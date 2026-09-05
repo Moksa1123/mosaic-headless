@@ -85,10 +85,33 @@ Types with `rule = any` are the safe scaffolding: `div`, `section`, `body`,
 `loop-item`, `tabs-tab-pane`, `slider-slide`, `styleguide-entry-content`. Build with
 those and place specialised children only inside the family that declares them.
 
-## Cross-checking the table against reality
+## What this table does NOT tell you
 
-`tools/check_placement_predicts.py` scores `nested_rule` as a predictor of the sweep's
-`BROKE_PAGE` / `COMMIT_5xx` outcomes. It is deliberately reported as a confusion
-matrix rather than a pass mark: `nested_rule` over-flags, because carrying an ancestry
-condition does not mean a bare `div` will necessarily kill the render. The rule is a
-sound *warning*, not a precise oracle, and the script says so with numbers.
+It does not predict which types are unsafe to drop into a plain container. That was
+tested rather than assumed, and it failed:
+
+```
+predictor                        tp / fp / fn   precision  recall
+nested_rule == yes                9 / 46 / 13     0.16      0.41
+rule == allow                    11 / 15 / 11     0.42      0.50
+rule in (allow, complex)         11 / 18 / 11     0.38      0.50
+rule == allow AND nested_rule     5 / 12 / 17     0.29      0.23
+rule == allow OR nested_rule     15 / 49 /  7     0.23      0.68
+```
+
+22 of the 122 types break the page or fault the commit when placed under a bare `div`,
+and they are spread across every rule value - 11 are `allow`, 6 are `none`, 5 are
+`any`. No flag in this table separates them, and the best combination still misses a
+third of them while flagging 49 types that are perfectly fine.
+
+So the two questions are different, and only one of them is settled by source:
+
+| question | authority |
+|---|---|
+| which children does parent P accept? | `placement-rules.csv` - reliable, this is literally `canBeParentFor` |
+| is child C safe under a plain container? | `node-verification.csv` - **measured**, nothing else predicts it |
+
+Reach for the measured table when you are deciding what to build with, and this one
+when you are deciding what may go inside what. `tools/check_placement_predicts.py`
+re-scores the numbers above after any re-sweep, so the claim stays honest if the
+plugin changes.

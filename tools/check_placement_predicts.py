@@ -1,28 +1,23 @@
 #!/usr/bin/env python3
-"""Test whether the extracted placement rules predict what the live sweep measured.
+"""Score the source-extracted placement rules against what the live sweep measured.
 
     python check_placement_predicts.py
 
-The sweep hangs every node type off a `div`. `div` has `canBeParentFor -> any`, so the
-parent side never objects; anything that goes wrong is the *child* refusing that
-context, which is what `canBeNestedChildFor` encodes.
+The sweep hangs every node type off a `div`, and `div` accepts any child, so the
+parent side never objects. Whatever goes wrong is the child refusing that context.
+The question this script answers is whether the static rules can tell you *in advance*
+which types those are.
 
-So the prediction is simple and falsifiable:
-
-    a type with nested_rule = yes   should NOT be safely placeable under a bare div
-    a type with nested_rule = ''    should be
-
-"Not safely placeable" means the sweep saw BROKE_PAGE or COMMIT_5xx. This script
-reports the confusion matrix and names every disagreement, because the disagreements
-are the interesting part - they are where a static reading of the source would have
-misled someone.
+The answer is no, and that is the point of keeping this script in the repo: it stops
+anyone (including a future pass of this skill) from quietly promoting the extracted
+rules into a safety guarantee they do not earn. Run it after any re-sweep; if a
+predictor ever gets good, the numbers will say so.
 """
 import csv
 import os
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 DATA = os.path.join(HERE, "..", "data")
-UNSAFE = {"BROKE_PAGE"}
 
 
 def load(name):
@@ -30,48 +25,47 @@ def load(name):
         return list(csv.DictReader(fh))
 
 
+def is_unsafe(outcome):
+    return outcome == "BROKE_PAGE" or outcome.startswith("COMMIT_5")
+
+
+PREDICTORS = [
+    ("nested_rule == yes", lambda ru: ru["nested_rule"] == "yes"),
+    ("rule == allow", lambda ru: ru["rule"] == "allow"),
+    ("rule in (allow, complex)", lambda ru: ru["rule"] in ("allow", "complex")),
+    ("rule == allow AND nested_rule", lambda ru: ru["rule"] == "allow" and ru["nested_rule"] == "yes"),
+    ("rule == allow OR nested_rule", lambda ru: ru["rule"] == "allow" or ru["nested_rule"] == "yes"),
+]
+
+
 def main():
     rules = {r["type"]: r for r in load("placement-rules.csv")}
-    swept = load("node-verification.csv")
+    swept = [r for r in load("node-verification.csv") if r["type"] in rules]
+    unsafe = [r for r in swept if is_unsafe(r["outcome"])]
 
-    tp = fp = tn = fn = 0
-    false_alarms, misses = [], []
-    for row in swept:
-        rule = rules.get(row["type"])
-        if not rule:
-            continue
-        predicted_unsafe = rule["nested_rule"] == "yes"
-        actually_unsafe = row["outcome"] in UNSAFE or row["outcome"].startswith("COMMIT_5")
-        if predicted_unsafe and actually_unsafe:
-            tp += 1
-        elif predicted_unsafe and not actually_unsafe:
-            fp += 1
-            false_alarms.append((row["type"], row["outcome"]))
-        elif not predicted_unsafe and actually_unsafe:
-            fn += 1
-            misses.append((row["type"], row["outcome"], row["detail"][:60]))
-        else:
-            tn += 1
+    print("%d types swept, %d unsafe under a bare div\n" % (len(swept), len(unsafe)))
+    print("  %-34s %-22s %s" % ("predictor", "tp / fp / fn", "precision  recall"))
+    for name, pred in PREDICTORS:
+        tp = fp = fn = 0
+        for r in swept:
+            p, a = pred(rules[r["type"]]), is_unsafe(r["outcome"])
+            tp, fp, fn = tp + (p and a), fp + (p and not a), fn + (a and not p)
+        prec = tp / (tp + fp) if tp + fp else 0.0
+        rec = tp / (tp + fn) if tp + fn else 0.0
+        print("  %-34s %-22s %.2f       %.2f" % (name, "%d / %d / %d" % (tp, fp, fn), prec, rec))
 
-    total = tp + fp + tn + fn
-    print("cross-check over %d swept types\n" % total)
-    print("                       measured unsafe   measured fine")
-    print("  predicted unsafe   %14d %15d" % (tp, fp))
-    print("  predicted fine     %14d %15d" % (fn, tn))
-    if tp + fn:
-        print("\nrecall  (unsafe types the rule catches): %d/%d" % (tp, tp + fn))
-    if tp + fp:
-        print("precision (flagged types that really are): %d/%d" % (tp, tp + fp))
+    by_rule = {}
+    for r in unsafe:
+        by_rule.setdefault(rules[r["type"]]["rule"], []).append(r["type"])
+    print("\nthe unsafe types spread across every rule value, which is why no")
+    print("single flag separates them:")
+    for rule, types in sorted(by_rule.items()):
+        print("  rule=%-8s %2d   %s" % (rule, len(types), ", ".join(sorted(types))))
 
-    if misses:
-        print("\nMISSED - broke or faulted but nested_rule was empty:")
-        for t, o, d in misses:
-            print("   %-28s %-11s %s" % (t, o, d))
-    if false_alarms:
-        print("\nOVER-FLAGGED - nested_rule set, but placed under a div without trouble: %d" % len(false_alarms))
-        print("   " + ", ".join("%s" % t for t, _o in false_alarms[:20]))
-        print("   (expected: the ancestry condition is checked by the editor, and a")
-        print("    type can carry one and still survive a bare div at render time)")
+    print("\nCONCLUSION: use data/node-verification.csv - the measured table - to answer")
+    print("'is this type safe under a plain container'. Use data/placement-rules.csv to")
+    print("answer 'which children does this parent accept', which it does reliably.")
+    print("They are different questions and only the second one is settled by source.")
 
 
 if __name__ == "__main__":

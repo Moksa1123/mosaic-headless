@@ -73,24 +73,25 @@ def probe_value(prop, validators, accepted, marker):
     return marker, False
 
 
-def stylesheets(client, html):
-    """Fetch every same-origin stylesheet the page links, so CSS effects are visible."""
-    css = []
-    for href in re.findall(r'<link[^>]+rel="stylesheet"[^>]+href="([^"]+)"', html):
-        if href.startswith("//"):
-            href = "https:" + href
-        elif href.startswith("/"):
-            href = client.base + href
-        elif not href.startswith("http"):
-            continue
-        if not href.startswith(client.base):
-            continue
-        try:
-            with urllib.request.urlopen(href, timeout=60) as r:
-                css.append(r.read().decode("utf-8", "replace"))
-        except Exception:
-            pass
-    return "\n".join(css)
+RE_MOSAIC_STYLE = re.compile(
+    r'<style id="mosaic-[^"]*-inline-css">(.*?)</style>', re.S
+)
+
+
+def split_markup_and_css(html):
+    """Separate Mosaic's compiled CSS from the markup it sits inside.
+
+    Mosaic ships NO stylesheet file. Every compiled rule is emitted as an inline
+    <style id="mosaic-theme-block-editor-styles_<breakpointID>-inline-css"> block in
+    the document head - one block per breakpoint, the base breakpoint being `_`.
+
+    This matters for the sweep: searching linked stylesheets finds nothing at all, so
+    a probe whose only effect is a CSS rule would be scored NO_EFFECT. Pull the blocks
+    out of the HTML, and search what is left as markup, so the two can be told apart.
+    """
+    css = "\n".join(RE_MOSAIC_STYLE.findall(html))
+    markup = RE_MOSAIC_STYLE.sub("", html)
+    return markup, css
 
 
 def load_surface(carriers):
@@ -162,11 +163,11 @@ def run(client, cfg, jobs, out_path):
             if len(html) < MIN_HEALTHY_BYTES:
                 outcome, detail = "BROKE_PAGE", html.strip()[:160]
             else:
-                css = stylesheets(client, html) if prop["property"] not in STRUCTURAL else ""
-                if needle in html:
-                    outcome = "ENUM_APPLIED" if is_enum else "HTML"
-                elif css and needle in css:
+                markup, css = split_markup_and_css(html)
+                if needle in css:
                     outcome = "CSS"
+                elif needle in markup:
+                    outcome = "ENUM_APPLIED" if is_enum else "HTML"
                 else:
                     outcome = "NO_EFFECT"
                 detail = ""
