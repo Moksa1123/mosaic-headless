@@ -1,0 +1,123 @@
+type,label,class,extends,abstract,edition,alias_types,is_link,can_be_parent,default_element_class,file
+accordion,Accordion,AccordionElementTypeFactory,ElementTypeFactoryAbstract,no,free,,,,,Mosaic/NodeTypes/Accordion/AccordionElementTypeFactory.php
+accordion-content,Accordion Content,AccordionContentElementTypeFactory,ElementTypeFactoryAbstract,no,free,,,true,,Mosaic/NodeTypes/Accordion/AccordionItem/AccordionContent/AccordionContentElementTypeFactory.php
+accordion-item,Item,AccordionItemElementTypeFactory,ElementTypeFactoryAbstract,no,free,,,,,Mosaic/NodeTypes/Accordion/AccordionItem/AccordionItemElementTypeFactory.php
+accordion-title,Accordion title,AccordionTitleElementTypeFactory,ElementTypeFactoryAbstract,no,free,,true,true,,Mosaic/NodeTypes/Accordion/AccordionItem/AccordionTitle/AccordionTitleElementTypeFactory.php
+accordion-loop-items,Loop items,AccordionLoopItemsElementTypeFactory,ElementTypeFactoryAbstract,no,free,,,,,Mosaic/NodeTypes/Accordion/AccordionLoopItems/AccordionLoopItemsElementTypeFactory.php
+button,Button,ButtonElementTypeFactory,ElementTypeFactoryAbstract,no,free,button-advanced,true,true,ButtonElementVariationsConst::ButtonElementClassID,Mosaic/NodeTypes/Button/ButtonElementTypeFactory.php
+component-instance,Instance,ComponentInstanceElementTypeFactory,ElementTypeFactoryAbstract,no,free,,,true,,Mosaic/NodeTypes/Component/ComponentInstance/ComponentInstanceElementTypeFactory.php
+component-external,Component external,ComponentExternalElementTypeFactory,ElementTypeFactoryAbstract,no,free,,,,,Mosaic/NodeTypes/Component/Component/ComponentExternal/ComponentExternalElementTypeFactory.php
+component-internal,Component,ComponentInternalElementTypeFactory,ElementTypeFactoryAbstract,no,free,,,true,,Mosaic/NodeTypes/Component/Component/ComponentInternal/ComponentInternalElementTypeFactory.php
+div,,DivElementTypeFactory,ElementTypeFactoryAbstract,no,free,,,true,DivElementVariationsConst::DivElementClassID,Mosaic/NodeTypes/Div/DivElementTypeFactory.php
+body,,BodyElementTypeFactory,ElementTypeFactoryAbstract,no,free,,,true,,Mosaic/NodeTypes/Document/Body/BodyElementTypeFactory.php
+document,Document,DocumentElementTypeFactory,ElementTypeFactoryAbstract,no,free,,,,,Mosaic/NodeTypes/Document/DocumentElementTypeFactory.php
+googlemaps,Google Maps,GoogleMapsElementTypeFactory,ElementTypeFactoryAbstract,no,free,,,,,Mosaic/NodeTypes/GoogleMaps/GoogleMapsElementTypeFactory.php
+icon,Icon,IconElementTypeFactory,ElementTypeFactoryAbstract,no,free,,,,IconElementVariationsConst::IconElementClassID,Mosaic/NodeTypes/Icon/IconElementTypeFactory.php
+image,Image,ImageElementTypeFactory,ElementTypeFactoryAbstract,no,free,,,,,Mosaic/NodeTypes/Image/ImageElementTypeFactory.php
+list,List,ListElementTypeFactory,ElementTypeFactoryAbstract,no,free,,,,ListElementVariationsConst::ListElementClassID,Mosaic/NodeTypes/ListElement/ListElementTypeFactory.php
+list-item,Item,ListItemElementTypeFactory,ElementTypeFactoryAbstract,no,free,,,true,,Mosaic/NodeTypes/ListElement/ListItem/ListItemElementTypeFactory.php
+list-loop-items,Loop items,ListLoopItemsElementTypeFactory,ElementTypeFactoryAbstract,no,free,,,,,Mosaic/NodeTypes/ListElement/ListLoopItems/ListLoopItemsElementTypeFactory.php
+loop,Loop,LoopElementTypeFactory,ElementTypeFactoryAbstract,no,free,,,,,Mosaic/NodeTypes/Loop/LoopElementTypeFactory.php
+loop-item,Item,LoopItemElementTypeFactory,ElementTypeFactoryAbstract,no,free,,,true,,Mosaic/NodeTypes/Loop/LoopItems/LoopItem/LoopItemElementTypeFactory.php
+loop-items,Items,LoopItemsElementTypeFactory,ElementTypeFactoryAbstract,no,free,,,,,Mosaic/NodeTypes/Loop/LoopItems/LoopItemsElementTypeFactory.php
+loop-no-result,No result,LoopNoResultElementTypeFactory,ElementTypeFactoryAbstract,no,free,,,true,,Mosaic/NodeTypes/Loop/LoopNoResult/LoopNoResultElementTypeFactory.php
+loop-pagination-button-next,Next button,LoopPaginationButtonNextElementTypeFactory,ElementTypeFactoryAbstract,no,free,,true,true,,Mosaic/NodeTypes/Loop/LoopPagination/Button/ButtonNext/LoopPaginationButtonNextElementTypeFactory.php
+loop-pagination-button-previous,Previous button,LoopPaginationButtonPreviousElementTypeFactory,ElementTypeFactoryAbstract,no,free,,true,true,,Mosaic/NodeTypes/Loop/LoopPagination/Button/ButtonPrevious/LoopPaginationButtonPreviousElementTypeFactory.php
+loop-pagination,Pagination,LoopPaginationElementTypeFactory,ElementTypeFactoryAbstract,no,free,,,true,,Mosaic/NodeTypes/Loop/LoopPagination/LoopPaginationElementTypeFactory.php
+loop-pagination-numbers,Numbers,LoopPaginationNumbersElementTypeFactory,ElementTypeFactoryAbstract,no,free,,,,,Mosaic/NodeTypes/Loop/LoopPagination/Numbers/LoopPaginationNumbersElementTypeFactory.php
+loop-pagination-number,Number,LoopPaginationNumberElementTypeFactory,ElementTypeFactoryAbstract,no,free,,true,,,Mosaic/NodeTypes/Loop/LoopPagination/Numbers/Number/LoopPaginationNumberElementTypeFactory.php
+dropdown-toggle,Dropdown toggle,DropdownToggleElementTypeFactory,ElementTypeFactoryAbstract,no,free,,true,true,,Mosaic/NodeTypes/Menu/Dropdown/DropdownToggle/DropdownToggleElementTypeFactory.php
+dropdown-wide,Dropdown wide,DropdownWideElementTypeFactory,DropdownElementTypeFactoryAbstract,no,free,,,,,Mosaic/NodeTypes/Menu/Dropdown/DropdownWide/DropdownWideElementTypeFactory.php
+dropdown-wrapper-wide,Dropdown wrapper wide,DropdownWrapperWideElementTypeFactory,DropdownWrapperElementTypeFactoryAbstract,no,free,,,,,Mosaic/NodeTypes/Menu/Dropdown/DropdownWide/DropdownWrapperWide/DropdownWrapperWideElementTypeFactory.php
+dropdown,Dropdown,DropdownElementTypeFactory,DropdownElementTypeFactoryAbstract,no,free,,,,,Mosaic/NodeTypes/Menu/Dropdown/Dropdown/DropdownElementTypeFactory.php
+dropdown-wrapper,Dropdown wrapper,DropdownWrapperElementTypeFactory,DropdownWrapperElementTypeFactoryAbstract,no,free,,,,,Mosaic/NodeTypes/Menu/Dropdown/Dropdown/DropdownWrapper/DropdownWrapperElementTypeFactory.php
+menu,Menu,MenuElementTypeFactory,ElementTypeFactoryAbstract,no,free,,,true,,Mosaic/NodeTypes/Menu/MenuElementTypeFactory.php
+menu-link,Menu link,MenuLinkElementTypeFactory,ElementTypeFactoryAbstract,no,free,,true,true,,Mosaic/NodeTypes/Menu/MenuLink/MenuLinkElementTypeFactory.php
+wp-menu,WP Menu,WPMenuElementTypeFactory,ElementTypeFactoryAbstract,no,free,,,,,Mosaic/NodeTypes/Menu/WPMenu/WPMenuElementTypeFactory.php
+navbar,Navbar,NavbarElementTypeFactory,ElementTypeFactoryAbstract,no,free,,,,,Mosaic/NodeTypes/Navbar/NavbarElementTypeFactory.php
+navbar-toggle,Mobile menu toggle,NavbarToggleElementTypeFactory,ElementTypeFactoryAbstract,no,free,,true,true,,Mosaic/NodeTypes/Navbar/NavbarToggle/NavbarToggleElementTypeFactory.php
+navigation,Navigation,NavigationElementTypeFactory,ElementTypeFactoryAbstract,no,free,,,true,,Mosaic/NodeTypes/Navbar/Navigation/NavigationElementTypeFactory.php
+code,Code,CodeElementTypeFactory,ElementTypeFactoryAbstract,no,pro,,,,,Mosaic/NodeTypes/Pro/Code/CodeElementTypeFactory.php
+form-wrapper,Form,FormWrapperElementTypeFactory,ElementTypeFactoryAbstract,no,pro,,,,,Mosaic/NodeTypes/Pro/Form/FormWrapperElementTypeFactory.php
+form,Form,FormElementTypeFactory,ElementTypeFactoryAbstract,no,pro,,,true,,Mosaic/NodeTypes/Pro/Form/Form/FormElementTypeFactory.php
+checkbox-input,Checkbox input,CheckboxInputElementTypeFactory,ElementTypeFactoryAbstract,no,pro,,true,,,Mosaic/NodeTypes/Pro/Form/Form/MElements/Checkbox/CheckboxInput/CheckboxInputElementTypeFactory.php
+choice-field,Choice field,ChoiceFieldElementTypeFactory,ElementTypeFactoryAbstract,no,pro,,,,,Mosaic/NodeTypes/Pro/Form/Form/MElements/ChoiceField/ChoiceFieldElementTypeFactory.php
+choice-content,Content,ChoiceContentElementTypeFactory,ElementTypeFactoryAbstract,no,pro,,,true,,Mosaic/NodeTypes/Pro/Form/Form/MElements/ChoiceField/Content/ChoiceContentElementTypeFactory.php
+choice-legend,Legend,ChoiceLegendElementTypeFactory,ElementTypeFactoryAbstract,no,pro,,true,,,Mosaic/NodeTypes/Pro/Form/Form/MElements/ChoiceField/Legend/ChoiceLegendElementTypeFactory.php
+choice,Choice,ChoiceElementTypeFactory,ElementTypeFactoryAbstract,no,pro,,,true,,Mosaic/NodeTypes/Pro/Form/Form/MElements/Choice/ChoiceElementTypeFactory.php
+choice-label,Choice label,ChoiceLabelElementTypeFactory,ElementTypeFactoryAbstract,no,pro,,true,,,Mosaic/NodeTypes/Pro/Form/Form/MElements/Choice/ChoiceLabel/ChoiceLabelElementTypeFactory.php
+fieldset,Field set,FieldSetElementTypeFactory,ElementTypeFactoryAbstract,no,pro,,,,,Mosaic/NodeTypes/Pro/Form/Form/MElements/FieldSet/FieldSetElementTypeFactory.php
+field,Field,FieldElementTypeFactory,ElementTypeFactoryAbstract,no,pro,,,true,,Mosaic/NodeTypes/Pro/Form/Form/MElements/Field/FieldElementTypeFactory.php
+fileupload-input,File upload,FileUploadElementTypeFactory,ElementTypeFactoryAbstract,no,pro,,true,,,Mosaic/NodeTypes/Pro/Form/Form/MElements/FileUpload/FileUploadElementTypeFactory.php
+form-error,Error message,FormErrorElementTypeFactory,ElementTypeFactoryAbstract,no,pro,,,,,Mosaic/NodeTypes/Pro/Form/Form/MElements/FormError/FormErrorElementTypeFactory.php
+hidden-input,Hidden input,HiddenInputElementTypeFactory,ElementTypeFactoryAbstract,no,pro,,true,,,Mosaic/NodeTypes/Pro/Form/Form/MElements/HiddenInput/HiddenInputElementTypeFactory.php
+text-input,Input,InputTextElementTypeFactory,ElementTypeFactoryAbstract,no,pro,,true,,,Mosaic/NodeTypes/Pro/Form/Form/MElements/InputText/InputTextElementTypeFactory.php
+label,Label,LabelElementTypeFactory,ElementTypeFactoryAbstract,no,pro,,true,,,Mosaic/NodeTypes/Pro/Form/Form/MElements/Label/LabelElementTypeFactory.php
+multi-steps-back-button,Back button,FormStepButtonBackElementTypeFactory,ElementTypeFactoryAbstract,no,pro,,true,true,,Mosaic/NodeTypes/Pro/Form/Form/MElements/MultiSteps/Forms/FormStep/Button/ButtonStepBack/FormStepButtonBackElementTypeFactory.php
+multi-steps-next-button,Next button,FormStepButtonNextElementTypeFactory,ElementTypeFactoryAbstract,no,pro,,true,true,,Mosaic/NodeTypes/Pro/Form/Form/MElements/MultiSteps/Forms/FormStep/Button/ButtonStepNext/FormStepButtonNextElementTypeFactory.php
+multi-steps-form-step,Form step,FormStepElementTypeFactory,ElementTypeFactoryAbstract,no,pro,,,true,,Mosaic/NodeTypes/Pro/Form/Form/MElements/MultiSteps/Forms/FormStep/FormStepElementTypeFactory.php
+multi-steps-forms,Forms,FormsElementTypeFactory,ElementTypeFactoryAbstract,no,pro,,,,,Mosaic/NodeTypes/Pro/Form/Form/MElements/MultiSteps/Forms/FormsElementTypeFactory.php
+form-multi-steps,Multi step,MultiStepsElementTypeFactory,ElementTypeFactoryAbstract,no,pro,,,,,Mosaic/NodeTypes/Pro/Form/Form/MElements/MultiSteps/MultiStepsElementTypeFactory.php
+form-multi-steps-step,Step,StepElementTypeFactory,ElementTypeFactoryAbstract,no,pro,,true,true,,Mosaic/NodeTypes/Pro/Form/Form/MElements/MultiSteps/Steps/Step/StepElementTypeFactory.php
+form-multi-steps-steps,Steps,StepsElementTypeFactory,ElementTypeFactoryAbstract,no,pro,,,,,Mosaic/NodeTypes/Pro/Form/Form/MElements/MultiSteps/Steps/StepsElementTypeFactory.php
+radio-input,Radio input,RadioInputElementTypeFactory,ElementTypeFactoryAbstract,no,pro,,true,,,Mosaic/NodeTypes/Pro/Form/Form/MElements/Radio/RadioInput/RadioInputElementTypeFactory.php
+recaptcha,reCAPTCHA,RecaptchaElementTypeFactory,ElementTypeFactoryAbstract,no,pro,,,,,Mosaic/NodeTypes/Pro/Form/Form/MElements/Recaptcha/RecaptchaElementTypeFactory.php
+select-option,Option,OptionElementTypeFactory,ElementTypeFactoryAbstract,no,pro,,true,,,Mosaic/NodeTypes/Pro/Form/Form/MElements/Select/Option/OptionElementTypeFactory.php
+select-input,Select,SelectElementTypeFactory,ElementTypeFactoryAbstract,no,pro,,true,,,Mosaic/NodeTypes/Pro/Form/Form/MElements/Select/SelectElementTypeFactory.php
+submit-label,Submit label,SubmitLabelElementTypeFactory,ElementTypeFactoryAbstract,no,pro,,true,,,Mosaic/NodeTypes/Pro/Form/Form/MElements/SubmitButton/Label/SubmitLabelElementTypeFactory.php
+submit-loading,Submit loading,SubmitLoadingElementTypeFactory,ElementTypeFactoryAbstract,no,pro,,true,,,Mosaic/NodeTypes/Pro/Form/Form/MElements/SubmitButton/Loading/SubmitLoadingElementTypeFactory.php
+submit-button,Submit,SubmitButtonElementTypeFactory,ElementTypeFactoryAbstract,no,pro,,true,,,Mosaic/NodeTypes/Pro/Form/Form/MElements/SubmitButton/SubmitButtonElementTypeFactory.php
+textarea-input,Text area,TextAreaElementTypeFactory,ElementTypeFactoryAbstract,no,pro,,true,,,Mosaic/NodeTypes/Pro/Form/Form/MElements/TextArea/TextAreaElementTypeFactory.php
+turnstile,Turnstile,TurnstileElementTypeFactory,ElementTypeFactoryAbstract,no,pro,,,,,Mosaic/NodeTypes/Pro/Form/Form/MElements/Turnstile/TurnstileElementTypeFactory.php
+success-screen,Success screen,SuccessScreenElementTypeFactory,ElementTypeFactoryAbstract,no,pro,,,true,,Mosaic/NodeTypes/Pro/Form/SuccessScreen/SuccessScreenElementTypeFactory.php
+slider-arrow-left,Slider arrow left,SliderArrowLeftElementTypeFactory,SliderArrowElementTypeFactoryAbstract,no,pro,,,,,Mosaic/NodeTypes/Pro/Slider/SliderArrow/SliderArrowLeft/SliderArrowLeftElementTypeFactory.php
+slider-arrow-right,Slider arrow right,SliderArrowRightMElementTypeFactory,SliderArrowElementTypeFactoryAbstract,no,pro,,,,,Mosaic/NodeTypes/Pro/Slider/SliderArrow/SliderArrowRight/SliderArrowRightMElementTypeFactory.php
+slider,Slider,SliderElementTypeFactory,ElementTypeFactoryAbstract,no,pro,,,true,,Mosaic/NodeTypes/Pro/Slider/SliderElementTypeFactory.php
+slider-loop-slides,Loop slides,SliderLoopSlidesElementTypeFactory,ElementTypeFactoryAbstract,no,pro,,,,,Mosaic/NodeTypes/Pro/Slider/SliderLoopSlides/SliderLoopSlidesElementTypeFactory.php
+slider-navigation-bullet,Bullet,SliderNavigationBulletElementTypeFactory,ElementTypeFactoryAbstract,no,pro,,true,,,Mosaic/NodeTypes/Pro/Slider/SliderNavigation/SliderNavigationBullet/SliderNavigationBulletElementTypeFactory.php
+slider-navigation,Navigation,SliderNavigationElementTypeFactory,ElementTypeFactoryAbstract,no,pro,,,,,Mosaic/NodeTypes/Pro/Slider/SliderNavigation/SliderNavigationElementTypeFactory.php
+slider-slide,Slide,SliderSlideElementTypeFactory,ElementTypeFactoryAbstract,no,pro,,,true,,Mosaic/NodeTypes/Pro/Slider/SliderSlides/SliderSlide/SliderSlideElementTypeFactory.php
+slider-slides,Slides,SliderSlidesElementTypeFactory,ElementTypeFactoryAbstract,no,pro,,,,,Mosaic/NodeTypes/Pro/Slider/SliderSlides/SliderSlidesElementTypeFactory.php
+tabs-loop-tab-panes,Tabs loop tab panes,TabLoopTabPanesElementTypeFactory,ElementTypeFactoryAbstract,no,pro,,,,,Mosaic/NodeTypes/Pro/Tabs/TabsContent/LoopTabPanes/TabLoopTabPanesElementTypeFactory.php
+tabs-tab-pane,Tabs tab pane,TabPaneElementTypeFactory,ElementTypeFactoryAbstract,no,pro,,,true,,Mosaic/NodeTypes/Pro/Tabs/TabsContent/TabPane/TabPaneElementTypeFactory.php
+tabs-content,Tabs content,TabsContentElementTypeFactory,ElementTypeFactoryAbstract,no,pro,,,,,Mosaic/NodeTypes/Pro/Tabs/TabsContent/TabsContentElementTypeFactory.php
+tabs,Tabs,TabsElementTypeFactory,ElementTypeFactoryAbstract,no,pro,,,,,Mosaic/NodeTypes/Pro/Tabs/TabsElementTypeFactory.php
+tabs-loop-tabs,Loop tabs,TabLoopTabsElementTypeFactory,ElementTypeFactoryAbstract,no,pro,,,,,Mosaic/NodeTypes/Pro/Tabs/TabsMenu/LoopTabs/TabLoopTabsElementTypeFactory.php
+tabs-tab,Tab,TabElementTypeFactory,ElementTypeFactoryAbstract,no,pro,,,true,,Mosaic/NodeTypes/Pro/Tabs/TabsMenu/Tab/TabElementTypeFactory.php
+tabs-menu,Tabs menu,TabsMenuElementTypeFactory,ElementTypeFactoryAbstract,no,pro,,,,,Mosaic/NodeTypes/Pro/Tabs/TabsMenu/TabsMenuElementTypeFactory.php
+component-root,Component root element,ComponentRootElementTypeFactory,RootElementTypeFactoryAbstract,no,free,,,,,Mosaic/NodeTypes/Root/Component/ComponentRootElementTypeFactory.php
+master-root,Master root element,MasterRootElementTypeFactory,RootElementTypeFactoryAbstract,no,free,,,,,Mosaic/NodeTypes/Root/Master/MasterRootElementTypeFactory.php
+styleguide-root,External style root element,StyleGuideRootElementTypeFactory,RootElementTypeFactoryAbstract,no,free,,,,,Mosaic/NodeTypes/Root/StyleGuide/StyleGuideRootElementTypeFactory.php
+styleguide-a,,SGAElementTypeFactory,ElementTypeFactoryAbstract,no,free,,,,,Mosaic/NodeTypes/SG/SGA/SGAElementTypeFactory.php
+styleguide-entry-content-button,Entry button,SGEntryContentButtonElementTypeFactory,ElementTypeFactoryAbstract,no,free,,,,SGEntryContentButtonElementVariationsConst::FillButtonElementClassID,Mosaic/NodeTypes/SG/SGEntryContent/SGEntryContentButton/SGEntryContentButtonElementTypeFactory.php
+styleguide-entry-content-code,Entry code,SGEntryContentCodeElementTypeFactory,ElementTypeFactoryAbstract,no,free,,,,,Mosaic/NodeTypes/SG/SGEntryContent/SGEntryContentCode/SGEntryContentCodeElementTypeFactory.php
+styleguide-entry-content,Post content,SGEntryContentElementTypeFactory,ElementTypeFactoryAbstract,no,free,,,true,,Mosaic/NodeTypes/SG/SGEntryContent/SGEntryContentElementTypeFactory.php
+styleguide-entry-content-image-caption,Image caption,SGEntryContentImageCaptionElementTypeFactory,ElementTypeFactoryAbstract,no,free,,,,,Mosaic/NodeTypes/SG/SGEntryContent/SGEntryContentImage/SGEntryContentImageCaption/SGEntryContentImageCaptionElementTypeFactory.php
+styleguide-entry-content-image,Entry content image,SGEntryContentImageElementTypeFactory,ElementTypeFactoryAbstract,no,free,,,,,Mosaic/NodeTypes/SG/SGEntryContent/SGEntryContentImage/SGEntryContentImageElementTypeFactory.php
+styleguide-entry-content-image-img,Image,SGEntryContentImageImgElementTypeFactory,ElementTypeFactoryAbstract,no,free,,,,,Mosaic/NodeTypes/SG/SGEntryContent/SGEntryContentImage/SGEntryContentImageImg/SGEntryContentImageImgElementTypeFactory.php
+styleguide-entry-content-list,Entry content list,SGEntryContentListElementTypeFactory,ElementTypeFactoryAbstract,no,free,,,,SGEntryContentListElementVariationsConst::UnorderedListElementClassID,Mosaic/NodeTypes/SG/SGEntryContent/SGEntryContentList/SGEntryContentListElementTypeFactory.php
+styleguide-entry-content-list-item,Entry content list item,SGEntryContentListItemElementTypeFactory,ElementTypeFactoryAbstract,no,free,,,,,Mosaic/NodeTypes/SG/SGEntryContent/SGEntryContentList/SGEntryContentListItem/SGEntryContentListItemElementTypeFactory.php
+styleguide-entry-content-preformatted,Entry preformatted,SGEntryContentPreformattedElementTypeFactory,ElementTypeFactoryAbstract,no,free,,,,,Mosaic/NodeTypes/SG/SGEntryContent/SGEntryContentPreformatted/SGEntryContentPreformattedElementTypeFactory.php
+styleguide-entry-content-pullquote-cite,Entry content pullquote cite,SGEntryContentPullQuoteCiteElementTypeFactory,ElementTypeFactoryAbstract,no,free,,,,,Mosaic/NodeTypes/SG/SGEntryContent/SGEntryContentPullQuote/SGEntryContentPullQuoteCite/SGEntryContentPullQuoteCiteElementTypeFactory.php
+styleguide-entry-content-pullquote,Entry content pullquote,SGEntryContentPullQuoteElementTypeFactory,ElementTypeFactoryAbstract,no,free,,,,,Mosaic/NodeTypes/SG/SGEntryContent/SGEntryContentPullQuote/SGEntryContentPullQuoteElementTypeFactory.php
+styleguide-entry-content-pullquote-paragraph,Entry content pullquote paragraph,SGEntryContentPullQuoteParagraphElementTypeFactory,ElementTypeFactoryAbstract,no,free,,,,,Mosaic/NodeTypes/SG/SGEntryContent/SGEntryContentPullQuote/SGEntryContentPullQuoteParagraph/SGEntryContentPullQuoteParagraphElementTypeFactory.php
+styleguide-entry-content-quote-cite,Entry content quote cite,SGEntryContentQuoteCiteElementTypeFactory,ElementTypeFactoryAbstract,no,free,,,,,Mosaic/NodeTypes/SG/SGEntryContent/SGEntryContentQuote/SGEntryContentQuoteCite/SGEntryContentQuoteCiteElementTypeFactory.php
+styleguide-entry-content-text-quote,Entry content quote,SGEntryContentQuoteElementTypeFactory,ElementTypeFactoryAbstract,no,free,,,,,Mosaic/NodeTypes/SG/SGEntryContent/SGEntryContentQuote/SGEntryContentQuoteElementTypeFactory.php
+styleguide-entry-content-separator,Entry separator,SGEntryContentSeparatorElementTypeFactory,ElementTypeFactoryAbstract,no,free,,,,SGEntryContentSeparatorElementVariationsConst::DefaultSeparatorElementClassID,Mosaic/NodeTypes/SG/SGEntryContent/SGEntryContentSeparator/SGEntryContentSeparatorElementTypeFactory.php
+styleguide-entry-content-text,Entry text,SGEntryContentTextElementTypeFactory,ElementTypeFactoryAbstract,no,free,,,,SGEntryContentElementVariationsConst::EntryH1ElementClassID,Mosaic/NodeTypes/SG/SGEntryContent/SGEntryContentText/SGEntryContentTextElementTypeFactory.php
+styleguide-entry-content-verse,Entry verse,SGEntryContentVerseElementTypeFactory,ElementTypeFactoryAbstract,no,free,,,,,Mosaic/NodeTypes/SG/SGEntryContent/SGEntryContentVerse/SGEntryContentVerseElementTypeFactory.php
+section,Section,SectionElementTypeFactory,ElementTypeFactoryAbstract,no,free,,,true,,Mosaic/NodeTypes/Section/SectionElementTypeFactory.php
+template-external,Template,TemplateExternalElementTypeFactory,ElementTypeFactoryAbstract,no,free,,,,,Mosaic/NodeTypes/Template/TemplateExternal/TemplateExternalElementTypeFactory.php
+template-internal,Template,TemplateInternalElementTypeFactory,ElementTypeFactoryAbstract,no,free,,,true,,Mosaic/NodeTypes/Template/TemplateInternal/TemplateInternalElementTypeFactory.php
+text,Text,TextElementTypeFactory,ElementTypeFactoryAbstract,no,free,,,,TextElementVariationsConst::DivElementClassID,Mosaic/NodeTypes/Text/TextElementTypeFactory.php
+__unknown,Unknown,UnknownElementTypeFactory,ElementTypeFactoryAbstract,no,free,,,,,Mosaic/NodeTypes/Unknown/UnknownElementTypeFactory.php
+video,Video,VideoElementTypeFactory,ElementTypeFactoryAbstract,no,free,,,,,Mosaic/NodeTypes/Video/VideoElementTypeFactory.php
+vimeo,,VimeoElementTypeFactory,ElementTypeFactoryAbstract,no,free,,,,,Mosaic/NodeTypes/Vimeo/VimeoElementTypeFactory.php
+wpContent,Post content,WPContentElementTypeFactory,ElementTypeFactoryAbstract,no,free,,,,,Mosaic/NodeTypes/WPContent/WPContentElementTypeFactory.php
+wpShortcode,Shortcode,WPShortcodeElementTypeFactory,ElementTypeFactoryAbstract,no,free,,,,,Mosaic/NodeTypes/WPShortcode/WPShortcodeElementTypeFactory.php
+wysiwyg-linebreak,Line break node,WysiwygLineBreakNodeTypeFactory,NodeTypeFactoryAbstract,no,free,,,,,Mosaic/NodeTypes/Wysiwyg/WysiwygLineBreak/WysiwygLineBreakNodeTypeFactory.php
+wysiwyg-link,Text node,WysiwygLinkElementTypeFactory,ElementTypeFactoryAbstract,no,free,,,,,Mosaic/NodeTypes/Wysiwyg/WysiwygLink/WysiwygLinkElementTypeFactory.php
+wysiwyg-span,Span node,WysiwygSpanElementTypeFactory,ElementTypeFactoryAbstract,no,free,,,,,Mosaic/NodeTypes/Wysiwyg/WysiwygSpan/WysiwygSpanElementTypeFactory.php
+wysiwyg-text,Text node,WysiwygTextNodeTypeFactory,NodeTypeFactoryAbstract,no,free,,,,,Mosaic/NodeTypes/Wysiwyg/WysiwygText/WysiwygTextNodeTypeFactory.php
+wysiwyg-variable,Variable node,WysiwygVariableNodeTypeFactory,NodeTypeFactoryAbstract,no,free,,,,,Mosaic/NodeTypes/Wysiwyg/WysiwygVariable/WysiwygVariableNodeTypeFactory.php
+youtube,,YouTubeElementTypeFactory,ElementTypeFactoryAbstract,no,free,,,,,Mosaic/NodeTypes/YouTube/YouTubeElementTypeFactory.php

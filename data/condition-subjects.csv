@@ -1,0 +1,60 @@
+context,rule_type,id,label,group,group_label,settings_fields,field_types,default_comparator,default_operator
+element,serverCondition,variable,Variable,editor,Editor,dynamicCode,dynamicCode,text,equals
+element,serverCondition,httpGet,Query parameter,http,HTTP,name,text,text,equals
+element,serverCondition,userLoggedIn,Logged-in status,currentUser,Current user,,,,
+element,serverCondition,userRole,User role,currentUser,Current user,,,,
+element,serverCondition,userCapability,User capability,currentUser,Current user,,,,
+element,serverCondition,userFields,User fields,currentUser,Current user,field,ajaxList,text,equals
+element,serverCondition,userMeta,User meta,currentUser,Current user,meta,ajaxList,text,equals
+element,serverCondition,postCategory,Categories,post,Posts,,,,
+element,serverCondition,postPostTag,Tags,post,Posts,,,,
+element,serverCondition,postPostFormat,Formats,post,Posts,,,,
+element,serverCondition,postProductBrand,Product brands,product,Products,,,,
+element,serverCondition,postProductCat,Product categories,product,Products,,,,
+element,serverCondition,postProductTag,Product tags,product,Products,,,,
+element,serverCondition,postMetaPost,Post meta,post,Posts,name,ajaxList,text,equals
+element,serverCondition,postMetaPage,Post meta,page,Pages,name,ajaxList,text,equals
+element,serverCondition,postMetaAttachment,Post meta,attachment,Media,name,ajaxList,text,equals
+element,serverCondition,postMetaProduct,Post meta,product,Products,name,ajaxList,text,equals
+element,serverCondition,httpCookie,Cookie,http,HTTP,name,text,text,equals
+template,serverCondition,httpGet,Query parameter,http,HTTP,name,text,text,equals
+template,serverCondition,userLoggedIn,Logged-in status,currentUser,Current user,,,,
+template,serverCondition,userRole,User role,currentUser,Current user,,,,
+template,serverCondition,userCapability,User capability,currentUser,Current user,,,,
+template,serverCondition,userFields,User fields,currentUser,Current user,field,ajaxList,text,equals
+template,serverCondition,userMeta,User meta,currentUser,Current user,meta,ajaxList,text,equals
+template,serverCondition,postCategory,Categories,post,Posts,,,,
+template,serverCondition,postPostTag,Tags,post,Posts,,,,
+template,serverCondition,postPostFormat,Formats,post,Posts,,,,
+template,serverCondition,postProductBrand,Product brands,product,Products,,,,
+template,serverCondition,postProductCat,Product categories,product,Products,,,,
+template,serverCondition,postProductTag,Product tags,product,Products,,,,
+template,serverCondition,httpCookie,Cookie,http,HTTP,name,text,text,equals
+interaction,serverCondition,httpGet,Query parameter,http,HTTP,name,text,text,equals
+interaction,serverCondition,userLoggedIn,Logged-in status,currentUser,Current user,,,,
+interaction,serverCondition,userRole,User role,currentUser,Current user,,,,
+interaction,serverCondition,userCapability,User capability,currentUser,Current user,,,,
+interaction,serverCondition,userFields,User fields,currentUser,Current user,field,ajaxList,text,equals
+interaction,serverCondition,userMeta,User meta,currentUser,Current user,meta,ajaxList,text,equals
+interaction,browserCondition,breakpoint,Breakpoint,core,Core,,,,
+interaction,browserCondition,reducedMotion,Motion,core,Core,,,,
+interaction,browserCondition,localStorage,Local storage,browserStorage,Browser storage,name,text,text,equals
+interaction,browserCondition,httpCookie,Cookie,browserStorage,Browser storage,name,text,text,equals
+formAction,serverCondition,variable,Variable,editor,Editor,dynamicCode,dynamicCode,text,equals
+formAction,serverCondition,httpGet,Query parameter,http,HTTP,name,text,text,equals
+formAction,serverCondition,userLoggedIn,Logged-in status,currentUser,Current user,,,,
+formAction,serverCondition,userRole,User role,currentUser,Current user,,,,
+formAction,serverCondition,userCapability,User capability,currentUser,Current user,,,,
+formAction,serverCondition,userFields,User fields,currentUser,Current user,field,ajaxList,text,equals
+formAction,serverCondition,userMeta,User meta,currentUser,Current user,meta,ajaxList,text,equals
+formAction,serverCondition,postCategory,Categories,post,Posts,,,,
+formAction,serverCondition,postPostTag,Tags,post,Posts,,,,
+formAction,serverCondition,postPostFormat,Formats,post,Posts,,,,
+formAction,serverCondition,postProductBrand,Product brands,product,Products,,,,
+formAction,serverCondition,postProductCat,Product categories,product,Products,,,,
+formAction,serverCondition,postProductTag,Product tags,product,Products,,,,
+formAction,serverCondition,postMetaPost,Post meta,post,Posts,name,ajaxList,text,equals
+formAction,serverCondition,postMetaPage,Post meta,page,Pages,name,ajaxList,text,equals
+formAction,serverCondition,postMetaAttachment,Post meta,attachment,Media,name,ajaxList,text,equals
+formAction,serverCondition,postMetaProduct,Post meta,product,Products,name,ajaxList,text,equals
+formAction,serverCondition,httpCookie,Cookie,http,HTTP,name,text,text,equals

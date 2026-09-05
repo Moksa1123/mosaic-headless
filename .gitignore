@@ -1,0 +1,9 @@
+# Mosaic Pro plugin source - licensed third-party code, never commit
+mosaic/
+mosaic.zip
+
+# local capture artefacts
+data/raw/*.local.json
+*.pyc
+__pycache__/
+.DS_Store
