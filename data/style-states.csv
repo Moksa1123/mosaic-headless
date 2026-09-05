@@ -1,0 +1,54 @@
+state,selector_template,order,scope,declared_in
+&,&,0,global,Mosaic/Builder/Style/StatesMeta.php
+focus,&:FOCUS,750,global,Mosaic/Builder/Style/StatesMeta.php
+focus-visible,&:FOCUS-VISIBLE,760,global,Mosaic/Builder/Style/StatesMeta.php
+hover,&:HOVER,100,global,Mosaic/Builder/Style/StatesMeta.php
+hover-on-link,":where(a[href]:not([disabled]),button:not([disabled])):HOVER &",200,global,Mosaic/Builder/Style/StatesMeta.php
+hover-on-tab,:where(.M_EL_Tab:not(.M_EL_Tab--active)):HOVER &,200,global,Mosaic/NodeTypes/Pro/Tabs/TabsMenu/Tab/TabElementTypeFactory.php
+hover-tab,&:where(.M_EL_Tab:not(.M_EL_Tab--active)):HOVER,100,global,Mosaic/NodeTypes/Pro/Tabs/TabsMenu/Tab/TabElementTypeFactory.php
+hover-when-link,"&:where([tabindex]:not([tabindex=""-1""]),a[href]:not([disabled]),button:not([disabled])):HOVER",100,global,Mosaic/Builder/Style/StatesMeta.php
+____loop_pagination_number--active,&.M_EL_LoopPaginationNumber--active,500,node-type,Mosaic/NodeTypes/Loop/LoopPagination/Numbers/Number/LoopPaginationNumberElementTypeFactory.php
+____loop_pagination_number_ellipsis,&.M_EL_LoopPaginationNumber_ellipsis,0,node-type,Mosaic/NodeTypes/Loop/LoopPagination/Numbers/Number/LoopPaginationNumberElementTypeFactory.php
+___arrow_hidden,&:where(.M_EL_SliderArrow--hidden),800,node-type,Mosaic/NodeTypes/Pro/Slider/SliderArrow/SliderArrowElementTypeFactoryAbstract.php
+___checkbox-input--checked,&:checked,500,node-type,Mosaic/NodeTypes/Pro/Form/Form/MElements/Checkbox/CheckboxInput/CheckboxInputElementTypeFactory.php
+___checkbox-input--checkmark,&:checked::before,500,node-type,Mosaic/NodeTypes/Pro/Form/Form/MElements/Checkbox/CheckboxInput/CheckboxInputElementTypeFactory.php
+___choice--checked,&:has(:where(input):checked),500,node-type,Mosaic/NodeTypes/Pro/Form/Form/MElements/Choice/ChoiceElementTypeFactory.php
+___choice--checked-within,.M_EL_Choice:where(:has(input:checked)) &,500,node-type,Mosaic/NodeTypes/Pro/Form/Form/MElements/Choice/ChoiceElementTypeFactory.php
+___choice--focus-visible,&:has(:where(input):focus-visible),760,node-type,Mosaic/NodeTypes/Pro/Form/Form/MElements/Choice/ChoiceElementTypeFactory.php
+___choice-field--invalid,&:has(:user-invalid),700,node-type,Mosaic/NodeTypes/Pro/Form/Form/MElements/ChoiceField/ChoiceFieldElementTypeFactory.php
+___choice-field--invalid-within,.M_EL_ChoiceField:where(:has(:user-invalid)) &,700,node-type,Mosaic/NodeTypes/Pro/Form/Form/MElements/ChoiceField/ChoiceFieldElementTypeFactory.php
+___dropdown--opening,.M_EL_Dropdown:where(.dropdown--opening) &,600,node-type,Mosaic/NodeTypes/Menu/Dropdown/DropdownElementTypeFactoryAbstract.php
+___dropdown-toggle--current,&.M_EL_DropdownToggle--current,500,node-type,Mosaic/NodeTypes/Menu/Dropdown/DropdownToggle/DropdownToggleElementTypeFactory.php
+___dropdown-toggle--current-within,".M_EL_Dropdown:where(:has(.M_EL_MenuLink--current,.M_EL_DropdownToggle--current)) > &",500,node-type,Mosaic/NodeTypes/Menu/Dropdown/DropdownToggle/DropdownToggleElementTypeFactory.php
+___field--focus-visible,"&:has(:where(input, textarea, select):focus-visible)",760,node-type,Mosaic/NodeTypes/Pro/Form/Form/MElements/Field/FieldElementTypeFactory.php
+___field--invalid,&:has(:user-invalid),700,node-type,Mosaic/NodeTypes/Pro/Form/Form/MElements/Field/FieldElementTypeFactory.php
+___field--invalid-focus-visible,&:has(:user-invalid:focus-visible),770,node-type,Mosaic/NodeTypes/Pro/Form/Form/MElements/Field/FieldElementTypeFactory.php
+___field--invalid-within,.M_EL_Field:where(:has(:user-invalid)) &,700,node-type,Mosaic/NodeTypes/Pro/Form/Form/MElements/Field/FieldElementTypeFactory.php
+___field-set--invalid,&:has(:user-invalid),700,node-type,Mosaic/NodeTypes/Pro/Form/Form/MElements/FieldSet/FieldSetElementTypeFactory.php
+___fileupload-input--selector-button,&::file-selector-button,0,node-type,Mosaic/NodeTypes/Pro/Form/Form/MElements/FileUpload/FileUploadElementTypeFactory.php
+___fileupload-input--selector-button-hover,&::file-selector-button:hover,100,node-type,Mosaic/NodeTypes/Pro/Form/Form/MElements/FileUpload/FileUploadElementTypeFactory.php
+___form--error,"&[data-form-state=""error""]",700,node-type,Mosaic/NodeTypes/Pro/Form/FormWrapperElementTypeFactory.php
+___form--invalid-within,.M_EL_FormWrapper:where(:has(:user-invalid)) &,700,node-type,Mosaic/NodeTypes/Pro/Form/FormWrapperElementTypeFactory.php
+___input--placeholder,&.M_EL_InputText::placeholder,0,node-type,Mosaic/NodeTypes/Pro/Form/Form/MElements/InputText/InputTextElementTypeFactory.php
+___loop_element_no_result,&.M_EL_Loop--no-result,600,node-type,Mosaic/NodeTypes/Loop/LoopElementTypeFactory.php
+___loop_pagination_button--disabled,&.M_EL_LoopPaginationButton--disabled,800,node-type,Mosaic/NodeTypes/Loop/LoopPagination/Button/ButtonNext/LoopPaginationButtonNextElementTypeFactory.php
+___menu-link--current,&.M_EL_MenuLink--current,500,node-type,Mosaic/NodeTypes/Menu/MenuLink/MenuLinkElementTypeFactory.php
+___navbar--dropdown-mode,"&:where(.M_EL_Navbar.dropdown-mode,.M_EL_Navbar.dropdown-mode &)",600,node-type,Mosaic/NodeTypes/Navbar/NavbarElementTypeFactory.php
+___navbar--opened,.dropdown-mode:where(.M_EL_Navbar.dropdown--opened) &,600,node-type,Mosaic/NodeTypes/Navbar/NavbarElementTypeFactory.php
+___navbar--opening,.dropdown-mode:where(.M_EL_Navbar.dropdown--opening) &,600,node-type,Mosaic/NodeTypes/Navbar/NavbarElementTypeFactory.php
+___nested_dropdown_mode,"&:where(.dropdown-mode .M_EL_Navigation .M_EL_Dropdown &, .M_EL_Dropdown .M_EL_Dropdown &):not(x)",600,node-type,Mosaic/NodeTypes/Menu/Dropdown/DropdownElementTypeFactoryAbstract.php
+___radio-input--checked,&:checked,500,node-type,Mosaic/NodeTypes/Pro/Form/Form/MElements/Radio/RadioInput/RadioInputElementTypeFactory.php
+___radio-input--checkmark,&:checked::before,500,node-type,Mosaic/NodeTypes/Pro/Form/Form/MElements/Radio/RadioInput/RadioInputElementTypeFactory.php
+___select-input-option,"&.M_EL_Select:where(:has(option:not(:disabled):checked)), &.M_EL_Select :where(option)",500,node-type,Mosaic/NodeTypes/Pro/Form/Form/MElements/Select/SelectElementTypeFactory.php
+___select-input-option--disabled,"&.M_EL_Select:where(:has(option:disabled:checked)), &.M_EL_Select :where(option:disabled)",800,node-type,Mosaic/NodeTypes/Pro/Form/Form/MElements/Select/SelectElementTypeFactory.php
+___slide--active,.M_EL_SliderSlide--active > &,500,node-type,Mosaic/NodeTypes/Pro/Slider/SliderSlides/SliderSlide/SliderSlideElementTypeFactory.php
+___slider_navigation_bullet--active,&.M_EL_SliderNavigationBullet--active,500,node-type,Mosaic/NodeTypes/Pro/Slider/SliderNavigation/SliderNavigationBullet/SliderNavigationBulletElementTypeFactory.php
+___slider_navigation_bullet--hover,&:not(.M_EL_SliderNavigationBullet--active):HOVER,100,node-type,Mosaic/NodeTypes/Pro/Slider/SliderNavigation/SliderNavigationBullet/SliderNavigationBulletElementTypeFactory.php
+___step--active,&.M_EL_Step--active,500,node-type,Mosaic/NodeTypes/Pro/Form/Form/MElements/MultiSteps/Steps/Step/StepElementTypeFactory.php
+___step--active___descendants,.M_EL_Step--active &,500,node-type,Mosaic/NodeTypes/Pro/Form/Form/MElements/MultiSteps/Steps/Step/StepElementTypeFactory.php
+___step--completed,&.M_EL_Step--completed,500,node-type,Mosaic/NodeTypes/Pro/Form/Form/MElements/MultiSteps/Steps/Step/StepElementTypeFactory.php
+___step--completed___descendants,.M_EL_Step--completed &,500,node-type,Mosaic/NodeTypes/Pro/Form/Form/MElements/MultiSteps/Steps/Step/StepElementTypeFactory.php
+___submit-button--busy,"&[aria-busy=""true""]",800,node-type,Mosaic/NodeTypes/Pro/Form/Form/MElements/SubmitButton/SubmitButtonElementTypeFactory.php
+___tab--active,&.M_EL_Tab--active,500,node-type,Mosaic/NodeTypes/Pro/Tabs/TabsMenu/Tab/TabElementTypeFactory.php
+___tab--active___descendants,.M_EL_Tab--active &,500,node-type,Mosaic/NodeTypes/Pro/Tabs/TabsMenu/Tab/TabElementTypeFactory.php
+___textarea-input--placeholder,&.M_EL_TextArea::placeholder,0,node-type,Mosaic/NodeTypes/Pro/Form/Form/MElements/TextArea/TextAreaElementTypeFactory.php
