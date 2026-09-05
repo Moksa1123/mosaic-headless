@@ -187,11 +187,29 @@ def probe_records(node_type, parent_id, master_id):
     return attr, nid, recs
 
 
-def delete_subtree(client, master_id, keep_ids):
-    """Remove every node under the probe parent that is not part of the healed baseline."""
+def delete_subtree(client, master_id, keep_ids, parent_id=None):
+    """Remove the probe nodes, leaving the healed skeleton alone.
+
+    Deleting "everything not in the original baseline" does not work: heal() rebuilds
+    the master-root > document > body skeleton with FRESH ids whenever it decides one
+    is missing, so a fixed baseline id set marks those rebuilds as garbage, deletes
+    them, and heal makes new ones again - the document grows every round and later
+    types get measured on a dirty tree. Scope the delete to the probe parent's own
+    descendants instead, which the skeleton is never part of.
+    """
     doc = unwrap(client.get("masterDocumentInstance/%s" % master_id), "masterDocumentInstance")
     key = "node/master/%s" % master_id
-    doomed = [n for n in doc[key] if n["ID"] not in keep_ids]
+    if parent_id:
+        by_parent = {}
+        for n in doc[key]:
+            by_parent.setdefault(n["parentID"], []).append(n)
+        doomed, stack = [], list(by_parent.get(parent_id, []))
+        while stack:
+            n = stack.pop()
+            doomed.append(n)
+            stack.extend(by_parent.get(n["ID"], []))
+    else:
+        doomed = [n for n in doc[key] if n["ID"] not in keep_ids]
     if not doomed:
         return
     # delete deepest-first so a parent never disappears out from under its child
@@ -257,7 +275,7 @@ def sweep(client, cfg, types, out_path):
                      "rendered_classes": classes, "text_echoed": echoed,
                      "page_bytes": size, "detail": err})
         print("%-40s %-11s %s" % (node_type, outcome, tag or err[:60]), flush=True)
-        delete_subtree(client, master_id, baseline_ids)
+        delete_subtree(client, master_id, baseline_ids, cfg["parentNodeID"])
 
     with open(out_path, "w", newline="", encoding="utf-8") as fh:
         w = csv.DictWriter(fh, fieldnames=list(rows[0].keys()))
@@ -275,7 +293,9 @@ if __name__ == "__main__":
     ap.add_argument("--config", required=True)
     ap.add_argument("--setup", action="store_true")
     ap.add_argument("--sweep", action="store_true")
-    ap.add_argument("--types", help="comma-separated subset; default = every free type")
+    ap.add_argument("--types", help="comma-separated subset; overrides --edition")
+    ap.add_argument("--edition", default="all", choices=["all", "free", "pro"],
+                    help="which slice of node-types.csv to sweep (default: all)")
     ap.add_argument("--node-types-csv", default="../data/node-types.csv")
     ap.add_argument("--out", default="../data/node-verification.csv")
     a = ap.parse_args()
@@ -289,7 +309,8 @@ if __name__ == "__main__":
             wanted = a.types.split(",")
         else:
             with open(a.node_types_csv, encoding="utf-8") as fh:
-                wanted = [r["type"] for r in csv.DictReader(fh) if r["edition"] == "free"]
+                wanted = [r["type"] for r in csv.DictReader(fh)
+                          if a.edition in ("all", r["edition"])]
         sweep(client, cfg, wanted, a.out)
     if not (a.setup or a.sweep):
         ap.error("pass --setup and/or --sweep")

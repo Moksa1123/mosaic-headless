@@ -35,6 +35,9 @@ RE_DEFAULT_CLASS = re.compile(
 RE_CREATE_DATA = re.compile(r"\$this->(createData\w*)\s*\(\s*'([^']+)'", re.S)
 RE_VALIDATOR = re.compile(r"(Validator\w+|ValidateAllowUndefined)")
 RE_OPTS = re.compile(r"'(supportsInherit|isResponsive|supportsState|allowDuplicates)'\s*=>\s*(true|false)")
+# createValidatorAcceptedValues([...]) is Mosaic's enum; the list is the only place
+# the legal values for a property are written down
+RE_ACCEPTED = re.compile(r"createValidatorAcceptedValues\s*\(\s*\[(.*?)\]", re.S)
 RE_LABEL_TEXT = re.compile(r"__\(\s*'([^']*)'")
 RE_RESERVED = re.compile(r"setReservedAttributes\s*\(\s*\[(.*?)\]", re.S)
 
@@ -73,6 +76,13 @@ def extract(plugin_root, out_dir):
         if not ctor:
             continue  # abstract factory with no own slug
         relpath = rel(path, plugin_root)
+        # the data class declaring this type's own properties sits beside the factory;
+        # node-properties.csv is keyed by that class name, so record it to make the join
+        data_class = ""
+        for sibling in sorted(os.listdir(os.path.dirname(path))):
+            if sibling.endswith("MResourceData.php"):
+                data_class = sibling[:-4]
+                break
         bools = dict(RE_METHOD_BOOL.findall(src))
         alias = RE_ALIAS.search(src)
         aliases = re.findall(r"'([^']+)'", alias.group(1)) if alias else []
@@ -89,6 +99,7 @@ def extract(plugin_root, out_dir):
                 "is_link": bools.get("isLink", ""),
                 "can_be_parent": bools.get("canBeParentFor", ""),
                 "default_element_class": (dflt.group(1).strip() if dflt else ""),
+                "data_class": data_class,
                 "file": relpath,
             }
         )
@@ -109,6 +120,13 @@ def extract(plugin_root, out_dir):
                 tail = tail[: nxt.start()]
             validators = sorted(set(RE_VALIDATOR.findall(tail)))
             opts = {k: v for k, v in RE_OPTS.findall(tail)}
+            acc = RE_ACCEPTED.search(tail)
+            # constants (MResourceStatus::PUBLISH) sit alongside plain strings; keep
+            # the literal strings and record the constants by their short name
+            accepted = []
+            if acc:
+                accepted = re.findall(r"'([^']+)'", acc.group(1))
+                accepted += [c for c in re.findall(r"\w+::(\w+)", acc.group(1))]
             props.append(
                 {
                     "owner_class": owner,
@@ -117,6 +135,7 @@ def extract(plugin_root, out_dir):
                     "creator": m.group(1),
                     "property": m.group(2),
                     "validators": "|".join(validators),
+                    "accepted_values": "|".join(accepted),
                     "supports_inherit": opts.get("supportsInherit", ""),
                     "is_responsive": opts.get("isResponsive", ""),
                     "reserved_attributes": "|".join(reserved_attrs),
