@@ -10,3 +10,5 @@ __pycache__/
 
 # playwright scratch output
 .playwright-mcp/
+report.html
+shots/web/_embed.json
