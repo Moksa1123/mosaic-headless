@@ -7,21 +7,24 @@ Writes ../data/property-verification.csv.
 
 ## What a "pass" means here
 
-Each property is set, alone, on a node that is known to render, and the page plus every
-stylesheet it links are then fetched and searched for the probe value. The probe is
-unique per (type, property) pair, so a hit means *that* property produced *that* output
-and nothing else could have.
+Each property is set, alone, on a node that is known to render, and the delivered page
+is then compared against an unprobed baseline of the same page. The probe is unique per
+(type, property) pair, so a hit means *that* property produced *that* output and
+nothing else could have.
 
-Enum properties (`accepted_values` in node-properties.csv) are probed with a real
-member of their enum rather than a marker string, because a marker would simply be
-rejected. For those the assertion is weaker by necessity - the value may legitimately
-appear elsewhere in the document - so they are reported as ENUM_APPLIED, not HTML.
+Enum properties (`accepted_values` in node-properties.csv) must be probed with a real
+member of their enum - a marker string would simply be rejected - and enum members like
+"0", "none" or "left" already appear all over a normal page. So the test is not "does
+the value appear" but "does it appear MORE OFTEN than without the probe". An enum value
+whose count does not grow is reported INCONCLUSIVE rather than being scored as a pass.
 
 ## Outcomes
 
     HTML       the probe value reached the delivered markup
-    CSS        the probe value reached one of the linked stylesheets
+    CSS        the probe value reached Mosaic's compiled inline CSS
     ENUM_APPLIED   an enum value was accepted and shows up in the output
+    INCONCLUSIVE an enum value that appears no more often than on an unprobed page,
+               so the probe proves nothing either way
     NO_EFFECT  accepted and stored, but nothing observable changed on a bare page
                (normal for properties that need context: conditions, interactions,
                loop bindings)
@@ -133,6 +136,7 @@ def run(client, cfg, jobs, out_path):
     base_html = client.page()
     if len(base_html) < MIN_HEALTHY_BYTES:
         sys.exit("baseline page already broken (%d bytes)" % len(base_html))
+    base_markup, base_css = split_markup_and_css(base_html)
     print("baseline %d bytes, %d nodes, %d probes\n" % (len(base_html), len(baseline_ids), len(jobs)))
 
     rows = []
@@ -164,10 +168,20 @@ def run(client, cfg, jobs, out_path):
                 outcome, detail = "BROKE_PAGE", html.strip()[:160]
             else:
                 markup, css = split_markup_and_css(html)
-                if needle in css:
+                # Counting occurrences against the unprobed baseline, rather than just
+                # testing for presence, is what makes an enum probe meaningful: values
+                # like "0", "none" or "left" already appear all over a normal page, and
+                # a presence test scores them as a hit no matter what the property did.
+                grew_css = css.count(needle) > base_css.count(needle)
+                grew_markup = markup.count(needle) > base_markup.count(needle)
+                if grew_css:
                     outcome = "CSS"
-                elif needle in markup:
+                elif grew_markup:
                     outcome = "ENUM_APPLIED" if is_enum else "HTML"
+                elif is_enum and (needle in css or needle in markup):
+                    # present, but no more often than on a page without the probe -
+                    # nothing can be concluded from this value
+                    outcome = "INCONCLUSIVE"
                 else:
                     outcome = "NO_EFFECT"
                 detail = ""

@@ -1,0 +1,315 @@
+{
+ "page_id": 15,
+ "title": "Neo Brutalist",
+ "master": "NeoBrutalist",
+ "tree": {
+  "type": "section",
+  "data": {
+   "attrID": "p4"
+  },
+  "style": {
+   "&": {
+    "_": {
+     "backgroundColor": "rgb(255,222,89)",
+     "paddingTop": "84px",
+     "paddingBottom": "104px",
+     "paddingLeft": "40px",
+     "paddingRight": "40px",
+     "fontFamily": "'Helvetica Neue', Helvetica, Arial, sans-serif"
+    },
+    "_m": {
+     "paddingLeft": "20px",
+     "paddingRight": "20px"
+    }
+   }
+  },
+  "children": [
+   {
+    "type": "text",
+    "data": {
+     "tagName": "h1"
+    },
+    "text": "MAKE IT LOUD",
+    "style": {
+     "&": {
+      "_": {
+       "color": "rgb(17,17,17)",
+       "fontSize": "78px",
+       "fontWeight": "800",
+       "lineHeight": "0.95",
+       "letterSpacing": "-3px"
+      }
+     }
+    }
+   },
+   {
+    "type": "text",
+    "data": {
+     "tagName": "p"
+    },
+    "text": "Flat colour, thick black keylines, and shadows that sit exactly where you put them.",
+    "style": {
+     "&": {
+      "_": {
+       "color": "rgb(17,17,17)",
+       "fontSize": "18px",
+       "marginTop": "20px",
+       "maxWidth": "580px",
+       "lineHeight": "1.5"
+      }
+     }
+    }
+   },
+   {
+    "type": "div",
+    "data": {
+     "attrID": "p4-grid"
+    },
+    "style": {
+     "&": {
+      "_": {
+       "display": "grid",
+       "gridCols": "repeat(3, 1fr)",
+       "columnGap": "28px",
+       "rowGap": "28px",
+       "marginTop": "56px"
+      },
+      "_m": {
+       "gridCols": "repeat(1, 1fr)"
+      }
+     }
+    },
+    "children": [
+     {
+      "type": "div",
+      "data": {
+       "attrID": "p4-c0"
+      },
+      "style": {
+       "&": {
+        "_": {
+         "backgroundColor": "rgb(255,107,107)",
+         "radius": "14px",
+         "paddingTop": "32px",
+         "paddingBottom": "32px",
+         "paddingLeft": "26px",
+         "paddingRight": "26px",
+         "border": {
+          "width": "3px",
+          "style": "solid",
+          "color": "rgb(17,17,17)"
+         },
+         "shadow": {
+          "x": "8px",
+          "y": "8px",
+          "color": "rgb(17,17,17)"
+         },
+         "transitionAll": "180ms ease"
+        }
+       },
+       "hover": {
+        "_": {
+         "move": {
+          "translateY": "-6px"
+         },
+         "shadow": {
+          "x": "14px",
+          "y": "14px",
+          "color": "rgb(17,17,17)"
+         }
+        }
+       }
+      },
+      "children": [
+       {
+        "type": "text",
+        "data": {
+         "tagName": "h3"
+        },
+        "text": "Offset",
+        "style": {
+         "&": {
+          "_": {
+           "color": "rgb(17,17,17)",
+           "fontSize": "22px",
+           "fontWeight": "800"
+          }
+         }
+        }
+       },
+       {
+        "type": "text",
+        "data": {
+         "tagName": "p"
+        },
+        "text": "An 8px hard shadow, no blur. Hover pushes it to 14.",
+        "style": {
+         "&": {
+          "_": {
+           "color": "rgb(17,17,17)",
+           "fontSize": "15px",
+           "marginTop": "10px",
+           "lineHeight": "1.55"
+          }
+         }
+        }
+       }
+      ]
+     },
+     {
+      "type": "div",
+      "data": {
+       "attrID": "p4-c1"
+      },
+      "style": {
+       "&": {
+        "_": {
+         "backgroundColor": "rgb(108,224,168)",
+         "radius": "14px",
+         "paddingTop": "32px",
+         "paddingBottom": "32px",
+         "paddingLeft": "26px",
+         "paddingRight": "26px",
+         "border": {
+          "width": "3px",
+          "style": "solid",
+          "color": "rgb(17,17,17)"
+         },
+         "shadow": {
+          "x": "8px",
+          "y": "8px",
+          "color": "rgb(17,17,17)"
+         },
+         "transitionAll": "180ms ease"
+        }
+       },
+       "hover": {
+        "_": {
+         "move": {
+          "translateY": "-6px"
+         },
+         "shadow": {
+          "x": "14px",
+          "y": "14px",
+          "color": "rgb(17,17,17)"
+         }
+        }
+       }
+      },
+      "children": [
+       {
+        "type": "text",
+        "data": {
+         "tagName": "h3"
+        },
+        "text": "Keyline",
+        "style": {
+         "&": {
+          "_": {
+           "color": "rgb(17,17,17)",
+           "fontSize": "22px",
+           "fontWeight": "800"
+          }
+         }
+        }
+       },
+       {
+        "type": "text",
+        "data": {
+         "tagName": "p"
+        },
+        "text": "Three-pixel black borders on everything, including the cards.",
+        "style": {
+         "&": {
+          "_": {
+           "color": "rgb(17,17,17)",
+           "fontSize": "15px",
+           "marginTop": "10px",
+           "lineHeight": "1.55"
+          }
+         }
+        }
+       }
+      ]
+     },
+     {
+      "type": "div",
+      "data": {
+       "attrID": "p4-c2"
+      },
+      "style": {
+       "&": {
+        "_": {
+         "backgroundColor": "rgb(150,176,255)",
+         "radius": "14px",
+         "paddingTop": "32px",
+         "paddingBottom": "32px",
+         "paddingLeft": "26px",
+         "paddingRight": "26px",
+         "border": {
+          "width": "3px",
+          "style": "solid",
+          "color": "rgb(17,17,17)"
+         },
+         "shadow": {
+          "x": "8px",
+          "y": "8px",
+          "color": "rgb(17,17,17)"
+         },
+         "transitionAll": "180ms ease"
+        }
+       },
+       "hover": {
+        "_": {
+         "move": {
+          "translateY": "-6px"
+         },
+         "shadow": {
+          "x": "14px",
+          "y": "14px",
+          "color": "rgb(17,17,17)"
+         }
+        }
+       }
+      },
+      "children": [
+       {
+        "type": "text",
+        "data": {
+         "tagName": "h3"
+        },
+        "text": "Pop",
+        "style": {
+         "&": {
+          "_": {
+           "color": "rgb(17,17,17)",
+           "fontSize": "22px",
+           "fontWeight": "800"
+          }
+         }
+        }
+       },
+       {
+        "type": "text",
+        "data": {
+         "tagName": "p"
+        },
+        "text": "Saturated flats that would be illegal in a corporate palette.",
+        "style": {
+         "&": {
+          "_": {
+           "color": "rgb(17,17,17)",
+           "fontSize": "15px",
+           "marginTop": "10px",
+           "lineHeight": "1.55"
+          }
+         }
+        }
+       }
+      ]
+     }
+    ]
+   }
+  ]
+ }
+}

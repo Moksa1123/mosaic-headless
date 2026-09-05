@@ -7,3 +7,6 @@ data/raw/*.local.json
 *.pyc
 __pycache__/
 .DS_Store
+
+# playwright scratch output
+.playwright-mcp/

@@ -1,0 +1,355 @@
+{
+ "page_id": 17,
+ "title": "Swiss",
+ "master": "Swiss",
+ "tree": {
+  "type": "section",
+  "data": {
+   "attrID": "p6"
+  },
+  "style": {
+   "&": {
+    "_": {
+     "backgroundColor": "rgb(255,255,255)",
+     "paddingTop": "88px",
+     "paddingBottom": "120px",
+     "paddingLeft": "56px",
+     "paddingRight": "56px",
+     "fontFamily": "'Helvetica Neue', Helvetica, Arial, sans-serif"
+    },
+    "_m": {
+     "paddingLeft": "20px",
+     "paddingRight": "20px",
+     "paddingTop": "48px"
+    }
+   }
+  },
+  "children": [
+   {
+    "type": "div",
+    "data": {
+     "attrID": "p6-bar"
+    },
+    "style": {
+     "&": {
+      "_": {
+       "height": "8px",
+       "width": "120px",
+       "backgroundColor": "rgb(222,26,26)"
+      }
+     }
+    }
+   },
+   {
+    "type": "text",
+    "data": {
+     "tagName": "h1"
+    },
+    "text": "Grid. Order. Silence.",
+    "style": {
+     "&": {
+      "_": {
+       "color": "rgb(12,12,12)",
+       "fontSize": "90px",
+       "fontWeight": "500",
+       "lineHeight": "0.95",
+       "letterSpacing": "-4px",
+       "marginTop": "34px",
+       "maxWidth": "820px"
+      }
+     }
+    }
+   },
+   {
+    "type": "div",
+    "data": {
+     "attrID": "p6-grid"
+    },
+    "style": {
+     "&": {
+      "_": {
+       "display": "grid",
+       "gridCols": "repeat(4, 1fr)",
+       "columnGap": "32px",
+       "rowGap": "32px",
+       "marginTop": "64px"
+      },
+      "_m": {
+       "gridCols": "repeat(1, 1fr)"
+      }
+     }
+    },
+    "children": [
+     {
+      "type": "div",
+      "data": {
+       "attrID": "p6-c0"
+      },
+      "style": {
+       "&": {
+        "_": {
+         "paddingTop": "20px",
+         "customStyles": "border-top:2px solid #0c0c0c;"
+        }
+       }
+      },
+      "children": [
+       {
+        "type": "text",
+        "data": {
+         "tagName": "p"
+        },
+        "text": "01",
+        "style": {
+         "&": {
+          "_": {
+           "color": "rgb(222,26,26)",
+           "fontSize": "13px",
+           "fontWeight": "700",
+           "letterSpacing": "1px"
+          }
+         }
+        }
+       },
+       {
+        "type": "text",
+        "data": {
+         "tagName": "h3"
+        },
+        "text": "Alignment",
+        "style": {
+         "&": {
+          "_": {
+           "color": "rgb(12,12,12)",
+           "fontSize": "17px",
+           "fontWeight": "600",
+           "marginTop": "10px"
+          }
+         }
+        }
+       },
+       {
+        "type": "text",
+        "data": {
+         "tagName": "p"
+        },
+        "text": "Everything sits on a four-column grid with a 32px gutter.",
+        "style": {
+         "&": {
+          "_": {
+           "color": "rgb(96,96,96)",
+           "fontSize": "14px",
+           "marginTop": "8px",
+           "lineHeight": "1.6"
+          }
+         }
+        }
+       }
+      ]
+     },
+     {
+      "type": "div",
+      "data": {
+       "attrID": "p6-c1"
+      },
+      "style": {
+       "&": {
+        "_": {
+         "paddingTop": "20px",
+         "customStyles": "border-top:2px solid #0c0c0c;"
+        }
+       }
+      },
+      "children": [
+       {
+        "type": "text",
+        "data": {
+         "tagName": "p"
+        },
+        "text": "02",
+        "style": {
+         "&": {
+          "_": {
+           "color": "rgb(222,26,26)",
+           "fontSize": "13px",
+           "fontWeight": "700",
+           "letterSpacing": "1px"
+          }
+         }
+        }
+       },
+       {
+        "type": "text",
+        "data": {
+         "tagName": "h3"
+        },
+        "text": "Weight",
+        "style": {
+         "&": {
+          "_": {
+           "color": "rgb(12,12,12)",
+           "fontSize": "17px",
+           "fontWeight": "600",
+           "marginTop": "10px"
+          }
+         }
+        }
+       },
+       {
+        "type": "text",
+        "data": {
+         "tagName": "p"
+        },
+        "text": "Two weights only: medium for display, regular for body.",
+        "style": {
+         "&": {
+          "_": {
+           "color": "rgb(96,96,96)",
+           "fontSize": "14px",
+           "marginTop": "8px",
+           "lineHeight": "1.6"
+          }
+         }
+        }
+       }
+      ]
+     },
+     {
+      "type": "div",
+      "data": {
+       "attrID": "p6-c2"
+      },
+      "style": {
+       "&": {
+        "_": {
+         "paddingTop": "20px",
+         "customStyles": "border-top:2px solid #0c0c0c;"
+        }
+       }
+      },
+      "children": [
+       {
+        "type": "text",
+        "data": {
+         "tagName": "p"
+        },
+        "text": "03",
+        "style": {
+         "&": {
+          "_": {
+           "color": "rgb(222,26,26)",
+           "fontSize": "13px",
+           "fontWeight": "700",
+           "letterSpacing": "1px"
+          }
+         }
+        }
+       },
+       {
+        "type": "text",
+        "data": {
+         "tagName": "h3"
+        },
+        "text": "Accent",
+        "style": {
+         "&": {
+          "_": {
+           "color": "rgb(12,12,12)",
+           "fontSize": "17px",
+           "fontWeight": "600",
+           "marginTop": "10px"
+          }
+         }
+        }
+       },
+       {
+        "type": "text",
+        "data": {
+         "tagName": "p"
+        },
+        "text": "Red appears three times and never as a background.",
+        "style": {
+         "&": {
+          "_": {
+           "color": "rgb(96,96,96)",
+           "fontSize": "14px",
+           "marginTop": "8px",
+           "lineHeight": "1.6"
+          }
+         }
+        }
+       }
+      ]
+     },
+     {
+      "type": "div",
+      "data": {
+       "attrID": "p6-c3"
+      },
+      "style": {
+       "&": {
+        "_": {
+         "paddingTop": "20px",
+         "customStyles": "border-top:2px solid #0c0c0c;"
+        }
+       }
+      },
+      "children": [
+       {
+        "type": "text",
+        "data": {
+         "tagName": "p"
+        },
+        "text": "04",
+        "style": {
+         "&": {
+          "_": {
+           "color": "rgb(222,26,26)",
+           "fontSize": "13px",
+           "fontWeight": "700",
+           "letterSpacing": "1px"
+          }
+         }
+        }
+       },
+       {
+        "type": "text",
+        "data": {
+         "tagName": "h3"
+        },
+        "text": "Whitespace",
+        "style": {
+         "&": {
+          "_": {
+           "color": "rgb(12,12,12)",
+           "fontSize": "17px",
+           "fontWeight": "600",
+           "marginTop": "10px"
+          }
+         }
+        }
+       },
+       {
+        "type": "text",
+        "data": {
+         "tagName": "p"
+        },
+        "text": "The empty column is a design element, not a leftover.",
+        "style": {
+         "&": {
+          "_": {
+           "color": "rgb(96,96,96)",
+           "fontSize": "14px",
+           "marginTop": "8px",
+           "lineHeight": "1.6"
+          }
+         }
+        }
+       }
+      ]
+     }
+    ]
+   }
+  ]
+ }
+}

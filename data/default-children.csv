@@ -1,0 +1,11 @@
+type,default_children,child_count,declared_in
+accordion-content,text|wysiwyg-text,2,Mosaic/NodeTypes/Accordion/AccordionItem/AccordionContent/AccordionContentElementTypeFactory.php
+accordion-item,accordion-title|accordion-content,2,Mosaic/NodeTypes/Accordion/AccordionItem/AccordionItemElementTypeFactory.php
+slider-navigation,slider-navigation-bullet,1,Mosaic/NodeTypes/Pro/Slider/SliderNavigation/SliderNavigationElementTypeFactory.php
+tabs-content,tabs-tab-pane,1,Mosaic/NodeTypes/Pro/Tabs/TabsContent/TabsContentElementTypeFactory.php
+tabs-loop-tab-panes,text|wysiwyg-variable,2,Mosaic/NodeTypes/Pro/Tabs/TabsContent/LoopTabPanes/TabLoopTabPanesElementTypeFactory.php
+tabs-loop-tabs,text|wysiwyg-variable,2,Mosaic/NodeTypes/Pro/Tabs/TabsMenu/LoopTabs/TabLoopTabsElementTypeFactory.php
+tabs-menu,tabs-tab,1,Mosaic/NodeTypes/Pro/Tabs/TabsMenu/TabsMenuElementTypeFactory.php
+tabs-tab,text|wysiwyg-text,2,Mosaic/NodeTypes/Pro/Tabs/TabsMenu/Tab/TabElementTypeFactory.php
+tabs-tab-pane,text|wysiwyg-text,2,Mosaic/NodeTypes/Pro/Tabs/TabsContent/TabPane/TabPaneElementTypeFactory.php
+text,wysiwyg-text,1,Mosaic/NodeTypes/Text/TextElementTypeFactory.php

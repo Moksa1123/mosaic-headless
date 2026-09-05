@@ -104,3 +104,48 @@ lowest layer and it opts that node out of both reuse mechanisms:
 Per-node `style` is for the exception, not the rule. Build a design by putting values
 in the class and token layers and letting nodes inherit; reach for per-node style when
 one element genuinely differs.
+
+## The five structured values
+
+Five properties are silently useless if you write a CSS string to them. The string is
+accepted — no rejection, no exception — and the compiled rule comes out as
+`transform:none`, `box-shadow:none`, or simply never appears. Every shape below was
+found by probing and confirmed against the compiled CSS.
+
+```jsonc
+// border-radius:18px
+"borderRadius": {"type": "all", "allOptions": {"borderRadiusValue": "18px"}}
+
+// transform:translateY(-8px)   — one entry per transform, type names come from
+// TransformTypeFactoryManager: translateX/Y/Z, rotateX/Y/Z, skewX/Y, scaleX/Y/Z
+"transform": [{"type": "translateY", "translateYOptions": {"value": "-8px"}, "uuid": "<uuid>"}]
+
+// box-shadow:rgb(20, 20, 20) 8px 8px 0px 0px   — type is "outside" or "inside",
+// NOT "outset"/"inset"; a wrong type yields box-shadow:none
+"boxShadow": [{"x": "8px", "y": "8px", "blur": "0px", "spread": "0px",
+               "color": "rgb(20,20,20)", "type": "outside", "uuid": "<uuid>"}]
+
+// transition-property/duration/timing-function/delay
+"transition": [{"transitionProperty": "all", "transitionDuration": "350ms",
+                "transitionDelay": "0ms", "transitionTimingFunction": "ease", "uuid": "<uuid>"}]
+
+// all twelve border-*-* longhands; there is no shorthand form
+"borderStyle": {"borderTopWidth": "5px", "borderTopStyle": "solid", "borderTopColor": "rgb(...)",
+                "borderRightWidth": …, "borderBottomWidth": …, "borderLeftWidth": …}
+```
+
+The `<type>Options` suffix is the general pattern (`BorderRadiusTypeFactoryAbstract::
+getOptionsName()` returns `getType() . 'Options'`), so it applies to `flexSizing` and the
+other type-switched groups too.
+
+`scale` as a single transform entry did not compile with the `value` shape — it uses
+`ScaleTransformTypeFactory`, which takes separate axes. Use `scaleX`/`scaleY` instead,
+which are `SingleTransformTypeFactory` and do take `{"value": …}`.
+
+**The escape hatch.** `customStyles` accepts raw CSS text and emits it verbatim into
+the rule: `"customStyles": "outline: 2px dashed rgb(7,8,9);"` compiled through
+unchanged. It is the fallback for anything whose structured shape you have not pinned
+down — at the cost of bypassing the collection-variable layer entirely.
+
+`tools/build_page.py` wraps the five shapes above as `radius`, `shadow`,
+`transitionAll`, `move` and `border` shorthands so a design spec cannot get them wrong.

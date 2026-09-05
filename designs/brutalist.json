@@ -1,0 +1,284 @@
+{
+ "page_id": 12,
+ "title": "Brutalist",
+ "master": "Brutalist",
+ "tree": {
+  "type": "section",
+  "data": {
+   "attrID": "p1"
+  },
+  "style": {
+   "&": {
+    "_": {
+     "backgroundColor": "rgb(245,243,238)",
+     "paddingTop": "72px",
+     "paddingBottom": "96px",
+     "paddingLeft": "40px",
+     "paddingRight": "40px",
+     "fontFamily": "'Courier New', monospace"
+    },
+    "_m": {
+     "paddingLeft": "20px",
+     "paddingRight": "20px",
+     "paddingTop": "40px"
+    }
+   }
+  },
+  "children": [
+   {
+    "type": "text",
+    "data": {
+     "tagName": "h1"
+    },
+    "text": "BRUTALIST\nGRID",
+    "style": {
+     "&": {
+      "_": {
+       "color": "rgb(16,16,16)",
+       "fontSize": "84px",
+       "fontWeight": "700",
+       "lineHeight": "0.88",
+       "letterSpacing": "-4px",
+       "textTransform": "uppercase"
+      }
+     }
+    }
+   },
+   {
+    "type": "text",
+    "data": {
+     "tagName": "p"
+    },
+    "text": "No ornament. Raw structure, hard rules, monospace type. Every box declares its own edge.",
+    "style": {
+     "&": {
+      "_": {
+       "color": "rgb(16,16,16)",
+       "fontSize": "17px",
+       "maxWidth": "560px",
+       "marginTop": "24px",
+       "lineHeight": "1.5"
+      }
+     }
+    }
+   },
+   {
+    "type": "div",
+    "data": {
+     "attrID": "p1-grid"
+    },
+    "style": {
+     "&": {
+      "_": {
+       "display": "grid",
+       "gridCols": "repeat(3, 1fr)",
+       "columnGap": "0px",
+       "rowGap": "0px",
+       "marginTop": "56px"
+      },
+      "_m": {
+       "gridCols": "repeat(1, 1fr)"
+      }
+     }
+    },
+    "children": [
+     {
+      "type": "div",
+      "data": {
+       "attrID": "p1-c0"
+      },
+      "style": {
+       "&": {
+        "_": {
+         "paddingTop": "36px",
+         "paddingBottom": "36px",
+         "paddingLeft": "28px",
+         "paddingRight": "28px",
+         "border": {
+          "width": "3px",
+          "style": "solid",
+          "color": "rgb(16,16,16)"
+         },
+         "backgroundColor": "rgb(245,243,238)",
+         "transitionAll": "200ms ease"
+        }
+       },
+       "hover": {
+        "_": {
+         "backgroundColor": "rgb(16,16,16)"
+        }
+       }
+      },
+      "children": [
+       {
+        "type": "text",
+        "data": {
+         "tagName": "h3"
+        },
+        "text": "01 / STRUCTURE",
+        "style": {
+         "&": {
+          "_": {
+           "color": "rgb(16,16,16)",
+           "fontSize": "15px",
+           "fontWeight": "700",
+           "textTransform": "uppercase",
+           "letterSpacing": "1px"
+          }
+         }
+        }
+       },
+       {
+        "type": "text",
+        "data": {
+         "tagName": "p"
+        },
+        "text": "Borders are load-bearing. Nothing is rounded, nothing is soft.",
+        "style": {
+         "&": {
+          "_": {
+           "color": "rgb(16,16,16)",
+           "fontSize": "14px",
+           "marginTop": "12px",
+           "lineHeight": "1.6"
+          }
+         }
+        }
+       }
+      ]
+     },
+     {
+      "type": "div",
+      "data": {
+       "attrID": "p1-c1"
+      },
+      "style": {
+       "&": {
+        "_": {
+         "paddingTop": "36px",
+         "paddingBottom": "36px",
+         "paddingLeft": "28px",
+         "paddingRight": "28px",
+         "border": {
+          "width": "3px",
+          "style": "solid",
+          "color": "rgb(16,16,16)"
+         },
+         "backgroundColor": "rgb(245,243,238)",
+         "transitionAll": "200ms ease"
+        }
+       },
+       "hover": {
+        "_": {
+         "backgroundColor": "rgb(16,16,16)"
+        }
+       }
+      },
+      "children": [
+       {
+        "type": "text",
+        "data": {
+         "tagName": "h3"
+        },
+        "text": "02 / TYPE",
+        "style": {
+         "&": {
+          "_": {
+           "color": "rgb(16,16,16)",
+           "fontSize": "15px",
+           "fontWeight": "700",
+           "textTransform": "uppercase",
+           "letterSpacing": "1px"
+          }
+         }
+        }
+       },
+       {
+        "type": "text",
+        "data": {
+         "tagName": "p"
+        },
+        "text": "One monospace family at three sizes. Hierarchy by weight only.",
+        "style": {
+         "&": {
+          "_": {
+           "color": "rgb(16,16,16)",
+           "fontSize": "14px",
+           "marginTop": "12px",
+           "lineHeight": "1.6"
+          }
+         }
+        }
+       }
+      ]
+     },
+     {
+      "type": "div",
+      "data": {
+       "attrID": "p1-c2"
+      },
+      "style": {
+       "&": {
+        "_": {
+         "paddingTop": "36px",
+         "paddingBottom": "36px",
+         "paddingLeft": "28px",
+         "paddingRight": "28px",
+         "border": {
+          "width": "3px",
+          "style": "solid",
+          "color": "rgb(16,16,16)"
+         },
+         "backgroundColor": "rgb(245,243,238)",
+         "transitionAll": "200ms ease"
+        }
+       },
+       "hover": {
+        "_": {
+         "backgroundColor": "rgb(16,16,16)"
+        }
+       }
+      },
+      "children": [
+       {
+        "type": "text",
+        "data": {
+         "tagName": "h3"
+        },
+        "text": "03 / COLOUR",
+        "style": {
+         "&": {
+          "_": {
+           "color": "rgb(16,16,16)",
+           "fontSize": "15px",
+           "fontWeight": "700",
+           "textTransform": "uppercase",
+           "letterSpacing": "1px"
+          }
+         }
+        }
+       },
+       {
+        "type": "text",
+        "data": {
+         "tagName": "p"
+        },
+        "text": "Two values: ink and paper. Hover inverts the whole cell.",
+        "style": {
+         "&": {
+          "_": {
+           "color": "rgb(16,16,16)",
+           "fontSize": "14px",
+           "marginTop": "12px",
+           "lineHeight": "1.6"
+          }
+         }
+        }
+       }
+      ]
+     }
+    ]
+   }
+  ]
+ }
+}

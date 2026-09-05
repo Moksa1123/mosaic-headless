@@ -1,0 +1,619 @@
+{
+ "page_id": 19,
+ "title": "Components",
+ "master": "Components",
+ "tree": {
+  "type": "section",
+  "data": {
+   "attrID": "p8"
+  },
+  "style": {
+   "&": {
+    "_": {
+     "backgroundColor": "rgb(248,248,250)",
+     "paddingTop": "80px",
+     "paddingBottom": "110px",
+     "paddingLeft": "40px",
+     "paddingRight": "40px",
+     "fontFamily": "'Helvetica Neue', Helvetica, Arial, sans-serif"
+    },
+    "_m": {
+     "paddingLeft": "20px",
+     "paddingRight": "20px",
+     "paddingTop": "44px"
+    }
+   }
+  },
+  "children": [
+   {
+    "type": "text",
+    "data": {
+     "tagName": "h1"
+    },
+    "text": "Composite components",
+    "style": {
+     "&": {
+      "_": {
+       "color": "rgb(20,20,26)",
+       "fontSize": "58px",
+       "fontWeight": "700",
+       "letterSpacing": "-2px"
+      }
+     }
+    }
+   },
+   {
+    "type": "text",
+    "data": {
+     "tagName": "p"
+    },
+    "text": "Accordion, tabs and list built through their declared parent chain rather than dropped into a div. Each of these types kills the page if you get the nesting wrong.",
+    "style": {
+     "&": {
+      "_": {
+       "color": "rgb(96,96,110)",
+       "fontSize": "17px",
+       "marginTop": "16px",
+       "maxWidth": "660px",
+       "lineHeight": "1.6"
+      }
+     }
+    }
+   },
+   {
+    "type": "text",
+    "data": {
+     "tagName": "h2"
+    },
+    "text": "Accordion",
+    "style": {
+     "&": {
+      "_": {
+       "color": "rgb(20,20,26)",
+       "fontSize": "24px",
+       "fontWeight": "700",
+       "marginTop": "54px"
+      }
+     }
+    }
+   },
+   {
+    "type": "div",
+    "data": {
+     "attrID": "p8-acc-wrap"
+    },
+    "style": {
+     "&": {
+      "_": {
+       "marginTop": "18px",
+       "maxWidth": "760px",
+       "backgroundColor": "rgb(255,255,255)",
+       "radius": "14px",
+       "paddingTop": "8px",
+       "paddingBottom": "8px",
+       "paddingLeft": "20px",
+       "paddingRight": "20px",
+       "border": {
+        "width": "1px",
+        "style": "solid",
+        "color": "rgb(224,224,232)"
+       }
+      }
+     }
+    },
+    "children": [
+     {
+      "type": "accordion",
+      "data": {
+       "attrID": "p8-acc",
+       "openMode": "single",
+       "firstOpened": "1",
+       "animation": "slide"
+      },
+      "children": [
+       {
+        "type": "accordion-item",
+        "data": {
+         "attrID": "p8-acc-i1"
+        },
+        "children": [
+         {
+          "type": "accordion-title",
+          "data": {
+           "attrID": "p8-acc-t1"
+          },
+          "style": {
+           "&": {
+            "_": {
+             "paddingTop": "16px",
+             "paddingBottom": "16px",
+             "fontSize": "17px",
+             "fontWeight": "600",
+             "color": "rgb(20,20,26)",
+             "cursor": "pointer"
+            }
+           }
+          },
+          "children": [
+           {
+            "type": "text",
+            "data": {
+             "tagName": "span"
+            },
+            "text": "Why the title matters",
+            "style": {
+             "&": {
+              "_": {
+               "color": "rgb(20,20,26)",
+               "fontSize": "17px",
+               "fontWeight": "600"
+              }
+             }
+            }
+           }
+          ]
+         },
+         {
+          "type": "accordion-content",
+          "data": {
+           "attrID": "p8-acc-c1"
+          },
+          "style": {
+           "&": {
+            "_": {
+             "paddingBottom": "18px"
+            }
+           }
+          },
+          "children": [
+           {
+            "type": "text",
+            "data": {
+             "tagName": "p"
+            },
+            "text": "Mosaic's Accordion.js binds its click handler to the title element. Omit it and the browser console throws, while the server reports a clean render.",
+            "style": {
+             "&": {
+              "_": {
+               "color": "rgb(90,90,104)",
+               "fontSize": "15px",
+               "lineHeight": "1.65"
+              }
+             }
+            }
+           }
+          ]
+         }
+        ]
+       },
+       {
+        "type": "accordion-item",
+        "data": {
+         "attrID": "p8-acc-i2"
+        },
+        "children": [
+         {
+          "type": "accordion-title",
+          "data": {
+           "attrID": "p8-acc-t2"
+          },
+          "style": {
+           "&": {
+            "_": {
+             "paddingTop": "16px",
+             "paddingBottom": "16px",
+             "fontSize": "17px",
+             "fontWeight": "600",
+             "color": "rgb(20,20,26)",
+             "cursor": "pointer"
+            }
+           }
+          },
+          "children": [
+           {
+            "type": "text",
+            "data": {
+             "tagName": "span"
+            },
+            "text": "Where the rule lives",
+            "style": {
+             "&": {
+              "_": {
+               "color": "rgb(20,20,26)",
+               "fontSize": "17px",
+               "fontWeight": "600"
+              }
+             }
+            }
+           }
+          ]
+         },
+         {
+          "type": "accordion-content",
+          "data": {
+           "attrID": "p8-acc-c2"
+          },
+          "style": {
+           "&": {
+            "_": {
+             "paddingBottom": "18px"
+            }
+           }
+          },
+          "children": [
+           {
+            "type": "text",
+            "data": {
+             "tagName": "p"
+            },
+            "text": "canBeParentFor says accordion-item accepts only more items. getAccordionItemDefaultData says title plus content. The second one is the truth.",
+            "style": {
+             "&": {
+              "_": {
+               "color": "rgb(90,90,104)",
+               "fontSize": "15px",
+               "lineHeight": "1.65"
+              }
+             }
+            }
+           }
+          ]
+         }
+        ]
+       },
+       {
+        "type": "accordion-item",
+        "data": {
+         "attrID": "p8-acc-i3"
+        },
+        "children": [
+         {
+          "type": "accordion-title",
+          "data": {
+           "attrID": "p8-acc-t3"
+          },
+          "style": {
+           "&": {
+            "_": {
+             "paddingTop": "16px",
+             "paddingBottom": "16px",
+             "fontSize": "17px",
+             "fontWeight": "600",
+             "color": "rgb(20,20,26)",
+             "cursor": "pointer"
+            }
+           }
+          },
+          "children": [
+           {
+            "type": "text",
+            "data": {
+             "tagName": "span"
+            },
+            "text": "Open mode",
+            "style": {
+             "&": {
+              "_": {
+               "color": "rgb(20,20,26)",
+               "fontSize": "17px",
+               "fontWeight": "600"
+              }
+             }
+            }
+           }
+          ]
+         },
+         {
+          "type": "accordion-content",
+          "data": {
+           "attrID": "p8-acc-c3"
+          },
+          "style": {
+           "&": {
+            "_": {
+             "paddingBottom": "18px"
+            }
+           }
+          },
+          "children": [
+           {
+            "type": "text",
+            "data": {
+             "tagName": "p"
+            },
+            "text": "openMode single, firstOpened 1, animation slide - all three are enum properties from node-properties.csv.",
+            "style": {
+             "&": {
+              "_": {
+               "color": "rgb(90,90,104)",
+               "fontSize": "15px",
+               "lineHeight": "1.65"
+              }
+             }
+            }
+           }
+          ]
+         }
+        ]
+       }
+      ]
+     }
+    ]
+   },
+   {
+    "type": "text",
+    "data": {
+     "tagName": "h2"
+    },
+    "text": "Tabs",
+    "style": {
+     "&": {
+      "_": {
+       "color": "rgb(20,20,26)",
+       "fontSize": "24px",
+       "fontWeight": "700",
+       "marginTop": "54px"
+      }
+     }
+    }
+   },
+   {
+    "type": "div",
+    "data": {
+     "attrID": "p8-tabs-wrap"
+    },
+    "style": {
+     "&": {
+      "_": {
+       "marginTop": "18px",
+       "maxWidth": "760px",
+       "backgroundColor": "rgb(255,255,255)",
+       "radius": "14px",
+       "paddingTop": "18px",
+       "paddingBottom": "18px",
+       "paddingLeft": "20px",
+       "paddingRight": "20px",
+       "border": {
+        "width": "1px",
+        "style": "solid",
+        "color": "rgb(224,224,232)"
+       }
+      }
+     }
+    },
+    "children": [
+     {
+      "type": "tabs",
+      "data": {
+       "attrID": "p8-tabs",
+       "defaultTabIndex": 0
+      },
+      "children": [
+       {
+        "type": "tabs-menu",
+        "data": {
+         "attrID": "p8-tabs-menu"
+        },
+        "children": [
+         {
+          "type": "tabs-tab",
+          "data": {
+           "attrID": "p8-tab1"
+          },
+          "children": [
+           {
+            "type": "text",
+            "data": {
+             "tagName": "span"
+            },
+            "text": "Structure",
+            "style": {
+             "&": {
+              "_": {
+               "color": "rgb(20,20,26)",
+               "fontSize": "15px",
+               "fontWeight": "600"
+              }
+             }
+            }
+           }
+          ],
+          "style": {
+           "&": {
+            "_": {
+             "paddingTop": "10px",
+             "paddingBottom": "10px",
+             "paddingLeft": "18px",
+             "paddingRight": "18px",
+             "cursor": "pointer",
+             "radius": "8px",
+             "transitionAll": "180ms ease"
+            }
+           },
+           "hover": {
+            "_": {
+             "backgroundColor": "rgb(238,238,244)"
+            }
+           }
+          }
+         },
+         {
+          "type": "tabs-tab",
+          "data": {
+           "attrID": "p8-tab2"
+          },
+          "children": [
+           {
+            "type": "text",
+            "data": {
+             "tagName": "span"
+            },
+            "text": "Rendering",
+            "style": {
+             "&": {
+              "_": {
+               "color": "rgb(20,20,26)",
+               "fontSize": "15px",
+               "fontWeight": "600"
+              }
+             }
+            }
+           }
+          ],
+          "style": {
+           "&": {
+            "_": {
+             "paddingTop": "10px",
+             "paddingBottom": "10px",
+             "paddingLeft": "18px",
+             "paddingRight": "18px",
+             "cursor": "pointer",
+             "radius": "8px",
+             "transitionAll": "180ms ease"
+            }
+           },
+           "hover": {
+            "_": {
+             "backgroundColor": "rgb(238,238,244)"
+            }
+           }
+          }
+         }
+        ]
+       },
+       {
+        "type": "tabs-content",
+        "data": {
+         "attrID": "p8-tabs-content"
+        },
+        "children": [
+         {
+          "type": "tabs-tab-pane",
+          "data": {
+           "attrID": "p8-pane1"
+          },
+          "children": [
+           {
+            "type": "text",
+            "data": {
+             "tagName": "p"
+            },
+            "text": "First pane. Rendered inside tabs-content, which only accepts tab panes.",
+            "style": {
+             "&": {
+              "_": {
+               "color": "rgb(70,70,84)",
+               "fontSize": "15px",
+               "lineHeight": "1.6"
+              }
+             }
+            }
+           }
+          ]
+         },
+         {
+          "type": "tabs-tab-pane",
+          "data": {
+           "attrID": "p8-pane2"
+          },
+          "children": [
+           {
+            "type": "text",
+            "data": {
+             "tagName": "p"
+            },
+            "text": "Second pane. The tabs element compiles to a mosaic-tabs custom element.",
+            "style": {
+             "&": {
+              "_": {
+               "color": "rgb(70,70,84)",
+               "fontSize": "15px",
+               "lineHeight": "1.6"
+              }
+             }
+            }
+           }
+          ]
+         }
+        ]
+       }
+      ]
+     }
+    ]
+   },
+   {
+    "type": "text",
+    "data": {
+     "tagName": "h2"
+    },
+    "text": "List",
+    "style": {
+     "&": {
+      "_": {
+       "color": "rgb(20,20,26)",
+       "fontSize": "24px",
+       "fontWeight": "700",
+       "marginTop": "54px"
+      }
+     }
+    }
+   },
+   {
+    "type": "div",
+    "data": {
+     "attrID": "p8-list-wrap"
+    },
+    "style": {
+     "&": {
+      "_": {
+       "marginTop": "18px",
+       "maxWidth": "760px"
+      }
+     }
+    },
+    "children": [
+     {
+      "type": "list",
+      "data": {
+       "attrID": "p8-list",
+       "listType": "1"
+      },
+      "style": {
+       "&": {
+        "_": {
+         "color": "rgb(50,50,62)",
+         "fontSize": "16px",
+         "lineHeight": "1.9",
+         "listStyleType": "decimal"
+        }
+       }
+      },
+      "children": [
+       {
+        "type": "list-item",
+        "data": {
+         "attrID": "p8-li1"
+        },
+        "text": "list accepts only list-item and list-loop-items."
+       },
+       {
+        "type": "list-item",
+        "data": {
+         "attrID": "p8-li2"
+        },
+        "text": "list-item renders a real list element, measured in the sweep."
+       },
+       {
+        "type": "list-item",
+        "data": {
+         "attrID": "p8-li3"
+        },
+        "text": "Anything else here is refused before it is committed."
+       }
+      ]
+     }
+    ]
+   }
+  ]
+ }
+}

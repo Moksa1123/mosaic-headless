@@ -1,0 +1,316 @@
+{
+ "page_id": 16,
+ "title": "Dark Glow",
+ "master": "DarkGlow",
+ "tree": {
+  "type": "section",
+  "data": {
+   "attrID": "p5"
+  },
+  "style": {
+   "&": {
+    "_": {
+     "customStyles": "background:radial-gradient(1100px 600px at 50% -10%, #1b2a5e 0%, #090b18 60%);min-height:100vh;",
+     "paddingTop": "120px",
+     "paddingBottom": "130px",
+     "paddingLeft": "40px",
+     "paddingRight": "40px",
+     "fontFamily": "'Helvetica Neue', Helvetica, Arial, sans-serif"
+    },
+    "_m": {
+     "paddingLeft": "20px",
+     "paddingRight": "20px",
+     "paddingTop": "70px"
+    }
+   }
+  },
+  "children": [
+   {
+    "type": "text",
+    "data": {
+     "tagName": "p"
+    },
+    "text": "SYSTEM ONLINE",
+    "style": {
+     "&": {
+      "_": {
+       "color": "rgb(110,231,255)",
+       "fontSize": "12px",
+       "letterSpacing": "4px",
+       "textTransform": "uppercase",
+       "textAlign": "center",
+       "fontWeight": "600"
+      }
+     }
+    }
+   },
+   {
+    "type": "text",
+    "data": {
+     "tagName": "h1"
+    },
+    "text": "Built for the dark",
+    "style": {
+     "&": {
+      "_": {
+       "color": "rgb(236,240,255)",
+       "fontSize": "70px",
+       "fontWeight": "700",
+       "textAlign": "center",
+       "marginTop": "20px",
+       "letterSpacing": "-2px",
+       "lineHeight": "1.05"
+      }
+     }
+    }
+   },
+   {
+    "type": "text",
+    "data": {
+     "tagName": "p"
+    },
+    "text": "Deep navy ground, cyan signal, and a glow that comes from a blurred shadow rather than an image.",
+    "style": {
+     "&": {
+      "_": {
+       "color": "rgb(150,160,196)",
+       "fontSize": "18px",
+       "textAlign": "center",
+       "marginTop": "20px",
+       "maxWidth": "620px",
+       "marginLeft": "auto",
+       "marginRight": "auto",
+       "lineHeight": "1.65"
+      }
+     }
+    }
+   },
+   {
+    "type": "div",
+    "data": {
+     "attrID": "p5-grid"
+    },
+    "style": {
+     "&": {
+      "_": {
+       "display": "grid",
+       "gridCols": "repeat(3, 1fr)",
+       "columnGap": "22px",
+       "rowGap": "22px",
+       "marginTop": "56px"
+      },
+      "_m": {
+       "gridCols": "repeat(1, 1fr)"
+      }
+     }
+    },
+    "children": [
+     {
+      "type": "div",
+      "data": {
+       "attrID": "p5-c0"
+      },
+      "style": {
+       "&": {
+        "_": {
+         "customStyles": "background:linear-gradient(180deg,rgba(255,255,255,0.06),rgba(255,255,255,0.02));border:1px solid rgba(120,150,255,0.22);",
+         "radius": "16px",
+         "paddingTop": "30px",
+         "paddingBottom": "30px",
+         "paddingLeft": "24px",
+         "paddingRight": "24px",
+         "transitionAll": "300ms ease"
+        }
+       },
+       "hover": {
+        "_": {
+         "shadow": {
+          "x": "0px",
+          "y": "10px",
+          "blur": "40px",
+          "spread": "-6px",
+          "color": "rgba(90,170,255,0.55)"
+         },
+         "move": {
+          "translateY": "-8px"
+         }
+        }
+       }
+      },
+      "children": [
+       {
+        "type": "text",
+        "data": {
+         "tagName": "h3"
+        },
+        "text": "Radial ground",
+        "style": {
+         "&": {
+          "_": {
+           "color": "rgb(110,231,255)",
+           "fontSize": "19px",
+           "fontWeight": "600"
+          }
+         }
+        }
+       },
+       {
+        "type": "text",
+        "data": {
+         "tagName": "p"
+        },
+        "text": "One radial gradient does the work of a hero image.",
+        "style": {
+         "&": {
+          "_": {
+           "color": "rgb(160,170,205)",
+           "fontSize": "15px",
+           "marginTop": "10px",
+           "lineHeight": "1.65"
+          }
+         }
+        }
+       }
+      ]
+     },
+     {
+      "type": "div",
+      "data": {
+       "attrID": "p5-c1"
+      },
+      "style": {
+       "&": {
+        "_": {
+         "customStyles": "background:linear-gradient(180deg,rgba(255,255,255,0.06),rgba(255,255,255,0.02));border:1px solid rgba(120,150,255,0.22);",
+         "radius": "16px",
+         "paddingTop": "30px",
+         "paddingBottom": "30px",
+         "paddingLeft": "24px",
+         "paddingRight": "24px",
+         "transitionAll": "300ms ease"
+        }
+       },
+       "hover": {
+        "_": {
+         "shadow": {
+          "x": "0px",
+          "y": "10px",
+          "blur": "40px",
+          "spread": "-6px",
+          "color": "rgba(90,170,255,0.55)"
+         },
+         "move": {
+          "translateY": "-8px"
+         }
+        }
+       }
+      },
+      "children": [
+       {
+        "type": "text",
+        "data": {
+         "tagName": "h3"
+        },
+        "text": "Signal cyan",
+        "style": {
+         "&": {
+          "_": {
+           "color": "rgb(110,231,255)",
+           "fontSize": "19px",
+           "fontWeight": "600"
+          }
+         }
+        }
+       },
+       {
+        "type": "text",
+        "data": {
+         "tagName": "p"
+        },
+        "text": "A single high-chroma hue against desaturated navy.",
+        "style": {
+         "&": {
+          "_": {
+           "color": "rgb(160,170,205)",
+           "fontSize": "15px",
+           "marginTop": "10px",
+           "lineHeight": "1.65"
+          }
+         }
+        }
+       }
+      ]
+     },
+     {
+      "type": "div",
+      "data": {
+       "attrID": "p5-c2"
+      },
+      "style": {
+       "&": {
+        "_": {
+         "customStyles": "background:linear-gradient(180deg,rgba(255,255,255,0.06),rgba(255,255,255,0.02));border:1px solid rgba(120,150,255,0.22);",
+         "radius": "16px",
+         "paddingTop": "30px",
+         "paddingBottom": "30px",
+         "paddingLeft": "24px",
+         "paddingRight": "24px",
+         "transitionAll": "300ms ease"
+        }
+       },
+       "hover": {
+        "_": {
+         "shadow": {
+          "x": "0px",
+          "y": "10px",
+          "blur": "40px",
+          "spread": "-6px",
+          "color": "rgba(90,170,255,0.55)"
+         },
+         "move": {
+          "translateY": "-8px"
+         }
+        }
+       }
+      },
+      "children": [
+       {
+        "type": "text",
+        "data": {
+         "tagName": "h3"
+        },
+        "text": "Bloom on hover",
+        "style": {
+         "&": {
+          "_": {
+           "color": "rgb(110,231,255)",
+           "fontSize": "19px",
+           "fontWeight": "600"
+          }
+         }
+        }
+       },
+       {
+        "type": "text",
+        "data": {
+         "tagName": "p"
+        },
+        "text": "A 40px blurred shadow reads as light, not as a drop shadow.",
+        "style": {
+         "&": {
+          "_": {
+           "color": "rgb(160,170,205)",
+           "fontSize": "15px",
+           "marginTop": "10px",
+           "lineHeight": "1.65"
+          }
+         }
+        }
+       }
+      ]
+     }
+    ]
+   }
+  ]
+ }
+}
