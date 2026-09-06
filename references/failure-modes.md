@@ -1,5 +1,27 @@
 # How Mosaic fails, measured
 
+## `$wpdb->insert()` casts any column named `ID` to an integer
+
+WordPress hardcodes `'ID' => '%d'` in `$wpdb->field_types`, because `wp_posts.ID` is
+an integer. Mosaic's `ID` columns are `varchar(36)` — UUIDs, and for breakpoints the
+literals `_t` and `_m`.
+
+So `$wpdb->insert($table, $row)` on a Mosaic table stores `_t` as `0`. It happened to
+fail loudly here, because `_m` also becomes `0` and collides on the composite primary
+key — on a table where only one row was affected it would have been silent.
+
+Pass an explicit format array on every insert:
+
+```php
+$wpdb->insert($table, $row, array_fill(0, count($row), '%s'));
+```
+
+## WP-CLI eats `--flags` before your script sees them
+
+`wp eval-file script.php --active` fails with *unknown --active parameter*: WP-CLI
+parses anything `--`-prefixed as its own option. Script arguments must be bare
+keywords — `wp eval-file script.php active`.
+
 ## An invalid `ordering` orphans the node, silently
 
 `ordering` is a fractional-index STRING. Send something that is not one and the

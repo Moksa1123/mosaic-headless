@@ -274,6 +274,16 @@ every page. `sites/_moksa.py` namespaces its tokens (`--mk-*`) and bakes the typ
 system onto the nodes with `apply_type()` instead of using element classes, which is
 what lets it share an install with a completely different design.
 
+Whole themes move between installs with `theme_export.php` / `theme_import.php`.
+A theme is a themeID scattered across nineteen tables, and every one of them has a
+COMPOSITE primary key of `(themeID, ID)` — so an import can keep every internal id
+and rewrite nothing but the theme, which means no id remapping and nothing left
+dangling. Round-tripped and verified: a full theme exported, re-imported as a copy,
+and the copy served byte-identical pages.
+
+`copy_styles.py` pushes one node's style onto others by attrID or prefix, optionally
+only certain `state.breakpoint` slices, and shows the diff before writing.
+
 ```bash
 wp eval-file tools/bootstrap_probe_theme.php     # licence-free scratch theme
 python tools/build_all.py --config sweep.json    # reset + build every design
@@ -329,6 +339,10 @@ python tools/sweep_node_types.py --config sweep.json --setup
 python tools/sweep_node_types.py --config sweep.json --sweep --edition all
 python tools/sweep_properties.py --config sweep.json
 python tools/verify_rwd.py --config sweep.json --site sites/moksa.json --csv data/rwd-verification.csv
+python tools/sweep_style_properties.py --config sweep.json --page moksa --csv data/style-verification.csv
+python tools/sweep_node_properties.py  --config sweep.json --page moksa --csv data/node-property-verification.csv
+wp eval-file tools/theme_export.php active > theme.json
+wp eval-file tools/theme_import.php theme.json "Copy" rebind activate
 python tools/probe.py --config lab.json --cases cases.json   # ad-hoc measurement
 python tools/check_placement_predicts.py
 ```
