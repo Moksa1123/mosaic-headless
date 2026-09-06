@@ -93,9 +93,87 @@
      "data": {
       "attrID": "zd-motion-css",
       "insertLocation": "head",
-      "content": "<style id=\"zd-motion\">\n@keyframes zd-rise{from{opacity:0;transform:translateY(26px)}to{opacity:1;transform:none}}\n@keyframes zd-draw{from{transform:scaleX(0)}to{transform:scaleX(1)}}\n@keyframes zd-lift{from{transform:scale(1.22) translateY(14px)}to{transform:scale(1.22) translateY(-18px)}}\n@keyframes zd-shadow{from{box-shadow:0 0 0 rgba(28,26,23,0)}to{box-shadow:0 10px 30px -22px rgba(28,26,23,.75)}}\n\n#zd-header{position:sticky;top:0;z-index:50;background:rgba(250,248,244,.86);\n  -webkit-backdrop-filter:saturate(1.6) blur(10px);backdrop-filter:saturate(1.6) blur(10px)}\n\n#zd-nav>*{position:relative}\n#zd-nav>*::after{content:\"\";position:absolute;left:0;right:100%;bottom:-7px;height:1px;\n  background:rgb(109,127,109);transition:right .3s cubic-bezier(.2,.7,.3,1)}\n#zd-nav>*:hover::after{right:0}\n\n#zd-header-cta::after,#zd-cta-1::after,#zd-cta-3::after{content:\" →\";display:inline-block;\n  transition:transform .28s cubic-bezier(.2,.7,.3,1)}\n#zd-header-cta:hover::after,#zd-cta-1:hover::after,#zd-cta-3:hover::after{transform:translateX(5px)}\n\n#zd-cat-txt-0 h3,#zd-cat-txt-1 h3,#zd-cat-txt-2 h3,#zd-cat-txt-3 h3{position:relative;display:inline-block}\n#zd-cat-txt-0 h3::after,#zd-cat-txt-1 h3::after,#zd-cat-txt-2 h3::after,#zd-cat-txt-3 h3::after{\n  content:\"\";position:absolute;left:0;right:100%;bottom:-5px;height:1px;background:rgb(109,127,109);\n  transition:right .38s cubic-bezier(.2,.7,.3,1)}\n#zd-cat-0:hover #zd-cat-txt-0 h3::after,#zd-cat-1:hover #zd-cat-txt-1 h3::after,\n#zd-cat-2:hover #zd-cat-txt-2 h3::after,#zd-cat-3:hover #zd-cat-txt-3 h3::after{right:0}\n\n@media (prefers-reduced-motion:no-preference){\n  @supports (animation-timeline:view()){\n    #zd-step-01,#zd-step-02,#zd-step-03,#zd-step-04,\n    #zd-oem-step-01,#zd-oem-step-02,#zd-oem-step-03,#zd-oem-step-04{\n      background-image:linear-gradient(rgb(28,26,23),rgb(28,26,23));\n      background-repeat:no-repeat;background-size:100% 2px;background-position:0 0;\n      animation:zd-draw .01s linear both;animation-timeline:view();\n      animation-range:entry 6% cover 26%;transform-origin:left center}\n  }\n}\n\n@media (prefers-reduced-motion:no-preference){\n  @supports (animation-timeline:view()){\n    #zd-hero-copy,#zd-hero-media,#zd-stat-0,#zd-stat-1,#zd-stat-2,#zd-stat-3,#zd-about-l,#zd-about-r,#zd-process-in,#zd-cat-head,#zd-cat-0,#zd-cat-1,#zd-cat-2,#zd-cat-3,#zd-why-head,#zd-why-0,#zd-why-1,#zd-why-2,#zd-why-3,#zd-why-4,#zd-why-5,#zd-cta-l,#zd-cta-r,#zd-oem-hero-in,#zd-lines-in,#zd-oem-process-in,#zd-line-0,#zd-line-1,#zd-line-2,#zd-line-3,#zd-line-4{animation:zd-rise .01s linear both;animation-timeline:view();animation-range:entry 4% cover 32%}\n    #zd-hero-media{animation-range:entry 9% cover 37%}\n    #zd-stat-1{animation-range:entry 9% cover 37%}\n    #zd-stat-2{animation-range:entry 14% cover 42%}\n    #zd-stat-3{animation-range:entry 19% cover 47%}\n    #zd-about-r{animation-range:entry 9% cover 37%}\n    #zd-cat-0{animation-range:entry 9% cover 37%}\n    #zd-cat-1{animation-range:entry 14% cover 42%}\n    #zd-cat-2{animation-range:entry 19% cover 47%}\n    #zd-cat-3{animation-range:entry 24% cover 52%}\n    #zd-why-1{animation-range:entry 9% cover 37%}\n    #zd-why-2{animation-range:entry 9% cover 37%}\n    #zd-why-3{animation-range:entry 14% cover 42%}\n    #zd-why-4{animation-range:entry 14% cover 42%}\n    #zd-why-5{animation-range:entry 19% cover 47%}\n    #zd-cta-r{animation-range:entry 9% cover 37%}\n    #zd-line-1{animation-range:entry 9% cover 37%}\n    #zd-line-2{animation-range:entry 14% cover 42%}\n    #zd-line-3{animation-range:entry 19% cover 47%}\n    #zd-line-4{animation-range:entry 24% cover 52%}\n  }\n  @supports (animation-timeline:scroll()){\n    #zd-header{animation:zd-shadow linear both;animation-timeline:scroll(root);animation-range:0 140px}\n    #zd-hero-img{animation:zd-lift linear both;animation-timeline:scroll(root);animation-range:0 640px}\n  }\n}\n</style>",
+      "content": "<style id=\"zd-motion\">\n@keyframes zd-curtain{0%,42%{transform:translateY(0)}100%{transform:translateY(-101%)}}\n@keyframes zd-markin{0%{opacity:0;transform:translateY(10px)}22%,52%{opacity:1;transform:none}72%,100%{opacity:0;transform:translateY(-8px)}}\n@keyframes zd-linein{from{transform:translateY(110%)}to{transform:translateY(0)}}\n@keyframes zd-softin{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:none}}\n@keyframes zd-kenburns{from{transform:scale(1.04)}to{transform:scale(1.14)}}\n@keyframes zd-marquee{from{transform:translateX(0)}to{transform:translateX(-50%)}}\n@keyframes zd-cue{0%,100%{opacity:.35;transform:translateY(0)}50%{opacity:.9;transform:translateY(6px)}}\n@keyframes zd-rise{from{opacity:0;transform:translateY(26px)}to{opacity:1;transform:none}}\n@keyframes zd-draw{from{transform:scaleX(0)}to{transform:scaleX(1)}}\n@keyframes zd-progress{from{transform:scaleX(0)}to{transform:scaleX(1)}}\n@keyframes zd-headfill{from{background:rgba(250,248,244,0);border-bottom-color:rgba(226,219,208,0)}to{background:rgba(250,248,244,.92);border-bottom-color:rgba(226,219,208,1)}}\n@keyframes zd-headink{from{color:rgba(250,248,244,1)}to{color:rgb(28,26,23)}}\n#zd-hero{position:relative;min-height:88vh;display:flex;align-items:center;overflow:hidden}\n#zd-hero-in{position:relative;z-index:1;padding-top:120px;padding-bottom:96px}\n#zd-hero-cue{position:absolute;left:50%;bottom:30px;transform:translateX(-50%);z-index:1}\n#zd-oem-hero{padding-top:164px}\n#zd-header{position:fixed;top:0;left:0;right:0;z-index:100;border-bottom:1px solid rgba(226,219,208,0);background:rgba(250,248,244,0)}\n#zd-header h3,#zd-header p,#zd-nav>*{color:rgba(250,248,244,.92)}\n#zd-header-cta{background:rgba(250,248,244,.14) !important;border:1px solid rgba(250,248,244,.4)}\n#zd-progress{position:fixed;top:0;left:0;right:0;height:2px;z-index:101;background:rgb(109,127,109);transform:scaleX(0);transform-origin:0 50%}\n#zd-intro{position:fixed;inset:0;z-index:200;background:rgb(20,18,16);display:grid;place-items:center;pointer-events:none}\n#zd-intro-mark{text-align:center}\n#zd-marquee-track{display:flex}\n#zd-footer-mark{pointer-events:none;user-select:none}\n#zd-nav>*{position:relative}\n#zd-nav>*::after{content:\"\";position:absolute;left:0;right:100%;bottom:-7px;height:1px;background:rgb(109,127,109);transition:right .3s cubic-bezier(.2,.7,.3,1)}\n#zd-nav>*:hover::after{right:0}\n#zd-header-cta::after,#zd-cta-1::after,#zd-cta-3::after{content:\" →\";display:inline-block;transition:transform .28s cubic-bezier(.2,.7,.3,1)}\n#zd-header-cta:hover::after,#zd-cta-1:hover::after,#zd-cta-3:hover::after{transform:translateX(5px)}\n#zd-cat-txt-0 h3,#zd-cat-txt-1 h3,#zd-cat-txt-2 h3,#zd-cat-txt-3 h3{position:relative;display:inline-block}\n#zd-cat-txt-0 h3::after,#zd-cat-txt-1 h3::after,#zd-cat-txt-2 h3::after,#zd-cat-txt-3 h3::after{content:\"\";position:absolute;left:0;right:100%;bottom:-5px;height:1px;background:rgb(109,127,109);transition:right .38s cubic-bezier(.2,.7,.3,1)}\n#zd-cat-0:hover #zd-cat-txt-0 h3::after,#zd-cat-1:hover #zd-cat-txt-1 h3::after,#zd-cat-2:hover #zd-cat-txt-2 h3::after,#zd-cat-3:hover #zd-cat-txt-3 h3::after{right:0}\n@media (prefers-reduced-motion:reduce){#zd-intro{display:none}}\n@media (prefers-reduced-motion:no-preference){\n  #zd-intro{animation:zd-curtain 1.45s cubic-bezier(.76,0,.24,1) forwards}\n  #zd-intro-mark{animation:zd-markin 1.45s ease forwards}\n  #zd-hl1-mask>*,#zd-hl2-mask>*{transform:translateY(110%);animation:zd-linein .9s cubic-bezier(.16,1,.3,1) forwards}\n  #zd-hl1-mask>*{animation-delay:.62s}\n  #zd-hl2-mask>*{animation-delay:.74s}\n  #zd-hero-eyebrow,#zd-hero-in p,#zd-hero-cta{opacity:0;animation:zd-softin .8s cubic-bezier(.16,1,.3,1) forwards}\n  #zd-hero-eyebrow{animation-delay:.56s}\n  #zd-hero-in p{animation-delay:.92s}\n  #zd-hero-cta{animation-delay:1.04s}\n  #zd-hero-bg{animation:zd-kenburns 22s ease-in-out infinite alternate}\n  #zd-hero-cue p{animation:zd-cue 2.4s ease-in-out infinite}\n  #zd-marquee-track{animation:zd-marquee 38s linear infinite}\n  @supports (animation-timeline:view()){\n    #zd-stat-0,#zd-stat-1,#zd-stat-2,#zd-stat-3,#zd-about-l,#zd-about-r,#zd-process-in,#zd-cat-head,#zd-cat-0,#zd-cat-1,#zd-cat-2,#zd-cat-3,#zd-why-head,#zd-why-0,#zd-why-1,#zd-why-2,#zd-why-3,#zd-why-4,#zd-why-5,#zd-cta-l,#zd-cta-r,#zd-oem-hero-in,#zd-lines-in,#zd-oem-process-in,#zd-line-0,#zd-line-1,#zd-line-2,#zd-line-3,#zd-line-4{animation:zd-rise .01s linear both;animation-timeline:view();animation-range:entry 4% cover 32%}\n    #zd-stat-1{animation-range:entry 9% cover 37%}\n    #zd-stat-2{animation-range:entry 14% cover 42%}\n    #zd-stat-3{animation-range:entry 19% cover 47%}\n    #zd-about-r{animation-range:entry 9% cover 37%}\n    #zd-cat-0{animation-range:entry 9% cover 37%}\n    #zd-cat-1{animation-range:entry 14% cover 42%}\n    #zd-cat-2{animation-range:entry 19% cover 47%}\n    #zd-cat-3{animation-range:entry 24% cover 52%}\n    #zd-why-1{animation-range:entry 9% cover 37%}\n    #zd-why-2{animation-range:entry 9% cover 37%}\n    #zd-why-3{animation-range:entry 14% cover 42%}\n    #zd-why-4{animation-range:entry 14% cover 42%}\n    #zd-why-5{animation-range:entry 19% cover 47%}\n    #zd-cta-r{animation-range:entry 9% cover 37%}\n    #zd-line-1{animation-range:entry 9% cover 37%}\n    #zd-line-2{animation-range:entry 14% cover 42%}\n    #zd-line-3{animation-range:entry 19% cover 47%}\n    #zd-line-4{animation-range:entry 24% cover 52%}\n    #zd-step-01,#zd-step-02,#zd-step-03,#zd-step-04,#zd-oem-step-01,#zd-oem-step-02,#zd-oem-step-03,#zd-oem-step-04{background-image:linear-gradient(rgb(28,26,23),rgb(28,26,23));background-repeat:no-repeat;background-size:100% 2px;background-position:0 0;animation:zd-draw .01s linear both;animation-timeline:view();animation-range:entry 6% cover 26%;transform-origin:left center}\n  }\n  @supports (animation-timeline:scroll()){\n    #zd-progress{animation:zd-progress linear both;animation-timeline:scroll(root)}\n    #zd-header{animation:zd-headfill linear both;animation-timeline:scroll(root);animation-range:60px 220px}\n    #zd-header h3,#zd-header p,#zd-nav>*{animation:zd-headink linear both;animation-timeline:scroll(root);animation-range:60px 220px}\n  }\n}\n</style>",
       "processShortcodes": "0"
      }
+    },
+    {
+     "type": "div",
+     "data": {
+      "attrID": "zd-intro"
+     },
+     "style": {
+      "&": {
+       "_": {}
+      }
+     },
+     "children": [
+      {
+       "type": "div",
+       "data": {
+        "attrID": "zd-intro-mark"
+       },
+       "style": {
+        "&": {
+         "_": {}
+        }
+       },
+       "children": [
+        {
+         "type": "text",
+         "data": {
+          "tagName": "h3"
+         },
+         "text": "姿丹娜",
+         "style": {
+          "&": {
+           "_": {
+            "color": {
+             "token": "--paper"
+            },
+            "fontSize": "30px",
+            "fontWeight": "700",
+            "letterSpacing": "0.34em"
+           }
+          }
+         }
+        },
+        {
+         "type": "text",
+         "data": {
+          "tagName": "p"
+         },
+         "text": "ZIDANNA",
+         "style": {
+          "&": {
+           "_": {
+            "color": {
+             "token": "--sage"
+            },
+            "fontSize": "10px",
+            "letterSpacing": "0.34em",
+            "fontFamily": "'Helvetica Neue',Helvetica,Arial,sans-serif",
+            "marginTop": "10px",
+            "textAlign": "center"
+           }
+          }
+         }
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "type": "div",
+     "data": {
+      "attrID": "zd-progress"
+     },
+     "style": {
+      "&": {
+       "_": {}
+      }
+     },
+     "children": []
     },
     {
      "type": "div",
@@ -361,11 +439,12 @@
       "backgroundColor": {
        "token": "--ink"
       },
-      "paddingTop": "72px",
+      "paddingTop": "84px",
       "paddingBottom": "40px",
       "paddingLeft": "48px",
       "paddingRight": "48px",
-      "fontFamily": "'PingFang SC','Hiragino Sans GB','Microsoft YaHei','Noto Sans SC',sans-serif"
+      "fontFamily": "'PingFang SC','Hiragino Sans GB','Microsoft YaHei','Noto Sans SC',sans-serif",
+      "customStyles": "overflow:hidden;"
      }
     }
    },
@@ -386,6 +465,39 @@
       }
      },
      "children": [
+      {
+       "type": "div",
+       "data": {
+        "attrID": "zd-footer-mark"
+       },
+       "style": {
+        "&": {
+         "_": {
+          "marginBottom": "56px"
+         }
+        }
+       },
+       "children": [
+        {
+         "type": "text",
+         "data": {
+          "tagName": "h2"
+         },
+         "text": "姿丹娜",
+         "style": {
+          "&": {
+           "_": {
+            "color": "rgba(250,248,244,.07)",
+            "fontSize": "128px",
+            "fontWeight": "700",
+            "letterSpacing": "0.12em",
+            "lineHeight": "1"
+           }
+          }
+         }
+        }
+       ]
+      },
       {
        "type": "div",
        "data": {
@@ -696,8 +808,8 @@
          "backgroundColor": {
           "token": "--paper"
          },
-         "paddingTop": "72px",
-         "paddingBottom": "96px",
+         "paddingTop": "0px",
+         "paddingBottom": "0px",
          "paddingLeft": "48px",
          "paddingRight": "48px",
          "fontFamily": "'PingFang SC','Hiragino Sans GB','Microsoft YaHei','Noto Sans SC',sans-serif"
@@ -711,6 +823,20 @@
        }
       },
       "children": [
+       {
+        "type": "div",
+        "data": {
+         "attrID": "zd-hero-bg"
+        },
+        "style": {
+         "&": {
+          "_": {
+           "customStyles": "position:absolute;inset:0;background-image:linear-gradient(95deg,rgba(16,15,13,.93) 0%,rgba(16,15,13,.78) 46%,rgba(16,15,13,.52) 100%),url(https://zidanna.com/wp-content/uploads/2026/08/hero.jpg);background-size:cover;background-position:center 46%;z-index:0;filter:saturate(.42) brightness(.62) contrast(1.06);"
+          }
+         }
+        },
+        "children": []
+       },
        {
         "type": "div",
         "data": {
@@ -730,231 +856,637 @@
          {
           "type": "div",
           "data": {
-           "attrID": "zd-hero-row"
+           "attrID": "zd-hero-copy"
           },
           "style": {
            "&": {
-            "_": {
-             "display": "grid",
-             "gridCols": "1.15fr 0.85fr",
-             "columnGap": "64px",
-             "rowGap": "44px",
-             "alignItems": "center"
-            },
-            "_m": {
-             "gridCols": "repeat(1, 1fr)"
-            }
+            "_": {}
            }
           },
           "children": [
            {
+            "type": "text",
+            "data": {
+             "tagName": "h2"
+            },
+            "text": "OEM / ODM SKINCARE MANUFACTURING",
+            "style": {
+             "&": {
+              "_": {
+               "color": {
+                "token": "--sage"
+               },
+               "fontSize": "11px",
+               "fontWeight": "700",
+               "letterSpacing": "0.22em",
+               "fontFamily": "'Helvetica Neue',Helvetica,Arial,sans-serif"
+              }
+             }
+            }
+           },
+           {
             "type": "div",
             "data": {
-             "attrID": "zd-hero-copy"
+             "attrID": "zd-hero-lines"
             },
             "style": {
              "&": {
-              "_": {}
+              "_": {
+               "marginTop": "26px"
+              }
              }
             },
             "children": [
              {
-              "type": "text",
-              "data": {
-               "tagName": "h2"
-              },
-              "text": "OEM / ODM SKINCARE MANUFACTURING",
-              "style": {
-               "&": {
-                "_": {
-                 "color": {
-                  "token": "--sage"
-                 },
-                 "fontSize": "11px",
-                 "fontWeight": "700",
-                 "letterSpacing": "0.22em",
-                 "fontFamily": "'Helvetica Neue',Helvetica,Arial,sans-serif"
-                }
-               }
-              }
-             },
-             {
-              "type": "text",
-              "data": {
-               "tagName": "h1"
-              },
-              "text": "用匠心深耕\n护肤品代加工",
-              "style": {
-               "&": {
-                "_": {
-                 "color": {
-                  "token": "--ink"
-                 },
-                 "fontSize": "68px",
-                 "fontWeight": "700",
-                 "lineHeight": "1.14",
-                 "letterSpacing": "0.02em",
-                 "marginTop": "26px",
-                 "whiteSpace": "pre-wrap"
-                }
-               }
-              }
-             },
-             {
-              "type": "text",
-              "data": {
-               "tagName": "p"
-              },
-              "text": "从品牌定位、配方开发到量产出货，姿丹娜在南京溧水的自有厂区，为护肤品牌承接完整的 OEM / ODM 制造。",
-              "style": {
-               "&": {
-                "_": {
-                 "color": {
-                  "token": "--muted"
-                 },
-                 "fontSize": "17px",
-                 "lineHeight": "2",
-                 "marginTop": "24px",
-                 "maxWidth": "30em"
-                }
-               }
-              }
-             },
-             {
               "type": "div",
               "data": {
-               "attrID": "zd-hero-cta"
+               "attrID": "zd-hl1-mask"
               },
               "style": {
                "&": {
                 "_": {
-                 "display": "flex",
-                 "columnGap": "14px",
-                 "marginTop": "36px"
+                 "customStyles": "overflow:hidden;padding-bottom:.08em;"
                 }
                }
               },
               "children": [
                {
-                "type": "button",
+                "type": "text",
                 "data": {
-                 "attrID": "zd-cta-1",
-                 "url": "/zidanna/#contact"
+                 "tagName": "h1"
                 },
+                "text": "用匠心深耕",
                 "style": {
                  "&": {
                   "_": {
-                   "backgroundColor": {
-                    "token": "--ink"
-                   },
                    "color": {
                     "token": "--paper"
                    },
-                   "fontSize": "15px",
-                   "paddingTop": "15px",
-                   "paddingBottom": "15px",
-                   "paddingLeft": "30px",
-                   "paddingRight": "30px",
-                   "radius": "2px",
-                   "cursor": "pointer",
-                   "transitionAll": "200ms ease"
-                  }
-                 },
-                 "hover": {
-                  "_": {
-                   "backgroundColor": {
-                    "token": "--sage"
-                   }
+                   "fontSize": "76px",
+                   "fontWeight": "700",
+                   "lineHeight": "1.1",
+                   "letterSpacing": "0.02em"
                   }
                  }
-                },
-                "text": "开始打造"
-               },
+                }
+               }
+              ]
+             },
+             {
+              "type": "div",
+              "data": {
+               "attrID": "zd-hl2-mask"
+              },
+              "style": {
+               "&": {
+                "_": {
+                 "customStyles": "overflow:hidden;padding-bottom:.08em;"
+                }
+               }
+              },
+              "children": [
                {
-                "type": "button",
+                "type": "text",
                 "data": {
-                 "attrID": "zd-cta-2",
-                 "url": "/zidanna-oem/"
+                 "tagName": "h2"
                 },
+                "text": "护肤品代加工",
                 "style": {
                  "&": {
                   "_": {
-                   "backgroundColor": {
+                   "color": {
                     "token": "--paper"
                    },
-                   "color": {
-                    "token": "--ink"
-                   },
-                   "fontSize": "15px",
-                   "paddingTop": "15px",
-                   "paddingBottom": "15px",
-                   "paddingLeft": "30px",
-                   "paddingRight": "30px",
-                   "radius": "2px",
-                   "cursor": "pointer",
-                   "border": {
-                    "width": "1px",
-                    "style": "solid",
-                    "color": "rgb(226,219,208)"
-                   },
-                   "transitionAll": "200ms ease"
-                  }
-                 },
-                 "hover": {
-                  "_": {
-                   "backgroundColor": {
-                    "token": "--sand"
-                   }
+                   "fontSize": "76px",
+                   "fontWeight": "700",
+                   "lineHeight": "1.1",
+                   "letterSpacing": "0.02em"
                   }
                  }
-                },
-                "text": "了解代工流程"
+                }
                }
               ]
              }
             ]
            },
            {
+            "type": "text",
+            "data": {
+             "tagName": "p"
+            },
+            "text": "从品牌定位、配方开发到量产出货，姿丹娜在南京溧水的自有厂区，为护肤品牌承接完整的 OEM / ODM 制造。",
+            "style": {
+             "&": {
+              "_": {
+               "color": "rgba(250,248,244,.78)",
+               "fontSize": "17px",
+               "lineHeight": "2.1",
+               "marginTop": "26px",
+               "maxWidth": "27em"
+              }
+             }
+            }
+           },
+           {
             "type": "div",
             "data": {
-             "attrID": "zd-hero-media"
+             "attrID": "zd-hero-cta"
             },
             "style": {
              "&": {
               "_": {
-               "radius": "3px",
-               "customStyles": "overflow:hidden;aspect-ratio:1/1;"
+               "display": "flex",
+               "columnGap": "14px",
+               "marginTop": "38px",
+               "flexWrap": "wrap"
               }
              }
             },
             "children": [
              {
-              "type": "image",
+              "type": "button",
               "data": {
-               "attrID": "zd-hero-img",
-               "image": "https://zidanna.com/wp-content/uploads/2026/08/01.png",
-               "alt": "姿丹娜护肤品代工产品"
+               "attrID": "zd-cta-1",
+               "url": "/zidanna/#contact"
               },
               "style": {
                "&": {
                 "_": {
-                 "width": "100%",
-                 "height": "100%",
-                 "objectFitStyle": {
-                  "objectFit": "cover",
-                  "objectPositionX": "60%",
-                  "objectPositionY": "85%"
+                 "backgroundColor": {
+                  "token": "--paper"
                  },
-                 "move": {
-                  "scale": "1.22"
+                 "color": {
+                  "token": "--ink"
+                 },
+                 "fontSize": "15px",
+                 "paddingTop": "16px",
+                 "paddingBottom": "16px",
+                 "paddingLeft": "32px",
+                 "paddingRight": "32px",
+                 "radius": "2px",
+                 "cursor": "pointer",
+                 "transitionAll": "220ms ease"
+                }
+               },
+               "hover": {
+                "_": {
+                 "backgroundColor": {
+                  "token": "--sage"
+                 },
+                 "color": {
+                  "token": "--paper"
                  }
                 }
                }
-              }
+              },
+              "text": "开始打造"
+             },
+             {
+              "type": "button",
+              "data": {
+               "attrID": "zd-cta-2",
+               "url": "/zidanna-oem/"
+              },
+              "style": {
+               "&": {
+                "_": {
+                 "backgroundColor": "rgba(0,0,0,0)",
+                 "color": {
+                  "token": "--paper"
+                 },
+                 "fontSize": "15px",
+                 "paddingTop": "16px",
+                 "paddingBottom": "16px",
+                 "paddingLeft": "32px",
+                 "paddingRight": "32px",
+                 "radius": "2px",
+                 "cursor": "pointer",
+                 "border": {
+                  "width": "1px",
+                  "style": "solid",
+                  "color": "rgba(250,248,244,.45)"
+                 },
+                 "transitionAll": "220ms ease"
+                }
+               },
+               "hover": {
+                "_": {
+                 "backgroundColor": "rgba(250,248,244,.12)"
+                }
+               }
+              },
+              "text": "了解代工流程"
              }
             ]
            }
           ]
+         },
+         {
+          "type": "div",
+          "data": {
+           "attrID": "zd-hero-cue"
+          },
+          "style": {
+           "&": {
+            "_": {}
+           }
+          },
+          "children": [
+           {
+            "type": "text",
+            "data": {
+             "tagName": "p"
+            },
+            "text": "SCROLL",
+            "style": {
+             "&": {
+              "_": {
+               "color": "rgba(250,248,244,.55)",
+               "fontSize": "10px",
+               "letterSpacing": "0.3em",
+               "fontFamily": "'Helvetica Neue',Helvetica,Arial,sans-serif"
+              }
+             }
+            }
+           }
+          ]
+         }
+        ]
+       }
+      ]
+     },
+     {
+      "type": "div",
+      "data": {
+       "attrID": "zd-marquee"
+      },
+      "style": {
+       "&": {
+        "_": {
+         "backgroundColor": {
+          "token": "--ink"
+         },
+         "paddingTop": "18px",
+         "paddingBottom": "18px",
+         "customStyles": "overflow:hidden;"
+        }
+       }
+      },
+      "children": [
+       {
+        "type": "div",
+        "data": {
+         "attrID": "zd-marquee-track"
+        },
+        "style": {
+         "&": {
+          "_": {
+           "display": "flex",
+           "columnGap": "0px",
+           "customStyles": "width:max-content;will-change:transform;"
+          }
+         }
+        },
+        "children": [
+         {
+          "type": "text",
+          "data": {
+           "tagName": "p"
+          },
+          "text": "日常护肤",
+          "style": {
+           "&": {
+            "_": {
+             "color": "rgba(250,248,244,.66)",
+             "fontSize": "13px",
+             "letterSpacing": "0.18em",
+             "customStyles": "padding:0 26px;white-space:nowrap;border-right:1px solid rgba(109,127,109,.55);"
+            }
+           }
+          }
+         },
+         {
+          "type": "text",
+          "data": {
+           "tagName": "p"
+          },
+          "text": "高端护理",
+          "style": {
+           "&": {
+            "_": {
+             "color": "rgba(250,248,244,.66)",
+             "fontSize": "13px",
+             "letterSpacing": "0.18em",
+             "customStyles": "padding:0 26px;white-space:nowrap;border-right:1px solid rgba(109,127,109,.55);"
+            }
+           }
+          }
+         },
+         {
+          "type": "text",
+          "data": {
+           "tagName": "p"
+          },
+          "text": "香氛系列",
+          "style": {
+           "&": {
+            "_": {
+             "color": "rgba(250,248,244,.66)",
+             "fontSize": "13px",
+             "letterSpacing": "0.18em",
+             "customStyles": "padding:0 26px;white-space:nowrap;border-right:1px solid rgba(109,127,109,.55);"
+            }
+           }
+          }
+         },
+         {
+          "type": "text",
+          "data": {
+           "tagName": "p"
+          },
+          "text": "植物精油",
+          "style": {
+           "&": {
+            "_": {
+             "color": "rgba(250,248,244,.66)",
+             "fontSize": "13px",
+             "letterSpacing": "0.18em",
+             "customStyles": "padding:0 26px;white-space:nowrap;border-right:1px solid rgba(109,127,109,.55);"
+            }
+           }
+          }
+         },
+         {
+          "type": "text",
+          "data": {
+           "tagName": "p"
+          },
+          "text": "身体 SPA",
+          "style": {
+           "&": {
+            "_": {
+             "color": "rgba(250,248,244,.66)",
+             "fontSize": "13px",
+             "letterSpacing": "0.18em",
+             "customStyles": "padding:0 26px;white-space:nowrap;border-right:1px solid rgba(109,127,109,.55);"
+            }
+           }
+          }
+         },
+         {
+          "type": "text",
+          "data": {
+           "tagName": "p"
+          },
+          "text": "面膜",
+          "style": {
+           "&": {
+            "_": {
+             "color": "rgba(250,248,244,.66)",
+             "fontSize": "13px",
+             "letterSpacing": "0.18em",
+             "customStyles": "padding:0 26px;white-space:nowrap;border-right:1px solid rgba(109,127,109,.55);"
+            }
+           }
+          }
+         },
+         {
+          "type": "text",
+          "data": {
+           "tagName": "p"
+          },
+          "text": "精华",
+          "style": {
+           "&": {
+            "_": {
+             "color": "rgba(250,248,244,.66)",
+             "fontSize": "13px",
+             "letterSpacing": "0.18em",
+             "customStyles": "padding:0 26px;white-space:nowrap;border-right:1px solid rgba(109,127,109,.55);"
+            }
+           }
+          }
+         },
+         {
+          "type": "text",
+          "data": {
+           "tagName": "p"
+          },
+          "text": "礼盒套装",
+          "style": {
+           "&": {
+            "_": {
+             "color": "rgba(250,248,244,.66)",
+             "fontSize": "13px",
+             "letterSpacing": "0.18em",
+             "customStyles": "padding:0 26px;white-space:nowrap;border-right:1px solid rgba(109,127,109,.55);"
+            }
+           }
+          }
+         },
+         {
+          "type": "text",
+          "data": {
+           "tagName": "p"
+          },
+          "text": "沙龙通路",
+          "style": {
+           "&": {
+            "_": {
+             "color": "rgba(250,248,244,.66)",
+             "fontSize": "13px",
+             "letterSpacing": "0.18em",
+             "customStyles": "padding:0 26px;white-space:nowrap;border-right:1px solid rgba(109,127,109,.55);"
+            }
+           }
+          }
+         },
+         {
+          "type": "text",
+          "data": {
+           "tagName": "p"
+          },
+          "text": "医美通路",
+          "style": {
+           "&": {
+            "_": {
+             "color": "rgba(250,248,244,.66)",
+             "fontSize": "13px",
+             "letterSpacing": "0.18em",
+             "customStyles": "padding:0 26px;white-space:nowrap;border-right:1px solid rgba(109,127,109,.55);"
+            }
+           }
+          }
+         },
+         {
+          "type": "text",
+          "data": {
+           "tagName": "p"
+          },
+          "text": "日常护肤",
+          "style": {
+           "&": {
+            "_": {
+             "color": "rgba(250,248,244,.66)",
+             "fontSize": "13px",
+             "letterSpacing": "0.18em",
+             "customStyles": "padding:0 26px;white-space:nowrap;border-right:1px solid rgba(109,127,109,.55);"
+            }
+           }
+          }
+         },
+         {
+          "type": "text",
+          "data": {
+           "tagName": "p"
+          },
+          "text": "高端护理",
+          "style": {
+           "&": {
+            "_": {
+             "color": "rgba(250,248,244,.66)",
+             "fontSize": "13px",
+             "letterSpacing": "0.18em",
+             "customStyles": "padding:0 26px;white-space:nowrap;border-right:1px solid rgba(109,127,109,.55);"
+            }
+           }
+          }
+         },
+         {
+          "type": "text",
+          "data": {
+           "tagName": "p"
+          },
+          "text": "香氛系列",
+          "style": {
+           "&": {
+            "_": {
+             "color": "rgba(250,248,244,.66)",
+             "fontSize": "13px",
+             "letterSpacing": "0.18em",
+             "customStyles": "padding:0 26px;white-space:nowrap;border-right:1px solid rgba(109,127,109,.55);"
+            }
+           }
+          }
+         },
+         {
+          "type": "text",
+          "data": {
+           "tagName": "p"
+          },
+          "text": "植物精油",
+          "style": {
+           "&": {
+            "_": {
+             "color": "rgba(250,248,244,.66)",
+             "fontSize": "13px",
+             "letterSpacing": "0.18em",
+             "customStyles": "padding:0 26px;white-space:nowrap;border-right:1px solid rgba(109,127,109,.55);"
+            }
+           }
+          }
+         },
+         {
+          "type": "text",
+          "data": {
+           "tagName": "p"
+          },
+          "text": "身体 SPA",
+          "style": {
+           "&": {
+            "_": {
+             "color": "rgba(250,248,244,.66)",
+             "fontSize": "13px",
+             "letterSpacing": "0.18em",
+             "customStyles": "padding:0 26px;white-space:nowrap;border-right:1px solid rgba(109,127,109,.55);"
+            }
+           }
+          }
+         },
+         {
+          "type": "text",
+          "data": {
+           "tagName": "p"
+          },
+          "text": "面膜",
+          "style": {
+           "&": {
+            "_": {
+             "color": "rgba(250,248,244,.66)",
+             "fontSize": "13px",
+             "letterSpacing": "0.18em",
+             "customStyles": "padding:0 26px;white-space:nowrap;border-right:1px solid rgba(109,127,109,.55);"
+            }
+           }
+          }
+         },
+         {
+          "type": "text",
+          "data": {
+           "tagName": "p"
+          },
+          "text": "精华",
+          "style": {
+           "&": {
+            "_": {
+             "color": "rgba(250,248,244,.66)",
+             "fontSize": "13px",
+             "letterSpacing": "0.18em",
+             "customStyles": "padding:0 26px;white-space:nowrap;border-right:1px solid rgba(109,127,109,.55);"
+            }
+           }
+          }
+         },
+         {
+          "type": "text",
+          "data": {
+           "tagName": "p"
+          },
+          "text": "礼盒套装",
+          "style": {
+           "&": {
+            "_": {
+             "color": "rgba(250,248,244,.66)",
+             "fontSize": "13px",
+             "letterSpacing": "0.18em",
+             "customStyles": "padding:0 26px;white-space:nowrap;border-right:1px solid rgba(109,127,109,.55);"
+            }
+           }
+          }
+         },
+         {
+          "type": "text",
+          "data": {
+           "tagName": "p"
+          },
+          "text": "沙龙通路",
+          "style": {
+           "&": {
+            "_": {
+             "color": "rgba(250,248,244,.66)",
+             "fontSize": "13px",
+             "letterSpacing": "0.18em",
+             "customStyles": "padding:0 26px;white-space:nowrap;border-right:1px solid rgba(109,127,109,.55);"
+            }
+           }
+          }
+         },
+         {
+          "type": "text",
+          "data": {
+           "tagName": "p"
+          },
+          "text": "医美通路",
+          "style": {
+           "&": {
+            "_": {
+             "color": "rgba(250,248,244,.66)",
+             "fontSize": "13px",
+             "letterSpacing": "0.18em",
+             "customStyles": "padding:0 26px;white-space:nowrap;border-right:1px solid rgba(109,127,109,.55);"
+            }
+           }
+          }
          }
         ]
        }

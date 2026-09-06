@@ -124,7 +124,8 @@ def clean(n):
 # threaded through every box() call: the stagger is a design decision and reads
 # better in one place than scattered across the tree.
 REVEALS = [
-    ("zd-hero-copy", 0), ("zd-hero-media", 1),
+    # the hero is not in here: it has its own entrance sequence timed off the curtain,
+    # and a scroll reveal on top of that would fight it
     ("zd-stat-0", 0), ("zd-stat-1", 1), ("zd-stat-2", 2), ("zd-stat-3", 3),
     ("zd-about-l", 0), ("zd-about-r", 1),
     ("zd-process-in", 0),
@@ -138,62 +139,128 @@ REVEALS = [
     ("zd-line-0", 0), ("zd-line-1", 1), ("zd-line-2", 2), ("zd-line-3", 3), ("zd-line-4", 4),
 ]
 
-DRAW_RULES = """@media (prefers-reduced-motion:no-preference){
-  @supports (animation-timeline:view()){
-    #zd-step-01,#zd-step-02,#zd-step-03,#zd-step-04,
-    #zd-oem-step-01,#zd-oem-step-02,#zd-oem-step-03,#zd-oem-step-04{
-      background-image:linear-gradient(rgb(28,26,23),rgb(28,26,23));
-      background-repeat:no-repeat;background-size:100% 2px;background-position:0 0;
-      animation:zd-draw .01s linear both;animation-timeline:view();
-      animation-range:entry 6% cover 26%;transform-origin:left center}
-  }
-}"""
-
-
 def motion_css():
-    """The head stylesheet. Every selector is an attrID this file sets."""
-    steps = "\n".join(
-        "    #%s{animation-range:entry %d%% cover %d%%}" % (attr, 4 + i * 5, 32 + i * 5)
-        for attr, i in REVEALS if i)
-    targets = ",".join("#" + attr for attr, _ in REVEALS)
-    return """<style id="zd-motion">
-@keyframes zd-rise{from{opacity:0;transform:translateY(26px)}to{opacity:1;transform:none}}
-@keyframes zd-draw{from{transform:scaleX(0)}to{transform:scaleX(1)}}
-@keyframes zd-lift{from{transform:scale(1.22) translateY(14px)}to{transform:scale(1.22) translateY(-18px)}}
-@keyframes zd-shadow{from{box-shadow:0 0 0 rgba(28,26,23,0)}to{box-shadow:0 10px 30px -22px rgba(28,26,23,.75)}}
+    """The head stylesheet: layout the style compiler cannot express, plus all motion.
 
-#zd-header{position:sticky;top:0;z-index:50;background:rgba(250,248,244,.86);
-  -webkit-backdrop-filter:saturate(1.6) blur(10px);backdrop-filter:saturate(1.6) blur(10px)}
+    Built by concatenation rather than %-formatting. An earlier version was a
+    %-format string with DRAW_RULES substituted into it, so that block's doubled
+    percent signs reached the browser verbatim - "100%% 2px" is not a valid
+    background-size, the gradient filled its box, and every process card turned
+    black. No format string, no escaping question.
+    """
+    reveal_targets = ",".join("#" + a for a, _ in REVEALS)
+    reveal_stagger = "\n".join(
+        "    #" + a + "{animation-range:entry " + str(4 + i * 5) + "% cover "
+        + str(32 + i * 5) + "%}"
+        for a, i in REVEALS if i)
+    steps = ("#zd-step-01,#zd-step-02,#zd-step-03,#zd-step-04,"
+             "#zd-oem-step-01,#zd-oem-step-02,#zd-oem-step-03,#zd-oem-step-04")
+    cats = ",".join("#zd-cat-txt-" + str(i) + " h3" for i in range(4))
+    cat_hovers = ",".join("#zd-cat-" + str(i) + ":hover #zd-cat-txt-" + str(i) + " h3::after"
+                          for i in range(4))
 
-#zd-nav>*{position:relative}
-#zd-nav>*::after{content:"";position:absolute;left:0;right:100%%;bottom:-7px;height:1px;
-  background:rgb(109,127,109);transition:right .3s cubic-bezier(.2,.7,.3,1)}
-#zd-nav>*:hover::after{right:0}
+    return "\n".join([
+        '<style id="zd-motion">',
 
-#zd-header-cta::after,#zd-cta-1::after,#zd-cta-3::after{content:" →";display:inline-block;
-  transition:transform .28s cubic-bezier(.2,.7,.3,1)}
-#zd-header-cta:hover::after,#zd-cta-1:hover::after,#zd-cta-3:hover::after{transform:translateX(5px)}
+        # ── keyframes ────────────────────────────────────────────────────────
+        "@keyframes zd-curtain{0%,42%{transform:translateY(0)}"
+        "100%{transform:translateY(-101%)}}",
+        "@keyframes zd-markin{0%{opacity:0;transform:translateY(10px)}"
+        "22%,52%{opacity:1;transform:none}72%,100%{opacity:0;transform:translateY(-8px)}}",
+        "@keyframes zd-linein{from{transform:translateY(110%)}to{transform:translateY(0)}}",
+        "@keyframes zd-softin{from{opacity:0;transform:translateY(14px)}"
+        "to{opacity:1;transform:none}}",
+        "@keyframes zd-kenburns{from{transform:scale(1.04)}to{transform:scale(1.14)}}",
+        "@keyframes zd-marquee{from{transform:translateX(0)}to{transform:translateX(-50%)}}",
+        "@keyframes zd-cue{0%,100%{opacity:.35;transform:translateY(0)}"
+        "50%{opacity:.9;transform:translateY(6px)}}",
+        "@keyframes zd-rise{from{opacity:0;transform:translateY(26px)}"
+        "to{opacity:1;transform:none}}",
+        "@keyframes zd-draw{from{transform:scaleX(0)}to{transform:scaleX(1)}}",
+        "@keyframes zd-progress{from{transform:scaleX(0)}to{transform:scaleX(1)}}",
+        "@keyframes zd-headfill{from{background:rgba(250,248,244,0);"
+        "border-bottom-color:rgba(226,219,208,0)}"
+        "to{background:rgba(250,248,244,.92);border-bottom-color:rgba(226,219,208,1)}}",
+        "@keyframes zd-headink{from{color:rgba(250,248,244,1)}to{color:rgb(28,26,23)}}",
 
-#zd-cat-txt-0 h3,#zd-cat-txt-1 h3,#zd-cat-txt-2 h3,#zd-cat-txt-3 h3{position:relative;display:inline-block}
-#zd-cat-txt-0 h3::after,#zd-cat-txt-1 h3::after,#zd-cat-txt-2 h3::after,#zd-cat-txt-3 h3::after{
-  content:"";position:absolute;left:0;right:100%%;bottom:-5px;height:1px;background:rgb(109,127,109);
-  transition:right .38s cubic-bezier(.2,.7,.3,1)}
-#zd-cat-0:hover #zd-cat-txt-0 h3::after,#zd-cat-1:hover #zd-cat-txt-1 h3::after,
-#zd-cat-2:hover #zd-cat-txt-2 h3::after,#zd-cat-3:hover #zd-cat-txt-3 h3::after{right:0}
+        # ── layout the style compiler cannot express ─────────────────────────
+        "#zd-hero{position:relative;min-height:88vh;display:flex;align-items:center;"
+        "overflow:hidden}",
+        "#zd-hero-in{position:relative;z-index:1;padding-top:120px;padding-bottom:96px}",
+        "#zd-hero-cue{position:absolute;left:50%;bottom:30px;transform:translateX(-50%);"
+        "z-index:1}",
+        "#zd-oem-hero{padding-top:164px}",
 
-%s
+        "#zd-header{position:fixed;top:0;left:0;right:0;z-index:100;"
+        "border-bottom:1px solid rgba(226,219,208,0);background:rgba(250,248,244,0)}",
+        # over the hero the header sits on the image, so its type starts light
+        "#zd-header h3,#zd-header p,#zd-nav>*{color:rgba(250,248,244,.92)}",
+        "#zd-header-cta{background:rgba(250,248,244,.14) !important;"
+        "border:1px solid rgba(250,248,244,.4)}",
+        "#zd-progress{position:fixed;top:0;left:0;right:0;height:2px;z-index:101;"
+        "background:rgb(109,127,109);transform:scaleX(0);transform-origin:0 50%}",
 
-@media (prefers-reduced-motion:no-preference){
-  @supports (animation-timeline:view()){
-    %s{animation:zd-rise .01s linear both;animation-timeline:view();animation-range:entry 4%% cover 32%%}
-%s
-  }
-  @supports (animation-timeline:scroll()){
-    #zd-header{animation:zd-shadow linear both;animation-timeline:scroll(root);animation-range:0 140px}
-    #zd-hero-img{animation:zd-lift linear both;animation-timeline:scroll(root);animation-range:0 640px}
-  }
-}
-</style>""" % (DRAW_RULES, targets, steps)
+        "#zd-intro{position:fixed;inset:0;z-index:200;background:rgb(20,18,16);"
+        "display:grid;place-items:center;pointer-events:none}",
+        "#zd-intro-mark{text-align:center}",
+
+        "#zd-marquee-track{display:flex}",
+        "#zd-footer-mark{pointer-events:none;user-select:none}",
+
+        # ── hover detail ─────────────────────────────────────────────────────
+        "#zd-nav>*{position:relative}",
+        '#zd-nav>*::after{content:"";position:absolute;left:0;right:100%;bottom:-7px;'
+        "height:1px;background:rgb(109,127,109);"
+        "transition:right .3s cubic-bezier(.2,.7,.3,1)}",
+        "#zd-nav>*:hover::after{right:0}",
+        '#zd-header-cta::after,#zd-cta-1::after,#zd-cta-3::after{content:" →";'
+        "display:inline-block;transition:transform .28s cubic-bezier(.2,.7,.3,1)}",
+        "#zd-header-cta:hover::after,#zd-cta-1:hover::after,#zd-cta-3:hover::after"
+        "{transform:translateX(5px)}",
+        cats + "{position:relative;display:inline-block}",
+        ",".join(c + "::after" for c in cats.split(",")) +
+        '{content:"";position:absolute;left:0;right:100%;bottom:-5px;height:1px;'
+        "background:rgb(109,127,109);transition:right .38s cubic-bezier(.2,.7,.3,1)}",
+        cat_hovers + "{right:0}",
+
+        # ── motion, all of it opt-out-able ───────────────────────────────────
+        "@media (prefers-reduced-motion:reduce){#zd-intro{display:none}}",
+        "@media (prefers-reduced-motion:no-preference){",
+        "  #zd-intro{animation:zd-curtain 1.45s cubic-bezier(.76,0,.24,1) forwards}",
+        "  #zd-intro-mark{animation:zd-markin 1.45s ease forwards}",
+        # the lines start below their own mask and are pulled up after the curtain
+        "  #zd-hl1-mask>*,#zd-hl2-mask>*{transform:translateY(110%);"
+        "animation:zd-linein .9s cubic-bezier(.16,1,.3,1) forwards}",
+        "  #zd-hl1-mask>*{animation-delay:.62s}",
+        "  #zd-hl2-mask>*{animation-delay:.74s}",
+        "  #zd-hero-eyebrow,#zd-hero-in p,#zd-hero-cta{opacity:0;"
+        "animation:zd-softin .8s cubic-bezier(.16,1,.3,1) forwards}",
+        "  #zd-hero-eyebrow{animation-delay:.56s}",
+        "  #zd-hero-in p{animation-delay:.92s}",
+        "  #zd-hero-cta{animation-delay:1.04s}",
+        "  #zd-hero-bg{animation:zd-kenburns 22s ease-in-out infinite alternate}",
+        "  #zd-hero-cue p{animation:zd-cue 2.4s ease-in-out infinite}",
+        "  #zd-marquee-track{animation:zd-marquee 38s linear infinite}",
+        "  @supports (animation-timeline:view()){",
+        "    " + reveal_targets + "{animation:zd-rise .01s linear both;"
+        "animation-timeline:view();animation-range:entry 4% cover 32%}",
+        reveal_stagger,
+        "    " + steps + "{background-image:linear-gradient(rgb(28,26,23),rgb(28,26,23));"
+        "background-repeat:no-repeat;background-size:100% 2px;background-position:0 0;"
+        "animation:zd-draw .01s linear both;animation-timeline:view();"
+        "animation-range:entry 6% cover 26%;transform-origin:left center}",
+        "  }",
+        "  @supports (animation-timeline:scroll()){",
+        "    #zd-progress{animation:zd-progress linear both;"
+        "animation-timeline:scroll(root)}",
+        "    #zd-header{animation:zd-headfill linear both;"
+        "animation-timeline:scroll(root);animation-range:60px 220px}",
+        "    #zd-header h3,#zd-header p,#zd-nav>*{animation:zd-headink linear both;"
+        "animation-timeline:scroll(root);animation-range:60px 220px}",
+        "  }",
+        "}",
+        "</style>",
+    ])
 
 
 # ── the shared shell ──────────────────────────────────────────────────────────
@@ -209,6 +276,19 @@ HEADER = box("zd-header",
      # into the document - customStyles is emitted inside a rule and cannot hold one
      {"type": "code", "data": {"attrID": "zd-motion-css", "insertLocation": "head",
                                "content": motion_css(), "processShortcodes": "0"}},
+     # the entrance curtain: a full-viewport panel that holds the wordmark for a beat
+     # and then lifts. Purely decorative, so it never takes pointer events, and it is
+     # removed entirely under prefers-reduced-motion.
+     box("zd-intro", {}, [
+         box("zd-intro-mark", {}, [
+             T("h3", "姿丹娜", color={"token": "--paper"}, fontSize="30px",
+               fontWeight="700", letterSpacing="0.34em"),
+             T("p", "ZIDANNA", color={"token": "--sage"}, fontSize="10px",
+               letterSpacing="0.34em", fontFamily=LATIN, marginTop="10px",
+               textAlign="center"),
+         ]),
+     ]),
+     box("zd-progress", {}, []),
      wrap("zd-header-in", [
         {"type": "div", "data": {"attrID": "zd-header-row"},
          "style": {"&": {"_": {"display": "flex", "alignItems": "center",
@@ -245,9 +325,15 @@ HEADER = box("zd-header",
     ])])
 
 FOOTER = box("zd-footer",
-    {"backgroundColor": {"token": "--ink"}, "paddingTop": "72px", "paddingBottom": "40px",
-     "paddingLeft": "48px", "paddingRight": "48px", "fontFamily": CJK},
+    {"backgroundColor": {"token": "--ink"}, "paddingTop": "84px", "paddingBottom": "40px",
+     "paddingLeft": "48px", "paddingRight": "48px", "fontFamily": CJK,
+     "customStyles": "overflow:hidden;"},
     [wrap("zd-footer-in", [
+        # the wordmark at display scale, treated as a graphic rather than a label
+        box("zd-footer-mark", {"marginBottom": "56px"}, [
+            T("h2", "姿丹娜", color="rgba(250,248,244,.07)", fontSize="128px",
+              fontWeight="700", letterSpacing="0.12em", lineHeight="1"),
+        ]),
         grid("zd-footer-grid", 3, "48px", [
             box("zd-f-brand", {}, [
                 T("h3", "姿丹娜", color="rgb(250,248,244)", fontSize="20px",
@@ -306,57 +392,94 @@ REASONS = [("配方稳定", "上千支已量产配方作为基础，不必从零
            ("两岸资源", "台湾母厂六十年制造经验，与南京厂区共用技术与品管标准。"),
            ("一站到底", "从品牌规划、配方、制造到包材，单一窗口负责到底。")]
 
-HOME = section("zd-hero", [wrap("zd-hero-in", [
-    {"type": "div", "data": {"attrID": "zd-hero-row"},
-     "style": {"&": {"_": {"display": "grid", "gridCols": "1.15fr 0.85fr",
-                           "columnGap": "64px", "rowGap": "44px", "alignItems": "center"},
-                     "_m": {"gridCols": "repeat(1, 1fr)"}}},
-     "children": [
-         box("zd-hero-copy", {}, [
-             eyebrow("OEM / ODM SKINCARE MANUFACTURING", "zd-hero-eyebrow"),
-             ml("h1", "用匠心深耕\n护肤品代加工", color={"token": "--ink"}, fontSize="68px",
-                fontWeight="700", lineHeight="1.14", letterSpacing="0.02em",
-                marginTop="26px"),
-             T("p", "从品牌定位、配方开发到量产出货，姿丹娜在南京溧水的自有厂区，"
-                    "为护肤品牌承接完整的 OEM / ODM 制造。",
-               color={"token": "--muted"}, fontSize="17px", lineHeight="2", marginTop="24px",
-               maxWidth="30em"),
-             {"type": "div", "data": {"attrID": "zd-hero-cta"},
-              "style": {"&": {"_": {"display": "flex", "columnGap": "14px", "marginTop": "36px"}}},
-              "children": [
-                  {"type": "button", "data": {"attrID": "zd-cta-1", "url": "/zidanna/#contact"},
-                   "style": {"&": {"_": {"backgroundColor": {"token": "--ink"},
-                                         "color": {"token": "--paper"}, "fontSize": "15px",
-                                         "paddingTop": "15px", "paddingBottom": "15px",
-                                         "paddingLeft": "30px", "paddingRight": "30px",
-                                         "radius": "2px", "cursor": "pointer",
-                                         "transitionAll": "200ms ease"}},
-                             "hover": {"_": {"backgroundColor": {"token": "--sage"}}}},
-                   "text": "开始打造"},
-                  {"type": "button", "data": {"attrID": "zd-cta-2", "url": "/zidanna-oem/"},
-                   "style": {"&": {"_": {"backgroundColor": {"token": "--paper"},
-                                         "color": {"token": "--ink"}, "fontSize": "15px",
-                                         "paddingTop": "15px", "paddingBottom": "15px",
-                                         "paddingLeft": "30px", "paddingRight": "30px",
-                                         "radius": "2px", "cursor": "pointer",
-                                         "border": {"width": "1px", "style": "solid",
-                                                    "color": "rgb(226,219,208)"},
-                                         "transitionAll": "200ms ease"}},
-                             "hover": {"_": {"backgroundColor": {"token": "--sand"}}}},
-                   "text": "了解代工流程"},
-              ]},
-         ]),
-         box("zd-hero-media",
-             {"radius": "3px", "customStyles": "overflow:hidden;aspect-ratio:1/1;"},
-             [{"type": "image", "data": {"attrID": "zd-hero-img", "image": IMG % "01.png",
-                                         "alt": "姿丹娜护肤品代工产品"},
-               "style": {"&": {"_": {"width": "100%", "height": "100%",
-                                     "objectFitStyle": {"objectFit": "cover",
-                                                        "objectPositionX": "60%",
-                                                        "objectPositionY": "85%"},
-                                     "move": {"scale": "1.22"}}}}}]),
-     ]},
-])], pt="72px", pb="96px")
+def mask_line(attr, text, **st):
+    """One display line in an overflow mask, so it can rise from behind its own edge.
+
+    The line reveal only works if each line is its own element - a single text node
+    with a newline gives the browser one box and nothing to slide behind.
+    """
+    return {"type": "div", "data": {"attrID": attr + "-mask"},
+            "style": {"&": {"_": {"customStyles": "overflow:hidden;padding-bottom:.08em;"}}},
+            "children": [T("h1", text, **st)] if attr.endswith("1")
+                        else [T("h2", text, **st)]}
+
+
+HERO_LINE = dict(color={"token": "--paper"}, fontSize="76px", fontWeight="700",
+                 lineHeight="1.1", letterSpacing="0.02em")
+
+# Full-bleed image, dark scrim, oversized type. The image is the client's own
+# 2560px hero asset - the product photos elsewhere on their site are 345px wide and
+# would fall apart at this size.
+HOME = section("zd-hero", [
+    box("zd-hero-bg", {"customStyles":
+        "position:absolute;inset:0;background-image:"
+        "linear-gradient(95deg,rgba(16,15,13,.93) 0%,rgba(16,15,13,.78) 46%,"
+        "rgba(16,15,13,.52) 100%),"
+        # concatenated, not %-formatted: this string is full of literal percent signs
+        "url(" + (IMG % "hero.jpg") + ");background-size:cover;"
+        "background-position:center 46%;z-index:0;"
+        "filter:saturate(.42) brightness(.62) contrast(1.06);"}, []),
+    wrap("zd-hero-in", [
+        box("zd-hero-copy", {}, [
+            eyebrow("OEM / ODM SKINCARE MANUFACTURING", "zd-hero-eyebrow"),
+            box("zd-hero-lines", {"marginTop": "26px"}, [
+                mask_line("zd-hl1", "用匠心深耕", **HERO_LINE),
+                mask_line("zd-hl2", "护肤品代加工", **HERO_LINE),
+            ]),
+            T("p", "从品牌定位、配方开发到量产出货，姿丹娜在南京溧水的自有厂区，"
+                   "为护肤品牌承接完整的 OEM / ODM 制造。",
+              color="rgba(250,248,244,.78)", fontSize="17px", lineHeight="2.1",
+              marginTop="26px", maxWidth="27em"),
+            {"type": "div", "data": {"attrID": "zd-hero-cta"},
+             "style": {"&": {"_": {"display": "flex", "columnGap": "14px", "marginTop": "38px",
+                                   "flexWrap": "wrap"}}},
+             "children": [
+                 {"type": "button", "data": {"attrID": "zd-cta-1", "url": "/zidanna/#contact"},
+                  "style": {"&": {"_": {"backgroundColor": {"token": "--paper"},
+                                        "color": {"token": "--ink"}, "fontSize": "15px",
+                                        "paddingTop": "16px", "paddingBottom": "16px",
+                                        "paddingLeft": "32px", "paddingRight": "32px",
+                                        "radius": "2px", "cursor": "pointer",
+                                        "transitionAll": "220ms ease"}},
+                            "hover": {"_": {"backgroundColor": {"token": "--sage"},
+                                            "color": {"token": "--paper"}}}},
+                  "text": "开始打造"},
+                 {"type": "button", "data": {"attrID": "zd-cta-2", "url": "/zidanna-oem/"},
+                  "style": {"&": {"_": {"backgroundColor": "rgba(0,0,0,0)",
+                                        "color": {"token": "--paper"}, "fontSize": "15px",
+                                        "paddingTop": "16px", "paddingBottom": "16px",
+                                        "paddingLeft": "32px", "paddingRight": "32px",
+                                        "radius": "2px", "cursor": "pointer",
+                                        "border": {"width": "1px", "style": "solid",
+                                                   "color": "rgba(250,248,244,.45)"},
+                                        "transitionAll": "220ms ease"}},
+                            "hover": {"_": {"backgroundColor": "rgba(250,248,244,.12)"}}},
+                  "text": "了解代工流程"},
+             ]},
+        ]),
+        box("zd-hero-cue", {}, [
+            T("p", "SCROLL", color="rgba(250,248,244,.55)", fontSize="10px",
+              letterSpacing="0.3em", fontFamily=LATIN),
+        ]),
+    ]),
+], pt="0px", pb="0px")
+
+
+MARQUEE_WORDS = ["日常护肤", "高端护理", "香氛系列", "植物精油", "身体 SPA",
+                 "面膜", "精华", "礼盒套装", "沙龙通路", "医美通路"]
+
+MARQUEE = box("zd-marquee",
+    {"backgroundColor": {"token": "--ink"}, "paddingTop": "18px", "paddingBottom": "18px",
+     "customStyles": "overflow:hidden;"},
+    [box("zd-marquee-track",
+         {"display": "flex", "columnGap": "0px",
+          "customStyles": "width:max-content;will-change:transform;"},
+         # duplicated so the loop can translate exactly -50% and never show a seam
+         [T("p", w, color="rgba(250,248,244,.66)", fontSize="13px",
+            letterSpacing="0.18em",
+            customStyles=("padding:0 26px;white-space:nowrap;"
+                          "border-right:1px solid rgba(109,127,109,.55);"))
+          for w in MARQUEE_WORDS * 2])])
 
 STAT_BAND = section("zd-stats", [wrap("zd-stats-in", [
     grid("zd-stats-grid", 4, "0px", [
@@ -595,7 +718,8 @@ OEM = {"type": "div", "data": {"attrID": "zd-oem"}, "children": [
 ]}
 
 HOME_TREE = {"type": "div", "data": {"attrID": "zd-home"},
-             "children": [HOME, STAT_BAND, ABOUT, PROCESS_SEC, CATEGORY_SEC, REASON_SEC, CTA]}
+             "children": [HOME, MARQUEE, STAT_BAND, ABOUT, PROCESS_SEC,
+                          CATEGORY_SEC, REASON_SEC, CTA]}
 
 SITE = {
     "master": "Zidanna shell",
