@@ -228,6 +228,8 @@ def motion_css():
         "to{opacity:1;transform:none}}",
         "@keyframes zd-kenburns{from{transform:scale(1.03)}to{transform:scale(1.13)}}",
         "@keyframes zd-marquee{from{transform:translateX(0)}to{transform:translateX(-50%)}}",
+        "@keyframes zd-cuefade{0%,22%{opacity:1;transform:translateY(0)}"
+        "100%{opacity:0;transform:translateY(16px)}}",
         "@keyframes zd-cuerail{0%{transform:translateY(-100%)}"
         "70%,100%{transform:translateY(520%)}}",
         "@keyframes zd-cue{0%,100%{opacity:.35;transform:translateY(0)}"
@@ -239,17 +241,24 @@ def motion_css():
         # one duration shared by both so the ripple cannot drift out of sync with
         # the landing - the contact is at 46% of the cycle in each
         "@keyframes zd-drop{"
-        "0%{opacity:0;transform:translateY(-6px) scale(.6,.6)}"
-        "8%{opacity:1;transform:translateY(2px) scale(.9,1.1)}"
-        "40%{opacity:1;transform:translateY(78px) scale(.82,1.35)}"
-        "46%{opacity:1;transform:translateY(101px) scale(1.25,.6)}"
-        "52%{opacity:0;transform:translateY(103px) scale(1.5,.25)}"
-        "100%{opacity:0;transform:translateY(103px) scale(1.5,.25)}}",
-        "@keyframes zd-ripple{"
-        "0%,44%{opacity:0;transform:scale(.2)}"
-        "50%{opacity:.9;transform:scale(.75)}"
-        "84%{opacity:0;transform:scale(2.4)}"
-        "100%{opacity:0;transform:scale(2.4)}}",
+        "0%{top:0;opacity:0;transform:rotate(45deg) scale(.45);"
+        "animation-timing-function:ease-out}"
+        "7%{top:4%;opacity:1;transform:rotate(45deg) scale(1);"
+        "animation-timing-function:cubic-bezier(.45,0,.85,.35)}"
+        "44%{top:100%;opacity:1;transform:rotate(45deg) scale(.86,1.3);"
+        "animation-timing-function:ease-out}"
+        "48%{top:100%;opacity:.95;transform:rotate(45deg) scale(1.45,.45)}"
+        "54%{top:100%;opacity:0;transform:rotate(45deg) scale(1.9,.2)}"
+        "100%{top:100%;opacity:0;transform:rotate(45deg) scale(1.9,.2)}}",
+        "@keyframes zd-ring0{0%,44%{opacity:0;transform:scale(.012)}"
+        "47%{opacity:.9;transform:scale(.08)}"
+        "84%,100%{opacity:0;transform:scale(1)}}",
+        "@keyframes zd-ring1{0%,48%{opacity:0;transform:scale(.012)}"
+        "51%{opacity:.6;transform:scale(.07)}"
+        "90%,100%{opacity:0;transform:scale(.82)}}",
+        "@keyframes zd-ring2{0%,52%{opacity:0;transform:scale(.012)}"
+        "55%{opacity:.38;transform:scale(.06)}"
+        "96%,100%{opacity:0;transform:scale(.62)}}",
         "@keyframes zd-progress{from{width:0%}to{width:100%}}",
         # Scrolling does not switch the glass on - it changes what the glass is
         # standing on. Over the dark hero it is a smoked panel; over paper it goes
@@ -297,11 +306,19 @@ def motion_css():
         " numOctaves='4'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25'"
         " filter='url(%23n)'/%3E%3C/svg%3E\");background-size:180px 180px}",
         "#zd-hero-in{position:relative;z-index:2;padding-top:124px;padding-bottom:112px}",
-        "#zd-hero-cue{position:absolute;left:50%;bottom:26px;transform:translateX(-50%);"
-        "z-index:2;display:flex;flex-direction:column;align-items:center;row-gap:12px;"
-        "text-shadow:0 1px 6px rgba(10,8,6,.55)}",
-        "#zd-cue-rail{position:relative;width:1px;height:52px;overflow:hidden;"
-        "background:rgba(247,244,238,.26)}",
+        "#zd-hero-cue{position:fixed;right:22px;bottom:32px;z-index:90;"
+        "display:flex;flex-direction:column;align-items:center;row-gap:13px;"
+        "pointer-events:none;padding:18px 11px 15px;border-radius:999px;"
+        "background:rgba(18,14,10,.46);"
+        "-webkit-backdrop-filter:blur(16px) saturate(170%);"
+        "backdrop-filter:blur(16px) saturate(170%);"
+        "border:1px solid rgba(255,255,255,.24);"
+        "box-shadow:0 10px 30px rgba(10,8,6,.45),"
+        "inset 0 1px 0 rgba(255,255,255,.30)}",
+        # set vertically, so it reads down the edge in the direction it is asking for
+        "#zd-hero-cue p{writing-mode:vertical-rl}",
+        "#zd-cue-rail{position:relative;width:1px;height:46px;overflow:hidden;"
+        "background:rgba(247,244,238,.3)}",
         '#zd-cue-rail::after{content:"";position:absolute;left:0;top:0;width:1px;'
         "height:18px;background:linear-gradient(rgba(226,196,146,0),"
         "rgb(232,206,160));box-shadow:0 0 8px rgba(226,196,146,.8)}",
@@ -360,22 +377,40 @@ def motion_css():
         "#zd-intro-rule{width:96px;height:1px;margin:22px auto 0;"
         "background:rgb(158,127,88);transform:scaleX(0);transform-origin:0 50%}",
 
-        "#zd-statement-rule{position:relative;width:1px;height:104px;margin:0 auto}",
+        # the rings run to the band's full width, so the band has to clip them -
+        # without this they would push a horizontal scrollbar onto the page
+        "#zd-statement{position:relative;overflow:hidden}",
+        # the type paints above the rings; the rule and its rings paint below. That
+        # is the whole reason the rings appear to pass *through* the sentence rather
+        # than over it.
+        "#zd-statement-in h2,#zd-statement-in p{position:relative;z-index:1}",
+        # absolute against the section, so it runs the full height of the band and
+        # sits behind the sentence rather than above or below it
+        "#zd-statement-rule{position:absolute;z-index:0;left:50%;top:0;bottom:0;"
+        "width:1px;pointer-events:none}",
         # the track
         '#zd-statement-rule::before{content:"";position:absolute;inset:0;'
         "background:linear-gradient(rgba(158,127,88,0),rgba(158,127,88,.85));"
         "transform:scaleY(0);transform-origin:50% 0}",
         # the drop: it stretches as it falls and squashes as it lands, which is the
         # whole difference between a falling drop and a dot on a timer
+        # A teardrop: one square corner, three round, turned 45deg so the point
+        # trails upward the way surface tension actually leaves it. margin-top pulls
+        # it back by its own height, so `top:100%` seats it ON the floor rather than
+        # one drop-height below it.
         '#zd-statement-rule::after{content:"";position:absolute;left:50%;top:0;'
-        "width:7px;height:7px;margin-left:-3.5px;border-radius:50%;opacity:0;"
-        "background:radial-gradient(circle at 35% 30%,rgb(238,214,170),"
-        "rgb(176,142,97) 70%);"
-        "box-shadow:0 0 10px rgba(198,163,114,.55)}",
+        "width:11px;height:11px;margin-left:-5.5px;margin-top:-11px;opacity:0;"
+        "border-radius:0 50% 50% 50%;"
+        "background:radial-gradient(circle at 62% 68%,rgb(242,222,182),"
+        "rgb(170,136,92) 78%);"
+        "box-shadow:0 0 12px rgba(198,163,114,.6)}",
         # the ripple: an ellipse, not a circle - it is being read as lying flat
-        "#zd-statement-ripple{position:absolute;left:50%;top:104px;width:38px;"
-        "height:11px;margin-left:-19px;margin-top:-5.5px;border-radius:50%;"
-        "border:1px solid rgba(198,163,114,.9);opacity:0;transform:scale(.2)}",
+        # each ring is authored at full size and scaled down to nothing, so the
+        # stroke stays a hairline at every size instead of thickening as it grows
+        "#zd-ring-0,#zd-ring-1,#zd-ring-2{position:absolute;left:50%;top:100%;"
+        "width:1600px;height:360px;margin-left:-800px;margin-top:-180px;"
+        "border-radius:50%;border:1px solid rgb(198,163,114);opacity:0;"
+        "transform:scale(.012);will-change:transform,opacity}",
         "#zd-statement-in{text-align:center}",
         "#zd-marquee-track{display:flex}",
         "#zd-nav>*,#zd-navm>*,#zd-logo h3,#zd-logo p{white-space:nowrap;line-height:1.25}",
@@ -403,8 +438,7 @@ def motion_css():
         "  #zd-hero{min-height:auto}",
         "  #zd-hero-in{padding-top:104px;padding-bottom:88px}",
         "  #zd-oem-hero{padding-top:102px}",
-        # centring a cue under a left-aligned column reads as a mistake at this width
-        "  #zd-hero-cue{left:auto;right:20px;transform:none;bottom:22px}",
+        "  #zd-hero-cue{right:14px;bottom:22px}",
         "  #zd-intro-rule{width:64px;margin-top:16px}",
         "  #zd-marquee-track p{padding:0 16px}",
         # full-width buttons: a 32px side pad on a 375px screen leaves a stub
@@ -458,13 +492,15 @@ def motion_css():
         "  #zd-hero-in p{animation-delay:2.02s}",
         "  #zd-hero-cta{animation-delay:2.18s}",
         "  #zd-hero-bg{animation:zd-kenburns 34s ease-in-out infinite alternate}",
-        "  #zd-hero-cue{opacity:0;animation:zd-softin 1s ease forwards;animation-delay:2.4s}",
+        "  #zd-hero-cue p,#zd-cue-rail{opacity:0;animation:zd-softin 1s ease forwards;"
+        "animation-delay:2.4s}",
         "  #zd-cue-rail::after{animation:zd-cuerail 2.6s cubic-bezier(.5,0,.5,1) "
         "infinite}",
         "  #zd-marquee-track{animation:zd-marquee 56s linear infinite}",
-        "  #zd-statement-rule::after{animation:zd-drop 4.2s cubic-bezier(.55,0,.85,.4) "
-        "infinite}",
-        "  #zd-statement-ripple{animation:zd-ripple 4.2s ease-out infinite}",
+        "  #zd-statement-rule::after{animation:zd-drop 4.2s linear infinite}",
+        "  #zd-ring-0{animation:zd-ring0 4.2s cubic-bezier(.16,.85,.3,1) infinite}",
+        "  #zd-ring-1{animation:zd-ring1 4.2s cubic-bezier(.16,.85,.3,1) infinite}",
+        "  #zd-ring-2{animation:zd-ring2 4.2s cubic-bezier(.16,.85,.3,1) infinite}",
 
         "  @supports (animation-timeline:view()){",
         "    " + reveal_targets + "{animation:zd-rise .01s linear both;"
@@ -483,6 +519,9 @@ def motion_css():
         "  @supports (animation-timeline:scroll()){",
         "    #zd-progress{animation:zd-progress linear both;"
         "animation-timeline:scroll(root)}",
+        # it has done its job the moment you scroll, so it retires with the hero
+        "    #zd-hero-cue{animation:zd-cuefade linear both;"
+        "animation-timeline:scroll(root);animation-range:0px 300px}",
         "    #zd-header{animation:zd-headfill linear both;"
         "animation-timeline:scroll(root);animation-range:60px 220px}",
         "    #zd-header h3,#zd-header p,#zd-nav>*,#zd-navm>*{animation:zd-headink linear both;"
@@ -734,8 +773,8 @@ HOME = section("zd-hero", [
              ]},
         ]),
         box("zd-hero-cue", {}, [
-            T("p", "SCROLL", color="rgba(247,244,238,.9)", fontSize="11px",
-              letterSpacing="0.34em", fontFamily=LATIN),
+            T("p", "SCROLL", color="rgb(247,244,238)", fontSize="11px",
+              fontWeight="500", letterSpacing="0.3em", fontFamily=LATIN),
             box("zd-cue-rail", {}, []),
         ]),
     ]),
@@ -929,16 +968,21 @@ REASON_SEC = section("zd-why", [wrap("zd-why-in", [
 ])], bg="--sand")
 
 STATEMENT = section("zd-statement", [wrap("zd-statement-in", [
-    box("zd-statement-rule", {}, [box("zd-statement-ripple", {}, [])]),
     ml("h2", "一支好用的产品\n是三百次微调之后\n才敢量产的那一支",
        color={"token": "--paper"}, fontSize="46px", fontWeight="400",
-       lineHeight="1.7", letterSpacing="0.06em", marginTop="44px",
+       lineHeight="1.7", letterSpacing="0.06em",
        _t={"fontSize": "36px"}, _m={"fontSize": "24px", "lineHeight": "1.8"}),
     T("p", "南京溧水厂区 · 逐批留样，制程可追溯", color="rgb(178,146,104)",
       fontSize="12px", fontWeight="500", letterSpacing="0.22em", fontFamily=LATIN,
-      marginTop="46px",
-      _m={"fontSize": "10px", "letterSpacing": "0.14em", "marginTop": "30px"}),
-], maxw="840px")], bg="--ink", pt="152px", pb="152px")
+      marginTop="40px",
+      _m={"fontSize": "10px", "letterSpacing": "0.14em", "marginTop": "28px"}),
+], maxw="840px"),
+    # a sibling of the text column, not a child of it: `#zd-statement-in` is a
+    # reveal target, and its transform would capture this as its containing block
+    # three rings, not one: a single ring reads as a circle appearing, three read
+    # as something having landed
+    box("zd-statement-rule", {}, [box("zd-ring-%d" % n, {}, []) for n in range(3)]),
+], bg="--ink", pt="92px", pb="92px")
 
 
 # A centred headline over a button is the most generic close a page can have. Give
