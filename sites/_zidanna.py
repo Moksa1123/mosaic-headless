@@ -230,26 +230,35 @@ def motion_css():
         "@keyframes zd-marquee{from{transform:translateX(0)}to{transform:translateX(-50%)}}",
         "@keyframes zd-cuefade{0%,22%{opacity:1;transform:translateY(0)}"
         "100%{opacity:0;transform:translateY(16px)}}",
-        "@keyframes zd-cuerail{0%{transform:translateY(-100%)}"
-        "70%,100%{transform:translateY(520%)}}",
+        "@keyframes zd-cuearrow{"
+        "0%{transform:translateY(-4px) rotate(45deg);opacity:0}"
+        "22%{opacity:1}"
+        "70%{opacity:1}"
+        "100%{transform:translateY(32px) rotate(45deg);opacity:0}}",
         "@keyframes zd-cue{0%,100%{opacity:.35;transform:translateY(0)}"
         "50%{opacity:.9;transform:translateY(6px)}}",
         "@keyframes zd-rise{from{opacity:0;transform:translateY(34px)}"
         "to{opacity:1;transform:none}}",
         "@keyframes zd-draw{from{transform:scaleX(0)}to{transform:scaleX(1)}}",
-        "@keyframes zd-drawy{from{transform:scaleY(0)}to{transform:scaleY(1)}}",
         # one duration shared by both so the ripple cannot drift out of sync with
         # the landing - the contact is at 46% of the cycle in each
+        # identical stops and easings to zd-drop, so the trail's lower edge is
+        # exactly where the drop is on every frame
+        "@keyframes zd-trail{"
+        "0%{height:0;opacity:0;animation-timing-function:ease-out}"
+        "5%{height:3%;opacity:1;"
+        "animation-timing-function:cubic-bezier(.45,0,.85,.35)}"
+        "40%{height:72%;opacity:1}"
+        "56%{height:72%;opacity:0}"
+        "100%{height:72%;opacity:0}}",
         "@keyframes zd-drop{"
         "0%{top:0;opacity:0;transform:rotate(45deg) scale(.45);"
         "animation-timing-function:ease-out}"
         "5%{top:3%;opacity:1;transform:rotate(45deg) scale(1);"
         "animation-timing-function:cubic-bezier(.45,0,.85,.35)}"
-        "40%{top:72%;opacity:1;transform:rotate(45deg) scale(.86,1.3);"
-        "animation-timing-function:ease-out}"
-        "44%{top:72%;opacity:.95;transform:rotate(45deg) scale(1.45,.45)}"
-        "50%{top:72%;opacity:0;transform:rotate(45deg) scale(1.9,.2)}"
-        "100%{top:72%;opacity:0;transform:rotate(45deg) scale(1.9,.2)}}",
+        "40%{top:72%;opacity:1;transform:rotate(45deg) scale(1)}"
+        "45%{top:72%;opacity:0;transform:rotate(45deg) scale(1)}"
+        "100%{top:72%;opacity:0;transform:rotate(45deg) scale(1)}}",
         "@keyframes zd-ring0{0%,40%{opacity:0;transform:scale(.012)}"
         "43%{opacity:.9;transform:scale(.07)}"
         "92%,100%{opacity:0;transform:scale(1)}}",
@@ -317,11 +326,15 @@ def motion_css():
         "inset 0 1px 0 rgba(255,255,255,.30)}",
         # set vertically, so it reads down the edge in the direction it is asking for
         "#zd-hero-cue p{writing-mode:vertical-rl}",
-        "#zd-cue-rail{position:relative;width:1px;height:46px;overflow:hidden;"
-        "background:rgba(247,244,238,.3)}",
-        '#zd-cue-rail::after{content:"";position:absolute;left:0;top:0;width:1px;'
-        "height:18px;background:linear-gradient(rgba(226,196,146,0),"
-        "rgb(232,206,160));box-shadow:0 0 8px rgba(226,196,146,.8)}",
+        "#zd-cue-rail{position:relative;width:10px;height:44px}",
+        '#zd-cue-rail::before{content:"";position:absolute;left:50%;top:0;bottom:0;'
+        "width:1px;margin-left:-.5px;background:rgba(247,244,238,.22)}",
+        # two borders on a square turned 45deg - a chevron with no extra markup
+        '#zd-cue-rail::after{content:"";position:absolute;left:50%;top:0;'
+        "width:8px;height:8px;margin-left:-4px;opacity:0;"
+        "border-right:1.5px solid rgb(236,212,168);"
+        "border-bottom:1.5px solid rgb(236,212,168);"
+        "filter:drop-shadow(0 0 5px rgba(226,196,146,.7))}",
         "#zd-oem-hero{padding-top:164px}",
 
         "#zd-header{position:fixed;top:14px;left:50%;z-index:100;"
@@ -389,9 +402,9 @@ def motion_css():
         "#zd-statement-rule{position:absolute;z-index:0;left:50%;top:0;bottom:0;"
         "width:1px;pointer-events:none}",
         # the track
-        '#zd-statement-rule::before{content:"";position:absolute;inset:0;'
-        "background:linear-gradient(rgba(158,127,88,0),rgba(158,127,88,.85));"
-        "transform:scaleY(0);transform-origin:50% 0}",
+        '#zd-statement-rule::before{content:"";position:absolute;left:0;top:0;'
+        "width:1px;height:0;opacity:0;"
+        "background:linear-gradient(rgba(158,127,88,0),rgba(158,127,88,.8))}",
         # the drop: it stretches as it falls and squashes as it lands, which is the
         # whole difference between a falling drop and a dot on a timer
         # A teardrop: one square corner, three round, turned 45deg so the point
@@ -494,9 +507,10 @@ def motion_css():
         "  #zd-hero-bg{animation:zd-kenburns 34s ease-in-out infinite alternate}",
         "  #zd-hero-cue p,#zd-cue-rail{opacity:0;animation:zd-softin 1s ease forwards;"
         "animation-delay:2.4s}",
-        "  #zd-cue-rail::after{animation:zd-cuerail 2.6s cubic-bezier(.5,0,.5,1) "
+        "  #zd-cue-rail::after{animation:zd-cuearrow 2.2s cubic-bezier(.4,0,.5,1) "
         "infinite}",
         "  #zd-marquee-track{animation:zd-marquee 56s linear infinite}",
+        "  #zd-statement-rule::before{animation:zd-trail 7.2s linear infinite}",
         "  #zd-statement-rule::after{animation:zd-drop 7.2s linear infinite}",
         # same 7.2s as the drop, so contact and first ring cannot drift apart
         "  #zd-ring-0{animation:zd-ring0 7.2s cubic-bezier(.12,.8,.3,1) infinite}",
@@ -510,8 +524,6 @@ def motion_css():
         # a much longer range than the card reveals: the point of this band is that
         # it slows you down, so the line drifts rather than snaps
         "    #zd-statement-in{animation-range:entry 0% cover 62%}",
-        "    #zd-statement-rule::before{animation:zd-drawy .01s linear both;"
-        "animation-timeline:view();animation-range:entry 4% cover 40%}",
         "    " + steps + "{background-image:linear-gradient(rgb(24,21,18),rgb(24,21,18));"
         "background-repeat:no-repeat;background-size:100% 1px;background-position:0 0;"
         "animation:zd-draw .01s linear both;animation-timeline:view();"
