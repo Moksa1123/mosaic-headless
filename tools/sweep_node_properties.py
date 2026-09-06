@@ -28,6 +28,19 @@ Statuses
     APPLIED     the property changed the delivered HTML in the way it claims to
     NO_EFFECT   correctly shaped value, committed, nothing changed in the markup
     SKIPPED     no value could be derived from the validator chain; NOT a pass
+    INSTRUMENT  this sweep USES the property to run itself, so it cannot also be the
+                subject - but another pass covers it, named per row. NOT a pass here
+
+`INSTRUMENT` exists because the alternative is a lie in either direction. This sweep
+finds each probe node by its `attrID` and reads its `style` back out of the compiled
+CSS; asking it to probe those two is asking a ruler to measure itself, and it
+returned `SKIPPED` for both. But `SKIPPED` reads as "nobody checked", and `attrID`
+and `style` are in fact the two most heavily asserted properties in the skill: every
+row of `style-verification.csv` is a `style` assertion and every row of
+`rwd-verification.csv` is a `style` assertion located by `attrID`. Relabelling them
+as passes would be the blind-spot-scored-as-success failure this file was written to
+avoid; leaving them as SKIPPED understates the evidence by nearly seven hundred rows.
+So they get their own status, and it carries the count and the file that holds it.
 """
 import argparse
 import csv
@@ -163,8 +176,32 @@ def main():
     for r in types.values():
         by_class.setdefault(r["data_class"], []).append(r["type"])
 
+    # The count is read out of the covering CSV at run time rather than typed in, so
+    # the claim cannot drift away from the evidence it points at.
+    def covering(files):
+        parts = []
+        for name in files:
+            path = os.path.join(here, "..", "data", name + ".csv")
+            if not os.path.exists(path):
+                continue
+            with open(path, encoding="utf-8", newline="") as fh:
+                n = sum(1 for _ in csv.DictReader(fh))
+            parts.append("%s (%d rows)" % (name + ".csv", n))
+        return "; ".join(parts)
+
+    INSTRUMENT = {
+        "attrID": ["style-verification", "rwd-verification"],
+        "style": ["style-verification", "rwd-verification"],
+    }
+
     plan = []
     for row in props:
+        if row["property"] in INSTRUMENT:
+            plan.append((None, row["property"], None,
+                         ("INSTRUMENT", "this sweep locates and reads nodes THROUGH "
+                          "it; asserted instead by " +
+                          covering(INSTRUMENT[row["property"]]))))
+            continue
         value = probe_value(row)
         if value is None:
             plan.append((None, row["property"], None, "SKIPPED"))
@@ -245,7 +282,9 @@ def main():
             status = "EDITOR_ONLY"
         rows.append([prop, host, json.dumps(value, ensure_ascii=False), status, evidence])
     for host, prop, value, pre in plan:
-        if pre in ("SKIPPED", "NO_HOST"):
+        if isinstance(pre, tuple):
+            rows.append([prop, "", "", pre[0], pre[1]])
+        elif pre in ("SKIPPED", "NO_HOST"):
             rows.append([prop, "", "", pre, ""])
 
     counts = {}
@@ -253,7 +292,7 @@ def main():
         counts[r[3]] = counts.get(r[3], 0) + 1
     print()
     for k in ("APPLIED", "NO_EFFECT", "EDITOR_ONLY", "NO_ELEMENT", "NO_HOST",
-              "SKIPPED"):
+              "INSTRUMENT", "SKIPPED"):
         if counts.get(k):
             print("  %-12s %d" % (k, counts[k]))
     applied = sorted({r[0] for r in rows if r[3] == "APPLIED"})

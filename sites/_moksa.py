@@ -41,9 +41,10 @@ TOKENS = {
     "--mk-paper":   {"type": "color", "value": "rgb(250,250,247)"},
     "--mk-panel":   {"type": "color", "value": "rgb(243,243,239)"},
     "--mk-accent":  {"type": "color", "value": "rgb(255,90,54)"},
-    "--mk-muted":   {"type": "color", "value": "rgb(111,113,120)"},
+    "--mk-accent-ink": {"type": "color", "value": "rgb(191,68,40)"},
+    "--mk-muted":   {"type": "color", "value": "rgb(90,92,97)"},
     "--mk-rule":    {"type": "color", "value": "rgb(214,214,206)"},
-    "--mk-faint":   {"type": "color", "value": "rgb(160,162,168)"},
+    "--mk-faint":   {"type": "color", "value": "rgb(107,109,113)"},
 }
 
 RULE = "rgba(22,24,28,.16)"
@@ -145,8 +146,13 @@ def figure(attr, num, size="56px", t="44px", m="34px"):
                                       "font-variant-numeric:tabular-nums;"}}},
             "children": [
                 {"type": "div", "data": {"attrID": attr + "-d%d" % j},
+                 # No `display:inline-block` here: these are flex items, and the
+                 # spec blockifies a flex item's display value. The declaration was
+                 # in the stylesheet, correct, and computed to `block` anyway -
+                 # which is exactly the class of dead code verify_browser.py exists
+                 # to find, and it found this one.
                  "style": {"&": {"_": {"customStyles":
-                                           "overflow:hidden;display:inline-block;"
+                                           "overflow:hidden;"
                                            "--d:%dms;" % (j * 70)}}},
                  "children": [T("h3", ch, color={"token": "--mk-ink"}, fontSize=size,
                                 fontWeight="600", letterSpacing="-0.03em",
@@ -168,7 +174,8 @@ def clause(num, en, zh, attr):
                       "customStyles": "border-top:1px solid " + RULE + ";"},
                _m={"gridCols": "48px 1fr"},
                children=[
-                   mono("§" + num, size="12px", color="--mk-accent", track="0.06em"),
+                   mono("§" + num, size="12px", color="--mk-accent-ink",
+                        track="0.06em"),
                    box(attr + "-t", {}, [
                        mono(en, size="11px", color="--mk-muted"),
                        T("h2", zh, color={"token": "--mk-ink"}, fontSize="34px",
@@ -634,8 +641,12 @@ HEADER = box("mk-shell-top", {}, [
                                              "url": "#contact"},
                   "style": {"&": {"_m": {"display": "none"},
                                   "_t": {"fontSize": "12px"},
+                                  # 13px of the bright orange on the glass header is
+                                  # 3.10:1; the darkened cut is 4.9:1. The BORDER
+                                  # stays bright, because a rule is not text and
+                                  # nobody has to read it.
                                   "_": {"backgroundColor": "rgba(0,0,0,0)",
-                                        "color": {"token": "--mk-accent"},
+                                        "color": {"token": "--mk-accent-ink"},
                                         "fontSize": "13px", "fontFamily": MONO,
                                         "letterSpacing": "0.06em",
                                         "paddingTop": "6px", "paddingBottom": "6px",
@@ -645,7 +656,7 @@ HEADER = box("mk-shell-top", {}, [
                                                    "color": "rgb(255,90,54)"},
                                         "transitionAll": "180ms ease"}},
                             "hover": {"_": {"backgroundColor": {"token": "--mk-accent"},
-                                            "color": {"token": "--mk-paper"}}}},
+                                            "color": {"token": "--mk-ink"}}}},
                   "text": "START A PROJECT"},
              ]}
         ])]),
@@ -684,7 +695,7 @@ FOOTER = box("mk-footer",
                 ]),
                 grid("mk-f-links", 2, "28px", tcols=2, mcols=2, children=[
                     box("mk-f-col-0", {}, [
-                        mono("PAGES", size="10px", color="rgb(122,124,132)",
+                        mono("PAGES", size="10px", color="rgb(128,130,138)",
                              track="0.2em"),
                         box("mk-f-col-0-list",
                             {"marginTop": "16px", "display": "grid", "rowGap": "9px"},
@@ -693,7 +704,7 @@ FOOTER = box("mk-footer",
                              for t in ["作品集", "團隊成員", "關於我們", "服務報價"]]),
                     ]),
                     box("mk-f-col-1", {}, [
-                        mono("LEARN", size="10px", color="rgb(122,124,132)",
+                        mono("LEARN", size="10px", color="rgb(128,130,138)",
                              track="0.2em"),
                         box("mk-f-col-1-list",
                             {"marginTop": "16px", "display": "grid", "rowGap": "9px"},
@@ -713,9 +724,9 @@ FOOTER = box("mk-footer",
                            "customStyles": "flex-wrap:wrap;"}, None, None),
               "children": [
                   mono("© 2026 MOKSA WEB — ALL RIGHTS RESERVED", size="10px",
-                       color="rgb(112,114,122)", track="0.1em"),
+                       color="rgb(128,130,138)", track="0.1em"),
                   mono("BUILT HEADLESS ON MOSAIC", size="10px",
-                       color="rgb(112,114,122)", track="0.1em"),
+                       color="rgb(128,130,138)", track="0.1em"),
               ]}]),
     ])])
 
@@ -767,7 +778,7 @@ MASTHEAD = section("mk-mast", [wrap("mk-mast-in", [
          {"type": "button", "data": {"attrID": "mk-cta-%d" % n, "url": href},
           "style": {"&": {"_": dict(
               {"backgroundColor": {"token": "--mk-accent"},
-               "color": {"token": "--mk-paper"},
+               "color": {"token": "--mk-ink"},
                "paddingLeft": "22px", "paddingRight": "22px",
                "paddingTop": "13px", "paddingBottom": "13px",
                "customStyles": "border:1px solid rgb(255,90,54);"}
@@ -831,7 +842,7 @@ MASTHEAD = section("mk-mast", [wrap("mk-mast-in", [
                          {"display": "flex", "alignItems": "baseline",
                           "columnGap": "3px", "marginTop": "12px"},
                          [figure("mk-fig-%d" % i, num),
-                          T("p", "+", color={"token": "--mk-accent"},
+                          T("p", "+", color={"token": "--mk-accent-ink"},
                             fontSize="22px", fontFamily=DISPLAY, fontWeight="600",
                             _m={"fontSize": "16px"})]),
                      T("p", zh, color={"token": "--mk-muted"}, fontSize="12px",
@@ -868,7 +879,8 @@ SERVICE_SEC = section("services", [wrap("mk-svc-in", [
                 children=[
                     mono(num, size="12px", color="--mk-faint", track="0.06em"),
                     box("mk-svc-t-%d" % i, {}, [
-                        mono(en, size="10px", color="--mk-accent", track="0.16em"),
+                        mono(en, size="10px", color="--mk-accent-ink",
+                             track="0.16em"),
                         T("h3", zh, color={"token": "--mk-ink"}, fontSize="19px",
                           fontWeight="500", marginTop="9px", fontFamily=CJK,
                           letterSpacing="0.01em"),
@@ -903,7 +915,8 @@ PROCESS_SEC = section("process", [wrap("mk-proc-in", [
                             T("h3", zh, color={"token": "--mk-ink"}, fontSize="19px",
                               fontWeight="500", fontFamily=CJK, marginTop="10px",
                               letterSpacing="0.01em"),
-                            mono(en, size="10px", color="--mk-accent", track="0.16em",
+                            mono(en, size="10px", color="--mk-accent-ink",
+                                 track="0.16em",
                                  marginTop="7px"),
                             T("p", body, color={"token": "--mk-muted"},
                               fontSize="13px", lineHeight="2", marginTop="12px"),
@@ -992,7 +1005,8 @@ WORK_SEC = section("works", [wrap("mk-works-in", [
                           fontWeight="500", fontFamily=CJK, letterSpacing="0.01em",
                           _m={"fontSize": "16px"}),
                         mono(cat, size="11px", color="--mk-muted", track="0.1em"),
-                        mono(domain, size="12px", color="--mk-accent", track="0.02em"),
+                        mono(domain, size="12px", color="--mk-accent-ink",
+                             track="0.02em"),
                     ])
                 for i, (name, cat, domain) in enumerate(WORKS)
             ]),
@@ -1034,7 +1048,7 @@ PRODUCT_SEC = section("products", [wrap("mk-prod-in", [
                             "paddingTop": "20px", "paddingBottom": "20px"},
                         children=[
                             mono("%02d" % (i + 1), size="12px",
-                                 color="rgb(122,124,132)", track="0.06em"),
+                                 color="rgb(128,130,138)", track="0.06em"),
                             box("mk-prod-t-%d" % i, {}, [
                                 mono(en, size="10px", color="--mk-accent",
                                      track="0.16em"),
@@ -1081,7 +1095,7 @@ VOICE_SEC = section("mk-voices", [wrap("mk-voice-in", [
                     "customStyles": "border-top:1px solid " + RULE + ";"
                                     "border-left:0;"},
                 children=[
-                    mono("“", size="24px", color="--mk-accent", track="0"),
+                    mono("“", size="24px", color="--mk-accent-ink", track="0"),
                     T("p", quote, color={"token": "--mk-ink"}, fontSize="14px",
                       lineHeight="2.05", marginTop="4px"),
                     box("mk-voice-a-%d" % i, {"marginTop": "22px"}, [
@@ -1104,7 +1118,8 @@ CONTACT = section("contact", [wrap("mk-contact-in", [
                  "customStyles": "border-top:1px solid " + RULE + ";"},
                 _m={"gridCols": "48px 1fr"},
                 children=[
-                    mono("§07", size="12px", color="--mk-accent", track="0.06em"),
+                    mono("§07", size="12px", color="--mk-accent-ink",
+                         track="0.06em"),
                     box("mk-contact-head-t", {}, [
                         mono("START A PROJECT", size="11px", color="--mk-muted"),
                         ml("h2", "準備好升級\n你的數位競爭力了嗎？",
@@ -1135,7 +1150,8 @@ CONTACT = section("contact", [wrap("mk-contact-in", [
                                           _m={"fontSize": "13px"}),
                                  ])
                              for i, (k, v, vc) in enumerate([
-                                 ("EMAIL", "services@moksaweb.com", "--mk-accent"),
+                                 ("EMAIL", "services@moksaweb.com",
+                                  "--mk-accent-ink"),
                                  ("PHONE", "+886-958-839-939", "--mk-ink"),
                                  ("LOCATION", "TAICHUNG, TAIWAN", "--mk-ink"),
                                  ("RESPONSE", "WITHIN 1 BUSINESS DAY", "--mk-ink"),

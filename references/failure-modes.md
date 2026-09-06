@@ -193,6 +193,58 @@ disagree, you are not looking at what you wrote.
 document that was actually committed. Do the same in anything else that checks a page
 - including a browser: hard-reload is not always enough, a query string always is.
 
+## Changing a design token's VALUE leaves the old one in `:root`
+
+A collection variable is a row, and a row is identified by its ID. If the writer
+mints a fresh ID each run - which `build_page.py` did, because its `_varIDs` cache
+starts empty every time - then changing a token's value does not change the token.
+It adds a second one.
+
+The rows hang off the theme's collection, and `build_site.py` makes a fresh master
+per build while the collection persists, so nothing ever cleans them up. Both
+declarations reach `:root` and the later one wins:
+
+```css
+:root{ ... --mk-faint: rgb(107, 109, 113); ... --mk-faint: rgb(160, 162, 168); ... }
+```
+
+Measured: after changing `--mk-faint`, a rebuild reported OK, the new variable
+existed with the correct value, `verify_rwd.py` passed, and the page kept rendering
+the old grey. Ten stale rows had accumulated across earlier builds. **Every
+server-side check agreed with the intent and the page still disagreed** - only
+`verify_browser.py`, reading the computed colour off the element, could see it.
+
+The fix is that a token's row ID must be a function of its name -
+`uuid5(VAR_NAMESPACE, "--mk-faint")` - so a rebuild rebinds the row instead of
+adding one, plus a reap of anything on the collection claiming a managed custom
+property under an ID we did not derive. Both are in `theme_records()`.
+
+The general shape is worth remembering beyond tokens: **anything keyed by a random
+ID that you write repeatedly will accumulate**, and duplicates in a cascade fail
+silently in favour of whichever happens to be last.
+
+## A declaration can be present, correct, and still wrong
+
+The fourth failure mode in SKILL.md - "wrong value SHAPE, HTTP 200, and the CSS rule
+is simply absent" - has a quieter sibling: the rule is *present*, the value is what
+you asked for, and what the browser does with it is not what you meant.
+
+Three ways, all measured on the example page:
+
+- **The unit resolves against something you did not think about.**
+  `letter-spacing: -0.035em` is a normal amount of tightening for a Latin display
+  face. On a 62px headline it is -2.17px, and the headline was Chinese.
+- **The face cannot render the text.** `font-family: 'Space Grotesk', 'Noto Sans TC'`
+  is honoured exactly: Space Grotesk has no CJK coverage, so Han characters come from
+  Noto Sans TC - while still carrying the tracking that was chosen for the Latin
+  face. Nothing reports a fallback.
+- **The property was never in play.** `display: inline-block` on a flex item is
+  blockified by the spec. The declaration was in the stylesheet, correct, and
+  computed to `block`.
+
+None of these is visible to anything that reads the stylesheet, because the
+stylesheet is right. `verify_browser.py` asks the element instead.
+
 ## Reproducing all of this
 
 ```bash

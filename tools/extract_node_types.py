@@ -78,10 +78,21 @@ def extract(plugin_root, out_dir):
         relpath = rel(path, plugin_root)
         # the data class declaring this type's own properties sits beside the factory;
         # node-properties.csv is keyed by that class name, so record it to make the join
-        data_class = ""
+        #
+        # Its OWN parent has to be recorded here too. A data class that declares no
+        # properties of its own writes no row into node-properties.csv, so the
+        # `extends` column there cannot tell you what it inherits - and 64 of the 122
+        # types are exactly that case. Without this column a lookup for
+        # `accordion-content` reports zero properties, when in fact it has the nine
+        # every element has. An empty answer that looks like a real one is the
+        # failure this whole skill argues against, so read the parent off the class.
+        data_class, data_extends = "", ""
         for sibling in sorted(os.listdir(os.path.dirname(path))):
             if sibling.endswith("MResourceData.php"):
                 data_class = sibling[:-4]
+                dcls = RE_CLASS.search(read(os.path.join(os.path.dirname(path),
+                                                         sibling)))
+                data_extends = dcls.group(3) if dcls else ""
                 break
         bools = dict(RE_METHOD_BOOL.findall(src))
         alias = RE_ALIAS.search(src)
@@ -100,15 +111,26 @@ def extract(plugin_root, out_dir):
                 "can_be_parent": bools.get("canBeParentFor", ""),
                 "default_element_class": (dflt.group(1).strip() if dflt else ""),
                 "data_class": data_class,
+                "data_extends": data_extends,
                 "file": relpath,
             }
         )
 
+    # Every data class, whether or not it declares a property of its own. An abstract
+    # that adds nothing still sits in the chain - `ElementMResourceLoopDataAbstract`
+    # is one, and five node types inherit through it - so a hierarchy built only from
+    # classes that happen to own properties has holes exactly where the plain ones
+    # are. This file makes the walk total.
+    hierarchy = []
     props = []
     for path in sorted(walk(node_root, ("MResourceData.php", "MResourceDataAbstract.php"))):
         src = read(path)
         cls = RE_CLASS.search(src)
         owner = cls.group(2) if cls else os.path.basename(path)[:-4]
+        hierarchy.append({"class": owner,
+                          "extends": cls.group(3) if cls else "",
+                          "abstract": "yes" if (cls and cls.group(1)) else "no",
+                          "file": rel(path, plugin_root)})
         relpath = rel(path, plugin_root)
         reserved = RE_RESERVED.search(src)
         reserved_attrs = re.findall(r"'([^']+)'", reserved.group(1)) if reserved else []
@@ -146,6 +168,9 @@ def extract(plugin_root, out_dir):
     os.makedirs(out_dir, exist_ok=True)
     write_csv(os.path.join(out_dir, "node-types.csv"), types)
     write_csv(os.path.join(out_dir, "node-properties.csv"), props)
+    write_csv(os.path.join(out_dir, "data-class-hierarchy.csv"),
+              sorted(hierarchy, key=lambda r: r["class"]))
+    print("data classes:    %d" % len(hierarchy))
     print("node types:      %d (%d pro)" % (len(types), sum(t["edition"] == "pro" for t in types)))
     print("node properties: %d across %d classes" % (len(props), len({p["owner_class"] for p in props})))
 

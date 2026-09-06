@@ -20,6 +20,17 @@ read off the source.
 **Never write a node type, property name, enum value, style key or Free/Pro claim
 from memory. Look it up in `data/`.**
 
+And look it up with `mo.py`, not grep. Grep answers the question you typed; it does
+not answer the question you have. Ask grep about `accordion-content` and it confirms
+the type exists. It does not mention that placing one commits cleanly and then
+reduces the whole public page to a 54-byte error string.
+
+```bash
+python tools/mo.py type accordion-content   # one type, joined to every live sweep
+python tools/mo.py check div text button    # exits 1 on an unsafe or unknown type
+python tools/mo.py style --grouped          # the 20 that are inert set on their own
+```
+
 Then check the page. Mosaic has four failure modes and **only one of them changes the
 HTTP status code**:
 
@@ -29,10 +40,13 @@ PHP fatal during commit     HTTP 500  (15 of 122 types do this from a plain div)
 structurally invalid node   HTTP 200, committed, row in the DB, and the whole
                             public page becomes a 54-byte error string
 wrong value SHAPE           HTTP 200, stored, and the CSS rule is simply absent
+right rule, wrong result    HTTP 200, in the stylesheet, correct, and the BROWSER
+                            computes something else
 no template for the URL     HTTP 406 with an EMPTY BODY for anyone not logged in
 ```
 
-A successful commit is not evidence of a working page.
+A successful commit is not evidence of a working page, and neither is a correct
+stylesheet.
 
 ## What was verified, and how
 
@@ -46,6 +60,8 @@ factories, so Pro types register and render regardless.
 | **style properties** | 98 / 98 written to a live page and checked against the compiled CSS: 58 COMPILED, 18 ABSENT, 21 SKIPPED |
 | **node properties** | 181 / 181 re-probed with a value shaped by each property's own validator chain: 35 APPLIED, 42 NO_EFFECT, 55 NO_HOST, 47 SKIPPED |
 | **responsive** | 576 `_t`/`_m` declarations across two sites asserted against the stylesheet the site actually served — all verified |
+| **browser** | 2,237 computed-style readings on the delivered page in Chromium at three viewports: 1,661 compared and agreed, 576 not-comparable and labelled, **0 overridden** |
+| **design audit** | contrast, font fallback, CJK tracking, overflow, clipped text, line measure — run in the browser, **0 findings** |
 | **theme export/import** | round-tripped: a full theme exported, re-imported as a copy, and the copy served byte-identical pages |
 | **measured live** | 114 REST routes, 151 element classes, 59 condition subjects, 23 tables / 206 columns |
 

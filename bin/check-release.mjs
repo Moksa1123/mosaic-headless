@@ -79,6 +79,8 @@ const counts = {
   "data/style-verification.csv": 98,
   "data/node-property-verification.csv": 181,
   "data/rwd-verification.csv": 576,
+  "data/browser-verification.csv": 2237,
+  "data/data-class-hierarchy.csv": 121,
 };
 for (const [file, expected] of Object.entries(counts)) {
   if (!fs.existsSync(path.join(ROOT, file))) { fail(`${file} missing`); continue; }
@@ -93,6 +95,24 @@ for (const [file, expected] of Object.entries(counts)) {
 const style = read("data/style-verification.csv");
 if (!style.includes("SKIPPED")) fail("style-verification.csv has no SKIPPED rows - "
   + "blind spots should be labelled, not dropped");
+
+// The browser pass has the same obligation, under a different word: a declaration it
+// cannot soundly compare must say so rather than be counted as agreement.
+const browser = read("data/browser-verification.csv");
+if (!browser.includes("not-comparable"))
+  fail("browser-verification.csv has no not-comparable rows - a computed-value check "
+     + "that claims to compare everything is comparing things it cannot");
+if (browser.includes("OVERRIDDEN"))
+  fail("browser-verification.csv still contains OVERRIDDEN rows - the shipped example "
+     + "must render what it declares");
+
+// The design audit ships even when it is empty, and empty has to mean "ran and found
+// nothing" rather than "was never run", so the header alone is the proof.
+const audit = read("data/design-audit.csv");
+if (!audit.startsWith("url,breakpoints,check,level"))
+  fail("data/design-audit.csv is not the audit table verify_browser.py writes");
+if (audit.includes(",error,"))
+  fail("data/design-audit.csv carries unresolved design errors");
 
 // ---------- nothing private ships -------------------------------------------
 

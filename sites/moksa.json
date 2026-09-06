@@ -18,9 +18,13 @@
     "type": "color",
     "value": "rgb(255,90,54)"
    },
+   "--mk-accent-ink": {
+    "type": "color",
+    "value": "rgb(191,68,40)"
+   },
    "--mk-muted": {
     "type": "color",
-    "value": "rgb(111,113,120)"
+    "value": "rgb(90,92,97)"
    },
    "--mk-rule": {
     "type": "color",
@@ -28,7 +32,7 @@
    },
    "--mk-faint": {
     "type": "color",
-    "value": "rgb(160,162,168)"
+    "value": "rgb(107,109,113)"
    }
   },
   "elementClasses": {}
@@ -380,7 +384,7 @@
              "_": {
               "backgroundColor": "rgba(0,0,0,0)",
               "color": {
-               "token": "--mk-accent"
+               "token": "--mk-accent-ink"
               },
               "fontSize": "13px",
               "fontFamily": "'IBM Plex Mono',ui-monospace,SFMono-Regular,Menlo,Consolas,monospace",
@@ -405,7 +409,7 @@
                "token": "--mk-accent"
               },
               "color": {
-               "token": "--mk-paper"
+               "token": "--mk-ink"
               }
              }
             }
@@ -655,7 +659,7 @@
              "style": {
               "&": {
                "_": {
-                "color": "rgb(122,124,132)",
+                "color": "rgb(128,130,138)",
                 "fontSize": "10px",
                 "letterSpacing": "0.2em",
                 "fontFamily": "'IBM Plex Mono',ui-monospace,SFMono-Regular,Menlo,Consolas,monospace",
@@ -775,7 +779,7 @@
              "style": {
               "&": {
                "_": {
-                "color": "rgb(122,124,132)",
+                "color": "rgb(128,130,138)",
                 "fontSize": "10px",
                 "letterSpacing": "0.2em",
                 "fontFamily": "'IBM Plex Mono',ui-monospace,SFMono-Regular,Menlo,Consolas,monospace",
@@ -919,7 +923,7 @@
            "style": {
             "&": {
              "_": {
-              "color": "rgb(112,114,122)",
+              "color": "rgb(128,130,138)",
               "fontSize": "10px",
               "letterSpacing": "0.1em",
               "fontFamily": "'IBM Plex Mono',ui-monospace,SFMono-Regular,Menlo,Consolas,monospace",
@@ -937,7 +941,7 @@
            "style": {
             "&": {
              "_": {
-              "color": "rgb(112,114,122)",
+              "color": "rgb(128,130,138)",
               "fontSize": "10px",
               "letterSpacing": "0.1em",
               "fontFamily": "'IBM Plex Mono',ui-monospace,SFMono-Regular,Menlo,Consolas,monospace",
@@ -1686,7 +1690,7 @@
                       "token": "--mk-accent"
                      },
                      "color": {
-                      "token": "--mk-paper"
+                      "token": "--mk-ink"
                      },
                      "paddingLeft": "22px",
                      "paddingRight": "22px",
@@ -2205,7 +2209,7 @@
                     "style": {
                      "&": {
                       "_": {
-                       "customStyles": "overflow:hidden;display:inline-block;--d:0ms;"
+                       "customStyles": "overflow:hidden;--d:0ms;"
                       }
                      }
                     },
@@ -2251,7 +2255,7 @@
                    "&": {
                     "_": {
                      "color": {
-                      "token": "--mk-accent"
+                      "token": "--mk-accent-ink"
                      },
                      "fontSize": "22px",
                      "fontFamily": "'Space Grotesk','Noto Sans TC','PingFang TC','Microsoft JhengHei',sans-serif",
@@ -2375,7 +2379,7 @@
                     "style": {
                      "&": {
                       "_": {
-                       "customStyles": "overflow:hidden;display:inline-block;--d:0ms;"
+                       "customStyles": "overflow:hidden;--d:0ms;"
                       }
                      }
                     },
@@ -2417,7 +2421,7 @@
                     "style": {
                      "&": {
                       "_": {
-                       "customStyles": "overflow:hidden;display:inline-block;--d:70ms;"
+                       "customStyles": "overflow:hidden;--d:70ms;"
                       }
                      }
                     },
@@ -2459,7 +2463,7 @@
                     "style": {
                      "&": {
                       "_": {
-                       "customStyles": "overflow:hidden;display:inline-block;--d:140ms;"
+                       "customStyles": "overflow:hidden;--d:140ms;"
                       }
                      }
                     },
@@ -2505,7 +2509,7 @@
                    "&": {
                     "_": {
                      "color": {
-                      "token": "--mk-accent"
+                      "token": "--mk-accent-ink"
                      },
                      "fontSize": "22px",
                      "fontFamily": "'Space Grotesk','Noto Sans TC','PingFang TC','Microsoft JhengHei',sans-serif",
@@ -2629,7 +2633,7 @@
                     "style": {
                      "&": {
                       "_": {
-                       "customStyles": "overflow:hidden;display:inline-block;--d:0ms;"
+                       "customStyles": "overflow:hidden;--d:0ms;"
                       }
                      }
                     },
@@ -2671,7 +2675,7 @@
                     "style": {
                      "&": {
                       "_": {
-                       "customStyles": "overflow:hidden;display:inline-block;--d:70ms;"
+                       "customStyles": "overflow:hidden;--d:70ms;"
                       }
                      }
                     },
@@ -2717,7 +2721,7 @@
                    "&": {
                     "_": {
                      "color": {
-                      "token": "--mk-accent"
+                      "token": "--mk-accent-ink"
                      },
                      "fontSize": "22px",
                      "fontFamily": "'Space Grotesk','Noto Sans TC','PingFang TC','Microsoft JhengHei',sans-serif",
@@ -2841,7 +2845,7 @@
                     "style": {
                      "&": {
                       "_": {
-                       "customStyles": "overflow:hidden;display:inline-block;--d:0ms;"
+                       "customStyles": "overflow:hidden;--d:0ms;"
                       }
                      }
                     },
@@ -2883,7 +2887,7 @@
                     "style": {
                      "&": {
                       "_": {
-                       "customStyles": "overflow:hidden;display:inline-block;--d:70ms;"
+                       "customStyles": "overflow:hidden;--d:70ms;"
                       }
                      }
                     },
@@ -2925,7 +2929,7 @@
                     "style": {
                      "&": {
                       "_": {
-                       "customStyles": "overflow:hidden;display:inline-block;--d:140ms;"
+                       "customStyles": "overflow:hidden;--d:140ms;"
                       }
                      }
                     },
@@ -2971,7 +2975,7 @@
                    "&": {
                     "_": {
                      "color": {
-                      "token": "--mk-accent"
+                      "token": "--mk-accent-ink"
                      },
                      "fontSize": "22px",
                      "fontFamily": "'Space Grotesk','Noto Sans TC','PingFang TC','Microsoft JhengHei',sans-serif",
@@ -3521,7 +3525,7 @@
                  "&": {
                   "_": {
                    "color": {
-                    "token": "--mk-accent"
+                    "token": "--mk-accent-ink"
                    },
                    "fontSize": "12px",
                    "letterSpacing": "0.06em",
@@ -3680,7 +3684,7 @@
                      "&": {
                       "_": {
                        "color": {
-                        "token": "--mk-accent"
+                        "token": "--mk-accent-ink"
                        },
                        "fontSize": "10px",
                        "letterSpacing": "0.16em",
@@ -3804,7 +3808,7 @@
                      "&": {
                       "_": {
                        "color": {
-                        "token": "--mk-accent"
+                        "token": "--mk-accent-ink"
                        },
                        "fontSize": "10px",
                        "letterSpacing": "0.16em",
@@ -3928,7 +3932,7 @@
                      "&": {
                       "_": {
                        "color": {
-                        "token": "--mk-accent"
+                        "token": "--mk-accent-ink"
                        },
                        "fontSize": "10px",
                        "letterSpacing": "0.16em",
@@ -4052,7 +4056,7 @@
                      "&": {
                       "_": {
                        "color": {
-                        "token": "--mk-accent"
+                        "token": "--mk-accent-ink"
                        },
                        "fontSize": "10px",
                        "letterSpacing": "0.16em",
@@ -4203,7 +4207,7 @@
                  "&": {
                   "_": {
                    "color": {
-                    "token": "--mk-accent"
+                    "token": "--mk-accent-ink"
                    },
                    "fontSize": "12px",
                    "letterSpacing": "0.06em",
@@ -4397,7 +4401,7 @@
                      "&": {
                       "_": {
                        "color": {
-                        "token": "--mk-accent"
+                        "token": "--mk-accent-ink"
                        },
                        "fontSize": "10px",
                        "letterSpacing": "0.16em",
@@ -4513,7 +4517,7 @@
                      "&": {
                       "_": {
                        "color": {
-                        "token": "--mk-accent"
+                        "token": "--mk-accent-ink"
                        },
                        "fontSize": "10px",
                        "letterSpacing": "0.16em",
@@ -4629,7 +4633,7 @@
                      "&": {
                       "_": {
                        "color": {
-                        "token": "--mk-accent"
+                        "token": "--mk-accent-ink"
                        },
                        "fontSize": "10px",
                        "letterSpacing": "0.16em",
@@ -4745,7 +4749,7 @@
                      "&": {
                       "_": {
                        "color": {
-                        "token": "--mk-accent"
+                        "token": "--mk-accent-ink"
                        },
                        "fontSize": "10px",
                        "letterSpacing": "0.16em",
@@ -4877,7 +4881,7 @@
                  "&": {
                   "_": {
                    "color": {
-                    "token": "--mk-accent"
+                    "token": "--mk-accent-ink"
                    },
                    "fontSize": "12px",
                    "letterSpacing": "0.06em",
@@ -5168,7 +5172,7 @@
                    "&": {
                     "_": {
                      "color": {
-                      "token": "--mk-accent"
+                      "token": "--mk-accent-ink"
                      },
                      "fontSize": "12px",
                      "letterSpacing": "0.02em",
@@ -5280,7 +5284,7 @@
                    "&": {
                     "_": {
                      "color": {
-                      "token": "--mk-accent"
+                      "token": "--mk-accent-ink"
                      },
                      "fontSize": "12px",
                      "letterSpacing": "0.02em",
@@ -5392,7 +5396,7 @@
                    "&": {
                     "_": {
                      "color": {
-                      "token": "--mk-accent"
+                      "token": "--mk-accent-ink"
                      },
                      "fontSize": "12px",
                      "letterSpacing": "0.02em",
@@ -5504,7 +5508,7 @@
                    "&": {
                     "_": {
                      "color": {
-                      "token": "--mk-accent"
+                      "token": "--mk-accent-ink"
                      },
                      "fontSize": "12px",
                      "letterSpacing": "0.02em",
@@ -5616,7 +5620,7 @@
                    "&": {
                     "_": {
                      "color": {
-                      "token": "--mk-accent"
+                      "token": "--mk-accent-ink"
                      },
                      "fontSize": "12px",
                      "letterSpacing": "0.02em",
@@ -5728,7 +5732,7 @@
                    "&": {
                     "_": {
                      "color": {
-                      "token": "--mk-accent"
+                      "token": "--mk-accent-ink"
                      },
                      "fontSize": "12px",
                      "letterSpacing": "0.02em",
@@ -5840,7 +5844,7 @@
                    "&": {
                     "_": {
                      "color": {
-                      "token": "--mk-accent"
+                      "token": "--mk-accent-ink"
                      },
                      "fontSize": "12px",
                      "letterSpacing": "0.02em",
@@ -5952,7 +5956,7 @@
                    "&": {
                     "_": {
                      "color": {
-                      "token": "--mk-accent"
+                      "token": "--mk-accent-ink"
                      },
                      "fontSize": "12px",
                      "letterSpacing": "0.02em",
@@ -6064,7 +6068,7 @@
                    "&": {
                     "_": {
                      "color": {
-                      "token": "--mk-accent"
+                      "token": "--mk-accent-ink"
                      },
                      "fontSize": "12px",
                      "letterSpacing": "0.02em",
@@ -6208,7 +6212,7 @@
                  "&": {
                   "_": {
                    "color": {
-                    "token": "--mk-accent"
+                    "token": "--mk-accent-ink"
                    },
                    "fontSize": "12px",
                    "letterSpacing": "0.06em",
@@ -7722,7 +7726,7 @@
                   "style": {
                    "&": {
                     "_": {
-                     "color": "rgb(122,124,132)",
+                     "color": "rgb(128,130,138)",
                      "fontSize": "12px",
                      "letterSpacing": "0.06em",
                      "fontFamily": "'IBM Plex Mono',ui-monospace,SFMono-Regular,Menlo,Consolas,monospace",
@@ -7882,7 +7886,7 @@
                   "style": {
                    "&": {
                     "_": {
-                     "color": "rgb(122,124,132)",
+                     "color": "rgb(128,130,138)",
                      "fontSize": "12px",
                      "letterSpacing": "0.06em",
                      "fontFamily": "'IBM Plex Mono',ui-monospace,SFMono-Regular,Menlo,Consolas,monospace",
@@ -8100,7 +8104,7 @@
                  "&": {
                   "_": {
                    "color": {
-                    "token": "--mk-accent"
+                    "token": "--mk-accent-ink"
                    },
                    "fontSize": "12px",
                    "letterSpacing": "0.06em",
@@ -8233,7 +8237,7 @@
                    "&": {
                     "_": {
                      "color": {
-                      "token": "--mk-accent"
+                      "token": "--mk-accent-ink"
                      },
                      "fontSize": "24px",
                      "letterSpacing": "0",
@@ -8358,7 +8362,7 @@
                    "&": {
                     "_": {
                      "color": {
-                      "token": "--mk-accent"
+                      "token": "--mk-accent-ink"
                      },
                      "fontSize": "24px",
                      "letterSpacing": "0",
@@ -8483,7 +8487,7 @@
                    "&": {
                     "_": {
                      "color": {
-                      "token": "--mk-accent"
+                      "token": "--mk-accent-ink"
                      },
                      "fontSize": "24px",
                      "letterSpacing": "0",
@@ -8670,7 +8674,7 @@
                  "&": {
                   "_": {
                    "color": {
-                    "token": "--mk-accent"
+                    "token": "--mk-accent-ink"
                    },
                    "fontSize": "12px",
                    "letterSpacing": "0.06em",
@@ -8832,7 +8836,7 @@
                        "&": {
                         "_": {
                          "color": {
-                          "token": "--mk-accent"
+                          "token": "--mk-accent-ink"
                          },
                          "fontSize": "15px",
                          "letterSpacing": "0.02em",

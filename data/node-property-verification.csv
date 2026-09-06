@@ -9,7 +9,7 @@ animation,,,NO_HOST,
 animation,navbar,"""flipDown""",APPLIED,"<mosaic-navbar id=""np-054"" class=""M_EL37 M_EL_Navbar"" data-toggle-breakpoint-id=""_m"" data-animation=""flipDown"""
 appearance,,,NO_HOST,
 ariaLabel,,,NO_HOST,
-attrID,,,SKIPPED,
+attrID,,,INSTRUMENT,this sweep locates and reads nodes THROUGH it; asserted instead by style-verification.csv (98 rows); rwd-verification.csv (576 rows)
 attributes,div,"[{""name"": ""data-mprobe37"", ""value"": ""yes""}]",NO_EFFECT,"<div id=""np-015"" class=""M_EL24 M_EL_Div"">"
 autoScale,icon,371337,NO_EFFECT,"<svg xmlns=""http://www.w3.org/2000/svg"" viewBox=""0 0 24 24"" fill=""none"" id=""np-026"" class=""M_EL26 M_EL_Icon"">"
 autocomplete,,,SKIPPED,
@@ -145,7 +145,7 @@ stepActive,,,NO_HOST,
 stepActive,form-multi-steps-step,true,NO_EFFECT,"<div id=""np-091"" class=""M_EL61 M_EL_Step"" onclick=""(() =>"
 stepIndex,,,NO_HOST,
 stepIndex,form-multi-steps-step,371337,NO_EFFECT,"<div id=""np-090"" class=""M_EL60 M_EL_Step"" onclick=""(() =>"
-style,,,SKIPPED,
+style,,,INSTRUMENT,this sweep locates and reads nodes THROUGH it; asserted instead by style-verification.csv (98 rows); rwd-verification.csv (576 rows)
 submitType,,,SKIPPED,
 suggestedVideos,youtube,"""1""",NO_EFFECT,"<mosaic-youtube id=""np-179"" class=""M_EL110 M_EL_YouTube"" data-autoplay=""0"" data-mute=""0"" data-playsinline=""0"">"
 svg,,,SKIPPED,

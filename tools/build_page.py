@@ -140,6 +140,10 @@ class Surface:
 # string to them is accepted and then silently produces `transform:none`, `box-shadow:none`
 # or no rule at all - so these shorthands exist to make the correct shape unavoidable.
 # Each was confirmed against the compiled CSS; see references/styling.md.
+
+# A fixed namespace, so a design token's row ID is a function of its name alone and
+# a rebuild rebinds the same row instead of adding a second one.
+VAR_NAMESPACE = uuid.UUID("6d6f7361-6963-4865-6164-6c657373ff01")
 VAR_IDS = {}
 
 
@@ -245,8 +249,27 @@ def theme_records(spec, doc, surface):
         if not (collection and mode and skin):
             sys.exit("theme.variables needs a healed collection/mode/skin")
         recs = []
+        # The ID is DERIVED from the token name, not minted.
+        #
+        # It used to be a fresh `uuid4()` per run, and `_varIDs` starts empty every
+        # time, so each build wrote a NEW collectionVariable row and left the old one
+        # in place. The rows are parented to the theme's collection, which survives
+        # `build_site.py` making a fresh master, so they accumulate - and both end up
+        # in `:root`, where the later one wins. Measured: after changing `--mk-faint`
+        # from rgb(160,162,168) to rgb(107,109,113), the delivered stylesheet carried
+        #
+        #     --mk-faint: rgb(107, 109, 113)
+        #     --mk-faint: rgb(160, 162, 168)
+        #
+        # and the page kept rendering the old grey. Every server-side check passed:
+        # the commit succeeded, the new variable existed, its value was correct. Only
+        # `verify_browser.py`, reading the computed colour off the element, saw it.
+        #
+        # A UUIDv5 over the custom property is stable across runs and across machines
+        # with no state to carry, so a rebuild REBINDS the row instead of adding one.
         for custom_property, value in variables.items():
-            vid = spec.setdefault("_varIDs", {}).setdefault(custom_property, str(uuid.uuid4()))
+            vid = str(uuid.uuid5(VAR_NAMESPACE, custom_property))
+            spec.setdefault("_varIDs", {})[custom_property] = vid
             recs.append({"newRevisionRecord": {
                 "ID": vid, "parentType": "collection", "parentID": collection,
                 "ordering": "a0", "status": "publish", "revision": "", "version": "",
@@ -255,6 +278,16 @@ def theme_records(spec, doc, surface):
                          "customProperty": custom_property,
                          "skinsData": {skin: {mode: {"value": value["value"]}}}}},
                 "originalRevisionRecord": None})
+        # Reap strays from before the ID became derivable. Anything on this
+        # collection that claims a custom property we manage, under an ID we did not
+        # derive, is a leftover that can still win the cascade.
+        managed = {v["ID"] for v in (r["newRevisionRecord"] for r in recs)}
+        for row in (doc.get("collectionVariable") or []):
+            cp = (row.get("data") or {}).get("customProperty")
+            if cp in variables and row["ID"] not in managed:
+                print("  reaping stale variable %s (%s)" % (cp, row["ID"][:8]))
+                recs.append({"newRevisionRecord": dict(row, status="delete"),
+                             "originalRevisionRecord": row})
         out["collectionVariable"] = recs
         # register the IDs before element-class styles are expanded - those cite
         # tokens too, and expand_shorthands resolves {"token": ...} from this map

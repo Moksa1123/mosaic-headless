@@ -1,10 +1,10 @@
 ---
 name: "mosaic-headless"
 description: |
-  Build and modify Mosaic Pro (Nextend) sites by writing the underlying data model directly - no visual editor, no DOM. Query the real surface (122 node types, 181 properties, 98 style properties with 20 structured value shapes pinned down, 53 style states, 151 element classes, 74 dynamic variables, 12 interaction triggers, 114 REST routes, 23 tables) instead of guessing, with every node type placed on a live site one at a time and asserted against the delivered HTML, the design-token and element-class layers verified against compiled CSS, the @VAR() dynamic language verified against rendered output, and nine designed pages built through the tables themselves.
+  Build and modify Mosaic Pro (Nextend) sites by writing the underlying data model directly - no visual editor, no DOM. Query the real surface with `mo.py`, which joins every source table to the live sweeps so a lookup leads with the measured verdict rather than the declaration (122 node types, 181 properties, 98 style properties with 20 structured value shapes pinned down, 53 style states, 151 element classes, 74 dynamic variables, 12 interaction triggers, 114 REST routes, 23 tables) instead of guessing, with every node type placed on a live site one at a time and asserted against the delivered HTML, the design-token and element-class layers verified against compiled CSS, the @VAR() dynamic language verified against rendered output, nine designed pages built through the tables themselves, and the delivered page re-read in Chromium at three viewports so a rule that is present, correct and still wrong cannot pass.
 license: "MIT"
 author: "moksa (https://moksaweb.com)"
-version: "1.2.1"
+version: "1.3.0"
 ---
 
 # Headless Mosaic
@@ -21,6 +21,34 @@ apply — `references/vs-elementor-gutenberg.md` says which skill does.
 **Never write a node type, property name, enum value, style key or Free/Pro claim
 from memory. Look it up in `data/`.**
 
+And look it up with `mo.py`, not with grep. Grep answers the question you typed;
+it does not answer the question you have. Ask grep about `accordion-content` and it
+confirms the type exists. It does not mention that placing one commits cleanly and
+then reduces the entire public page to a 54-byte error string - which is the only
+thing about that type worth knowing.
+
+```bash
+python tools/mo.py stats                    # the surface, and what is unsafe
+python tools/mo.py type accordion-content   # ONE type, joined to every sweep
+python tools/mo.py types --edition pro --safe
+python tools/mo.py check div text button    # exits 1 on an unsafe or unknown type
+python tools/mo.py placement accordion-item # what goes inside what, both directions
+python tools/mo.py prop tagName             # one node property + how it was probed
+python tools/mo.py props --shared           # the ones every element carries
+python tools/mo.py style --grouped          # the 20 that are inert set on their own
+python tools/mo.py css border-radius        # which Mosaic key drives this CSS
+python tools/mo.py states --grep hover      # state IDs and their selector templates
+python tools/mo.py vars --namespace post    # the @VAR() surface
+python tools/mo.py classes --grep Heading   # element classes (theme-global)
+python tools/mo.py routes --grep template
+python tools/mo.py tables wp_mosaic_nodes
+python tools/mo.py skeleton                 # a minimal valid page spec
+```
+
+`--json` on any of them for machine-readable output. Every answer leads with the
+measured verdict rather than the declaration, because on this platform the two
+disagree for 52 of the 122 types.
+
 Then check the page. Mosaic has four failure modes and **only one of them changes the
 HTTP status code**:
 
@@ -31,6 +59,10 @@ structurally invalid node   HTTP 200, committed, row in the DB, and the whole
                             public page becomes a 54-byte error string
 wrong value SHAPE           HTTP 200, stored, and the CSS rule is simply absent -
                             or worse, compiles to `transform:none`
+right rule, wrong result    HTTP 200, in the stylesheet, correct, and the BROWSER
+                            computes something else: a unit that resolves against
+                            something you forgot, a font that cannot render the
+                            text, a property the layout mode overrides
 no template for the URL     HTTP 406 with an EMPTY BODY for anyone not logged in
 ```
 
@@ -65,8 +97,10 @@ that looks like a server problem. Two things make it easy to hit:
   is 406 - and if the build fails, it stays that way. Never activate a new theme
   as a step that can be separated from the commit that fills it.
 
-A successful commit is not evidence of a working page. Fetch the page and check its
-size. `references/failure-modes.md` has all of them, measured.
+A successful commit is not evidence of a working page, and neither is a correct
+stylesheet. Fetch the page and check its size; then run `verify_browser.py` and let
+the element say what it actually got. `references/failure-modes.md` has all of them,
+measured.
 
 ## What was verified, and how
 
@@ -105,6 +139,14 @@ PROPERTIES   170 probes over the declared property surface, each value asserted
              against the delivered markup and the compiled CSS separately.
              data/property-verification.csv
 
+BROWSER      2,237 computed-style readings on the delivered page in Chromium, at
+             three viewports: every declared property vs `getComputedStyle` on the
+             node it targets. 1,661 compared and agreed, 576 not-comparable and
+             labelled as such, 0 overridden. Plus a design audit that only a browser
+             can run - font fallback, tracking against script, text contrast,
+             horizontal overflow, clipped text, line measure - currently 0 findings.
+             data/browser-verification.csv, data/design-audit.csv
+
 RWD          576 responsive declarations across two sites asserted against the
              stylesheet the site actually served - each `_t`/`_m` property matched
              to its element's generated class inside that breakpoint's own media
@@ -134,7 +176,7 @@ node types        122 / 122   swept live, one per document
 node properties   181 / 181   re-probed with a value shaped by each property's
                               own validator chain: 35 APPLIED, 42 NO_EFFECT,
                               2 EDITOR_ONLY, 55 NO_HOST (no rendering type
-                              declares them), 47 SKIPPED
+                              declares them), 2 INSTRUMENT, 45 SKIPPED
 style properties   98 /  98   swept live; 58 COMPILED, 18 ABSENT, 1 NO_ELEMENT,
                               21 SKIPPED (no test value could be synthesised, and
                               SKIPPED is never counted as a pass)
@@ -147,6 +189,15 @@ entire demo site is built on it. Re-probed with a value derived from the declare
 validator chain - array for `ValidatorArray`, boolean for `ValidatorBoolean`, a legal
 enum member for `ValidatorAcceptedValues` - six of those NO_EFFECTs turn out to work:
 `tagName`, `target`, `rel`, `height`, `size`, `insertLocation`.
+
+**A sweep cannot be its own subject.** `attrID` and `style` came back SKIPPED
+because the property sweep finds each probe node BY its `attrID` and reads its
+`style` back out of the compiled CSS - asking it to probe those is asking a ruler to
+measure itself. But SKIPPED reads as "nobody checked", and they are in fact the two
+most heavily asserted properties here: every row of `style-verification.csv` is a
+`style` assertion and every row of `rwd-verification.csv` is a `style` assertion
+located by `attrID`. They are labelled **INSTRUMENT**, which is not a pass either,
+and the label carries the file and row count that does cover them.
 
 **Some properties are gated by a companion.** `target` and `rel` did nothing until
 the node also carried a `url`: `button` and `menu-link` render a `<span>` without one
@@ -229,6 +280,9 @@ so the pattern is in the data, not just in this paragraph.
 | `data/node-property-verification.csv` | 181 | **swept live** — each property probed with a value shaped by its own validator chain, on a type that declares it |
 | `data/style-verification.csv` | 98 | **swept live** — every style property written to a page and checked against the compiled CSS, with its group beside the result |
 | `data/rwd-verification.csv` | 576 | **checked live** - every `_t`/`_m` declaration vs the served stylesheet, with status per row |
+| `data/browser-verification.csv` | 2237 | **computed in Chromium** - declared vs `getComputedStyle` at three viewports, `not-comparable` labelled per row |
+| `data/design-audit.csv` | 0 | **computed in Chromium** - contrast, font fallback, CJK tracking, overflow, measure. Empty means it ran and found nothing |
+| `data/data-class-hierarchy.csv` | 121 | source - every data class and its parent, so a type's inherited properties can be resolved |
 | `data/element-classes.csv` | 151 | **live** — the built-in class metas; their IDs are what an `elementClass` record must use |
 | `data/dynamic-variables.csv` | 74 | source — every `@VAR('ns/name')` expression, by namespace |
 | `data/evaluator-functions.csv` | 19 | source — the `@` functions with their arity |
@@ -320,6 +374,23 @@ post — `build_all.py` resets first for that reason.
   friends. A selector written against `div`/`nav` misses all of them.
 - **`icon` renders inline `<svg>`.**
 
+## Tools
+
+| tool | does |
+|---|---|
+| `mo.py` | query the measured surface - **the front door** |
+| `build_page.py` | commit one page spec through the verified write path |
+| `build_site.py` | a whole site: one master with the shell, one document per page |
+| `verify_rwd.py` | does every `_t`/`_m` declaration reach the served stylesheet? |
+| `verify_browser.py` | does the **browser** compute what the stylesheet promised - and does the result pass a design audit? |
+| `sweep_node_types.py` | commit every node type one per document and assert the delivered HTML |
+| `sweep_style_properties.py` | write every style property and check the compiled CSS |
+| `sweep_node_properties.py` | probe every node property with a value from its own validator chain |
+| `theme_export.php` / `theme_import.php` | move a whole theme across installs, ids intact |
+| `copy_styles.py` | push one node's style onto others, by attrID or prefix |
+| `bootstrap_probe_theme.php` | a licence-free scratch theme |
+| `mint_session.php` | a matching cookie + `wp_rest` nonce from WP-CLI |
+
 ## Regenerating everything
 
 ```bash
@@ -339,6 +410,7 @@ python tools/sweep_node_types.py --config sweep.json --setup
 python tools/sweep_node_types.py --config sweep.json --sweep --edition all
 python tools/sweep_properties.py --config sweep.json
 python tools/verify_rwd.py --config sweep.json --site sites/moksa.json --csv data/rwd-verification.csv
+python tools/verify_browser.py --config sweep.json --site sites/moksa.json     --csv data/browser-verification.csv --audit data/design-audit.csv
 python tools/sweep_style_properties.py --config sweep.json --page moksa --csv data/style-verification.csv
 python tools/sweep_node_properties.py  --config sweep.json --page moksa --csv data/node-property-verification.csv
 wp eval-file tools/theme_export.php active > theme.json
