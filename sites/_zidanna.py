@@ -20,56 +20,91 @@ Run from this directory: python _zidanna.py
 import json
 import os
 
-CJK = "'PingFang SC','Hiragino Sans GB','Microsoft YaHei','Noto Sans SC',sans-serif"
-LATIN = "'Helvetica Neue',Helvetica,Arial,sans-serif"
+# Three roles, not one. The first cut set everything in the platform CJK sans, which
+# is legible and says nothing; a Song/Ming serif is what the category's own packaging
+# and the brands this factory manufactures for actually use.
+CJK    = "'Noto Sans SC','PingFang SC','Hiragino Sans GB','Microsoft YaHei',sans-serif"
+SERIF  = "'Noto Serif SC','Songti SC','Source Han Serif SC','SimSun',serif"
+FIGURE = "'Cormorant Garamond','Noto Serif SC',Georgia,serif"
+LATIN  = "'Jost','Helvetica Neue',Helvetica,Arial,sans-serif"
 IMG = "https://zidanna.com/wp-content/uploads/2026/08/%s"
 
 TOKENS = {
-    "--ink":     {"type": "color", "value": "rgb(28,26,23)"},
-    "--paper":   {"type": "color", "value": "rgb(250,248,244)"},
-    "--surface": {"type": "color", "value": "rgb(255,255,255)"},
-    "--sand":    {"type": "color", "value": "rgb(235,228,217)"},
-    "--sage":    {"type": "color", "value": "rgb(109,127,109)"},
-    "--muted":   {"type": "color", "value": "rgb(125,118,108)"},
-    "--line":    {"type": "color", "value": "rgb(226,219,208)"},
+    # A warm near-black rather than a grey, an unbleached paper, and one bronze
+    # accent. Nothing here is fully saturated and nothing is a pure neutral - the
+    # whole palette sits on the warm side of the axis, which is what stops an
+    # off-white page from reading as "unstyled".
+    "--ink":     {"type": "color", "value": "rgb(24,21,18)"},
+    "--paper":   {"type": "color", "value": "rgb(247,244,238)"},
+    "--surface": {"type": "color", "value": "rgb(253,251,248)"},
+    "--sand":    {"type": "color", "value": "rgb(232,224,211)"},
+    "--accent":  {"type": "color", "value": "rgb(158,127,88)"},
+    "--muted":   {"type": "color", "value": "rgb(122,113,101)"},
+    "--line":    {"type": "color", "value": "rgb(223,215,202)"},
 }
 
 
-def T(tag, text, **st):
+def bp(base, t=None, m=None):
+    """Assemble a `&` state across the three breakpoints, dropping the empty ones.
+
+    `_t` is <=1079px and `_m` is <=767px, both `direction:down`, and `_m` is ordered
+    after `_t` - so a mobile value overrides a tablet one rather than fighting it.
+    """
+    out = {"_": base}
+    if t:
+        out["_t"] = t
+    if m:
+        out["_m"] = m
+    return {"&": out} if (base or t or m) else None
+
+
+def T(tag, text, _t=None, _m=None, **st):
     return {"type": "text", "data": {"tagName": tag}, "text": text,
-            "style": {"&": {"_": st}} if st else None}
+            "style": bp(st, _t, _m) if (st or _t or _m) else None}
 
 
-def dyn(tag, expr, **st):
+def dyn(tag, expr, _t=None, _m=None, **st):
     return {"type": "text", "data": {"tagName": tag},
             "children": [{"type": "wysiwyg-variable", "data": {"dynamicCode": expr}}],
-            "style": {"&": {"_": st}} if st else None}
+            "style": bp(st, _t, _m) if (st or _t or _m) else None}
 
 
-def box(attr, style, children, hover=None):
-    s = {"&": {"_": style}}
+def box(attr, style, children, hover=None, _t=None, _m=None):
+    s = bp(style, _t, _m) or {"&": {"_": {}}}
     if hover:
         s["hover"] = {"_": hover}
     return {"type": "div", "data": {"attrID": attr}, "style": s, "children": children}
 
 
-def grid(attr, cols, gap, children, **extra):
+def grid(attr, cols, gap, children, tcols=None, mcols=1, **extra):
+    """Three column counts, not two.
+
+    Collapsing a 4-up straight to a single column wastes the 768-1079px band, which
+    is where tablets and half-width desktop windows actually sit.
+    """
     st = {"display": "grid", "gridCols": "repeat(%d, 1fr)" % cols,
           "columnGap": gap, "rowGap": gap}
     st.update(extra)
+    if tcols is None:
+        tcols = 2 if cols >= 3 else cols
+    t = {"gridCols": "repeat(%d, 1fr)" % tcols} if tcols != cols else None
     return {"type": "div", "data": {"attrID": attr},
-            "style": {"&": {"_": st, "_m": {"gridCols": "repeat(1, 1fr)"}}},
+            "style": bp(st, t, {"gridCols": "repeat(%d, 1fr)" % mcols}),
             "children": children}
 
 
-def section(attr, children, bg="--paper", pt="112px", pb="112px"):
+def section(attr, children, bg="--paper", pt="136px", pb="136px"):
     return {"type": "section", "data": {"attrID": attr},
-            "style": {"&": {"_": {"backgroundColor": {"token": bg},
-                                  "paddingTop": pt, "paddingBottom": pb,
-                                  "paddingLeft": "48px", "paddingRight": "48px",
-                                  "fontFamily": CJK},
-                            "_m": {"paddingLeft": "20px", "paddingRight": "20px",
-                                   "paddingTop": "64px", "paddingBottom": "64px"}}},
+            "style": bp({"backgroundColor": {"token": bg},
+                         "paddingTop": pt, "paddingBottom": pb,
+                         "paddingLeft": "48px", "paddingRight": "48px",
+                         "fontFamily": CJK},
+                        {"paddingLeft": "32px", "paddingRight": "32px",
+                         "paddingTop": pt if pt == "0px" else "84px",
+                         "paddingBottom": pb if pb == "0px" else "84px"},
+                        {"paddingLeft": "20px", "paddingRight": "20px",
+                         "paddingTop": pt if pt == "0px" else "60px",
+                         "paddingBottom": pb if pb == "0px" else "60px"}),
             "children": children}
 
 
@@ -92,8 +127,11 @@ def ml(tag, text, **st):
 
 
 def eyebrow(text, attr):
-    return T("h2", text, color={"token": "--sage"}, fontSize="11px", fontWeight="700",
-             letterSpacing="0.22em", fontFamily=LATIN)
+    n = T("h2", text, color={"token": "--accent"}, fontSize="10px", fontWeight="400",
+          letterSpacing="0.34em", fontFamily=LATIN,
+          _m={"fontSize": "9px", "letterSpacing": "0.26em"})
+    n["data"]["attrID"] = attr
+    return n
 
 
 def hair(attr, color="--line", top="0px"):
@@ -126,7 +164,9 @@ def clean(n):
 REVEALS = [
     # the hero is not in here: it has its own entrance sequence timed off the curtain,
     # and a scroll reveal on top of that would fight it
-    ("zd-stat-0", 0), ("zd-stat-1", 1), ("zd-stat-2", 2), ("zd-stat-3", 3),
+    # the stat band is one ruled object; staggering its cells made each reveal at a
+    # different opacity over a shared ground, so the band looked patchy mid-scroll
+    ("zd-stat-0", 0), ("zd-stat-1", 0), ("zd-stat-2", 0), ("zd-stat-3", 0),
     ("zd-about-l", 0), ("zd-about-r", 1),
     ("zd-process-in", 0),
     ("zd-cat-head", 0), ("zd-cat-0", 1), ("zd-cat-1", 2), ("zd-cat-2", 3), ("zd-cat-3", 4),
@@ -150,8 +190,8 @@ def motion_css():
     """
     reveal_targets = ",".join("#" + a for a, _ in REVEALS)
     reveal_stagger = "\n".join(
-        "    #" + a + "{animation-range:entry " + str(4 + i * 5) + "% cover "
-        + str(32 + i * 5) + "%}"
+        "    #" + a + "{animation-range:entry " + str(2 + i * 6) + "% cover "
+        + str(42 + i * 6) + "%}"
         for a, i in REVEALS if i)
     steps = ("#zd-step-01,#zd-step-02,#zd-step-03,#zd-step-04,"
              "#zd-oem-step-01,#zd-oem-step-02,#zd-oem-step-03,#zd-oem-step-04")
@@ -160,59 +200,138 @@ def motion_css():
                           for i in range(4))
 
     return "\n".join([
+        # Preconnect first: the CJK serif is served as ~100 unicode-range subsets, so
+        # the round trip to the font host is on the critical path for every heading.
+        '<link rel="preconnect" href="https://fonts.googleapis.com">',
+        '<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>',
+        '<link rel="stylesheet" href="https://fonts.googleapis.com/css2?'
+        'family=Noto+Serif+SC:wght@400;500;600&'
+        'family=Noto+Sans+SC:wght@300;400&'
+        'family=Cormorant+Garamond:wght@300;500&'
+        'family=Jost:wght@300;400&display=swap">',
         '<style id="zd-motion">',
 
         # ── keyframes ────────────────────────────────────────────────────────
-        "@keyframes zd-curtain{0%,42%{transform:translateY(0)}"
+        "@keyframes zd-curtain{0%,58%{transform:translateY(0)}"
         "100%{transform:translateY(-101%)}}",
-        "@keyframes zd-markin{0%{opacity:0;transform:translateY(10px)}"
-        "22%,52%{opacity:1;transform:none}72%,100%{opacity:0;transform:translateY(-8px)}}",
-        "@keyframes zd-linein{from{transform:translateY(110%)}to{transform:translateY(0)}}",
+        "@keyframes zd-markin{0%{opacity:0;transform:translateY(14px)}"
+        "20%,50%{opacity:1;transform:none}"
+        "64%,100%{opacity:0;transform:translateY(-12px)}}",
+        "@keyframes zd-markspace{0%{letter-spacing:.72em}"
+        "52%{letter-spacing:.34em}100%{letter-spacing:.30em}}",
+        "@keyframes zd-introrule{0%{transform:scaleX(0)}34%,52%{transform:scaleX(1)}"
+        "70%,100%{transform:scaleX(0);transform-origin:100% 50%}}",
+        "@keyframes zd-linein{from{transform:translateY(112%);filter:blur(7px)}"
+        "60%{filter:blur(0)}to{transform:translateY(0);filter:blur(0)}}",
         "@keyframes zd-softin{from{opacity:0;transform:translateY(14px)}"
         "to{opacity:1;transform:none}}",
-        "@keyframes zd-kenburns{from{transform:scale(1.04)}to{transform:scale(1.14)}}",
+        "@keyframes zd-kenburns{from{transform:scale(1.03)}to{transform:scale(1.13)}}",
         "@keyframes zd-marquee{from{transform:translateX(0)}to{transform:translateX(-50%)}}",
         "@keyframes zd-cue{0%,100%{opacity:.35;transform:translateY(0)}"
         "50%{opacity:.9;transform:translateY(6px)}}",
-        "@keyframes zd-rise{from{opacity:0;transform:translateY(26px)}"
+        "@keyframes zd-rise{from{opacity:0;transform:translateY(34px)}"
         "to{opacity:1;transform:none}}",
         "@keyframes zd-draw{from{transform:scaleX(0)}to{transform:scaleX(1)}}",
         "@keyframes zd-progress{from{transform:scaleX(0)}to{transform:scaleX(1)}}",
-        "@keyframes zd-headfill{from{background:rgba(250,248,244,0);"
-        "border-bottom-color:rgba(226,219,208,0)}"
-        "to{background:rgba(250,248,244,.92);border-bottom-color:rgba(226,219,208,1)}}",
-        "@keyframes zd-headink{from{color:rgba(250,248,244,1)}to{color:rgb(28,26,23)}}",
+        "@keyframes zd-headfill{"
+        "from{background:rgba(247,244,238,0);border-bottom-color:rgba(223,215,202,0);"
+        "-webkit-backdrop-filter:blur(0px) saturate(100%);"
+        "backdrop-filter:blur(0px) saturate(100%);"
+        "box-shadow:0 0 0 rgba(24,21,18,0),inset 0 1px 0 rgba(255,255,255,0)}"
+        "to{background:rgba(247,244,238,.58);border-bottom-color:rgba(223,215,202,.85);"
+        "-webkit-backdrop-filter:blur(22px) saturate(190%);"
+        "backdrop-filter:blur(22px) saturate(190%);"
+        "box-shadow:0 1px 30px rgba(24,21,18,.08),"
+        "inset 0 1px 0 rgba(255,255,255,.62)}}",
+        # the specular edge that sells the material: a hairline of light that only
+        # exists where the panel has something behind it to refract
+        "@keyframes zd-headsheen{from{opacity:0}to{opacity:1}}",
+        "@keyframes zd-headink{from{color:rgba(247,244,238,1)}to{color:rgb(24,21,18)}}",
 
         # ── layout the style compiler cannot express ─────────────────────────
-        "#zd-hero{position:relative;min-height:88vh;display:flex;align-items:center;"
+        "#zd-hero{position:relative;min-height:84vh;display:flex;align-items:center;"
         "overflow:hidden}",
-        "#zd-hero-in{position:relative;z-index:1;padding-top:120px;padding-bottom:96px}",
+        # A film grain over the photograph. Without it a cover image under a flat
+        # scrim reads as a stock plate; the grain is what makes it read as printed.
+        '#zd-hero::after{content:"";position:absolute;inset:0;z-index:1;'
+        "pointer-events:none;opacity:.055;mix-blend-mode:overlay;"
+        "background-image:url(\"data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg'"
+        "%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.82'"
+        " numOctaves='4'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25'"
+        " filter='url(%23n)'/%3E%3C/svg%3E\");background-size:180px 180px}",
+        "#zd-hero-in{position:relative;z-index:2;padding-top:132px;padding-bottom:116px}",
         "#zd-hero-cue{position:absolute;left:50%;bottom:30px;transform:translateX(-50%);"
         "z-index:1}",
         "#zd-oem-hero{padding-top:164px}",
 
         "#zd-header{position:fixed;top:0;left:0;right:0;z-index:100;"
-        "border-bottom:1px solid rgba(226,219,208,0);background:rgba(250,248,244,0)}",
+        "border-bottom:1px solid rgba(223,215,202,0);background:rgba(247,244,238,0);"
+        "-webkit-backdrop-filter:blur(0px);backdrop-filter:blur(0px);"
+        "will-change:backdrop-filter,background}",
+        '#zd-header::before{content:"";position:absolute;left:0;right:0;bottom:-1px;'
+        "height:1px;opacity:0;pointer-events:none;background:linear-gradient(90deg,"
+        "rgba(158,127,88,0) 0%,rgba(158,127,88,.55) 22%,rgba(255,255,255,.9) 50%,"
+        "rgba(158,127,88,.55) 78%,rgba(158,127,88,0) 100%)}",
         # over the hero the header sits on the image, so its type starts light
-        "#zd-header h3,#zd-header p,#zd-nav>*{color:rgba(250,248,244,.92)}",
-        "#zd-header-cta{background:rgba(250,248,244,.14) !important;"
-        "border:1px solid rgba(250,248,244,.4)}",
-        "#zd-progress{position:fixed;top:0;left:0;right:0;height:2px;z-index:101;"
-        "background:rgb(109,127,109);transform:scaleX(0);transform-origin:0 50%}",
+        "#zd-header h3,#zd-header p,#zd-nav>*{color:rgba(247,244,238,.92)}",
+        "#zd-header-cta{background:rgba(247,244,238,.14) !important;"
+        "border:1px solid rgba(247,244,238,.4)}",
+        "#zd-progress{position:fixed;top:0;left:0;right:0;height:1px;z-index:101;"
+        "background:rgb(158,127,88);transform:scaleX(0);transform-origin:0 50%}",
 
-        "#zd-intro{position:fixed;inset:0;z-index:200;background:rgb(20,18,16);"
+        "#zd-intro{position:fixed;inset:0;z-index:200;background:rgb(19,16,13);"
         "display:grid;place-items:center;pointer-events:none}",
         "#zd-intro-mark{text-align:center}",
+        "#zd-intro-rule{width:96px;height:1px;margin:22px auto 0;"
+        "background:rgb(158,127,88);transform:scaleX(0);transform-origin:0 50%}",
 
         "#zd-marquee-track{display:flex}",
+        "html{scroll-behavior:smooth}",
+        # anchors land under a fixed header unless they reserve room for it
+        "#about,#contact{scroll-margin-top:96px}",
+        "@media (max-width:767px){#about,#contact{scroll-margin-top:108px}}",
+
+        # ── breakpoints the style compiler cannot reach ──────────────────────
+        # These are the positioned / pseudo-element rules that live in this block in
+        # the first place; everything expressible as a node style is set on the node
+        # at "_t" and "_m" instead.
+        "@media (max-width:1079px){",
+        "  #zd-hero{min-height:78vh}",
+        "  #zd-hero-in{padding-top:112px;padding-bottom:96px}",
+        "  #zd-oem-hero{padding-top:132px}",
+        "}",
+        "@media (max-width:767px){",
+        # the phone header is two rows, so the hero has to clear more of it
+        "  #zd-hero{min-height:auto}",
+        "  #zd-hero-in{padding-top:134px;padding-bottom:96px}",
+        "  #zd-oem-hero{padding-top:130px}",
+        # centring a cue under a left-aligned column reads as a mistake at this width
+        "  #zd-hero-cue{left:auto;right:20px;transform:none;bottom:22px}",
+        "  #zd-intro-rule{width:64px;margin-top:16px}",
+        "  #zd-marquee-track p{padding:0 16px}",
+        # full-width buttons: a 32px side pad on a 375px screen leaves a stub
+        "  #zd-hero-cta>*{flex:1 1 100%;text-align:center}",
+        "  #zd-progress{height:2px}",
+        "}",
+        # a coarse pointer never fires :hover, so the reveal has to be the rest state
+        "@media (hover:none){",
+        "  #zd-nav>*::after{right:0;opacity:.35}",
+        "}",
+        "#zd-cta-1,#zd-cta-3,#zd-header-cta{position:relative;overflow:hidden;"
+        "isolation:isolate}",
+        '#zd-cta-1::before,#zd-cta-3::before{content:"";position:absolute;inset:0;'
+        "background:rgb(158,127,88);transform:scaleY(0);transform-origin:50% 100%;"
+        "transition:transform .42s cubic-bezier(.72,0,.16,1);z-index:-1}",
+        "#zd-cta-1:hover::before,#zd-cta-3:hover::before{transform:scaleY(1)}",
         "#zd-footer-mark{pointer-events:none;user-select:none}",
 
         # ── hover detail ─────────────────────────────────────────────────────
         "#zd-nav>*{position:relative}",
         '#zd-nav>*::after{content:"";position:absolute;left:0;right:100%;bottom:-7px;'
-        "height:1px;background:rgb(109,127,109);"
+        "height:1px;background:rgb(158,127,88);"
         "transition:right .3s cubic-bezier(.2,.7,.3,1)}",
         "#zd-nav>*:hover::after{right:0}",
+        "#zd-header-cta,#zd-cta-1,#zd-cta-2,#zd-cta-3{letter-spacing:.14em;font-weight:400}",
         '#zd-header-cta::after,#zd-cta-1::after,#zd-cta-3::after{content:" →";'
         "display:inline-block;transition:transform .28s cubic-bezier(.2,.7,.3,1)}",
         "#zd-header-cta:hover::after,#zd-cta-1:hover::after,#zd-cta-3:hover::after"
@@ -220,33 +339,36 @@ def motion_css():
         cats + "{position:relative;display:inline-block}",
         ",".join(c + "::after" for c in cats.split(",")) +
         '{content:"";position:absolute;left:0;right:100%;bottom:-5px;height:1px;'
-        "background:rgb(109,127,109);transition:right .38s cubic-bezier(.2,.7,.3,1)}",
+        "background:rgb(158,127,88);transition:right .38s cubic-bezier(.2,.7,.3,1)}",
         cat_hovers + "{right:0}",
 
         # ── motion, all of it opt-out-able ───────────────────────────────────
         "@media (prefers-reduced-motion:reduce){#zd-intro{display:none}}",
         "@media (prefers-reduced-motion:no-preference){",
-        "  #zd-intro{animation:zd-curtain 1.45s cubic-bezier(.76,0,.24,1) forwards}",
-        "  #zd-intro-mark{animation:zd-markin 1.45s ease forwards}",
+        "  #zd-intro{animation:zd-curtain 2.45s cubic-bezier(.72,0,.16,1) forwards}",
+        "  #zd-intro-mark{animation:zd-markin 2.45s cubic-bezier(.4,0,.2,1) forwards}",
+        "  #zd-intro-rule{animation:zd-introrule 2.45s cubic-bezier(.72,0,.16,1) forwards}",
+        "  #zd-intro #zd-intro-mark h3{animation:zd-markspace 2.45s cubic-bezier(.4,0,.2,1) forwards}",
         # the lines start below their own mask and are pulled up after the curtain
         "  #zd-hl1-mask>*,#zd-hl2-mask>*{transform:translateY(110%);"
-        "animation:zd-linein .9s cubic-bezier(.16,1,.3,1) forwards}",
-        "  #zd-hl1-mask>*{animation-delay:.62s}",
-        "  #zd-hl2-mask>*{animation-delay:.74s}",
+        "animation:zd-linein 1.25s cubic-bezier(.16,1,.3,1) forwards}",
+        "  #zd-hl1-mask>*{animation-delay:1.62s}",
+        "  #zd-hl2-mask>*{animation-delay:1.80s}",
         "  #zd-hero-eyebrow,#zd-hero-in p,#zd-hero-cta{opacity:0;"
-        "animation:zd-softin .8s cubic-bezier(.16,1,.3,1) forwards}",
-        "  #zd-hero-eyebrow{animation-delay:.56s}",
-        "  #zd-hero-in p{animation-delay:.92s}",
-        "  #zd-hero-cta{animation-delay:1.04s}",
-        "  #zd-hero-bg{animation:zd-kenburns 22s ease-in-out infinite alternate}",
-        "  #zd-hero-cue p{animation:zd-cue 2.4s ease-in-out infinite}",
-        "  #zd-marquee-track{animation:zd-marquee 38s linear infinite}",
+        "animation:zd-softin 1.05s cubic-bezier(.16,1,.3,1) forwards}",
+        "  #zd-hero-eyebrow{animation-delay:1.52s}",
+        "  #zd-hero-in p{animation-delay:2.02s}",
+        "  #zd-hero-cta{animation-delay:2.18s}",
+        "  #zd-hero-bg{animation:zd-kenburns 34s ease-in-out infinite alternate}",
+        "  #zd-hero-cue{opacity:0;animation:zd-softin 1s ease forwards;animation-delay:2.4s}",
+        "  #zd-hero-cue p{animation:zd-cue 3.2s ease-in-out infinite}",
+        "  #zd-marquee-track{animation:zd-marquee 56s linear infinite}",
         "  @supports (animation-timeline:view()){",
         "    " + reveal_targets + "{animation:zd-rise .01s linear both;"
-        "animation-timeline:view();animation-range:entry 4% cover 32%}",
+        "animation-timeline:view();animation-range:entry 2% cover 42%}",
         reveal_stagger,
-        "    " + steps + "{background-image:linear-gradient(rgb(28,26,23),rgb(28,26,23));"
-        "background-repeat:no-repeat;background-size:100% 2px;background-position:0 0;"
+        "    " + steps + "{background-image:linear-gradient(rgb(24,21,18),rgb(24,21,18));"
+        "background-repeat:no-repeat;background-size:100% 1px;background-position:0 0;"
         "animation:zd-draw .01s linear both;animation-timeline:view();"
         "animation-range:entry 6% cover 26%;transform-origin:left center}",
         "  }",
@@ -255,6 +377,8 @@ def motion_css():
         "animation-timeline:scroll(root)}",
         "    #zd-header{animation:zd-headfill linear both;"
         "animation-timeline:scroll(root);animation-range:60px 220px}",
+        "    #zd-header::before{animation:zd-headsheen linear both;"
+        "animation-timeline:scroll(root);animation-range:90px 240px}",
         "    #zd-header h3,#zd-header p,#zd-nav>*{animation:zd-headink linear both;"
         "animation-timeline:scroll(root);animation-range:60px 220px}",
         "  }",
@@ -267,11 +391,7 @@ def motion_css():
 NAV = [("首页", "/zidanna/"), ("OEM代工", "/zidanna-oem/"),
        ("关于姿丹娜", "/zidanna/#about"), ("联络我们", "/zidanna/#contact")]
 
-HEADER = box("zd-header",
-    {"backgroundColor": {"token": "--paper"}, "paddingTop": "20px", "paddingBottom": "20px",
-     "paddingLeft": "48px", "paddingRight": "48px", "fontFamily": CJK,
-     "customStyles": "border-bottom:1px solid rgb(226,219,208);"},
-    [
+HEADER = box("zd-shell-top", {}, [
      # a `code` node with insertLocation "head" is the only way to get @keyframes
      # into the document - customStyles is emitted inside a rule and cannot hold one
      {"type": "code", "data": {"attrID": "zd-motion-css", "insertLocation": "head",
@@ -282,61 +402,86 @@ HEADER = box("zd-header",
      box("zd-intro", {}, [
          box("zd-intro-mark", {}, [
              T("h3", "姿丹娜", color={"token": "--paper"}, fontSize="30px",
-               fontWeight="700", letterSpacing="0.34em"),
-             T("p", "ZIDANNA", color={"token": "--sage"}, fontSize="10px",
-               letterSpacing="0.34em", fontFamily=LATIN, marginTop="10px",
+               fontWeight="500", letterSpacing="0.34em"),
+             box("zd-intro-rule", {}, []),
+             T("p", "ZIDANNA", color={"token": "--accent"}, fontSize="10px",
+               letterSpacing="0.34em", fontFamily=LATIN, marginTop="14px",
                textAlign="center"),
          ]),
      ]),
      box("zd-progress", {}, []),
-     wrap("zd-header-in", [
+     box("zd-header",
+         {"paddingTop": "20px", "paddingBottom": "20px",
+          "paddingLeft": "48px", "paddingRight": "48px", "fontFamily": CJK},
+         _t={"paddingLeft": "32px", "paddingRight": "32px"},
+         _m={"paddingLeft": "20px", "paddingRight": "20px",
+             "paddingTop": "9px", "paddingBottom": "9px"},
+         children=
+    [wrap("zd-header-in", [
         {"type": "div", "data": {"attrID": "zd-header-row"},
-         "style": {"&": {"_": {"display": "flex", "alignItems": "center",
-                               "justifyContent": "space-between", "columnGap": "40px"}}},
+         "style": bp({"display": "flex", "alignItems": "center",
+                      "justifyContent": "space-between", "columnGap": "40px"},
+                     {"columnGap": "24px"},
+                     {"flexDirection": "column", "alignItems": "flex-start",
+                      "rowGap": "5px"}),
          "children": [
              box("zd-logo", {}, [
                  T("h3", "姿丹娜", color={"token": "--ink"}, fontSize="21px",
-                   fontWeight="700", letterSpacing="4px"),
+                   fontWeight="700", letterSpacing="4px", _m={"fontSize": "17px",
+                                                              "letterSpacing": "3px"}),
                  T("p", "ZIDANNA", color={"token": "--muted"}, fontSize="10px",
-                   letterSpacing="3px", fontFamily=LATIN, marginTop="2px"),
+                   letterSpacing="3px", fontFamily=LATIN, marginTop="2px",
+                   _m={"display": "none"}),
              ]),
              {"type": "menu", "data": {"attrID": "zd-nav"},
-              "style": {"&": {"_": {"display": "flex", "columnGap": "34px",
-                                    "alignItems": "center"},
-                              "_m": {"display": "none"}}},
+              "style": bp({"display": "flex", "columnGap": "34px",
+                           "alignItems": "center"},
+                          {"columnGap": "22px"},
+                          {"columnGap": "16px", "width": "100%",
+                           "customStyles": "flex-wrap:wrap;"}),
               "children": [
                   {"type": "menu-link", "data": {"attrID": "zd-nav-%d" % i, "url": href},
                    "style": {"&": {"_": {"color": {"token": "--ink"}, "fontSize": "14px",
-                                         "transitionAll": "160ms ease", "cursor": "pointer"}},
-                             "hover": {"_": {"color": {"token": "--sage"}}}},
+                                         "transitionAll": "160ms ease", "cursor": "pointer",
+                                         "fontWeight": "400", "letterSpacing": "0.06em"},
+                                    "_t": {"fontSize": "13px"},
+                                    "_m": {"fontSize": "12px"}},
+                             "hover": {"_": {"color": {"token": "--accent"}}}},
                    "text": label}
                   for i, (label, href) in enumerate(NAV)
               ]},
              {"type": "button", "data": {"attrID": "zd-header-cta", "url": "/zidanna/#contact"},
-              "style": {"&": {"_": {"backgroundColor": {"token": "--ink"},
+              "style": {"&": {"_m": {"display": "none"},
+                              "_t": {"fontSize": "13px", "paddingLeft": "16px",
+                                     "paddingRight": "16px"},
+                              "_": {"backgroundColor": {"token": "--ink"},
                                     "color": {"token": "--paper"}, "fontSize": "14px",
                                     "paddingTop": "11px", "paddingBottom": "11px",
                                     "paddingLeft": "22px", "paddingRight": "22px",
-                                    "radius": "2px", "cursor": "pointer",
+                                    "radius": "0px", "cursor": "pointer",
                                     "transitionAll": "200ms ease"}},
-                        "hover": {"_": {"backgroundColor": {"token": "--sage"}}}},
+                        "hover": {"_": {"backgroundColor": {"token": "--accent"}}}},
               "text": "开始打造"},
          ]}
-    ])])
+    ])])])
 
 FOOTER = box("zd-footer",
     {"backgroundColor": {"token": "--ink"}, "paddingTop": "84px", "paddingBottom": "40px",
      "paddingLeft": "48px", "paddingRight": "48px", "fontFamily": CJK,
      "customStyles": "overflow:hidden;"},
+    _t={"paddingLeft": "32px", "paddingRight": "32px", "paddingTop": "64px"},
+    _m={"paddingLeft": "20px", "paddingRight": "20px", "paddingTop": "48px"},
+    children=
     [wrap("zd-footer-in", [
         # the wordmark at display scale, treated as a graphic rather than a label
-        box("zd-footer-mark", {"marginBottom": "56px"}, [
-            T("h2", "姿丹娜", color="rgba(250,248,244,.07)", fontSize="128px",
-              fontWeight="700", letterSpacing="0.12em", lineHeight="1"),
+        box("zd-footer-mark", {"marginBottom": "56px"}, _m={"marginBottom": "34px"}, children=[
+            T("h2", "姿丹娜", color="rgba(247,244,238,.07)", fontSize="128px",
+              fontWeight="500", letterSpacing="0.12em", lineHeight="1",
+              _t={"fontSize": "88px"}, _m={"fontSize": "50px"}),
         ]),
-        grid("zd-footer-grid", 3, "48px", [
+        grid("zd-footer-grid", 3, "48px", tcols=3, children=[
             box("zd-f-brand", {}, [
-                T("h3", "姿丹娜", color="rgb(250,248,244)", fontSize="20px",
+                T("h3", "姿丹娜", color="rgb(247,244,238)", fontSize="20px",
                   fontWeight="700", letterSpacing="4px"),
                 T("p", "南京姿丹娜日化实业有限公司", color="rgb(168,160,150)",
                   fontSize="13px", marginTop="14px", lineHeight="1.8"),
@@ -345,7 +490,7 @@ FOOTER = box("zd-footer",
                   fontFamily=LATIN, lineHeight="1.6"),
             ]),
             box("contact", {}, [
-                T("h3", "南京厂区", color={"token": "--sage"}, fontSize="12px",
+                T("h3", "南京厂区", color={"token": "--accent"}, fontSize="12px",
                   fontWeight="700", letterSpacing="2px"),
                 T("p", "江苏省南京市溧水经济开发区中兴东路 1-1 号　邮编 211200",
                   color="rgb(168,160,150)", fontSize="13px", marginTop="14px", lineHeight="1.9"),
@@ -354,7 +499,7 @@ FOOTER = box("zd-footer",
                   lineHeight="1.9", fontFamily=LATIN),
             ]),
             box("zd-f-tw", {}, [
-                T("h3", "台湾总部", color={"token": "--sage"}, fontSize="12px",
+                T("h3", "台湾总部", color={"token": "--accent"}, fontSize="12px",
                   fontWeight="700", letterSpacing="2px"),
                 T("p", "太平洋化妆品股份有限公司", color="rgb(168,160,150)",
                   fontSize="13px", marginTop="14px", lineHeight="1.9"),
@@ -366,7 +511,7 @@ FOOTER = box("zd-footer",
         ]),
         box("zd-f-legal",
             {"marginTop": "56px", "paddingTop": "22px",
-             "customStyles": "border-top:1px solid rgba(250,248,244,0.12);"},
+             "customStyles": "border-top:1px solid rgba(247,244,238,0.12);"},
             [T("p", "© 2026 Nanjing Zidanna Personal Care Chemical Co., Ltd. 版权所有",
                color="rgb(110,104,96)", fontSize="11px", fontFamily=LATIN)]),
     ])])
@@ -392,7 +537,7 @@ REASONS = [("配方稳定", "上千支已量产配方作为基础，不必从零
            ("两岸资源", "台湾母厂六十年制造经验，与南京厂区共用技术与品管标准。"),
            ("一站到底", "从品牌规划、配方、制造到包材，单一窗口负责到底。")]
 
-def mask_line(attr, text, **st):
+def mask_line(attr, text, _t=None, _m=None, **st):
     """One display line in an overflow mask, so it can rise from behind its own edge.
 
     The line reveal only works if each line is its own element - a single text node
@@ -400,12 +545,13 @@ def mask_line(attr, text, **st):
     """
     return {"type": "div", "data": {"attrID": attr + "-mask"},
             "style": {"&": {"_": {"customStyles": "overflow:hidden;padding-bottom:.08em;"}}},
-            "children": [T("h1", text, **st)] if attr.endswith("1")
-                        else [T("h2", text, **st)]}
+            "children": [T("h1", text, _t=_t, _m=_m, **st)] if attr.endswith("1")
+                        else [T("h2", text, _t=_t, _m=_m, **st)]}
 
 
-HERO_LINE = dict(color={"token": "--paper"}, fontSize="76px", fontWeight="700",
-                 lineHeight="1.1", letterSpacing="0.02em")
+HERO_LINE = dict(color={"token": "--paper"}, fontSize="76px", fontWeight="500",
+                 lineHeight="1.1", letterSpacing="0.02em",
+                 _t={"fontSize": "56px"}, _m={"fontSize": "37px"})
 
 # Full-bleed image, dark scrim, oversized type. The image is the client's own
 # 2560px hero asset - the product photos elsewhere on their site are 345px wide and
@@ -413,12 +559,15 @@ HERO_LINE = dict(color={"token": "--paper"}, fontSize="76px", fontWeight="700",
 HOME = section("zd-hero", [
     box("zd-hero-bg", {"customStyles":
         "position:absolute;inset:0;background-image:"
-        "linear-gradient(95deg,rgba(16,15,13,.93) 0%,rgba(16,15,13,.78) 46%,"
-        "rgba(16,15,13,.52) 100%),"
+        "linear-gradient(96deg,rgba(20,16,11,.96) 0%,rgba(20,16,11,.88) 42%,"
+        "rgba(20,16,11,.70) 100%),"
+        # a second, vertical pass so the type never sits on a bright sky
+        "linear-gradient(rgba(20,16,11,.55) 0%,rgba(20,16,11,.12) 42%,"
+        "rgba(20,16,11,.62) 100%),"
         # concatenated, not %-formatted: this string is full of literal percent signs
         "url(" + (IMG % "hero.jpg") + ");background-size:cover;"
         "background-position:center 46%;z-index:0;"
-        "filter:saturate(.42) brightness(.62) contrast(1.06);"}, []),
+        "filter:saturate(.30) brightness(.56) contrast(1.1);"}, []),
     wrap("zd-hero-in", [
         box("zd-hero-copy", {}, [
             eyebrow("OEM / ODM SKINCARE MANUFACTURING", "zd-hero-eyebrow"),
@@ -428,20 +577,22 @@ HOME = section("zd-hero", [
             ]),
             T("p", "从品牌定位、配方开发到量产出货，姿丹娜在南京溧水的自有厂区，"
                    "为护肤品牌承接完整的 OEM / ODM 制造。",
-              color="rgba(250,248,244,.78)", fontSize="17px", lineHeight="2.1",
-              marginTop="26px", maxWidth="27em"),
+              color="rgba(247,244,238,.78)", fontSize="17px", lineHeight="2.1",
+              marginTop="26px", maxWidth="27em",
+              _m={"fontSize": "15px", "lineHeight": "1.95", "marginTop": "20px"}),
             {"type": "div", "data": {"attrID": "zd-hero-cta"},
-             "style": {"&": {"_": {"display": "flex", "columnGap": "14px", "marginTop": "38px",
-                                   "flexWrap": "wrap"}}},
+             "style": bp({"display": "flex", "columnGap": "14px", "marginTop": "38px",
+                          "flexWrap": "wrap", "rowGap": "12px"},
+                         None, {"marginTop": "30px"}),
              "children": [
                  {"type": "button", "data": {"attrID": "zd-cta-1", "url": "/zidanna/#contact"},
                   "style": {"&": {"_": {"backgroundColor": {"token": "--paper"},
                                         "color": {"token": "--ink"}, "fontSize": "15px",
                                         "paddingTop": "16px", "paddingBottom": "16px",
                                         "paddingLeft": "32px", "paddingRight": "32px",
-                                        "radius": "2px", "cursor": "pointer",
+                                        "radius": "0px", "cursor": "pointer",
                                         "transitionAll": "220ms ease"}},
-                            "hover": {"_": {"backgroundColor": {"token": "--sage"},
+                            "hover": {"_": {"backgroundColor": {"token": "--accent"},
                                             "color": {"token": "--paper"}}}},
                   "text": "开始打造"},
                  {"type": "button", "data": {"attrID": "zd-cta-2", "url": "/zidanna-oem/"},
@@ -449,16 +600,16 @@ HOME = section("zd-hero", [
                                         "color": {"token": "--paper"}, "fontSize": "15px",
                                         "paddingTop": "16px", "paddingBottom": "16px",
                                         "paddingLeft": "32px", "paddingRight": "32px",
-                                        "radius": "2px", "cursor": "pointer",
+                                        "radius": "0px", "cursor": "pointer",
                                         "border": {"width": "1px", "style": "solid",
-                                                   "color": "rgba(250,248,244,.45)"},
+                                                   "color": "rgba(247,244,238,.45)"},
                                         "transitionAll": "220ms ease"}},
-                            "hover": {"_": {"backgroundColor": "rgba(250,248,244,.12)"}}},
+                            "hover": {"_": {"backgroundColor": "rgba(247,244,238,.12)"}}},
                   "text": "了解代工流程"},
              ]},
         ]),
         box("zd-hero-cue", {}, [
-            T("p", "SCROLL", color="rgba(250,248,244,.55)", fontSize="10px",
+            T("p", "SCROLL", color="rgba(247,244,238,.55)", fontSize="10px",
               letterSpacing="0.3em", fontFamily=LATIN),
         ]),
     ]),
@@ -475,31 +626,42 @@ MARQUEE = box("zd-marquee",
          {"display": "flex", "columnGap": "0px",
           "customStyles": "width:max-content;will-change:transform;"},
          # duplicated so the loop can translate exactly -50% and never show a seam
-         [T("p", w, color="rgba(250,248,244,.66)", fontSize="13px",
-            letterSpacing="0.18em",
-            customStyles=("padding:0 26px;white-space:nowrap;"
-                          "border-right:1px solid rgba(109,127,109,.55);"))
+         [T("p", w, color="rgba(247,244,238,.62)", fontSize="13px",
+            letterSpacing="0.3em", fontFamily=SERIF,
+            customStyles=("padding:0 34px;white-space:nowrap;"
+                          "border-right:1px solid rgba(158,127,88,.5);"))
           for w in MARQUEE_WORDS * 2])])
 
 STAT_BAND = section("zd-stats", [wrap("zd-stats-in", [
-    grid("zd-stats-grid", 4, "0px", [
+    grid("zd-stats-grid", 4, "0px", tcols=2, mcols=2, children=[
         box("zd-stat-%d" % i,
             {"paddingTop": "52px", "paddingBottom": "52px",
              "paddingLeft": "34px", "paddingRight": "28px",
              # a hairline between cells, not around them: the first cell has none,
              # so the band reads as one object rather than four boxes
-             "customStyles": ("" if i == 0 else "border-left:1px solid rgba(28,26,23,.14);")},
-            [{"type": "div", "data": {"attrID": "zd-stat-n-%d" % i},
+             "customStyles": ("" if i == 0 else "border-left:1px solid rgba(24,21,18,.14);")},
+            # at two-up the rule has to fall on the odd cells instead, or column 3
+            # keeps a left edge it no longer sits against
+            _t={"paddingTop": "40px", "paddingBottom": "40px", "paddingLeft": "26px",
+                "customStyles": ("" if i % 2 == 0 else "border-left:1px solid rgba(24,21,18,.14);")
+                                + ("border-top:1px solid rgba(24,21,18,.14);" if i > 1 else "")},
+            _m={"paddingTop": "30px", "paddingBottom": "30px", "paddingLeft": "18px",
+                "paddingRight": "14px"},
+            children=[{"type": "div", "data": {"attrID": "zd-stat-n-%d" % i},
               "style": {"&": {"_": {"display": "flex", "alignItems": "baseline",
                                     "columnGap": "3px",
                                     "customStyles": "font-variant-numeric:tabular-nums;"}}},
               "children": [
-                  T("h3", n, color={"token": "--ink"}, fontSize="54px", fontWeight="700",
-                    letterSpacing="-0.03em", lineHeight="1", fontFamily=LATIN),
-                  T("p", unit, color={"token": "--sage"}, fontSize="17px", fontWeight="700"),
+                  # Cormorant's numerals are the reason this face is here: a
+                  # geometric sans figure reads as a spec sheet, this reads as a mark.
+                  T("h3", n, color={"token": "--ink"}, fontSize="66px", fontWeight="500",
+                    letterSpacing="0em", lineHeight="1", fontFamily=FIGURE,
+                    _t={"fontSize": "52px"}, _m={"fontSize": "40px"}),
+                  T("p", unit, color={"token": "--accent"}, fontSize="15px",
+                    fontWeight="400", fontFamily=SERIF, marginLeft="2px"),
               ]},
              T("p", label, color={"token": "--muted"}, fontSize="13px", marginTop="14px",
-               lineHeight="1.7", letterSpacing="0.04em")])
+               lineHeight="1.7", letterSpacing="0.04em", _m={"fontSize": "12px"})])
         for i, (n, unit, label) in enumerate(STATS)
     ]),
 ])], bg="--sand", pt="0px", pb="0px")
@@ -512,8 +674,8 @@ ABOUT = section("about", [wrap("zd-about-in", [
      "children": [
          box("zd-about-l", {}, [
              eyebrow("ABOUT ZIDANNA", "zd-about-eyebrow"),
-             T("h2", "精致护肤品的\n打造专家", color={"token": "--ink"}, fontSize="40px",
-               fontWeight="700", lineHeight="1.35", marginTop="18px"),
+             ml("h2", "精致护肤品的\n打造专家", color={"token": "--ink"}, fontSize="40px", _t={"fontSize": "34px"}, _m={"fontSize": "26px"},
+               fontWeight="500", lineHeight="1.35", marginTop="18px"),
          ]),
          box("zd-about-r", {}, [
              T("p", "姿丹娜承接护肤品的 OEM 与 ODM 代加工，产品线涵盖日常护肤、"
@@ -528,12 +690,12 @@ ABOUT = section("about", [wrap("zd-about-in", [
 
 PROCESS_SEC = section("zd-process", [wrap("zd-process-in", [
     eyebrow("HOW WE WORK", "zd-process-eyebrow"),
-    T("h2", "从一句想法，到一箱成品", color={"token": "--ink"}, fontSize="38px",
-      fontWeight="700", marginTop="16px", lineHeight="1.4"),
+    T("h2", "从一句想法，到一箱成品", color={"token": "--ink"}, fontSize="38px", _t={"fontSize": "33px"}, _m={"fontSize": "25px"},
+      fontWeight="500", marginTop="16px", lineHeight="1.4"),
     grid("zd-process-grid", 4, "28px", [
         box("zd-step-%s" % num,
-            {"paddingTop": "26px", "customStyles": "border-top:2px solid rgb(28,26,23);"},
-            [T("p", num, color={"token": "--sage"}, fontSize="13px", fontWeight="700",
+            {"paddingTop": "26px", "customStyles": "border-top:2px solid rgb(24,21,18);"},
+            [T("p", num, color={"token": "--accent"}, fontSize="13px", fontWeight="700",
                letterSpacing="1px", fontFamily=LATIN),
              T("h3", title, color={"token": "--ink"}, fontSize="19px", fontWeight="700",
                marginTop="12px"),
@@ -550,15 +712,15 @@ CATEGORY_SEC = section("zd-cat", [wrap("zd-cat-in", [
      "children": [
          box("zd-cat-head-l", {}, [
              eyebrow("DEVELOP", "zd-cat-eyebrow"),
-             T("h2", "专项护肤品开发", color={"token": "--ink"}, fontSize="38px",
-               fontWeight="700", marginTop="16px"),
+             T("h2", "专项护肤品开发", color={"token": "--ink"}, fontSize="38px", _t={"fontSize": "33px"}, _m={"fontSize": "25px"},
+               fontWeight="500", marginTop="16px"),
          ]),
          T("p", "四条常见产品线，也接受完全客制的品项。", color={"token": "--muted"},
            fontSize="14px", lineHeight="1.9", maxWidth="18em"),
      ]},
     grid("zd-cat-grid", 4, "22px", [
         box("zd-cat-%d" % i,
-            {"customStyles": "overflow:hidden;", "radius": "3px",
+            {"customStyles": "overflow:hidden;", "radius": "0px",
              "backgroundColor": {"token": "--surface"}, "transitionAll": "260ms ease"},
             [box("zd-cat-img-%d" % i,
                  {"customStyles": "overflow:hidden;aspect-ratio:1/1;"},
@@ -578,7 +740,7 @@ CATEGORY_SEC = section("zd-cat", [wrap("zd-cat-in", [
                   T("p", desc, color={"token": "--muted"}, fontSize="13px", marginTop="8px",
                     lineHeight="1.85")])],
             hover={"shadow": {"x": "0px", "y": "16px", "blur": "34px", "spread": "-16px",
-                              "color": "rgba(28,26,23,0.28)"}})
+                              "color": "rgba(24,21,18,0.28)"}})
         for i, (title, desc, img) in enumerate(CATEGORIES)
     ], marginTop="46px"),
 ])])
@@ -591,8 +753,8 @@ REASON_SEC = section("zd-why", [wrap("zd-why-in", [
      "children": [
          box("zd-why-head-l", {}, [
              eyebrow("WHY ZIDANNA", "zd-why-eyebrow"),
-             T("h2", "为何选择我们", color={"token": "--ink"}, fontSize="40px",
-               fontWeight="700", marginTop="16px", letterSpacing="0.02em"),
+             T("h2", "为何选择我们", color={"token": "--ink"}, fontSize="40px", _t={"fontSize": "34px"}, _m={"fontSize": "26px"},
+               fontWeight="500", marginTop="16px", letterSpacing="0.02em"),
          ]),
          T("p", "不是每个环节都需要重新发明。已经稳定的部分交给我们，"
                 "品牌把力气花在真正需要差异化的地方。",
@@ -606,10 +768,10 @@ REASON_SEC = section("zd-why", [wrap("zd-why-in", [
              "paddingTop": "30px", "paddingBottom": "30px",
              "paddingRight": "48px" if i % 2 == 0 else "0px",
              "paddingLeft": "0px" if i % 2 == 0 else "48px",
-             "customStyles": ("border-top:1px solid rgba(28,26,23,.14);"
-                              + ("" if i % 2 == 0 else "border-left:1px solid rgba(28,26,23,.14);")),
+             "customStyles": ("border-top:1px solid rgba(24,21,18,.14);"
+                              + ("" if i % 2 == 0 else "border-left:1px solid rgba(24,21,18,.14);")),
              "transitionAll": "220ms ease"},
-            [T("p", "%02d" % (i + 1), color={"token": "--sage"}, fontSize="12px",
+            [T("p", "%02d" % (i + 1), color={"token": "--accent"}, fontSize="12px",
                fontWeight="700", fontFamily=LATIN, letterSpacing="0.1em",
                customStyles="padding-top:5px;"),
              box("zd-why-t-%d" % i, {}, [
@@ -633,7 +795,7 @@ CTA = section("zd-cta", [wrap("zd-cta-in", [
          box("zd-cta-l", {}, [
              eyebrow("START A PROJECT", "zd-cta-eyebrow"),
              ml("h2", "每个品牌\n都是从第一支样品开始的", color={"token": "--paper"},
-                fontSize="34px", fontWeight="700", lineHeight="1.45", marginTop="18px",
+                fontSize="34px", _t={"fontSize": "29px"}, _m={"fontSize": "23px"}, fontWeight="500", lineHeight="1.45", marginTop="18px",
                 letterSpacing="0.02em"),
          ]),
          box("zd-cta-r", {}, [
@@ -647,7 +809,7 @@ CTA = section("zd-cta", [wrap("zd-cta-in", [
                                     "marginTop": "26px", "cursor": "pointer",
                                     "letterSpacing": "-0.01em",
                                     "transitionAll": "200ms ease"}},
-                        "hover": {"_": {"color": {"token": "--sage"}}}},
+                        "hover": {"_": {"color": {"token": "--accent"}}}},
               "text": "zidnana@163.com"},
              hair("zd-cta-rule", top="18px"),
              {"type": "div", "data": {"attrID": "zd-cta-meta"},
@@ -672,8 +834,8 @@ LINES = [("日常护肤系列", "化妆水、精华、乳液、面霜与面膜�
 OEM = {"type": "div", "data": {"attrID": "zd-oem"}, "children": [
     section("zd-oem-hero", [wrap("zd-oem-hero-in", [
         eyebrow("OEM / ODM", "zd-oem-eyebrow"),
-        dyn("h1", "@VAR('post/title')", color={"token": "--ink"}, fontSize="52px",
-            fontWeight="700", marginTop="18px", lineHeight="1.25"),
+        dyn("h1", "@VAR('post/title')", color={"token": "--ink"}, fontSize="52px", _t={"fontSize": "44px"}, _m={"fontSize": "31px"},
+            fontWeight="500", marginTop="18px", lineHeight="1.25"),
         T("p", "从既有配方微调，到完全依品牌需求重新开发，两种模式都承接。"
                "以下是姿丹娜目前量产中的主要产品线。",
           color={"token": "--muted"}, fontSize="17px", lineHeight="2", marginTop="20px",
@@ -682,13 +844,13 @@ OEM = {"type": "div", "data": {"attrID": "zd-oem"}, "children": [
 
     section("zd-lines", [wrap("zd-lines-in", [
         eyebrow("PRODUCT LINES", "zd-lines-eyebrow"),
-        T("h2", "产品线", color={"token": "--ink"}, fontSize="36px", fontWeight="700",
+        T("h2", "产品线", color={"token": "--ink"}, fontSize="36px", _t={"fontSize": "31px"}, _m={"fontSize": "24px"}, fontWeight="500",
           marginTop="16px"),
         box("zd-lines-list", {"marginTop": "40px"}, [
             box("zd-line-%d" % i,
                 {"paddingTop": "26px", "paddingBottom": "26px",
                  "display": "grid", "gridCols": "0.32fr 0.68fr", "columnGap": "40px",
-                 "customStyles": "border-top:1px solid rgb(226,219,208);",
+                 "customStyles": "border-top:1px solid rgb(223,215,202);",
                  "transitionAll": "200ms ease"},
                 [T("h3", name, color={"token": "--ink"}, fontSize="19px", fontWeight="700"),
                  T("p", desc, color={"token": "--muted"}, fontSize="15px", lineHeight="1.95")],
@@ -699,12 +861,12 @@ OEM = {"type": "div", "data": {"attrID": "zd-oem"}, "children": [
 
     section("zd-oem-process", [wrap("zd-oem-process-in", [
         eyebrow("HOW WE WORK", "zd-oem-p-eyebrow"),
-        T("h2", "合作流程", color={"token": "--ink"}, fontSize="36px", fontWeight="700",
+        T("h2", "合作流程", color={"token": "--ink"}, fontSize="36px", _t={"fontSize": "31px"}, _m={"fontSize": "24px"}, fontWeight="500",
           marginTop="16px"),
         grid("zd-oem-grid", 4, "28px", [
             box("zd-oem-step-%s" % num,
-                {"paddingTop": "26px", "customStyles": "border-top:2px solid rgb(28,26,23);"},
-                [T("p", num, color={"token": "--sage"}, fontSize="13px", fontWeight="700",
+                {"paddingTop": "26px", "customStyles": "border-top:2px solid rgb(24,21,18);"},
+                [T("p", num, color={"token": "--accent"}, fontSize="13px", fontWeight="700",
                    letterSpacing="1px", fontFamily=LATIN),
                  T("h3", title, color={"token": "--ink"}, fontSize="19px", fontWeight="700",
                    marginTop="12px"),
@@ -726,10 +888,18 @@ SITE = {
     "theme": {
         "variables": TOKENS,
         "elementClasses": {
-            "Body": {"&": {"_": {"fontFamily": CJK, "color": {"token": "--ink"}}}},
-            "Heading 1": {"&": {"_": {"fontWeight": "700", "letterSpacing": "0.5px"}}},
-            "Heading 2": {"&": {"_": {"fontWeight": "700"}}},
-            "Heading 3": {"&": {"_": {"fontWeight": "700"}}},
+            # Display is the serif, running text is the sans. Setting it here rather
+            # than on each node means one edit changes the whole site's voice.
+            "Body": {"&": {"_": {"fontFamily": CJK, "color": {"token": "--ink"},
+                                 "fontWeight": "300"}}},
+            "Heading 1": {"&": {"_": {"fontFamily": SERIF, "fontWeight": "500",
+                                      "letterSpacing": "0.04em"}}},
+            "Heading 2": {"&": {"_": {"fontFamily": SERIF, "fontWeight": "500",
+                                      "letterSpacing": "0.03em"}}},
+            "Heading 3": {"&": {"_": {"fontFamily": SERIF, "fontWeight": "500",
+                                      "letterSpacing": "0.02em"}}},
+            "Paragraph": {"&": {"_": {"fontFamily": CJK, "fontWeight": "300",
+                                      "lineHeight": "2.05"}}},
         },
     },
     "shell": {"header": HEADER, "footer": FOOTER},
