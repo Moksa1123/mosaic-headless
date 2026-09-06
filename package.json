@@ -1,0 +1,59 @@
+{
+  "name": "mosaic-headless",
+  "version": "1.2.0",
+  "description": "AI-agent skill: build Mosaic Pro (Nextend) WordPress sites by writing the underlying data model directly - 23 custom tables, no visual editor, no DOM. Every node type, style property and node property swept against a live install and asserted on the delivered HTML and compiled CSS. Installs into Claude Code, Cursor, Codex CLI, Gemini CLI, Copilot, Continue, Windsurf and Claude.ai.",
+  "keywords": [
+    "wordpress",
+    "mosaic",
+    "mosaic-pro",
+    "nextend",
+    "page-builder",
+    "claude-code",
+    "agent-skill",
+    "ai-agent",
+    "headless",
+    "woocommerce",
+    "wp-cli"
+  ],
+  "homepage": "https://github.com/Moksa1123/mosaic-headless#readme",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Moksa1123/mosaic-headless.git"
+  },
+  "bugs": {
+    "url": "https://github.com/Moksa1123/mosaic-headless/issues"
+  },
+  "license": "MIT",
+  "author": "moksa (https://moksaweb.com)",
+  "type": "module",
+  "bin": {
+    "mosaic-headless": "bin/install.mjs"
+  },
+  "files": [
+    "bin/",
+    "assets/",
+    "data/*.csv",
+    "references/",
+    "sites/_moksa.py",
+    "sites/moksa.json",
+    "tools/*.py",
+    "tools/*.php",
+    "SKILL.md",
+    "README.md",
+    "README.zh-TW.md",
+    "README.zh-CN.md",
+    "README.ja.md",
+    "LICENSE"
+  ],
+  "engines": {
+    "node": ">=18"
+  },
+  "scripts": {
+    "install-skill": "node bin/install.mjs",
+    "check": "node bin/check-release.mjs",
+    "preversion": "npm run check",
+    "version": "node bin/sync-version.mjs && git add SKILL.md assets/templates/platforms",
+    "postversion": "git push && git push --tags",
+    "prepublishOnly": "npm run check"
+  }
+}

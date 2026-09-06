@@ -1,0 +1,68 @@
+name: release
+
+# Publishing is driven by the tag, and the tag is made by `npm version`, so there is
+# exactly one command to remember and no way to publish a version that was never
+# tagged. The job re-checks that the tag matches package.json before it publishes -
+# a tag pushed by hand that disagrees with the manifest is refused rather than
+# published under the wrong number.
+
+on:
+  push:
+    tags:
+      - "v*"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+  id-token: write          # npm provenance
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          registry-url: https://registry.npmjs.org
+
+      - name: Tag must match package.json
+        if: startsWith(github.ref, 'refs/tags/v')
+        run: |
+          TAG="${GITHUB_REF_NAME#v}"
+          PKG=$(node -p "require('./package.json').version")
+          echo "tag=$TAG package.json=$PKG"
+          [ "$TAG" = "$PKG" ] || {
+            echo "::error::tag $GITHUB_REF_NAME does not match package.json $PKG"
+            exit 1
+          }
+
+      # The same check that guards `npm version` locally: versions agree across
+      # package.json, SKILL.md and every platform template, every shipped path
+      # exists, and the row counts in the verification CSVs still match the numbers
+      # SKILL.md quotes.
+      - name: Release checks
+        run: node bin/check-release.mjs
+
+      - name: Installer must run
+        run: |
+          node bin/install.mjs --list
+          node bin/install.mjs --dry-run claude-code
+
+      - name: Show exactly what will ship
+        run: npm pack --dry-run
+
+      - name: Publish
+        run: npm publish --provenance --access public
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+
+      - name: GitHub release
+        if: startsWith(github.ref, 'refs/tags/v')
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          gh release create "$GITHUB_REF_NAME" \
+            --title "$GITHUB_REF_NAME" \
+            --generate-notes

@@ -1,0 +1,34 @@
+{
+  "platform": "claude-ai",
+  "displayName": "Claude.ai (web app)",
+  "installType": "zip-upload",
+  "folderStructure": {
+    "projectRoot": null,
+    "globalRoot": null,
+    "skillPath": "mosaic-headless.zip",
+    "filename": "SKILL.md"
+  },
+  "sections": {
+    "skill": true,
+    "references": true,
+    "tools": false,
+    "data": true,
+    "sites": true
+  },
+  "frontmatter": {
+    "name": "mosaic-headless",
+    "description": "Build and modify Mosaic Pro (Nextend) sites by writing the underlying data model directly - no visual editor, no DOM. Query the real surface (122 node types, 181 node properties, 98 style properties, 53 style states, 151 element classes, 74 dynamic variables, 114 REST routes, 23 tables) instead of guessing, with every node type placed on a live site one at a time and asserted against the delivered HTML, every style and node property swept against the compiled CSS and markup, and 569 responsive declarations checked against the stylesheet the site actually served.",
+    "license": "MIT",
+    "author": "moksa (https://moksaweb.com)",
+    "version": "1.2.0"
+  },
+  "loaderBehaviour": "Upload via Settings -> Skills -> Upload. Claude.ai parses SKILL.md frontmatter and surfaces the skill in your library. The extraction tool (extract-block-schema.php) needs a live WP-CLI connection and won't run in the sandbox; use it from a local terminal against your own site instead.",
+  "uploadSteps": [
+    "1. Run: python tools/install-skill.py claude-ai --to ./build (creates elementor-headless.zip)",
+    "2. Open Claude.ai -> Settings -> Skills -> Upload",
+    "3. Pick the generated zip; the skill appears in your library",
+    "4. New chats auto-invoke when you ask to build/modify an Elementor page programmatically"
+  ],
+  "verified": true,
+  "verifiedAsOf": "2026-09-06"
+}

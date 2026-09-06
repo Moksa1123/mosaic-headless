@@ -36,3 +36,9 @@ tools/build_report.py
 # stray screenshots at the repo root
 *.png
 *.jpg
+
+# npm
+node_modules/
+*.tgz
+# an install test run inside the repo would land here
+.claude/

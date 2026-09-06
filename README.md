@@ -89,6 +89,45 @@ clause index built on named view timelines and no JavaScript.
 5. `references/styling.md` — how a style value becomes CSS.
 6. `references/design-system.md` — element classes and design tokens.
 
+## Releasing
+
+One command. The version lives in three places — `package.json`, the SKILL.md
+frontmatter an agent reads, and the frontmatter each platform template writes on
+install — and nothing keeps them together on its own.
+
+```bash
+npm version patch      # or minor / major
+```
+
+That runs, in order:
+
+1. `preversion` → `bin/check-release.mjs`
+2. npm bumps `package.json`
+3. `version` → `bin/sync-version.mjs` writes the new number into SKILL.md and all
+   eight platform templates, and stages them
+4. npm commits and tags `vX.Y.Z`
+5. `postversion` → pushes the commit and the tag
+
+The tag push triggers `.github/workflows/release.yml`, which refuses to publish
+unless the tag matches `package.json`, re-runs the release checks, proves the
+installer runs, prints the tarball, then publishes with provenance and opens a
+GitHub release.
+
+`bin/check-release.mjs` is the gate, and it checks the things that are easy to get
+wrong rather than the things that are easy to check:
+
+- the three version numbers agree
+- every glob in `files` matches something
+- the row counts in the verification CSVs still equal the numbers SKILL.md quotes
+- `SKIPPED` labels survive into the shipped data, because a sweep that hides its
+  blind spots is the failure this skill argues against
+- **the tarball itself is inspected**, not the intent. npm's `files` allowlist
+  *overrides* `.gitignore`: naming a directory ships everything inside it, ignored
+  or not. Listing `sites/` once put a real client's generator and content into the
+  tarball — gitignored, and about to be published anyway.
+
+One-time setup: add the `NPM_TOKEN` repository secret.
+
 ## Licence
 
 MIT. Mosaic Pro itself is licensed third-party software and is **not** included here.

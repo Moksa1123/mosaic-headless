@@ -1,0 +1,31 @@
+{
+  "platform": "continue",
+  "displayName": "Continue (continue.dev)",
+  "installType": "rule",
+  "folderStructure": {
+    "projectRoot": ".continue",
+    "globalRoot": "~/.continue",
+    "skillPath": "rules",
+    "filename": "mosaic-headless.md"
+  },
+  "sections": {
+    "skill": true,
+    "references": false,
+    "tools": false,
+    "data": false,
+    "sites": false
+  },
+  "frontmatter": {
+    "name": "mosaic-headless",
+    "description": "Build and modify Mosaic Pro (Nextend) sites by writing the underlying data model directly - no visual editor, no DOM. Query the real surface (122 node types, 181 node properties, 98 style properties, 53 style states, 151 element classes, 74 dynamic variables, 114 REST routes, 23 tables) instead of guessing, with every node type placed on a live site one at a time and asserted against the delivered HTML, every style and node property swept against the compiled CSS and markup, and 569 responsive declarations checked against the stylesheet the site actually served.",
+    "alwaysApply": false
+  },
+  "loaderBehaviour": "Continue reads .continue/rules/*.md as Rules. Set alwaysApply: true to attach to every chat, or leave false and rely on the description for relevance matching. Rule files load in lexicographic order if you split this into several numbered files. References must be embedded inline; the installer concatenates key reference files into the rule body.",
+  "embedReferences": [
+    "data-model.md",
+    "failure-modes.md",
+    "responsive.md"
+  ],
+  "verified": true,
+  "verifiedAsOf": "2026-09-06"
+}
