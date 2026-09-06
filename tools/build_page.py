@@ -88,8 +88,15 @@ class Surface:
         # need their own parent. So the measured verdict only applies when the parent is
         # not the one the type is declared to belong under.
         parent_rule = self.rules.get(parent_type or "", {})
+        parent_defaults = self.default_children.get(parent_type or "", [])
         declared_child = (t in (parent_rule.get("allowed_children") or "").split("|")
-                          or t in self.default_children.get(parent_type or "", []))
+                          or t in parent_defaults
+                          # the wysiwyg family is one interchangeable content model: a
+                          # parent that seeds itself with wysiwyg-text takes any of
+                          # them, and wysiwyg-variable inside a text node is verified
+                          # to render (references/dynamic-content.md)
+                          or (t.startswith("wysiwyg-")
+                              and any(d.startswith("wysiwyg-") for d in parent_defaults)))
         outcome = self.outcome.get(t)
         if not declared_child and (outcome == "BROKE_PAGE" or (outcome or "").startswith("COMMIT_5")):
             problems.append("%s is measured %s under a plain container, and %s is not its declared parent"
@@ -122,6 +129,9 @@ class Surface:
 # string to them is accepted and then silently produces `transform:none`, `box-shadow:none`
 # or no rule at all - so these shorthands exist to make the correct shape unavoidable.
 # Each was confirmed against the compiled CSS; see references/styling.md.
+VAR_IDS = {}
+
+
 def expand_shorthands(props):
     out = {}
     extra_css = []
@@ -151,6 +161,13 @@ def expand_shorthands(props):
             out["borderStyle"] = {"border%s%s" % (side, part): val
                                   for side in ("Top", "Right", "Bottom", "Left")
                                   for part, val in (("Width", width), ("Style", style), ("Color", color))}
+        elif isinstance(value, dict) and "token" in value:
+            # {"token": "--brand"} -> the {"var": <uuid>} reference the compiler wants
+            vid = VAR_IDS.get(value["token"])
+            if not vid:
+                sys.exit("style references token %r before it is declared in theme.variables"
+                         % value["token"])
+            out[key] = {"var": vid}
         else:
             out[key] = value
     if extra_css:
@@ -199,6 +216,63 @@ def ordering_for(index):
     return "a" + (alphabet[index] if index < len(alphabet) else alphabet[-1] + alphabet[index % len(alphabet)])
 
 
+def theme_records(spec, doc, surface):
+    """Turn the spec's `theme` block into collectionVariable + elementClass records.
+
+    Both are theme-scoped rather than per-node, and both are how a real Mosaic site is
+    meant to be styled: variables are the tokens, element classes apply them to every
+    element of a kind. See references/design-system.md.
+    """
+    theme = spec.get("theme") or {}
+    out = {}
+
+    variables = theme.get("variables") or {}
+    if variables:
+        collection = (doc.get("collection") or [{}])[0].get("ID")
+        mode = (doc.get("collectionMode") or [{}])[0].get("ID")
+        skin = (doc.get("collectionSkin") or [{}])[0].get("ID")
+        if not (collection and mode and skin):
+            sys.exit("theme.variables needs a healed collection/mode/skin")
+        recs = []
+        for custom_property, value in variables.items():
+            vid = spec.setdefault("_varIDs", {}).setdefault(custom_property, str(uuid.uuid4()))
+            recs.append({"newRevisionRecord": {
+                "ID": vid, "parentType": "collection", "parentID": collection,
+                "ordering": "a0", "status": "publish", "revision": "", "version": "",
+                "data": {"name": custom_property.lstrip("-"),
+                         "type": value.get("type", "color"),
+                         "customProperty": custom_property,
+                         "skinsData": {skin: {mode: {"value": value["value"]}}}}},
+                "originalRevisionRecord": None})
+        out["collectionVariable"] = recs
+        # register the IDs before element-class styles are expanded - those cite
+        # tokens too, and expand_shorthands resolves {"token": ...} from this map
+        VAR_IDS.update(spec["_varIDs"])
+
+    classes = theme.get("elementClasses") or {}
+    if classes:
+        by_name = {}
+        for row in load_csv("element-classes.csv"):
+            by_name.setdefault(row["name"], []).append(row)
+        recs = []
+        for name, states in classes.items():
+            matches = by_name.get(name) or []
+            if not matches:
+                sys.exit("no element-class meta named %r; see data/element-classes.csv" % name)
+            # a fresh UUID here is accepted and then silently dropped, so the meta ID
+            # is the only thing that works - take the top-level (parent-less) one
+            top = next((m for m in matches if not m["parent"]), matches[0])
+            recs.append({"newRevisionRecord": {
+                "ID": top["id"], "parentType": "", "parentID": "", "ordering": "a0",
+                "status": "publish", "revision": "", "version": "",
+                "data": {"states": {st: {bp: expand_shorthands(props)
+                                         for bp, props in per_bp.items()}
+                                    for st, per_bp in states.items()}}},
+                "originalRevisionRecord": None})
+        out["elementClass"] = recs
+    return out
+
+
 def create_master(client, name):
     inst = unwrap(client.get("adminMasterEditorInstance"), "adminMasterEditorInstance")
     mid = str(uuid.uuid4())
@@ -238,9 +312,14 @@ def build(client, cfg, spec, force):
             {"newRevisionRecord": dict(n, status="delete"), "originalRevisionRecord": n} for n in doomed]})
         doc = unwrap(client.get("masterDocumentInstance/%s" % master_id), "masterDocumentInstance")
 
+    # theme records first: the variable IDs have to exist before a node can cite one
+    VAR_IDS.clear()
+    extra = theme_records(spec, doc, surface)
+
     records = flatten(spec["tree"], body["ID"], master_id, surface, force, parent_type="body")
-    resp = client.commit("masterDocumentInstance/%s" % master_id, envelopes(doc),
-                         {key: [{"newRevisionRecord": r, "originalRevisionRecord": None} for r in records]})
+    payload = dict(extra)
+    payload[key] = [{"newRevisionRecord": r, "originalRevisionRecord": None} for r in records]
+    resp = client.commit("masterDocumentInstance/%s" % master_id, envelopes(doc), payload)
     err = exceptions_of(resp)
     if err:
         sys.exit("node commit failed: %s" % err)
