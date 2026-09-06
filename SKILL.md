@@ -92,6 +92,12 @@ PROPERTIES   170 probes over the declared property surface, each value asserted
              against the delivered markup and the compiled CSS separately.
              data/property-verification.csv
 
+RWD          569 responsive declarations across two sites asserted against the
+             stylesheet the site actually served - each `_t`/`_m` property matched
+             to its element's generated class inside that breakpoint's own media
+             query. All verified; the checker is itself checked against a poisoned
+             spec so a pass means something. data/rwd-verification.csv
+
 BUILD        nine complete designed pages built through the tables alone and checked
              in a real browser, hover states included - the ninth uses only design
              tokens, element-class typography and dynamic content, no hard-coded
@@ -111,6 +117,10 @@ FROM SOURCE  122 node types, 181 properties (61 with enums), 207 pluggable IDs,
 - `backgroundStyle` is the one style property whose shape resisted every attempt — it
   accepts what you send and emits `background-image:none`. Use `customStyles` for
   gradients, as the glass and darkglow pages do.
+- **`gridColumnStart` / `gridColumnEnd` / `gridRowStart` / `gridRowEnd` emit nothing.**
+  All four are real entries in `data/style-properties.csv`, under `gridChildPosition`.
+  Measured: 16 `gridColumnStart` declarations committed, zero occurrences of
+  `grid-column` in the delivered CSS. Change the template; you cannot place a child.
 - **Interaction property binding is unsolved.** The trigger, action slot and keyframe
   timing all reach the browser; `propertyMetas` and per-keyframe `properties` do not.
   Animate with the CSS transition/state path, which is fully verified.
@@ -129,16 +139,19 @@ FROM SOURCE  122 node types, 181 properties (61 with enums), 207 pluggable IDs,
    tell you.
 5. `references/styling.md` — how a style value becomes CSS, and the shapes that are
    silently inert if you write a string.
-6. `references/design-system.md` — element classes and design tokens. **Read this
+6. `references/responsive.md` - the state/breakpoint/property axis, the two
+   breakpoint rows, and the override that can change a property but never remove
+   one. **Read before writing any `_t` or `_m` value.**
+7. `references/design-system.md` — element classes and design tokens. **Read this
    before styling anything beyond a one-off page**; per-node style is the wrong layer
    for a real site.
-7. `references/dynamic-content.md` — the `@VAR()` language. The syntax is not
+8. `references/dynamic-content.md` — the `@VAR()` language. The syntax is not
    guessable, and a wrong guess renders as literal text rather than an error.
-8. `references/templates-and-conditions.md` — how Mosaic picks a template, and the
+9. `references/templates-and-conditions.md` — how Mosaic picks a template, and the
    condition grammar shared by templates, elements, interactions and form actions.
-9. `references/interactions.md` — the JavaScript animation system, and how far it is
+10. `references/interactions.md` — the JavaScript animation system, and how far it is
    verified.
-10. `references/vs-elementor-gutenberg.md` — which builder habits transfer.
+11. `references/vs-elementor-gutenberg.md` — which builder habits transfer.
 
 ## The data files
 
@@ -153,6 +166,7 @@ FROM SOURCE  122 node types, 181 properties (61 with enums), 207 pluggable IDs,
 | `data/style-value-shapes.csv` | 22 | **probed live** — the exact JSON shape for each structured value, and what it compiled to |
 | `data/style-states.csv` | 53 | source — state IDs with their exact CSS selector templates |
 | `data/property-verification.csv` | 170 | **probed live** — per-property effect on markup vs CSS, with unprovable enums marked INCONCLUSIVE |
+| `data/rwd-verification.csv` | 567 | **checked live** - every `_t`/`_m` declaration vs the served stylesheet, with status per row |
 | `data/element-classes.csv` | 151 | **live** — the built-in class metas; their IDs are what an `elementClass` record must use |
 | `data/dynamic-variables.csv` | 74 | source — every `@VAR('ns/name')` expression, by namespace |
 | `data/evaluator-functions.csv` | 19 | source — the `@` functions with their arity |
@@ -252,6 +266,7 @@ python tools/capture_live.py             data/          # from data/raw/*.json
 python tools/sweep_node_types.py --config sweep.json --setup
 python tools/sweep_node_types.py --config sweep.json --sweep --edition all
 python tools/sweep_properties.py --config sweep.json
+python tools/verify_rwd.py --config sweep.json --site sites/moksa.json --csv data/rwd-verification.csv
 python tools/probe.py --config lab.json --cases cases.json   # ad-hoc measurement
 python tools/check_placement_predicts.py
 ```

@@ -3240,12 +3240,12 @@
                    "customStyles": "border-top:1px solid rgba(22,24,28,.16);"
                   },
                   "_t": {
-                   "gridCols": "84px 1fr",
-                   "rowGap": "10px"
+                   "gridCols": "72px 1fr 1.2fr",
+                   "columnGap": "18px"
                   },
                   "_m": {
-                   "gridCols": "48px 1fr",
-                   "rowGap": "8px",
+                   "gridCols": "repeat(1, 1fr)",
+                   "rowGap": "10px",
                    "paddingTop": "20px",
                    "paddingBottom": "20px"
                   }
@@ -3364,12 +3364,12 @@
                    "customStyles": "border-top:1px solid rgba(22,24,28,.16);"
                   },
                   "_t": {
-                   "gridCols": "84px 1fr",
-                   "rowGap": "10px"
+                   "gridCols": "72px 1fr 1.2fr",
+                   "columnGap": "18px"
                   },
                   "_m": {
-                   "gridCols": "48px 1fr",
-                   "rowGap": "8px",
+                   "gridCols": "repeat(1, 1fr)",
+                   "rowGap": "10px",
                    "paddingTop": "20px",
                    "paddingBottom": "20px"
                   }
@@ -3488,12 +3488,12 @@
                    "customStyles": "border-top:1px solid rgba(22,24,28,.16);"
                   },
                   "_t": {
-                   "gridCols": "84px 1fr",
-                   "rowGap": "10px"
+                   "gridCols": "72px 1fr 1.2fr",
+                   "columnGap": "18px"
                   },
                   "_m": {
-                   "gridCols": "48px 1fr",
-                   "rowGap": "8px",
+                   "gridCols": "repeat(1, 1fr)",
+                   "rowGap": "10px",
                    "paddingTop": "20px",
                    "paddingBottom": "20px"
                   }
@@ -3612,12 +3612,12 @@
                    "customStyles": "border-top:1px solid rgba(22,24,28,.16);"
                   },
                   "_t": {
-                   "gridCols": "84px 1fr",
-                   "rowGap": "10px"
+                   "gridCols": "72px 1fr 1.2fr",
+                   "columnGap": "18px"
                   },
                   "_m": {
-                   "gridCols": "48px 1fr",
-                   "rowGap": "8px",
+                   "gridCols": "repeat(1, 1fr)",
+                   "rowGap": "10px",
                    "paddingTop": "20px",
                    "paddingBottom": "20px"
                   }
@@ -7305,7 +7305,7 @@
                  "&": {
                   "_": {
                    "display": "grid",
-                   "gridCols": "84px 1fr 1.3fr 118px",
+                   "gridCols": "84px 1fr 1.3fr",
                    "columnGap": "24px",
                    "alignItems": "start",
                    "paddingTop": "26px",
@@ -7313,12 +7313,13 @@
                    "customStyles": "border-top:1px solid rgba(250,250,247,.18);"
                   },
                   "_t": {
-                   "gridCols": "84px 1fr",
-                   "rowGap": "12px"
+                   "gridCols": "72px 1fr 1.2fr",
+                   "columnGap": "18px",
+                   "rowGap": "14px"
                   },
                   "_m": {
-                   "gridCols": "48px 1fr",
-                   "rowGap": "10px",
+                   "gridCols": "repeat(1, 1fr)",
+                   "rowGap": "12px",
                    "paddingTop": "20px",
                    "paddingBottom": "20px"
                   }
@@ -7397,6 +7398,42 @@
                       }
                      }
                     }
+                   },
+                   {
+                    "type": "div",
+                    "data": {
+                     "attrID": "mk-prod-s-0"
+                    },
+                    "style": {
+                     "&": {
+                      "_": {
+                       "marginTop": "14px",
+                       "customStyles": "border:1px solid rgba(255,90,54,.6);padding:5px 10px;display:inline-block;width:max-content;"
+                      }
+                     }
+                    },
+                    "children": [
+                     {
+                      "type": "text",
+                      "data": {
+                       "tagName": "p"
+                      },
+                      "text": "FREE TIER",
+                      "style": {
+                       "&": {
+                        "_": {
+                         "color": {
+                          "token": "--mk-accent"
+                         },
+                         "fontSize": "10px",
+                         "letterSpacing": "0.12em",
+                         "fontFamily": "'IBM Plex Mono',ui-monospace,SFMono-Regular,Menlo,Consolas,monospace",
+                         "fontWeight": "400"
+                        }
+                       }
+                      }
+                     }
+                    ]
                    }
                   ]
                  },
@@ -7416,41 +7453,6 @@
                     }
                    }
                   }
-                 },
-                 {
-                  "type": "div",
-                  "data": {
-                   "attrID": "mk-prod-s-0"
-                  },
-                  "style": {
-                   "&": {
-                    "_": {
-                     "customStyles": "border:1px solid rgba(255,90,54,.6);padding:5px 10px;align-self:start;"
-                    }
-                   }
-                  },
-                  "children": [
-                   {
-                    "type": "text",
-                    "data": {
-                     "tagName": "p"
-                    },
-                    "text": "FREE TIER",
-                    "style": {
-                     "&": {
-                      "_": {
-                       "color": {
-                        "token": "--mk-accent"
-                       },
-                       "fontSize": "10px",
-                       "letterSpacing": "0.12em",
-                       "fontFamily": "'IBM Plex Mono',ui-monospace,SFMono-Regular,Menlo,Consolas,monospace",
-                       "fontWeight": "400"
-                      }
-                     }
-                    }
-                   }
-                  ]
                  }
                 ]
                },
@@ -7463,7 +7465,7 @@
                  "&": {
                   "_": {
                    "display": "grid",
-                   "gridCols": "84px 1fr 1.3fr 118px",
+                   "gridCols": "84px 1fr 1.3fr",
                    "columnGap": "24px",
                    "alignItems": "start",
                    "paddingTop": "26px",
@@ -7471,12 +7473,13 @@
                    "customStyles": "border-top:1px solid rgba(250,250,247,.18);"
                   },
                   "_t": {
-                   "gridCols": "84px 1fr",
-                   "rowGap": "12px"
+                   "gridCols": "72px 1fr 1.2fr",
+                   "columnGap": "18px",
+                   "rowGap": "14px"
                   },
                   "_m": {
-                   "gridCols": "48px 1fr",
-                   "rowGap": "10px",
+                   "gridCols": "repeat(1, 1fr)",
+                   "rowGap": "12px",
                    "paddingTop": "20px",
                    "paddingBottom": "20px"
                   }
@@ -7555,6 +7558,42 @@
                       }
                      }
                     }
+                   },
+                   {
+                    "type": "div",
+                    "data": {
+                     "attrID": "mk-prod-s-1"
+                    },
+                    "style": {
+                     "&": {
+                      "_": {
+                       "marginTop": "14px",
+                       "customStyles": "border:1px solid rgba(255,90,54,.6);padding:5px 10px;display:inline-block;width:max-content;"
+                      }
+                     }
+                    },
+                    "children": [
+                     {
+                      "type": "text",
+                      "data": {
+                       "tagName": "p"
+                      },
+                      "text": "IN BETA",
+                      "style": {
+                       "&": {
+                        "_": {
+                         "color": {
+                          "token": "--mk-accent"
+                         },
+                         "fontSize": "10px",
+                         "letterSpacing": "0.12em",
+                         "fontFamily": "'IBM Plex Mono',ui-monospace,SFMono-Regular,Menlo,Consolas,monospace",
+                         "fontWeight": "400"
+                        }
+                       }
+                      }
+                     }
+                    ]
                    }
                   ]
                  },
@@ -7574,41 +7613,6 @@
                     }
                    }
                   }
-                 },
-                 {
-                  "type": "div",
-                  "data": {
-                   "attrID": "mk-prod-s-1"
-                  },
-                  "style": {
-                   "&": {
-                    "_": {
-                     "customStyles": "border:1px solid rgba(255,90,54,.6);padding:5px 10px;align-self:start;"
-                    }
-                   }
-                  },
-                  "children": [
-                   {
-                    "type": "text",
-                    "data": {
-                     "tagName": "p"
-                    },
-                    "text": "IN BETA",
-                    "style": {
-                     "&": {
-                      "_": {
-                       "color": {
-                        "token": "--mk-accent"
-                       },
-                       "fontSize": "10px",
-                       "letterSpacing": "0.12em",
-                       "fontFamily": "'IBM Plex Mono',ui-monospace,SFMono-Regular,Menlo,Consolas,monospace",
-                       "fontWeight": "400"
-                      }
-                     }
-                    }
-                   }
-                  ]
                  }
                 ]
                }

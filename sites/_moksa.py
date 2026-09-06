@@ -816,8 +816,8 @@ SERVICE_SEC = section("services", [wrap("mk-svc-in", [
                  "columnGap": "24px", "alignItems": "start",
                  "paddingTop": "26px", "paddingBottom": "26px",
                  "customStyles": "border-top:1px solid " + RULE + ";"},
-                _t={"gridCols": "84px 1fr", "rowGap": "10px"},
-                _m={"gridCols": "48px 1fr", "rowGap": "8px",
+                _t={"gridCols": "72px 1fr 1.2fr", "columnGap": "18px"},
+                _m={"gridCols": "repeat(1, 1fr)", "rowGap": "10px",
                     "paddingTop": "20px", "paddingBottom": "20px"},
                 children=[
                     mono(num, size="12px", color="--mk-faint", track="0.06em"),
@@ -828,7 +828,8 @@ SERVICE_SEC = section("services", [wrap("mk-svc-in", [
                           letterSpacing="0.01em"),
                     ]),
                     T("p", body, color={"token": "--mk-muted"}, fontSize="13px",
-                      lineHeight="2"),
+                      lineHeight="2",
+                      ),
                 ])
             for i, (num, en, zh, body) in enumerate(SERVICES)
         ]),
@@ -977,12 +978,13 @@ PRODUCT_SEC = section("products", [wrap("mk-prod-in", [
             box("mk-prod-list", {"marginTop": "40px"}, _m={"marginTop": "28px"},
                 children=[
                     box("mk-prod-%d" % i,
-                        {"display": "grid", "gridCols": "84px 1fr 1.3fr 118px",
+                        {"display": "grid", "gridCols": "84px 1fr 1.3fr",
                          "columnGap": "24px", "alignItems": "start",
                          "paddingTop": "26px", "paddingBottom": "26px",
                          "customStyles": "border-top:1px solid " + RULE_DARK + ";"},
-                        _t={"gridCols": "84px 1fr", "rowGap": "12px"},
-                        _m={"gridCols": "48px 1fr", "rowGap": "10px",
+                        _t={"gridCols": "72px 1fr 1.2fr", "columnGap": "18px",
+                            "rowGap": "14px"},
+                        _m={"gridCols": "repeat(1, 1fr)", "rowGap": "12px",
                             "paddingTop": "20px", "paddingBottom": "20px"},
                         children=[
                             mono("%02d" % (i + 1), size="12px",
@@ -994,15 +996,20 @@ PRODUCT_SEC = section("products", [wrap("mk-prod-in", [
                                   fontSize="24px", fontWeight="600",
                                   fontFamily=DISPLAY, marginTop="9px",
                                   letterSpacing="-0.02em", _m={"fontSize": "21px"}),
+                                # a property of the product, not a column of the
+                                # table: as a fourth grid child it landed alone in
+                                # the 72px number gutter on row two at tablet
+                                box("mk-prod-s-%d" % i,
+                                    {"marginTop": "14px",
+                                     "customStyles":
+                                         "border:1px solid rgba(255,90,54,.6);"
+                                         "padding:5px 10px;display:inline-block;"
+                                         "width:max-content;"},
+                                    [mono(status, size="10px", color="--mk-accent",
+                                          track="0.12em")]),
                             ]),
                             T("p", body, color="rgb(158,160,168)", fontSize="13px",
                               lineHeight="2"),
-                            box("mk-prod-s-%d" % i,
-                                {"customStyles":
-                                     "border:1px solid rgba(255,90,54,.6);"
-                                     "padding:5px 10px;align-self:start;"},
-                                [mono(status, size="10px", color="--mk-accent",
-                                      track="0.12em")]),
                         ])
                     for i, (en, name, body, status) in enumerate(PRODUCTS)
                 ]),
