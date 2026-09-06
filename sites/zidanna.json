@@ -1,0 +1,4381 @@
+{
+ "master": "Zidanna shell",
+ "theme": {
+  "variables": {
+   "--ink": {
+    "type": "color",
+    "value": "rgb(28,26,23)"
+   },
+   "--paper": {
+    "type": "color",
+    "value": "rgb(250,248,244)"
+   },
+   "--surface": {
+    "type": "color",
+    "value": "rgb(255,255,255)"
+   },
+   "--sand": {
+    "type": "color",
+    "value": "rgb(235,228,217)"
+   },
+   "--sage": {
+    "type": "color",
+    "value": "rgb(109,127,109)"
+   },
+   "--muted": {
+    "type": "color",
+    "value": "rgb(125,118,108)"
+   },
+   "--line": {
+    "type": "color",
+    "value": "rgb(226,219,208)"
+   }
+  },
+  "elementClasses": {
+   "Body": {
+    "&": {
+     "_": {
+      "fontFamily": "'PingFang SC','Hiragino Sans GB','Microsoft YaHei','Noto Sans SC',sans-serif",
+      "color": {
+       "token": "--ink"
+      }
+     }
+    }
+   },
+   "Heading 1": {
+    "&": {
+     "_": {
+      "fontWeight": "700",
+      "letterSpacing": "0.5px"
+     }
+    }
+   },
+   "Heading 2": {
+    "&": {
+     "_": {
+      "fontWeight": "700"
+     }
+    }
+   },
+   "Heading 3": {
+    "&": {
+     "_": {
+      "fontWeight": "700"
+     }
+    }
+   }
+  }
+ },
+ "shell": {
+  "header": {
+   "type": "div",
+   "data": {
+    "attrID": "zd-header"
+   },
+   "style": {
+    "&": {
+     "_": {
+      "backgroundColor": {
+       "token": "--paper"
+      },
+      "paddingTop": "20px",
+      "paddingBottom": "20px",
+      "paddingLeft": "48px",
+      "paddingRight": "48px",
+      "fontFamily": "'PingFang SC','Hiragino Sans GB','Microsoft YaHei','Noto Sans SC',sans-serif",
+      "customStyles": "border-bottom:1px solid rgb(226,219,208);"
+     }
+    }
+   },
+   "children": [
+    {
+     "type": "div",
+     "data": {
+      "attrID": "zd-header-in"
+     },
+     "style": {
+      "&": {
+       "_": {
+        "width": "100%",
+        "maxWidth": "1120px",
+        "marginLeft": "auto",
+        "marginRight": "auto"
+       }
+      }
+     },
+     "children": [
+      {
+       "type": "div",
+       "data": {
+        "attrID": "zd-header-row"
+       },
+       "style": {
+        "&": {
+         "_": {
+          "display": "flex",
+          "alignItems": "center",
+          "justifyContent": "space-between",
+          "columnGap": "40px"
+         }
+        }
+       },
+       "children": [
+        {
+         "type": "div",
+         "data": {
+          "attrID": "zd-logo"
+         },
+         "style": {
+          "&": {
+           "_": {}
+          }
+         },
+         "children": [
+          {
+           "type": "text",
+           "data": {
+            "tagName": "h3"
+           },
+           "text": "姿丹娜",
+           "style": {
+            "&": {
+             "_": {
+              "color": {
+               "token": "--ink"
+              },
+              "fontSize": "21px",
+              "fontWeight": "700",
+              "letterSpacing": "4px"
+             }
+            }
+           }
+          },
+          {
+           "type": "text",
+           "data": {
+            "tagName": "p"
+           },
+           "text": "ZIDANNA",
+           "style": {
+            "&": {
+             "_": {
+              "color": {
+               "token": "--muted"
+              },
+              "fontSize": "10px",
+              "letterSpacing": "3px",
+              "fontFamily": "'Helvetica Neue',Helvetica,Arial,sans-serif",
+              "marginTop": "2px"
+             }
+            }
+           }
+          }
+         ]
+        },
+        {
+         "type": "menu",
+         "data": {
+          "attrID": "zd-nav"
+         },
+         "style": {
+          "&": {
+           "_": {
+            "display": "flex",
+            "columnGap": "34px",
+            "alignItems": "center"
+           },
+           "_m": {
+            "display": "none"
+           }
+          }
+         },
+         "children": [
+          {
+           "type": "menu-link",
+           "data": {
+            "attrID": "zd-nav-0",
+            "url": "/zidanna/"
+           },
+           "style": {
+            "&": {
+             "_": {
+              "color": {
+               "token": "--ink"
+              },
+              "fontSize": "14px",
+              "transitionAll": "160ms ease",
+              "cursor": "pointer"
+             }
+            },
+            "hover": {
+             "_": {
+              "color": {
+               "token": "--sage"
+              }
+             }
+            }
+           },
+           "text": "首页"
+          },
+          {
+           "type": "menu-link",
+           "data": {
+            "attrID": "zd-nav-1",
+            "url": "/zidanna-oem/"
+           },
+           "style": {
+            "&": {
+             "_": {
+              "color": {
+               "token": "--ink"
+              },
+              "fontSize": "14px",
+              "transitionAll": "160ms ease",
+              "cursor": "pointer"
+             }
+            },
+            "hover": {
+             "_": {
+              "color": {
+               "token": "--sage"
+              }
+             }
+            }
+           },
+           "text": "OEM代工"
+          },
+          {
+           "type": "menu-link",
+           "data": {
+            "attrID": "zd-nav-2",
+            "url": "/zidanna/#about"
+           },
+           "style": {
+            "&": {
+             "_": {
+              "color": {
+               "token": "--ink"
+              },
+              "fontSize": "14px",
+              "transitionAll": "160ms ease",
+              "cursor": "pointer"
+             }
+            },
+            "hover": {
+             "_": {
+              "color": {
+               "token": "--sage"
+              }
+             }
+            }
+           },
+           "text": "关于姿丹娜"
+          },
+          {
+           "type": "menu-link",
+           "data": {
+            "attrID": "zd-nav-3",
+            "url": "/zidanna/#contact"
+           },
+           "style": {
+            "&": {
+             "_": {
+              "color": {
+               "token": "--ink"
+              },
+              "fontSize": "14px",
+              "transitionAll": "160ms ease",
+              "cursor": "pointer"
+             }
+            },
+            "hover": {
+             "_": {
+              "color": {
+               "token": "--sage"
+              }
+             }
+            }
+           },
+           "text": "联络我们"
+          }
+         ]
+        },
+        {
+         "type": "button",
+         "data": {
+          "attrID": "zd-header-cta",
+          "url": "/zidanna/#contact"
+         },
+         "style": {
+          "&": {
+           "_": {
+            "backgroundColor": {
+             "token": "--ink"
+            },
+            "color": {
+             "token": "--paper"
+            },
+            "fontSize": "14px",
+            "paddingTop": "11px",
+            "paddingBottom": "11px",
+            "paddingLeft": "22px",
+            "paddingRight": "22px",
+            "radius": "2px",
+            "cursor": "pointer",
+            "transitionAll": "200ms ease"
+           }
+          },
+          "hover": {
+           "_": {
+            "backgroundColor": {
+             "token": "--sage"
+            }
+           }
+          }
+         },
+         "text": "开始打造"
+        }
+       ]
+      }
+     ]
+    }
+   ]
+  },
+  "footer": {
+   "type": "div",
+   "data": {
+    "attrID": "zd-footer"
+   },
+   "style": {
+    "&": {
+     "_": {
+      "backgroundColor": {
+       "token": "--ink"
+      },
+      "paddingTop": "72px",
+      "paddingBottom": "40px",
+      "paddingLeft": "48px",
+      "paddingRight": "48px",
+      "fontFamily": "'PingFang SC','Hiragino Sans GB','Microsoft YaHei','Noto Sans SC',sans-serif"
+     }
+    }
+   },
+   "children": [
+    {
+     "type": "div",
+     "data": {
+      "attrID": "zd-footer-in"
+     },
+     "style": {
+      "&": {
+       "_": {
+        "width": "100%",
+        "maxWidth": "1120px",
+        "marginLeft": "auto",
+        "marginRight": "auto"
+       }
+      }
+     },
+     "children": [
+      {
+       "type": "div",
+       "data": {
+        "attrID": "zd-footer-grid"
+       },
+       "style": {
+        "&": {
+         "_": {
+          "display": "grid",
+          "gridCols": "repeat(3, 1fr)",
+          "columnGap": "48px",
+          "rowGap": "48px"
+         },
+         "_m": {
+          "gridCols": "repeat(1, 1fr)"
+         }
+        }
+       },
+       "children": [
+        {
+         "type": "div",
+         "data": {
+          "attrID": "zd-f-brand"
+         },
+         "style": {
+          "&": {
+           "_": {}
+          }
+         },
+         "children": [
+          {
+           "type": "text",
+           "data": {
+            "tagName": "h3"
+           },
+           "text": "姿丹娜",
+           "style": {
+            "&": {
+             "_": {
+              "color": "rgb(250,248,244)",
+              "fontSize": "20px",
+              "fontWeight": "700",
+              "letterSpacing": "4px"
+             }
+            }
+           }
+          },
+          {
+           "type": "text",
+           "data": {
+            "tagName": "p"
+           },
+           "text": "南京姿丹娜日化实业有限公司",
+           "style": {
+            "&": {
+             "_": {
+              "color": "rgb(168,160,150)",
+              "fontSize": "13px",
+              "marginTop": "14px",
+              "lineHeight": "1.8"
+             }
+            }
+           }
+          },
+          {
+           "type": "text",
+           "data": {
+            "tagName": "p"
+           },
+           "text": "Nanjing Zidanna Personal Care Chemical Co., Ltd.",
+           "style": {
+            "&": {
+             "_": {
+              "color": "rgb(125,118,108)",
+              "fontSize": "11px",
+              "marginTop": "4px",
+              "fontFamily": "'Helvetica Neue',Helvetica,Arial,sans-serif",
+              "lineHeight": "1.6"
+             }
+            }
+           }
+          }
+         ]
+        },
+        {
+         "type": "div",
+         "data": {
+          "attrID": "contact"
+         },
+         "style": {
+          "&": {
+           "_": {}
+          }
+         },
+         "children": [
+          {
+           "type": "text",
+           "data": {
+            "tagName": "h3"
+           },
+           "text": "南京厂区",
+           "style": {
+            "&": {
+             "_": {
+              "color": {
+               "token": "--sage"
+              },
+              "fontSize": "12px",
+              "fontWeight": "700",
+              "letterSpacing": "2px"
+             }
+            }
+           }
+          },
+          {
+           "type": "text",
+           "data": {
+            "tagName": "p"
+           },
+           "text": "江苏省南京市溧水经济开发区中兴东路 1-1 号　邮编 211200",
+           "style": {
+            "&": {
+             "_": {
+              "color": "rgb(168,160,150)",
+              "fontSize": "13px",
+              "marginTop": "14px",
+              "lineHeight": "1.9"
+             }
+            }
+           }
+          },
+          {
+           "type": "text",
+           "data": {
+            "tagName": "p"
+           },
+           "text": "电话 025-56213122",
+           "style": {
+            "&": {
+             "_": {
+              "color": "rgb(168,160,150)",
+              "fontSize": "13px",
+              "lineHeight": "1.9"
+             }
+            }
+           }
+          },
+          {
+           "type": "text",
+           "data": {
+            "tagName": "p"
+           },
+           "text": "E-mail zidnana@163.com",
+           "style": {
+            "&": {
+             "_": {
+              "color": "rgb(168,160,150)",
+              "fontSize": "13px",
+              "lineHeight": "1.9",
+              "fontFamily": "'Helvetica Neue',Helvetica,Arial,sans-serif"
+             }
+            }
+           }
+          }
+         ]
+        },
+        {
+         "type": "div",
+         "data": {
+          "attrID": "zd-f-tw"
+         },
+         "style": {
+          "&": {
+           "_": {}
+          }
+         },
+         "children": [
+          {
+           "type": "text",
+           "data": {
+            "tagName": "h3"
+           },
+           "text": "台湾总部",
+           "style": {
+            "&": {
+             "_": {
+              "color": {
+               "token": "--sage"
+              },
+              "fontSize": "12px",
+              "fontWeight": "700",
+              "letterSpacing": "2px"
+             }
+            }
+           }
+          },
+          {
+           "type": "text",
+           "data": {
+            "tagName": "p"
+           },
+           "text": "太平洋化妆品股份有限公司",
+           "style": {
+            "&": {
+             "_": {
+              "color": "rgb(168,160,150)",
+              "fontSize": "13px",
+              "marginTop": "14px",
+              "lineHeight": "1.9"
+             }
+            }
+           }
+          },
+          {
+           "type": "text",
+           "data": {
+            "tagName": "p"
+           },
+           "text": "台湾省台中市后里区月湖东路 398 号",
+           "style": {
+            "&": {
+             "_": {
+              "color": "rgb(168,160,150)",
+              "fontSize": "13px",
+              "lineHeight": "1.9"
+             }
+            }
+           }
+          },
+          {
+           "type": "text",
+           "data": {
+            "tagName": "p"
+           },
+           "text": "电话 +886-2557 2798",
+           "style": {
+            "&": {
+             "_": {
+              "color": "rgb(168,160,150)",
+              "fontSize": "13px",
+              "lineHeight": "1.9",
+              "fontFamily": "'Helvetica Neue',Helvetica,Arial,sans-serif"
+             }
+            }
+           }
+          }
+         ]
+        }
+       ]
+      },
+      {
+       "type": "div",
+       "data": {
+        "attrID": "zd-f-legal"
+       },
+       "style": {
+        "&": {
+         "_": {
+          "marginTop": "56px",
+          "paddingTop": "22px",
+          "customStyles": "border-top:1px solid rgba(250,248,244,0.12);"
+         }
+        }
+       },
+       "children": [
+        {
+         "type": "text",
+         "data": {
+          "tagName": "p"
+         },
+         "text": "© 2026 Nanjing Zidanna Personal Care Chemical Co., Ltd. 版权所有",
+         "style": {
+          "&": {
+           "_": {
+            "color": "rgb(110,104,96)",
+            "fontSize": "11px",
+            "fontFamily": "'Helvetica Neue',Helvetica,Arial,sans-serif"
+           }
+          }
+         }
+        }
+       ]
+      }
+     ]
+    }
+   ]
+  }
+ },
+ "pages": [
+  {
+   "slug": "zidanna",
+   "post_id": 22,
+   "title": "姿丹娜",
+   "tree": {
+    "type": "div",
+    "data": {
+     "attrID": "zd-home"
+    },
+    "children": [
+     {
+      "type": "section",
+      "data": {
+       "attrID": "zd-hero"
+      },
+      "style": {
+       "&": {
+        "_": {
+         "backgroundColor": {
+          "token": "--paper"
+         },
+         "paddingTop": "72px",
+         "paddingBottom": "96px",
+         "paddingLeft": "48px",
+         "paddingRight": "48px",
+         "fontFamily": "'PingFang SC','Hiragino Sans GB','Microsoft YaHei','Noto Sans SC',sans-serif"
+        },
+        "_m": {
+         "paddingLeft": "20px",
+         "paddingRight": "20px",
+         "paddingTop": "64px",
+         "paddingBottom": "64px"
+        }
+       }
+      },
+      "children": [
+       {
+        "type": "div",
+        "data": {
+         "attrID": "zd-hero-in"
+        },
+        "style": {
+         "&": {
+          "_": {
+           "width": "100%",
+           "maxWidth": "1120px",
+           "marginLeft": "auto",
+           "marginRight": "auto"
+          }
+         }
+        },
+        "children": [
+         {
+          "type": "div",
+          "data": {
+           "attrID": "zd-hero-row"
+          },
+          "style": {
+           "&": {
+            "_": {
+             "display": "grid",
+             "gridCols": "1.15fr 0.85fr",
+             "columnGap": "64px",
+             "rowGap": "44px",
+             "alignItems": "center"
+            },
+            "_m": {
+             "gridCols": "repeat(1, 1fr)"
+            }
+           }
+          },
+          "children": [
+           {
+            "type": "div",
+            "data": {
+             "attrID": "zd-hero-copy"
+            },
+            "style": {
+             "&": {
+              "_": {}
+             }
+            },
+            "children": [
+             {
+              "type": "text",
+              "data": {
+               "tagName": "h2"
+              },
+              "text": "OEM / ODM SKINCARE MANUFACTURING",
+              "style": {
+               "&": {
+                "_": {
+                 "color": {
+                  "token": "--sage"
+                 },
+                 "fontSize": "12px",
+                 "fontWeight": "700",
+                 "letterSpacing": "3px",
+                 "fontFamily": "'Helvetica Neue',Helvetica,Arial,sans-serif"
+                }
+               }
+              }
+             },
+             {
+              "type": "text",
+              "data": {
+               "tagName": "h1"
+              },
+              "text": "用匠心深耕\n护肤品代加工",
+              "style": {
+               "&": {
+                "_": {
+                 "color": {
+                  "token": "--ink"
+                 },
+                 "fontSize": "60px",
+                 "fontWeight": "700",
+                 "lineHeight": "1.18",
+                 "letterSpacing": "1px",
+                 "marginTop": "22px"
+                }
+               }
+              }
+             },
+             {
+              "type": "text",
+              "data": {
+               "tagName": "p"
+              },
+              "text": "从品牌定位、配方开发到量产出货，姿丹娜在南京溧水的自有厂区，为护肤品牌承接完整的 OEM / ODM 制造。",
+              "style": {
+               "&": {
+                "_": {
+                 "color": {
+                  "token": "--muted"
+                 },
+                 "fontSize": "17px",
+                 "lineHeight": "2",
+                 "marginTop": "24px",
+                 "maxWidth": "30em"
+                }
+               }
+              }
+             },
+             {
+              "type": "div",
+              "data": {
+               "attrID": "zd-hero-cta"
+              },
+              "style": {
+               "&": {
+                "_": {
+                 "display": "flex",
+                 "columnGap": "14px",
+                 "marginTop": "36px"
+                }
+               }
+              },
+              "children": [
+               {
+                "type": "button",
+                "data": {
+                 "attrID": "zd-cta-1",
+                 "url": "/zidanna/#contact"
+                },
+                "style": {
+                 "&": {
+                  "_": {
+                   "backgroundColor": {
+                    "token": "--ink"
+                   },
+                   "color": {
+                    "token": "--paper"
+                   },
+                   "fontSize": "15px",
+                   "paddingTop": "15px",
+                   "paddingBottom": "15px",
+                   "paddingLeft": "30px",
+                   "paddingRight": "30px",
+                   "radius": "2px",
+                   "cursor": "pointer",
+                   "transitionAll": "200ms ease"
+                  }
+                 },
+                 "hover": {
+                  "_": {
+                   "backgroundColor": {
+                    "token": "--sage"
+                   }
+                  }
+                 }
+                },
+                "text": "开始打造"
+               },
+               {
+                "type": "button",
+                "data": {
+                 "attrID": "zd-cta-2",
+                 "url": "/zidanna-oem/"
+                },
+                "style": {
+                 "&": {
+                  "_": {
+                   "backgroundColor": {
+                    "token": "--paper"
+                   },
+                   "color": {
+                    "token": "--ink"
+                   },
+                   "fontSize": "15px",
+                   "paddingTop": "15px",
+                   "paddingBottom": "15px",
+                   "paddingLeft": "30px",
+                   "paddingRight": "30px",
+                   "radius": "2px",
+                   "cursor": "pointer",
+                   "border": {
+                    "width": "1px",
+                    "style": "solid",
+                    "color": "rgb(226,219,208)"
+                   },
+                   "transitionAll": "200ms ease"
+                  }
+                 },
+                 "hover": {
+                  "_": {
+                   "backgroundColor": {
+                    "token": "--sand"
+                   }
+                  }
+                 }
+                },
+                "text": "了解代工流程"
+               }
+              ]
+             }
+            ]
+           },
+           {
+            "type": "div",
+            "data": {
+             "attrID": "zd-hero-media"
+            },
+            "style": {
+             "&": {
+              "_": {
+               "radius": "3px",
+               "customStyles": "overflow:hidden;aspect-ratio:1/1;"
+              }
+             }
+            },
+            "children": [
+             {
+              "type": "image",
+              "data": {
+               "attrID": "zd-hero-img",
+               "image": "https://zidanna.com/wp-content/uploads/2026/08/01.png",
+               "alt": "姿丹娜护肤品代工产品"
+              },
+              "style": {
+               "&": {
+                "_": {
+                 "width": "100%",
+                 "height": "100%",
+                 "objectFitStyle": {
+                  "objectFit": "cover",
+                  "objectPositionX": "60%",
+                  "objectPositionY": "85%"
+                 },
+                 "move": {
+                  "scale": "1.22"
+                 }
+                }
+               }
+              }
+             }
+            ]
+           }
+          ]
+         }
+        ]
+       }
+      ]
+     },
+     {
+      "type": "section",
+      "data": {
+       "attrID": "zd-stats"
+      },
+      "style": {
+       "&": {
+        "_": {
+         "backgroundColor": {
+          "token": "--sand"
+         },
+         "paddingTop": "0px",
+         "paddingBottom": "0px",
+         "paddingLeft": "48px",
+         "paddingRight": "48px",
+         "fontFamily": "'PingFang SC','Hiragino Sans GB','Microsoft YaHei','Noto Sans SC',sans-serif"
+        },
+        "_m": {
+         "paddingLeft": "20px",
+         "paddingRight": "20px",
+         "paddingTop": "64px",
+         "paddingBottom": "64px"
+        }
+       }
+      },
+      "children": [
+       {
+        "type": "div",
+        "data": {
+         "attrID": "zd-stats-in"
+        },
+        "style": {
+         "&": {
+          "_": {
+           "width": "100%",
+           "maxWidth": "1120px",
+           "marginLeft": "auto",
+           "marginRight": "auto"
+          }
+         }
+        },
+        "children": [
+         {
+          "type": "div",
+          "data": {
+           "attrID": "zd-stats-grid"
+          },
+          "style": {
+           "&": {
+            "_": {
+             "display": "grid",
+             "gridCols": "repeat(4, 1fr)",
+             "columnGap": "1px",
+             "rowGap": "1px",
+             "customStyles": "background:rgb(226,219,208);"
+            },
+            "_m": {
+             "gridCols": "repeat(1, 1fr)"
+            }
+           }
+          },
+          "children": [
+           {
+            "type": "div",
+            "data": {
+             "attrID": "zd-stat-0"
+            },
+            "style": {
+             "&": {
+              "_": {
+               "backgroundColor": {
+                "token": "--paper"
+               },
+               "paddingTop": "36px",
+               "paddingBottom": "36px",
+               "paddingLeft": "28px",
+               "paddingRight": "28px"
+              }
+             }
+            },
+            "children": [
+             {
+              "type": "div",
+              "data": {
+               "attrID": "zd-stat-n-0"
+              },
+              "style": {
+               "&": {
+                "_": {
+                 "display": "flex",
+                 "alignItems": "baseline",
+                 "columnGap": "2px"
+                }
+               }
+              },
+              "children": [
+               {
+                "type": "text",
+                "data": {
+                 "tagName": "h3"
+                },
+                "text": "60",
+                "style": {
+                 "&": {
+                  "_": {
+                   "color": {
+                    "token": "--ink"
+                   },
+                   "fontSize": "46px",
+                   "fontWeight": "700",
+                   "letterSpacing": "-1px",
+                   "fontFamily": "'Helvetica Neue',Helvetica,Arial,sans-serif"
+                  }
+                 }
+                }
+               },
+               {
+                "type": "text",
+                "data": {
+                 "tagName": "p"
+                },
+                "text": "年",
+                "style": {
+                 "&": {
+                  "_": {
+                   "color": {
+                    "token": "--sage"
+                   },
+                   "fontSize": "18px",
+                   "fontWeight": "700"
+                  }
+                 }
+                }
+               }
+              ]
+             },
+             {
+              "type": "text",
+              "data": {
+               "tagName": "p"
+              },
+              "text": "台湾母厂制造经验",
+              "style": {
+               "&": {
+                "_": {
+                 "color": {
+                  "token": "--muted"
+                 },
+                 "fontSize": "13px",
+                 "marginTop": "8px",
+                 "lineHeight": "1.7"
+                }
+               }
+              }
+             }
+            ]
+           },
+           {
+            "type": "div",
+            "data": {
+             "attrID": "zd-stat-1"
+            },
+            "style": {
+             "&": {
+              "_": {
+               "backgroundColor": {
+                "token": "--paper"
+               },
+               "paddingTop": "36px",
+               "paddingBottom": "36px",
+               "paddingLeft": "28px",
+               "paddingRight": "28px"
+              }
+             }
+            },
+            "children": [
+             {
+              "type": "div",
+              "data": {
+               "attrID": "zd-stat-n-1"
+              },
+              "style": {
+               "&": {
+                "_": {
+                 "display": "flex",
+                 "alignItems": "baseline",
+                 "columnGap": "2px"
+                }
+               }
+              },
+              "children": [
+               {
+                "type": "text",
+                "data": {
+                 "tagName": "h3"
+                },
+                "text": "5000",
+                "style": {
+                 "&": {
+                  "_": {
+                   "color": {
+                    "token": "--ink"
+                   },
+                   "fontSize": "46px",
+                   "fontWeight": "700",
+                   "letterSpacing": "-1px",
+                   "fontFamily": "'Helvetica Neue',Helvetica,Arial,sans-serif"
+                  }
+                 }
+                }
+               },
+               {
+                "type": "text",
+                "data": {
+                 "tagName": "p"
+                },
+                "text": "+",
+                "style": {
+                 "&": {
+                  "_": {
+                   "color": {
+                    "token": "--sage"
+                   },
+                   "fontSize": "18px",
+                   "fontWeight": "700"
+                  }
+                 }
+                }
+               }
+              ]
+             },
+             {
+              "type": "text",
+              "data": {
+               "tagName": "p"
+              },
+              "text": "可调用原物料品项",
+              "style": {
+               "&": {
+                "_": {
+                 "color": {
+                  "token": "--muted"
+                 },
+                 "fontSize": "13px",
+                 "marginTop": "8px",
+                 "lineHeight": "1.7"
+                }
+               }
+              }
+             }
+            ]
+           },
+           {
+            "type": "div",
+            "data": {
+             "attrID": "zd-stat-2"
+            },
+            "style": {
+             "&": {
+              "_": {
+               "backgroundColor": {
+                "token": "--paper"
+               },
+               "paddingTop": "36px",
+               "paddingBottom": "36px",
+               "paddingLeft": "28px",
+               "paddingRight": "28px"
+              }
+             }
+            },
+            "children": [
+             {
+              "type": "div",
+              "data": {
+               "attrID": "zd-stat-n-2"
+              },
+              "style": {
+               "&": {
+                "_": {
+                 "display": "flex",
+                 "alignItems": "baseline",
+                 "columnGap": "2px"
+                }
+               }
+              },
+              "children": [
+               {
+                "type": "text",
+                "data": {
+                 "tagName": "h3"
+                },
+                "text": "100",
+                "style": {
+                 "&": {
+                  "_": {
+                   "color": {
+                    "token": "--ink"
+                   },
+                   "fontSize": "46px",
+                   "fontWeight": "700",
+                   "letterSpacing": "-1px",
+                   "fontFamily": "'Helvetica Neue',Helvetica,Arial,sans-serif"
+                  }
+                 }
+                }
+               },
+               {
+                "type": "text",
+                "data": {
+                 "tagName": "p"
+                },
+                "text": "+",
+                "style": {
+                 "&": {
+                  "_": {
+                   "color": {
+                    "token": "--sage"
+                   },
+                   "fontSize": "18px",
+                   "fontWeight": "700"
+                  }
+                 }
+                }
+               }
+              ]
+             },
+             {
+              "type": "text",
+              "data": {
+               "tagName": "p"
+              },
+              "text": "长期合作品牌",
+              "style": {
+               "&": {
+                "_": {
+                 "color": {
+                  "token": "--muted"
+                 },
+                 "fontSize": "13px",
+                 "marginTop": "8px",
+                 "lineHeight": "1.7"
+                }
+               }
+              }
+             }
+            ]
+           },
+           {
+            "type": "div",
+            "data": {
+             "attrID": "zd-stat-3"
+            },
+            "style": {
+             "&": {
+              "_": {
+               "backgroundColor": {
+                "token": "--paper"
+               },
+               "paddingTop": "36px",
+               "paddingBottom": "36px",
+               "paddingLeft": "28px",
+               "paddingRight": "28px"
+              }
+             }
+            },
+            "children": [
+             {
+              "type": "div",
+              "data": {
+               "attrID": "zd-stat-n-3"
+              },
+              "style": {
+               "&": {
+                "_": {
+                 "display": "flex",
+                 "alignItems": "baseline",
+                 "columnGap": "2px"
+                }
+               }
+              },
+              "children": [
+               {
+                "type": "text",
+                "data": {
+                 "tagName": "h3"
+                },
+                "text": "1000",
+                "style": {
+                 "&": {
+                  "_": {
+                   "color": {
+                    "token": "--ink"
+                   },
+                   "fontSize": "46px",
+                   "fontWeight": "700",
+                   "letterSpacing": "-1px",
+                   "fontFamily": "'Helvetica Neue',Helvetica,Arial,sans-serif"
+                  }
+                 }
+                }
+               },
+               {
+                "type": "text",
+                "data": {
+                 "tagName": "p"
+                },
+                "text": "+",
+                "style": {
+                 "&": {
+                  "_": {
+                   "color": {
+                    "token": "--sage"
+                   },
+                   "fontSize": "18px",
+                   "fontWeight": "700"
+                  }
+                 }
+                }
+               }
+              ]
+             },
+             {
+              "type": "text",
+              "data": {
+               "tagName": "p"
+              },
+              "text": "已开发稳定配方",
+              "style": {
+               "&": {
+                "_": {
+                 "color": {
+                  "token": "--muted"
+                 },
+                 "fontSize": "13px",
+                 "marginTop": "8px",
+                 "lineHeight": "1.7"
+                }
+               }
+              }
+             }
+            ]
+           }
+          ]
+         }
+        ]
+       }
+      ]
+     },
+     {
+      "type": "section",
+      "data": {
+       "attrID": "about"
+      },
+      "style": {
+       "&": {
+        "_": {
+         "backgroundColor": {
+          "token": "--paper"
+         },
+         "paddingTop": "112px",
+         "paddingBottom": "112px",
+         "paddingLeft": "48px",
+         "paddingRight": "48px",
+         "fontFamily": "'PingFang SC','Hiragino Sans GB','Microsoft YaHei','Noto Sans SC',sans-serif"
+        },
+        "_m": {
+         "paddingLeft": "20px",
+         "paddingRight": "20px",
+         "paddingTop": "64px",
+         "paddingBottom": "64px"
+        }
+       }
+      },
+      "children": [
+       {
+        "type": "div",
+        "data": {
+         "attrID": "zd-about-in"
+        },
+        "style": {
+         "&": {
+          "_": {
+           "width": "100%",
+           "maxWidth": "1120px",
+           "marginLeft": "auto",
+           "marginRight": "auto"
+          }
+         }
+        },
+        "children": [
+         {
+          "type": "div",
+          "data": {
+           "attrID": "zd-about-row"
+          },
+          "style": {
+           "&": {
+            "_": {
+             "display": "grid",
+             "gridCols": "0.9fr 1.1fr",
+             "columnGap": "72px",
+             "rowGap": "32px"
+            },
+            "_m": {
+             "gridCols": "repeat(1, 1fr)"
+            }
+           }
+          },
+          "children": [
+           {
+            "type": "div",
+            "data": {
+             "attrID": "zd-about-l"
+            },
+            "style": {
+             "&": {
+              "_": {}
+             }
+            },
+            "children": [
+             {
+              "type": "text",
+              "data": {
+               "tagName": "h2"
+              },
+              "text": "ABOUT ZIDANNA",
+              "style": {
+               "&": {
+                "_": {
+                 "color": {
+                  "token": "--sage"
+                 },
+                 "fontSize": "12px",
+                 "fontWeight": "700",
+                 "letterSpacing": "3px",
+                 "fontFamily": "'Helvetica Neue',Helvetica,Arial,sans-serif"
+                }
+               }
+              }
+             },
+             {
+              "type": "text",
+              "data": {
+               "tagName": "h2"
+              },
+              "text": "精致护肤品的\n打造专家",
+              "style": {
+               "&": {
+                "_": {
+                 "color": {
+                  "token": "--ink"
+                 },
+                 "fontSize": "40px",
+                 "fontWeight": "700",
+                 "lineHeight": "1.35",
+                 "marginTop": "18px"
+                }
+               }
+              }
+             }
+            ]
+           },
+           {
+            "type": "div",
+            "data": {
+             "attrID": "zd-about-r"
+            },
+            "style": {
+             "&": {
+              "_": {}
+             }
+            },
+            "children": [
+             {
+              "type": "text",
+              "data": {
+               "tagName": "p"
+              },
+              "text": "姿丹娜承接护肤品的 OEM 与 ODM 代加工，产品线涵盖日常护肤、高端护理、香氛系列、植物精油与身体 SPA，能对应品牌在不同通路上的需求。",
+              "style": {
+               "&": {
+                "_": {
+                 "color": {
+                  "token": "--ink"
+                 },
+                 "fontSize": "17px",
+                 "lineHeight": "2.1"
+                }
+               }
+              }
+             },
+             {
+              "type": "text",
+              "data": {
+               "tagName": "p"
+              },
+              "text": "台湾母厂太平洋化妆品累积六十年制造经验，南京厂区沿用同一套技术与品管标准。从品牌识别建议、配方开发、试样调整，到量产与后续补货，由同一个团队跟到底。",
+              "style": {
+               "&": {
+                "_": {
+                 "color": {
+                  "token": "--muted"
+                 },
+                 "fontSize": "16px",
+                 "lineHeight": "2.1",
+                 "marginTop": "20px"
+                }
+               }
+              }
+             }
+            ]
+           }
+          ]
+         }
+        ]
+       }
+      ]
+     },
+     {
+      "type": "section",
+      "data": {
+       "attrID": "zd-process"
+      },
+      "style": {
+       "&": {
+        "_": {
+         "backgroundColor": {
+          "token": "--surface"
+         },
+         "paddingTop": "112px",
+         "paddingBottom": "112px",
+         "paddingLeft": "48px",
+         "paddingRight": "48px",
+         "fontFamily": "'PingFang SC','Hiragino Sans GB','Microsoft YaHei','Noto Sans SC',sans-serif"
+        },
+        "_m": {
+         "paddingLeft": "20px",
+         "paddingRight": "20px",
+         "paddingTop": "64px",
+         "paddingBottom": "64px"
+        }
+       }
+      },
+      "children": [
+       {
+        "type": "div",
+        "data": {
+         "attrID": "zd-process-in"
+        },
+        "style": {
+         "&": {
+          "_": {
+           "width": "100%",
+           "maxWidth": "1120px",
+           "marginLeft": "auto",
+           "marginRight": "auto"
+          }
+         }
+        },
+        "children": [
+         {
+          "type": "text",
+          "data": {
+           "tagName": "h2"
+          },
+          "text": "HOW WE WORK",
+          "style": {
+           "&": {
+            "_": {
+             "color": {
+              "token": "--sage"
+             },
+             "fontSize": "12px",
+             "fontWeight": "700",
+             "letterSpacing": "3px",
+             "fontFamily": "'Helvetica Neue',Helvetica,Arial,sans-serif"
+            }
+           }
+          }
+         },
+         {
+          "type": "text",
+          "data": {
+           "tagName": "h2"
+          },
+          "text": "从一句想法，到一箱成品",
+          "style": {
+           "&": {
+            "_": {
+             "color": {
+              "token": "--ink"
+             },
+             "fontSize": "38px",
+             "fontWeight": "700",
+             "marginTop": "16px",
+             "lineHeight": "1.4"
+            }
+           }
+          }
+         },
+         {
+          "type": "div",
+          "data": {
+           "attrID": "zd-process-grid"
+          },
+          "style": {
+           "&": {
+            "_": {
+             "display": "grid",
+             "gridCols": "repeat(4, 1fr)",
+             "columnGap": "28px",
+             "rowGap": "28px",
+             "marginTop": "52px"
+            },
+            "_m": {
+             "gridCols": "repeat(1, 1fr)"
+            }
+           }
+          },
+          "children": [
+           {
+            "type": "div",
+            "data": {
+             "attrID": "zd-step-01"
+            },
+            "style": {
+             "&": {
+              "_": {
+               "paddingTop": "26px",
+               "customStyles": "border-top:2px solid rgb(28,26,23);"
+              }
+             }
+            },
+            "children": [
+             {
+              "type": "text",
+              "data": {
+               "tagName": "p"
+              },
+              "text": "01",
+              "style": {
+               "&": {
+                "_": {
+                 "color": {
+                  "token": "--sage"
+                 },
+                 "fontSize": "13px",
+                 "fontWeight": "700",
+                 "letterSpacing": "1px",
+                 "fontFamily": "'Helvetica Neue',Helvetica,Arial,sans-serif"
+                }
+               }
+              }
+             },
+             {
+              "type": "text",
+              "data": {
+               "tagName": "h3"
+              },
+              "text": "品牌规划",
+              "style": {
+               "&": {
+                "_": {
+                 "color": {
+                  "token": "--ink"
+                 },
+                 "fontSize": "19px",
+                 "fontWeight": "700",
+                 "marginTop": "12px"
+                }
+               }
+              }
+             },
+             {
+              "type": "text",
+              "data": {
+               "tagName": "p"
+              },
+              "text": "先弄清楚品牌要卖给谁、放在哪个价格带，再决定产品该长什么样。",
+              "style": {
+               "&": {
+                "_": {
+                 "color": {
+                  "token": "--muted"
+                 },
+                 "fontSize": "14px",
+                 "marginTop": "10px",
+                 "lineHeight": "1.95"
+                }
+               }
+              }
+             }
+            ]
+           },
+           {
+            "type": "div",
+            "data": {
+             "attrID": "zd-step-02"
+            },
+            "style": {
+             "&": {
+              "_": {
+               "paddingTop": "26px",
+               "customStyles": "border-top:2px solid rgb(28,26,23);"
+              }
+             }
+            },
+            "children": [
+             {
+              "type": "text",
+              "data": {
+               "tagName": "p"
+              },
+              "text": "02",
+              "style": {
+               "&": {
+                "_": {
+                 "color": {
+                  "token": "--sage"
+                 },
+                 "fontSize": "13px",
+                 "fontWeight": "700",
+                 "letterSpacing": "1px",
+                 "fontFamily": "'Helvetica Neue',Helvetica,Arial,sans-serif"
+                }
+               }
+              }
+             },
+             {
+              "type": "text",
+              "data": {
+               "tagName": "h3"
+              },
+              "text": "配方设计",
+              "style": {
+               "&": {
+                "_": {
+                 "color": {
+                  "token": "--ink"
+                 },
+                 "fontSize": "19px",
+                 "fontWeight": "700",
+                 "marginTop": "12px"
+                }
+               }
+              }
+             },
+             {
+              "type": "text",
+              "data": {
+               "tagName": "p"
+              },
+              "text": "依肤质需求与市场定位调整配方，实验室小样确认肤感后才进入放大。",
+              "style": {
+               "&": {
+                "_": {
+                 "color": {
+                  "token": "--muted"
+                 },
+                 "fontSize": "14px",
+                 "marginTop": "10px",
+                 "lineHeight": "1.95"
+                }
+               }
+              }
+             }
+            ]
+           },
+           {
+            "type": "div",
+            "data": {
+             "attrID": "zd-step-03"
+            },
+            "style": {
+             "&": {
+              "_": {
+               "paddingTop": "26px",
+               "customStyles": "border-top:2px solid rgb(28,26,23);"
+              }
+             }
+            },
+            "children": [
+             {
+              "type": "text",
+              "data": {
+               "tagName": "p"
+              },
+              "text": "03",
+              "style": {
+               "&": {
+                "_": {
+                 "color": {
+                  "token": "--sage"
+                 },
+                 "fontSize": "13px",
+                 "fontWeight": "700",
+                 "letterSpacing": "1px",
+                 "fontFamily": "'Helvetica Neue',Helvetica,Arial,sans-serif"
+                }
+               }
+              }
+             },
+             {
+              "type": "text",
+              "data": {
+               "tagName": "h3"
+              },
+              "text": "产品制造",
+              "style": {
+               "&": {
+                "_": {
+                 "color": {
+                  "token": "--ink"
+                 },
+                 "fontSize": "19px",
+                 "fontWeight": "700",
+                 "marginTop": "12px"
+                }
+               }
+              }
+             },
+             {
+              "type": "text",
+              "data": {
+               "tagName": "p"
+              },
+              "text": "自有厂区量产，原料、半成品到成品逐批留样，制程可追溯。",
+              "style": {
+               "&": {
+                "_": {
+                 "color": {
+                  "token": "--muted"
+                 },
+                 "fontSize": "14px",
+                 "marginTop": "10px",
+                 "lineHeight": "1.95"
+                }
+               }
+              }
+             }
+            ]
+           },
+           {
+            "type": "div",
+            "data": {
+             "attrID": "zd-step-04"
+            },
+            "style": {
+             "&": {
+              "_": {
+               "paddingTop": "26px",
+               "customStyles": "border-top:2px solid rgb(28,26,23);"
+              }
+             }
+            },
+            "children": [
+             {
+              "type": "text",
+              "data": {
+               "tagName": "p"
+              },
+              "text": "04",
+              "style": {
+               "&": {
+                "_": {
+                 "color": {
+                  "token": "--sage"
+                 },
+                 "fontSize": "13px",
+                 "fontWeight": "700",
+                 "letterSpacing": "1px",
+                 "fontFamily": "'Helvetica Neue',Helvetica,Arial,sans-serif"
+                }
+               }
+              }
+             },
+             {
+              "type": "text",
+              "data": {
+               "tagName": "h3"
+              },
+              "text": "售后服务",
+              "style": {
+               "&": {
+                "_": {
+                 "color": {
+                  "token": "--ink"
+                 },
+                 "fontSize": "19px",
+                 "fontWeight": "700",
+                 "marginTop": "12px"
+                }
+               }
+              }
+             },
+             {
+              "type": "text",
+              "data": {
+               "tagName": "p"
+              },
+              "text": "交货不是结束。备料、补货与配方微调，长期跟着品牌一起走。",
+              "style": {
+               "&": {
+                "_": {
+                 "color": {
+                  "token": "--muted"
+                 },
+                 "fontSize": "14px",
+                 "marginTop": "10px",
+                 "lineHeight": "1.95"
+                }
+               }
+              }
+             }
+            ]
+           }
+          ]
+         }
+        ]
+       }
+      ]
+     },
+     {
+      "type": "section",
+      "data": {
+       "attrID": "zd-cat"
+      },
+      "style": {
+       "&": {
+        "_": {
+         "backgroundColor": {
+          "token": "--paper"
+         },
+         "paddingTop": "112px",
+         "paddingBottom": "112px",
+         "paddingLeft": "48px",
+         "paddingRight": "48px",
+         "fontFamily": "'PingFang SC','Hiragino Sans GB','Microsoft YaHei','Noto Sans SC',sans-serif"
+        },
+        "_m": {
+         "paddingLeft": "20px",
+         "paddingRight": "20px",
+         "paddingTop": "64px",
+         "paddingBottom": "64px"
+        }
+       }
+      },
+      "children": [
+       {
+        "type": "div",
+        "data": {
+         "attrID": "zd-cat-in"
+        },
+        "style": {
+         "&": {
+          "_": {
+           "width": "100%",
+           "maxWidth": "1120px",
+           "marginLeft": "auto",
+           "marginRight": "auto"
+          }
+         }
+        },
+        "children": [
+         {
+          "type": "div",
+          "data": {
+           "attrID": "zd-cat-head"
+          },
+          "style": {
+           "&": {
+            "_": {
+             "display": "flex",
+             "justifyContent": "space-between",
+             "alignItems": "flex-end",
+             "columnGap": "32px"
+            }
+           }
+          },
+          "children": [
+           {
+            "type": "div",
+            "data": {
+             "attrID": "zd-cat-head-l"
+            },
+            "style": {
+             "&": {
+              "_": {}
+             }
+            },
+            "children": [
+             {
+              "type": "text",
+              "data": {
+               "tagName": "h2"
+              },
+              "text": "DEVELOP",
+              "style": {
+               "&": {
+                "_": {
+                 "color": {
+                  "token": "--sage"
+                 },
+                 "fontSize": "12px",
+                 "fontWeight": "700",
+                 "letterSpacing": "3px",
+                 "fontFamily": "'Helvetica Neue',Helvetica,Arial,sans-serif"
+                }
+               }
+              }
+             },
+             {
+              "type": "text",
+              "data": {
+               "tagName": "h2"
+              },
+              "text": "专项护肤品开发",
+              "style": {
+               "&": {
+                "_": {
+                 "color": {
+                  "token": "--ink"
+                 },
+                 "fontSize": "38px",
+                 "fontWeight": "700",
+                 "marginTop": "16px"
+                }
+               }
+              }
+             }
+            ]
+           },
+           {
+            "type": "text",
+            "data": {
+             "tagName": "p"
+            },
+            "text": "四条常见产品线，也接受完全客制的品项。",
+            "style": {
+             "&": {
+              "_": {
+               "color": {
+                "token": "--muted"
+               },
+               "fontSize": "14px",
+               "lineHeight": "1.9",
+               "maxWidth": "18em"
+              }
+             }
+            }
+           }
+          ]
+         },
+         {
+          "type": "div",
+          "data": {
+           "attrID": "zd-cat-grid"
+          },
+          "style": {
+           "&": {
+            "_": {
+             "display": "grid",
+             "gridCols": "repeat(4, 1fr)",
+             "columnGap": "22px",
+             "rowGap": "22px",
+             "marginTop": "46px"
+            },
+            "_m": {
+             "gridCols": "repeat(1, 1fr)"
+            }
+           }
+          },
+          "children": [
+           {
+            "type": "div",
+            "data": {
+             "attrID": "zd-cat-0"
+            },
+            "style": {
+             "&": {
+              "_": {
+               "customStyles": "overflow:hidden;",
+               "radius": "3px",
+               "backgroundColor": {
+                "token": "--surface"
+               },
+               "transitionAll": "260ms ease"
+              }
+             },
+             "hover": {
+              "_": {
+               "shadow": {
+                "x": "0px",
+                "y": "16px",
+                "blur": "34px",
+                "spread": "-16px",
+                "color": "rgba(28,26,23,0.28)"
+               }
+              }
+             }
+            },
+            "children": [
+             {
+              "type": "div",
+              "data": {
+               "attrID": "zd-cat-img-0"
+              },
+              "style": {
+               "&": {
+                "_": {
+                 "customStyles": "overflow:hidden;aspect-ratio:1/1;"
+                }
+               }
+              },
+              "children": [
+               {
+                "type": "image",
+                "data": {
+                 "attrID": "zd-cat-i-0",
+                 "image": "https://zidanna.com/wp-content/uploads/2026/08/03.png",
+                 "alt": "香氛精油"
+                },
+                "style": {
+                 "&": {
+                  "_": {
+                   "width": "100%",
+                   "height": "100%",
+                   "objectFitStyle": {
+                    "objectFit": "cover",
+                    "objectPositionX": "55%",
+                    "objectPositionY": "88%"
+                   },
+                   "move": {
+                    "scale": "1.22"
+                   },
+                   "transitionAll": "600ms ease"
+                  }
+                 },
+                 "hover": {
+                  "_": {
+                   "move": {
+                    "scale": "1.3"
+                   }
+                  }
+                 }
+                }
+               }
+              ]
+             },
+             {
+              "type": "div",
+              "data": {
+               "attrID": "zd-cat-txt-0"
+              },
+              "style": {
+               "&": {
+                "_": {
+                 "paddingTop": "20px",
+                 "paddingBottom": "24px",
+                 "paddingLeft": "20px",
+                 "paddingRight": "20px"
+                }
+               }
+              },
+              "children": [
+               {
+                "type": "text",
+                "data": {
+                 "tagName": "h3"
+                },
+                "text": "香氛精油",
+                "style": {
+                 "&": {
+                  "_": {
+                   "color": {
+                    "token": "--ink"
+                   },
+                   "fontSize": "17px",
+                   "fontWeight": "700"
+                  }
+                 }
+                }
+               },
+               {
+                "type": "text",
+                "data": {
+                 "tagName": "p"
+                },
+                "text": "植物精油与调香，单方复方皆可开发。",
+                "style": {
+                 "&": {
+                  "_": {
+                   "color": {
+                    "token": "--muted"
+                   },
+                   "fontSize": "13px",
+                   "marginTop": "8px",
+                   "lineHeight": "1.85"
+                  }
+                 }
+                }
+               }
+              ]
+             }
+            ]
+           },
+           {
+            "type": "div",
+            "data": {
+             "attrID": "zd-cat-1"
+            },
+            "style": {
+             "&": {
+              "_": {
+               "customStyles": "overflow:hidden;",
+               "radius": "3px",
+               "backgroundColor": {
+                "token": "--surface"
+               },
+               "transitionAll": "260ms ease"
+              }
+             },
+             "hover": {
+              "_": {
+               "shadow": {
+                "x": "0px",
+                "y": "16px",
+                "blur": "34px",
+                "spread": "-16px",
+                "color": "rgba(28,26,23,0.28)"
+               }
+              }
+             }
+            },
+            "children": [
+             {
+              "type": "div",
+              "data": {
+               "attrID": "zd-cat-img-1"
+              },
+              "style": {
+               "&": {
+                "_": {
+                 "customStyles": "overflow:hidden;aspect-ratio:1/1;"
+                }
+               }
+              },
+              "children": [
+               {
+                "type": "image",
+                "data": {
+                 "attrID": "zd-cat-i-1",
+                 "image": "https://zidanna.com/wp-content/uploads/2026/08/02.png",
+                 "alt": "SPA 护肤品"
+                },
+                "style": {
+                 "&": {
+                  "_": {
+                   "width": "100%",
+                   "height": "100%",
+                   "objectFitStyle": {
+                    "objectFit": "cover",
+                    "objectPositionX": "55%",
+                    "objectPositionY": "88%"
+                   },
+                   "move": {
+                    "scale": "1.22"
+                   },
+                   "transitionAll": "600ms ease"
+                  }
+                 },
+                 "hover": {
+                  "_": {
+                   "move": {
+                    "scale": "1.3"
+                   }
+                  }
+                 }
+                }
+               }
+              ]
+             },
+             {
+              "type": "div",
+              "data": {
+               "attrID": "zd-cat-txt-1"
+              },
+              "style": {
+               "&": {
+                "_": {
+                 "paddingTop": "20px",
+                 "paddingBottom": "24px",
+                 "paddingLeft": "20px",
+                 "paddingRight": "20px"
+                }
+               }
+              },
+              "children": [
+               {
+                "type": "text",
+                "data": {
+                 "tagName": "h3"
+                },
+                "text": "SPA 护肤品",
+                "style": {
+                 "&": {
+                  "_": {
+                   "color": {
+                    "token": "--ink"
+                   },
+                   "fontSize": "17px",
+                   "fontWeight": "700"
+                  }
+                 }
+                }
+               },
+               {
+                "type": "text",
+                "data": {
+                 "tagName": "p"
+                },
+                "text": "身体按摩、去角质与沙龙通路专用品项。",
+                "style": {
+                 "&": {
+                  "_": {
+                   "color": {
+                    "token": "--muted"
+                   },
+                   "fontSize": "13px",
+                   "marginTop": "8px",
+                   "lineHeight": "1.85"
+                  }
+                 }
+                }
+               }
+              ]
+             }
+            ]
+           },
+           {
+            "type": "div",
+            "data": {
+             "attrID": "zd-cat-2"
+            },
+            "style": {
+             "&": {
+              "_": {
+               "customStyles": "overflow:hidden;",
+               "radius": "3px",
+               "backgroundColor": {
+                "token": "--surface"
+               },
+               "transitionAll": "260ms ease"
+              }
+             },
+             "hover": {
+              "_": {
+               "shadow": {
+                "x": "0px",
+                "y": "16px",
+                "blur": "34px",
+                "spread": "-16px",
+                "color": "rgba(28,26,23,0.28)"
+               }
+              }
+             }
+            },
+            "children": [
+             {
+              "type": "div",
+              "data": {
+               "attrID": "zd-cat-img-2"
+              },
+              "style": {
+               "&": {
+                "_": {
+                 "customStyles": "overflow:hidden;aspect-ratio:1/1;"
+                }
+               }
+              },
+              "children": [
+               {
+                "type": "image",
+                "data": {
+                 "attrID": "zd-cat-i-2",
+                 "image": "https://zidanna.com/wp-content/uploads/2026/08/04.png",
+                 "alt": "专卖店护肤品"
+                },
+                "style": {
+                 "&": {
+                  "_": {
+                   "width": "100%",
+                   "height": "100%",
+                   "objectFitStyle": {
+                    "objectFit": "cover",
+                    "objectPositionX": "55%",
+                    "objectPositionY": "88%"
+                   },
+                   "move": {
+                    "scale": "1.22"
+                   },
+                   "transitionAll": "600ms ease"
+                  }
+                 },
+                 "hover": {
+                  "_": {
+                   "move": {
+                    "scale": "1.3"
+                   }
+                  }
+                 }
+                }
+               }
+              ]
+             },
+             {
+              "type": "div",
+              "data": {
+               "attrID": "zd-cat-txt-2"
+              },
+              "style": {
+               "&": {
+                "_": {
+                 "paddingTop": "20px",
+                 "paddingBottom": "24px",
+                 "paddingLeft": "20px",
+                 "paddingRight": "20px"
+                }
+               }
+              },
+              "children": [
+               {
+                "type": "text",
+                "data": {
+                 "tagName": "h3"
+                },
+                "text": "专卖店护肤品",
+                "style": {
+                 "&": {
+                  "_": {
+                   "color": {
+                    "token": "--ink"
+                   },
+                   "fontSize": "17px",
+                   "fontWeight": "700"
+                  }
+                 }
+                }
+               },
+               {
+                "type": "text",
+                "data": {
+                 "tagName": "p"
+                },
+                "text": "专柜与专卖通路的高端护理系列。",
+                "style": {
+                 "&": {
+                  "_": {
+                   "color": {
+                    "token": "--muted"
+                   },
+                   "fontSize": "13px",
+                   "marginTop": "8px",
+                   "lineHeight": "1.85"
+                  }
+                 }
+                }
+               }
+              ]
+             }
+            ]
+           },
+           {
+            "type": "div",
+            "data": {
+             "attrID": "zd-cat-3"
+            },
+            "style": {
+             "&": {
+              "_": {
+               "customStyles": "overflow:hidden;",
+               "radius": "3px",
+               "backgroundColor": {
+                "token": "--surface"
+               },
+               "transitionAll": "260ms ease"
+              }
+             },
+             "hover": {
+              "_": {
+               "shadow": {
+                "x": "0px",
+                "y": "16px",
+                "blur": "34px",
+                "spread": "-16px",
+                "color": "rgba(28,26,23,0.28)"
+               }
+              }
+             }
+            },
+            "children": [
+             {
+              "type": "div",
+              "data": {
+               "attrID": "zd-cat-img-3"
+              },
+              "style": {
+               "&": {
+                "_": {
+                 "customStyles": "overflow:hidden;aspect-ratio:1/1;"
+                }
+               }
+              },
+              "children": [
+               {
+                "type": "image",
+                "data": {
+                 "attrID": "zd-cat-i-3",
+                 "image": "https://zidanna.com/wp-content/uploads/2026/08/01.png",
+                 "alt": "护肤品套盒"
+                },
+                "style": {
+                 "&": {
+                  "_": {
+                   "width": "100%",
+                   "height": "100%",
+                   "objectFitStyle": {
+                    "objectFit": "cover",
+                    "objectPositionX": "55%",
+                    "objectPositionY": "88%"
+                   },
+                   "move": {
+                    "scale": "1.22"
+                   },
+                   "transitionAll": "600ms ease"
+                  }
+                 },
+                 "hover": {
+                  "_": {
+                   "move": {
+                    "scale": "1.3"
+                   }
+                  }
+                 }
+                }
+               }
+              ]
+             },
+             {
+              "type": "div",
+              "data": {
+               "attrID": "zd-cat-txt-3"
+              },
+              "style": {
+               "&": {
+                "_": {
+                 "paddingTop": "20px",
+                 "paddingBottom": "24px",
+                 "paddingLeft": "20px",
+                 "paddingRight": "20px"
+                }
+               }
+              },
+              "children": [
+               {
+                "type": "text",
+                "data": {
+                 "tagName": "h3"
+                },
+                "text": "护肤品套盒",
+                "style": {
+                 "&": {
+                  "_": {
+                   "color": {
+                    "token": "--ink"
+                   },
+                   "fontSize": "17px",
+                   "fontWeight": "700"
+                  }
+                 }
+                }
+               },
+               {
+                "type": "text",
+                "data": {
+                 "tagName": "p"
+                },
+                "text": "礼盒与旅行组，含包材与外盒整合。",
+                "style": {
+                 "&": {
+                  "_": {
+                   "color": {
+                    "token": "--muted"
+                   },
+                   "fontSize": "13px",
+                   "marginTop": "8px",
+                   "lineHeight": "1.85"
+                  }
+                 }
+                }
+               }
+              ]
+             }
+            ]
+           }
+          ]
+         }
+        ]
+       }
+      ]
+     },
+     {
+      "type": "section",
+      "data": {
+       "attrID": "zd-why"
+      },
+      "style": {
+       "&": {
+        "_": {
+         "backgroundColor": {
+          "token": "--sand"
+         },
+         "paddingTop": "112px",
+         "paddingBottom": "112px",
+         "paddingLeft": "48px",
+         "paddingRight": "48px",
+         "fontFamily": "'PingFang SC','Hiragino Sans GB','Microsoft YaHei','Noto Sans SC',sans-serif"
+        },
+        "_m": {
+         "paddingLeft": "20px",
+         "paddingRight": "20px",
+         "paddingTop": "64px",
+         "paddingBottom": "64px"
+        }
+       }
+      },
+      "children": [
+       {
+        "type": "div",
+        "data": {
+         "attrID": "zd-why-in"
+        },
+        "style": {
+         "&": {
+          "_": {
+           "width": "100%",
+           "maxWidth": "1120px",
+           "marginLeft": "auto",
+           "marginRight": "auto"
+          }
+         }
+        },
+        "children": [
+         {
+          "type": "text",
+          "data": {
+           "tagName": "h2"
+          },
+          "text": "WHY ZIDANNA",
+          "style": {
+           "&": {
+            "_": {
+             "color": {
+              "token": "--sage"
+             },
+             "fontSize": "12px",
+             "fontWeight": "700",
+             "letterSpacing": "3px",
+             "fontFamily": "'Helvetica Neue',Helvetica,Arial,sans-serif"
+            }
+           }
+          }
+         },
+         {
+          "type": "text",
+          "data": {
+           "tagName": "h2"
+          },
+          "text": "为何选择我们",
+          "style": {
+           "&": {
+            "_": {
+             "color": {
+              "token": "--ink"
+             },
+             "fontSize": "38px",
+             "fontWeight": "700",
+             "marginTop": "16px"
+            }
+           }
+          }
+         },
+         {
+          "type": "div",
+          "data": {
+           "attrID": "zd-why-grid"
+          },
+          "style": {
+           "&": {
+            "_": {
+             "display": "grid",
+             "gridCols": "repeat(3, 1fr)",
+             "columnGap": "1px",
+             "rowGap": "1px",
+             "marginTop": "46px",
+             "customStyles": "background:rgb(226,219,208);"
+            },
+            "_m": {
+             "gridCols": "repeat(1, 1fr)"
+            }
+           }
+          },
+          "children": [
+           {
+            "type": "div",
+            "data": {
+             "attrID": "zd-why-0"
+            },
+            "style": {
+             "&": {
+              "_": {
+               "backgroundColor": {
+                "token": "--paper"
+               },
+               "paddingTop": "34px",
+               "paddingBottom": "34px",
+               "paddingLeft": "30px",
+               "paddingRight": "30px",
+               "transitionAll": "220ms ease"
+              }
+             },
+             "hover": {
+              "_": {
+               "backgroundColor": {
+                "token": "--surface"
+               }
+              }
+             }
+            },
+            "children": [
+             {
+              "type": "text",
+              "data": {
+               "tagName": "h3"
+              },
+              "text": "配方稳定",
+              "style": {
+               "&": {
+                "_": {
+                 "color": {
+                  "token": "--ink"
+                 },
+                 "fontSize": "18px",
+                 "fontWeight": "700"
+                }
+               }
+              }
+             },
+             {
+              "type": "text",
+              "data": {
+               "tagName": "p"
+              },
+              "text": "上千支已量产配方作为基础，不必从零开始试错。",
+              "style": {
+               "&": {
+                "_": {
+                 "color": {
+                  "token": "--muted"
+                 },
+                 "fontSize": "14px",
+                 "marginTop": "10px",
+                 "lineHeight": "1.95"
+                }
+               }
+              }
+             }
+            ]
+           },
+           {
+            "type": "div",
+            "data": {
+             "attrID": "zd-why-1"
+            },
+            "style": {
+             "&": {
+              "_": {
+               "backgroundColor": {
+                "token": "--paper"
+               },
+               "paddingTop": "34px",
+               "paddingBottom": "34px",
+               "paddingLeft": "30px",
+               "paddingRight": "30px",
+               "transitionAll": "220ms ease"
+              }
+             },
+             "hover": {
+              "_": {
+               "backgroundColor": {
+                "token": "--surface"
+               }
+              }
+             }
+            },
+            "children": [
+             {
+              "type": "text",
+              "data": {
+               "tagName": "h3"
+              },
+              "text": "原料广度",
+              "style": {
+               "&": {
+                "_": {
+                 "color": {
+                  "token": "--ink"
+                 },
+                 "fontSize": "18px",
+                 "fontWeight": "700"
+                }
+               }
+              }
+             },
+             {
+              "type": "text",
+              "data": {
+               "tagName": "p"
+              },
+              "text": "五千种以上原物料可选，特殊诉求也找得到对应方案。",
+              "style": {
+               "&": {
+                "_": {
+                 "color": {
+                  "token": "--muted"
+                 },
+                 "fontSize": "14px",
+                 "marginTop": "10px",
+                 "lineHeight": "1.95"
+                }
+               }
+              }
+             }
+            ]
+           },
+           {
+            "type": "div",
+            "data": {
+             "attrID": "zd-why-2"
+            },
+            "style": {
+             "&": {
+              "_": {
+               "backgroundColor": {
+                "token": "--paper"
+               },
+               "paddingTop": "34px",
+               "paddingBottom": "34px",
+               "paddingLeft": "30px",
+               "paddingRight": "30px",
+               "transitionAll": "220ms ease"
+              }
+             },
+             "hover": {
+              "_": {
+               "backgroundColor": {
+                "token": "--surface"
+               }
+              }
+             }
+            },
+            "children": [
+             {
+              "type": "text",
+              "data": {
+               "tagName": "h3"
+              },
+              "text": "通路经验",
+              "style": {
+               "&": {
+                "_": {
+                 "color": {
+                  "token": "--ink"
+                 },
+                 "fontSize": "18px",
+                 "fontWeight": "700"
+                }
+               }
+              }
+             },
+             {
+              "type": "text",
+              "data": {
+               "tagName": "p"
+              },
+              "text": "服务过上百个品牌，熟悉电商、专柜与沙龙各自的规格要求。",
+              "style": {
+               "&": {
+                "_": {
+                 "color": {
+                  "token": "--muted"
+                 },
+                 "fontSize": "14px",
+                 "marginTop": "10px",
+                 "lineHeight": "1.95"
+                }
+               }
+              }
+             }
+            ]
+           },
+           {
+            "type": "div",
+            "data": {
+             "attrID": "zd-why-3"
+            },
+            "style": {
+             "&": {
+              "_": {
+               "backgroundColor": {
+                "token": "--paper"
+               },
+               "paddingTop": "34px",
+               "paddingBottom": "34px",
+               "paddingLeft": "30px",
+               "paddingRight": "30px",
+               "transitionAll": "220ms ease"
+              }
+             },
+             "hover": {
+              "_": {
+               "backgroundColor": {
+                "token": "--surface"
+               }
+              }
+             }
+            },
+            "children": [
+             {
+              "type": "text",
+              "data": {
+               "tagName": "h3"
+              },
+              "text": "肤感优化",
+              "style": {
+               "&": {
+                "_": {
+                 "color": {
+                  "token": "--ink"
+                 },
+                 "fontSize": "18px",
+                 "fontWeight": "700"
+                }
+               }
+              }
+             },
+             {
+              "type": "text",
+              "data": {
+               "tagName": "p"
+              },
+              "text": "重视实际使用感受，小样阶段就把质地调到位。",
+              "style": {
+               "&": {
+                "_": {
+                 "color": {
+                  "token": "--muted"
+                 },
+                 "fontSize": "14px",
+                 "marginTop": "10px",
+                 "lineHeight": "1.95"
+                }
+               }
+              }
+             }
+            ]
+           },
+           {
+            "type": "div",
+            "data": {
+             "attrID": "zd-why-4"
+            },
+            "style": {
+             "&": {
+              "_": {
+               "backgroundColor": {
+                "token": "--paper"
+               },
+               "paddingTop": "34px",
+               "paddingBottom": "34px",
+               "paddingLeft": "30px",
+               "paddingRight": "30px",
+               "transitionAll": "220ms ease"
+              }
+             },
+             "hover": {
+              "_": {
+               "backgroundColor": {
+                "token": "--surface"
+               }
+              }
+             }
+            },
+            "children": [
+             {
+              "type": "text",
+              "data": {
+               "tagName": "h3"
+              },
+              "text": "两岸资源",
+              "style": {
+               "&": {
+                "_": {
+                 "color": {
+                  "token": "--ink"
+                 },
+                 "fontSize": "18px",
+                 "fontWeight": "700"
+                }
+               }
+              }
+             },
+             {
+              "type": "text",
+              "data": {
+               "tagName": "p"
+              },
+              "text": "台湾母厂六十年制造经验，与南京厂区共用技术与品管标准。",
+              "style": {
+               "&": {
+                "_": {
+                 "color": {
+                  "token": "--muted"
+                 },
+                 "fontSize": "14px",
+                 "marginTop": "10px",
+                 "lineHeight": "1.95"
+                }
+               }
+              }
+             }
+            ]
+           },
+           {
+            "type": "div",
+            "data": {
+             "attrID": "zd-why-5"
+            },
+            "style": {
+             "&": {
+              "_": {
+               "backgroundColor": {
+                "token": "--paper"
+               },
+               "paddingTop": "34px",
+               "paddingBottom": "34px",
+               "paddingLeft": "30px",
+               "paddingRight": "30px",
+               "transitionAll": "220ms ease"
+              }
+             },
+             "hover": {
+              "_": {
+               "backgroundColor": {
+                "token": "--surface"
+               }
+              }
+             }
+            },
+            "children": [
+             {
+              "type": "text",
+              "data": {
+               "tagName": "h3"
+              },
+              "text": "一站到底",
+              "style": {
+               "&": {
+                "_": {
+                 "color": {
+                  "token": "--ink"
+                 },
+                 "fontSize": "18px",
+                 "fontWeight": "700"
+                }
+               }
+              }
+             },
+             {
+              "type": "text",
+              "data": {
+               "tagName": "p"
+              },
+              "text": "从品牌规划、配方、制造到包材，单一窗口负责到底。",
+              "style": {
+               "&": {
+                "_": {
+                 "color": {
+                  "token": "--muted"
+                 },
+                 "fontSize": "14px",
+                 "marginTop": "10px",
+                 "lineHeight": "1.95"
+                }
+               }
+              }
+             }
+            ]
+           }
+          ]
+         }
+        ]
+       }
+      ]
+     },
+     {
+      "type": "section",
+      "data": {
+       "attrID": "zd-cta"
+      },
+      "style": {
+       "&": {
+        "_": {
+         "backgroundColor": {
+          "token": "--ink"
+         },
+         "paddingTop": "96px",
+         "paddingBottom": "96px",
+         "paddingLeft": "48px",
+         "paddingRight": "48px",
+         "fontFamily": "'PingFang SC','Hiragino Sans GB','Microsoft YaHei','Noto Sans SC',sans-serif"
+        },
+        "_m": {
+         "paddingLeft": "20px",
+         "paddingRight": "20px",
+         "paddingTop": "64px",
+         "paddingBottom": "64px"
+        }
+       }
+      },
+      "children": [
+       {
+        "type": "div",
+        "data": {
+         "attrID": "zd-cta-in"
+        },
+        "style": {
+         "&": {
+          "_": {
+           "width": "100%",
+           "maxWidth": "1120px",
+           "marginLeft": "auto",
+           "marginRight": "auto"
+          }
+         }
+        },
+        "children": [
+         {
+          "type": "text",
+          "data": {
+           "tagName": "h2"
+          },
+          "text": "每个品牌都是从第一支样品开始的",
+          "style": {
+           "&": {
+            "_": {
+             "color": {
+              "token": "--paper"
+             },
+             "fontSize": "34px",
+             "fontWeight": "700",
+             "lineHeight": "1.5",
+             "textAlign": "center"
+            }
+           }
+          }
+         },
+         {
+          "type": "text",
+          "data": {
+           "tagName": "p"
+          },
+          "text": "把想法、预算与上市时间告诉我们，我们回覆可行的配方方向与打样时程。",
+          "style": {
+           "&": {
+            "_": {
+             "color": "rgb(168,160,150)",
+             "fontSize": "16px",
+             "marginTop": "16px",
+             "textAlign": "center",
+             "lineHeight": "2"
+            }
+           }
+          }
+         },
+         {
+          "type": "div",
+          "data": {
+           "attrID": "zd-cta-btn"
+          },
+          "style": {
+           "&": {
+            "_": {
+             "display": "flex",
+             "justifyContent": "center",
+             "marginTop": "32px"
+            }
+           }
+          },
+          "children": [
+           {
+            "type": "button",
+            "data": {
+             "attrID": "zd-cta-3",
+             "url": "mailto:zidnana@163.com"
+            },
+            "style": {
+             "&": {
+              "_": {
+               "backgroundColor": {
+                "token": "--sage"
+               },
+               "color": "rgb(250,248,244)",
+               "fontSize": "15px",
+               "paddingTop": "16px",
+               "paddingBottom": "16px",
+               "paddingLeft": "38px",
+               "paddingRight": "38px",
+               "radius": "2px",
+               "cursor": "pointer",
+               "transitionAll": "200ms ease"
+              }
+             },
+             "hover": {
+              "_": {
+               "backgroundColor": "rgb(250,248,244)",
+               "color": {
+                "token": "--ink"
+               }
+              }
+             }
+            },
+            "text": "开始打造"
+           }
+          ]
+         }
+        ]
+       }
+      ]
+     }
+    ]
+   }
+  },
+  {
+   "slug": "zidanna-oem",
+   "post_id": 23,
+   "title": "OEM代工",
+   "tree": {
+    "type": "div",
+    "data": {
+     "attrID": "zd-oem"
+    },
+    "children": [
+     {
+      "type": "section",
+      "data": {
+       "attrID": "zd-oem-hero"
+      },
+      "style": {
+       "&": {
+        "_": {
+         "backgroundColor": {
+          "token": "--paper"
+         },
+         "paddingTop": "72px",
+         "paddingBottom": "72px",
+         "paddingLeft": "48px",
+         "paddingRight": "48px",
+         "fontFamily": "'PingFang SC','Hiragino Sans GB','Microsoft YaHei','Noto Sans SC',sans-serif"
+        },
+        "_m": {
+         "paddingLeft": "20px",
+         "paddingRight": "20px",
+         "paddingTop": "64px",
+         "paddingBottom": "64px"
+        }
+       }
+      },
+      "children": [
+       {
+        "type": "div",
+        "data": {
+         "attrID": "zd-oem-hero-in"
+        },
+        "style": {
+         "&": {
+          "_": {
+           "width": "100%",
+           "maxWidth": "1120px",
+           "marginLeft": "auto",
+           "marginRight": "auto"
+          }
+         }
+        },
+        "children": [
+         {
+          "type": "text",
+          "data": {
+           "tagName": "h2"
+          },
+          "text": "OEM / ODM",
+          "style": {
+           "&": {
+            "_": {
+             "color": {
+              "token": "--sage"
+             },
+             "fontSize": "12px",
+             "fontWeight": "700",
+             "letterSpacing": "3px",
+             "fontFamily": "'Helvetica Neue',Helvetica,Arial,sans-serif"
+            }
+           }
+          }
+         },
+         {
+          "type": "text",
+          "data": {
+           "tagName": "h1"
+          },
+          "children": [
+           {
+            "type": "wysiwyg-variable",
+            "data": {
+             "dynamicCode": "@VAR('post/title')"
+            }
+           }
+          ],
+          "style": {
+           "&": {
+            "_": {
+             "color": {
+              "token": "--ink"
+             },
+             "fontSize": "52px",
+             "fontWeight": "700",
+             "marginTop": "18px",
+             "lineHeight": "1.25"
+            }
+           }
+          }
+         },
+         {
+          "type": "text",
+          "data": {
+           "tagName": "p"
+          },
+          "text": "从既有配方微调，到完全依品牌需求重新开发，两种模式都承接。以下是姿丹娜目前量产中的主要产品线。",
+          "style": {
+           "&": {
+            "_": {
+             "color": {
+              "token": "--muted"
+             },
+             "fontSize": "17px",
+             "lineHeight": "2",
+             "marginTop": "20px",
+             "maxWidth": "34em"
+            }
+           }
+          }
+         }
+        ]
+       }
+      ]
+     },
+     {
+      "type": "section",
+      "data": {
+       "attrID": "zd-lines"
+      },
+      "style": {
+       "&": {
+        "_": {
+         "backgroundColor": {
+          "token": "--surface"
+         },
+         "paddingTop": "112px",
+         "paddingBottom": "112px",
+         "paddingLeft": "48px",
+         "paddingRight": "48px",
+         "fontFamily": "'PingFang SC','Hiragino Sans GB','Microsoft YaHei','Noto Sans SC',sans-serif"
+        },
+        "_m": {
+         "paddingLeft": "20px",
+         "paddingRight": "20px",
+         "paddingTop": "64px",
+         "paddingBottom": "64px"
+        }
+       }
+      },
+      "children": [
+       {
+        "type": "div",
+        "data": {
+         "attrID": "zd-lines-in"
+        },
+        "style": {
+         "&": {
+          "_": {
+           "width": "100%",
+           "maxWidth": "1120px",
+           "marginLeft": "auto",
+           "marginRight": "auto"
+          }
+         }
+        },
+        "children": [
+         {
+          "type": "text",
+          "data": {
+           "tagName": "h2"
+          },
+          "text": "PRODUCT LINES",
+          "style": {
+           "&": {
+            "_": {
+             "color": {
+              "token": "--sage"
+             },
+             "fontSize": "12px",
+             "fontWeight": "700",
+             "letterSpacing": "3px",
+             "fontFamily": "'Helvetica Neue',Helvetica,Arial,sans-serif"
+            }
+           }
+          }
+         },
+         {
+          "type": "text",
+          "data": {
+           "tagName": "h2"
+          },
+          "text": "产品线",
+          "style": {
+           "&": {
+            "_": {
+             "color": {
+              "token": "--ink"
+             },
+             "fontSize": "36px",
+             "fontWeight": "700",
+             "marginTop": "16px"
+            }
+           }
+          }
+         },
+         {
+          "type": "div",
+          "data": {
+           "attrID": "zd-lines-list"
+          },
+          "style": {
+           "&": {
+            "_": {
+             "marginTop": "40px"
+            }
+           }
+          },
+          "children": [
+           {
+            "type": "div",
+            "data": {
+             "attrID": "zd-line-0"
+            },
+            "style": {
+             "&": {
+              "_": {
+               "paddingTop": "26px",
+               "paddingBottom": "26px",
+               "display": "grid",
+               "gridCols": "0.32fr 0.68fr",
+               "columnGap": "40px",
+               "customStyles": "border-top:1px solid rgb(226,219,208);",
+               "transitionAll": "200ms ease"
+              }
+             },
+             "hover": {
+              "_": {
+               "paddingLeft": "12px"
+              }
+             }
+            },
+            "children": [
+             {
+              "type": "text",
+              "data": {
+               "tagName": "h3"
+              },
+              "text": "日常护肤系列",
+              "style": {
+               "&": {
+                "_": {
+                 "color": {
+                  "token": "--ink"
+                 },
+                 "fontSize": "19px",
+                 "fontWeight": "700"
+                }
+               }
+              }
+             },
+             {
+              "type": "text",
+              "data": {
+               "tagName": "p"
+              },
+              "text": "化妆水、精华、乳液、面霜与面膜，最常见的基础品项。",
+              "style": {
+               "&": {
+                "_": {
+                 "color": {
+                  "token": "--muted"
+                 },
+                 "fontSize": "15px",
+                 "lineHeight": "1.95"
+                }
+               }
+              }
+             }
+            ]
+           },
+           {
+            "type": "div",
+            "data": {
+             "attrID": "zd-line-1"
+            },
+            "style": {
+             "&": {
+              "_": {
+               "paddingTop": "26px",
+               "paddingBottom": "26px",
+               "display": "grid",
+               "gridCols": "0.32fr 0.68fr",
+               "columnGap": "40px",
+               "customStyles": "border-top:1px solid rgb(226,219,208);",
+               "transitionAll": "200ms ease"
+              }
+             },
+             "hover": {
+              "_": {
+               "paddingLeft": "12px"
+              }
+             }
+            },
+            "children": [
+             {
+              "type": "text",
+              "data": {
+               "tagName": "h3"
+              },
+              "text": "高端护理系列",
+              "style": {
+               "&": {
+                "_": {
+                 "color": {
+                  "token": "--ink"
+                 },
+                 "fontSize": "19px",
+                 "fontWeight": "700"
+                }
+               }
+              }
+             },
+             {
+              "type": "text",
+              "data": {
+               "tagName": "p"
+              },
+              "text": "高单价抗龄与修护线，适合专柜与医美通路。",
+              "style": {
+               "&": {
+                "_": {
+                 "color": {
+                  "token": "--muted"
+                 },
+                 "fontSize": "15px",
+                 "lineHeight": "1.95"
+                }
+               }
+              }
+             }
+            ]
+           },
+           {
+            "type": "div",
+            "data": {
+             "attrID": "zd-line-2"
+            },
+            "style": {
+             "&": {
+              "_": {
+               "paddingTop": "26px",
+               "paddingBottom": "26px",
+               "display": "grid",
+               "gridCols": "0.32fr 0.68fr",
+               "columnGap": "40px",
+               "customStyles": "border-top:1px solid rgb(226,219,208);",
+               "transitionAll": "200ms ease"
+              }
+             },
+             "hover": {
+              "_": {
+               "paddingLeft": "12px"
+              }
+             }
+            },
+            "children": [
+             {
+              "type": "text",
+              "data": {
+               "tagName": "h3"
+              },
+              "text": "香氛系列",
+              "style": {
+               "&": {
+                "_": {
+                 "color": {
+                  "token": "--ink"
+                 },
+                 "fontSize": "19px",
+                 "fontWeight": "700"
+                }
+               }
+              }
+             },
+             {
+              "type": "text",
+              "data": {
+               "tagName": "p"
+              },
+              "text": "香水、身体喷雾与居家香氛，可单独调香。",
+              "style": {
+               "&": {
+                "_": {
+                 "color": {
+                  "token": "--muted"
+                 },
+                 "fontSize": "15px",
+                 "lineHeight": "1.95"
+                }
+               }
+              }
+             }
+            ]
+           },
+           {
+            "type": "div",
+            "data": {
+             "attrID": "zd-line-3"
+            },
+            "style": {
+             "&": {
+              "_": {
+               "paddingTop": "26px",
+               "paddingBottom": "26px",
+               "display": "grid",
+               "gridCols": "0.32fr 0.68fr",
+               "columnGap": "40px",
+               "customStyles": "border-top:1px solid rgb(226,219,208);",
+               "transitionAll": "200ms ease"
+              }
+             },
+             "hover": {
+              "_": {
+               "paddingLeft": "12px"
+              }
+             }
+            },
+            "children": [
+             {
+              "type": "text",
+              "data": {
+               "tagName": "h3"
+              },
+              "text": "植物精油",
+              "style": {
+               "&": {
+                "_": {
+                 "color": {
+                  "token": "--ink"
+                 },
+                 "fontSize": "19px",
+                 "fontWeight": "700"
+                }
+               }
+              }
+             },
+             {
+              "type": "text",
+              "data": {
+               "tagName": "p"
+              },
+              "text": "单方与复方精油，含基底油稀释配比。",
+              "style": {
+               "&": {
+                "_": {
+                 "color": {
+                  "token": "--muted"
+                 },
+                 "fontSize": "15px",
+                 "lineHeight": "1.95"
+                }
+               }
+              }
+             }
+            ]
+           },
+           {
+            "type": "div",
+            "data": {
+             "attrID": "zd-line-4"
+            },
+            "style": {
+             "&": {
+              "_": {
+               "paddingTop": "26px",
+               "paddingBottom": "26px",
+               "display": "grid",
+               "gridCols": "0.32fr 0.68fr",
+               "columnGap": "40px",
+               "customStyles": "border-top:1px solid rgb(226,219,208);",
+               "transitionAll": "200ms ease"
+              }
+             },
+             "hover": {
+              "_": {
+               "paddingLeft": "12px"
+              }
+             }
+            },
+            "children": [
+             {
+              "type": "text",
+              "data": {
+               "tagName": "h3"
+              },
+              "text": "身体 SPA 系列",
+              "style": {
+               "&": {
+                "_": {
+                 "color": {
+                  "token": "--ink"
+                 },
+                 "fontSize": "19px",
+                 "fontWeight": "700"
+                }
+               }
+              }
+             },
+             {
+              "type": "text",
+              "data": {
+               "tagName": "p"
+              },
+              "text": "按摩油、去角质与沐浴品项，沙龙规格包装。",
+              "style": {
+               "&": {
+                "_": {
+                 "color": {
+                  "token": "--muted"
+                 },
+                 "fontSize": "15px",
+                 "lineHeight": "1.95"
+                }
+               }
+              }
+             }
+            ]
+           }
+          ]
+         }
+        ]
+       }
+      ]
+     },
+     {
+      "type": "section",
+      "data": {
+       "attrID": "zd-oem-process"
+      },
+      "style": {
+       "&": {
+        "_": {
+         "backgroundColor": {
+          "token": "--paper"
+         },
+         "paddingTop": "112px",
+         "paddingBottom": "112px",
+         "paddingLeft": "48px",
+         "paddingRight": "48px",
+         "fontFamily": "'PingFang SC','Hiragino Sans GB','Microsoft YaHei','Noto Sans SC',sans-serif"
+        },
+        "_m": {
+         "paddingLeft": "20px",
+         "paddingRight": "20px",
+         "paddingTop": "64px",
+         "paddingBottom": "64px"
+        }
+       }
+      },
+      "children": [
+       {
+        "type": "div",
+        "data": {
+         "attrID": "zd-oem-process-in"
+        },
+        "style": {
+         "&": {
+          "_": {
+           "width": "100%",
+           "maxWidth": "1120px",
+           "marginLeft": "auto",
+           "marginRight": "auto"
+          }
+         }
+        },
+        "children": [
+         {
+          "type": "text",
+          "data": {
+           "tagName": "h2"
+          },
+          "text": "HOW WE WORK",
+          "style": {
+           "&": {
+            "_": {
+             "color": {
+              "token": "--sage"
+             },
+             "fontSize": "12px",
+             "fontWeight": "700",
+             "letterSpacing": "3px",
+             "fontFamily": "'Helvetica Neue',Helvetica,Arial,sans-serif"
+            }
+           }
+          }
+         },
+         {
+          "type": "text",
+          "data": {
+           "tagName": "h2"
+          },
+          "text": "合作流程",
+          "style": {
+           "&": {
+            "_": {
+             "color": {
+              "token": "--ink"
+             },
+             "fontSize": "36px",
+             "fontWeight": "700",
+             "marginTop": "16px"
+            }
+           }
+          }
+         },
+         {
+          "type": "div",
+          "data": {
+           "attrID": "zd-oem-grid"
+          },
+          "style": {
+           "&": {
+            "_": {
+             "display": "grid",
+             "gridCols": "repeat(4, 1fr)",
+             "columnGap": "28px",
+             "rowGap": "28px",
+             "marginTop": "46px"
+            },
+            "_m": {
+             "gridCols": "repeat(1, 1fr)"
+            }
+           }
+          },
+          "children": [
+           {
+            "type": "div",
+            "data": {
+             "attrID": "zd-oem-step-01"
+            },
+            "style": {
+             "&": {
+              "_": {
+               "paddingTop": "26px",
+               "customStyles": "border-top:2px solid rgb(28,26,23);"
+              }
+             }
+            },
+            "children": [
+             {
+              "type": "text",
+              "data": {
+               "tagName": "p"
+              },
+              "text": "01",
+              "style": {
+               "&": {
+                "_": {
+                 "color": {
+                  "token": "--sage"
+                 },
+                 "fontSize": "13px",
+                 "fontWeight": "700",
+                 "letterSpacing": "1px",
+                 "fontFamily": "'Helvetica Neue',Helvetica,Arial,sans-serif"
+                }
+               }
+              }
+             },
+             {
+              "type": "text",
+              "data": {
+               "tagName": "h3"
+              },
+              "text": "品牌规划",
+              "style": {
+               "&": {
+                "_": {
+                 "color": {
+                  "token": "--ink"
+                 },
+                 "fontSize": "19px",
+                 "fontWeight": "700",
+                 "marginTop": "12px"
+                }
+               }
+              }
+             },
+             {
+              "type": "text",
+              "data": {
+               "tagName": "p"
+              },
+              "text": "先弄清楚品牌要卖给谁、放在哪个价格带，再决定产品该长什么样。",
+              "style": {
+               "&": {
+                "_": {
+                 "color": {
+                  "token": "--muted"
+                 },
+                 "fontSize": "14px",
+                 "marginTop": "10px",
+                 "lineHeight": "1.95"
+                }
+               }
+              }
+             }
+            ]
+           },
+           {
+            "type": "div",
+            "data": {
+             "attrID": "zd-oem-step-02"
+            },
+            "style": {
+             "&": {
+              "_": {
+               "paddingTop": "26px",
+               "customStyles": "border-top:2px solid rgb(28,26,23);"
+              }
+             }
+            },
+            "children": [
+             {
+              "type": "text",
+              "data": {
+               "tagName": "p"
+              },
+              "text": "02",
+              "style": {
+               "&": {
+                "_": {
+                 "color": {
+                  "token": "--sage"
+                 },
+                 "fontSize": "13px",
+                 "fontWeight": "700",
+                 "letterSpacing": "1px",
+                 "fontFamily": "'Helvetica Neue',Helvetica,Arial,sans-serif"
+                }
+               }
+              }
+             },
+             {
+              "type": "text",
+              "data": {
+               "tagName": "h3"
+              },
+              "text": "配方设计",
+              "style": {
+               "&": {
+                "_": {
+                 "color": {
+                  "token": "--ink"
+                 },
+                 "fontSize": "19px",
+                 "fontWeight": "700",
+                 "marginTop": "12px"
+                }
+               }
+              }
+             },
+             {
+              "type": "text",
+              "data": {
+               "tagName": "p"
+              },
+              "text": "依肤质需求与市场定位调整配方，实验室小样确认肤感后才进入放大。",
+              "style": {
+               "&": {
+                "_": {
+                 "color": {
+                  "token": "--muted"
+                 },
+                 "fontSize": "14px",
+                 "marginTop": "10px",
+                 "lineHeight": "1.95"
+                }
+               }
+              }
+             }
+            ]
+           },
+           {
+            "type": "div",
+            "data": {
+             "attrID": "zd-oem-step-03"
+            },
+            "style": {
+             "&": {
+              "_": {
+               "paddingTop": "26px",
+               "customStyles": "border-top:2px solid rgb(28,26,23);"
+              }
+             }
+            },
+            "children": [
+             {
+              "type": "text",
+              "data": {
+               "tagName": "p"
+              },
+              "text": "03",
+              "style": {
+               "&": {
+                "_": {
+                 "color": {
+                  "token": "--sage"
+                 },
+                 "fontSize": "13px",
+                 "fontWeight": "700",
+                 "letterSpacing": "1px",
+                 "fontFamily": "'Helvetica Neue',Helvetica,Arial,sans-serif"
+                }
+               }
+              }
+             },
+             {
+              "type": "text",
+              "data": {
+               "tagName": "h3"
+              },
+              "text": "产品制造",
+              "style": {
+               "&": {
+                "_": {
+                 "color": {
+                  "token": "--ink"
+                 },
+                 "fontSize": "19px",
+                 "fontWeight": "700",
+                 "marginTop": "12px"
+                }
+               }
+              }
+             },
+             {
+              "type": "text",
+              "data": {
+               "tagName": "p"
+              },
+              "text": "自有厂区量产，原料、半成品到成品逐批留样，制程可追溯。",
+              "style": {
+               "&": {
+                "_": {
+                 "color": {
+                  "token": "--muted"
+                 },
+                 "fontSize": "14px",
+                 "marginTop": "10px",
+                 "lineHeight": "1.95"
+                }
+               }
+              }
+             }
+            ]
+           },
+           {
+            "type": "div",
+            "data": {
+             "attrID": "zd-oem-step-04"
+            },
+            "style": {
+             "&": {
+              "_": {
+               "paddingTop": "26px",
+               "customStyles": "border-top:2px solid rgb(28,26,23);"
+              }
+             }
+            },
+            "children": [
+             {
+              "type": "text",
+              "data": {
+               "tagName": "p"
+              },
+              "text": "04",
+              "style": {
+               "&": {
+                "_": {
+                 "color": {
+                  "token": "--sage"
+                 },
+                 "fontSize": "13px",
+                 "fontWeight": "700",
+                 "letterSpacing": "1px",
+                 "fontFamily": "'Helvetica Neue',Helvetica,Arial,sans-serif"
+                }
+               }
+              }
+             },
+             {
+              "type": "text",
+              "data": {
+               "tagName": "h3"
+              },
+              "text": "售后服务",
+              "style": {
+               "&": {
+                "_": {
+                 "color": {
+                  "token": "--ink"
+                 },
+                 "fontSize": "19px",
+                 "fontWeight": "700",
+                 "marginTop": "12px"
+                }
+               }
+              }
+             },
+             {
+              "type": "text",
+              "data": {
+               "tagName": "p"
+              },
+              "text": "交货不是结束。备料、补货与配方微调，长期跟着品牌一起走。",
+              "style": {
+               "&": {
+                "_": {
+                 "color": {
+                  "token": "--muted"
+                 },
+                 "fontSize": "14px",
+                 "marginTop": "10px",
+                 "lineHeight": "1.95"
+                }
+               }
+              }
+             }
+            ]
+           }
+          ]
+         }
+        ]
+       }
+      ]
+     },
+     {
+      "type": "section",
+      "data": {
+       "attrID": "zd-cta"
+      },
+      "style": {
+       "&": {
+        "_": {
+         "backgroundColor": {
+          "token": "--ink"
+         },
+         "paddingTop": "96px",
+         "paddingBottom": "96px",
+         "paddingLeft": "48px",
+         "paddingRight": "48px",
+         "fontFamily": "'PingFang SC','Hiragino Sans GB','Microsoft YaHei','Noto Sans SC',sans-serif"
+        },
+        "_m": {
+         "paddingLeft": "20px",
+         "paddingRight": "20px",
+         "paddingTop": "64px",
+         "paddingBottom": "64px"
+        }
+       }
+      },
+      "children": [
+       {
+        "type": "div",
+        "data": {
+         "attrID": "zd-cta-in"
+        },
+        "style": {
+         "&": {
+          "_": {
+           "width": "100%",
+           "maxWidth": "1120px",
+           "marginLeft": "auto",
+           "marginRight": "auto"
+          }
+         }
+        },
+        "children": [
+         {
+          "type": "text",
+          "data": {
+           "tagName": "h2"
+          },
+          "text": "每个品牌都是从第一支样品开始的",
+          "style": {
+           "&": {
+            "_": {
+             "color": {
+              "token": "--paper"
+             },
+             "fontSize": "34px",
+             "fontWeight": "700",
+             "lineHeight": "1.5",
+             "textAlign": "center"
+            }
+           }
+          }
+         },
+         {
+          "type": "text",
+          "data": {
+           "tagName": "p"
+          },
+          "text": "把想法、预算与上市时间告诉我们，我们回覆可行的配方方向与打样时程。",
+          "style": {
+           "&": {
+            "_": {
+             "color": "rgb(168,160,150)",
+             "fontSize": "16px",
+             "marginTop": "16px",
+             "textAlign": "center",
+             "lineHeight": "2"
+            }
+           }
+          }
+         },
+         {
+          "type": "div",
+          "data": {
+           "attrID": "zd-cta-btn"
+          },
+          "style": {
+           "&": {
+            "_": {
+             "display": "flex",
+             "justifyContent": "center",
+             "marginTop": "32px"
+            }
+           }
+          },
+          "children": [
+           {
+            "type": "button",
+            "data": {
+             "attrID": "zd-cta-3",
+             "url": "mailto:zidnana@163.com"
+            },
+            "style": {
+             "&": {
+              "_": {
+               "backgroundColor": {
+                "token": "--sage"
+               },
+               "color": "rgb(250,248,244)",
+               "fontSize": "15px",
+               "paddingTop": "16px",
+               "paddingBottom": "16px",
+               "paddingLeft": "38px",
+               "paddingRight": "38px",
+               "radius": "2px",
+               "cursor": "pointer",
+               "transitionAll": "200ms ease"
+              }
+             },
+             "hover": {
+              "_": {
+               "backgroundColor": "rgb(250,248,244)",
+               "color": {
+                "token": "--ink"
+               }
+              }
+             }
+            },
+            "text": "开始打造"
+           }
+          ]
+         }
+        ]
+       }
+      ]
+     }
+    ]
+   }
+  }
+ ]
+}
