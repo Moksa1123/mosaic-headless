@@ -111,6 +111,8 @@ Details that cost time to find:
    children, Button, Section — referencing those variables rather than literals.
 3. Only then write per-node `style` for the things that genuinely differ.
 
-The eight pages in `designs/` deliberately do **not** do this — they set everything
+The nine probe pages built while verifying this skill deliberately do **not** do
+this (they are gitignored - they were scaffolding, not a deliverable) — they set
+everything
 per node, because their job was to exercise the style compiler across eight visual
 languages, not to model a maintainable theme. A real site inverts that ratio.

@@ -3,7 +3,7 @@
 There are two ways to animate in Mosaic and they are completely separate.
 
 **The CSS path** — a `transition` array plus a `hover` (or any other) state — is fully
-verified and is what the eight pages in `designs/` use. It covers hover, focus and
+verified and is what `sites/_moksa.py` uses. It covers hover, focus and
 every node-type state in `data/style-states.csv`. Reach for it first;
 `references/styling.md` has the shapes.
 

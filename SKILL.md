@@ -95,7 +95,8 @@ PROPERTIES   170 probes over the declared property surface, each value asserted
 BUILD        nine complete designed pages built through the tables alone and checked
              in a real browser, hover states included - the ninth uses only design
              tokens, element-class typography and dynamic content, no hard-coded
-             colour anywhere. designs/, shots/
+             colour anywhere, plus a real studio homepage rebuilt from the
+             live moksaweb.com. sites/_moksa.py is the one that ships.
 
 MEASURED     114 REST routes, 151 element classes, 59 condition subjects,
              23 tables / 206 columns - read off the running site.
@@ -166,8 +167,15 @@ FROM SOURCE  122 node types, 181 properties (61 with enums), 207 pluggable IDs,
 ## Building a page
 
 `tools/build_page.py` consumes a declarative spec and commits it through the verified
-write path, refusing anything the tables say is unsafe. `designs/*.json` are nine
-worked examples; `designs/_generate.py` writes five of them from a shared skeleton.
+write path, refusing anything the tables say is unsafe. `tools/build_site.py` does the
+same for a whole site: one master carrying the header and footer, one template document
+per page.
+
+**`sites/_moksa.py` is the worked example** - a real studio homepage (hero, statistics,
+services, a nine-item work list, products, testimonials, CTA, footer) generated as a
+spec and committed entirely through the tables. Read it for the shape of a real build:
+the `bp()` breakpoint helper, the `code` node that carries the keyframes, the glass
+header, and `apply_type()`.
 
 A spec can carry a `theme` block, which is how a real site should be styled — design
 tokens and element-class typography rather than per-node values:
@@ -180,9 +188,15 @@ tokens and element-class typography rather than per-node values:
 ```
 
 `{"token": "--brand"}` anywhere in a style resolves to the `{"var": "<uuid>"}`
-reference the compiler wants. `designs/tokens.json` is the worked example: no colour
-is hard-coded anywhere on that page, and its heading is the post title read at render
-time.
+reference the compiler wants.
+
+**Two brands in one theme need namespaced tokens and no element classes at all.**
+Collection variables and element classes are both theme-global: two specs that each
+declare `--ink` produce one `:root` with duplicate declarations, and two specs that
+each style `Heading 1` produce one set of rules. Whichever committed last wins, for
+every page. `sites/_moksa.py` namespaces its tokens (`--mk-*`) and bakes the type
+system onto the nodes with `apply_type()` instead of using element classes, which is
+what lets it share an install with a completely different design.
 
 ```bash
 wp eval-file tools/bootstrap_probe_theme.php     # licence-free scratch theme
@@ -231,6 +245,8 @@ python tools/extract_style_properties.py <plugin-root> data/
 python tools/extract_interactions.py     <plugin-root> data/
 python tools/extract_dynamic_variables.py <plugin-root> data/
 python tools/capture_live.py             data/          # from data/raw/*.json
+                                                        # (raw dumps are gitignored;
+                                                        #  re-capture from a live site)
 
 # against a scratch site - DESTRUCTIVE, never point at production
 python tools/sweep_node_types.py --config sweep.json --setup

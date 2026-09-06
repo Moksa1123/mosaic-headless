@@ -35,7 +35,7 @@ of its own gets `status_header(406)` and an empty body.
 **Manual assignment is a REST call, not a commit.** `POST /templateAssign/createManualTemplate`
 with `resourceQuery=post/<postID>` and `masterID=<masterID>` creates the template row
 *and* the assign row in one step, deriving the path and name from the post. The eight
-pages in `designs/` are all bound this way.
+pages built by `tools/build_site.py` are all bound this way.
 
 One consequence worth knowing: **that endpoint creates a new template every time.**
 Calling it twice for the same post leaves two template rows and one assign row —

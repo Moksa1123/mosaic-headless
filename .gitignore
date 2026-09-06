@@ -13,3 +13,26 @@ __pycache__/
 report.html
 shots/web/_embed.json
 __pycache__/
+
+# Screenshots - 9.5MB of PNG/JPG that the skill itself does not need. The published
+# report embeds its own copies; regenerate with tools/capture_live.py + build_report.py
+shots/
+
+# Raw capture dumps. data/*.csv is generated FROM these by tools/capture_live.py and
+# is what the skill actually reads; the dumps are an intermediate, not a deliverable.
+data/raw/
+
+# Probe page specs used while developing the skill
+designs/
+
+# Client work - a real client's content and copy, not part of the skill
+sites/_zidanna.py
+sites/zidanna.json
+
+# Drove designs/ and shots/, which no longer ship
+tools/build_all.py
+tools/build_report.py
+
+# stray screenshots at the repo root
+*.png
+*.jpg

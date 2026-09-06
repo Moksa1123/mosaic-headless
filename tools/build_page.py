@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """Build a Mosaic page from a declarative design spec, through the public write path.
 
-    python build_page.py --config sweep.json --spec designs/brutalist.json
+    python build_page.py --config sweep.json --spec myspec.json
 
 This is the skill eating its own cooking. Nothing here knows anything about Mosaic
 that is not written down in ../data and ../references: node types come from
