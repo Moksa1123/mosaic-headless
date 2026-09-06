@@ -3,7 +3,7 @@
 [Mosaic Pro](https://mosaicbuilder.com)（Nextend）のサイトを、データモデルを直接書いて
 構築・変更する — ビジュアルエディタも DOM も使わない。
 
-*他の言語：[English](README.md) · [繁體中文](README.zh-TW.md) · [简体中文](README.zh-CN.md)*
+*他の言語：[English](README.md) · [繁體中文](README.zh-TW.md) · [한국어](README.ko.md)*
 
 ---
 

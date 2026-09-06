@@ -3,7 +3,7 @@
 直接寫入資料模型來建置與修改 [Mosaic Pro](https://mosaicbuilder.com)（Nextend）網站——
 不開視覺編輯器，不碰 DOM。
 
-*其他語言：[English](README.md) · [简体中文](README.zh-CN.md) · [日本語](README.ja.md)*
+*其他語言：[English](README.md) · [日本語](README.ja.md) · [한국어](README.ko.md)*
 
 ---
 
