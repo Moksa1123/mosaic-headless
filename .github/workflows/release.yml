@@ -24,7 +24,7 @@ jobs:
 
       - uses: actions/setup-node@v4
         with:
-          node-version: 20
+          node-version: 24
           registry-url: https://registry.npmjs.org
 
       - name: Tag must match package.json
@@ -53,13 +53,28 @@ jobs:
       - name: Show exactly what will ship
         run: npm pack --dry-run
 
+      # Idempotent: a re-run of an already-published tag should be a no-op, not a
+      # red X. A version can only be published once, and the first 1.2.0 went out by
+      # hand before NPM_TOKEN existed.
       - name: Publish
-        run: npm publish --provenance --access public
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+        run: |
+          NAME=$(node -p "require('./package.json').name")
+          VER=$(node -p "require('./package.json').version")
+          if npm view "$NAME@$VER" version >/dev/null 2>&1; then
+            echo "::notice::$NAME@$VER is already on npm; nothing to publish"
+            exit 0
+          fi
+          if [ -z "$NODE_AUTH_TOKEN" ]; then
+            echo "::error::NPM_TOKEN is not set on this repository"
+            exit 1
+          fi
+          npm publish --provenance --access public
 
       - name: GitHub release
         if: startsWith(github.ref, 'refs/tags/v')
+        continue-on-error: true
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
