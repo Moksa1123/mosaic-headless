@@ -39,14 +39,27 @@ no template for the URL     HTTP 406 with an EMPTY BODY for anyone not logged in
 only for an admin, so a logged-out visitor gets a blank page and a status code
 that looks like a server problem. Two things make it easy to hit:
 
-- **Templates bind to one post each, and that is the only binding there is.**
-  `createManualTemplate` takes `resourceQuery=post/<id>`, and `post` is the only
-  resource type the plugin registers (`setResourceType('post')`, three call sites).
-  There is no path-level or catch-all assignment through that endpoint - so the
-  blog homepage, archives, 404s and every page you did not build return 406.
-  If a site should answer on `/`, point WordPress's front page at a post that has
-  a template (`show_on_front=page`, `page_on_front=<id>`), rather than looking for
-  a Mosaic-side default.
+- **There are TWO ways to bind a template, and `createManualTemplate` is only one
+  of them.** That endpoint takes `resourceQuery=post/<id>` and `post` is the only
+  resource type it registers (`setResourceType('post')`, three call sites), so
+  through it there is no catch-all. But `assign` and `path` are first-class columns
+  on `wp_mosaic_templates`, and a template row committed with `assign:"auto"` and
+  `path:"index.php"` binds to a template PATH instead of a post. Measured A/B on a
+  URL with no template of its own: 406 with no such row, handled with it, 406 again
+  after deleting it. `X-Mosaic-Paths` on any 406 names the paths Mosaic looked for,
+  and `index.php` is in every list.
+
+  **Two limits, both measured.** `adminTemplateEditorInstance` does not return auto
+  templates at all - it listed only the three manual ones - so the admin surface
+  hides them. And an auto template's document has a `node/template/<id>` key but no
+  `template-internal` root: `heal()` builds that skeleton only for templates made
+  through `createManualTemplate`, and committing one directly answers HTTP 500. So
+  the row removes the 406 and I could not then put content in it. Not deployed on
+  the demo site for that reason - a 200 with an empty body is worse signal than a
+  406.
+
+  For `/` specifically the WordPress-side fix is the sound one: point the front page
+  at a post that has a template (`show_on_front=page`, `page_on_front=<id>`).
 - **Activating a theme is not the same as populating it.** A fresh theme has no
   templates, so between `wp theme activate` and a successful build the whole site
   is 406 - and if the build fails, it stays that way. Never activate a new theme
@@ -111,6 +124,30 @@ FROM SOURCE  122 node types, 181 properties (61 with enums), 207 pluggable IDs,
              122 placement rules, 10 composite default structures, 98 style
              properties, 53 style states.
 ```
+
+**Coverage, stated as a fraction rather than as a headline.** The verification
+counts above are real, but they are not the same as "the surface is verified", and
+the difference is worth being exact about:
+
+```
+node types        122 / 122   swept live, one per document
+node properties   170 / 181   probed; 11 never probed, and of the 170,
+                              12 are INCONCLUSIVE and 91 showed NO_EFFECT
+style properties   18 /  98   ever written to a live page
+                              data/style-value-shapes.csv covers the structured
+                              ones because their SHAPE had to be reverse-
+                              engineered; the other 80 were assumed to work
+                              because the shape looked obvious
+```
+
+**80 of 98 style properties have never been asserted against compiled CSS.** That is
+the largest hole in this skill. It matters because `gridColumnStart` is one of them
+and it emits nothing — declared in the source, its own factory group, zero output —
+so "declared" demonstrably does not imply "works", and 80 properties are currently
+resting on that implication. A batch sweep for this was attempted and abandoned: the
+probe nodes commit and come back with an empty `parentID`, so they never render and
+every property reads as a false ABSENT. Shipping that would have been worse than the
+gap.
 
 **Known gaps, stated rather than papered over.**
 

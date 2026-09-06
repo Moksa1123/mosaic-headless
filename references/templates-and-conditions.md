@@ -24,7 +24,20 @@ So there are exactly two routing modes:
 `single-product.php`, `archive-product.php` and so on. It is the WordPress template
 hierarchy, so a Mosaic template lands wherever the corresponding PHP template would.
 
-**`post/<id>` is the only resourceQuery that works.** The grammar in
+**`assign` + `path` is the other binding, and it is a real catch-all.** The
+template row carries `assign` (default `auto`) and `path` columns. Commit one with
+`assign:"auto"`, `path:"index.php"` and it binds to a template path rather than to a
+post; `X-Mosaic-Paths` on a 406 names the paths Mosaic looked for, and `index.php` is
+in all of them. Measured A/B: a URL with no template returned 406, was handled once
+the row existed, and returned to 406 when it was deleted.
+
+Two limits, both measured: `adminTemplateEditorInstance` does not list auto templates,
+and their document has no `template-internal` root - `heal()` builds that only for
+templates created through `createManualTemplate`, and committing one directly answers
+HTTP 500. So the row stops the 406 but there is no verified route to putting content
+in it.
+
+**`post/<id>` is the only resourceQuery `createManualTemplate` accepts.** The grammar in
 `ResourceQuery::create()` is just `explode('/', $s, 2)`, so anything parses - but the
 only resource type any template path registers is `post`
 (`setResourceType('post')` in PathPostTypePage, PathPostTypePost and PathPostTypes).
