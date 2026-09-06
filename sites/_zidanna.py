@@ -233,20 +233,41 @@ def motion_css():
         "to{opacity:1;transform:none}}",
         "@keyframes zd-draw{from{transform:scaleX(0)}to{transform:scaleX(1)}}",
         "@keyframes zd-progress{from{transform:scaleX(0)}to{transform:scaleX(1)}}",
+        # Scrolling does not switch the glass on - it changes what the glass is
+        # standing on. Over the dark hero it is a smoked panel; over paper it goes
+        # bright and the rim lights up.
         "@keyframes zd-headfill{"
-        "from{background:rgba(247,244,238,0);border-bottom-color:rgba(223,215,202,0);"
-        "-webkit-backdrop-filter:blur(0px) saturate(100%);"
-        "backdrop-filter:blur(0px) saturate(100%);"
-        "box-shadow:0 0 0 rgba(24,21,18,0),inset 0 1px 0 rgba(255,255,255,0)}"
-        "to{background:rgba(247,244,238,.58);border-bottom-color:rgba(223,215,202,.85);"
-        "-webkit-backdrop-filter:blur(22px) saturate(190%);"
-        "backdrop-filter:blur(22px) saturate(190%);"
-        "box-shadow:0 1px 30px rgba(24,21,18,.08),"
-        "inset 0 1px 0 rgba(255,255,255,.62)}}",
-        # the specular edge that sells the material: a hairline of light that only
-        # exists where the panel has something behind it to refract
-        "@keyframes zd-headsheen{from{opacity:0}to{opacity:1}}",
-        "@keyframes zd-headink{from{color:rgba(247,244,238,1)}to{color:rgb(24,21,18)}}",
+        "from{background:rgba(255,255,255,.10);border-color:rgba(255,255,255,.24);"
+        "-webkit-backdrop-filter:blur(26px) saturate(200%);"
+        "backdrop-filter:blur(26px) saturate(200%);"
+        "box-shadow:0 14px 44px rgba(10,8,6,.34),"
+        "inset 0 1px 0 rgba(255,255,255,.46),"
+        "inset 0 -1px 0 rgba(255,255,255,.14),"
+        "inset 8px 0 16px -12px rgba(255,255,255,.55),"
+        "inset -8px 0 16px -12px rgba(255,255,255,.55)}"
+        "to{background:rgba(255,255,255,.56);border-color:rgba(255,255,255,.85);"
+        "-webkit-backdrop-filter:blur(36px) saturate(230%) brightness(1.06);"
+        "backdrop-filter:blur(36px) saturate(230%) brightness(1.06);"
+        "box-shadow:0 16px 48px rgba(24,21,18,.14),"
+        "inset 0 1px 0 rgba(255,255,255,.95),"
+        "inset 0 -1px 0 rgba(24,21,18,.06),"
+        "inset 10px 0 18px -12px rgba(255,255,255,.9),"
+        "inset -10px 0 18px -12px rgba(255,255,255,.9)}}",
+        "@keyframes zd-headsheen{"
+        "0%{transform:translateX(-140%) rotate(18deg)}"
+        "38%,100%{transform:translateX(420%) rotate(18deg)}}",
+        # the shadow exists to hold light type off a photograph; once the type is
+        # dark on bright glass it is just dirt, so it fades out with the colour
+        "@keyframes zd-headink{"
+        "from{color:rgba(247,244,238,1);text-shadow:0 1px 2px rgba(10,8,6,.28)}"
+        "to{color:rgb(24,21,18);text-shadow:0 1px 2px rgba(10,8,6,0)}}",
+        "@keyframes zd-headcta{"
+        "from{background:rgba(255,255,255,.16);border-color:rgba(255,255,255,.42);"
+        "color:rgba(247,244,238,.96);"
+        "box-shadow:inset 0 1px 0 rgba(255,255,255,.35)}"
+        "to{background:rgb(24,21,18);border-color:rgb(24,21,18);"
+        "color:rgb(247,244,238);"
+        "box-shadow:inset 0 1px 0 rgba(255,255,255,.16)}}",
 
         # ── layout the style compiler cannot express ─────────────────────────
         "#zd-hero{position:relative;min-height:84vh;display:flex;align-items:center;"
@@ -259,23 +280,43 @@ def motion_css():
         "%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.82'"
         " numOctaves='4'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25'"
         " filter='url(%23n)'/%3E%3C/svg%3E\");background-size:180px 180px}",
-        "#zd-hero-in{position:relative;z-index:2;padding-top:132px;padding-bottom:116px}",
+        "#zd-hero-in{position:relative;z-index:2;padding-top:124px;padding-bottom:112px}",
         "#zd-hero-cue{position:absolute;left:50%;bottom:30px;transform:translateX(-50%);"
         "z-index:1}",
         "#zd-oem-hero{padding-top:164px}",
 
-        "#zd-header{position:fixed;top:0;left:0;right:0;z-index:100;"
-        "border-bottom:1px solid rgba(223,215,202,0);background:rgba(247,244,238,0);"
-        "-webkit-backdrop-filter:blur(0px);backdrop-filter:blur(0px);"
+        "#zd-header{position:fixed;top:14px;left:50%;z-index:100;"
+        "transform:translateX(-50%);width:calc(100% - 32px);max-width:1264px;"
+        "border-radius:999px;overflow:hidden;isolation:isolate;"
+        # present from the first frame rather than faded in on scroll - the whole
+        # point is that you can see the photograph through it
+        "background:rgba(255,255,255,.10);"
+        "-webkit-backdrop-filter:blur(26px) saturate(200%);"
+        "backdrop-filter:blur(26px) saturate(200%);"
+        "border:1px solid rgba(255,255,255,.24);"
+        # four shadows doing four jobs: lift off the page, a lit top edge, a dim
+        # bottom edge, and a pair of bright inner sides that read as the light
+        # bending round the rim
+        "box-shadow:0 14px 44px rgba(10,8,6,.34),"
+        "inset 0 1px 0 rgba(255,255,255,.46),"
+        "inset 0 -1px 0 rgba(255,255,255,.14),"
+        "inset 8px 0 16px -12px rgba(255,255,255,.55),"
+        "inset -8px 0 16px -12px rgba(255,255,255,.55);"
         "will-change:backdrop-filter,background}",
-        '#zd-header::before{content:"";position:absolute;left:0;right:0;bottom:-1px;'
-        "height:1px;opacity:0;pointer-events:none;background:linear-gradient(90deg,"
-        "rgba(158,127,88,0) 0%,rgba(158,127,88,.55) 22%,rgba(255,255,255,.9) 50%,"
-        "rgba(158,127,88,.55) 78%,rgba(158,127,88,0) 100%)}",
+        # a specular band that travels the capsule and then waits - the thing that
+        # separates glass from a frosted rectangle
+        '#zd-header::before{content:"";position:absolute;top:-70%;left:0;'
+        "width:34%;height:240%;pointer-events:none;z-index:0;"
+        "background:linear-gradient(90deg,rgba(255,255,255,0) 0%,"
+        "rgba(255,255,255,.22) 50%,rgba(255,255,255,0) 100%);"
+        "transform:translateX(-140%) rotate(18deg)}",
+        "#zd-header-in{position:relative;z-index:1}",
         # over the hero the header sits on the image, so its type starts light
-        "#zd-header h3,#zd-header p,#zd-nav>*{color:rgba(247,244,238,.92)}",
-        "#zd-header-cta{background:rgba(247,244,238,.14) !important;"
-        "border:1px solid rgba(247,244,238,.4)}",
+        "#zd-header h3,#zd-header p,#zd-nav>*{color:rgba(247,244,238,.94);"
+        "text-shadow:0 1px 2px rgba(10,8,6,.28)}",
+        "#zd-header-cta{background:rgba(255,255,255,.16);"
+        "border:1px solid rgba(255,255,255,.42);color:rgba(247,244,238,.96);"
+        "box-shadow:inset 0 1px 0 rgba(255,255,255,.35)}",
         "#zd-progress{position:fixed;top:0;left:0;right:0;height:1px;z-index:101;"
         "background:rgb(158,127,88);transform:scaleX(0);transform-origin:0 50%}",
 
@@ -286,10 +327,13 @@ def motion_css():
         "background:rgb(158,127,88);transform:scaleX(0);transform-origin:0 50%}",
 
         "#zd-marquee-track{display:flex}",
+        "#zd-nav>*,#zd-logo h3,#zd-logo p{white-space:nowrap;line-height:1.25}",
+        "#zd-header-cta{line-height:1.3}",
         "html{scroll-behavior:smooth}",
         # anchors land under a fixed header unless they reserve room for it
-        "#about,#contact{scroll-margin-top:96px}",
-        "@media (max-width:767px){#about,#contact{scroll-margin-top:108px}}",
+        "#about,#contact,#zd-process,#zd-cat{scroll-margin-top:92px}",
+        "@media (max-width:767px){#about,#contact,#zd-process,#zd-cat"
+        "{scroll-margin-top:76px}}",
 
         # ── breakpoints the style compiler cannot reach ──────────────────────
         # These are the positioned / pseudo-element rules that live in this block in
@@ -297,14 +341,15 @@ def motion_css():
         # at "_t" and "_m" instead.
         "@media (max-width:1079px){",
         "  #zd-hero{min-height:78vh}",
-        "  #zd-hero-in{padding-top:112px;padding-bottom:96px}",
+        "  #zd-hero-in{padding-top:104px;padding-bottom:90px}",
         "  #zd-oem-hero{padding-top:132px}",
         "}",
         "@media (max-width:767px){",
         # the phone header is two rows, so the hero has to clear more of it
+        "  #zd-header{width:calc(100% - 20px);top:10px}",
         "  #zd-hero{min-height:auto}",
-        "  #zd-hero-in{padding-top:134px;padding-bottom:96px}",
-        "  #zd-oem-hero{padding-top:130px}",
+        "  #zd-hero-in{padding-top:106px;padding-bottom:88px}",
+        "  #zd-oem-hero{padding-top:104px}",
         # centring a cue under a left-aligned column reads as a mistake at this width
         "  #zd-hero-cue{left:auto;right:20px;transform:none;bottom:22px}",
         "  #zd-intro-rule{width:64px;margin-top:16px}",
@@ -363,6 +408,7 @@ def motion_css():
         "  #zd-hero-cue{opacity:0;animation:zd-softin 1s ease forwards;animation-delay:2.4s}",
         "  #zd-hero-cue p{animation:zd-cue 3.2s ease-in-out infinite}",
         "  #zd-marquee-track{animation:zd-marquee 56s linear infinite}",
+        "  #zd-header::before{animation:zd-headsheen 9s ease-in-out infinite}",
         "  @supports (animation-timeline:view()){",
         "    " + reveal_targets + "{animation:zd-rise .01s linear both;"
         "animation-timeline:view();animation-range:entry 2% cover 42%}",
@@ -377,9 +423,9 @@ def motion_css():
         "animation-timeline:scroll(root)}",
         "    #zd-header{animation:zd-headfill linear both;"
         "animation-timeline:scroll(root);animation-range:60px 220px}",
-        "    #zd-header::before{animation:zd-headsheen linear both;"
-        "animation-timeline:scroll(root);animation-range:90px 240px}",
         "    #zd-header h3,#zd-header p,#zd-nav>*{animation:zd-headink linear both;"
+        "animation-timeline:scroll(root);animation-range:60px 220px}",
+        "    #zd-header-cta{animation:zd-headcta linear both;"
         "animation-timeline:scroll(root);animation-range:60px 220px}",
         "  }",
         "}",
@@ -388,8 +434,8 @@ def motion_css():
 
 
 # ── the shared shell ──────────────────────────────────────────────────────────
-NAV = [("首页", "/zidanna/"), ("OEM代工", "/zidanna-oem/"),
-       ("关于姿丹娜", "/zidanna/#about"), ("联络我们", "/zidanna/#contact")]
+NAV = [("关于姿丹娜", "#about"), ("代工流程", "#zd-process"),
+       ("产品线", "#zd-cat"), ("联络我们", "#contact")]
 
 HEADER = box("zd-shell-top", {}, [
      # a `code` node with insertLocation "head" is the only way to get @keyframes
@@ -411,54 +457,56 @@ HEADER = box("zd-shell-top", {}, [
      ]),
      box("zd-progress", {}, []),
      box("zd-header",
-         {"paddingTop": "20px", "paddingBottom": "20px",
-          "paddingLeft": "48px", "paddingRight": "48px", "fontFamily": CJK},
-         _t={"paddingLeft": "32px", "paddingRight": "32px"},
-         _m={"paddingLeft": "20px", "paddingRight": "20px",
-             "paddingTop": "9px", "paddingBottom": "9px"},
+         {"paddingTop": "14px", "paddingBottom": "14px",
+          "paddingLeft": "30px", "paddingRight": "18px", "fontFamily": CJK},
+         _t={"paddingLeft": "24px", "paddingRight": "14px"},
+         _m={"paddingLeft": "15px", "paddingRight": "15px",
+             "paddingTop": "10px", "paddingBottom": "10px"},
          children=
     [wrap("zd-header-in", [
         {"type": "div", "data": {"attrID": "zd-header-row"},
          "style": bp({"display": "flex", "alignItems": "center",
                       "justifyContent": "space-between", "columnGap": "40px"},
                      {"columnGap": "24px"},
-                     {"flexDirection": "column", "alignItems": "flex-start",
-                      "rowGap": "5px"}),
+                     {"columnGap": "12px"}),
          "children": [
-             box("zd-logo", {}, [
-                 T("h3", "姿丹娜", color={"token": "--ink"}, fontSize="21px",
-                   fontWeight="700", letterSpacing="4px", _m={"fontSize": "17px",
-                                                              "letterSpacing": "3px"}),
-                 T("p", "ZIDANNA", color={"token": "--muted"}, fontSize="10px",
-                   letterSpacing="3px", fontFamily=LATIN, marginTop="2px",
-                   _m={"display": "none"}),
-             ]),
+             # stacked, the lockup forced a ~110px bar; set on one baseline it
+             # fits a capsule, which is the shape the glass wants to be
+             box("zd-logo",
+                 {"display": "flex", "alignItems": "baseline", "columnGap": "11px"},
+                 [T("h3", "姿丹娜", color={"token": "--ink"}, fontSize="20px",
+                    fontWeight="500", letterSpacing="0.16em",
+                    _m={"fontSize": "16px", "letterSpacing": "0.08em"}),
+                  T("p", "ZIDANNA", color={"token": "--muted"}, fontSize="9px",
+                    letterSpacing="0.3em", fontFamily=LATIN,
+                    _t={"display": "none"})]),
              {"type": "menu", "data": {"attrID": "zd-nav"},
               "style": bp({"display": "flex", "columnGap": "34px",
                            "alignItems": "center"},
                           {"columnGap": "22px"},
-                          {"columnGap": "16px", "width": "100%",
-                           "customStyles": "flex-wrap:wrap;"}),
+                          {"columnGap": "11px"}),
               "children": [
                   {"type": "menu-link", "data": {"attrID": "zd-nav-%d" % i, "url": href},
                    "style": {"&": {"_": {"color": {"token": "--ink"}, "fontSize": "14px",
                                          "transitionAll": "160ms ease", "cursor": "pointer",
                                          "fontWeight": "400", "letterSpacing": "0.06em"},
                                     "_t": {"fontSize": "13px"},
-                                    "_m": {"fontSize": "12px"}},
+                                    "_m": {"fontSize": "11px",
+                                           "letterSpacing": "0.02em"}},
                              "hover": {"_": {"color": {"token": "--accent"}}}},
                    "text": label}
                   for i, (label, href) in enumerate(NAV)
               ]},
              {"type": "button", "data": {"attrID": "zd-header-cta", "url": "/zidanna/#contact"},
               "style": {"&": {"_m": {"display": "none"},
-                              "_t": {"fontSize": "13px", "paddingLeft": "16px",
-                                     "paddingRight": "16px"},
+                              "_t": {"fontSize": "12px", "paddingLeft": "15px",
+                                     "paddingRight": "15px"},
                               "_": {"backgroundColor": {"token": "--ink"},
                                     "color": {"token": "--paper"}, "fontSize": "14px",
-                                    "paddingTop": "11px", "paddingBottom": "11px",
-                                    "paddingLeft": "22px", "paddingRight": "22px",
-                                    "radius": "0px", "cursor": "pointer",
+                                    "paddingTop": "9px", "paddingBottom": "9px",
+                                    "paddingLeft": "20px", "paddingRight": "20px",
+                                    "radius": "999px", "cursor": "pointer",
+                                    "fontSize": "13px",
                                     "transitionAll": "200ms ease"}},
                         "hover": {"_": {"backgroundColor": {"token": "--accent"}}}},
               "text": "开始打造"},
