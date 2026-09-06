@@ -246,27 +246,27 @@ def motion_css():
         # exactly where the drop is on every frame
         "@keyframes zd-trail{"
         "0%{height:0;opacity:0;animation-timing-function:ease-out}"
-        "5%{height:3%;opacity:1;"
+        "3%{height:2%;opacity:1;"
         "animation-timing-function:cubic-bezier(.45,0,.85,.35)}"
-        "40%{height:72%;opacity:1}"
-        "56%{height:72%;opacity:0}"
+        "45%{height:72%;opacity:1}"
+        "66%{height:72%;opacity:0}"
         "100%{height:72%;opacity:0}}",
         "@keyframes zd-drop{"
         "0%{top:0;opacity:0;transform:rotate(45deg) scale(.45);"
         "animation-timing-function:ease-out}"
-        "5%{top:3%;opacity:1;transform:rotate(45deg) scale(1);"
+        "3%{top:2%;opacity:1;transform:rotate(45deg) scale(1);"
         "animation-timing-function:cubic-bezier(.45,0,.85,.35)}"
-        "40%{top:72%;opacity:1;transform:rotate(45deg) scale(1)}"
-        "45%{top:72%;opacity:0;transform:rotate(45deg) scale(1)}"
+        "45%{top:72%;opacity:1;transform:rotate(45deg) scale(1)}"
+        "49%{top:72%;opacity:0;transform:rotate(45deg) scale(1)}"
         "100%{top:72%;opacity:0;transform:rotate(45deg) scale(1)}}",
-        "@keyframes zd-ring0{0%,40%{opacity:0;transform:scale(.012)}"
-        "43%{opacity:.9;transform:scale(.07)}"
+        "@keyframes zd-ring0{0%,45%{opacity:0;transform:scale(.012)}"
+        "48%{opacity:.9;transform:scale(.07)}"
         "92%,100%{opacity:0;transform:scale(1)}}",
-        "@keyframes zd-ring1{0%,45%{opacity:0;transform:scale(.012)}"
-        "48%{opacity:.6;transform:scale(.06)}"
-        "97%,100%{opacity:0;transform:scale(.8)}}",
-        "@keyframes zd-ring2{0%,50%{opacity:0;transform:scale(.012)}"
-        "53%{opacity:.38;transform:scale(.05)}"
+        "@keyframes zd-ring1{0%,49%{opacity:0;transform:scale(.012)}"
+        "52%{opacity:.6;transform:scale(.06)}"
+        "96%,100%{opacity:0;transform:scale(.8)}}",
+        "@keyframes zd-ring2{0%,53%{opacity:0;transform:scale(.012)}"
+        "56%{opacity:.38;transform:scale(.05)}"
         "100%{opacity:0;transform:scale(.6)}}",
         "@keyframes zd-progress{from{width:0%}to{width:100%}}",
         # Scrolling does not switch the glass on - it changes what the glass is
@@ -510,12 +510,12 @@ def motion_css():
         "  #zd-cue-rail::after{animation:zd-cuearrow 2.2s cubic-bezier(.4,0,.5,1) "
         "infinite}",
         "  #zd-marquee-track{animation:zd-marquee 56s linear infinite}",
-        "  #zd-statement-rule::before{animation:zd-trail 7.2s linear infinite}",
-        "  #zd-statement-rule::after{animation:zd-drop 7.2s linear infinite}",
-        # same 7.2s as the drop, so contact and first ring cannot drift apart
-        "  #zd-ring-0{animation:zd-ring0 7.2s cubic-bezier(.12,.8,.3,1) infinite}",
-        "  #zd-ring-1{animation:zd-ring1 7.2s cubic-bezier(.12,.8,.3,1) infinite}",
-        "  #zd-ring-2{animation:zd-ring2 7.2s cubic-bezier(.12,.8,.3,1) infinite}",
+        "  #zd-statement-rule::before{animation:zd-trail 5s linear infinite}",
+        "  #zd-statement-rule::after{animation:zd-drop 5s linear infinite}",
+        # same 5s as the drop, so contact and first ring cannot drift apart
+        "  #zd-ring-0{animation:zd-ring0 5s cubic-bezier(.12,.8,.3,1) infinite}",
+        "  #zd-ring-1{animation:zd-ring1 5s cubic-bezier(.12,.8,.3,1) infinite}",
+        "  #zd-ring-2{animation:zd-ring2 5s cubic-bezier(.12,.8,.3,1) infinite}",
 
         "  @supports (animation-timeline:view()){",
         "    " + reveal_targets + "{animation:zd-rise .01s linear both;"
