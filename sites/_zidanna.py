@@ -228,12 +228,28 @@ def motion_css():
         "to{opacity:1;transform:none}}",
         "@keyframes zd-kenburns{from{transform:scale(1.03)}to{transform:scale(1.13)}}",
         "@keyframes zd-marquee{from{transform:translateX(0)}to{transform:translateX(-50%)}}",
+        "@keyframes zd-cuerail{0%{transform:translateY(-100%)}"
+        "70%,100%{transform:translateY(520%)}}",
         "@keyframes zd-cue{0%,100%{opacity:.35;transform:translateY(0)}"
         "50%{opacity:.9;transform:translateY(6px)}}",
         "@keyframes zd-rise{from{opacity:0;transform:translateY(34px)}"
         "to{opacity:1;transform:none}}",
         "@keyframes zd-draw{from{transform:scaleX(0)}to{transform:scaleX(1)}}",
         "@keyframes zd-drawy{from{transform:scaleY(0)}to{transform:scaleY(1)}}",
+        # one duration shared by both so the ripple cannot drift out of sync with
+        # the landing - the contact is at 46% of the cycle in each
+        "@keyframes zd-drop{"
+        "0%{opacity:0;transform:translateY(-6px) scale(.6,.6)}"
+        "8%{opacity:1;transform:translateY(2px) scale(.9,1.1)}"
+        "40%{opacity:1;transform:translateY(78px) scale(.82,1.35)}"
+        "46%{opacity:1;transform:translateY(101px) scale(1.25,.6)}"
+        "52%{opacity:0;transform:translateY(103px) scale(1.5,.25)}"
+        "100%{opacity:0;transform:translateY(103px) scale(1.5,.25)}}",
+        "@keyframes zd-ripple{"
+        "0%,44%{opacity:0;transform:scale(.2)}"
+        "50%{opacity:.9;transform:scale(.75)}"
+        "84%{opacity:0;transform:scale(2.4)}"
+        "100%{opacity:0;transform:scale(2.4)}}",
         "@keyframes zd-progress{from{width:0%}to{width:100%}}",
         # Scrolling does not switch the glass on - it changes what the glass is
         # standing on. Over the dark hero it is a smoked panel; over paper it goes
@@ -255,9 +271,7 @@ def motion_css():
         "inset 0 -1px 0 rgba(24,21,18,.06),"
         "inset 10px 0 18px -12px rgba(255,255,255,.9),"
         "inset -10px 0 18px -12px rgba(255,255,255,.9)}}",
-        "@keyframes zd-headsheen{"
-        "0%{transform:translateX(-140%) rotate(18deg)}"
-        "38%,100%{transform:translateX(420%) rotate(18deg)}}",
+
         # the shadow exists to hold light type off a photograph; once the type is
         # dark on bright glass it is just dirt, so it fades out with the colour
         "@keyframes zd-headink{"
@@ -283,8 +297,14 @@ def motion_css():
         " numOctaves='4'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25'"
         " filter='url(%23n)'/%3E%3C/svg%3E\");background-size:180px 180px}",
         "#zd-hero-in{position:relative;z-index:2;padding-top:124px;padding-bottom:112px}",
-        "#zd-hero-cue{position:absolute;left:50%;bottom:30px;transform:translateX(-50%);"
-        "z-index:1}",
+        "#zd-hero-cue{position:absolute;left:50%;bottom:26px;transform:translateX(-50%);"
+        "z-index:2;display:flex;flex-direction:column;align-items:center;row-gap:12px;"
+        "text-shadow:0 1px 6px rgba(10,8,6,.55)}",
+        "#zd-cue-rail{position:relative;width:1px;height:52px;overflow:hidden;"
+        "background:rgba(247,244,238,.26)}",
+        '#zd-cue-rail::after{content:"";position:absolute;left:0;top:0;width:1px;'
+        "height:18px;background:linear-gradient(rgba(226,196,146,0),"
+        "rgb(232,206,160));box-shadow:0 0 8px rgba(226,196,146,.8)}",
         "#zd-oem-hero{padding-top:164px}",
 
         "#zd-header{position:fixed;top:14px;left:50%;z-index:100;"
@@ -305,13 +325,13 @@ def motion_css():
         "inset 8px 0 16px -12px rgba(255,255,255,.55),"
         "inset -8px 0 16px -12px rgba(255,255,255,.55);"
         "will-change:backdrop-filter,background}",
-        # a specular band that travels the capsule and then waits - the thing that
-        # separates glass from a frosted rectangle
-        '#zd-header::before{content:"";position:absolute;top:-70%;left:0;'
-        "width:34%;height:240%;pointer-events:none;z-index:0;"
-        "background:linear-gradient(90deg,rgba(255,255,255,0) 0%,"
-        "rgba(255,255,255,.22) 50%,rgba(255,255,255,0) 100%);"
-        "transform:translateX(-140%) rotate(18deg)}",
+        # a fixed light source rather than a moving one: glass is lit from
+        # somewhere, it does not have a shape sliding across it
+        '#zd-header::before{content:"";position:absolute;inset:0;'
+        "pointer-events:none;z-index:0;border-radius:inherit;"
+        "background:radial-gradient(120% 260% at 12% -60%,"
+        "rgba(255,255,255,.20) 0%,rgba(255,255,255,.07) 38%,"
+        "rgba(255,255,255,0) 72%)}",
         "#zd-header-in{position:relative;z-index:1}",
         # over the hero the header sits on the image, so its type starts light
         "#zd-header h3,#zd-header p,#zd-nav>*,#zd-navm>*{color:rgba(247,244,238,.94);"
@@ -340,9 +360,22 @@ def motion_css():
         "#zd-intro-rule{width:96px;height:1px;margin:22px auto 0;"
         "background:rgb(158,127,88);transform:scaleX(0);transform-origin:0 50%}",
 
-        "#zd-statement-rule{width:1px;height:64px;margin:0 auto;"
-        "background:linear-gradient(rgba(158,127,88,0),rgb(158,127,88));"
-        "transform-origin:50% 0}",
+        "#zd-statement-rule{position:relative;width:1px;height:104px;margin:0 auto}",
+        # the track
+        '#zd-statement-rule::before{content:"";position:absolute;inset:0;'
+        "background:linear-gradient(rgba(158,127,88,0),rgba(158,127,88,.85));"
+        "transform:scaleY(0);transform-origin:50% 0}",
+        # the drop: it stretches as it falls and squashes as it lands, which is the
+        # whole difference between a falling drop and a dot on a timer
+        '#zd-statement-rule::after{content:"";position:absolute;left:50%;top:0;'
+        "width:7px;height:7px;margin-left:-3.5px;border-radius:50%;opacity:0;"
+        "background:radial-gradient(circle at 35% 30%,rgb(238,214,170),"
+        "rgb(176,142,97) 70%);"
+        "box-shadow:0 0 10px rgba(198,163,114,.55)}",
+        # the ripple: an ellipse, not a circle - it is being read as lying flat
+        "#zd-statement-ripple{position:absolute;left:50%;top:104px;width:38px;"
+        "height:11px;margin-left:-19px;margin-top:-5.5px;border-radius:50%;"
+        "border:1px solid rgba(198,163,114,.9);opacity:0;transform:scale(.2)}",
         "#zd-statement-in{text-align:center}",
         "#zd-marquee-track{display:flex}",
         "#zd-nav>*,#zd-navm>*,#zd-logo h3,#zd-logo p{white-space:nowrap;line-height:1.25}",
@@ -426,9 +459,13 @@ def motion_css():
         "  #zd-hero-cta{animation-delay:2.18s}",
         "  #zd-hero-bg{animation:zd-kenburns 34s ease-in-out infinite alternate}",
         "  #zd-hero-cue{opacity:0;animation:zd-softin 1s ease forwards;animation-delay:2.4s}",
-        "  #zd-hero-cue p{animation:zd-cue 3.2s ease-in-out infinite}",
+        "  #zd-cue-rail::after{animation:zd-cuerail 2.6s cubic-bezier(.5,0,.5,1) "
+        "infinite}",
         "  #zd-marquee-track{animation:zd-marquee 56s linear infinite}",
-        "  #zd-header::before{animation:zd-headsheen 9s ease-in-out infinite}",
+        "  #zd-statement-rule::after{animation:zd-drop 4.2s cubic-bezier(.55,0,.85,.4) "
+        "infinite}",
+        "  #zd-statement-ripple{animation:zd-ripple 4.2s ease-out infinite}",
+
         "  @supports (animation-timeline:view()){",
         "    " + reveal_targets + "{animation:zd-rise .01s linear both;"
         "animation-timeline:view();animation-range:entry 2% cover 42%}",
@@ -436,7 +473,7 @@ def motion_css():
         # a much longer range than the card reveals: the point of this band is that
         # it slows you down, so the line drifts rather than snaps
         "    #zd-statement-in{animation-range:entry 0% cover 62%}",
-        "    #zd-statement-rule{animation:zd-drawy .01s linear both;"
+        "    #zd-statement-rule::before{animation:zd-drawy .01s linear both;"
         "animation-timeline:view();animation-range:entry 4% cover 40%}",
         "    " + steps + "{background-image:linear-gradient(rgb(24,21,18),rgb(24,21,18));"
         "background-repeat:no-repeat;background-size:100% 1px;background-position:0 0;"
@@ -645,15 +682,17 @@ HERO_LINE = dict(color={"token": "--paper"}, fontSize="76px", fontWeight="500",
 HOME = section("zd-hero", [
     box("zd-hero-bg", {"customStyles":
         "position:absolute;inset:0;background-image:"
-        "linear-gradient(96deg,rgba(20,16,11,.96) 0%,rgba(20,16,11,.88) 42%,"
-        "rgba(20,16,11,.70) 100%),"
-        # a second, vertical pass so the type never sits on a bright sky
-        "linear-gradient(rgba(20,16,11,.55) 0%,rgba(20,16,11,.12) 42%,"
-        "rgba(20,16,11,.62) 100%),"
+        "linear-gradient(96deg,rgba(20,16,11,.93) 0%,rgba(20,16,11,.80) 26%,"
+        "rgba(20,16,11,.46) 56%,rgba(20,16,11,.14) 82%,"
+        "rgba(20,16,11,.06) 100%),"
+        # a much lighter vertical pass: enough to seat the capsule at the top and the
+        # cue at the bottom, not enough to flatten the middle of the frame
+        "linear-gradient(rgba(20,16,11,.42) 0%,rgba(20,16,11,0) 34%,"
+        "rgba(20,16,11,0) 62%,rgba(20,16,11,.40) 100%),"
         # concatenated, not %-formatted: this string is full of literal percent signs
         "url(" + (IMG % "hero.jpg") + ");background-size:cover;"
         "background-position:center 46%;z-index:0;"
-        "filter:saturate(.30) brightness(.56) contrast(1.1);"}, []),
+        "filter:saturate(.62) brightness(.86) contrast(1.04);"}, []),
     wrap("zd-hero-in", [
         box("zd-hero-copy", {}, [
             eyebrow("OEM / ODM SKINCARE MANUFACTURING", "zd-hero-eyebrow"),
@@ -695,8 +734,9 @@ HOME = section("zd-hero", [
              ]},
         ]),
         box("zd-hero-cue", {}, [
-            T("p", "SCROLL", color="rgba(247,244,238,.55)", fontSize="10px",
-              letterSpacing="0.3em", fontFamily=LATIN),
+            T("p", "SCROLL", color="rgba(247,244,238,.9)", fontSize="11px",
+              letterSpacing="0.34em", fontFamily=LATIN),
+            box("zd-cue-rail", {}, []),
         ]),
     ]),
 ], pt="0px", pb="0px")
@@ -730,8 +770,12 @@ STAT_BAND = section("zd-stats", [wrap("zd-stats-in", [
             # at two-up the rule has to fall on the odd cells instead, or column 3
             # keeps a left edge it no longer sits against
             _t={"paddingTop": "40px", "paddingBottom": "40px", "paddingLeft": "26px",
-                "customStyles": ("" if i % 2 == 0 else "border-left:1px solid rgba(24,21,18,.14);")
-                                + ("border-top:1px solid rgba(24,21,18,.14);" if i > 1 else "")},
+                # `border-left:0` on the even cells, not merely its absence: at two-up
+                # cell 2 starts a row, and the four-up rule would otherwise still draw
+                "customStyles": ("border-left:0;" if i % 2 == 0
+                                 else "border-left:1px solid rgba(24,21,18,.14);")
+                                + ("border-top:1px solid rgba(24,21,18,.14);" if i > 1
+                                   else "border-top:0;")},
             _m={"paddingTop": "30px", "paddingBottom": "30px", "paddingLeft": "18px",
                 "paddingRight": "14px"},
             children=[{"type": "div", "data": {"attrID": "zd-stat-n-%d" % i},
@@ -874,13 +918,18 @@ REASON_SEC = section("zd-why", [wrap("zd-why-in", [
                  T("h3", title, color={"token": "--ink"}, fontSize="19px", fontWeight="700"),
                  T("p", body, color={"token": "--muted"}, fontSize="14px", marginTop="9px",
                    lineHeight="1.95", maxWidth="24em"),
-             ])])
+             ])],
+            # one column: the column rule and the gutter indent both have to be
+            # switched off explicitly - omitting them leaves the two-up rule standing
+            _m={"paddingLeft": "0px", "paddingRight": "0px",
+                "paddingTop": "24px", "paddingBottom": "24px",
+                "customStyles": "border-top:1px solid rgba(24,21,18,.14);border-left:0;"})
         for i, (title, body) in enumerate(REASONS)
     ], marginTop="52px"),
 ])], bg="--sand")
 
 STATEMENT = section("zd-statement", [wrap("zd-statement-in", [
-    box("zd-statement-rule", {}, []),
+    box("zd-statement-rule", {}, [box("zd-statement-ripple", {}, [])]),
     ml("h2", "一支好用的产品\n是三百次微调之后\n才敢量产的那一支",
        color={"token": "--paper"}, fontSize="46px", fontWeight="400",
        lineHeight="1.7", letterSpacing="0.06em", marginTop="44px",
