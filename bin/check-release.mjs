@@ -78,7 +78,7 @@ const counts = {
   "data/node-verification.csv": 122,
   "data/style-verification.csv": 98,
   "data/node-property-verification.csv": 181,
-  "data/rwd-verification.csv": 569,
+  "data/rwd-verification.csv": 576,
 };
 for (const [file, expected] of Object.entries(counts)) {
   if (!fs.existsSync(path.join(ROOT, file))) { fail(`${file} missing`); continue; }

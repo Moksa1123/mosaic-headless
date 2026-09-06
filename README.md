@@ -45,7 +45,7 @@ factories, so Pro types register and render regardless.
 | **node types** | 122 / 122 swept one per document, committed → rendered → asserted → deleted: 70 RENDERED, 30 COMMITTED, 15 COMMIT_5xx, 7 BROKE_PAGE |
 | **style properties** | 98 / 98 written to a live page and checked against the compiled CSS: 58 COMPILED, 18 ABSENT, 21 SKIPPED |
 | **node properties** | 181 / 181 re-probed with a value shaped by each property's own validator chain: 35 APPLIED, 42 NO_EFFECT, 55 NO_HOST, 47 SKIPPED |
-| **responsive** | 569 `_t`/`_m` declarations across two sites asserted against the stylesheet the site actually served — all verified |
+| **responsive** | 576 `_t`/`_m` declarations across two sites asserted against the stylesheet the site actually served — all verified |
 | **theme export/import** | round-tripped: a full theme exported, re-imported as a copy, and the copy served byte-identical pages |
 | **measured live** | 114 REST routes, 151 element classes, 59 condition subjects, 23 tables / 206 columns |
 
@@ -77,7 +77,7 @@ wp eval-file tools/theme_import.php theme.json "Name" rebind activate
 
 `sites/_moksa.py` is the worked example: a real studio homepage — masthead, spec
 block, services, a nine-row work table, process, stack, products, testimonials,
-contact — 590 nodes committed entirely through the tables, with a scroll-tracking
+contact — 618 nodes committed entirely through the tables, with a scroll-tracking
 clause index built on named view timelines and no JavaScript.
 
 ## Where to start

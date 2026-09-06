@@ -131,7 +131,7 @@ def mono(text, size="11px", color="--mk-muted", track="0.14em", **st):
              fontSize=size, letterSpacing=track, **st)
 
 
-def figure(attr, num, size="40px", t="34px", m="27px"):
+def figure(attr, num, size="56px", t="44px", m="34px"):
     """A number set as one masked box per digit.
 
     A count-up needs JavaScript; a digit rolling out from behind its own edge does
@@ -149,8 +149,8 @@ def figure(attr, num, size="40px", t="34px", m="27px"):
                                            "overflow:hidden;display:inline-block;"
                                            "--d:%dms;" % (j * 70)}}},
                  "children": [T("h3", ch, color={"token": "--mk-ink"}, fontSize=size,
-                                fontWeight="500", letterSpacing="-0.04em",
-                                lineHeight="1.05", fontFamily=MONO,
+                                fontWeight="600", letterSpacing="-0.03em",
+                                lineHeight="1.02", fontFamily=DISPLAY,
                                 _t={"fontSize": t}, _m={"fontSize": m})]}
                 for j, ch in enumerate(num)
             ]}
@@ -172,7 +172,7 @@ def clause(num, en, zh, attr):
                    box(attr + "-t", {}, [
                        mono(en, size="11px", color="--mk-muted"),
                        T("h2", zh, color={"token": "--mk-ink"}, fontSize="34px",
-                         fontWeight="600", letterSpacing="-0.025em", lineHeight="1.3",
+                         fontWeight="600", letterSpacing="0.01em", lineHeight="1.35",
                          fontFamily=DISPLAY, marginTop="10px",
                          _t={"fontSize": "29px"}, _m={"fontSize": "23px"}),
                    ]),
@@ -232,6 +232,16 @@ SPEC = [
     ("DELIVERED", "252", "完成客製化專案"),
     ("SELECTED", "17", "精選上線作品"),
     ("SUPPORT", "876", "技術支援與服務"),
+]
+
+# The masthead's right-hand column. A profile document states its terms in its own
+# header, and it is the content that fills the frame the headline leaves empty.
+SIDE = [
+    ("DISCIPLINE", "Web / AI / Automation"),
+    ("STACK", "WordPress · n8n · Claude"),
+    ("ENGAGEMENT", "專案制 / 長期維運"),
+    ("LEAD TIME", "3–8 週"),
+    ("RESPONSE", "1 個工作天"),
 ]
 
 SERVICES = [
@@ -659,7 +669,7 @@ FOOTER = box("mk-footer",
                     mono("MAKE WEB MEANINGFUL", size="11px", color="--mk-accent",
                          track="0.2em"),
                     T("h2", "打造有價值的網站體驗。", color={"token": "--mk-paper"},
-                      fontSize="30px", fontWeight="500", letterSpacing="-0.01em",
+                      fontSize="30px", fontWeight="500", letterSpacing="0.02em",
                       lineHeight="1.5", fontFamily=CJK, marginTop="16px",
                       _m={"fontSize": "22px"}),
                     box("mk-f-contact",
@@ -712,8 +722,8 @@ FOOTER = box("mk-footer",
 
 # ── the page ──────────────────────────────────────────────────────────────────
 HERO_LINE = dict(color={"token": "--mk-ink"}, fontSize="62px", fontWeight="600",
-                 lineHeight="1.12", letterSpacing="-0.035em", fontFamily=DISPLAY,
-                 _t={"fontSize": "46px"}, _m={"fontSize": "31px"})
+                 lineHeight="1.14", letterSpacing="0.005em", fontFamily=DISPLAY,
+                 _t={"fontSize": "48px"}, _m={"fontSize": "32px"})
 
 MASTHEAD = section("mk-mast", [wrap("mk-mast-in", [
     # the document's own header block: what this is, where it is from, which revision
@@ -733,11 +743,19 @@ MASTHEAD = section("mk-mast", [wrap("mk-mast-in", [
                 {"display": "flex", "alignItems": "center", "marginTop": "10px"},
                 [box("mk-caret", {}, [])]),
         ]),
+    box("mk-mast-body",
+        {"display": "grid", "gridCols": "1.35fr .65fr", "columnGap": "56px",
+         "rowGap": "32px", "alignItems": "start", "marginTop": "26px"},
+        _t={"gridCols": "1.2fr .8fr", "columnGap": "36px"},
+        _m={"gridCols": "repeat(1, 1fr)", "columnGap": "0px", "rowGap": "26px",
+            "marginTop": "20px"},
+        children=[
+          box("mk-mast-left", {}, [
     {"type": "text", "data": {"tagName": "p", "attrID": "mk-mast-lede"},
      "style": bp({"color": {"token": "--mk-muted"}, "fontSize": "16px",
-                  "lineHeight": "2", "marginTop": "24px", "maxWidth": "34em"},
+                  "lineHeight": "2", "marginTop": "0px", "maxWidth": "30em"},
                  None,
-                 {"fontSize": "14px", "lineHeight": "1.95", "marginTop": "20px"}),
+                 {"fontSize": "14px", "lineHeight": "1.95", "marginTop": "0px"}),
      "text": "我打造網站、開發軟體、導入 AI、串起自動化流程，"
              "讓技術不只是工具，而是幫你省下時間、長出業績的數位夥伴。"},
     {"type": "div", "data": {"attrID": "mk-mast-cta"},
@@ -747,19 +765,46 @@ MASTHEAD = section("mk-mast", [wrap("mk-mast-in", [
      "children": [
          # underlined links, not buttons: a document points, it does not sell
          {"type": "button", "data": {"attrID": "mk-cta-%d" % n, "url": href},
-          "style": {"&": {"_": {"backgroundColor": "rgba(0,0,0,0)",
-                                "color": {"token": "--mk-ink"}, "fontSize": "14px",
-                                "fontFamily": MONO, "letterSpacing": "0.06em",
-                                "paddingTop": "8px", "paddingBottom": "8px",
-                                "radius": "0px", "cursor": "pointer",
-                                "customStyles":
-                                    "border-bottom:1px solid rgb(22,24,28);",
-                                "transitionAll": "180ms ease"}},
-                    "hover": {"_": {"color": {"token": "--mk-accent"}}}},
+          "style": {"&": {"_": dict(
+              {"backgroundColor": {"token": "--mk-accent"},
+               "color": {"token": "--mk-paper"},
+               "paddingLeft": "22px", "paddingRight": "22px",
+               "paddingTop": "13px", "paddingBottom": "13px",
+               "customStyles": "border:1px solid rgb(255,90,54);"}
+              if n == 1 else
+              {"backgroundColor": "rgba(0,0,0,0)", "color": {"token": "--mk-ink"},
+               "paddingLeft": "0px", "paddingRight": "0px",
+               "paddingTop": "13px", "paddingBottom": "13px",
+               "customStyles": "border:1px solid rgba(0,0,0,0);"
+                               "border-bottom-color:rgb(22,24,28);"},
+              fontSize="13px", fontFamily=MONO, letterSpacing="0.1em",
+              radius="0px", cursor="pointer", transitionAll="180ms ease")},
+                    "hover": {"_": ({"backgroundColor": {"token": "--mk-ink"},
+                                     "customStyles": "border:1px solid rgb(22,24,28);"}
+                                    if n == 1
+                                    else {"color": {"token": "--mk-accent"}})}},
           "text": text}
-         for n, (text, href) in enumerate([("→ 服務項目", "#services"),
-                                           ("→ 精選作品", "#works")], start=1)
+         for n, (text, href) in enumerate([("服務項目 →", "#services"),
+                                           ("精選作品 →", "#works")], start=1)
      ]},
+          ]),
+          # the right-hand column: what a spec sheet puts in its header block
+          box("mk-mast-side",
+              {"display": "grid", "rowGap": "0px",
+               "customStyles": "border-top:1px solid " + RULE_INK + ";"},
+              _m={"customStyles": "border-top:1px solid " + RULE + ";"},
+              children=[
+                  box("mk-mast-side-%d" % i,
+                      {"display": "grid", "gridCols": "1fr auto",
+                       "columnGap": "14px", "alignItems": "baseline",
+                       "paddingTop": "11px", "paddingBottom": "11px",
+                       "customStyles": ("" if i == 0
+                                        else "border-top:1px solid " + RULE + ";")},
+                      [mono(k, size="10px", color="--mk-faint", track="0.18em"),
+                       mono(v, size="12px", color="--mk-ink", track="0.02em")])
+                  for i, (k, v) in enumerate(SIDE)
+              ]),
+        ]),
     box("mk-spec-rule", {"marginTop": "56px"}, [], _m={"marginTop": "40px"}),
     # the figures as a datasheet, not as four big numbers looking for attention
     grid("mk-spec", 4, "0px", tcols=2, mcols=2,
@@ -787,7 +832,8 @@ MASTHEAD = section("mk-mast", [wrap("mk-mast-in", [
                           "columnGap": "3px", "marginTop": "12px"},
                          [figure("mk-fig-%d" % i, num),
                           T("p", "+", color={"token": "--mk-accent"},
-                            fontSize="17px", fontFamily=MONO, fontWeight="500")]),
+                            fontSize="22px", fontFamily=DISPLAY, fontWeight="600",
+                            _m={"fontSize": "16px"})]),
                      T("p", zh, color={"token": "--mk-muted"}, fontSize="12px",
                        marginTop="10px", lineHeight="1.7", _m={"fontSize": "11px"}),
                  ])
@@ -970,8 +1016,8 @@ PRODUCT_SEC = section("products", [wrap("mk-prod-in", [
                         mono("OUR PRODUCTS", size="11px", color="rgb(140,142,150)"),
                         T("h2", "不只接案，也開發自己的產品",
                           color={"token": "--mk-paper"}, fontSize="34px",
-                          fontWeight="600", letterSpacing="-0.025em",
-                          lineHeight="1.3", fontFamily=DISPLAY, marginTop="10px",
+                          fontWeight="600", letterSpacing="0.01em",
+                          lineHeight="1.35", fontFamily=DISPLAY, marginTop="10px",
                           _t={"fontSize": "29px"}, _m={"fontSize": "23px"}),
                     ]),
                 ]),
@@ -995,7 +1041,7 @@ PRODUCT_SEC = section("products", [wrap("mk-prod-in", [
                                 T("h3", name, color={"token": "--mk-paper"},
                                   fontSize="24px", fontWeight="600",
                                   fontFamily=DISPLAY, marginTop="9px",
-                                  letterSpacing="-0.02em", _m={"fontSize": "21px"}),
+                                  letterSpacing="0.01em", _m={"fontSize": "21px"}),
                                 # a property of the product, not a column of the
                                 # table: as a fourth grid child it landed alone in
                                 # the 72px number gutter on row two at tablet
@@ -1063,8 +1109,8 @@ CONTACT = section("contact", [wrap("mk-contact-in", [
                         mono("START A PROJECT", size="11px", color="--mk-muted"),
                         ml("h2", "準備好升級\n你的數位競爭力了嗎？",
                            color={"token": "--mk-ink"}, fontSize="44px",
-                           fontWeight="600", letterSpacing="-0.03em",
-                           lineHeight="1.24", fontFamily=DISPLAY, marginTop="12px",
+                           fontWeight="600", letterSpacing="0.01em",
+                           lineHeight="1.3", fontFamily=DISPLAY, marginTop="12px",
                            _t={"fontSize": "36px"}, _m={"fontSize": "26px"}),
                         T("p", "先看方案抓預算，或直接告訴我們你想解決的問題，"
                                "一個工作天內回覆。",

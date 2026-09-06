@@ -53,6 +53,7 @@ import json
 import os
 import re
 import sys
+import time
 import urllib.request
 
 BREAKPOINTS = {"_t": ("t", "max-width: 1079px"), "_m": ("m", "max-width: 767px")}
@@ -123,8 +124,20 @@ def base_customstyles(node, out):
 
 
 def fetch(url):
+    """Fetch the page the way a browser would - but never the cached copy.
+
+    A full-page cache in front of WordPress (Varnish on Cloudways, any CDN) will
+    happily serve the pre-commit HTML seconds after a successful commit, and every
+    declaration on a node you have just added then reports `no-element`. That is a
+    false negative from the verifier's own transport, which is the one kind of result
+    this tool must not produce: a unique query string makes the request a cache miss
+    and the assertion is made against what was actually written.
+    """
+    sep = "&" if "?" in url else "?"
+    url = "%s%s_v=%d" % (url, sep, int(time.time() * 1000))
     req = urllib.request.Request(url, headers={
-        "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) Chrome/140.0 Safari/537.36"})
+        "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) Chrome/140.0 Safari/537.36",
+        "Cache-Control": "no-cache", "Pragma": "no-cache"})
     with urllib.request.urlopen(req, timeout=60) as r:
         return r.read().decode("utf-8", "replace")
 

@@ -532,7 +532,7 @@
               },
               "fontSize": "30px",
               "fontWeight": "500",
-              "letterSpacing": "-0.01em",
+              "letterSpacing": "0.02em",
               "lineHeight": "1.5",
               "fontFamily": "'Noto Sans TC','PingFang TC','Hiragino Sans TC','Microsoft JhengHei',sans-serif",
               "marginTop": "16px"
@@ -1498,15 +1498,15 @@
                    },
                    "fontSize": "62px",
                    "fontWeight": "600",
-                   "lineHeight": "1.12",
-                   "letterSpacing": "-0.035em",
+                   "lineHeight": "1.14",
+                   "letterSpacing": "0.005em",
                    "fontFamily": "'Space Grotesk','Noto Sans TC','PingFang TC','Microsoft JhengHei',sans-serif"
                   },
                   "_t": {
-                   "fontSize": "46px"
+                   "fontSize": "48px"
                   },
                   "_m": {
-                   "fontSize": "31px"
+                   "fontSize": "32px"
                   }
                  }
                 }
@@ -1540,15 +1540,15 @@
                    },
                    "fontSize": "62px",
                    "fontWeight": "600",
-                   "lineHeight": "1.12",
-                   "letterSpacing": "-0.035em",
+                   "lineHeight": "1.14",
+                   "letterSpacing": "0.005em",
                    "fontFamily": "'Space Grotesk','Noto Sans TC','PingFang TC','Microsoft JhengHei',sans-serif"
                   },
                   "_t": {
-                   "fontSize": "46px"
+                   "fontSize": "48px"
                   },
                   "_m": {
-                   "fontSize": "31px"
+                   "fontSize": "32px"
                   }
                  }
                 }
@@ -1587,120 +1587,495 @@
             ]
            },
            {
-            "type": "text",
-            "data": {
-             "tagName": "p",
-             "attrID": "mk-mast-lede"
-            },
-            "style": {
-             "&": {
-              "_": {
-               "color": {
-                "token": "--mk-muted"
-               },
-               "fontSize": "16px",
-               "lineHeight": "2",
-               "marginTop": "24px",
-               "maxWidth": "34em",
-               "fontFamily": "'Noto Sans TC','PingFang TC','Hiragino Sans TC','Microsoft JhengHei',sans-serif"
-              },
-              "_m": {
-               "fontSize": "14px",
-               "lineHeight": "1.95",
-               "marginTop": "20px"
-              }
-             }
-            },
-            "text": "我打造網站、開發軟體、導入 AI、串起自動化流程，讓技術不只是工具，而是幫你省下時間、長出業績的數位夥伴。"
-           },
-           {
             "type": "div",
             "data": {
-             "attrID": "mk-mast-cta"
+             "attrID": "mk-mast-body"
             },
             "style": {
              "&": {
               "_": {
-               "display": "flex",
-               "columnGap": "26px",
-               "rowGap": "10px",
-               "marginTop": "32px",
-               "flexWrap": "wrap"
+               "display": "grid",
+               "gridCols": "1.35fr .65fr",
+               "columnGap": "56px",
+               "rowGap": "32px",
+               "alignItems": "start",
+               "marginTop": "26px"
+              },
+              "_t": {
+               "gridCols": "1.2fr .8fr",
+               "columnGap": "36px"
               },
               "_m": {
-               "marginTop": "26px",
-               "columnGap": "18px"
+               "gridCols": "repeat(1, 1fr)",
+               "columnGap": "0px",
+               "rowGap": "26px",
+               "marginTop": "20px"
               }
              }
             },
             "children": [
              {
-              "type": "button",
+              "type": "div",
               "data": {
-               "attrID": "mk-cta-1",
-               "url": "#services"
+               "attrID": "mk-mast-left"
               },
               "style": {
                "&": {
-                "_": {
-                 "backgroundColor": "rgba(0,0,0,0)",
-                 "color": {
-                  "token": "--mk-ink"
-                 },
-                 "fontSize": "14px",
-                 "fontFamily": "'IBM Plex Mono',ui-monospace,SFMono-Regular,Menlo,Consolas,monospace",
-                 "letterSpacing": "0.06em",
-                 "paddingTop": "8px",
-                 "paddingBottom": "8px",
-                 "radius": "0px",
-                 "cursor": "pointer",
-                 "customStyles": "border-bottom:1px solid rgb(22,24,28);",
-                 "transitionAll": "180ms ease"
-                }
-               },
-               "hover": {
-                "_": {
-                 "color": {
-                  "token": "--mk-accent"
-                 }
-                }
+                "_": {}
                }
               },
-              "text": "→ 服務項目"
+              "children": [
+               {
+                "type": "text",
+                "data": {
+                 "tagName": "p",
+                 "attrID": "mk-mast-lede"
+                },
+                "style": {
+                 "&": {
+                  "_": {
+                   "color": {
+                    "token": "--mk-muted"
+                   },
+                   "fontSize": "16px",
+                   "lineHeight": "2",
+                   "marginTop": "0px",
+                   "maxWidth": "30em",
+                   "fontFamily": "'Noto Sans TC','PingFang TC','Hiragino Sans TC','Microsoft JhengHei',sans-serif"
+                  },
+                  "_m": {
+                   "fontSize": "14px",
+                   "lineHeight": "1.95",
+                   "marginTop": "0px"
+                  }
+                 }
+                },
+                "text": "我打造網站、開發軟體、導入 AI、串起自動化流程，讓技術不只是工具，而是幫你省下時間、長出業績的數位夥伴。"
+               },
+               {
+                "type": "div",
+                "data": {
+                 "attrID": "mk-mast-cta"
+                },
+                "style": {
+                 "&": {
+                  "_": {
+                   "display": "flex",
+                   "columnGap": "26px",
+                   "rowGap": "10px",
+                   "marginTop": "32px",
+                   "flexWrap": "wrap"
+                  },
+                  "_m": {
+                   "marginTop": "26px",
+                   "columnGap": "18px"
+                  }
+                 }
+                },
+                "children": [
+                 {
+                  "type": "button",
+                  "data": {
+                   "attrID": "mk-cta-1",
+                   "url": "#services"
+                  },
+                  "style": {
+                   "&": {
+                    "_": {
+                     "backgroundColor": {
+                      "token": "--mk-accent"
+                     },
+                     "color": {
+                      "token": "--mk-paper"
+                     },
+                     "paddingLeft": "22px",
+                     "paddingRight": "22px",
+                     "paddingTop": "13px",
+                     "paddingBottom": "13px",
+                     "customStyles": "border:1px solid rgb(255,90,54);",
+                     "fontSize": "13px",
+                     "fontFamily": "'IBM Plex Mono',ui-monospace,SFMono-Regular,Menlo,Consolas,monospace",
+                     "letterSpacing": "0.1em",
+                     "radius": "0px",
+                     "cursor": "pointer",
+                     "transitionAll": "180ms ease"
+                    }
+                   },
+                   "hover": {
+                    "_": {
+                     "backgroundColor": {
+                      "token": "--mk-ink"
+                     },
+                     "customStyles": "border:1px solid rgb(22,24,28);"
+                    }
+                   }
+                  },
+                  "text": "服務項目 →"
+                 },
+                 {
+                  "type": "button",
+                  "data": {
+                   "attrID": "mk-cta-2",
+                   "url": "#works"
+                  },
+                  "style": {
+                   "&": {
+                    "_": {
+                     "backgroundColor": "rgba(0,0,0,0)",
+                     "color": {
+                      "token": "--mk-ink"
+                     },
+                     "paddingLeft": "0px",
+                     "paddingRight": "0px",
+                     "paddingTop": "13px",
+                     "paddingBottom": "13px",
+                     "customStyles": "border:1px solid rgba(0,0,0,0);border-bottom-color:rgb(22,24,28);",
+                     "fontSize": "13px",
+                     "fontFamily": "'IBM Plex Mono',ui-monospace,SFMono-Regular,Menlo,Consolas,monospace",
+                     "letterSpacing": "0.1em",
+                     "radius": "0px",
+                     "cursor": "pointer",
+                     "transitionAll": "180ms ease"
+                    }
+                   },
+                   "hover": {
+                    "_": {
+                     "color": {
+                      "token": "--mk-accent"
+                     }
+                    }
+                   }
+                  },
+                  "text": "精選作品 →"
+                 }
+                ]
+               }
+              ]
              },
              {
-              "type": "button",
+              "type": "div",
               "data": {
-               "attrID": "mk-cta-2",
-               "url": "#works"
+               "attrID": "mk-mast-side"
               },
               "style": {
                "&": {
                 "_": {
-                 "backgroundColor": "rgba(0,0,0,0)",
-                 "color": {
-                  "token": "--mk-ink"
-                 },
-                 "fontSize": "14px",
-                 "fontFamily": "'IBM Plex Mono',ui-monospace,SFMono-Regular,Menlo,Consolas,monospace",
-                 "letterSpacing": "0.06em",
-                 "paddingTop": "8px",
-                 "paddingBottom": "8px",
-                 "radius": "0px",
-                 "cursor": "pointer",
-                 "customStyles": "border-bottom:1px solid rgb(22,24,28);",
-                 "transitionAll": "180ms ease"
-                }
-               },
-               "hover": {
-                "_": {
-                 "color": {
-                  "token": "--mk-accent"
-                 }
+                 "display": "grid",
+                 "rowGap": "0px",
+                 "customStyles": "border-top:1px solid rgba(22,24,28,.42);"
+                },
+                "_m": {
+                 "customStyles": "border-top:1px solid rgba(22,24,28,.16);"
                 }
                }
               },
-              "text": "→ 精選作品"
+              "children": [
+               {
+                "type": "div",
+                "data": {
+                 "attrID": "mk-mast-side-0"
+                },
+                "style": {
+                 "&": {
+                  "_": {
+                   "display": "grid",
+                   "gridCols": "1fr auto",
+                   "columnGap": "14px",
+                   "alignItems": "baseline",
+                   "paddingTop": "11px",
+                   "paddingBottom": "11px",
+                   "customStyles": ""
+                  }
+                 }
+                },
+                "children": [
+                 {
+                  "type": "text",
+                  "data": {
+                   "tagName": "p"
+                  },
+                  "text": "DISCIPLINE",
+                  "style": {
+                   "&": {
+                    "_": {
+                     "color": {
+                      "token": "--mk-faint"
+                     },
+                     "fontSize": "10px",
+                     "letterSpacing": "0.18em",
+                     "fontFamily": "'IBM Plex Mono',ui-monospace,SFMono-Regular,Menlo,Consolas,monospace",
+                     "fontWeight": "400"
+                    }
+                   }
+                  }
+                 },
+                 {
+                  "type": "text",
+                  "data": {
+                   "tagName": "p"
+                  },
+                  "text": "Web / AI / Automation",
+                  "style": {
+                   "&": {
+                    "_": {
+                     "color": {
+                      "token": "--mk-ink"
+                     },
+                     "fontSize": "12px",
+                     "letterSpacing": "0.02em",
+                     "fontFamily": "'IBM Plex Mono',ui-monospace,SFMono-Regular,Menlo,Consolas,monospace",
+                     "fontWeight": "400"
+                    }
+                   }
+                  }
+                 }
+                ]
+               },
+               {
+                "type": "div",
+                "data": {
+                 "attrID": "mk-mast-side-1"
+                },
+                "style": {
+                 "&": {
+                  "_": {
+                   "display": "grid",
+                   "gridCols": "1fr auto",
+                   "columnGap": "14px",
+                   "alignItems": "baseline",
+                   "paddingTop": "11px",
+                   "paddingBottom": "11px",
+                   "customStyles": "border-top:1px solid rgba(22,24,28,.16);"
+                  }
+                 }
+                },
+                "children": [
+                 {
+                  "type": "text",
+                  "data": {
+                   "tagName": "p"
+                  },
+                  "text": "STACK",
+                  "style": {
+                   "&": {
+                    "_": {
+                     "color": {
+                      "token": "--mk-faint"
+                     },
+                     "fontSize": "10px",
+                     "letterSpacing": "0.18em",
+                     "fontFamily": "'IBM Plex Mono',ui-monospace,SFMono-Regular,Menlo,Consolas,monospace",
+                     "fontWeight": "400"
+                    }
+                   }
+                  }
+                 },
+                 {
+                  "type": "text",
+                  "data": {
+                   "tagName": "p"
+                  },
+                  "text": "WordPress · n8n · Claude",
+                  "style": {
+                   "&": {
+                    "_": {
+                     "color": {
+                      "token": "--mk-ink"
+                     },
+                     "fontSize": "12px",
+                     "letterSpacing": "0.02em",
+                     "fontFamily": "'IBM Plex Mono',ui-monospace,SFMono-Regular,Menlo,Consolas,monospace",
+                     "fontWeight": "400"
+                    }
+                   }
+                  }
+                 }
+                ]
+               },
+               {
+                "type": "div",
+                "data": {
+                 "attrID": "mk-mast-side-2"
+                },
+                "style": {
+                 "&": {
+                  "_": {
+                   "display": "grid",
+                   "gridCols": "1fr auto",
+                   "columnGap": "14px",
+                   "alignItems": "baseline",
+                   "paddingTop": "11px",
+                   "paddingBottom": "11px",
+                   "customStyles": "border-top:1px solid rgba(22,24,28,.16);"
+                  }
+                 }
+                },
+                "children": [
+                 {
+                  "type": "text",
+                  "data": {
+                   "tagName": "p"
+                  },
+                  "text": "ENGAGEMENT",
+                  "style": {
+                   "&": {
+                    "_": {
+                     "color": {
+                      "token": "--mk-faint"
+                     },
+                     "fontSize": "10px",
+                     "letterSpacing": "0.18em",
+                     "fontFamily": "'IBM Plex Mono',ui-monospace,SFMono-Regular,Menlo,Consolas,monospace",
+                     "fontWeight": "400"
+                    }
+                   }
+                  }
+                 },
+                 {
+                  "type": "text",
+                  "data": {
+                   "tagName": "p"
+                  },
+                  "text": "專案制 / 長期維運",
+                  "style": {
+                   "&": {
+                    "_": {
+                     "color": {
+                      "token": "--mk-ink"
+                     },
+                     "fontSize": "12px",
+                     "letterSpacing": "0.02em",
+                     "fontFamily": "'IBM Plex Mono',ui-monospace,SFMono-Regular,Menlo,Consolas,monospace",
+                     "fontWeight": "400"
+                    }
+                   }
+                  }
+                 }
+                ]
+               },
+               {
+                "type": "div",
+                "data": {
+                 "attrID": "mk-mast-side-3"
+                },
+                "style": {
+                 "&": {
+                  "_": {
+                   "display": "grid",
+                   "gridCols": "1fr auto",
+                   "columnGap": "14px",
+                   "alignItems": "baseline",
+                   "paddingTop": "11px",
+                   "paddingBottom": "11px",
+                   "customStyles": "border-top:1px solid rgba(22,24,28,.16);"
+                  }
+                 }
+                },
+                "children": [
+                 {
+                  "type": "text",
+                  "data": {
+                   "tagName": "p"
+                  },
+                  "text": "LEAD TIME",
+                  "style": {
+                   "&": {
+                    "_": {
+                     "color": {
+                      "token": "--mk-faint"
+                     },
+                     "fontSize": "10px",
+                     "letterSpacing": "0.18em",
+                     "fontFamily": "'IBM Plex Mono',ui-monospace,SFMono-Regular,Menlo,Consolas,monospace",
+                     "fontWeight": "400"
+                    }
+                   }
+                  }
+                 },
+                 {
+                  "type": "text",
+                  "data": {
+                   "tagName": "p"
+                  },
+                  "text": "3–8 週",
+                  "style": {
+                   "&": {
+                    "_": {
+                     "color": {
+                      "token": "--mk-ink"
+                     },
+                     "fontSize": "12px",
+                     "letterSpacing": "0.02em",
+                     "fontFamily": "'IBM Plex Mono',ui-monospace,SFMono-Regular,Menlo,Consolas,monospace",
+                     "fontWeight": "400"
+                    }
+                   }
+                  }
+                 }
+                ]
+               },
+               {
+                "type": "div",
+                "data": {
+                 "attrID": "mk-mast-side-4"
+                },
+                "style": {
+                 "&": {
+                  "_": {
+                   "display": "grid",
+                   "gridCols": "1fr auto",
+                   "columnGap": "14px",
+                   "alignItems": "baseline",
+                   "paddingTop": "11px",
+                   "paddingBottom": "11px",
+                   "customStyles": "border-top:1px solid rgba(22,24,28,.16);"
+                  }
+                 }
+                },
+                "children": [
+                 {
+                  "type": "text",
+                  "data": {
+                   "tagName": "p"
+                  },
+                  "text": "RESPONSE",
+                  "style": {
+                   "&": {
+                    "_": {
+                     "color": {
+                      "token": "--mk-faint"
+                     },
+                     "fontSize": "10px",
+                     "letterSpacing": "0.18em",
+                     "fontFamily": "'IBM Plex Mono',ui-monospace,SFMono-Regular,Menlo,Consolas,monospace",
+                     "fontWeight": "400"
+                    }
+                   }
+                  }
+                 },
+                 {
+                  "type": "text",
+                  "data": {
+                   "tagName": "p"
+                  },
+                  "text": "1 個工作天",
+                  "style": {
+                   "&": {
+                    "_": {
+                     "color": {
+                      "token": "--mk-ink"
+                     },
+                     "fontSize": "12px",
+                     "letterSpacing": "0.02em",
+                     "fontFamily": "'IBM Plex Mono',ui-monospace,SFMono-Regular,Menlo,Consolas,monospace",
+                     "fontWeight": "400"
+                    }
+                   }
+                  }
+                 }
+                ]
+               }
+              ]
              }
             ]
            },
@@ -1847,17 +2222,17 @@
                          "color": {
                           "token": "--mk-ink"
                          },
-                         "fontSize": "40px",
-                         "fontWeight": "500",
-                         "letterSpacing": "-0.04em",
-                         "lineHeight": "1.05",
-                         "fontFamily": "'IBM Plex Mono',ui-monospace,SFMono-Regular,Menlo,Consolas,monospace"
+                         "fontSize": "56px",
+                         "fontWeight": "600",
+                         "letterSpacing": "-0.03em",
+                         "lineHeight": "1.02",
+                         "fontFamily": "'Space Grotesk','Noto Sans TC','PingFang TC','Microsoft JhengHei',sans-serif"
                         },
                         "_t": {
-                         "fontSize": "34px"
+                         "fontSize": "44px"
                         },
                         "_m": {
-                         "fontSize": "27px"
+                         "fontSize": "34px"
                         }
                        }
                       }
@@ -1878,9 +2253,12 @@
                      "color": {
                       "token": "--mk-accent"
                      },
-                     "fontSize": "17px",
-                     "fontFamily": "'IBM Plex Mono',ui-monospace,SFMono-Regular,Menlo,Consolas,monospace",
-                     "fontWeight": "500"
+                     "fontSize": "22px",
+                     "fontFamily": "'Space Grotesk','Noto Sans TC','PingFang TC','Microsoft JhengHei',sans-serif",
+                     "fontWeight": "600"
+                    },
+                    "_m": {
+                     "fontSize": "16px"
                     }
                    }
                   }
@@ -2014,17 +2392,17 @@
                          "color": {
                           "token": "--mk-ink"
                          },
-                         "fontSize": "40px",
-                         "fontWeight": "500",
-                         "letterSpacing": "-0.04em",
-                         "lineHeight": "1.05",
-                         "fontFamily": "'IBM Plex Mono',ui-monospace,SFMono-Regular,Menlo,Consolas,monospace"
+                         "fontSize": "56px",
+                         "fontWeight": "600",
+                         "letterSpacing": "-0.03em",
+                         "lineHeight": "1.02",
+                         "fontFamily": "'Space Grotesk','Noto Sans TC','PingFang TC','Microsoft JhengHei',sans-serif"
                         },
                         "_t": {
-                         "fontSize": "34px"
+                         "fontSize": "44px"
                         },
                         "_m": {
-                         "fontSize": "27px"
+                         "fontSize": "34px"
                         }
                        }
                       }
@@ -2056,17 +2434,17 @@
                          "color": {
                           "token": "--mk-ink"
                          },
-                         "fontSize": "40px",
-                         "fontWeight": "500",
-                         "letterSpacing": "-0.04em",
-                         "lineHeight": "1.05",
-                         "fontFamily": "'IBM Plex Mono',ui-monospace,SFMono-Regular,Menlo,Consolas,monospace"
+                         "fontSize": "56px",
+                         "fontWeight": "600",
+                         "letterSpacing": "-0.03em",
+                         "lineHeight": "1.02",
+                         "fontFamily": "'Space Grotesk','Noto Sans TC','PingFang TC','Microsoft JhengHei',sans-serif"
                         },
                         "_t": {
-                         "fontSize": "34px"
+                         "fontSize": "44px"
                         },
                         "_m": {
-                         "fontSize": "27px"
+                         "fontSize": "34px"
                         }
                        }
                       }
@@ -2098,17 +2476,17 @@
                          "color": {
                           "token": "--mk-ink"
                          },
-                         "fontSize": "40px",
-                         "fontWeight": "500",
-                         "letterSpacing": "-0.04em",
-                         "lineHeight": "1.05",
-                         "fontFamily": "'IBM Plex Mono',ui-monospace,SFMono-Regular,Menlo,Consolas,monospace"
+                         "fontSize": "56px",
+                         "fontWeight": "600",
+                         "letterSpacing": "-0.03em",
+                         "lineHeight": "1.02",
+                         "fontFamily": "'Space Grotesk','Noto Sans TC','PingFang TC','Microsoft JhengHei',sans-serif"
                         },
                         "_t": {
-                         "fontSize": "34px"
+                         "fontSize": "44px"
                         },
                         "_m": {
-                         "fontSize": "27px"
+                         "fontSize": "34px"
                         }
                        }
                       }
@@ -2129,9 +2507,12 @@
                      "color": {
                       "token": "--mk-accent"
                      },
-                     "fontSize": "17px",
-                     "fontFamily": "'IBM Plex Mono',ui-monospace,SFMono-Regular,Menlo,Consolas,monospace",
-                     "fontWeight": "500"
+                     "fontSize": "22px",
+                     "fontFamily": "'Space Grotesk','Noto Sans TC','PingFang TC','Microsoft JhengHei',sans-serif",
+                     "fontWeight": "600"
+                    },
+                    "_m": {
+                     "fontSize": "16px"
                     }
                    }
                   }
@@ -2265,17 +2646,17 @@
                          "color": {
                           "token": "--mk-ink"
                          },
-                         "fontSize": "40px",
-                         "fontWeight": "500",
-                         "letterSpacing": "-0.04em",
-                         "lineHeight": "1.05",
-                         "fontFamily": "'IBM Plex Mono',ui-monospace,SFMono-Regular,Menlo,Consolas,monospace"
+                         "fontSize": "56px",
+                         "fontWeight": "600",
+                         "letterSpacing": "-0.03em",
+                         "lineHeight": "1.02",
+                         "fontFamily": "'Space Grotesk','Noto Sans TC','PingFang TC','Microsoft JhengHei',sans-serif"
                         },
                         "_t": {
-                         "fontSize": "34px"
+                         "fontSize": "44px"
                         },
                         "_m": {
-                         "fontSize": "27px"
+                         "fontSize": "34px"
                         }
                        }
                       }
@@ -2307,17 +2688,17 @@
                          "color": {
                           "token": "--mk-ink"
                          },
-                         "fontSize": "40px",
-                         "fontWeight": "500",
-                         "letterSpacing": "-0.04em",
-                         "lineHeight": "1.05",
-                         "fontFamily": "'IBM Plex Mono',ui-monospace,SFMono-Regular,Menlo,Consolas,monospace"
+                         "fontSize": "56px",
+                         "fontWeight": "600",
+                         "letterSpacing": "-0.03em",
+                         "lineHeight": "1.02",
+                         "fontFamily": "'Space Grotesk','Noto Sans TC','PingFang TC','Microsoft JhengHei',sans-serif"
                         },
                         "_t": {
-                         "fontSize": "34px"
+                         "fontSize": "44px"
                         },
                         "_m": {
-                         "fontSize": "27px"
+                         "fontSize": "34px"
                         }
                        }
                       }
@@ -2338,9 +2719,12 @@
                      "color": {
                       "token": "--mk-accent"
                      },
-                     "fontSize": "17px",
-                     "fontFamily": "'IBM Plex Mono',ui-monospace,SFMono-Regular,Menlo,Consolas,monospace",
-                     "fontWeight": "500"
+                     "fontSize": "22px",
+                     "fontFamily": "'Space Grotesk','Noto Sans TC','PingFang TC','Microsoft JhengHei',sans-serif",
+                     "fontWeight": "600"
+                    },
+                    "_m": {
+                     "fontSize": "16px"
                     }
                    }
                   }
@@ -2474,17 +2858,17 @@
                          "color": {
                           "token": "--mk-ink"
                          },
-                         "fontSize": "40px",
-                         "fontWeight": "500",
-                         "letterSpacing": "-0.04em",
-                         "lineHeight": "1.05",
-                         "fontFamily": "'IBM Plex Mono',ui-monospace,SFMono-Regular,Menlo,Consolas,monospace"
+                         "fontSize": "56px",
+                         "fontWeight": "600",
+                         "letterSpacing": "-0.03em",
+                         "lineHeight": "1.02",
+                         "fontFamily": "'Space Grotesk','Noto Sans TC','PingFang TC','Microsoft JhengHei',sans-serif"
                         },
                         "_t": {
-                         "fontSize": "34px"
+                         "fontSize": "44px"
                         },
                         "_m": {
-                         "fontSize": "27px"
+                         "fontSize": "34px"
                         }
                        }
                       }
@@ -2516,17 +2900,17 @@
                          "color": {
                           "token": "--mk-ink"
                          },
-                         "fontSize": "40px",
-                         "fontWeight": "500",
-                         "letterSpacing": "-0.04em",
-                         "lineHeight": "1.05",
-                         "fontFamily": "'IBM Plex Mono',ui-monospace,SFMono-Regular,Menlo,Consolas,monospace"
+                         "fontSize": "56px",
+                         "fontWeight": "600",
+                         "letterSpacing": "-0.03em",
+                         "lineHeight": "1.02",
+                         "fontFamily": "'Space Grotesk','Noto Sans TC','PingFang TC','Microsoft JhengHei',sans-serif"
                         },
                         "_t": {
-                         "fontSize": "34px"
+                         "fontSize": "44px"
                         },
                         "_m": {
-                         "fontSize": "27px"
+                         "fontSize": "34px"
                         }
                        }
                       }
@@ -2558,17 +2942,17 @@
                          "color": {
                           "token": "--mk-ink"
                          },
-                         "fontSize": "40px",
-                         "fontWeight": "500",
-                         "letterSpacing": "-0.04em",
-                         "lineHeight": "1.05",
-                         "fontFamily": "'IBM Plex Mono',ui-monospace,SFMono-Regular,Menlo,Consolas,monospace"
+                         "fontSize": "56px",
+                         "fontWeight": "600",
+                         "letterSpacing": "-0.03em",
+                         "lineHeight": "1.02",
+                         "fontFamily": "'Space Grotesk','Noto Sans TC','PingFang TC','Microsoft JhengHei',sans-serif"
                         },
                         "_t": {
-                         "fontSize": "34px"
+                         "fontSize": "44px"
                         },
                         "_m": {
-                         "fontSize": "27px"
+                         "fontSize": "34px"
                         }
                        }
                       }
@@ -2589,9 +2973,12 @@
                      "color": {
                       "token": "--mk-accent"
                      },
-                     "fontSize": "17px",
-                     "fontFamily": "'IBM Plex Mono',ui-monospace,SFMono-Regular,Menlo,Consolas,monospace",
-                     "fontWeight": "500"
+                     "fontSize": "22px",
+                     "fontFamily": "'Space Grotesk','Noto Sans TC','PingFang TC','Microsoft JhengHei',sans-serif",
+                     "fontWeight": "600"
+                    },
+                    "_m": {
+                     "fontSize": "16px"
                     }
                    }
                   }
@@ -3189,8 +3576,8 @@
                      },
                      "fontSize": "34px",
                      "fontWeight": "600",
-                     "letterSpacing": "-0.025em",
-                     "lineHeight": "1.3",
+                     "letterSpacing": "0.01em",
+                     "lineHeight": "1.35",
                      "fontFamily": "'Space Grotesk','Noto Sans TC','PingFang TC','Microsoft JhengHei',sans-serif",
                      "marginTop": "10px"
                     },
@@ -3871,8 +4258,8 @@
                      },
                      "fontSize": "34px",
                      "fontWeight": "600",
-                     "letterSpacing": "-0.025em",
-                     "lineHeight": "1.3",
+                     "letterSpacing": "0.01em",
+                     "lineHeight": "1.35",
                      "fontFamily": "'Space Grotesk','Noto Sans TC','PingFang TC','Microsoft JhengHei',sans-serif",
                      "marginTop": "10px"
                     },
@@ -4545,8 +4932,8 @@
                      },
                      "fontSize": "34px",
                      "fontWeight": "600",
-                     "letterSpacing": "-0.025em",
-                     "lineHeight": "1.3",
+                     "letterSpacing": "0.01em",
+                     "lineHeight": "1.35",
                      "fontFamily": "'Space Grotesk','Noto Sans TC','PingFang TC','Microsoft JhengHei',sans-serif",
                      "marginTop": "10px"
                     },
@@ -5876,8 +6263,8 @@
                      },
                      "fontSize": "34px",
                      "fontWeight": "600",
-                     "letterSpacing": "-0.025em",
-                     "lineHeight": "1.3",
+                     "letterSpacing": "0.01em",
+                     "lineHeight": "1.35",
                      "fontFamily": "'Space Grotesk','Noto Sans TC','PingFang TC','Microsoft JhengHei',sans-serif",
                      "marginTop": "10px"
                     },
@@ -7262,8 +7649,8 @@
                      },
                      "fontSize": "34px",
                      "fontWeight": "600",
-                     "letterSpacing": "-0.025em",
-                     "lineHeight": "1.3",
+                     "letterSpacing": "0.01em",
+                     "lineHeight": "1.35",
                      "fontFamily": "'Space Grotesk','Noto Sans TC','PingFang TC','Microsoft JhengHei',sans-serif",
                      "marginTop": "10px"
                     },
@@ -7391,7 +7778,7 @@
                        "fontWeight": "600",
                        "fontFamily": "'Space Grotesk','Noto Sans TC','PingFang TC','Microsoft JhengHei',sans-serif",
                        "marginTop": "9px",
-                       "letterSpacing": "-0.02em"
+                       "letterSpacing": "0.01em"
                       },
                       "_m": {
                        "fontSize": "21px"
@@ -7551,7 +7938,7 @@
                        "fontWeight": "600",
                        "fontFamily": "'Space Grotesk','Noto Sans TC','PingFang TC','Microsoft JhengHei',sans-serif",
                        "marginTop": "9px",
-                       "letterSpacing": "-0.02em"
+                       "letterSpacing": "0.01em"
                       },
                       "_m": {
                        "fontSize": "21px"
@@ -7768,8 +8155,8 @@
                      },
                      "fontSize": "34px",
                      "fontWeight": "600",
-                     "letterSpacing": "-0.025em",
-                     "lineHeight": "1.3",
+                     "letterSpacing": "0.01em",
+                     "lineHeight": "1.35",
                      "fontFamily": "'Space Grotesk','Noto Sans TC','PingFang TC','Microsoft JhengHei',sans-serif",
                      "marginTop": "10px"
                     },
@@ -8338,8 +8725,8 @@
                      },
                      "fontSize": "44px",
                      "fontWeight": "600",
-                     "letterSpacing": "-0.03em",
-                     "lineHeight": "1.24",
+                     "letterSpacing": "0.01em",
+                     "lineHeight": "1.3",
                      "fontFamily": "'Space Grotesk','Noto Sans TC','PingFang TC','Microsoft JhengHei',sans-serif",
                      "marginTop": "12px",
                      "whiteSpace": "pre-wrap"

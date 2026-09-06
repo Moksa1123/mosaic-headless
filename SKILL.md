@@ -105,7 +105,7 @@ PROPERTIES   170 probes over the declared property surface, each value asserted
              against the delivered markup and the compiled CSS separately.
              data/property-verification.csv
 
-RWD          569 responsive declarations across two sites asserted against the
+RWD          576 responsive declarations across two sites asserted against the
              stylesheet the site actually served - each `_t`/`_m` property matched
              to its element's generated class inside that breakpoint's own media
              query. All verified; the checker is itself checked against a poisoned
@@ -228,7 +228,7 @@ so the pattern is in the data, not just in this paragraph.
 | `data/property-verification.csv` | 170 | **probed live** — per-property effect on markup vs CSS, with unprovable enums marked INCONCLUSIVE |
 | `data/node-property-verification.csv` | 181 | **swept live** — each property probed with a value shaped by its own validator chain, on a type that declares it |
 | `data/style-verification.csv` | 98 | **swept live** — every style property written to a page and checked against the compiled CSS, with its group beside the result |
-| `data/rwd-verification.csv` | 569 | **checked live** - every `_t`/`_m` declaration vs the served stylesheet, with status per row |
+| `data/rwd-verification.csv` | 576 | **checked live** - every `_t`/`_m` declaration vs the served stylesheet, with status per row |
 | `data/element-classes.csv` | 151 | **live** — the built-in class metas; their IDs are what an `elementClass` record must use |
 | `data/dynamic-variables.csv` | 74 | source — every `@VAR('ns/name')` expression, by namespace |
 | `data/evaluator-functions.csv` | 19 | source — the `@` functions with their arity |

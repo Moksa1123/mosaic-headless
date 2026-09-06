@@ -171,6 +171,28 @@ required children on commit.
 A record committed with `"modified_gmt": "2026-09-05 17:00:00"` came back stored as
 `16:59:16`. The server overwrites it. Do not use a value you sent as a local cache key.
 
+## A page cache turns "it worked" into "the node does not exist"
+
+Not a Mosaic failure - a failure of *checking* Mosaic, and it produces the exact
+result this skill exists to prevent: a confident negative about something that is
+actually there.
+
+Commit succeeds. `build_site.py` reports the byte size the renderer produced. Then
+the verifier fetches the URL, a full-page cache in front of WordPress (Varnish on
+Cloudways, or any CDN) answers with the pre-commit HTML, and every declaration on a
+node you have just added comes back `no-element`. Measured on this install: the
+builder saw 138878 bytes, `curl` on the same URL a second later got 136021, and
+seven declarations on two brand-new grid wrappers were reported missing while the
+wrappers were sitting correctly in the database and in the committed JSON.
+
+The tell is the byte count: if the size the builder reports and the size you fetch
+disagree, you are not looking at what you wrote.
+
+`tools/verify_rwd.py` now appends a unique `_v=<ms>` query string and sends
+`Cache-Control: no-cache` on every fetch, so the assertion is always made against the
+document that was actually committed. Do the same in anything else that checks a page
+- including a browser: hard-reload is not always enough, a query string always is.
+
 ## Reproducing all of this
 
 ```bash
