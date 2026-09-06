@@ -243,22 +243,22 @@ def motion_css():
         "@keyframes zd-drop{"
         "0%{top:0;opacity:0;transform:rotate(45deg) scale(.45);"
         "animation-timing-function:ease-out}"
-        "7%{top:4%;opacity:1;transform:rotate(45deg) scale(1);"
+        "5%{top:3%;opacity:1;transform:rotate(45deg) scale(1);"
         "animation-timing-function:cubic-bezier(.45,0,.85,.35)}"
-        "44%{top:100%;opacity:1;transform:rotate(45deg) scale(.86,1.3);"
+        "40%{top:72%;opacity:1;transform:rotate(45deg) scale(.86,1.3);"
         "animation-timing-function:ease-out}"
-        "48%{top:100%;opacity:.95;transform:rotate(45deg) scale(1.45,.45)}"
-        "54%{top:100%;opacity:0;transform:rotate(45deg) scale(1.9,.2)}"
-        "100%{top:100%;opacity:0;transform:rotate(45deg) scale(1.9,.2)}}",
-        "@keyframes zd-ring0{0%,44%{opacity:0;transform:scale(.012)}"
-        "47%{opacity:.9;transform:scale(.08)}"
-        "84%,100%{opacity:0;transform:scale(1)}}",
-        "@keyframes zd-ring1{0%,48%{opacity:0;transform:scale(.012)}"
-        "51%{opacity:.6;transform:scale(.07)}"
-        "90%,100%{opacity:0;transform:scale(.82)}}",
-        "@keyframes zd-ring2{0%,52%{opacity:0;transform:scale(.012)}"
-        "55%{opacity:.38;transform:scale(.06)}"
-        "96%,100%{opacity:0;transform:scale(.62)}}",
+        "44%{top:72%;opacity:.95;transform:rotate(45deg) scale(1.45,.45)}"
+        "50%{top:72%;opacity:0;transform:rotate(45deg) scale(1.9,.2)}"
+        "100%{top:72%;opacity:0;transform:rotate(45deg) scale(1.9,.2)}}",
+        "@keyframes zd-ring0{0%,40%{opacity:0;transform:scale(.012)}"
+        "43%{opacity:.9;transform:scale(.07)}"
+        "92%,100%{opacity:0;transform:scale(1)}}",
+        "@keyframes zd-ring1{0%,45%{opacity:0;transform:scale(.012)}"
+        "48%{opacity:.6;transform:scale(.06)}"
+        "97%,100%{opacity:0;transform:scale(.8)}}",
+        "@keyframes zd-ring2{0%,50%{opacity:0;transform:scale(.012)}"
+        "53%{opacity:.38;transform:scale(.05)}"
+        "100%{opacity:0;transform:scale(.6)}}",
         "@keyframes zd-progress{from{width:0%}to{width:100%}}",
         # Scrolling does not switch the glass on - it changes what the glass is
         # standing on. Over the dark hero it is a smoked panel; over paper it goes
@@ -407,7 +407,7 @@ def motion_css():
         # the ripple: an ellipse, not a circle - it is being read as lying flat
         # each ring is authored at full size and scaled down to nothing, so the
         # stroke stays a hairline at every size instead of thickening as it grows
-        "#zd-ring-0,#zd-ring-1,#zd-ring-2{position:absolute;left:50%;top:100%;"
+        "#zd-ring-0,#zd-ring-1,#zd-ring-2{position:absolute;left:50%;top:72%;"
         "width:1600px;height:360px;margin-left:-800px;margin-top:-180px;"
         "border-radius:50%;border:1px solid rgb(198,163,114);opacity:0;"
         "transform:scale(.012);will-change:transform,opacity}",
@@ -497,10 +497,11 @@ def motion_css():
         "  #zd-cue-rail::after{animation:zd-cuerail 2.6s cubic-bezier(.5,0,.5,1) "
         "infinite}",
         "  #zd-marquee-track{animation:zd-marquee 56s linear infinite}",
-        "  #zd-statement-rule::after{animation:zd-drop 4.2s linear infinite}",
-        "  #zd-ring-0{animation:zd-ring0 4.2s cubic-bezier(.16,.85,.3,1) infinite}",
-        "  #zd-ring-1{animation:zd-ring1 4.2s cubic-bezier(.16,.85,.3,1) infinite}",
-        "  #zd-ring-2{animation:zd-ring2 4.2s cubic-bezier(.16,.85,.3,1) infinite}",
+        "  #zd-statement-rule::after{animation:zd-drop 7.2s linear infinite}",
+        # same 7.2s as the drop, so contact and first ring cannot drift apart
+        "  #zd-ring-0{animation:zd-ring0 7.2s cubic-bezier(.12,.8,.3,1) infinite}",
+        "  #zd-ring-1{animation:zd-ring1 7.2s cubic-bezier(.12,.8,.3,1) infinite}",
+        "  #zd-ring-2{animation:zd-ring2 7.2s cubic-bezier(.12,.8,.3,1) infinite}",
 
         "  @supports (animation-timeline:view()){",
         "    " + reveal_targets + "{animation:zd-rise .01s linear both;"
