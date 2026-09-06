@@ -133,7 +133,7 @@ def run(client, cfg, jobs, out_path):
     key = "node/master/%s" % master
     doc = unwrap(client.get("masterDocumentInstance/%s" % master), "masterDocumentInstance")
     baseline_ids = {n["ID"] for n in doc[key]}
-    base_html = client.page()
+    base_html = client.page(cfg.get("path", ""))
     if len(base_html) < MIN_HEALTHY_BYTES:
         sys.exit("baseline page already broken (%d bytes)" % len(base_html))
     base_markup, base_css = split_markup_and_css(base_html)
@@ -163,7 +163,7 @@ def run(client, cfg, jobs, out_path):
             outcome = "COMMIT_%d" % code if code and code >= 500 else "REJECTED"
             detail = "PHP fatal during commit" if code else err
         else:
-            html = client.page()
+            html = client.page(cfg.get("path", ""))
             if len(html) < MIN_HEALTHY_BYTES:
                 outcome, detail = "BROKE_PAGE", html.strip()[:160]
             else:

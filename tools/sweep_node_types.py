@@ -77,8 +77,10 @@ class Client:
             {"syncCheckEnvelopes": json.dumps(sync), "revisionEnvelopes": json.dumps(revisions)},
         )
 
-    def page(self):
-        req = urllib.request.Request("%s/?sweep=%s" % (self.base, uuid.uuid4().hex[:8]))
+    def page(self, path=""):
+        """Fetch a public page, cache-busted. `path` picks a page other than the home page."""
+        req = urllib.request.Request("%s/%s?sweep=%s" % (self.base, path.strip("/") + "/" if path else "",
+                                                         uuid.uuid4().hex[:8]))
         try:
             with urllib.request.urlopen(req, timeout=120) as r:
                 return r.read().decode("utf-8", "replace")

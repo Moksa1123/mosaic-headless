@@ -1,0 +1,23 @@
+property,kind,animates_via
+transform,Transform,(the CSS property)
+translateX,Move,--mosaic-translate-x
+translateY,Move,--mosaic-translate-y
+translateZ,Move,--mosaic-translate-z
+scale,Scale,--mosaic-scale
+scaleX,Scale,--mosaic-scale-x
+scaleY,Scale,--mosaic-scale-y
+scaleZ,Scale,--mosaic-scale-z
+rotateX,Rotate,--mosaic-rotate-x
+rotateY,Rotate,--mosaic-rotate-y
+rotateZ,Rotate,--mosaic-rotate-z
+opacity,Opacity,(the CSS property)
+color,Color,(the CSS property)
+backgroundColor,Color,(the CSS property)
+borderColor,Color,(the CSS property)
+boxShadow,BoxShadow,(the CSS property)
+textShadow,TextShadow,(the CSS property)
+width,Size,(the CSS property)
+height,Size,(the CSS property)
+filter,Filter,(the CSS property)
+backdropFilter,Filter,(the CSS property)
+transformOrigin,TransformOrigin,(the CSS property)

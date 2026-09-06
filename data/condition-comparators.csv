@@ -1,0 +1,13 @@
+context,rule_type,comparator,label,operators,settings_fields,field_types,supports_dynamic
+element,serverCondition,text,Text,equals|not-equals|contains|not-contains|starts-with|regexp,value,text,yes
+element,serverCondition,number,Number,equals|not-equals|greater-than|greater-than-or-equal|less-than|less-than-or-equal,value,number,yes
+element,serverCondition,date,Date,after|before,value,dateTime,yes
+formAction,serverCondition,text,Text,equals|not-equals|contains|not-contains|starts-with|regexp,value,text,yes
+formAction,serverCondition,number,Number,equals|not-equals|greater-than|greater-than-or-equal|less-than|less-than-or-equal,value,number,yes
+formAction,serverCondition,date,Date,after|before,value,dateTime,yes
+interaction,serverCondition,text,Text,equals|not-equals|contains|not-contains|starts-with|regexp,value,text,no
+interaction,serverCondition,number,Number,equals|not-equals|greater-than|greater-than-or-equal|less-than|less-than-or-equal,value,number,no
+interaction,browserCondition,text,Text,equals|not-equals|contains|not-contains|starts-with,value,text,no
+interaction,browserCondition,number,Number,equals|not-equals|greater-than|greater-than-or-equal|less-than|less-than-or-equal,value,number,no
+template,serverCondition,text,Text,equals|not-equals|contains|not-contains|starts-with|regexp,value,text,no
+template,serverCondition,number,Number,equals|not-equals|greater-than|greater-than-or-equal|less-than|less-than-or-equal,value,number,no

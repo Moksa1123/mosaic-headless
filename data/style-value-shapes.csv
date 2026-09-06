@@ -1,0 +1,23 @@
+property,kind,shape,compiles_to,status
+borderRadius,object,"{""type"":""all"",""allOptions"":{""borderRadiusValue"":""18px""}}",border-radius:18px,OK
+borderStyle,object,"{""borderTopWidth"":""5px"",""borderTopStyle"":""solid"",""borderTopColor"":""rgb(..)"", ...12 keys}",border-top-width:5px; ...,OK
+outlineStyle,object,"{""outlineWidth"":""3px"",""outlineStyle"":""dotted"",""outlineColor"":""rgb(..)"",""outlineOffset"":""4px""}",outline-width:3px;outline-style:dotted;...,OK
+boxShadow,array,"[{""x"":""8px"",""y"":""8px"",""blur"":""0px"",""spread"":""0px"",""color"":""rgb(..)"",""type"":""outside"",""uuid"":""<uuid>""}]",box-shadow:rgb(..) 8px 8px 0px 0px,"OK - type is ""outside""/""inside"", NOT outset/inset"
+textShadow,array,"[{""x"":""0px"",""y"":""2px"",""blur"":""8px"",""color"":""rgb(..)"",""uuid"":""<uuid>""}]",text-shadow:rgb(..) 0px 2px 8px,OK
+transition,array,"[{""transitionProperty"":""all"",""transitionDuration"":""350ms"",""transitionDelay"":""0ms"",""transitionTimingFunction"":""ease"",""uuid"":""<uuid>""}]",transition-property:all;transition-duration:350ms;...,OK - easing maps to var(--mosaic-easing-<name>)
+transform,array,"[{""type"":""translateY"",""translateYOptions"":{""value"":""-8px""},""uuid"":""<uuid>""}]",transform:translateY(-8px),"OK - types: translateX/Y/Z, rotateX/Y/Z, skewX/Y, scale, scaleX/Y/Z"
+transform (scale),array,"[{""type"":""scale"",""scaleOptions"":{""value"":""1.05""},""uuid"":""<uuid>""}]",transform:scale(1.05),"OK - key is value, not x/y"
+translate,object,"{""x"":""0px"",""y"":""-6px"",""z"":""0px""}",--mosaic-translate-*; translate:0px -6px 0px,OK
+rotate,object,"{""x"":""0deg"",""y"":""0deg"",""z"":""4deg""}",--mosaic-rotate-*; rotate:0 0 1 4deg,OK
+transformOrigin,object,"{""x"":""0%"",""y"":""0%"",""z"":""0px""}",transform-origin:0% 0% 0px,OK
+perspectiveOrigin,object,"{""x"":""50%"",""y"":""50%""}",perspective-origin:50% 50%,OK
+filter,array,"[{""type"":""blur"",""blurOptions"":{""value"":""5px""},""uuid"":""<uuid>""}]",filter:blur(5px),OK - also brightness/contrast/... each with <type>Options
+backdropFilter,array,"[{""type"":""blur"",""blurOptions"":{""value"":""14px""},""uuid"":""<uuid>""}]",backdrop-filter:blur(14px) + -webkit- prefix,OK
+gridTemplateColumns,array,"[{""type"":""default"",""defaultOptions"":{""size"":""1fr""},""uuid"":""<uuid>""}, ...one per column]",grid-template-columns:1fr 1fr 2fr,OK
+gridTemplateColumns (autofit),array,"[{""type"":""default"",""defaultOptions"":{""size"":""240px"",""autofit"":""1""},""uuid"":""<uuid>""}]","grid-template-columns:repeat(auto-fit, 240px)",OK - autofit is rejected with an fr size
+gridChildPosition,object,"{""gridRowStart"":""1"",""gridColumnStart"":""1"",""gridRowEnd"":""2"",""gridColumnEnd"":""3""}",grid-row-start:1;grid-column-start:1;...,OK
+flexSizing,object,"{""type"":""grow"",""growOptions"":{}}",flex-grow:1;flex-shrink:0,OK
+objectFitStyle,object,"{""objectFit"":""cover"",""objectPositionX"":""50%"",""objectPositionY"":""50%""}",object-fit:cover;object-position:50%,OK
+mask,array,"[{""type"":""gradient"",""gradientOptions"":{""subType"":""linear"",""linearOptions"":{""angle"":""180deg""},""dots"":[...]},""uuid"":""<uuid>""}]",mask-image:linear-gradient(...),"PARTIAL - compiles, but only the last dot survives"
+backgroundStyle,array,"[{""type"":""overlay"",""overlayOptions"":{""color"":""rgba(..)""},""uuid"":""<uuid>""}]","(accepted, emits background-image:none)",UNRESOLVED - use customStyles
+customStyles,string,"""outline: 2px dashed rgb(7,8,9);""",emitted verbatim into the rule,OK - the escape hatch; bypasses the collection-variable layer

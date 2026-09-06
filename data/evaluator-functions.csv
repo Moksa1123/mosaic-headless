@@ -1,0 +1,20 @@
+id,max_args,variadic,note,declared_in
+abs,1,,,Mosaic/Plugins/EvaluatorFunctions/Abs/EvaluatorFunctionAbs.php
+attachment,2,,,Mosaic/Plugins/EvaluatorFunctions/Attachment/EvaluatorFunctionAttachment.php
+avg,0,yes,,Mosaic/Plugins/EvaluatorFunctions/Avg/EvaluatorFunctionAvg.php
+calc,1,,,Mosaic/Plugins/EvaluatorFunctions/Calc/EvaluatorFunctionCalc.php
+concat,0,,,Mosaic/Plugins/EvaluatorFunctions/Concat/EvaluatorFunctionConcat.php
+date,3,,The timestamp is a true GMT Unix timestamp. For local time we add the,Mosaic/Plugins/EvaluatorFunctions/Date/EvaluatorFunctionDate.php
+esc_attr,1,,,Mosaic/Plugins/EvaluatorFunctions/EscAttr/EvaluatorFunctionEscAttr.php
+esc_html,1,,,Mosaic/Plugins/EvaluatorFunctions/EscHtml/EvaluatorFunctionEscHtml.php
+excerpt,4,,"some languages ( e.g. Chinese ) doesn't use spaces between the words,",Mosaic/Plugins/EvaluatorFunctions/Excerpt/EvaluatorFunctionExcerpt.php
+fallback,2,yes,"false and null values don't have to be listed here, as strval() evaluates these as empty s",Mosaic/Plugins/EvaluatorFunctions/Fallback/EvaluatorFunctionFallback.php
+find_image,2,,,Mosaic/Plugins/EvaluatorFunctions/FindImage/EvaluatorFunctionFindImage.php
+find_link,2,,,Mosaic/Plugins/EvaluatorFunctions/FindLink/EvaluatorFunctionFindLink.php
+find_video,2,,,Mosaic/Plugins/EvaluatorFunctions/FindVideo/EvaluatorFunctionFindVideo.php
+json_encode,1,,,Mosaic/Plugins/EvaluatorFunctions/JsonEncode/EvaluatorFunctionJsonEncode.php
+remove_html,1,,,Mosaic/Plugins/EvaluatorFunctions/RemoveHTML/EvaluatorFunctionRemoveHTML.php
+round,1,,,Mosaic/Plugins/EvaluatorFunctions/Round/EvaluatorFunctionRound.php
+round_up,2,,,Mosaic/Plugins/EvaluatorFunctions/RoundUp/EvaluatorFunctionRoundUp.php
+substr,3,,Implemented based on JS String.prototype.substring()() logic,Mosaic/Plugins/EvaluatorFunctions/Substr/EvaluatorFunctionSubstr.php
+sum,0,yes,,Mosaic/Plugins/EvaluatorFunctions/Sum/EvaluatorFunctionSum.php
