@@ -93,7 +93,7 @@
      "data": {
       "attrID": "zd-motion-css",
       "insertLocation": "head",
-      "content": "<style id=\"zd-motion\">\n@keyframes zd-rise{from{opacity:0;transform:translateY(26px)}to{opacity:1;transform:none}}\n@keyframes zd-draw{from{transform:scaleX(0)}to{transform:scaleX(1)}}\n@keyframes zd-lift{from{transform:scale(1.22) translateY(14px)}to{transform:scale(1.22) translateY(-18px)}}\n@keyframes zd-shadow{from{box-shadow:0 0 0 rgba(28,26,23,0)}to{box-shadow:0 10px 30px -22px rgba(28,26,23,.75)}}\n\n#zd-header{position:sticky;top:0;z-index:50;background:rgba(250,248,244,.86);\n  -webkit-backdrop-filter:saturate(1.6) blur(10px);backdrop-filter:saturate(1.6) blur(10px)}\n\n#zd-nav>*{position:relative}\n#zd-nav>*::after{content:\"\";position:absolute;left:0;right:100%;bottom:-7px;height:1px;\n  background:rgb(109,127,109);transition:right .3s cubic-bezier(.2,.7,.3,1)}\n#zd-nav>*:hover::after{right:0}\n\n#zd-header-cta::after,#zd-cta-1::after,#zd-cta-3::after{content:\" →\";display:inline-block;\n  transition:transform .28s cubic-bezier(.2,.7,.3,1)}\n#zd-header-cta:hover::after,#zd-cta-1:hover::after,#zd-cta-3:hover::after{transform:translateX(5px)}\n\n#zd-cat-txt-0 h3,#zd-cat-txt-1 h3,#zd-cat-txt-2 h3,#zd-cat-txt-3 h3{position:relative;display:inline-block}\n#zd-cat-txt-0 h3::after,#zd-cat-txt-1 h3::after,#zd-cat-txt-2 h3::after,#zd-cat-txt-3 h3::after{\n  content:\"\";position:absolute;left:0;right:100%;bottom:-5px;height:1px;background:rgb(109,127,109);\n  transition:right .38s cubic-bezier(.2,.7,.3,1)}\n#zd-cat-0:hover #zd-cat-txt-0 h3::after,#zd-cat-1:hover #zd-cat-txt-1 h3::after,\n#zd-cat-2:hover #zd-cat-txt-2 h3::after,#zd-cat-3:hover #zd-cat-txt-3 h3::after{right:0}\n\n@media (prefers-reduced-motion:no-preference){\n  @supports (animation-timeline:view()){\n    #zd-step-01,#zd-step-02,#zd-step-03,#zd-step-04,\n    #zd-oem-step-01,#zd-oem-step-02,#zd-oem-step-03,#zd-oem-step-04{\n      background-image:linear-gradient(rgb(28,26,23),rgb(28,26,23));\n      background-repeat:no-repeat;background-size:100% 2px;background-position:0 0;\n      animation:zd-draw .01s linear both;animation-timeline:view();\n      animation-range:entry 6% cover 26%;transform-origin:left center}\n  }\n}\n\n@media (prefers-reduced-motion:no-preference){\n  @supports (animation-timeline:view()){\n    #zd-hero-copy,#zd-hero-media,#zd-stat-0,#zd-stat-1,#zd-stat-2,#zd-stat-3,#zd-about-l,#zd-about-r,#zd-process-in,#zd-cat-head,#zd-cat-0,#zd-cat-1,#zd-cat-2,#zd-cat-3,#zd-why-0,#zd-why-1,#zd-why-2,#zd-why-3,#zd-why-4,#zd-why-5,#zd-cta-in,#zd-oem-hero-in,#zd-lines-in,#zd-oem-process-in,#zd-line-0,#zd-line-1,#zd-line-2,#zd-line-3,#zd-line-4{animation:zd-rise .01s linear both;animation-timeline:view();animation-range:entry 4% cover 32%}\n    #zd-hero-media{animation-range:entry 9% cover 37%}\n    #zd-stat-1{animation-range:entry 9% cover 37%}\n    #zd-stat-2{animation-range:entry 14% cover 42%}\n    #zd-stat-3{animation-range:entry 19% cover 47%}\n    #zd-about-r{animation-range:entry 9% cover 37%}\n    #zd-cat-0{animation-range:entry 9% cover 37%}\n    #zd-cat-1{animation-range:entry 14% cover 42%}\n    #zd-cat-2{animation-range:entry 19% cover 47%}\n    #zd-cat-3{animation-range:entry 24% cover 52%}\n    #zd-why-1{animation-range:entry 9% cover 37%}\n    #zd-why-2{animation-range:entry 14% cover 42%}\n    #zd-why-3{animation-range:entry 9% cover 37%}\n    #zd-why-4{animation-range:entry 14% cover 42%}\n    #zd-why-5{animation-range:entry 19% cover 47%}\n    #zd-line-1{animation-range:entry 9% cover 37%}\n    #zd-line-2{animation-range:entry 14% cover 42%}\n    #zd-line-3{animation-range:entry 19% cover 47%}\n    #zd-line-4{animation-range:entry 24% cover 52%}\n  }\n  @supports (animation-timeline:scroll()){\n    #zd-header{animation:zd-shadow linear both;animation-timeline:scroll(root);animation-range:0 140px}\n    #zd-hero-img{animation:zd-lift linear both;animation-timeline:scroll(root);animation-range:0 640px}\n  }\n}\n</style>",
+      "content": "<style id=\"zd-motion\">\n@keyframes zd-rise{from{opacity:0;transform:translateY(26px)}to{opacity:1;transform:none}}\n@keyframes zd-draw{from{transform:scaleX(0)}to{transform:scaleX(1)}}\n@keyframes zd-lift{from{transform:scale(1.22) translateY(14px)}to{transform:scale(1.22) translateY(-18px)}}\n@keyframes zd-shadow{from{box-shadow:0 0 0 rgba(28,26,23,0)}to{box-shadow:0 10px 30px -22px rgba(28,26,23,.75)}}\n\n#zd-header{position:sticky;top:0;z-index:50;background:rgba(250,248,244,.86);\n  -webkit-backdrop-filter:saturate(1.6) blur(10px);backdrop-filter:saturate(1.6) blur(10px)}\n\n#zd-nav>*{position:relative}\n#zd-nav>*::after{content:\"\";position:absolute;left:0;right:100%;bottom:-7px;height:1px;\n  background:rgb(109,127,109);transition:right .3s cubic-bezier(.2,.7,.3,1)}\n#zd-nav>*:hover::after{right:0}\n\n#zd-header-cta::after,#zd-cta-1::after,#zd-cta-3::after{content:\" →\";display:inline-block;\n  transition:transform .28s cubic-bezier(.2,.7,.3,1)}\n#zd-header-cta:hover::after,#zd-cta-1:hover::after,#zd-cta-3:hover::after{transform:translateX(5px)}\n\n#zd-cat-txt-0 h3,#zd-cat-txt-1 h3,#zd-cat-txt-2 h3,#zd-cat-txt-3 h3{position:relative;display:inline-block}\n#zd-cat-txt-0 h3::after,#zd-cat-txt-1 h3::after,#zd-cat-txt-2 h3::after,#zd-cat-txt-3 h3::after{\n  content:\"\";position:absolute;left:0;right:100%;bottom:-5px;height:1px;background:rgb(109,127,109);\n  transition:right .38s cubic-bezier(.2,.7,.3,1)}\n#zd-cat-0:hover #zd-cat-txt-0 h3::after,#zd-cat-1:hover #zd-cat-txt-1 h3::after,\n#zd-cat-2:hover #zd-cat-txt-2 h3::after,#zd-cat-3:hover #zd-cat-txt-3 h3::after{right:0}\n\n@media (prefers-reduced-motion:no-preference){\n  @supports (animation-timeline:view()){\n    #zd-step-01,#zd-step-02,#zd-step-03,#zd-step-04,\n    #zd-oem-step-01,#zd-oem-step-02,#zd-oem-step-03,#zd-oem-step-04{\n      background-image:linear-gradient(rgb(28,26,23),rgb(28,26,23));\n      background-repeat:no-repeat;background-size:100% 2px;background-position:0 0;\n      animation:zd-draw .01s linear both;animation-timeline:view();\n      animation-range:entry 6% cover 26%;transform-origin:left center}\n  }\n}\n\n@media (prefers-reduced-motion:no-preference){\n  @supports (animation-timeline:view()){\n    #zd-hero-copy,#zd-hero-media,#zd-stat-0,#zd-stat-1,#zd-stat-2,#zd-stat-3,#zd-about-l,#zd-about-r,#zd-process-in,#zd-cat-head,#zd-cat-0,#zd-cat-1,#zd-cat-2,#zd-cat-3,#zd-why-head,#zd-why-0,#zd-why-1,#zd-why-2,#zd-why-3,#zd-why-4,#zd-why-5,#zd-cta-l,#zd-cta-r,#zd-oem-hero-in,#zd-lines-in,#zd-oem-process-in,#zd-line-0,#zd-line-1,#zd-line-2,#zd-line-3,#zd-line-4{animation:zd-rise .01s linear both;animation-timeline:view();animation-range:entry 4% cover 32%}\n    #zd-hero-media{animation-range:entry 9% cover 37%}\n    #zd-stat-1{animation-range:entry 9% cover 37%}\n    #zd-stat-2{animation-range:entry 14% cover 42%}\n    #zd-stat-3{animation-range:entry 19% cover 47%}\n    #zd-about-r{animation-range:entry 9% cover 37%}\n    #zd-cat-0{animation-range:entry 9% cover 37%}\n    #zd-cat-1{animation-range:entry 14% cover 42%}\n    #zd-cat-2{animation-range:entry 19% cover 47%}\n    #zd-cat-3{animation-range:entry 24% cover 52%}\n    #zd-why-1{animation-range:entry 9% cover 37%}\n    #zd-why-2{animation-range:entry 9% cover 37%}\n    #zd-why-3{animation-range:entry 14% cover 42%}\n    #zd-why-4{animation-range:entry 14% cover 42%}\n    #zd-why-5{animation-range:entry 19% cover 47%}\n    #zd-cta-r{animation-range:entry 9% cover 37%}\n    #zd-line-1{animation-range:entry 9% cover 37%}\n    #zd-line-2{animation-range:entry 14% cover 42%}\n    #zd-line-3{animation-range:entry 19% cover 47%}\n    #zd-line-4{animation-range:entry 24% cover 52%}\n  }\n  @supports (animation-timeline:scroll()){\n    #zd-header{animation:zd-shadow linear both;animation-timeline:scroll(root);animation-range:0 140px}\n    #zd-hero-img{animation:zd-lift linear both;animation-timeline:scroll(root);animation-range:0 640px}\n  }\n}\n</style>",
       "processShortcodes": "0"
      }
     },
@@ -770,9 +770,9 @@
                  "color": {
                   "token": "--sage"
                  },
-                 "fontSize": "12px",
+                 "fontSize": "11px",
                  "fontWeight": "700",
-                 "letterSpacing": "3px",
+                 "letterSpacing": "0.22em",
                  "fontFamily": "'Helvetica Neue',Helvetica,Arial,sans-serif"
                 }
                }
@@ -790,11 +790,12 @@
                  "color": {
                   "token": "--ink"
                  },
-                 "fontSize": "60px",
+                 "fontSize": "68px",
                  "fontWeight": "700",
-                 "lineHeight": "1.18",
-                 "letterSpacing": "1px",
-                 "marginTop": "22px"
+                 "lineHeight": "1.14",
+                 "letterSpacing": "0.02em",
+                 "marginTop": "26px",
+                 "whiteSpace": "pre-wrap"
                 }
                }
               }
@@ -1011,9 +1012,8 @@
             "_": {
              "display": "grid",
              "gridCols": "repeat(4, 1fr)",
-             "columnGap": "1px",
-             "rowGap": "1px",
-             "customStyles": "background:rgb(226,219,208);"
+             "columnGap": "0px",
+             "rowGap": "0px"
             },
             "_m": {
              "gridCols": "repeat(1, 1fr)"
@@ -1029,13 +1029,11 @@
             "style": {
              "&": {
               "_": {
-               "backgroundColor": {
-                "token": "--paper"
-               },
-               "paddingTop": "36px",
-               "paddingBottom": "36px",
-               "paddingLeft": "28px",
-               "paddingRight": "28px"
+               "paddingTop": "52px",
+               "paddingBottom": "52px",
+               "paddingLeft": "34px",
+               "paddingRight": "28px",
+               "customStyles": ""
               }
              }
             },
@@ -1050,7 +1048,8 @@
                 "_": {
                  "display": "flex",
                  "alignItems": "baseline",
-                 "columnGap": "2px"
+                 "columnGap": "3px",
+                 "customStyles": "font-variant-numeric:tabular-nums;"
                 }
                }
               },
@@ -1067,9 +1066,10 @@
                    "color": {
                     "token": "--ink"
                    },
-                   "fontSize": "46px",
+                   "fontSize": "54px",
                    "fontWeight": "700",
-                   "letterSpacing": "-1px",
+                   "letterSpacing": "-0.03em",
+                   "lineHeight": "1",
                    "fontFamily": "'Helvetica Neue',Helvetica,Arial,sans-serif"
                   }
                  }
@@ -1087,7 +1087,7 @@
                    "color": {
                     "token": "--sage"
                    },
-                   "fontSize": "18px",
+                   "fontSize": "17px",
                    "fontWeight": "700"
                   }
                  }
@@ -1108,8 +1108,9 @@
                   "token": "--muted"
                  },
                  "fontSize": "13px",
-                 "marginTop": "8px",
-                 "lineHeight": "1.7"
+                 "marginTop": "14px",
+                 "lineHeight": "1.7",
+                 "letterSpacing": "0.04em"
                 }
                }
               }
@@ -1124,13 +1125,11 @@
             "style": {
              "&": {
               "_": {
-               "backgroundColor": {
-                "token": "--paper"
-               },
-               "paddingTop": "36px",
-               "paddingBottom": "36px",
-               "paddingLeft": "28px",
-               "paddingRight": "28px"
+               "paddingTop": "52px",
+               "paddingBottom": "52px",
+               "paddingLeft": "34px",
+               "paddingRight": "28px",
+               "customStyles": "border-left:1px solid rgba(28,26,23,.14);"
               }
              }
             },
@@ -1145,7 +1144,8 @@
                 "_": {
                  "display": "flex",
                  "alignItems": "baseline",
-                 "columnGap": "2px"
+                 "columnGap": "3px",
+                 "customStyles": "font-variant-numeric:tabular-nums;"
                 }
                }
               },
@@ -1162,9 +1162,10 @@
                    "color": {
                     "token": "--ink"
                    },
-                   "fontSize": "46px",
+                   "fontSize": "54px",
                    "fontWeight": "700",
-                   "letterSpacing": "-1px",
+                   "letterSpacing": "-0.03em",
+                   "lineHeight": "1",
                    "fontFamily": "'Helvetica Neue',Helvetica,Arial,sans-serif"
                   }
                  }
@@ -1182,7 +1183,7 @@
                    "color": {
                     "token": "--sage"
                    },
-                   "fontSize": "18px",
+                   "fontSize": "17px",
                    "fontWeight": "700"
                   }
                  }
@@ -1203,8 +1204,9 @@
                   "token": "--muted"
                  },
                  "fontSize": "13px",
-                 "marginTop": "8px",
-                 "lineHeight": "1.7"
+                 "marginTop": "14px",
+                 "lineHeight": "1.7",
+                 "letterSpacing": "0.04em"
                 }
                }
               }
@@ -1219,13 +1221,11 @@
             "style": {
              "&": {
               "_": {
-               "backgroundColor": {
-                "token": "--paper"
-               },
-               "paddingTop": "36px",
-               "paddingBottom": "36px",
-               "paddingLeft": "28px",
-               "paddingRight": "28px"
+               "paddingTop": "52px",
+               "paddingBottom": "52px",
+               "paddingLeft": "34px",
+               "paddingRight": "28px",
+               "customStyles": "border-left:1px solid rgba(28,26,23,.14);"
               }
              }
             },
@@ -1240,7 +1240,8 @@
                 "_": {
                  "display": "flex",
                  "alignItems": "baseline",
-                 "columnGap": "2px"
+                 "columnGap": "3px",
+                 "customStyles": "font-variant-numeric:tabular-nums;"
                 }
                }
               },
@@ -1257,9 +1258,10 @@
                    "color": {
                     "token": "--ink"
                    },
-                   "fontSize": "46px",
+                   "fontSize": "54px",
                    "fontWeight": "700",
-                   "letterSpacing": "-1px",
+                   "letterSpacing": "-0.03em",
+                   "lineHeight": "1",
                    "fontFamily": "'Helvetica Neue',Helvetica,Arial,sans-serif"
                   }
                  }
@@ -1277,7 +1279,7 @@
                    "color": {
                     "token": "--sage"
                    },
-                   "fontSize": "18px",
+                   "fontSize": "17px",
                    "fontWeight": "700"
                   }
                  }
@@ -1298,8 +1300,9 @@
                   "token": "--muted"
                  },
                  "fontSize": "13px",
-                 "marginTop": "8px",
-                 "lineHeight": "1.7"
+                 "marginTop": "14px",
+                 "lineHeight": "1.7",
+                 "letterSpacing": "0.04em"
                 }
                }
               }
@@ -1314,13 +1317,11 @@
             "style": {
              "&": {
               "_": {
-               "backgroundColor": {
-                "token": "--paper"
-               },
-               "paddingTop": "36px",
-               "paddingBottom": "36px",
-               "paddingLeft": "28px",
-               "paddingRight": "28px"
+               "paddingTop": "52px",
+               "paddingBottom": "52px",
+               "paddingLeft": "34px",
+               "paddingRight": "28px",
+               "customStyles": "border-left:1px solid rgba(28,26,23,.14);"
               }
              }
             },
@@ -1335,7 +1336,8 @@
                 "_": {
                  "display": "flex",
                  "alignItems": "baseline",
-                 "columnGap": "2px"
+                 "columnGap": "3px",
+                 "customStyles": "font-variant-numeric:tabular-nums;"
                 }
                }
               },
@@ -1352,9 +1354,10 @@
                    "color": {
                     "token": "--ink"
                    },
-                   "fontSize": "46px",
+                   "fontSize": "54px",
                    "fontWeight": "700",
-                   "letterSpacing": "-1px",
+                   "letterSpacing": "-0.03em",
+                   "lineHeight": "1",
                    "fontFamily": "'Helvetica Neue',Helvetica,Arial,sans-serif"
                   }
                  }
@@ -1372,7 +1375,7 @@
                    "color": {
                     "token": "--sage"
                    },
-                   "fontSize": "18px",
+                   "fontSize": "17px",
                    "fontWeight": "700"
                   }
                  }
@@ -1393,8 +1396,9 @@
                   "token": "--muted"
                  },
                  "fontSize": "13px",
-                 "marginTop": "8px",
-                 "lineHeight": "1.7"
+                 "marginTop": "14px",
+                 "lineHeight": "1.7",
+                 "letterSpacing": "0.04em"
                 }
                }
               }
@@ -1491,9 +1495,9 @@
                  "color": {
                   "token": "--sage"
                  },
-                 "fontSize": "12px",
+                 "fontSize": "11px",
                  "fontWeight": "700",
-                 "letterSpacing": "3px",
+                 "letterSpacing": "0.22em",
                  "fontFamily": "'Helvetica Neue',Helvetica,Arial,sans-serif"
                 }
                }
@@ -1631,9 +1635,9 @@
              "color": {
               "token": "--sage"
              },
-             "fontSize": "12px",
+             "fontSize": "11px",
              "fontWeight": "700",
-             "letterSpacing": "3px",
+             "letterSpacing": "0.22em",
              "fontFamily": "'Helvetica Neue',Helvetica,Arial,sans-serif"
             }
            }
@@ -2062,9 +2066,9 @@
                  "color": {
                   "token": "--sage"
                  },
-                 "fontSize": "12px",
+                 "fontSize": "11px",
                  "fontWeight": "700",
-                 "letterSpacing": "3px",
+                 "letterSpacing": "0.22em",
                  "fontFamily": "'Helvetica Neue',Helvetica,Arial,sans-serif"
                 }
                }
@@ -2713,43 +2717,98 @@
         },
         "children": [
          {
-          "type": "text",
+          "type": "div",
           "data": {
-           "tagName": "h2"
+           "attrID": "zd-why-head"
           },
-          "text": "WHY ZIDANNA",
           "style": {
            "&": {
             "_": {
-             "color": {
-              "token": "--sage"
-             },
-             "fontSize": "12px",
-             "fontWeight": "700",
-             "letterSpacing": "3px",
-             "fontFamily": "'Helvetica Neue',Helvetica,Arial,sans-serif"
+             "display": "grid",
+             "gridCols": "0.42fr 0.58fr",
+             "columnGap": "56px",
+             "rowGap": "18px",
+             "alignItems": "end"
+            },
+            "_m": {
+             "gridCols": "repeat(1, 1fr)"
             }
            }
-          }
-         },
-         {
-          "type": "text",
-          "data": {
-           "tagName": "h2"
           },
-          "text": "为何选择我们",
-          "style": {
-           "&": {
-            "_": {
-             "color": {
-              "token": "--ink"
+          "children": [
+           {
+            "type": "div",
+            "data": {
+             "attrID": "zd-why-head-l"
+            },
+            "style": {
+             "&": {
+              "_": {}
+             }
+            },
+            "children": [
+             {
+              "type": "text",
+              "data": {
+               "tagName": "h2"
+              },
+              "text": "WHY ZIDANNA",
+              "style": {
+               "&": {
+                "_": {
+                 "color": {
+                  "token": "--sage"
+                 },
+                 "fontSize": "11px",
+                 "fontWeight": "700",
+                 "letterSpacing": "0.22em",
+                 "fontFamily": "'Helvetica Neue',Helvetica,Arial,sans-serif"
+                }
+               }
+              }
              },
-             "fontSize": "38px",
-             "fontWeight": "700",
-             "marginTop": "16px"
+             {
+              "type": "text",
+              "data": {
+               "tagName": "h2"
+              },
+              "text": "为何选择我们",
+              "style": {
+               "&": {
+                "_": {
+                 "color": {
+                  "token": "--ink"
+                 },
+                 "fontSize": "40px",
+                 "fontWeight": "700",
+                 "marginTop": "16px",
+                 "letterSpacing": "0.02em"
+                }
+               }
+              }
+             }
+            ]
+           },
+           {
+            "type": "text",
+            "data": {
+             "tagName": "p"
+            },
+            "text": "不是每个环节都需要重新发明。已经稳定的部分交给我们，品牌把力气花在真正需要差异化的地方。",
+            "style": {
+             "&": {
+              "_": {
+               "color": {
+                "token": "--muted"
+               },
+               "fontSize": "15px",
+               "lineHeight": "2",
+               "maxWidth": "26em"
+              }
+             }
             }
            }
-          }
+          ]
          },
          {
           "type": "div",
@@ -2760,11 +2819,10 @@
            "&": {
             "_": {
              "display": "grid",
-             "gridCols": "repeat(3, 1fr)",
-             "columnGap": "1px",
-             "rowGap": "1px",
-             "marginTop": "46px",
-             "customStyles": "background:rgb(226,219,208);"
+             "gridCols": "repeat(2, 1fr)",
+             "columnGap": "0px",
+             "rowGap": "0px",
+             "marginTop": "52px"
             },
             "_m": {
              "gridCols": "repeat(1, 1fr)"
@@ -2780,21 +2838,15 @@
             "style": {
              "&": {
               "_": {
-               "backgroundColor": {
-                "token": "--paper"
-               },
-               "paddingTop": "34px",
-               "paddingBottom": "34px",
-               "paddingLeft": "30px",
-               "paddingRight": "30px",
+               "display": "grid",
+               "gridCols": "auto 1fr",
+               "columnGap": "26px",
+               "paddingTop": "30px",
+               "paddingBottom": "30px",
+               "paddingRight": "48px",
+               "paddingLeft": "0px",
+               "customStyles": "border-top:1px solid rgba(28,26,23,.14);",
                "transitionAll": "220ms ease"
-              }
-             },
-             "hover": {
-              "_": {
-               "backgroundColor": {
-                "token": "--surface"
-               }
               }
              }
             },
@@ -2802,39 +2854,74 @@
              {
               "type": "text",
               "data": {
-               "tagName": "h3"
+               "tagName": "p"
               },
-              "text": "配方稳定",
+              "text": "01",
               "style": {
                "&": {
                 "_": {
                  "color": {
-                  "token": "--ink"
+                  "token": "--sage"
                  },
-                 "fontSize": "18px",
-                 "fontWeight": "700"
+                 "fontSize": "12px",
+                 "fontWeight": "700",
+                 "fontFamily": "'Helvetica Neue',Helvetica,Arial,sans-serif",
+                 "letterSpacing": "0.1em",
+                 "customStyles": "padding-top:5px;"
                 }
                }
               }
              },
              {
-              "type": "text",
+              "type": "div",
               "data": {
-               "tagName": "p"
+               "attrID": "zd-why-t-0"
               },
-              "text": "上千支已量产配方作为基础，不必从零开始试错。",
               "style": {
                "&": {
-                "_": {
-                 "color": {
-                  "token": "--muted"
-                 },
-                 "fontSize": "14px",
-                 "marginTop": "10px",
-                 "lineHeight": "1.95"
+                "_": {}
+               }
+              },
+              "children": [
+               {
+                "type": "text",
+                "data": {
+                 "tagName": "h3"
+                },
+                "text": "配方稳定",
+                "style": {
+                 "&": {
+                  "_": {
+                   "color": {
+                    "token": "--ink"
+                   },
+                   "fontSize": "19px",
+                   "fontWeight": "700"
+                  }
+                 }
+                }
+               },
+               {
+                "type": "text",
+                "data": {
+                 "tagName": "p"
+                },
+                "text": "上千支已量产配方作为基础，不必从零开始试错。",
+                "style": {
+                 "&": {
+                  "_": {
+                   "color": {
+                    "token": "--muted"
+                   },
+                   "fontSize": "14px",
+                   "marginTop": "9px",
+                   "lineHeight": "1.95",
+                   "maxWidth": "24em"
+                  }
+                 }
                 }
                }
-              }
+              ]
              }
             ]
            },
@@ -2846,21 +2933,15 @@
             "style": {
              "&": {
               "_": {
-               "backgroundColor": {
-                "token": "--paper"
-               },
-               "paddingTop": "34px",
-               "paddingBottom": "34px",
-               "paddingLeft": "30px",
-               "paddingRight": "30px",
+               "display": "grid",
+               "gridCols": "auto 1fr",
+               "columnGap": "26px",
+               "paddingTop": "30px",
+               "paddingBottom": "30px",
+               "paddingRight": "0px",
+               "paddingLeft": "48px",
+               "customStyles": "border-top:1px solid rgba(28,26,23,.14);border-left:1px solid rgba(28,26,23,.14);",
                "transitionAll": "220ms ease"
-              }
-             },
-             "hover": {
-              "_": {
-               "backgroundColor": {
-                "token": "--surface"
-               }
               }
              }
             },
@@ -2868,39 +2949,74 @@
              {
               "type": "text",
               "data": {
-               "tagName": "h3"
+               "tagName": "p"
               },
-              "text": "原料广度",
+              "text": "02",
               "style": {
                "&": {
                 "_": {
                  "color": {
-                  "token": "--ink"
+                  "token": "--sage"
                  },
-                 "fontSize": "18px",
-                 "fontWeight": "700"
+                 "fontSize": "12px",
+                 "fontWeight": "700",
+                 "fontFamily": "'Helvetica Neue',Helvetica,Arial,sans-serif",
+                 "letterSpacing": "0.1em",
+                 "customStyles": "padding-top:5px;"
                 }
                }
               }
              },
              {
-              "type": "text",
+              "type": "div",
               "data": {
-               "tagName": "p"
+               "attrID": "zd-why-t-1"
               },
-              "text": "五千种以上原物料可选，特殊诉求也找得到对应方案。",
               "style": {
                "&": {
-                "_": {
-                 "color": {
-                  "token": "--muted"
-                 },
-                 "fontSize": "14px",
-                 "marginTop": "10px",
-                 "lineHeight": "1.95"
+                "_": {}
+               }
+              },
+              "children": [
+               {
+                "type": "text",
+                "data": {
+                 "tagName": "h3"
+                },
+                "text": "原料广度",
+                "style": {
+                 "&": {
+                  "_": {
+                   "color": {
+                    "token": "--ink"
+                   },
+                   "fontSize": "19px",
+                   "fontWeight": "700"
+                  }
+                 }
+                }
+               },
+               {
+                "type": "text",
+                "data": {
+                 "tagName": "p"
+                },
+                "text": "五千种以上原物料可选，特殊诉求也找得到对应方案。",
+                "style": {
+                 "&": {
+                  "_": {
+                   "color": {
+                    "token": "--muted"
+                   },
+                   "fontSize": "14px",
+                   "marginTop": "9px",
+                   "lineHeight": "1.95",
+                   "maxWidth": "24em"
+                  }
+                 }
                 }
                }
-              }
+              ]
              }
             ]
            },
@@ -2912,21 +3028,15 @@
             "style": {
              "&": {
               "_": {
-               "backgroundColor": {
-                "token": "--paper"
-               },
-               "paddingTop": "34px",
-               "paddingBottom": "34px",
-               "paddingLeft": "30px",
-               "paddingRight": "30px",
+               "display": "grid",
+               "gridCols": "auto 1fr",
+               "columnGap": "26px",
+               "paddingTop": "30px",
+               "paddingBottom": "30px",
+               "paddingRight": "48px",
+               "paddingLeft": "0px",
+               "customStyles": "border-top:1px solid rgba(28,26,23,.14);",
                "transitionAll": "220ms ease"
-              }
-             },
-             "hover": {
-              "_": {
-               "backgroundColor": {
-                "token": "--surface"
-               }
               }
              }
             },
@@ -2934,39 +3044,74 @@
              {
               "type": "text",
               "data": {
-               "tagName": "h3"
+               "tagName": "p"
               },
-              "text": "通路经验",
+              "text": "03",
               "style": {
                "&": {
                 "_": {
                  "color": {
-                  "token": "--ink"
+                  "token": "--sage"
                  },
-                 "fontSize": "18px",
-                 "fontWeight": "700"
+                 "fontSize": "12px",
+                 "fontWeight": "700",
+                 "fontFamily": "'Helvetica Neue',Helvetica,Arial,sans-serif",
+                 "letterSpacing": "0.1em",
+                 "customStyles": "padding-top:5px;"
                 }
                }
               }
              },
              {
-              "type": "text",
+              "type": "div",
               "data": {
-               "tagName": "p"
+               "attrID": "zd-why-t-2"
               },
-              "text": "服务过上百个品牌，熟悉电商、专柜与沙龙各自的规格要求。",
               "style": {
                "&": {
-                "_": {
-                 "color": {
-                  "token": "--muted"
-                 },
-                 "fontSize": "14px",
-                 "marginTop": "10px",
-                 "lineHeight": "1.95"
+                "_": {}
+               }
+              },
+              "children": [
+               {
+                "type": "text",
+                "data": {
+                 "tagName": "h3"
+                },
+                "text": "通路经验",
+                "style": {
+                 "&": {
+                  "_": {
+                   "color": {
+                    "token": "--ink"
+                   },
+                   "fontSize": "19px",
+                   "fontWeight": "700"
+                  }
+                 }
+                }
+               },
+               {
+                "type": "text",
+                "data": {
+                 "tagName": "p"
+                },
+                "text": "服务过上百个品牌，熟悉电商、专柜与沙龙各自的规格要求。",
+                "style": {
+                 "&": {
+                  "_": {
+                   "color": {
+                    "token": "--muted"
+                   },
+                   "fontSize": "14px",
+                   "marginTop": "9px",
+                   "lineHeight": "1.95",
+                   "maxWidth": "24em"
+                  }
+                 }
                 }
                }
-              }
+              ]
              }
             ]
            },
@@ -2978,21 +3123,15 @@
             "style": {
              "&": {
               "_": {
-               "backgroundColor": {
-                "token": "--paper"
-               },
-               "paddingTop": "34px",
-               "paddingBottom": "34px",
-               "paddingLeft": "30px",
-               "paddingRight": "30px",
+               "display": "grid",
+               "gridCols": "auto 1fr",
+               "columnGap": "26px",
+               "paddingTop": "30px",
+               "paddingBottom": "30px",
+               "paddingRight": "0px",
+               "paddingLeft": "48px",
+               "customStyles": "border-top:1px solid rgba(28,26,23,.14);border-left:1px solid rgba(28,26,23,.14);",
                "transitionAll": "220ms ease"
-              }
-             },
-             "hover": {
-              "_": {
-               "backgroundColor": {
-                "token": "--surface"
-               }
               }
              }
             },
@@ -3000,39 +3139,74 @@
              {
               "type": "text",
               "data": {
-               "tagName": "h3"
+               "tagName": "p"
               },
-              "text": "肤感优化",
+              "text": "04",
               "style": {
                "&": {
                 "_": {
                  "color": {
-                  "token": "--ink"
+                  "token": "--sage"
                  },
-                 "fontSize": "18px",
-                 "fontWeight": "700"
+                 "fontSize": "12px",
+                 "fontWeight": "700",
+                 "fontFamily": "'Helvetica Neue',Helvetica,Arial,sans-serif",
+                 "letterSpacing": "0.1em",
+                 "customStyles": "padding-top:5px;"
                 }
                }
               }
              },
              {
-              "type": "text",
+              "type": "div",
               "data": {
-               "tagName": "p"
+               "attrID": "zd-why-t-3"
               },
-              "text": "重视实际使用感受，小样阶段就把质地调到位。",
               "style": {
                "&": {
-                "_": {
-                 "color": {
-                  "token": "--muted"
-                 },
-                 "fontSize": "14px",
-                 "marginTop": "10px",
-                 "lineHeight": "1.95"
+                "_": {}
+               }
+              },
+              "children": [
+               {
+                "type": "text",
+                "data": {
+                 "tagName": "h3"
+                },
+                "text": "肤感优化",
+                "style": {
+                 "&": {
+                  "_": {
+                   "color": {
+                    "token": "--ink"
+                   },
+                   "fontSize": "19px",
+                   "fontWeight": "700"
+                  }
+                 }
+                }
+               },
+               {
+                "type": "text",
+                "data": {
+                 "tagName": "p"
+                },
+                "text": "重视实际使用感受，小样阶段就把质地调到位。",
+                "style": {
+                 "&": {
+                  "_": {
+                   "color": {
+                    "token": "--muted"
+                   },
+                   "fontSize": "14px",
+                   "marginTop": "9px",
+                   "lineHeight": "1.95",
+                   "maxWidth": "24em"
+                  }
+                 }
                 }
                }
-              }
+              ]
              }
             ]
            },
@@ -3044,21 +3218,15 @@
             "style": {
              "&": {
               "_": {
-               "backgroundColor": {
-                "token": "--paper"
-               },
-               "paddingTop": "34px",
-               "paddingBottom": "34px",
-               "paddingLeft": "30px",
-               "paddingRight": "30px",
+               "display": "grid",
+               "gridCols": "auto 1fr",
+               "columnGap": "26px",
+               "paddingTop": "30px",
+               "paddingBottom": "30px",
+               "paddingRight": "48px",
+               "paddingLeft": "0px",
+               "customStyles": "border-top:1px solid rgba(28,26,23,.14);",
                "transitionAll": "220ms ease"
-              }
-             },
-             "hover": {
-              "_": {
-               "backgroundColor": {
-                "token": "--surface"
-               }
               }
              }
             },
@@ -3066,39 +3234,74 @@
              {
               "type": "text",
               "data": {
-               "tagName": "h3"
+               "tagName": "p"
               },
-              "text": "两岸资源",
+              "text": "05",
               "style": {
                "&": {
                 "_": {
                  "color": {
-                  "token": "--ink"
+                  "token": "--sage"
                  },
-                 "fontSize": "18px",
-                 "fontWeight": "700"
+                 "fontSize": "12px",
+                 "fontWeight": "700",
+                 "fontFamily": "'Helvetica Neue',Helvetica,Arial,sans-serif",
+                 "letterSpacing": "0.1em",
+                 "customStyles": "padding-top:5px;"
                 }
                }
               }
              },
              {
-              "type": "text",
+              "type": "div",
               "data": {
-               "tagName": "p"
+               "attrID": "zd-why-t-4"
               },
-              "text": "台湾母厂六十年制造经验，与南京厂区共用技术与品管标准。",
               "style": {
                "&": {
-                "_": {
-                 "color": {
-                  "token": "--muted"
-                 },
-                 "fontSize": "14px",
-                 "marginTop": "10px",
-                 "lineHeight": "1.95"
+                "_": {}
+               }
+              },
+              "children": [
+               {
+                "type": "text",
+                "data": {
+                 "tagName": "h3"
+                },
+                "text": "两岸资源",
+                "style": {
+                 "&": {
+                  "_": {
+                   "color": {
+                    "token": "--ink"
+                   },
+                   "fontSize": "19px",
+                   "fontWeight": "700"
+                  }
+                 }
+                }
+               },
+               {
+                "type": "text",
+                "data": {
+                 "tagName": "p"
+                },
+                "text": "台湾母厂六十年制造经验，与南京厂区共用技术与品管标准。",
+                "style": {
+                 "&": {
+                  "_": {
+                   "color": {
+                    "token": "--muted"
+                   },
+                   "fontSize": "14px",
+                   "marginTop": "9px",
+                   "lineHeight": "1.95",
+                   "maxWidth": "24em"
+                  }
+                 }
                 }
                }
-              }
+              ]
              }
             ]
            },
@@ -3110,21 +3313,15 @@
             "style": {
              "&": {
               "_": {
-               "backgroundColor": {
-                "token": "--paper"
-               },
-               "paddingTop": "34px",
-               "paddingBottom": "34px",
-               "paddingLeft": "30px",
-               "paddingRight": "30px",
+               "display": "grid",
+               "gridCols": "auto 1fr",
+               "columnGap": "26px",
+               "paddingTop": "30px",
+               "paddingBottom": "30px",
+               "paddingRight": "0px",
+               "paddingLeft": "48px",
+               "customStyles": "border-top:1px solid rgba(28,26,23,.14);border-left:1px solid rgba(28,26,23,.14);",
                "transitionAll": "220ms ease"
-              }
-             },
-             "hover": {
-              "_": {
-               "backgroundColor": {
-                "token": "--surface"
-               }
               }
              }
             },
@@ -3132,39 +3329,74 @@
              {
               "type": "text",
               "data": {
-               "tagName": "h3"
+               "tagName": "p"
               },
-              "text": "一站到底",
+              "text": "06",
               "style": {
                "&": {
                 "_": {
                  "color": {
-                  "token": "--ink"
+                  "token": "--sage"
                  },
-                 "fontSize": "18px",
-                 "fontWeight": "700"
+                 "fontSize": "12px",
+                 "fontWeight": "700",
+                 "fontFamily": "'Helvetica Neue',Helvetica,Arial,sans-serif",
+                 "letterSpacing": "0.1em",
+                 "customStyles": "padding-top:5px;"
                 }
                }
               }
              },
              {
-              "type": "text",
+              "type": "div",
               "data": {
-               "tagName": "p"
+               "attrID": "zd-why-t-5"
               },
-              "text": "从品牌规划、配方、制造到包材，单一窗口负责到底。",
               "style": {
                "&": {
-                "_": {
-                 "color": {
-                  "token": "--muted"
-                 },
-                 "fontSize": "14px",
-                 "marginTop": "10px",
-                 "lineHeight": "1.95"
+                "_": {}
+               }
+              },
+              "children": [
+               {
+                "type": "text",
+                "data": {
+                 "tagName": "h3"
+                },
+                "text": "一站到底",
+                "style": {
+                 "&": {
+                  "_": {
+                   "color": {
+                    "token": "--ink"
+                   },
+                   "fontSize": "19px",
+                   "fontWeight": "700"
+                  }
+                 }
+                }
+               },
+               {
+                "type": "text",
+                "data": {
+                 "tagName": "p"
+                },
+                "text": "从品牌规划、配方、制造到包材，单一窗口负责到底。",
+                "style": {
+                 "&": {
+                  "_": {
+                   "color": {
+                    "token": "--muted"
+                   },
+                   "fontSize": "14px",
+                   "marginTop": "9px",
+                   "lineHeight": "1.95",
+                   "maxWidth": "24em"
+                  }
+                 }
                 }
                }
-              }
+              ]
              }
             ]
            }
@@ -3185,8 +3417,8 @@
          "backgroundColor": {
           "token": "--ink"
          },
-         "paddingTop": "96px",
-         "paddingBottom": "96px",
+         "paddingTop": "104px",
+         "paddingBottom": "104px",
          "paddingLeft": "48px",
          "paddingRight": "48px",
          "fontFamily": "'PingFang SC','Hiragino Sans GB','Microsoft YaHei','Noto Sans SC',sans-serif"
@@ -3217,91 +3449,208 @@
         },
         "children": [
          {
-          "type": "text",
-          "data": {
-           "tagName": "h2"
-          },
-          "text": "每个品牌都是从第一支样品开始的",
-          "style": {
-           "&": {
-            "_": {
-             "color": {
-              "token": "--paper"
-             },
-             "fontSize": "34px",
-             "fontWeight": "700",
-             "lineHeight": "1.5",
-             "textAlign": "center"
-            }
-           }
-          }
-         },
-         {
-          "type": "text",
-          "data": {
-           "tagName": "p"
-          },
-          "text": "把想法、预算与上市时间告诉我们，我们回覆可行的配方方向与打样时程。",
-          "style": {
-           "&": {
-            "_": {
-             "color": "rgb(168,160,150)",
-             "fontSize": "16px",
-             "marginTop": "16px",
-             "textAlign": "center",
-             "lineHeight": "2"
-            }
-           }
-          }
-         },
-         {
           "type": "div",
           "data": {
-           "attrID": "zd-cta-btn"
+           "attrID": "zd-cta-row"
           },
           "style": {
            "&": {
             "_": {
-             "display": "flex",
-             "justifyContent": "center",
-             "marginTop": "32px"
+             "display": "grid",
+             "gridCols": "0.46fr 0.54fr",
+             "columnGap": "64px",
+             "rowGap": "34px",
+             "alignItems": "center"
+            },
+            "_m": {
+             "gridCols": "repeat(1, 1fr)"
             }
            }
           },
           "children": [
            {
-            "type": "button",
+            "type": "div",
             "data": {
-             "attrID": "zd-cta-3",
-             "url": "mailto:zidnana@163.com"
+             "attrID": "zd-cta-l"
             },
             "style": {
              "&": {
-              "_": {
-               "backgroundColor": {
-                "token": "--sage"
-               },
-               "color": "rgb(250,248,244)",
-               "fontSize": "15px",
-               "paddingTop": "16px",
-               "paddingBottom": "16px",
-               "paddingLeft": "38px",
-               "paddingRight": "38px",
-               "radius": "2px",
-               "cursor": "pointer",
-               "transitionAll": "200ms ease"
+              "_": {}
+             }
+            },
+            "children": [
+             {
+              "type": "text",
+              "data": {
+               "tagName": "h2"
+              },
+              "text": "START A PROJECT",
+              "style": {
+               "&": {
+                "_": {
+                 "color": {
+                  "token": "--sage"
+                 },
+                 "fontSize": "11px",
+                 "fontWeight": "700",
+                 "letterSpacing": "0.22em",
+                 "fontFamily": "'Helvetica Neue',Helvetica,Arial,sans-serif"
+                }
+               }
               }
              },
-             "hover": {
-              "_": {
-               "backgroundColor": "rgb(250,248,244)",
-               "color": {
-                "token": "--ink"
+             {
+              "type": "text",
+              "data": {
+               "tagName": "h2"
+              },
+              "text": "每个品牌\n都是从第一支样品开始的",
+              "style": {
+               "&": {
+                "_": {
+                 "color": {
+                  "token": "--paper"
+                 },
+                 "fontSize": "34px",
+                 "fontWeight": "700",
+                 "lineHeight": "1.45",
+                 "marginTop": "18px",
+                 "letterSpacing": "0.02em",
+                 "whiteSpace": "pre-wrap"
+                }
                }
               }
              }
+            ]
+           },
+           {
+            "type": "div",
+            "data": {
+             "attrID": "zd-cta-r"
             },
-            "text": "开始打造"
+            "style": {
+             "&": {
+              "_": {}
+             }
+            },
+            "children": [
+             {
+              "type": "text",
+              "data": {
+               "tagName": "p"
+              },
+              "text": "把想法、预算与上市时间告诉我们，我们回覆可行的配方方向与打样时程。",
+              "style": {
+               "&": {
+                "_": {
+                 "color": "rgb(168,160,150)",
+                 "fontSize": "16px",
+                 "lineHeight": "2.1",
+                 "maxWidth": "26em"
+                }
+               }
+              }
+             },
+             {
+              "type": "button",
+              "data": {
+               "attrID": "zd-cta-mail",
+               "url": "mailto:zidnana@163.com"
+              },
+              "style": {
+               "&": {
+                "_": {
+                 "backgroundColor": "rgba(0,0,0,0)",
+                 "color": {
+                  "token": "--paper"
+                 },
+                 "fontSize": "30px",
+                 "fontWeight": "700",
+                 "fontFamily": "'Helvetica Neue',Helvetica,Arial,sans-serif",
+                 "marginTop": "26px",
+                 "cursor": "pointer",
+                 "letterSpacing": "-0.01em",
+                 "transitionAll": "200ms ease"
+                }
+               },
+               "hover": {
+                "_": {
+                 "color": {
+                  "token": "--sage"
+                 }
+                }
+               }
+              },
+              "text": "zidnana@163.com"
+             },
+             {
+              "type": "div",
+              "data": {
+               "attrID": "zd-cta-rule"
+              },
+              "style": {
+               "&": {
+                "_": {
+                 "height": "1px",
+                 "width": "100%",
+                 "marginTop": "18px",
+                 "backgroundColor": {
+                  "token": "--line"
+                 }
+                }
+               }
+              }
+             },
+             {
+              "type": "div",
+              "data": {
+               "attrID": "zd-cta-meta"
+              },
+              "style": {
+               "&": {
+                "_": {
+                 "display": "flex",
+                 "columnGap": "34px",
+                 "marginTop": "18px",
+                 "flexWrap": "wrap"
+                }
+               }
+              },
+              "children": [
+               {
+                "type": "text",
+                "data": {
+                 "tagName": "p"
+                },
+                "text": "电话 025-56213122",
+                "style": {
+                 "&": {
+                  "_": {
+                   "color": "rgb(140,133,124)",
+                   "fontSize": "13px",
+                   "fontFamily": "'Helvetica Neue',Helvetica,Arial,sans-serif"
+                  }
+                 }
+                }
+               },
+               {
+                "type": "text",
+                "data": {
+                 "tagName": "p"
+                },
+                "text": "南京溧水经济开发区",
+                "style": {
+                 "&": {
+                  "_": {
+                   "color": "rgb(140,133,124)",
+                   "fontSize": "13px"
+                  }
+                 }
+                }
+               }
+              ]
+             }
+            ]
            }
           ]
          }
@@ -3376,9 +3725,9 @@
              "color": {
               "token": "--sage"
              },
-             "fontSize": "12px",
+             "fontSize": "11px",
              "fontWeight": "700",
-             "letterSpacing": "3px",
+             "letterSpacing": "0.22em",
              "fontFamily": "'Helvetica Neue',Helvetica,Arial,sans-serif"
             }
            }
@@ -3489,9 +3838,9 @@
              "color": {
               "token": "--sage"
              },
-             "fontSize": "12px",
+             "fontSize": "11px",
              "fontWeight": "700",
-             "letterSpacing": "3px",
+             "letterSpacing": "0.22em",
              "fontFamily": "'Helvetica Neue',Helvetica,Arial,sans-serif"
             }
            }
@@ -3899,9 +4248,9 @@
              "color": {
               "token": "--sage"
              },
-             "fontSize": "12px",
+             "fontSize": "11px",
              "fontWeight": "700",
-             "letterSpacing": "3px",
+             "letterSpacing": "0.22em",
              "fontFamily": "'Helvetica Neue',Helvetica,Arial,sans-serif"
             }
            }
@@ -4259,8 +4608,8 @@
          "backgroundColor": {
           "token": "--ink"
          },
-         "paddingTop": "96px",
-         "paddingBottom": "96px",
+         "paddingTop": "104px",
+         "paddingBottom": "104px",
          "paddingLeft": "48px",
          "paddingRight": "48px",
          "fontFamily": "'PingFang SC','Hiragino Sans GB','Microsoft YaHei','Noto Sans SC',sans-serif"
@@ -4291,91 +4640,208 @@
         },
         "children": [
          {
-          "type": "text",
-          "data": {
-           "tagName": "h2"
-          },
-          "text": "每个品牌都是从第一支样品开始的",
-          "style": {
-           "&": {
-            "_": {
-             "color": {
-              "token": "--paper"
-             },
-             "fontSize": "34px",
-             "fontWeight": "700",
-             "lineHeight": "1.5",
-             "textAlign": "center"
-            }
-           }
-          }
-         },
-         {
-          "type": "text",
-          "data": {
-           "tagName": "p"
-          },
-          "text": "把想法、预算与上市时间告诉我们，我们回覆可行的配方方向与打样时程。",
-          "style": {
-           "&": {
-            "_": {
-             "color": "rgb(168,160,150)",
-             "fontSize": "16px",
-             "marginTop": "16px",
-             "textAlign": "center",
-             "lineHeight": "2"
-            }
-           }
-          }
-         },
-         {
           "type": "div",
           "data": {
-           "attrID": "zd-cta-btn"
+           "attrID": "zd-cta-row"
           },
           "style": {
            "&": {
             "_": {
-             "display": "flex",
-             "justifyContent": "center",
-             "marginTop": "32px"
+             "display": "grid",
+             "gridCols": "0.46fr 0.54fr",
+             "columnGap": "64px",
+             "rowGap": "34px",
+             "alignItems": "center"
+            },
+            "_m": {
+             "gridCols": "repeat(1, 1fr)"
             }
            }
           },
           "children": [
            {
-            "type": "button",
+            "type": "div",
             "data": {
-             "attrID": "zd-cta-3",
-             "url": "mailto:zidnana@163.com"
+             "attrID": "zd-cta-l"
             },
             "style": {
              "&": {
-              "_": {
-               "backgroundColor": {
-                "token": "--sage"
-               },
-               "color": "rgb(250,248,244)",
-               "fontSize": "15px",
-               "paddingTop": "16px",
-               "paddingBottom": "16px",
-               "paddingLeft": "38px",
-               "paddingRight": "38px",
-               "radius": "2px",
-               "cursor": "pointer",
-               "transitionAll": "200ms ease"
+              "_": {}
+             }
+            },
+            "children": [
+             {
+              "type": "text",
+              "data": {
+               "tagName": "h2"
+              },
+              "text": "START A PROJECT",
+              "style": {
+               "&": {
+                "_": {
+                 "color": {
+                  "token": "--sage"
+                 },
+                 "fontSize": "11px",
+                 "fontWeight": "700",
+                 "letterSpacing": "0.22em",
+                 "fontFamily": "'Helvetica Neue',Helvetica,Arial,sans-serif"
+                }
+               }
               }
              },
-             "hover": {
-              "_": {
-               "backgroundColor": "rgb(250,248,244)",
-               "color": {
-                "token": "--ink"
+             {
+              "type": "text",
+              "data": {
+               "tagName": "h2"
+              },
+              "text": "每个品牌\n都是从第一支样品开始的",
+              "style": {
+               "&": {
+                "_": {
+                 "color": {
+                  "token": "--paper"
+                 },
+                 "fontSize": "34px",
+                 "fontWeight": "700",
+                 "lineHeight": "1.45",
+                 "marginTop": "18px",
+                 "letterSpacing": "0.02em",
+                 "whiteSpace": "pre-wrap"
+                }
                }
               }
              }
+            ]
+           },
+           {
+            "type": "div",
+            "data": {
+             "attrID": "zd-cta-r"
             },
-            "text": "开始打造"
+            "style": {
+             "&": {
+              "_": {}
+             }
+            },
+            "children": [
+             {
+              "type": "text",
+              "data": {
+               "tagName": "p"
+              },
+              "text": "把想法、预算与上市时间告诉我们，我们回覆可行的配方方向与打样时程。",
+              "style": {
+               "&": {
+                "_": {
+                 "color": "rgb(168,160,150)",
+                 "fontSize": "16px",
+                 "lineHeight": "2.1",
+                 "maxWidth": "26em"
+                }
+               }
+              }
+             },
+             {
+              "type": "button",
+              "data": {
+               "attrID": "zd-cta-mail",
+               "url": "mailto:zidnana@163.com"
+              },
+              "style": {
+               "&": {
+                "_": {
+                 "backgroundColor": "rgba(0,0,0,0)",
+                 "color": {
+                  "token": "--paper"
+                 },
+                 "fontSize": "30px",
+                 "fontWeight": "700",
+                 "fontFamily": "'Helvetica Neue',Helvetica,Arial,sans-serif",
+                 "marginTop": "26px",
+                 "cursor": "pointer",
+                 "letterSpacing": "-0.01em",
+                 "transitionAll": "200ms ease"
+                }
+               },
+               "hover": {
+                "_": {
+                 "color": {
+                  "token": "--sage"
+                 }
+                }
+               }
+              },
+              "text": "zidnana@163.com"
+             },
+             {
+              "type": "div",
+              "data": {
+               "attrID": "zd-cta-rule"
+              },
+              "style": {
+               "&": {
+                "_": {
+                 "height": "1px",
+                 "width": "100%",
+                 "marginTop": "18px",
+                 "backgroundColor": {
+                  "token": "--line"
+                 }
+                }
+               }
+              }
+             },
+             {
+              "type": "div",
+              "data": {
+               "attrID": "zd-cta-meta"
+              },
+              "style": {
+               "&": {
+                "_": {
+                 "display": "flex",
+                 "columnGap": "34px",
+                 "marginTop": "18px",
+                 "flexWrap": "wrap"
+                }
+               }
+              },
+              "children": [
+               {
+                "type": "text",
+                "data": {
+                 "tagName": "p"
+                },
+                "text": "电话 025-56213122",
+                "style": {
+                 "&": {
+                  "_": {
+                   "color": "rgb(140,133,124)",
+                   "fontSize": "13px",
+                   "fontFamily": "'Helvetica Neue',Helvetica,Arial,sans-serif"
+                  }
+                 }
+                }
+               },
+               {
+                "type": "text",
+                "data": {
+                 "tagName": "p"
+                },
+                "text": "南京溧水经济开发区",
+                "style": {
+                 "&": {
+                  "_": {
+                   "color": "rgb(140,133,124)",
+                   "fontSize": "13px"
+                  }
+                 }
+                }
+               }
+              ]
+             }
+            ]
            }
           ]
          }

@@ -80,9 +80,27 @@ def wrap(attr, children, maxw="1120px", **extra):
             "children": children}
 
 
+def ml(tag, text, **st):
+    """A heading whose own line breaks are honoured.
+
+    A "\\n" in the text is otherwise collapsed to a space and the browser breaks
+    wherever it likes - which in Chinese means splitting a compound mid-word. The
+    first cut of this page read 用匠心深耕 护肤品代 / 加工, breaking 代加工 in half.
+    """
+    st.setdefault("whiteSpace", "pre-wrap")
+    return T(tag, text, **st)
+
+
 def eyebrow(text, attr):
-    return T("h2", text, color={"token": "--sage"}, fontSize="12px", fontWeight="700",
-             letterSpacing="3px", fontFamily=LATIN)
+    return T("h2", text, color={"token": "--sage"}, fontSize="11px", fontWeight="700",
+             letterSpacing="0.22em", fontFamily=LATIN)
+
+
+def hair(attr, color="--line", top="0px"):
+    """A one-pixel rule. Cheaper than a border and it never inherits a radius."""
+    return {"type": "div", "data": {"attrID": attr},
+            "style": {"&": {"_": {"height": "1px", "width": "100%", "marginTop": top,
+                                  "backgroundColor": {"token": color}}}}}
 
 
 def clean(n):
@@ -111,9 +129,11 @@ REVEALS = [
     ("zd-about-l", 0), ("zd-about-r", 1),
     ("zd-process-in", 0),
     ("zd-cat-head", 0), ("zd-cat-0", 1), ("zd-cat-1", 2), ("zd-cat-2", 3), ("zd-cat-3", 4),
-    ("zd-why-0", 0), ("zd-why-1", 1), ("zd-why-2", 2),
-    ("zd-why-3", 1), ("zd-why-4", 2), ("zd-why-5", 3),
-    ("zd-cta-in", 0),
+    ("zd-why-head", 0),
+    ("zd-why-0", 0), ("zd-why-1", 1),
+    ("zd-why-2", 1), ("zd-why-3", 2),
+    ("zd-why-4", 2), ("zd-why-5", 3),
+    ("zd-cta-l", 0), ("zd-cta-r", 1),
     ("zd-oem-hero-in", 0), ("zd-lines-in", 0), ("zd-oem-process-in", 0),
     ("zd-line-0", 0), ("zd-line-1", 1), ("zd-line-2", 2), ("zd-line-3", 3), ("zd-line-4", 4),
 ]
@@ -294,8 +314,9 @@ HOME = section("zd-hero", [wrap("zd-hero-in", [
      "children": [
          box("zd-hero-copy", {}, [
              eyebrow("OEM / ODM SKINCARE MANUFACTURING", "zd-hero-eyebrow"),
-             T("h1", "用匠心深耕\n护肤品代加工", color={"token": "--ink"}, fontSize="60px",
-               fontWeight="700", lineHeight="1.18", letterSpacing="1px", marginTop="22px"),
+             ml("h1", "用匠心深耕\n护肤品代加工", color={"token": "--ink"}, fontSize="68px",
+                fontWeight="700", lineHeight="1.14", letterSpacing="0.02em",
+                marginTop="26px"),
              T("p", "从品牌定位、配方开发到量产出货，姿丹娜在南京溧水的自有厂区，"
                     "为护肤品牌承接完整的 OEM / ODM 制造。",
                color={"token": "--muted"}, fontSize="17px", lineHeight="2", marginTop="24px",
@@ -338,22 +359,26 @@ HOME = section("zd-hero", [wrap("zd-hero-in", [
 ])], pt="72px", pb="96px")
 
 STAT_BAND = section("zd-stats", [wrap("zd-stats-in", [
-    grid("zd-stats-grid", 4, "1px", [
+    grid("zd-stats-grid", 4, "0px", [
         box("zd-stat-%d" % i,
-            {"backgroundColor": {"token": "--paper"}, "paddingTop": "36px",
-             "paddingBottom": "36px", "paddingLeft": "28px", "paddingRight": "28px"},
+            {"paddingTop": "52px", "paddingBottom": "52px",
+             "paddingLeft": "34px", "paddingRight": "28px",
+             # a hairline between cells, not around them: the first cell has none,
+             # so the band reads as one object rather than four boxes
+             "customStyles": ("" if i == 0 else "border-left:1px solid rgba(28,26,23,.14);")},
             [{"type": "div", "data": {"attrID": "zd-stat-n-%d" % i},
               "style": {"&": {"_": {"display": "flex", "alignItems": "baseline",
-                                    "columnGap": "2px"}}},
+                                    "columnGap": "3px",
+                                    "customStyles": "font-variant-numeric:tabular-nums;"}}},
               "children": [
-                  T("h3", n, color={"token": "--ink"}, fontSize="46px", fontWeight="700",
-                    letterSpacing="-1px", fontFamily=LATIN),
-                  T("p", unit, color={"token": "--sage"}, fontSize="18px", fontWeight="700"),
+                  T("h3", n, color={"token": "--ink"}, fontSize="54px", fontWeight="700",
+                    letterSpacing="-0.03em", lineHeight="1", fontFamily=LATIN),
+                  T("p", unit, color={"token": "--sage"}, fontSize="17px", fontWeight="700"),
               ]},
-             T("p", label, color={"token": "--muted"}, fontSize="13px", marginTop="8px",
-               lineHeight="1.7")])
+             T("p", label, color={"token": "--muted"}, fontSize="13px", marginTop="14px",
+               lineHeight="1.7", letterSpacing="0.04em")])
         for i, (n, unit, label) in enumerate(STATS)
-    ], customStyles="background:rgb(226,219,208);"),
+    ]),
 ])], bg="--sand", pt="0px", pb="0px")
 
 ABOUT = section("about", [wrap("zd-about-in", [
@@ -436,41 +461,83 @@ CATEGORY_SEC = section("zd-cat", [wrap("zd-cat-in", [
 ])])
 
 REASON_SEC = section("zd-why", [wrap("zd-why-in", [
-    eyebrow("WHY ZIDANNA", "zd-why-eyebrow"),
-    T("h2", "为何选择我们", color={"token": "--ink"}, fontSize="38px", fontWeight="700",
-      marginTop="16px"),
-    grid("zd-why-grid", 3, "1px", [
+    {"type": "div", "data": {"attrID": "zd-why-head"},
+     "style": {"&": {"_": {"display": "grid", "gridCols": "0.42fr 0.58fr",
+                           "columnGap": "56px", "rowGap": "18px", "alignItems": "end"},
+                     "_m": {"gridCols": "repeat(1, 1fr)"}}},
+     "children": [
+         box("zd-why-head-l", {}, [
+             eyebrow("WHY ZIDANNA", "zd-why-eyebrow"),
+             T("h2", "为何选择我们", color={"token": "--ink"}, fontSize="40px",
+               fontWeight="700", marginTop="16px", letterSpacing="0.02em"),
+         ]),
+         T("p", "不是每个环节都需要重新发明。已经稳定的部分交给我们，"
+                "品牌把力气花在真正需要差异化的地方。",
+           color={"token": "--muted"}, fontSize="15px", lineHeight="2", maxWidth="26em"),
+     ]},
+    # six flat cards read as box soup; an editorial two-column list with numbers and
+    # hairlines gives the same content a hierarchy and far more air
+    grid("zd-why-grid", 2, "0px", [
         box("zd-why-%d" % i,
-            {"backgroundColor": {"token": "--paper"}, "paddingTop": "34px",
-             "paddingBottom": "34px", "paddingLeft": "30px", "paddingRight": "30px",
+            {"display": "grid", "gridCols": "auto 1fr", "columnGap": "26px",
+             "paddingTop": "30px", "paddingBottom": "30px",
+             "paddingRight": "48px" if i % 2 == 0 else "0px",
+             "paddingLeft": "0px" if i % 2 == 0 else "48px",
+             "customStyles": ("border-top:1px solid rgba(28,26,23,.14);"
+                              + ("" if i % 2 == 0 else "border-left:1px solid rgba(28,26,23,.14);")),
              "transitionAll": "220ms ease"},
-            [T("h3", title, color={"token": "--ink"}, fontSize="18px", fontWeight="700"),
-             T("p", body, color={"token": "--muted"}, fontSize="14px", marginTop="10px",
-               lineHeight="1.95")],
-            hover={"backgroundColor": {"token": "--surface"}})
+            [T("p", "%02d" % (i + 1), color={"token": "--sage"}, fontSize="12px",
+               fontWeight="700", fontFamily=LATIN, letterSpacing="0.1em",
+               customStyles="padding-top:5px;"),
+             box("zd-why-t-%d" % i, {}, [
+                 T("h3", title, color={"token": "--ink"}, fontSize="19px", fontWeight="700"),
+                 T("p", body, color={"token": "--muted"}, fontSize="14px", marginTop="9px",
+                   lineHeight="1.95", maxWidth="24em"),
+             ])])
         for i, (title, body) in enumerate(REASONS)
-    ], marginTop="46px", customStyles="background:rgb(226,219,208);"),
+    ], marginTop="52px"),
 ])], bg="--sand")
 
+# A centred headline over a button is the most generic close a page can have. Give
+# the contact route itself the typographic weight instead - the email is the thing
+# a visitor actually needs, so it should be the largest thing in the band.
 CTA = section("zd-cta", [wrap("zd-cta-in", [
-    T("h2", "每个品牌都是从第一支样品开始的", color={"token": "--paper"}, fontSize="34px",
-      fontWeight="700", lineHeight="1.5", textAlign="center"),
-    T("p", "把想法、预算与上市时间告诉我们，我们回覆可行的配方方向与打样时程。",
-      color="rgb(168,160,150)", fontSize="16px", marginTop="16px", textAlign="center",
-      lineHeight="2"),
-    box("zd-cta-btn",
-        {"display": "flex", "justifyContent": "center", "marginTop": "32px"},
-        [{"type": "button", "data": {"attrID": "zd-cta-3", "url": "mailto:zidnana@163.com"},
-          "style": {"&": {"_": {"backgroundColor": {"token": "--sage"},
-                                "color": "rgb(250,248,244)", "fontSize": "15px",
-                                "paddingTop": "16px", "paddingBottom": "16px",
-                                "paddingLeft": "38px", "paddingRight": "38px",
-                                "radius": "2px", "cursor": "pointer",
-                                "transitionAll": "200ms ease"}},
-                    "hover": {"_": {"backgroundColor": "rgb(250,248,244)",
-                                    "color": {"token": "--ink"}}}},
-          "text": "开始打造"}]),
-])], bg="--ink", pt="96px", pb="96px")
+    {"type": "div", "data": {"attrID": "zd-cta-row"},
+     "style": {"&": {"_": {"display": "grid", "gridCols": "0.46fr 0.54fr",
+                           "columnGap": "64px", "rowGap": "34px", "alignItems": "center"},
+                     "_m": {"gridCols": "repeat(1, 1fr)"}}},
+     "children": [
+         box("zd-cta-l", {}, [
+             eyebrow("START A PROJECT", "zd-cta-eyebrow"),
+             ml("h2", "每个品牌\n都是从第一支样品开始的", color={"token": "--paper"},
+                fontSize="34px", fontWeight="700", lineHeight="1.45", marginTop="18px",
+                letterSpacing="0.02em"),
+         ]),
+         box("zd-cta-r", {}, [
+             T("p", "把想法、预算与上市时间告诉我们，我们回覆可行的配方方向与打样时程。",
+               color="rgb(168,160,150)", fontSize="16px", lineHeight="2.1", maxWidth="26em"),
+             {"type": "button", "data": {"attrID": "zd-cta-mail",
+                                         "url": "mailto:zidnana@163.com"},
+              "style": {"&": {"_": {"backgroundColor": "rgba(0,0,0,0)",
+                                    "color": {"token": "--paper"}, "fontSize": "30px",
+                                    "fontWeight": "700", "fontFamily": LATIN,
+                                    "marginTop": "26px", "cursor": "pointer",
+                                    "letterSpacing": "-0.01em",
+                                    "transitionAll": "200ms ease"}},
+                        "hover": {"_": {"color": {"token": "--sage"}}}},
+              "text": "zidnana@163.com"},
+             hair("zd-cta-rule", top="18px"),
+             {"type": "div", "data": {"attrID": "zd-cta-meta"},
+              "style": {"&": {"_": {"display": "flex", "columnGap": "34px",
+                                    "marginTop": "18px", "flexWrap": "wrap"}}},
+              "children": [
+                  T("p", "电话 025-56213122", color="rgb(140,133,124)", fontSize="13px",
+                    fontFamily=LATIN),
+                  T("p", "南京溧水经济开发区", color="rgb(140,133,124)", fontSize="13px"),
+              ]},
+         ]),
+     ]},
+])], bg="--ink", pt="104px", pb="104px")
 
 # ── OEM detail page ───────────────────────────────────────────────────────────
 LINES = [("日常护肤系列", "化妆水、精华、乳液、面霜与面膜，最常见的基础品项。"),

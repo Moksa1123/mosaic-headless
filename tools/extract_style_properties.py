@@ -33,6 +33,15 @@ import os
 import re
 import sys
 
+# StyleStateDataMeta declares each style property's validator chain, and many of the
+# ones registered as a plain CSSPropertyFactory are in fact restricted to an enum.
+# Without this, style-properties.csv reads as "any CSS string" and a legal-looking
+# value like white-space:pre-line is accepted, dropped, and never compiled.
+RE_STYLE_PROP = re.compile(
+    r"createDataSimple\(\s*'([^']+)'.*?(?=createDataSimple\(|createDataGroup\(|createDataArray\(|\Z)",
+    re.S)
+RE_ACCEPTED = re.compile(r"createValidatorAcceptedValues\(\s*\[(.*?)\]", re.S)
+
 RE_ADD = re.compile(
     r'addCSSProperty\(\s*new\s+(\w+)\s*\(\s*"([^"]+)"'      # factory, first arg
     r'(?:\s*,\s*"([^"]+)")?'                                 # optional member name
@@ -84,7 +93,25 @@ def extract_states(plugin_root, out_dir):
              sum(1 for r in rows if r["scope"] == "node-type")))
 
 
+def style_enums(plugin_root):
+    """property -> its accepted values, for the style properties restricted to an enum."""
+    path = os.path.join(plugin_root, "Mosaic", "Data", "StyleData", "StyleStateDataMeta.php")
+    if not os.path.exists(path):
+        return {}
+    with open(path, encoding="utf-8", errors="replace") as fh:
+        src = fh.read()
+    out = {}
+    for m in RE_STYLE_PROP.finditer(src):
+        acc = RE_ACCEPTED.search(m.group(0))
+        if acc:
+            values = re.findall(r"'([^']+)'", acc.group(1))
+            if values:
+                out[m.group(1)] = values
+    return out
+
+
 def extract(plugin_root, out_dir):
+    enums = style_enums(plugin_root)
     path = os.path.join(plugin_root, "Mosaic", "Builder", "Style", "SupportedStyleProperties.php")
     if not os.path.exists(path):
         sys.exit("no SupportedStyleProperties.php under %s" % plugin_root)
@@ -100,6 +127,7 @@ def extract(plugin_root, out_dir):
                 "group": first if grouped else "",
                 "factory": factory,
                 "value_class": value_class.split("\\")[-1] if value_class else "",
+                "accepted_values": "|".join(enums.get(member if grouped else first, [])),
                 "tokenable": "yes" if (
                     "CollectionVariable" in factory or "Color" in factory
                     or "CollectionVariable" in (value_class or "")
@@ -110,14 +138,17 @@ def extract(plugin_root, out_dir):
     os.makedirs(out_dir, exist_ok=True)
     out = os.path.join(out_dir, "style-properties.csv")
     with open(out, "w", newline="", encoding="utf-8") as fh:
-        w = csv.DictWriter(fh, fieldnames=["property", "group", "factory", "value_class", "tokenable"])
+        w = csv.DictWriter(fh, fieldnames=["property", "group", "factory", "value_class",
+                                           "accepted_values", "tokenable"])
         w.writeheader()
         w.writerows(rows)
 
     groups = {r["group"] for r in rows if r["group"]}
-    print("style properties: %d (%d in %d compound groups, %d token-referencable)"
+    print("style properties: %d (%d in %d compound groups, %d token-referencable, "
+          "%d restricted to an enum)"
           % (len(rows), sum(1 for r in rows if r["group"]), len(groups),
-             sum(1 for r in rows if r["tokenable"])))
+             sum(1 for r in rows if r["tokenable"]),
+             sum(1 for r in rows if r["accepted_values"])))
     by_factory = {}
     for r in rows:
         by_factory[r["factory"]] = by_factory.get(r["factory"], 0) + 1

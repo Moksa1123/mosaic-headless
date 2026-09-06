@@ -71,7 +71,14 @@ class Surface:
         self.types = {r["type"]: r for r in load_csv("node-types.csv")}
         self.rules = {r["type"]: r for r in load_csv("placement-rules.csv")}
         self.outcome = {r["type"]: r["outcome"] for r in load_csv("node-verification.csv")}
-        self.style_props = {r["property"] for r in load_csv("style-properties.csv")}
+        style_rows = load_csv("style-properties.csv")
+        self.style_props = {r["property"] for r in style_rows}
+        # 24 of the 98 style properties are restricted to an enum. A value outside it
+        # is accepted by the API, stored, and silently never compiled - white-space
+        # takes pre-wrap but not pre-line, and the difference is invisible until you
+        # look at the delivered CSS. Refuse it here instead.
+        self.style_enums = {r["property"]: set(r["accepted_values"].split("|"))
+                            for r in style_rows if r.get("accepted_values")}
         self.states = {r["state"] for r in load_csv("style-states.csv")}
         # what a composite type needs INSIDE it, which canBeParentFor does not describe
         self.default_children = {r["type"]: r["default_children"].split("|")
@@ -119,9 +126,13 @@ class Surface:
             if state not in self.states:
                 problems.append("unknown style state %r on %s" % (state, t))
             for _bp, props in per_bp.items():
-                for p in props:
+                for p, value in props.items():
                     if p not in self.style_props and p not in shorthands:
                         problems.append("%r is not a supported style property (on %s)" % (p, t))
+                    allowed = self.style_enums.get(p)
+                    if allowed and isinstance(value, str) and value not in allowed:
+                        problems.append("%s=%r is not one of %s (on %s)"
+                                        % (p, value, "/".join(sorted(allowed)), t))
         return [] if force else problems
 
 
