@@ -113,7 +113,14 @@ try {
 if (packed) {
   let files = [];
   try {
-    files = (JSON.parse(packed)[0]?.files || []).map((f) => f.path.split("\\").join("/"));
+    // npm 11 returns an array of packed packages; npm 12 returns an object keyed
+    // by package name. Reading only the array shape against npm 12 yields zero
+    // files, and a leak check over zero files passes - which is the blind spot
+    // scored as a success that this whole file exists to prevent. The
+    // `files.length === 0` assertion below is the backstop that caught it.
+    const parsed = JSON.parse(packed);
+    const packs = Array.isArray(parsed) ? parsed : Object.values(parsed);
+    files = (packs[0]?.files || []).map((f) => f.path.split("\\").join("/"));
   } catch { fail("could not parse `npm pack --json` output"); }
 
   const forbidden = [
