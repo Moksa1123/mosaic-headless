@@ -25,6 +25,29 @@ sweep returns a suspiciously total failure, check that the probes rendered befor
 believing the measurement — `sweep_style_properties.py` now exits rather than
 reporting a run in which nothing rendered.
 
+## Duplicate `ordering` among siblings drops nodes, silently
+
+`ordering_for()` in `build_page.py` wraps after 62 entries, so `ordering_for(i % 62)`
+hands two siblings the same index. Mosaic keeps one and discards the other without an
+exception. A sweep of 79 probes left 39 nodes in the database and still printed a
+result table.
+
+For more than 62 siblings, generate your own monotonic index - `"a" + ALPHA[i // 62]
++ ALPHA[i % 62]` gives 3844 lexicographically ordered slots.
+
+## A sweep must refuse a contaminated page
+
+Probe ids from separate runs share an id space, and two runs can give the same id to
+different node types - `np-101` was a `<select>` from one run and a `<div>` from the
+next, on the same page. Every number read off that page was meaningless.
+
+Worse, the cleanup query was `LIKE "%np-0%"`, which silently misses every id from
+`np-100` up, so "0 remaining" was itself wrong. Match the stored shape:
+`LIKE '%"attrID":"np-%'`.
+
+`sweep_node_properties.py` now exits unless the page carries exactly the probes this
+run planned, allowing for the ones whose own property relocates them out of the tree.
+
 ## heal() owns the body's children
 
 Do not parent anything directly to a `body` node. `heal()` rebuilds the

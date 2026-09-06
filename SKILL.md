@@ -131,12 +131,31 @@ the difference is worth being exact about:
 
 ```
 node types        122 / 122   swept live, one per document
-node properties   170 / 181   probed; 11 never probed, and of the 170,
-                              12 are INCONCLUSIVE and 91 showed NO_EFFECT
+node properties   181 / 181   re-probed with a value shaped by each property's
+                              own validator chain: 35 APPLIED, 42 NO_EFFECT,
+                              2 EDITOR_ONLY, 55 NO_HOST (no rendering type
+                              declares them), 47 SKIPPED
 style properties   98 /  98   swept live; 58 COMPILED, 18 ABSENT, 1 NO_ELEMENT,
                               21 SKIPPED (no test value could be synthesised, and
                               SKIPPED is never counted as a pass)
 ```
+
+**A same-value probe measures the probe, not the surface.** The first property run
+sent the string `MPROP0000X` to all 181 properties regardless of what each wanted,
+and reported 91 NO_EFFECT. The tell was that `tagName` was in that list while the
+entire demo site is built on it. Re-probed with a value derived from the declared
+validator chain - array for `ValidatorArray`, boolean for `ValidatorBoolean`, a legal
+enum member for `ValidatorAcceptedValues` - six of those NO_EFFECTs turn out to work:
+`tagName`, `target`, `rel`, `height`, `size`, `insertLocation`.
+
+**Some properties are gated by a companion.** `target` and `rel` did nothing until
+the node also carried a `url`: `button` and `menu-link` render a `<span>` without one
+and an `<a href>` with it, so an anchor-only attribute has nothing to attach to. A
+NO_EFFECT is only meaningful once the property has been given the context it needs.
+
+Twelve remain NO_EFFECT with a correctly shaped value, `cssClasses` and `attributes`
+among them - recorded as measured-inert-with-this-shape rather than as dead, because
+a third shape may yet be the right one.
 
 **A property that belongs to a `group` is inert when you set it on its own.** This is
 the sweep's one big result and it is exact:
@@ -207,6 +226,7 @@ so the pattern is in the data, not just in this paragraph.
 | `data/style-value-shapes.csv` | 22 | **probed live** — the exact JSON shape for each structured value, and what it compiled to |
 | `data/style-states.csv` | 53 | source — state IDs with their exact CSS selector templates |
 | `data/property-verification.csv` | 170 | **probed live** — per-property effect on markup vs CSS, with unprovable enums marked INCONCLUSIVE |
+| `data/node-property-verification.csv` | 181 | **swept live** — each property probed with a value shaped by its own validator chain, on a type that declares it |
 | `data/style-verification.csv` | 98 | **swept live** — every style property written to a page and checked against the compiled CSS, with its group beside the result |
 | `data/rwd-verification.csv` | 569 | **checked live** - every `_t`/`_m` declaration vs the served stylesheet, with status per row |
 | `data/element-classes.csv` | 151 | **live** — the built-in class metas; their IDs are what an `elementClass` record must use |
