@@ -12,3 +12,4 @@ __pycache__/
 .playwright-mcp/
 report.html
 shots/web/_embed.json
+__pycache__/

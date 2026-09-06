@@ -1,0 +1,75 @@
+expression,namespace,name,label,declared_in
+@VAR('__current_theme/name'),__current_theme,name,Name,Mosaic/Themes/Theme/VariableProviderTheme.php
+@VAR('author/author_avatar'),author,author_avatar,Avatar,Mosaic/Compatibility/WordPress/PathContext/VariableProviderAuthor.php
+@VAR('author/author_description'),author,author_description,Description,Mosaic/Compatibility/WordPress/PathContext/VariableProviderAuthor.php
+@VAR('author/author_email'),author,author_email,Email,Mosaic/Compatibility/WordPress/PathContext/VariableProviderAuthor.php
+@VAR('author/author_id'),author,author_id,ID,Mosaic/Compatibility/WordPress/PathContext/VariableProviderAuthor.php
+@VAR('author/author_name'),author,author_name,Display name,Mosaic/Compatibility/WordPress/PathContext/VariableProviderAuthor.php
+@VAR('author/author_permalink'),author,author_permalink,Permalink,Mosaic/Compatibility/WordPress/PathContext/VariableProviderAuthor.php
+@VAR('author/author_url'),author,author_url,Website,Mosaic/Compatibility/WordPress/PathContext/VariableProviderAuthor.php
+@VAR('form/formName'),form,formName,,Mosaic/Form/FormDocument.php
+@VAR('form/value'),form,value,,Mosaic/Form/FormDocument.php
+@VAR('menu/hasChildren'),menu,hasChildren,Item has children,Mosaic/Compatibility/Common/VariableProviderMenu.php
+@VAR('menu/href'),menu,href,Item URL,Mosaic/Compatibility/Common/VariableProviderMenu.php
+@VAR('menu/id'),menu,id,ID,Mosaic/Compatibility/Common/VariableProviderMenu.php
+@VAR('menu/loop'),menu,loop,,Mosaic/Compatibility/Common/VariableProviderMenu.php
+@VAR('menu/name'),menu,name,Name,Mosaic/Compatibility/Common/VariableProviderMenu.php
+@VAR('menu/target'),menu,target,Item target,Mosaic/Compatibility/Common/VariableProviderMenu.php
+@VAR('menu/title'),menu,title,Navigation label,Mosaic/Compatibility/Common/VariableProviderMenu.php
+@VAR('post/author_avatar'),post,author_avatar,Author avatar,Mosaic/Compatibility/WordPress/SchemaHelpers/Post/AbstractPostSchemaHelper.php
+@VAR('post/author_description'),post,author_description,Author description,Mosaic/Compatibility/WordPress/SchemaHelpers/Post/AbstractPostSchemaHelper.php
+@VAR('post/author_email'),post,author_email,Author email,Mosaic/Compatibility/WordPress/SchemaHelpers/Post/AbstractPostSchemaHelper.php
+@VAR('post/author_id'),post,author_id,Author ID,Mosaic/Compatibility/WordPress/SchemaHelpers/Post/AbstractPostSchemaHelper.php
+@VAR('post/author_name'),post,author_name,Author display name,Mosaic/Compatibility/WordPress/SchemaHelpers/Post/AbstractPostSchemaHelper.php
+@VAR('post/author_permalink'),post,author_permalink,Author permalink,Mosaic/Compatibility/WordPress/SchemaHelpers/Post/AbstractPostSchemaHelper.php
+@VAR('post/author_url'),post,author_url,Author website,Mosaic/Compatibility/WordPress/SchemaHelpers/Post/AbstractPostSchemaHelper.php
+@VAR('post/content'),post,content,Content,Mosaic/Compatibility/WordPress/PathContext/VariableProviderIndex.php
+@VAR('post/featuredImage'),post,featuredImage,Featured image,Mosaic/Compatibility/WordPress/SchemaHelpers/Post/AbstractPostSchemaHelper.php
+@VAR('post/featuredImageAlt'),post,featuredImageAlt,Featured image alt text,Mosaic/Compatibility/WordPress/SchemaHelpers/Post/AbstractPostSchemaHelper.php
+@VAR('post/id'),post,id,ID,Mosaic/Compatibility/WordPress/PathContext/VariableProviderSingle.php
+@VAR('post/modified_date'),post,modified_date,Modified date,Mosaic/Compatibility/WordPress/SchemaHelpers/Post/AbstractPostSchemaHelper.php
+@VAR('post/modified_time'),post,modified_time,Modified time,Mosaic/Compatibility/WordPress/SchemaHelpers/Post/AbstractPostSchemaHelper.php
+@VAR('post/modified_timestamp'),post,modified_timestamp,Modified timestamp,Mosaic/Compatibility/WordPress/SchemaHelpers/Post/AbstractPostSchemaHelper.php
+@VAR('post/modified_timestamp_gmt'),post,modified_timestamp_gmt,Modified timestamp GMT,Mosaic/Compatibility/WordPress/SchemaHelpers/Post/AbstractPostSchemaHelper.php
+@VAR('post/parent_id'),post,parent_id,Parent id,Mosaic/Compatibility/WordPress/SchemaHelpers/Post/AbstractPostSchemaHelper.php
+@VAR('post/permalink'),post,permalink,Permalink,Mosaic/Compatibility/WordPress/SchemaHelpers/Post/AbstractPostSchemaHelper.php
+@VAR('post/publish_date'),post,publish_date,Publish date,Mosaic/Compatibility/WordPress/SchemaHelpers/Post/AbstractPostSchemaHelper.php
+@VAR('post/publish_time'),post,publish_time,Publish time,Mosaic/Compatibility/WordPress/SchemaHelpers/Post/AbstractPostSchemaHelper.php
+@VAR('post/publish_timestamp'),post,publish_timestamp,Publish timestamp,Mosaic/Compatibility/WordPress/SchemaHelpers/Post/AbstractPostSchemaHelper.php
+@VAR('post/publish_timestamp_gmt'),post,publish_timestamp_gmt,Publish timestamp GMT,Mosaic/Compatibility/WordPress/SchemaHelpers/Post/AbstractPostSchemaHelper.php
+@VAR('post/title'),post,title,Title,Mosaic/Compatibility/WordPress/PathContext/VariableProviderIndex.php
+@VAR('request/ip'),request,ip,IP,Mosaic/Compatibility/Common/VariableProviderRequest.php
+@VAR('request/page_url'),request,page_url,Page URL,Mosaic/Compatibility/Common/VariableProviderRequest.php
+@VAR('request/referrer'),request,referrer,Referrer,Mosaic/Compatibility/Common/VariableProviderRequest.php
+@VAR('request/user_agent'),request,user_agent,User agent,Mosaic/Compatibility/Common/VariableProviderRequest.php
+@VAR('site/admin_email'),site,admin_email,Administration email,Mosaic/Compatibility/Common/VariableProviderSite.php
+@VAR('site/description'),site,description,Tagline,Mosaic/Compatibility/Common/VariableProviderSite.php
+@VAR('site/logouturl'),site,logouturl,Log out URL,Mosaic/Compatibility/Common/VariableProviderSite.php
+@VAR('site/name'),site,name,Title,Mosaic/Compatibility/Common/VariableProviderSite.php
+@VAR('site/timestamp'),site,timestamp,Timestamp,Mosaic/Compatibility/Common/VariableProviderSite.php
+@VAR('site/url'),site,url,Home URL,Mosaic/Compatibility/Common/VariableProviderSite.php
+@VAR('site/wpurl'),site,wpurl,Site URL,Mosaic/Compatibility/Common/VariableProviderSite.php
+@VAR('slider/index'),slider,index,Index,Mosaic/NodeTypes/Pro/Slider/SliderSlides/SliderSlidesElementMResource.php
+@VAR('slider/thumbnail'),slider,thumbnail,Thumbnail,Mosaic/NodeTypes/Pro/Slider/SliderSlides/SliderSlidesElementMResource.php
+@VAR('slider/thumbnailAlt'),slider,thumbnailAlt,Thumbnail alt,Mosaic/NodeTypes/Pro/Slider/SliderSlides/SliderSlidesElementMResource.php
+@VAR('slider/title'),slider,title,Title,Mosaic/NodeTypes/Pro/Slider/SliderSlides/SliderSlidesElementMResource.php
+@VAR('user/description'),user,description,Biographical info,Mosaic/Compatibility/Common/VariableProviderCurrentUser.php
+@VAR('user/displayName'),user,displayName,Display name,Mosaic/Compatibility/Common/VariableProviderCurrentUser.php
+@VAR('user/email'),user,email,Email,Mosaic/Compatibility/Common/VariableProviderCurrentUser.php
+@VAR('user/firstName'),user,firstName,First name,Mosaic/Compatibility/Common/VariableProviderCurrentUser.php
+@VAR('user/id'),user,id,ID,Mosaic/Compatibility/Common/VariableProviderCurrentUser.php
+@VAR('user/lastName'),user,lastName,Last name,Mosaic/Compatibility/Common/VariableProviderCurrentUser.php
+@VAR('user/loggedin'),user,loggedin,Is logged in,Mosaic/Compatibility/Common/VariableProviderCurrentUser.php
+@VAR('user/url'),user,url,Website,Mosaic/Compatibility/Common/VariableProviderCurrentUser.php
+@VAR('user/user_registered'),user,user_registered,Register datetime,Mosaic/Compatibility/Common/VariableProviderCurrentUser.php
+@VAR('user/user_registered_date'),user,user_registered_date,Register date,Mosaic/Compatibility/Common/VariableProviderCurrentUser.php
+@VAR('user/user_registered_time'),user,user_registered_time,Register time,Mosaic/Compatibility/Common/VariableProviderCurrentUser.php
+@VAR('user/user_registered_timestamp'),user,user_registered_timestamp,Register timestamp,Mosaic/Compatibility/Common/VariableProviderCurrentUser.php
+@VAR('user/username'),user,username,Username,Mosaic/Compatibility/Common/VariableProviderCurrentUser.php
+@VAR('wordpress_archive/description'),wordpress_archive,description,Description,Mosaic/Compatibility/WordPress/PathContext/VariableProviderArchive.php
+@VAR('wordpress_archive/posts'),wordpress_archive,posts,,Mosaic/Compatibility/WordPress/PathContext/VariableProviderArchive.php
+@VAR('wordpress_archive/title'),wordpress_archive,title,Title,Mosaic/Compatibility/WordPress/PathContext/VariableProviderArchive.php
+@VAR('wordpress_search/resultCount'),wordpress_search,resultCount,Result count,Mosaic/Compatibility/WordPress/PathContext/VariableProviderSearch.php
+@VAR('wordpress_search/results'),wordpress_search,results,Search results,Mosaic/Compatibility/WordPress/PathContext/VariableProviderSearch.php
+@VAR('wordpress_search/searchQuery'),wordpress_search,searchQuery,Search query,Mosaic/Compatibility/WordPress/PathContext/VariableProviderSearch.php
+@VAR('wordpress_search/title'),wordpress_search,title,Title,Mosaic/Compatibility/WordPress/PathContext/VariableProviderSearch.php
