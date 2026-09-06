@@ -306,10 +306,11 @@ def motion_css():
         "#mk-hero-in{position:relative;z-index:2;padding-top:132px;padding-bottom:104px}",
         # a fine grid over the ink, so the ground reads as drawn rather than filled
         '#mk-hero::before{content:"";position:absolute;inset:0;z-index:0;'
-        "pointer-events:none;opacity:.55;"
-        "background-image:linear-gradient(rgba(255,255,255,.045) 1px,transparent 1px),"
-        "linear-gradient(90deg,rgba(255,255,255,.045) 1px,transparent 1px);"
-        "background-size:72px 72px}",
+        "pointer-events:none;"
+        "background-image:"
+        "radial-gradient(circle at 1px 1px,rgba(255,90,54,.34) 1.6px,transparent 1.8px),"
+        "radial-gradient(circle at 1px 1px,rgba(255,255,255,.13) 1px,transparent 1.2px);"
+        "background-size:116px 116px,29px 29px}",
         # a single soft bloom in the studio's colour, off to one side
         '#mk-hero::after{content:"";position:absolute;z-index:0;pointer-events:none;'
         "right:-8%;top:-20%;width:60%;height:120%;"
@@ -410,7 +411,7 @@ def motion_css():
         "  #mk-header{width:calc(100% - 20px);top:10px}",
         "  #mk-hero{min-height:auto}",
         "  #mk-hero-in{padding-top:104px;padding-bottom:84px}",
-        "  #mk-hero::before{background-size:44px 44px}",
+        "  #mk-hero::before{background-size:80px 80px,20px 20px}",
         "  #mk-cue{right:14px;bottom:22px}",
         "  #mk-progress-track{left:10px;right:10px}",
         "  #mk-intro-bar{width:80px}",
