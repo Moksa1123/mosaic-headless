@@ -1,5 +1,26 @@
 # Styling: how a value becomes CSS
 
+## Grouped properties are inert on their own
+
+`data/style-properties.csv` has a `group` column. Twenty of the 98 properties have a
+value in it, and **not one of them compiles when set individually** — swept live,
+zero exceptions:
+
+| group | members | result |
+|---|---|---|
+| `borderStyle` | `border{Top,Right,Bottom,Left}{Width,Style,Color}` | 12 / 12 inert |
+| `outlineStyle` | `outlineWidth`, `outlineStyle`, `outlineColor`, `outlineOffset` | 4 / 4 inert |
+| `gridChildPosition` | `gridColumnStart`, `gridColumnEnd`, `gridRowStart`, `gridRowEnd` | 4 / 4 inert |
+
+The commit is accepted, the row is stored, and the stylesheet simply has no such
+declaration. Meanwhile every one of the 58 testable ungrouped properties compiled.
+
+Use the grouped shape — `border` takes `{"width": "3px", "style": "dashed", "color":
+"rgb(...)"}` and does compile — or drop to `customStyles`. If you need a child in a
+particular grid column, change the template rather than trying to place the child.
+
+`data/style-verification.csv` is per-property, with the group beside the result.
+
 Measured on a live install by committing a styled `div` and reading what came back
 down the wire.
 

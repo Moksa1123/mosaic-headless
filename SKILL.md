@@ -133,21 +133,25 @@ the difference is worth being exact about:
 node types        122 / 122   swept live, one per document
 node properties   170 / 181   probed; 11 never probed, and of the 170,
                               12 are INCONCLUSIVE and 91 showed NO_EFFECT
-style properties   18 /  98   ever written to a live page
-                              data/style-value-shapes.csv covers the structured
-                              ones because their SHAPE had to be reverse-
-                              engineered; the other 80 were assumed to work
-                              because the shape looked obvious
+style properties   98 /  98   swept live; 58 COMPILED, 18 ABSENT, 1 NO_ELEMENT,
+                              21 SKIPPED (no test value could be synthesised, and
+                              SKIPPED is never counted as a pass)
 ```
 
-**80 of 98 style properties have never been asserted against compiled CSS.** That is
-the largest hole in this skill. It matters because `gridColumnStart` is one of them
-and it emits nothing — declared in the source, its own factory group, zero output —
-so "declared" demonstrably does not imply "works", and 80 properties are currently
-resting on that implication. A batch sweep for this was attempted and abandoned: the
-probe nodes commit and come back with an empty `parentID`, so they never render and
-every property reads as a false ABSENT. Shipping that would have been worse than the
-gap.
+**A property that belongs to a `group` is inert when you set it on its own.** This is
+the sweep's one big result and it is exact:
+
+```
+ungrouped  78 properties   58 COMPILED   0 ABSENT    (20 SKIPPED)
+grouped    20 properties    0 COMPILED  18 ABSENT    (1 NO_ELEMENT, 1 SKIPPED)
+```
+
+Zero exceptions in either direction. The 20 are the `borderStyle` per-side longhands
+(12), `outlineStyle` (4) and `gridChildPosition` (4) — so `borderLeftWidth`,
+`outlineColor` and `gridColumnStart` are all instances of one rule rather than three
+oddities. Set the grouped shape instead (`border` takes `{width, style, color}`), or
+use `customStyles`. `data/style-verification.csv` carries the group beside the result
+so the pattern is in the data, not just in this paragraph.
 
 **Known gaps, stated rather than papered over.**
 
@@ -203,7 +207,8 @@ gap.
 | `data/style-value-shapes.csv` | 22 | **probed live** — the exact JSON shape for each structured value, and what it compiled to |
 | `data/style-states.csv` | 53 | source — state IDs with their exact CSS selector templates |
 | `data/property-verification.csv` | 170 | **probed live** — per-property effect on markup vs CSS, with unprovable enums marked INCONCLUSIVE |
-| `data/rwd-verification.csv` | 567 | **checked live** - every `_t`/`_m` declaration vs the served stylesheet, with status per row |
+| `data/style-verification.csv` | 98 | **swept live** — every style property written to a page and checked against the compiled CSS, with its group beside the result |
+| `data/rwd-verification.csv` | 569 | **checked live** - every `_t`/`_m` declaration vs the served stylesheet, with status per row |
 | `data/element-classes.csv` | 151 | **live** — the built-in class metas; their IDs are what an `elementClass` record must use |
 | `data/dynamic-variables.csv` | 74 | source — every `@VAR('ns/name')` expression, by namespace |
 | `data/evaluator-functions.csv` | 19 | source — the `@` functions with their arity |

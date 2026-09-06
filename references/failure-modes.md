@@ -1,5 +1,36 @@
 # How Mosaic fails, measured
 
+## An invalid `ordering` orphans the node, silently
+
+`ordering` is a fractional-index STRING. Send something that is not one and the
+commit returns **no exception** — and the row is stored with **both `ordering` and
+`parentID` blanked**. The node has no parent, so it never renders, and anything you
+were measuring through it reads as a clean negative.
+
+Measured side by side in one commit, three sibling probes:
+
+```
+ordering "a6"    -> stored: ordering=a6  parentID=a2dd9602-...   renders
+ordering "z000"  -> stored: ordering=''  parentID=''            orphan
+ordering "z001"  -> stored: ordering=''  parentID=''            orphan
+```
+
+This cost a whole style-property sweep: 77 probes committed without error, none
+rendered, and all 77 properties came back ABSENT — including `color` and
+`paddingTop`, which the entire site is built on. The result looked like a finding.
+It was the tool being broken.
+
+Use `ordering_for()` in `tools/build_page.py`; never format your own. And when a
+sweep returns a suspiciously total failure, check that the probes rendered before
+believing the measurement — `sweep_style_properties.py` now exits rather than
+reporting a run in which nothing rendered.
+
+## heal() owns the body's children
+
+Do not parent anything directly to a `body` node. `heal()` rebuilds the
+body > three-div skeleton whenever it decides one is missing, and probes hung
+straight off the body do not survive it. Attach to a div inside the body instead.
+
 Every failure below was produced on purpose, on a live install, by the sweep in
 `tools/sweep_node_types.py`. None of it is inferred from source.
 

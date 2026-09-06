@@ -1,0 +1,99 @@
+property,group,css_property,sent,compiled,status
+display,,display,,,SKIPPED
+alignItems,,align-items,"""baseline""",baseline,COMPILED
+justifyItems,,justify-items,"""baseline""",baseline,COMPILED
+alignContent,,align-content,"""baseline""",baseline,COMPILED
+justifyContent,,justify-content,"""right""",right,COMPILED
+flexDirection,,flex-direction,"""column-reverse""",column-reverse,COMPILED
+flexWrap,,flex-wrap,"""wrap-reverse""",wrap-reverse,COMPILED
+columnGap,,column-gap,"""37px""",37px,COMPILED
+rowGap,,row-gap,"""37px""",37px,COMPILED
+gridAutoFlow,,grid-auto-flow,"""column""",column,COMPILED
+gridAutoColumns,,grid-auto-columns,,,SKIPPED
+gridAutoRows,,grid-auto-rows,,,SKIPPED
+gridTemplateColumns,,grid-template-columns,"[{""type"": ""default"", ""defaultOptions"": {""size"": ""37px""}}]",none,COMPILED
+gridTemplateRows,,grid-template-rows,"[{""type"": ""default"", ""defaultOptions"": {""size"": ""37px""}}]",none,COMPILED
+gridTemplateAreas,,grid-template-areas,,,SKIPPED
+gridRowStart,gridChildPosition,grid-row-start,"""7""",,ABSENT
+gridColumnStart,gridChildPosition,grid-column-start,"""7""",,ABSENT
+gridRowEnd,gridChildPosition,grid-row-end,"""7""",,ABSENT
+gridColumnEnd,gridChildPosition,grid-column-end,"""7""",,ABSENT
+flexSizing,,flex-sizing,,,SKIPPED
+flexBasis,,flex-basis,"""37px""",37px,COMPILED
+alignSelf,,align-self,"""baseline""",baseline,COMPILED
+justifySelf,,justify-self,"""baseline""",baseline,COMPILED
+order,,order,"""7""",7,COMPILED
+listStylePosition,,list-style-position,"""outside""",outside,COMPILED
+listStyleType,,list-style-type,"""none""",none,COMPILED
+fontFamily,,font-family,,,SKIPPED
+textDecorationLine,,text-decoration-line,"""line-through""",line-through,COMPILED
+fontStyle,,font-style,"""italic""",italic,COMPILED
+color,,color,"""rgb(9, 99, 199)""","rgb(9, 99, 199)",COMPILED
+fontSize,,font-size,"""37px""",37px,COMPILED
+lineHeight,,line-height,"""7""",7,COMPILED
+fontWeight,,font-weight,"""900""",900,COMPILED
+textAlign,,text-align,"""right""",right,COMPILED
+letterSpacing,,letter-spacing,"""37px""",37px,COMPILED
+wordSpacing,,word-spacing,"""37px""",37px,COMPILED
+whiteSpace,,white-space,"""pre""",pre,COMPILED
+textTransform,,text-transform,"""capitalize""",capitalize,COMPILED
+textShadow,,text-shadow,,,SKIPPED
+width,,width,"""37px""",37px,COMPILED
+minWidth,,min-width,"""37px""",37px,COMPILED
+maxWidth,,max-width,"""37px""",37px,COMPILED
+height,,height,"""37px""",37px,COMPILED
+minHeight,,min-height,"""37px""",37px,COMPILED
+maxHeight,,max-height,"""37px""",37px,COMPILED
+position,,position,"""sticky""",sticky,COMPILED
+zIndex,,z-index,"""7""",7,COMPILED
+top,,top,"""37px""",37px,COMPILED
+right,,right,"""37px""",37px,COMPILED
+bottom,,bottom,"""37px""",37px,COMPILED
+left,,left,"""37px""",37px,COMPILED
+marginTop,,margin-top,"""37px""",37px,COMPILED
+marginRight,,margin-right,"""37px""",37px,COMPILED
+marginBottom,,margin-bottom,"""37px""",37px,COMPILED
+marginLeft,,margin-left,"""37px""",37px,COMPILED
+paddingTop,,padding-top,"""37px""",37px,COMPILED
+paddingRight,,padding-right,"""37px""",37px,COMPILED
+paddingBottom,,padding-bottom,"""37px""",37px,COMPILED
+paddingLeft,,padding-left,"""37px""",37px,COMPILED
+borderRadius,,border-radius,"{""type"": ""all"", ""allOptions"": {""borderRadiusValue"": ""37px""}}",37px,COMPILED
+borderTopWidth,borderStyle,border-top-width,"""37px""",,ABSENT
+borderTopStyle,borderStyle,border-top-style,"""37px""",,ABSENT
+borderTopColor,borderStyle,border-top-color,"""rgb(9, 99, 199)""",,NO_ELEMENT
+borderRightWidth,borderStyle,border-right-width,"""37px""",,ABSENT
+borderRightStyle,borderStyle,border-right-style,"""37px""",,ABSENT
+borderRightColor,borderStyle,border-right-color,"""rgb(9, 99, 199)""",,ABSENT
+borderBottomWidth,borderStyle,border-bottom-width,"""37px""",,ABSENT
+borderBottomStyle,borderStyle,border-bottom-style,"""37px""",,ABSENT
+borderBottomColor,borderStyle,border-bottom-color,"""rgb(9, 99, 199)""",,ABSENT
+borderLeftWidth,borderStyle,border-left-width,"""37px""",,ABSENT
+borderLeftStyle,borderStyle,border-left-style,"""37px""",,ABSENT
+borderLeftColor,borderStyle,border-left-color,"""rgb(9, 99, 199)""",,ABSENT
+outlineWidth,outlineStyle,outline-width,"""37px""",,ABSENT
+outlineStyle,outlineStyle,outline-style,,,SKIPPED
+outlineColor,outlineStyle,outline-color,"""rgb(9, 99, 199)""",,ABSENT
+outlineOffset,outlineStyle,outline-offset,"""37px""",,ABSENT
+boxShadow,,box-shadow,,,SKIPPED
+opacity,,opacity,"""0.37""",0.37,COMPILED
+visibility,,visibility,"""hidden""",hidden,COMPILED
+overflow,,overflow,"""auto""",auto,COMPILED
+filter,,filter,,,SKIPPED
+backdropFilter,,backdrop-filter,,,SKIPPED
+transform,,transform,,,SKIPPED
+translate,,translate,,,SKIPPED
+rotate,,rotate,,,SKIPPED
+transformOrigin,,transform-origin,,,SKIPPED
+transformStyle,,transform-style,"""preserve-3d""",preserve-3d,COMPILED
+transition,,transition,,,SKIPPED
+mask,,mask,,,SKIPPED
+perspectiveOrigin,,perspective-origin,,,SKIPPED
+objectFitStyle,,object-fit,"{""objectFit"": ""cover"", ""objectPositionX"": ""37%"", ""objectPositionY"": ""37%""}",cover,COMPILED
+mixBlendMode,,mix-blend-mode,"""luminosity""",luminosity,COMPILED
+boxSizing,,box-sizing,"""content-box""",content-box,COMPILED
+aspectRatio,,aspect-ratio,,,SKIPPED
+backgroundColor,,background-color,"""rgb(9, 99, 199)""","rgb(9, 99, 199)",COMPILED
+backgroundStyle,,background-image,,,SKIPPED
+cursor,,cursor,"""unset""",unset,COMPILED
+customStyles,,,,,SKIPPED
