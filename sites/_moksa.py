@@ -5,42 +5,49 @@ The skill's worked example: a real studio homepage rebuilt through the Mosaic da
 model alone - no visual editor, no post_content, every node written over REST.
 
 Content and brand are Moksa Web's own, read off moksaweb.com rather than invented:
-the palette is built on their #FF5A36, the display face is the Space Grotesk they
-already use, and the figures, service lines, client list and testimonials are theirs.
+the accent is their #FF5A36, the display face is the Space Grotesk they already use,
+and the figures, service lines, client list and testimonials are theirs.
 
-Design direction, and how it differs from sites/_zidanna.py:
+Direction: a technical specification document.
 
-    zidanna     a skincare contract manufacturer - Song serif, bronze, warm paper,
-                slow luxury pacing
-    this        a software studio - grotesque display, monospace labels, near-black
-                ground, one hot signal colour, tight technical rhythm
+    A studio that builds integrations, ERP and automation lives in endpoints,
+    versions, schedules and tables. So the page is set as a spec sheet rather than
+    as a marketing site: monospace is the primary voice, not a decorative label
+    font; structure is carried entirely by hairlines, with no cards, no shadows and
+    no rounded corners anywhere; the work is a table with columns rather than a grid
+    of tiles; and every section is a numbered clause. Colour is almost absent - one
+    accent, used only where it means something.
 
-Both run through the same helpers on purpose: the point of the pair is that the
-data model carries two unrelated visual identities without special-casing.
+    Against sites/_zidanna.py - a Song serif, bronze, slow-luxury skincare site -
+    the pair is the argument: the same helpers and the same data model carry two
+    identities that share nothing.
 
 Run from this directory: python _moksa.py
 """
 import json
 import os
 
-# Three roles. Space Grotesk is the studio's own display face; the monospace stack is
-# what a technical label should be set in; Noto Sans TC carries the Chinese text.
+# Monospace leads. The grotesque is the display face and appears at three sizes only;
+# Noto Sans TC carries running Chinese text.
+MONO = "'IBM Plex Mono',ui-monospace,SFMono-Regular,Menlo,Consolas,monospace"
 DISPLAY = "'Space Grotesk','Noto Sans TC','PingFang TC','Microsoft JhengHei',sans-serif"
 CJK = "'Noto Sans TC','PingFang TC','Hiragino Sans TC','Microsoft JhengHei',sans-serif"
-MONO = "'IBM Plex Mono',ui-monospace,SFMono-Regular,Menlo,Consolas,monospace"
 
 TOKENS = {
-    # Near-black with a blue bias rather than a neutral one, an off-white that is not
-    # quite paper, and the studio's own signal orange used only where it means
-    # something. --line is the hairline that carries most of the structure.
-    "--mk-ink":     {"type": "color", "value": "rgb(17,19,24)"},
-    "--mk-paper":   {"type": "color", "value": "rgb(245,245,243)"},
-    "--mk-surface": {"type": "color", "value": "rgb(255,255,255)"},
-    "--mk-slate":   {"type": "color", "value": "rgb(30,33,40)"},
+    # Paper with a trace of warmth so it does not read as an unstyled white page, a
+    # near-black that is not pure black, one rule colour doing all the structural
+    # work, and the studio's own signal orange used sparingly.
+    "--mk-ink":     {"type": "color", "value": "rgb(22,24,28)"},
+    "--mk-paper":   {"type": "color", "value": "rgb(250,250,247)"},
+    "--mk-panel":   {"type": "color", "value": "rgb(243,243,239)"},
     "--mk-accent":  {"type": "color", "value": "rgb(255,90,54)"},
-    "--mk-muted":   {"type": "color", "value": "rgb(122,125,133)"},
-    "--mk-line":    {"type": "color", "value": "rgb(226,226,222)"},
+    "--mk-muted":   {"type": "color", "value": "rgb(111,113,120)"},
+    "--mk-rule":    {"type": "color", "value": "rgb(214,214,206)"},
+    "--mk-faint":   {"type": "color", "value": "rgb(160,162,168)"},
 }
+
+RULE = "rgba(22,24,28,.16)"
+RULE_DARK = "rgba(250,250,247,.18)"
 
 
 def bp(base, t=None, m=None):
@@ -83,22 +90,19 @@ def grid(attr, cols, gap, children, tcols=None, mcols=1, **extra):
             "children": children}
 
 
-def section(attr, children, bg="--mk-paper", pt="128px", pb="128px"):
+def section(attr, children, bg="--mk-paper"):
+    """Sections carry no vertical padding here - the document's rhythm is set by the
+    rules between clauses, not by a stack of padded bands."""
     return {"type": "section", "data": {"attrID": attr},
             "style": bp({"backgroundColor": {"token": bg},
-                         "paddingTop": pt, "paddingBottom": pb,
-                         "paddingLeft": "48px", "paddingRight": "48px",
+                         "paddingLeft": "40px", "paddingRight": "40px",
                          "fontFamily": CJK},
-                        {"paddingLeft": "32px", "paddingRight": "32px",
-                         "paddingTop": pt if pt == "0px" else "84px",
-                         "paddingBottom": pb if pb == "0px" else "84px"},
-                        {"paddingLeft": "20px", "paddingRight": "20px",
-                         "paddingTop": pt if pt == "0px" else "60px",
-                         "paddingBottom": pb if pb == "0px" else "60px"}),
+                        {"paddingLeft": "28px", "paddingRight": "28px"},
+                        {"paddingLeft": "18px", "paddingRight": "18px"}),
             "children": children}
 
 
-def wrap(attr, children, maxw="1180px", **extra):
+def wrap(attr, children, maxw="1240px", **extra):
     st = {"width": "100%", "maxWidth": maxw, "marginLeft": "auto", "marginRight": "auto"}
     st.update(extra)
     return {"type": "div", "data": {"attrID": attr}, "style": {"&": {"_": st}},
@@ -115,25 +119,37 @@ def ml(tag, text, **st):
     return T(tag, text, **st)
 
 
-def label(text, attr, color="--mk-accent"):
-    """The monospace tag that heads every section. One device, used consistently."""
-    n = T("h2", text, color={"token": color}, fontSize="11px", fontWeight="500",
-          letterSpacing="0.16em", fontFamily=MONO,
-          _m={"fontSize": "10px", "letterSpacing": "0.12em"})
-    n["data"]["attrID"] = attr
-    return n
+def mono(text, size="11px", color="--mk-muted", track="0.14em", **st):
+    """The page's primary voice. Everything that is a label, a key, a figure or an
+    address is set in it."""
+    st.setdefault("fontFamily", MONO)
+    st.setdefault("fontWeight", "400")
+    return T("p", text,
+             color={"token": color} if color.startswith("--") else color,
+             fontSize=size, letterSpacing=track, **st)
 
 
-def mask_line(attr, text, tag="h1", **st):
-    """One display line in an overflow mask, so it can rise from behind its own edge.
+def clause(num, en, zh, attr):
+    """A numbered section head.
 
-    The reveal only works if each line is its own element - a single text node with a
-    newline gives the browser one box and nothing to slide behind.
+    The numbers are not ornament: the page is written as a document, and they are how
+    you would refer to a part of it out loud.
     """
-    return {"type": "div", "data": {"attrID": attr + "-mask"},
-            "style": {"&": {"_": {"customStyles": "overflow:hidden;padding-bottom:.08em;"}}},
-            "children": [T(tag, text, **st)]}
-
+    return box(attr, {"display": "grid", "gridCols": "84px 1fr",
+                      "columnGap": "0px", "alignItems": "start",
+                      "paddingTop": "22px",
+                      "customStyles": "border-top:1px solid " + RULE + ";"},
+               _m={"gridCols": "48px 1fr"},
+               children=[
+                   mono("§" + num, size="12px", color="--mk-accent", track="0.06em"),
+                   box(attr + "-t", {}, [
+                       mono(en, size="11px", color="--mk-muted"),
+                       T("h2", zh, color={"token": "--mk-ink"}, fontSize="34px",
+                         fontWeight="600", letterSpacing="-0.025em", lineHeight="1.3",
+                         fontFamily=DISPLAY, marginTop="10px",
+                         _t={"fontSize": "29px"}, _m={"fontSize": "23px"}),
+                   ]),
+               ])
 
 
 def apply_type(node, display, body, weight="600"):
@@ -166,21 +182,39 @@ def apply_type(node, display, body, weight="600"):
             apply_type(v, display, body, weight)
     return node
 
+
+def mask_line(attr, text, tag="h1", **st):
+    """One display line in an overflow mask, so it can rise from behind its own edge.
+
+    The reveal only works if each line is its own element - a single text node with a
+    newline gives the browser one box and nothing to slide behind.
+    """
+    return {"type": "div", "data": {"attrID": attr + "-mask"},
+            "style": {"&": {"_": {"customStyles":
+                                      "overflow:hidden;padding-bottom:.08em;"}}},
+            "children": [T(tag, text, **st)]}
+
+
 # ── content, all of it Moksa Web's own ───────────────────────────────────────
 NAV = [("服務", "#services"), ("作品", "#works"),
-       ("產品", "#saas"), ("聯絡", "#contact")]
+       ("產品", "#products"), ("聯絡", "#contact")]
 
-STATS = [("9", "年技術開發經驗"), ("252", "完成客製化專案"),
-         ("17", "精選上線作品"), ("876", "技術支援與服務")]
+# key / figure / caption, read as a datasheet rather than as four big numbers
+SPEC = [
+    ("EXPERIENCE", "9", "年技術開發經驗"),
+    ("DELIVERED", "252", "完成客製化專案"),
+    ("SELECTED", "17", "精選上線作品"),
+    ("SUPPORT", "876", "技術支援與服務"),
+]
 
 SERVICES = [
-    ("WEB & E-COMMERCE", "網站與電商",
+    ("01", "WEB & E-COMMERCE", "網站與電商",
      "品牌官網、電商平台與 WordPress 開發，乾淨的結構與好管理的後台。"),
-    ("AI & AUTOMATION", "AI・自動化・軟體",
+    ("02", "AI & AUTOMATION", "AI・自動化・軟體",
      "AI 客服與自動化流程導入、客製軟體與 ERP 開發，把重複工作交給機器。"),
-    ("INTEGRATION & MIGRATION", "串接與轉移",
+    ("03", "INTEGRATION & MIGRATION", "串接與轉移",
      "API、金物流串接與平台無痛轉移，讓資料在系統之間自動流通。"),
-    ("OPTIMIZE & MAINTAIN", "優化與維運",
+    ("04", "OPTIMIZE & MAINTAIN", "優化與維運",
      "SEO 優化、主機代管與資安維護，上線後的長期穩定照顧。"),
 ]
 
@@ -196,13 +230,13 @@ WORKS = [
     ("酸奶多 YogurtDuo", "BRAND WEBSITE", "yogurtduo.com"),
 ]
 
-SAAS = [
+PRODUCTS = [
     ("WOOCOMMERCE MANAGEMENT", "StoreDash",
      "WooCommerce 雲端管理後台，專為台灣電商設計。訂單、商品、庫存、LINE 通知，"
-     "一支手機就能管。"),
+     "一支手機就能管。", "FREE TIER"),
     ("BUSINESS MANAGEMENT", "Freelancer CRM",
      "專為自由工作者打造的業務管理系統。客戶管理、報價追蹤、財務報表與案件進度，"
-     "接案人生一站搞定。"),
+     "接案人生一站搞定。", "IN BETA"),
 ]
 
 VOICES = [
@@ -214,21 +248,20 @@ VOICES = [
      "從前端到後台都非常專業。", "Emily 黃", "睡衣品牌創意總監"),
 ]
 
-MARQUEE_WORDS = ["WEB", "AI", "AUTOMATION", "SOFTWARE", "ERP", "SEO",
-                 "HOSTING", "WORDPRESS", "WOOCOMMERCE", "N8N"]
+TICKER = ["WEB", "AI", "AUTOMATION", "SOFTWARE", "ERP", "SEO",
+          "HOSTING", "WORDPRESS", "WOOCOMMERCE", "N8N"]
 
-# Threaded through the build: the stagger is a design decision and reads better in
-# one place than scattered across the tree.
 REVEALS = [
-    ("mk-stats-in", 0),
-    ("mk-svc-head", 0), ("mk-svc-0", 1), ("mk-svc-1", 2), ("mk-svc-2", 3), ("mk-svc-3", 4),
+    ("mk-spec", 0),
+    ("mk-svc-head", 0), ("mk-svc-0", 1), ("mk-svc-1", 2), ("mk-svc-2", 3),
+    ("mk-svc-3", 4),
     ("mk-works-head", 0),
-    ("mk-work-0", 1), ("mk-work-1", 2), ("mk-work-2", 3),
-    ("mk-work-3", 1), ("mk-work-4", 2), ("mk-work-5", 3),
-    ("mk-work-6", 1), ("mk-work-7", 2), ("mk-work-8", 3),
-    ("mk-saas-head", 0), ("mk-saas-0", 1), ("mk-saas-1", 2),
+    ("mk-work-0", 1), ("mk-work-1", 1), ("mk-work-2", 2), ("mk-work-3", 2),
+    ("mk-work-4", 3), ("mk-work-5", 3), ("mk-work-6", 4), ("mk-work-7", 4),
+    ("mk-work-8", 5),
+    ("mk-prod-head", 0), ("mk-prod-0", 1), ("mk-prod-1", 2),
     ("mk-voice-head", 0), ("mk-voice-0", 1), ("mk-voice-1", 2), ("mk-voice-2", 3),
-    ("mk-cta-in", 0),
+    ("mk-contact-head", 0),
 ]
 
 
@@ -240,222 +273,143 @@ def motion_css():
     """
     reveal_targets = ",".join("#" + a for a, _ in REVEALS)
     reveal_stagger = "\n".join(
-        "    #" + a + "{animation-range:entry " + str(2 + i * 5) + "% cover "
-        + str(40 + i * 5) + "%}"
+        "    #" + a + "{animation-range:entry " + str(2 + i * 4) + "% cover "
+        + str(36 + i * 4) + "%}"
         for a, i in REVEALS if i)
-    works = ",".join("#mk-work-%d" % i for i in range(len(WORKS)))
-    arrows = ",".join("#mk-arrow-%d" % i for i in range(len(WORKS)))
-    work_hovers = ",".join("#mk-work-%d:hover #mk-arrow-%d" % (i, i)
-                           for i in range(len(WORKS)))
+    work_rows = ",".join("#mk-work-%d" % i for i in range(len(WORKS)))
+    work_hovers = ",".join("#mk-work-%d:hover" % i for i in range(len(WORKS)))
+    idx_hovers = ",".join("#mk-work-%d:hover #mk-work-idx-%d" % (i, i)
+                          for i in range(len(WORKS)))
 
     return "\n".join([
-        # Preconnect first: the display face is on the critical path for the hero.
         '<link rel="preconnect" href="https://fonts.googleapis.com">',
         '<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>',
         '<link rel="stylesheet" href="https://fonts.googleapis.com/css2?'
-        'family=Space+Grotesk:wght@400;500;600;700&'
-        'family=Noto+Sans+TC:wght@300;400;500&'
-        'family=IBM+Plex+Mono:wght@400;500&display=swap">',
+        'family=IBM+Plex+Mono:wght@400;500&'
+        'family=Space+Grotesk:wght@500;600;700&'
+        'family=Noto+Sans+TC:wght@300;400;500&display=swap">',
         '<style id="mk-motion">',
 
         # ── keyframes ────────────────────────────────────────────────────────
-        "@keyframes mk-curtain{0%,58%{transform:translateY(0)}"
-        "100%{transform:translateY(-101%)}}",
-        "@keyframes mk-markin{0%{opacity:0;transform:translateY(12px)}"
-        "20%,50%{opacity:1;transform:none}64%,100%{opacity:0;transform:translateY(-10px)}}",
-        "@keyframes mk-markbar{0%{transform:scaleX(0)}34%,52%{transform:scaleX(1)}"
-        "70%,100%{transform:scaleX(0);transform-origin:100% 50%}}",
-        "@keyframes mk-linein{from{transform:translateY(112%)}to{transform:translateY(0)}}",
-        "@keyframes mk-softin{from{opacity:0;transform:translateY(14px)}"
+        "@keyframes mk-linein{from{transform:translateY(110%)}to{transform:translateY(0)}}",
+        "@keyframes mk-softin{from{opacity:0;transform:translateY(10px)}"
         "to{opacity:1;transform:none}}",
-        "@keyframes mk-rise{from{opacity:0;transform:translateY(30px)}"
+        "@keyframes mk-rise{from{opacity:0;transform:translateY(18px)}"
         "to{opacity:1;transform:none}}",
-        "@keyframes mk-draw{from{transform:scaleX(0)}to{transform:scaleX(1)}}",
-        "@keyframes mk-marquee{from{transform:translateX(0)}"
+        "@keyframes mk-drawx{from{transform:scaleX(0)}to{transform:scaleX(1)}}",
+        "@keyframes mk-ticker{from{transform:translateX(0)}"
         "to{transform:translateX(-50%)}}",
         "@keyframes mk-progress{from{width:0%}to{width:100%}}",
-        "@keyframes mk-headfill{"
-        "from{background:rgba(255,255,255,.08);border-color:rgba(255,255,255,.20);"
-        "-webkit-backdrop-filter:blur(24px) saturate(190%);"
-        "backdrop-filter:blur(24px) saturate(190%);"
-        "box-shadow:0 14px 40px rgba(0,0,0,.34),"
-        "inset 0 1px 0 rgba(255,255,255,.40)}"
-        "to{background:rgba(255,255,255,.62);border-color:rgba(255,255,255,.9);"
-        "-webkit-backdrop-filter:blur(34px) saturate(220%) brightness(1.05);"
-        "backdrop-filter:blur(34px) saturate(220%) brightness(1.05);"
-        "box-shadow:0 16px 46px rgba(17,19,24,.14),"
-        "inset 0 1px 0 rgba(255,255,255,.95)}}",
-        "@keyframes mk-headink{"
-        "from{color:rgba(245,245,243,1);text-shadow:0 1px 3px rgba(0,0,0,.4)}"
-        "to{color:rgb(17,19,24);text-shadow:0 1px 3px rgba(0,0,0,0)}}",
-        "@keyframes mk-headcta{"
-        "from{background:rgb(255,90,54);color:rgb(255,255,255);"
-        "border-color:rgb(255,90,54)}"
-        "to{background:rgb(17,19,24);color:rgb(245,245,243);"
-        "border-color:rgb(17,19,24)}}",
+        "@keyframes mk-headrule{from{opacity:0}to{opacity:1}}",
+        "@keyframes mk-headbg{from{background:rgba(250,250,247,0)}"
+        "to{background:rgba(250,250,247,.9)}}",
+        "@keyframes mk-caret{0%,45%{opacity:1}50%,95%{opacity:0}100%{opacity:1}}",
         "@keyframes mk-cuearrow{"
-        "0%{transform:translateY(-4px) rotate(45deg);opacity:0}"
-        "22%{opacity:1}70%{opacity:1}"
-        "100%{transform:translateY(30px) rotate(45deg);opacity:0}}",
-        "@keyframes mk-cuefade{0%,22%{opacity:1;transform:translateY(0)}"
-        "100%{opacity:0;transform:translateY(16px)}}",
+        "0%{transform:translateY(-3px) rotate(45deg);opacity:0}"
+        "25%{opacity:1}70%{opacity:1}"
+        "100%{transform:translateY(20px) rotate(45deg);opacity:0}}",
+        "@keyframes mk-cuefade{0%,25%{opacity:1}100%{opacity:0}}",
 
-        # ── layout the style compiler cannot express ─────────────────────────
-        "#mk-hero{position:relative;min-height:86vh;display:flex;align-items:center;"
-        "overflow:hidden}",
-        "#mk-hero-in{position:relative;z-index:2;padding-top:132px;padding-bottom:104px}",
-        # a fine grid over the ink, so the ground reads as drawn rather than filled
-        '#mk-hero::before{content:"";position:absolute;inset:0;z-index:0;'
-        "pointer-events:none;"
-        "background-image:"
-        "radial-gradient(circle at 1px 1px,rgba(255,90,54,.34) 1.6px,transparent 1.8px),"
-        "radial-gradient(circle at 1px 1px,rgba(255,255,255,.13) 1px,transparent 1.2px);"
-        "background-size:116px 116px,29px 29px}",
-        # a single soft bloom in the studio's colour, off to one side
-        '#mk-hero::after{content:"";position:absolute;z-index:0;pointer-events:none;'
-        "right:-8%;top:-20%;width:60%;height:120%;"
-        "background:radial-gradient(closest-side,rgba(255,90,54,.22),"
-        "rgba(255,90,54,0) 72%)}",
+        # ── the document frame ───────────────────────────────────────────────
+        # A spec sheet has margins. These two fixed rules are what say the content
+        # sits inside a measured field rather than floating on a page.
+        "#mk-doc{position:relative}",
+        '#mk-doc::before,#mk-doc::after{content:"";position:fixed;top:0;bottom:0;'
+        "width:1px;background:" + RULE + ";z-index:1;pointer-events:none}",
+        "#mk-doc::before{left:40px}",
+        "#mk-doc::after{right:40px}",
+        "@media (max-width:1079px){#mk-doc::before{left:28px}"
+        "#mk-doc::after{right:28px}}",
+        "@media (max-width:767px){#mk-doc::before,#mk-doc::after{display:none}}",
 
-        "#mk-header{position:fixed;top:14px;left:50%;z-index:100;"
-        "transform:translateX(-50%);width:calc(100% - 32px);max-width:1264px;"
-        "border-radius:999px;overflow:hidden;isolation:isolate;"
-        "background:rgba(255,255,255,.08);"
-        "-webkit-backdrop-filter:blur(24px) saturate(190%);"
-        "backdrop-filter:blur(24px) saturate(190%);"
-        "border:1px solid rgba(255,255,255,.20);"
-        "box-shadow:0 14px 40px rgba(0,0,0,.34),"
-        "inset 0 1px 0 rgba(255,255,255,.40);"
-        "will-change:backdrop-filter,background}",
-        '#mk-header::before{content:"";position:absolute;inset:0;'
-        "pointer-events:none;z-index:0;border-radius:inherit;"
-        "background:radial-gradient(120% 260% at 12% -60%,"
-        "rgba(255,255,255,.18) 0%,rgba(255,255,255,.06) 38%,"
-        "rgba(255,255,255,0) 72%)}",
-        "#mk-header-in{position:relative;z-index:1}",
-        "#mk-header h3,#mk-header p,#mk-nav>*{color:rgba(245,245,243,.95);"
-        "text-shadow:0 1px 3px rgba(0,0,0,.4)}",
-        "#mk-nav>*,#mk-logo h3,#mk-logo p{white-space:nowrap;line-height:1.25}",
-        "#mk-header-cta{line-height:1.3}",
-
-        "#mk-progress-track{position:fixed;top:0;left:16px;right:16px;height:4px;"
-        "z-index:101;border-radius:4px;pointer-events:none;"
-        "background:rgba(255,90,54,.22)}",
-        "#mk-progress{position:absolute;left:0;top:0;width:0;height:100%;"
-        "border-radius:4px;pointer-events:none;"
-        "background:linear-gradient(90deg,rgb(214,63,30) 0%,rgb(255,90,54) 60%,"
-        "rgb(255,142,110) 100%);"
-        "box-shadow:0 0 18px rgba(255,90,54,.7)}",
-        '#mk-progress::after{content:"";position:absolute;right:-3px;top:50%;'
-        "width:10px;height:10px;margin-top:-5px;border-radius:50%;"
-        "background:rgb(255,160,130);"
-        "box-shadow:0 0 12px 3px rgba(255,90,54,.9)}",
-
-        "#mk-intro{position:fixed;inset:0;z-index:200;background:rgb(13,14,18);"
-        "display:grid;place-items:center;pointer-events:none}",
-        "#mk-intro-mark{text-align:center}",
-        "#mk-intro-bar{width:120px;height:2px;margin:20px auto 0;"
-        "background:rgb(255,90,54);transform:scaleX(0);transform-origin:0 50%}",
-
-        "#mk-marquee-track{display:flex;width:max-content;will-change:transform}",
-        "html{scroll-behavior:smooth}",
-        "#services,#works,#saas,#contact{scroll-margin-top:96px}",
-        "@media (max-width:767px){#services,#works,#saas,#contact"
-        "{scroll-margin-top:76px}}",
-
-        # the scroll cue: chrome, so it belongs to the viewport, not to the column
-        "#mk-cue{position:fixed;right:22px;bottom:32px;z-index:90;"
-        "display:flex;flex-direction:column;align-items:center;row-gap:13px;"
-        "pointer-events:none;padding:18px 11px 15px;border-radius:999px;"
-        "background:rgba(13,14,18,.5);"
-        "-webkit-backdrop-filter:blur(16px) saturate(170%);"
-        "backdrop-filter:blur(16px) saturate(170%);"
-        "border:1px solid rgba(255,255,255,.22);"
-        "box-shadow:0 10px 30px rgba(0,0,0,.45),"
-        "inset 0 1px 0 rgba(255,255,255,.28)}",
-        "#mk-cue p{writing-mode:vertical-rl}",
-        "#mk-cue-rail{position:relative;width:10px;height:42px}",
-        '#mk-cue-rail::before{content:"";position:absolute;left:50%;top:0;bottom:0;'
-        "width:1px;margin-left:-.5px;background:rgba(245,245,243,.22)}",
-        # two borders on a square turned 45deg - a chevron with no extra markup
-        '#mk-cue-rail::after{content:"";position:absolute;left:50%;top:0;'
-        "width:8px;height:8px;margin-left:-4px;opacity:0;"
-        "border-right:1.5px solid rgb(255,120,90);"
-        "border-bottom:1.5px solid rgb(255,120,90);"
-        "filter:drop-shadow(0 0 5px rgba(255,90,54,.7))}",
-
-        # ── hover detail ─────────────────────────────────────────────────────
+        # ── header: a flush document bar, not a floating panel ───────────────
+        "#mk-header{position:fixed;top:0;left:0;right:0;z-index:100;"
+        "background:rgba(250,250,247,0);"
+        "-webkit-backdrop-filter:blur(10px);backdrop-filter:blur(10px)}",
+        '#mk-header::after{content:"";position:absolute;left:0;right:0;bottom:0;'
+        "height:1px;background:" + RULE + ";opacity:0}",
         "#mk-nav>*{position:relative}",
-        '#mk-nav>*::after{content:"";position:absolute;left:0;right:100%;bottom:-7px;'
+        '#mk-nav>*::after{content:"";position:absolute;left:0;right:100%;bottom:-5px;'
         "height:1px;background:rgb(255,90,54);"
-        "transition:right .3s cubic-bezier(.2,.7,.3,1)}",
+        "transition:right .28s cubic-bezier(.2,.7,.3,1)}",
         "#mk-nav>*:hover::after{right:0}",
-        works + "{position:relative}",
-        ",".join("#mk-work-%d::after" % i for i in range(len(WORKS)))
-        + '{content:"";position:absolute;left:0;right:100%;bottom:0;height:2px;'
-        "background:rgb(255,90,54);"
-        "transition:right .42s cubic-bezier(.2,.7,.3,1)}",
-        ",".join("#mk-work-%d:hover::after" % i for i in range(len(WORKS)))
-        + "{right:0}",
-        arrows + "{display:inline-block;"
-        "transition:transform .3s cubic-bezier(.2,.7,.3,1)}",
-        work_hovers + "{transform:translate(4px,-4px)}",
-        "@media (hover:none){#mk-nav>*::after{right:0;opacity:.4}}",
+        "@media (hover:none){#mk-nav>*::after{right:0;opacity:.45}}",
 
-        # ── breakpoints the style compiler cannot reach ──────────────────────
-        "@media (max-width:1079px){",
-        "  #mk-hero{min-height:78vh}",
-        "  #mk-hero-in{padding-top:112px;padding-bottom:88px}",
-        "}",
-        "@media (max-width:767px){",
-        "  #mk-header{width:calc(100% - 20px);top:10px}",
-        "  #mk-hero{min-height:auto}",
-        "  #mk-hero-in{padding-top:104px;padding-bottom:84px}",
-        "  #mk-hero::before{background-size:80px 80px,20px 20px}",
-        "  #mk-cue{right:14px;bottom:22px}",
-        "  #mk-progress-track{left:10px;right:10px}",
-        "  #mk-intro-bar{width:80px}",
-        "  #mk-marquee-track p{padding:0 18px}",
-        "  #mk-hero-cta>*{flex:1 1 100%;text-align:center}",
-        "}",
+        "#mk-progress-track{position:fixed;top:0;left:0;right:0;height:2px;"
+        "z-index:101;pointer-events:none;background:rgba(255,90,54,.16)}",
+        "#mk-progress{position:absolute;left:0;top:0;width:0;height:100%;"
+        "background:rgb(255,90,54)}",
+
+        # ── masthead ─────────────────────────────────────────────────────────
+        "#mk-mast-in{padding-top:128px}",
+        "@media (max-width:1079px){#mk-mast-in{padding-top:104px}}",
+        "@media (max-width:767px){#mk-mast-in{padding-top:88px}}",
+        # the blinking caret under the headline: the one piece of ornament, and it
+        # belongs to a page set in a terminal face
+        "#mk-caret{width:13px;height:19px;background:rgb(255,90,54)}",
+        "#mk-mast-rule,#mk-spec-rule{height:1px;background:" + RULE + ";"
+        "transform:scaleX(0);transform-origin:0 50%}",
+
+        # ── the work table ───────────────────────────────────────────────────
+        work_rows + "{transition:background-color .2s ease,padding-left .28s "
+        "cubic-bezier(.2,.7,.3,1)}",
+        work_hovers + "{background-color:rgba(255,90,54,.06);padding-left:14px}",
+        idx_hovers + "{color:rgb(255,90,54)}",
+
+        "#mk-ticker-track{display:flex;width:max-content;will-change:transform}",
+        "html{scroll-behavior:smooth}",
+        "#services,#works,#products,#contact{scroll-margin-top:82px}",
+        "#mk-home{scroll-margin-top:0}",
+        "@media (max-width:767px){#services,#works,#products,#contact"
+        "{scroll-margin-top:68px}}",
+
+        # ── the scroll cue, set as a field marker rather than a badge ────────
+        "#mk-cue{position:fixed;right:40px;bottom:24px;z-index:90;"
+        "display:flex;align-items:center;column-gap:10px;pointer-events:none}",
+        "#mk-cue-rail{position:relative;width:9px;height:24px}",
+        '#mk-cue-rail::after{content:"";position:absolute;left:50%;top:0;'
+        "width:7px;height:7px;margin-left:-4px;opacity:0;"
+        "border-right:1px solid rgb(255,90,54);"
+        "border-bottom:1px solid rgb(255,90,54)}",
+        "@media (max-width:1079px){#mk-cue{right:28px}}",
+        "@media (max-width:767px){#mk-cue{right:18px;bottom:16px}}",
 
         # ── motion, all of it opt-out-able ───────────────────────────────────
-        "@media (prefers-reduced-motion:reduce){#mk-intro{display:none}}",
         "@media (prefers-reduced-motion:no-preference){",
-        "  #mk-intro{animation:mk-curtain 2.3s cubic-bezier(.72,0,.16,1) forwards}",
-        "  #mk-intro-mark{animation:mk-markin 2.3s cubic-bezier(.4,0,.2,1) forwards}",
-        "  #mk-intro-bar{animation:mk-markbar 2.3s cubic-bezier(.72,0,.16,1) forwards}",
-        # the lines start below their own mask and are pulled up after the curtain
         "  #mk-hl1-mask>*,#mk-hl2-mask>*{transform:translateY(112%);"
-        "animation:mk-linein 1.15s cubic-bezier(.16,1,.3,1) forwards}",
-        "  #mk-hl1-mask>*{animation-delay:1.5s}",
-        "  #mk-hl2-mask>*{animation-delay:1.66s}",
-        "  #mk-eyebrow,#mk-hero-in p,#mk-hero-cta{opacity:0;"
-        "animation:mk-softin 1s cubic-bezier(.16,1,.3,1) forwards}",
-        "  #mk-eyebrow{animation-delay:1.42s}",
-        "  #mk-hero-in p{animation-delay:1.88s}",
-        "  #mk-hero-cta{animation-delay:2.02s}",
-        "  #mk-cue p,#mk-cue-rail{opacity:0;animation:mk-softin 1s ease forwards;"
-        "animation-delay:2.3s}",
-        "  #mk-cue-rail::after{animation:mk-cuearrow 2.2s cubic-bezier(.4,0,.5,1) "
+        "animation:mk-linein .95s cubic-bezier(.16,1,.3,1) forwards}",
+        "  #mk-hl1-mask>*{animation-delay:.2s}",
+        "  #mk-hl2-mask>*{animation-delay:.32s}",
+        "  #mk-mast-meta,#mk-mast-lede,#mk-mast-cta{opacity:0;"
+        "animation:mk-softin .8s cubic-bezier(.16,1,.3,1) forwards}",
+        "  #mk-mast-meta{animation-delay:.06s}",
+        "  #mk-mast-lede{animation-delay:.66s}",
+        "  #mk-mast-cta{animation-delay:.78s}",
+        "  #mk-caret{animation:mk-caret 1.15s steps(1,end) infinite;"
+        "animation-delay:.95s}",
+        "  #mk-mast-rule{animation:mk-drawx .9s cubic-bezier(.2,.7,.3,1) forwards;"
+        "animation-delay:.44s}",
+        "  #mk-spec-rule{animation:mk-drawx .9s cubic-bezier(.2,.7,.3,1) forwards;"
+        "animation-delay:.9s}",
+        "  #mk-cue{opacity:0;animation:mk-softin .8s ease forwards;"
+        "animation-delay:1.1s}",
+        "  #mk-cue-rail::after{animation:mk-cuearrow 1.9s cubic-bezier(.4,0,.5,1) "
         "infinite}",
-        "  #mk-marquee-track{animation:mk-marquee 44s linear infinite}",
+        "  #mk-ticker-track{animation:mk-ticker 40s linear infinite}",
         "  @supports (animation-timeline:view()){",
         "    " + reveal_targets + "{animation:mk-rise .01s linear both;"
-        "animation-timeline:view();animation-range:entry 2% cover 40%}",
+        "animation-timeline:view();animation-range:entry 2% cover 36%}",
         reveal_stagger,
         "  }",
         "  @supports (animation-timeline:scroll()){",
-        "    #mk-progress{right:16px;animation:mk-progress linear both;"
+        "    #mk-progress{animation:mk-progress linear both;"
         "animation-timeline:scroll(root)}",
         "    #mk-cue{animation:mk-cuefade linear both;"
-        "animation-timeline:scroll(root);animation-range:0px 300px}",
-        "    #mk-header{animation:mk-headfill linear both;"
-        "animation-timeline:scroll(root);animation-range:60px 220px}",
-        "    #mk-header h3,#mk-header p,#mk-nav>*{animation:mk-headink linear both;"
-        "animation-timeline:scroll(root);animation-range:60px 220px}",
-        "    #mk-header-cta{animation:mk-headcta linear both;"
-        "animation-timeline:scroll(root);animation-range:60px 220px}",
+        "animation-timeline:scroll(root);animation-range:0px 260px}",
+        "    #mk-header{animation:mk-headbg linear both;"
+        "animation-timeline:scroll(root);animation-range:20px 120px}",
+        "    #mk-header::after{animation:mk-headrule linear both;"
+        "animation-timeline:scroll(root);animation-range:20px 120px}",
         "  }",
         "}",
         "</style>",
@@ -468,433 +422,478 @@ HEADER = box("mk-shell-top", {}, [
     # the document - customStyles is emitted inside a rule and cannot hold one
     {"type": "code", "data": {"attrID": "mk-motion-css", "insertLocation": "head",
                               "content": motion_css(), "processShortcodes": "0"}},
-    # the entrance curtain: a full-viewport panel that holds the wordmark for a beat
-    # and then lifts. Purely decorative, so it never takes pointer events, and it is
-    # removed entirely under prefers-reduced-motion.
-    box("mk-intro", {}, [
-        box("mk-intro-mark", {}, [
-            T("h3", "MOKSA WEB", color={"token": "--mk-paper"}, fontSize="30px",
-              fontWeight="700", letterSpacing="0.06em", fontFamily=DISPLAY,
-              _m={"fontSize": "22px"}),
-            box("mk-intro-bar", {}, []),
-            T("p", "MAKE WEB MEANINGFUL", color={"token": "--mk-muted"}, fontSize="10px",
-              letterSpacing="0.3em", fontFamily=MONO, marginTop="16px",
-              textAlign="center"),
-        ]),
-    ]),
     # the fill and the track are separate elements: nested, the fill's width is a
-    # percentage of the track and the two insets cannot drift apart
+    # percentage of the track and the two cannot drift apart
     box("mk-progress-track", {}, [box("mk-progress", {}, [])]),
     box("mk-header",
-        {"paddingTop": "14px", "paddingBottom": "14px",
-         "paddingLeft": "30px", "paddingRight": "18px", "fontFamily": CJK},
-        _t={"paddingLeft": "24px", "paddingRight": "14px"},
+        {"paddingTop": "17px", "paddingBottom": "17px",
+         "paddingLeft": "40px", "paddingRight": "40px", "fontFamily": MONO},
+        _t={"paddingLeft": "28px", "paddingRight": "28px"},
         _m={"paddingLeft": "18px", "paddingRight": "18px",
-            "paddingTop": "11px", "paddingBottom": "11px"},
+            "paddingTop": "13px", "paddingBottom": "13px"},
         children=
         [wrap("mk-header-in", [
             {"type": "div", "data": {"attrID": "mk-header-row"},
              "style": bp({"display": "flex", "alignItems": "center",
                           "justifyContent": "space-between", "columnGap": "40px"},
-                         {"columnGap": "24px"}, {"columnGap": "14px"}),
+                         {"columnGap": "24px"}, {"columnGap": "12px"}),
              "children": [
                  # the wordmark is the only route back to the top on a one-pager, so
                  # it has to be a link. `menu-link` with a url renders a real <a>.
                  {"type": "menu-link", "data": {"attrID": "mk-logo", "url": "#mk-home"},
                   "style": {"&": {"_": {"display": "flex", "alignItems": "baseline",
-                                        "columnGap": "10px", "cursor": "pointer"}}},
+                                        "columnGap": "9px", "cursor": "pointer"}}},
                   "children":
-                      [T("h3", "MOKSA", color={"token": "--mk-paper"}, fontSize="20px",
-                         fontWeight="700", letterSpacing="0.02em", fontFamily=DISPLAY,
-                         _m={"fontSize": "17px"}),
-                       T("p", "WEB", color={"token": "--mk-accent"}, fontSize="11px",
-                         fontWeight="500", letterSpacing="0.24em", fontFamily=MONO)]},
+                      [T("h3", "MOKSA WEB", color={"token": "--mk-ink"},
+                         fontSize="14px", fontWeight="500", letterSpacing="0.05em",
+                         fontFamily=MONO, _m={"fontSize": "13px"}),
+                       T("p", "/ STUDIO", color={"token": "--mk-faint"},
+                         fontSize="11px", letterSpacing="0.06em", fontFamily=MONO,
+                         _m={"display": "none"})]},
                  {"type": "menu", "data": {"attrID": "mk-nav"},
-                  "style": bp({"display": "flex", "columnGap": "32px",
+                  "style": bp({"display": "flex", "columnGap": "30px",
                                "alignItems": "center"},
-                              {"columnGap": "22px"}, {"columnGap": "16px"}),
+                              {"columnGap": "20px"}, {"columnGap": "15px"}),
                   "children": [
                       {"type": "menu-link",
                        "data": {"attrID": "mk-nav-%d" % i, "url": href},
-                       "style": {"&": {"_": {"color": {"token": "--mk-paper"},
-                                             "fontSize": "14px", "fontWeight": "400",
+                       "style": {"&": {"_": {"color": {"token": "--mk-ink"},
+                                             "fontSize": "13px", "fontWeight": "400",
                                              "letterSpacing": "0.04em",
+                                             "fontFamily": MONO,
                                              "transitionAll": "160ms ease",
                                              "cursor": "pointer"},
-                                       "_t": {"fontSize": "13px"},
-                                       "_m": {"fontSize": "13px"}},
+                                       "_m": {"fontSize": "12px"}},
                                  "hover": {"_": {"color": {"token": "--mk-accent"}}}},
                        "text": text}
                       for i, (text, href) in enumerate(NAV)
                   ]},
+                 # not a pill: a bracketed link, the way a document cross-references
                  {"type": "button", "data": {"attrID": "mk-header-cta",
                                              "url": "#contact"},
                   "style": {"&": {"_m": {"display": "none"},
-                                  "_t": {"fontSize": "12px", "paddingLeft": "15px",
-                                         "paddingRight": "15px"},
-                                  "_": {"backgroundColor": {"token": "--mk-accent"},
-                                        "color": "rgb(255,255,255)", "fontSize": "13px",
-                                        "fontWeight": "500",
-                                        "paddingTop": "9px", "paddingBottom": "9px",
-                                        "paddingLeft": "20px", "paddingRight": "20px",
-                                        "radius": "999px", "cursor": "pointer",
+                                  "_t": {"fontSize": "12px"},
+                                  "_": {"backgroundColor": "rgba(0,0,0,0)",
+                                        "color": {"token": "--mk-accent"},
+                                        "fontSize": "13px", "fontFamily": MONO,
+                                        "letterSpacing": "0.06em",
+                                        "paddingTop": "6px", "paddingBottom": "6px",
+                                        "paddingLeft": "12px", "paddingRight": "12px",
+                                        "radius": "0px", "cursor": "pointer",
                                         "border": {"width": "1px", "style": "solid",
                                                    "color": "rgb(255,90,54)"},
-                                        "transitionAll": "200ms ease"}}},
-                  "text": "開始專案"},
+                                        "transitionAll": "180ms ease"}},
+                            "hover": {"_": {"backgroundColor": {"token": "--mk-accent"},
+                                            "color": {"token": "--mk-paper"}}}},
+                  "text": "START A PROJECT"},
              ]}
         ])]),
 ])
 
 FOOTER = box("mk-footer",
-    {"backgroundColor": {"token": "--mk-ink"}, "paddingTop": "88px", "paddingBottom": "40px",
-     "paddingLeft": "48px", "paddingRight": "48px", "fontFamily": CJK,
-     "customStyles": "overflow:hidden;"},
-    _t={"paddingLeft": "32px", "paddingRight": "32px", "paddingTop": "68px"},
-    _m={"paddingLeft": "20px", "paddingRight": "20px", "paddingTop": "52px"},
+    {"backgroundColor": {"token": "--mk-ink"}, "paddingBottom": "26px",
+     "paddingLeft": "40px", "paddingRight": "40px", "fontFamily": MONO},
+    _t={"paddingLeft": "28px", "paddingRight": "28px"},
+    _m={"paddingLeft": "18px", "paddingRight": "18px"},
     children=
     [wrap("mk-footer-in", [
-        {"type": "div", "data": {"attrID": "contact"},
-         "style": bp({"display": "grid", "gridCols": "1.15fr .85fr",
-                      "columnGap": "64px", "rowGap": "40px", "alignItems": "start"},
-                     None, {"gridCols": "repeat(1, 1fr)"}),
-         "children": [
-             box("mk-f-brand", {}, [
-                 T("h2", "Make Web Meaningful.", color={"token": "--mk-paper"},
-                   fontSize="40px", fontWeight="600", letterSpacing="-0.01em",
-                   lineHeight="1.15", fontFamily=DISPLAY,
-                   _t={"fontSize": "33px"}, _m={"fontSize": "26px"}),
-                 T("p", "打造有價值的網站體驗。", color="rgb(150,153,160)",
-                   fontSize="15px", marginTop="14px", lineHeight="1.9"),
-                 T("p", "+886-958-839-939", color={"token": "--mk-paper"}, fontSize="17px",
-                   fontFamily=MONO, marginTop="34px", letterSpacing="0.02em"),
-                 T("p", "services@moksaweb.com", color={"token": "--mk-accent"},
-                   fontSize="17px", fontFamily=MONO, marginTop="6px",
-                   letterSpacing="0.02em"),
-             ]),
-             grid("mk-f-links", 2, "32px", tcols=2, mcols=2, children=[
-                 box("mk-f-col-0", {}, [
-                     T("h3", "PAGES", color={"token": "--mk-muted"}, fontSize="10px",
-                       fontWeight="500", letterSpacing="0.18em", fontFamily=MONO),
-                     box("mk-f-col-0-list", {"marginTop": "18px"},
-                         [T("p", t, color="rgb(168,171,178)", fontSize="14px",
-                            lineHeight="2.2")
-                          for t in ["作品集", "團隊成員", "關於我們", "服務報價"]]),
-                 ]),
-                 box("mk-f-col-1", {}, [
-                     T("h3", "LEARN", color={"token": "--mk-muted"}, fontSize="10px",
-                       fontWeight="500", letterSpacing="0.18em", fontFamily=MONO),
-                     box("mk-f-col-1-list", {"marginTop": "18px"},
-                         [T("p", t, color="rgb(168,171,178)", fontSize="14px",
-                            lineHeight="2.2")
-                          for t in ["Claude Code 教學", "n8n 教學", "全部文章", "開源計畫"]]),
-                 ]),
-             ]),
-         ]},
-        box("mk-f-legal",
-            {"marginTop": "64px", "paddingTop": "22px",
-             "customStyles": "border-top:1px solid rgba(245,245,243,0.12);"},
-            _m={"marginTop": "44px"},
+        box("mk-f-top",
+            {"display": "grid", "gridCols": "1.1fr .9fr",
+             "columnGap": "56px", "rowGap": "36px", "alignItems": "start",
+             "paddingTop": "58px", "paddingBottom": "48px"},
+            _m={"gridCols": "repeat(1, 1fr)", "paddingTop": "42px",
+                "paddingBottom": "34px"},
             children=[
-                {"type": "div", "data": {"attrID": "mk-f-legal-row"},
-                 "style": bp({"display": "flex", "justifyContent": "space-between",
-                              "columnGap": "24px", "rowGap": "8px",
-                              "customStyles": "flex-wrap:wrap;"}, None, None),
-                 "children": [
-                     T("p", "© 2026 Moksa Web — All Rights Reserved",
-                       color="rgb(110,113,120)", fontSize="11px", fontFamily=MONO),
-                     T("p", "MAKE WEB MEANINGFUL — TAICHUNG, TW",
-                       color="rgb(110,113,120)", fontSize="11px", fontFamily=MONO,
-                       letterSpacing="0.1em"),
-                 ]},
+                box("mk-f-brand", {}, [
+                    mono("MAKE WEB MEANINGFUL", size="11px", color="--mk-accent",
+                         track="0.2em"),
+                    T("h2", "打造有價值的網站體驗。", color={"token": "--mk-paper"},
+                      fontSize="30px", fontWeight="500", letterSpacing="-0.01em",
+                      lineHeight="1.5", fontFamily=CJK, marginTop="16px",
+                      _m={"fontSize": "22px"}),
+                    box("mk-f-contact",
+                        {"marginTop": "30px", "display": "grid", "rowGap": "6px"}, [
+                            mono("+886-958-839-939", size="14px",
+                                 color="rgb(250,250,247)", track="0.02em"),
+                            mono("services@moksaweb.com", size="14px",
+                                 color="rgb(255,90,54)", track="0.02em"),
+                            mono("TAICHUNG, TAIWAN", size="11px",
+                                 color="rgb(140,142,150)", track="0.16em"),
+                        ]),
+                ]),
+                grid("mk-f-links", 2, "28px", tcols=2, mcols=2, children=[
+                    box("mk-f-col-0", {}, [
+                        mono("PAGES", size="10px", color="rgb(122,124,132)",
+                             track="0.2em"),
+                        box("mk-f-col-0-list",
+                            {"marginTop": "16px", "display": "grid", "rowGap": "9px"},
+                            [mono(t, size="13px", color="rgb(178,180,186)",
+                                  track="0.02em")
+                             for t in ["作品集", "團隊成員", "關於我們", "服務報價"]]),
+                    ]),
+                    box("mk-f-col-1", {}, [
+                        mono("LEARN", size="10px", color="rgb(122,124,132)",
+                             track="0.2em"),
+                        box("mk-f-col-1-list",
+                            {"marginTop": "16px", "display": "grid", "rowGap": "9px"},
+                            [mono(t, size="13px", color="rgb(178,180,186)",
+                                  track="0.02em")
+                             for t in ["Claude Code 教學", "n8n 教學", "全部文章",
+                                       "開源計畫"]]),
+                    ]),
+                ]),
             ]),
+        box("mk-f-legal",
+            {"paddingTop": "18px",
+             "customStyles": "border-top:1px solid " + RULE_DARK + ";"},
+            [{"type": "div", "data": {"attrID": "mk-f-legal-row"},
+              "style": bp({"display": "flex", "justifyContent": "space-between",
+                           "columnGap": "20px", "rowGap": "6px",
+                           "customStyles": "flex-wrap:wrap;"}, None, None),
+              "children": [
+                  mono("© 2026 MOKSA WEB — ALL RIGHTS RESERVED", size="10px",
+                       color="rgb(112,114,122)", track="0.1em"),
+                  mono("BUILT HEADLESS ON MOSAIC", size="10px",
+                       color="rgb(112,114,122)", track="0.1em"),
+              ]}]),
     ])])
 
 
 # ── the page ──────────────────────────────────────────────────────────────────
-HERO_LINE = dict(color={"token": "--mk-paper"}, fontSize="72px", fontWeight="600",
-                 lineHeight="1.06", letterSpacing="-0.02em", fontFamily=DISPLAY,
-                 _t={"fontSize": "52px"}, _m={"fontSize": "34px"})
+HERO_LINE = dict(color={"token": "--mk-ink"}, fontSize="62px", fontWeight="600",
+                 lineHeight="1.12", letterSpacing="-0.035em", fontFamily=DISPLAY,
+                 _t={"fontSize": "46px"}, _m={"fontSize": "31px"})
 
-HERO = section("mk-hero", [
-    wrap("mk-hero-in", [
-        box("mk-hero-copy", {"maxWidth": "760px"}, [
-            label("MOKSA WEB STUDIO — TAICHUNG, TW", "mk-eyebrow"),
-            box("mk-hero-lines", {"marginTop": "26px"}, [
-                mask_line("mk-hl1", "網站開發 × AI 導入", **HERO_LINE),
-                mask_line("mk-hl2", "流程自動化", tag="h2", **HERO_LINE),
-            ]),
-            T("p", "我打造網站、開發軟體、導入 AI、串起自動化流程，"
-                   "讓技術不只是工具，而是幫你省下時間、長出業績的數位夥伴。",
-              color="rgba(245,245,243,.76)", fontSize="17px", lineHeight="2",
-              marginTop="26px", maxWidth="30em",
-              _m={"fontSize": "15px", "lineHeight": "1.95", "marginTop": "20px"}),
-            {"type": "div", "data": {"attrID": "mk-hero-cta"},
-             "style": bp({"display": "flex", "columnGap": "12px", "rowGap": "12px",
-                          "marginTop": "38px", "flexWrap": "wrap"},
-                         None, {"marginTop": "30px"}),
-             "children": [
-                 {"type": "button", "data": {"attrID": "mk-cta-1", "url": "#services"},
-                  "style": {"&": {"_": {"backgroundColor": {"token": "--mk-accent"},
-                                        "color": "rgb(255,255,255)", "fontSize": "15px",
-                                        "fontWeight": "500",
-                                        "paddingTop": "16px", "paddingBottom": "16px",
-                                        "paddingLeft": "30px", "paddingRight": "30px",
-                                        "radius": "999px", "cursor": "pointer",
-                                        "transitionAll": "220ms ease"}},
-                            "hover": {"_": {"backgroundColor": {"token": "--mk-paper"},
-                                            "color": {"token": "--mk-ink"}}}},
-                  "text": "查看服務項目"},
-                 {"type": "button", "data": {"attrID": "mk-cta-2", "url": "#works"},
-                  "style": {"&": {"_": {"backgroundColor": "rgba(0,0,0,0)",
-                                        "color": {"token": "--mk-paper"}, "fontSize": "15px",
-                                        "paddingTop": "16px", "paddingBottom": "16px",
-                                        "paddingLeft": "30px", "paddingRight": "30px",
-                                        "radius": "999px", "cursor": "pointer",
-                                        "border": {"width": "1px", "style": "solid",
-                                                   "color": "rgba(245,245,243,.42)"},
-                                        "transitionAll": "220ms ease"}},
-                            "hover": {"_": {"backgroundColor": "rgba(245,245,243,.12)"}}},
-                  "text": "看精選作品"},
-             ]},
+MASTHEAD = section("mk-mast", [wrap("mk-mast-in", [
+    # the document's own header block: what this is, where it is from, which revision
+    box("mk-mast-meta",
+        {"display": "flex", "justifyContent": "space-between", "columnGap": "20px",
+         "rowGap": "6px", "customStyles": "flex-wrap:wrap;"},
+        [mono("MOKSA WEB — STUDIO PROFILE", color="--mk-ink", track="0.16em"),
+         mono("TAICHUNG, TW", track="0.16em"),
+         mono("REV. 2026.09", track="0.16em")]),
+    box("mk-mast-rule", {"marginTop": "16px"}, []),
+    box("mk-mast-lines", {"marginTop": "44px"},
+        _m={"marginTop": "30px"},
+        children=[
+            mask_line("mk-hl1", "網站開發 × AI 導入", **HERO_LINE),
+            mask_line("mk-hl2", "流程自動化", tag="h2", **HERO_LINE),
+            box("mk-caret-row",
+                {"display": "flex", "alignItems": "center", "marginTop": "10px"},
+                [box("mk-caret", {}, [])]),
         ]),
-    ]),
-], bg="--mk-ink", pt="0px", pb="0px")
+    {"type": "text", "data": {"tagName": "p", "attrID": "mk-mast-lede"},
+     "style": bp({"color": {"token": "--mk-muted"}, "fontSize": "16px",
+                  "lineHeight": "2", "marginTop": "24px", "maxWidth": "34em"},
+                 None,
+                 {"fontSize": "14px", "lineHeight": "1.95", "marginTop": "20px"}),
+     "text": "我打造網站、開發軟體、導入 AI、串起自動化流程，"
+             "讓技術不只是工具，而是幫你省下時間、長出業績的數位夥伴。"},
+    {"type": "div", "data": {"attrID": "mk-mast-cta"},
+     "style": bp({"display": "flex", "columnGap": "26px", "rowGap": "10px",
+                  "marginTop": "32px", "flexWrap": "wrap"},
+                 None, {"marginTop": "26px", "columnGap": "18px"}),
+     "children": [
+         # underlined links, not buttons: a document points, it does not sell
+         {"type": "button", "data": {"attrID": "mk-cta-%d" % n, "url": href},
+          "style": {"&": {"_": {"backgroundColor": "rgba(0,0,0,0)",
+                                "color": {"token": "--mk-ink"}, "fontSize": "14px",
+                                "fontFamily": MONO, "letterSpacing": "0.06em",
+                                "paddingTop": "8px", "paddingBottom": "8px",
+                                "radius": "0px", "cursor": "pointer",
+                                "customStyles":
+                                    "border-bottom:1px solid rgb(22,24,28);",
+                                "transitionAll": "180ms ease"}},
+                    "hover": {"_": {"color": {"token": "--mk-accent"}}}},
+          "text": text}
+         for n, (text, href) in enumerate([("→ 服務項目", "#services"),
+                                           ("→ 精選作品", "#works")], start=1)
+     ]},
+    box("mk-spec-rule", {"marginTop": "56px"}, [], _m={"marginTop": "40px"}),
+    # the figures as a datasheet, not as four big numbers looking for attention
+    grid("mk-spec", 4, "0px", tcols=2, mcols=2,
+         paddingTop="22px", paddingBottom="58px", children=[
+             box("mk-spec-%d" % i,
+                 {"paddingRight": "22px",
+                  "paddingLeft": "0px" if i == 0 else "22px",
+                  "customStyles": ("" if i == 0
+                                   else "border-left:1px solid " + RULE + ";")},
+                 # at two-up the rule falls on the odd cells instead, and
+                 # `border-left:0` has to be set explicitly - omitting it leaves the
+                 # four-up rule standing
+                 _t={"paddingTop": "18px", "paddingBottom": "18px",
+                     "paddingLeft": "0px" if i % 2 == 0 else "18px",
+                     "customStyles": ("border-left:0;" if i % 2 == 0
+                                      else "border-left:1px solid " + RULE + ";")
+                                     + ("border-top:1px solid " + RULE + ";" if i > 1
+                                        else "border-top:0;")},
+                 _m={"paddingRight": "12px",
+                     "paddingLeft": "0px" if i % 2 == 0 else "14px"},
+                 children=[
+                     mono(key, size="10px", color="--mk-faint", track="0.18em"),
+                     {"type": "div", "data": {"attrID": "mk-spec-n-%d" % i},
+                      "style": {"&": {"_": {"display": "flex",
+                                            "alignItems": "baseline",
+                                            "columnGap": "3px", "marginTop": "12px",
+                                            "customStyles":
+                                                "font-variant-numeric:tabular-nums;"}}},
+                      "children": [
+                          T("h3", num, color={"token": "--mk-ink"}, fontSize="40px",
+                            fontWeight="500", letterSpacing="-0.04em", lineHeight="1",
+                            fontFamily=MONO,
+                            _t={"fontSize": "34px"}, _m={"fontSize": "27px"}),
+                          T("p", "+", color={"token": "--mk-accent"}, fontSize="17px",
+                            fontFamily=MONO, fontWeight="500"),
+                      ]},
+                     T("p", zh, color={"token": "--mk-muted"}, fontSize="12px",
+                       marginTop="10px", lineHeight="1.7", _m={"fontSize": "11px"}),
+                 ])
+             for i, (key, num, zh) in enumerate(SPEC)
+         ]),
+])])
 
-MARQUEE = box("mk-marquee",
-    {"backgroundColor": {"token": "--mk-accent"}, "paddingTop": "14px",
-     "paddingBottom": "14px", "customStyles": "overflow:hidden;"},
-    [box("mk-marquee-track", {"display": "flex", "columnGap": "0px"},
+TICKER_BAND = box("mk-ticker",
+    {"backgroundColor": {"token": "--mk-ink"}, "paddingTop": "11px",
+     "paddingBottom": "11px", "customStyles": "overflow:hidden;"},
+    [box("mk-ticker-track", {"display": "flex", "columnGap": "0px"},
          # duplicated so the loop can translate exactly -50% and never show a seam
-         [T("p", w, color="rgb(255,255,255)", fontSize="12px", fontWeight="500",
-            letterSpacing="0.22em", fontFamily=MONO,
-            customStyles="padding:0 26px;white-space:nowrap;")
-          for w in MARQUEE_WORDS * 2])])
-
-STAT_BAND = section("mk-stats", [wrap("mk-stats-in", [
-    grid("mk-stats-grid", 4, "0px", tcols=2, mcols=2, children=[
-        box("mk-stat-%d" % i,
-            {"paddingTop": "48px", "paddingBottom": "48px",
-             "paddingLeft": "30px", "paddingRight": "24px",
-             # a hairline between cells, not around them: the first cell has none, so
-             # the band reads as one object rather than four boxes
-             "customStyles": ("" if i == 0 else "border-left:1px solid rgba(17,19,24,.12);")},
-            # at two-up the rule falls on the odd cells instead, and `border-left:0`
-            # has to be set explicitly - omitting it leaves the four-up rule standing
-            _t={"paddingTop": "36px", "paddingBottom": "36px", "paddingLeft": "22px",
-                "customStyles": ("border-left:0;" if i % 2 == 0
-                                 else "border-left:1px solid rgba(17,19,24,.12);")
-                                + ("border-top:1px solid rgba(17,19,24,.12);" if i > 1
-                                   else "border-top:0;")},
-            _m={"paddingTop": "28px", "paddingBottom": "28px", "paddingLeft": "16px",
-                "paddingRight": "12px"},
-            children=[
-                {"type": "div", "data": {"attrID": "mk-stat-n-%d" % i},
-                 "style": {"&": {"_": {"display": "flex", "alignItems": "baseline",
-                                       "columnGap": "2px",
-                                       "customStyles": "font-variant-numeric:tabular-nums;"}}},
-                 "children": [
-                     T("h3", n, color={"token": "--mk-ink"}, fontSize="56px",
-                       fontWeight="700", letterSpacing="-0.04em", lineHeight="1",
-                       fontFamily=DISPLAY,
-                       _t={"fontSize": "44px"}, _m={"fontSize": "34px"}),
-                     T("p", "+", color={"token": "--mk-accent"}, fontSize="22px",
-                       fontWeight="600", fontFamily=DISPLAY,
-                       _m={"fontSize": "17px"}),
-                 ]},
-                T("p", lab, color={"token": "--mk-muted"}, fontSize="13px",
-                  marginTop="12px", lineHeight="1.7", _m={"fontSize": "12px"})])
-        for i, (n, lab) in enumerate(STATS)
-    ]),
-])], bg="--mk-paper", pt="0px", pb="0px")
+         [T("p", w, color="rgb(250,250,247)", fontSize="11px", fontWeight="400",
+            letterSpacing="0.2em", fontFamily=MONO,
+            customStyles=("padding:0 22px;white-space:nowrap;"
+                          "border-right:1px solid rgba(250,250,247,.22);"))
+          for w in TICKER * 2])])
 
 SERVICE_SEC = section("services", [wrap("mk-svc-in", [
-    box("mk-svc-head", {}, [
-        label("01 / WHAT WE DO", "mk-svc-label"),
-        ml("h2", "從一個窗口\n把技術整合完", color={"token": "--mk-ink"}, fontSize="44px",
-           fontWeight="600", letterSpacing="-0.02em", lineHeight="1.25",
-           fontFamily=DISPLAY, marginTop="18px",
-           _t={"fontSize": "36px"}, _m={"fontSize": "27px"}),
-        T("p", "從品牌官網、電商平台、AI 導入到流程自動化與軟體開發，"
-               "12 項服務、一個窗口搞定。",
-          color={"token": "--mk-muted"}, fontSize="15px", lineHeight="2",
-          marginTop="16px", maxWidth="34em"),
+    box("mk-svc-pad", {"paddingTop": "84px"}, _m={"paddingTop": "56px"}, children=[
+        clause("01", "SERVICES — 12 ITEMS, ONE CONTACT", "從一個窗口把技術整合完",
+               "mk-svc-head"),
+        box("mk-svc-list", {"marginTop": "44px"}, _m={"marginTop": "32px"}, children=[
+            box("mk-svc-%d" % i,
+                {"display": "grid", "gridCols": "84px 1fr 1.35fr",
+                 "columnGap": "24px", "alignItems": "start",
+                 "paddingTop": "26px", "paddingBottom": "26px",
+                 "customStyles": "border-top:1px solid " + RULE + ";"},
+                _t={"gridCols": "84px 1fr", "rowGap": "10px"},
+                _m={"gridCols": "48px 1fr", "rowGap": "8px",
+                    "paddingTop": "20px", "paddingBottom": "20px"},
+                children=[
+                    mono(num, size="12px", color="--mk-faint", track="0.06em"),
+                    box("mk-svc-t-%d" % i, {}, [
+                        mono(en, size="10px", color="--mk-accent", track="0.16em"),
+                        T("h3", zh, color={"token": "--mk-ink"}, fontSize="19px",
+                          fontWeight="500", marginTop="9px", fontFamily=CJK,
+                          letterSpacing="0.01em"),
+                    ]),
+                    T("p", body, color={"token": "--mk-muted"}, fontSize="13px",
+                      lineHeight="2"),
+                ])
+            for i, (num, en, zh, body) in enumerate(SERVICES)
+        ]),
     ]),
-    grid("mk-svc-grid", 4, "0px", tcols=2, mcols=1, marginTop="56px", children=[
-        box("mk-svc-%d" % i,
-            {"paddingTop": "28px", "paddingRight": "28px", "paddingBottom": "8px",
-             "customStyles": "border-top:2px solid rgb(17,19,24);",
-             # every other card drops half a step, so the row reads as a set of
-             # distinct services rather than four simultaneous boxes
-             "marginTop": "0px" if i % 2 == 0 else "36px"},
-            _t={"marginTop": "0px" if i % 2 == 0 else "28px", "paddingRight": "20px"},
-            _m={"marginTop": "0px", "paddingRight": "0px"},
-            children=[
-                T("p", en, color={"token": "--mk-accent"}, fontSize="10px",
-                  fontWeight="500", letterSpacing="0.14em", fontFamily=MONO,
-                  lineHeight="1.6"),
-                T("h3", zh, color={"token": "--mk-ink"}, fontSize="20px",
-                  fontWeight="600", marginTop="14px", letterSpacing="0.01em"),
-                T("p", body, color={"token": "--mk-muted"}, fontSize="14px",
-                  marginTop="10px", lineHeight="1.95"),
-            ])
-        for i, (en, zh, body) in enumerate(SERVICES)
-    ]),
-])], bg="--mk-paper")
+])])
 
 WORK_SEC = section("works", [wrap("mk-works-in", [
-    {"type": "div", "data": {"attrID": "mk-works-head"},
-     "style": bp({"display": "flex", "justifyContent": "space-between",
-                  "alignItems": "flex-end", "columnGap": "32px", "rowGap": "16px",
-                  "customStyles": "flex-wrap:wrap;"}, None, None),
-     "children": [
-         box("mk-works-head-l", {}, [
-             label("02 / SELECTED WORKS", "mk-works-label"),
-             T("h2", "全部正式上線，真實運轉中", color={"token": "--mk-ink"},
-               fontSize="44px", fontWeight="600", letterSpacing="-0.02em",
-               fontFamily=DISPLAY, marginTop="18px", lineHeight="1.25",
-               _t={"fontSize": "36px"}, _m={"fontSize": "26px"}),
-         ]),
-         T("p", "17 個精選上線作品，這裡列出其中九個。", color={"token": "--mk-muted"},
-           fontSize="14px", lineHeight="1.9", maxWidth="18em"),
-     ]},
-    # A ruled list, not a card grid: nine logos in nine boxes is a directory, nine
-    # rows with a rule between them is a body of work.
-    grid("mk-works-grid", 3, "0px", tcols=2, mcols=1, marginTop="52px", children=[
-        box("mk-work-%d" % i,
-            {"paddingTop": "26px", "paddingBottom": "26px",
-             "paddingRight": "24px",
-             "customStyles": "border-top:1px solid rgba(17,19,24,.14);",
-             "transitionAll": "220ms ease", "cursor": "pointer"},
-            _m={"paddingRight": "0px", "paddingTop": "22px", "paddingBottom": "22px"},
+    box("mk-works-pad", {"paddingTop": "84px"}, _m={"paddingTop": "56px"}, children=[
+        clause("02", "SELECTED WORKS — ALL LIVE", "全部正式上線，真實運轉中",
+               "mk-works-head"),
+        # A table, not a grid of tiles: nine clients each with a discipline and a
+        # domain is tabular data, and a table is how tabular data is read.
+        box("mk-works-table", {"marginTop": "44px"}, _m={"marginTop": "32px"},
             children=[
-                T("p", cat, color={"token": "--mk-accent"}, fontSize="9px",
-                  fontWeight="500", letterSpacing="0.16em", fontFamily=MONO),
-                {"type": "div", "data": {"attrID": "mk-work-t-%d" % i},
-                 "style": {"&": {"_": {"display": "flex", "alignItems": "baseline",
-                                       "justifyContent": "space-between",
-                                       "columnGap": "12px", "marginTop": "12px"}}},
-                 "children": [
-                     T("h3", name, color={"token": "--mk-ink"}, fontSize="19px",
-                       fontWeight="600", letterSpacing="0.01em"),
-                     {"type": "text", "data": {"tagName": "span",
-                                               "attrID": "mk-arrow-%d" % i},
-                      "style": {"&": {"_": {"color": {"token": "--mk-accent"},
-                                            "fontSize": "15px"}}},
-                      "text": "↗"},
-                 ]},
-                T("p", domain, color={"token": "--mk-muted"}, fontSize="12px",
-                  marginTop="8px", fontFamily=MONO, letterSpacing="0.02em"),
-            ])
-        for i, (name, cat, domain) in enumerate(WORKS)
+                box("mk-works-thead",
+                    {"display": "grid", "gridCols": "60px 1.4fr 1fr 1fr",
+                     "columnGap": "20px", "paddingBottom": "12px",
+                     "customStyles":
+                         "border-bottom:1px solid rgba(22,24,28,.34);"},
+                    _m={"display": "none"},
+                    children=[
+                        mono("IDX", size="10px", color="--mk-faint", track="0.18em"),
+                        mono("CLIENT", size="10px", color="--mk-faint",
+                             track="0.18em"),
+                        mono("DISCIPLINE", size="10px", color="--mk-faint",
+                             track="0.18em"),
+                        mono("DOMAIN", size="10px", color="--mk-faint",
+                             track="0.18em"),
+                    ]),
+            ] + [
+                box("mk-work-%d" % i,
+                    {"display": "grid", "gridCols": "60px 1.4fr 1fr 1fr",
+                     "columnGap": "20px", "alignItems": "baseline",
+                     "paddingTop": "17px", "paddingBottom": "17px",
+                     "cursor": "pointer",
+                     "customStyles": "border-bottom:1px solid " + RULE + ";"},
+                    _m={"gridCols": "1fr", "rowGap": "5px",
+                        "paddingTop": "15px", "paddingBottom": "15px"},
+                    children=[
+                        {"type": "text",
+                         "data": {"tagName": "p", "attrID": "mk-work-idx-%d" % i},
+                         "style": {"&": {"_": {"color": {"token": "--mk-faint"},
+                                               "fontSize": "12px",
+                                               "fontFamily": MONO,
+                                               "letterSpacing": "0.04em",
+                                               "transitionAll": "180ms ease"}}},
+                         "text": "%02d" % (i + 1)},
+                        T("h3", name, color={"token": "--mk-ink"}, fontSize="17px",
+                          fontWeight="500", fontFamily=CJK, letterSpacing="0.01em",
+                          _m={"fontSize": "16px"}),
+                        mono(cat, size="11px", color="--mk-muted", track="0.1em"),
+                        mono(domain, size="12px", color="--mk-accent", track="0.02em"),
+                    ])
+                for i, (name, cat, domain) in enumerate(WORKS)
+            ]),
+        box("mk-works-foot", {"paddingTop": "16px"},
+            [mono("17 SELECTED — 9 LISTED", size="11px", color="--mk-faint",
+                  track="0.16em")]),
     ]),
-])], bg="--mk-paper")
+])])
 
-SAAS_SEC = section("saas", [wrap("mk-saas-in", [
-    box("mk-saas-head", {}, [
-        label("03 / OUR PRODUCTS", "mk-saas-label", color="--mk-accent"),
-        T("h2", "不只接案，也開發自己的產品", color={"token": "--mk-paper"},
-          fontSize="44px", fontWeight="600", letterSpacing="-0.02em",
-          fontFamily=DISPLAY, marginTop="18px", lineHeight="1.25",
-          _t={"fontSize": "36px"}, _m={"fontSize": "26px"}),
-        T("p", "拿來解決客戶每天遇到的問題。", color="rgb(150,153,160)",
-          fontSize="15px", lineHeight="2", marginTop="14px"),
-    ]),
-    grid("mk-saas-grid", 2, "24px", tcols=2, mcols=1, marginTop="52px", children=[
-        box("mk-saas-%d" % i,
-            {"paddingTop": "38px", "paddingBottom": "38px",
-             "paddingLeft": "34px", "paddingRight": "34px",
-             "backgroundColor": {"token": "--mk-slate"}, "radius": "0px",
-             "transitionAll": "240ms ease",
-             "customStyles": "border:1px solid rgba(245,245,243,.10);"},
-            _m={"paddingLeft": "22px", "paddingRight": "22px",
-                "paddingTop": "28px", "paddingBottom": "28px"},
-            hover={"move": {"translateY": "-6px"},
-                   "shadow": {"x": "0px", "y": "18px", "blur": "40px",
-                              "spread": "-18px", "color": "rgba(255,90,54,0.45)"}},
-            children=[
-                T("p", en, color={"token": "--mk-accent"}, fontSize="10px",
-                  fontWeight="500", letterSpacing="0.16em", fontFamily=MONO),
-                T("h3", name, color={"token": "--mk-paper"}, fontSize="28px",
-                  fontWeight="700", fontFamily=DISPLAY, marginTop="14px",
-                  letterSpacing="-0.01em", _m={"fontSize": "23px"}),
-                T("p", body, color="rgb(158,161,168)", fontSize="14px",
-                  marginTop="12px", lineHeight="2"),
-            ])
-        for i, (en, name, body) in enumerate(SAAS)
-    ]),
+PRODUCT_SEC = section("products", [wrap("mk-prod-in", [
+    box("mk-prod-pad", {"paddingTop": "80px", "paddingBottom": "80px"},
+        _m={"paddingTop": "54px", "paddingBottom": "54px"}, children=[
+            box("mk-prod-head",
+                {"display": "grid", "gridCols": "84px 1fr", "columnGap": "0px",
+                 "alignItems": "start", "paddingTop": "22px",
+                 "customStyles": "border-top:1px solid " + RULE_DARK + ";"},
+                _m={"gridCols": "48px 1fr"},
+                children=[
+                    mono("§03", size="12px", color="--mk-accent", track="0.06em"),
+                    box("mk-prod-head-t", {}, [
+                        mono("OUR PRODUCTS", size="11px", color="rgb(140,142,150)"),
+                        T("h2", "不只接案，也開發自己的產品",
+                          color={"token": "--mk-paper"}, fontSize="34px",
+                          fontWeight="600", letterSpacing="-0.025em",
+                          lineHeight="1.3", fontFamily=DISPLAY, marginTop="10px",
+                          _t={"fontSize": "29px"}, _m={"fontSize": "23px"}),
+                    ]),
+                ]),
+            box("mk-prod-list", {"marginTop": "40px"}, _m={"marginTop": "28px"},
+                children=[
+                    box("mk-prod-%d" % i,
+                        {"display": "grid", "gridCols": "84px 1fr 1.3fr 118px",
+                         "columnGap": "24px", "alignItems": "start",
+                         "paddingTop": "26px", "paddingBottom": "26px",
+                         "customStyles": "border-top:1px solid " + RULE_DARK + ";"},
+                        _t={"gridCols": "84px 1fr", "rowGap": "12px"},
+                        _m={"gridCols": "48px 1fr", "rowGap": "10px",
+                            "paddingTop": "20px", "paddingBottom": "20px"},
+                        children=[
+                            mono("%02d" % (i + 1), size="12px",
+                                 color="rgb(122,124,132)", track="0.06em"),
+                            box("mk-prod-t-%d" % i, {}, [
+                                mono(en, size="10px", color="--mk-accent",
+                                     track="0.16em"),
+                                T("h3", name, color={"token": "--mk-paper"},
+                                  fontSize="24px", fontWeight="600",
+                                  fontFamily=DISPLAY, marginTop="9px",
+                                  letterSpacing="-0.02em", _m={"fontSize": "21px"}),
+                            ]),
+                            T("p", body, color="rgb(158,160,168)", fontSize="13px",
+                              lineHeight="2"),
+                            box("mk-prod-s-%d" % i,
+                                {"customStyles":
+                                     "border:1px solid rgba(255,90,54,.6);"
+                                     "padding:5px 10px;align-self:start;"},
+                                [mono(status, size="10px", color="--mk-accent",
+                                      track="0.12em")]),
+                        ])
+                    for i, (en, name, body, status) in enumerate(PRODUCTS)
+                ]),
+        ]),
 ])], bg="--mk-ink")
 
 VOICE_SEC = section("mk-voices", [wrap("mk-voice-in", [
-    box("mk-voice-head", {}, [
-        label("04 / TESTIMONIALS", "mk-voice-label"),
-        T("h2", "客戶怎麼說", color={"token": "--mk-ink"}, fontSize="44px",
-          fontWeight="600", letterSpacing="-0.02em", fontFamily=DISPLAY,
-          marginTop="18px", _t={"fontSize": "36px"}, _m={"fontSize": "26px"}),
+    box("mk-voice-pad", {"paddingTop": "84px"}, _m={"paddingTop": "56px"}, children=[
+        clause("04", "TESTIMONIALS", "客戶怎麼說", "mk-voice-head"),
+        grid("mk-voice-grid", 3, "0px", tcols=1, mcols=1, marginTop="42px", children=[
+            box("mk-voice-%d" % i,
+                {"paddingTop": "26px", "paddingRight": "28px", "paddingBottom": "26px",
+                 "paddingLeft": "0px" if i == 0 else "28px",
+                 "customStyles": "border-top:1px solid " + RULE + ";"
+                                 + ("" if i == 0
+                                    else "border-left:1px solid " + RULE + ";")},
+                # one column: the column rule and the gutter both have to be switched
+                # off explicitly - omitting them leaves the three-up rule standing
+                _t={"paddingLeft": "0px", "paddingRight": "0px",
+                    "customStyles": "border-top:1px solid " + RULE + ";"
+                                    "border-left:0;"},
+                _m={"paddingLeft": "0px", "paddingRight": "0px",
+                    "customStyles": "border-top:1px solid " + RULE + ";"
+                                    "border-left:0;"},
+                children=[
+                    mono("“", size="24px", color="--mk-accent", track="0"),
+                    T("p", quote, color={"token": "--mk-ink"}, fontSize="14px",
+                      lineHeight="2.05", marginTop="4px"),
+                    box("mk-voice-a-%d" % i, {"marginTop": "22px"}, [
+                        mono(who, size="12px", color="--mk-ink", track="0.04em"),
+                        mono(role, size="10px", color="--mk-faint", track="0.14em",
+                             marginTop="5px"),
+                    ]),
+                ])
+            for i, (quote, who, role) in enumerate(VOICES)
+        ]),
     ]),
-    grid("mk-voice-grid", 3, "22px", tcols=1, mcols=1, marginTop="48px", children=[
-        box("mk-voice-%d" % i,
-            {"paddingTop": "30px", "paddingRight": "26px", "paddingBottom": "30px",
-             "customStyles": "border-top:2px solid rgb(255,90,54);"},
-            _m={"paddingRight": "0px"},
-            children=[
-                T("p", quote, color={"token": "--mk-ink"}, fontSize="15px",
-                  lineHeight="2.05"),
-                T("p", who, color={"token": "--mk-ink"}, fontSize="13px",
-                  fontWeight="600", marginTop="24px"),
-                T("p", role, color={"token": "--mk-muted"}, fontSize="11px",
-                  marginTop="4px", fontFamily=MONO, letterSpacing="0.06em"),
-            ])
-        for i, (quote, who, role) in enumerate(VOICES)
-    ]),
-])], bg="--mk-paper")
+])])
 
-CTA = section("mk-cta", [wrap("mk-cta-in", [
-    label("05 / START?", "mk-cta-label"),
-    ml("h2", "準備好升級\n你的數位競爭力了嗎？", color={"token": "--mk-ink"},
-       fontSize="50px", fontWeight="600", letterSpacing="-0.02em", lineHeight="1.2",
-       fontFamily=DISPLAY, marginTop="18px",
-       _t={"fontSize": "40px"}, _m={"fontSize": "28px"}),
-    T("p", "先看方案抓預算，或直接告訴我們你想解決的問題，一個工作天內回覆。",
-      color={"token": "--mk-muted"}, fontSize="16px", lineHeight="2", marginTop="20px",
-      maxWidth="32em", _m={"fontSize": "14px"}),
-    {"type": "div", "data": {"attrID": "mk-cta-row"},
-     "style": bp({"display": "flex", "columnGap": "12px", "rowGap": "12px",
-                  "marginTop": "36px", "flexWrap": "wrap"}, None, None),
-     "children": [
-         {"type": "button", "data": {"attrID": "mk-cta-3", "url": "#contact"},
-          "style": {"&": {"_": {"backgroundColor": {"token": "--mk-ink"},
-                                "color": {"token": "--mk-paper"}, "fontSize": "15px",
-                                "fontWeight": "500",
-                                "paddingTop": "16px", "paddingBottom": "16px",
-                                "paddingLeft": "30px", "paddingRight": "30px",
-                                "radius": "999px", "cursor": "pointer",
-                                "transitionAll": "220ms ease"}},
-                    "hover": {"_": {"backgroundColor": {"token": "--mk-accent"}}}},
-          "text": "查看服務報價"},
-         {"type": "button", "data": {"attrID": "mk-cta-4", "url": "#contact"},
-          "style": {"&": {"_": {"backgroundColor": "rgba(0,0,0,0)",
-                                "color": {"token": "--mk-ink"}, "fontSize": "15px",
-                                "paddingTop": "16px", "paddingBottom": "16px",
-                                "paddingLeft": "30px", "paddingRight": "30px",
-                                "radius": "999px", "cursor": "pointer",
-                                "border": {"width": "1px", "style": "solid",
-                                           "color": "rgba(17,19,24,.28)"},
-                                "transitionAll": "220ms ease"}},
-                    "hover": {"_": {"backgroundColor": "rgba(17,19,24,.06)"}}},
-          "text": "聯絡我們"},
-     ]},
-])], bg="--mk-paper", pt="120px", pb="120px")
+CONTACT = section("contact", [wrap("mk-contact-in", [
+    box("mk-contact-pad", {"paddingTop": "84px", "paddingBottom": "96px"},
+        _m={"paddingTop": "56px", "paddingBottom": "64px"}, children=[
+            box("mk-contact-head",
+                {"display": "grid", "gridCols": "84px 1fr", "columnGap": "0px",
+                 "alignItems": "start", "paddingTop": "22px",
+                 "customStyles": "border-top:1px solid " + RULE + ";"},
+                _m={"gridCols": "48px 1fr"},
+                children=[
+                    mono("§05", size="12px", color="--mk-accent", track="0.06em"),
+                    box("mk-contact-head-t", {}, [
+                        mono("START A PROJECT", size="11px", color="--mk-muted"),
+                        ml("h2", "準備好升級\n你的數位競爭力了嗎？",
+                           color={"token": "--mk-ink"}, fontSize="44px",
+                           fontWeight="600", letterSpacing="-0.03em",
+                           lineHeight="1.24", fontFamily=DISPLAY, marginTop="12px",
+                           _t={"fontSize": "36px"}, _m={"fontSize": "26px"}),
+                        T("p", "先看方案抓預算，或直接告訴我們你想解決的問題，"
+                               "一個工作天內回覆。",
+                          color={"token": "--mk-muted"}, fontSize="15px",
+                          lineHeight="2", marginTop="18px", maxWidth="30em",
+                          _m={"fontSize": "13.5px"}),
+                        # the contact routes as a key/value block, like the rest of
+                        # the document
+                        box("mk-contact-rows",
+                            {"marginTop": "34px", "display": "grid", "rowGap": "0px"},
+                            [box("mk-contact-r-%d" % i,
+                                 {"display": "grid", "gridCols": "150px 1fr",
+                                  "columnGap": "20px", "alignItems": "baseline",
+                                  "paddingTop": "15px", "paddingBottom": "15px",
+                                  "customStyles":
+                                      "border-top:1px solid " + RULE + ";"},
+                                 _m={"gridCols": "84px 1fr", "columnGap": "12px"},
+                                 children=[
+                                     mono(k, size="10px", color="--mk-faint",
+                                          track="0.18em"),
+                                     mono(v, size="15px", color=vc, track="0.02em",
+                                          _m={"fontSize": "13px"}),
+                                 ])
+                             for i, (k, v, vc) in enumerate([
+                                 ("EMAIL", "services@moksaweb.com", "--mk-accent"),
+                                 ("PHONE", "+886-958-839-939", "--mk-ink"),
+                                 ("LOCATION", "TAICHUNG, TAIWAN", "--mk-ink"),
+                                 ("RESPONSE", "WITHIN 1 BUSINESS DAY", "--mk-ink"),
+                             ])]),
+                    ]),
+                ]),
+        ]),
+])])
 
 CUE = box("mk-cue", {}, [
-    T("p", "SCROLL", color="rgb(245,245,243)", fontSize="11px", fontWeight="500",
-      letterSpacing="0.3em", fontFamily=MONO),
+    mono("SCROLL", size="10px", color="--mk-faint", track="0.22em"),
     box("mk-cue-rail", {}, []),
 ])
 
 HOME_TREE = {"type": "div", "data": {"attrID": "mk-home"},
-             "children": [CUE, HERO, MARQUEE, STAT_BAND, SERVICE_SEC, WORK_SEC,
-                          SAAS_SEC, VOICE_SEC, CTA]}
+             "children": [box("mk-doc", {}, [
+                 CUE, MASTHEAD, TICKER_BAND, SERVICE_SEC, WORK_SEC,
+                 PRODUCT_SEC, VOICE_SEC, CONTACT,
+             ])]}
 
 SITE = {
     "master": "Moksa Web shell",
@@ -907,7 +906,8 @@ SITE = {
     "shell": {"header": apply_type(HEADER, DISPLAY, CJK, "600"),
               "footer": apply_type(FOOTER, DISPLAY, CJK, "600")},
     "pages": [
-        {"slug": "moksa", "post_id": 26, "title": "Moksa Web", "tree": apply_type(HOME_TREE, DISPLAY, CJK, "600")},
+        {"slug": "moksa", "post_id": 26, "title": "Moksa Web",
+         "tree": apply_type(HOME_TREE, DISPLAY, CJK, "600")},
     ],
 }
 
