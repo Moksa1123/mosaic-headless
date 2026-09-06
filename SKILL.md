@@ -31,7 +31,26 @@ structurally invalid node   HTTP 200, committed, row in the DB, and the whole
                             public page becomes a 54-byte error string
 wrong value SHAPE           HTTP 200, stored, and the CSS rule is simply absent -
                             or worse, compiles to `transform:none`
+no template for the URL     HTTP 406 with an EMPTY BODY for anyone not logged in
 ```
+
+**406 is Mosaic's "no template matched".** `FrontendRenderer` answers
+`TemplateNotFoundException` with `status_header(406)` and prints the explanation
+only for an admin, so a logged-out visitor gets a blank page and a status code
+that looks like a server problem. Two things make it easy to hit:
+
+- **Templates bind to one post each, and that is the only binding there is.**
+  `createManualTemplate` takes `resourceQuery=post/<id>`, and `post` is the only
+  resource type the plugin registers (`setResourceType('post')`, three call sites).
+  There is no path-level or catch-all assignment through that endpoint - so the
+  blog homepage, archives, 404s and every page you did not build return 406.
+  If a site should answer on `/`, point WordPress's front page at a post that has
+  a template (`show_on_front=page`, `page_on_front=<id>`), rather than looking for
+  a Mosaic-side default.
+- **Activating a theme is not the same as populating it.** A fresh theme has no
+  templates, so between `wp theme activate` and a successful build the whole site
+  is 406 - and if the build fails, it stays that way. Never activate a new theme
+  as a step that can be separated from the commit that fills it.
 
 A successful commit is not evidence of a working page. Fetch the page and check its
 size. `references/failure-modes.md` has all of them, measured.

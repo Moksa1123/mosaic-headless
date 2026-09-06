@@ -24,6 +24,14 @@ So there are exactly two routing modes:
 `single-product.php`, `archive-product.php` and so on. It is the WordPress template
 hierarchy, so a Mosaic template lands wherever the corresponding PHP template would.
 
+**`post/<id>` is the only resourceQuery that works.** The grammar in
+`ResourceQuery::create()` is just `explode('/', $s, 2)`, so anything parses - but the
+only resource type any template path registers is `post`
+(`setResourceType('post')` in PathPostTypePage, PathPostTypePost and PathPostTypes).
+`path/single-page.php` and `path/index.php` were both tried against the live
+endpoint and both returned HTTP 500. There is no catch-all: a URL with no template
+of its own gets `status_header(406)` and an empty body.
+
 **Manual assignment is a REST call, not a commit.** `POST /templateAssign/createManualTemplate`
 with `resourceQuery=post/<postID>` and `masterID=<masterID>` creates the template row
 *and* the assign row in one step, deriving the path and name from the post. The eight
