@@ -314,13 +314,17 @@ def motion_css():
         "transform:translateX(-140%) rotate(18deg)}",
         "#zd-header-in{position:relative;z-index:1}",
         # over the hero the header sits on the image, so its type starts light
-        "#zd-header h3,#zd-header p,#zd-nav>*{color:rgba(247,244,238,.94);"
+        "#zd-header h3,#zd-header p,#zd-nav>*,#zd-navm>*{color:rgba(247,244,238,.94);"
         "text-shadow:0 1px 2px rgba(10,8,6,.28)}",
         "#zd-header-cta{background:rgba(255,255,255,.16);"
         "border:1px solid rgba(255,255,255,.42);color:rgba(247,244,238,.96);"
         "box-shadow:inset 0 1px 0 rgba(255,255,255,.35)}",
-        "#zd-progress{position:fixed;top:0;left:0;right:0;height:1px;z-index:101;"
-        "background:rgb(158,127,88);transform:scaleX(0);transform-origin:0 50%}",
+        "#zd-progress{position:fixed;top:0;left:16px;right:16px;height:3px;"
+        "z-index:101;border-radius:0 3px 3px 0;pointer-events:none;"
+        "background:linear-gradient(90deg,rgba(158,127,88,.45) 0%,"
+        "rgb(158,127,88) 52%,rgb(210,180,132) 100%);"
+        "box-shadow:0 0 16px rgba(158,127,88,.6),0 0 4px rgba(210,180,132,.5);"
+        "transform:scaleX(0);transform-origin:0 50%}",
 
         "#zd-intro{position:fixed;inset:0;z-index:200;background:rgb(19,16,13);"
         "display:grid;place-items:center;pointer-events:none}",
@@ -333,7 +337,7 @@ def motion_css():
         "transform-origin:50% 0}",
         "#zd-statement-in{text-align:center}",
         "#zd-marquee-track{display:flex}",
-        "#zd-nav>*,#zd-logo h3,#zd-logo p{white-space:nowrap;line-height:1.25}",
+        "#zd-nav>*,#zd-navm>*,#zd-logo h3,#zd-logo p{white-space:nowrap;line-height:1.25}",
         "#zd-header-cta{line-height:1.3}",
         "html{scroll-behavior:smooth}",
         # anchors land under a fixed header unless they reserve room for it
@@ -341,7 +345,7 @@ def motion_css():
         # the page root is the wordmark's target and must not carry the offset
         "#zd-home{scroll-margin-top:0}",
         "@media (max-width:767px){#about,#contact,#zd-process,#zd-cat"
-        "{scroll-margin-top:76px}}",
+        "{scroll-margin-top:70px}}",
 
         # ── breakpoints the style compiler cannot reach ──────────────────────
         # These are the positioned / pseudo-element rules that live in this block in
@@ -354,21 +358,21 @@ def motion_css():
         "}",
         "@media (max-width:767px){",
         # the phone header is two rows, so the hero has to clear more of it
-        "  #zd-header{width:calc(100% - 20px);top:10px;border-radius:20px}",
+        "  #zd-header{width:calc(100% - 20px);top:10px}",
         "  #zd-hero{min-height:auto}",
-        "  #zd-hero-in{padding-top:120px;padding-bottom:88px}",
-        "  #zd-oem-hero{padding-top:118px}",
+        "  #zd-hero-in{padding-top:104px;padding-bottom:88px}",
+        "  #zd-oem-hero{padding-top:102px}",
         # centring a cue under a left-aligned column reads as a mistake at this width
         "  #zd-hero-cue{left:auto;right:20px;transform:none;bottom:22px}",
         "  #zd-intro-rule{width:64px;margin-top:16px}",
         "  #zd-marquee-track p{padding:0 16px}",
         # full-width buttons: a 32px side pad on a 375px screen leaves a stub
         "  #zd-hero-cta>*{flex:1 1 100%;text-align:center}",
-        "  #zd-progress{height:2px}",
+        "  #zd-progress{left:10px;right:10px}",
         "}",
         # a coarse pointer never fires :hover, so the reveal has to be the rest state
         "@media (hover:none){",
-        "  #zd-nav>*::after{right:0;opacity:.35}",
+        "  #zd-nav>*::after,#zd-navm>*::after{right:0;opacity:.35}",
         "}",
         "#zd-cta-1,#zd-cta-3,#zd-header-cta{position:relative;overflow:hidden;"
         "isolation:isolate}",
@@ -379,11 +383,11 @@ def motion_css():
         "#zd-footer-mark{pointer-events:none;user-select:none}",
 
         # ── hover detail ─────────────────────────────────────────────────────
-        "#zd-nav>*{position:relative}",
-        '#zd-nav>*::after{content:"";position:absolute;left:0;right:100%;bottom:-7px;'
+        "#zd-nav>*,#zd-navm>*{position:relative}",
+        '#zd-nav>*::after,#zd-navm>*::after{content:"";position:absolute;left:0;right:100%;bottom:-7px;'
         "height:1px;background:rgb(158,127,88);"
         "transition:right .3s cubic-bezier(.2,.7,.3,1)}",
-        "#zd-nav>*:hover::after{right:0}",
+        "#zd-nav>*:hover::after,#zd-navm>*:hover::after{right:0}",
         "#zd-header-cta,#zd-cta-1,#zd-cta-2,#zd-cta-3{letter-spacing:.14em;font-weight:400}",
         '#zd-header-cta::after,#zd-cta-1::after,#zd-cta-3::after{content:" →";'
         "display:inline-block;transition:transform .28s cubic-bezier(.2,.7,.3,1)}",
@@ -436,7 +440,7 @@ def motion_css():
         "animation-timeline:scroll(root)}",
         "    #zd-header{animation:zd-headfill linear both;"
         "animation-timeline:scroll(root);animation-range:60px 220px}",
-        "    #zd-header h3,#zd-header p,#zd-nav>*{animation:zd-headink linear both;"
+        "    #zd-header h3,#zd-header p,#zd-nav>*,#zd-navm>*{animation:zd-headink linear both;"
         "animation-timeline:scroll(root);animation-range:60px 220px}",
         "    #zd-header-cta{animation:zd-headcta linear both;"
         "animation-timeline:scroll(root);animation-range:60px 220px}",
@@ -447,8 +451,27 @@ def motion_css():
 
 
 # ── the shared shell ──────────────────────────────────────────────────────────
-NAV = [("关于姿丹娜", "#about"), ("代工流程", "#zd-process"),
-       ("产品线", "#zd-cat"), ("联络我们", "#contact")]
+# (full label, phone label, anchor). CSS cannot swap text, so the phone form is a
+# second nav that the breakpoint shows and hides. `display:none` takes the hidden
+# one out of the accessibility tree as well as the layout, so nothing is announced
+# twice - which is what makes this preferable to a ::before content swap.
+NAV = [("关于姿丹娜", "关于", "#about"), ("代工流程", "流程", "#zd-process"),
+       ("产品线", "产品", "#zd-cat"), ("联络我们", "联络", "#contact")]
+
+
+def nav_menu(attr, short, style):
+    return {"type": "menu", "data": {"attrID": attr}, "style": style,
+            "children": [
+                {"type": "menu-link",
+                 "data": {"attrID": "%s-%d" % (attr, i), "url": href},
+                 "style": {"&": {"_": {"color": {"token": "--ink"}, "fontSize": "14px",
+                                       "transitionAll": "160ms ease", "cursor": "pointer",
+                                       "fontWeight": "400", "letterSpacing": "0.06em"},
+                                 "_t": {"fontSize": "13px"},
+                                 "_m": {"fontSize": "13px", "letterSpacing": "0.04em"}},
+                           "hover": {"_": {"color": {"token": "--accent"}}}},
+                 "text": s_label if short else label}
+                for i, (label, s_label, href) in enumerate(NAV)]}
 
 HEADER = box("zd-shell-top", {}, [
      # a `code` node with insertLocation "head" is the only way to get @keyframes
@@ -474,15 +497,14 @@ HEADER = box("zd-shell-top", {}, [
           "paddingLeft": "30px", "paddingRight": "18px", "fontFamily": CJK},
          _t={"paddingLeft": "24px", "paddingRight": "14px"},
          _m={"paddingLeft": "18px", "paddingRight": "18px",
-             "paddingTop": "10px", "paddingBottom": "11px"},
+             "paddingTop": "11px", "paddingBottom": "12px"},
          children=
     [wrap("zd-header-in", [
         {"type": "div", "data": {"attrID": "zd-header-row"},
          "style": bp({"display": "flex", "alignItems": "center",
                       "justifyContent": "space-between", "columnGap": "40px"},
                      {"columnGap": "24px"},
-                     {"flexDirection": "column", "alignItems": "flex-start",
-                      "rowGap": "6px"}),
+                     {"columnGap": "14px"}),
          "children": [
              # stacked, the lockup forced a ~110px bar; set on one baseline it
              # fits a capsule, which is the shape the glass wants to be
@@ -496,23 +518,15 @@ HEADER = box("zd-shell-top", {}, [
                   T("p", "ZIDANNA", color={"token": "--muted"}, fontSize="9px",
                     letterSpacing="0.3em", fontFamily=LATIN,
                     _t={"display": "none"})]},
-             {"type": "menu", "data": {"attrID": "zd-nav"},
-              "style": bp({"display": "flex", "columnGap": "34px",
-                           "alignItems": "center"},
-                          {"columnGap": "22px"},
-                          {"columnGap": "18px", "width": "100%"}),
-              "children": [
-                  {"type": "menu-link", "data": {"attrID": "zd-nav-%d" % i, "url": href},
-                   "style": {"&": {"_": {"color": {"token": "--ink"}, "fontSize": "14px",
-                                         "transitionAll": "160ms ease", "cursor": "pointer",
-                                         "fontWeight": "400", "letterSpacing": "0.06em"},
-                                    "_t": {"fontSize": "13px"},
-                                    "_m": {"fontSize": "12px",
-                                           "letterSpacing": "0.02em"}},
-                             "hover": {"_": {"color": {"token": "--accent"}}}},
-                   "text": label}
-                  for i, (label, href) in enumerate(NAV)
-              ]},
+             nav_menu("zd-nav", False,
+                      bp({"display": "flex", "columnGap": "34px",
+                          "alignItems": "center"},
+                         {"columnGap": "22px"},
+                         {"display": "none"})),
+             nav_menu("zd-navm", True,
+                      bp({"display": "none"}, None,
+                         {"display": "flex", "columnGap": "20px",
+                          "alignItems": "center"})),
              {"type": "button", "data": {"attrID": "zd-header-cta", "url": "/zidanna/#contact"},
               "style": {"&": {"_m": {"display": "none"},
                               "_t": {"fontSize": "12px", "paddingLeft": "15px",
