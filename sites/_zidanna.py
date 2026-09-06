@@ -168,6 +168,7 @@ REVEALS = [
     # different opacity over a shared ground, so the band looked patchy mid-scroll
     ("zd-stat-0", 0), ("zd-stat-1", 0), ("zd-stat-2", 0), ("zd-stat-3", 0),
     ("zd-about-l", 0), ("zd-about-r", 1),
+    ("zd-statement-in", 0),
     ("zd-process-in", 0),
     ("zd-cat-head", 0), ("zd-cat-0", 1), ("zd-cat-1", 2), ("zd-cat-2", 3), ("zd-cat-3", 4),
     ("zd-why-head", 0),
@@ -232,6 +233,7 @@ def motion_css():
         "@keyframes zd-rise{from{opacity:0;transform:translateY(34px)}"
         "to{opacity:1;transform:none}}",
         "@keyframes zd-draw{from{transform:scaleX(0)}to{transform:scaleX(1)}}",
+        "@keyframes zd-drawy{from{transform:scaleY(0)}to{transform:scaleY(1)}}",
         "@keyframes zd-progress{from{transform:scaleX(0)}to{transform:scaleX(1)}}",
         # Scrolling does not switch the glass on - it changes what the glass is
         # standing on. Over the dark hero it is a smoked panel; over paper it goes
@@ -326,12 +328,18 @@ def motion_css():
         "#zd-intro-rule{width:96px;height:1px;margin:22px auto 0;"
         "background:rgb(158,127,88);transform:scaleX(0);transform-origin:0 50%}",
 
+        "#zd-statement-rule{width:1px;height:64px;margin:0 auto;"
+        "background:linear-gradient(rgba(158,127,88,0),rgb(158,127,88));"
+        "transform-origin:50% 0}",
+        "#zd-statement-in{text-align:center}",
         "#zd-marquee-track{display:flex}",
         "#zd-nav>*,#zd-logo h3,#zd-logo p{white-space:nowrap;line-height:1.25}",
         "#zd-header-cta{line-height:1.3}",
         "html{scroll-behavior:smooth}",
         # anchors land under a fixed header unless they reserve room for it
         "#about,#contact,#zd-process,#zd-cat{scroll-margin-top:92px}",
+        # the page root is the wordmark's target and must not carry the offset
+        "#zd-home{scroll-margin-top:0}",
         "@media (max-width:767px){#about,#contact,#zd-process,#zd-cat"
         "{scroll-margin-top:76px}}",
 
@@ -346,10 +354,10 @@ def motion_css():
         "}",
         "@media (max-width:767px){",
         # the phone header is two rows, so the hero has to clear more of it
-        "  #zd-header{width:calc(100% - 20px);top:10px}",
+        "  #zd-header{width:calc(100% - 20px);top:10px;border-radius:20px}",
         "  #zd-hero{min-height:auto}",
-        "  #zd-hero-in{padding-top:106px;padding-bottom:88px}",
-        "  #zd-oem-hero{padding-top:104px}",
+        "  #zd-hero-in{padding-top:120px;padding-bottom:88px}",
+        "  #zd-oem-hero{padding-top:118px}",
         # centring a cue under a left-aligned column reads as a mistake at this width
         "  #zd-hero-cue{left:auto;right:20px;transform:none;bottom:22px}",
         "  #zd-intro-rule{width:64px;margin-top:16px}",
@@ -413,6 +421,11 @@ def motion_css():
         "    " + reveal_targets + "{animation:zd-rise .01s linear both;"
         "animation-timeline:view();animation-range:entry 2% cover 42%}",
         reveal_stagger,
+        # a much longer range than the card reveals: the point of this band is that
+        # it slows you down, so the line drifts rather than snaps
+        "    #zd-statement-in{animation-range:entry 0% cover 62%}",
+        "    #zd-statement-rule{animation:zd-drawy .01s linear both;"
+        "animation-timeline:view();animation-range:entry 4% cover 40%}",
         "    " + steps + "{background-image:linear-gradient(rgb(24,21,18),rgb(24,21,18));"
         "background-repeat:no-repeat;background-size:100% 1px;background-position:0 0;"
         "animation:zd-draw .01s linear both;animation-timeline:view();"
@@ -460,38 +473,41 @@ HEADER = box("zd-shell-top", {}, [
          {"paddingTop": "14px", "paddingBottom": "14px",
           "paddingLeft": "30px", "paddingRight": "18px", "fontFamily": CJK},
          _t={"paddingLeft": "24px", "paddingRight": "14px"},
-         _m={"paddingLeft": "15px", "paddingRight": "15px",
-             "paddingTop": "10px", "paddingBottom": "10px"},
+         _m={"paddingLeft": "18px", "paddingRight": "18px",
+             "paddingTop": "10px", "paddingBottom": "11px"},
          children=
     [wrap("zd-header-in", [
         {"type": "div", "data": {"attrID": "zd-header-row"},
          "style": bp({"display": "flex", "alignItems": "center",
                       "justifyContent": "space-between", "columnGap": "40px"},
                      {"columnGap": "24px"},
-                     {"columnGap": "12px"}),
+                     {"flexDirection": "column", "alignItems": "flex-start",
+                      "rowGap": "6px"}),
          "children": [
              # stacked, the lockup forced a ~110px bar; set on one baseline it
              # fits a capsule, which is the shape the glass wants to be
-             box("zd-logo",
-                 {"display": "flex", "alignItems": "baseline", "columnGap": "11px"},
+             {"type": "menu-link", "data": {"attrID": "zd-logo", "url": "#zd-home"},
+              "style": {"&": {"_": {"display": "flex", "alignItems": "baseline",
+                                    "columnGap": "11px", "cursor": "pointer"}}},
+              "children":
                  [T("h3", "姿丹娜", color={"token": "--ink"}, fontSize="20px",
                     fontWeight="500", letterSpacing="0.16em",
                     _m={"fontSize": "16px", "letterSpacing": "0.08em"}),
                   T("p", "ZIDANNA", color={"token": "--muted"}, fontSize="9px",
                     letterSpacing="0.3em", fontFamily=LATIN,
-                    _t={"display": "none"})]),
+                    _t={"display": "none"})]},
              {"type": "menu", "data": {"attrID": "zd-nav"},
               "style": bp({"display": "flex", "columnGap": "34px",
                            "alignItems": "center"},
                           {"columnGap": "22px"},
-                          {"columnGap": "11px"}),
+                          {"columnGap": "18px", "width": "100%"}),
               "children": [
                   {"type": "menu-link", "data": {"attrID": "zd-nav-%d" % i, "url": href},
                    "style": {"&": {"_": {"color": {"token": "--ink"}, "fontSize": "14px",
                                          "transitionAll": "160ms ease", "cursor": "pointer",
                                          "fontWeight": "400", "letterSpacing": "0.06em"},
                                     "_t": {"fontSize": "13px"},
-                                    "_m": {"fontSize": "11px",
+                                    "_m": {"fontSize": "12px",
                                            "letterSpacing": "0.02em"}},
                              "hover": {"_": {"color": {"token": "--accent"}}}},
                    "text": label}
@@ -669,7 +685,8 @@ MARQUEE_WORDS = ["日常护肤", "高端护理", "香氛系列", "植物精油",
 
 MARQUEE = box("zd-marquee",
     {"backgroundColor": {"token": "--ink"}, "paddingTop": "18px", "paddingBottom": "18px",
-     "customStyles": "overflow:hidden;"},
+     "customStyles": "overflow:hidden;border-top:1px solid rgba(158,127,88,.45);"
+                     "border-bottom:1px solid rgba(158,127,88,.45);"},
     [box("zd-marquee-track",
          {"display": "flex", "columnGap": "0px",
           "customStyles": "width:max-content;will-change:transform;"},
@@ -742,13 +759,18 @@ PROCESS_SEC = section("zd-process", [wrap("zd-process-in", [
       fontWeight="500", marginTop="16px", lineHeight="1.4"),
     grid("zd-process-grid", 4, "28px", [
         box("zd-step-%s" % num,
-            {"paddingTop": "26px", "customStyles": "border-top:2px solid rgb(24,21,18);"},
+            {"paddingTop": "26px", "customStyles": "border-top:2px solid rgb(24,21,18);",
+             # every other step drops half a step, so the row reads as a sequence
+             # rather than as four simultaneous boxes
+             "marginTop": "0px" if int(num) % 2 else "40px"},
             [T("p", num, color={"token": "--accent"}, fontSize="13px", fontWeight="700",
                letterSpacing="1px", fontFamily=LATIN),
              T("h3", title, color={"token": "--ink"}, fontSize="19px", fontWeight="700",
                marginTop="12px"),
              T("p", body, color={"token": "--muted"}, fontSize="14px", marginTop="10px",
-               lineHeight="1.95")])
+               lineHeight="1.95")],
+            _t={"marginTop": "0px" if int(num) % 2 else "28px"},
+            _m={"marginTop": "0px"})
         for num, title, body in PROCESS
     ], marginTop="52px"),
 ])], bg="--surface")
@@ -769,9 +791,11 @@ CATEGORY_SEC = section("zd-cat", [wrap("zd-cat-in", [
     grid("zd-cat-grid", 4, "22px", [
         box("zd-cat-%d" % i,
             {"customStyles": "overflow:hidden;", "radius": "0px",
-             "backgroundColor": {"token": "--surface"}, "transitionAll": "260ms ease"},
+             "backgroundColor": {"token": "--surface"}, "transitionAll": "260ms ease",
+             "marginTop": "0px" if i % 2 == 0 else "48px"},
             [box("zd-cat-img-%d" % i,
-                 {"customStyles": "overflow:hidden;aspect-ratio:1/1;"},
+                 {"customStyles": "overflow:hidden;aspect-ratio:%s;"
+                                  % ("3/4" if i == 0 else "1/1")},
                  [{"type": "image", "data": {"attrID": "zd-cat-i-%d" % i,
                                              "image": IMG % img, "alt": title},
                    "style": {"&": {"_": {"width": "100%", "height": "100%",
@@ -788,7 +812,9 @@ CATEGORY_SEC = section("zd-cat", [wrap("zd-cat-in", [
                   T("p", desc, color={"token": "--muted"}, fontSize="13px", marginTop="8px",
                     lineHeight="1.85")])],
             hover={"shadow": {"x": "0px", "y": "16px", "blur": "34px", "spread": "-16px",
-                              "color": "rgba(24,21,18,0.28)"}})
+                              "color": "rgba(24,21,18,0.28)"}},
+            _t={"marginTop": "0px" if i % 2 == 0 else "34px"},
+            _m={"marginTop": "0px"})
         for i, (title, desc, img) in enumerate(CATEGORIES)
     ], marginTop="46px"),
 ])])
@@ -830,6 +856,19 @@ REASON_SEC = section("zd-why", [wrap("zd-why-in", [
         for i, (title, body) in enumerate(REASONS)
     ], marginTop="52px"),
 ])], bg="--sand")
+
+STATEMENT = section("zd-statement", [wrap("zd-statement-in", [
+    box("zd-statement-rule", {}, []),
+    ml("h2", "一支好用的产品\n是三百次微调之后\n才敢量产的那一支",
+       color={"token": "--paper"}, fontSize="46px", fontWeight="400",
+       lineHeight="1.7", letterSpacing="0.06em", marginTop="44px",
+       _t={"fontSize": "36px"}, _m={"fontSize": "24px", "lineHeight": "1.8"}),
+    T("p", "南京溧水厂区 · 逐批留样，制程可追溯", color="rgb(178,146,104)",
+      fontSize="12px", fontWeight="500", letterSpacing="0.22em", fontFamily=LATIN,
+      marginTop="46px",
+      _m={"fontSize": "10px", "letterSpacing": "0.14em", "marginTop": "30px"}),
+], maxw="840px")], bg="--ink", pt="152px", pb="152px")
+
 
 # A centred headline over a button is the most generic close a page can have. Give
 # the contact route itself the typographic weight instead - the email is the thing
@@ -928,7 +967,7 @@ OEM = {"type": "div", "data": {"attrID": "zd-oem"}, "children": [
 ]}
 
 HOME_TREE = {"type": "div", "data": {"attrID": "zd-home"},
-             "children": [HOME, MARQUEE, STAT_BAND, ABOUT, PROCESS_SEC,
+             "children": [HOME, MARQUEE, STAT_BAND, ABOUT, STATEMENT, PROCESS_SEC,
                           CATEGORY_SEC, REASON_SEC, CTA]}
 
 SITE = {
