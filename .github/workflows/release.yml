@@ -27,6 +27,15 @@ jobs:
           node-version: 24
           registry-url: https://registry.npmjs.org
 
+      # Trusted publishing is an npm CLI feature, not a registry-side one: the
+      # client is what exchanges the Actions OIDC token for a short-lived
+      # publish token. It landed in npm 11.5.1, and whatever npm ships inside
+      # the Node image is not a version this workflow controls.
+      - name: npm new enough to do OIDC
+        run: |
+          npm install -g npm@latest
+          npm --version
+
       - name: Tag must match package.json
         if: startsWith(github.ref, 'refs/tags/v')
         run: |
@@ -53,12 +62,16 @@ jobs:
       - name: Show exactly what will ship
         run: npm pack --dry-run
 
+      # Published through npm trusted publishing (OIDC), so there is no NPM_TOKEN
+      # and no long-lived credential in this repository at all: npm trusts this
+      # exact workflow file in this exact repository, and the `id-token: write`
+      # permission above is what lets the CLI prove it. Provenance is attached
+      # automatically - passing --provenance would be redundant.
+      #
       # Idempotent: a re-run of an already-published tag should be a no-op, not a
-      # red X. A version can only be published once, and the first 1.2.0 went out by
-      # hand before NPM_TOKEN existed.
+      # red X. A version can only be published once, and 1.2.0 went out by hand
+      # before any of this existed.
       - name: Publish
-        env:
-          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
         run: |
           NAME=$(node -p "require('./package.json').name")
           VER=$(node -p "require('./package.json').version")
@@ -66,11 +79,7 @@ jobs:
             echo "::notice::$NAME@$VER is already on npm; nothing to publish"
             exit 0
           fi
-          if [ -z "$NODE_AUTH_TOKEN" ]; then
-            echo "::error::NPM_TOKEN is not set on this repository"
-            exit 1
-          fi
-          npm publish --provenance --access public
+          npm publish --access public
 
       - name: GitHub release
         if: startsWith(github.ref, 'refs/tags/v')

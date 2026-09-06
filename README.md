@@ -126,7 +126,16 @@ wrong rather than the things that are easy to check:
   or not. Listing `sites/` once put a real client's generator and content into the
   tarball — gitignored, and about to be published anyway.
 
-One-time setup: add the `NPM_TOKEN` repository secret.
+Publishing runs on npm trusted publishing (OIDC): npm trusts this repository's
+`release.yml` directly, so there is no token in the repository's secrets and
+nothing to rotate. Provenance is attached automatically.
+
+One-time setup, on npmjs.com under the package's Settings → Trusted Publisher:
+publisher `GitHub Actions`, organisation `Moksa1123`, repository
+`mosaic-headless`, workflow filename `release.yml`, environment name left
+**empty** — the workflow declares no environment, and a value here that the run
+does not match is refused. The connection cannot be edited afterwards, only
+deleted and recreated.
 
 ## Licence
 
