@@ -48,6 +48,8 @@ TOKENS = {
 
 RULE = "rgba(22,24,28,.16)"
 RULE_DARK = "rgba(250,250,247,.18)"
+# the trim marks want to be read, not inferred, so they sit a step darker
+RULE_INK = "rgba(22,24,28,.42)"
 
 
 def bp(base, t=None, m=None):
@@ -127,6 +129,31 @@ def mono(text, size="11px", color="--mk-muted", track="0.14em", **st):
     return T("p", text,
              color={"token": color} if color.startswith("--") else color,
              fontSize=size, letterSpacing=track, **st)
+
+
+def figure(attr, num, size="40px", t="34px", m="27px"):
+    """A number set as one masked box per digit.
+
+    A count-up needs JavaScript; a digit rolling out from behind its own edge does
+    not, and it reads as deliberate rather than as a gimmick. Each digit carries its
+    own delay through an inline custom property, so one keyframe serves all of them.
+    """
+    return {"type": "div", "data": {"attrID": attr},
+            "style": {"&": {"_": {"display": "flex", "alignItems": "baseline",
+                                  "columnGap": "0px",
+                                  "customStyles":
+                                      "font-variant-numeric:tabular-nums;"}}},
+            "children": [
+                {"type": "div", "data": {"attrID": attr + "-d%d" % j},
+                 "style": {"&": {"_": {"customStyles":
+                                           "overflow:hidden;display:inline-block;"
+                                           "--d:%dms;" % (j * 70)}}},
+                 "children": [T("h3", ch, color={"token": "--mk-ink"}, fontSize=size,
+                                fontWeight="500", letterSpacing="-0.04em",
+                                lineHeight="1.05", fontFamily=MONO,
+                                _t={"fontSize": t}, _m={"fontSize": m})]}
+                for j, ch in enumerate(num)
+            ]}
 
 
 def clause(num, en, zh, attr):
@@ -248,6 +275,35 @@ VOICES = [
      "從前端到後台都非常專業。", "Emily 黃", "睡衣品牌創意總監"),
 ]
 
+# how an engagement actually runs, as a sequence
+PROCESS = [
+    ("需求訪談", "DISCOVERY", "先弄清楚要解決什麼問題、誰在用、成功長什麼樣子。"),
+    ("規劃報價", "SCOPE", "把需求拆成可估的項目，報價與時程一次講清楚。"),
+    ("設計開發", "BUILD", "設計、開發、串接與測試，過程中持續給你看得到的進度。"),
+    ("上線維運", "OPERATE", "上線只是開始。主機、備份、更新與後續調整持續照顧。"),
+]
+
+# the tools actually used, grouped the way a spec sheet groups them
+STACK = [
+    ("FRONT", ["WordPress", "Gutenberg", "Tailwind", "Alpine.js", "Vite"]),
+    ("COMMERCE", ["WooCommerce", "綠界 ECPay", "藍新 NewebPay", "新竹貨運", "7-11 C2C"]),
+    ("AUTOMATION", ["n8n", "Claude API", "OpenAI", "LINE Messaging", "Webhooks"]),
+    ("BACKEND", ["PHP 8", "Laravel", "MySQL", "Redis", "REST / GraphQL"]),
+    ("INFRA", ["Cloudways", "Cloudflare", "Docker", "GitHub Actions", "Sentry"]),
+]
+
+# the clause index, fixed to the left margin. One entry per section, and the entry
+# lights up while its section is on screen - see the named view timelines below.
+CLAUSES = [
+    ("01", "SERVICES", "#services", "--mk-s1"),
+    ("02", "PROCESS", "#process", "--mk-s2"),
+    ("03", "WORKS", "#works", "--mk-s3"),
+    ("04", "STACK", "#stack", "--mk-s4"),
+    ("05", "PRODUCTS", "#products", "--mk-s5"),
+    ("06", "VOICES", "#mk-voices", "--mk-s6"),
+    ("07", "CONTACT", "#contact", "--mk-s7"),
+]
+
 TICKER = ["WEB", "AI", "AUTOMATION", "SOFTWARE", "ERP", "SEO",
           "HOSTING", "WORDPRESS", "WOOCOMMERCE", "N8N"]
 
@@ -255,10 +311,14 @@ REVEALS = [
     ("mk-spec", 0),
     ("mk-svc-head", 0), ("mk-svc-0", 1), ("mk-svc-1", 2), ("mk-svc-2", 3),
     ("mk-svc-3", 4),
+    ("mk-proc-head", 0), ("mk-proc-0", 1), ("mk-proc-1", 2), ("mk-proc-2", 3),
+    ("mk-proc-3", 4),
     ("mk-works-head", 0),
     ("mk-work-0", 1), ("mk-work-1", 1), ("mk-work-2", 2), ("mk-work-3", 2),
     ("mk-work-4", 3), ("mk-work-5", 3), ("mk-work-6", 4), ("mk-work-7", 4),
     ("mk-work-8", 5),
+    ("mk-stack-head", 0), ("mk-stack-0", 1), ("mk-stack-1", 2), ("mk-stack-2", 3),
+    ("mk-stack-3", 4), ("mk-stack-4", 5),
     ("mk-prod-head", 0), ("mk-prod-0", 1), ("mk-prod-1", 2),
     ("mk-voice-head", 0), ("mk-voice-0", 1), ("mk-voice-1", 2), ("mk-voice-2", 3),
     ("mk-contact-head", 0),
@@ -277,6 +337,26 @@ def motion_css():
         + str(36 + i * 4) + "%}"
         for a, i in REVEALS if i)
     work_rows = ",".join("#mk-work-%d" % i for i in range(len(WORKS)))
+    digits = ",".join("#mk-fig-%d>div>*" % i for i in range(len(SPEC)))
+    digit_boxes = ",".join("#mk-fig-%d>div" % i for i in range(len(SPEC)))
+    proc_dots = ",".join("#mk-proc-dot-%d" % i for i in range(len(PROCESS)))
+    tags = ",".join("#mk-tag-%d-%d" % (i, j)
+                    for i, (_g, items) in enumerate(STACK)
+                    for j in range(len(items)))
+    tag_hovers = ",".join("#mk-tag-%d-%d:hover" % (i, j)
+                          for i, (_g, items) in enumerate(STACK)
+                          for j in range(len(items)))
+    marks = ",".join("#mk-mark-%d" % i for i in range(4))
+    # a named view timeline per section, declared on the section and consumed by its
+    # index entry - `timeline-scope` on #mk-doc is what lets the name cross between
+    # two elements that are not ancestor and descendant
+    section_timelines = "\n".join(
+        "%s{view-timeline-name:%s;view-timeline-inset:45%% 45%%}"
+        % (href, tl) for _n, _l, href, tl in CLAUSES)
+    index_actives = "\n".join(
+        "  #mk-idx-%d{animation:mk-idxon linear;animation-timeline:%s;"
+        "animation-range:cover 0%% cover 100%%}" % (i, tl)
+        for i, (_n, _l, _h, tl) in enumerate(CLAUSES))
     work_hovers = ",".join("#mk-work-%d:hover" % i for i in range(len(WORKS)))
     idx_hovers = ",".join("#mk-work-%d:hover #mk-work-idx-%d" % (i, i)
                           for i in range(len(WORKS)))
@@ -309,6 +389,18 @@ def motion_css():
         "25%{opacity:1}70%{opacity:1}"
         "100%{transform:translateY(20px) rotate(45deg);opacity:0}}",
         "@keyframes mk-cuefade{0%,25%{opacity:1}100%{opacity:0}}",
+        # a digit rolling out from behind its own edge
+        "@keyframes mk-digit{from{transform:translateY(105%)}"
+        "to{transform:translateY(0)}}",
+        # the accent line that sweeps a table row as it arrives
+        "@keyframes mk-sweep{from{transform:scaleX(0)}to{transform:scaleX(1)}}",
+        # registration marks, drawn corner by corner
+        "@keyframes mk-markin{from{opacity:0;transform:scale(.4)}"
+        "to{opacity:1;transform:scale(1)}}",
+        # the index entry for whichever section is on screen
+        "@keyframes mk-idxon{from,to{color:rgb(255,90,54);"
+        "letter-spacing:.2em}}",
+        "@keyframes mk-dotin{from{transform:scale(0)}to{transform:scale(1)}}",
 
         # ── the document frame ───────────────────────────────────────────────
         # A spec sheet has margins. These two fixed rules are what say the content
@@ -349,14 +441,47 @@ def motion_css():
         "#mk-caret{width:13px;height:19px;background:rgb(255,90,54)}",
         "#mk-mast-rule,#mk-spec-rule{height:1px;background:" + RULE + ";"
         "transform:scaleX(0);transform-origin:0 50%}",
+        digits + "{display:block;transform:translateY(105%)}",
 
         # ── the work table ───────────────────────────────────────────────────
-        work_rows + "{transition:background-color .2s ease,padding-left .28s "
-        "cubic-bezier(.2,.7,.3,1)}",
+        work_rows + "{position:relative;transition:background-color .2s ease,"
+        "padding-left .28s cubic-bezier(.2,.7,.3,1)}",
+        ",".join("#mk-work-%d::after" % i for i in range(len(WORKS)))
+        + '{content:"";position:absolute;left:0;right:0;bottom:-1px;height:1px;'
+        "background:rgb(255,90,54);transform:scaleX(0);transform-origin:0 50%}",
         work_hovers + "{background-color:rgba(255,90,54,.06);padding-left:14px}",
         idx_hovers + "{color:rgb(255,90,54)}",
 
+        # registration marks at the trim, one per corner
+        marks + "{position:fixed;width:13px;height:13px;z-index:2;"
+        "pointer-events:none;opacity:0}",
+        "#mk-mark-0{top:66px;left:40px;border-left:1px solid " + RULE_INK
+        + ";border-top:1px solid " + RULE_INK + "}",
+        "#mk-mark-1{top:66px;right:40px;border-right:1px solid " + RULE_INK
+        + ";border-top:1px solid " + RULE_INK + "}",
+        "#mk-mark-2{bottom:20px;left:40px;border-left:1px solid " + RULE_INK
+        + ";border-bottom:1px solid " + RULE_INK + "}",
+        "#mk-mark-3{bottom:20px;right:40px;border-right:1px solid " + RULE_INK
+        + ";border-bottom:1px solid " + RULE_INK + "}",
+        "@media (max-width:1279px){" + marks + "{display:none}}",
+
+        # the clause index. It needs room outside the document margin, so it only
+        # appears once the viewport is wide enough to have that room.
+        "#mk-index{position:fixed;left:14px;top:50%;transform:translateY(-50%);"
+        "z-index:3;display:grid;row-gap:11px;pointer-events:auto}",
+        "@media (max-width:1439px){#mk-index{display:none}}",
+
+        # process: the sequence marker on each step, and the line it sits on
+        proc_dots + "{width:7px;height:7px;background:rgb(255,90,54);"
+        "border-radius:50%;transform:scale(0);margin-top:-4px}",
+
+        # stack tags
+        tag_hovers + "{border-color:rgb(255,90,54)}",
+
         "#mk-ticker-track{display:flex;width:max-content;will-change:transform}",
+        # a ticker you cannot read is decoration; stopping it on hover makes it
+        # content again
+        "#mk-ticker:hover #mk-ticker-track{animation-play-state:paused}",
         "html{scroll-behavior:smooth}",
         "#services,#works,#products,#contact{scroll-margin-top:82px}",
         "#mk-home{scroll-margin-top:0}",
@@ -396,10 +521,36 @@ def motion_css():
         "  #mk-cue-rail::after{animation:mk-cuearrow 1.9s cubic-bezier(.4,0,.5,1) "
         "infinite}",
         "  #mk-ticker-track{animation:mk-ticker 40s linear infinite}",
+        "  " + marks + "{animation:mk-markin .5s cubic-bezier(.16,1,.3,1) forwards}",
+        "  #mk-mark-0{animation-delay:1.15s}",
+        "  #mk-mark-1{animation-delay:1.24s}",
+        "  #mk-mark-2{animation-delay:1.33s}",
+        "  #mk-mark-3{animation-delay:1.42s}",
         "  @supports (animation-timeline:view()){",
         "    " + reveal_targets + "{animation:mk-rise .01s linear both;"
         "animation-timeline:view();animation-range:entry 2% cover 36%}",
         reveal_stagger,
+        # the figures roll in a digit at a time, each digit carrying its own delay
+        # through the --d custom property set on its mask
+        "    " + digits + "{animation:mk-digit .7s cubic-bezier(.16,1,.3,1) both;"
+        "animation-delay:var(--d,0ms)}",
+        "    " + digit_boxes + "{animation:mk-rise .01s linear both;"
+        "animation-timeline:view();animation-range:entry 0% entry 1%}",
+        # each row's rule draws itself as the row arrives, left to right
+        "    " + ",".join("#mk-work-%d::after" % i for i in range(len(WORKS)))
+        + "{animation:mk-sweep .01s linear both;animation-timeline:view();"
+        "animation-range:entry 12% cover 24%}",
+        # the sequence markers pop as each step arrives
+        "    " + proc_dots + "{animation:mk-dotin .01s linear both;"
+        "animation-timeline:view();animation-range:entry 14% cover 26%}",
+        "  }",
+        "  @supports (timeline-scope:--x){",
+        # the index entry lights while its own section is on screen. No fill mode, so
+        # outside the range each entry simply falls back to its resting colour.
+        "    #mk-doc{timeline-scope:" + ",".join(tl for _n, _l, _h, tl in CLAUSES)
+        + "}",
+        section_timelines,
+        index_actives,
         "  }",
         "  @supports (animation-timeline:scroll()){",
         "    #mk-progress{animation:mk-progress linear both;"
@@ -631,20 +782,12 @@ MASTHEAD = section("mk-mast", [wrap("mk-mast-in", [
                      "paddingLeft": "0px" if i % 2 == 0 else "14px"},
                  children=[
                      mono(key, size="10px", color="--mk-faint", track="0.18em"),
-                     {"type": "div", "data": {"attrID": "mk-spec-n-%d" % i},
-                      "style": {"&": {"_": {"display": "flex",
-                                            "alignItems": "baseline",
-                                            "columnGap": "3px", "marginTop": "12px",
-                                            "customStyles":
-                                                "font-variant-numeric:tabular-nums;"}}},
-                      "children": [
-                          T("h3", num, color={"token": "--mk-ink"}, fontSize="40px",
-                            fontWeight="500", letterSpacing="-0.04em", lineHeight="1",
-                            fontFamily=MONO,
-                            _t={"fontSize": "34px"}, _m={"fontSize": "27px"}),
-                          T("p", "+", color={"token": "--mk-accent"}, fontSize="17px",
-                            fontFamily=MONO, fontWeight="500"),
-                      ]},
+                     box("mk-spec-n-%d" % i,
+                         {"display": "flex", "alignItems": "baseline",
+                          "columnGap": "3px", "marginTop": "12px"},
+                         [figure("mk-fig-%d" % i, num),
+                          T("p", "+", color={"token": "--mk-accent"},
+                            fontSize="17px", fontFamily=MONO, fontWeight="500")]),
                      T("p", zh, color={"token": "--mk-muted"}, fontSize="12px",
                        marginTop="10px", lineHeight="1.7", _m={"fontSize": "11px"}),
                  ])
@@ -692,9 +835,74 @@ SERVICE_SEC = section("services", [wrap("mk-svc-in", [
     ]),
 ])])
 
+PROCESS_SEC = section("process", [wrap("mk-proc-in", [
+    box("mk-proc-pad", {"paddingTop": "84px"}, _m={"paddingTop": "56px"}, children=[
+        clause("02", "HOW AN ENGAGEMENT RUNS", "從第一次談，到長期照顧",
+               "mk-proc-head"),
+        # A sequence, so it is drawn as one: four stops on a single line, with the
+        # line drawing itself between them as you arrive.
+        box("mk-proc-track", {"marginTop": "52px"}, _m={"marginTop": "34px"},
+            children=[
+                grid("mk-proc-grid", 4, "24px", tcols=2, mcols=1, children=[
+                    box("mk-proc-%d" % i,
+                        {"paddingTop": "26px", "paddingRight": "18px",
+                         "customStyles": "border-top:1px solid " + RULE + ";"},
+                        _m={"paddingTop": "20px", "paddingRight": "0px"},
+                        children=[
+                            box("mk-proc-dot-%d" % i, {}, []),
+                            mono("STEP %02d" % (i + 1), size="10px",
+                                 color="--mk-faint", track="0.18em",
+                                 marginTop="16px"),
+                            T("h3", zh, color={"token": "--mk-ink"}, fontSize="19px",
+                              fontWeight="500", fontFamily=CJK, marginTop="10px",
+                              letterSpacing="0.01em"),
+                            mono(en, size="10px", color="--mk-accent", track="0.16em",
+                                 marginTop="7px"),
+                            T("p", body, color={"token": "--mk-muted"},
+                              fontSize="13px", lineHeight="2", marginTop="12px"),
+                        ])
+                    for i, (zh, en, body) in enumerate(PROCESS)
+                ]),
+            ]),
+    ]),
+])])
+
+STACK_SEC = section("stack", [wrap("mk-stack-in", [
+    box("mk-stack-pad", {"paddingTop": "84px"}, _m={"paddingTop": "56px"}, children=[
+        clause("04", "STACK — WHAT WE BUILD WITH", "工具是選的，不是信仰",
+               "mk-stack-head"),
+        box("mk-stack-list", {"marginTop": "44px"}, _m={"marginTop": "32px"},
+            children=[
+                box("mk-stack-%d" % i,
+                    {"display": "grid", "gridCols": "160px 1fr", "columnGap": "24px",
+                     "alignItems": "baseline",
+                     "paddingTop": "18px", "paddingBottom": "18px",
+                     "customStyles": "border-top:1px solid " + RULE + ";"},
+                    _m={"gridCols": "1fr", "rowGap": "10px",
+                        "paddingTop": "16px", "paddingBottom": "16px"},
+                    children=[
+                        mono(group, size="10px", color="--mk-faint", track="0.18em"),
+                        box("mk-stack-tags-%d" % i,
+                            {"display": "flex", "columnGap": "8px", "rowGap": "8px",
+                             "customStyles": "flex-wrap:wrap;"},
+                            [box("mk-tag-%d-%d" % (i, j),
+                                 {"customStyles":
+                                      "border:1px solid " + RULE + ";"
+                                      "padding:5px 10px;"
+                                      "transition:border-color .2s ease,"
+                                      "color .2s ease;"},
+                                 [mono(name, size="11px", color="--mk-ink",
+                                       track="0.04em")])
+                             for j, name in enumerate(items)]),
+                    ])
+                for i, (group, items) in enumerate(STACK)
+            ]),
+    ]),
+])])
+
 WORK_SEC = section("works", [wrap("mk-works-in", [
     box("mk-works-pad", {"paddingTop": "84px"}, _m={"paddingTop": "56px"}, children=[
-        clause("02", "SELECTED WORKS — ALL LIVE", "全部正式上線，真實運轉中",
+        clause("03", "SELECTED WORKS — ALL LIVE", "全部正式上線，真實運轉中",
                "mk-works-head"),
         # A table, not a grid of tiles: nine clients each with a discipline and a
         # domain is tabular data, and a table is how tabular data is read.
@@ -756,7 +964,7 @@ PRODUCT_SEC = section("products", [wrap("mk-prod-in", [
                  "customStyles": "border-top:1px solid " + RULE_DARK + ";"},
                 _m={"gridCols": "48px 1fr"},
                 children=[
-                    mono("§03", size="12px", color="--mk-accent", track="0.06em"),
+                    mono("§05", size="12px", color="--mk-accent", track="0.06em"),
                     box("mk-prod-head-t", {}, [
                         mono("OUR PRODUCTS", size="11px", color="rgb(140,142,150)"),
                         T("h2", "不只接案，也開發自己的產品",
@@ -803,7 +1011,7 @@ PRODUCT_SEC = section("products", [wrap("mk-prod-in", [
 
 VOICE_SEC = section("mk-voices", [wrap("mk-voice-in", [
     box("mk-voice-pad", {"paddingTop": "84px"}, _m={"paddingTop": "56px"}, children=[
-        clause("04", "TESTIMONIALS", "客戶怎麼說", "mk-voice-head"),
+        clause("06", "TESTIMONIALS", "客戶怎麼說", "mk-voice-head"),
         grid("mk-voice-grid", 3, "0px", tcols=1, mcols=1, marginTop="42px", children=[
             box("mk-voice-%d" % i,
                 {"paddingTop": "26px", "paddingRight": "28px", "paddingBottom": "26px",
@@ -843,7 +1051,7 @@ CONTACT = section("contact", [wrap("mk-contact-in", [
                  "customStyles": "border-top:1px solid " + RULE + ";"},
                 _m={"gridCols": "48px 1fr"},
                 children=[
-                    mono("§05", size="12px", color="--mk-accent", track="0.06em"),
+                    mono("§07", size="12px", color="--mk-accent", track="0.06em"),
                     box("mk-contact-head-t", {}, [
                         mono("START A PROJECT", size="11px", color="--mk-muted"),
                         ml("h2", "準備好升級\n你的數位競爭力了嗎？",
@@ -884,6 +1092,26 @@ CONTACT = section("contact", [wrap("mk-contact-in", [
         ]),
 ])])
 
+# Registration marks. A spec sheet is a printed object and these are how one is
+# trimmed; here they simply say the page has edges that were decided.
+MARKS = box("mk-marks", {}, [box("mk-mark-%d" % i, {}, []) for i in range(4)])
+
+# The clause index, fixed to the left margin on wide screens. Each entry lights up
+# while its own section is on screen, through a named view timeline declared on the
+# section and consumed here - no JavaScript, no scroll listener.
+INDEX = box("mk-index", {}, [
+    {"type": "menu-link", "data": {"attrID": "mk-idx-%d" % i, "url": href},
+     "style": {"&": {"_": {"display": "flex", "columnGap": "8px",
+                           "alignItems": "baseline", "cursor": "pointer",
+                           "color": {"token": "--mk-faint"},
+                           "fontFamily": MONO, "fontSize": "10px",
+                           "letterSpacing": "0.14em",
+                           "transitionAll": "220ms ease"}},
+               "hover": {"_": {"color": {"token": "--mk-ink"}}}},
+     "text": "§" + num + "  " + name}
+    for i, (num, name, href, _tl) in enumerate(CLAUSES)
+])
+
 CUE = box("mk-cue", {}, [
     mono("SCROLL", size="10px", color="--mk-faint", track="0.22em"),
     box("mk-cue-rail", {}, []),
@@ -891,8 +1119,9 @@ CUE = box("mk-cue", {}, [
 
 HOME_TREE = {"type": "div", "data": {"attrID": "mk-home"},
              "children": [box("mk-doc", {}, [
-                 CUE, MASTHEAD, TICKER_BAND, SERVICE_SEC, WORK_SEC,
-                 PRODUCT_SEC, VOICE_SEC, CONTACT,
+                 MARKS, INDEX, CUE,
+                 MASTHEAD, TICKER_BAND, SERVICE_SEC, PROCESS_SEC, WORK_SEC,
+                 STACK_SEC, PRODUCT_SEC, VOICE_SEC, CONTACT,
              ])]}
 
 SITE = {
