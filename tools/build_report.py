@@ -51,6 +51,12 @@ PAGES = [
       motion="八格各自動一種屬性：<b>Lift</b> translateY −14px、<b>Tilt</b> rotateZ 4deg、<b>Grow</b> scaleX 1.06、<b>Glow</b> 46px 模糊藍色光暈、<b>Skew</b> skewX 6deg、<b>Fade</b> opacity 1→0.45、<b>Round</b> 圓角 14px→40px、<b>Blur</b> filter blur 3px。全部走 <code>transition</code> 陣列，260–320ms ease。右側附圖是用真實指標 hover 在 Glow 格上截下來的。",
       components="<code>section</code> ×1、<code>div</code> ×9、<code>text</code> ×18、<code>wysiwyg-text</code> ×18",
       props="26 個；<code>transform</code> 四種型別（translateY / rotateZ / scaleX / skewX）、<code>boxShadow</code>、<code>opacity</code>、<code>borderRadius</code>、<code>filter</code>（走 customStyles）"),
+ dict(slug="tokens", shot="09-tokens", name="Design Tokens", nodes=29, bytes=33740,
+      palette=["#12141c", "#0d6c66", "#666e70", "#ffffff", "#f7f6f3"],
+      style="這頁是唯一一個「照真實網站該有的方式」建的。整頁沒有任何寫死的顏色——五個 collection variable 編譯成 <code>:root</code> 上的 <code>--ink</code>／<code>--paper</code>／<code>--brand</code>／<code>--muted</code>／<code>--surface</code>，樹裡每一處顏色都是 <code>var()</code> 引用（全頁 16 次）。h1/h2/h3/段落的排版也不在節點上，而是提交給內建的 element class meta，所以是全站生效的規則。",
+      motion="卡片 hover 上移 6px 並長出 28px 模糊陰影，220ms ease。動態部分不是動畫而是內容：標題與說明文字在渲染當下才讀取。",
+      components="<code>section</code> ×1、<code>div</code> ×9（3 卡片 + 5 色票 + 網格）、<code>text</code> ×9、<code>wysiwyg-text</code> ×7、<code>wysiwyg-variable</code> ×2",
+      props="theme 層：5 個 collectionVariable + 4 個 elementClass（Heading 1/2/3、Paragraph）；節點層只剩排版與間距"),
  dict(slug="components", shot="08-components", name="Composite Components", nodes=58, bytes=35378,
       palette=["#f8f8fa", "#14141a"],
       style="安靜的淺灰底白卡，因為這頁的主體不是視覺而是結構——它測的是那些「巢狀寫錯就會把整頁弄死」的複合元件能不能正確組出來。三個區塊：手風琴、分頁、清單。",
@@ -176,8 +182,8 @@ HTML = """<title>Mosaic 無頭建站驗證</title>
 
 <div class="wrap">
   <p class="eyebrow">Mosaic Pro 1.0.7 · 無授權 · WP 7.1 / Woo 11.1</p>
-  <h1>八個測試頁，八種設計語言</h1>
-  <p class="lede">每一頁都只靠 <code>mosaic-headless</code> skill 的資料表建成——查表決定用哪個節點型別、什麼可以放進什麼、樣式值該寫成什麼形狀，然後走 REST 提交，最後在真實瀏覽器裡拍下來。建得出來的地方證明表是對的；建不出來的地方就是表的破洞，都列在最後。</p>
+  <h1>九個測試頁，九種設計語言</h1>
+  <p class="lede">每一頁都只靠 <code>mosaic-headless</code> skill 的資料表建成——查表決定用哪個節點型別、什麼可以放進什麼、樣式值該寫成什麼形狀，然後走 REST 提交，最後在真實瀏覽器裡拍下來。建得出來的地方證明表是對的；建不出來的地方就是表的破洞，都列在最後。最後一頁是唯一按照「真實網站該有的方式」建的：設計 token、全域排版、渲染當下讀取的動態內容。</p>
 
   <div class="tally">
     <div><b>122</b><span>節點型別掃描</span></div>
@@ -185,9 +191,10 @@ HTML = """<title>Mosaic 無頭建站驗證</title>
     <div class="bad"><b>22</b><span>放錯位置會炸</span></div>
     <div><b>98</b><span>樣式屬性</span></div>
     <div><b>53</b><span>樣式 state</span></div>
-    <div><b>8</b><span>設計頁全數通過</span></div>
+    <div><b>74</b><span>動態變數</span></div>
+    <div><b>9</b><span>設計頁全數通過</span></div>
   </div>
-  <p class="tally-note">節點掃描是逐型別單獨放上真站 → 提交 → 渲染 → 比對 attrID → 刪除，122 型跑滿。八頁共 247 個節點，全部第一次提交就渲染成功。</p>
+  <p class="tally-note">節點掃描是逐型別單獨放上真站 → 提交 → 渲染 → 比對 attrID → 刪除，122 型跑滿。九頁共 276 個節點。</p>
 
   <h2>測試頁</h2>
   {cards}
@@ -198,6 +205,8 @@ HTML = """<title>Mosaic 無頭建站驗證</title>
     <li><b>五種結構化值已破解。</b><code>borderRadius</code>、<code>transform</code>、<code>boxShadow</code>、<code>transition</code>、<code>borderStyle</code> 都不吃字串。<code>boxShadow</code> 的 <code>type</code> 必須是 <code>outside</code>／<code>inside</code>，寫 CSS 慣用的 <code>outset</code> 會靜默編譯成 <code>box-shadow:none</code>。</li>
     <li><b><code>canBeParentFor</code> 不是複合元件的權威。</b><code>accordion-item</code> 宣告只收 accordion-item，但它的 <code>getAccordionItemDefaultData()</code> 說要 title + content——而 title 正是 Accordion.js 綁點擊事件的元素。少了它，伺服器渲染乾淨無誤，瀏覽器 console 直接拋 <code>Cannot read properties of null</code>。</li>
     <li><b>Pro 型別不需要授權。</b><code>isLicenseActive: false</code> 但 48 個 Pro 型別照常註冊、照常渲染。授權擋的是主題庫和更新，不是 node factory。</li>
+    <li><b>動態內容的語法猜不到。</b>裸識別字完全沒實作——<code>Evaluator</code> 對 Identifier 節點回傳的是字串 <code>"Identifiers are not used currently"</code>。所以 <code>@post.title</code> 存得下、渲染成文字 <code>@post.title</code>，看起來像你打錯字而不是功能壞了。正確寫法是函式呼叫 <code>@VAR('post/title')</code>，而且解析不到的名稱回空字串、不報錯。</li>
+    <li><b>無效的巢狀結構會被靜默剪掉。</b>提交完整的 interaction 回 200、無 exception、正常 create 信封，存進去的卻只剩 <code>{type, name, uuid}</code>。在這個資料模型上，把 row 讀回來跟送出的做 diff，那個 diff 就是 Mosaic 從來不給你的錯誤訊息。</li>
   </ul>
 
   <p class="foot">
