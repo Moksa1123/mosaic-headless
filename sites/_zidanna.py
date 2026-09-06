@@ -93,6 +93,89 @@ def clean(n):
     return n
 
 
+
+
+# ── motion ────────────────────────────────────────────────────────────────────
+# Mosaic's interaction system can carry a trigger and a keyframe timeline but not
+# yet a property binding (references/interactions.md), so scroll motion here is
+# plain CSS. A `code` node with insertLocation "head" injects a real <style> block,
+# which is the only way to declare @keyframes - customStyles is emitted inside a
+# rule and cannot hold one. Every selector targets an attrID this file sets, so the
+# stylesheet and the tree stay in sync.
+# What rises into view, and in what order. Kept as an explicit list rather than
+# threaded through every box() call: the stagger is a design decision and reads
+# better in one place than scattered across the tree.
+REVEALS = [
+    ("zd-hero-copy", 0), ("zd-hero-media", 1),
+    ("zd-stat-0", 0), ("zd-stat-1", 1), ("zd-stat-2", 2), ("zd-stat-3", 3),
+    ("zd-about-l", 0), ("zd-about-r", 1),
+    ("zd-process-in", 0),
+    ("zd-cat-head", 0), ("zd-cat-0", 1), ("zd-cat-1", 2), ("zd-cat-2", 3), ("zd-cat-3", 4),
+    ("zd-why-0", 0), ("zd-why-1", 1), ("zd-why-2", 2),
+    ("zd-why-3", 1), ("zd-why-4", 2), ("zd-why-5", 3),
+    ("zd-cta-in", 0),
+    ("zd-oem-hero-in", 0), ("zd-lines-in", 0), ("zd-oem-process-in", 0),
+    ("zd-line-0", 0), ("zd-line-1", 1), ("zd-line-2", 2), ("zd-line-3", 3), ("zd-line-4", 4),
+]
+
+DRAW_RULES = """@media (prefers-reduced-motion:no-preference){
+  @supports (animation-timeline:view()){
+    #zd-step-01,#zd-step-02,#zd-step-03,#zd-step-04,
+    #zd-oem-step-01,#zd-oem-step-02,#zd-oem-step-03,#zd-oem-step-04{
+      background-image:linear-gradient(rgb(28,26,23),rgb(28,26,23));
+      background-repeat:no-repeat;background-size:100% 2px;background-position:0 0;
+      animation:zd-draw .01s linear both;animation-timeline:view();
+      animation-range:entry 6% cover 26%;transform-origin:left center}
+  }
+}"""
+
+
+def motion_css():
+    """The head stylesheet. Every selector is an attrID this file sets."""
+    steps = "\n".join(
+        "    #%s{animation-range:entry %d%% cover %d%%}" % (attr, 4 + i * 5, 32 + i * 5)
+        for attr, i in REVEALS if i)
+    targets = ",".join("#" + attr for attr, _ in REVEALS)
+    return """<style id="zd-motion">
+@keyframes zd-rise{from{opacity:0;transform:translateY(26px)}to{opacity:1;transform:none}}
+@keyframes zd-draw{from{transform:scaleX(0)}to{transform:scaleX(1)}}
+@keyframes zd-lift{from{transform:scale(1.22) translateY(14px)}to{transform:scale(1.22) translateY(-18px)}}
+@keyframes zd-shadow{from{box-shadow:0 0 0 rgba(28,26,23,0)}to{box-shadow:0 10px 30px -22px rgba(28,26,23,.75)}}
+
+#zd-header{position:sticky;top:0;z-index:50;background:rgba(250,248,244,.86);
+  -webkit-backdrop-filter:saturate(1.6) blur(10px);backdrop-filter:saturate(1.6) blur(10px)}
+
+#zd-nav>*{position:relative}
+#zd-nav>*::after{content:"";position:absolute;left:0;right:100%%;bottom:-7px;height:1px;
+  background:rgb(109,127,109);transition:right .3s cubic-bezier(.2,.7,.3,1)}
+#zd-nav>*:hover::after{right:0}
+
+#zd-header-cta::after,#zd-cta-1::after,#zd-cta-3::after{content:" →";display:inline-block;
+  transition:transform .28s cubic-bezier(.2,.7,.3,1)}
+#zd-header-cta:hover::after,#zd-cta-1:hover::after,#zd-cta-3:hover::after{transform:translateX(5px)}
+
+#zd-cat-txt-0 h3,#zd-cat-txt-1 h3,#zd-cat-txt-2 h3,#zd-cat-txt-3 h3{position:relative;display:inline-block}
+#zd-cat-txt-0 h3::after,#zd-cat-txt-1 h3::after,#zd-cat-txt-2 h3::after,#zd-cat-txt-3 h3::after{
+  content:"";position:absolute;left:0;right:100%%;bottom:-5px;height:1px;background:rgb(109,127,109);
+  transition:right .38s cubic-bezier(.2,.7,.3,1)}
+#zd-cat-0:hover #zd-cat-txt-0 h3::after,#zd-cat-1:hover #zd-cat-txt-1 h3::after,
+#zd-cat-2:hover #zd-cat-txt-2 h3::after,#zd-cat-3:hover #zd-cat-txt-3 h3::after{right:0}
+
+%s
+
+@media (prefers-reduced-motion:no-preference){
+  @supports (animation-timeline:view()){
+    %s{animation:zd-rise .01s linear both;animation-timeline:view();animation-range:entry 4%% cover 32%%}
+%s
+  }
+  @supports (animation-timeline:scroll()){
+    #zd-header{animation:zd-shadow linear both;animation-timeline:scroll(root);animation-range:0 140px}
+    #zd-hero-img{animation:zd-lift linear both;animation-timeline:scroll(root);animation-range:0 640px}
+  }
+}
+</style>""" % (DRAW_RULES, targets, steps)
+
+
 # ── the shared shell ──────────────────────────────────────────────────────────
 NAV = [("首页", "/zidanna/"), ("OEM代工", "/zidanna-oem/"),
        ("关于姿丹娜", "/zidanna/#about"), ("联络我们", "/zidanna/#contact")]
@@ -101,7 +184,12 @@ HEADER = box("zd-header",
     {"backgroundColor": {"token": "--paper"}, "paddingTop": "20px", "paddingBottom": "20px",
      "paddingLeft": "48px", "paddingRight": "48px", "fontFamily": CJK,
      "customStyles": "border-bottom:1px solid rgb(226,219,208);"},
-    [wrap("zd-header-in", [
+    [
+     # a `code` node with insertLocation "head" is the only way to get @keyframes
+     # into the document - customStyles is emitted inside a rule and cannot hold one
+     {"type": "code", "data": {"attrID": "zd-motion-css", "insertLocation": "head",
+                               "content": motion_css(), "processShortcodes": "0"}},
+     wrap("zd-header-in", [
         {"type": "div", "data": {"attrID": "zd-header-row"},
          "style": {"&": {"_": {"display": "flex", "alignItems": "center",
                                "justifyContent": "space-between", "columnGap": "40px"}}},
