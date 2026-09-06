@@ -234,7 +234,7 @@ def motion_css():
         "to{opacity:1;transform:none}}",
         "@keyframes zd-draw{from{transform:scaleX(0)}to{transform:scaleX(1)}}",
         "@keyframes zd-drawy{from{transform:scaleY(0)}to{transform:scaleY(1)}}",
-        "@keyframes zd-progress{from{transform:scaleX(0)}to{transform:scaleX(1)}}",
+        "@keyframes zd-progress{from{width:0%}to{width:100%}}",
         # Scrolling does not switch the glass on - it changes what the glass is
         # standing on. Over the dark hero it is a smoked panel; over paper it goes
         # bright and the rim lights up.
@@ -319,12 +319,20 @@ def motion_css():
         "#zd-header-cta{background:rgba(255,255,255,.16);"
         "border:1px solid rgba(255,255,255,.42);color:rgba(247,244,238,.96);"
         "box-shadow:inset 0 1px 0 rgba(255,255,255,.35)}",
-        "#zd-progress{position:fixed;top:0;left:16px;right:16px;height:3px;"
-        "z-index:101;border-radius:0 3px 3px 0;pointer-events:none;"
-        "background:linear-gradient(90deg,rgba(158,127,88,.45) 0%,"
-        "rgb(158,127,88) 52%,rgb(210,180,132) 100%);"
-        "box-shadow:0 0 16px rgba(158,127,88,.6),0 0 4px rgba(210,180,132,.5);"
-        "transform:scaleX(0);transform-origin:0 50%}",
+        "#zd-progress-track{position:fixed;top:0;left:16px;right:16px;height:4px;"
+        "z-index:101;border-radius:4px;pointer-events:none;"
+        "background:rgba(158,127,88,.28);"
+        "box-shadow:inset 0 0 0 1px rgba(158,127,88,.16)}",
+        "#zd-progress{position:absolute;left:0;top:0;width:0;height:100%;"
+        "border-radius:4px;pointer-events:none;"
+        "background:linear-gradient(90deg,rgb(140,110,74) 0%,"
+        "rgb(180,147,101) 55%,rgb(228,199,150) 100%);"
+        "box-shadow:0 0 18px rgba(198,163,114,.8)}",
+        # a lit cap on the leading edge: the eye tracks the end that is moving
+        '#zd-progress::after{content:"";position:absolute;right:-3px;top:50%;'
+        "width:10px;height:10px;margin-top:-5px;border-radius:50%;"
+        "background:rgb(242,224,187);"
+        "box-shadow:0 0 12px 3px rgba(228,199,150,.9)}",
 
         "#zd-intro{position:fixed;inset:0;z-index:200;background:rgb(19,16,13);"
         "display:grid;place-items:center;pointer-events:none}",
@@ -368,7 +376,7 @@ def motion_css():
         "  #zd-marquee-track p{padding:0 16px}",
         # full-width buttons: a 32px side pad on a 375px screen leaves a stub
         "  #zd-hero-cta>*{flex:1 1 100%;text-align:center}",
-        "  #zd-progress{left:10px;right:10px}",
+        "  #zd-progress-track{left:10px;right:10px}",
         "}",
         # a coarse pointer never fires :hover, so the reveal has to be the rest state
         "@media (hover:none){",
@@ -491,7 +499,7 @@ HEADER = box("zd-shell-top", {}, [
                textAlign="center"),
          ]),
      ]),
-     box("zd-progress", {}, []),
+     box("zd-progress-track", {}, [box("zd-progress", {}, [])]),
      box("zd-header",
          {"paddingTop": "14px", "paddingBottom": "14px",
           "paddingLeft": "30px", "paddingRight": "18px", "fontFamily": CJK},
