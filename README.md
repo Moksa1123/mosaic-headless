@@ -63,6 +63,7 @@ factories, so Pro types register and render regardless.
 | **responsive** | 576 `_t`/`_m` declarations across two sites asserted against the stylesheet the site actually served — all verified |
 | **style states** | 52 of the 53 states written to a live page and matched against the selector the table promises: **36 compiled exactly**, 12 NO_HOST, 3 SKIPPED, 1 BROKE_PAGE. All seven globally usable states verified |
 | **interactions** | the JS animation path probed with negative controls and the row read back: `propertyMetas` **is** accepted and stored; the property values still do not bind, and the boundary is now exact |
+| **entrance animation** | the page-load sequence sampled at ten timestamps and asserted on seven counts — it plays, its animated `@property` counter reaches 100, the veil leaves hit-testing, nothing in the viewport is stranded at opacity 0, a real click reaches the document, and under `prefers-reduced-motion` the veil never exists at all |
 | **browser** | 2,282 computed-style readings on the delivered page in Chromium at three viewports: 1,676 compared and agreed, 606 not-comparable and labelled, **0 overridden** |
 | **design audit** | contrast, font fallback, CJK tracking, overflow, clipped text, line measure — run in the browser, **0 findings** |
 | **theme export/import** | round-tripped: a full theme exported, re-imported as a copy, and the copy served byte-identical pages |

@@ -4,7 +4,7 @@ description: |
   Build and modify Mosaic Pro (Nextend) sites by writing the underlying data model directly - no visual editor, no DOM. Query the real surface with `mo.py`, which joins every source table to the live sweeps so a lookup leads with the measured verdict rather than the declaration (122 node types, 181 properties, 98 style properties with 20 structured value shapes pinned down, 53 style states, 151 element classes, 74 dynamic variables, 12 interaction triggers, 114 REST routes, 23 tables) instead of guessing, with every node type placed on a live site one at a time and asserted against the delivered HTML, the design-token and element-class layers verified against compiled CSS, the @VAR() dynamic language verified against rendered output, nine designed pages built through the tables themselves, and the delivered page re-read in Chromium at three viewports so a rule that is present, correct and still wrong cannot pass.
 license: "MIT"
 author: "moksa (https://moksaweb.com)"
-version: "1.4.0"
+version: "1.5.0"
 ---
 
 # Headless Mosaic
@@ -154,6 +154,13 @@ INTERACTION  the JS animation path, probed with negative controls and the row re
              a second commit, not on one that changes `propertyMetas/order`, and not
              written straight into the table with caches flushed.
              data/interaction-verification.csv
+
+INTRO        the page-load sequence sampled at ten timestamps across its life and
+             asserted on seven counts - it plays, the animated `@property` counter
+             reaches 100, the veil leaves hit-testing, no in-viewport content is
+             stranded at opacity 0, a real click reaches the document, and under
+             `prefers-reduced-motion` the veil never exists at all. All pass.
+             data/intro-verification.csv
 
 BROWSER      2,282 computed-style readings on the delivered page in Chromium, at
              three viewports: every declared property vs `getComputedStyle` on the
@@ -309,6 +316,7 @@ so the pattern is in the data, not just in this paragraph.
 | `data/data-class-hierarchy.csv` | 121 | source - every data class and its parent, so a type's inherited properties can be resolved |
 | `data/style-state-verification.csv` | 52 | **swept live** - each state written on a host of its own type and matched against its promised selector |
 | `data/interaction-verification.csv` | 7 | **probed live** - interaction animation shapes, with negative controls and the stored row beside the payload |
+| `data/intro-verification.csv` | 7 + 10 | **sampled live** - the entrance sequence over ten timestamps, plus the seven assertions about it |
 | `data/element-classes.csv` | 151 | **live** — the built-in class metas; their IDs are what an `elementClass` record must use |
 | `data/dynamic-variables.csv` | 74 | source — every `@VAR('ns/name')` expression, by namespace |
 | `data/evaluator-functions.csv` | 19 | source — the `@` functions with their arity |
@@ -409,6 +417,7 @@ post — `build_all.py` resets first for that reason.
 | `build_site.py` | a whole site: one master with the shell, one document per page |
 | `verify_rwd.py` | does every `_t`/`_m` declaration reach the served stylesheet? |
 | `verify_browser.py` | does the **browser** compute what the stylesheet promised - and does the result pass a design audit? |
+| `verify_intro.py` | does the page-load animation play, and - the part that matters - does it END and hand the page back? |
 | `sweep_node_types.py` | commit every node type one per document and assert the delivered HTML |
 | `sweep_style_properties.py` | write every style property and check the compiled CSS |
 | `sweep_node_properties.py` | probe every node property with a value from its own validator chain |
@@ -438,7 +447,10 @@ python tools/sweep_node_types.py --config sweep.json --setup
 python tools/sweep_node_types.py --config sweep.json --sweep --edition all
 python tools/sweep_properties.py --config sweep.json
 python tools/verify_rwd.py --config sweep.json --site sites/moksa.json --csv data/rwd-verification.csv
-python tools/verify_browser.py --config sweep.json --site sites/moksa.json     --csv data/browser-verification.csv --audit data/design-audit.csv
+python tools/verify_browser.py --config sweep.json --site sites/moksa.json \
+    --csv data/browser-verification.csv --audit data/design-audit.csv
+python tools/verify_intro.py --config sweep.json --site sites/moksa.json \
+    --csv data/intro-verification.csv --frames shots/intro/
 python tools/sweep_style_properties.py --config sweep.json --page moksa --csv data/style-verification.csv
 python tools/sweep_node_properties.py  --config sweep.json --page moksa --csv data/node-property-verification.csv
 python tools/sweep_style_states.py --config sweep.json --post 20 --slug probe-lab     --csv data/style-state-verification.csv

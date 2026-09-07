@@ -110,6 +110,18 @@ if (browser.includes("OVERRIDDEN"))
 
 // The design audit ships even when it is empty, and empty has to mean "ran and found
 // nothing" rather than "was never run", so the header alone is the proof.
+// The intro table is two tables in one file - the checks and the timeline readings -
+// so a row count says nothing useful about it. What matters is that every check
+// passed, because a shipped example whose entrance animation never lifts is a blank
+// page for every visitor.
+const intro = read("data/intro-verification.csv");
+if (!intro.startsWith("check,result,detail"))
+  fail("data/intro-verification.csv is not the table verify_intro.py writes");
+for (const need of ["PLAYS", "ENDS", "NO_TRAP", "CLEARS", "DEGRADES"])
+  if (!new RegExp(`^${need},PASS`, "m").test(intro))
+    fail(`intro-verification.csv: ${need} did not pass`);
+if (/,FAIL,/.test(intro)) fail("data/intro-verification.csv carries a failed check");
+
 const audit = read("data/design-audit.csv");
 if (!audit.startsWith("url,breakpoints,check,level"))
   fail("data/design-audit.csv is not the audit table verify_browser.py writes");

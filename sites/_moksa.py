@@ -376,6 +376,10 @@ def motion_css():
                           for i, (_g, items) in enumerate(STACK)
                           for j in range(len(items)))
     marks = ",".join("#mk-mark-%d" % i for i in range(4))
+    # the boot list lights one clause at a time
+    boot_stagger = "\n".join(
+        "  #mk-boot-c%d{animation-delay:%dms}" % (i, 260 + i * 120)
+        for i in range(len(CLAUSES)))
     # a named view timeline per section, declared on the section and consumed by its
     # index entry - `timeline-scope` on #mk-doc is what lets the name cross between
     # two elements that are not ancestor and descendant
@@ -528,21 +532,94 @@ def motion_css():
         "@media (max-width:1079px){#mk-cue{right:28px}}",
         "@media (max-width:767px){#mk-cue{right:18px;bottom:16px}}",
 
+        # ── the entrance sequence ────────────────────────────────────────────
+        # A page-load animation has one catastrophic failure mode: an overlay that
+        # covers the document and never leaves. So the veil is `display:none` in the
+        # BASE rule and is only switched on inside the motion query, alongside the
+        # animation that removes it. If motion is reduced, or the query never matches,
+        # or the stylesheet is truncated, the overlay does not exist at all - the
+        # failure direction is "no intro", never "no page".
+        "#mk-boot{display:none}",
+        # An integer that can be animated, and read back out of the element - which
+        # is what makes the counter verifiable rather than merely visible.
+        # `inherits:true` is load-bearing, and the reason is not obvious. The
+        # animation runs on #mk-boot-num, but the digits are drawn by its ::after
+        # through `counter(n)`. With `inherits:false` the pseudo-element never sees
+        # the animated value: measured mid-run, --mk-n was 18 on the element and 0
+        # on its ::after, so the counter sat at 0 for the whole sequence while the
+        # property underneath it animated perfectly.
+        "@property --mk-n{syntax:'<integer>';initial-value:0;inherits:true}",
+        "@keyframes mk-count{to{--mk-n:100}}",
+        "@keyframes mk-boot-out{"
+        "0%{clip-path:inset(0 0 0 0)}"
+        "100%{clip-path:inset(0 0 100% 0);visibility:hidden}}",
+        "@keyframes mk-boot-fill{from{transform:scaleX(0)}to{transform:scaleX(1)}}",
+        "@keyframes mk-boot-line{from{opacity:.14}"
+        "60%{opacity:1;color:rgb(255,90,54)}to{opacity:.55;color:rgb(107,109,113)}}",
+        "@keyframes mk-boot-scan{from{transform:translateY(0)}"
+        "to{transform:translateY(100vh)}}",
+        "@keyframes mk-boot-fade{from{opacity:0}to{opacity:1}}",
+
         # ── motion, all of it opt-out-able ───────────────────────────────────
         "@media (prefers-reduced-motion:no-preference){",
+        "  #mk-boot{display:grid;position:fixed;inset:0;z-index:999;"
+        "background:rgb(250,250,247);align-content:center;justify-items:center;"
+        "row-gap:22px;overflow:hidden;"
+        "animation:mk-boot-out .5s cubic-bezier(.7,0,.3,1) 1.55s forwards}",
+        "  #mk-boot-head,#mk-boot-foot{position:absolute;left:40px;right:40px;"
+        "display:flex;justify-content:space-between;font-family:" + MONO + ";"
+        "font-size:10px;letter-spacing:.2em;color:rgb(107,109,113);"
+        "animation:mk-boot-fade .4s ease both}",
+        "  #mk-boot-head{top:34px}",
+        "  #mk-boot-foot{bottom:30px;animation-delay:.1s}",
+        "  #mk-boot-num{font-family:" + MONO + ";font-size:96px;font-weight:500;"
+        "line-height:1;letter-spacing:-.04em;color:rgb(22,24,28);"
+        "font-variant-numeric:tabular-nums;min-width:3ch;text-align:right;"
+        "animation:mk-count 1.2s cubic-bezier(.3,0,0,1) .12s both}",
+        '  #mk-boot-num::after{counter-reset:n var(--mk-n);content:counter(n)}',
+        "  #mk-boot-row{display:flex;align-items:flex-end;column-gap:8px;"
+        "line-height:1}",
+        # the darkened cut, not the fill orange: 18px of rgb(255,90,54) on paper is
+        # 2.97:1 and the design audit refuses it. The progress rule beside it keeps
+        # the bright colour, because a 1px hairline is not text.
+        "  #mk-boot-pct{font-family:" + MONO + ";font-size:18px;"
+        "color:rgb(191,68,40);padding-bottom:12px}",
+        "  #mk-boot-track{width:min(420px,62vw);height:1px;"
+        "background:rgba(22,24,28,.14);position:relative}",
+        "  #mk-boot-fill{position:absolute;inset:0;background:rgb(255,90,54);"
+        "transform-origin:0 50%;"
+        "animation:mk-boot-fill 1.2s cubic-bezier(.3,0,0,1) .12s both}",
+        "  #mk-boot-list{display:flex;column-gap:18px;row-gap:8px;"
+        "flex-wrap:wrap;justify-content:center;font-family:" + MONO + ";"
+        "font-size:10px;letter-spacing:.18em}",
+        "  #mk-boot-list>*{opacity:.14;"
+        "animation:mk-boot-line .5s ease both}",
+        boot_stagger,
+        "  #mk-boot::before{content:\"\";position:absolute;inset:0;"
+        "background:"
+        "repeating-linear-gradient(90deg,rgba(22,24,28,.045) 0 1px,"
+        "transparent 1px 72px),"
+        "repeating-linear-gradient(0deg,rgba(22,24,28,.045) 0 1px,"
+        "transparent 1px 72px);"
+        "animation:mk-boot-fade .5s ease both}",
+        "  #mk-boot-scan{position:absolute;left:0;right:0;top:0;height:1px;"
+        "background:linear-gradient(90deg,rgba(255,90,54,0),rgba(255,90,54,.55),"
+        "rgba(255,90,54,0));animation:mk-boot-scan 1.6s linear .1s both}",
+        "  @media (max-width:767px){#mk-boot-num{font-size:62px}"
+        "#mk-boot-head,#mk-boot-foot{left:18px;right:18px}}",
         "  #mk-hl1-mask>*,#mk-hl2-mask>*{transform:translateY(112%);"
         "animation:mk-linein .95s cubic-bezier(.16,1,.3,1) forwards}",
-        "  #mk-hl1-mask>*{animation-delay:.2s}",
-        "  #mk-hl2-mask>*{animation-delay:.32s}",
+        "  #mk-hl1-mask>*{animation-delay:1.72s}",
+        "  #mk-hl2-mask>*{animation-delay:1.84s}",
         "  #mk-mast-meta,#mk-mast-lede,#mk-mast-cta{opacity:0;"
         "animation:mk-softin .8s cubic-bezier(.16,1,.3,1) forwards}",
-        "  #mk-mast-meta{animation-delay:.06s}",
-        "  #mk-mast-lede{animation-delay:.66s}",
-        "  #mk-mast-cta{animation-delay:.78s}",
+        "  #mk-mast-meta{animation-delay:1.62s}",
+        "  #mk-mast-lede{animation-delay:2.10s}",
+        "  #mk-mast-cta{animation-delay:2.22s}",
         "  #mk-caret{animation:mk-caret 1.15s steps(1,end) infinite;"
-        "animation-delay:.95s}",
+        "animation-delay:2.4s}",
         "  #mk-mast-rule{animation:mk-drawx .9s cubic-bezier(.2,.7,.3,1) forwards;"
-        "animation-delay:.44s}",
+        "animation-delay:1.96s}",
         "  #mk-spec-rule{animation:mk-drawx .9s cubic-bezier(.2,.7,.3,1) forwards;"
         "animation-delay:.9s}",
         "  #mk-cue{opacity:0;animation:mk-softin .8s ease forwards;"
@@ -1184,6 +1261,40 @@ CONTACT = section("contact", [wrap("mk-contact-in", [
         ]),
 ])])
 
+# ── the entrance sequence ─────────────────────────────────────────────────────
+# A boot screen, because the page is a specification document and this is what one
+# looks like while it is being read off a machine. It is CSS only: a counter that is
+# a real animated integer (`@property --mk-n`), a rule that fills with it, the seven
+# clauses reporting in one at a time, and a scan line. Then the whole panel clips
+# upward and is gone.
+#
+# Every id here is deliberate. `verify_intro.py` samples them over the first seconds
+# of the page's life, which is the only window in which any of this exists.
+BOOT = box("mk-boot", {}, [
+    box("mk-boot-scan", {}, []),
+    box("mk-boot-head", {}, [
+        mono("MOKSA WEB — STUDIO PROFILE", size="10px", color="--mk-faint",
+             track="0.2em"),
+        mono("REV. 2026.09", size="10px", color="--mk-faint", track="0.2em"),
+    ]),
+    box("mk-boot-row", {}, [
+        box("mk-boot-num", {}, []),
+        box("mk-boot-pct", {}, [T("p", "%")]),
+    ]),
+    box("mk-boot-track", {}, [box("mk-boot-fill", {}, [])]),
+    box("mk-boot-list", {},
+        # each clause gets its own box because the id is what the stagger
+        # targets, and `mono()` puts everything it is given into the style
+        [box("mk-boot-c%d" % i, {},
+             [mono("§" + num + " " + name, size="10px", color="--mk-faint",
+                   track="0.18em")])
+         for i, (num, name, _h, _t) in enumerate(CLAUSES)]),
+    box("mk-boot-foot", {}, [
+        mono("INITIALISING", size="10px", color="--mk-faint", track="0.2em"),
+        mono("TAICHUNG, TW", size="10px", color="--mk-faint", track="0.2em"),
+    ]),
+])
+
 # Registration marks. A spec sheet is a printed object and these are how one is
 # trimmed; here they simply say the page has edges that were decided.
 MARKS = box("mk-marks", {}, [box("mk-mark-%d" % i, {}, []) for i in range(4)])
@@ -1211,7 +1322,7 @@ CUE = box("mk-cue", {}, [
 ])
 
 HOME_TREE = {"type": "div", "data": {"attrID": "mk-home"},
-             "children": [box("mk-doc", {}, [
+             "children": [BOOT, box("mk-doc", {}, [
                  MARKS, INDEX, CUE,
                  MASTHEAD, TICKER_BAND, SERVICE_SEC, PROCESS_SEC, WORK_SEC,
                  STACK_SEC, PRODUCT_SEC, VOICE_SEC, CONTACT,

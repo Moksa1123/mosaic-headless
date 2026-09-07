@@ -1,0 +1,20 @@
+check,result,detail
+PLAYS,PASS,17 of 17 intro elements changed state
+COUNTS,PASS,--mk-n reached 100
+ENDS,PASS,veil is out of hit-testing from 3200ms
+NO_TRAP,PASS,"0 content elements still at opacity 0 in the viewport (34 below the fold awaiting their own scroll timeline, 1 mid-blink)"
+CLEARS,PASS,a real click landed on 'mk-caret-row'
+DEGRADES,PASS,with reduced motion the veil is display:none throughout
+READABLE,PASS,0 elements invisible at 120ms with reduced motion
+
+t_ms,counter,veil_visibility,veil_clip,veil_covers_centre,hit_centre,invisible_content
+120,,,,False,html.no-js,0
+350,0,visible,none,True,mk-boot,7
+700,56,visible,none,True,mk-boot,7
+1100,94,visible,none,True,mk-boot,7
+1500,100,visible,none,True,mk-boot,4
+1750,100,visible,inset(0px 0px 2.37106%),True,mk-boot,2
+2050,100,visible,inset(0px 0px 99.6708%),False,mk-caret-row,2
+2400,100,hidden,inset(0px 0px 100%),False,mk-caret-row,0
+3200,100,hidden,inset(0px 0px 100%),False,mk-caret-row,0
+4500,100,hidden,inset(0px 0px 100%),False,mk-caret-row,0
