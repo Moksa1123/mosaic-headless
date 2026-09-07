@@ -32,6 +32,7 @@ import argparse
 import json
 import os
 import sys
+import urllib.request
 import urllib.parse
 import uuid
 
@@ -148,6 +149,45 @@ def build_page_document(client, cfg, master_id, template_id, tree, surface):
     return len(records)
 
 
+def cache_check(url, _fresh_bytes=None):
+    """Fetch the URL twice - once as a visitor, once cache-busted - and compare.
+
+    Every check in this repo cache-busts, for good reason: a verifier that reads a
+    stale copy reports the previous build. But that means nothing here had ever
+    looked at the page an actual VISITOR receives. A full-page cache in front of
+    WordPress - Varnish on Cloudways, any CDN - keeps serving the old document after
+    a perfectly successful build, and the whole toolchain reports green while the
+    site shows yesterday's page. Measured here: 141,134 bytes to a visitor while the
+    build had just produced 148,457.
+
+    Both fetches happen here, at the same moment, because comparing against a size
+    measured earlier in the build folds in every byte that changed in between. Two
+    fetches of the same live page still differ by a few hundred bytes - nonces and
+    ids are regenerated per request - so the tolerance is proportional: natural
+    variance measured at 0.25%, a stale document at 5%.
+
+    This cannot purge the cache; that needs credentials this tool has no business
+    holding. Silence is the one thing it must not do.
+    """
+    def get(u):
+        req = urllib.request.Request(u, headers={"User-Agent": "Mozilla/5.0"})
+        with urllib.request.urlopen(req, timeout=60) as r:
+            return r.read(), (r.headers.get("Age") or r.headers.get("X-Cache") or "")
+
+    try:
+        sep = "&" if "?" in url else "?"
+        fresh, _ = get("%s%s_v=%d" % (url, sep, uuid.uuid4().int % 10 ** 9))
+        plain, age = get(url)
+    except Exception as exc:                              # noqa: BLE001
+        return "could not compare the cached page: %s" % exc
+
+    if abs(len(plain) - len(fresh)) <= max(512, len(fresh) // 100):
+        return ""
+    return ("STALE CACHE: a visitor gets %d bytes, a fresh fetch gives %d%s"
+            " - purge the page cache or the site keeps serving the old document"
+            % (len(plain), len(fresh), ("  (Age %s)" % age) if age else ""))
+
+
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--config", required=True)
@@ -168,6 +208,9 @@ def main():
         ok = len(body) >= MIN_HEALTHY_BYTES
         print("  %-16s %-7s %6d bytes  %3d nodes  %s" % (
             page["slug"], "OK" if ok else "BROKEN", len(body), n, url))
+        stale = cache_check(url, len(body))
+        if stale:
+            print("  %-16s %s" % ("", stale))
 
 
 if __name__ == "__main__":

@@ -188,6 +188,21 @@ wrappers were sitting correctly in the database and in the committed JSON.
 The tell is the byte count: if the size the builder reports and the size you fetch
 disagree, you are not looking at what you wrote.
 
+**And the cache cuts the other way too, which is worse.** Once every tool in the
+toolchain cache-busts, nothing is left looking at the page a visitor receives. A
+build finishes, every check reports green - responsive verified, computed values
+agreed, design audit clean, the entrance animation asserted on seven counts - and
+the site is still serving the previous document to everybody. Measured here: a
+visitor got 141,134 bytes with none of the new work in it while a cache-busted fetch
+of the same URL gave 148,457. Nothing was wrong except that nobody had looked.
+
+`build_site.py` now fetches each page twice at the end of the build, plain and
+cache-busted, and says so when they disagree. It cannot purge the cache - that needs
+credentials a build script has no business holding - but it must not be silent. Two
+fetches of the same live page differ by a few hundred bytes anyway, since nonces and
+ids regenerate per request, so the tolerance is proportional: natural variance
+measured at 0.25%, a stale document at 5%.
+
 `tools/verify_rwd.py` now appends a unique `_v=<ms>` query string and sends
 `Cache-Control: no-cache` on every fetch, so the assertion is always made against the
 document that was actually committed. Do the same in anything else that checks a page
