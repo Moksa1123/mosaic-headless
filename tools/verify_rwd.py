@@ -143,12 +143,23 @@ def fetch(url):
 
 
 def class_map(html):
-    """attrID -> generated M_EL class. The stylesheet targets the class, not the id."""
+    """attrID -> EVERY generated M_EL class on it. The stylesheet targets the class.
+
+    All of them, not the first. A component instance's inner node carries two: its
+    own, and the one belonging to the definition it came from - `M_EL293 M_EL292` -
+    and the rules live on the second. Reading only the first reported twenty-four
+    responsive declarations MISSING on a page whose CSS was completely correct,
+    which is the worse kind of false result: it would have sent someone to fix
+    something that was not broken."""
     out = {}
-    for m in re.finditer(r'id="([^"]+)"[^>]*class="(M_EL\d+)', html):
-        out[m.group(1)] = m.group(2)
-    for m in re.finditer(r'class="(M_EL\d+)[^"]*"[^>]*id="([^"]+)"', html):
-        out.setdefault(m.group(2), m.group(1))
+    for m in re.finditer(r'id="([^"]+)"[^>]*?class="([^"]*)"', html):
+        found = re.findall(r"M_EL\d+", m.group(2))
+        if found:
+            out.setdefault(m.group(1), found)
+    for m in re.finditer(r'class="([^"]*)"[^>]*?id="([^"]+)"', html):
+        found = re.findall(r"M_EL\d+", m.group(1))
+        if found:
+            out.setdefault(m.group(2), found)
     return out
 
 
@@ -188,11 +199,15 @@ def check_page(url, tree, rows):
         compiled[bp_key] = r or {}
 
     for attr, bp_key, key, value in walk(tree, []):
-        cls = classes.get(attr)
-        if not cls:
+        cls_list = classes.get(attr)
+        if not cls_list:
             rows.append([url, attr, bp_key, key, "", "", "no-element"])
             continue
-        props = compiled[bp_key].get(cls, {})
+        # merge the rules from every class the element carries, in the order they
+        # appear on it, so a definition's class and an instance's both count
+        props = {}
+        for cls in reversed(cls_list):
+            props.update(compiled[bp_key].get(cls, {}))
         if key in RAW:
             # customStyles is raw CSS: every declaration in it must be present
             for decl in str(value).split(";"):
@@ -244,6 +259,51 @@ def reset_lint(tree, rows):
                              "RESET-RISK"])
 
 
+def instances_of(node, out=None):
+    """Every component instance in a page tree: (component name, instance attrID)."""
+    out = [] if out is None else out
+    if isinstance(node, dict):
+        if node.get("component"):
+            out.append((node["component"],
+                        (node.get("data") or {}).get("attrID")))
+        for v in node.values():
+            instances_of(v, out)
+    elif isinstance(node, list):
+        for v in node:
+            instances_of(v, out)
+    return out
+
+
+def component_tree(spec, name, instance_attr):
+    """A component's tree with every attrID rewritten for ONE instance.
+
+    Componentising four rows moved twenty-four responsive declarations out of the
+    page spec and into the theme, and this checker walks the page spec - so those
+    twenty-four silently stopped being verified while still shipping. That is the
+    failure this whole repo argues against, arriving through a feature rather than
+    through a bug.
+
+    A component declaration is not checked once, it is checked ONCE PER INSTANCE:
+    the same rule has to reach four different elements, and only the delivered page
+    can say whether it did. build_site names an instance's inner nodes
+    `<instance>-<component attrID>`, so rewriting the tree that way and handing it
+    to the ordinary walker checks the real elements.
+    """
+    def rewrite(node):
+        if isinstance(node, dict):
+            out = {k: rewrite(v) for k, v in node.items()}
+            data = out.get("data")
+            if isinstance(data, dict) and data.get("attrID"):
+                out["data"] = dict(data,
+                                   attrID="%s-%s" % (instance_attr,
+                                                     data["attrID"]))
+            return out
+        if isinstance(node, list):
+            return [rewrite(v) for v in node]
+        return node
+    return rewrite((spec.get("components") or {})[name])
+
+
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--config", required=True)
@@ -261,6 +321,9 @@ def main():
         print("checking", url)
         check_page(url, page["tree"], rows)
         check_page(url, site.get("shell", {}), rows)
+        for name, attr in instances_of(page["tree"]):
+            if name in (site.get("components") or {}) and attr:
+                check_page(url, component_tree(site, name, attr), rows)
         reset_lint(page["tree"], rows)
         reset_lint(site.get("shell", {}), rows)
 

@@ -4,7 +4,7 @@ description: |
   Build and modify Mosaic Pro (Nextend) sites by writing the underlying data model directly - no visual editor, no DOM. Query the real surface with `mo.py`, which joins every source table to the live sweeps so a lookup leads with the measured verdict rather than the declaration (122 node types, 181 properties, 98 style properties with 20 structured value shapes pinned down, 53 style states, 151 element classes, 74 dynamic variables, 12 interaction triggers, 114 REST routes, 23 tables) instead of guessing, with every node type placed on a live site one at a time and asserted against the delivered HTML, the design-token and element-class layers verified against compiled CSS, the @VAR() dynamic language verified against rendered output, nine designed pages built through the tables themselves, and the delivered page re-read in Chromium at three viewports so a rule that is present, correct and still wrong cannot pass.
 license: "MIT"
 author: "moksa (https://moksaweb.com)"
-version: "1.13.0"
+version: "1.14.0"
 ---
 
 # Headless Mosaic
@@ -150,7 +150,13 @@ STATES       52 of the 53 style states written to a live page and matched agains
              pseudo-classes are emitted UPPERCASE (`.M_EL9:HOVER`), so grepping a
              stylesheet for `:hover` finds nothing. data/style-state-verification.csv
 
-COMPONENTS   the component system driven end to end, 8 of 8 checks: a component
+COMPONENTS   used on the example page: the service row is committed ONCE to the
+             theme and the page places four instances of it, each carrying only the
+             words that differ. A spec declares `"components": {...}` and a node
+             says `"component": "<name>"` with `"overrides"`; build_site creates or
+             refills the definition, resolves the name to an id, and writes the
+             overrides in a second pass - they cannot exist before the instance
+             does. Plus the system driven end to end, 8 of 8 checks: a component
              created under a category, its document healed, its tree filled through
              the WRITABLE instance, the read-only one refused the same write as a
              negative control, and two instances placed on a page rendering the one
@@ -175,9 +181,9 @@ INTRO        the page-load sequence sampled at thirteen timestamps across its li
              EVENT; a page can pass all of them and be completely static the moment
              you stop scrolling. All pass. data/intro-verification.csv
 
-BROWSER      3,637 computed-style readings on the delivered page in Chromium, at
+BROWSER      3,841 computed-style readings on the delivered page in Chromium, at
              three viewports: every declared property vs `getComputedStyle` on the
-             node it targets. 2,725 compared and agreed, 912 not-comparable and
+             node it targets. 2,929 compared and agreed, 912 not-comparable and
              labelled as such, 0 overridden. Plus a design audit that only a browser
              can run - font fallback, tracking against script, text contrast,
              horizontal overflow, clipped text, line measure - currently 0 findings.
@@ -324,7 +330,7 @@ so the pattern is in the data, not just in this paragraph.
 | `data/node-property-verification.csv` | 181 | **swept live** — each property probed with a value shaped by its own validator chain, on a type that declares it |
 | `data/style-verification.csv` | 98 | **swept live** — every style property written to a page and checked against the compiled CSS, with its group beside the result |
 | `data/rwd-verification.csv` | 688 | **checked live** - every `_t`/`_m` declaration vs the served stylesheet, with status per row |
-| `data/browser-verification.csv` | 3637 | **computed in Chromium** - declared vs `getComputedStyle` at three viewports, `not-comparable` labelled per row |
+| `data/browser-verification.csv` | 3841 | **computed in Chromium** - declared vs `getComputedStyle` at three viewports, `not-comparable` labelled per row |
 | `data/design-audit-acknowledged.csv` | 1 | reviewed findings that will not be fixed, each with a written reason. An acknowledgement without a reason is a suppression wearing a better name, and the release gate refuses one |
 | `data/design-audit.csv` | 24 | **computed in Chromium** - contrast, font fallback, CJK tracking, overflow, measure. Empty means it ran and found nothing |
 | `data/data-class-hierarchy.csv` | 121 | source - every data class and its parent, so a type's inherited properties can be resolved |

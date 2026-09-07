@@ -150,10 +150,48 @@ def effective(decls, bp):
     return out
 
 
-def declared_map(spec):
+def instances_of(node, out=None):
+    """Every component instance in a tree: (component name, instance attrID)."""
+    out = [] if out is None else out
+    if isinstance(node, dict):
+        if node.get("component"):
+            out.append((node["component"], (node.get("data") or {}).get("attrID")))
+        for v in node.values():
+            instances_of(v, out)
+    elif isinstance(node, list):
+        for v in node:
+            instances_of(v, out)
+    return out
+
+
+def with_prefix(tree, prefix):
+    """A component's tree with every attrID rewritten for one instance."""
+    if isinstance(tree, dict):
+        out = {k: with_prefix(v, prefix) for k, v in tree.items()}
+        data = out.get("data")
+        if isinstance(data, dict) and data.get("attrID"):
+            out["data"] = dict(data, attrID="%s-%s" % (prefix, data["attrID"]))
+        return out
+    if isinstance(tree, list):
+        return [with_prefix(v, prefix) for v in tree]
+    return tree
+
+
+def declared_map(spec, site=None):
+    """Declared styles by attrID - the page's own, AND every component instance's.
+
+    A component's declarations live in the theme, not in the page tree, so walking
+    only the page silently stops checking them the moment anything is
+    componentised. They have to be checked once PER INSTANCE, against the elements
+    build_site names `<instance>-<component attrID>`."""
     per: dict[str, dict[str, dict]] = {}
     for attr, bp, key, value in walk(spec, []):
         per.setdefault(attr, {}).setdefault(bp, {})[key] = value
+    for name, holder in instances_of(spec):
+        tree = ((site or {}).get("components") or {}).get(name)
+        if tree and holder:
+            for attr, bp, key, value in walk(with_prefix(tree, holder), []):
+                per.setdefault(attr, {}).setdefault(bp, {})[key] = value
     return per
 
 
@@ -587,7 +625,7 @@ def main():
         if a.page and page["slug"] != a.page:
             continue
         url = "%s/%s/" % (cfg["base"].rstrip("/"), page["slug"])
-        per = declared_map(page.get("tree"))
+        per = declared_map(page.get("tree"), spec)
         ids = sorted(per)
         print("checking %s  (%d nodes, %d viewports)" % (url, len(ids),
                                                          len(VIEWPORTS)))

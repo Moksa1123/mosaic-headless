@@ -830,34 +830,102 @@ https://mosaic.moksaweb.com/moksa/,_,mk-stack-tags-7,display,flex,flex,ok
 https://mosaic.moksaweb.com/moksa/,_,mk-stack-tags-7,columnGap,8px,8px,ok
 https://mosaic.moksaweb.com/moksa/,_,mk-stack-tags-7,rowGap,8px,8px,ok
 https://mosaic.moksaweb.com/moksa/,_,mk-stack-tags-7,customStyles:flex-wrap,wrap,wrap,ok
-https://mosaic.moksaweb.com/moksa/,_,mk-svc-0,display,grid,grid,ok
-https://mosaic.moksaweb.com/moksa/,_,mk-svc-0,gridCols,84px 1fr 1.35fr,84px 471.484px 636.516px,ok
-https://mosaic.moksaweb.com/moksa/,_,mk-svc-0,columnGap,24px,24px,ok
-https://mosaic.moksaweb.com/moksa/,_,mk-svc-0,alignItems,start,start,ok
-https://mosaic.moksaweb.com/moksa/,_,mk-svc-0,paddingTop,26px,26px,ok
-https://mosaic.moksaweb.com/moksa/,_,mk-svc-0,paddingBottom,26px,26px,ok
-https://mosaic.moksaweb.com/moksa/,_,mk-svc-0,customStyles:border-top,"1px solid rgba(22,24,28,.16)",no computed value,not-comparable
-https://mosaic.moksaweb.com/moksa/,_,mk-svc-1,display,grid,grid,ok
-https://mosaic.moksaweb.com/moksa/,_,mk-svc-1,gridCols,84px 1fr 1.35fr,84px 471.484px 636.516px,ok
-https://mosaic.moksaweb.com/moksa/,_,mk-svc-1,columnGap,24px,24px,ok
-https://mosaic.moksaweb.com/moksa/,_,mk-svc-1,alignItems,start,start,ok
-https://mosaic.moksaweb.com/moksa/,_,mk-svc-1,paddingTop,26px,26px,ok
-https://mosaic.moksaweb.com/moksa/,_,mk-svc-1,paddingBottom,26px,26px,ok
-https://mosaic.moksaweb.com/moksa/,_,mk-svc-1,customStyles:border-top,"1px solid rgba(22,24,28,.16)",no computed value,not-comparable
-https://mosaic.moksaweb.com/moksa/,_,mk-svc-2,display,grid,grid,ok
-https://mosaic.moksaweb.com/moksa/,_,mk-svc-2,gridCols,84px 1fr 1.35fr,84px 471.484px 636.516px,ok
-https://mosaic.moksaweb.com/moksa/,_,mk-svc-2,columnGap,24px,24px,ok
-https://mosaic.moksaweb.com/moksa/,_,mk-svc-2,alignItems,start,start,ok
-https://mosaic.moksaweb.com/moksa/,_,mk-svc-2,paddingTop,26px,26px,ok
-https://mosaic.moksaweb.com/moksa/,_,mk-svc-2,paddingBottom,26px,26px,ok
-https://mosaic.moksaweb.com/moksa/,_,mk-svc-2,customStyles:border-top,"1px solid rgba(22,24,28,.16)",no computed value,not-comparable
-https://mosaic.moksaweb.com/moksa/,_,mk-svc-3,display,grid,grid,ok
-https://mosaic.moksaweb.com/moksa/,_,mk-svc-3,gridCols,84px 1fr 1.35fr,84px 471.484px 636.516px,ok
-https://mosaic.moksaweb.com/moksa/,_,mk-svc-3,columnGap,24px,24px,ok
-https://mosaic.moksaweb.com/moksa/,_,mk-svc-3,alignItems,start,start,ok
-https://mosaic.moksaweb.com/moksa/,_,mk-svc-3,paddingTop,26px,26px,ok
-https://mosaic.moksaweb.com/moksa/,_,mk-svc-3,paddingBottom,26px,26px,ok
-https://mosaic.moksaweb.com/moksa/,_,mk-svc-3,customStyles:border-top,"1px solid rgba(22,24,28,.16)",no computed value,not-comparable
+https://mosaic.moksaweb.com/moksa/,_,mk-svc-0-svc-body,color,"rgb(90,92,97)","rgb(90, 92, 97)",ok
+https://mosaic.moksaweb.com/moksa/,_,mk-svc-0-svc-body,fontSize,13px,13px,ok
+https://mosaic.moksaweb.com/moksa/,_,mk-svc-0-svc-body,lineHeight,2,26px,ok
+https://mosaic.moksaweb.com/moksa/,_,mk-svc-0-svc-en,color,"rgb(191,68,40)","rgb(191, 68, 40)",ok
+https://mosaic.moksaweb.com/moksa/,_,mk-svc-0-svc-en,fontSize,10px,10px,ok
+https://mosaic.moksaweb.com/moksa/,_,mk-svc-0-svc-en,fontFamily,"'IBM Plex Mono',ui-monospace,SFMono-Regular,Menlo,Consolas,monospace","""IBM Plex Mono"", ui-monospace, SFMono-Regular, Menlo, Consolas, monospace",ok
+https://mosaic.moksaweb.com/moksa/,_,mk-svc-0-svc-en,letterSpacing,0.16em,1.6px,ok
+https://mosaic.moksaweb.com/moksa/,_,mk-svc-0-svc-num,color,"rgb(107,109,113)","rgb(107, 109, 113)",ok
+https://mosaic.moksaweb.com/moksa/,_,mk-svc-0-svc-num,fontSize,12px,12px,ok
+https://mosaic.moksaweb.com/moksa/,_,mk-svc-0-svc-num,fontFamily,"'IBM Plex Mono',ui-monospace,SFMono-Regular,Menlo,Consolas,monospace","""IBM Plex Mono"", ui-monospace, SFMono-Regular, Menlo, Consolas, monospace",ok
+https://mosaic.moksaweb.com/moksa/,_,mk-svc-0-svc-num,letterSpacing,0.06em,0.72px,ok
+https://mosaic.moksaweb.com/moksa/,_,mk-svc-0-svc-row,display,grid,grid,ok
+https://mosaic.moksaweb.com/moksa/,_,mk-svc-0-svc-row,gridCols,84px 1fr 1.35fr,84px 471.484px 636.516px,ok
+https://mosaic.moksaweb.com/moksa/,_,mk-svc-0-svc-row,columnGap,24px,24px,ok
+https://mosaic.moksaweb.com/moksa/,_,mk-svc-0-svc-row,alignItems,start,start,ok
+https://mosaic.moksaweb.com/moksa/,_,mk-svc-0-svc-row,paddingTop,26px,26px,ok
+https://mosaic.moksaweb.com/moksa/,_,mk-svc-0-svc-row,paddingBottom,26px,26px,ok
+https://mosaic.moksaweb.com/moksa/,_,mk-svc-0-svc-row,customStyles:border-top,"1px solid rgba(22,24,28,.16)",no computed value,not-comparable
+https://mosaic.moksaweb.com/moksa/,_,mk-svc-0-svc-zh,color,"rgb(22,24,28)","rgb(22, 24, 28)",ok
+https://mosaic.moksaweb.com/moksa/,_,mk-svc-0-svc-zh,fontSize,19px,19px,ok
+https://mosaic.moksaweb.com/moksa/,_,mk-svc-0-svc-zh,fontWeight,500,500,ok
+https://mosaic.moksaweb.com/moksa/,_,mk-svc-0-svc-zh,marginTop,9px,9px,ok
+https://mosaic.moksaweb.com/moksa/,_,mk-svc-0-svc-zh,fontFamily,"'Noto Sans TC','PingFang TC','Hiragino Sans TC','Microsoft JhengHei',sans-serif","""Noto Sans TC"", ""PingFang TC"", ""Hiragino Sans TC"", ""Microsoft JhengHei"", sans-serif",ok
+https://mosaic.moksaweb.com/moksa/,_,mk-svc-0-svc-zh,letterSpacing,0.01em,0.19px,ok
+https://mosaic.moksaweb.com/moksa/,_,mk-svc-1-svc-body,color,"rgb(90,92,97)","rgb(90, 92, 97)",ok
+https://mosaic.moksaweb.com/moksa/,_,mk-svc-1-svc-body,fontSize,13px,13px,ok
+https://mosaic.moksaweb.com/moksa/,_,mk-svc-1-svc-body,lineHeight,2,26px,ok
+https://mosaic.moksaweb.com/moksa/,_,mk-svc-1-svc-en,color,"rgb(191,68,40)","rgb(191, 68, 40)",ok
+https://mosaic.moksaweb.com/moksa/,_,mk-svc-1-svc-en,fontSize,10px,10px,ok
+https://mosaic.moksaweb.com/moksa/,_,mk-svc-1-svc-en,fontFamily,"'IBM Plex Mono',ui-monospace,SFMono-Regular,Menlo,Consolas,monospace","""IBM Plex Mono"", ui-monospace, SFMono-Regular, Menlo, Consolas, monospace",ok
+https://mosaic.moksaweb.com/moksa/,_,mk-svc-1-svc-en,letterSpacing,0.16em,1.6px,ok
+https://mosaic.moksaweb.com/moksa/,_,mk-svc-1-svc-num,color,"rgb(107,109,113)","rgb(107, 109, 113)",ok
+https://mosaic.moksaweb.com/moksa/,_,mk-svc-1-svc-num,fontSize,12px,12px,ok
+https://mosaic.moksaweb.com/moksa/,_,mk-svc-1-svc-num,fontFamily,"'IBM Plex Mono',ui-monospace,SFMono-Regular,Menlo,Consolas,monospace","""IBM Plex Mono"", ui-monospace, SFMono-Regular, Menlo, Consolas, monospace",ok
+https://mosaic.moksaweb.com/moksa/,_,mk-svc-1-svc-num,letterSpacing,0.06em,0.72px,ok
+https://mosaic.moksaweb.com/moksa/,_,mk-svc-1-svc-row,display,grid,grid,ok
+https://mosaic.moksaweb.com/moksa/,_,mk-svc-1-svc-row,gridCols,84px 1fr 1.35fr,84px 471.484px 636.516px,ok
+https://mosaic.moksaweb.com/moksa/,_,mk-svc-1-svc-row,columnGap,24px,24px,ok
+https://mosaic.moksaweb.com/moksa/,_,mk-svc-1-svc-row,alignItems,start,start,ok
+https://mosaic.moksaweb.com/moksa/,_,mk-svc-1-svc-row,paddingTop,26px,26px,ok
+https://mosaic.moksaweb.com/moksa/,_,mk-svc-1-svc-row,paddingBottom,26px,26px,ok
+https://mosaic.moksaweb.com/moksa/,_,mk-svc-1-svc-row,customStyles:border-top,"1px solid rgba(22,24,28,.16)",no computed value,not-comparable
+https://mosaic.moksaweb.com/moksa/,_,mk-svc-1-svc-zh,color,"rgb(22,24,28)","rgb(22, 24, 28)",ok
+https://mosaic.moksaweb.com/moksa/,_,mk-svc-1-svc-zh,fontSize,19px,19px,ok
+https://mosaic.moksaweb.com/moksa/,_,mk-svc-1-svc-zh,fontWeight,500,500,ok
+https://mosaic.moksaweb.com/moksa/,_,mk-svc-1-svc-zh,marginTop,9px,9px,ok
+https://mosaic.moksaweb.com/moksa/,_,mk-svc-1-svc-zh,fontFamily,"'Noto Sans TC','PingFang TC','Hiragino Sans TC','Microsoft JhengHei',sans-serif","""Noto Sans TC"", ""PingFang TC"", ""Hiragino Sans TC"", ""Microsoft JhengHei"", sans-serif",ok
+https://mosaic.moksaweb.com/moksa/,_,mk-svc-1-svc-zh,letterSpacing,0.01em,0.19px,ok
+https://mosaic.moksaweb.com/moksa/,_,mk-svc-2-svc-body,color,"rgb(90,92,97)","rgb(90, 92, 97)",ok
+https://mosaic.moksaweb.com/moksa/,_,mk-svc-2-svc-body,fontSize,13px,13px,ok
+https://mosaic.moksaweb.com/moksa/,_,mk-svc-2-svc-body,lineHeight,2,26px,ok
+https://mosaic.moksaweb.com/moksa/,_,mk-svc-2-svc-en,color,"rgb(191,68,40)","rgb(191, 68, 40)",ok
+https://mosaic.moksaweb.com/moksa/,_,mk-svc-2-svc-en,fontSize,10px,10px,ok
+https://mosaic.moksaweb.com/moksa/,_,mk-svc-2-svc-en,fontFamily,"'IBM Plex Mono',ui-monospace,SFMono-Regular,Menlo,Consolas,monospace","""IBM Plex Mono"", ui-monospace, SFMono-Regular, Menlo, Consolas, monospace",ok
+https://mosaic.moksaweb.com/moksa/,_,mk-svc-2-svc-en,letterSpacing,0.16em,1.6px,ok
+https://mosaic.moksaweb.com/moksa/,_,mk-svc-2-svc-num,color,"rgb(107,109,113)","rgb(107, 109, 113)",ok
+https://mosaic.moksaweb.com/moksa/,_,mk-svc-2-svc-num,fontSize,12px,12px,ok
+https://mosaic.moksaweb.com/moksa/,_,mk-svc-2-svc-num,fontFamily,"'IBM Plex Mono',ui-monospace,SFMono-Regular,Menlo,Consolas,monospace","""IBM Plex Mono"", ui-monospace, SFMono-Regular, Menlo, Consolas, monospace",ok
+https://mosaic.moksaweb.com/moksa/,_,mk-svc-2-svc-num,letterSpacing,0.06em,0.72px,ok
+https://mosaic.moksaweb.com/moksa/,_,mk-svc-2-svc-row,display,grid,grid,ok
+https://mosaic.moksaweb.com/moksa/,_,mk-svc-2-svc-row,gridCols,84px 1fr 1.35fr,84px 471.484px 636.516px,ok
+https://mosaic.moksaweb.com/moksa/,_,mk-svc-2-svc-row,columnGap,24px,24px,ok
+https://mosaic.moksaweb.com/moksa/,_,mk-svc-2-svc-row,alignItems,start,start,ok
+https://mosaic.moksaweb.com/moksa/,_,mk-svc-2-svc-row,paddingTop,26px,26px,ok
+https://mosaic.moksaweb.com/moksa/,_,mk-svc-2-svc-row,paddingBottom,26px,26px,ok
+https://mosaic.moksaweb.com/moksa/,_,mk-svc-2-svc-row,customStyles:border-top,"1px solid rgba(22,24,28,.16)",no computed value,not-comparable
+https://mosaic.moksaweb.com/moksa/,_,mk-svc-2-svc-zh,color,"rgb(22,24,28)","rgb(22, 24, 28)",ok
+https://mosaic.moksaweb.com/moksa/,_,mk-svc-2-svc-zh,fontSize,19px,19px,ok
+https://mosaic.moksaweb.com/moksa/,_,mk-svc-2-svc-zh,fontWeight,500,500,ok
+https://mosaic.moksaweb.com/moksa/,_,mk-svc-2-svc-zh,marginTop,9px,9px,ok
+https://mosaic.moksaweb.com/moksa/,_,mk-svc-2-svc-zh,fontFamily,"'Noto Sans TC','PingFang TC','Hiragino Sans TC','Microsoft JhengHei',sans-serif","""Noto Sans TC"", ""PingFang TC"", ""Hiragino Sans TC"", ""Microsoft JhengHei"", sans-serif",ok
+https://mosaic.moksaweb.com/moksa/,_,mk-svc-2-svc-zh,letterSpacing,0.01em,0.19px,ok
+https://mosaic.moksaweb.com/moksa/,_,mk-svc-3-svc-body,color,"rgb(90,92,97)","rgb(90, 92, 97)",ok
+https://mosaic.moksaweb.com/moksa/,_,mk-svc-3-svc-body,fontSize,13px,13px,ok
+https://mosaic.moksaweb.com/moksa/,_,mk-svc-3-svc-body,lineHeight,2,26px,ok
+https://mosaic.moksaweb.com/moksa/,_,mk-svc-3-svc-en,color,"rgb(191,68,40)","rgb(191, 68, 40)",ok
+https://mosaic.moksaweb.com/moksa/,_,mk-svc-3-svc-en,fontSize,10px,10px,ok
+https://mosaic.moksaweb.com/moksa/,_,mk-svc-3-svc-en,fontFamily,"'IBM Plex Mono',ui-monospace,SFMono-Regular,Menlo,Consolas,monospace","""IBM Plex Mono"", ui-monospace, SFMono-Regular, Menlo, Consolas, monospace",ok
+https://mosaic.moksaweb.com/moksa/,_,mk-svc-3-svc-en,letterSpacing,0.16em,1.6px,ok
+https://mosaic.moksaweb.com/moksa/,_,mk-svc-3-svc-num,color,"rgb(107,109,113)","rgb(107, 109, 113)",ok
+https://mosaic.moksaweb.com/moksa/,_,mk-svc-3-svc-num,fontSize,12px,12px,ok
+https://mosaic.moksaweb.com/moksa/,_,mk-svc-3-svc-num,fontFamily,"'IBM Plex Mono',ui-monospace,SFMono-Regular,Menlo,Consolas,monospace","""IBM Plex Mono"", ui-monospace, SFMono-Regular, Menlo, Consolas, monospace",ok
+https://mosaic.moksaweb.com/moksa/,_,mk-svc-3-svc-num,letterSpacing,0.06em,0.72px,ok
+https://mosaic.moksaweb.com/moksa/,_,mk-svc-3-svc-row,display,grid,grid,ok
+https://mosaic.moksaweb.com/moksa/,_,mk-svc-3-svc-row,gridCols,84px 1fr 1.35fr,84px 471.484px 636.516px,ok
+https://mosaic.moksaweb.com/moksa/,_,mk-svc-3-svc-row,columnGap,24px,24px,ok
+https://mosaic.moksaweb.com/moksa/,_,mk-svc-3-svc-row,alignItems,start,start,ok
+https://mosaic.moksaweb.com/moksa/,_,mk-svc-3-svc-row,paddingTop,26px,26px,ok
+https://mosaic.moksaweb.com/moksa/,_,mk-svc-3-svc-row,paddingBottom,26px,26px,ok
+https://mosaic.moksaweb.com/moksa/,_,mk-svc-3-svc-row,customStyles:border-top,"1px solid rgba(22,24,28,.16)",no computed value,not-comparable
+https://mosaic.moksaweb.com/moksa/,_,mk-svc-3-svc-zh,color,"rgb(22,24,28)","rgb(22, 24, 28)",ok
+https://mosaic.moksaweb.com/moksa/,_,mk-svc-3-svc-zh,fontSize,19px,19px,ok
+https://mosaic.moksaweb.com/moksa/,_,mk-svc-3-svc-zh,fontWeight,500,500,ok
+https://mosaic.moksaweb.com/moksa/,_,mk-svc-3-svc-zh,marginTop,9px,9px,ok
+https://mosaic.moksaweb.com/moksa/,_,mk-svc-3-svc-zh,fontFamily,"'Noto Sans TC','PingFang TC','Hiragino Sans TC','Microsoft JhengHei',sans-serif","""Noto Sans TC"", ""PingFang TC"", ""Hiragino Sans TC"", ""Microsoft JhengHei"", sans-serif",ok
+https://mosaic.moksaweb.com/moksa/,_,mk-svc-3-svc-zh,letterSpacing,0.01em,0.19px,ok
 https://mosaic.moksaweb.com/moksa/,_,mk-svc-head,display,grid,grid,ok
 https://mosaic.moksaweb.com/moksa/,_,mk-svc-head,gridCols,84px 1fr,84px 1156px,ok
 https://mosaic.moksaweb.com/moksa/,_,mk-svc-head,columnGap,0px,0px,ok
@@ -2036,34 +2104,102 @@ https://mosaic.moksaweb.com/moksa/,_t,mk-stack-tags-7,display,flex,flex,ok
 https://mosaic.moksaweb.com/moksa/,_t,mk-stack-tags-7,columnGap,8px,8px,ok
 https://mosaic.moksaweb.com/moksa/,_t,mk-stack-tags-7,rowGap,8px,8px,ok
 https://mosaic.moksaweb.com/moksa/,_t,mk-stack-tags-7,customStyles:flex-wrap,wrap,wrap,ok
-https://mosaic.moksaweb.com/moksa/,_t,mk-svc-0,display,grid,grid,ok
-https://mosaic.moksaweb.com/moksa/,_t,mk-svc-0,gridCols,72px 1fr 1.2fr,72px 334.531px 401.469px,ok
-https://mosaic.moksaweb.com/moksa/,_t,mk-svc-0,columnGap,18px,18px,ok
-https://mosaic.moksaweb.com/moksa/,_t,mk-svc-0,alignItems,start,start,ok
-https://mosaic.moksaweb.com/moksa/,_t,mk-svc-0,paddingTop,26px,26px,ok
-https://mosaic.moksaweb.com/moksa/,_t,mk-svc-0,paddingBottom,26px,26px,ok
-https://mosaic.moksaweb.com/moksa/,_t,mk-svc-0,customStyles:border-top,"1px solid rgba(22,24,28,.16)",no computed value,not-comparable
-https://mosaic.moksaweb.com/moksa/,_t,mk-svc-1,display,grid,grid,ok
-https://mosaic.moksaweb.com/moksa/,_t,mk-svc-1,gridCols,72px 1fr 1.2fr,72px 334.531px 401.469px,ok
-https://mosaic.moksaweb.com/moksa/,_t,mk-svc-1,columnGap,18px,18px,ok
-https://mosaic.moksaweb.com/moksa/,_t,mk-svc-1,alignItems,start,start,ok
-https://mosaic.moksaweb.com/moksa/,_t,mk-svc-1,paddingTop,26px,26px,ok
-https://mosaic.moksaweb.com/moksa/,_t,mk-svc-1,paddingBottom,26px,26px,ok
-https://mosaic.moksaweb.com/moksa/,_t,mk-svc-1,customStyles:border-top,"1px solid rgba(22,24,28,.16)",no computed value,not-comparable
-https://mosaic.moksaweb.com/moksa/,_t,mk-svc-2,display,grid,grid,ok
-https://mosaic.moksaweb.com/moksa/,_t,mk-svc-2,gridCols,72px 1fr 1.2fr,72px 334.531px 401.469px,ok
-https://mosaic.moksaweb.com/moksa/,_t,mk-svc-2,columnGap,18px,18px,ok
-https://mosaic.moksaweb.com/moksa/,_t,mk-svc-2,alignItems,start,start,ok
-https://mosaic.moksaweb.com/moksa/,_t,mk-svc-2,paddingTop,26px,26px,ok
-https://mosaic.moksaweb.com/moksa/,_t,mk-svc-2,paddingBottom,26px,26px,ok
-https://mosaic.moksaweb.com/moksa/,_t,mk-svc-2,customStyles:border-top,"1px solid rgba(22,24,28,.16)",no computed value,not-comparable
-https://mosaic.moksaweb.com/moksa/,_t,mk-svc-3,display,grid,grid,ok
-https://mosaic.moksaweb.com/moksa/,_t,mk-svc-3,gridCols,72px 1fr 1.2fr,72px 334.531px 401.469px,ok
-https://mosaic.moksaweb.com/moksa/,_t,mk-svc-3,columnGap,18px,18px,ok
-https://mosaic.moksaweb.com/moksa/,_t,mk-svc-3,alignItems,start,start,ok
-https://mosaic.moksaweb.com/moksa/,_t,mk-svc-3,paddingTop,26px,26px,ok
-https://mosaic.moksaweb.com/moksa/,_t,mk-svc-3,paddingBottom,26px,26px,ok
-https://mosaic.moksaweb.com/moksa/,_t,mk-svc-3,customStyles:border-top,"1px solid rgba(22,24,28,.16)",no computed value,not-comparable
+https://mosaic.moksaweb.com/moksa/,_t,mk-svc-0-svc-body,color,"rgb(90,92,97)","rgb(90, 92, 97)",ok
+https://mosaic.moksaweb.com/moksa/,_t,mk-svc-0-svc-body,fontSize,13px,13px,ok
+https://mosaic.moksaweb.com/moksa/,_t,mk-svc-0-svc-body,lineHeight,2,26px,ok
+https://mosaic.moksaweb.com/moksa/,_t,mk-svc-0-svc-en,color,"rgb(191,68,40)","rgb(191, 68, 40)",ok
+https://mosaic.moksaweb.com/moksa/,_t,mk-svc-0-svc-en,fontSize,10px,10px,ok
+https://mosaic.moksaweb.com/moksa/,_t,mk-svc-0-svc-en,fontFamily,"'IBM Plex Mono',ui-monospace,SFMono-Regular,Menlo,Consolas,monospace","""IBM Plex Mono"", ui-monospace, SFMono-Regular, Menlo, Consolas, monospace",ok
+https://mosaic.moksaweb.com/moksa/,_t,mk-svc-0-svc-en,letterSpacing,0.16em,1.6px,ok
+https://mosaic.moksaweb.com/moksa/,_t,mk-svc-0-svc-num,color,"rgb(107,109,113)","rgb(107, 109, 113)",ok
+https://mosaic.moksaweb.com/moksa/,_t,mk-svc-0-svc-num,fontSize,12px,12px,ok
+https://mosaic.moksaweb.com/moksa/,_t,mk-svc-0-svc-num,fontFamily,"'IBM Plex Mono',ui-monospace,SFMono-Regular,Menlo,Consolas,monospace","""IBM Plex Mono"", ui-monospace, SFMono-Regular, Menlo, Consolas, monospace",ok
+https://mosaic.moksaweb.com/moksa/,_t,mk-svc-0-svc-num,letterSpacing,0.06em,0.72px,ok
+https://mosaic.moksaweb.com/moksa/,_t,mk-svc-0-svc-row,display,grid,grid,ok
+https://mosaic.moksaweb.com/moksa/,_t,mk-svc-0-svc-row,gridCols,72px 1fr 1.2fr,72px 334.531px 401.469px,ok
+https://mosaic.moksaweb.com/moksa/,_t,mk-svc-0-svc-row,columnGap,18px,18px,ok
+https://mosaic.moksaweb.com/moksa/,_t,mk-svc-0-svc-row,alignItems,start,start,ok
+https://mosaic.moksaweb.com/moksa/,_t,mk-svc-0-svc-row,paddingTop,26px,26px,ok
+https://mosaic.moksaweb.com/moksa/,_t,mk-svc-0-svc-row,paddingBottom,26px,26px,ok
+https://mosaic.moksaweb.com/moksa/,_t,mk-svc-0-svc-row,customStyles:border-top,"1px solid rgba(22,24,28,.16)",no computed value,not-comparable
+https://mosaic.moksaweb.com/moksa/,_t,mk-svc-0-svc-zh,color,"rgb(22,24,28)","rgb(22, 24, 28)",ok
+https://mosaic.moksaweb.com/moksa/,_t,mk-svc-0-svc-zh,fontSize,19px,19px,ok
+https://mosaic.moksaweb.com/moksa/,_t,mk-svc-0-svc-zh,fontWeight,500,500,ok
+https://mosaic.moksaweb.com/moksa/,_t,mk-svc-0-svc-zh,marginTop,9px,9px,ok
+https://mosaic.moksaweb.com/moksa/,_t,mk-svc-0-svc-zh,fontFamily,"'Noto Sans TC','PingFang TC','Hiragino Sans TC','Microsoft JhengHei',sans-serif","""Noto Sans TC"", ""PingFang TC"", ""Hiragino Sans TC"", ""Microsoft JhengHei"", sans-serif",ok
+https://mosaic.moksaweb.com/moksa/,_t,mk-svc-0-svc-zh,letterSpacing,0.01em,0.19px,ok
+https://mosaic.moksaweb.com/moksa/,_t,mk-svc-1-svc-body,color,"rgb(90,92,97)","rgb(90, 92, 97)",ok
+https://mosaic.moksaweb.com/moksa/,_t,mk-svc-1-svc-body,fontSize,13px,13px,ok
+https://mosaic.moksaweb.com/moksa/,_t,mk-svc-1-svc-body,lineHeight,2,26px,ok
+https://mosaic.moksaweb.com/moksa/,_t,mk-svc-1-svc-en,color,"rgb(191,68,40)","rgb(191, 68, 40)",ok
+https://mosaic.moksaweb.com/moksa/,_t,mk-svc-1-svc-en,fontSize,10px,10px,ok
+https://mosaic.moksaweb.com/moksa/,_t,mk-svc-1-svc-en,fontFamily,"'IBM Plex Mono',ui-monospace,SFMono-Regular,Menlo,Consolas,monospace","""IBM Plex Mono"", ui-monospace, SFMono-Regular, Menlo, Consolas, monospace",ok
+https://mosaic.moksaweb.com/moksa/,_t,mk-svc-1-svc-en,letterSpacing,0.16em,1.6px,ok
+https://mosaic.moksaweb.com/moksa/,_t,mk-svc-1-svc-num,color,"rgb(107,109,113)","rgb(107, 109, 113)",ok
+https://mosaic.moksaweb.com/moksa/,_t,mk-svc-1-svc-num,fontSize,12px,12px,ok
+https://mosaic.moksaweb.com/moksa/,_t,mk-svc-1-svc-num,fontFamily,"'IBM Plex Mono',ui-monospace,SFMono-Regular,Menlo,Consolas,monospace","""IBM Plex Mono"", ui-monospace, SFMono-Regular, Menlo, Consolas, monospace",ok
+https://mosaic.moksaweb.com/moksa/,_t,mk-svc-1-svc-num,letterSpacing,0.06em,0.72px,ok
+https://mosaic.moksaweb.com/moksa/,_t,mk-svc-1-svc-row,display,grid,grid,ok
+https://mosaic.moksaweb.com/moksa/,_t,mk-svc-1-svc-row,gridCols,72px 1fr 1.2fr,72px 334.531px 401.469px,ok
+https://mosaic.moksaweb.com/moksa/,_t,mk-svc-1-svc-row,columnGap,18px,18px,ok
+https://mosaic.moksaweb.com/moksa/,_t,mk-svc-1-svc-row,alignItems,start,start,ok
+https://mosaic.moksaweb.com/moksa/,_t,mk-svc-1-svc-row,paddingTop,26px,26px,ok
+https://mosaic.moksaweb.com/moksa/,_t,mk-svc-1-svc-row,paddingBottom,26px,26px,ok
+https://mosaic.moksaweb.com/moksa/,_t,mk-svc-1-svc-row,customStyles:border-top,"1px solid rgba(22,24,28,.16)",no computed value,not-comparable
+https://mosaic.moksaweb.com/moksa/,_t,mk-svc-1-svc-zh,color,"rgb(22,24,28)","rgb(22, 24, 28)",ok
+https://mosaic.moksaweb.com/moksa/,_t,mk-svc-1-svc-zh,fontSize,19px,19px,ok
+https://mosaic.moksaweb.com/moksa/,_t,mk-svc-1-svc-zh,fontWeight,500,500,ok
+https://mosaic.moksaweb.com/moksa/,_t,mk-svc-1-svc-zh,marginTop,9px,9px,ok
+https://mosaic.moksaweb.com/moksa/,_t,mk-svc-1-svc-zh,fontFamily,"'Noto Sans TC','PingFang TC','Hiragino Sans TC','Microsoft JhengHei',sans-serif","""Noto Sans TC"", ""PingFang TC"", ""Hiragino Sans TC"", ""Microsoft JhengHei"", sans-serif",ok
+https://mosaic.moksaweb.com/moksa/,_t,mk-svc-1-svc-zh,letterSpacing,0.01em,0.19px,ok
+https://mosaic.moksaweb.com/moksa/,_t,mk-svc-2-svc-body,color,"rgb(90,92,97)","rgb(90, 92, 97)",ok
+https://mosaic.moksaweb.com/moksa/,_t,mk-svc-2-svc-body,fontSize,13px,13px,ok
+https://mosaic.moksaweb.com/moksa/,_t,mk-svc-2-svc-body,lineHeight,2,26px,ok
+https://mosaic.moksaweb.com/moksa/,_t,mk-svc-2-svc-en,color,"rgb(191,68,40)","rgb(191, 68, 40)",ok
+https://mosaic.moksaweb.com/moksa/,_t,mk-svc-2-svc-en,fontSize,10px,10px,ok
+https://mosaic.moksaweb.com/moksa/,_t,mk-svc-2-svc-en,fontFamily,"'IBM Plex Mono',ui-monospace,SFMono-Regular,Menlo,Consolas,monospace","""IBM Plex Mono"", ui-monospace, SFMono-Regular, Menlo, Consolas, monospace",ok
+https://mosaic.moksaweb.com/moksa/,_t,mk-svc-2-svc-en,letterSpacing,0.16em,1.6px,ok
+https://mosaic.moksaweb.com/moksa/,_t,mk-svc-2-svc-num,color,"rgb(107,109,113)","rgb(107, 109, 113)",ok
+https://mosaic.moksaweb.com/moksa/,_t,mk-svc-2-svc-num,fontSize,12px,12px,ok
+https://mosaic.moksaweb.com/moksa/,_t,mk-svc-2-svc-num,fontFamily,"'IBM Plex Mono',ui-monospace,SFMono-Regular,Menlo,Consolas,monospace","""IBM Plex Mono"", ui-monospace, SFMono-Regular, Menlo, Consolas, monospace",ok
+https://mosaic.moksaweb.com/moksa/,_t,mk-svc-2-svc-num,letterSpacing,0.06em,0.72px,ok
+https://mosaic.moksaweb.com/moksa/,_t,mk-svc-2-svc-row,display,grid,grid,ok
+https://mosaic.moksaweb.com/moksa/,_t,mk-svc-2-svc-row,gridCols,72px 1fr 1.2fr,72px 334.531px 401.469px,ok
+https://mosaic.moksaweb.com/moksa/,_t,mk-svc-2-svc-row,columnGap,18px,18px,ok
+https://mosaic.moksaweb.com/moksa/,_t,mk-svc-2-svc-row,alignItems,start,start,ok
+https://mosaic.moksaweb.com/moksa/,_t,mk-svc-2-svc-row,paddingTop,26px,26px,ok
+https://mosaic.moksaweb.com/moksa/,_t,mk-svc-2-svc-row,paddingBottom,26px,26px,ok
+https://mosaic.moksaweb.com/moksa/,_t,mk-svc-2-svc-row,customStyles:border-top,"1px solid rgba(22,24,28,.16)",no computed value,not-comparable
+https://mosaic.moksaweb.com/moksa/,_t,mk-svc-2-svc-zh,color,"rgb(22,24,28)","rgb(22, 24, 28)",ok
+https://mosaic.moksaweb.com/moksa/,_t,mk-svc-2-svc-zh,fontSize,19px,19px,ok
+https://mosaic.moksaweb.com/moksa/,_t,mk-svc-2-svc-zh,fontWeight,500,500,ok
+https://mosaic.moksaweb.com/moksa/,_t,mk-svc-2-svc-zh,marginTop,9px,9px,ok
+https://mosaic.moksaweb.com/moksa/,_t,mk-svc-2-svc-zh,fontFamily,"'Noto Sans TC','PingFang TC','Hiragino Sans TC','Microsoft JhengHei',sans-serif","""Noto Sans TC"", ""PingFang TC"", ""Hiragino Sans TC"", ""Microsoft JhengHei"", sans-serif",ok
+https://mosaic.moksaweb.com/moksa/,_t,mk-svc-2-svc-zh,letterSpacing,0.01em,0.19px,ok
+https://mosaic.moksaweb.com/moksa/,_t,mk-svc-3-svc-body,color,"rgb(90,92,97)","rgb(90, 92, 97)",ok
+https://mosaic.moksaweb.com/moksa/,_t,mk-svc-3-svc-body,fontSize,13px,13px,ok
+https://mosaic.moksaweb.com/moksa/,_t,mk-svc-3-svc-body,lineHeight,2,26px,ok
+https://mosaic.moksaweb.com/moksa/,_t,mk-svc-3-svc-en,color,"rgb(191,68,40)","rgb(191, 68, 40)",ok
+https://mosaic.moksaweb.com/moksa/,_t,mk-svc-3-svc-en,fontSize,10px,10px,ok
+https://mosaic.moksaweb.com/moksa/,_t,mk-svc-3-svc-en,fontFamily,"'IBM Plex Mono',ui-monospace,SFMono-Regular,Menlo,Consolas,monospace","""IBM Plex Mono"", ui-monospace, SFMono-Regular, Menlo, Consolas, monospace",ok
+https://mosaic.moksaweb.com/moksa/,_t,mk-svc-3-svc-en,letterSpacing,0.16em,1.6px,ok
+https://mosaic.moksaweb.com/moksa/,_t,mk-svc-3-svc-num,color,"rgb(107,109,113)","rgb(107, 109, 113)",ok
+https://mosaic.moksaweb.com/moksa/,_t,mk-svc-3-svc-num,fontSize,12px,12px,ok
+https://mosaic.moksaweb.com/moksa/,_t,mk-svc-3-svc-num,fontFamily,"'IBM Plex Mono',ui-monospace,SFMono-Regular,Menlo,Consolas,monospace","""IBM Plex Mono"", ui-monospace, SFMono-Regular, Menlo, Consolas, monospace",ok
+https://mosaic.moksaweb.com/moksa/,_t,mk-svc-3-svc-num,letterSpacing,0.06em,0.72px,ok
+https://mosaic.moksaweb.com/moksa/,_t,mk-svc-3-svc-row,display,grid,grid,ok
+https://mosaic.moksaweb.com/moksa/,_t,mk-svc-3-svc-row,gridCols,72px 1fr 1.2fr,72px 334.531px 401.469px,ok
+https://mosaic.moksaweb.com/moksa/,_t,mk-svc-3-svc-row,columnGap,18px,18px,ok
+https://mosaic.moksaweb.com/moksa/,_t,mk-svc-3-svc-row,alignItems,start,start,ok
+https://mosaic.moksaweb.com/moksa/,_t,mk-svc-3-svc-row,paddingTop,26px,26px,ok
+https://mosaic.moksaweb.com/moksa/,_t,mk-svc-3-svc-row,paddingBottom,26px,26px,ok
+https://mosaic.moksaweb.com/moksa/,_t,mk-svc-3-svc-row,customStyles:border-top,"1px solid rgba(22,24,28,.16)",no computed value,not-comparable
+https://mosaic.moksaweb.com/moksa/,_t,mk-svc-3-svc-zh,color,"rgb(22,24,28)","rgb(22, 24, 28)",ok
+https://mosaic.moksaweb.com/moksa/,_t,mk-svc-3-svc-zh,fontSize,19px,19px,ok
+https://mosaic.moksaweb.com/moksa/,_t,mk-svc-3-svc-zh,fontWeight,500,500,ok
+https://mosaic.moksaweb.com/moksa/,_t,mk-svc-3-svc-zh,marginTop,9px,9px,ok
+https://mosaic.moksaweb.com/moksa/,_t,mk-svc-3-svc-zh,fontFamily,"'Noto Sans TC','PingFang TC','Hiragino Sans TC','Microsoft JhengHei',sans-serif","""Noto Sans TC"", ""PingFang TC"", ""Hiragino Sans TC"", ""Microsoft JhengHei"", sans-serif",ok
+https://mosaic.moksaweb.com/moksa/,_t,mk-svc-3-svc-zh,letterSpacing,0.01em,0.19px,ok
 https://mosaic.moksaweb.com/moksa/,_t,mk-svc-head,display,grid,grid,ok
 https://mosaic.moksaweb.com/moksa/,_t,mk-svc-head,gridCols,84px 1fr,84px 760px,ok
 https://mosaic.moksaweb.com/moksa/,_t,mk-svc-head,columnGap,0px,0px,ok
@@ -3262,38 +3398,106 @@ https://mosaic.moksaweb.com/moksa/,_m,mk-stack-tags-7,display,flex,flex,ok
 https://mosaic.moksaweb.com/moksa/,_m,mk-stack-tags-7,columnGap,8px,8px,ok
 https://mosaic.moksaweb.com/moksa/,_m,mk-stack-tags-7,rowGap,8px,8px,ok
 https://mosaic.moksaweb.com/moksa/,_m,mk-stack-tags-7,customStyles:flex-wrap,wrap,wrap,ok
-https://mosaic.moksaweb.com/moksa/,_m,mk-svc-0,display,grid,grid,ok
-https://mosaic.moksaweb.com/moksa/,_m,mk-svc-0,gridCols,"repeat(1, 1fr)",354px,ok
-https://mosaic.moksaweb.com/moksa/,_m,mk-svc-0,columnGap,18px,18px,ok
-https://mosaic.moksaweb.com/moksa/,_m,mk-svc-0,alignItems,start,start,ok
-https://mosaic.moksaweb.com/moksa/,_m,mk-svc-0,paddingTop,20px,20px,ok
-https://mosaic.moksaweb.com/moksa/,_m,mk-svc-0,paddingBottom,20px,20px,ok
-https://mosaic.moksaweb.com/moksa/,_m,mk-svc-0,customStyles:border-top,"1px solid rgba(22,24,28,.16)",no computed value,not-comparable
-https://mosaic.moksaweb.com/moksa/,_m,mk-svc-0,rowGap,10px,10px,ok
-https://mosaic.moksaweb.com/moksa/,_m,mk-svc-1,display,grid,grid,ok
-https://mosaic.moksaweb.com/moksa/,_m,mk-svc-1,gridCols,"repeat(1, 1fr)",354px,ok
-https://mosaic.moksaweb.com/moksa/,_m,mk-svc-1,columnGap,18px,18px,ok
-https://mosaic.moksaweb.com/moksa/,_m,mk-svc-1,alignItems,start,start,ok
-https://mosaic.moksaweb.com/moksa/,_m,mk-svc-1,paddingTop,20px,20px,ok
-https://mosaic.moksaweb.com/moksa/,_m,mk-svc-1,paddingBottom,20px,20px,ok
-https://mosaic.moksaweb.com/moksa/,_m,mk-svc-1,customStyles:border-top,"1px solid rgba(22,24,28,.16)",no computed value,not-comparable
-https://mosaic.moksaweb.com/moksa/,_m,mk-svc-1,rowGap,10px,10px,ok
-https://mosaic.moksaweb.com/moksa/,_m,mk-svc-2,display,grid,grid,ok
-https://mosaic.moksaweb.com/moksa/,_m,mk-svc-2,gridCols,"repeat(1, 1fr)",354px,ok
-https://mosaic.moksaweb.com/moksa/,_m,mk-svc-2,columnGap,18px,18px,ok
-https://mosaic.moksaweb.com/moksa/,_m,mk-svc-2,alignItems,start,start,ok
-https://mosaic.moksaweb.com/moksa/,_m,mk-svc-2,paddingTop,20px,20px,ok
-https://mosaic.moksaweb.com/moksa/,_m,mk-svc-2,paddingBottom,20px,20px,ok
-https://mosaic.moksaweb.com/moksa/,_m,mk-svc-2,customStyles:border-top,"1px solid rgba(22,24,28,.16)",no computed value,not-comparable
-https://mosaic.moksaweb.com/moksa/,_m,mk-svc-2,rowGap,10px,10px,ok
-https://mosaic.moksaweb.com/moksa/,_m,mk-svc-3,display,grid,grid,ok
-https://mosaic.moksaweb.com/moksa/,_m,mk-svc-3,gridCols,"repeat(1, 1fr)",354px,ok
-https://mosaic.moksaweb.com/moksa/,_m,mk-svc-3,columnGap,18px,18px,ok
-https://mosaic.moksaweb.com/moksa/,_m,mk-svc-3,alignItems,start,start,ok
-https://mosaic.moksaweb.com/moksa/,_m,mk-svc-3,paddingTop,20px,20px,ok
-https://mosaic.moksaweb.com/moksa/,_m,mk-svc-3,paddingBottom,20px,20px,ok
-https://mosaic.moksaweb.com/moksa/,_m,mk-svc-3,customStyles:border-top,"1px solid rgba(22,24,28,.16)",no computed value,not-comparable
-https://mosaic.moksaweb.com/moksa/,_m,mk-svc-3,rowGap,10px,10px,ok
+https://mosaic.moksaweb.com/moksa/,_m,mk-svc-0-svc-body,color,"rgb(90,92,97)","rgb(90, 92, 97)",ok
+https://mosaic.moksaweb.com/moksa/,_m,mk-svc-0-svc-body,fontSize,13px,13px,ok
+https://mosaic.moksaweb.com/moksa/,_m,mk-svc-0-svc-body,lineHeight,2,26px,ok
+https://mosaic.moksaweb.com/moksa/,_m,mk-svc-0-svc-en,color,"rgb(191,68,40)","rgb(191, 68, 40)",ok
+https://mosaic.moksaweb.com/moksa/,_m,mk-svc-0-svc-en,fontSize,10px,10px,ok
+https://mosaic.moksaweb.com/moksa/,_m,mk-svc-0-svc-en,fontFamily,"'IBM Plex Mono',ui-monospace,SFMono-Regular,Menlo,Consolas,monospace","""IBM Plex Mono"", ui-monospace, SFMono-Regular, Menlo, Consolas, monospace",ok
+https://mosaic.moksaweb.com/moksa/,_m,mk-svc-0-svc-en,letterSpacing,0.16em,1.6px,ok
+https://mosaic.moksaweb.com/moksa/,_m,mk-svc-0-svc-num,color,"rgb(107,109,113)","rgb(107, 109, 113)",ok
+https://mosaic.moksaweb.com/moksa/,_m,mk-svc-0-svc-num,fontSize,12px,12px,ok
+https://mosaic.moksaweb.com/moksa/,_m,mk-svc-0-svc-num,fontFamily,"'IBM Plex Mono',ui-monospace,SFMono-Regular,Menlo,Consolas,monospace","""IBM Plex Mono"", ui-monospace, SFMono-Regular, Menlo, Consolas, monospace",ok
+https://mosaic.moksaweb.com/moksa/,_m,mk-svc-0-svc-num,letterSpacing,0.06em,0.72px,ok
+https://mosaic.moksaweb.com/moksa/,_m,mk-svc-0-svc-row,display,grid,grid,ok
+https://mosaic.moksaweb.com/moksa/,_m,mk-svc-0-svc-row,gridCols,"repeat(1, 1fr)",354px,ok
+https://mosaic.moksaweb.com/moksa/,_m,mk-svc-0-svc-row,columnGap,18px,18px,ok
+https://mosaic.moksaweb.com/moksa/,_m,mk-svc-0-svc-row,alignItems,start,start,ok
+https://mosaic.moksaweb.com/moksa/,_m,mk-svc-0-svc-row,paddingTop,20px,20px,ok
+https://mosaic.moksaweb.com/moksa/,_m,mk-svc-0-svc-row,paddingBottom,20px,20px,ok
+https://mosaic.moksaweb.com/moksa/,_m,mk-svc-0-svc-row,customStyles:border-top,"1px solid rgba(22,24,28,.16)",no computed value,not-comparable
+https://mosaic.moksaweb.com/moksa/,_m,mk-svc-0-svc-row,rowGap,10px,10px,ok
+https://mosaic.moksaweb.com/moksa/,_m,mk-svc-0-svc-zh,color,"rgb(22,24,28)","rgb(22, 24, 28)",ok
+https://mosaic.moksaweb.com/moksa/,_m,mk-svc-0-svc-zh,fontSize,19px,19px,ok
+https://mosaic.moksaweb.com/moksa/,_m,mk-svc-0-svc-zh,fontWeight,500,500,ok
+https://mosaic.moksaweb.com/moksa/,_m,mk-svc-0-svc-zh,marginTop,9px,9px,ok
+https://mosaic.moksaweb.com/moksa/,_m,mk-svc-0-svc-zh,fontFamily,"'Noto Sans TC','PingFang TC','Hiragino Sans TC','Microsoft JhengHei',sans-serif","""Noto Sans TC"", ""PingFang TC"", ""Hiragino Sans TC"", ""Microsoft JhengHei"", sans-serif",ok
+https://mosaic.moksaweb.com/moksa/,_m,mk-svc-0-svc-zh,letterSpacing,0.01em,0.19px,ok
+https://mosaic.moksaweb.com/moksa/,_m,mk-svc-1-svc-body,color,"rgb(90,92,97)","rgb(90, 92, 97)",ok
+https://mosaic.moksaweb.com/moksa/,_m,mk-svc-1-svc-body,fontSize,13px,13px,ok
+https://mosaic.moksaweb.com/moksa/,_m,mk-svc-1-svc-body,lineHeight,2,26px,ok
+https://mosaic.moksaweb.com/moksa/,_m,mk-svc-1-svc-en,color,"rgb(191,68,40)","rgb(191, 68, 40)",ok
+https://mosaic.moksaweb.com/moksa/,_m,mk-svc-1-svc-en,fontSize,10px,10px,ok
+https://mosaic.moksaweb.com/moksa/,_m,mk-svc-1-svc-en,fontFamily,"'IBM Plex Mono',ui-monospace,SFMono-Regular,Menlo,Consolas,monospace","""IBM Plex Mono"", ui-monospace, SFMono-Regular, Menlo, Consolas, monospace",ok
+https://mosaic.moksaweb.com/moksa/,_m,mk-svc-1-svc-en,letterSpacing,0.16em,1.6px,ok
+https://mosaic.moksaweb.com/moksa/,_m,mk-svc-1-svc-num,color,"rgb(107,109,113)","rgb(107, 109, 113)",ok
+https://mosaic.moksaweb.com/moksa/,_m,mk-svc-1-svc-num,fontSize,12px,12px,ok
+https://mosaic.moksaweb.com/moksa/,_m,mk-svc-1-svc-num,fontFamily,"'IBM Plex Mono',ui-monospace,SFMono-Regular,Menlo,Consolas,monospace","""IBM Plex Mono"", ui-monospace, SFMono-Regular, Menlo, Consolas, monospace",ok
+https://mosaic.moksaweb.com/moksa/,_m,mk-svc-1-svc-num,letterSpacing,0.06em,0.72px,ok
+https://mosaic.moksaweb.com/moksa/,_m,mk-svc-1-svc-row,display,grid,grid,ok
+https://mosaic.moksaweb.com/moksa/,_m,mk-svc-1-svc-row,gridCols,"repeat(1, 1fr)",354px,ok
+https://mosaic.moksaweb.com/moksa/,_m,mk-svc-1-svc-row,columnGap,18px,18px,ok
+https://mosaic.moksaweb.com/moksa/,_m,mk-svc-1-svc-row,alignItems,start,start,ok
+https://mosaic.moksaweb.com/moksa/,_m,mk-svc-1-svc-row,paddingTop,20px,20px,ok
+https://mosaic.moksaweb.com/moksa/,_m,mk-svc-1-svc-row,paddingBottom,20px,20px,ok
+https://mosaic.moksaweb.com/moksa/,_m,mk-svc-1-svc-row,customStyles:border-top,"1px solid rgba(22,24,28,.16)",no computed value,not-comparable
+https://mosaic.moksaweb.com/moksa/,_m,mk-svc-1-svc-row,rowGap,10px,10px,ok
+https://mosaic.moksaweb.com/moksa/,_m,mk-svc-1-svc-zh,color,"rgb(22,24,28)","rgb(22, 24, 28)",ok
+https://mosaic.moksaweb.com/moksa/,_m,mk-svc-1-svc-zh,fontSize,19px,19px,ok
+https://mosaic.moksaweb.com/moksa/,_m,mk-svc-1-svc-zh,fontWeight,500,500,ok
+https://mosaic.moksaweb.com/moksa/,_m,mk-svc-1-svc-zh,marginTop,9px,9px,ok
+https://mosaic.moksaweb.com/moksa/,_m,mk-svc-1-svc-zh,fontFamily,"'Noto Sans TC','PingFang TC','Hiragino Sans TC','Microsoft JhengHei',sans-serif","""Noto Sans TC"", ""PingFang TC"", ""Hiragino Sans TC"", ""Microsoft JhengHei"", sans-serif",ok
+https://mosaic.moksaweb.com/moksa/,_m,mk-svc-1-svc-zh,letterSpacing,0.01em,0.19px,ok
+https://mosaic.moksaweb.com/moksa/,_m,mk-svc-2-svc-body,color,"rgb(90,92,97)","rgb(90, 92, 97)",ok
+https://mosaic.moksaweb.com/moksa/,_m,mk-svc-2-svc-body,fontSize,13px,13px,ok
+https://mosaic.moksaweb.com/moksa/,_m,mk-svc-2-svc-body,lineHeight,2,26px,ok
+https://mosaic.moksaweb.com/moksa/,_m,mk-svc-2-svc-en,color,"rgb(191,68,40)","rgb(191, 68, 40)",ok
+https://mosaic.moksaweb.com/moksa/,_m,mk-svc-2-svc-en,fontSize,10px,10px,ok
+https://mosaic.moksaweb.com/moksa/,_m,mk-svc-2-svc-en,fontFamily,"'IBM Plex Mono',ui-monospace,SFMono-Regular,Menlo,Consolas,monospace","""IBM Plex Mono"", ui-monospace, SFMono-Regular, Menlo, Consolas, monospace",ok
+https://mosaic.moksaweb.com/moksa/,_m,mk-svc-2-svc-en,letterSpacing,0.16em,1.6px,ok
+https://mosaic.moksaweb.com/moksa/,_m,mk-svc-2-svc-num,color,"rgb(107,109,113)","rgb(107, 109, 113)",ok
+https://mosaic.moksaweb.com/moksa/,_m,mk-svc-2-svc-num,fontSize,12px,12px,ok
+https://mosaic.moksaweb.com/moksa/,_m,mk-svc-2-svc-num,fontFamily,"'IBM Plex Mono',ui-monospace,SFMono-Regular,Menlo,Consolas,monospace","""IBM Plex Mono"", ui-monospace, SFMono-Regular, Menlo, Consolas, monospace",ok
+https://mosaic.moksaweb.com/moksa/,_m,mk-svc-2-svc-num,letterSpacing,0.06em,0.72px,ok
+https://mosaic.moksaweb.com/moksa/,_m,mk-svc-2-svc-row,display,grid,grid,ok
+https://mosaic.moksaweb.com/moksa/,_m,mk-svc-2-svc-row,gridCols,"repeat(1, 1fr)",354px,ok
+https://mosaic.moksaweb.com/moksa/,_m,mk-svc-2-svc-row,columnGap,18px,18px,ok
+https://mosaic.moksaweb.com/moksa/,_m,mk-svc-2-svc-row,alignItems,start,start,ok
+https://mosaic.moksaweb.com/moksa/,_m,mk-svc-2-svc-row,paddingTop,20px,20px,ok
+https://mosaic.moksaweb.com/moksa/,_m,mk-svc-2-svc-row,paddingBottom,20px,20px,ok
+https://mosaic.moksaweb.com/moksa/,_m,mk-svc-2-svc-row,customStyles:border-top,"1px solid rgba(22,24,28,.16)",no computed value,not-comparable
+https://mosaic.moksaweb.com/moksa/,_m,mk-svc-2-svc-row,rowGap,10px,10px,ok
+https://mosaic.moksaweb.com/moksa/,_m,mk-svc-2-svc-zh,color,"rgb(22,24,28)","rgb(22, 24, 28)",ok
+https://mosaic.moksaweb.com/moksa/,_m,mk-svc-2-svc-zh,fontSize,19px,19px,ok
+https://mosaic.moksaweb.com/moksa/,_m,mk-svc-2-svc-zh,fontWeight,500,500,ok
+https://mosaic.moksaweb.com/moksa/,_m,mk-svc-2-svc-zh,marginTop,9px,9px,ok
+https://mosaic.moksaweb.com/moksa/,_m,mk-svc-2-svc-zh,fontFamily,"'Noto Sans TC','PingFang TC','Hiragino Sans TC','Microsoft JhengHei',sans-serif","""Noto Sans TC"", ""PingFang TC"", ""Hiragino Sans TC"", ""Microsoft JhengHei"", sans-serif",ok
+https://mosaic.moksaweb.com/moksa/,_m,mk-svc-2-svc-zh,letterSpacing,0.01em,0.19px,ok
+https://mosaic.moksaweb.com/moksa/,_m,mk-svc-3-svc-body,color,"rgb(90,92,97)","rgb(90, 92, 97)",ok
+https://mosaic.moksaweb.com/moksa/,_m,mk-svc-3-svc-body,fontSize,13px,13px,ok
+https://mosaic.moksaweb.com/moksa/,_m,mk-svc-3-svc-body,lineHeight,2,26px,ok
+https://mosaic.moksaweb.com/moksa/,_m,mk-svc-3-svc-en,color,"rgb(191,68,40)","rgb(191, 68, 40)",ok
+https://mosaic.moksaweb.com/moksa/,_m,mk-svc-3-svc-en,fontSize,10px,10px,ok
+https://mosaic.moksaweb.com/moksa/,_m,mk-svc-3-svc-en,fontFamily,"'IBM Plex Mono',ui-monospace,SFMono-Regular,Menlo,Consolas,monospace","""IBM Plex Mono"", ui-monospace, SFMono-Regular, Menlo, Consolas, monospace",ok
+https://mosaic.moksaweb.com/moksa/,_m,mk-svc-3-svc-en,letterSpacing,0.16em,1.6px,ok
+https://mosaic.moksaweb.com/moksa/,_m,mk-svc-3-svc-num,color,"rgb(107,109,113)","rgb(107, 109, 113)",ok
+https://mosaic.moksaweb.com/moksa/,_m,mk-svc-3-svc-num,fontSize,12px,12px,ok
+https://mosaic.moksaweb.com/moksa/,_m,mk-svc-3-svc-num,fontFamily,"'IBM Plex Mono',ui-monospace,SFMono-Regular,Menlo,Consolas,monospace","""IBM Plex Mono"", ui-monospace, SFMono-Regular, Menlo, Consolas, monospace",ok
+https://mosaic.moksaweb.com/moksa/,_m,mk-svc-3-svc-num,letterSpacing,0.06em,0.72px,ok
+https://mosaic.moksaweb.com/moksa/,_m,mk-svc-3-svc-row,display,grid,grid,ok
+https://mosaic.moksaweb.com/moksa/,_m,mk-svc-3-svc-row,gridCols,"repeat(1, 1fr)",354px,ok
+https://mosaic.moksaweb.com/moksa/,_m,mk-svc-3-svc-row,columnGap,18px,18px,ok
+https://mosaic.moksaweb.com/moksa/,_m,mk-svc-3-svc-row,alignItems,start,start,ok
+https://mosaic.moksaweb.com/moksa/,_m,mk-svc-3-svc-row,paddingTop,20px,20px,ok
+https://mosaic.moksaweb.com/moksa/,_m,mk-svc-3-svc-row,paddingBottom,20px,20px,ok
+https://mosaic.moksaweb.com/moksa/,_m,mk-svc-3-svc-row,customStyles:border-top,"1px solid rgba(22,24,28,.16)",no computed value,not-comparable
+https://mosaic.moksaweb.com/moksa/,_m,mk-svc-3-svc-row,rowGap,10px,10px,ok
+https://mosaic.moksaweb.com/moksa/,_m,mk-svc-3-svc-zh,color,"rgb(22,24,28)","rgb(22, 24, 28)",ok
+https://mosaic.moksaweb.com/moksa/,_m,mk-svc-3-svc-zh,fontSize,19px,19px,ok
+https://mosaic.moksaweb.com/moksa/,_m,mk-svc-3-svc-zh,fontWeight,500,500,ok
+https://mosaic.moksaweb.com/moksa/,_m,mk-svc-3-svc-zh,marginTop,9px,9px,ok
+https://mosaic.moksaweb.com/moksa/,_m,mk-svc-3-svc-zh,fontFamily,"'Noto Sans TC','PingFang TC','Hiragino Sans TC','Microsoft JhengHei',sans-serif","""Noto Sans TC"", ""PingFang TC"", ""Hiragino Sans TC"", ""Microsoft JhengHei"", sans-serif",ok
+https://mosaic.moksaweb.com/moksa/,_m,mk-svc-3-svc-zh,letterSpacing,0.01em,0.19px,ok
 https://mosaic.moksaweb.com/moksa/,_m,mk-svc-head,display,grid,grid,ok
 https://mosaic.moksaweb.com/moksa/,_m,mk-svc-head,gridCols,48px 1fr,48px 306px,ok
 https://mosaic.moksaweb.com/moksa/,_m,mk-svc-head,columnGap,0px,0px,ok

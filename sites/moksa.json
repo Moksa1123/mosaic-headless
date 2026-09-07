@@ -1,5 +1,164 @@
 {
  "master": "Moksa Web shell",
+ "components": {
+  "service-row": {
+   "type": "div",
+   "data": {
+    "attrID": "svc-row"
+   },
+   "style": {
+    "&": {
+     "_": {
+      "display": "grid",
+      "gridCols": "84px 1fr 1.35fr",
+      "columnGap": "24px",
+      "alignItems": "start",
+      "paddingTop": "26px",
+      "paddingBottom": "26px",
+      "customStyles": "border-top:1px solid rgba(22,24,28,.16);"
+     },
+     "_t": {
+      "gridCols": "72px 1fr 1.2fr",
+      "columnGap": "18px"
+     },
+     "_m": {
+      "gridCols": "repeat(1, 1fr)",
+      "rowGap": "10px",
+      "paddingTop": "20px",
+      "paddingBottom": "20px"
+     }
+    }
+   },
+   "children": [
+    {
+     "type": "text",
+     "data": {
+      "tagName": "p",
+      "attrID": "svc-num"
+     },
+     "style": {
+      "&": {
+       "_": {
+        "color": {
+         "token": "--mk-faint"
+        },
+        "fontSize": "12px",
+        "fontFamily": "'IBM Plex Mono',ui-monospace,SFMono-Regular,Menlo,Consolas,monospace",
+        "letterSpacing": "0.06em"
+       }
+      }
+     },
+     "children": [
+      {
+       "type": "wysiwyg-text",
+       "data": {
+        "attrID": "svc-num-w",
+        "text": "00"
+       }
+      }
+     ]
+    },
+    {
+     "type": "div",
+     "data": {
+      "attrID": "svc-t"
+     },
+     "style": {
+      "&": {
+       "_": {}
+      }
+     },
+     "children": [
+      {
+       "type": "text",
+       "data": {
+        "tagName": "p",
+        "attrID": "svc-en"
+       },
+       "style": {
+        "&": {
+         "_": {
+          "color": {
+           "token": "--mk-accent-ink"
+          },
+          "fontSize": "10px",
+          "fontFamily": "'IBM Plex Mono',ui-monospace,SFMono-Regular,Menlo,Consolas,monospace",
+          "letterSpacing": "0.16em"
+         }
+        }
+       },
+       "children": [
+        {
+         "type": "wysiwyg-text",
+         "data": {
+          "attrID": "svc-en-w",
+          "text": "SERVICE"
+         }
+        }
+       ]
+      },
+      {
+       "type": "text",
+       "data": {
+        "tagName": "h3",
+        "attrID": "svc-zh"
+       },
+       "style": {
+        "&": {
+         "_": {
+          "color": {
+           "token": "--mk-ink"
+          },
+          "fontSize": "19px",
+          "fontWeight": "500",
+          "marginTop": "9px",
+          "fontFamily": "'Noto Sans TC','PingFang TC','Hiragino Sans TC','Microsoft JhengHei',sans-serif",
+          "letterSpacing": "0.01em"
+         }
+        }
+       },
+       "children": [
+        {
+         "type": "wysiwyg-text",
+         "data": {
+          "attrID": "svc-zh-w",
+          "text": "服務"
+         }
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "type": "text",
+     "data": {
+      "tagName": "p",
+      "attrID": "svc-body"
+     },
+     "style": {
+      "&": {
+       "_": {
+        "color": {
+         "token": "--mk-muted"
+        },
+        "fontSize": "13px",
+        "lineHeight": "2"
+       }
+      }
+     },
+     "children": [
+      {
+       "type": "wysiwyg-text",
+       "data": {
+        "attrID": "svc-body-w",
+        "text": "說明"
+       }
+      }
+     ]
+    }
+   ]
+  }
+ },
  "theme": {
   "variables": {
    "--mk-ink": {
@@ -5686,499 +5845,87 @@
               "children": [
                {
                 "type": "div",
+                "component": "service-row",
                 "data": {
                  "attrID": "mk-svc-0"
                 },
-                "style": {
-                 "&": {
-                  "_": {
-                   "display": "grid",
-                   "gridCols": "84px 1fr 1.35fr",
-                   "columnGap": "24px",
-                   "alignItems": "start",
-                   "paddingTop": "26px",
-                   "paddingBottom": "26px",
-                   "customStyles": "border-top:1px solid rgba(22,24,28,.16);"
-                  },
-                  "_t": {
-                   "gridCols": "72px 1fr 1.2fr",
-                   "columnGap": "18px"
-                  },
-                  "_m": {
-                   "gridCols": "repeat(1, 1fr)",
-                   "rowGap": "10px",
-                   "paddingTop": "20px",
-                   "paddingBottom": "20px"
-                  }
-                 }
-                },
-                "children": [
-                 {
-                  "type": "text",
-                  "data": {
-                   "tagName": "p"
-                  },
-                  "text": "01",
-                  "style": {
-                   "&": {
-                    "_": {
-                     "color": {
-                      "token": "--mk-faint"
-                     },
-                     "fontSize": "12px",
-                     "letterSpacing": "0.06em",
-                     "fontFamily": "'IBM Plex Mono',ui-monospace,SFMono-Regular,Menlo,Consolas,monospace",
-                     "fontWeight": "400"
-                    }
-                   }
-                  }
+                "overrides": {
+                 "svc-num": {
+                  "text": "01"
                  },
-                 {
-                  "type": "div",
-                  "data": {
-                   "attrID": "mk-svc-t-0"
-                  },
-                  "style": {
-                   "&": {
-                    "_": {}
-                   }
-                  },
-                  "children": [
-                   {
-                    "type": "text",
-                    "data": {
-                     "tagName": "p"
-                    },
-                    "text": "WEB & E-COMMERCE",
-                    "style": {
-                     "&": {
-                      "_": {
-                       "color": {
-                        "token": "--mk-accent-ink"
-                       },
-                       "fontSize": "10px",
-                       "letterSpacing": "0.16em",
-                       "fontFamily": "'IBM Plex Mono',ui-monospace,SFMono-Regular,Menlo,Consolas,monospace",
-                       "fontWeight": "400"
-                      }
-                     }
-                    }
-                   },
-                   {
-                    "type": "text",
-                    "data": {
-                     "tagName": "h3"
-                    },
-                    "text": "網站與電商",
-                    "style": {
-                     "&": {
-                      "_": {
-                       "color": {
-                        "token": "--mk-ink"
-                       },
-                       "fontSize": "19px",
-                       "fontWeight": "500",
-                       "marginTop": "9px",
-                       "fontFamily": "'Noto Sans TC','PingFang TC','Hiragino Sans TC','Microsoft JhengHei',sans-serif",
-                       "letterSpacing": "0.01em"
-                      }
-                     }
-                    }
-                   }
-                  ]
+                 "svc-en": {
+                  "text": "WEB & E-COMMERCE"
                  },
-                 {
-                  "type": "text",
-                  "data": {
-                   "tagName": "p"
-                  },
-                  "text": "品牌官網、電商平台與 WordPress 開發，乾淨的結構與好管理的後台。",
-                  "style": {
-                   "&": {
-                    "_": {
-                     "color": {
-                      "token": "--mk-muted"
-                     },
-                     "fontSize": "13px",
-                     "lineHeight": "2",
-                     "fontFamily": "'Noto Sans TC','PingFang TC','Hiragino Sans TC','Microsoft JhengHei',sans-serif"
-                    }
-                   }
-                  }
+                 "svc-zh": {
+                  "text": "網站與電商"
+                 },
+                 "svc-body": {
+                  "text": "品牌官網、電商平台與 WordPress 開發，乾淨的結構與好管理的後台。"
                  }
-                ]
+                }
                },
                {
                 "type": "div",
+                "component": "service-row",
                 "data": {
                  "attrID": "mk-svc-1"
                 },
-                "style": {
-                 "&": {
-                  "_": {
-                   "display": "grid",
-                   "gridCols": "84px 1fr 1.35fr",
-                   "columnGap": "24px",
-                   "alignItems": "start",
-                   "paddingTop": "26px",
-                   "paddingBottom": "26px",
-                   "customStyles": "border-top:1px solid rgba(22,24,28,.16);"
-                  },
-                  "_t": {
-                   "gridCols": "72px 1fr 1.2fr",
-                   "columnGap": "18px"
-                  },
-                  "_m": {
-                   "gridCols": "repeat(1, 1fr)",
-                   "rowGap": "10px",
-                   "paddingTop": "20px",
-                   "paddingBottom": "20px"
-                  }
-                 }
-                },
-                "children": [
-                 {
-                  "type": "text",
-                  "data": {
-                   "tagName": "p"
-                  },
-                  "text": "02",
-                  "style": {
-                   "&": {
-                    "_": {
-                     "color": {
-                      "token": "--mk-faint"
-                     },
-                     "fontSize": "12px",
-                     "letterSpacing": "0.06em",
-                     "fontFamily": "'IBM Plex Mono',ui-monospace,SFMono-Regular,Menlo,Consolas,monospace",
-                     "fontWeight": "400"
-                    }
-                   }
-                  }
+                "overrides": {
+                 "svc-num": {
+                  "text": "02"
                  },
-                 {
-                  "type": "div",
-                  "data": {
-                   "attrID": "mk-svc-t-1"
-                  },
-                  "style": {
-                   "&": {
-                    "_": {}
-                   }
-                  },
-                  "children": [
-                   {
-                    "type": "text",
-                    "data": {
-                     "tagName": "p"
-                    },
-                    "text": "AI & AUTOMATION",
-                    "style": {
-                     "&": {
-                      "_": {
-                       "color": {
-                        "token": "--mk-accent-ink"
-                       },
-                       "fontSize": "10px",
-                       "letterSpacing": "0.16em",
-                       "fontFamily": "'IBM Plex Mono',ui-monospace,SFMono-Regular,Menlo,Consolas,monospace",
-                       "fontWeight": "400"
-                      }
-                     }
-                    }
-                   },
-                   {
-                    "type": "text",
-                    "data": {
-                     "tagName": "h3"
-                    },
-                    "text": "AI・自動化・軟體",
-                    "style": {
-                     "&": {
-                      "_": {
-                       "color": {
-                        "token": "--mk-ink"
-                       },
-                       "fontSize": "19px",
-                       "fontWeight": "500",
-                       "marginTop": "9px",
-                       "fontFamily": "'Noto Sans TC','PingFang TC','Hiragino Sans TC','Microsoft JhengHei',sans-serif",
-                       "letterSpacing": "0.01em"
-                      }
-                     }
-                    }
-                   }
-                  ]
+                 "svc-en": {
+                  "text": "AI & AUTOMATION"
                  },
-                 {
-                  "type": "text",
-                  "data": {
-                   "tagName": "p"
-                  },
-                  "text": "AI 客服與自動化流程導入、客製軟體與 ERP 開發，把重複工作交給機器。",
-                  "style": {
-                   "&": {
-                    "_": {
-                     "color": {
-                      "token": "--mk-muted"
-                     },
-                     "fontSize": "13px",
-                     "lineHeight": "2",
-                     "fontFamily": "'Noto Sans TC','PingFang TC','Hiragino Sans TC','Microsoft JhengHei',sans-serif"
-                    }
-                   }
-                  }
+                 "svc-zh": {
+                  "text": "AI・自動化・軟體"
+                 },
+                 "svc-body": {
+                  "text": "AI 客服與自動化流程導入、客製軟體與 ERP 開發，把重複工作交給機器。"
                  }
-                ]
+                }
                },
                {
                 "type": "div",
+                "component": "service-row",
                 "data": {
                  "attrID": "mk-svc-2"
                 },
-                "style": {
-                 "&": {
-                  "_": {
-                   "display": "grid",
-                   "gridCols": "84px 1fr 1.35fr",
-                   "columnGap": "24px",
-                   "alignItems": "start",
-                   "paddingTop": "26px",
-                   "paddingBottom": "26px",
-                   "customStyles": "border-top:1px solid rgba(22,24,28,.16);"
-                  },
-                  "_t": {
-                   "gridCols": "72px 1fr 1.2fr",
-                   "columnGap": "18px"
-                  },
-                  "_m": {
-                   "gridCols": "repeat(1, 1fr)",
-                   "rowGap": "10px",
-                   "paddingTop": "20px",
-                   "paddingBottom": "20px"
-                  }
-                 }
-                },
-                "children": [
-                 {
-                  "type": "text",
-                  "data": {
-                   "tagName": "p"
-                  },
-                  "text": "03",
-                  "style": {
-                   "&": {
-                    "_": {
-                     "color": {
-                      "token": "--mk-faint"
-                     },
-                     "fontSize": "12px",
-                     "letterSpacing": "0.06em",
-                     "fontFamily": "'IBM Plex Mono',ui-monospace,SFMono-Regular,Menlo,Consolas,monospace",
-                     "fontWeight": "400"
-                    }
-                   }
-                  }
+                "overrides": {
+                 "svc-num": {
+                  "text": "03"
                  },
-                 {
-                  "type": "div",
-                  "data": {
-                   "attrID": "mk-svc-t-2"
-                  },
-                  "style": {
-                   "&": {
-                    "_": {}
-                   }
-                  },
-                  "children": [
-                   {
-                    "type": "text",
-                    "data": {
-                     "tagName": "p"
-                    },
-                    "text": "INTEGRATION & MIGRATION",
-                    "style": {
-                     "&": {
-                      "_": {
-                       "color": {
-                        "token": "--mk-accent-ink"
-                       },
-                       "fontSize": "10px",
-                       "letterSpacing": "0.16em",
-                       "fontFamily": "'IBM Plex Mono',ui-monospace,SFMono-Regular,Menlo,Consolas,monospace",
-                       "fontWeight": "400"
-                      }
-                     }
-                    }
-                   },
-                   {
-                    "type": "text",
-                    "data": {
-                     "tagName": "h3"
-                    },
-                    "text": "串接與轉移",
-                    "style": {
-                     "&": {
-                      "_": {
-                       "color": {
-                        "token": "--mk-ink"
-                       },
-                       "fontSize": "19px",
-                       "fontWeight": "500",
-                       "marginTop": "9px",
-                       "fontFamily": "'Noto Sans TC','PingFang TC','Hiragino Sans TC','Microsoft JhengHei',sans-serif",
-                       "letterSpacing": "0.01em"
-                      }
-                     }
-                    }
-                   }
-                  ]
+                 "svc-en": {
+                  "text": "INTEGRATION & MIGRATION"
                  },
-                 {
-                  "type": "text",
-                  "data": {
-                   "tagName": "p"
-                  },
-                  "text": "API、金物流串接與平台無痛轉移，讓資料在系統之間自動流通。",
-                  "style": {
-                   "&": {
-                    "_": {
-                     "color": {
-                      "token": "--mk-muted"
-                     },
-                     "fontSize": "13px",
-                     "lineHeight": "2",
-                     "fontFamily": "'Noto Sans TC','PingFang TC','Hiragino Sans TC','Microsoft JhengHei',sans-serif"
-                    }
-                   }
-                  }
+                 "svc-zh": {
+                  "text": "串接與轉移"
+                 },
+                 "svc-body": {
+                  "text": "API、金物流串接與平台無痛轉移，讓資料在系統之間自動流通。"
                  }
-                ]
+                }
                },
                {
                 "type": "div",
+                "component": "service-row",
                 "data": {
                  "attrID": "mk-svc-3"
                 },
-                "style": {
-                 "&": {
-                  "_": {
-                   "display": "grid",
-                   "gridCols": "84px 1fr 1.35fr",
-                   "columnGap": "24px",
-                   "alignItems": "start",
-                   "paddingTop": "26px",
-                   "paddingBottom": "26px",
-                   "customStyles": "border-top:1px solid rgba(22,24,28,.16);"
-                  },
-                  "_t": {
-                   "gridCols": "72px 1fr 1.2fr",
-                   "columnGap": "18px"
-                  },
-                  "_m": {
-                   "gridCols": "repeat(1, 1fr)",
-                   "rowGap": "10px",
-                   "paddingTop": "20px",
-                   "paddingBottom": "20px"
-                  }
-                 }
-                },
-                "children": [
-                 {
-                  "type": "text",
-                  "data": {
-                   "tagName": "p"
-                  },
-                  "text": "04",
-                  "style": {
-                   "&": {
-                    "_": {
-                     "color": {
-                      "token": "--mk-faint"
-                     },
-                     "fontSize": "12px",
-                     "letterSpacing": "0.06em",
-                     "fontFamily": "'IBM Plex Mono',ui-monospace,SFMono-Regular,Menlo,Consolas,monospace",
-                     "fontWeight": "400"
-                    }
-                   }
-                  }
+                "overrides": {
+                 "svc-num": {
+                  "text": "04"
                  },
-                 {
-                  "type": "div",
-                  "data": {
-                   "attrID": "mk-svc-t-3"
-                  },
-                  "style": {
-                   "&": {
-                    "_": {}
-                   }
-                  },
-                  "children": [
-                   {
-                    "type": "text",
-                    "data": {
-                     "tagName": "p"
-                    },
-                    "text": "OPTIMIZE & MAINTAIN",
-                    "style": {
-                     "&": {
-                      "_": {
-                       "color": {
-                        "token": "--mk-accent-ink"
-                       },
-                       "fontSize": "10px",
-                       "letterSpacing": "0.16em",
-                       "fontFamily": "'IBM Plex Mono',ui-monospace,SFMono-Regular,Menlo,Consolas,monospace",
-                       "fontWeight": "400"
-                      }
-                     }
-                    }
-                   },
-                   {
-                    "type": "text",
-                    "data": {
-                     "tagName": "h3"
-                    },
-                    "text": "優化與維運",
-                    "style": {
-                     "&": {
-                      "_": {
-                       "color": {
-                        "token": "--mk-ink"
-                       },
-                       "fontSize": "19px",
-                       "fontWeight": "500",
-                       "marginTop": "9px",
-                       "fontFamily": "'Noto Sans TC','PingFang TC','Hiragino Sans TC','Microsoft JhengHei',sans-serif",
-                       "letterSpacing": "0.01em"
-                      }
-                     }
-                    }
-                   }
-                  ]
+                 "svc-en": {
+                  "text": "OPTIMIZE & MAINTAIN"
                  },
-                 {
-                  "type": "text",
-                  "data": {
-                   "tagName": "p"
-                  },
-                  "text": "SEO 優化、主機代管與資安維護，上線後的長期穩定照顧。",
-                  "style": {
-                   "&": {
-                    "_": {
-                     "color": {
-                      "token": "--mk-muted"
-                     },
-                     "fontSize": "13px",
-                     "lineHeight": "2",
-                     "fontFamily": "'Noto Sans TC','PingFang TC','Hiragino Sans TC','Microsoft JhengHei',sans-serif"
-                    }
-                   }
-                  }
+                 "svc-zh": {
+                  "text": "優化與維運"
+                 },
+                 "svc-body": {
+                  "text": "SEO 優化、主機代管與資安維護，上線後的長期穩定照顧。"
                  }
-                ]
+                }
                }
               ]
              }

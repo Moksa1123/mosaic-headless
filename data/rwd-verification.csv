@@ -63,30 +63,6 @@ https://mosaic.moksaweb.com/moksa/,services,_m,padding-right,18px,18px,verified
 https://mosaic.moksaweb.com/moksa/,mk-svc-pad,_m,padding-top,56px,56px,verified
 https://mosaic.moksaweb.com/moksa/,mk-svc-head,_m,grid-template-columns,48px 1fr,48px 1fr,verified
 https://mosaic.moksaweb.com/moksa/,mk-svc-list,_m,margin-top,32px,32px,verified
-https://mosaic.moksaweb.com/moksa/,mk-svc-0,_t,grid-template-columns,72px 1fr 1.2fr,72px 1fr 1.2fr,verified
-https://mosaic.moksaweb.com/moksa/,mk-svc-0,_t,column-gap,18px,18px,verified
-https://mosaic.moksaweb.com/moksa/,mk-svc-0,_m,grid-template-columns,"repeat(1, 1fr)","repeat(1, 1fr)",verified
-https://mosaic.moksaweb.com/moksa/,mk-svc-0,_m,row-gap,10px,10px,verified
-https://mosaic.moksaweb.com/moksa/,mk-svc-0,_m,padding-top,20px,20px,verified
-https://mosaic.moksaweb.com/moksa/,mk-svc-0,_m,padding-bottom,20px,20px,verified
-https://mosaic.moksaweb.com/moksa/,mk-svc-1,_t,grid-template-columns,72px 1fr 1.2fr,72px 1fr 1.2fr,verified
-https://mosaic.moksaweb.com/moksa/,mk-svc-1,_t,column-gap,18px,18px,verified
-https://mosaic.moksaweb.com/moksa/,mk-svc-1,_m,grid-template-columns,"repeat(1, 1fr)","repeat(1, 1fr)",verified
-https://mosaic.moksaweb.com/moksa/,mk-svc-1,_m,row-gap,10px,10px,verified
-https://mosaic.moksaweb.com/moksa/,mk-svc-1,_m,padding-top,20px,20px,verified
-https://mosaic.moksaweb.com/moksa/,mk-svc-1,_m,padding-bottom,20px,20px,verified
-https://mosaic.moksaweb.com/moksa/,mk-svc-2,_t,grid-template-columns,72px 1fr 1.2fr,72px 1fr 1.2fr,verified
-https://mosaic.moksaweb.com/moksa/,mk-svc-2,_t,column-gap,18px,18px,verified
-https://mosaic.moksaweb.com/moksa/,mk-svc-2,_m,grid-template-columns,"repeat(1, 1fr)","repeat(1, 1fr)",verified
-https://mosaic.moksaweb.com/moksa/,mk-svc-2,_m,row-gap,10px,10px,verified
-https://mosaic.moksaweb.com/moksa/,mk-svc-2,_m,padding-top,20px,20px,verified
-https://mosaic.moksaweb.com/moksa/,mk-svc-2,_m,padding-bottom,20px,20px,verified
-https://mosaic.moksaweb.com/moksa/,mk-svc-3,_t,grid-template-columns,72px 1fr 1.2fr,72px 1fr 1.2fr,verified
-https://mosaic.moksaweb.com/moksa/,mk-svc-3,_t,column-gap,18px,18px,verified
-https://mosaic.moksaweb.com/moksa/,mk-svc-3,_m,grid-template-columns,"repeat(1, 1fr)","repeat(1, 1fr)",verified
-https://mosaic.moksaweb.com/moksa/,mk-svc-3,_m,row-gap,10px,10px,verified
-https://mosaic.moksaweb.com/moksa/,mk-svc-3,_m,padding-top,20px,20px,verified
-https://mosaic.moksaweb.com/moksa/,mk-svc-3,_m,padding-bottom,20px,20px,verified
 https://mosaic.moksaweb.com/moksa/,matrix,_t,padding-left,28px,28px,verified
 https://mosaic.moksaweb.com/moksa/,matrix,_t,padding-right,28px,28px,verified
 https://mosaic.moksaweb.com/moksa/,matrix,_m,padding-left,18px,18px,verified
@@ -371,6 +347,30 @@ https://mosaic.moksaweb.com/moksa/,mk-f-top,_m,grid-template-columns,"repeat(1, 
 https://mosaic.moksaweb.com/moksa/,mk-f-top,_m,padding-top,42px,42px,verified
 https://mosaic.moksaweb.com/moksa/,mk-f-top,_m,padding-bottom,34px,34px,verified
 https://mosaic.moksaweb.com/moksa/,mk-f-links,_m,grid-template-columns,"repeat(2, 1fr)","repeat(2, 1fr)",verified
+https://mosaic.moksaweb.com/moksa/,mk-svc-0-svc-row,_t,grid-template-columns,72px 1fr 1.2fr,72px 1fr 1.2fr,verified
+https://mosaic.moksaweb.com/moksa/,mk-svc-0-svc-row,_t,column-gap,18px,18px,verified
+https://mosaic.moksaweb.com/moksa/,mk-svc-0-svc-row,_m,grid-template-columns,"repeat(1, 1fr)","repeat(1, 1fr)",verified
+https://mosaic.moksaweb.com/moksa/,mk-svc-0-svc-row,_m,row-gap,10px,10px,verified
+https://mosaic.moksaweb.com/moksa/,mk-svc-0-svc-row,_m,padding-top,20px,20px,verified
+https://mosaic.moksaweb.com/moksa/,mk-svc-0-svc-row,_m,padding-bottom,20px,20px,verified
+https://mosaic.moksaweb.com/moksa/,mk-svc-1-svc-row,_t,grid-template-columns,72px 1fr 1.2fr,72px 1fr 1.2fr,verified
+https://mosaic.moksaweb.com/moksa/,mk-svc-1-svc-row,_t,column-gap,18px,18px,verified
+https://mosaic.moksaweb.com/moksa/,mk-svc-1-svc-row,_m,grid-template-columns,"repeat(1, 1fr)","repeat(1, 1fr)",verified
+https://mosaic.moksaweb.com/moksa/,mk-svc-1-svc-row,_m,row-gap,10px,10px,verified
+https://mosaic.moksaweb.com/moksa/,mk-svc-1-svc-row,_m,padding-top,20px,20px,verified
+https://mosaic.moksaweb.com/moksa/,mk-svc-1-svc-row,_m,padding-bottom,20px,20px,verified
+https://mosaic.moksaweb.com/moksa/,mk-svc-2-svc-row,_t,grid-template-columns,72px 1fr 1.2fr,72px 1fr 1.2fr,verified
+https://mosaic.moksaweb.com/moksa/,mk-svc-2-svc-row,_t,column-gap,18px,18px,verified
+https://mosaic.moksaweb.com/moksa/,mk-svc-2-svc-row,_m,grid-template-columns,"repeat(1, 1fr)","repeat(1, 1fr)",verified
+https://mosaic.moksaweb.com/moksa/,mk-svc-2-svc-row,_m,row-gap,10px,10px,verified
+https://mosaic.moksaweb.com/moksa/,mk-svc-2-svc-row,_m,padding-top,20px,20px,verified
+https://mosaic.moksaweb.com/moksa/,mk-svc-2-svc-row,_m,padding-bottom,20px,20px,verified
+https://mosaic.moksaweb.com/moksa/,mk-svc-3-svc-row,_t,grid-template-columns,72px 1fr 1.2fr,72px 1fr 1.2fr,verified
+https://mosaic.moksaweb.com/moksa/,mk-svc-3-svc-row,_t,column-gap,18px,18px,verified
+https://mosaic.moksaweb.com/moksa/,mk-svc-3-svc-row,_m,grid-template-columns,"repeat(1, 1fr)","repeat(1, 1fr)",verified
+https://mosaic.moksaweb.com/moksa/,mk-svc-3-svc-row,_m,row-gap,10px,10px,verified
+https://mosaic.moksaweb.com/moksa/,mk-svc-3-svc-row,_m,padding-top,20px,20px,verified
+https://mosaic.moksaweb.com/moksa/,mk-svc-3-svc-row,_m,padding-bottom,20px,20px,verified
 https://mosaic.moksaweb.com/zidanna/,zd-hero,_t,padding-left,32px,32px,verified
 https://mosaic.moksaweb.com/zidanna/,zd-hero,_t,padding-right,32px,32px,verified
 https://mosaic.moksaweb.com/zidanna/,zd-hero,_t,padding-top,0px,0px,verified

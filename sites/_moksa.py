@@ -1355,34 +1355,71 @@ TICKER_BAND = box("mk-ticker",
                           "border-right:1px solid rgba(250,250,247,.22);"))
           for w in TICKER * 2])])
 
+# ── the service row, as a COMPONENT ───────────────────────────────────────────
+# Four rows that are the same object with different words in it - which is exactly
+# what a component is for. The tree below is committed ONCE, to the theme, and the
+# page places four instances of it. Change the structure here and all four change;
+# the words are per-instance overrides.
+def slot(tag, attr, text, **st):
+    """A text node whose STRING is addressable.
+
+    `T()` and `mono()` leave the string on an anonymous `wysiwyg-text` child, and an
+    override has to name the node it replaces - `override.originalID` points at a
+    node inside the definition, and its attrID is the only stable handle a spec has
+    on it. So a component's text is built with the child spelled out and named.
+    """
+    node = T(tag, "", **st)
+    node["data"]["attrID"] = attr
+    node.pop("text", None)
+    node["children"] = [{"type": "wysiwyg-text",
+                         "data": {"attrID": attr + "-w", "text": text}}]
+    return node
+
+
+SERVICE_ROW = box("svc-row",
+                  {"display": "grid", "gridCols": "84px 1fr 1.35fr",
+                   "columnGap": "24px", "alignItems": "start",
+                   "paddingTop": "26px", "paddingBottom": "26px",
+                   "customStyles": "border-top:1px solid " + RULE + ";"},
+                  _t={"gridCols": "72px 1fr 1.2fr", "columnGap": "18px"},
+                  _m={"gridCols": "repeat(1, 1fr)", "rowGap": "10px",
+                      "paddingTop": "20px", "paddingBottom": "20px"},
+                  children=[
+                      slot("p", "svc-num", "00", color={"token": "--mk-faint"},
+                           fontSize="12px", fontFamily=MONO,
+                           letterSpacing="0.06em"),
+                      box("svc-t", {}, [
+                          slot("p", "svc-en", "SERVICE",
+                               color={"token": "--mk-accent-ink"},
+                               fontSize="10px", fontFamily=MONO,
+                               letterSpacing="0.16em"),
+                          slot("h3", "svc-zh", "服務",
+                               color={"token": "--mk-ink"}, fontSize="19px",
+                               fontWeight="500", marginTop="9px", fontFamily=CJK,
+                               letterSpacing="0.01em"),
+                      ]),
+                      slot("p", "svc-body", "說明", color={"token": "--mk-muted"},
+                           fontSize="13px", lineHeight="2"),
+                  ])
+
+
+def service_instance(i, num, en, zh, body):
+    """One instance, carrying only what differs from the definition."""
+    return {"type": "div", "component": "service-row",
+            "data": {"attrID": "mk-svc-%d" % i},
+            "overrides": {"svc-num": {"text": num},
+                          "svc-en": {"text": en},
+                          "svc-zh": {"text": zh},
+                          "svc-body": {"text": body}}}
+
+
 SERVICE_SEC = section("services", [wrap("mk-svc-in", [
     box("mk-svc-pad", {"paddingTop": "84px"}, _m={"paddingTop": "56px"}, children=[
         clause("01", "SERVICES — 12 ITEMS, ONE CONTACT", "從一個窗口把技術整合完",
                "mk-svc-head"),
-        box("mk-svc-list", {"marginTop": "44px"}, _m={"marginTop": "32px"}, children=[
-            box("mk-svc-%d" % i,
-                {"display": "grid", "gridCols": "84px 1fr 1.35fr",
-                 "columnGap": "24px", "alignItems": "start",
-                 "paddingTop": "26px", "paddingBottom": "26px",
-                 "customStyles": "border-top:1px solid " + RULE + ";"},
-                _t={"gridCols": "72px 1fr 1.2fr", "columnGap": "18px"},
-                _m={"gridCols": "repeat(1, 1fr)", "rowGap": "10px",
-                    "paddingTop": "20px", "paddingBottom": "20px"},
-                children=[
-                    mono(num, size="12px", color="--mk-faint", track="0.06em"),
-                    box("mk-svc-t-%d" % i, {}, [
-                        mono(en, size="10px", color="--mk-accent-ink",
-                             track="0.16em"),
-                        T("h3", zh, color={"token": "--mk-ink"}, fontSize="19px",
-                          fontWeight="500", marginTop="9px", fontFamily=CJK,
-                          letterSpacing="0.01em"),
-                    ]),
-                    T("p", body, color={"token": "--mk-muted"}, fontSize="13px",
-                      lineHeight="2",
-                      ),
-                ])
-            for i, (num, en, zh, body) in enumerate(SERVICES)
-        ]),
+        box("mk-svc-list", {"marginTop": "44px"}, _m={"marginTop": "32px"},
+            children=[service_instance(i, num, en, zh, body)
+                      for i, (num, en, zh, body) in enumerate(SERVICES)]),
     ]),
 ])])
 
@@ -2103,6 +2140,8 @@ HOME_TREE = {"type": "div", "data": {"attrID": "mk-home"},
 
 SITE = {
     "master": "Moksa Web shell",
+    # committed to the THEME once, then instanced by the page
+    "components": {"service-row": SERVICE_ROW},
     "theme": {
         "variables": TOKENS,
         # Element classes are theme-global, and this install carries two brands,

@@ -199,9 +199,16 @@ def to_style(spec_style):
                        for state, per_bp in spec_style.items()}}
 
 
+# Every component instance flatten() emits, so the override pass can find them
+# again after the commit. Cleared by build_site before each page.
+COMPONENT_USES = []
+
+
 def flatten(node, parent_id, master_id, surface, force, ordering="a0", parent_type=None, out=None):
     """Depth-first walk producing revision records, checking placement as it goes."""
     out = out if out is not None else []
+    if node.get("component"):
+        node = dict(node, type="div")     # placement is checked as a plain element
     problems = surface.check(parent_type, node, force)
     if problems:
         raise SystemExit("refusing to build:\n  " + "\n  ".join(problems))
@@ -211,11 +218,27 @@ def flatten(node, parent_id, master_id, surface, force, ordering="a0", parent_ty
     style = to_style(node.get("style"))
     if style:
         data["style"] = style
+    # A node that names a component becomes an INSTANCE of it, and an instance's
+    # type carries the component's id after a slash - the factory splits on it, and
+    # a bare `component-instance` has no id to read and fatals. `overrides` is not
+    # written here: Mosaic materialises one override node per component node per
+    # instance, and those are updated in a second pass once they exist.
+    node_type = node["type"]
+    if node.get("component"):
+        node_type = "component-instance/%s" % node["component"]
+        data.pop("overrides", None)
     out.append({
         "ID": nid, "parentType": "node", "parentID": parent_id, "ordering": ordering,
-        "status": "publish", "revision": "", "version": "", "type": node["type"],
+        "status": "publish", "revision": "", "version": "", "type": node_type,
         "data": data, "documentType": "master", "documentID": master_id,
     })
+    if node.get("component"):
+        # remembered by attrID so the override pass can find this instance again
+        COMPONENT_USES.append({"instance_attr": data.get("attrID"),
+                               "componentID": node["component"],
+                               "component_name": node.get("_component_name"),
+                               "overrides": node.get("overrides") or {}})
+        return out
 
     children = list(node.get("children") or [])
     if node.get("text") is not None:

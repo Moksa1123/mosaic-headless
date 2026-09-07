@@ -37,7 +37,13 @@ import urllib.parse
 import uuid
 
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
-from build_page import VAR_IDS, Surface, flatten, theme_records  # noqa: E402
+from build_page import (  # noqa: E402
+    COMPONENT_USES,
+    VAR_IDS,
+    Surface,
+    flatten,
+    theme_records,
+)
 from sweep_node_types import (  # noqa: E402
     MIN_HEALTHY_BYTES,
     Client,
@@ -117,6 +123,166 @@ def build_shell(client, cfg, site, surface):
     return master_id
 
 
+# A component's row id is derived from its NAME, for the same reason a design
+# token's is: `build_site.py` runs again and again, and anything keyed by a fresh
+# uuid accumulates. See references/failure-modes.md.
+COMPONENT_NAMESPACE = uuid.UUID("6d6f7361-6963-4865-6164-6c657373ff02")
+
+
+def ensure_components(client, cfg, site, surface):
+    """Create or refill every component the spec declares, and map its inner nodes.
+
+    Returns {name: {"id": componentID, "nodes": {attrID: nodeID}}}. The node map is
+    what an override needs: `override.originalID` addresses a node INSIDE the
+    component, and the only stable handle a spec has on that node is its attrID.
+    """
+    components = site.get("components") or {}
+    if not components:
+        return {}
+
+    inst = unwrap(client.get("adminComponentsEditorInstance"),
+                  "adminComponentsEditorInstance")
+    cats = inst.get("componentCategory") or []
+    if not cats:
+        sys.exit("no componentCategory exists; a component has nothing to hang from")
+    # a component MUST hang off a category - parentType:"" is an HTTP 500
+    cat = next((c for c in cats
+                if (c.get("data") or {}).get("name") == "Block"), cats[0])["ID"]
+
+    existing = {r["ID"]: r for r in (inst.get("component") or [])}
+    records = []
+    for name in components:
+        cid = str(uuid.uuid5(COMPONENT_NAMESPACE, name))
+        if cid not in existing:
+            records.append({"newRevisionRecord": {
+                "ID": cid, "parentType": "componentCategory", "parentID": cat,
+                "ordering": "a0", "status": "publish", "revision": "", "version": "",
+                "name": name, "path": ""}, "originalRevisionRecord": None})
+    if records:
+        commit(client, "adminComponentsEditorInstance", inst,
+               {"component": records}, "components")
+
+    out = {}
+    for name, tree in components.items():
+        cid = str(uuid.uuid5(COMPONENT_NAMESPACE, name))
+        instance = "componentDocumentInstance/%s" % cid
+        client.get(instance)                     # the first GET heals the document
+        doc = unwrap(client.get(instance), "componentDocumentInstance")
+        key = "node/component/%s" % cid
+        internal = next(n for n in doc[key] if n["type"] == "component-internal")
+
+        # refill: drop whatever the last build put there, deepest first
+        old = [n for n in doc[key] if n["type"] != "component-internal"]
+        if old:
+            depth = {n["ID"]: n for n in doc[key]}
+
+            def rank(node):
+                d, cur = 0, node
+                while cur and cur.get("parentID") in depth:
+                    cur = depth[cur["parentID"]]
+                    d += 1
+                return -d
+            commit(client, instance, doc, {key: [
+                {"newRevisionRecord": dict(x, status="delete"),
+                 "originalRevisionRecord": x} for x in sorted(old, key=rank)]},
+                "component %s cleanup" % name)
+            doc = unwrap(client.get(instance), "componentDocumentInstance")
+            internal = next(n for n in doc[key] if n["type"] == "component-internal")
+
+        recs = flatten(tree, internal["ID"], cid, surface, False,
+                       parent_type="component-internal")
+        for r in recs:
+            r["documentType"], r["documentID"] = "component", cid
+        commit(client, instance, doc,
+               {key: [{"newRevisionRecord": r, "originalRevisionRecord": None}
+                      for r in recs]}, "component %s" % name)
+
+        doc2 = unwrap(client.get(instance), "componentDocumentInstance")
+        nodes, texts = {}, {}
+        # `wysiwyg-text` has four properties and `attrID` is not among them - it
+        # descends from the NODE abstract, not the ELEMENT one - so a string cannot
+        # be named directly. It can still be overridden, so each element's text
+        # child is recorded under the ELEMENT's name and a `text` patch is routed
+        # there. Without this the four instances all rendered the definition's
+        # placeholder words while reporting twenty-four overrides written.
+        for node in doc2[key]:
+            attr = (node.get("data") or {}).get("attrID")
+            if attr:
+                nodes[attr] = node["ID"]
+        by_parent = {}
+        for node in doc2[key]:
+            by_parent.setdefault(node.get("parentID"), []).append(node)
+        for attr, nid in nodes.items():
+            child = next((c for c in by_parent.get(nid, [])
+                          if c["type"].startswith("wysiwyg-")), None)
+            if child:
+                texts[attr] = child["ID"]
+        out[name] = {"id": cid, "nodes": nodes, "texts": texts}
+        print("  component %-22s %s  %d nodes, %d named, %d with text"
+              % (name, cid[:8], len(recs), len(nodes), len(texts)))
+    return out
+
+
+def apply_overrides(client, instance, key, uses, comps):
+    """Second pass: write each instance's own content into the override nodes.
+
+    Mosaic materialises one override node per component node per instance - node,
+    `parentType:"override"`, `parentID` the instance, `data.override.originalID` the
+    node inside the component. They only exist AFTER the instance is committed,
+    which is why this cannot be one pass. Putting `overrideChildren` on the instance
+    instead does nothing at all: `NodeMResourceInserterHelper` guards it with
+    `strpos($type, 'component-instance')`, and strpos returns 0 for a needle at
+    offset 0, so the condition is false for every instance there will ever be.
+    """
+    wanted = [u for u in uses if u.get("overrides")]
+    if not wanted:
+        return 0
+    doc = unwrap(client.get(instance), "templateDocumentInstance")
+    by_attr = {(n.get("data") or {}).get("attrID"): n for n in doc[key]}
+    revisions = []
+    for use in wanted:
+        holder = by_attr.get(use["instance_attr"])
+        if not holder:
+            continue
+        cmap = comps[use["component_name"]]
+        # an originalID resolves either to a named element, or to the text child of
+        # one; a `text` patch belongs to the second, everything else to the first
+        element_of = {v: k for k, v in cmap["nodes"].items()}
+        text_of = {v: k for k, v in cmap.get("texts", {}).items()}
+        for node in doc[key]:
+            if node.get("parentType") != "override":
+                continue
+            if node.get("parentID") != holder["ID"]:
+                continue
+            oid = ((node.get("data") or {}).get("override") or {}).get(
+                "originalID")
+            attr, is_text = element_of.get(oid), False
+            if attr is None and oid in text_of:
+                attr, is_text = text_of[oid], True
+            spec = dict(use["overrides"].get(attr) or {})
+            patch = ({"text": spec["text"]} if is_text and "text" in spec
+                     else {k: v for k, v in spec.items() if k != "text"}
+                     if not is_text else {})
+            # EVERY instance gets its own attrID for every inner node, whether or
+            # not the spec overrides its content. A component's inner nodes carry
+            # the definition's attrID, so nine instances put nine elements with the
+            # same `id` into the document - invalid HTML, and worse here, it
+            # silently corrupts every tool in this repo that maps an attrID to the
+            # generated class it was given. Measured before this line existed:
+            # `id="cmp-card"` appeared twice on one page.
+            if attr and not is_text and "attrID" not in patch:
+                patch["attrID"] = "%s-%s" % (use["instance_attr"], attr)
+            if not patch:
+                continue
+            fresh = dict(node.get("data") or {})
+            fresh.update(patch)
+            revisions.append({"newRevisionRecord": dict(node, data=fresh),
+                              "originalRevisionRecord": node})
+    if revisions:
+        commit(client, instance, doc, {key: revisions}, "overrides")
+    return len(revisions)
+
+
 def bind_page(client, cfg, master_id, slug, post_id):
     """Create the manual template for a post, then find the row it made."""
     resp = client._call("%s/templateAssign/createManualTemplate" % client.api,
@@ -131,6 +297,22 @@ def bind_page(client, cfg, master_id, slug, post_id):
     return sorted(mine, key=lambda t: t.get("modified_gmt", ""))[-1]["ID"]
 
 
+def resolve_components(node, comps):
+    """Turn every `"component": "<name>"` into the component's id, in place.
+
+    The spec names components; only this function knows their ids, and it records
+    the name alongside so the override pass can map an attrID back to the node it
+    addresses inside the definition."""
+    if isinstance(node, dict):
+        name = node.get("component")
+        if name and name in comps:
+            node = dict(node, component=comps[name]["id"], _component_name=name)
+        return {k: resolve_components(v, comps) for k, v in node.items()}
+    if isinstance(node, list):
+        return [resolve_components(v, comps) for v in node]
+    return node
+
+
 def build_page_document(client, cfg, master_id, template_id, tree, surface):
     """Commit a page's tree into its own template document, under template-internal."""
     instance = "templateDocumentInstance/%s/%s" % (master_id, template_id)
@@ -140,13 +322,14 @@ def build_page_document(client, cfg, master_id, template_id, tree, surface):
     if root is None:
         sys.exit("template %s has no template-internal root" % template_id[:8])
 
+    COMPONENT_USES.clear()
     records = flatten(tree, root["ID"], template_id, surface, False, parent_type="template-internal")
     for r in records:
         r["documentType"] = "template"          # these rows belong to the template,
         r["documentID"] = template_id           # not to the master that frames them
     commit(client, instance, doc, {key: [{"newRevisionRecord": r, "originalRevisionRecord": None}
                                          for r in records]}, "page document")
-    return len(records)
+    return len(records), list(COMPONENT_USES)
 
 
 def cache_check(url, _fresh_bytes=None):
@@ -198,11 +381,23 @@ def main():
     client = Client(cfg)
     surface = Surface()
 
+    # AFTER the shell, not before: build_shell is what commits the theme's design
+    # tokens and fills VAR_IDS, and a component that uses one cannot be flattened
+    # until the token it names exists.
     master_id = build_shell(client, cfg, site, surface)
+    comps = ensure_components(client, cfg, site, surface)
 
     for page in site["pages"]:
         template_id = bind_page(client, cfg, master_id, page["slug"], page["post_id"])
-        n = build_page_document(client, cfg, master_id, template_id, page["tree"], surface)
+        tree = resolve_components(page["tree"], comps) if comps else page["tree"]
+        n, uses = build_page_document(client, cfg, master_id, template_id, tree,
+                                      surface)
+        if comps and uses:
+            key = "node/template/%s" % template_id
+            inst = "templateDocumentInstance/%s/%s" % (master_id, template_id)
+            done = apply_overrides(client, inst, key, uses, comps)
+            print("  %-16s %d instances, %d overrides written"
+                  % ("", len(uses), done))
         url = "%s/%s/" % (cfg["base"].rstrip("/"), page["slug"])
         body = client.page(page["slug"])
         ok = len(body) >= MIN_HEALTHY_BYTES
