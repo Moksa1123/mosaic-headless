@@ -104,6 +104,21 @@ def table(headers, body, gap=2):
         print(sep.join(c.ljust(width[i]) for i, c in enumerate(r)).rstrip())
 
 
+def wrap(text: str, width: int) -> list[str]:
+    """Break on spaces. Slicing every N characters splits words in half, which in a
+    note about `component-instance/<componentID>` is actively misleading."""
+    out, line = [], ""
+    for word in (text or "").split():
+        if line and len(line) + 1 + len(word) > width:
+            out.append(line)
+            line = word
+        else:
+            line = (line + " " + word) if line else word
+    if line:
+        out.append(line)
+    return out
+
+
 def matches(text: str, needle: str | None) -> bool:
     return needle is None or needle.lower() in (text or "").lower()
 
@@ -119,6 +134,14 @@ def type_record(name: str) -> dict:
             name, ("\ndid you mean: " + ", ".join(near[:8])) if near else ""))
 
     v = index("node-verification", "type").get(name, {})
+    # A sweep outcome is what happened to ONE probe. Where that number is true but
+    # misleading on its own, the note says why - `component-instance` is COMMIT_500
+    # only because a bare one has no component id in its type.
+    note = ""
+    try:
+        note = index("node-type-notes", "type").get(name, {}).get("note", "")
+    except SystemExit:
+        note = ""
     p = index("placement-rules", "type").get(name, {})
     d = index("default-children", "type").get(name, {})
 
@@ -148,6 +171,7 @@ def type_record(name: str) -> dict:
         "edition": t.get("edition"),
         "outcome": v.get("outcome"),
         "outcome_note": OUTCOME_NOTE.get(v.get("outcome"), ""),
+        "note": note,
         "safe_to_commit": v.get("outcome") not in UNSAFE,
         "detail": v.get("detail"),
         "rendered_tag": v.get("rendered_tag"),
@@ -207,6 +231,9 @@ def cmd_type(a):
         print("verdict   : %s" % flag)
         if rec["detail"]:
             print("failure   : %s" % rec["detail"])
+        if rec["note"]:
+            for i, line in enumerate(wrap(rec["note"], 74)):
+                print("%-11s %s" % ("note      :" if i == 0 else "", line))
         if rec["rendered_tag"]:
             print("renders as: <%s>%s" % (
                 rec["rendered_tag"],
@@ -242,6 +269,96 @@ def cmd_type(a):
         print("\nsource: %s" % rec["file"])
 
     emit(rec, render)
+
+
+def cmd_params(a):
+    """Everything that can be SET on one node type, in one answer.
+
+    This is the question you actually have in front of an editor: not "does this
+    type exist" but "what may I put on it, in what shape, and which of those have
+    been seen to work". It is four tables joined - node properties by the data
+    class, the universal style surface, the style states that reach this type, and
+    the placement rule - because the answer is not in any one of them.
+
+    Mosaic differs from a widget-based builder here in a way worth stating: the
+    STYLE surface is universal. Every element takes the same 98 style properties;
+    what varies per type is the DATA properties and which node-type-scoped states
+    apply. So the style half of this output is the same for every type, and that
+    is a fact about the platform rather than a shortcut taken here."""
+    rec = type_record(a.name)
+    prop_status = {r["property"]: r for r in rows("node-property-verification")}
+    sv = index("style-verification", "property")
+    shapes = index("style-value-shapes", "property")
+    ver = index("style-state-verification", "state")
+
+    states = []
+    for r in rows("style-states"):
+        v = ver.get(r["state"], {})
+        if r["scope"] == "global" or v.get("host") == a.name:
+            states.append({"state": r["state"], "scope": r["scope"],
+                           "selector": r["selector_template"],
+                           "status": v.get("status", "base state"
+                                           if r["state"] == "&" else "")})
+
+    style = []
+    for r in rows("style-properties"):
+        v = sv.get(r["property"], {})
+        style.append({"property": r["property"], "group": r["group"],
+                      "css": v.get("css_property", ""),
+                      "status": v.get("status", ""),
+                      "shape": shapes.get(r["property"], {}).get("shape", ""),
+                      "accepted_values": split(r["accepted_values"])})
+
+    payload = {"type": a.name, "safe_to_commit": rec["safe_to_commit"],
+               "note": rec["note"], "data_properties": rec["properties"],
+               "style_properties": style, "states": states,
+               "placement_rule": rec["placement_rule"],
+               "allowed_children": rec["allowed_children"]}
+
+    def render():
+        head("%s - everything settable" % a.name)
+        print("verdict   : %s%s"
+              % ("SAFE" if rec["safe_to_commit"] else "UNSAFE TO COMMIT",
+                 "  (%s)" % rec["outcome"] if rec["outcome"] else ""))
+        if rec["note"]:
+            for i, line in enumerate(wrap(rec["note"], 74)):
+                print("%-11s %s" % ("note      :" if i == 0 else "", line))
+
+        print("\nDATA properties (%d) - these vary by type"
+              % len(rec["properties"]))
+        table(["property", "shared", "verified", "accepted values"],
+              [[p["property"], "yes" if p["inherited_from"] else "",
+                (prop_status.get(p["property"]) or {}).get("status", ""),
+                ", ".join(p["accepted_values"])[:44]]
+               for p in rec["properties"]])
+
+        usable = [s for s in states if s["status"] in ("COMPILED", "base state")]
+        print("\nSTATES reaching this type (%d usable of %d)"
+              % (len(usable), len(states)))
+        table(["state", "scope", "swept", "selector"],
+              [[s["state"], s["scope"], s["status"], s["selector"][:44]]
+               for s in states])
+
+        ok = [p for p in style if p["status"] == "COMPILED"]
+        grouped = [p for p in style if p["group"]]
+        print("\nSTYLE properties: %d in the surface, %d measured COMPILED,"
+              " %d belong to a group and are INERT set on their own."
+              "\nThe style surface is UNIVERSAL in Mosaic - it is the same "
+              "for every type."
+              % (len(style), len(ok), len(grouped)))
+        if a.style:
+            table(["property", "group", "css", "swept", "shape"],
+                  [[p["property"], p["group"], p["css"], p["status"],
+                    p["shape"][:30]] for p in style])
+        else:
+            print("(pass --style to list them, or `mo.py style` for the same "
+                  "table on its own)")
+
+        print("\nCHILDREN  : rule=%s%s" % (rec["placement_rule"],
+              ("  " + ", ".join(rec["allowed_children"]))
+              if rec["allowed_children"] else ""))
+
+    emit(payload, render)
 
 
 def cmd_types(a):
@@ -654,6 +771,12 @@ def main():
 
     p = add("type", cmd_type, "one node type, fully joined")
     p.add_argument("name")
+
+    p = add("params", cmd_params,
+            "EVERYTHING settable on one type: data, style, states, placement")
+    p.add_argument("name")
+    p.add_argument("--style", action="store_true",
+                   help="list all 98 style properties too, not just count them")
 
     p = add("check", cmd_check, "exit 1 if any named type is unsafe or unknown")
     p.add_argument("names", nargs="+")

@@ -26,6 +26,7 @@ python tools/mo.py type accordion-content   # 一個型別，接上所有線上�
 python tools/mo.py check div text button    # 型別不安全或不存在就 exit 1
 python tools/mo.py style --grouped          # 那 20 個單獨設定必然無效的屬性
 python tools/mo.py states --verified        # 實測會編譯出來的狀態
+python tools/mo.py params text              # 一個型別上所有能設的東西
 ```
 
 然後去看頁面。Mosaic 有四種失效模式，**其中只有一種會改變 HTTP 狀態碼**：
@@ -53,6 +54,7 @@ commit 時 PHP fatal   HTTP 500  （122 種型別裡有 15 種，光放在 div �
 | **樣式屬性** | 98 / 98 寫進真實頁面並對照編譯後的 CSS：58 COMPILED、18 ABSENT、21 SKIPPED |
 | **節點屬性** | 181 / 181，用每個屬性自己的 validator chain 推導出的值重測：35 APPLIED、42 NO_EFFECT、55 NO_HOST、47 SKIPPED |
 | **響應式** | 兩個站共 688 條 `_t`/`_m` 宣告，對照網站實際送出的樣式表逐條斷言——全數通過 |
+| **元件系統** | 完整驅動過一遍，**8 / 8**：在分類下建立、文件 heal、透過可寫的 instance 填入內容、唯讀的那個作為負對照組確實拒絕同一個寫入，最後兩個實例在頁面上由同一份定義渲染兩次 |
 | **樣式狀態** | 53 個狀態中的 52 個寫進真實頁面，對照表格承諾的選擇器逐一比對：**36 個完全吻合**、12 個 NO_HOST、3 個 SKIPPED、1 個 BROKE_PAGE。七個可用於任何元素的狀態全數驗證 |
 | **互動動畫** | 帶負對照組並讀回儲存列來探測 JS 動畫路徑：`propertyMetas` **確實**會被接受並儲存；屬性值仍然無法綁定，但界線現在很精確 |
 | **入口動畫** | 在載入後十個時間點取樣並做七項斷言——它有播、被動畫的 `@property` 計數器跑到 100、遮罩退出點擊判定、視窗內沒有任何內容卡在 opacity 0、真實點擊落在文件上，而在 `prefers-reduced-motion` 下遮罩根本不存在 |

@@ -30,6 +30,7 @@ python tools/mo.py type accordion-content   # 타입 하나를 모든 라이브 
 python tools/mo.py check div text button    # 위험하거나 존재하지 않는 타입이면 exit 1
 python tools/mo.py style --grouped          # 단독으로 설정하면 반드시 무효인 20개
 python tools/mo.py states --verified        # 실측으로 컴파일이 확인된 상태만
+python tools/mo.py params text              # 한 타입에 설정 가능한 모든 것
 ```
 
 그리고 페이지를 확인한다. Mosaic의 실패 방식은 네 가지이고,
@@ -60,6 +61,7 @@ URL에 맞는 템플릿 없음      HTTP 406, 로그인하지 않은 사용자�
 | **스타일 속성** | 98 / 98을 실제 페이지에 쓰고 컴파일된 CSS와 대조: 58 COMPILED, 18 ABSENT, 21 SKIPPED |
 | **노드 속성** | 181 / 181을 각 속성 자신의 validator chain에서 도출한 값으로 재측정: 35 APPLIED, 42 NO_EFFECT, 55 NO_HOST, 47 SKIPPED |
 | **반응형** | 두 사이트 합쳐 688개의 `_t`/`_m` 선언을, 사이트가 실제로 내보낸 스타일시트에 대해 하나씩 단언 — 전부 검증됨 |
+| **컴포넌트** | 컴포넌트 체계를 끝까지 구동해 **8 / 8**: 카테고리 아래 생성, 문서 heal, 쓰기 가능한 instance로 트리 주입, 읽기 전용 쪽은 같은 쓰기를 거부(음성 대조군), 마지막으로 인스턴스 2개가 정의 하나로 렌더링 |
 | **스타일 상태** | 53개 상태 중 52개를 실제 페이지에 쓰고 표가 약속한 셀렉터와 대조: **36개가 정확히 일치**, 12개 NO_HOST, 3개 SKIPPED, 1개 BROKE_PAGE. 어떤 요소에나 쓸 수 있는 전역 7개 상태는 전부 검증됨 |
 | **인터랙션** | JS 애니메이션 경로를 음성 대조군과 함께, 저장된 행을 되읽으며 검증: `propertyMetas`는 **수용되고 저장된다**. 속성 값은 여전히 바인딩되지 않지만 그 경계는 이제 정확하다 |
 | **인트로 애니메이션** | 페이지 로드 후 10개 시점을 샘플링해 7가지를 단언 — 재생될 것, 애니메이션되는 `@property` 카운터가 100에 도달할 것, 베일이 히트 테스트에서 빠질 것, 뷰포트 안에 opacity 0으로 갇힌 요소가 없을 것, 실제 클릭이 문서에 닿을 것, 그리고 `prefers-reduced-motion`에서는 베일이 아예 존재하지 않을 것 |

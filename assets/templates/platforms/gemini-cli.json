@@ -20,7 +20,7 @@
     "description": "Build and modify Mosaic Pro (Nextend) sites by writing the underlying data model directly - no visual editor, no DOM. Query the real surface (122 node types, 181 node properties, 98 style properties, 53 style states, 151 element classes, 74 dynamic variables, 114 REST routes, 23 tables) instead of guessing, with every node type placed on a live site one at a time and asserted against the delivered HTML, every style and node property swept against the compiled CSS and markup, and 569 responsive declarations checked against the stylesheet the site actually served.",
     "license": "MIT",
     "author": "moksa (https://moksaweb.com)",
-    "version": "1.12.0"
+    "version": "1.13.0"
   },
   "loaderBehaviour": "CHANGED as of 2026-07-11: Gemini CLI now natively supports the same SKILL.md standard as Claude Code and Codex CLI - the same directory-based skill works unmodified. Gemini CLI discovers skills in this precedence order: built-in, extension skills, ~/.gemini/skills/ (personal), .gemini/skills/ (project, shared via version control). At session start Gemini injects each discovered skill's name+description into the system prompt and calls activate_skill when a task matches.",
   "verified": true,

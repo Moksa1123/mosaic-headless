@@ -93,3 +93,41 @@ takes variations from there.
 That is why the same visual change can be made in two very different places, and
 why writing a style onto a node directly is usually the wrong move: the class is
 the unit of reuse, and the collection/variable tables are the token layer beneath it.
+
+
+## Components: one definition, many places
+
+Three tables (`components`, `component_documents`, `component_categories`), four
+node types and eighteen REST routes. Driven end to end by
+`tools/sweep_components.py`; every claim here was measured, and none of it is
+guessable from the route list.
+
+```
+1  create      adminComponentsEditorInstance, commit a `component` record
+               parentType MUST be "componentCategory" - Page, Block and Part exist
+               out of the box, and no other parent type is accepted at all.
+               parentType:"" gives HTTP 500, "Parent type not supported"
+
+2  heal        GET componentDocumentInstance/<id>
+               the FIRST call 404s and creates the document; the second returns it,
+               healed into body / component-external / component-root / document
+
+3  fill        commit into the SAME instance, under the `component-internal` node
+               in its `node/component/<id>` key.
+               NOT componentNodeEditorInstance - `isCommitAllowed()` returns false
+               there and the commit is refused with "Not allowed!" and a 500, even
+               though that is the instance which shows you the tree.
+               NOT component-root either - it accepts no children
+
+4  instance    on a page, a node whose TYPE carries the component's id:
+                   type: "component-instance/<componentID>"
+               `ComponentInstanceElementTypeFactory` splits on that slash. A bare
+               `component-instance` has no id for `$flags[0]` and fatals, which is
+               the entire reason it is COMMIT_500 in node-verification.csv
+```
+
+Verified on a live page: two instances of one component, both rendered, the
+component's own text present twice from a single definition. Edit the component and
+every instance changes - which is the whole point, and the reason a real site should
+use these rather than repeating a tree.
+

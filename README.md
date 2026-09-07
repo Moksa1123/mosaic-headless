@@ -30,6 +30,7 @@ python tools/mo.py type accordion-content   # one type, joined to every live swe
 python tools/mo.py check div text button    # exits 1 on an unsafe or unknown type
 python tools/mo.py style --grouped          # the 20 that are inert set on their own
 python tools/mo.py states --verified        # the states measured to compile
+python tools/mo.py params text              # everything settable on one type
 ```
 
 Then check the page. Mosaic has four failure modes and **only one of them changes the
@@ -61,6 +62,7 @@ factories, so Pro types register and render regardless.
 | **style properties** | 98 / 98 written to a live page and checked against the compiled CSS: 58 COMPILED, 18 ABSENT, 21 SKIPPED |
 | **node properties** | 181 / 181 re-probed with a value shaped by each property's own validator chain: 35 APPLIED, 42 NO_EFFECT, 55 NO_HOST, 47 SKIPPED |
 | **responsive** | 688 `_t`/`_m` declarations across two sites asserted against the stylesheet the site actually served — all verified |
+| **components** | the component system driven end to end, **8 of 8**: created under a category, document healed, tree filled through the writable instance, the read-only one refused the same write as a negative control, and two instances on a page rendering one definition twice |
 | **style states** | 52 of the 53 states written to a live page and matched against the selector the table promises: **36 compiled exactly**, 12 NO_HOST, 3 SKIPPED, 1 BROKE_PAGE. All seven globally usable states verified |
 | **interactions** | the JS animation path probed with negative controls and the row read back: `propertyMetas` **is** accepted and stored; the property values still do not bind, and the boundary is now exact |
 | **entrance animation** | the page-load sequence sampled at ten timestamps and asserted on seven counts — it plays, its animated `@property` counter reaches 100, the veil leaves hit-testing, nothing in the viewport is stranded at opacity 0, a real click reaches the document, and under `prefers-reduced-motion` the veil never exists at all |

@@ -1,0 +1,9 @@
+step,result,detail
+categories exist,PASS,"Page, Block, Part"
+component created,PASS,parented to 'Page'
+document healed,PASS,"first GET 404'd, second gave component-internal"
+component filled,PASS,"tree is component-internal, div, text, wysiwyg-text"
+read-only instance refuses,PASS,componentNodeEditorInstance rejected the same commit
+instances committed,PASS,type carries the component id
+both instances rendered,PASS,2 instance elements in the delivered HTML
+component content reused,PASS,the component's own text appears 2 times from ONE definition

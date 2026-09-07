@@ -1,0 +1,5 @@
+type,note
+component-instance,"Swept as COMMIT_500, which is what a BARE one does. The node's type is not `component-instance` but `component-instance/<componentID>` - the factory splits on that slash and a bare one has no id to read. With a real component it commits and renders; see sweep_components.py."
+component-internal,"The component's content hangs under THIS node, in the `node/component/<id>` key of a componentDocumentInstance. `component-root` looks like the parent and accepts no children."
+component-root,"Accepts no children. It frames the component's preview document, not its content."
+loop,"COMMIT_500 on a bare page: the loop needs a query context that a plain document does not provide."
