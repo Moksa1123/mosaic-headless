@@ -403,14 +403,43 @@ PROBE = r"""
     // rgba(0,0,0,0) as pure black - which then scores a perfect contrast ratio
     // against any light ground. That is a blind spot scoring itself as a pass, so
     // it gets its own finding instead: the check cannot run here, and says so.
-    const rgba = (cs.color.match(/[\d.]+/g) || []).map(Number);
+    let rgba = (cs.color.match(/[\d.]+/g) || []).map(Number);
+    let paintedBy = '';
     if (rgba.length === 4 && rgba[3] < 0.05) {
-      out.audit.push({check: 'TEXT_CLIP', level: 'warn', node: id,
-                      detail: 'color is ' + cs.color + '; painted by ' +
-                              (cs.backgroundClip === 'text' ? 'background-clip:text'
-                                                            : 'something else') +
-                              ' - contrast NOT checked here',
-                      sample: own.slice(0, 24)});
+      // The colour is transparent, but the glyphs are not: something else is
+      // painting them. Reporting "cannot check" here was the tool declining to
+      // look one property further. Both of the ways this page does it are
+      // readable from the computed style.
+      const stops = [];
+      if (cs.backgroundClip === 'text' || cs.webkitBackgroundClip === 'text') {
+        // every colour stop in the gradient; the worst one is what decides
+        for (const m of (cs.backgroundImage || '').matchAll(
+               /rgba?\(([^)]+)\)/g)) {
+          const v = m[1].split(',').map(Number);
+          if (v.length >= 3) stops.push(v);
+        }
+        if (stops.length) paintedBy = 'background-clip:text';
+      }
+      const strokeW = parseFloat(cs.webkitTextStrokeWidth) || 0;
+      if (!stops.length && strokeW > 0) {
+        const v = (cs.webkitTextStrokeColor.match(/[\d.]+/g) || []).map(Number);
+        if (v.length >= 3) { stops.push(v); paintedBy = 'text-stroke'; }
+      }
+      if (stops.length) {
+        // the worst stop is the one that decides whether the string is readable
+        let worst = null, wr = Infinity;
+        for (const v of stops) {
+          const c = over(v.slice(0, 3), bgOf(el), v.length === 4 ? v[3] : 1);
+          const r = ratio(c, bgOf(el));
+          if (r < wr) { wr = r; worst = c; }
+        }
+        rgba = worst.concat([1]);
+      } else {
+        out.audit.push({check: 'TEXT_CLIP', level: 'warn', node: id,
+                        detail: 'color is ' + cs.color + ' and nothing readable is '
+                              + 'painting it - contrast NOT checked here',
+                        sample: own.slice(0, 24)});
+      }
     }
     const bg0 = bgOf(el);
     const fg = over(rgba.slice(0, 3), bg0,
@@ -421,7 +450,8 @@ PROBE = r"""
       const need = large ? 3.0 : 4.5;
       if (r < need) out.audit.push({
         check: 'CONTRAST', level: r < need - 1 ? 'error' : 'warn', node: id,
-        detail: r.toFixed(2) + ':1 against its background, needs ' + need,
+        detail: r.toFixed(2) + ':1 against its background, needs ' + need
+              + (paintedBy ? ' (painted by ' + paintedBy + ', worst stop)' : ''),
         sample: own.slice(0, 24)});
     }
 
@@ -541,6 +571,10 @@ def main():
     ap.add_argument("--site", required=True)
     ap.add_argument("--csv", help="the computed-value table")
     ap.add_argument("--audit", help="the design-audit findings")
+    ap.add_argument("--ack", default=os.path.join(
+        os.path.dirname(os.path.abspath(__file__)), "..", "data",
+        "design-audit-acknowledged.csv"),
+        help="findings reviewed and accepted, with the reason for each")
     ap.add_argument("--shots")
     ap.add_argument("--page", help="only this slug")
     a = ap.parse_args()
@@ -617,6 +651,26 @@ def main():
                 print("    %-4s %-22s %-16s declared %-18s got %s"
                       % (r[1], r[2][:22], r[3], r[4][:18], r[5][:34]))
 
+    # A finding that is correct by design and will never be fixed should not sit
+    # in the same bucket as one nobody has looked at yet - a list where most
+    # entries are permanent is a list people stop reading. So they are
+    # ACKNOWLEDGED rather than suppressed: the acknowledgement lives in the
+    # repository beside the data, every one carries a written reason, and the
+    # count is still printed. Nothing is dropped; it is only separated from what
+    # nobody has looked at.
+    acks = []
+    if a.ack and os.path.exists(a.ack):
+        with open(a.ack, encoding="utf-8", newline="") as fh:
+            acks = list(csv.DictReader(fh))
+
+    def acknowledged(finding):
+        for row in acks:
+            if (row["check"] == finding["check"]
+                    and (finding.get("node") or "").startswith(
+                        row["node_prefix"])):
+                return row["reason"]
+        return None
+
     # Audit findings collapse across breakpoints: the same headline reported at three
     # widths is one defect, not three, and printing it three times buries the others.
     seen: dict[tuple, dict] = {}
@@ -624,13 +678,29 @@ def main():
         key = (f["check"], f.get("node", ""), f.get("detail", ""))
         seen.setdefault(key, dict(f, breakpoints=[]))["breakpoints"].append(
             f["breakpoint"])
-    audit = sorted(seen.values(), key=lambda f: (f["level"] != "error", f["check"]))
+    audit = sorted(seen.values(),
+                   key=lambda f: (f["level"] != "error", f["check"]))
+    for f in audit:
+        why = acknowledged(f)
+        if why:
+            f["level"], f["ack"] = "ack", why
     errors = [f for f in audit if f["level"] == "error"]
+    open_warns = [f for f in audit if f["level"] == "warn"]
+    acked = [f for f in audit if f["level"] == "ack"]
     hard += len(errors)
 
-    print("\ndesign audit  (%d findings: %d error, %d warn)"
-          % (len(audit), len(errors), len(audit) - len(errors)))
+    print("\ndesign audit  (%d findings: %d error, %d unreviewed warn, "
+          "%d acknowledged)"
+          % (len(audit), len(errors), len(open_warns), len(acked)))
+    for f in acked[:6]:
+        print("  ack   %-22s %-26s %s"
+              % (f["check"], (f.get("node") or "")[:26], f["ack"][:64]))
+    if len(acked) > 6:
+        print("  ack   ... %d more under the same acknowledgement"
+              % (len(acked) - 6))
     for f in audit[:40]:
+        if f["level"] == "ack":
+            continue
         print("  %-5s %-22s %-26s %s"
               % (f["level"], f["check"], (f.get("node") or "")[:26],
                  f.get("detail", "")))
@@ -653,20 +723,21 @@ def main():
     if a.audit:
         with open(a.audit, "w", newline="", encoding="utf-8") as fh:
             w = csv.writer(fh)
-            w.writerow(["url", "breakpoints", "check", "level", "node", "detail",
-                        "sample"])
+            w.writerow(["url", "breakpoints", "check", "level", "node",
+                        "detail", "sample", "acknowledged_because"])
             for f in audit:
                 w.writerow([f["url"], ",".join(f["breakpoints"]), f["check"],
                             f["level"], f.get("node", ""), f.get("detail", ""),
-                            f.get("sample", "")])
+                            f.get("sample", ""), f.get("ack", "")])
         print("wrote %s (%d findings)" % (a.audit, len(audit)))
 
     # "clean" was overstating it once the audit began reporting blind spots as
     # warnings. A run carrying two labelled unknowns is not a run carrying none, and
     # the summary line is the part people read.
     print("\n%s" % (("PASS - every comparable declaration is what the browser "
-                     "computed; 0 audit errors, %d warnings"
-                     % (len(audit) - len(errors)))
+                     "computed; 0 audit errors, %d unreviewed warnings, "
+                     "%d acknowledged"
+                     % (len(open_warns), len(acked)))
                     if not hard else
                     "FAIL - %d overridden declarations, %d audit errors"
                     % (counts.get("OVERRIDDEN", 0), len(errors))))

@@ -1,0 +1,2 @@
+check,node_prefix,reason
+DECORATIVE_TEXT,mk-code-,"The hero's code layer. Drawn by CSS `content` so it is not in the accessibility tree, and WCAG 1.4.3 exempts incidental text that is part of a picture with other significant visual content. Measured at 1.46:1 under the headline and 2.71:1 to the right; raising it to 4.5:1 would make the background a foreground. The lede and the spec column carry their own paper so no real content is ever read against it."

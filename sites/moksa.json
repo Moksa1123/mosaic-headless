@@ -5351,7 +5351,7 @@
                    "lineHeight": ".82",
                    "letterSpacing": "-0.05em",
                    "color": "rgba(0,0,0,0)",
-                   "customStyles": "-webkit-text-stroke:1px rgba(22,24,28,.42);"
+                   "customStyles": "-webkit-text-stroke:1px rgba(22,24,28,.52);"
                   },
                   "_t": {
                    "fontSize": "104px"

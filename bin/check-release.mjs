@@ -128,6 +128,25 @@ if (!audit.startsWith("url,breakpoints,check,level"))
 if (audit.includes(",error,"))
   fail("data/design-audit.csv carries unresolved design errors");
 
+// Stronger than "no errors": every finding must be either FIXED or ACKNOWLEDGED in
+// writing. A warning that nobody has ruled on is the state this gate exists to
+// prevent - it is how a list of findings turns into a list nobody reads.
+if (audit.includes(",warn,"))
+  fail("data/design-audit.csv carries warnings that are neither fixed nor "
+     + "acknowledged in data/design-audit-acknowledged.csv");
+const ackFile = "data/design-audit-acknowledged.csv";
+if (!fs.existsSync(path.join(ROOT, ackFile))) fail(`${ackFile} missing`);
+else {
+  const ack = read(ackFile);
+  if (!ack.startsWith("check,node_prefix,reason"))
+    fail(`${ackFile} is not the acknowledgement table verify_browser.py reads`);
+  // an acknowledgement without a reason is a suppression wearing a better name
+  for (const line of ack.trim().split("\n").slice(1))
+    if (line.length < 60)
+      fail(`${ackFile}: an acknowledgement has no substantive reason: `
+         + line.slice(0, 60));
+}
+
 // ---------- nothing private ships -------------------------------------------
 
 // npm's `files` allowlist OVERRIDES .gitignore: naming a directory there ships

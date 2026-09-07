@@ -1935,7 +1935,12 @@ PLATE = section("plate", [wrap("mk-plate-in", [
                 [T("p", "01", fontFamily=DISPLAY, fontSize="132px",
                    fontWeight="600", lineHeight=".82", letterSpacing="-0.05em",
                    color="rgba(0,0,0,0)",
-                   customStyles="-webkit-text-stroke:1px " + RULE_INK + ";",
+                   # RULE_INK at 42% measured 2.64:1 on the panel, and a 132px
+                   # numeral is large text, which needs 3.0. This is the lightest
+                   # stroke that clears it. It was invisible until the audit
+                   # learned to read `-webkit-text-stroke-color` instead of
+                   # giving up at a transparent `color`.
+                   customStyles="-webkit-text-stroke:1px rgba(22,24,28,.52);",
                    _t={"fontSize": "104px"}, _m={"fontSize": "68px"})]),
             box("mk-plate-t", {}, [
                 mono("PLATE 01 — POSITION", size="10px", color="--mk-accent-ink",
