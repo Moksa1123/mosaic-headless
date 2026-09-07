@@ -348,6 +348,13 @@ PROBE = r"""
                                                         : Math.pow((v + .055) / 1.055, 2.4); });
     return .2126 * s[0] + .7152 * s[1] + .0722 * s[2];
   };
+  // Semi-transparent text is NOT its own colour. `rgba(22,24,28,.10)` on paper is
+  // a pale grey, and taking the rgb and discarding the alpha reported the hero's
+  // 10%-opacity code layer at 17:1 - the ratio ink would have if it were solid.
+  // Composite first, then measure what is actually on the screen.
+  const over = (fg, bg, a) =>
+    (a === undefined || a >= 1) ? fg
+      : fg.map((v, i) => Math.round(v * a + bg[i] * (1 - a)));
   const ratio = (a, b) => {
     const [x, y] = [lum(a), lum(b)].sort((m, n) => n - m);
     return (x + .05) / (y + .05);
@@ -405,9 +412,11 @@ PROBE = r"""
                               ' - contrast NOT checked here',
                       sample: own.slice(0, 24)});
     }
-    const fg = rgba.slice(0, 3);
+    const bg0 = bgOf(el);
+    const fg = over(rgba.slice(0, 3), bg0,
+                    rgba.length === 4 ? rgba[3] : 1);
     if (fg.length === 3 && !(rgba.length === 4 && rgba[3] < 0.05)) {
-      const r = ratio(fg, bgOf(el));
+      const r = ratio(fg, bg0);
       const large = size >= 24 || (size >= 18.66 && px(cs.fontWeight) >= 700);
       const need = large ? 3.0 : 4.5;
       if (r < need) out.audit.push({
@@ -429,6 +438,39 @@ PROBE = r"""
       if (ch > 108) out.audit.push({
         check: 'MEASURE', level: 'warn', node: id,
         detail: Math.round(ch) + ' characters per line', sample: own.slice(0, 24)});
+    }
+  }
+
+  // Text drawn by a pseudo-element needs its own pass. The loop above starts with
+  // `if (!own) continue` - it walks nodes that OWN a text node - so an element whose
+  // only content is CSS `content` is skipped before any check runs on it. That is
+  // exactly the hero's code layer: ten empty divs, all of their type drawn by
+  // `::after`. Putting the check inside that loop found nothing and looked like a
+  // clean result.
+  //
+  // Keeping such text out of the accessibility tree is the correct treatment for
+  // decoration, and WCAG exempts it. "My checker cannot see it" is still not the
+  // same claim as "it is fine", so it is reported with its measured contrast.
+  for (const el of document.body.querySelectorAll('*')) {
+    const cs = getComputedStyle(el);
+    if (cs.visibility === 'hidden' || cs.display === 'none') continue;
+    const id = el.id || (el.tagName.toLowerCase() + '.' +
+                         (el.className || '').toString().split(' ')[0]);
+    for (const pseudo of ['::before', '::after']) {
+      const pc = getComputedStyle(el, pseudo);
+      const raw = pc.content;
+      if (!raw || raw === 'none' || raw === 'normal') continue;
+      const m = raw.match(/^"(.*)"$/s);
+      if (!m || m[1].trim().length < 2) continue;
+      const pn = (pc.color.match(/[\d.]+/g) || []).map(Number);
+      if (pn.length < 3) continue;
+      const pbg = bgOf(el);
+      const pf = over(pn.slice(0, 3), pbg, pn.length === 4 ? pn[3] : 1);
+      out.audit.push({
+        check: 'DECORATIVE_TEXT', level: 'warn', node: id + pseudo,
+        detail: ratio(pf, pbg).toFixed(2) + ':1 - drawn by CSS content, so it '
+              + 'is out of the accessibility tree and exempt, but it IS visible',
+        sample: m[1].slice(0, 28)});
     }
   }
 

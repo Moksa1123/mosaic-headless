@@ -322,8 +322,8 @@ https://mosaic.moksaweb.com/moksa/,_,mk-mast-cta,marginTop,32px,32px,ok
 https://mosaic.moksaweb.com/moksa/,_,mk-mast-cta,flexWrap,wrap,wrap,ok
 https://mosaic.moksaweb.com/moksa/,_,mk-mast-in,width,100%,viewport- or parent-relative,not-comparable
 https://mosaic.moksaweb.com/moksa/,_,mk-mast-in,maxWidth,1240px,1240px,ok
-https://mosaic.moksaweb.com/moksa/,_,mk-mast-in,marginLeft,auto,auto resolves to a used value (60px),not-comparable
-https://mosaic.moksaweb.com/moksa/,_,mk-mast-in,marginRight,auto,auto resolves to a used value (60px),not-comparable
+https://mosaic.moksaweb.com/moksa/,_,mk-mast-in,marginLeft,auto,auto resolves to a used value (0px),not-comparable
+https://mosaic.moksaweb.com/moksa/,_,mk-mast-in,marginRight,auto,auto resolves to a used value (0px),not-comparable
 https://mosaic.moksaweb.com/moksa/,_,mk-mast-lede,color,"rgb(90,92,97)","rgb(90, 92, 97)",ok
 https://mosaic.moksaweb.com/moksa/,_,mk-mast-lede,fontSize,16px,16px,ok
 https://mosaic.moksaweb.com/moksa/,_,mk-mast-lede,lineHeight,2,32px,ok

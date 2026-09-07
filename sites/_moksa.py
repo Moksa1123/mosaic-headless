@@ -338,6 +338,22 @@ BOOT_LOG = [
 ]
 RULER_TICKS = 13
 
+# The hero's code layer. Third table up here for the same reason as the others:
+# motion_css() builds a rule per line and runs long before the section that uses it.
+HERO_CODE = [
+    "const order = await prisma.order.findUnique({",
+    "  where: { id }, include: { items: true },",
+    "})",
+    "",
+    "await n8n.trigger('order.paid', {",
+    "  invoice: await ecpay.issue(order),",
+    "  notify:  await line.push(order.customerId, flex(order)),",
+    "})",
+    "",
+    "return reply.code(200).send({ ok: true })",
+]
+
+
 # The destination board's rows. Up here with the other tables because motion_css()
 # derives the flap geometry from how many there are, and it runs long before the
 # section that draws them.
@@ -428,6 +444,18 @@ def motion_css():
     idx_words = ",".join("#mk-idx-w-%d" % i for i in range(len(CLAUSES)))
     flap_strips = ",".join(["#mk-flap-%d-s" % k for k in range(3)]
                            + ["#mk-board-city-s", "#mk-board-utc-s"])
+    # the snippet is drawn by pseudo-elements: no text nodes, so it stays out of
+    # the accessibility tree where decorative type belongs
+    code_lines = "\n".join(
+        "#mk-code-%d::after{content:%s;display:block;min-height:1.75em}"
+        % (i, json.dumps(line or " "))
+        for i, line in enumerate(HERO_CODE))
+    # one period for the block; each line waits its turn, and the steps() count is
+    # the line's own length so the caret lands on characters rather than sliding
+    code_typing = "\n".join(
+        "  #mk-code-%d{animation:mk-typeline 15s steps(%d,end) %dms infinite}"
+        % (i, max(len(line), 1), 300 + i * 340)
+        for i, line in enumerate(HERO_CODE))
     # the diagram's arrows, and the delay that makes the pulse travel down it
     flow_arrows = ",".join("#mk-ar-%s-%d>*" % (c, i)
                            for i in range(len(FLOW)) for c in ("a", "b"))
@@ -558,6 +586,35 @@ def motion_css():
         # belongs to a page set in a terminal face
         "#mk-caret{width:13px;height:19px;background:rgb(255,90,54)}",
         "#mk-plate-dash{width:34px;height:1px;background:rgb(191,68,40)}",
+
+        # ── the hero's code layer ────────────────────────────────────────────
+        # Each line types itself in, holds while the rest of the block arrives,
+        # then clears - one keyframe covering the whole cycle, so the block writes,
+        # rests and rewrites forever without any JavaScript to sequence it.
+        "@keyframes mk-typeline{"
+        "0%{clip-path:inset(0 100% 0 0)}"
+        "14%{clip-path:inset(0 0 0 0)}"
+        "88%{clip-path:inset(0 0 0 0)}"
+        "94%,100%{clip-path:inset(0 100% 0 0)}}",
+        "#mk-mast-in{position:relative}",
+        # Anchored to the empty upper-right of the hero rather than stretched
+        # across it. Filling the whole box put the snippet straight through the
+        # statistics band, and code running across a number reads as a bug rather
+        # than as a background. `max-height` is what guarantees it can never grow
+        # back into them.
+        "#mk-code{position:absolute;top:86px;right:0;z-index:0;"
+        "pointer-events:none;width:max-content;max-height:292px;overflow:hidden;"
+        "display:grid;align-content:start;justify-items:start;row-gap:1px;"
+        "font-family:" + MONO + ";font-size:12px;line-height:1.72;"
+        "letter-spacing:0.01em;color:rgba(22,24,28,.10);"
+        "white-space:pre;text-align:left}",
+        # everything else in the masthead sits above it
+        "#mk-mast-in>*:not(#mk-code){position:relative;z-index:1}",
+        code_lines,
+        "#mk-code-cur{width:7px;height:13px;background:rgba(255,90,54,.30)}",
+        # Below 1280 the spec column claims that corner, so the layer stands down
+        # rather than fighting it for the space.
+        "@media (max-width:1279px){#mk-code{display:none}}",
 
         # ── the clock ────────────────────────────────────────────────────────
         # Two registered integers, stepped rather than eased, so each one lands on a
@@ -815,6 +872,8 @@ def motion_css():
         "  #mk-clock-dot{animation:mk-livedot 2s steps(1,end) infinite}",
         "  #mk-sweep{animation:mk-sweepdown 11s linear infinite}",
         "  #mk-pan-loop{animation:mk-panloop 26s linear infinite}",
+        code_typing,
+        "  #mk-code-cur{animation:mk-boot-caret .62s steps(1,end) infinite}",
         # One period for the whole board. The letters carry a few dozen ms of delay
         # each so they land left to right the way a real board does; that is far too
         # small to pull them out of step with the name beside them.
@@ -1076,7 +1135,26 @@ HERO_LINE = dict(color={"token": "--mk-ink"}, fontSize="62px", fontWeight="600",
                  lineHeight="1.14", letterSpacing="0.005em", fontFamily=DISPLAY,
                  _t={"fontSize": "48px"}, _m={"fontSize": "32px"})
 
+# ── the hero's code layer ─────────────────────────────────────────────────────
+# A terminal writing itself out behind the headline. The snippet is real work rather
+# than lorem: a Prisma read, an n8n trigger, an ECPay invoice and a LINE push are
+# four of the things this studio actually wires together, so the background says
+# what the page says.
+#
+# Every line is drawn by a pseudo-element rather than by a text node, and that is a
+# deliberate accessibility decision, not a trick. Decorative type set at 7% opacity
+# behind a headline cannot meet a contrast ratio and should not be announced by a
+# screen reader either; CSS `content` keeps it out of the accessibility tree, which
+# is where WCAG puts incidental text. `verify_browser.py` was taught to look for it
+# anyway and report it as DECORATIVE_TEXT, because "invisible to my own checker" is
+# not the same as "fine".
+
+CODE_LAYER = box("mk-code", {}, [box("mk-code-%d" % i, {}, [])
+                                 for i in range(len(HERO_CODE))]
+                                + [box("mk-code-cur", {}, [])])
+
 MASTHEAD = section("mk-mast", [wrap("mk-mast-in", [
+    CODE_LAYER,
     # the document's own header block: what this is, where it is from, which revision
     box("mk-mast-meta",
         {"display": "flex", "justifyContent": "space-between", "columnGap": "20px",
