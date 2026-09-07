@@ -476,12 +476,12 @@ def motion_css():
         for i, line in enumerate(lines))
     code_heads = "\n".join(
         "#mk-code-c%d-h::after{content:%s;display:block;font-size:9px;"
-        "letter-spacing:.2em;color:rgba(255,90,54,.5);margin-bottom:9px}"
+        "letter-spacing:.2em;color:rgba(255,90,54,.9);margin-bottom:9px}"
         % (c, json.dumps(label))
         for c, (label, _lines) in enumerate(HERO_CODE))
     code_cursors = "\n".join(
         "#mk-code-c%d-cur{width:6px;height:11px;margin-top:4px;"
-        "background:rgba(255,90,54,.22)}" % c
+        "background:rgba(255,90,54,.7)}" % c
         for c in range(len(HERO_CODE)))
     # one period for the block; each line waits its turn, and the steps() count is
     # the line's own length so the caret lands on characters rather than sliding
@@ -643,24 +643,36 @@ def motion_css():
         # statistics band, and code running across a number reads as a bug rather
         # than as a background. `max-height` is what guarantees it can never grow
         # back into them.
-        # Full bleed, and it works only because of the two numbers at the end of
-        # this rule. At 10% opacity a single column ran visibly through the
-        # statistics and read as a bug; at 5.5% and masked, four columns are a
-        # texture the page sits ON rather than a thing competing with it. The mask
-        # is asymmetric on purpose - lightest under the headline at the left,
-        # fullest out to the right where there is nothing else.
+        # Full bleed. The opacity here has been wrong in both directions: a single
+        # column at 10% ran through the statistics and read as a bug, and four
+        # columns at 5.5% behind a 30% mask floor were so faint they may as well
+        # not have been there. 18% with the mask floor at 55% puts the layer at
+        # roughly 1.6:1 under the headline and 2.4:1 out to the right - legible as
+        # code if you look at it, and still an order of magnitude below the
+        # statistics, which sit at 17:1. The mask stays asymmetric on purpose:
+        # lightest where the headline is, fullest where nothing else is.
         "#mk-code{position:absolute;left:0;right:0;top:0;bottom:0;z-index:0;"
         "pointer-events:none;overflow:hidden;display:grid;"
         "grid-template-columns:repeat(4,minmax(0,1fr));column-gap:26px;"
         "align-content:center;padding:70px 0;"
         "font-family:" + MONO + ";font-size:11.5px;line-height:1.78;"
-        "letter-spacing:0.01em;color:rgba(22,24,28,.055);"
+        "letter-spacing:0.01em;color:rgba(22,24,28,.18);"
         "white-space:pre;text-align:left;"
-        "-webkit-mask-image:linear-gradient(96deg,rgba(0,0,0,.30) 0%,"
-        "rgba(0,0,0,.30) 28%,rgba(0,0,0,1) 62%,rgba(0,0,0,1) 100%);"
-        "mask-image:linear-gradient(96deg,rgba(0,0,0,.30) 0%,"
-        "rgba(0,0,0,.30) 28%,rgba(0,0,0,1) 62%,rgba(0,0,0,1) 100%)}",
+        "-webkit-mask-image:linear-gradient(96deg,rgba(0,0,0,.55) 0%,"
+        "rgba(0,0,0,.55) 26%,rgba(0,0,0,1) 58%,rgba(0,0,0,1) 100%);"
+        "mask-image:linear-gradient(96deg,rgba(0,0,0,.55) 0%,"
+        "rgba(0,0,0,.55) 26%,rgba(0,0,0,1) 58%,rgba(0,0,0,1) 100%)}",
         "#mk-code>*{align-self:start;overflow:hidden}",
+        # The two blocks the code would otherwise run behind carry their own paper,
+        # so raising the layer's opacity cannot cost the page its readability. The
+        # texture still shows everywhere else in the hero - between the columns,
+        # above the lede, and all the way down the right - which is most of it.
+        # No border and no shadow: this is the page's own ground showing through,
+        # not a card laid on top of it.
+        "#mk-mast-lede{background:rgb(250,250,247);"
+        "padding:6px 18px 6px 0;margin-left:-2px}",
+        "#mk-mast-side{background:rgb(250,250,247);padding:0 0 0 14px;"
+        "margin-left:-14px}",
         code_heads,
         code_cursors,
         # everything else in the masthead sits above it
