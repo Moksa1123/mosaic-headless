@@ -358,6 +358,12 @@ REVEALS = [
     ("mk-work-4", 3), ("mk-work-5", 3), ("mk-work-6", 4), ("mk-work-7", 4),
     ("mk-work-8", 5),
     ("mk-plate-num", 0), ("mk-plate-t", 1),
+    ("mk-mx-head", 0), ("mk-mx-cols", 1),
+    ("mk-mx-r-0", 1), ("mk-mx-r-1", 2), ("mk-mx-r-2", 2), ("mk-mx-r-3", 3),
+    ("mk-mx-r-4", 3), ("mk-mx-r-5", 4), ("mk-mx-r-6", 4), ("mk-mx-r-7", 5),
+    ("mk-fig2-head", 0), ("mk-fl-a-0", 1), ("mk-fl-b-0", 2), ("mk-fl-c-0", 3),
+    ("mk-fl-a-1", 2), ("mk-fl-b-1", 3), ("mk-fl-c-1", 4),
+    ("mk-fl-a-2", 3), ("mk-fl-b-2", 4), ("mk-fl-c-2", 5),
     ("mk-spec2-head", 0), ("mk-spec2-r-0", 1), ("mk-spec2-r-1", 2),
     ("mk-spec2-r-2", 3), ("mk-spec2-r-3", 4),
     ("mk-stack-head", 0), ("mk-stack-0", 1), ("mk-stack-1", 2), ("mk-stack-2", 3),
@@ -1337,6 +1343,149 @@ CONTACT = section("contact", [wrap("mk-contact-in", [
         ]),
 ])])
 
+# ── the capability matrix ─────────────────────────────────────────────────────
+# The page could tell you what the studio does; a specification SHOWS you, in a form
+# you can read across. Filled, half and hollow marks carry the whole answer without
+# a sentence, and the density is the point - this is the one block on the page that
+# rewards being read as a grid rather than as a line.
+MATRIX_COLS = ["網站", "電商", "自動化"]
+MATRIX = [
+    ("客製化設計", "BESPOKE DESIGN", "●", "●", "◐"),
+    ("RWD 三段點", "RESPONSIVE", "●", "●", "○"),
+    ("SEO 結構化資料", "STRUCTURED DATA", "●", "●", "○"),
+    ("金流／物流串接", "PAYMENT / LOGISTICS", "○", "●", "◐"),
+    ("會員與訂單系統", "ACCOUNTS / ORDERS", "○", "●", "◐"),
+    ("n8n 流程自動化", "WORKFLOW AUTOMATION", "◐", "◐", "●"),
+    ("AI 內容與判讀", "AI CONTENT / REASONING", "◐", "◐", "●"),
+    ("上線後維運", "MAINTENANCE", "●", "●", "●"),
+]
+
+
+def mark(sym, i, j):
+    """One cell of the matrix. The symbol carries the meaning; the colour only
+    reinforces it, so it still reads if the colour is gone."""
+    colour = "--mk-ink" if sym == "●" else (
+        "--mk-accent-ink" if sym == "◐" else "--mk-faint")
+    return box("mk-mx-c-%d-%d" % (i, j),
+               {"display": "flex", "justifyContent": "center"},
+               [T("p", sym, color={"token": colour}, fontSize="13px",
+                  fontFamily=MONO, lineHeight="1")])
+
+
+MATRIX_SEC = section("matrix", [wrap("mk-mx-in", [
+    box("mk-mx-pad", {"paddingTop": "78px", "paddingBottom": "78px"},
+        _m={"paddingTop": "52px", "paddingBottom": "52px"},
+        children=[
+            box("mk-mx-head",
+                {"display": "flex", "justifyContent": "space-between",
+                 "columnGap": "20px", "rowGap": "8px", "alignItems": "baseline",
+                 "customStyles": "flex-wrap:wrap;"},
+                [mono("TABLE 01 — CAPABILITY", size="10px",
+                      color="--mk-accent-ink", track="0.22em"),
+                 mono("● 標準   ◐ 選配   ○ 不含", size="10px",
+                      color="--mk-faint", track="0.12em")]),
+            # the column header, then one row per capability
+            box("mk-mx-cols",
+                {"display": "grid", "gridCols": "1fr repeat(3, 78px)",
+                 "columnGap": "10px", "alignItems": "end", "marginTop": "26px",
+                 "paddingBottom": "10px",
+                 "customStyles": "border-bottom:1px solid " + RULE_INK + ";"},
+                _m={"gridCols": "1fr repeat(3, 46px)", "columnGap": "6px"},
+                children=[mono("CAPABILITY", size="10px", color="--mk-faint",
+                               track="0.18em")]
+                + [box("mk-mx-h-%d" % j,
+                       {"display": "flex", "justifyContent": "center"},
+                       [mono(c, size="11px", color="--mk-ink", track="0.06em")])
+                   for j, c in enumerate(MATRIX_COLS)]),
+            box("mk-mx-rows", {}, [
+                box("mk-mx-r-%d" % i,
+                    {"display": "grid", "gridCols": "1fr repeat(3, 78px)",
+                     "columnGap": "10px", "alignItems": "center",
+                     "paddingTop": "13px", "paddingBottom": "13px",
+                     "customStyles": "border-bottom:1px solid " + RULE + ";"},
+                    _m={"gridCols": "1fr repeat(3, 46px)", "columnGap": "6px",
+                        "paddingTop": "11px", "paddingBottom": "11px"},
+                    children=[
+                        box("mk-mx-n-%d" % i,
+                            {"display": "flex", "columnGap": "12px",
+                             "alignItems": "baseline", "rowGap": "2px",
+                             "customStyles": "flex-wrap:wrap;"},
+                            [T("p", zh, color={"token": "--mk-ink"},
+                               fontSize="14px", _m={"fontSize": "12.5px"}),
+                             mono(en, size="9px", color="--mk-faint",
+                                  track="0.16em", _m={"display": "none"})]),
+                    ] + [mark(sym, i, j) for j, sym in enumerate(marks)])
+                for i, (zh, en, *marks) in enumerate(MATRIX)
+            ]),
+        ]),
+])], bg="--mk-panel")
+
+
+# ── FIGURE 01: what a workflow actually looks like ────────────────────────────
+# The page had no graphic on it at all - every section was type and rules, which is
+# austere for eleven screens. A diagram is the one element that says something no
+# sentence here can, and drawn in hairline boxes it belongs to the same document
+# rather than arriving from a different one.
+FLOW = [
+    ("網站表單", "FORM", "n8n 節點", "WORKFLOW", "ERP 建單", "ERP"),
+    ("電商訂單", "ORDER", "Claude 判讀", "REASONING", "通知／報表", "NOTIFY"),
+    ("客服訊息", "INBOX", "分類與派工", "TRIAGE", "CRM 紀錄", "CRM"),
+]
+
+
+def flow_cell(attr, zh, en):
+    return box(attr,
+               {"paddingTop": "14px", "paddingBottom": "14px",
+                "paddingLeft": "16px", "paddingRight": "16px",
+                "customStyles": "border:1px solid " + RULE + ";"},
+               [mono(en, size="9px", color="--mk-faint", track="0.18em"),
+                T("p", zh, color={"token": "--mk-ink"}, fontSize="14px",
+                  marginTop="6px", _m={"fontSize": "13px"})])
+
+
+def arrow(attr):
+    return box(attr, {"display": "flex", "justifyContent": "center",
+                      "alignItems": "center"},
+               [T("p", "→", color={"token": "--mk-accent-ink"}, fontSize="15px",
+                  fontFamily=MONO)],
+               _m={"customStyles": "transform:rotate(90deg);"})
+
+
+FIGURE_SEC = section("figure", [wrap("mk-fig2-in", [
+    box("mk-fig2-pad", {"paddingTop": "82px", "paddingBottom": "82px"},
+        _m={"paddingTop": "54px", "paddingBottom": "54px"},
+        children=[
+            box("mk-fig2-head",
+                {"display": "flex", "justifyContent": "space-between",
+                 "columnGap": "20px", "rowGap": "8px",
+                 "customStyles": "flex-wrap:wrap;"},
+                [mono("FIGURE 01 — A WORKFLOW", size="10px",
+                      color="--mk-accent-ink", track="0.22em"),
+                 mono("INPUT → PROCESS → OUTPUT", size="10px",
+                      color="--mk-faint", track="0.18em")]),
+            box("mk-fig2-grid",
+                {"display": "grid", "gridCols": "1fr 44px 1fr 44px 1fr",
+                 "columnGap": "0px", "rowGap": "16px", "marginTop": "34px"},
+                _t={"gridCols": "1fr 34px 1fr 34px 1fr"},
+                _m={"gridCols": "repeat(1, 1fr)", "rowGap": "8px",
+                    "marginTop": "24px"},
+                children=[
+                    node for i, row in enumerate(FLOW) for node in (
+                        flow_cell("mk-fl-a-%d" % i, row[0], row[1]),
+                        arrow("mk-ar-a-%d" % i),
+                        flow_cell("mk-fl-b-%d" % i, row[2], row[3]),
+                        arrow("mk-ar-b-%d" % i),
+                        flow_cell("mk-fl-c-%d" % i, row[4], row[5]),
+                    )
+                ]),
+            T("p", "同一條線可以接任何一端：表單、訂單、訊息進來，"
+                   "判斷與轉換在中間，結果送到你本來就在用的系統裡。",
+              color={"token": "--mk-muted"}, fontSize="13px", lineHeight="1.95",
+              marginTop="26px", maxWidth="42em", _m={"fontSize": "12.5px"}),
+        ]),
+])])
+
+
 # ── PLATE 01: a statement ─────────────────────────────────────────────────────
 # Every clause on this page has the same rhythm - a numbered head, then hairline
 # rows. That is correct for a specification and monotonous for a page. A document
@@ -1511,8 +1660,9 @@ HOME_TREE = {"type": "div", "data": {"attrID": "mk-home"},
                  MARKS, INDEX, CUE,
                  # paper, panel, paper, ink, paper, ink, paper - the page
                  # changes ground five times so it reads as chapters
-                 MASTHEAD, TICKER_BAND, PLATE, SERVICE_SEC, PROCESS_SEC,
-                 WORK_SEC, SPECIMEN, STACK_SEC, PRODUCT_SEC, VOICE_SEC, CONTACT,
+                 MASTHEAD, TICKER_BAND, PLATE, SERVICE_SEC, MATRIX_SEC,
+                 PROCESS_SEC, FIGURE_SEC, WORK_SEC, SPECIMEN, STACK_SEC,
+                 PRODUCT_SEC, VOICE_SEC, CONTACT,
              ])]}
 
 SITE = {

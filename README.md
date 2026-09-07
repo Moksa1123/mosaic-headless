@@ -60,11 +60,11 @@ factories, so Pro types register and render regardless.
 | **node types** | 122 / 122 swept one per document, committed → rendered → asserted → deleted: 70 RENDERED, 30 COMMITTED, 15 COMMIT_5xx, 7 BROKE_PAGE |
 | **style properties** | 98 / 98 written to a live page and checked against the compiled CSS: 58 COMPILED, 18 ABSENT, 21 SKIPPED |
 | **node properties** | 181 / 181 re-probed with a value shaped by each property's own validator chain: 35 APPLIED, 42 NO_EFFECT, 55 NO_HOST, 47 SKIPPED |
-| **responsive** | 608 `_t`/`_m` declarations across two sites asserted against the stylesheet the site actually served — all verified |
+| **responsive** | 664 `_t`/`_m` declarations across two sites asserted against the stylesheet the site actually served — all verified |
 | **style states** | 52 of the 53 states written to a live page and matched against the selector the table promises: **36 compiled exactly**, 12 NO_HOST, 3 SKIPPED, 1 BROKE_PAGE. All seven globally usable states verified |
 | **interactions** | the JS animation path probed with negative controls and the row read back: `propertyMetas` **is** accepted and stored; the property values still do not bind, and the boundary is now exact |
 | **entrance animation** | the page-load sequence sampled at ten timestamps and asserted on seven counts — it plays, its animated `@property` counter reaches 100, the veil leaves hit-testing, nothing in the viewport is stranded at opacity 0, a real click reaches the document, and under `prefers-reduced-motion` the veil never exists at all |
-| **browser** | 2,473 computed-style readings on the delivered page in Chromium at three viewports: 1,837 compared and agreed, 636 not-comparable and labelled, **0 overridden** |
+| **browser** | 3,247 computed-style readings on the delivered page in Chromium at three viewports: 2,533 compared and agreed, 714 not-comparable and labelled, **0 overridden** |
 | **design audit** | contrast, font fallback, CJK tracking, overflow, clipped text, line measure — run in the browser, **0 findings** |
 | **theme export/import** | round-tripped: a full theme exported, re-imported as a copy, and the copy served byte-identical pages |
 | **measured live** | 114 REST routes, 151 element classes, 59 condition subjects, 23 tables / 206 columns |
