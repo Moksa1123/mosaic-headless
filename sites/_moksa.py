@@ -340,17 +340,40 @@ RULER_TICKS = 13
 
 # The hero's code layer. Third table up here for the same reason as the others:
 # motion_css() builds a rule per line and runs long before the section that uses it.
+# Four columns, four languages, all of them real work from this studio's own stack:
+# a FastAPI handler, a Tailwind component, a Vite config, and the Node path that
+# ties them together. Lines are kept short deliberately - the layer is full bleed,
+# and a long line would have to be clipped mid-word, which reads as a mistake rather
+# than as a background.
 HERO_CODE = [
-    "const order = await prisma.order.findUnique({",
-    "  where: { id }, include: { items: true },",
-    "})",
-    "",
-    "await n8n.trigger('order.paid', {",
-    "  invoice: await ecpay.issue(order),",
-    "  notify:  await line.push(order.customerId, flex(order)),",
-    "})",
-    "",
-    "return reply.code(200).send({ ok: true })",
+    ("PY", [
+        '@app.post("/orders/{id}/paid")',
+        "async def paid(id: str):",
+        "    o = await repo.get(id)",
+        '    await tasks("invoice", o)',
+        '    return {"ok": True}',
+    ]),
+    ("TSX", [
+        "<section",
+        '  className="grid gap-6',
+        '             md:grid-cols-3">',
+        "  <Card {...order} />",
+        "</section>",
+    ]),
+    ("VITE", [
+        "export default defineConfig({",
+        "  plugins: [react()],",
+        "  build: { target: 'es2022' },",
+        "  server: { port: 5173 },",
+        "})",
+    ]),
+    ("JS", [
+        "const o = await prisma.order",
+        "  .findUnique({ where: { id } })",
+        "await n8n.trigger('order.paid')",
+        "await line.push(o.customerId)",
+        "await ecpay.issue(o)",
+    ]),
 ]
 
 
@@ -447,15 +470,33 @@ def motion_css():
     # the snippet is drawn by pseudo-elements: no text nodes, so it stays out of
     # the accessibility tree where decorative type belongs
     code_lines = "\n".join(
-        "#mk-code-%d::after{content:%s;display:block;min-height:1.75em}"
-        % (i, json.dumps(line or " "))
-        for i, line in enumerate(HERO_CODE))
+        "#mk-code-c%d-l%d::after{content:%s;display:block;min-height:1.78em}"
+        % (c, i, json.dumps(line or " "))
+        for c, (_l, lines) in enumerate(HERO_CODE)
+        for i, line in enumerate(lines))
+    code_heads = "\n".join(
+        "#mk-code-c%d-h::after{content:%s;display:block;font-size:9px;"
+        "letter-spacing:.2em;color:rgba(255,90,54,.5);margin-bottom:9px}"
+        % (c, json.dumps(label))
+        for c, (label, _lines) in enumerate(HERO_CODE))
+    code_cursors = "\n".join(
+        "#mk-code-c%d-cur{width:6px;height:11px;margin-top:4px;"
+        "background:rgba(255,90,54,.22)}" % c
+        for c in range(len(HERO_CODE)))
     # one period for the block; each line waits its turn, and the steps() count is
     # the line's own length so the caret lands on characters rather than sliding
+    # Each column shares the period but starts a beat later, so the four are
+    # never writing the same line at the same moment; within a column the
+    # steps() count is the line's own length, which is what lands the caret on
+    # characters instead of sliding it between them.
     code_typing = "\n".join(
-        "  #mk-code-%d{animation:mk-typeline 15s steps(%d,end) %dms infinite}"
-        % (i, max(len(line), 1), 300 + i * 340)
-        for i, line in enumerate(HERO_CODE))
+        "  #mk-code-c%d-l%d{animation:mk-typeline 15s steps(%d,end) %dms infinite}"
+        % (c, i, max(len(line), 1), 240 + c * 430 + i * 300)
+        for c, (_l, lines) in enumerate(HERO_CODE)
+        for i, line in enumerate(lines))
+    code_cur_anim = "\n".join(
+        "  #mk-code-c%d-cur{animation:mk-boot-caret .62s steps(1,end) %dms "
+        "infinite}" % (c, c * 150) for c in range(len(HERO_CODE)))
     # the diagram's arrows, and the delay that makes the pulse travel down it
     flow_arrows = ",".join("#mk-ar-%s-%d>*" % (c, i)
                            for i in range(len(FLOW)) for c in ("a", "b"))
@@ -602,19 +643,35 @@ def motion_css():
         # statistics band, and code running across a number reads as a bug rather
         # than as a background. `max-height` is what guarantees it can never grow
         # back into them.
-        "#mk-code{position:absolute;top:86px;right:0;z-index:0;"
-        "pointer-events:none;width:max-content;max-height:292px;overflow:hidden;"
-        "display:grid;align-content:start;justify-items:start;row-gap:1px;"
-        "font-family:" + MONO + ";font-size:12px;line-height:1.72;"
-        "letter-spacing:0.01em;color:rgba(22,24,28,.10);"
-        "white-space:pre;text-align:left}",
+        # Full bleed, and it works only because of the two numbers at the end of
+        # this rule. At 10% opacity a single column ran visibly through the
+        # statistics and read as a bug; at 5.5% and masked, four columns are a
+        # texture the page sits ON rather than a thing competing with it. The mask
+        # is asymmetric on purpose - lightest under the headline at the left,
+        # fullest out to the right where there is nothing else.
+        "#mk-code{position:absolute;left:0;right:0;top:0;bottom:0;z-index:0;"
+        "pointer-events:none;overflow:hidden;display:grid;"
+        "grid-template-columns:repeat(4,minmax(0,1fr));column-gap:26px;"
+        "align-content:center;padding:70px 0;"
+        "font-family:" + MONO + ";font-size:11.5px;line-height:1.78;"
+        "letter-spacing:0.01em;color:rgba(22,24,28,.055);"
+        "white-space:pre;text-align:left;"
+        "-webkit-mask-image:linear-gradient(96deg,rgba(0,0,0,.30) 0%,"
+        "rgba(0,0,0,.30) 28%,rgba(0,0,0,1) 62%,rgba(0,0,0,1) 100%);"
+        "mask-image:linear-gradient(96deg,rgba(0,0,0,.30) 0%,"
+        "rgba(0,0,0,.30) 28%,rgba(0,0,0,1) 62%,rgba(0,0,0,1) 100%)}",
+        "#mk-code>*{align-self:start;overflow:hidden}",
+        code_heads,
+        code_cursors,
         # everything else in the masthead sits above it
         "#mk-mast-in>*:not(#mk-code){position:relative;z-index:1}",
         code_lines,
         "#mk-code-cur{width:7px;height:13px;background:rgba(255,90,54,.30)}",
-        # Below 1280 the spec column claims that corner, so the layer stands down
-        # rather than fighting it for the space.
-        "@media (max-width:1279px){#mk-code{display:none}}",
+        # Two columns where there is room for two, and none on a phone - a
+        # texture you have to scroll past is not a texture.
+        "@media (max-width:1279px){#mk-code{"
+        "grid-template-columns:repeat(2,minmax(0,1fr));font-size:10.5px}}",
+        "@media (max-width:767px){#mk-code{display:none}}",
 
         # ── the clock ────────────────────────────────────────────────────────
         # Two registered integers, stepped rather than eased, so each one lands on a
@@ -1149,9 +1206,13 @@ HERO_LINE = dict(color={"token": "--mk-ink"}, fontSize="62px", fontWeight="600",
 # anyway and report it as DECORATIVE_TEXT, because "invisible to my own checker" is
 # not the same as "fine".
 
-CODE_LAYER = box("mk-code", {}, [box("mk-code-%d" % i, {}, [])
-                                 for i in range(len(HERO_CODE))]
-                                + [box("mk-code-cur", {}, [])])
+CODE_LAYER = box("mk-code", {}, [
+    box("mk-code-c%d" % c, {},
+        [box("mk-code-c%d-h" % c, {}, [])]
+        + [box("mk-code-c%d-l%d" % (c, i), {}, []) for i in range(len(lines))]
+        + [box("mk-code-c%d-cur" % c, {}, [])])
+    for c, (_label, lines) in enumerate(HERO_CODE)
+])
 
 MASTHEAD = section("mk-mast", [wrap("mk-mast-in", [
     CODE_LAYER,

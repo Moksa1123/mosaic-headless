@@ -1,6 +1,6 @@
 {
   "name": "mosaic-headless",
-  "version": "1.11.0",
+  "version": "1.11.1",
   "description": "AI-agent skill: build Mosaic Pro (Nextend) WordPress sites by writing the underlying data model directly - 23 custom tables, no visual editor, no DOM. Every node type, style property and node property swept against a live install and asserted on the delivered HTML and compiled CSS. Installs into Claude Code, Cursor, Codex CLI, Gemini CLI, Copilot, Continue, Windsurf and Claude.ai.",
   "keywords": [
     "wordpress",
