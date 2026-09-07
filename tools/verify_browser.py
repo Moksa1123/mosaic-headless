@@ -34,6 +34,14 @@ AUDIT     what only a browser knows, checked whether or not it was declared: fon
           fallback, tracking against script, text contrast, horizontal overflow,
           clipped text, and line measure.
 
+          Its scope is stated rather than implied: readings are taken with the page
+          at rest at scroll-top, so a defect that only exists part-way down a scroll
+          - a fixed element crossing a band of a different colour - is outside what
+          this pass sees. The contrast check does hit-test the ground behind a fixed
+          or sticky element rather than walking its ancestors, so it would find such
+          a case if it were looking there; it simply is not scrolling. `verify_intro`
+          samples over time; nothing here yet samples over scroll.
+
 Exit status is non-zero if any declaration is OVERRIDDEN or any audit finding is
 rated `error`.
 """
@@ -307,11 +315,31 @@ PROBE = r"""
 
   // Effective background behind a text node, for contrast. Walks up until something
   // is actually painted; a transparent parent is not a background.
+  const solid = b => {
+    const n = (b.match(/[\d.]+/g) || []).map(Number);
+    return (n.length >= 3 && (n.length < 4 || n[3] > 0.55)) ? n.slice(0, 3) : null;
+  };
   const bgOf = el => {
+    const cs0 = getComputedStyle(el);
+    // A FIXED or STICKY element does not sit on its ancestors - it sits on whatever
+    // the page has scrolled underneath it, and the ancestor chain knows nothing
+    // about that. The clause index on this page is fixed to the left margin in a
+    // faint grey; when an accent-coloured band scrolls behind it the text becomes
+    // unreadable, and walking parents reports the paper ground it was declared on
+    // and passes. Hit-testing is the only way to ask what is actually back there.
+    if (cs0.position === 'fixed' || cs0.position === 'sticky') {
+      const r = el.getBoundingClientRect();
+      const x = Math.min(Math.max(r.left + r.width / 2, 1), innerWidth - 1);
+      const y = Math.min(Math.max(r.top + r.height / 2, 1), innerHeight - 1);
+      for (const under of document.elementsFromPoint(x, y)) {
+        if (under === el || el.contains(under) || under.contains(el)) continue;
+        const c = solid(getComputedStyle(under).backgroundColor);
+        if (c) return c;
+      }
+    }
     for (let p = el; p; p = p.parentElement) {
-      const b = getComputedStyle(p).backgroundColor;
-      const n = (b.match(/[\d.]+/g) || []).map(Number);
-      if (n.length >= 3 && (n.length < 4 || n[3] > 0.55)) return n.slice(0, 3);
+      const c = solid(getComputedStyle(p).backgroundColor);
+      if (c) return c;
     }
     return [255, 255, 255];
   };
@@ -363,8 +391,22 @@ PROBE = r"""
         sample: own.slice(0, 24)});
     }
 
-    const fg = (cs.color.match(/[\d.]+/g) || []).map(Number).slice(0, 3);
-    if (fg.length === 3) {
+    // Text can be painted by something other than `color`. A headline using
+    // `background-clip:text` sets `color:transparent`, and a naive parse reads
+    // rgba(0,0,0,0) as pure black - which then scores a perfect contrast ratio
+    // against any light ground. That is a blind spot scoring itself as a pass, so
+    // it gets its own finding instead: the check cannot run here, and says so.
+    const rgba = (cs.color.match(/[\d.]+/g) || []).map(Number);
+    if (rgba.length === 4 && rgba[3] < 0.05) {
+      out.audit.push({check: 'TEXT_CLIP', level: 'warn', node: id,
+                      detail: 'color is ' + cs.color + '; painted by ' +
+                              (cs.backgroundClip === 'text' ? 'background-clip:text'
+                                                            : 'something else') +
+                              ' - contrast NOT checked here',
+                      sample: own.slice(0, 24)});
+    }
+    const fg = rgba.slice(0, 3);
+    if (fg.length === 3 && !(rgba.length === 4 && rgba[3] < 0.05)) {
       const r = ratio(fg, bgOf(el));
       const large = size >= 24 || (size >= 18.66 && px(cs.fontWeight) >= 700);
       const need = large ? 3.0 : 4.5;
@@ -577,8 +619,12 @@ def main():
                             f.get("sample", "")])
         print("wrote %s (%d findings)" % (a.audit, len(audit)))
 
-    print("\n%s" % ("PASS - every comparable declaration is what the browser "
-                    "computed, and the audit is clean"
+    # "clean" was overstating it once the audit began reporting blind spots as
+    # warnings. A run carrying two labelled unknowns is not a run carrying none, and
+    # the summary line is the part people read.
+    print("\n%s" % (("PASS - every comparable declaration is what the browser "
+                     "computed; 0 audit errors, %d warnings"
+                     % (len(audit) - len(errors)))
                     if not hard else
                     "FAIL - %d overridden declarations, %d audit errors"
                     % (counts.get("OVERRIDDEN", 0), len(errors))))

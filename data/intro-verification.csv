@@ -11,12 +11,12 @@ t_ms,counter,veil_visibility,veil_clip,veil_covers_centre,hit_centre,invisible_c
 120,,,,False,html.no-js,0
 400,0,visible,none,True,mk-boot,7
 800,11,visible,none,True,mk-boot,7
-1300,37,visible,none,True,mk-boot,7
+1300,38,visible,none,True,mk-boot,7
 1800,66,visible,none,True,p.M_EL56,3
 2300,93,visible,none,True,p.M_EL56,3
 2700,100,visible,none,True,p.M_EL56,3
-3000,100,visible,inset(0px 0px 0.487303%),True,p.M_EL56,3
-3300,100,visible,inset(0px 0px 84.1246%),False,mk-caret-row,2
+3000,100,visible,inset(0px 0px 0.209424%),True,p.M_EL56,3
+3300,100,visible,inset(0px 0px 80.1684%),False,mk-caret-row,2
 3700,100,hidden,inset(0px 0px 100%),False,mk-caret-row,0
 4200,100,hidden,inset(0px 0px 100%),False,mk-caret-row,0
 5200,100,hidden,inset(0px 0px 100%),False,mk-caret-row,0

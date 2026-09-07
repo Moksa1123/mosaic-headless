@@ -54,7 +54,7 @@
      "data": {
       "attrID": "mk-motion-css",
       "insertLocation": "head",
-      "content": "<link rel=\"preconnect\" href=\"https://fonts.googleapis.com\">\n<link rel=\"preconnect\" href=\"https://fonts.gstatic.com\" crossorigin>\n<link rel=\"stylesheet\" href=\"https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=Space+Grotesk:wght@500;600;700&family=Noto+Sans+TC:wght@300;400;500&display=swap\">\n<style id=\"mk-motion\">\n@keyframes mk-linein{from{transform:translateY(110%)}to{transform:translateY(0)}}\n@keyframes mk-softin{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}\n@keyframes mk-rise{from{opacity:0;transform:translateY(18px)}to{opacity:1;transform:none}}\n@keyframes mk-drawx{from{transform:scaleX(0)}to{transform:scaleX(1)}}\n@keyframes mk-ticker{from{transform:translateX(0)}to{transform:translateX(-50%)}}\n@keyframes mk-progress{from{width:0%}to{width:100%}}\n@keyframes mk-headrule{from{opacity:0}to{opacity:1}}\n@keyframes mk-headbg{from{background:rgba(250,250,247,0)}to{background:rgba(250,250,247,.9)}}\n@keyframes mk-caret{0%,45%{opacity:1}50%,95%{opacity:0}100%{opacity:1}}\n@keyframes mk-cuearrow{0%{transform:translateY(-3px) rotate(45deg);opacity:0}25%{opacity:1}70%{opacity:1}100%{transform:translateY(20px) rotate(45deg);opacity:0}}\n@keyframes mk-cuefade{0%,25%{opacity:1}100%{opacity:0}}\n@keyframes mk-digit{from{transform:translateY(105%)}to{transform:translateY(0)}}\n@keyframes mk-sweep{from{transform:scaleX(0)}to{transform:scaleX(1)}}\n@keyframes mk-markin{from{opacity:0;transform:scale(.4)}to{opacity:1;transform:scale(1)}}\n@keyframes mk-idxon{from,to{color:rgb(255,90,54);letter-spacing:.2em}}\n@keyframes mk-dotin{from{transform:scale(0)}to{transform:scale(1)}}\n#mk-doc{position:relative}\n#mk-doc::before,#mk-doc::after{content:\"\";position:fixed;top:0;bottom:0;width:1px;background:rgba(22,24,28,.16);z-index:1;pointer-events:none}\n#mk-doc::before{left:40px}\n#mk-doc::after{right:40px}\n@media (max-width:1079px){#mk-doc::before{left:28px}#mk-doc::after{right:28px}}\n@media (max-width:767px){#mk-doc::before,#mk-doc::after{display:none}}\n#mk-header{position:fixed;top:0;left:0;right:0;z-index:100;background:rgba(250,250,247,0);-webkit-backdrop-filter:blur(10px);backdrop-filter:blur(10px)}\n#mk-header::after{content:\"\";position:absolute;left:0;right:0;bottom:0;height:1px;background:rgba(22,24,28,.16);opacity:0}\n#mk-nav>*{position:relative}\n#mk-nav>*::after{content:\"\";position:absolute;left:0;right:100%;bottom:-5px;height:1px;background:rgb(255,90,54);transition:right .28s cubic-bezier(.2,.7,.3,1)}\n#mk-nav>*:hover::after{right:0}\n@media (hover:none){#mk-nav>*::after{right:0;opacity:.45}}\n#mk-progress-track{position:fixed;top:0;left:0;right:0;height:2px;z-index:101;pointer-events:none;background:rgba(255,90,54,.16)}\n#mk-progress{position:absolute;left:0;top:0;width:0;height:100%;background:rgb(255,90,54)}\n#mk-mast-in{padding-top:128px}\n@media (max-width:1079px){#mk-mast-in{padding-top:104px}}\n@media (max-width:767px){#mk-mast-in{padding-top:88px}}\n#mk-caret{width:13px;height:19px;background:rgb(255,90,54)}\n#mk-plate-dash{width:34px;height:1px;background:rgb(191,68,40)}\n#mk-mast-rule,#mk-spec-rule{height:1px;background:rgba(22,24,28,.16);transform:scaleX(0);transform-origin:0 50%}\n#mk-fig-0>div>*,#mk-fig-1>div>*,#mk-fig-2>div>*,#mk-fig-3>div>*{display:block;transform:translateY(105%)}\n#mk-work-0,#mk-work-1,#mk-work-2,#mk-work-3,#mk-work-4,#mk-work-5,#mk-work-6,#mk-work-7,#mk-work-8{position:relative;transition:background-color .2s ease,padding-left .28s cubic-bezier(.2,.7,.3,1)}\n#mk-work-0::after,#mk-work-1::after,#mk-work-2::after,#mk-work-3::after,#mk-work-4::after,#mk-work-5::after,#mk-work-6::after,#mk-work-7::after,#mk-work-8::after{content:\"\";position:absolute;left:0;right:0;bottom:-1px;height:1px;background:rgb(255,90,54);transform:scaleX(0);transform-origin:0 50%}\n#mk-work-0:hover,#mk-work-1:hover,#mk-work-2:hover,#mk-work-3:hover,#mk-work-4:hover,#mk-work-5:hover,#mk-work-6:hover,#mk-work-7:hover,#mk-work-8:hover{background-color:rgba(255,90,54,.06);padding-left:14px}\n#mk-work-0:hover #mk-work-idx-0,#mk-work-1:hover #mk-work-idx-1,#mk-work-2:hover #mk-work-idx-2,#mk-work-3:hover #mk-work-idx-3,#mk-work-4:hover #mk-work-idx-4,#mk-work-5:hover #mk-work-idx-5,#mk-work-6:hover #mk-work-idx-6,#mk-work-7:hover #mk-work-idx-7,#mk-work-8:hover #mk-work-idx-8{color:rgb(255,90,54)}\n#mk-mark-0,#mk-mark-1,#mk-mark-2,#mk-mark-3{position:fixed;width:13px;height:13px;z-index:2;pointer-events:none;opacity:0}\n#mk-mark-0{top:66px;left:40px;border-left:1px solid rgba(22,24,28,.42);border-top:1px solid rgba(22,24,28,.42)}\n#mk-mark-1{top:66px;right:40px;border-right:1px solid rgba(22,24,28,.42);border-top:1px solid rgba(22,24,28,.42)}\n#mk-mark-2{bottom:20px;left:40px;border-left:1px solid rgba(22,24,28,.42);border-bottom:1px solid rgba(22,24,28,.42)}\n#mk-mark-3{bottom:20px;right:40px;border-right:1px solid rgba(22,24,28,.42);border-bottom:1px solid rgba(22,24,28,.42)}\n@media (max-width:1279px){#mk-mark-0,#mk-mark-1,#mk-mark-2,#mk-mark-3{display:none}}\n#mk-index{position:fixed;left:14px;top:50%;transform:translateY(-50%);z-index:3;display:grid;row-gap:11px;pointer-events:auto}\n@media (max-width:1439px){#mk-index{display:none}}\n#mk-proc-dot-0,#mk-proc-dot-1,#mk-proc-dot-2,#mk-proc-dot-3{width:7px;height:7px;background:rgb(255,90,54);border-radius:50%;transform:scale(0);margin-top:-4px}\n#mk-tag-0-0:hover,#mk-tag-0-1:hover,#mk-tag-0-2:hover,#mk-tag-0-3:hover,#mk-tag-0-4:hover,#mk-tag-1-0:hover,#mk-tag-1-1:hover,#mk-tag-1-2:hover,#mk-tag-1-3:hover,#mk-tag-1-4:hover,#mk-tag-2-0:hover,#mk-tag-2-1:hover,#mk-tag-2-2:hover,#mk-tag-2-3:hover,#mk-tag-2-4:hover,#mk-tag-3-0:hover,#mk-tag-3-1:hover,#mk-tag-3-2:hover,#mk-tag-3-3:hover,#mk-tag-3-4:hover,#mk-tag-4-0:hover,#mk-tag-4-1:hover,#mk-tag-4-2:hover,#mk-tag-4-3:hover,#mk-tag-4-4:hover{border-color:rgb(255,90,54)}\n#mk-ticker-track{display:flex;width:max-content;will-change:transform}\n#mk-ticker:hover #mk-ticker-track{animation-play-state:paused}\nhtml{scroll-behavior:smooth}\n#services,#works,#products,#contact{scroll-margin-top:82px}\n#mk-home{scroll-margin-top:0}\n@media (max-width:767px){#services,#works,#products,#contact{scroll-margin-top:68px}}\n#mk-cue{position:fixed;right:40px;bottom:24px;z-index:90;display:flex;align-items:center;column-gap:10px;pointer-events:none}\n#mk-cue-rail{position:relative;width:9px;height:24px}\n#mk-cue-rail::after{content:\"\";position:absolute;left:50%;top:0;width:7px;height:7px;margin-left:-4px;opacity:0;border-right:1px solid rgb(255,90,54);border-bottom:1px solid rgb(255,90,54)}\n@media (max-width:1079px){#mk-cue{right:28px}}\n@media (max-width:767px){#mk-cue{right:18px;bottom:16px}}\n#mk-boot{display:none}\n@property --mk-n{syntax:'<integer>';initial-value:0;inherits:true}\n@keyframes mk-count{to{--mk-n:100}}\n@keyframes mk-boot-out{0%{clip-path:inset(0 0 0 0)}100%{clip-path:inset(0 0 100% 0);visibility:hidden}}\n@keyframes mk-boot-fill{from{transform:scaleX(0)}to{transform:scaleX(1)}}\n@keyframes mk-boot-line{from{opacity:.14}60%{opacity:1;color:rgb(255,90,54)}to{opacity:.55;color:rgb(107,109,113)}}\n@keyframes mk-boot-scan{from{transform:translateY(0)}to{transform:translateY(100vh)}}\n@keyframes mk-boot-fade{from{opacity:0}to{opacity:1}}\n@keyframes mk-boot-type{from{clip-path:inset(0 100% 0 0);opacity:.3}to{clip-path:inset(0 0 0 0);opacity:1}}\n@keyframes mk-boot-caret{0%,49%{opacity:1}50%,99%{opacity:0}}\n@keyframes mk-boot-cross{from{opacity:0;transform:scale(.55)}to{opacity:1;transform:scale(1)}}\n@keyframes mk-boot-tick{from{opacity:0;transform:scaleX(.2)}to{opacity:1;transform:scaleX(1)}}\n@keyframes mk-boot-stamp{0%{opacity:0;transform:scale(1.35)}55%{opacity:1;transform:scale(.97)}100%{opacity:1;transform:scale(1)}}\n@media (prefers-reduced-motion:no-preference){\n  #mk-boot{display:grid;position:fixed;inset:0;z-index:999;background:rgb(250,250,247);align-content:center;justify-items:center;row-gap:20px;overflow:hidden;animation:mk-boot-out .62s cubic-bezier(.7,0,.3,1) 2.95s forwards}\n  #mk-boot-head,#mk-boot-foot{position:absolute;left:40px;right:40px;display:flex;justify-content:space-between;font-family:'IBM Plex Mono',ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font-size:10px;letter-spacing:.2em;color:rgb(107,109,113);animation:mk-boot-fade .4s ease both}\n  #mk-boot-head{top:34px}\n  #mk-boot-foot{bottom:30px;animation-delay:.1s}\n  #mk-boot-num{font-family:'IBM Plex Mono',ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font-size:104px;font-weight:500;line-height:1;letter-spacing:-.04em;color:rgb(22,24,28);font-variant-numeric:tabular-nums;min-width:3ch;text-align:right;animation:mk-count 2.05s linear .3s both}\n  #mk-boot-num::after{counter-reset:n var(--mk-n);content:counter(n)}\n  #mk-boot-row{display:flex;align-items:flex-end;column-gap:8px;line-height:1}\n  #mk-boot-pct{font-family:'IBM Plex Mono',ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font-size:18px;color:rgb(191,68,40);padding-bottom:12px}\n  #mk-boot-track{width:min(420px,62vw);height:1px;background:rgba(22,24,28,.14);position:relative}\n  #mk-boot-fill{position:absolute;inset:0;background:rgb(255,90,54);transform-origin:0 50%;animation:mk-boot-fill 2.05s linear .3s both}\n  #mk-boot-track::after{content:\"\";position:absolute;left:0;right:0;top:-3px;height:3px;background:repeating-linear-gradient(90deg,rgba(22,24,28,.22) 0 1px,transparent 1px 42px);animation:mk-boot-fade .5s ease .15s both}\n  #mk-boot-list{display:flex;column-gap:18px;row-gap:8px;flex-wrap:wrap;justify-content:center;font-family:'IBM Plex Mono',ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font-size:10px;letter-spacing:.18em}\n  #mk-boot-list>*{opacity:.14;animation:mk-boot-line .62s ease both}\n  #mk-boot-c0{animation-delay:700ms}\n  #mk-boot-c1{animation-delay:900ms}\n  #mk-boot-c2{animation-delay:1100ms}\n  #mk-boot-c3{animation-delay:1300ms}\n  #mk-boot-c4{animation-delay:1500ms}\n  #mk-boot-c5{animation-delay:1700ms}\n  #mk-boot-c6{animation-delay:1900ms}\n  #mk-boot::before{content:\"\";position:absolute;inset:0;background:repeating-linear-gradient(90deg,rgba(22,24,28,.045) 0 1px,transparent 1px 72px),repeating-linear-gradient(0deg,rgba(22,24,28,.045) 0 1px,transparent 1px 72px);animation:mk-boot-fade .5s ease both}\n  #mk-boot-scan{position:absolute;left:0;right:0;top:0;height:1px;background:linear-gradient(90deg,rgba(255,90,54,0),rgba(255,90,54,.55),rgba(255,90,54,0));animation:mk-boot-scan 1.45s linear .15s 2 both}\n  #mk-boot .mk-x,#mk-boot-x0,#mk-boot-x1,#mk-boot-x2,#mk-boot-x3{position:absolute;width:14px;height:14px;animation:mk-boot-cross .5s cubic-bezier(.16,1,.3,1) both}\n  #mk-boot-x0{top:64px;left:40px;border-left:1px solid rgba(22,24,28,.42);border-top:1px solid rgba(22,24,28,.42);animation-delay:.08s}\n  #mk-boot-x1{top:64px;right:40px;border-right:1px solid rgba(22,24,28,.42);border-top:1px solid rgba(22,24,28,.42);animation-delay:.16s}\n  #mk-boot-x2{bottom:56px;left:40px;border-left:1px solid rgba(22,24,28,.42);border-bottom:1px solid rgba(22,24,28,.42);animation-delay:.24s}\n  #mk-boot-x3{bottom:56px;right:40px;border-right:1px solid rgba(22,24,28,.42);border-bottom:1px solid rgba(22,24,28,.42);animation-delay:.32s}\n  #mk-boot-ruler{position:absolute;left:40px;top:50%;transform:translateY(-50%);display:grid;row-gap:9px}\n  #mk-boot-ruler>*{width:9px;height:1px;background:rgba(22,24,28,.42);transform-origin:0 50%;animation:mk-boot-tick .3s ease both}\n  #mk-boot-t0{animation-delay:120ms}\n  #mk-boot-t1{animation-delay:146ms}\n  #mk-boot-t2{animation-delay:172ms}\n  #mk-boot-t3{animation-delay:198ms}\n  #mk-boot-t4{animation-delay:224ms}\n  #mk-boot-t5{animation-delay:250ms}\n  #mk-boot-t6{animation-delay:276ms}\n  #mk-boot-t7{animation-delay:302ms}\n  #mk-boot-t8{animation-delay:328ms}\n  #mk-boot-t9{animation-delay:354ms}\n  #mk-boot-t10{animation-delay:380ms}\n  #mk-boot-t11{animation-delay:406ms}\n  #mk-boot-t12{animation-delay:432ms}\n  @media (max-width:1023px){#mk-boot-ruler{display:none}}\n  #mk-boot-log{display:grid;row-gap:7px;justify-items:start;font-family:'IBM Plex Mono',ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font-size:10px;letter-spacing:.16em;color:rgb(107,109,113);min-height:64px}\n  #mk-boot-log>*{animation:mk-boot-type .42s steps(24,end) both}\n  #mk-boot-l0{animation-delay:550ms}\n  #mk-boot-l1{animation-delay:930ms}\n  #mk-boot-l2{animation-delay:1310ms}\n  #mk-boot-l3{animation-delay:1690ms}\n  #mk-boot-cursor{width:7px;height:11px;background:rgb(255,90,54);animation:mk-boot-caret .62s steps(1,end) .5s infinite}\n  #mk-boot-ready{border:1px solid rgb(191,68,40);padding:5px 12px;font-family:'IBM Plex Mono',ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font-size:10px;letter-spacing:.24em;color:rgb(191,68,40);opacity:0;animation:mk-boot-stamp .42s cubic-bezier(.16,1,.3,1) 2.42s both}\n  @media (max-width:767px){#mk-boot-num{font-size:62px}#mk-boot-head,#mk-boot-foot{left:18px;right:18px}}\n  #mk-hl1-mask>*,#mk-hl2-mask>*{transform:translateY(112%);animation:mk-linein .95s cubic-bezier(.16,1,.3,1) forwards}\n  #mk-hl1-mask>*{animation-delay:3.16s}\n  #mk-hl2-mask>*{animation-delay:3.28s}\n  #mk-mast-meta,#mk-mast-lede,#mk-mast-cta{opacity:0;animation:mk-softin .8s cubic-bezier(.16,1,.3,1) forwards}\n  #mk-mast-meta{animation-delay:3.06s}\n  #mk-mast-lede{animation-delay:3.54s}\n  #mk-mast-cta{animation-delay:3.66s}\n  #mk-caret{animation:mk-caret 1.15s steps(1,end) infinite;animation-delay:3.84s}\n  #mk-mast-rule{animation:mk-drawx .9s cubic-bezier(.2,.7,.3,1) forwards;animation-delay:3.40s}\n  #mk-spec-rule{animation:mk-drawx .9s cubic-bezier(.2,.7,.3,1) forwards;animation-delay:.9s}\n  #mk-cue{opacity:0;animation:mk-softin .8s ease forwards;animation-delay:1.1s}\n  #mk-cue-rail::after{animation:mk-cuearrow 1.9s cubic-bezier(.4,0,.5,1) infinite}\n  #mk-ticker-track{animation:mk-ticker 40s linear infinite}\n  #mk-mark-0,#mk-mark-1,#mk-mark-2,#mk-mark-3{animation:mk-markin .5s cubic-bezier(.16,1,.3,1) forwards}\n  #mk-mark-0{animation-delay:1.15s}\n  #mk-mark-1{animation-delay:1.24s}\n  #mk-mark-2{animation-delay:1.33s}\n  #mk-mark-3{animation-delay:1.42s}\n  @supports (animation-timeline:view()){\n    #mk-spec,#mk-svc-head,#mk-svc-0,#mk-svc-1,#mk-svc-2,#mk-svc-3,#mk-proc-head,#mk-proc-0,#mk-proc-1,#mk-proc-2,#mk-proc-3,#mk-works-head,#mk-work-0,#mk-work-1,#mk-work-2,#mk-work-3,#mk-work-4,#mk-work-5,#mk-work-6,#mk-work-7,#mk-work-8,#mk-plate-num,#mk-plate-t,#mk-mx-head,#mk-mx-cols,#mk-mx-r-0,#mk-mx-r-1,#mk-mx-r-2,#mk-mx-r-3,#mk-mx-r-4,#mk-mx-r-5,#mk-mx-r-6,#mk-mx-r-7,#mk-fig2-head,#mk-fl-a-0,#mk-fl-b-0,#mk-fl-c-0,#mk-fl-a-1,#mk-fl-b-1,#mk-fl-c-1,#mk-fl-a-2,#mk-fl-b-2,#mk-fl-c-2,#mk-spec2-head,#mk-spec2-r-0,#mk-spec2-r-1,#mk-spec2-r-2,#mk-spec2-r-3,#mk-stack-head,#mk-stack-0,#mk-stack-1,#mk-stack-2,#mk-stack-3,#mk-stack-4,#mk-prod-head,#mk-prod-0,#mk-prod-1,#mk-voice-head,#mk-voice-0,#mk-voice-1,#mk-voice-2,#mk-contact-head{animation:mk-rise .01s linear both;animation-timeline:view();animation-range:entry 2% cover 36%}\n    #mk-svc-0{animation-range:entry 6% cover 40%}\n    #mk-svc-1{animation-range:entry 10% cover 44%}\n    #mk-svc-2{animation-range:entry 14% cover 48%}\n    #mk-svc-3{animation-range:entry 18% cover 52%}\n    #mk-proc-0{animation-range:entry 6% cover 40%}\n    #mk-proc-1{animation-range:entry 10% cover 44%}\n    #mk-proc-2{animation-range:entry 14% cover 48%}\n    #mk-proc-3{animation-range:entry 18% cover 52%}\n    #mk-work-0{animation-range:entry 6% cover 40%}\n    #mk-work-1{animation-range:entry 6% cover 40%}\n    #mk-work-2{animation-range:entry 10% cover 44%}\n    #mk-work-3{animation-range:entry 10% cover 44%}\n    #mk-work-4{animation-range:entry 14% cover 48%}\n    #mk-work-5{animation-range:entry 14% cover 48%}\n    #mk-work-6{animation-range:entry 18% cover 52%}\n    #mk-work-7{animation-range:entry 18% cover 52%}\n    #mk-work-8{animation-range:entry 22% cover 56%}\n    #mk-plate-t{animation-range:entry 6% cover 40%}\n    #mk-mx-cols{animation-range:entry 6% cover 40%}\n    #mk-mx-r-0{animation-range:entry 6% cover 40%}\n    #mk-mx-r-1{animation-range:entry 10% cover 44%}\n    #mk-mx-r-2{animation-range:entry 10% cover 44%}\n    #mk-mx-r-3{animation-range:entry 14% cover 48%}\n    #mk-mx-r-4{animation-range:entry 14% cover 48%}\n    #mk-mx-r-5{animation-range:entry 18% cover 52%}\n    #mk-mx-r-6{animation-range:entry 18% cover 52%}\n    #mk-mx-r-7{animation-range:entry 22% cover 56%}\n    #mk-fl-a-0{animation-range:entry 6% cover 40%}\n    #mk-fl-b-0{animation-range:entry 10% cover 44%}\n    #mk-fl-c-0{animation-range:entry 14% cover 48%}\n    #mk-fl-a-1{animation-range:entry 10% cover 44%}\n    #mk-fl-b-1{animation-range:entry 14% cover 48%}\n    #mk-fl-c-1{animation-range:entry 18% cover 52%}\n    #mk-fl-a-2{animation-range:entry 14% cover 48%}\n    #mk-fl-b-2{animation-range:entry 18% cover 52%}\n    #mk-fl-c-2{animation-range:entry 22% cover 56%}\n    #mk-spec2-r-0{animation-range:entry 6% cover 40%}\n    #mk-spec2-r-1{animation-range:entry 10% cover 44%}\n    #mk-spec2-r-2{animation-range:entry 14% cover 48%}\n    #mk-spec2-r-3{animation-range:entry 18% cover 52%}\n    #mk-stack-0{animation-range:entry 6% cover 40%}\n    #mk-stack-1{animation-range:entry 10% cover 44%}\n    #mk-stack-2{animation-range:entry 14% cover 48%}\n    #mk-stack-3{animation-range:entry 18% cover 52%}\n    #mk-stack-4{animation-range:entry 22% cover 56%}\n    #mk-prod-0{animation-range:entry 6% cover 40%}\n    #mk-prod-1{animation-range:entry 10% cover 44%}\n    #mk-voice-0{animation-range:entry 6% cover 40%}\n    #mk-voice-1{animation-range:entry 10% cover 44%}\n    #mk-voice-2{animation-range:entry 14% cover 48%}\n    #mk-fig-0>div>*,#mk-fig-1>div>*,#mk-fig-2>div>*,#mk-fig-3>div>*{animation:mk-digit .7s cubic-bezier(.16,1,.3,1) both;animation-delay:var(--d,0ms)}\n    #mk-fig-0>div,#mk-fig-1>div,#mk-fig-2>div,#mk-fig-3>div{animation:mk-rise .01s linear both;animation-timeline:view();animation-range:entry 0% entry 1%}\n    #mk-work-0::after,#mk-work-1::after,#mk-work-2::after,#mk-work-3::after,#mk-work-4::after,#mk-work-5::after,#mk-work-6::after,#mk-work-7::after,#mk-work-8::after{animation:mk-sweep .01s linear both;animation-timeline:view();animation-range:entry 12% cover 24%}\n    #mk-proc-dot-0,#mk-proc-dot-1,#mk-proc-dot-2,#mk-proc-dot-3{animation:mk-dotin .01s linear both;animation-timeline:view();animation-range:entry 14% cover 26%}\n  }\n  @supports (timeline-scope:--x){\n    #mk-doc{timeline-scope:--mk-s1,--mk-s2,--mk-s3,--mk-s4,--mk-s5,--mk-s6,--mk-s7}\n#services{view-timeline-name:--mk-s1;view-timeline-inset:45% 45%}\n#process{view-timeline-name:--mk-s2;view-timeline-inset:45% 45%}\n#works{view-timeline-name:--mk-s3;view-timeline-inset:45% 45%}\n#stack{view-timeline-name:--mk-s4;view-timeline-inset:45% 45%}\n#products{view-timeline-name:--mk-s5;view-timeline-inset:45% 45%}\n#mk-voices{view-timeline-name:--mk-s6;view-timeline-inset:45% 45%}\n#contact{view-timeline-name:--mk-s7;view-timeline-inset:45% 45%}\n  #mk-idx-0{animation:mk-idxon linear;animation-timeline:--mk-s1;animation-range:cover 0% cover 100%}\n  #mk-idx-1{animation:mk-idxon linear;animation-timeline:--mk-s2;animation-range:cover 0% cover 100%}\n  #mk-idx-2{animation:mk-idxon linear;animation-timeline:--mk-s3;animation-range:cover 0% cover 100%}\n  #mk-idx-3{animation:mk-idxon linear;animation-timeline:--mk-s4;animation-range:cover 0% cover 100%}\n  #mk-idx-4{animation:mk-idxon linear;animation-timeline:--mk-s5;animation-range:cover 0% cover 100%}\n  #mk-idx-5{animation:mk-idxon linear;animation-timeline:--mk-s6;animation-range:cover 0% cover 100%}\n  #mk-idx-6{animation:mk-idxon linear;animation-timeline:--mk-s7;animation-range:cover 0% cover 100%}\n  }\n  @supports (animation-timeline:scroll()){\n    #mk-progress{animation:mk-progress linear both;animation-timeline:scroll(root)}\n    #mk-cue{animation:mk-cuefade linear both;animation-timeline:scroll(root);animation-range:0px 260px}\n    #mk-header{animation:mk-headbg linear both;animation-timeline:scroll(root);animation-range:20px 120px}\n    #mk-header::after{animation:mk-headrule linear both;animation-timeline:scroll(root);animation-range:20px 120px}\n  }\n}\n</style>",
+      "content": "<link rel=\"preconnect\" href=\"https://fonts.googleapis.com\">\n<link rel=\"preconnect\" href=\"https://fonts.gstatic.com\" crossorigin>\n<link rel=\"stylesheet\" href=\"https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=Space+Grotesk:wght@500;600;700&family=Noto+Sans+TC:wght@300;400;500&display=swap\">\n<style id=\"mk-motion\">\n@keyframes mk-linein{from{transform:translateY(110%)}to{transform:translateY(0)}}\n@keyframes mk-softin{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}\n@keyframes mk-rise{from{opacity:0;transform:translateY(18px)}to{opacity:1;transform:none}}\n@keyframes mk-drawx{from{transform:scaleX(0)}to{transform:scaleX(1)}}\n@keyframes mk-ticker{from{transform:translateX(0)}to{transform:translateX(-50%)}}\n@keyframes mk-progress{from{width:0%}to{width:100%}}\n@keyframes mk-headrule{from{opacity:0}to{opacity:1}}\n@keyframes mk-headbg{from{background:rgba(250,250,247,0)}to{background:rgba(250,250,247,.9)}}\n@keyframes mk-caret{0%,45%{opacity:1}50%,95%{opacity:0}100%{opacity:1}}\n@keyframes mk-cuearrow{0%{transform:translateY(-3px) rotate(45deg);opacity:0}25%{opacity:1}70%{opacity:1}100%{transform:translateY(20px) rotate(45deg);opacity:0}}\n@keyframes mk-cuefade{0%,25%{opacity:1}100%{opacity:0}}\n@keyframes mk-digit{from{transform:translateY(105%)}to{transform:translateY(0)}}\n@keyframes mk-sweep{from{transform:scaleX(0)}to{transform:scaleX(1)}}\n@keyframes mk-markin{from{opacity:0;transform:scale(.4)}to{opacity:1;transform:scale(1)}}\n@keyframes mk-idxon{from,to{color:rgb(255,90,54);letter-spacing:.2em}}\n@keyframes mk-dotin{from{transform:scale(0)}to{transform:scale(1)}}\n@keyframes mk-pan{from{transform:translateX(2%)}to{transform:translateX(-34%)}}\n@keyframes mk-fillscrub{from{background-position:100% 0}to{background-position:0 0}}\n@keyframes mk-flow{0%{transform:translateX(-7px);opacity:.2}45%{opacity:1}100%{transform:translateX(7px);opacity:.2}}\n#mk-doc{position:relative}\n#mk-doc::before,#mk-doc::after{content:\"\";position:fixed;top:0;bottom:0;width:1px;background:rgba(22,24,28,.16);z-index:1;pointer-events:none}\n#mk-doc::before{left:40px}\n#mk-doc::after{right:40px}\n@media (max-width:1079px){#mk-doc::before{left:28px}#mk-doc::after{right:28px}}\n@media (max-width:767px){#mk-doc::before,#mk-doc::after{display:none}}\n#mk-header{position:fixed;top:0;left:0;right:0;z-index:100;background:rgba(250,250,247,0);-webkit-backdrop-filter:blur(10px);backdrop-filter:blur(10px)}\n#mk-header::after{content:\"\";position:absolute;left:0;right:0;bottom:0;height:1px;background:rgba(22,24,28,.16);opacity:0}\n#mk-nav>*{position:relative}\n#mk-nav>*::after{content:\"\";position:absolute;left:0;right:100%;bottom:-5px;height:1px;background:rgb(255,90,54);transition:right .28s cubic-bezier(.2,.7,.3,1)}\n#mk-nav>*:hover::after{right:0}\n@media (hover:none){#mk-nav>*::after{right:0;opacity:.45}}\n#mk-progress-track{position:fixed;top:0;left:0;right:0;height:2px;z-index:101;pointer-events:none;background:rgba(255,90,54,.16)}\n#mk-progress{position:absolute;left:0;top:0;width:0;height:100%;background:rgb(255,90,54)}\n#mk-mast-in{padding-top:128px}\n@media (max-width:1079px){#mk-mast-in{padding-top:104px}}\n@media (max-width:767px){#mk-mast-in{padding-top:88px}}\n#mk-caret{width:13px;height:19px;background:rgb(255,90,54)}\n#mk-plate-dash{width:34px;height:1px;background:rgb(191,68,40)}\n#mk-mast-rule,#mk-spec-rule{height:1px;background:rgba(22,24,28,.16);transform:scaleX(0);transform-origin:0 50%}\n#mk-fig-0>div>*,#mk-fig-1>div>*,#mk-fig-2>div>*,#mk-fig-3>div>*{display:block;transform:translateY(105%)}\n#mk-work-0,#mk-work-1,#mk-work-2,#mk-work-3,#mk-work-4,#mk-work-5,#mk-work-6,#mk-work-7,#mk-work-8{position:relative;transition:background-color .2s ease,padding-left .28s cubic-bezier(.2,.7,.3,1)}\n#mk-work-0::after,#mk-work-1::after,#mk-work-2::after,#mk-work-3::after,#mk-work-4::after,#mk-work-5::after,#mk-work-6::after,#mk-work-7::after,#mk-work-8::after{content:\"\";position:absolute;left:0;right:0;bottom:-1px;height:1px;background:rgb(255,90,54);transform:scaleX(0);transform-origin:0 50%}\n#mk-work-0:hover,#mk-work-1:hover,#mk-work-2:hover,#mk-work-3:hover,#mk-work-4:hover,#mk-work-5:hover,#mk-work-6:hover,#mk-work-7:hover,#mk-work-8:hover{background-color:rgba(255,90,54,.06);padding-left:14px}\n#mk-work-0:hover #mk-work-idx-0,#mk-work-1:hover #mk-work-idx-1,#mk-work-2:hover #mk-work-idx-2,#mk-work-3:hover #mk-work-idx-3,#mk-work-4:hover #mk-work-idx-4,#mk-work-5:hover #mk-work-idx-5,#mk-work-6:hover #mk-work-idx-6,#mk-work-7:hover #mk-work-idx-7,#mk-work-8:hover #mk-work-idx-8{color:rgb(255,90,54)}\n#mk-mark-0,#mk-mark-1,#mk-mark-2,#mk-mark-3{position:fixed;width:13px;height:13px;z-index:2;pointer-events:none;opacity:0}\n#mk-mark-0{top:66px;left:40px;border-left:1px solid rgba(22,24,28,.42);border-top:1px solid rgba(22,24,28,.42)}\n#mk-mark-1{top:66px;right:40px;border-right:1px solid rgba(22,24,28,.42);border-top:1px solid rgba(22,24,28,.42)}\n#mk-mark-2{bottom:20px;left:40px;border-left:1px solid rgba(22,24,28,.42);border-bottom:1px solid rgba(22,24,28,.42)}\n#mk-mark-3{bottom:20px;right:40px;border-right:1px solid rgba(22,24,28,.42);border-bottom:1px solid rgba(22,24,28,.42)}\n@media (max-width:1279px){#mk-mark-0,#mk-mark-1,#mk-mark-2,#mk-mark-3{display:none}}\n#mk-index{position:fixed;left:8px;top:50%;transform:translateY(-50%);z-index:3;display:grid;row-gap:11px;pointer-events:auto;background:rgb(250,250,247);padding:14px 10px;border:1px solid rgba(22,24,28,.16)}\n@media (max-width:1439px){#mk-index{display:none}}\n#mk-proc-dot-0,#mk-proc-dot-1,#mk-proc-dot-2,#mk-proc-dot-3{width:7px;height:7px;background:rgb(255,90,54);border-radius:50%;transform:scale(0);margin-top:-4px}\n#mk-tag-0-0:hover,#mk-tag-0-1:hover,#mk-tag-0-2:hover,#mk-tag-0-3:hover,#mk-tag-0-4:hover,#mk-tag-1-0:hover,#mk-tag-1-1:hover,#mk-tag-1-2:hover,#mk-tag-1-3:hover,#mk-tag-1-4:hover,#mk-tag-2-0:hover,#mk-tag-2-1:hover,#mk-tag-2-2:hover,#mk-tag-2-3:hover,#mk-tag-2-4:hover,#mk-tag-3-0:hover,#mk-tag-3-1:hover,#mk-tag-3-2:hover,#mk-tag-3-3:hover,#mk-tag-3-4:hover,#mk-tag-4-0:hover,#mk-tag-4-1:hover,#mk-tag-4-2:hover,#mk-tag-4-3:hover,#mk-tag-4-4:hover{border-color:rgb(255,90,54)}\n#mk-ticker-track{display:flex;width:max-content;will-change:transform}\n#mk-ticker:hover #mk-ticker-track{animation-play-state:paused}\nhtml{scroll-behavior:smooth}\n#services,#works,#products,#contact{scroll-margin-top:82px}\n#mk-home{scroll-margin-top:0}\n@media (max-width:767px){#services,#works,#products,#contact{scroll-margin-top:68px}}\n#mk-cue{position:fixed;right:40px;bottom:24px;z-index:90;display:flex;align-items:center;column-gap:10px;pointer-events:none}\n#mk-cue-rail{position:relative;width:9px;height:24px}\n#mk-cue-rail::after{content:\"\";position:absolute;left:50%;top:0;width:7px;height:7px;margin-left:-4px;opacity:0;border-right:1px solid rgb(255,90,54);border-bottom:1px solid rgb(255,90,54)}\n@media (max-width:1079px){#mk-cue{right:28px}}\n@media (max-width:767px){#mk-cue{right:18px;bottom:16px}}\n#mk-boot{display:none}\n@property --mk-n{syntax:'<integer>';initial-value:0;inherits:true}\n@keyframes mk-count{to{--mk-n:100}}\n@keyframes mk-boot-out{0%{clip-path:inset(0 0 0 0)}100%{clip-path:inset(0 0 100% 0);visibility:hidden}}\n@keyframes mk-boot-fill{from{transform:scaleX(0)}to{transform:scaleX(1)}}\n@keyframes mk-boot-line{from{opacity:.14}60%{opacity:1;color:rgb(255,90,54)}to{opacity:.55;color:rgb(107,109,113)}}\n@keyframes mk-boot-scan{from{transform:translateY(0)}to{transform:translateY(100vh)}}\n@keyframes mk-boot-fade{from{opacity:0}to{opacity:1}}\n@keyframes mk-boot-type{from{clip-path:inset(0 100% 0 0);opacity:.3}to{clip-path:inset(0 0 0 0);opacity:1}}\n@keyframes mk-boot-caret{0%,49%{opacity:1}50%,99%{opacity:0}}\n@keyframes mk-boot-cross{from{opacity:0;transform:scale(.55)}to{opacity:1;transform:scale(1)}}\n@keyframes mk-boot-tick{from{opacity:0;transform:scaleX(.2)}to{opacity:1;transform:scaleX(1)}}\n@keyframes mk-boot-stamp{0%{opacity:0;transform:scale(1.35)}55%{opacity:1;transform:scale(.97)}100%{opacity:1;transform:scale(1)}}\n@media (prefers-reduced-motion:no-preference){\n  #mk-boot{display:grid;position:fixed;inset:0;z-index:999;background:rgb(250,250,247);align-content:center;justify-items:center;row-gap:20px;overflow:hidden;animation:mk-boot-out .62s cubic-bezier(.7,0,.3,1) 2.95s forwards}\n  #mk-boot-head,#mk-boot-foot{position:absolute;left:40px;right:40px;display:flex;justify-content:space-between;font-family:'IBM Plex Mono',ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font-size:10px;letter-spacing:.2em;color:rgb(107,109,113);animation:mk-boot-fade .4s ease both}\n  #mk-boot-head{top:34px}\n  #mk-boot-foot{bottom:30px;animation-delay:.1s}\n  #mk-boot-num{font-family:'IBM Plex Mono',ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font-size:104px;font-weight:500;line-height:1;letter-spacing:-.04em;color:rgb(22,24,28);font-variant-numeric:tabular-nums;min-width:3ch;text-align:right;animation:mk-count 2.05s linear .3s both}\n  #mk-boot-num::after{counter-reset:n var(--mk-n);content:counter(n)}\n  #mk-boot-row{display:flex;align-items:flex-end;column-gap:8px;line-height:1}\n  #mk-boot-pct{font-family:'IBM Plex Mono',ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font-size:18px;color:rgb(191,68,40);padding-bottom:12px}\n  #mk-boot-track{width:min(420px,62vw);height:1px;background:rgba(22,24,28,.14);position:relative}\n  #mk-boot-fill{position:absolute;inset:0;background:rgb(255,90,54);transform-origin:0 50%;animation:mk-boot-fill 2.05s linear .3s both}\n  #mk-boot-track::after{content:\"\";position:absolute;left:0;right:0;top:-3px;height:3px;background:repeating-linear-gradient(90deg,rgba(22,24,28,.22) 0 1px,transparent 1px 42px);animation:mk-boot-fade .5s ease .15s both}\n  #mk-boot-list{display:flex;column-gap:18px;row-gap:8px;flex-wrap:wrap;justify-content:center;font-family:'IBM Plex Mono',ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font-size:10px;letter-spacing:.18em}\n  #mk-boot-list>*{opacity:.14;animation:mk-boot-line .62s ease both}\n  #mk-boot-c0{animation-delay:700ms}\n  #mk-boot-c1{animation-delay:900ms}\n  #mk-boot-c2{animation-delay:1100ms}\n  #mk-boot-c3{animation-delay:1300ms}\n  #mk-boot-c4{animation-delay:1500ms}\n  #mk-boot-c5{animation-delay:1700ms}\n  #mk-boot-c6{animation-delay:1900ms}\n  #mk-boot::before{content:\"\";position:absolute;inset:0;background:repeating-linear-gradient(90deg,rgba(22,24,28,.045) 0 1px,transparent 1px 72px),repeating-linear-gradient(0deg,rgba(22,24,28,.045) 0 1px,transparent 1px 72px);animation:mk-boot-fade .5s ease both}\n  #mk-boot-scan{position:absolute;left:0;right:0;top:0;height:1px;background:linear-gradient(90deg,rgba(255,90,54,0),rgba(255,90,54,.55),rgba(255,90,54,0));animation:mk-boot-scan 1.45s linear .15s 2 both}\n  #mk-boot .mk-x,#mk-boot-x0,#mk-boot-x1,#mk-boot-x2,#mk-boot-x3{position:absolute;width:14px;height:14px;animation:mk-boot-cross .5s cubic-bezier(.16,1,.3,1) both}\n  #mk-boot-x0{top:64px;left:40px;border-left:1px solid rgba(22,24,28,.42);border-top:1px solid rgba(22,24,28,.42);animation-delay:.08s}\n  #mk-boot-x1{top:64px;right:40px;border-right:1px solid rgba(22,24,28,.42);border-top:1px solid rgba(22,24,28,.42);animation-delay:.16s}\n  #mk-boot-x2{bottom:56px;left:40px;border-left:1px solid rgba(22,24,28,.42);border-bottom:1px solid rgba(22,24,28,.42);animation-delay:.24s}\n  #mk-boot-x3{bottom:56px;right:40px;border-right:1px solid rgba(22,24,28,.42);border-bottom:1px solid rgba(22,24,28,.42);animation-delay:.32s}\n  #mk-boot-ruler{position:absolute;left:40px;top:50%;transform:translateY(-50%);display:grid;row-gap:9px}\n  #mk-boot-ruler>*{width:9px;height:1px;background:rgba(22,24,28,.42);transform-origin:0 50%;animation:mk-boot-tick .3s ease both}\n  #mk-boot-t0{animation-delay:120ms}\n  #mk-boot-t1{animation-delay:146ms}\n  #mk-boot-t2{animation-delay:172ms}\n  #mk-boot-t3{animation-delay:198ms}\n  #mk-boot-t4{animation-delay:224ms}\n  #mk-boot-t5{animation-delay:250ms}\n  #mk-boot-t6{animation-delay:276ms}\n  #mk-boot-t7{animation-delay:302ms}\n  #mk-boot-t8{animation-delay:328ms}\n  #mk-boot-t9{animation-delay:354ms}\n  #mk-boot-t10{animation-delay:380ms}\n  #mk-boot-t11{animation-delay:406ms}\n  #mk-boot-t12{animation-delay:432ms}\n  @media (max-width:1023px){#mk-boot-ruler{display:none}}\n  #mk-boot-log{display:grid;row-gap:7px;justify-items:start;font-family:'IBM Plex Mono',ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font-size:10px;letter-spacing:.16em;color:rgb(107,109,113);min-height:64px}\n  #mk-boot-log>*{animation:mk-boot-type .42s steps(24,end) both}\n  #mk-boot-l0{animation-delay:550ms}\n  #mk-boot-l1{animation-delay:930ms}\n  #mk-boot-l2{animation-delay:1310ms}\n  #mk-boot-l3{animation-delay:1690ms}\n  #mk-boot-cursor{width:7px;height:11px;background:rgb(255,90,54);animation:mk-boot-caret .62s steps(1,end) .5s infinite}\n  #mk-boot-ready{border:1px solid rgb(191,68,40);padding:5px 12px;font-family:'IBM Plex Mono',ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font-size:10px;letter-spacing:.24em;color:rgb(191,68,40);opacity:0;animation:mk-boot-stamp .42s cubic-bezier(.16,1,.3,1) 2.42s both}\n  @media (max-width:767px){#mk-boot-num{font-size:62px}#mk-boot-head,#mk-boot-foot{left:18px;right:18px}}\n  #mk-hl1-mask>*,#mk-hl2-mask>*{transform:translateY(112%);animation:mk-linein .95s cubic-bezier(.16,1,.3,1) forwards}\n  #mk-hl1-mask>*{animation-delay:3.16s}\n  #mk-hl2-mask>*{animation-delay:3.28s}\n  #mk-mast-meta,#mk-mast-lede,#mk-mast-cta{opacity:0;animation:mk-softin .8s cubic-bezier(.16,1,.3,1) forwards}\n  #mk-mast-meta{animation-delay:3.06s}\n  #mk-mast-lede{animation-delay:3.54s}\n  #mk-mast-cta{animation-delay:3.66s}\n  #mk-ar-a-0>*,#mk-ar-b-0>*,#mk-ar-a-1>*,#mk-ar-b-1>*,#mk-ar-a-2>*,#mk-ar-b-2>*{animation:mk-flow 1.9s ease-in-out infinite}\n  #mk-ar-a-0>*{animation-delay:0ms}\n  #mk-ar-b-0>*{animation-delay:130ms}\n  #mk-ar-a-1>*{animation-delay:260ms}\n  #mk-ar-b-1>*{animation-delay:390ms}\n  #mk-ar-a-2>*{animation-delay:520ms}\n  #mk-ar-b-2>*{animation-delay:650ms}\n  #mk-caret{animation:mk-caret 1.15s steps(1,end) infinite;animation-delay:3.84s}\n  #mk-mast-rule{animation:mk-drawx .9s cubic-bezier(.2,.7,.3,1) forwards;animation-delay:3.40s}\n  #mk-spec-rule{animation:mk-drawx .9s cubic-bezier(.2,.7,.3,1) forwards;animation-delay:.9s}\n  #mk-cue{opacity:0;animation:mk-softin .8s ease forwards;animation-delay:1.1s}\n  #mk-cue-rail::after{animation:mk-cuearrow 1.9s cubic-bezier(.4,0,.5,1) infinite}\n  #mk-ticker-track{animation:mk-ticker 40s linear infinite}\n  #mk-mark-0,#mk-mark-1,#mk-mark-2,#mk-mark-3{animation:mk-markin .5s cubic-bezier(.16,1,.3,1) forwards}\n  #mk-mark-0{animation-delay:1.15s}\n  #mk-mark-1{animation-delay:1.24s}\n  #mk-mark-2{animation-delay:1.33s}\n  #mk-mark-3{animation-delay:1.42s}\n  @supports (animation-timeline:view()){\n    #mk-spec,#mk-svc-head,#mk-svc-0,#mk-svc-1,#mk-svc-2,#mk-svc-3,#mk-proc-head,#mk-proc-0,#mk-proc-1,#mk-proc-2,#mk-proc-3,#mk-works-head,#mk-work-0,#mk-work-1,#mk-work-2,#mk-work-3,#mk-work-4,#mk-work-5,#mk-work-6,#mk-work-7,#mk-work-8,#mk-plate-num,#mk-plate-t,#mk-mx-head,#mk-mx-cols,#mk-mx-r-0,#mk-mx-r-1,#mk-mx-r-2,#mk-mx-r-3,#mk-mx-r-4,#mk-mx-r-5,#mk-mx-r-6,#mk-mx-r-7,#mk-fig2-head,#mk-fl-a-0,#mk-fl-b-0,#mk-fl-c-0,#mk-fl-a-1,#mk-fl-b-1,#mk-fl-c-1,#mk-fl-a-2,#mk-fl-b-2,#mk-fl-c-2,#mk-spec2-head,#mk-spec2-r-0,#mk-spec2-r-1,#mk-spec2-r-2,#mk-spec2-r-3,#mk-stack-head,#mk-stack-0,#mk-stack-1,#mk-stack-2,#mk-stack-3,#mk-stack-4,#mk-prod-head,#mk-prod-0,#mk-prod-1,#mk-voice-head,#mk-voice-0,#mk-voice-1,#mk-voice-2,#mk-contact-head{animation:mk-rise .01s linear both;animation-timeline:view();animation-range:entry 2% cover 36%}\n    #mk-svc-0{animation-range:entry 6% cover 40%}\n    #mk-svc-1{animation-range:entry 10% cover 44%}\n    #mk-svc-2{animation-range:entry 14% cover 48%}\n    #mk-svc-3{animation-range:entry 18% cover 52%}\n    #mk-proc-0{animation-range:entry 6% cover 40%}\n    #mk-proc-1{animation-range:entry 10% cover 44%}\n    #mk-proc-2{animation-range:entry 14% cover 48%}\n    #mk-proc-3{animation-range:entry 18% cover 52%}\n    #mk-work-0{animation-range:entry 6% cover 40%}\n    #mk-work-1{animation-range:entry 6% cover 40%}\n    #mk-work-2{animation-range:entry 10% cover 44%}\n    #mk-work-3{animation-range:entry 10% cover 44%}\n    #mk-work-4{animation-range:entry 14% cover 48%}\n    #mk-work-5{animation-range:entry 14% cover 48%}\n    #mk-work-6{animation-range:entry 18% cover 52%}\n    #mk-work-7{animation-range:entry 18% cover 52%}\n    #mk-work-8{animation-range:entry 22% cover 56%}\n    #mk-plate-t{animation-range:entry 6% cover 40%}\n    #mk-mx-cols{animation-range:entry 6% cover 40%}\n    #mk-mx-r-0{animation-range:entry 6% cover 40%}\n    #mk-mx-r-1{animation-range:entry 10% cover 44%}\n    #mk-mx-r-2{animation-range:entry 10% cover 44%}\n    #mk-mx-r-3{animation-range:entry 14% cover 48%}\n    #mk-mx-r-4{animation-range:entry 14% cover 48%}\n    #mk-mx-r-5{animation-range:entry 18% cover 52%}\n    #mk-mx-r-6{animation-range:entry 18% cover 52%}\n    #mk-mx-r-7{animation-range:entry 22% cover 56%}\n    #mk-fl-a-0{animation-range:entry 6% cover 40%}\n    #mk-fl-b-0{animation-range:entry 10% cover 44%}\n    #mk-fl-c-0{animation-range:entry 14% cover 48%}\n    #mk-fl-a-1{animation-range:entry 10% cover 44%}\n    #mk-fl-b-1{animation-range:entry 14% cover 48%}\n    #mk-fl-c-1{animation-range:entry 18% cover 52%}\n    #mk-fl-a-2{animation-range:entry 14% cover 48%}\n    #mk-fl-b-2{animation-range:entry 18% cover 52%}\n    #mk-fl-c-2{animation-range:entry 22% cover 56%}\n    #mk-spec2-r-0{animation-range:entry 6% cover 40%}\n    #mk-spec2-r-1{animation-range:entry 10% cover 44%}\n    #mk-spec2-r-2{animation-range:entry 14% cover 48%}\n    #mk-spec2-r-3{animation-range:entry 18% cover 52%}\n    #mk-stack-0{animation-range:entry 6% cover 40%}\n    #mk-stack-1{animation-range:entry 10% cover 44%}\n    #mk-stack-2{animation-range:entry 14% cover 48%}\n    #mk-stack-3{animation-range:entry 18% cover 52%}\n    #mk-stack-4{animation-range:entry 22% cover 56%}\n    #mk-prod-0{animation-range:entry 6% cover 40%}\n    #mk-prod-1{animation-range:entry 10% cover 44%}\n    #mk-voice-0{animation-range:entry 6% cover 40%}\n    #mk-voice-1{animation-range:entry 10% cover 44%}\n    #mk-voice-2{animation-range:entry 14% cover 48%}\n    #mk-fig-0>div>*,#mk-fig-1>div>*,#mk-fig-2>div>*,#mk-fig-3>div>*{animation:mk-digit .7s cubic-bezier(.16,1,.3,1) both;animation-delay:var(--d,0ms)}\n    #mk-fig-0>div,#mk-fig-1>div,#mk-fig-2>div,#mk-fig-3>div{animation:mk-rise .01s linear both;animation-timeline:view();animation-range:entry 0% entry 1%}\n    #mk-work-0::after,#mk-work-1::after,#mk-work-2::after,#mk-work-3::after,#mk-work-4::after,#mk-work-5::after,#mk-work-6::after,#mk-work-7::after,#mk-work-8::after{animation:mk-sweep .01s linear both;animation-timeline:view();animation-range:entry 12% cover 24%}\n    #mk-proc-dot-0,#mk-proc-dot-1,#mk-proc-dot-2,#mk-proc-dot-3{animation:mk-dotin .01s linear both;animation-timeline:view();animation-range:entry 14% cover 26%}\n    #mk-pan-track{animation:mk-pan linear both;animation-timeline:view();animation-range:cover 0% cover 100%}\n    #mk-plate-t h2{background-image:linear-gradient(90deg,rgb(22,24,28) 0 50%,rgb(107,109,113) 50% 100%);background-size:220% 100%;background-position:100% 0;-webkit-background-clip:text;background-clip:text;color:rgba(0,0,0,0);animation:mk-fillscrub linear both;animation-timeline:view();animation-range:entry 24% cover 58%}\n  }\n  @supports (timeline-scope:--x){\n    #mk-doc{timeline-scope:--mk-s1,--mk-s2,--mk-s3,--mk-s4,--mk-s5,--mk-s6,--mk-s7}\n#services{view-timeline-name:--mk-s1;view-timeline-inset:45% 45%}\n#process{view-timeline-name:--mk-s2;view-timeline-inset:45% 45%}\n#works{view-timeline-name:--mk-s3;view-timeline-inset:45% 45%}\n#stack{view-timeline-name:--mk-s4;view-timeline-inset:45% 45%}\n#products{view-timeline-name:--mk-s5;view-timeline-inset:45% 45%}\n#mk-voices{view-timeline-name:--mk-s6;view-timeline-inset:45% 45%}\n#contact{view-timeline-name:--mk-s7;view-timeline-inset:45% 45%}\n  #mk-idx-0{animation:mk-idxon linear;animation-timeline:--mk-s1;animation-range:cover 0% cover 100%}\n  #mk-idx-1{animation:mk-idxon linear;animation-timeline:--mk-s2;animation-range:cover 0% cover 100%}\n  #mk-idx-2{animation:mk-idxon linear;animation-timeline:--mk-s3;animation-range:cover 0% cover 100%}\n  #mk-idx-3{animation:mk-idxon linear;animation-timeline:--mk-s4;animation-range:cover 0% cover 100%}\n  #mk-idx-4{animation:mk-idxon linear;animation-timeline:--mk-s5;animation-range:cover 0% cover 100%}\n  #mk-idx-5{animation:mk-idxon linear;animation-timeline:--mk-s6;animation-range:cover 0% cover 100%}\n  #mk-idx-6{animation:mk-idxon linear;animation-timeline:--mk-s7;animation-range:cover 0% cover 100%}\n  }\n  @supports (animation-timeline:scroll()){\n    #mk-progress{animation:mk-progress linear both;animation-timeline:scroll(root)}\n    #mk-cue{animation:mk-cuefade linear both;animation-timeline:scroll(root);animation-range:0px 260px}\n    #mk-header{animation:mk-headbg linear both;animation-timeline:scroll(root);animation-range:20px 120px}\n    #mk-header::after{animation:mk-headrule linear both;animation-timeline:scroll(root);animation-range:20px 120px}\n  }\n}\n</style>",
       "processShortcodes": "0"
      }
     },
@@ -10107,6 +10107,548 @@
                 }
                }
               ]
+             }
+            ]
+           }
+          ]
+         }
+        ]
+       },
+       {
+        "type": "div",
+        "data": {
+         "attrID": "mk-pan"
+        },
+        "style": {
+         "&": {
+          "_": {
+           "backgroundColor": {
+            "token": "--mk-accent"
+           },
+           "paddingTop": "34px",
+           "paddingBottom": "34px",
+           "customStyles": "overflow:hidden;"
+          },
+          "_m": {
+           "paddingTop": "22px",
+           "paddingBottom": "22px"
+          }
+         }
+        },
+        "children": [
+         {
+          "type": "div",
+          "data": {
+           "attrID": "mk-pan-track"
+          },
+          "style": {
+           "&": {
+            "_": {
+             "display": "flex",
+             "columnGap": "56px",
+             "alignItems": "baseline",
+             "customStyles": "white-space:nowrap;width:max-content;"
+            },
+            "_m": {
+             "columnGap": "30px"
+            }
+           }
+          },
+          "children": [
+           {
+            "type": "div",
+            "data": {
+             "attrID": "mk-pan-n-0"
+            },
+            "style": {
+             "&": {
+              "_": {}
+             }
+            },
+            "children": [
+             {
+              "type": "text",
+              "data": {
+               "tagName": "p"
+              },
+              "text": "01",
+              "style": {
+               "&": {
+                "_": {
+                 "color": "rgb(22,24,28)",
+                 "fontSize": "11px",
+                 "letterSpacing": "0.18em",
+                 "fontFamily": "'IBM Plex Mono',ui-monospace,SFMono-Regular,Menlo,Consolas,monospace",
+                 "fontWeight": "400"
+                }
+               }
+              }
+             }
+            ]
+           },
+           {
+            "type": "div",
+            "data": {
+             "attrID": "mk-pan-w-0"
+            },
+            "style": {
+             "&": {
+              "_": {}
+             }
+            },
+            "children": [
+             {
+              "type": "text",
+              "data": {
+               "tagName": "p"
+              },
+              "text": "WEB",
+              "style": {
+               "&": {
+                "_": {
+                 "color": {
+                  "token": "--mk-ink"
+                 },
+                 "fontSize": "58px",
+                 "fontWeight": "600",
+                 "fontFamily": "'Space Grotesk','Noto Sans TC','PingFang TC','Microsoft JhengHei',sans-serif",
+                 "letterSpacing": "-0.02em",
+                 "lineHeight": "1"
+                },
+                "_t": {
+                 "fontSize": "44px"
+                },
+                "_m": {
+                 "fontSize": "31px"
+                }
+               }
+              }
+             }
+            ]
+           },
+           {
+            "type": "div",
+            "data": {
+             "attrID": "mk-pan-n-1"
+            },
+            "style": {
+             "&": {
+              "_": {}
+             }
+            },
+            "children": [
+             {
+              "type": "text",
+              "data": {
+               "tagName": "p"
+              },
+              "text": "02",
+              "style": {
+               "&": {
+                "_": {
+                 "color": "rgb(22,24,28)",
+                 "fontSize": "11px",
+                 "letterSpacing": "0.18em",
+                 "fontFamily": "'IBM Plex Mono',ui-monospace,SFMono-Regular,Menlo,Consolas,monospace",
+                 "fontWeight": "400"
+                }
+               }
+              }
+             }
+            ]
+           },
+           {
+            "type": "div",
+            "data": {
+             "attrID": "mk-pan-w-1"
+            },
+            "style": {
+             "&": {
+              "_": {}
+             }
+            },
+            "children": [
+             {
+              "type": "text",
+              "data": {
+               "tagName": "p"
+              },
+              "text": "COMMERCE",
+              "style": {
+               "&": {
+                "_": {
+                 "color": {
+                  "token": "--mk-ink"
+                 },
+                 "fontSize": "58px",
+                 "fontWeight": "600",
+                 "fontFamily": "'Space Grotesk','Noto Sans TC','PingFang TC','Microsoft JhengHei',sans-serif",
+                 "letterSpacing": "-0.02em",
+                 "lineHeight": "1"
+                },
+                "_t": {
+                 "fontSize": "44px"
+                },
+                "_m": {
+                 "fontSize": "31px"
+                }
+               }
+              }
+             }
+            ]
+           },
+           {
+            "type": "div",
+            "data": {
+             "attrID": "mk-pan-n-2"
+            },
+            "style": {
+             "&": {
+              "_": {}
+             }
+            },
+            "children": [
+             {
+              "type": "text",
+              "data": {
+               "tagName": "p"
+              },
+              "text": "03",
+              "style": {
+               "&": {
+                "_": {
+                 "color": "rgb(22,24,28)",
+                 "fontSize": "11px",
+                 "letterSpacing": "0.18em",
+                 "fontFamily": "'IBM Plex Mono',ui-monospace,SFMono-Regular,Menlo,Consolas,monospace",
+                 "fontWeight": "400"
+                }
+               }
+              }
+             }
+            ]
+           },
+           {
+            "type": "div",
+            "data": {
+             "attrID": "mk-pan-w-2"
+            },
+            "style": {
+             "&": {
+              "_": {}
+             }
+            },
+            "children": [
+             {
+              "type": "text",
+              "data": {
+               "tagName": "p"
+              },
+              "text": "AUTOMATION",
+              "style": {
+               "&": {
+                "_": {
+                 "color": {
+                  "token": "--mk-ink"
+                 },
+                 "fontSize": "58px",
+                 "fontWeight": "600",
+                 "fontFamily": "'Space Grotesk','Noto Sans TC','PingFang TC','Microsoft JhengHei',sans-serif",
+                 "letterSpacing": "-0.02em",
+                 "lineHeight": "1"
+                },
+                "_t": {
+                 "fontSize": "44px"
+                },
+                "_m": {
+                 "fontSize": "31px"
+                }
+               }
+              }
+             }
+            ]
+           },
+           {
+            "type": "div",
+            "data": {
+             "attrID": "mk-pan-n-3"
+            },
+            "style": {
+             "&": {
+              "_": {}
+             }
+            },
+            "children": [
+             {
+              "type": "text",
+              "data": {
+               "tagName": "p"
+              },
+              "text": "04",
+              "style": {
+               "&": {
+                "_": {
+                 "color": "rgb(22,24,28)",
+                 "fontSize": "11px",
+                 "letterSpacing": "0.18em",
+                 "fontFamily": "'IBM Plex Mono',ui-monospace,SFMono-Regular,Menlo,Consolas,monospace",
+                 "fontWeight": "400"
+                }
+               }
+              }
+             }
+            ]
+           },
+           {
+            "type": "div",
+            "data": {
+             "attrID": "mk-pan-w-3"
+            },
+            "style": {
+             "&": {
+              "_": {}
+             }
+            },
+            "children": [
+             {
+              "type": "text",
+              "data": {
+               "tagName": "p"
+              },
+              "text": "AI",
+              "style": {
+               "&": {
+                "_": {
+                 "color": {
+                  "token": "--mk-ink"
+                 },
+                 "fontSize": "58px",
+                 "fontWeight": "600",
+                 "fontFamily": "'Space Grotesk','Noto Sans TC','PingFang TC','Microsoft JhengHei',sans-serif",
+                 "letterSpacing": "-0.02em",
+                 "lineHeight": "1"
+                },
+                "_t": {
+                 "fontSize": "44px"
+                },
+                "_m": {
+                 "fontSize": "31px"
+                }
+               }
+              }
+             }
+            ]
+           },
+           {
+            "type": "div",
+            "data": {
+             "attrID": "mk-pan-n-4"
+            },
+            "style": {
+             "&": {
+              "_": {}
+             }
+            },
+            "children": [
+             {
+              "type": "text",
+              "data": {
+               "tagName": "p"
+              },
+              "text": "05",
+              "style": {
+               "&": {
+                "_": {
+                 "color": "rgb(22,24,28)",
+                 "fontSize": "11px",
+                 "letterSpacing": "0.18em",
+                 "fontFamily": "'IBM Plex Mono',ui-monospace,SFMono-Regular,Menlo,Consolas,monospace",
+                 "fontWeight": "400"
+                }
+               }
+              }
+             }
+            ]
+           },
+           {
+            "type": "div",
+            "data": {
+             "attrID": "mk-pan-w-4"
+            },
+            "style": {
+             "&": {
+              "_": {}
+             }
+            },
+            "children": [
+             {
+              "type": "text",
+              "data": {
+               "tagName": "p"
+              },
+              "text": "ERP",
+              "style": {
+               "&": {
+                "_": {
+                 "color": {
+                  "token": "--mk-ink"
+                 },
+                 "fontSize": "58px",
+                 "fontWeight": "600",
+                 "fontFamily": "'Space Grotesk','Noto Sans TC','PingFang TC','Microsoft JhengHei',sans-serif",
+                 "letterSpacing": "-0.02em",
+                 "lineHeight": "1"
+                },
+                "_t": {
+                 "fontSize": "44px"
+                },
+                "_m": {
+                 "fontSize": "31px"
+                }
+               }
+              }
+             }
+            ]
+           },
+           {
+            "type": "div",
+            "data": {
+             "attrID": "mk-pan-n-5"
+            },
+            "style": {
+             "&": {
+              "_": {}
+             }
+            },
+            "children": [
+             {
+              "type": "text",
+              "data": {
+               "tagName": "p"
+              },
+              "text": "06",
+              "style": {
+               "&": {
+                "_": {
+                 "color": "rgb(22,24,28)",
+                 "fontSize": "11px",
+                 "letterSpacing": "0.18em",
+                 "fontFamily": "'IBM Plex Mono',ui-monospace,SFMono-Regular,Menlo,Consolas,monospace",
+                 "fontWeight": "400"
+                }
+               }
+              }
+             }
+            ]
+           },
+           {
+            "type": "div",
+            "data": {
+             "attrID": "mk-pan-w-5"
+            },
+            "style": {
+             "&": {
+              "_": {}
+             }
+            },
+            "children": [
+             {
+              "type": "text",
+              "data": {
+               "tagName": "p"
+              },
+              "text": "SEO",
+              "style": {
+               "&": {
+                "_": {
+                 "color": {
+                  "token": "--mk-ink"
+                 },
+                 "fontSize": "58px",
+                 "fontWeight": "600",
+                 "fontFamily": "'Space Grotesk','Noto Sans TC','PingFang TC','Microsoft JhengHei',sans-serif",
+                 "letterSpacing": "-0.02em",
+                 "lineHeight": "1"
+                },
+                "_t": {
+                 "fontSize": "44px"
+                },
+                "_m": {
+                 "fontSize": "31px"
+                }
+               }
+              }
+             }
+            ]
+           },
+           {
+            "type": "div",
+            "data": {
+             "attrID": "mk-pan-n-6"
+            },
+            "style": {
+             "&": {
+              "_": {}
+             }
+            },
+            "children": [
+             {
+              "type": "text",
+              "data": {
+               "tagName": "p"
+              },
+              "text": "07",
+              "style": {
+               "&": {
+                "_": {
+                 "color": "rgb(22,24,28)",
+                 "fontSize": "11px",
+                 "letterSpacing": "0.18em",
+                 "fontFamily": "'IBM Plex Mono',ui-monospace,SFMono-Regular,Menlo,Consolas,monospace",
+                 "fontWeight": "400"
+                }
+               }
+              }
+             }
+            ]
+           },
+           {
+            "type": "div",
+            "data": {
+             "attrID": "mk-pan-w-6"
+            },
+            "style": {
+             "&": {
+              "_": {}
+             }
+            },
+            "children": [
+             {
+              "type": "text",
+              "data": {
+               "tagName": "p"
+              },
+              "text": "SOFTWARE",
+              "style": {
+               "&": {
+                "_": {
+                 "color": {
+                  "token": "--mk-ink"
+                 },
+                 "fontSize": "58px",
+                 "fontWeight": "600",
+                 "fontFamily": "'Space Grotesk','Noto Sans TC','PingFang TC','Microsoft JhengHei',sans-serif",
+                 "letterSpacing": "-0.02em",
+                 "lineHeight": "1"
+                },
+                "_t": {
+                 "fontSize": "44px"
+                },
+                "_m": {
+                 "fontSize": "31px"
+                }
+               }
+              }
              }
             ]
            }

@@ -502,6 +502,15 @@ https://mosaic.moksaweb.com/moksa/,_,mk-mx-r-7,alignItems,center,center,ok
 https://mosaic.moksaweb.com/moksa/,_,mk-mx-r-7,paddingTop,13px,13px,ok
 https://mosaic.moksaweb.com/moksa/,_,mk-mx-r-7,paddingBottom,13px,13px,ok
 https://mosaic.moksaweb.com/moksa/,_,mk-mx-r-7,customStyles:border-bottom,"1px solid rgba(22,24,28,.16)",no computed value,not-comparable
+https://mosaic.moksaweb.com/moksa/,_,mk-pan,backgroundColor,"rgb(255,90,54)","rgb(255, 90, 54)",ok
+https://mosaic.moksaweb.com/moksa/,_,mk-pan,paddingTop,34px,34px,ok
+https://mosaic.moksaweb.com/moksa/,_,mk-pan,paddingBottom,34px,34px,ok
+https://mosaic.moksaweb.com/moksa/,_,mk-pan,customStyles:overflow,hidden,no computed value,not-comparable
+https://mosaic.moksaweb.com/moksa/,_,mk-pan-track,display,flex,flex,ok
+https://mosaic.moksaweb.com/moksa/,_,mk-pan-track,columnGap,56px,56px,ok
+https://mosaic.moksaweb.com/moksa/,_,mk-pan-track,alignItems,baseline,baseline,ok
+https://mosaic.moksaweb.com/moksa/,_,mk-pan-track,customStyles:white-space,nowrap,no computed value,not-comparable
+https://mosaic.moksaweb.com/moksa/,_,mk-pan-track,customStyles:width,max-content,max-content resolves to a used value (2159.62px),not-comparable
 https://mosaic.moksaweb.com/moksa/,_,mk-plate-in,width,100%,viewport- or parent-relative,not-comparable
 https://mosaic.moksaweb.com/moksa/,_,mk-plate-in,maxWidth,1240px,1240px,ok
 https://mosaic.moksaweb.com/moksa/,_,mk-plate-in,marginLeft,auto,auto resolves to a used value (60px),not-comparable
@@ -1564,6 +1573,15 @@ https://mosaic.moksaweb.com/moksa/,_t,mk-mx-r-7,alignItems,center,center,ok
 https://mosaic.moksaweb.com/moksa/,_t,mk-mx-r-7,paddingTop,13px,13px,ok
 https://mosaic.moksaweb.com/moksa/,_t,mk-mx-r-7,paddingBottom,13px,13px,ok
 https://mosaic.moksaweb.com/moksa/,_t,mk-mx-r-7,customStyles:border-bottom,"1px solid rgba(22,24,28,.16)",no computed value,not-comparable
+https://mosaic.moksaweb.com/moksa/,_t,mk-pan,backgroundColor,"rgb(255,90,54)","rgb(255, 90, 54)",ok
+https://mosaic.moksaweb.com/moksa/,_t,mk-pan,paddingTop,34px,34px,ok
+https://mosaic.moksaweb.com/moksa/,_t,mk-pan,paddingBottom,34px,34px,ok
+https://mosaic.moksaweb.com/moksa/,_t,mk-pan,customStyles:overflow,hidden,no computed value,not-comparable
+https://mosaic.moksaweb.com/moksa/,_t,mk-pan-track,display,flex,flex,ok
+https://mosaic.moksaweb.com/moksa/,_t,mk-pan-track,columnGap,56px,56px,ok
+https://mosaic.moksaweb.com/moksa/,_t,mk-pan-track,alignItems,baseline,baseline,ok
+https://mosaic.moksaweb.com/moksa/,_t,mk-pan-track,customStyles:white-space,nowrap,no computed value,not-comparable
+https://mosaic.moksaweb.com/moksa/,_t,mk-pan-track,customStyles:width,max-content,max-content resolves to a used value (1843.08px),not-comparable
 https://mosaic.moksaweb.com/moksa/,_t,mk-plate-in,width,100%,viewport- or parent-relative,not-comparable
 https://mosaic.moksaweb.com/moksa/,_t,mk-plate-in,maxWidth,1240px,1240px,ok
 https://mosaic.moksaweb.com/moksa/,_t,mk-plate-in,marginLeft,auto,auto resolves to a used value (0px),not-comparable
@@ -2648,6 +2666,15 @@ https://mosaic.moksaweb.com/moksa/,_m,mk-mx-r-7,alignItems,center,center,ok
 https://mosaic.moksaweb.com/moksa/,_m,mk-mx-r-7,paddingTop,11px,11px,ok
 https://mosaic.moksaweb.com/moksa/,_m,mk-mx-r-7,paddingBottom,11px,11px,ok
 https://mosaic.moksaweb.com/moksa/,_m,mk-mx-r-7,customStyles:border-bottom,"1px solid rgba(22,24,28,.16)",no computed value,not-comparable
+https://mosaic.moksaweb.com/moksa/,_m,mk-pan,backgroundColor,"rgb(255,90,54)","rgb(255, 90, 54)",ok
+https://mosaic.moksaweb.com/moksa/,_m,mk-pan,paddingTop,22px,22px,ok
+https://mosaic.moksaweb.com/moksa/,_m,mk-pan,paddingBottom,22px,22px,ok
+https://mosaic.moksaweb.com/moksa/,_m,mk-pan,customStyles:overflow,hidden,no computed value,not-comparable
+https://mosaic.moksaweb.com/moksa/,_m,mk-pan-track,display,flex,flex,ok
+https://mosaic.moksaweb.com/moksa/,_m,mk-pan-track,columnGap,30px,30px,ok
+https://mosaic.moksaweb.com/moksa/,_m,mk-pan-track,alignItems,baseline,baseline,ok
+https://mosaic.moksaweb.com/moksa/,_m,mk-pan-track,customStyles:white-space,nowrap,no computed value,not-comparable
+https://mosaic.moksaweb.com/moksa/,_m,mk-pan-track,customStyles:width,max-content,max-content resolves to a used value (1211.17px),not-comparable
 https://mosaic.moksaweb.com/moksa/,_m,mk-plate-in,width,100%,viewport- or parent-relative,not-comparable
 https://mosaic.moksaweb.com/moksa/,_m,mk-plate-in,maxWidth,1240px,1240px,ok
 https://mosaic.moksaweb.com/moksa/,_m,mk-plate-in,marginLeft,auto,auto resolves to a used value (0px),not-comparable

@@ -334,6 +334,15 @@ BOOT_LOG = [
 ]
 RULER_TICKS = 13
 
+# FIGURE 01's rows. Up here with the other tables rather than beside the section
+# that draws it, because motion_css() reads it to build the arrow stagger and is
+# defined long before the figure is.
+FLOW = [
+    ("網站表單", "FORM", "n8n 節點", "WORKFLOW", "ERP 建單", "ERP"),
+    ("電商訂單", "ORDER", "Claude 判讀", "REASONING", "通知／報表", "NOTIFY"),
+    ("客服訊息", "INBOX", "分類與派工", "TRIAGE", "CRM 紀錄", "CRM"),
+]
+
 CLAUSES = [
     ("01", "SERVICES", "#services", "--mk-s1"),
     ("02", "PROCESS", "#process", "--mk-s2"),
@@ -396,6 +405,12 @@ def motion_css():
                           for i, (_g, items) in enumerate(STACK)
                           for j in range(len(items)))
     marks = ",".join("#mk-mark-%d" % i for i in range(4))
+    # the diagram's arrows, and the delay that makes the pulse travel down it
+    flow_arrows = ",".join("#mk-ar-%s-%d>*" % (c, i)
+                           for i in range(len(FLOW)) for c in ("a", "b"))
+    flow_stagger = "\n".join(
+        "  #mk-ar-%s-%d>*{animation-delay:%dms}" % (c, i, i * 260 + j * 130)
+        for i in range(len(FLOW)) for j, c in enumerate(("a", "b")))
     # the boot sequence, phase by phase: the clauses report in, the log writes
     # itself out a line at a time, and the ruler ticks up the left margin
     boot_stagger = "\n".join(
@@ -461,6 +476,15 @@ def motion_css():
         "@keyframes mk-idxon{from,to{color:rgb(255,90,54);"
         "letter-spacing:.2em}}",
         "@keyframes mk-dotin{from{transform:scale(0)}to{transform:scale(1)}}",
+        # the accent band pans sideways while it crosses the viewport
+        "@keyframes mk-pan{from{transform:translateX(2%)}"
+        "to{transform:translateX(-34%)}}",
+        # a headline that fills with ink as it is read past
+        "@keyframes mk-fillscrub{from{background-position:100% 0}"
+        "to{background-position:0 0}}",
+        # a pulse travelling down the diagram's arrows
+        "@keyframes mk-flow{0%{transform:translateX(-7px);opacity:.2}"
+        "45%{opacity:1}100%{transform:translateX(7px);opacity:.2}}",
 
         # ── the document frame ───────────────────────────────────────────────
         # A spec sheet has margins. These two fixed rules are what say the content
@@ -528,8 +552,14 @@ def motion_css():
 
         # the clause index. It needs room outside the document margin, so it only
         # appears once the viewport is wide enough to have that room.
-        "#mk-index{position:fixed;left:14px;top:50%;transform:translateY(-50%);"
-        "z-index:3;display:grid;row-gap:11px;pointer-events:auto}",
+        # The index is FIXED, so it does not sit on the ground it was declared
+        # against - it sits on whatever has scrolled underneath. Over the accent
+        # band its faint grey became unreadable. Giving it its own paper ground
+        # means it carries its background with it instead of borrowing one.
+        "#mk-index{position:fixed;left:8px;top:50%;transform:translateY(-50%);"
+        "z-index:3;display:grid;row-gap:11px;pointer-events:auto;"
+        "background:rgb(250,250,247);padding:14px 10px;"
+        "border:1px solid " + RULE + "}",
         "@media (max-width:1439px){#mk-index{display:none}}",
 
         # process: the sequence marker on each step, and the line it sits on
@@ -698,6 +728,8 @@ def motion_css():
         "  #mk-mast-meta{animation-delay:3.06s}",
         "  #mk-mast-lede{animation-delay:3.54s}",
         "  #mk-mast-cta{animation-delay:3.66s}",
+        "  " + flow_arrows + "{animation:mk-flow 1.9s ease-in-out infinite}",
+        flow_stagger,
         "  #mk-caret{animation:mk-caret 1.15s steps(1,end) infinite;"
         "animation-delay:3.84s}",
         "  #mk-mast-rule{animation:mk-drawx .9s cubic-bezier(.2,.7,.3,1) forwards;"
@@ -731,6 +763,28 @@ def motion_css():
         # the sequence markers pop as each step arrives
         "    " + proc_dots + "{animation:mk-dotin .01s linear both;"
         "animation-timeline:view();animation-range:entry 14% cover 26%}",
+        # the band pans across the whole time it is on screen
+        "    #mk-pan-track{animation:mk-pan linear both;"
+        "animation-timeline:view();animation-range:cover 0% cover 100%}",
+        # The statement fills with ink as it passes. The gradient is built so the
+        # UNANIMATED state shows the faint half - `color:transparent` plus
+        # `background-clip:text` is one of the few ways to make text that is
+        # genuinely invisible if its animation never runs, and the page must never
+        # depend on that. At `from` the visible half is the faint colour, so the
+        # worst case is a paler headline, not a missing one.
+        "    #mk-plate-t h2{background-image:linear-gradient(90deg,"
+        # The unfilled half is `--mk-faint`, not a decorative pale grey. At
+        # rgb(168,170,176) the tail of the line measured 2.3:1 against the panel
+        # while the scrub had not reached it - readable only once you had scrolled
+        # far enough, which is not a thing to ask of a sentence. This value clears
+        # 4.66:1 on its own, so the effect is a change in weight rather than a
+        # change between legible and not.
+        "rgb(22,24,28) 0 50%,rgb(107,109,113) 50% 100%);"
+        "background-size:220% 100%;background-position:100% 0;"
+        "-webkit-background-clip:text;background-clip:text;"
+        "color:rgba(0,0,0,0);"
+        "animation:mk-fillscrub linear both;animation-timeline:view();"
+        "animation-range:entry 24% cover 58%}",
         "  }",
         "  @supports (timeline-scope:--x){",
         # the index entry lights while its own section is on screen. No fill mode, so
@@ -1343,6 +1397,40 @@ CONTACT = section("contact", [wrap("mk-contact-in", [
         ]),
 ])])
 
+# ── the pan strip ─────────────────────────────────────────────────────────────
+# The page has no field of colour anywhere - the accent has only ever been a rule, a
+# mark or a small block. A band of it, with the whole line panning sideways as you
+# scroll down, is the one moment here that is purely about being looked at. Ink on
+# the accent measures 5.73:1, which is why the type is dark rather than light.
+PAN_WORDS = ["WEB", "COMMERCE", "AUTOMATION", "AI", "ERP", "SEO", "SOFTWARE"]
+
+PAN = box("mk-pan",
+          {"backgroundColor": {"token": "--mk-accent"},
+           "paddingTop": "34px", "paddingBottom": "34px",
+           "customStyles": "overflow:hidden;"},
+          _m={"paddingTop": "22px", "paddingBottom": "22px"},
+          children=[
+              box("mk-pan-track",
+                  {"display": "flex", "columnGap": "56px", "alignItems": "baseline",
+                   "customStyles": "white-space:nowrap;width:max-content;"},
+                  _m={"columnGap": "30px"},
+                  children=[
+                      node for i, w in enumerate(PAN_WORDS) for node in (
+                          box("mk-pan-n-%d" % i, {},
+                              [mono("%02d" % (i + 1), size="11px",
+                                    color="rgb(22,24,28)", track="0.18em")]),
+                          box("mk-pan-w-%d" % i, {},
+                              [T("p", w, color={"token": "--mk-ink"},
+                                 fontSize="58px", fontWeight="600",
+                                 fontFamily=DISPLAY, letterSpacing="-0.02em",
+                                 lineHeight="1",
+                                 _t={"fontSize": "44px"},
+                                 _m={"fontSize": "31px"})]),
+                      )
+                  ]),
+          ])
+
+
 # ── the capability matrix ─────────────────────────────────────────────────────
 # The page could tell you what the studio does; a specification SHOWS you, in a form
 # you can read across. Filled, half and hollow marks carry the whole answer without
@@ -1426,11 +1514,6 @@ MATRIX_SEC = section("matrix", [wrap("mk-mx-in", [
 # austere for eleven screens. A diagram is the one element that says something no
 # sentence here can, and drawn in hairline boxes it belongs to the same document
 # rather than arriving from a different one.
-FLOW = [
-    ("網站表單", "FORM", "n8n 節點", "WORKFLOW", "ERP 建單", "ERP"),
-    ("電商訂單", "ORDER", "Claude 判讀", "REASONING", "通知／報表", "NOTIFY"),
-    ("客服訊息", "INBOX", "分類與派工", "TRIAGE", "CRM 紀錄", "CRM"),
-]
 
 
 def flow_cell(attr, zh, en):
@@ -1661,7 +1744,7 @@ HOME_TREE = {"type": "div", "data": {"attrID": "mk-home"},
                  # paper, panel, paper, ink, paper, ink, paper - the page
                  # changes ground five times so it reads as chapters
                  MASTHEAD, TICKER_BAND, PLATE, SERVICE_SEC, MATRIX_SEC,
-                 PROCESS_SEC, FIGURE_SEC, WORK_SEC, SPECIMEN, STACK_SEC,
+                 PROCESS_SEC, FIGURE_SEC, WORK_SEC, PAN, SPECIMEN, STACK_SEC,
                  PRODUCT_SEC, VOICE_SEC, CONTACT,
              ])]}
 
