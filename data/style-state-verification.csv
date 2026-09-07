@@ -1,0 +1,53 @@
+state,scope,host,selector_template,status,evidence
+focus,global,div,&:FOCUS,COMPILED,.M_EL7:FOCUS
+focus-visible,global,div,&:FOCUS-VISIBLE,COMPILED,.M_EL8:FOCUS-VISIBLE
+hover,global,div,&:HOVER,COMPILED,.M_EL9:HOVER
+hover-on-link,global,div,":where(a[href]:not([disabled]),button:not([disabled])):HOVER &",COMPILED,":where(a[href]:not([disabled]),button:not([disabled])):HOVER .M_EL10"
+hover-on-tab,global,div,:where(.M_EL_Tab:not(.M_EL_Tab--active)):HOVER &,COMPILED,:where(.M_EL_Tab:not(.M_EL_Tab--active)):HOVER .M_EL11
+hover-tab,global,div,&:where(.M_EL_Tab:not(.M_EL_Tab--active)):HOVER,COMPILED,.M_EL12:where(.M_EL_Tab:not(.M_EL_Tab--active)):HOVER
+hover-when-link,global,div,"&:where([tabindex]:not([tabindex=""-1""]),a[href]:not([disabled]),button:not([disabled])):HOVER",COMPILED,".M_EL13:where([tabindex]:not([tabindex=""-1""]),a[href]:not([disabled]),button:not([disabled"
+____loop_pagination_number--active,node-type,loop-pagination-number,&.M_EL_LoopPaginationNumber--active,NO_HOST,host loop-pagination-number is COMMIT_500 - committing it breaks the page
+____loop_pagination_number_ellipsis,node-type,loop-pagination-number,&.M_EL_LoopPaginationNumber_ellipsis,NO_HOST,host loop-pagination-number is COMMIT_500 - committing it breaks the page
+___arrow_hidden,node-type,,&:where(.M_EL_SliderArrow--hidden),SKIPPED,no node type declares Mosaic/NodeTypes/Pro/Slider/SliderArrow/SliderArrowElementTypeFactoryAbstract.php
+___checkbox-input--checked,node-type,checkbox-input,&:checked,NO_HOST,host checkbox-input is BROKE_PAGE - committing it breaks the page
+___checkbox-input--checkmark,node-type,checkbox-input,&:checked::before,NO_HOST,host checkbox-input is BROKE_PAGE - committing it breaks the page
+___choice--checked,node-type,choice,&:has(:where(input):checked),COMPILED,.M_EL7:has(:where(input):checked)
+___choice--checked-within,node-type,choice,.M_EL_Choice:where(:has(input:checked)) &,COMPILED,.M_EL_Choice:where(:has(input:checked)) .M_EL8
+___choice--focus-visible,node-type,choice,&:has(:where(input):focus-visible),COMPILED,.M_EL9:has(:where(input):focus-visible)
+___choice-field--invalid,node-type,choice-field,&:has(:user-invalid),COMPILED,.M_EL7:has(:user-invalid)
+___choice-field--invalid-within,node-type,choice-field,.M_EL_ChoiceField:where(:has(:user-invalid)) &,COMPILED,.M_EL_ChoiceField:where(:has(:user-invalid)) .M_EL10
+___dropdown--opening,node-type,,.M_EL_Dropdown:where(.dropdown--opening) &,SKIPPED,no node type declares Mosaic/NodeTypes/Menu/Dropdown/DropdownElementTypeFactoryAbstract.php
+___dropdown-toggle--current,node-type,dropdown-toggle,&.M_EL_DropdownToggle--current,COMPILED,.M_EL7.M_EL_DropdownToggle--current
+___dropdown-toggle--current-within,node-type,dropdown-toggle,".M_EL_Dropdown:where(:has(.M_EL_MenuLink--current,.M_EL_DropdownToggle--current)) > &",COMPILED,".M_EL_Dropdown:where(:has(.M_EL_MenuLink--current,.M_EL_DropdownToggle--current)) > .M_EL8"
+___field--focus-visible,node-type,field,"&:has(:where(input, textarea, select):focus-visible)",COMPILED,".M_EL7:has(:where(input, textarea, select):focus-visible)"
+___field--invalid,node-type,field,&:has(:user-invalid),COMPILED,.M_EL8:has(:user-invalid)
+___field--invalid-focus-visible,node-type,field,&:has(:user-invalid:focus-visible),COMPILED,.M_EL9:has(:user-invalid:focus-visible)
+___field--invalid-within,node-type,field,.M_EL_Field:where(:has(:user-invalid)) &,COMPILED,.M_EL_Field:where(:has(:user-invalid)) .M_EL10
+___field-set--invalid,node-type,fieldset,&:has(:user-invalid),COMPILED,.M_EL7:has(:user-invalid)
+___fileupload-input--selector-button,node-type,fileupload-input,&::file-selector-button,COMPILED,.M_EL7::file-selector-button
+___fileupload-input--selector-button-hover,node-type,fileupload-input,&::file-selector-button:hover,COMPILED,.M_EL8::file-selector-button:hover
+___form--error,node-type,form-wrapper,"&[data-form-state=""error""]",COMPILED,".M_EL7[data-form-state=""error""]"
+___form--invalid-within,node-type,form-wrapper,.M_EL_FormWrapper:where(:has(:user-invalid)) &,COMPILED,.M_EL_FormWrapper:where(:has(:user-invalid)) .M_EL10
+___input--placeholder,node-type,text-input,&.M_EL_InputText::placeholder,COMPILED,.M_EL7.M_EL_InputText::placeholder
+___loop_element_no_result,node-type,loop,&.M_EL_Loop--no-result,NO_HOST,host loop is COMMIT_500 - committing it breaks the page
+___loop_pagination_button--disabled,node-type,loop-pagination-button-next,&.M_EL_LoopPaginationButton--disabled,BROKE_PAGE,this host's page did not render
+___menu-link--current,node-type,menu-link,&.M_EL_MenuLink--current,COMPILED,.M_EL7.M_EL_MenuLink--current
+___navbar--dropdown-mode,node-type,navbar,"&:where(.M_EL_Navbar.dropdown-mode,.M_EL_Navbar.dropdown-mode &)",COMPILED,".M_EL7:where(.M_EL_Navbar.dropdown-mode,.M_EL_Navbar.dropdown-mode .M_EL7)"
+___navbar--opened,node-type,navbar,.dropdown-mode:where(.M_EL_Navbar.dropdown--opened) &,COMPILED,.dropdown-mode:where(.M_EL_Navbar.dropdown--opened) .M_EL8
+___navbar--opening,node-type,navbar,.dropdown-mode:where(.M_EL_Navbar.dropdown--opening) &,COMPILED,.dropdown-mode:where(.M_EL_Navbar.dropdown--opening) .M_EL9
+___nested_dropdown_mode,node-type,,"&:where(.dropdown-mode .M_EL_Navigation .M_EL_Dropdown &, .M_EL_Dropdown .M_EL_Dropdown &):not(x)",SKIPPED,no node type declares Mosaic/NodeTypes/Menu/Dropdown/DropdownElementTypeFactoryAbstract.php
+___radio-input--checked,node-type,radio-input,&:checked,NO_HOST,host radio-input is BROKE_PAGE - committing it breaks the page
+___radio-input--checkmark,node-type,radio-input,&:checked::before,NO_HOST,host radio-input is BROKE_PAGE - committing it breaks the page
+___select-input-option,node-type,select-input,"&.M_EL_Select:where(:has(option:not(:disabled):checked)), &.M_EL_Select :where(option)",COMPILED,".M_EL7.M_EL_Select:where(:has(option:not(:disabled):checked)), .M_EL7.M_EL_Select :where(o"
+___select-input-option--disabled,node-type,select-input,"&.M_EL_Select:where(:has(option:disabled:checked)), &.M_EL_Select :where(option:disabled)",COMPILED,".M_EL8.M_EL_Select:where(:has(option:disabled:checked)), .M_EL8.M_EL_Select :where(option:"
+___slide--active,node-type,slider-slide,.M_EL_SliderSlide--active > &,NO_HOST,host slider-slide is BROKE_PAGE - committing it breaks the page
+___slider_navigation_bullet--active,node-type,slider-navigation-bullet,&.M_EL_SliderNavigationBullet--active,NO_HOST,host slider-navigation-bullet is COMMIT_500 - committing it breaks the page
+___slider_navigation_bullet--hover,node-type,slider-navigation-bullet,&:not(.M_EL_SliderNavigationBullet--active):HOVER,NO_HOST,host slider-navigation-bullet is COMMIT_500 - committing it breaks the page
+___step--active,node-type,form-multi-steps-step,&.M_EL_Step--active,COMPILED,.M_EL7.M_EL_Step--active
+___step--active___descendants,node-type,form-multi-steps-step,.M_EL_Step--active &,COMPILED,.M_EL_Step--active .M_EL8
+___step--completed,node-type,form-multi-steps-step,&.M_EL_Step--completed,COMPILED,.M_EL9.M_EL_Step--completed
+___step--completed___descendants,node-type,form-multi-steps-step,.M_EL_Step--completed &,COMPILED,.M_EL_Step--completed .M_EL10
+___submit-button--busy,node-type,submit-button,"&[aria-busy=""true""]",COMPILED,".M_EL7[aria-busy=""true""]"
+___tab--active,node-type,tabs-tab,&.M_EL_Tab--active,NO_HOST,host tabs-tab is BROKE_PAGE - committing it breaks the page
+___tab--active___descendants,node-type,tabs-tab,.M_EL_Tab--active &,NO_HOST,host tabs-tab is BROKE_PAGE - committing it breaks the page
+___textarea-input--placeholder,node-type,textarea-input,&.M_EL_TextArea::placeholder,COMPILED,.M_EL7.M_EL_TextArea::placeholder

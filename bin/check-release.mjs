@@ -79,7 +79,9 @@ const counts = {
   "data/style-verification.csv": 98,
   "data/node-property-verification.csv": 181,
   "data/rwd-verification.csv": 576,
-  "data/browser-verification.csv": 2237,
+  "data/browser-verification.csv": 2282,
+  "data/style-state-verification.csv": 52,
+  "data/interaction-verification.csv": 7,
   "data/data-class-hierarchy.csv": 121,
 };
 for (const [file, expected] of Object.entries(counts)) {

@@ -262,6 +262,11 @@
                  "token": "--mk-accent"
                 }
                }
+              },
+              "focus-visible": {
+               "_": {
+                "customStyles": "outline:2px solid rgb(255,90,54);outline-offset:3px;"
+               }
               }
              },
              "text": "服務"
@@ -294,6 +299,11 @@
                 "color": {
                  "token": "--mk-accent"
                 }
+               }
+              },
+              "focus-visible": {
+               "_": {
+                "customStyles": "outline:2px solid rgb(255,90,54);outline-offset:3px;"
                }
               }
              },
@@ -328,6 +338,11 @@
                  "token": "--mk-accent"
                 }
                }
+              },
+              "focus-visible": {
+               "_": {
+                "customStyles": "outline:2px solid rgb(255,90,54);outline-offset:3px;"
+               }
               }
              },
              "text": "產品"
@@ -360,6 +375,11 @@
                 "color": {
                  "token": "--mk-accent"
                 }
+               }
+              },
+              "focus-visible": {
+               "_": {
+                "customStyles": "outline:2px solid rgb(255,90,54);outline-offset:3px;"
                }
               }
              },
@@ -411,6 +431,11 @@
               "color": {
                "token": "--mk-ink"
               }
+             }
+            },
+            "focus-visible": {
+             "_": {
+              "customStyles": "outline:2px solid rgb(255,90,54);outline-offset:3px;"
              }
             }
            },
@@ -1081,6 +1106,11 @@
               "token": "--mk-ink"
              }
             }
+           },
+           "focus-visible": {
+            "_": {
+             "customStyles": "outline:2px solid rgb(255,90,54);outline-offset:3px;"
+            }
            }
           },
           "text": "§01  SERVICES"
@@ -1112,6 +1142,11 @@
              "color": {
               "token": "--mk-ink"
              }
+            }
+           },
+           "focus-visible": {
+            "_": {
+             "customStyles": "outline:2px solid rgb(255,90,54);outline-offset:3px;"
             }
            }
           },
@@ -1145,6 +1180,11 @@
               "token": "--mk-ink"
              }
             }
+           },
+           "focus-visible": {
+            "_": {
+             "customStyles": "outline:2px solid rgb(255,90,54);outline-offset:3px;"
+            }
            }
           },
           "text": "§03  WORKS"
@@ -1176,6 +1216,11 @@
              "color": {
               "token": "--mk-ink"
              }
+            }
+           },
+           "focus-visible": {
+            "_": {
+             "customStyles": "outline:2px solid rgb(255,90,54);outline-offset:3px;"
             }
            }
           },
@@ -1209,6 +1254,11 @@
               "token": "--mk-ink"
              }
             }
+           },
+           "focus-visible": {
+            "_": {
+             "customStyles": "outline:2px solid rgb(255,90,54);outline-offset:3px;"
+            }
            }
           },
           "text": "§05  PRODUCTS"
@@ -1241,6 +1291,11 @@
               "token": "--mk-ink"
              }
             }
+           },
+           "focus-visible": {
+            "_": {
+             "customStyles": "outline:2px solid rgb(255,90,54);outline-offset:3px;"
+            }
            }
           },
           "text": "§06  VOICES"
@@ -1272,6 +1327,11 @@
              "color": {
               "token": "--mk-ink"
              }
+            }
+           },
+           "focus-visible": {
+            "_": {
+             "customStyles": "outline:2px solid rgb(255,90,54);outline-offset:3px;"
             }
            }
           },
@@ -1705,6 +1765,11 @@
                      "transitionAll": "180ms ease"
                     }
                    },
+                   "focus-visible": {
+                    "_": {
+                     "customStyles": "outline:2px solid rgb(255,90,54);outline-offset:3px;"
+                    }
+                   },
                    "hover": {
                     "_": {
                      "backgroundColor": {
@@ -1740,6 +1805,11 @@
                      "radius": "0px",
                      "cursor": "pointer",
                      "transitionAll": "180ms ease"
+                    }
+                   },
+                   "focus-visible": {
+                    "_": {
+                     "customStyles": "outline:2px solid rgb(255,90,54);outline-offset:3px;"
                     }
                    },
                    "hover": {
@@ -6315,7 +6385,7 @@
                    "alignItems": "baseline",
                    "paddingTop": "18px",
                    "paddingBottom": "18px",
-                   "customStyles": "border-top:1px solid rgba(22,24,28,.16);"
+                   "customStyles": "border-top:1px solid rgba(22,24,28,.16);animation:mk-rise both;animation-timeline:view();animation-range:entry 2% cover 18%;"
                   },
                   "_m": {
                    "gridCols": "1fr",
@@ -6555,7 +6625,7 @@
                    "alignItems": "baseline",
                    "paddingTop": "18px",
                    "paddingBottom": "18px",
-                   "customStyles": "border-top:1px solid rgba(22,24,28,.16);"
+                   "customStyles": "border-top:1px solid rgba(22,24,28,.16);animation:mk-rise both;animation-timeline:view();animation-range:entry 6% cover 22%;"
                   },
                   "_m": {
                    "gridCols": "1fr",
@@ -6795,7 +6865,7 @@
                    "alignItems": "baseline",
                    "paddingTop": "18px",
                    "paddingBottom": "18px",
-                   "customStyles": "border-top:1px solid rgba(22,24,28,.16);"
+                   "customStyles": "border-top:1px solid rgba(22,24,28,.16);animation:mk-rise both;animation-timeline:view();animation-range:entry 10% cover 26%;"
                   },
                   "_m": {
                    "gridCols": "1fr",
@@ -7035,7 +7105,7 @@
                    "alignItems": "baseline",
                    "paddingTop": "18px",
                    "paddingBottom": "18px",
-                   "customStyles": "border-top:1px solid rgba(22,24,28,.16);"
+                   "customStyles": "border-top:1px solid rgba(22,24,28,.16);animation:mk-rise both;animation-timeline:view();animation-range:entry 14% cover 30%;"
                   },
                   "_m": {
                    "gridCols": "1fr",
@@ -7275,7 +7345,7 @@
                    "alignItems": "baseline",
                    "paddingTop": "18px",
                    "paddingBottom": "18px",
-                   "customStyles": "border-top:1px solid rgba(22,24,28,.16);"
+                   "customStyles": "border-top:1px solid rgba(22,24,28,.16);animation:mk-rise both;animation-timeline:view();animation-range:entry 18% cover 34%;"
                   },
                   "_m": {
                    "gridCols": "1fr",

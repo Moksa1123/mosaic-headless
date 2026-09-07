@@ -68,16 +68,61 @@ Confirmed from it:
   it is a percentage of the scroll range, not milliseconds.
 - **`easing` is defaulted to `ease`** by the server.
 
-## What is NOT solved
+## What is NOT solved - and exactly how far it now goes
 
-**Property binding.** `propertyMetas` and per-keyframe `properties` did not survive
-into the payload in any shape tried: flat array of metas, metas nested one level
-deeper (which made the whole interaction vanish), properties as an object, properties
-as an array. The keyframes arrive with timing but with nothing to animate.
+`tools/sweep_interactions.py` commits candidate shapes to a live page and judges each
+against `var mosaicInteractions` in the delivered HTML **and** against the row read
+back out of the database, with negative controls. Results in
+`data/interaction-verification.csv`.
 
-Do not ship an interaction animation on the strength of this page. Use the CSS path,
-or drive the editor once by hand and read the stored row back out of `wp_mosaic_nodes`
-— that row is the authoritative example, and one look at it would settle the shape.
+**`propertyMetas` is NOT the problem, and the previous claim here was wrong.** It is
+accepted, stored, and keeps its order:
+
+```json
+"propertyMetas": [{"uuid": "<uuid>", "type": "predefined", "timelineKey": "_",
+                   "predefinedOptions": {"name": "opacity"}}]
+```
+
+`type` is one of `predefined | custom | static | collectionMode | collectionVariable
+| display`; the options key is that type plus `Options`
+(`KeyframePropertyMetaTypeFactoryAbstract::getPropertyMetaOptionsDataName()`), and
+for `predefined` the `name` is the property itself - the full list is
+`data/animatable-properties.csv`.
+
+**`uuid` is optional on create and REQUIRED on update.** `DataArray::initValues`
+mints one when it is missing, but `DataArray::applyCommitData` matches existing items
+by uuid and rebuilds `order` from `array_column($new, 'uuid')` - so on any later
+commit an item without a uuid is not matched, not carried into the new order, and
+disappears. Measured both ways: the same shape stored 1 meta on create and 0 after an
+update.
+
+**What still does not bind is `initial` and the keyframes' `properties`.** Four
+attempts, each with the row read back:
+
+| attempt | result |
+|---|---|
+| one commit carrying metas + values | metas stored, 0 property values |
+| second commit adding the values | metas stored, 0 property values |
+| second commit that also REORDERS the metas, so `propertyMetas/order` genuinely changes | reorder took effect in storage, still 0 property values |
+| the values written **straight into `wp_mosaic_nodes`**, all caches flushed | still absent from the payload |
+
+That last row is the informative one: it rules out the trust model, the commit
+validators and the cache. The gate is in the export itself -
+`KeyframePropertiesDataSub::exportForInteraction()` will only emit a property for
+which `$this->hasSubData($name)` is true, and those descriptors exist only where
+`AnimationActionOptionsDataSubAbstract::syncAttachedPropertyMetas()` has created
+them, on a shared `DataMeta` that starts empty every time the object is constructed.
+
+So the honest position is: **the envelope, the trigger, the timeline and the property
+metas can all be written headlessly; the property VALUES have not been.** Use the CSS
+path, which is fully verified - see `data/style-state-verification.csv`, where 36 of
+37 probed states compiled to exactly the selector the table promises.
+
+The one experiment left, and it is cheap: author a single interaction in the editor,
+then `SELECT data FROM wp_mosaic_nodes` for that node. One look settles it.
+
+**`pointerEnter` produced no `mosaicInteractions` entry at all**, so the timed family
+needs something the progress family does not - also unfinished.
 
 ## The failure mode that makes this hard
 

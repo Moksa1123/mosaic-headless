@@ -72,10 +72,22 @@ def T(tag, text, _t=None, _m=None, **st):
             "style": bp(st, _t, _m) if (st or _t or _m) else None}
 
 
-def box(attr, style, children, hover=None, _t=None, _m=None):
+# The keyboard is a state too.
+#
+# `focus-visible` was verified by sweep_style_states.py to compile to
+# `.M_EL<n>:FOCUS-VISIBLE` - note the UPPERCASE pseudo-class Mosaic emits, which is
+# why grepping a delivered stylesheet for ":focus-visible" finds nothing at all. Of
+# the seven globally usable states this page used exactly one, `hover`, which means
+# every route through it was invisible to anyone not using a mouse.
+FOCUS_RING = {"customStyles": "outline:2px solid rgb(255,90,54);outline-offset:3px;"}
+
+
+def box(attr, style, children, hover=None, focus=None, _t=None, _m=None):
     s = bp(style, _t, _m) or {"&": {"_": {}}}
     if hover:
         s["hover"] = {"_": hover}
+    if focus:
+        s["focus-visible"] = {"_": focus}
     return {"type": "div", "data": {"attrID": attr}, "style": s, "children": children}
 
 
@@ -632,7 +644,8 @@ HEADER = box("mk-shell-top", {}, [
                                              "transitionAll": "160ms ease",
                                              "cursor": "pointer"},
                                        "_m": {"fontSize": "12px"}},
-                                 "hover": {"_": {"color": {"token": "--mk-accent"}}}},
+                                 "hover": {"_": {"color": {"token": "--mk-accent"}}},
+                                 "focus-visible": {"_": FOCUS_RING}},
                        "text": text}
                       for i, (text, href) in enumerate(NAV)
                   ]},
@@ -656,7 +669,8 @@ HEADER = box("mk-shell-top", {}, [
                                                    "color": "rgb(255,90,54)"},
                                         "transitionAll": "180ms ease"}},
                             "hover": {"_": {"backgroundColor": {"token": "--mk-accent"},
-                                            "color": {"token": "--mk-ink"}}}},
+                                            "color": {"token": "--mk-ink"}}},
+                            "focus-visible": {"_": FOCUS_RING}},
                   "text": "START A PROJECT"},
              ]}
         ])]),
@@ -790,6 +804,7 @@ MASTHEAD = section("mk-mast", [wrap("mk-mast-in", [
                                "border-bottom-color:rgb(22,24,28);"},
               fontSize="13px", fontFamily=MONO, letterSpacing="0.1em",
               radius="0px", cursor="pointer", transitionAll="180ms ease")},
+                    "focus-visible": {"_": FOCUS_RING},
                     "hover": {"_": ({"backgroundColor": {"token": "--mk-ink"},
                                      "customStyles": "border:1px solid rgb(22,24,28);"}
                                     if n == 1
@@ -937,7 +952,15 @@ STACK_SEC = section("stack", [wrap("mk-stack-in", [
                     {"display": "grid", "gridCols": "160px 1fr", "columnGap": "24px",
                      "alignItems": "baseline",
                      "paddingTop": "18px", "paddingBottom": "18px",
-                     "customStyles": "border-top:1px solid " + RULE + ";"},
+                     # Each row arrives on its own, staggered by pushing its
+                     # animation-range further down the scroll rather than by a
+                     # delay: a scroll-driven animation has no clock to delay
+                     # against, so the offset has to live in the range.
+                     "customStyles":
+                         "border-top:1px solid " + RULE + ";"
+                         "animation:mk-rise both;animation-timeline:view();"
+                         "animation-range:entry %d%% cover %d%%;"
+                         % (2 + i * 4, 18 + i * 4)},
                     _m={"gridCols": "1fr", "rowGap": "10px",
                         "paddingTop": "16px", "paddingBottom": "16px"},
                     children=[
@@ -1176,7 +1199,8 @@ INDEX = box("mk-index", {}, [
                            "fontFamily": MONO, "fontSize": "10px",
                            "letterSpacing": "0.14em",
                            "transitionAll": "220ms ease"}},
-               "hover": {"_": {"color": {"token": "--mk-ink"}}}},
+               "hover": {"_": {"color": {"token": "--mk-ink"}}},
+               "focus-visible": {"_": FOCUS_RING}},
      "text": "§" + num + "  " + name}
     for i, (num, name, href, _tl) in enumerate(CLAUSES)
 ])

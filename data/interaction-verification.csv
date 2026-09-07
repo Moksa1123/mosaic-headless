@@ -1,0 +1,8 @@
+candidate,note,status,evidence,stored
+metas-with-uuid,the hypothesis: DataArray items carry their own uuid,TIMING_ONLY,"1 keyframes, no properties","stored: 1 metas, 0 property values"
+metas-without-uuid,NEGATIVE CONTROL - identical but the meta has no uuid,TIMING_ONLY,"1 keyframes, no properties","stored: 1 metas, 0 property values"
+properties-keyed-by-meta-uuid,"NEGATIVE CONTROL - properties keyed by the meta's uuid, not name",TIMING_ONLY,"1 keyframes, no properties","stored: 1 metas, 0 property values"
+no-initial,does the initial block have to be there?,TIMING_ONLY,"1 keyframes, no properties","stored: 1 metas, 0 property values"
+two-properties,"more than one meta, and a transform among them",TIMING_ONLY,"1 keyframes, no properties","stored: 2 metas, 0 property values"
+two-keyframes,a real timeline rather than a single step,TIMING_ONLY,"2 keyframes, no properties","stored: 1 metas, 0 property values"
+timed-trigger,the timed family rather than the progress family,NO_PAYLOAD,no entry for this trigger selector,"stored: 0 metas, 0 property values"

@@ -4,7 +4,7 @@ description: |
   Build and modify Mosaic Pro (Nextend) sites by writing the underlying data model directly - no visual editor, no DOM. Query the real surface with `mo.py`, which joins every source table to the live sweeps so a lookup leads with the measured verdict rather than the declaration (122 node types, 181 properties, 98 style properties with 20 structured value shapes pinned down, 53 style states, 151 element classes, 74 dynamic variables, 12 interaction triggers, 114 REST routes, 23 tables) instead of guessing, with every node type placed on a live site one at a time and asserted against the delivered HTML, the design-token and element-class layers verified against compiled CSS, the @VAR() dynamic language verified against rendered output, nine designed pages built through the tables themselves, and the delivered page re-read in Chromium at three viewports so a rule that is present, correct and still wrong cannot pass.
 license: "MIT"
 author: "moksa (https://moksaweb.com)"
-version: "1.3.0"
+version: "1.4.0"
 ---
 
 # Headless Mosaic
@@ -38,6 +38,7 @@ python tools/mo.py props --shared           # the ones every element carries
 python tools/mo.py style --grouped          # the 20 that are inert set on their own
 python tools/mo.py css border-radius        # which Mosaic key drives this CSS
 python tools/mo.py states --grep hover      # state IDs and their selector templates
+python tools/mo.py states --verified        # only the ones measured to compile
 python tools/mo.py vars --namespace post    # the @VAR() surface
 python tools/mo.py classes --grep Heading   # element classes (theme-global)
 python tools/mo.py routes --grep template
@@ -139,9 +140,24 @@ PROPERTIES   170 probes over the declared property surface, each value asserted
              against the delivered markup and the compiled CSS separately.
              data/property-verification.csv
 
-BROWSER      2,237 computed-style readings on the delivered page in Chromium, at
+STATES       52 of the 53 style states written to a live page and matched against
+             the selector `data/style-states.csv` promises: 36 COMPILED exactly,
+             1 BROKE_PAGE, 12 NO_HOST (their node type cannot be committed safely),
+             3 SKIPPED. All seven globally usable states verified - and the
+             pseudo-classes are emitted UPPERCASE (`.M_EL9:HOVER`), so grepping a
+             stylesheet for `:hover` finds nothing. data/style-state-verification.csv
+
+INTERACTION  the JS animation path, probed with negative controls and the row read
+             back: `propertyMetas` IS accepted and stored (the earlier claim that it
+             never survived was wrong), `uuid` per item is optional on create and
+             required on update, and the property VALUES still do not bind - not on
+             a second commit, not on one that changes `propertyMetas/order`, and not
+             written straight into the table with caches flushed.
+             data/interaction-verification.csv
+
+BROWSER      2,282 computed-style readings on the delivered page in Chromium, at
              three viewports: every declared property vs `getComputedStyle` on the
-             node it targets. 1,661 compared and agreed, 576 not-comparable and
+             node it targets. 1,676 compared and agreed, 606 not-comparable and
              labelled as such, 0 overridden. Plus a design audit that only a browser
              can run - font fallback, tracking against script, text contrast,
              horizontal overflow, clipped text, line measure - currently 0 findings.
@@ -232,9 +248,17 @@ so the pattern is in the data, not just in this paragraph.
   All four are real entries in `data/style-properties.csv`, under `gridChildPosition`.
   Measured: 16 `gridColumnStart` declarations committed, zero occurrences of
   `grid-column` in the delivered CSS. Change the template; you cannot place a child.
-- **Interaction property binding is unsolved.** The trigger, action slot and keyframe
-  timing all reach the browser; `propertyMetas` and per-keyframe `properties` do not.
-  Animate with the CSS transition/state path, which is fully verified.
+- **Interaction property binding is unsolved, but the boundary is now exact.** The
+  trigger, action slot, keyframe timing **and `propertyMetas`** all reach the
+  browser - the earlier claim that `propertyMetas` never survived was wrong, and the
+  missing field was the per-item `uuid` a `DataArray` needs. What still does not bind
+  is `initial` and the keyframes' `properties`, and not for want of the right shape:
+  they are absent after a second commit, after one that changes `propertyMetas/order`,
+  and after writing them **straight into `wp_mosaic_nodes` with every cache flushed**.
+  The gate is `KeyframePropertiesDataSub::exportForInteraction()`, which emits only
+  properties whose descriptor exists, and those are created during sync on a
+  `DataMeta` that starts empty. Animate with the CSS state path, which is fully
+  verified: 36 of 37 probed states compile to exactly the promised selector.
 - Committing a **condition** has not been driven end to end. The grammar in
   `references/templates-and-conditions.md` is read from source and from the live
   metas; an element carrying one rendered as hidden, which is consistent with the
@@ -280,9 +304,11 @@ so the pattern is in the data, not just in this paragraph.
 | `data/node-property-verification.csv` | 181 | **swept live** — each property probed with a value shaped by its own validator chain, on a type that declares it |
 | `data/style-verification.csv` | 98 | **swept live** — every style property written to a page and checked against the compiled CSS, with its group beside the result |
 | `data/rwd-verification.csv` | 576 | **checked live** - every `_t`/`_m` declaration vs the served stylesheet, with status per row |
-| `data/browser-verification.csv` | 2237 | **computed in Chromium** - declared vs `getComputedStyle` at three viewports, `not-comparable` labelled per row |
+| `data/browser-verification.csv` | 2282 | **computed in Chromium** - declared vs `getComputedStyle` at three viewports, `not-comparable` labelled per row |
 | `data/design-audit.csv` | 0 | **computed in Chromium** - contrast, font fallback, CJK tracking, overflow, measure. Empty means it ran and found nothing |
 | `data/data-class-hierarchy.csv` | 121 | source - every data class and its parent, so a type's inherited properties can be resolved |
+| `data/style-state-verification.csv` | 52 | **swept live** - each state written on a host of its own type and matched against its promised selector |
+| `data/interaction-verification.csv` | 7 | **probed live** - interaction animation shapes, with negative controls and the stored row beside the payload |
 | `data/element-classes.csv` | 151 | **live** — the built-in class metas; their IDs are what an `elementClass` record must use |
 | `data/dynamic-variables.csv` | 74 | source — every `@VAR('ns/name')` expression, by namespace |
 | `data/evaluator-functions.csv` | 19 | source — the `@` functions with their arity |
@@ -386,6 +412,8 @@ post — `build_all.py` resets first for that reason.
 | `sweep_node_types.py` | commit every node type one per document and assert the delivered HTML |
 | `sweep_style_properties.py` | write every style property and check the compiled CSS |
 | `sweep_node_properties.py` | probe every node property with a value from its own validator chain |
+| `sweep_style_states.py` | write every style state and check the selector it compiled to |
+| `sweep_interactions.py` | which interaction animation shapes survive to the frontend payload |
 | `theme_export.php` / `theme_import.php` | move a whole theme across installs, ids intact |
 | `copy_styles.py` | push one node's style onto others, by attrID or prefix |
 | `bootstrap_probe_theme.php` | a licence-free scratch theme |
@@ -413,6 +441,8 @@ python tools/verify_rwd.py --config sweep.json --site sites/moksa.json --csv dat
 python tools/verify_browser.py --config sweep.json --site sites/moksa.json     --csv data/browser-verification.csv --audit data/design-audit.csv
 python tools/sweep_style_properties.py --config sweep.json --page moksa --csv data/style-verification.csv
 python tools/sweep_node_properties.py  --config sweep.json --page moksa --csv data/node-property-verification.csv
+python tools/sweep_style_states.py --config sweep.json --post 20 --slug probe-lab     --csv data/style-state-verification.csv
+python tools/sweep_interactions.py --config sweep.json --post 20 --slug probe-lab     --csv data/interaction-verification.csv
 wp eval-file tools/theme_export.php active > theme.json
 wp eval-file tools/theme_import.php theme.json "Copy" rebind activate
 python tools/probe.py --config lab.json --cases cases.json   # ad-hoc measurement

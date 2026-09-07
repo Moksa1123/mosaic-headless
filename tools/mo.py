@@ -410,13 +410,40 @@ def cmd_css(a):
 
 
 def cmd_states(a):
-    out = [r for r in rows("style-states")
-           if matches(r["state"], a.grep) or matches(r["selector_template"], a.grep)]
-    emit(out, lambda: (
-        table(["state", "selector", "scope"],
-              [[r["state"], r["selector_template"], r["scope"]] for r in out]),
+    """A state joined to whether it was ever seen to compile.
+
+    `style-states.csv` is what the source declares. `--verified` is the view that
+    answers the question you actually have when you are about to write one: a state
+    whose only host takes the whole page down is not a style you can use."""
+    ver = index("style-state-verification", "state")
+    out = []
+    for r in rows("style-states"):
+        if not (matches(r["state"], a.grep)
+                or matches(r["selector_template"], a.grep)):
+            continue
+        v = ver.get(r["state"], {})
+        status = v.get("status", "base state" if r["state"] == "&" else "")
+        if a.verified and status != "COMPILED":
+            continue
+        out.append({"state": r["state"], "selector": r["selector_template"],
+                    "scope": r["scope"], "host": v.get("host", ""),
+                    "status": status, "compiled_to": v.get("evidence", "")})
+
+    def render():
+        table(["state", "scope", "host", "swept", "selector"],
+              [[r["state"], r["scope"], r["host"], r["status"], r["selector"][:50]]
+               for r in out])
+        usable = [r for r in out
+                  if r["scope"] == "global" and r["status"] == "COMPILED"]
         print("\n%d states. `&` is the base state; the breakpoint axis is separate "
-              "(_ / _t / _m)." % len(out))))
+              "(_ / _t / _m)." % len(out))
+        if usable:
+            print("%d go on ANY element: %s"
+                  % (len(usable), ", ".join(r["state"] for r in usable)))
+        print("The pseudo-class is emitted UPPERCASE (`.M_EL9:HOVER`), so grepping a "
+              "stylesheet\nfor `:hover` finds nothing.")
+
+    emit(out, render)
 
 
 def cmd_classes(a):
@@ -654,6 +681,8 @@ def main():
 
     p = add("states", cmd_states, "style states and their selectors")
     p.add_argument("--grep")
+    p.add_argument("--verified", action="store_true",
+                   help="only states measured to compile to their promised selector")
 
     p = add("classes", cmd_classes, "element classes (theme-global)")
     p.add_argument("--grep")
