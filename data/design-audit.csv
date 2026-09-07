@@ -1,4 +1,4 @@
 url,breakpoints,check,level,node,detail,sample
-https://mosaic.moksaweb.com/moksa/,"_,_t,_m",TEXT_CLIP,warn,p.M_EL206,"color is rgba(0, 0, 0, 0); painted by something else - contrast NOT checked here",01
-https://mosaic.moksaweb.com/moksa/,"_,_t,_m",TEXT_CLIP,warn,h2.M_EL209,"color is rgba(0, 0, 0, 0); painted by background-clip:text - contrast NOT checked here","技術是拿來解決問題的，
+https://mosaic.moksaweb.com/moksa/,"_,_t,_m",TEXT_CLIP,warn,p.M_EL241,"color is rgba(0, 0, 0, 0); painted by something else - contrast NOT checked here",01
+https://mosaic.moksaweb.com/moksa/,"_,_t,_m",TEXT_CLIP,warn,h2.M_EL244,"color is rgba(0, 0, 0, 0); painted by background-clip:text - contrast NOT checked here","技術是拿來解決問題的，
 不是拿來炫耀的。"

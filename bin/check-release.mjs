@@ -79,7 +79,7 @@ const counts = {
   "data/style-verification.csv": 98,
   "data/node-property-verification.csv": 181,
   "data/rwd-verification.csv": 667,
-  "data/browser-verification.csv": 3274,
+  "data/browser-verification.csv": 3277,
   "data/style-state-verification.csv": 52,
   "data/interaction-verification.csv": 7,
   "data/data-class-hierarchy.csv": 121,
@@ -117,7 +117,7 @@ if (browser.includes("OVERRIDDEN"))
 const intro = read("data/intro-verification.csv");
 if (!intro.startsWith("check,result,detail"))
   fail("data/intro-verification.csv is not the table verify_intro.py writes");
-for (const need of ["PLAYS", "ENDS", "NO_TRAP", "CLEARS", "DEGRADES"])
+for (const need of ["PLAYS", "ENDS", "NO_TRAP", "CLEARS", "DEGRADES", "AMBIENT"])
   if (!new RegExp(`^${need},PASS`, "m").test(intro))
     fail(`intro-verification.csv: ${need} did not pass`);
 if (/,FAIL,/.test(intro)) fail("data/intro-verification.csv carries a failed check");

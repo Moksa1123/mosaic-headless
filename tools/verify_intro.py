@@ -72,7 +72,14 @@ PROBE = r"""
       pointerEvents: cs.pointerEvents,
       clipPath: cs.clipPath,
       transform: cs.transform,
-      counter: cs.getPropertyValue('--mk-n').trim(),
+      // Every registered custom property this element carries, not one name
+      // picked in advance. The counters are drawn by `::after` through
+      // `counter()`, so `textContent` is empty and computed `content` comes back
+      // as the literal `counter(s, decimal-leading-zero)` rather than the digits -
+      // the animated integer underneath is the only readable trace they leave.
+      // Hard-coding `--mk-n` meant a running clock counted as motionless.
+      counter: Array.from(cs).filter(p => p.startsWith('--'))
+                    .map(p => p + '=' + cs.getPropertyValue(p).trim()).join(';'),
       text: (el.textContent || '').trim().slice(0, 24),
       w: Math.round(r.width), h: Math.round(r.height),
     };
@@ -115,7 +122,12 @@ PROBE = r"""
 
 
 def read_ids(spec, slug):
-    """Every attrID on the page, split into veil and content."""
+    """Every attrID the visitor will see - the page tree AND the shell.
+
+    Walking only `page["tree"]` misses the header and footer entirely, because in
+    Mosaic those live on the master rather than on the template. The running clock
+    is in the header, so a check for "is anything still moving" could not see the
+    one element built specifically to always be moving."""
     ids = []
 
     def walk(node):
@@ -129,6 +141,9 @@ def read_ids(spec, slug):
             for v in node:
                 walk(v)
 
+    shell = spec.get("shell") or {}
+    walk(shell.get("header"))
+    walk(shell.get("footer"))
     for page in spec["pages"]:
         if page["slug"] == slug:
             walk(page.get("tree"))
@@ -206,6 +221,8 @@ def main():
     ap.add_argument("--page")
     ap.add_argument("--veil-prefix", default="mk-boot",
                     help="ids under this prefix are the intro, not the content")
+    ap.add_argument("--min-ambient", type=int, default=3,
+                    help="how many elements must still be moving once settled")
     ap.add_argument("--deadline-ms", type=int, default=4200,
                     help="by this point the intro must be over")
     ap.add_argument("--csv")
@@ -248,9 +265,13 @@ def main():
                    "%d of %d intro elements changed state" % (len(veil_moved),
                                                               len(veil))))
     # the counter is an animated integer, so it can be read rather than admired
-    counters = [(r["t_ms"], (r["nodes"].get(a.veil_prefix + "-num") or {})
-                 .get("counter", "")) for r in readings]
-    nums = [int(c) for _t, c in counters if c.isdigit()]
+    import re as _re
+    nums = []
+    for r in readings:
+        sig = (r["nodes"].get(a.veil_prefix + "-num") or {}).get("counter", "")
+        hit = _re.search(r"--mk-n=(-?\d+)", sig)
+        if hit:
+            nums.append(int(hit.group(1)))
     checks.append(("COUNTS", bool(nums) and max(nums) >= 99,
                    "--mk-n reached %s" % (max(nums) if nums else "nothing")))
 
@@ -270,6 +291,29 @@ def main():
     # CLEARS
     cleared = bool(clicked) and not str(clicked).startswith(a.veil_prefix)
     checks.append(("CLEARS", cleared, "a real click landed on %r" % clicked))
+
+    # AMBIENT - does anything still move once the page has settled?
+    #
+    # Every other motion check here fires on an event: the document loading, an
+    # element entering the viewport. A page can pass all of them and still be
+    # completely static the moment you stop scrolling, which is a real quality a
+    # reader notices and nothing was measuring. So: take the last two readings,
+    # both well past the intro, and count how many elements differ between them.
+    settled = [r for r in readings if r["t_ms"] >= a.deadline_ms]
+    moving = set()
+    if len(settled) >= 2:
+        first, last_ = settled[-2], settled[-1]
+        for i in ids:
+            x, y = first["nodes"].get(i), last_["nodes"].get(i)
+            if not x or not y:
+                continue
+            if (x["transform"], x["opacity"], x["counter"], x["text"]) !=                (y["transform"], y["opacity"], y["counter"], y["text"]):
+                moving.add(i)
+    checks.append(("AMBIENT", len(moving) >= a.min_ambient,
+                   "%d elements still moving between %dms and %dms with no input: %s"
+                   % (len(moving), settled[-2]["t_ms"] if len(settled) >= 2 else 0,
+                      settled[-1]["t_ms"] if settled else 0,
+                      ", ".join(sorted(moving)[:6]) or "nothing")))
 
     # DEGRADES
     red, red_click, _ = run(url, ids, True, None)

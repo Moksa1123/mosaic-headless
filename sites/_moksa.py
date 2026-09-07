@@ -405,6 +405,7 @@ def motion_css():
                           for i, (_g, items) in enumerate(STACK)
                           for j in range(len(items)))
     marks = ",".join("#mk-mark-%d" % i for i in range(4))
+    idx_words = ",".join("#mk-idx-w-%d" % i for i in range(len(CLAUSES)))
     # the diagram's arrows, and the delay that makes the pulse travel down it
     flow_arrows = ",".join("#mk-ar-%s-%d>*" % (c, i)
                            for i in range(len(FLOW)) for c in ("a", "b"))
@@ -479,6 +480,8 @@ def motion_css():
         # the accent band pans sideways while it crosses the viewport
         "@keyframes mk-pan{from{transform:translateX(2%)}"
         "to{transform:translateX(-34%)}}",
+        "@keyframes mk-panloop{from{transform:translateX(0)}"
+        "to{transform:translateX(-50%)}}",
         # a headline that fills with ink as it is read past
         "@keyframes mk-fillscrub{from{background-position:100% 0}"
         "to{background-position:0 0}}",
@@ -524,6 +527,44 @@ def motion_css():
         # belongs to a page set in a terminal face
         "#mk-caret{width:13px;height:19px;background:rgb(255,90,54)}",
         "#mk-plate-dash{width:34px;height:1px;background:rgb(191,68,40)}",
+
+        # ── the clock ────────────────────────────────────────────────────────
+        # Two registered integers, stepped rather than eased, so each one lands on a
+        # whole number and reads as a tick instead of a blur. `decimal-leading-zero`
+        # is what keeps it two digits without any padding logic.
+        "@property --mk-s{syntax:'<integer>';initial-value:0;inherits:true}",
+        "@property --mk-m{syntax:'<integer>';initial-value:0;inherits:true}",
+        "@keyframes mk-secs{to{--mk-s:60}}",
+        "@keyframes mk-mins{to{--mk-m:60}}",
+        "@keyframes mk-livedot{0%,55%{opacity:1}56%,100%{opacity:.15}}",
+        "#mk-clock{display:flex;align-items:baseline;column-gap:5px;"
+        "margin-left:18px;padding-left:18px;"
+        "border-left:1px solid " + RULE + "}",
+        "#mk-clock-dot{width:5px;height:5px;background:rgb(255,90,54);"
+        "align-self:center;margin-right:3px}",
+        "#mk-clock-m,#mk-clock-s{font-family:" + MONO + ";font-size:11px;"
+        "color:rgb(22,24,28);font-variant-numeric:tabular-nums;"
+        "letter-spacing:0.02em}",
+        "#mk-clock-s::after{counter-reset:s var(--mk-s);"
+        "content:counter(s,decimal-leading-zero)}",
+        "#mk-clock-m::after{counter-reset:m var(--mk-m);"
+        "content:counter(m,decimal-leading-zero)}",
+        "@media (max-width:1023px){#mk-clock{display:none}}",
+
+        # ── an ambient sweep ─────────────────────────────────────────────────
+        # One hairline crossing the viewport, forever, at an opacity that is almost
+        # an excuse. It is the difference between a page that is still and a page
+        # that is idling.
+        "@keyframes mk-sweepdown{from{transform:translateY(-10vh)}"
+        "to{transform:translateY(110vh)}}",
+        '#mk-sweep{content:"";position:fixed;left:0;right:0;top:0;height:1px;'
+        "z-index:2;pointer-events:none;background:linear-gradient(90deg,"
+        "rgba(255,90,54,0),rgba(255,90,54,.30) 22%,rgba(255,90,54,.30) 78%,"
+        "rgba(255,90,54,0))}",
+
+        # ── the margin rules carry a travelling segment ──────────────────────
+        "@keyframes mk-railrun{from{background-position:0 -40vh}"
+        "to{background-position:0 140vh}}",
         "#mk-mast-rule,#mk-spec-rule{height:1px;background:" + RULE + ";"
         "transform:scaleX(0);transform-origin:0 50%}",
         digits + "{display:block;transform:translateY(105%)}",
@@ -556,10 +597,19 @@ def motion_css():
         # against - it sits on whatever has scrolled underneath. Over the accent
         # band its faint grey became unreadable. Giving it its own paper ground
         # means it carries its background with it instead of borrowing one.
+        # The index lives in the margin, so where it can show its words is a
+        # function of how much margin there is: the container is 1240px centred, so
+        # the left margin is (W-1240)/2, and the full panel measures 178px. First
+        # attempt put the threshold at 1560 and 1600px still overlapped by 6px -
+        # measured, not estimated. 1680 leaves 34px of air; below it the panel keeps
+        # the clause numbers only, which fit the gutter at any width.
         "#mk-index{position:fixed;left:8px;top:50%;transform:translateY(-50%);"
         "z-index:3;display:grid;row-gap:11px;pointer-events:auto;"
         "background:rgb(250,250,247);padding:14px 10px;"
         "border:1px solid " + RULE + "}",
+        "#mk-index>*{display:flex;column-gap:8px;align-items:baseline}",
+        "@media (max-width:1679px){" + idx_words + "{display:none}"
+        "#mk-index{padding:12px 7px;left:4px}}",
         "@media (max-width:1439px){#mk-index{display:none}}",
 
         # process: the sequence marker on each step, and the line it sits on
@@ -729,6 +779,17 @@ def motion_css():
         "  #mk-mast-lede{animation-delay:3.54s}",
         "  #mk-mast-cta{animation-delay:3.66s}",
         "  " + flow_arrows + "{animation:mk-flow 1.9s ease-in-out infinite}",
+        "  #mk-clock-s{animation:mk-secs 60s steps(60,end) infinite}",
+        "  #mk-clock-m{animation:mk-mins 3600s steps(60,end) infinite}",
+        "  #mk-clock-dot{animation:mk-livedot 2s steps(1,end) infinite}",
+        "  #mk-sweep{animation:mk-sweepdown 11s linear infinite}",
+        "  #mk-pan-loop{animation:mk-panloop 26s linear infinite}",
+        # the two fixed document rules get a lit segment sliding down them forever
+        "  #mk-doc::before,#mk-doc::after{"
+        "background-image:linear-gradient(180deg,rgba(255,90,54,0),"
+        "rgba(255,90,54,.55) 45%,rgba(255,90,54,.55) 55%,rgba(255,90,54,0));"
+        "background-size:1px 34vh;background-repeat:no-repeat;"
+        "animation:mk-railrun 9s linear infinite}",
         flow_stagger,
         "  #mk-caret{animation:mk-caret 1.15s steps(1,end) infinite;"
         "animation-delay:3.84s}",
@@ -843,6 +904,20 @@ HEADER = box("mk-shell-top", {}, [
                        T("p", "/ STUDIO", color={"token": "--mk-faint"},
                          fontSize="11px", letterSpacing="0.06em", fontFamily=MONO,
                          _m={"display": "none"})]},
+                 # A running session clock. It counts from the moment the document
+                 # loaded, which is why it says T+ rather than pretending to be the
+                 # time of day - a page cannot know that without JavaScript, and
+                 # labelling a page-load counter "14:32" would be a small lie told
+                 # in the most trustworthy typeface on the site.
+                 box("mk-clock", {}, [
+                     box("mk-clock-dot", {}, []),
+                     T("p", "T+", color={"token": "--mk-faint"}, fontSize="10px",
+                       fontFamily=MONO, letterSpacing="0.18em"),
+                     box("mk-clock-m", {}, []),
+                     T("p", ":", color={"token": "--mk-faint"}, fontSize="11px",
+                       fontFamily=MONO),
+                     box("mk-clock-s", {}, []),
+                 ]),
                  {"type": "menu", "data": {"attrID": "mk-nav"},
                   "style": bp({"display": "flex", "columnGap": "30px",
                                "alignItems": "center"},
@@ -1410,24 +1485,33 @@ PAN = box("mk-pan",
            "customStyles": "overflow:hidden;"},
           _m={"paddingTop": "22px", "paddingBottom": "22px"},
           children=[
-              box("mk-pan-track",
-                  {"display": "flex", "columnGap": "56px", "alignItems": "baseline",
-                   "customStyles": "white-space:nowrap;width:max-content;"},
-                  _m={"columnGap": "30px"},
-                  children=[
-                      node for i, w in enumerate(PAN_WORDS) for node in (
-                          box("mk-pan-n-%d" % i, {},
-                              [mono("%02d" % (i + 1), size="11px",
-                                    color="rgb(22,24,28)", track="0.18em")]),
-                          box("mk-pan-w-%d" % i, {},
-                              [T("p", w, color={"token": "--mk-ink"},
-                                 fontSize="58px", fontWeight="600",
-                                 fontFamily=DISPLAY, letterSpacing="-0.02em",
-                                 lineHeight="1",
-                                 _t={"fontSize": "44px"},
-                                 _m={"fontSize": "31px"})]),
-                      )
-                  ]),
+              # Two nested motions, because one transform cannot do both jobs.
+              # The outer track is scrubbed by the scroll; the inner loop runs on
+              # its own clock so the band is still moving when nobody is scrolling.
+              # The word list is emitted TWICE and the loop travels exactly half its
+              # own width, which is what makes the wrap invisible.
+              box("mk-pan-track", {"customStyles": "width:max-content;"}, [
+                  box("mk-pan-loop",
+                      {"display": "flex", "columnGap": "56px",
+                       "alignItems": "baseline",
+                       "customStyles": "white-space:nowrap;width:max-content;"},
+                      _m={"columnGap": "30px"},
+                      children=[
+                          node for c in range(2)
+                          for i, w in enumerate(PAN_WORDS) for node in (
+                              box("mk-pan-n-%d-%d" % (c, i), {},
+                                  [mono("%02d" % (i + 1), size="11px",
+                                        color="rgb(22,24,28)", track="0.18em")]),
+                              box("mk-pan-w-%d-%d" % (c, i), {},
+                                  [T("p", w, color={"token": "--mk-ink"},
+                                     fontSize="58px", fontWeight="600",
+                                     fontFamily=DISPLAY, letterSpacing="-0.02em",
+                                     lineHeight="1",
+                                     _t={"fontSize": "44px"},
+                                     _m={"fontSize": "31px"})]),
+                          )
+                      ]),
+              ]),
           ])
 
 
@@ -1729,7 +1813,10 @@ INDEX = box("mk-index", {}, [
                            "transitionAll": "220ms ease"}},
                "hover": {"_": {"color": {"token": "--mk-ink"}}},
                "focus-visible": {"_": FOCUS_RING}},
-     "text": "§" + num + "  " + name}
+     "children": [
+         box("mk-idx-n-%d" % i, {}, [T("p", "§" + num)]),
+         box("mk-idx-w-%d" % i, {}, [T("p", name)]),
+     ]}
     for i, (num, name, href, _tl) in enumerate(CLAUSES)
 ])
 
@@ -1740,7 +1827,7 @@ CUE = box("mk-cue", {}, [
 
 HOME_TREE = {"type": "div", "data": {"attrID": "mk-home"},
              "children": [BOOT, box("mk-doc", {}, [
-                 MARKS, INDEX, CUE,
+                 MARKS, INDEX, CUE, box("mk-sweep", {}, []),
                  # paper, panel, paper, ink, paper, ink, paper - the page
                  # changes ground five times so it reads as chapters
                  MASTHEAD, TICKER_BAND, PLATE, SERVICE_SEC, MATRIX_SEC,
