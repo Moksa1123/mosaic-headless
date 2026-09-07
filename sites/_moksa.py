@@ -314,11 +314,15 @@ PROCESS = [
 
 # the tools actually used, grouped the way a spec sheet groups them
 STACK = [
-    ("FRONT", ["WordPress", "Gutenberg", "Tailwind", "Alpine.js", "Vite"]),
-    ("COMMERCE", ["WooCommerce", "綠界 ECPay", "藍新 NewebPay", "新竹貨運", "7-11 C2C"]),
-    ("AUTOMATION", ["n8n", "Claude API", "OpenAI", "LINE Messaging", "Webhooks"]),
-    ("BACKEND", ["PHP 8", "Laravel", "MySQL", "Redis", "REST / GraphQL"]),
-    ("INFRA", ["Cloudways", "Cloudflare", "Docker", "GitHub Actions", "Sentry"]),
+    ("WEB", ["Next.js", "React", "TypeScript", "Tailwind", "Vite"]),
+    ("APP", ["Flutter", "Dart", "React Native", "PWA"]),
+    ("BACKEND", ["Node.js", "FastAPI", "Python", "PHP 8", "Prisma"]),
+    ("DATA", ["PostgreSQL", "MySQL", "Redis", "REST / GraphQL"]),
+    ("WORDPRESS", ["WooCommerce", "Gutenberg", "Elementor", "外掛開發"]),
+    ("COMMERCE", ["綠界 ECPay", "藍新 NewebPay", "新竹貨運", "7-11 C2C", "電子發票"]),
+    ("AUTOMATION", ["n8n", "Claude API", "MCP", "LINE Messaging API", "Webhooks"]),
+    ("INFRA", ["Docker", "pnpm workspaces", "GitHub Actions", "Cloudflare",
+               "Sentry"]),
 ]
 
 # the clause index, fixed to the left margin. One entry per section, and the entry
@@ -333,6 +337,22 @@ BOOT_LOG = [
     "MOUNTING CLAUSES §01–§07",
 ]
 RULER_TICKS = 13
+
+# The destination board's rows. Up here with the other tables because motion_css()
+# derives the flap geometry from how many there are, and it runs long before the
+# section that draws them.
+CITIES = [
+    ("TPE", "台北", "UTC+8"),
+    ("RMQ", "台中", "UTC+8"),
+    ("TYO", "東京", "UTC+9"),
+    ("HKG", "香港", "UTC+8"),
+    ("SIN", "新加坡", "UTC+8"),
+    ("ICN", "首爾", "UTC+9"),
+    ("SFO", "舊金山", "UTC-8"),
+]
+
+
+NC = len(CITIES)          # the board's period, and the geometry of its travel
 
 # FIGURE 01's rows. Up here with the other tables rather than beside the section
 # that draws it, because motion_css() reads it to build the arrow stagger and is
@@ -375,8 +395,8 @@ REVEALS = [
     ("mk-fl-a-2", 3), ("mk-fl-b-2", 4), ("mk-fl-c-2", 5),
     ("mk-spec2-head", 0), ("mk-spec2-r-0", 1), ("mk-spec2-r-1", 2),
     ("mk-spec2-r-2", 3), ("mk-spec2-r-3", 4),
-    ("mk-stack-head", 0), ("mk-stack-0", 1), ("mk-stack-1", 2), ("mk-stack-2", 3),
-    ("mk-stack-3", 4), ("mk-stack-4", 5),
+    ("mk-stack-head", 0)] + [
+    ("mk-stack-%d" % i, min(i + 1, 5)) for i in range(len(STACK))] + [
     ("mk-prod-head", 0), ("mk-prod-0", 1), ("mk-prod-1", 2),
     ("mk-voice-head", 0), ("mk-voice-0", 1), ("mk-voice-1", 2), ("mk-voice-2", 3),
     ("mk-contact-head", 0),
@@ -406,6 +426,8 @@ def motion_css():
                           for j in range(len(items)))
     marks = ",".join("#mk-mark-%d" % i for i in range(4))
     idx_words = ",".join("#mk-idx-w-%d" % i for i in range(len(CLAUSES)))
+    flap_strips = ",".join(["#mk-flap-%d-s" % k for k in range(3)]
+                           + ["#mk-board-city-s", "#mk-board-utc-s"])
     # the diagram's arrows, and the delay that makes the pulse travel down it
     flow_arrows = ",".join("#mk-ar-%s-%d>*" % (c, i)
                            for i in range(len(FLOW)) for c in ("a", "b"))
@@ -482,6 +504,15 @@ def motion_css():
         "to{transform:translateX(-34%)}}",
         "@keyframes mk-panloop{from{transform:translateX(0)}"
         "to{transform:translateX(-50%)}}",
+        "@keyframes mk-flap{from{transform:translateY(0)}"
+        "to{transform:translateY(-%.4f%%)}}" % (100.0 * NC / (NC + 1)),
+        "#mk-board-code>*{position:relative}",
+        # the hinge line across the middle of each letter window, which is what
+        # makes it read as a flap rather than as a scrolling list
+        '#mk-board-code>*::after{content:"";position:absolute;left:0;right:0;'
+        "top:50%;height:1px;background:rgba(0,0,0,.55);z-index:2;"
+        "pointer-events:none}",
+        "#mk-board-row{font-variant-numeric:tabular-nums}",
         # a headline that fills with ink as it is read past
         "@keyframes mk-fillscrub{from{background-position:100% 0}"
         "to{background-position:0 0}}",
@@ -784,6 +815,13 @@ def motion_css():
         "  #mk-clock-dot{animation:mk-livedot 2s steps(1,end) infinite}",
         "  #mk-sweep{animation:mk-sweepdown 11s linear infinite}",
         "  #mk-pan-loop{animation:mk-panloop 26s linear infinite}",
+        # One period for the whole board. The letters carry a few dozen ms of delay
+        # each so they land left to right the way a real board does; that is far too
+        # small to pull them out of step with the name beside them.
+        "  " + flap_strips + "{animation:mk-flap %ds steps(%d,end) infinite}"
+        % (NC * 2, NC),
+        "  #mk-flap-1-s{animation-delay:80ms}",
+        "  #mk-flap-2-s{animation-delay:160ms}",
         # the two fixed document rules get a lit segment sliding down them forever
         "  #mk-doc::before,#mk-doc::after{"
         "background-image:linear-gradient(180deg,rgba(255,90,54,0),"
@@ -1472,6 +1510,78 @@ CONTACT = section("contact", [wrap("mk-contact-in", [
         ]),
 ])])
 
+# ── the destination board ─────────────────────────────────────────────────────
+# A split-flap board, the kind that hangs in an airport. Each of the three letter
+# positions is a vertical strip of glyphs inside a one-line window, stepped with
+# `steps()` so it CLICKS from one character to the next instead of sliding - that
+# discrete landing is the whole character of the thing.
+#
+# The strips are built by transposing the code list, which is what makes the board
+# honest: position one only ever holds the first letters, position two the seconds,
+# so every frame it stops on is a real IATA code rather than three letters that
+# happen to be adjacent. The city name and the UTC offset are strips on the same
+# period, so the three read as one board.
+
+
+def flap(attr, items, cell, size, family=MONO, weight="500", colour="--mk-paper",
+         track="0.02em", **st):
+    """One window with a strip of values behind it.
+
+    The strip carries its first item again at the end, so the step that wraps lands
+    on a copy of where it started and the loop has no seam. The travel is therefore
+    n/(n+1) of the strip's own height, which the CSS computes from the same count.
+    """
+    return box(attr,
+               dict({"customStyles": "overflow:hidden;height:%s;" % cell}, **st),
+               [box(attr + "-s", {},
+                    [box("%s-i-%d" % (attr, j), {},
+                         [T("p", v, color={"token": colour} if colour.startswith("--")
+                            else colour, fontSize=size, fontFamily=family,
+                            fontWeight=weight, letterSpacing=track,
+                            lineHeight=cell)])
+                     for j, v in enumerate(list(items) + [items[0]])])])
+
+
+BOARD = section("board", [wrap("mk-board-in", [
+    box("mk-board-pad", {"paddingTop": "72px", "paddingBottom": "72px"},
+        _m={"paddingTop": "48px", "paddingBottom": "48px"},
+        children=[
+            box("mk-board-head",
+                {"display": "flex", "justifyContent": "space-between",
+                 "columnGap": "20px", "rowGap": "8px",
+                 "customStyles": "flex-wrap:wrap;"},
+                [mono("BOARD 01 — WHERE WE WORK", size="10px",
+                      color="--mk-accent", track="0.22em"),
+                 mono("REMOTE / %d DESTINATIONS" % len(CITIES), size="10px",
+                      color="rgb(140,142,150)", track="0.2em")]),
+            box("mk-board-row",
+                {"display": "flex", "alignItems": "center", "columnGap": "26px",
+                 "marginTop": "34px", "customStyles": "flex-wrap:wrap;"},
+                _m={"columnGap": "14px", "marginTop": "24px"},
+                children=[
+                    # the three letter windows, transposed out of the code list
+                    box("mk-board-code",
+                        {"display": "flex", "columnGap": "8px"},
+                        _m={"columnGap": "5px"},
+                        children=[
+                            flap("mk-flap-%d" % k,
+                                 [c[0][k] for c in CITIES],
+                                 "86px", "74px", weight="600",
+                                 customStyles="overflow:hidden;height:86px;"
+                                              "background:rgb(30,32,37);"
+                                              "padding:0 16px;"
+                                              "border:1px solid rgba(250,250,247,.14);")
+                            for k in range(3)
+                        ]),
+                    flap("mk-board-city", [c[1] for c in CITIES], "34px", "26px",
+                         family=CJK, weight="500", track="0.06em"),
+                    flap("mk-board-utc", [c[2] for c in CITIES], "34px", "13px",
+                         colour="rgb(140,142,150)", track="0.18em"),
+                ]),
+        ]),
+])], bg="--mk-ink")
+
+
 # ── the pan strip ─────────────────────────────────────────────────────────────
 # The page has no field of colour anywhere - the accent has only ever been a rule, a
 # mark or a small block. A band of it, with the whole line panning sideways as you
@@ -1832,7 +1942,7 @@ HOME_TREE = {"type": "div", "data": {"attrID": "mk-home"},
                  # changes ground five times so it reads as chapters
                  MASTHEAD, TICKER_BAND, PLATE, SERVICE_SEC, MATRIX_SEC,
                  PROCESS_SEC, FIGURE_SEC, WORK_SEC, PAN, SPECIMEN, STACK_SEC,
-                 PRODUCT_SEC, VOICE_SEC, CONTACT,
+                 BOARD, PRODUCT_SEC, VOICE_SEC, CONTACT,
              ])]}
 
 SITE = {

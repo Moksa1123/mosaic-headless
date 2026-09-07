@@ -1,4 +1,8 @@
 url,breakpoint,attrID,property,declared,computed,status
+https://mosaic.moksaweb.com/moksa/,_,board,backgroundColor,"rgb(22,24,28)","rgb(22, 24, 28)",ok
+https://mosaic.moksaweb.com/moksa/,_,board,paddingLeft,40px,40px,ok
+https://mosaic.moksaweb.com/moksa/,_,board,paddingRight,40px,40px,ok
+https://mosaic.moksaweb.com/moksa/,_,board,fontFamily,"'Noto Sans TC','PingFang TC','Hiragino Sans TC','Microsoft JhengHei',sans-serif","""Noto Sans TC"", ""PingFang TC"", ""Hiragino Sans TC"", ""Microsoft JhengHei"", sans-serif",ok
 https://mosaic.moksaweb.com/moksa/,_,contact,backgroundColor,"rgb(250,250,247)","rgb(250, 250, 247)",ok
 https://mosaic.moksaweb.com/moksa/,_,contact,paddingLeft,40px,40px,ok
 https://mosaic.moksaweb.com/moksa/,_,contact,paddingRight,40px,40px,ok
@@ -29,6 +33,28 @@ https://mosaic.moksaweb.com/moksa/,_,mk-ar-b-1,alignItems,center,center,ok
 https://mosaic.moksaweb.com/moksa/,_,mk-ar-b-2,display,flex,flex,ok
 https://mosaic.moksaweb.com/moksa/,_,mk-ar-b-2,justifyContent,center,center,ok
 https://mosaic.moksaweb.com/moksa/,_,mk-ar-b-2,alignItems,center,center,ok
+https://mosaic.moksaweb.com/moksa/,_,mk-board-city,customStyles:overflow,hidden,no computed value,not-comparable
+https://mosaic.moksaweb.com/moksa/,_,mk-board-city,customStyles:height,34px,34px,ok
+https://mosaic.moksaweb.com/moksa/,_,mk-board-code,display,flex,flex,ok
+https://mosaic.moksaweb.com/moksa/,_,mk-board-code,columnGap,8px,8px,ok
+https://mosaic.moksaweb.com/moksa/,_,mk-board-head,display,flex,flex,ok
+https://mosaic.moksaweb.com/moksa/,_,mk-board-head,justifyContent,space-between,space-between,ok
+https://mosaic.moksaweb.com/moksa/,_,mk-board-head,columnGap,20px,20px,ok
+https://mosaic.moksaweb.com/moksa/,_,mk-board-head,rowGap,8px,8px,ok
+https://mosaic.moksaweb.com/moksa/,_,mk-board-head,customStyles:flex-wrap,wrap,wrap,ok
+https://mosaic.moksaweb.com/moksa/,_,mk-board-in,width,100%,viewport- or parent-relative,not-comparable
+https://mosaic.moksaweb.com/moksa/,_,mk-board-in,maxWidth,1240px,1240px,ok
+https://mosaic.moksaweb.com/moksa/,_,mk-board-in,marginLeft,auto,auto resolves to a used value (60px),not-comparable
+https://mosaic.moksaweb.com/moksa/,_,mk-board-in,marginRight,auto,auto resolves to a used value (60px),not-comparable
+https://mosaic.moksaweb.com/moksa/,_,mk-board-pad,paddingTop,72px,72px,ok
+https://mosaic.moksaweb.com/moksa/,_,mk-board-pad,paddingBottom,72px,72px,ok
+https://mosaic.moksaweb.com/moksa/,_,mk-board-row,display,flex,flex,ok
+https://mosaic.moksaweb.com/moksa/,_,mk-board-row,alignItems,center,center,ok
+https://mosaic.moksaweb.com/moksa/,_,mk-board-row,columnGap,26px,26px,ok
+https://mosaic.moksaweb.com/moksa/,_,mk-board-row,marginTop,34px,34px,ok
+https://mosaic.moksaweb.com/moksa/,_,mk-board-row,customStyles:flex-wrap,wrap,wrap,ok
+https://mosaic.moksaweb.com/moksa/,_,mk-board-utc,customStyles:overflow,hidden,no computed value,not-comparable
+https://mosaic.moksaweb.com/moksa/,_,mk-board-utc,customStyles:height,34px,34px,ok
 https://mosaic.moksaweb.com/moksa/,_,mk-caret-row,display,flex,flex,ok
 https://mosaic.moksaweb.com/moksa/,_,mk-caret-row,alignItems,center,center,ok
 https://mosaic.moksaweb.com/moksa/,_,mk-caret-row,marginTop,10px,10px,ok
@@ -197,6 +223,21 @@ https://mosaic.moksaweb.com/moksa/,_,mk-fl-c-2,paddingBottom,14px,14px,ok
 https://mosaic.moksaweb.com/moksa/,_,mk-fl-c-2,paddingLeft,16px,16px,ok
 https://mosaic.moksaweb.com/moksa/,_,mk-fl-c-2,paddingRight,16px,16px,ok
 https://mosaic.moksaweb.com/moksa/,_,mk-fl-c-2,customStyles:border,"1px solid rgba(22,24,28,.16)",no computed value,not-comparable
+https://mosaic.moksaweb.com/moksa/,_,mk-flap-0,customStyles:overflow,hidden,no computed value,not-comparable
+https://mosaic.moksaweb.com/moksa/,_,mk-flap-0,customStyles:height,86px,86px,ok
+https://mosaic.moksaweb.com/moksa/,_,mk-flap-0,customStyles:background,"rgb(30,32,37)",no computed value,not-comparable
+https://mosaic.moksaweb.com/moksa/,_,mk-flap-0,customStyles:padding,0 16px,no computed value,not-comparable
+https://mosaic.moksaweb.com/moksa/,_,mk-flap-0,customStyles:border,"1px solid rgba(250,250,247,.14)",no computed value,not-comparable
+https://mosaic.moksaweb.com/moksa/,_,mk-flap-1,customStyles:overflow,hidden,no computed value,not-comparable
+https://mosaic.moksaweb.com/moksa/,_,mk-flap-1,customStyles:height,86px,86px,ok
+https://mosaic.moksaweb.com/moksa/,_,mk-flap-1,customStyles:background,"rgb(30,32,37)",no computed value,not-comparable
+https://mosaic.moksaweb.com/moksa/,_,mk-flap-1,customStyles:padding,0 16px,no computed value,not-comparable
+https://mosaic.moksaweb.com/moksa/,_,mk-flap-1,customStyles:border,"1px solid rgba(250,250,247,.14)",no computed value,not-comparable
+https://mosaic.moksaweb.com/moksa/,_,mk-flap-2,customStyles:overflow,hidden,no computed value,not-comparable
+https://mosaic.moksaweb.com/moksa/,_,mk-flap-2,customStyles:height,86px,86px,ok
+https://mosaic.moksaweb.com/moksa/,_,mk-flap-2,customStyles:background,"rgb(30,32,37)",no computed value,not-comparable
+https://mosaic.moksaweb.com/moksa/,_,mk-flap-2,customStyles:padding,0 16px,no computed value,not-comparable
+https://mosaic.moksaweb.com/moksa/,_,mk-flap-2,customStyles:border,"1px solid rgba(250,250,247,.14)",no computed value,not-comparable
 https://mosaic.moksaweb.com/moksa/,_,mk-hl1-mask,customStyles:overflow,hidden,no computed value,not-comparable
 https://mosaic.moksaweb.com/moksa/,_,mk-hl1-mask,customStyles:padding-bottom,.08em,1.28px,ok
 https://mosaic.moksaweb.com/moksa/,_,mk-hl2-mask,customStyles:overflow,hidden,no computed value,not-comparable
@@ -715,6 +756,36 @@ https://mosaic.moksaweb.com/moksa/,_,mk-stack-4,customStyles:border-top,"1px sol
 https://mosaic.moksaweb.com/moksa/,_,mk-stack-4,customStyles:animation,mk-rise both,no computed value,not-comparable
 https://mosaic.moksaweb.com/moksa/,_,mk-stack-4,customStyles:animation-timeline,view(),view(),ok
 https://mosaic.moksaweb.com/moksa/,_,mk-stack-4,customStyles:animation-range,entry 18% cover 34%,no computed value,not-comparable
+https://mosaic.moksaweb.com/moksa/,_,mk-stack-5,display,grid,grid,ok
+https://mosaic.moksaweb.com/moksa/,_,mk-stack-5,gridCols,160px 1fr,160px 1056px,ok
+https://mosaic.moksaweb.com/moksa/,_,mk-stack-5,columnGap,24px,24px,ok
+https://mosaic.moksaweb.com/moksa/,_,mk-stack-5,alignItems,baseline,baseline,ok
+https://mosaic.moksaweb.com/moksa/,_,mk-stack-5,paddingTop,18px,18px,ok
+https://mosaic.moksaweb.com/moksa/,_,mk-stack-5,paddingBottom,18px,18px,ok
+https://mosaic.moksaweb.com/moksa/,_,mk-stack-5,customStyles:border-top,"1px solid rgba(22,24,28,.16)",no computed value,not-comparable
+https://mosaic.moksaweb.com/moksa/,_,mk-stack-5,customStyles:animation,mk-rise both,no computed value,not-comparable
+https://mosaic.moksaweb.com/moksa/,_,mk-stack-5,customStyles:animation-timeline,view(),view(),ok
+https://mosaic.moksaweb.com/moksa/,_,mk-stack-5,customStyles:animation-range,entry 22% cover 38%,no computed value,not-comparable
+https://mosaic.moksaweb.com/moksa/,_,mk-stack-6,display,grid,grid,ok
+https://mosaic.moksaweb.com/moksa/,_,mk-stack-6,gridCols,160px 1fr,160px 1056px,ok
+https://mosaic.moksaweb.com/moksa/,_,mk-stack-6,columnGap,24px,24px,ok
+https://mosaic.moksaweb.com/moksa/,_,mk-stack-6,alignItems,baseline,baseline,ok
+https://mosaic.moksaweb.com/moksa/,_,mk-stack-6,paddingTop,18px,18px,ok
+https://mosaic.moksaweb.com/moksa/,_,mk-stack-6,paddingBottom,18px,18px,ok
+https://mosaic.moksaweb.com/moksa/,_,mk-stack-6,customStyles:border-top,"1px solid rgba(22,24,28,.16)",no computed value,not-comparable
+https://mosaic.moksaweb.com/moksa/,_,mk-stack-6,customStyles:animation,mk-rise both,no computed value,not-comparable
+https://mosaic.moksaweb.com/moksa/,_,mk-stack-6,customStyles:animation-timeline,view(),view(),ok
+https://mosaic.moksaweb.com/moksa/,_,mk-stack-6,customStyles:animation-range,entry 26% cover 42%,no computed value,not-comparable
+https://mosaic.moksaweb.com/moksa/,_,mk-stack-7,display,grid,grid,ok
+https://mosaic.moksaweb.com/moksa/,_,mk-stack-7,gridCols,160px 1fr,160px 1056px,ok
+https://mosaic.moksaweb.com/moksa/,_,mk-stack-7,columnGap,24px,24px,ok
+https://mosaic.moksaweb.com/moksa/,_,mk-stack-7,alignItems,baseline,baseline,ok
+https://mosaic.moksaweb.com/moksa/,_,mk-stack-7,paddingTop,18px,18px,ok
+https://mosaic.moksaweb.com/moksa/,_,mk-stack-7,paddingBottom,18px,18px,ok
+https://mosaic.moksaweb.com/moksa/,_,mk-stack-7,customStyles:border-top,"1px solid rgba(22,24,28,.16)",no computed value,not-comparable
+https://mosaic.moksaweb.com/moksa/,_,mk-stack-7,customStyles:animation,mk-rise both,no computed value,not-comparable
+https://mosaic.moksaweb.com/moksa/,_,mk-stack-7,customStyles:animation-timeline,view(),view(),ok
+https://mosaic.moksaweb.com/moksa/,_,mk-stack-7,customStyles:animation-range,entry 30% cover 46%,no computed value,not-comparable
 https://mosaic.moksaweb.com/moksa/,_,mk-stack-head,display,grid,grid,ok
 https://mosaic.moksaweb.com/moksa/,_,mk-stack-head,gridCols,84px 1fr,84px 1156px,ok
 https://mosaic.moksaweb.com/moksa/,_,mk-stack-head,columnGap,0px,0px,ok
@@ -747,6 +818,18 @@ https://mosaic.moksaweb.com/moksa/,_,mk-stack-tags-4,display,flex,flex,ok
 https://mosaic.moksaweb.com/moksa/,_,mk-stack-tags-4,columnGap,8px,8px,ok
 https://mosaic.moksaweb.com/moksa/,_,mk-stack-tags-4,rowGap,8px,8px,ok
 https://mosaic.moksaweb.com/moksa/,_,mk-stack-tags-4,customStyles:flex-wrap,wrap,wrap,ok
+https://mosaic.moksaweb.com/moksa/,_,mk-stack-tags-5,display,flex,flex,ok
+https://mosaic.moksaweb.com/moksa/,_,mk-stack-tags-5,columnGap,8px,8px,ok
+https://mosaic.moksaweb.com/moksa/,_,mk-stack-tags-5,rowGap,8px,8px,ok
+https://mosaic.moksaweb.com/moksa/,_,mk-stack-tags-5,customStyles:flex-wrap,wrap,wrap,ok
+https://mosaic.moksaweb.com/moksa/,_,mk-stack-tags-6,display,flex,flex,ok
+https://mosaic.moksaweb.com/moksa/,_,mk-stack-tags-6,columnGap,8px,8px,ok
+https://mosaic.moksaweb.com/moksa/,_,mk-stack-tags-6,rowGap,8px,8px,ok
+https://mosaic.moksaweb.com/moksa/,_,mk-stack-tags-6,customStyles:flex-wrap,wrap,wrap,ok
+https://mosaic.moksaweb.com/moksa/,_,mk-stack-tags-7,display,flex,flex,ok
+https://mosaic.moksaweb.com/moksa/,_,mk-stack-tags-7,columnGap,8px,8px,ok
+https://mosaic.moksaweb.com/moksa/,_,mk-stack-tags-7,rowGap,8px,8px,ok
+https://mosaic.moksaweb.com/moksa/,_,mk-stack-tags-7,customStyles:flex-wrap,wrap,wrap,ok
 https://mosaic.moksaweb.com/moksa/,_,mk-svc-0,display,grid,grid,ok
 https://mosaic.moksaweb.com/moksa/,_,mk-svc-0,gridCols,84px 1fr 1.35fr,84px 471.484px 636.516px,ok
 https://mosaic.moksaweb.com/moksa/,_,mk-svc-0,columnGap,24px,24px,ok
@@ -814,9 +897,6 @@ https://mosaic.moksaweb.com/moksa/,_,mk-tag-1-2,customStyles:transition,"border-
 https://mosaic.moksaweb.com/moksa/,_,mk-tag-1-3,customStyles:border,"1px solid rgba(22,24,28,.16)",no computed value,not-comparable
 https://mosaic.moksaweb.com/moksa/,_,mk-tag-1-3,customStyles:padding,5px 10px,no computed value,not-comparable
 https://mosaic.moksaweb.com/moksa/,_,mk-tag-1-3,customStyles:transition,"border-color .2s ease,color .2s ease",composite or raw value,not-comparable
-https://mosaic.moksaweb.com/moksa/,_,mk-tag-1-4,customStyles:border,"1px solid rgba(22,24,28,.16)",no computed value,not-comparable
-https://mosaic.moksaweb.com/moksa/,_,mk-tag-1-4,customStyles:padding,5px 10px,no computed value,not-comparable
-https://mosaic.moksaweb.com/moksa/,_,mk-tag-1-4,customStyles:transition,"border-color .2s ease,color .2s ease",composite or raw value,not-comparable
 https://mosaic.moksaweb.com/moksa/,_,mk-tag-2-0,customStyles:border,"1px solid rgba(22,24,28,.16)",no computed value,not-comparable
 https://mosaic.moksaweb.com/moksa/,_,mk-tag-2-0,customStyles:padding,5px 10px,no computed value,not-comparable
 https://mosaic.moksaweb.com/moksa/,_,mk-tag-2-0,customStyles:transition,"border-color .2s ease,color .2s ease",composite or raw value,not-comparable
@@ -844,9 +924,6 @@ https://mosaic.moksaweb.com/moksa/,_,mk-tag-3-2,customStyles:transition,"border-
 https://mosaic.moksaweb.com/moksa/,_,mk-tag-3-3,customStyles:border,"1px solid rgba(22,24,28,.16)",no computed value,not-comparable
 https://mosaic.moksaweb.com/moksa/,_,mk-tag-3-3,customStyles:padding,5px 10px,no computed value,not-comparable
 https://mosaic.moksaweb.com/moksa/,_,mk-tag-3-3,customStyles:transition,"border-color .2s ease,color .2s ease",composite or raw value,not-comparable
-https://mosaic.moksaweb.com/moksa/,_,mk-tag-3-4,customStyles:border,"1px solid rgba(22,24,28,.16)",no computed value,not-comparable
-https://mosaic.moksaweb.com/moksa/,_,mk-tag-3-4,customStyles:padding,5px 10px,no computed value,not-comparable
-https://mosaic.moksaweb.com/moksa/,_,mk-tag-3-4,customStyles:transition,"border-color .2s ease,color .2s ease",composite or raw value,not-comparable
 https://mosaic.moksaweb.com/moksa/,_,mk-tag-4-0,customStyles:border,"1px solid rgba(22,24,28,.16)",no computed value,not-comparable
 https://mosaic.moksaweb.com/moksa/,_,mk-tag-4-0,customStyles:padding,5px 10px,no computed value,not-comparable
 https://mosaic.moksaweb.com/moksa/,_,mk-tag-4-0,customStyles:transition,"border-color .2s ease,color .2s ease",composite or raw value,not-comparable
@@ -859,9 +936,51 @@ https://mosaic.moksaweb.com/moksa/,_,mk-tag-4-2,customStyles:transition,"border-
 https://mosaic.moksaweb.com/moksa/,_,mk-tag-4-3,customStyles:border,"1px solid rgba(22,24,28,.16)",no computed value,not-comparable
 https://mosaic.moksaweb.com/moksa/,_,mk-tag-4-3,customStyles:padding,5px 10px,no computed value,not-comparable
 https://mosaic.moksaweb.com/moksa/,_,mk-tag-4-3,customStyles:transition,"border-color .2s ease,color .2s ease",composite or raw value,not-comparable
-https://mosaic.moksaweb.com/moksa/,_,mk-tag-4-4,customStyles:border,"1px solid rgba(22,24,28,.16)",no computed value,not-comparable
-https://mosaic.moksaweb.com/moksa/,_,mk-tag-4-4,customStyles:padding,5px 10px,no computed value,not-comparable
-https://mosaic.moksaweb.com/moksa/,_,mk-tag-4-4,customStyles:transition,"border-color .2s ease,color .2s ease",composite or raw value,not-comparable
+https://mosaic.moksaweb.com/moksa/,_,mk-tag-5-0,customStyles:border,"1px solid rgba(22,24,28,.16)",no computed value,not-comparable
+https://mosaic.moksaweb.com/moksa/,_,mk-tag-5-0,customStyles:padding,5px 10px,no computed value,not-comparable
+https://mosaic.moksaweb.com/moksa/,_,mk-tag-5-0,customStyles:transition,"border-color .2s ease,color .2s ease",composite or raw value,not-comparable
+https://mosaic.moksaweb.com/moksa/,_,mk-tag-5-1,customStyles:border,"1px solid rgba(22,24,28,.16)",no computed value,not-comparable
+https://mosaic.moksaweb.com/moksa/,_,mk-tag-5-1,customStyles:padding,5px 10px,no computed value,not-comparable
+https://mosaic.moksaweb.com/moksa/,_,mk-tag-5-1,customStyles:transition,"border-color .2s ease,color .2s ease",composite or raw value,not-comparable
+https://mosaic.moksaweb.com/moksa/,_,mk-tag-5-2,customStyles:border,"1px solid rgba(22,24,28,.16)",no computed value,not-comparable
+https://mosaic.moksaweb.com/moksa/,_,mk-tag-5-2,customStyles:padding,5px 10px,no computed value,not-comparable
+https://mosaic.moksaweb.com/moksa/,_,mk-tag-5-2,customStyles:transition,"border-color .2s ease,color .2s ease",composite or raw value,not-comparable
+https://mosaic.moksaweb.com/moksa/,_,mk-tag-5-3,customStyles:border,"1px solid rgba(22,24,28,.16)",no computed value,not-comparable
+https://mosaic.moksaweb.com/moksa/,_,mk-tag-5-3,customStyles:padding,5px 10px,no computed value,not-comparable
+https://mosaic.moksaweb.com/moksa/,_,mk-tag-5-3,customStyles:transition,"border-color .2s ease,color .2s ease",composite or raw value,not-comparable
+https://mosaic.moksaweb.com/moksa/,_,mk-tag-5-4,customStyles:border,"1px solid rgba(22,24,28,.16)",no computed value,not-comparable
+https://mosaic.moksaweb.com/moksa/,_,mk-tag-5-4,customStyles:padding,5px 10px,no computed value,not-comparable
+https://mosaic.moksaweb.com/moksa/,_,mk-tag-5-4,customStyles:transition,"border-color .2s ease,color .2s ease",composite or raw value,not-comparable
+https://mosaic.moksaweb.com/moksa/,_,mk-tag-6-0,customStyles:border,"1px solid rgba(22,24,28,.16)",no computed value,not-comparable
+https://mosaic.moksaweb.com/moksa/,_,mk-tag-6-0,customStyles:padding,5px 10px,no computed value,not-comparable
+https://mosaic.moksaweb.com/moksa/,_,mk-tag-6-0,customStyles:transition,"border-color .2s ease,color .2s ease",composite or raw value,not-comparable
+https://mosaic.moksaweb.com/moksa/,_,mk-tag-6-1,customStyles:border,"1px solid rgba(22,24,28,.16)",no computed value,not-comparable
+https://mosaic.moksaweb.com/moksa/,_,mk-tag-6-1,customStyles:padding,5px 10px,no computed value,not-comparable
+https://mosaic.moksaweb.com/moksa/,_,mk-tag-6-1,customStyles:transition,"border-color .2s ease,color .2s ease",composite or raw value,not-comparable
+https://mosaic.moksaweb.com/moksa/,_,mk-tag-6-2,customStyles:border,"1px solid rgba(22,24,28,.16)",no computed value,not-comparable
+https://mosaic.moksaweb.com/moksa/,_,mk-tag-6-2,customStyles:padding,5px 10px,no computed value,not-comparable
+https://mosaic.moksaweb.com/moksa/,_,mk-tag-6-2,customStyles:transition,"border-color .2s ease,color .2s ease",composite or raw value,not-comparable
+https://mosaic.moksaweb.com/moksa/,_,mk-tag-6-3,customStyles:border,"1px solid rgba(22,24,28,.16)",no computed value,not-comparable
+https://mosaic.moksaweb.com/moksa/,_,mk-tag-6-3,customStyles:padding,5px 10px,no computed value,not-comparable
+https://mosaic.moksaweb.com/moksa/,_,mk-tag-6-3,customStyles:transition,"border-color .2s ease,color .2s ease",composite or raw value,not-comparable
+https://mosaic.moksaweb.com/moksa/,_,mk-tag-6-4,customStyles:border,"1px solid rgba(22,24,28,.16)",no computed value,not-comparable
+https://mosaic.moksaweb.com/moksa/,_,mk-tag-6-4,customStyles:padding,5px 10px,no computed value,not-comparable
+https://mosaic.moksaweb.com/moksa/,_,mk-tag-6-4,customStyles:transition,"border-color .2s ease,color .2s ease",composite or raw value,not-comparable
+https://mosaic.moksaweb.com/moksa/,_,mk-tag-7-0,customStyles:border,"1px solid rgba(22,24,28,.16)",no computed value,not-comparable
+https://mosaic.moksaweb.com/moksa/,_,mk-tag-7-0,customStyles:padding,5px 10px,no computed value,not-comparable
+https://mosaic.moksaweb.com/moksa/,_,mk-tag-7-0,customStyles:transition,"border-color .2s ease,color .2s ease",composite or raw value,not-comparable
+https://mosaic.moksaweb.com/moksa/,_,mk-tag-7-1,customStyles:border,"1px solid rgba(22,24,28,.16)",no computed value,not-comparable
+https://mosaic.moksaweb.com/moksa/,_,mk-tag-7-1,customStyles:padding,5px 10px,no computed value,not-comparable
+https://mosaic.moksaweb.com/moksa/,_,mk-tag-7-1,customStyles:transition,"border-color .2s ease,color .2s ease",composite or raw value,not-comparable
+https://mosaic.moksaweb.com/moksa/,_,mk-tag-7-2,customStyles:border,"1px solid rgba(22,24,28,.16)",no computed value,not-comparable
+https://mosaic.moksaweb.com/moksa/,_,mk-tag-7-2,customStyles:padding,5px 10px,no computed value,not-comparable
+https://mosaic.moksaweb.com/moksa/,_,mk-tag-7-2,customStyles:transition,"border-color .2s ease,color .2s ease",composite or raw value,not-comparable
+https://mosaic.moksaweb.com/moksa/,_,mk-tag-7-3,customStyles:border,"1px solid rgba(22,24,28,.16)",no computed value,not-comparable
+https://mosaic.moksaweb.com/moksa/,_,mk-tag-7-3,customStyles:padding,5px 10px,no computed value,not-comparable
+https://mosaic.moksaweb.com/moksa/,_,mk-tag-7-3,customStyles:transition,"border-color .2s ease,color .2s ease",composite or raw value,not-comparable
+https://mosaic.moksaweb.com/moksa/,_,mk-tag-7-4,customStyles:border,"1px solid rgba(22,24,28,.16)",no computed value,not-comparable
+https://mosaic.moksaweb.com/moksa/,_,mk-tag-7-4,customStyles:padding,5px 10px,no computed value,not-comparable
+https://mosaic.moksaweb.com/moksa/,_,mk-tag-7-4,customStyles:transition,"border-color .2s ease,color .2s ease",composite or raw value,not-comparable
 https://mosaic.moksaweb.com/moksa/,_,mk-ticker,backgroundColor,"rgb(22,24,28)","rgb(22, 24, 28)",ok
 https://mosaic.moksaweb.com/moksa/,_,mk-ticker,paddingTop,11px,11px,ok
 https://mosaic.moksaweb.com/moksa/,_,mk-ticker,paddingBottom,11px,11px,ok
@@ -1071,6 +1190,10 @@ https://mosaic.moksaweb.com/moksa/,_,works,backgroundColor,"rgb(250,250,247)","r
 https://mosaic.moksaweb.com/moksa/,_,works,paddingLeft,40px,40px,ok
 https://mosaic.moksaweb.com/moksa/,_,works,paddingRight,40px,40px,ok
 https://mosaic.moksaweb.com/moksa/,_,works,fontFamily,"'Noto Sans TC','PingFang TC','Hiragino Sans TC','Microsoft JhengHei',sans-serif","""Noto Sans TC"", ""PingFang TC"", ""Hiragino Sans TC"", ""Microsoft JhengHei"", sans-serif",ok
+https://mosaic.moksaweb.com/moksa/,_t,board,backgroundColor,"rgb(22,24,28)","rgb(22, 24, 28)",ok
+https://mosaic.moksaweb.com/moksa/,_t,board,paddingLeft,28px,28px,ok
+https://mosaic.moksaweb.com/moksa/,_t,board,paddingRight,28px,28px,ok
+https://mosaic.moksaweb.com/moksa/,_t,board,fontFamily,"'Noto Sans TC','PingFang TC','Hiragino Sans TC','Microsoft JhengHei',sans-serif","""Noto Sans TC"", ""PingFang TC"", ""Hiragino Sans TC"", ""Microsoft JhengHei"", sans-serif",ok
 https://mosaic.moksaweb.com/moksa/,_t,contact,backgroundColor,"rgb(250,250,247)","rgb(250, 250, 247)",ok
 https://mosaic.moksaweb.com/moksa/,_t,contact,paddingLeft,28px,28px,ok
 https://mosaic.moksaweb.com/moksa/,_t,contact,paddingRight,28px,28px,ok
@@ -1101,6 +1224,28 @@ https://mosaic.moksaweb.com/moksa/,_t,mk-ar-b-1,alignItems,center,center,ok
 https://mosaic.moksaweb.com/moksa/,_t,mk-ar-b-2,display,flex,flex,ok
 https://mosaic.moksaweb.com/moksa/,_t,mk-ar-b-2,justifyContent,center,center,ok
 https://mosaic.moksaweb.com/moksa/,_t,mk-ar-b-2,alignItems,center,center,ok
+https://mosaic.moksaweb.com/moksa/,_t,mk-board-city,customStyles:overflow,hidden,no computed value,not-comparable
+https://mosaic.moksaweb.com/moksa/,_t,mk-board-city,customStyles:height,34px,34px,ok
+https://mosaic.moksaweb.com/moksa/,_t,mk-board-code,display,flex,flex,ok
+https://mosaic.moksaweb.com/moksa/,_t,mk-board-code,columnGap,8px,8px,ok
+https://mosaic.moksaweb.com/moksa/,_t,mk-board-head,display,flex,flex,ok
+https://mosaic.moksaweb.com/moksa/,_t,mk-board-head,justifyContent,space-between,space-between,ok
+https://mosaic.moksaweb.com/moksa/,_t,mk-board-head,columnGap,20px,20px,ok
+https://mosaic.moksaweb.com/moksa/,_t,mk-board-head,rowGap,8px,8px,ok
+https://mosaic.moksaweb.com/moksa/,_t,mk-board-head,customStyles:flex-wrap,wrap,wrap,ok
+https://mosaic.moksaweb.com/moksa/,_t,mk-board-in,width,100%,viewport- or parent-relative,not-comparable
+https://mosaic.moksaweb.com/moksa/,_t,mk-board-in,maxWidth,1240px,1240px,ok
+https://mosaic.moksaweb.com/moksa/,_t,mk-board-in,marginLeft,auto,auto resolves to a used value (0px),not-comparable
+https://mosaic.moksaweb.com/moksa/,_t,mk-board-in,marginRight,auto,auto resolves to a used value (0px),not-comparable
+https://mosaic.moksaweb.com/moksa/,_t,mk-board-pad,paddingTop,72px,72px,ok
+https://mosaic.moksaweb.com/moksa/,_t,mk-board-pad,paddingBottom,72px,72px,ok
+https://mosaic.moksaweb.com/moksa/,_t,mk-board-row,display,flex,flex,ok
+https://mosaic.moksaweb.com/moksa/,_t,mk-board-row,alignItems,center,center,ok
+https://mosaic.moksaweb.com/moksa/,_t,mk-board-row,columnGap,26px,26px,ok
+https://mosaic.moksaweb.com/moksa/,_t,mk-board-row,marginTop,34px,34px,ok
+https://mosaic.moksaweb.com/moksa/,_t,mk-board-row,customStyles:flex-wrap,wrap,wrap,ok
+https://mosaic.moksaweb.com/moksa/,_t,mk-board-utc,customStyles:overflow,hidden,no computed value,not-comparable
+https://mosaic.moksaweb.com/moksa/,_t,mk-board-utc,customStyles:height,34px,34px,ok
 https://mosaic.moksaweb.com/moksa/,_t,mk-caret-row,display,flex,flex,ok
 https://mosaic.moksaweb.com/moksa/,_t,mk-caret-row,alignItems,center,center,ok
 https://mosaic.moksaweb.com/moksa/,_t,mk-caret-row,marginTop,10px,10px,ok
@@ -1269,6 +1414,21 @@ https://mosaic.moksaweb.com/moksa/,_t,mk-fl-c-2,paddingBottom,14px,14px,ok
 https://mosaic.moksaweb.com/moksa/,_t,mk-fl-c-2,paddingLeft,16px,16px,ok
 https://mosaic.moksaweb.com/moksa/,_t,mk-fl-c-2,paddingRight,16px,16px,ok
 https://mosaic.moksaweb.com/moksa/,_t,mk-fl-c-2,customStyles:border,"1px solid rgba(22,24,28,.16)",no computed value,not-comparable
+https://mosaic.moksaweb.com/moksa/,_t,mk-flap-0,customStyles:overflow,hidden,no computed value,not-comparable
+https://mosaic.moksaweb.com/moksa/,_t,mk-flap-0,customStyles:height,86px,86px,ok
+https://mosaic.moksaweb.com/moksa/,_t,mk-flap-0,customStyles:background,"rgb(30,32,37)",no computed value,not-comparable
+https://mosaic.moksaweb.com/moksa/,_t,mk-flap-0,customStyles:padding,0 16px,no computed value,not-comparable
+https://mosaic.moksaweb.com/moksa/,_t,mk-flap-0,customStyles:border,"1px solid rgba(250,250,247,.14)",no computed value,not-comparable
+https://mosaic.moksaweb.com/moksa/,_t,mk-flap-1,customStyles:overflow,hidden,no computed value,not-comparable
+https://mosaic.moksaweb.com/moksa/,_t,mk-flap-1,customStyles:height,86px,86px,ok
+https://mosaic.moksaweb.com/moksa/,_t,mk-flap-1,customStyles:background,"rgb(30,32,37)",no computed value,not-comparable
+https://mosaic.moksaweb.com/moksa/,_t,mk-flap-1,customStyles:padding,0 16px,no computed value,not-comparable
+https://mosaic.moksaweb.com/moksa/,_t,mk-flap-1,customStyles:border,"1px solid rgba(250,250,247,.14)",no computed value,not-comparable
+https://mosaic.moksaweb.com/moksa/,_t,mk-flap-2,customStyles:overflow,hidden,no computed value,not-comparable
+https://mosaic.moksaweb.com/moksa/,_t,mk-flap-2,customStyles:height,86px,86px,ok
+https://mosaic.moksaweb.com/moksa/,_t,mk-flap-2,customStyles:background,"rgb(30,32,37)",no computed value,not-comparable
+https://mosaic.moksaweb.com/moksa/,_t,mk-flap-2,customStyles:padding,0 16px,no computed value,not-comparable
+https://mosaic.moksaweb.com/moksa/,_t,mk-flap-2,customStyles:border,"1px solid rgba(250,250,247,.14)",no computed value,not-comparable
 https://mosaic.moksaweb.com/moksa/,_t,mk-hl1-mask,customStyles:overflow,hidden,no computed value,not-comparable
 https://mosaic.moksaweb.com/moksa/,_t,mk-hl1-mask,customStyles:padding-bottom,.08em,1.28px,ok
 https://mosaic.moksaweb.com/moksa/,_t,mk-hl2-mask,customStyles:overflow,hidden,no computed value,not-comparable
@@ -1802,6 +1962,36 @@ https://mosaic.moksaweb.com/moksa/,_t,mk-stack-4,customStyles:border-top,"1px so
 https://mosaic.moksaweb.com/moksa/,_t,mk-stack-4,customStyles:animation,mk-rise both,no computed value,not-comparable
 https://mosaic.moksaweb.com/moksa/,_t,mk-stack-4,customStyles:animation-timeline,view(),view(),ok
 https://mosaic.moksaweb.com/moksa/,_t,mk-stack-4,customStyles:animation-range,entry 18% cover 34%,no computed value,not-comparable
+https://mosaic.moksaweb.com/moksa/,_t,mk-stack-5,display,grid,grid,ok
+https://mosaic.moksaweb.com/moksa/,_t,mk-stack-5,gridCols,160px 1fr,160px 660px,ok
+https://mosaic.moksaweb.com/moksa/,_t,mk-stack-5,columnGap,24px,24px,ok
+https://mosaic.moksaweb.com/moksa/,_t,mk-stack-5,alignItems,baseline,baseline,ok
+https://mosaic.moksaweb.com/moksa/,_t,mk-stack-5,paddingTop,18px,18px,ok
+https://mosaic.moksaweb.com/moksa/,_t,mk-stack-5,paddingBottom,18px,18px,ok
+https://mosaic.moksaweb.com/moksa/,_t,mk-stack-5,customStyles:border-top,"1px solid rgba(22,24,28,.16)",no computed value,not-comparable
+https://mosaic.moksaweb.com/moksa/,_t,mk-stack-5,customStyles:animation,mk-rise both,no computed value,not-comparable
+https://mosaic.moksaweb.com/moksa/,_t,mk-stack-5,customStyles:animation-timeline,view(),view(),ok
+https://mosaic.moksaweb.com/moksa/,_t,mk-stack-5,customStyles:animation-range,entry 22% cover 38%,no computed value,not-comparable
+https://mosaic.moksaweb.com/moksa/,_t,mk-stack-6,display,grid,grid,ok
+https://mosaic.moksaweb.com/moksa/,_t,mk-stack-6,gridCols,160px 1fr,160px 660px,ok
+https://mosaic.moksaweb.com/moksa/,_t,mk-stack-6,columnGap,24px,24px,ok
+https://mosaic.moksaweb.com/moksa/,_t,mk-stack-6,alignItems,baseline,baseline,ok
+https://mosaic.moksaweb.com/moksa/,_t,mk-stack-6,paddingTop,18px,18px,ok
+https://mosaic.moksaweb.com/moksa/,_t,mk-stack-6,paddingBottom,18px,18px,ok
+https://mosaic.moksaweb.com/moksa/,_t,mk-stack-6,customStyles:border-top,"1px solid rgba(22,24,28,.16)",no computed value,not-comparable
+https://mosaic.moksaweb.com/moksa/,_t,mk-stack-6,customStyles:animation,mk-rise both,no computed value,not-comparable
+https://mosaic.moksaweb.com/moksa/,_t,mk-stack-6,customStyles:animation-timeline,view(),view(),ok
+https://mosaic.moksaweb.com/moksa/,_t,mk-stack-6,customStyles:animation-range,entry 26% cover 42%,no computed value,not-comparable
+https://mosaic.moksaweb.com/moksa/,_t,mk-stack-7,display,grid,grid,ok
+https://mosaic.moksaweb.com/moksa/,_t,mk-stack-7,gridCols,160px 1fr,160px 660px,ok
+https://mosaic.moksaweb.com/moksa/,_t,mk-stack-7,columnGap,24px,24px,ok
+https://mosaic.moksaweb.com/moksa/,_t,mk-stack-7,alignItems,baseline,baseline,ok
+https://mosaic.moksaweb.com/moksa/,_t,mk-stack-7,paddingTop,18px,18px,ok
+https://mosaic.moksaweb.com/moksa/,_t,mk-stack-7,paddingBottom,18px,18px,ok
+https://mosaic.moksaweb.com/moksa/,_t,mk-stack-7,customStyles:border-top,"1px solid rgba(22,24,28,.16)",no computed value,not-comparable
+https://mosaic.moksaweb.com/moksa/,_t,mk-stack-7,customStyles:animation,mk-rise both,no computed value,not-comparable
+https://mosaic.moksaweb.com/moksa/,_t,mk-stack-7,customStyles:animation-timeline,view(),view(),ok
+https://mosaic.moksaweb.com/moksa/,_t,mk-stack-7,customStyles:animation-range,entry 30% cover 46%,no computed value,not-comparable
 https://mosaic.moksaweb.com/moksa/,_t,mk-stack-head,display,grid,grid,ok
 https://mosaic.moksaweb.com/moksa/,_t,mk-stack-head,gridCols,84px 1fr,84px 760px,ok
 https://mosaic.moksaweb.com/moksa/,_t,mk-stack-head,columnGap,0px,0px,ok
@@ -1834,6 +2024,18 @@ https://mosaic.moksaweb.com/moksa/,_t,mk-stack-tags-4,display,flex,flex,ok
 https://mosaic.moksaweb.com/moksa/,_t,mk-stack-tags-4,columnGap,8px,8px,ok
 https://mosaic.moksaweb.com/moksa/,_t,mk-stack-tags-4,rowGap,8px,8px,ok
 https://mosaic.moksaweb.com/moksa/,_t,mk-stack-tags-4,customStyles:flex-wrap,wrap,wrap,ok
+https://mosaic.moksaweb.com/moksa/,_t,mk-stack-tags-5,display,flex,flex,ok
+https://mosaic.moksaweb.com/moksa/,_t,mk-stack-tags-5,columnGap,8px,8px,ok
+https://mosaic.moksaweb.com/moksa/,_t,mk-stack-tags-5,rowGap,8px,8px,ok
+https://mosaic.moksaweb.com/moksa/,_t,mk-stack-tags-5,customStyles:flex-wrap,wrap,wrap,ok
+https://mosaic.moksaweb.com/moksa/,_t,mk-stack-tags-6,display,flex,flex,ok
+https://mosaic.moksaweb.com/moksa/,_t,mk-stack-tags-6,columnGap,8px,8px,ok
+https://mosaic.moksaweb.com/moksa/,_t,mk-stack-tags-6,rowGap,8px,8px,ok
+https://mosaic.moksaweb.com/moksa/,_t,mk-stack-tags-6,customStyles:flex-wrap,wrap,wrap,ok
+https://mosaic.moksaweb.com/moksa/,_t,mk-stack-tags-7,display,flex,flex,ok
+https://mosaic.moksaweb.com/moksa/,_t,mk-stack-tags-7,columnGap,8px,8px,ok
+https://mosaic.moksaweb.com/moksa/,_t,mk-stack-tags-7,rowGap,8px,8px,ok
+https://mosaic.moksaweb.com/moksa/,_t,mk-stack-tags-7,customStyles:flex-wrap,wrap,wrap,ok
 https://mosaic.moksaweb.com/moksa/,_t,mk-svc-0,display,grid,grid,ok
 https://mosaic.moksaweb.com/moksa/,_t,mk-svc-0,gridCols,72px 1fr 1.2fr,72px 334.531px 401.469px,ok
 https://mosaic.moksaweb.com/moksa/,_t,mk-svc-0,columnGap,18px,18px,ok
@@ -1901,9 +2103,6 @@ https://mosaic.moksaweb.com/moksa/,_t,mk-tag-1-2,customStyles:transition,"border
 https://mosaic.moksaweb.com/moksa/,_t,mk-tag-1-3,customStyles:border,"1px solid rgba(22,24,28,.16)",no computed value,not-comparable
 https://mosaic.moksaweb.com/moksa/,_t,mk-tag-1-3,customStyles:padding,5px 10px,no computed value,not-comparable
 https://mosaic.moksaweb.com/moksa/,_t,mk-tag-1-3,customStyles:transition,"border-color .2s ease,color .2s ease",composite or raw value,not-comparable
-https://mosaic.moksaweb.com/moksa/,_t,mk-tag-1-4,customStyles:border,"1px solid rgba(22,24,28,.16)",no computed value,not-comparable
-https://mosaic.moksaweb.com/moksa/,_t,mk-tag-1-4,customStyles:padding,5px 10px,no computed value,not-comparable
-https://mosaic.moksaweb.com/moksa/,_t,mk-tag-1-4,customStyles:transition,"border-color .2s ease,color .2s ease",composite or raw value,not-comparable
 https://mosaic.moksaweb.com/moksa/,_t,mk-tag-2-0,customStyles:border,"1px solid rgba(22,24,28,.16)",no computed value,not-comparable
 https://mosaic.moksaweb.com/moksa/,_t,mk-tag-2-0,customStyles:padding,5px 10px,no computed value,not-comparable
 https://mosaic.moksaweb.com/moksa/,_t,mk-tag-2-0,customStyles:transition,"border-color .2s ease,color .2s ease",composite or raw value,not-comparable
@@ -1931,9 +2130,6 @@ https://mosaic.moksaweb.com/moksa/,_t,mk-tag-3-2,customStyles:transition,"border
 https://mosaic.moksaweb.com/moksa/,_t,mk-tag-3-3,customStyles:border,"1px solid rgba(22,24,28,.16)",no computed value,not-comparable
 https://mosaic.moksaweb.com/moksa/,_t,mk-tag-3-3,customStyles:padding,5px 10px,no computed value,not-comparable
 https://mosaic.moksaweb.com/moksa/,_t,mk-tag-3-3,customStyles:transition,"border-color .2s ease,color .2s ease",composite or raw value,not-comparable
-https://mosaic.moksaweb.com/moksa/,_t,mk-tag-3-4,customStyles:border,"1px solid rgba(22,24,28,.16)",no computed value,not-comparable
-https://mosaic.moksaweb.com/moksa/,_t,mk-tag-3-4,customStyles:padding,5px 10px,no computed value,not-comparable
-https://mosaic.moksaweb.com/moksa/,_t,mk-tag-3-4,customStyles:transition,"border-color .2s ease,color .2s ease",composite or raw value,not-comparable
 https://mosaic.moksaweb.com/moksa/,_t,mk-tag-4-0,customStyles:border,"1px solid rgba(22,24,28,.16)",no computed value,not-comparable
 https://mosaic.moksaweb.com/moksa/,_t,mk-tag-4-0,customStyles:padding,5px 10px,no computed value,not-comparable
 https://mosaic.moksaweb.com/moksa/,_t,mk-tag-4-0,customStyles:transition,"border-color .2s ease,color .2s ease",composite or raw value,not-comparable
@@ -1946,9 +2142,51 @@ https://mosaic.moksaweb.com/moksa/,_t,mk-tag-4-2,customStyles:transition,"border
 https://mosaic.moksaweb.com/moksa/,_t,mk-tag-4-3,customStyles:border,"1px solid rgba(22,24,28,.16)",no computed value,not-comparable
 https://mosaic.moksaweb.com/moksa/,_t,mk-tag-4-3,customStyles:padding,5px 10px,no computed value,not-comparable
 https://mosaic.moksaweb.com/moksa/,_t,mk-tag-4-3,customStyles:transition,"border-color .2s ease,color .2s ease",composite or raw value,not-comparable
-https://mosaic.moksaweb.com/moksa/,_t,mk-tag-4-4,customStyles:border,"1px solid rgba(22,24,28,.16)",no computed value,not-comparable
-https://mosaic.moksaweb.com/moksa/,_t,mk-tag-4-4,customStyles:padding,5px 10px,no computed value,not-comparable
-https://mosaic.moksaweb.com/moksa/,_t,mk-tag-4-4,customStyles:transition,"border-color .2s ease,color .2s ease",composite or raw value,not-comparable
+https://mosaic.moksaweb.com/moksa/,_t,mk-tag-5-0,customStyles:border,"1px solid rgba(22,24,28,.16)",no computed value,not-comparable
+https://mosaic.moksaweb.com/moksa/,_t,mk-tag-5-0,customStyles:padding,5px 10px,no computed value,not-comparable
+https://mosaic.moksaweb.com/moksa/,_t,mk-tag-5-0,customStyles:transition,"border-color .2s ease,color .2s ease",composite or raw value,not-comparable
+https://mosaic.moksaweb.com/moksa/,_t,mk-tag-5-1,customStyles:border,"1px solid rgba(22,24,28,.16)",no computed value,not-comparable
+https://mosaic.moksaweb.com/moksa/,_t,mk-tag-5-1,customStyles:padding,5px 10px,no computed value,not-comparable
+https://mosaic.moksaweb.com/moksa/,_t,mk-tag-5-1,customStyles:transition,"border-color .2s ease,color .2s ease",composite or raw value,not-comparable
+https://mosaic.moksaweb.com/moksa/,_t,mk-tag-5-2,customStyles:border,"1px solid rgba(22,24,28,.16)",no computed value,not-comparable
+https://mosaic.moksaweb.com/moksa/,_t,mk-tag-5-2,customStyles:padding,5px 10px,no computed value,not-comparable
+https://mosaic.moksaweb.com/moksa/,_t,mk-tag-5-2,customStyles:transition,"border-color .2s ease,color .2s ease",composite or raw value,not-comparable
+https://mosaic.moksaweb.com/moksa/,_t,mk-tag-5-3,customStyles:border,"1px solid rgba(22,24,28,.16)",no computed value,not-comparable
+https://mosaic.moksaweb.com/moksa/,_t,mk-tag-5-3,customStyles:padding,5px 10px,no computed value,not-comparable
+https://mosaic.moksaweb.com/moksa/,_t,mk-tag-5-3,customStyles:transition,"border-color .2s ease,color .2s ease",composite or raw value,not-comparable
+https://mosaic.moksaweb.com/moksa/,_t,mk-tag-5-4,customStyles:border,"1px solid rgba(22,24,28,.16)",no computed value,not-comparable
+https://mosaic.moksaweb.com/moksa/,_t,mk-tag-5-4,customStyles:padding,5px 10px,no computed value,not-comparable
+https://mosaic.moksaweb.com/moksa/,_t,mk-tag-5-4,customStyles:transition,"border-color .2s ease,color .2s ease",composite or raw value,not-comparable
+https://mosaic.moksaweb.com/moksa/,_t,mk-tag-6-0,customStyles:border,"1px solid rgba(22,24,28,.16)",no computed value,not-comparable
+https://mosaic.moksaweb.com/moksa/,_t,mk-tag-6-0,customStyles:padding,5px 10px,no computed value,not-comparable
+https://mosaic.moksaweb.com/moksa/,_t,mk-tag-6-0,customStyles:transition,"border-color .2s ease,color .2s ease",composite or raw value,not-comparable
+https://mosaic.moksaweb.com/moksa/,_t,mk-tag-6-1,customStyles:border,"1px solid rgba(22,24,28,.16)",no computed value,not-comparable
+https://mosaic.moksaweb.com/moksa/,_t,mk-tag-6-1,customStyles:padding,5px 10px,no computed value,not-comparable
+https://mosaic.moksaweb.com/moksa/,_t,mk-tag-6-1,customStyles:transition,"border-color .2s ease,color .2s ease",composite or raw value,not-comparable
+https://mosaic.moksaweb.com/moksa/,_t,mk-tag-6-2,customStyles:border,"1px solid rgba(22,24,28,.16)",no computed value,not-comparable
+https://mosaic.moksaweb.com/moksa/,_t,mk-tag-6-2,customStyles:padding,5px 10px,no computed value,not-comparable
+https://mosaic.moksaweb.com/moksa/,_t,mk-tag-6-2,customStyles:transition,"border-color .2s ease,color .2s ease",composite or raw value,not-comparable
+https://mosaic.moksaweb.com/moksa/,_t,mk-tag-6-3,customStyles:border,"1px solid rgba(22,24,28,.16)",no computed value,not-comparable
+https://mosaic.moksaweb.com/moksa/,_t,mk-tag-6-3,customStyles:padding,5px 10px,no computed value,not-comparable
+https://mosaic.moksaweb.com/moksa/,_t,mk-tag-6-3,customStyles:transition,"border-color .2s ease,color .2s ease",composite or raw value,not-comparable
+https://mosaic.moksaweb.com/moksa/,_t,mk-tag-6-4,customStyles:border,"1px solid rgba(22,24,28,.16)",no computed value,not-comparable
+https://mosaic.moksaweb.com/moksa/,_t,mk-tag-6-4,customStyles:padding,5px 10px,no computed value,not-comparable
+https://mosaic.moksaweb.com/moksa/,_t,mk-tag-6-4,customStyles:transition,"border-color .2s ease,color .2s ease",composite or raw value,not-comparable
+https://mosaic.moksaweb.com/moksa/,_t,mk-tag-7-0,customStyles:border,"1px solid rgba(22,24,28,.16)",no computed value,not-comparable
+https://mosaic.moksaweb.com/moksa/,_t,mk-tag-7-0,customStyles:padding,5px 10px,no computed value,not-comparable
+https://mosaic.moksaweb.com/moksa/,_t,mk-tag-7-0,customStyles:transition,"border-color .2s ease,color .2s ease",composite or raw value,not-comparable
+https://mosaic.moksaweb.com/moksa/,_t,mk-tag-7-1,customStyles:border,"1px solid rgba(22,24,28,.16)",no computed value,not-comparable
+https://mosaic.moksaweb.com/moksa/,_t,mk-tag-7-1,customStyles:padding,5px 10px,no computed value,not-comparable
+https://mosaic.moksaweb.com/moksa/,_t,mk-tag-7-1,customStyles:transition,"border-color .2s ease,color .2s ease",composite or raw value,not-comparable
+https://mosaic.moksaweb.com/moksa/,_t,mk-tag-7-2,customStyles:border,"1px solid rgba(22,24,28,.16)",no computed value,not-comparable
+https://mosaic.moksaweb.com/moksa/,_t,mk-tag-7-2,customStyles:padding,5px 10px,no computed value,not-comparable
+https://mosaic.moksaweb.com/moksa/,_t,mk-tag-7-2,customStyles:transition,"border-color .2s ease,color .2s ease",composite or raw value,not-comparable
+https://mosaic.moksaweb.com/moksa/,_t,mk-tag-7-3,customStyles:border,"1px solid rgba(22,24,28,.16)",no computed value,not-comparable
+https://mosaic.moksaweb.com/moksa/,_t,mk-tag-7-3,customStyles:padding,5px 10px,no computed value,not-comparable
+https://mosaic.moksaweb.com/moksa/,_t,mk-tag-7-3,customStyles:transition,"border-color .2s ease,color .2s ease",composite or raw value,not-comparable
+https://mosaic.moksaweb.com/moksa/,_t,mk-tag-7-4,customStyles:border,"1px solid rgba(22,24,28,.16)",no computed value,not-comparable
+https://mosaic.moksaweb.com/moksa/,_t,mk-tag-7-4,customStyles:padding,5px 10px,no computed value,not-comparable
+https://mosaic.moksaweb.com/moksa/,_t,mk-tag-7-4,customStyles:transition,"border-color .2s ease,color .2s ease",composite or raw value,not-comparable
 https://mosaic.moksaweb.com/moksa/,_t,mk-ticker,backgroundColor,"rgb(22,24,28)","rgb(22, 24, 28)",ok
 https://mosaic.moksaweb.com/moksa/,_t,mk-ticker,paddingTop,11px,11px,ok
 https://mosaic.moksaweb.com/moksa/,_t,mk-ticker,paddingBottom,11px,11px,ok
@@ -2159,6 +2397,10 @@ https://mosaic.moksaweb.com/moksa/,_t,works,backgroundColor,"rgb(250,250,247)","
 https://mosaic.moksaweb.com/moksa/,_t,works,paddingLeft,28px,28px,ok
 https://mosaic.moksaweb.com/moksa/,_t,works,paddingRight,28px,28px,ok
 https://mosaic.moksaweb.com/moksa/,_t,works,fontFamily,"'Noto Sans TC','PingFang TC','Hiragino Sans TC','Microsoft JhengHei',sans-serif","""Noto Sans TC"", ""PingFang TC"", ""Hiragino Sans TC"", ""Microsoft JhengHei"", sans-serif",ok
+https://mosaic.moksaweb.com/moksa/,_m,board,backgroundColor,"rgb(22,24,28)","rgb(22, 24, 28)",ok
+https://mosaic.moksaweb.com/moksa/,_m,board,paddingLeft,18px,18px,ok
+https://mosaic.moksaweb.com/moksa/,_m,board,paddingRight,18px,18px,ok
+https://mosaic.moksaweb.com/moksa/,_m,board,fontFamily,"'Noto Sans TC','PingFang TC','Hiragino Sans TC','Microsoft JhengHei',sans-serif","""Noto Sans TC"", ""PingFang TC"", ""Hiragino Sans TC"", ""Microsoft JhengHei"", sans-serif",ok
 https://mosaic.moksaweb.com/moksa/,_m,contact,backgroundColor,"rgb(250,250,247)","rgb(250, 250, 247)",ok
 https://mosaic.moksaweb.com/moksa/,_m,contact,paddingLeft,18px,18px,ok
 https://mosaic.moksaweb.com/moksa/,_m,contact,paddingRight,18px,18px,ok
@@ -2195,6 +2437,28 @@ https://mosaic.moksaweb.com/moksa/,_m,mk-ar-b-2,display,flex,flex,ok
 https://mosaic.moksaweb.com/moksa/,_m,mk-ar-b-2,justifyContent,center,center,ok
 https://mosaic.moksaweb.com/moksa/,_m,mk-ar-b-2,alignItems,center,center,ok
 https://mosaic.moksaweb.com/moksa/,_m,mk-ar-b-2,customStyles:transform,rotate(90deg),composite or raw value,not-comparable
+https://mosaic.moksaweb.com/moksa/,_m,mk-board-city,customStyles:overflow,hidden,no computed value,not-comparable
+https://mosaic.moksaweb.com/moksa/,_m,mk-board-city,customStyles:height,34px,34px,ok
+https://mosaic.moksaweb.com/moksa/,_m,mk-board-code,display,flex,flex,ok
+https://mosaic.moksaweb.com/moksa/,_m,mk-board-code,columnGap,5px,5px,ok
+https://mosaic.moksaweb.com/moksa/,_m,mk-board-head,display,flex,flex,ok
+https://mosaic.moksaweb.com/moksa/,_m,mk-board-head,justifyContent,space-between,space-between,ok
+https://mosaic.moksaweb.com/moksa/,_m,mk-board-head,columnGap,20px,20px,ok
+https://mosaic.moksaweb.com/moksa/,_m,mk-board-head,rowGap,8px,8px,ok
+https://mosaic.moksaweb.com/moksa/,_m,mk-board-head,customStyles:flex-wrap,wrap,wrap,ok
+https://mosaic.moksaweb.com/moksa/,_m,mk-board-in,width,100%,viewport- or parent-relative,not-comparable
+https://mosaic.moksaweb.com/moksa/,_m,mk-board-in,maxWidth,1240px,1240px,ok
+https://mosaic.moksaweb.com/moksa/,_m,mk-board-in,marginLeft,auto,auto resolves to a used value (0px),not-comparable
+https://mosaic.moksaweb.com/moksa/,_m,mk-board-in,marginRight,auto,auto resolves to a used value (0px),not-comparable
+https://mosaic.moksaweb.com/moksa/,_m,mk-board-pad,paddingTop,48px,48px,ok
+https://mosaic.moksaweb.com/moksa/,_m,mk-board-pad,paddingBottom,48px,48px,ok
+https://mosaic.moksaweb.com/moksa/,_m,mk-board-row,display,flex,flex,ok
+https://mosaic.moksaweb.com/moksa/,_m,mk-board-row,alignItems,center,center,ok
+https://mosaic.moksaweb.com/moksa/,_m,mk-board-row,columnGap,14px,14px,ok
+https://mosaic.moksaweb.com/moksa/,_m,mk-board-row,marginTop,24px,24px,ok
+https://mosaic.moksaweb.com/moksa/,_m,mk-board-row,customStyles:flex-wrap,wrap,wrap,ok
+https://mosaic.moksaweb.com/moksa/,_m,mk-board-utc,customStyles:overflow,hidden,no computed value,not-comparable
+https://mosaic.moksaweb.com/moksa/,_m,mk-board-utc,customStyles:height,34px,34px,ok
 https://mosaic.moksaweb.com/moksa/,_m,mk-caret-row,display,flex,flex,ok
 https://mosaic.moksaweb.com/moksa/,_m,mk-caret-row,alignItems,center,center,ok
 https://mosaic.moksaweb.com/moksa/,_m,mk-caret-row,marginTop,10px,10px,ok
@@ -2363,6 +2627,21 @@ https://mosaic.moksaweb.com/moksa/,_m,mk-fl-c-2,paddingBottom,14px,14px,ok
 https://mosaic.moksaweb.com/moksa/,_m,mk-fl-c-2,paddingLeft,16px,16px,ok
 https://mosaic.moksaweb.com/moksa/,_m,mk-fl-c-2,paddingRight,16px,16px,ok
 https://mosaic.moksaweb.com/moksa/,_m,mk-fl-c-2,customStyles:border,"1px solid rgba(22,24,28,.16)",no computed value,not-comparable
+https://mosaic.moksaweb.com/moksa/,_m,mk-flap-0,customStyles:overflow,hidden,no computed value,not-comparable
+https://mosaic.moksaweb.com/moksa/,_m,mk-flap-0,customStyles:height,86px,86px,ok
+https://mosaic.moksaweb.com/moksa/,_m,mk-flap-0,customStyles:background,"rgb(30,32,37)",no computed value,not-comparable
+https://mosaic.moksaweb.com/moksa/,_m,mk-flap-0,customStyles:padding,0 16px,no computed value,not-comparable
+https://mosaic.moksaweb.com/moksa/,_m,mk-flap-0,customStyles:border,"1px solid rgba(250,250,247,.14)",no computed value,not-comparable
+https://mosaic.moksaweb.com/moksa/,_m,mk-flap-1,customStyles:overflow,hidden,no computed value,not-comparable
+https://mosaic.moksaweb.com/moksa/,_m,mk-flap-1,customStyles:height,86px,86px,ok
+https://mosaic.moksaweb.com/moksa/,_m,mk-flap-1,customStyles:background,"rgb(30,32,37)",no computed value,not-comparable
+https://mosaic.moksaweb.com/moksa/,_m,mk-flap-1,customStyles:padding,0 16px,no computed value,not-comparable
+https://mosaic.moksaweb.com/moksa/,_m,mk-flap-1,customStyles:border,"1px solid rgba(250,250,247,.14)",no computed value,not-comparable
+https://mosaic.moksaweb.com/moksa/,_m,mk-flap-2,customStyles:overflow,hidden,no computed value,not-comparable
+https://mosaic.moksaweb.com/moksa/,_m,mk-flap-2,customStyles:height,86px,86px,ok
+https://mosaic.moksaweb.com/moksa/,_m,mk-flap-2,customStyles:background,"rgb(30,32,37)",no computed value,not-comparable
+https://mosaic.moksaweb.com/moksa/,_m,mk-flap-2,customStyles:padding,0 16px,no computed value,not-comparable
+https://mosaic.moksaweb.com/moksa/,_m,mk-flap-2,customStyles:border,"1px solid rgba(250,250,247,.14)",no computed value,not-comparable
 https://mosaic.moksaweb.com/moksa/,_m,mk-hl1-mask,customStyles:overflow,hidden,no computed value,not-comparable
 https://mosaic.moksaweb.com/moksa/,_m,mk-hl1-mask,customStyles:padding-bottom,.08em,1.28px,ok
 https://mosaic.moksaweb.com/moksa/,_m,mk-hl2-mask,customStyles:overflow,hidden,no computed value,not-comparable
@@ -2906,6 +3185,39 @@ https://mosaic.moksaweb.com/moksa/,_m,mk-stack-4,customStyles:animation,mk-rise 
 https://mosaic.moksaweb.com/moksa/,_m,mk-stack-4,customStyles:animation-timeline,view(),view(),ok
 https://mosaic.moksaweb.com/moksa/,_m,mk-stack-4,customStyles:animation-range,entry 18% cover 34%,no computed value,not-comparable
 https://mosaic.moksaweb.com/moksa/,_m,mk-stack-4,rowGap,10px,10px,ok
+https://mosaic.moksaweb.com/moksa/,_m,mk-stack-5,display,grid,grid,ok
+https://mosaic.moksaweb.com/moksa/,_m,mk-stack-5,gridCols,1fr,354px,ok
+https://mosaic.moksaweb.com/moksa/,_m,mk-stack-5,columnGap,24px,24px,ok
+https://mosaic.moksaweb.com/moksa/,_m,mk-stack-5,alignItems,baseline,baseline,ok
+https://mosaic.moksaweb.com/moksa/,_m,mk-stack-5,paddingTop,16px,16px,ok
+https://mosaic.moksaweb.com/moksa/,_m,mk-stack-5,paddingBottom,16px,16px,ok
+https://mosaic.moksaweb.com/moksa/,_m,mk-stack-5,customStyles:border-top,"1px solid rgba(22,24,28,.16)",no computed value,not-comparable
+https://mosaic.moksaweb.com/moksa/,_m,mk-stack-5,customStyles:animation,mk-rise both,no computed value,not-comparable
+https://mosaic.moksaweb.com/moksa/,_m,mk-stack-5,customStyles:animation-timeline,view(),view(),ok
+https://mosaic.moksaweb.com/moksa/,_m,mk-stack-5,customStyles:animation-range,entry 22% cover 38%,no computed value,not-comparable
+https://mosaic.moksaweb.com/moksa/,_m,mk-stack-5,rowGap,10px,10px,ok
+https://mosaic.moksaweb.com/moksa/,_m,mk-stack-6,display,grid,grid,ok
+https://mosaic.moksaweb.com/moksa/,_m,mk-stack-6,gridCols,1fr,354px,ok
+https://mosaic.moksaweb.com/moksa/,_m,mk-stack-6,columnGap,24px,24px,ok
+https://mosaic.moksaweb.com/moksa/,_m,mk-stack-6,alignItems,baseline,baseline,ok
+https://mosaic.moksaweb.com/moksa/,_m,mk-stack-6,paddingTop,16px,16px,ok
+https://mosaic.moksaweb.com/moksa/,_m,mk-stack-6,paddingBottom,16px,16px,ok
+https://mosaic.moksaweb.com/moksa/,_m,mk-stack-6,customStyles:border-top,"1px solid rgba(22,24,28,.16)",no computed value,not-comparable
+https://mosaic.moksaweb.com/moksa/,_m,mk-stack-6,customStyles:animation,mk-rise both,no computed value,not-comparable
+https://mosaic.moksaweb.com/moksa/,_m,mk-stack-6,customStyles:animation-timeline,view(),view(),ok
+https://mosaic.moksaweb.com/moksa/,_m,mk-stack-6,customStyles:animation-range,entry 26% cover 42%,no computed value,not-comparable
+https://mosaic.moksaweb.com/moksa/,_m,mk-stack-6,rowGap,10px,10px,ok
+https://mosaic.moksaweb.com/moksa/,_m,mk-stack-7,display,grid,grid,ok
+https://mosaic.moksaweb.com/moksa/,_m,mk-stack-7,gridCols,1fr,354px,ok
+https://mosaic.moksaweb.com/moksa/,_m,mk-stack-7,columnGap,24px,24px,ok
+https://mosaic.moksaweb.com/moksa/,_m,mk-stack-7,alignItems,baseline,baseline,ok
+https://mosaic.moksaweb.com/moksa/,_m,mk-stack-7,paddingTop,16px,16px,ok
+https://mosaic.moksaweb.com/moksa/,_m,mk-stack-7,paddingBottom,16px,16px,ok
+https://mosaic.moksaweb.com/moksa/,_m,mk-stack-7,customStyles:border-top,"1px solid rgba(22,24,28,.16)",no computed value,not-comparable
+https://mosaic.moksaweb.com/moksa/,_m,mk-stack-7,customStyles:animation,mk-rise both,no computed value,not-comparable
+https://mosaic.moksaweb.com/moksa/,_m,mk-stack-7,customStyles:animation-timeline,view(),view(),ok
+https://mosaic.moksaweb.com/moksa/,_m,mk-stack-7,customStyles:animation-range,entry 30% cover 46%,no computed value,not-comparable
+https://mosaic.moksaweb.com/moksa/,_m,mk-stack-7,rowGap,10px,10px,ok
 https://mosaic.moksaweb.com/moksa/,_m,mk-stack-head,display,grid,grid,ok
 https://mosaic.moksaweb.com/moksa/,_m,mk-stack-head,gridCols,48px 1fr,48px 306px,ok
 https://mosaic.moksaweb.com/moksa/,_m,mk-stack-head,columnGap,0px,0px,ok
@@ -2938,6 +3250,18 @@ https://mosaic.moksaweb.com/moksa/,_m,mk-stack-tags-4,display,flex,flex,ok
 https://mosaic.moksaweb.com/moksa/,_m,mk-stack-tags-4,columnGap,8px,8px,ok
 https://mosaic.moksaweb.com/moksa/,_m,mk-stack-tags-4,rowGap,8px,8px,ok
 https://mosaic.moksaweb.com/moksa/,_m,mk-stack-tags-4,customStyles:flex-wrap,wrap,wrap,ok
+https://mosaic.moksaweb.com/moksa/,_m,mk-stack-tags-5,display,flex,flex,ok
+https://mosaic.moksaweb.com/moksa/,_m,mk-stack-tags-5,columnGap,8px,8px,ok
+https://mosaic.moksaweb.com/moksa/,_m,mk-stack-tags-5,rowGap,8px,8px,ok
+https://mosaic.moksaweb.com/moksa/,_m,mk-stack-tags-5,customStyles:flex-wrap,wrap,wrap,ok
+https://mosaic.moksaweb.com/moksa/,_m,mk-stack-tags-6,display,flex,flex,ok
+https://mosaic.moksaweb.com/moksa/,_m,mk-stack-tags-6,columnGap,8px,8px,ok
+https://mosaic.moksaweb.com/moksa/,_m,mk-stack-tags-6,rowGap,8px,8px,ok
+https://mosaic.moksaweb.com/moksa/,_m,mk-stack-tags-6,customStyles:flex-wrap,wrap,wrap,ok
+https://mosaic.moksaweb.com/moksa/,_m,mk-stack-tags-7,display,flex,flex,ok
+https://mosaic.moksaweb.com/moksa/,_m,mk-stack-tags-7,columnGap,8px,8px,ok
+https://mosaic.moksaweb.com/moksa/,_m,mk-stack-tags-7,rowGap,8px,8px,ok
+https://mosaic.moksaweb.com/moksa/,_m,mk-stack-tags-7,customStyles:flex-wrap,wrap,wrap,ok
 https://mosaic.moksaweb.com/moksa/,_m,mk-svc-0,display,grid,grid,ok
 https://mosaic.moksaweb.com/moksa/,_m,mk-svc-0,gridCols,"repeat(1, 1fr)",354px,ok
 https://mosaic.moksaweb.com/moksa/,_m,mk-svc-0,columnGap,18px,18px,ok
@@ -3009,9 +3333,6 @@ https://mosaic.moksaweb.com/moksa/,_m,mk-tag-1-2,customStyles:transition,"border
 https://mosaic.moksaweb.com/moksa/,_m,mk-tag-1-3,customStyles:border,"1px solid rgba(22,24,28,.16)",no computed value,not-comparable
 https://mosaic.moksaweb.com/moksa/,_m,mk-tag-1-3,customStyles:padding,5px 10px,no computed value,not-comparable
 https://mosaic.moksaweb.com/moksa/,_m,mk-tag-1-3,customStyles:transition,"border-color .2s ease,color .2s ease",composite or raw value,not-comparable
-https://mosaic.moksaweb.com/moksa/,_m,mk-tag-1-4,customStyles:border,"1px solid rgba(22,24,28,.16)",no computed value,not-comparable
-https://mosaic.moksaweb.com/moksa/,_m,mk-tag-1-4,customStyles:padding,5px 10px,no computed value,not-comparable
-https://mosaic.moksaweb.com/moksa/,_m,mk-tag-1-4,customStyles:transition,"border-color .2s ease,color .2s ease",composite or raw value,not-comparable
 https://mosaic.moksaweb.com/moksa/,_m,mk-tag-2-0,customStyles:border,"1px solid rgba(22,24,28,.16)",no computed value,not-comparable
 https://mosaic.moksaweb.com/moksa/,_m,mk-tag-2-0,customStyles:padding,5px 10px,no computed value,not-comparable
 https://mosaic.moksaweb.com/moksa/,_m,mk-tag-2-0,customStyles:transition,"border-color .2s ease,color .2s ease",composite or raw value,not-comparable
@@ -3039,9 +3360,6 @@ https://mosaic.moksaweb.com/moksa/,_m,mk-tag-3-2,customStyles:transition,"border
 https://mosaic.moksaweb.com/moksa/,_m,mk-tag-3-3,customStyles:border,"1px solid rgba(22,24,28,.16)",no computed value,not-comparable
 https://mosaic.moksaweb.com/moksa/,_m,mk-tag-3-3,customStyles:padding,5px 10px,no computed value,not-comparable
 https://mosaic.moksaweb.com/moksa/,_m,mk-tag-3-3,customStyles:transition,"border-color .2s ease,color .2s ease",composite or raw value,not-comparable
-https://mosaic.moksaweb.com/moksa/,_m,mk-tag-3-4,customStyles:border,"1px solid rgba(22,24,28,.16)",no computed value,not-comparable
-https://mosaic.moksaweb.com/moksa/,_m,mk-tag-3-4,customStyles:padding,5px 10px,no computed value,not-comparable
-https://mosaic.moksaweb.com/moksa/,_m,mk-tag-3-4,customStyles:transition,"border-color .2s ease,color .2s ease",composite or raw value,not-comparable
 https://mosaic.moksaweb.com/moksa/,_m,mk-tag-4-0,customStyles:border,"1px solid rgba(22,24,28,.16)",no computed value,not-comparable
 https://mosaic.moksaweb.com/moksa/,_m,mk-tag-4-0,customStyles:padding,5px 10px,no computed value,not-comparable
 https://mosaic.moksaweb.com/moksa/,_m,mk-tag-4-0,customStyles:transition,"border-color .2s ease,color .2s ease",composite or raw value,not-comparable
@@ -3054,9 +3372,51 @@ https://mosaic.moksaweb.com/moksa/,_m,mk-tag-4-2,customStyles:transition,"border
 https://mosaic.moksaweb.com/moksa/,_m,mk-tag-4-3,customStyles:border,"1px solid rgba(22,24,28,.16)",no computed value,not-comparable
 https://mosaic.moksaweb.com/moksa/,_m,mk-tag-4-3,customStyles:padding,5px 10px,no computed value,not-comparable
 https://mosaic.moksaweb.com/moksa/,_m,mk-tag-4-3,customStyles:transition,"border-color .2s ease,color .2s ease",composite or raw value,not-comparable
-https://mosaic.moksaweb.com/moksa/,_m,mk-tag-4-4,customStyles:border,"1px solid rgba(22,24,28,.16)",no computed value,not-comparable
-https://mosaic.moksaweb.com/moksa/,_m,mk-tag-4-4,customStyles:padding,5px 10px,no computed value,not-comparable
-https://mosaic.moksaweb.com/moksa/,_m,mk-tag-4-4,customStyles:transition,"border-color .2s ease,color .2s ease",composite or raw value,not-comparable
+https://mosaic.moksaweb.com/moksa/,_m,mk-tag-5-0,customStyles:border,"1px solid rgba(22,24,28,.16)",no computed value,not-comparable
+https://mosaic.moksaweb.com/moksa/,_m,mk-tag-5-0,customStyles:padding,5px 10px,no computed value,not-comparable
+https://mosaic.moksaweb.com/moksa/,_m,mk-tag-5-0,customStyles:transition,"border-color .2s ease,color .2s ease",composite or raw value,not-comparable
+https://mosaic.moksaweb.com/moksa/,_m,mk-tag-5-1,customStyles:border,"1px solid rgba(22,24,28,.16)",no computed value,not-comparable
+https://mosaic.moksaweb.com/moksa/,_m,mk-tag-5-1,customStyles:padding,5px 10px,no computed value,not-comparable
+https://mosaic.moksaweb.com/moksa/,_m,mk-tag-5-1,customStyles:transition,"border-color .2s ease,color .2s ease",composite or raw value,not-comparable
+https://mosaic.moksaweb.com/moksa/,_m,mk-tag-5-2,customStyles:border,"1px solid rgba(22,24,28,.16)",no computed value,not-comparable
+https://mosaic.moksaweb.com/moksa/,_m,mk-tag-5-2,customStyles:padding,5px 10px,no computed value,not-comparable
+https://mosaic.moksaweb.com/moksa/,_m,mk-tag-5-2,customStyles:transition,"border-color .2s ease,color .2s ease",composite or raw value,not-comparable
+https://mosaic.moksaweb.com/moksa/,_m,mk-tag-5-3,customStyles:border,"1px solid rgba(22,24,28,.16)",no computed value,not-comparable
+https://mosaic.moksaweb.com/moksa/,_m,mk-tag-5-3,customStyles:padding,5px 10px,no computed value,not-comparable
+https://mosaic.moksaweb.com/moksa/,_m,mk-tag-5-3,customStyles:transition,"border-color .2s ease,color .2s ease",composite or raw value,not-comparable
+https://mosaic.moksaweb.com/moksa/,_m,mk-tag-5-4,customStyles:border,"1px solid rgba(22,24,28,.16)",no computed value,not-comparable
+https://mosaic.moksaweb.com/moksa/,_m,mk-tag-5-4,customStyles:padding,5px 10px,no computed value,not-comparable
+https://mosaic.moksaweb.com/moksa/,_m,mk-tag-5-4,customStyles:transition,"border-color .2s ease,color .2s ease",composite or raw value,not-comparable
+https://mosaic.moksaweb.com/moksa/,_m,mk-tag-6-0,customStyles:border,"1px solid rgba(22,24,28,.16)",no computed value,not-comparable
+https://mosaic.moksaweb.com/moksa/,_m,mk-tag-6-0,customStyles:padding,5px 10px,no computed value,not-comparable
+https://mosaic.moksaweb.com/moksa/,_m,mk-tag-6-0,customStyles:transition,"border-color .2s ease,color .2s ease",composite or raw value,not-comparable
+https://mosaic.moksaweb.com/moksa/,_m,mk-tag-6-1,customStyles:border,"1px solid rgba(22,24,28,.16)",no computed value,not-comparable
+https://mosaic.moksaweb.com/moksa/,_m,mk-tag-6-1,customStyles:padding,5px 10px,no computed value,not-comparable
+https://mosaic.moksaweb.com/moksa/,_m,mk-tag-6-1,customStyles:transition,"border-color .2s ease,color .2s ease",composite or raw value,not-comparable
+https://mosaic.moksaweb.com/moksa/,_m,mk-tag-6-2,customStyles:border,"1px solid rgba(22,24,28,.16)",no computed value,not-comparable
+https://mosaic.moksaweb.com/moksa/,_m,mk-tag-6-2,customStyles:padding,5px 10px,no computed value,not-comparable
+https://mosaic.moksaweb.com/moksa/,_m,mk-tag-6-2,customStyles:transition,"border-color .2s ease,color .2s ease",composite or raw value,not-comparable
+https://mosaic.moksaweb.com/moksa/,_m,mk-tag-6-3,customStyles:border,"1px solid rgba(22,24,28,.16)",no computed value,not-comparable
+https://mosaic.moksaweb.com/moksa/,_m,mk-tag-6-3,customStyles:padding,5px 10px,no computed value,not-comparable
+https://mosaic.moksaweb.com/moksa/,_m,mk-tag-6-3,customStyles:transition,"border-color .2s ease,color .2s ease",composite or raw value,not-comparable
+https://mosaic.moksaweb.com/moksa/,_m,mk-tag-6-4,customStyles:border,"1px solid rgba(22,24,28,.16)",no computed value,not-comparable
+https://mosaic.moksaweb.com/moksa/,_m,mk-tag-6-4,customStyles:padding,5px 10px,no computed value,not-comparable
+https://mosaic.moksaweb.com/moksa/,_m,mk-tag-6-4,customStyles:transition,"border-color .2s ease,color .2s ease",composite or raw value,not-comparable
+https://mosaic.moksaweb.com/moksa/,_m,mk-tag-7-0,customStyles:border,"1px solid rgba(22,24,28,.16)",no computed value,not-comparable
+https://mosaic.moksaweb.com/moksa/,_m,mk-tag-7-0,customStyles:padding,5px 10px,no computed value,not-comparable
+https://mosaic.moksaweb.com/moksa/,_m,mk-tag-7-0,customStyles:transition,"border-color .2s ease,color .2s ease",composite or raw value,not-comparable
+https://mosaic.moksaweb.com/moksa/,_m,mk-tag-7-1,customStyles:border,"1px solid rgba(22,24,28,.16)",no computed value,not-comparable
+https://mosaic.moksaweb.com/moksa/,_m,mk-tag-7-1,customStyles:padding,5px 10px,no computed value,not-comparable
+https://mosaic.moksaweb.com/moksa/,_m,mk-tag-7-1,customStyles:transition,"border-color .2s ease,color .2s ease",composite or raw value,not-comparable
+https://mosaic.moksaweb.com/moksa/,_m,mk-tag-7-2,customStyles:border,"1px solid rgba(22,24,28,.16)",no computed value,not-comparable
+https://mosaic.moksaweb.com/moksa/,_m,mk-tag-7-2,customStyles:padding,5px 10px,no computed value,not-comparable
+https://mosaic.moksaweb.com/moksa/,_m,mk-tag-7-2,customStyles:transition,"border-color .2s ease,color .2s ease",composite or raw value,not-comparable
+https://mosaic.moksaweb.com/moksa/,_m,mk-tag-7-3,customStyles:border,"1px solid rgba(22,24,28,.16)",no computed value,not-comparable
+https://mosaic.moksaweb.com/moksa/,_m,mk-tag-7-3,customStyles:padding,5px 10px,no computed value,not-comparable
+https://mosaic.moksaweb.com/moksa/,_m,mk-tag-7-3,customStyles:transition,"border-color .2s ease,color .2s ease",composite or raw value,not-comparable
+https://mosaic.moksaweb.com/moksa/,_m,mk-tag-7-4,customStyles:border,"1px solid rgba(22,24,28,.16)",no computed value,not-comparable
+https://mosaic.moksaweb.com/moksa/,_m,mk-tag-7-4,customStyles:padding,5px 10px,no computed value,not-comparable
+https://mosaic.moksaweb.com/moksa/,_m,mk-tag-7-4,customStyles:transition,"border-color .2s ease,color .2s ease",composite or raw value,not-comparable
 https://mosaic.moksaweb.com/moksa/,_m,mk-ticker,backgroundColor,"rgb(22,24,28)","rgb(22, 24, 28)",ok
 https://mosaic.moksaweb.com/moksa/,_m,mk-ticker,paddingTop,11px,11px,ok
 https://mosaic.moksaweb.com/moksa/,_m,mk-ticker,paddingBottom,11px,11px,ok
