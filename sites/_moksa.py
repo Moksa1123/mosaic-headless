@@ -323,6 +323,17 @@ STACK = [
 
 # the clause index, fixed to the left margin. One entry per section, and the entry
 # lights up while its section is on screen - see the named view timelines below.
+# What the boot screen reports while it works. Real steps in this page's own
+# construction rather than decoration: the faces it loads, the tokens it resolves,
+# the breakpoints it compiles, the clauses it mounts.
+BOOT_LOG = [
+    "LOADING TYPEFACES — IBM PLEX MONO / SPACE GROTESK / NOTO SANS TC",
+    "RESOLVING DESIGN TOKENS — 8 COLLECTION VARIABLES",
+    "COMPILING BREAKPOINTS — 1440 / 1079 / 767",
+    "MOUNTING CLAUSES §01–§07",
+]
+RULER_TICKS = 13
+
 CLAUSES = [
     ("01", "SERVICES", "#services", "--mk-s1"),
     ("02", "PROCESS", "#process", "--mk-s2"),
@@ -346,6 +357,9 @@ REVEALS = [
     ("mk-work-0", 1), ("mk-work-1", 1), ("mk-work-2", 2), ("mk-work-3", 2),
     ("mk-work-4", 3), ("mk-work-5", 3), ("mk-work-6", 4), ("mk-work-7", 4),
     ("mk-work-8", 5),
+    ("mk-plate-num", 0), ("mk-plate-t", 1),
+    ("mk-spec2-head", 0), ("mk-spec2-r-0", 1), ("mk-spec2-r-1", 2),
+    ("mk-spec2-r-2", 3), ("mk-spec2-r-3", 4),
     ("mk-stack-head", 0), ("mk-stack-0", 1), ("mk-stack-1", 2), ("mk-stack-2", 3),
     ("mk-stack-3", 4), ("mk-stack-4", 5),
     ("mk-prod-head", 0), ("mk-prod-0", 1), ("mk-prod-1", 2),
@@ -376,10 +390,17 @@ def motion_css():
                           for i, (_g, items) in enumerate(STACK)
                           for j in range(len(items)))
     marks = ",".join("#mk-mark-%d" % i for i in range(4))
-    # the boot list lights one clause at a time
+    # the boot sequence, phase by phase: the clauses report in, the log writes
+    # itself out a line at a time, and the ruler ticks up the left margin
     boot_stagger = "\n".join(
-        "  #mk-boot-c%d{animation-delay:%dms}" % (i, 260 + i * 120)
+        "  #mk-boot-c%d{animation-delay:%dms}" % (i, 700 + i * 200)
         for i in range(len(CLAUSES)))
+    log_stagger = "\n".join(
+        "  #mk-boot-l%d{animation-delay:%dms}" % (i, 550 + i * 380)
+        for i in range(len(BOOT_LOG)))
+    ruler_stagger = "\n".join(
+        "  #mk-boot-t%d{animation-delay:%dms}" % (i, 120 + i * 26)
+        for i in range(RULER_TICKS))
     # a named view timeline per section, declared on the section and consumed by its
     # index entry - `timeline-scope` on #mk-doc is what lets the name cross between
     # two elements that are not ancestor and descendant
@@ -472,6 +493,7 @@ def motion_css():
         # the blinking caret under the headline: the one piece of ornament, and it
         # belongs to a page set in a terminal face
         "#mk-caret{width:13px;height:19px;background:rgb(255,90,54)}",
+        "#mk-plate-dash{width:34px;height:1px;background:rgb(191,68,40)}",
         "#mk-mast-rule,#mk-spec-rule{height:1px;background:" + RULE + ";"
         "transform:scaleX(0);transform-origin:0 50%}",
         digits + "{display:block;transform:translateY(105%)}",
@@ -559,23 +581,35 @@ def motion_css():
         "@keyframes mk-boot-scan{from{transform:translateY(0)}"
         "to{transform:translateY(100vh)}}",
         "@keyframes mk-boot-fade{from{opacity:0}to{opacity:1}}",
+        # a log line arriving: clipped from the left, like a terminal writing it
+        "@keyframes mk-boot-type{from{clip-path:inset(0 100% 0 0);opacity:.3}"
+        "to{clip-path:inset(0 0 0 0);opacity:1}}",
+        "@keyframes mk-boot-caret{0%,49%{opacity:1}50%,99%{opacity:0}}",
+        # the corner crosshairs draw themselves in
+        "@keyframes mk-boot-cross{from{opacity:0;transform:scale(.55)}"
+        "to{opacity:1;transform:scale(1)}}",
+        "@keyframes mk-boot-tick{from{opacity:0;transform:scaleX(.2)}"
+        "to{opacity:1;transform:scaleX(1)}}",
+        # the stamp lands hard, the way a stamp does
+        "@keyframes mk-boot-stamp{0%{opacity:0;transform:scale(1.35)}"
+        "55%{opacity:1;transform:scale(.97)}100%{opacity:1;transform:scale(1)}}",
 
         # ── motion, all of it opt-out-able ───────────────────────────────────
         "@media (prefers-reduced-motion:no-preference){",
         "  #mk-boot{display:grid;position:fixed;inset:0;z-index:999;"
         "background:rgb(250,250,247);align-content:center;justify-items:center;"
-        "row-gap:22px;overflow:hidden;"
-        "animation:mk-boot-out .5s cubic-bezier(.7,0,.3,1) 1.55s forwards}",
+        "row-gap:20px;overflow:hidden;"
+        "animation:mk-boot-out .62s cubic-bezier(.7,0,.3,1) 2.95s forwards}",
         "  #mk-boot-head,#mk-boot-foot{position:absolute;left:40px;right:40px;"
         "display:flex;justify-content:space-between;font-family:" + MONO + ";"
         "font-size:10px;letter-spacing:.2em;color:rgb(107,109,113);"
         "animation:mk-boot-fade .4s ease both}",
         "  #mk-boot-head{top:34px}",
         "  #mk-boot-foot{bottom:30px;animation-delay:.1s}",
-        "  #mk-boot-num{font-family:" + MONO + ";font-size:96px;font-weight:500;"
+        "  #mk-boot-num{font-family:" + MONO + ";font-size:104px;font-weight:500;"
         "line-height:1;letter-spacing:-.04em;color:rgb(22,24,28);"
         "font-variant-numeric:tabular-nums;min-width:3ch;text-align:right;"
-        "animation:mk-count 1.2s cubic-bezier(.3,0,0,1) .12s both}",
+        "animation:mk-count 2.05s linear .3s both}",
         '  #mk-boot-num::after{counter-reset:n var(--mk-n);content:counter(n)}',
         "  #mk-boot-row{display:flex;align-items:flex-end;column-gap:8px;"
         "line-height:1}",
@@ -588,12 +622,17 @@ def motion_css():
         "background:rgba(22,24,28,.14);position:relative}",
         "  #mk-boot-fill{position:absolute;inset:0;background:rgb(255,90,54);"
         "transform-origin:0 50%;"
-        "animation:mk-boot-fill 1.2s cubic-bezier(.3,0,0,1) .12s both}",
+        "animation:mk-boot-fill 2.05s linear .3s both}",
+        # ticks along the rule, so the bar reads as a measure rather than a bar
+        '  #mk-boot-track::after{content:"";position:absolute;left:0;right:0;'
+        "top:-3px;height:3px;background:repeating-linear-gradient(90deg,"
+        "rgba(22,24,28,.22) 0 1px,transparent 1px 42px);"
+        "animation:mk-boot-fade .5s ease .15s both}",
         "  #mk-boot-list{display:flex;column-gap:18px;row-gap:8px;"
         "flex-wrap:wrap;justify-content:center;font-family:" + MONO + ";"
         "font-size:10px;letter-spacing:.18em}",
         "  #mk-boot-list>*{opacity:.14;"
-        "animation:mk-boot-line .5s ease both}",
+        "animation:mk-boot-line .62s ease both}",
         boot_stagger,
         "  #mk-boot::before{content:\"\";position:absolute;inset:0;"
         "background:"
@@ -604,22 +643,59 @@ def motion_css():
         "animation:mk-boot-fade .5s ease both}",
         "  #mk-boot-scan{position:absolute;left:0;right:0;top:0;height:1px;"
         "background:linear-gradient(90deg,rgba(255,90,54,0),rgba(255,90,54,.55),"
-        "rgba(255,90,54,0));animation:mk-boot-scan 1.6s linear .1s both}",
+        "rgba(255,90,54,0));"
+        "animation:mk-boot-scan 1.45s linear .15s 2 both}",
+
+        # corner crosshairs: the veil is a plate, and a plate has trim marks
+        "  #mk-boot .mk-x,#mk-boot-x0,#mk-boot-x1,#mk-boot-x2,#mk-boot-x3{"
+        "position:absolute;width:14px;height:14px;"
+        "animation:mk-boot-cross .5s cubic-bezier(.16,1,.3,1) both}",
+        "  #mk-boot-x0{top:64px;left:40px;border-left:1px solid " + RULE_INK
+        + ";border-top:1px solid " + RULE_INK + ";animation-delay:.08s}",
+        "  #mk-boot-x1{top:64px;right:40px;border-right:1px solid " + RULE_INK
+        + ";border-top:1px solid " + RULE_INK + ";animation-delay:.16s}",
+        "  #mk-boot-x2{bottom:56px;left:40px;border-left:1px solid " + RULE_INK
+        + ";border-bottom:1px solid " + RULE_INK + ";animation-delay:.24s}",
+        "  #mk-boot-x3{bottom:56px;right:40px;border-right:1px solid " + RULE_INK
+        + ";border-bottom:1px solid " + RULE_INK + ";animation-delay:.32s}",
+
+        # a ruler down the left margin, because this is a measured object
+        "  #mk-boot-ruler{position:absolute;left:40px;top:50%;"
+        "transform:translateY(-50%);display:grid;row-gap:9px}",
+        "  #mk-boot-ruler>*{width:9px;height:1px;background:" + RULE_INK + ";"
+        "transform-origin:0 50%;animation:mk-boot-tick .3s ease both}",
+        ruler_stagger,
+        "  @media (max-width:1023px){#mk-boot-ruler{display:none}}",
+
+        # the log: four lines, each written out left to right
+        "  #mk-boot-log{display:grid;row-gap:7px;justify-items:start;"
+        "font-family:" + MONO + ";font-size:10px;letter-spacing:.16em;"
+        "color:rgb(107,109,113);min-height:64px}",
+        "  #mk-boot-log>*{animation:mk-boot-type .42s steps(24,end) both}",
+        log_stagger,
+        "  #mk-boot-cursor{width:7px;height:11px;background:rgb(255,90,54);"
+        "animation:mk-boot-caret .62s steps(1,end) .5s infinite}",
+
+        # the stamp that says the document is complete
+        "  #mk-boot-ready{border:1px solid rgb(191,68,40);padding:5px 12px;"
+        "font-family:" + MONO + ";font-size:10px;letter-spacing:.24em;"
+        "color:rgb(191,68,40);opacity:0;"
+        "animation:mk-boot-stamp .42s cubic-bezier(.16,1,.3,1) 2.42s both}",
         "  @media (max-width:767px){#mk-boot-num{font-size:62px}"
         "#mk-boot-head,#mk-boot-foot{left:18px;right:18px}}",
         "  #mk-hl1-mask>*,#mk-hl2-mask>*{transform:translateY(112%);"
         "animation:mk-linein .95s cubic-bezier(.16,1,.3,1) forwards}",
-        "  #mk-hl1-mask>*{animation-delay:1.72s}",
-        "  #mk-hl2-mask>*{animation-delay:1.84s}",
+        "  #mk-hl1-mask>*{animation-delay:3.16s}",
+        "  #mk-hl2-mask>*{animation-delay:3.28s}",
         "  #mk-mast-meta,#mk-mast-lede,#mk-mast-cta{opacity:0;"
         "animation:mk-softin .8s cubic-bezier(.16,1,.3,1) forwards}",
-        "  #mk-mast-meta{animation-delay:1.62s}",
-        "  #mk-mast-lede{animation-delay:2.10s}",
-        "  #mk-mast-cta{animation-delay:2.22s}",
+        "  #mk-mast-meta{animation-delay:3.06s}",
+        "  #mk-mast-lede{animation-delay:3.54s}",
+        "  #mk-mast-cta{animation-delay:3.66s}",
         "  #mk-caret{animation:mk-caret 1.15s steps(1,end) infinite;"
-        "animation-delay:2.4s}",
+        "animation-delay:3.84s}",
         "  #mk-mast-rule{animation:mk-drawx .9s cubic-bezier(.2,.7,.3,1) forwards;"
-        "animation-delay:1.96s}",
+        "animation-delay:3.40s}",
         "  #mk-spec-rule{animation:mk-drawx .9s cubic-bezier(.2,.7,.3,1) forwards;"
         "animation-delay:.9s}",
         "  #mk-cue{opacity:0;animation:mk-softin .8s ease forwards;"
@@ -1261,6 +1337,102 @@ CONTACT = section("contact", [wrap("mk-contact-in", [
         ]),
 ])])
 
+# ── PLATE 01: a statement ─────────────────────────────────────────────────────
+# Every clause on this page has the same rhythm - a numbered head, then hairline
+# rows. That is correct for a specification and monotonous for a page. A document
+# also has PLATES: unnumbered, full-bleed, one idea at a scale nothing else gets.
+# This one changes the ground, the measure and the type size all at once, so the
+# reader feels a chapter break rather than another row.
+PLATE = section("plate", [wrap("mk-plate-in", [
+    box("mk-plate-pad",
+        {"paddingTop": "104px", "paddingBottom": "104px",
+         "display": "grid", "gridCols": "auto 1fr", "columnGap": "56px",
+         "alignItems": "start"},
+        _t={"columnGap": "36px"},
+        _m={"gridCols": "repeat(1, 1fr)", "rowGap": "22px",
+            "paddingTop": "62px", "paddingBottom": "62px"},
+        children=[
+            # the plate number, set as a hollow numeral - the one place on the page
+            # where type is used as a shape rather than as reading matter
+            box("mk-plate-num", {},
+                [T("p", "01", fontFamily=DISPLAY, fontSize="132px",
+                   fontWeight="600", lineHeight=".82", letterSpacing="-0.05em",
+                   color="rgba(0,0,0,0)",
+                   customStyles="-webkit-text-stroke:1px " + RULE_INK + ";",
+                   _t={"fontSize": "104px"}, _m={"fontSize": "68px"})]),
+            box("mk-plate-t", {}, [
+                mono("PLATE 01 — POSITION", size="10px", color="--mk-accent-ink",
+                     track="0.22em"),
+                ml("h2", "技術是拿來解決問題的，\n不是拿來炫耀的。",
+                   color={"token": "--mk-ink"}, fontSize="46px", fontWeight="600",
+                   letterSpacing="0.01em", lineHeight="1.42", fontFamily=DISPLAY,
+                   marginTop="22px",
+                   _t={"fontSize": "38px"}, _m={"fontSize": "26px"}),
+                T("p", "每一個決定都要能被說明：為什麼用這個工具、"
+                       "為什麼是這個結構、為什麼值這個價錢。說不清楚的，就不做。",
+                  color={"token": "--mk-muted"}, fontSize="15px", lineHeight="2",
+                  marginTop="26px", maxWidth="34em", _m={"fontSize": "13.5px"}),
+                box("mk-plate-sig",
+                    {"marginTop": "34px", "display": "flex", "columnGap": "12px",
+                     "alignItems": "center"},
+                    [box("mk-plate-dash", {}, []),
+                     mono("MOKSA WEB — TAICHUNG", size="10px", color="--mk-faint",
+                          track="0.2em")]),
+            ]),
+        ]),
+])], bg="--mk-panel")
+
+
+# ── the type specimen ─────────────────────────────────────────────────────────
+# A studio that sets type should be willing to show the type. This is the system
+# itself on display - the scale it uses, the faces it pairs, the numerals it relies
+# on - inverted onto the ink ground so it reads as a plate rather than a section.
+SPECIMEN_ROWS = [
+    ("Aa", "72 / SPACE GROTESK 600", "72px", "54px", "40px", DISPLAY, "600"),
+    ("網站開發", "46 / NOTO SANS TC 500", "46px", "38px", "27px", CJK, "500"),
+    ("0123456789", "34 / IBM PLEX MONO 500", "34px", "27px", "20px", MONO, "500"),
+    ("automation", "22 / SPACE GROTESK 500", "22px", "19px", "16px", DISPLAY,
+     "500"),
+]
+
+SPECIMEN = section("specimen", [wrap("mk-spec2-in", [
+    box("mk-spec2-pad", {"paddingTop": "88px", "paddingBottom": "88px"},
+        _m={"paddingTop": "58px", "paddingBottom": "58px"},
+        children=[
+            box("mk-spec2-head",
+                {"display": "flex", "justifyContent": "space-between",
+                 "columnGap": "20px", "rowGap": "8px",
+                 "customStyles": "flex-wrap:wrap;"},
+                [mono("TYPE SPECIMEN", size="10px", color="--mk-accent",
+                      track="0.22em"),
+                 mono("THREE FACES / ONE SCALE", size="10px",
+                      color="rgb(140,142,150)", track="0.2em")]),
+            box("mk-spec2-rows", {"marginTop": "40px"},
+                _m={"marginTop": "26px"},
+                children=[
+                    box("mk-spec2-r-%d" % i,
+                        {"display": "grid", "gridCols": "1fr auto",
+                         "columnGap": "28px", "alignItems": "baseline",
+                         "paddingTop": "20px", "paddingBottom": "20px",
+                         "customStyles":
+                             "border-top:1px solid " + RULE_DARK + ";"},
+                        _m={"gridCols": "1fr", "rowGap": "6px",
+                            "paddingTop": "14px", "paddingBottom": "14px"},
+                        children=[
+                            T("p", glyphs, color={"token": "--mk-paper"},
+                              fontSize=size, fontFamily=face, fontWeight=weight,
+                              lineHeight="1.1", letterSpacing="0.01em",
+                              _t={"fontSize": tsize}, _m={"fontSize": msize}),
+                            mono(label, size="10px", color="rgb(140,142,150)",
+                                 track="0.16em"),
+                        ])
+                    for i, (glyphs, label, size, tsize, msize, face, weight)
+                    in enumerate(SPECIMEN_ROWS)
+                ]),
+        ]),
+])], bg="--mk-ink")
+
+
 # ── the entrance sequence ─────────────────────────────────────────────────────
 # A boot screen, because the page is a specification document and this is what one
 # looks like while it is being read off a machine. It is CSS only: a counter that is
@@ -1272,6 +1444,11 @@ CONTACT = section("contact", [wrap("mk-contact-in", [
 # of the page's life, which is the only window in which any of this exists.
 BOOT = box("mk-boot", {}, [
     box("mk-boot-scan", {}, []),
+    # trim marks on the plate itself, drawn corner by corner
+    *[box("mk-boot-x%d" % i, {}, []) for i in range(4)],
+    # a ruler up the left margin: the veil is a measured object, not a splash
+    box("mk-boot-ruler", {}, [box("mk-boot-t%d" % i, {}, [])
+                              for i in range(RULER_TICKS)]),
     box("mk-boot-head", {}, [
         mono("MOKSA WEB — STUDIO PROFILE", size="10px", color="--mk-faint",
              track="0.2em"),
@@ -1282,6 +1459,13 @@ BOOT = box("mk-boot", {}, [
         box("mk-boot-pct", {}, [T("p", "%")]),
     ]),
     box("mk-boot-track", {}, [box("mk-boot-fill", {}, [])]),
+    # the log writes itself out a line at a time, with a cursor still blinking
+    box("mk-boot-log", {},
+        [box("mk-boot-l%d" % i, {}, [mono(line, size="10px", color="--mk-faint",
+                                          track="0.16em")])
+         for i, line in enumerate(BOOT_LOG)]
+        + [box("mk-boot-l%d" % len(BOOT_LOG), {},
+               [box("mk-boot-cursor", {}, [])])]),
     box("mk-boot-list", {},
         # each clause gets its own box because the id is what the stagger
         # targets, and `mono()` puts everything it is given into the style
@@ -1289,6 +1473,7 @@ BOOT = box("mk-boot", {}, [
              [mono("§" + num + " " + name, size="10px", color="--mk-faint",
                    track="0.18em")])
          for i, (num, name, _h, _t) in enumerate(CLAUSES)]),
+    box("mk-boot-ready", {}, [T("p", "PROFILE READY")]),
     box("mk-boot-foot", {}, [
         mono("INITIALISING", size="10px", color="--mk-faint", track="0.2em"),
         mono("TAICHUNG, TW", size="10px", color="--mk-faint", track="0.2em"),
@@ -1324,8 +1509,10 @@ CUE = box("mk-cue", {}, [
 HOME_TREE = {"type": "div", "data": {"attrID": "mk-home"},
              "children": [BOOT, box("mk-doc", {}, [
                  MARKS, INDEX, CUE,
-                 MASTHEAD, TICKER_BAND, SERVICE_SEC, PROCESS_SEC, WORK_SEC,
-                 STACK_SEC, PRODUCT_SEC, VOICE_SEC, CONTACT,
+                 # paper, panel, paper, ink, paper, ink, paper - the page
+                 # changes ground five times so it reads as chapters
+                 MASTHEAD, TICKER_BAND, PLATE, SERVICE_SEC, PROCESS_SEC,
+                 WORK_SEC, SPECIMEN, STACK_SEC, PRODUCT_SEC, VOICE_SEC, CONTACT,
              ])]}
 
 SITE = {

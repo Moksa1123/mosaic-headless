@@ -52,7 +52,8 @@ import time
 
 # When to read. Dense through the sequence, then two well past its end - the last
 # two are what turn "it looked right" into "it finished".
-SAMPLES_MS = [120, 350, 700, 1100, 1500, 1750, 2050, 2400, 3200, 4500]
+SAMPLES_MS = [120, 400, 800, 1300, 1800, 2300, 2700, 3000, 3300, 3700, 4200,
+              5200, 6500]
 
 # What to read at each sample. Anything whose id starts with the veil prefix is
 # treated as part of the intro; everything else is content that must end up visible.
@@ -205,7 +206,7 @@ def main():
     ap.add_argument("--page")
     ap.add_argument("--veil-prefix", default="mk-boot",
                     help="ids under this prefix are the intro, not the content")
-    ap.add_argument("--deadline-ms", type=int, default=3200,
+    ap.add_argument("--deadline-ms", type=int, default=4200,
                     help="by this point the intro must be over")
     ap.add_argument("--csv")
     ap.add_argument("--frames")
