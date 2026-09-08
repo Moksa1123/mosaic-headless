@@ -57,8 +57,13 @@ SAMPLES_MS = [120, 400, 800, 1300, 1800, 2300, 2700, 3000, 3300, 3700, 4200,
 
 # What to read at each sample. Anything whose id starts with the veil prefix is
 # treated as part of the intro; everything else is content that must end up visible.
+# The registered custom properties this page animates. Named rather than
+# discovered, because discovery means enumerating every property on every
+# element and that is what made the probe slower than the thing it measures.
+ANIMATED_VARS = ["--mk-n", "--mk-s", "--mk-m"]
+
 PROBE = r"""
-(ids) => {
+([ids, ANIMATED_VARS]) => {
   const out = {t: performance.now(), nodes: {}};
   for (const id of ids) {
     const el = document.getElementById(id);
@@ -78,8 +83,15 @@ PROBE = r"""
       // as the literal `counter(s, decimal-leading-zero)` rather than the digits -
       // the animated integer underneath is the only readable trace they leave.
       // Hard-coding `--mk-n` meant a running clock counted as motionless.
-      counter: Array.from(cs).filter(p => p.startsWith('--'))
-                    .map(p => p + '=' + cs.getPropertyValue(p).trim()).join(';'),
+      // Asked for BY NAME. Enumerating the style declaration - `Array.from(cs)` -
+      // materialises every one of the three hundred-odd properties on every one of
+      // five hundred elements, and filtering afterwards does not save any of that:
+      // it cost seconds per sample and pushed each reading fourteen seconds past
+      // the timestamp it was labelled with. The checks still passed, because they
+      // compare readings to each other rather than to the clock - which is how a
+      // timing tool goes blind to time.
+      counter: ANIMATED_VARS.map(v => v + '=' + cs.getPropertyValue(v).trim())
+                            .filter(x => !x.endsWith('=')).join(';'),
       text: (el.textContent || '').trim().slice(0, 24),
       w: Math.round(r.width), h: Math.round(r.height),
     };
@@ -174,12 +186,23 @@ def run(url, ids, reduced, frames_dir):
         sep = "&" if "?" in url else "?"
         page.goto("%s%s_v=%d" % (url, sep, int(time.time() * 1000)),
                   wait_until="commit", timeout=60000)
+        # Scheduled against a real clock, not against the previous SAMPLE. Waiting
+        # `ms - previous_ms` assumes the work between samples is free, and it is
+        # not: with --frames every reading is followed by a full screenshot, and
+        # the drift compounded to nine seconds by the middle of the run - the
+        # captured frames showed a page whose intro had finished long before, while
+        # each one was labelled with the time it was supposed to be. The readings
+        # were right in a run without frames, which is exactly how a fault like this
+        # survives: it only appears when you look.
+        start = time.monotonic()
         readings = []
         for ms in SAMPLES_MS:
-            page.wait_for_timeout(max(0, ms - (readings[-1]["t_ms"]
-                                               if readings else 0)))
-            rec = page.evaluate(PROBE, ids)
+            remaining = ms / 1000.0 - (time.monotonic() - start)
+            if remaining > 0:
+                page.wait_for_timeout(remaining * 1000)
+            rec = page.evaluate(PROBE, [ids, ANIMATED_VARS])
             rec["t_ms"] = ms
+            rec["t_actual_ms"] = int((time.monotonic() - start) * 1000)
             readings.append(rec)
             if frames_dir:
                 os.makedirs(frames_dir, exist_ok=True)
@@ -247,11 +270,19 @@ def main():
 
     print("  %-7s %-11s %-9s %-8s %-7s %s"
           % ("t", "counter", "veil vis", "clip", "covers", "under the centre"))
+    import re as _re2
     for r in readings:
         v = r["nodes"].get(a.veil_prefix) or {}
-        num = (r["nodes"].get(a.veil_prefix + "-num") or {}).get("counter", "")
+        # the probe now records EVERY registered custom property on the element, so
+        # the one this column is about has to be picked back out - printing the
+        # signature put the page's entire variable table into a table cell
+        sig = (r["nodes"].get(a.veil_prefix + "-num") or {}).get("counter", "")
+        hit = _re2.search(r"--mk-n=(-?\d+)", sig)
+        num = hit.group(1) if hit else ""
+        drift = r.get("t_actual_ms", r["t_ms"]) - r["t_ms"]
         print("  %-7s %-11s %-9s %-8s %-7s %s"
-              % ("%dms" % r["t_ms"], num or "-", v.get("visibility", "-"),
+              % ("%dms%s" % (r["t_ms"], "+%d" % drift if drift > 120 else ""),
+                 num or "-", v.get("visibility", "-"),
                  (v.get("clipPath") or "-")[:8],
                  "YES" if r["veilCoversCentre"] else "no", r["hitCentre"]))
 

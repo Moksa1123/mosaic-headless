@@ -42,6 +42,9 @@ TOKENS = {
     "--mk-panel":   {"type": "color", "value": "rgb(243,243,239)"},
     "--mk-accent":  {"type": "color", "value": "rgb(255,90,54)"},
     "--mk-accent-ink": {"type": "color", "value": "rgb(191,68,40)"},
+    # 藍摺 aizuri indigo, for the entrance sequence's colour blocks. 10.98:1 on the
+    # paper ground, so it is a real colour here rather than a tint.
+    "--mk-ai":      {"type": "color", "value": "rgb(31,58,95)"},
     "--mk-muted":   {"type": "color", "value": "rgb(90,92,97)"},
     "--mk-rule":    {"type": "color", "value": "rgb(214,214,206)"},
     "--mk-faint":   {"type": "color", "value": "rgb(107,109,113)"},
@@ -824,6 +827,27 @@ def motion_css():
         "@keyframes mk-boot-scan{from{transform:translateY(0)}"
         "to{transform:translateY(100vh)}}",
         "@keyframes mk-boot-fade{from{opacity:0}to{opacity:1}}",
+
+        # ── the print ────────────────────────────────────────────────────────
+        # Each impression arrives OUT OF REGISTER and then snaps true. The snap is
+        # the whole effect: a block that simply fades in reads as a graphic
+        # appearing, while one that lands a few pixels off and then corrects reads
+        # as a sheet being pulled against the kento notches.
+        "@keyframes mk-ink{"
+        "0%{opacity:0;transform:translate(7px,-5px)}"
+        "34%{opacity:.5;transform:translate(7px,-5px)}"
+        "72%{opacity:1;transform:translate(7px,-5px)}"
+        "73%,100%{opacity:1;transform:none}}",
+        # bokashi: the gradation a printer wipes by hand, never a hard edge
+        "@keyframes mk-bokashi{"
+        "0%{opacity:0;background-position:0 -100%}"
+        "40%{opacity:1}"
+        "100%{opacity:1;background-position:0 0}}",
+        # the seal is pressed, not drawn
+        "@keyframes mk-seal{"
+        "0%{opacity:0;transform:rotate(-9deg) scale(1.5)}"
+        "60%{opacity:.92;transform:rotate(-9deg) scale(.94)}"
+        "100%{opacity:.92;transform:rotate(-9deg) scale(1)}}",
         # a log line arriving: clipped from the left, like a terminal writing it
         "@keyframes mk-boot-type{from{clip-path:inset(0 100% 0 0);opacity:.3}"
         "to{clip-path:inset(0 0 0 0);opacity:1}}",
@@ -843,13 +867,70 @@ def motion_css():
         "background:rgb(250,250,247);align-content:center;justify-items:center;"
         "row-gap:20px;overflow:hidden;"
         "animation:mk-boot-out .62s cubic-bezier(.7,0,.3,1) 2.95s forwards}",
+        # ── the sheet, and the blocks carved for it ──────────────────────────
+        "  #mk-uki{position:relative;width:min(430px,64vw);aspect-ratio:3/2;"
+        "background:rgb(250,250,247);overflow:hidden;"
+        "box-shadow:0 0 0 1px rgba(22,24,28,.10)}",
+        "  #mk-uki>*{position:absolute;inset:0;"
+        "animation:mk-ink .8s cubic-bezier(.2,.7,.3,1) both}",
+
+        # 1. the sky, wiped from the top - the one block that is a gradation
+        "  #mk-uki-sky{background:linear-gradient(180deg,rgb(31,58,95) 0%,"
+        "rgba(31,58,95,.72) 34%,rgba(31,58,95,.30) 58%,rgba(31,58,95,.10) 70%);"
+        "background-size:100% 200%;"
+        "animation:mk-bokashi 1.1s cubic-bezier(.3,0,.2,1) .35s both}",
+
+        # 2. the disc
+        "  #mk-uki-sun{background:radial-gradient(circle at 71% 31%,"
+        "rgb(255,90,54) 0 8.5%,rgba(255,90,54,0) 8.6%);animation-delay:.75s}",
+
+        # 3. the mountain, printed in paper so the sky is what shapes it
+        "  #mk-uki-fuji{background:rgb(250,250,247);"
+        "clip-path:polygon(50% 34%,88% 100%,12% 100%);animation-delay:1.05s}",
+        # The mountain is polygon(50% 34%, 88% 100%, 12% 100%), so at y=55% its
+        # slopes are at x=37.9% and x=62.1%. The cap's lower corners are those two
+        # points; the zigzag between them is the snow line. Guessed corners left a
+        # rhombus floating clear of the peak.
+        "  #mk-uki-snow{background:rgb(252,252,250);"
+        "clip-path:polygon(50% 34%,62.1% 55%,57% 48%,52% 55%,47% 47%,"
+        "42% 54%,37.9% 55%);animation-delay:1.3s}",
+
+        # 4. 青海波 - the sea-wave scale, two offset rings of the same carve
+        "  #mk-uki-sea{top:auto;height:34%;"
+        "background:"
+        "radial-gradient(circle at 50% 100%,rgba(0,0,0,0) 41%,"
+        "rgb(31,58,95) 42% 47%,rgba(0,0,0,0) 48%) 0 0/34px 17px,"
+        "radial-gradient(circle at 50% 100%,rgba(0,0,0,0) 41%,"
+        "rgba(31,58,95,.55) 42% 47%,rgba(0,0,0,0) 48%) 17px 8.5px/34px 17px;"
+        "animation-delay:1.55s}",
+
+        # 5. 主版 the key block - the line work, and the last impression pulled
+        # 主版: the line work. Four stacked gradients drew one edge and lost the
+        # rest; a border is a border. The horizon is the other line the key block
+        # would actually carry.
+        "  #mk-uki-key{border:1px solid rgb(22,24,28);"
+        "animation-delay:1.85s}",
+        '  #mk-uki-key::after{content:"";position:absolute;left:0;right:0;'
+        "top:66%;height:1px;background:rgba(22,24,28,.55)}",
+
+        # 6. 落款 the seal, pressed once the run is finished
+        "  #mk-uki-seal{inset:auto 16px 14px auto;width:34px;height:34px;"
+        "background:rgb(191,68,40);opacity:0;"
+        'clip-path:polygon(0 0,100% 0,100% 100%,0 100%);'
+        "animation:mk-seal .45s cubic-bezier(.16,1,.3,1) 2.15s both}",
+        '  #mk-uki-seal::after{content:"摺";position:absolute;inset:0;'
+        "display:grid;place-items:center;color:rgb(250,250,247);"
+        "font-family:" + CJK + ";font-size:19px;line-height:1}",
+
+        "  @media (max-width:767px){#mk-uki{width:74vw}}",
+
         "  #mk-boot-head,#mk-boot-foot{position:absolute;left:40px;right:40px;"
         "display:flex;justify-content:space-between;font-family:" + MONO + ";"
         "font-size:10px;letter-spacing:.2em;color:rgb(107,109,113);"
         "animation:mk-boot-fade .4s ease both}",
         "  #mk-boot-head{top:34px}",
         "  #mk-boot-foot{bottom:30px;animation-delay:.1s}",
-        "  #mk-boot-num{font-family:" + MONO + ";font-size:104px;font-weight:500;"
+        "  #mk-boot-num{font-family:" + MONO + ";font-size:58px;font-weight:500;"
         "line-height:1;letter-spacing:-.04em;color:rgb(22,24,28);"
         "font-variant-numeric:tabular-nums;min-width:3ch;text-align:right;"
         "animation:mk-count 2.05s linear .3s both}",
@@ -924,7 +1005,7 @@ def motion_css():
         "font-family:" + MONO + ";font-size:10px;letter-spacing:.24em;"
         "color:rgb(191,68,40);opacity:0;"
         "animation:mk-boot-stamp .42s cubic-bezier(.16,1,.3,1) 2.42s both}",
-        "  @media (max-width:767px){#mk-boot-num{font-size:62px}"
+        "  @media (max-width:767px){#mk-boot-num{font-size:40px}"
         "#mk-boot-head,#mk-boot-foot{left:18px;right:18px}}",
         "  #mk-hl1-mask>*,#mk-hl2-mask>*{transform:translateY(112%);"
         "animation:mk-linein .95s cubic-bezier(.16,1,.3,1) forwards}",
@@ -2061,6 +2142,26 @@ SPECIMEN = section("specimen", [wrap("mk-spec2-in", [
 #
 # Every id here is deliberate. `verify_intro.py` samples them over the first seconds
 # of the page's life, which is the only window in which any of this exists.
+# ── the print ─────────────────────────────────────────────────────────────────
+# An ukiyo-e sheet is not drawn, it is REGISTERED: a key block carrying the line
+# work, then one carved block per colour, each impression aligned to the same kento
+# notches, finished with a bokashi wipe pulled by hand. The boot screen was already
+# a registration sequence with trim marks at its corners, so this is the same idea
+# told properly rather than a costume put on it.
+#
+# One node per block, printed in order, each arriving slightly out of register and
+# then SNAPPING true - a misprint correcting itself is the thing that reads as
+# printing rather than as fading in.
+PRINT = box("mk-uki", {}, [
+    box("mk-uki-sky", {}, []),      # 藍 bokashi sky, pulled from the top
+    box("mk-uki-sun", {}, []),      # 朱 the disc
+    box("mk-uki-fuji", {}, []),     # the mountain, in paper
+    box("mk-uki-snow", {}, []),     # its cap
+    box("mk-uki-sea", {}, []),      # 青海波 seigaiha, the sea-wave scale pattern
+    box("mk-uki-key", {}, []),      # 主版 the key block: the line work, last
+    box("mk-uki-seal", {}, []),     # 落款 the seal, stamped when the run is done
+])
+
 BOOT = box("mk-boot", {}, [
     box("mk-boot-scan", {}, []),
     # trim marks on the plate itself, drawn corner by corner
@@ -2073,6 +2174,7 @@ BOOT = box("mk-boot", {}, [
              track="0.2em"),
         mono("REV. 2026.09", size="10px", color="--mk-faint", track="0.2em"),
     ]),
+    PRINT,
     box("mk-boot-row", {}, [
         box("mk-boot-num", {}, []),
         box("mk-boot-pct", {}, [T("p", "%")]),

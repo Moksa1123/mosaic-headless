@@ -4,7 +4,7 @@ description: |
   Build and modify Mosaic Pro (Nextend) sites by writing the underlying data model directly - no visual editor, no DOM. Query the real surface with `mo.py`, which joins every source table to the live sweeps so a lookup leads with the measured verdict rather than the declaration (122 node types, 181 properties, 98 style properties with 20 structured value shapes pinned down, 53 style states, 151 element classes, 74 dynamic variables, 12 interaction triggers, 114 REST routes, 23 tables) instead of guessing, with every node type placed on a live site one at a time and asserted against the delivered HTML, the design-token and element-class layers verified against compiled CSS, the @VAR() dynamic language verified against rendered output, nine designed pages built through the tables themselves, and the delivered page re-read in Chromium at three viewports so a rule that is present, correct and still wrong cannot pass.
 license: "MIT"
 author: "moksa (https://moksaweb.com)"
-version: "1.14.0"
+version: "1.15.0"
 ---
 
 # Headless Mosaic
@@ -170,7 +170,10 @@ INTERACTION  the JS animation path, probed with negative controls and the row re
              written straight into the table with caches flushed.
              data/interaction-verification.csv
 
-INTRO        the page-load sequence sampled at thirteen timestamps across its life
+INTRO        the page-load sequence - an ukiyo-e sheet printing itself one carved
+             block at a time, each impression landing out of register and snapping
+             true against the kento marks - sampled at thirteen timestamps across
+             its life
              and
              asserted on seven counts - it plays, the animated `@property` counter
              reaches 100, the veil leaves hit-testing, no in-viewport content is
