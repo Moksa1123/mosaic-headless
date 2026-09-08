@@ -11,14 +11,14 @@ READABLE,PASS,0 elements invisible at 120ms with reduced motion
 t_ms,counter,veil_visibility,veil_clip,veil_covers_centre,hit_centre,invisible_content
 120,,,,False,html.no-js,0
 400,--mk-n=0;--mk-s=0;--mk-m=0,visible,none,True,mk-boot,7
-800,--mk-n=3;--mk-s=0;--mk-m=0,visible,none,True,mk-boot,7
+800,--mk-n=2;--mk-s=0;--mk-m=0,visible,none,True,mk-boot,7
 1300,--mk-n=26;--mk-s=0;--mk-m=0,visible,none,True,mk-boot,7
 1800,--mk-n=50;--mk-s=0;--mk-m=0,visible,none,True,mk-boot,4
-2300,--mk-n=76;--mk-s=0;--mk-m=0,visible,none,True,mk-boot,3
+2300,--mk-n=75;--mk-s=0;--mk-m=0,visible,none,True,mk-boot,3
 2700,--mk-n=94;--mk-s=0;--mk-m=0,visible,none,True,mk-boot,3
 3000,--mk-n=100;--mk-s=0;--mk-m=0,visible,none,True,mk-boot,3
-3300,--mk-n=100;--mk-s=0;--mk-m=0,visible,none,True,mk-boot,3
-3700,--mk-n=100;--mk-s=0;--mk-m=0,visible,inset(0px 0px 44.6013%),True,mk-boot,2
+3300,--mk-n=100;--mk-s=0;--mk-m=0,visible,inset(0px 0px 2.19873%),True,mk-boot,3
+3700,--mk-n=100;--mk-s=0;--mk-m=0,visible,inset(0px 0px 96.6413%),False,mk-caret-row,2
 4200,--mk-n=100;--mk-s=0;--mk-m=0,hidden,inset(0px 0px 100%),False,mk-caret-row,0
 5200,--mk-n=100;--mk-s=0;--mk-m=0,hidden,inset(0px 0px 100%),False,mk-caret-row,0
 6500,--mk-n=100;--mk-s=0;--mk-m=0,hidden,inset(0px 0px 100%),False,mk-caret-row,0

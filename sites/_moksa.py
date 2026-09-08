@@ -839,11 +839,20 @@ def motion_css():
         "72%{opacity:1;transform:translate(7px,-5px)}"
         "73%,100%{opacity:1;transform:none}}",
         # bokashi: the gradation a printer wipes by hand, never a hard edge
+        # bokashi on an SVG group is an opacity wipe, not a background slide -
+        # a <g> has no background to move.
         "@keyframes mk-bokashi{"
-        "0%{opacity:0;background-position:0 -100%}"
-        "40%{opacity:1}"
-        "100%{opacity:1;background-position:0 0}}",
+        "0%{opacity:0}60%{opacity:.7}100%{opacity:1}}",
         # the seal is pressed, not drawn
+        # the swell, once the sheet is printed - small, slow, and never still
+        "@keyframes mk-swell{"
+        "0%{transform:translate3d(0,0,0)}"
+        "50%{transform:translate3d(-2.2%,-1.4%,0)}"
+        "100%{transform:translate3d(0,0,0)}}",
+        "@keyframes mk-swell2{"
+        "0%{transform:translate3d(0,0,0)}"
+        "50%{transform:translate3d(2.6%,1.1%,0)}"
+        "100%{transform:translate3d(0,0,0)}}",
         "@keyframes mk-seal{"
         "0%{opacity:0;transform:rotate(-9deg) scale(1.5)}"
         "60%{opacity:.92;transform:rotate(-9deg) scale(.94)}"
@@ -869,54 +878,33 @@ def motion_css():
         "animation:mk-boot-out .62s cubic-bezier(.7,0,.3,1) 2.95s forwards}",
         # ── the sheet, and the blocks carved for it ──────────────────────────
         "  #mk-uki{position:relative;width:min(430px,64vw);aspect-ratio:3/2;"
-        "background:rgb(250,250,247);overflow:hidden;"
-        "box-shadow:0 0 0 1px rgba(22,24,28,.10)}",
-        "  #mk-uki>*{position:absolute;inset:0;"
-        "animation:mk-ink .8s cubic-bezier(.2,.7,.3,1) both}",
+        "background:rgb(250,250,247);overflow:hidden}",
+        "  #mk-uki svg{position:absolute;inset:0;width:100%;height:100%;"
+        "display:block}",
+        # one <g> per block: each lands out of register and snaps true
+        "  #uk-sun,#uk-fuji,#uk-sea,#uk-wave,#uk-claw,#uk-swell,#uk-key{"
+        "animation:mk-ink .8s cubic-bezier(.2,.7,.3,1) both;"
+        "transform-box:fill-box;transform-origin:50% 50%}",
+        "  #uk-sky{animation:mk-bokashi 1.1s cubic-bezier(.3,0,.2,1) .35s both}",
+        "  #uk-sun{animation-delay:.75s}",
+        "  #uk-fuji{animation-delay:1.0s}",
+        "  #uk-sea{animation-delay:1.25s}",
+        "  #uk-swell{animation-delay:1.45s}",
+        "  #uk-wave{animation-delay:1.65s}",
+        "  #uk-claw{animation-delay:1.8s}",
+        "  #uk-key{animation-delay:2.0s}",
+        # once the impression has landed, the sea keeps moving
+        "  #uk-wave,#uk-claw{animation:mk-ink .8s cubic-bezier(.2,.7,.3,1) both,"
+        "mk-swell 6s ease-in-out 2.7s infinite}",
+        "  #uk-swell{animation:mk-ink .8s cubic-bezier(.2,.7,.3,1) both,"
+        "mk-swell2 8s ease-in-out 2.9s infinite}",
+        "  #uk-wave{animation-delay:1.65s,2.7s}",
+        "  #uk-claw{animation-delay:1.8s,2.8s}",
+        "  #uk-swell{animation-delay:1.45s,2.9s}",
 
-        # 1. the sky, wiped from the top - the one block that is a gradation
-        "  #mk-uki-sky{background:linear-gradient(180deg,rgb(31,58,95) 0%,"
-        "rgba(31,58,95,.72) 34%,rgba(31,58,95,.30) 58%,rgba(31,58,95,.10) 70%);"
-        "background-size:100% 200%;"
-        "animation:mk-bokashi 1.1s cubic-bezier(.3,0,.2,1) .35s both}",
-
-        # 2. the disc
-        "  #mk-uki-sun{background:radial-gradient(circle at 71% 31%,"
-        "rgb(255,90,54) 0 8.5%,rgba(255,90,54,0) 8.6%);animation-delay:.75s}",
-
-        # 3. the mountain, printed in paper so the sky is what shapes it
-        "  #mk-uki-fuji{background:rgb(250,250,247);"
-        "clip-path:polygon(50% 34%,88% 100%,12% 100%);animation-delay:1.05s}",
-        # The mountain is polygon(50% 34%, 88% 100%, 12% 100%), so at y=55% its
-        # slopes are at x=37.9% and x=62.1%. The cap's lower corners are those two
-        # points; the zigzag between them is the snow line. Guessed corners left a
-        # rhombus floating clear of the peak.
-        "  #mk-uki-snow{background:rgb(252,252,250);"
-        "clip-path:polygon(50% 34%,62.1% 55%,57% 48%,52% 55%,47% 47%,"
-        "42% 54%,37.9% 55%);animation-delay:1.3s}",
-
-        # 4. 青海波 - the sea-wave scale, two offset rings of the same carve
-        "  #mk-uki-sea{top:auto;height:34%;"
-        "background:"
-        "radial-gradient(circle at 50% 100%,rgba(0,0,0,0) 41%,"
-        "rgb(31,58,95) 42% 47%,rgba(0,0,0,0) 48%) 0 0/34px 17px,"
-        "radial-gradient(circle at 50% 100%,rgba(0,0,0,0) 41%,"
-        "rgba(31,58,95,.55) 42% 47%,rgba(0,0,0,0) 48%) 17px 8.5px/34px 17px;"
-        "animation-delay:1.55s}",
-
-        # 5. 主版 the key block - the line work, and the last impression pulled
-        # 主版: the line work. Four stacked gradients drew one edge and lost the
-        # rest; a border is a border. The horizon is the other line the key block
-        # would actually carry.
-        "  #mk-uki-key{border:1px solid rgb(22,24,28);"
-        "animation-delay:1.85s}",
-        '  #mk-uki-key::after{content:"";position:absolute;left:0;right:0;'
-        "top:66%;height:1px;background:rgba(22,24,28,.55)}",
-
-        # 6. 落款 the seal, pressed once the run is finished
-        "  #mk-uki-seal{inset:auto 16px 14px auto;width:34px;height:34px;"
-        "background:rgb(191,68,40);opacity:0;"
-        'clip-path:polygon(0 0,100% 0,100% 100%,0 100%);'
+        # 落款 the seal, pressed once the run is finished
+        "  #mk-uki-seal{position:absolute;inset:auto 16px 14px auto;"
+        "width:34px;height:34px;background:rgb(191,68,40);opacity:0;"
         "animation:mk-seal .45s cubic-bezier(.16,1,.3,1) 2.15s both}",
         '  #mk-uki-seal::after{content:"摺";position:absolute;inset:0;'
         "display:grid;place-items:center;color:rgb(250,250,247);"
@@ -2152,13 +2140,90 @@ SPECIMEN = section("specimen", [wrap("mk-spec2-in", [
 # One node per block, printed in order, each arriving slightly out of register and
 # then SNAPPING true - a misprint correcting itself is the thing that reads as
 # printing rather than as fading in.
+# The sheet is drawn as SVG, not as clip-path polygons. A polygon has only straight
+# edges, and a breaking wave is entirely curve - the first attempt read as a dark
+# hill that swallowed the mountain, with the foam floating clear of it as loose
+# triangles. Bezier paths are the right tool and a `code` node with
+# `insertLocation: "inPlace"` is how one gets into the tree.
+#
+# One <g> per carved block, printed in order, each landing out of register and then
+# snapping true against the kento marks.
+PRINT_SVG = """
+<svg id="uk" viewBox="0 0 420 280" preserveAspectRatio="xMidYMid slice"
+     xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false">
+  <defs>
+    <linearGradient id="uk-bokashi" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%"   stop-color="#1f3a5f"/>
+      <stop offset="34%"  stop-color="#1f3a5f" stop-opacity=".72"/>
+      <stop offset="62%"  stop-color="#1f3a5f" stop-opacity=".24"/>
+      <stop offset="100%" stop-color="#1f3a5f" stop-opacity=".10"/>
+    </linearGradient>
+    <linearGradient id="uk-water" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%"   stop-color="#1f3a5f"/>
+      <stop offset="100%" stop-color="#162d4e"/>
+    </linearGradient>
+  </defs>
+
+  <g id="uk-sky"><rect x="0" y="0" width="420" height="280" fill="url(#uk-bokashi)"/></g>
+  <g id="uk-sun"><circle cx="300" cy="86" r="26" fill="#ff5a36"/></g>
+
+  <g id="uk-fuji">
+    <path d="M244,206 L300,146 L356,206 Z" fill="#fcfcfa"/>
+    <path d="M300,146 L314,161 L307,157 L300,166 L293,155 L286,161 Z" fill="#fff"/>
+    <path d="M244,206 L300,146 L356,206" fill="none" stroke="#16181c"
+          stroke-width="1.1"/>
+  </g>
+
+  <g id="uk-sea">
+    <path d="M0,206 H420 V280 H0 Z" fill="url(#uk-water)" opacity=".34"/>
+    <path d="M0,206 H420" stroke="#16181c" stroke-width="1" opacity=".55"/>
+  </g>
+
+  <g id="uk-wave">
+    <path d="M0,280 L0,198
+             C30,158 72,120 122,101
+             C162,86 202,95 224,121
+             C206,106 176,101 152,112
+             C127,123 111,145 107,169
+             C129,199 180,217 250,227
+             C320,235 380,239 420,241
+             L420,280 Z" fill="url(#uk-water)"/>
+    <path d="M0,198 C30,158 72,120 122,101 C162,86 202,95 224,121"
+          fill="none" stroke="#16181c" stroke-width="1.3"/>
+  </g>
+
+  <g id="uk-claw">
+    <path d="M152,112
+             C160,96 170,92 173,106
+             C178,92 188,90 191,104
+             C196,91 206,92 209,105
+             C214,95 221,99 224,121
+             C206,107 176,101 152,112 Z" fill="#fcfcfa" stroke="#16181c"
+          stroke-width="1"/>
+    <path d="M107,169 C118,152 132,148 138,160 C143,150 152,150 155,160
+             C147,168 124,174 107,169 Z" fill="#fcfcfa" stroke="#16181c"
+          stroke-width="1"/>
+  </g>
+
+  <g id="uk-swell">
+    <path d="M0,280 L0,250
+             C58,238 118,247 178,240
+             C238,233 300,244 360,237
+             C390,234 406,238 420,236
+             L420,280 Z" fill="#162d4e"/>
+    <path d="M0,250 C58,238 118,247 178,240 C238,233 300,244 360,237
+             C390,234 406,238 420,236" fill="none" stroke="#16181c"
+          stroke-width="1.1" opacity=".7"/>
+  </g>
+
+  <g id="uk-key"><rect x=".5" y=".5" width="419" height="279" fill="none"
+                       stroke="#16181c" stroke-width="1"/></g>
+</svg>
+"""
+
 PRINT = box("mk-uki", {}, [
-    box("mk-uki-sky", {}, []),      # 藍 bokashi sky, pulled from the top
-    box("mk-uki-sun", {}, []),      # 朱 the disc
-    box("mk-uki-fuji", {}, []),     # the mountain, in paper
-    box("mk-uki-snow", {}, []),     # its cap
-    box("mk-uki-sea", {}, []),      # 青海波 seigaiha, the sea-wave scale pattern
-    box("mk-uki-key", {}, []),      # 主版 the key block: the line work, last
+    {"type": "code", "data": {"attrID": "mk-uki-svg", "insertLocation": "inPlace",
+                              "content": PRINT_SVG, "processShortcodes": "0"}},
     box("mk-uki-seal", {}, []),     # 落款 the seal, stamped when the run is done
 ])
 
