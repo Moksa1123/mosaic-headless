@@ -14,6 +14,11 @@
  * It refuses the live theme. Every theme_zip.py import in test mode leaves a theme
  * behind, and this is how one is taken away again; the live one is not a mistake
  * anyone should be able to make with a typo.
+ *
+ * A theme FOLDER with no theme row - wp-content/themes/mosaic-1-1-<id>/ left by a
+ * deletion that did not go through this routine - cannot be removed with
+ * `wp theme delete`: Mosaic hooks WordPress's theme deletion and fatals when the
+ * row it expects is not there. Remove the folder itself; nothing references it.
  */
 $args = isset($args) ? $args : [];
 $id   = isset($args[0]) ? trim($args[0]) : '';
