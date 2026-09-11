@@ -1,0 +1,8 @@
+step,result,detail
+nested commit accepted,PASS,no exception from the commit
+page still renders,PASS,28853 bytes delivered
+title rendered,PASS,the accordion title is in the delivered HTML
+content rendered,PASS,the accordion content is in the delivered HTML
+carries plugin markup,PASS,found 'mosaic-accordion' in the output
+bare content refused,PASS,"accordion-content is measured BROKE_PAGE under a plain container, and template-internal is not its declared parent"
+nested placement allowed,PASS,"accordion-item is a declared child of accordion, so the same guard that refuses the bare node permits this one"

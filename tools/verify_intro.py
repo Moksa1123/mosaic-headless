@@ -52,8 +52,8 @@ import time
 
 # When to read. Dense through the sequence, then two well past its end - the last
 # two are what turn "it looked right" into "it finished".
-SAMPLES_MS = [120, 400, 800, 1300, 1800, 2300, 2700, 3000, 3300, 3700, 4200,
-              5200, 6500]
+SAMPLES_MS = [120, 700, 1400, 2200, 3000, 3800, 4600, 5400, 6200, 7000,
+              7800, 8300, 8900, 11000, 13000]
 
 # What to read at each sample. Anything whose id starts with the veil prefix is
 # treated as part of the intro; everything else is content that must end up visible.
@@ -107,7 +107,7 @@ PROBE = r"""
   // deliberately at opacity 0, waiting for a view() timeline to bring them in as
   // you scroll, and counting those as trapped content reports 34 failures on a
   // page that is working exactly as designed.
-  let hidden = [], offscreen = 0, blinking = 0;
+  let hidden = [], offscreen = 0, blinking = 0, waiting = 0;
   for (const el of document.querySelectorAll('#mk-doc *')) {
     const cs = getComputedStyle(el);
     if (cs.display === 'none' || cs.visibility === 'hidden') continue;
@@ -121,6 +121,15 @@ PROBE = r"""
     if (cs.animationIterationCount.split(',').some(v => v.trim() === 'infinite')) {
       blinking++; continue;
     }
+    // Nor is an element whose opacity is driven by a SCROLL timeline that has not
+    // advanced yet. The below-the-fold exemption above catches those by position,
+    // which misses a `position:fixed` one - it sits in the viewport from the first
+    // frame while its timeline is still at zero. Scrolling brings it in exactly
+    // like the others, so it is waiting, not trapped.
+    const tl = cs.animationTimeline || '';
+    if (tl && tl !== 'auto' && tl !== 'none' && !/^\s*auto\s*(,|$)/.test(tl)) {
+      waiting++; continue;
+    }
     hidden.push(el.id || el.tagName.toLowerCase() + '.' +
                 (el.className || '').toString().split(' ')[0]);
   }
@@ -128,6 +137,7 @@ PROBE = r"""
   out.invisibleIds = hidden.slice(0, 8);
   out.invisibleBelowFold = offscreen;
   out.blinking = blinking;
+  out.invisibleOnScrollTimeline = waiting;
   return out;
 }
 """
@@ -246,7 +256,7 @@ def main():
                     help="ids under this prefix are the intro, not the content")
     ap.add_argument("--min-ambient", type=int, default=3,
                     help="how many elements must still be moving once settled")
-    ap.add_argument("--deadline-ms", type=int, default=4200,
+    ap.add_argument("--deadline-ms", type=int, default=8900,
                     help="by this point the intro must be over")
     ap.add_argument("--csv")
     ap.add_argument("--frames")
@@ -312,12 +322,13 @@ def main():
                    "veil is out of hit-testing from %dms" % a.deadline_ms))
     checks.append(("NO_TRAP", last["invisibleContent"] == 0,
                    "%d content elements still at opacity 0 in the viewport%s "
-                   "(%d below the fold awaiting their own scroll timeline, "
+                   "(%d below the fold and %d on a scroll timeline awaiting it, "
                    "%d mid-blink)"
                    % (last["invisibleContent"],
                       (": " + ", ".join(last["invisibleIds"]))
                       if last["invisibleIds"] else "",
-                      last["invisibleBelowFold"], last["blinking"])))
+                      last["invisibleBelowFold"],
+                      last["invisibleOnScrollTimeline"], last["blinking"])))
 
     # CLEARS
     cleared = bool(clicked) and not str(clicked).startswith(a.veil_prefix)

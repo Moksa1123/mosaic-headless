@@ -1,5 +1,9 @@
 type,note
+accordion-content,"Same as accordion-item: BROKE_PAGE unparented, fine under an accordion-item. Note that accordion-item declares only accordion-item and accordion-loop-items as allowed children - title and content arrive through heal(), which is why the placement guard permits them."
+accordion-item,"Swept as BROKE_PAGE, which is what it does under a plain container. The factory needs an `accordion` above it - the failure reads `AccordionElementMResource instance required`. Nested as accordion > accordion-item > (accordion-title, accordion-content) it commits and renders; see tools/probe_accordion.py."
+accordion-title,"Renders as a <dt> carrying tabindex=0 and aria-expanded, and the plugin toggles M_EL_AccordionItem--opened on the item. That is a keyboard-operable disclosure control for free; styling the ITEM off that class needs no :has()."
+code,"`processShortcodes` is NO_EFFECT in the property sweep because the sweep's content carried no shortcode - there was nothing for the flag to act on. With `[woocommerce_my_account]` and processShortcodes ""1"" the node renders the whole WooCommerce account UI (sites/_moksa.py, the my-account page). The flag works; the row records the sweep, not the property."
 component-instance,"Swept as COMMIT_500, which is what a BARE one does. The node's type is not `component-instance` but `component-instance/<componentID>` - the factory splits on that slash and a bare one has no id to read. With a real component it commits and renders; see sweep_components.py."
 component-internal,"The component's content hangs under THIS node, in the `node/component/<id>` key of a componentDocumentInstance. `component-root` looks like the parent and accepts no children."
 component-root,"Accepts no children. It frames the component's preview document, not its content."
-loop,"COMMIT_500 on a bare page: the loop needs a query context that a plain document does not provide."
+loop,COMMIT_500 on a bare page: the loop needs a query context that a plain document does not provide.

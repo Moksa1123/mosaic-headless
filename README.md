@@ -1,5 +1,7 @@
 # mosaic-headless
 
+[![npm downloads](https://img.shields.io/npm/dt/mosaic-headless?label=npm%20downloads&color=cb3837)](https://www.npmjs.com/package/mosaic-headless)
+
 Build and modify [Mosaic Pro](https://mosaicbuilder.com) (Nextend) sites by writing
 the data model directly — no visual editor, no DOM.
 

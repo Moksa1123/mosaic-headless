@@ -78,8 +78,8 @@ const counts = {
   "data/node-verification.csv": 122,
   "data/style-verification.csv": 98,
   "data/node-property-verification.csv": 181,
-  "data/rwd-verification.csv": 688,
-  "data/browser-verification.csv": 3841,
+  "data/rwd-verification.csv": 731,
+  "data/browser-verification.csv": 3988,
   "data/style-state-verification.csv": 52,
   "data/interaction-verification.csv": 7,
   "data/data-class-hierarchy.csv": 121,
@@ -121,6 +121,26 @@ for (const need of ["PLAYS", "ENDS", "NO_TRAP", "CLEARS", "DEGRADES", "AMBIENT"]
   if (!new RegExp(`^${need},PASS`, "m").test(intro))
     fail(`intro-verification.csv: ${need} did not pass`);
 if (/,FAIL,/.test(intro)) fail("data/intro-verification.csv carries a failed check");
+
+// The loop table is the same shape and the same obligation: a decoration that runs
+// forever is the easiest thing in this repo to ship broken, because it looks fine in
+// a screenshot whether or not it ever moves again.
+const loop = read("data/loop-verification.csv");
+if (!loop.startsWith("check,result,detail"))
+  fail("data/loop-verification.csv is not the table verify_loop.py writes");
+for (const need of ["RUNS", "SCRUBBABLE", "REDUCED"])
+  if (!new RegExp(`^${need},PASS`, "m").test(loop))
+    fail(`loop-verification.csv: ${need} did not pass`);
+if (!/^CLEAR@\d+,PASS/m.test(loop))
+  fail("loop-verification.csv has no CLEAR@<width> row - occlusion was never checked");
+if (/,FAIL,/.test(loop)) fail("data/loop-verification.csv carries a failed check");
+
+// The accordion probe exists to correct a row in node-verification.csv, so it has
+// to keep passing or the correction silently becomes another wrong claim.
+const acc = read("data/accordion-verification.csv");
+if (!acc.startsWith("step,result,detail"))
+  fail("data/accordion-verification.csv is not the table probe_accordion.py writes");
+if (/,FAIL,/.test(acc)) fail("data/accordion-verification.csv carries a failed check");
 
 const audit = read("data/design-audit.csv");
 if (!audit.startsWith("url,breakpoints,check,level"))

@@ -1,0 +1,29 @@
+check,result,detail
+RUNS,PASS,"12 of 12 parts changed on their own over a full 14000ms period, with no input"
+SCRUBBABLE,PASS,12 animations on the document timeline drive the parts; sampled past 3000ms of stagger
+ukw-sky,PASS,moves 92.9 across one period; identical one period later
+ukw-sun,PASS,moves 103.4 across one period; identical one period later
+ukw-fuji,PASS,moves 93.5 across one period; identical one period later
+ukw-mist,PASS,moves 67.6 across one period; identical one period later
+ukw-sea,PASS,moves 58.3 across one period; identical one period later
+ukw-crest,PASS,moves 85.1 across one period; identical one period later
+ukw-boat,PASS,moves 100.1 across one period; identical one period later
+ukw-wave,PASS,moves 113.8 across one period; identical one period later
+ukw-claw,PASS,moves 103.7 across one period; identical one period later
+ukw-swell,PASS,moves 109.9 across one period; identical one period later
+ukw-key,PASS,moves 91.0 across one period; identical one period later
+mk-loop-seal,PASS,moves 92.0 across one period; identical one period later
+CLEAR@390,PASS,"crosses 47 of 414 text elements, every one of them free at some other scroll position"
+REACHABLE@390,PASS,"crosses 0 of 7 links and buttons, every one of them free at some other scroll position"
+CLEAR@768,PASS,"crosses 44 of 428 text elements, every one of them free at some other scroll position"
+REACHABLE@768,PASS,"crosses 0 of 8 links and buttons, every one of them free at some other scroll position"
+CLEAR@1280,PASS,"crosses 37 of 430 text elements, every one of them free at some other scroll position"
+REACHABLE@1280,PASS,"crosses 0 of 8 links and buttons, every one of them free at some other scroll position"
+CLEAR@1440,PASS,"crosses 33 of 437 text elements, every one of them free at some other scroll position"
+REACHABLE@1440,PASS,"crosses 0 of 15 links and buttons, every one of them free at some other scroll position"
+CLEAR@1920,PASS,"crosses 1 of 444 text elements, every one of them free at some other scroll position"
+REACHABLE@1920,PASS,"crosses 0 of 15 links and buttons, every one of them free at some other scroll position"
+OPENS,PASS,"186x161 -> 1920x900, aria-expanded=true"
+CLOSES,PASS,"back to 186x161, aria-expanded=false"
+KEYBOARD,PASS,the control takes focus and Enter opens it
+REDUCED,PASS,present but with 0 running animations under prefers-reduced-motion: reduce

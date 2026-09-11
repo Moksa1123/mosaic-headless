@@ -1,5 +1,7 @@
 # mosaic-headless
 
+[![npm downloads](https://img.shields.io/npm/dt/mosaic-headless?label=npm%20downloads&color=cb3837)](https://www.npmjs.com/package/mosaic-headless)
+
 [Mosaic Pro](https://mosaicbuilder.com)(Nextend) 사이트를 데이터 모델에 직접 써서
 구축하고 수정한다 — 비주얼 에디터도, DOM도 쓰지 않는다.
 

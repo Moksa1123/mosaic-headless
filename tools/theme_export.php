@@ -6,8 +6,10 @@
  *   wp eval-file theme_export.php active    > mytheme.json
  *
  * A Mosaic theme is not a file and not an option row - it is a themeID scattered
- * across nineteen tables. Nothing in the plugin exports one without a licence, and
- * "copy the site" is not a migration path when you want one theme out of fifty.
+ * across nineteen tables. The plugin has its own export (POST /theme/<id>/export,
+ * a milestone-driven ZIP with attachments, admin-gated - see SKILL.md), but that
+ * produces an archive for the editor's Import button, not something you can diff,
+ * version, or load without a running Mosaic on the other end.
  *
  * What makes this safe to re-import is the schema: every theme-scoped table has a
  * COMPOSITE primary key of (themeID, ID). Internal ids - masters, templates, nodes,

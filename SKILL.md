@@ -184,15 +184,51 @@ INTRO        the page-load sequence - an ukiyo-e sheet printing itself one carve
              EVENT; a page can pass all of them and be completely static the moment
              you stop scrolling. All pass. data/intro-verification.csv
 
-BROWSER      3,841 computed-style readings on the delivered page in Chromium, at
+LOOP         28 assertions about the one animation nothing else here can see: the
+             ukiyo-e plate that keeps printing itself in the corner of the page,
+             forever, with no input, and that opens to full size when tapped. Its
+             eleven moving parts are SVG groups inside a raw-HTML `code` node, so no
+             checker that walks the spec tree knows they exist. RUNS reads them on the clock across a full period; each part is
+             then proved periodic by PAUSING its animation and scrubbing
+             `currentTime` to T and T + 11s, which is the only way to compare a
+             compositor-driven transform exactly. CLEAR is the one that found a real
+             defect: a fixed decoration is opaque, and on a full-bleed page no
+             rectangle anywhere along the right edge misses text at every scroll
+             offset - so the test is not "never overlaps" but "never makes anything
+             unreadable", per element, at four widths and twenty-five scroll stops.
+             It caught three footer links buried at the position a reader cannot
+             scroll past. Once the plate became a control, REACHABLE holds links and
+             buttons to the same rule - swallowing a click is worse than covering a
+             word - and OPENS/CLOSES/KEYBOARD check the enlarged view on the
+             delivered page, including that Enter works on it. Five widths from 390
+             up. data/loop-verification.csv
+
+ACCORDION    7 checks that resolve a wrong entry in this skill's own tables.
+             `accordion-item` and `accordion-content` are recorded BROKE_PAGE, which
+             is true and misleading in exactly the way `component-instance` was:
+             the failure is `AccordionItemElementMResource instance required`, i.e.
+             committed without the parent the factory needs. Nested properly they
+             commit, render, and emit `<dl><div class=AccordionItem><dt tabindex=0
+             aria-expanded><dd>` - which is why the worked example's enlargeable
+             plate is built on it instead of on a checkbox, and gets keyboard
+             operation and a screen-reader state for nothing. The negative control
+             asks the placement guard rather than committing, because the first
+             version of the probe destroyed the positive result it had just
+             produced. data/accordion-verification.csv
+
+BROWSER      3,988 computed-style readings on the delivered pages in Chromium, at
              three viewports: every declared property vs `getComputedStyle` on the
              node it targets. 2,929 compared and agreed, 912 not-comparable and
              labelled as such, 0 overridden. Plus a design audit that only a browser
              can run - font fallback, tracking against script, text contrast,
-             horizontal overflow, clipped text, line measure - currently 0 findings.
+             horizontal overflow, clipped text, line measure - 26 findings, every
+             one ruled on in writing. Two pages: the homepage, and a WooCommerce
+             My Account page whose UI arrives through one `code` node running a
+             shortcode - which is also the measurement that shows the property
+             sweep's NO_EFFECT on `processShortcodes` was the sweep, not the flag.
              data/browser-verification.csv, data/design-audit.csv
 
-RWD          688 responsive declarations across two sites asserted against the
+RWD          731 responsive declarations across two sites asserted against the
              stylesheet the site actually served - each `_t`/`_m` property matched
              to its element's generated class inside that breakpoint's own media
              query. All verified; the checker is itself checked against a poisoned
@@ -332,14 +368,16 @@ so the pattern is in the data, not just in this paragraph.
 | `data/property-verification.csv` | 170 | **probed live** — per-property effect on markup vs CSS, with unprovable enums marked INCONCLUSIVE |
 | `data/node-property-verification.csv` | 181 | **swept live** — each property probed with a value shaped by its own validator chain, on a type that declares it |
 | `data/style-verification.csv` | 98 | **swept live** — every style property written to a page and checked against the compiled CSS, with its group beside the result |
-| `data/rwd-verification.csv` | 688 | **checked live** - every `_t`/`_m` declaration vs the served stylesheet, with status per row |
-| `data/browser-verification.csv` | 3841 | **computed in Chromium** - declared vs `getComputedStyle` at three viewports, `not-comparable` labelled per row |
-| `data/design-audit-acknowledged.csv` | 1 | reviewed findings that will not be fixed, each with a written reason. An acknowledgement without a reason is a suppression wearing a better name, and the release gate refuses one |
-| `data/design-audit.csv` | 24 | **computed in Chromium** - contrast, font fallback, CJK tracking, overflow, measure. Empty means it ran and found nothing |
+| `data/rwd-verification.csv` | 731 | **checked live** - every `_t`/`_m` declaration vs the served stylesheet, with status per row |
+| `data/browser-verification.csv` | 3988 | **computed in Chromium** - declared vs `getComputedStyle` at three viewports, `not-comparable` labelled per row |
+| `data/design-audit-acknowledged.csv` | 3 | reviewed findings that will not be fixed, each with a written reason. An acknowledgement without a reason is a suppression wearing a better name, and the release gate refuses one |
+| `data/design-audit.csv` | 26 | **computed in Chromium** - contrast, font fallback, CJK tracking, overflow, measure. Empty means it ran and found nothing |
 | `data/data-class-hierarchy.csv` | 121 | source - every data class and its parent, so a type's inherited properties can be resolved |
 | `data/style-state-verification.csv` | 52 | **swept live** - each state written on a host of its own type and matched against its promised selector |
 | `data/component-verification.csv` | 8 | **driven live** - the component lifecycle, each step asserted against the row or the delivered HTML |
-| `data/node-type-notes.csv` | 4 | where a sweep outcome is true but misleading on its own, why. Surfaced by `mo.py type` |
+| `data/loop-verification.csv` | 28 | **measured live** - a perpetual animation: periodicity by scrubbing a paused timeline, per-element occlusion of both text and controls at five widths, and the enlarged view opened by pointer and by keyboard |
+| `data/accordion-verification.csv` | 7 | **driven live** - the accordion family nested the way its factory requires, against the guard that refuses it unparented. Resolves two BROKE_PAGE rows |
+| `data/node-type-notes.csv` | 8 | where a sweep outcome is true but misleading on its own, why. Surfaced by `mo.py type` |
 | `data/interaction-verification.csv` | 7 | **probed live** - interaction animation shapes, with negative controls and the stored row beside the payload |
 | `data/intro-verification.csv` | 7 + 10 | **sampled live** - the entrance sequence over ten timestamps, plus the seven assertions about it |
 | `data/element-classes.csv` | 151 | **live** — the built-in class metas; their IDs are what an `elementClass` record must use |
@@ -399,6 +437,16 @@ COMPOSITE primary key of `(themeID, ID)` — so an import can keep every interna
 and rewrite nothing but the theme, which means no id remapping and nothing left
 dangling. Round-tripped and verified: a full theme exported, re-imported as a copy,
 and the copy served byte-identical pages.
+
+Mosaic also has its own: `POST /theme/<id>/export` and `POST /theme/import/upload`
+(or `/import/download` from a URL), plus `/duplicate` on themes, masters, templates,
+components and style guides. The native export is a ZIP with the theme's
+attachments inside, produced by a chunked, lock-protected milestone flow — you POST
+repeatedly with `milestoneID` to step it through collect → compress → download — and
+it is gated on admin capability only, not on a licence. It moves a whole theme, never
+a single page. `theme_export.php` exists because a 2 MB JSON of rows is easier to
+diff, version and reason about than a ZIP, and because it needs nothing but WP-CLI;
+the native flow is what the editor's Export button drives.
 
 `copy_styles.py` pushes one node's style onto others by attrID or prefix, optionally
 only certain `state.breakpoint` slices, and shows the diff before writing.

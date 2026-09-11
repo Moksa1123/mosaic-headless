@@ -1,24 +1,26 @@
 check,result,detail
 PLAYS,PASS,43 of 43 intro elements changed state
 COUNTS,PASS,--mk-n reached 100
-ENDS,PASS,veil is out of hit-testing from 4200ms
-NO_TRAP,PASS,"0 content elements still at opacity 0 in the viewport (60 below the fold awaiting their own scroll timeline, 1 mid-blink)"
+ENDS,PASS,veil is out of hit-testing from 8900ms
+NO_TRAP,PASS,"0 content elements still at opacity 0 in the viewport (60 below the fold and 1 on a scroll timeline awaiting it, 1 mid-blink)"
 CLEARS,PASS,a real click landed on 'mk-caret-row'
-AMBIENT,PASS,"7 elements still moving between 5200ms and 6500ms with no input: mk-board-city-s, mk-board-utc-s, mk-clock-s, mk-flap-0-s, mk-pan-loop, mk-sweep"
+AMBIENT,PASS,"9 elements still moving between 11000ms and 13000ms with no input: mk-board-city-s, mk-board-utc-s, mk-clock-s, mk-flap-0-s, mk-flap-1-s, mk-flap-2-s"
 DEGRADES,PASS,with reduced motion the veil is display:none throughout
 READABLE,PASS,0 elements invisible at 120ms with reduced motion
 
 t_ms,counter,veil_visibility,veil_clip,veil_covers_centre,hit_centre,invisible_content
 120,,,,False,html.no-js,0
-400,--mk-n=0;--mk-s=0;--mk-m=0,visible,none,True,mk-boot,7
-800,--mk-n=2;--mk-s=0;--mk-m=0,visible,none,True,mk-boot,7
-1300,--mk-n=26;--mk-s=0;--mk-m=0,visible,none,True,mk-boot,7
-1800,--mk-n=50;--mk-s=0;--mk-m=0,visible,none,True,mk-boot,4
-2300,--mk-n=75;--mk-s=0;--mk-m=0,visible,none,True,mk-boot,3
-2700,--mk-n=94;--mk-s=0;--mk-m=0,visible,none,True,mk-boot,3
-3000,--mk-n=100;--mk-s=0;--mk-m=0,visible,none,True,mk-boot,3
-3300,--mk-n=100;--mk-s=0;--mk-m=0,visible,inset(0px 0px 2.19873%),True,mk-boot,3
-3700,--mk-n=100;--mk-s=0;--mk-m=0,visible,inset(0px 0px 96.6413%),False,mk-caret-row,2
-4200,--mk-n=100;--mk-s=0;--mk-m=0,hidden,inset(0px 0px 100%),False,mk-caret-row,0
-5200,--mk-n=100;--mk-s=0;--mk-m=0,hidden,inset(0px 0px 100%),False,mk-caret-row,0
-6500,--mk-n=100;--mk-s=0;--mk-m=0,hidden,inset(0px 0px 100%),False,mk-caret-row,0
+700,--mk-n=0;--mk-s=0;--mk-m=0,visible,none,True,mk-boot-num,7
+1400,--mk-n=1;--mk-s=0;--mk-m=0,visible,none,True,mk-boot-num,7
+2200,--mk-n=35;--mk-s=0;--mk-m=0,visible,none,True,mk-boot-num,3
+3000,--mk-n=67;--mk-s=0;--mk-m=0,visible,none,True,mk-boot-num,3
+3800,--mk-n=86;--mk-s=0;--mk-m=0,visible,none,True,mk-boot-num,3
+4600,--mk-n=94;--mk-s=0;--mk-m=0,visible,none,True,mk-boot-num,3
+5400,--mk-n=98;--mk-s=0;--mk-m=0,visible,none,True,mk-boot-num,3
+6200,--mk-n=100;--mk-s=0;--mk-m=0,visible,none,True,mk-boot-num,3
+7000,--mk-n=100;--mk-s=0;--mk-m=0,visible,none,True,mk-boot-num,3
+7800,--mk-n=100;--mk-s=0;--mk-m=0,visible,none,True,mk-boot-num,3
+8300,--mk-n=100;--mk-s=0;--mk-m=0,visible,none,False,mk-caret-row,2
+8900,--mk-n=0;--mk-s=0;--mk-m=0,hidden,none,False,mk-caret-row,0
+11000,--mk-n=0;--mk-s=0;--mk-m=0,hidden,none,False,mk-caret-row,0
+13000,--mk-n=0;--mk-s=0;--mk-m=0,hidden,none,False,mk-caret-row,0

@@ -1,5 +1,7 @@
 # mosaic-headless
 
+[![npm downloads](https://img.shields.io/npm/dt/mosaic-headless?label=npm%20downloads&color=cb3837)](https://www.npmjs.com/package/mosaic-headless)
+
 [Mosaic Pro](https://mosaicbuilder.com)（Nextend）のサイトを、データモデルを直接書いて
 構築・変更する — ビジュアルエディタも DOM も使わない。
 

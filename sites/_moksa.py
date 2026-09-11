@@ -509,14 +509,11 @@ def motion_css():
     # the boot sequence, phase by phase: the clauses report in, the log writes
     # itself out a line at a time, and the ruler ticks up the left margin
     boot_stagger = "\n".join(
-        "  #mk-boot-c%d{animation-delay:%dms}" % (i, 700 + i * 200)
+        "  #mk-boot-c%d{animation-delay:%dms}" % (i, 1150 + i * 520)
         for i in range(len(CLAUSES)))
     log_stagger = "\n".join(
-        "  #mk-boot-l%d{animation-delay:%dms}" % (i, 550 + i * 380)
+        "  #mk-boot-l%d{animation-delay:%dms}" % (i, 1000 + i * 950)
         for i in range(len(BOOT_LOG)))
-    ruler_stagger = "\n".join(
-        "  #mk-boot-t%d{animation-delay:%dms}" % (i, 120 + i * 26)
-        for i in range(RULER_TICKS))
     # a named view timeline per section, declared on the section and consumed by its
     # index entry - `timeline-scope` on #mk-doc is what lets the name cross between
     # two elements that are not ancestor and descendant
@@ -606,6 +603,7 @@ def motion_css():
 
         # ── header: a flush document bar, not a floating panel ───────────────
         "#mk-header{position:fixed;top:0;left:0;right:0;z-index:100;"
+        "contain:layout;"
         "background:rgba(250,250,247,0);"
         "-webkit-backdrop-filter:blur(10px);backdrop-filter:blur(10px)}",
         '#mk-header::after{content:"";position:absolute;left:0;right:0;bottom:0;'
@@ -800,6 +798,75 @@ def motion_css():
         "@media (max-width:1079px){#mk-cue{right:28px}}",
         "@media (max-width:767px){#mk-cue{right:18px;bottom:16px}}",
 
+        # -- the press, still running -------------------------------------
+        # The entrance prints the sheet once and leaves. This is the same set
+        # of blocks left on the bed in the corner of the page, pulling
+        # impression after impression, so the site is never entirely still. It
+        # is built as a plate on a bench rather than as a card: hairlines and a
+        # doubled offset rule, because the direction forbids shadows and radii.
+        "#mk-loop{position:fixed;right:32px;bottom:70px;z-index:90;width:186px}",
+        # the accordion's own boxes carry nothing: <dl> and the item wrapper
+        # are structure, and a description list arrives with a browser margin
+        "#mk-plate{margin:0}",
+        "#mk-plate-item{position:relative;background:rgb(250,250,247);"
+        "border:1px solid rgb(214,214,206)}",
+        '#mk-plate-item::after{content:"";position:absolute;left:4px;right:-4px;'
+        "top:4px;bottom:-4px;border:1px solid rgba(22,24,28,.10);z-index:-1}",
+        # the whole plate is the control, so it says so on hover and to a
+        # keyboard. `dt` is focusable already; what it lacks is a focus ring.
+        "#mk-plate-title{display:block;cursor:zoom-in}",
+        "#mk-plate-title:focus-visible{outline:2px solid rgb(255,90,54);"
+        "outline-offset:3px}",
+        # closed, the caption is not rendered at all - the accordion collapses
+        # it, and the corner shows only the plate and its bar
+        "#mk-plate-body{display:grid;row-gap:7px;justify-items:center;"
+        "padding:14px 10px 4px;text-align:center}",
+        "#mk-loop-plate{position:relative;width:100%;aspect-ratio:3/2;"
+        "overflow:hidden;background:rgb(250,250,247);contain:layout paint}",
+        "#mk-loop-plate svg{position:absolute;inset:0;width:100%;height:100%;"
+        "display:block}",
+        "#mk-loop-seal{position:absolute;inset:auto 7px 6px auto;width:19px;"
+        "height:19px;background:rgb(191,68,40);opacity:.92;"
+        "transform:rotate(-9deg)}",
+        '#mk-loop-seal::after{content:"\u6444";position:absolute;inset:0;'
+        "display:grid;place-items:center;color:rgb(250,250,247);"
+        "font-family:" + CJK + ";font-size:11px;line-height:1}",
+        "#mk-loop-bar{display:flex;justify-content:space-between;"
+        "align-items:center;column-gap:10px;padding:5px 8px 6px;"
+        "white-space:nowrap;border-top:1px solid rgb(214,214,206)}",
+        "#mk-loop-live{display:flex;align-items:center;column-gap:5px}",
+        "#mk-loop-dot{width:5px;height:5px;background:rgb(255,90,54)}",
+        # ── opened ──────────────────────────────────────────────────────
+        # The item itself becomes the overlay. Nothing above it is styled, so
+        # no `:has()` is needed and no ancestor has to know this state exists.
+        "#mk-plate-item.M_EL_AccordionItem--opened{position:fixed;inset:0;"
+        "z-index:200;width:auto;border:none;background:rgba(250,250,247,.97);"
+        "display:grid;align-content:center;justify-items:center;"
+        "padding:24px}",
+        "#mk-plate-item.M_EL_AccordionItem--opened::after{display:none}",
+        "#mk-plate-item.M_EL_AccordionItem--opened #mk-plate-title{"
+        "cursor:zoom-out;width:min(760px,88vw);"
+        "border:1px solid rgb(214,214,206)}",
+        "#mk-plate-item.M_EL_AccordionItem--opened #mk-loop-bar{"
+        "padding:8px 12px 9px}",
+        "#mk-plate-item.M_EL_AccordionItem--opened #mk-plate-body{"
+        "width:min(760px,88vw)}",
+        "#mk-plate-item.M_EL_AccordionItem--opened #mk-loop-seal{"
+        "inset:auto 16px 14px auto;width:38px;height:38px}",
+        "#mk-plate-item.M_EL_AccordionItem--opened #mk-loop-seal::after{"
+        "font-size:21px}",
+        "@media (max-width:1079px){#mk-loop{right:24px;width:154px}}",
+        # the phone gets the plate too, tucked above the scroll cue and small
+        # enough to leave the column alone; opened, it fills the screen the
+        # same way it does anywhere else
+        "@media (max-width:767px){#mk-loop{right:12px;bottom:62px;"
+        "width:116px}}",
+        # Reduced motion stops the press; it does not take the print away.
+        # Removing the window entirely was over-broad - the objection is to
+        # perpetual motion, not to a picture, and the enlarged view is content.
+        "@media (prefers-reduced-motion:reduce){"
+        "#mk-loop *{animation:none!important}}",
+
         # ── the entrance sequence ────────────────────────────────────────────
         # A page-load animation has one catastrophic failure mode: an overlay that
         # covers the document and never leaves. So the veil is `display:none` in the
@@ -819,14 +886,13 @@ def motion_css():
         "@property --mk-n{syntax:'<integer>';initial-value:0;inherits:true}",
         "@keyframes mk-count{to{--mk-n:100}}",
         "@keyframes mk-boot-out{"
-        "0%{clip-path:inset(0 0 0 0)}"
-        "100%{clip-path:inset(0 0 100% 0);visibility:hidden}}",
+        "0%{transform:translateY(0)}"
+        "100%{transform:translateY(-100%);visibility:hidden;display:none}}",
         "@keyframes mk-boot-fill{from{transform:scaleX(0)}to{transform:scaleX(1)}}",
         "@keyframes mk-boot-line{from{opacity:.14}"
         "60%{opacity:1;color:rgb(255,90,54)}to{opacity:.55;color:rgb(107,109,113)}}",
         "@keyframes mk-boot-scan{from{transform:translateY(0)}"
         "to{transform:translateY(100vh)}}",
-        "@keyframes mk-boot-fade{from{opacity:0}to{opacity:1}}",
 
         # ── the print ────────────────────────────────────────────────────────
         # Each impression arrives OUT OF REGISTER and then snaps true. The snap is
@@ -835,9 +901,10 @@ def motion_css():
         # as a sheet being pulled against the kento notches.
         "@keyframes mk-ink{"
         "0%{opacity:0;transform:translate(7px,-5px)}"
-        "34%{opacity:.5;transform:translate(7px,-5px)}"
-        "72%{opacity:1;transform:translate(7px,-5px)}"
-        "73%,100%{opacity:1;transform:none}}",
+        "34%{opacity:.55;transform:translate(7px,-5px)}"
+        "64%{opacity:1;transform:translate(7px,-5px);"
+        "animation-timing-function:cubic-bezier(.16,.86,.24,1)}"
+        "100%{opacity:1;transform:translate(0,0)}}",
         # bokashi: the gradation a printer wipes by hand, never a hard edge
         # bokashi on an SVG group is an opacity wipe, not a background slide -
         # a <g> has no background to move.
@@ -862,10 +929,6 @@ def motion_css():
         "to{clip-path:inset(0 0 0 0);opacity:1}}",
         "@keyframes mk-boot-caret{0%,49%{opacity:1}50%,99%{opacity:0}}",
         # the corner crosshairs draw themselves in
-        "@keyframes mk-boot-cross{from{opacity:0;transform:scale(.55)}"
-        "to{opacity:1;transform:scale(1)}}",
-        "@keyframes mk-boot-tick{from{opacity:0;transform:scaleX(.2)}"
-        "to{opacity:1;transform:scaleX(1)}}",
         # the stamp lands hard, the way a stamp does
         "@keyframes mk-boot-stamp{0%{opacity:0;transform:scale(1.35)}"
         "55%{opacity:1;transform:scale(.97)}100%{opacity:1;transform:scale(1)}}",
@@ -874,54 +937,145 @@ def motion_css():
         "@media (prefers-reduced-motion:no-preference){",
         "  #mk-boot{display:grid;position:fixed;inset:0;z-index:999;"
         "background:rgb(250,250,247);align-content:center;justify-items:center;"
-        "row-gap:20px;overflow:hidden;"
-        "animation:mk-boot-out .62s cubic-bezier(.7,0,.3,1) 2.95s forwards}",
+        "row-gap:20px;overflow:hidden;will-change:transform;contain:layout;"
+        "animation:mk-boot-out .9s cubic-bezier(.76,0,.24,1) 7.15s forwards}",
         # ── the sheet, and the blocks carved for it ──────────────────────────
         "  #mk-uki{position:relative;width:min(430px,64vw);aspect-ratio:3/2;"
-        "background:rgb(250,250,247);overflow:hidden}",
+        "background:rgb(250,250,247);overflow:hidden;contain:layout paint}",
         "  #mk-uki svg{position:absolute;inset:0;width:100%;height:100%;"
         "display:block}",
         # one <g> per block: each lands out of register and snaps true
-        "  #uk-sun,#uk-fuji,#uk-sea,#uk-wave,#uk-claw,#uk-swell,#uk-key{"
-        "animation:mk-ink .8s cubic-bezier(.2,.7,.3,1) both;"
+        "  #uk-sun,#uk-fuji,#uk-mist,#uk-sea,#uk-crest,#uk-boat,#uk-wave,"
+        "#uk-claw,#uk-swell,#uk-key{"
+        "animation:mk-ink 1.4s cubic-bezier(.2,.7,.3,1) both;"
         "transform-box:fill-box;transform-origin:50% 50%}",
-        "  #uk-sky{animation:mk-bokashi 1.1s cubic-bezier(.3,0,.2,1) .35s both}",
-        "  #uk-sun{animation-delay:.75s}",
-        "  #uk-fuji{animation-delay:1.0s}",
-        "  #uk-sea{animation-delay:1.25s}",
-        "  #uk-swell{animation-delay:1.45s}",
-        "  #uk-wave{animation-delay:1.65s}",
-        "  #uk-claw{animation-delay:1.8s}",
-        "  #uk-key{animation-delay:2.0s}",
+        # the sheet on the bed is blank until the press starts. Washing the sky in
+        # at .45s, while the rest of the plate is still a held still frame,
+        # read as a half-loaded image rather than as paper.
+        "  #uk-sky{animation:mk-bokashi 1.7s cubic-bezier(.3,0,.2,1) .95s both}",
+        "  #uk-sun{animation-delay:1.45s}",
+        "  #uk-fuji{animation-delay:1.85s}",
+        "  #uk-mist{animation-delay:2.25s}",
+        "  #uk-sea{animation-delay:2.65s}",
+        "  #uk-crest{animation-delay:3.05s}",
+        "  #uk-boat{animation-delay:3.45s}",
+        "  #uk-swell{animation-delay:4.6s}",
+        "  #uk-wave{animation-delay:3.85s}",
+        "  #uk-claw{animation-delay:4.25s}",
+        "  #uk-key{animation-delay:4.95s}",
         # once the impression has landed, the sea keeps moving
-        "  #uk-wave,#uk-claw{animation:mk-ink .8s cubic-bezier(.2,.7,.3,1) both,"
+        "  #uk-wave,#uk-claw{animation:mk-ink 1.4s cubic-bezier(.2,.7,.3,1) both,"
         "mk-swell 6s ease-in-out 2.7s infinite}",
-        "  #uk-swell{animation:mk-ink .8s cubic-bezier(.2,.7,.3,1) both,"
+        "  #uk-swell{animation:mk-ink 1.4s cubic-bezier(.2,.7,.3,1) both,"
         "mk-swell2 8s ease-in-out 2.9s infinite}",
-        "  #uk-wave{animation-delay:1.65s,2.7s}",
-        "  #uk-claw{animation-delay:1.8s,2.8s}",
-        "  #uk-swell{animation-delay:1.45s,2.9s}",
+        "  #uk-wave{animation-delay:3.85s,6.4s}",
+        "  #uk-claw{animation-delay:4.25s,6.5s}",
+        "  #uk-swell{animation-delay:4.6s,6.6s}",
 
         # 落款 the seal, pressed once the run is finished
         "  #mk-uki-seal{position:absolute;inset:auto 16px 14px auto;"
         "width:34px;height:34px;background:rgb(191,68,40);opacity:0;"
-        "animation:mk-seal .45s cubic-bezier(.16,1,.3,1) 2.15s both}",
+        "animation:mk-seal .6s cubic-bezier(.16,1,.3,1) 5.6s both}",
         '  #mk-uki-seal::after{content:"摺";position:absolute;inset:0;'
         "display:grid;place-items:center;color:rgb(250,250,247);"
         "font-family:" + CJK + ";font-size:19px;line-height:1}",
 
         "  @media (max-width:767px){#mk-uki{width:74vw}}",
 
+        # -- the corner press, cycling -------------------------------------
+        # One 11s period shared by every block, with a per-block delay applied
+        # once, so the impressions stay in register with each other forever.
+        # Each block lands out of true, snaps, holds, and is lifted again.
+        "@keyframes mk-uki-loop{"
+        "0%{opacity:0;transform:translate(6px,-4px)}"
+        "5%{opacity:.55;transform:translate(6px,-4px)}"
+        "9%{opacity:1;transform:translate(6px,-4px);"
+        "animation-timing-function:cubic-bezier(.16,.86,.24,1)}"
+        "17%,84%{opacity:1;transform:translate(0,0)}"
+        "96%,100%{opacity:0;transform:translate(0,0)}}",
+        # the water blocks drift while they are held, so the held frame is not
+        # a still frame - which is the whole point of the window
+        "@keyframes mk-uki-loopw{"
+        "0%{opacity:0;transform:translate(6px,-4px)}"
+        "5%{opacity:.55;transform:translate(6px,-4px)}"
+        "9%{opacity:1;transform:translate(6px,-4px);"
+        "animation-timing-function:cubic-bezier(.16,.86,.24,1)}"
+        "17%{opacity:1;transform:translate3d(0,0,0)}"
+        "50%{opacity:1;transform:translate3d(-2.6%,-1.6%,0)}"
+        "84%{opacity:1;transform:translate3d(0,0,0)}"
+        "96%,100%{opacity:0;transform:translate3d(0,0,0)}}",
+        "@keyframes mk-uki-loops{"
+        "0%{opacity:0;transform:translate(6px,-4px)}"
+        "5%{opacity:.55;transform:translate(6px,-4px)}"
+        "9%{opacity:1;transform:translate(6px,-4px);"
+        "animation-timing-function:cubic-bezier(.16,.86,.24,1)}"
+        "17%{opacity:1;transform:translate3d(0,0,0)}"
+        "50%{opacity:1;transform:translate3d(3%,1.3%,0)}"
+        "84%{opacity:1;transform:translate3d(0,0,0)}"
+        "96%,100%{opacity:0;transform:translate3d(0,0,0)}}",
+        "@keyframes mk-uki-loopsky{0%{opacity:0}9%{opacity:.7}"
+        "14%,86%{opacity:1}97%,100%{opacity:0}}",
+        "@keyframes mk-uki-loopseal{"
+        "0%,30%{opacity:0;transform:rotate(-9deg) scale(1.5)}"
+        "36%{opacity:.92;transform:rotate(-9deg) scale(.94)}"
+        "40%,86%{opacity:.92;transform:rotate(-9deg) scale(1)}"
+        "96%,100%{opacity:0;transform:rotate(-9deg) scale(1)}}",
+        # The window is opaque and fixed, so wherever it sits it hides whatever
+        # scrolls under it. Measured on this page: no fixed rectangle anywhere
+        # along the right edge avoids text at every scroll offset, because the
+        # marquee bands and the full-bleed rules reach every column. What can be
+        # avoided is hiding something the reader cannot then get back, so the
+        # plate is put on the document scroll timeline and is absent at both
+        # ends: over the masthead, where it covered two values in the spec
+        # table, and over the footer, where it buried three links at the one
+        # position a reader cannot scroll past. In between it crosses text and
+        # moves on, which is what a plate laid on a moving sheet does.
+        # A browser with no scroll timelines ignores `animation-timeline`, runs
+        # the 1ms duration on the clock and lands on the 100% frame - which is
+        # the hidden one. For a decoration that is the safe direction to fail.
+        # opacity ONLY. A transform on this element makes it the containing
+        # block for its `position:fixed` descendants, which would pin the
+        # enlarged view inside the 186px corner box instead of the viewport.
+        "@keyframes mk-loop-in{0%{opacity:0}6%,92%{opacity:1}"
+        "100%{opacity:0}}",
+        "  #mk-loop{opacity:0;animation:mk-loop-in 1ms linear both;"
+        "animation-timeline:scroll(root);animation-range:62vh 100%}",
+        "  #ukw-sun,#ukw-fuji,#ukw-mist,#ukw-sea,#ukw-crest,#ukw-boat,"
+        "#ukw-key{"
+        "animation:mk-uki-loop 14s cubic-bezier(.2,.7,.3,1) infinite both;"
+        "transform-box:fill-box;transform-origin:50% 50%}",
+        "  #ukw-wave,#ukw-claw{"
+        "animation:mk-uki-loopw 14s cubic-bezier(.2,.7,.3,1) infinite both;"
+        "transform-box:fill-box;transform-origin:50% 50%}",
+        "  #ukw-swell{"
+        "animation:mk-uki-loops 14s cubic-bezier(.2,.7,.3,1) infinite both;"
+        "transform-box:fill-box;transform-origin:50% 50%}",
+        "  #ukw-sky{animation:mk-uki-loopsky 14s ease infinite both}",
+        "  #ukw-sun{animation-delay:.3s}",
+        "  #ukw-fuji{animation-delay:.6s}",
+        "  #ukw-mist{animation-delay:.9s}",
+        "  #ukw-sea{animation-delay:1.2s}",
+        "  #ukw-crest{animation-delay:1.5s}",
+        "  #ukw-boat{animation-delay:1.8s}",
+        "  #ukw-wave{animation-delay:2.1s}",
+        "  #ukw-claw{animation-delay:2.4s}",
+        "  #ukw-swell{animation-delay:2.7s}",
+        "  #ukw-key{animation-delay:3s}",
+        "  #mk-loop-seal{opacity:0;"
+        "animation:mk-uki-loopseal 14s ease 3s infinite both}",
+        "  #mk-loop-dot{animation:mk-livedot 2s steps(1,end) infinite}",
+
+
         "  #mk-boot-head,#mk-boot-foot{position:absolute;left:40px;right:40px;"
         "display:flex;justify-content:space-between;font-family:" + MONO + ";"
-        "font-size:10px;letter-spacing:.2em;color:rgb(107,109,113);"
-        "animation:mk-boot-fade .4s ease both}",
+        "font-size:10px;letter-spacing:.2em;color:rgb(107,109,113)}",
         "  #mk-boot-head{top:34px}",
-        "  #mk-boot-foot{bottom:30px;animation-delay:.1s}",
+        "  #mk-boot-foot{bottom:30px}",
         "  #mk-boot-num{font-family:" + MONO + ";font-size:58px;font-weight:500;"
         "line-height:1;letter-spacing:-.04em;color:rgb(22,24,28);"
-        "font-variant-numeric:tabular-nums;min-width:3ch;text-align:right;"
-        "animation:mk-count 2.05s linear .3s both}",
+        "font-variant-numeric:tabular-nums;width:3ch;text-align:right;"
+        "contain:layout;"
+        "animation:mk-count 5.6s cubic-bezier(.32,.72,.28,1) .9s both}",
         '  #mk-boot-num::after{counter-reset:n var(--mk-n);content:counter(n)}',
         "  #mk-boot-row{display:flex;align-items:flex-end;column-gap:8px;"
         "line-height:1}",
@@ -934,12 +1088,11 @@ def motion_css():
         "background:rgba(22,24,28,.14);position:relative}",
         "  #mk-boot-fill{position:absolute;inset:0;background:rgb(255,90,54);"
         "transform-origin:0 50%;"
-        "animation:mk-boot-fill 2.05s linear .3s both}",
+        "animation:mk-boot-fill 5.6s cubic-bezier(.32,.72,.28,1) .9s both}",
         # ticks along the rule, so the bar reads as a measure rather than a bar
         '  #mk-boot-track::after{content:"";position:absolute;left:0;right:0;'
         "top:-3px;height:3px;background:repeating-linear-gradient(90deg,"
-        "rgba(22,24,28,.22) 0 1px,transparent 1px 42px);"
-        "animation:mk-boot-fade .5s ease .15s both}",
+        "rgba(22,24,28,.22) 0 1px,transparent 1px 42px)}",
         "  #mk-boot-list{display:flex;column-gap:18px;row-gap:8px;"
         "flex-wrap:wrap;justify-content:center;font-family:" + MONO + ";"
         "font-size:10px;letter-spacing:.18em}",
@@ -951,32 +1104,28 @@ def motion_css():
         "repeating-linear-gradient(90deg,rgba(22,24,28,.045) 0 1px,"
         "transparent 1px 72px),"
         "repeating-linear-gradient(0deg,rgba(22,24,28,.045) 0 1px,"
-        "transparent 1px 72px);"
-        "animation:mk-boot-fade .5s ease both}",
+        "transparent 1px 72px)}",
         "  #mk-boot-scan{position:absolute;left:0;right:0;top:0;height:1px;"
         "background:linear-gradient(90deg,rgba(255,90,54,0),rgba(255,90,54,.55),"
         "rgba(255,90,54,0));"
-        "animation:mk-boot-scan 1.45s linear .15s 2 both}",
+        "animation:mk-boot-scan 2.9s linear .95s 2 both}",
 
         # corner crosshairs: the veil is a plate, and a plate has trim marks
         "  #mk-boot .mk-x,#mk-boot-x0,#mk-boot-x1,#mk-boot-x2,#mk-boot-x3{"
-        "position:absolute;width:14px;height:14px;"
-        "animation:mk-boot-cross .5s cubic-bezier(.16,1,.3,1) both}",
+        "position:absolute;width:14px;height:14px}",
         "  #mk-boot-x0{top:64px;left:40px;border-left:1px solid " + RULE_INK
-        + ";border-top:1px solid " + RULE_INK + ";animation-delay:.08s}",
+        + ";border-top:1px solid " + RULE_INK + "}",
         "  #mk-boot-x1{top:64px;right:40px;border-right:1px solid " + RULE_INK
-        + ";border-top:1px solid " + RULE_INK + ";animation-delay:.16s}",
+        + ";border-top:1px solid " + RULE_INK + "}",
         "  #mk-boot-x2{bottom:56px;left:40px;border-left:1px solid " + RULE_INK
-        + ";border-bottom:1px solid " + RULE_INK + ";animation-delay:.24s}",
+        + ";border-bottom:1px solid " + RULE_INK + "}",
         "  #mk-boot-x3{bottom:56px;right:40px;border-right:1px solid " + RULE_INK
-        + ";border-bottom:1px solid " + RULE_INK + ";animation-delay:.32s}",
+        + ";border-bottom:1px solid " + RULE_INK + "}",
 
         # a ruler down the left margin, because this is a measured object
         "  #mk-boot-ruler{position:absolute;left:40px;top:50%;"
         "transform:translateY(-50%);display:grid;row-gap:9px}",
-        "  #mk-boot-ruler>*{width:9px;height:1px;background:" + RULE_INK + ";"
-        "transform-origin:0 50%;animation:mk-boot-tick .3s ease both}",
-        ruler_stagger,
+        "  #mk-boot-ruler>*{width:9px;height:1px;background:" + RULE_INK + "}",
         "  @media (max-width:1023px){#mk-boot-ruler{display:none}}",
 
         # the log: four lines, each written out left to right
@@ -992,18 +1141,18 @@ def motion_css():
         "  #mk-boot-ready{border:1px solid rgb(191,68,40);padding:5px 12px;"
         "font-family:" + MONO + ";font-size:10px;letter-spacing:.24em;"
         "color:rgb(191,68,40);opacity:0;"
-        "animation:mk-boot-stamp .42s cubic-bezier(.16,1,.3,1) 2.42s both}",
+        "animation:mk-boot-stamp .5s cubic-bezier(.16,1,.3,1) 6.55s both}",
         "  @media (max-width:767px){#mk-boot-num{font-size:40px}"
         "#mk-boot-head,#mk-boot-foot{left:18px;right:18px}}",
         "  #mk-hl1-mask>*,#mk-hl2-mask>*{transform:translateY(112%);"
         "animation:mk-linein .95s cubic-bezier(.16,1,.3,1) forwards}",
-        "  #mk-hl1-mask>*{animation-delay:3.16s}",
-        "  #mk-hl2-mask>*{animation-delay:3.28s}",
+        "  #mk-hl1-mask>*{animation-delay:7.44s}",
+        "  #mk-hl2-mask>*{animation-delay:7.56s}",
         "  #mk-mast-meta,#mk-mast-lede,#mk-mast-cta{opacity:0;"
         "animation:mk-softin .8s cubic-bezier(.16,1,.3,1) forwards}",
-        "  #mk-mast-meta{animation-delay:3.06s}",
-        "  #mk-mast-lede{animation-delay:3.54s}",
-        "  #mk-mast-cta{animation-delay:3.66s}",
+        "  #mk-mast-meta{animation-delay:7.34s}",
+        "  #mk-mast-lede{animation-delay:7.82s}",
+        "  #mk-mast-cta{animation-delay:7.94s}",
         "  " + flow_arrows + "{animation:mk-flow 1.9s ease-in-out infinite}",
         "  #mk-clock-s{animation:mk-secs 60s steps(60,end) infinite}",
         "  #mk-clock-m{animation:mk-mins 3600s steps(60,end) infinite}",
@@ -2174,9 +2323,46 @@ PRINT_SVG = """
           stroke-width="1.1"/>
   </g>
 
+  <g id="uk-mist">
+    <path d="M204,179 C238,170 274,175 310,170 C340,166 362,171 384,168
+             C364,178 340,176 308,180 C274,184 238,187 204,179 Z"
+          fill="#fcfcfa" opacity=".8"/>
+    <path d="M238,197 C266,190 294,194 320,190 C342,187 358,191 374,188
+             C356,197 342,196 318,199 C292,203 264,204 238,197 Z"
+          fill="#fcfcfa" opacity=".58"/>
+  </g>
+
   <g id="uk-sea">
     <path d="M0,206 H420 V280 H0 Z" fill="url(#uk-water)" opacity=".34"/>
     <path d="M0,206 H420" stroke="#16181c" stroke-width="1" opacity=".55"/>
+  </g>
+
+  <g id="uk-crest">
+    <path d="M316,226 C332,212 350,208 364,214 C374,218 382,223 390,226
+             C372,230 348,231 332,229 C322,228 317,227 316,226 Z"
+          fill="#162d4e"/>
+    <path d="M344,212 C353,204 363,203 370,209 C363,210 356,213 352,218
+             C349,215 346,213 344,212 Z"
+          fill="#fcfcfa" stroke="#16181c" stroke-width=".8"/>
+    <path d="M392,222 C402,212 412,210 420,214 L420,224
+             C410,222 400,222 392,222 Z" fill="#162d4e"/>
+  </g>
+
+  <g id="uk-boat">
+    <path d="M226,225 C248,218 274,216 300,220 C311,221 319,218 330,211
+             C326,218 323,225 325,231
+             C312,238 292,241 268,241 C247,241 233,234 226,225 Z"
+          fill="#16181c"/>
+    <path d="M233,225 C252,219 276,218 300,222 C309,223 315,225 319,228
+             C307,233 289,235 267,235 C248,235 239,230 233,225 Z"
+          fill="#fcfcfa"/>
+    <g fill="#16181c">
+      <rect x="245" y="213" width="1.9" height="9"/>
+      <rect x="256" y="212" width="1.9" height="10"/>
+      <rect x="267" y="212" width="1.9" height="10"/>
+      <rect x="278" y="212" width="1.9" height="10"/>
+      <rect x="289" y="213" width="1.9" height="9"/>
+    </g>
   </g>
 
   <g id="uk-wave">
@@ -2226,6 +2412,51 @@ PRINT = box("mk-uki", {}, [
                               "content": PRINT_SVG, "processShortcodes": "0"}},
     box("mk-uki-seal", {}, []),     # 落款 the seal, stamped when the run is done
 ])
+
+# The same carved blocks, pulled again in the corner of the page. A second copy of
+# the markup means a second copy of every id in it, and duplicate ids are exactly
+# the defect the component work turned up - so the whole sheet is re-issued under a
+# `ukw-` prefix, gradient references included.
+PRINT_SVG_LOOP = (PRINT_SVG.replace('id="uk', 'id="ukw')
+                           .replace("url(#uk-", "url(#ukw-"))
+
+# The plate is the accordion's title, so the whole thing is the control: one tap
+# or one Return opens it. The caption is the accordion's content, which means it
+# does not exist in the corner at all and appears only in the enlarged view.
+LOOP_WINDOW = box("mk-loop", {}, [
+    {"type": "accordion", "data": {"attrID": "mk-plate"}, "children": [
+        {"type": "accordion-item", "data": {"attrID": "mk-plate-item"}, "children": [
+            {"type": "accordion-title", "data": {"attrID": "mk-plate-title"},
+             "children": [
+                 box("mk-loop-plate", {}, [
+                     {"type": "code", "data": {"attrID": "mk-loop-svg",
+                                               "insertLocation": "inPlace",
+                                               "content": PRINT_SVG_LOOP,
+                                               "processShortcodes": "0"}},
+                     box("mk-loop-seal", {}, []),
+                 ]),
+                 box("mk-loop-bar", {}, [
+                     mono("KANAGAWA", size="9px", color="--mk-faint",
+                          track="0.18em"),
+                     box("mk-loop-live", {}, [
+                         box("mk-loop-dot", {}, []),
+                         mono("LOOP", size="9px", color="--mk-faint",
+                              track="0.18em"),
+                     ]),
+                 ]),
+             ]},
+            {"type": "accordion-content", "data": {"attrID": "mk-plate-body"},
+             "children": [
+                 T("p", "\u795e\u5948\u5ddd\u6c96\u6d6a\u88cf",
+                   color={"token": "--mk-ink"}, fontSize="17px",
+                   fontWeight="600", letterSpacing="0.04em"),
+                 mono("11 BLOCKS / 14s CYCLE / TAP TO CLOSE", size="10px",
+                      color="--mk-faint", track="0.2em"),
+             ]},
+        ]},
+    ]},
+])
+
 
 BOOT = box("mk-boot", {}, [
     box("mk-boot-scan", {}, []),
@@ -2297,13 +2528,313 @@ CUE = box("mk-cue", {}, [
 
 HOME_TREE = {"type": "div", "data": {"attrID": "mk-home"},
              "children": [BOOT, box("mk-doc", {}, [
-                 MARKS, INDEX, CUE, box("mk-sweep", {}, []),
+                 MARKS, INDEX, CUE, LOOP_WINDOW, box("mk-sweep", {}, []),
                  # paper, panel, paper, ink, paper, ink, paper - the page
                  # changes ground five times so it reads as chapters
                  MASTHEAD, TICKER_BAND, PLATE, SERVICE_SEC, MATRIX_SEC,
                  PROCESS_SEC, FIGURE_SEC, WORK_SEC, PAN, SPECIMEN, STACK_SEC,
                  BOARD, PRODUCT_SEC, VOICE_SEC, CONTACT,
              ])]}
+
+
+# ── §A the account page ───────────────────────────────────────────────────────
+# WooCommerce's My Account is a shortcode, and a shortcode is markup you do not
+# get to write. So this page is two things: a masthead built from the same
+# vocabulary as the rest of the document, and a stylesheet that takes the classes
+# WooCommerce has kept stable for a decade and sets them in this document's voice -
+# mono labels, hairlines, no radii, the accent only on the one primary action.
+#
+# What it also is, is a measurement. `code`'s `processShortcodes` property sits in
+# the property table as NO_EFFECT, which is true of the sweep - the sweep's content
+# had no shortcode in it - and says nothing about whether the flag works. This
+# page is the first place in the repo that puts a real shortcode through it.
+#
+# Two states share one page and one stylesheet. Logged out, the shortcode emits a
+# heading and a form; logged in, a <nav> and a content pane. The pane and the nav
+# want two columns, the form wants one, and there is no wrapper to hang the
+# difference on - so `.woocommerce` is always a grid and everything that is not
+# the nav or the pane simply spans it. No `:has()` is needed for the layout.
+#
+# One thing needs it: the dashboard's "Hello, X" is a <p> like any other, and the
+# only thing that says "this is the dashboard" is a class on a sibling <nav>. The
+# greeting is set large through `.woocommerce:has(...--dashboard.is-active)`, and a
+# browser without `:has()` sees an ordinary paragraph, which is fine.
+
+ACCOUNT_CSS = "\n".join([
+    '<style id="mk-acct-css">',
+    # the section element arrives with 80px top and bottom of its own; between the
+    # masthead and the ledger that made a 204px hole, measured
+    "#mk-acct-mast{padding-bottom:0}#mk-acct-body{padding-top:0}",
+    # ── layout ──
+    # Measured before this block existed: the nav landed in column TWO and the
+    # pane fell to the next row. WooCommerce's clearfix - `.woocommerce::before`
+    # with `display:table` - is a grid item like any other and had taken (1,1).
+    # And the theme caps `.woocommerce` at 1000px, so the ledger's rules stopped
+    # short of the masthead's.
+    "#mk-acct-sheet .woocommerce{display:grid;grid-template-columns:250px 1fr;"
+    "column-gap:60px;align-items:start;max-width:none;width:100%;margin:0}",
+    "#mk-acct-sheet .woocommerce::before,#mk-acct-sheet .woocommerce::after{"
+    "display:none;content:none}",
+    # `min-width:0` because a grid item's default is `auto`, and on a phone the
+    # rail becomes a nowrap flex strip that then refuses to shrink - measured, it
+    # ran 53px past the column and the ledger's rules stopped short of it
+    "#mk-acct-sheet .woocommerce-MyAccount-navigation,"
+    "#mk-acct-sheet .woocommerce-MyAccount-content{float:none;width:auto;"
+    "min-width:0;margin:0}",
+    "#mk-acct-sheet .woocommerce>*:not(.woocommerce-MyAccount-navigation)"
+    ":not(.woocommerce-MyAccount-content){grid-column:1/-1}",
+    "@media (max-width:1079px){#mk-acct-sheet .woocommerce{"
+    "grid-template-columns:200px 1fr;column-gap:32px}}",
+    "@media (max-width:767px){#mk-acct-sheet .woocommerce{"
+    "grid-template-columns:1fr;row-gap:28px}}",
+
+    # ── the rail: WooCommerce's nav as a run of numbered clauses ──
+    "#mk-acct-sheet .woocommerce-MyAccount-navigation{position:sticky;top:96px}",
+    "#mk-acct-sheet .woocommerce-MyAccount-navigation ul{list-style:none;margin:0;"
+    "padding:0;counter-reset:acct}",
+    "#mk-acct-sheet .woocommerce-MyAccount-navigation li{counter-increment:acct;"
+    "margin:0;padding:0;border-top:1px solid " + RULE + "}",
+    "#mk-acct-sheet .woocommerce-MyAccount-navigation li:last-child{"
+    "border-bottom:1px solid " + RULE + "}",
+    "#mk-acct-sheet .woocommerce-MyAccount-navigation a{display:grid;"
+    "grid-template-columns:52px 1fr;align-items:baseline;padding:14px 0;"
+    "font-family:" + MONO + ";font-size:11px;letter-spacing:.16em;"
+    "text-transform:uppercase;color:rgb(90,92,97);text-decoration:none;"
+    "transition:color .2s}",
+    '#mk-acct-sheet .woocommerce-MyAccount-navigation a::before{'
+    'content:"A." counter(acct,decimal-leading-zero);font-size:10px;'
+    "letter-spacing:.08em;color:rgb(107,109,113)}",
+    "#mk-acct-sheet .woocommerce-MyAccount-navigation a:hover{color:rgb(22,24,28)}",
+    "#mk-acct-sheet .woocommerce-MyAccount-navigation a:focus-visible{"
+    "outline:2px solid rgb(255,90,54);outline-offset:3px}",
+    "#mk-acct-sheet .woocommerce-MyAccount-navigation .is-active a{"
+    "color:rgb(22,24,28)}",
+    "#mk-acct-sheet .woocommerce-MyAccount-navigation .is-active a::before{"
+    "color:rgb(191,68,40)}",
+    # the rail lies down on a phone: one horizontal strip, scrollable
+    "@media (max-width:767px){"
+    "#mk-acct-sheet .woocommerce-MyAccount-navigation{position:static}"
+    "#mk-acct-sheet .woocommerce-MyAccount-navigation ul{display:flex;"
+    "overflow-x:auto;border-top:1px solid " + RULE + ";"
+    "border-bottom:1px solid " + RULE + "}"
+    "#mk-acct-sheet .woocommerce-MyAccount-navigation li{border:0;flex:0 0 auto}"
+    "#mk-acct-sheet .woocommerce-MyAccount-navigation li:last-child{border:0}"
+    "#mk-acct-sheet .woocommerce-MyAccount-navigation a{grid-template-columns:auto;"
+    "column-gap:8px;padding:12px 16px 12px 0;white-space:nowrap}"
+    "#mk-acct-sheet .woocommerce-MyAccount-navigation a::before{display:none}}",
+
+    # ── the pane ──
+    "#mk-acct-sheet .woocommerce-MyAccount-content{border-top:1px solid " + RULE
+    + ";padding-top:22px;min-height:46vh}",
+    "#mk-acct-sheet .woocommerce-MyAccount-content p{font-size:15px;line-height:2;"
+    "color:rgb(90,92,97);max-width:40em;margin:0 0 14px}",
+    "#mk-acct-sheet .woocommerce-MyAccount-content p strong{color:rgb(22,24,28);"
+    "font-weight:600}",
+    "#mk-acct-sheet .woocommerce-MyAccount-content a:not(.button){"
+    "color:rgb(191,68,40);text-decoration:none;border-bottom:1px solid currentColor}",
+    "#mk-acct-sheet .woocommerce-MyAccount-content h2,"
+    "#mk-acct-sheet .woocommerce-MyAccount-content h3,"
+    "#mk-acct-sheet .woocommerce-MyAccount-content legend{font-family:" + DISPLAY
+    + ";font-weight:600;color:rgb(22,24,28);letter-spacing:.01em}",
+    "#mk-acct-sheet .woocommerce-MyAccount-content h2{font-size:26px;margin:6px 0 18px}",
+    "#mk-acct-sheet .woocommerce-MyAccount-content h3,"
+    "#mk-acct-sheet .woocommerce-MyAccount-content legend{font-size:17px;"
+    "margin:26px 0 10px;padding:0}",
+    # the greeting, and only on the dashboard
+    "#mk-acct-sheet .woocommerce:has(.woocommerce-MyAccount-navigation-link--dashboard"
+    ".is-active) .woocommerce-MyAccount-content>p:first-of-type{font-family:"
+    + DISPLAY + ";font-size:28px;line-height:1.4;color:rgb(22,24,28);"
+    "letter-spacing:.01em;margin-bottom:18px}",
+    "@media (max-width:767px){#mk-acct-sheet .woocommerce:has("
+    ".woocommerce-MyAccount-navigation-link--dashboard.is-active) "
+    ".woocommerce-MyAccount-content>p:first-of-type{font-size:22px}}",
+
+    # ── tables: a ledger, not a grid of boxes ──
+    "#mk-acct-sheet table.shop_table{width:100%;border-collapse:collapse;border:0;"
+    "font-family:" + MONO + ";font-size:12px;margin:0 0 24px}",
+    "#mk-acct-sheet table.shop_table th{text-align:left;font-weight:400;"
+    "font-size:10px;letter-spacing:.18em;text-transform:uppercase;"
+    "color:rgb(107,109,113);padding:10px 14px 10px 0;border:0;"
+    "border-bottom:1px solid " + RULE + "}",
+    "#mk-acct-sheet table.shop_table td{padding:14px 14px 14px 0;border:0;"
+    "border-bottom:1px solid " + RULE + ";color:rgb(22,24,28);"
+    "font-variant-numeric:tabular-nums;vertical-align:top;line-height:1.6}",
+    "#mk-acct-sheet table.shop_table td a:not(.button){color:rgb(191,68,40);"
+    "text-decoration:none;border-bottom:1px solid currentColor}",
+    # WooCommerce stacks its tables on a phone with td::before labels - keep that
+    "@media (max-width:767px){#mk-acct-sheet table.shop_table td::before{"
+    "font-size:10px;letter-spacing:.18em;text-transform:uppercase;"
+    "color:rgb(107,109,113)}}",
+
+    # ── addresses ──
+    "#mk-acct-sheet .woocommerce-Addresses{display:grid;"
+    "grid-template-columns:1fr 1fr;column-gap:40px;row-gap:28px}",
+    "@media (max-width:767px){#mk-acct-sheet .woocommerce-Addresses{"
+    "grid-template-columns:1fr}}",
+    # the same clearfix, the same stolen cell - see `.woocommerce::before` above
+    "#mk-acct-sheet .woocommerce-Addresses::before,"
+    "#mk-acct-sheet .woocommerce-Addresses::after{display:none;content:none}",
+    "#mk-acct-sheet .woocommerce-Address{width:auto;float:none;margin:0}",
+    "#mk-acct-sheet .woocommerce-Address-title{display:flex;"
+    "justify-content:space-between;align-items:baseline;"
+    "border-bottom:1px solid " + RULE + ";padding-bottom:8px;margin-bottom:12px}",
+    "#mk-acct-sheet .woocommerce-Address-title h2,"
+    "#mk-acct-sheet .woocommerce-Address-title h3{margin:0;font-size:17px;"
+    "float:none;width:auto;text-align:left}",
+    "#mk-acct-sheet .woocommerce-Address-title .edit{float:none}",
+    "#mk-acct-sheet .woocommerce-Address-title a{font-family:" + MONO
+    + ";font-size:10px;letter-spacing:.18em;text-transform:uppercase}",
+    "#mk-acct-sheet .woocommerce-Address address{font-style:normal;font-family:"
+    + MONO + ";font-size:13px;line-height:1.9;color:rgb(90,92,97)}",
+
+    # ── forms, all of them: login, register, details, addresses ──
+    "#mk-acct-sheet form .form-row{margin:0 0 22px;padding:0;float:none;"
+    "width:auto;overflow:visible}",
+    "#mk-acct-sheet form .form-row-first,#mk-acct-sheet form .form-row-last{"
+    "width:auto}",
+    "#mk-acct-sheet form .form-row label{display:block;font-family:" + MONO
+    + ";font-size:10px;letter-spacing:.1em;text-transform:uppercase;"
+    "color:rgb(107,109,113);margin:0 0 8px}",
+    "#mk-acct-sheet form .required{color:rgb(191,68,40);text-decoration:none;"
+    "border:0}",
+    "#mk-acct-sheet form .input-text,#mk-acct-sheet form select,"
+    "#mk-acct-sheet form textarea{display:block;width:100%;box-sizing:border-box;"
+    "background:transparent;border:0;border-bottom:1px solid rgba(22,24,28,.42);"
+    "border-radius:0;padding:10px 0;font-family:" + MONO + ";font-size:15px;"
+    "color:rgb(22,24,28);outline:0;box-shadow:none;transition:border-color .2s}",
+    "#mk-acct-sheet form .input-text:focus,#mk-acct-sheet form select:focus,"
+    "#mk-acct-sheet form textarea:focus{border-bottom-color:rgb(255,90,54)}",
+    "#mk-acct-sheet form .input-text:focus-visible,#mk-acct-sheet form select"
+    ":focus-visible{outline:2px solid rgb(255,90,54);outline-offset:4px}",
+    "#mk-acct-sheet form .password-input{display:block;position:relative}",
+    "#mk-acct-sheet form fieldset{border:0;margin:34px 0 0;padding:0}",
+    # login is a short form and should read as one
+    "#mk-acct-sheet .woocommerce-form-login,#mk-acct-sheet .woocommerce-form-register,"
+    "#mk-acct-sheet .woocommerce-ResetPassword{max-width:34em;border:0;padding:0;"
+    "margin:0}",
+    "#mk-acct-sheet .woocommerce>h2{font-family:" + MONO + ";font-size:11px;"
+    "letter-spacing:.2em;text-transform:uppercase;color:rgb(90,92,97);"
+    "font-weight:400;margin:0 0 26px;padding-top:22px;border-top:1px solid "
+    + RULE + "}",
+    "#mk-acct-sheet .woocommerce-form-login__rememberme{display:inline-flex;"
+    "align-items:center;gap:9px;font-family:" + MONO + ";font-size:11px;"
+    "letter-spacing:.12em;text-transform:none;color:rgb(90,92,97);margin:0 0 18px}",
+    "#mk-acct-sheet .woocommerce-form-login__rememberme input{margin:0;"
+    "accent-color:rgb(255,90,54)}",
+    "#mk-acct-sheet .woocommerce-LostPassword{margin:16px 0 0}",
+    "#mk-acct-sheet .woocommerce-LostPassword a,"
+    "#mk-acct-sheet .woocommerce-privacy-policy-text a{font-family:" + MONO
+    + ";font-size:11px;letter-spacing:.12em;color:rgb(191,68,40);"
+    "text-decoration:none;border-bottom:1px solid currentColor}",
+    "#mk-acct-sheet .woocommerce-privacy-policy-text{font-size:13px;line-height:1.9;"
+    "color:rgb(90,92,97)}",
+    # registration alongside login: two ledgers, then one
+    "#mk-acct-sheet .u-columns{display:grid;grid-template-columns:1fr 1fr;"
+    "column-gap:60px}",
+    "#mk-acct-sheet .u-columns>.u-column1,#mk-acct-sheet .u-columns>.u-column2{"
+    "width:auto;float:none;margin:0}",
+    "@media (max-width:1079px){#mk-acct-sheet .u-columns{grid-template-columns:1fr;"
+    "row-gap:48px}}",
+
+    # ── the one accent: the button ──
+    # ink on the accent, not paper on it: paper on rgb(255,90,54) is 2.97:1 and
+    # the audit refuses it, as it did on the homepage. Ink on it is 5.73:1.
+    "#mk-acct-sheet .button,#mk-acct-sheet button.button,"
+    "#mk-acct-sheet .woocommerce-button{display:inline-block;"
+    "background:rgb(255,90,54);color:rgb(22,24,28);border:0;border-radius:0;"
+    "font-family:" + MONO + ";font-size:11px;font-weight:400;letter-spacing:.18em;"
+    "text-transform:uppercase;padding:14px 24px;line-height:1;cursor:pointer;"
+    "text-decoration:none;transition:background-color .2s}",
+    "#mk-acct-sheet .button:hover,#mk-acct-sheet button.button:hover{"
+    "background:rgb(22,24,28);color:rgb(250,250,247)}",
+    "#mk-acct-sheet .button:focus-visible,#mk-acct-sheet button.button:focus-visible{"
+    "outline:2px solid rgb(255,90,54);outline-offset:3px}",
+    "#mk-acct-sheet .woocommerce-form-login__submit{margin-top:4px}",
+    "#mk-acct-sheet .woocommerce-form-login>*:first-child:not(.form-row){"
+    "margin:0 0 26px}",
+
+    # ── notices: a ruled note in the margin, not a coloured banner ──
+    "#mk-acct-sheet .woocommerce-error,#mk-acct-sheet .woocommerce-message,"
+    "#mk-acct-sheet .woocommerce-info{list-style:none;margin:0 0 28px;"
+    "padding:14px 18px;border:1px solid " + RULE + ";background:rgb(243,243,239);"
+    "font-family:" + MONO + ";font-size:12px;letter-spacing:.04em;line-height:1.7;"
+    "color:rgb(22,24,28)}",
+    "#mk-acct-sheet .woocommerce-error{border-color:rgb(191,68,40);"
+    "color:rgb(191,68,40)}",
+    "#mk-acct-sheet .woocommerce-error li,#mk-acct-sheet .woocommerce-message li,"
+    "#mk-acct-sheet .woocommerce-info li{margin:0}",
+    "#mk-acct-sheet .woocommerce-message a,#mk-acct-sheet .woocommerce-info a{"
+    "color:rgb(191,68,40)}",
+    "</style>",
+])
+
+ACCOUNT_TREE = {"type": "div", "data": {"attrID": "mk-acct"}, "children": [
+    {"type": "code", "data": {"attrID": "mk-acct-css", "insertLocation": "head",
+                              "content": ACCOUNT_CSS, "processShortcodes": "0"}},
+    section("mk-acct-mast", [wrap("mk-acct-mast-in", [
+        box("mk-acct-pad", {"paddingTop": "70px", "paddingBottom": "48px"},
+            _t={"paddingTop": "50px"}, _m={"paddingTop": "24px",
+                                           "paddingBottom": "34px"},
+            children=[
+                box("mk-acct-head",
+                    {"display": "grid", "gridCols": "84px 1fr", "columnGap": "0px",
+                     "alignItems": "start", "paddingTop": "22px",
+                     "customStyles": "border-top:1px solid " + RULE + ";"},
+                    _m={"gridCols": "48px 1fr"},
+                    children=[
+                        mono("§A", size="12px", color="--mk-accent-ink",
+                             track="0.06em"),
+                        box("mk-acct-head-t", {}, [
+                            mono("ACCOUNT — MEMBER AREA", size="11px",
+                                 color="--mk-muted"),
+                            T("h1", "帳戶", color={"token": "--mk-ink"},
+                              fontSize="44px", fontWeight="600",
+                              letterSpacing="0.01em", lineHeight="1.3",
+                              fontFamily=DISPLAY, marginTop="12px",
+                              _t={"fontSize": "36px"}, _m={"fontSize": "28px"}),
+                            T("p", "訂單、下載、地址與帳號資料，都在這一頁。",
+                              color={"token": "--mk-muted"}, fontSize="15px",
+                              lineHeight="2", marginTop="14px", maxWidth="30em",
+                              _m={"fontSize": "13.5px"}),
+                            box("mk-acct-rows",
+                                {"marginTop": "30px", "display": "grid",
+                                 "rowGap": "0px"},
+                                [box("mk-acct-r-%d" % i,
+                                     {"display": "grid", "gridCols": "150px 1fr",
+                                      "columnGap": "20px", "alignItems": "baseline",
+                                      "paddingTop": "13px", "paddingBottom": "13px",
+                                      "customStyles":
+                                          "border-top:1px solid " + RULE + ";"},
+                                     _m={"gridCols": "84px 1fr", "columnGap": "12px"},
+                                     children=[
+                                         mono(k, size="10px", color="--mk-faint",
+                                              track="0.18em"),
+                                         mono(v, size="13px", color=vc,
+                                              track="0.06em",
+                                              _m={"fontSize": "12px"}),
+                                     ])
+                                 for i, (k, v, vc) in enumerate([
+                                     ("SCOPE", "ORDERS · DOWNLOADS · ADDRESSES · "
+                                               "DETAILS", "--mk-ink"),
+                                     ("ACCESS", "MEMBERS ONLY", "--mk-ink"),
+                                     ("SUPPORT", "services@moksaweb.com",
+                                      "--mk-accent-ink"),
+                                 ])]),
+                        ]),
+                    ]),
+        ]),
+    ])]),
+    section("mk-acct-body", [wrap("mk-acct-body-in", [
+        box("mk-acct-sheet", {"paddingBottom": "120px"},
+            _m={"paddingBottom": "72px"}, children=[
+                # the whole of WooCommerce's account UI arrives through this one node
+                {"type": "code", "data": {"attrID": "mk-acct-wc",
+                                          "insertLocation": "inPlace",
+                                          "content": "[woocommerce_my_account]",
+                                          "processShortcodes": "1"}},
+            ]),
+    ])]),
+]}
 
 SITE = {
     "master": "Moksa Web shell",
@@ -2320,6 +2851,8 @@ SITE = {
     "pages": [
         {"slug": "moksa", "post_id": 26, "title": "Moksa Web",
          "tree": apply_type(HOME_TREE, DISPLAY, CJK, "600")},
+        {"slug": "my-account", "post_id": 9, "title": "My account",
+         "tree": apply_type(ACCOUNT_TREE, DISPLAY, CJK, "600")},
     ],
 }
 

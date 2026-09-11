@@ -1,5 +1,7 @@
 # mosaic-headless
 
+[![npm downloads](https://img.shields.io/npm/dt/mosaic-headless?label=npm%20downloads&color=cb3837)](https://www.npmjs.com/package/mosaic-headless)
+
 直接寫入資料模型來建置與修改 [Mosaic Pro](https://mosaicbuilder.com)（Nextend）網站——
 不開視覺編輯器，不碰 DOM。
 

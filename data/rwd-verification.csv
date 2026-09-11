@@ -371,6 +371,49 @@ https://mosaic.moksaweb.com/moksa/,mk-svc-3-svc-row,_m,grid-template-columns,"re
 https://mosaic.moksaweb.com/moksa/,mk-svc-3-svc-row,_m,row-gap,10px,10px,verified
 https://mosaic.moksaweb.com/moksa/,mk-svc-3-svc-row,_m,padding-top,20px,20px,verified
 https://mosaic.moksaweb.com/moksa/,mk-svc-3-svc-row,_m,padding-bottom,20px,20px,verified
+https://mosaic.moksaweb.com/my-account/,mk-acct-mast,_t,padding-left,28px,28px,verified
+https://mosaic.moksaweb.com/my-account/,mk-acct-mast,_t,padding-right,28px,28px,verified
+https://mosaic.moksaweb.com/my-account/,mk-acct-mast,_m,padding-left,18px,18px,verified
+https://mosaic.moksaweb.com/my-account/,mk-acct-mast,_m,padding-right,18px,18px,verified
+https://mosaic.moksaweb.com/my-account/,mk-acct-pad,_t,padding-top,50px,50px,verified
+https://mosaic.moksaweb.com/my-account/,mk-acct-pad,_m,padding-top,24px,24px,verified
+https://mosaic.moksaweb.com/my-account/,mk-acct-pad,_m,padding-bottom,34px,34px,verified
+https://mosaic.moksaweb.com/my-account/,mk-acct-head,_m,grid-template-columns,48px 1fr,48px 1fr,verified
+https://mosaic.moksaweb.com/my-account/,mk-acct-r-0,_m,grid-template-columns,84px 1fr,84px 1fr,verified
+https://mosaic.moksaweb.com/my-account/,mk-acct-r-0,_m,column-gap,12px,12px,verified
+https://mosaic.moksaweb.com/my-account/,mk-acct-r-1,_m,grid-template-columns,84px 1fr,84px 1fr,verified
+https://mosaic.moksaweb.com/my-account/,mk-acct-r-1,_m,column-gap,12px,12px,verified
+https://mosaic.moksaweb.com/my-account/,mk-acct-r-2,_m,grid-template-columns,84px 1fr,84px 1fr,verified
+https://mosaic.moksaweb.com/my-account/,mk-acct-r-2,_m,column-gap,12px,12px,verified
+https://mosaic.moksaweb.com/my-account/,mk-acct-body,_t,padding-left,28px,28px,verified
+https://mosaic.moksaweb.com/my-account/,mk-acct-body,_t,padding-right,28px,28px,verified
+https://mosaic.moksaweb.com/my-account/,mk-acct-body,_m,padding-left,18px,18px,verified
+https://mosaic.moksaweb.com/my-account/,mk-acct-body,_m,padding-right,18px,18px,verified
+https://mosaic.moksaweb.com/my-account/,mk-acct-sheet,_m,padding-bottom,72px,72px,verified
+https://mosaic.moksaweb.com/my-account/,mk-header,_t,padding-left,28px,28px,verified
+https://mosaic.moksaweb.com/my-account/,mk-header,_t,padding-right,28px,28px,verified
+https://mosaic.moksaweb.com/my-account/,mk-header,_m,padding-left,18px,18px,verified
+https://mosaic.moksaweb.com/my-account/,mk-header,_m,padding-right,18px,18px,verified
+https://mosaic.moksaweb.com/my-account/,mk-header,_m,padding-top,13px,13px,verified
+https://mosaic.moksaweb.com/my-account/,mk-header,_m,padding-bottom,13px,13px,verified
+https://mosaic.moksaweb.com/my-account/,mk-header-row,_t,column-gap,24px,24px,verified
+https://mosaic.moksaweb.com/my-account/,mk-header-row,_m,column-gap,12px,12px,verified
+https://mosaic.moksaweb.com/my-account/,mk-nav,_t,column-gap,20px,20px,verified
+https://mosaic.moksaweb.com/my-account/,mk-nav,_m,column-gap,15px,15px,verified
+https://mosaic.moksaweb.com/my-account/,mk-nav-0,_m,font-size,12px,12px,verified
+https://mosaic.moksaweb.com/my-account/,mk-nav-1,_m,font-size,12px,12px,verified
+https://mosaic.moksaweb.com/my-account/,mk-nav-2,_m,font-size,12px,12px,verified
+https://mosaic.moksaweb.com/my-account/,mk-nav-3,_m,font-size,12px,12px,verified
+https://mosaic.moksaweb.com/my-account/,mk-header-cta,_m,display,none,none,verified
+https://mosaic.moksaweb.com/my-account/,mk-header-cta,_t,font-size,12px,12px,verified
+https://mosaic.moksaweb.com/my-account/,mk-footer,_t,padding-left,28px,28px,verified
+https://mosaic.moksaweb.com/my-account/,mk-footer,_t,padding-right,28px,28px,verified
+https://mosaic.moksaweb.com/my-account/,mk-footer,_m,padding-left,18px,18px,verified
+https://mosaic.moksaweb.com/my-account/,mk-footer,_m,padding-right,18px,18px,verified
+https://mosaic.moksaweb.com/my-account/,mk-f-top,_m,grid-template-columns,"repeat(1, 1fr)","repeat(1, 1fr)",verified
+https://mosaic.moksaweb.com/my-account/,mk-f-top,_m,padding-top,42px,42px,verified
+https://mosaic.moksaweb.com/my-account/,mk-f-top,_m,padding-bottom,34px,34px,verified
+https://mosaic.moksaweb.com/my-account/,mk-f-links,_m,grid-template-columns,"repeat(2, 1fr)","repeat(2, 1fr)",verified
 https://mosaic.moksaweb.com/zidanna/,zd-hero,_t,padding-left,32px,32px,verified
 https://mosaic.moksaweb.com/zidanna/,zd-hero,_t,padding-right,32px,32px,verified
 https://mosaic.moksaweb.com/zidanna/,zd-hero,_t,padding-top,0px,0px,verified
