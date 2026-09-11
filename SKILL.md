@@ -377,6 +377,7 @@ so the pattern is in the data, not just in this paragraph.
 | `data/component-verification.csv` | 8 | **driven live** - the component lifecycle, each step asserted against the row or the delivered HTML |
 | `data/loop-verification.csv` | 28 | **measured live** - a perpetual animation: periodicity by scrubbing a paused timeline, per-element occlusion of both text and controls at five widths, and the enlarged view opened by pointer and by keyboard |
 | `data/accordion-verification.csv` | 7 | **driven live** - the accordion family nested the way its factory requires, against the guard that refuses it unparented. Resolves two BROKE_PAGE rows |
+| `data/theme-zip-verification.csv` | 22 | **round-tripped live** - Mosaic's own ZIP export imported in test mode and compared to its source, table by table and tree by tree |
 | `data/node-type-notes.csv` | 8 | where a sweep outcome is true but misleading on its own, why. Surfaced by `mo.py type` |
 | `data/interaction-verification.csv` | 7 | **probed live** - interaction animation shapes, with negative controls and the stored row beside the payload |
 | `data/intro-verification.csv` | 7 + 10 | **sampled live** - the entrance sequence over ten timestamps, plus the seven assertions about it |
@@ -444,9 +445,26 @@ components and style guides. The native export is a ZIP with the theme's
 attachments inside, produced by a chunked, lock-protected milestone flow — you POST
 repeatedly with `milestoneID` to step it through collect → compress → download — and
 it is gated on admin capability only, not on a licence. It moves a whole theme, never
-a single page. `theme_export.php` exists because a 2 MB JSON of rows is easier to
-diff, version and reason about than a ZIP, and because it needs nothing but WP-CLI;
-the native flow is what the editor's Export button drives.
+a single page. `tools/theme_zip.py` drives both directions from outside the editor.
+Two things about the import that the route list does not tell you: with no
+`themeActivateMode` it defaults to `live` and switches every visitor to the imported
+theme (the tool sends `test`, Mosaic's admin-only preview, unless `--activate`); and a
+milestone must be called until it answers `isCompleted:true` - stop one call early,
+as the first version of the tool did after its last upload chunk, and that
+milestone's batch bookkeeping is left in the lock for the NEXT milestone to read as
+its own, which is how `extract` came to skip creating its directories and fail on
+the first nested file with "Could not copy file".
+
+Round-tripped and measured (`data/theme-zip-verification.csv`, 22 checks): export,
+import in test mode, compare. Every scoped table equal; 68,337 of 68,337 nodes
+outside overrides keep their ids; the 1,024 override nodes are re-keyed, with their
+`originalID` re-pointed at the re-keyed component internals; the live theme
+untouched. The node table came back one row short, and that row is the difference
+between the two tools in one line: an orphan `div` with no parent, left by an
+interrupted build, which a tree-walking import correctly does not carry and a
+row-copying one (`theme_import.php`) would. `theme_export.php` exists because a
+2 MB JSON of rows is easier to diff, version and reason about than a ZIP, and
+because it needs nothing but WP-CLI; the ZIP is what the editor's buttons speak.
 
 `copy_styles.py` pushes one node's style onto others by attrID or prefix, optionally
 only certain `state.breakpoint` slices, and shows the diff before writing.
@@ -504,6 +522,9 @@ post — `build_all.py` resets first for that reason.
 | `sweep_components.py` | build a component, instance it twice, and prove one definition served both |
 | `sweep_interactions.py` | which interaction animation shapes survive to the frontend payload |
 | `theme_export.php` / `theme_import.php` | move a whole theme across installs, ids intact |
+| `theme_zip.py` | drive Mosaic's OWN export/import - the ZIP the editor makes, attachments included, over the milestone protocol; import lands in test mode unless told `--activate` |
+| `theme_zip_compare.php` | hold an imported copy against its source, tree for tree - every scoped table, the (parentType, type) shape, which ids survive, and orphans named rather than counted |
+| `theme_delete.php` | remove a theme completely through the plugin's own routine; refuses the live one |
 | `copy_styles.py` | push one node's style onto others, by attrID or prefix |
 | `bootstrap_probe_theme.php` | a licence-free scratch theme |
 | `mint_session.php` | a matching cookie + `wp_rest` nonce from WP-CLI |
@@ -537,6 +558,11 @@ python tools/sweep_style_states.py --config sweep.json --post 20 --slug probe-la
 python tools/sweep_interactions.py --config sweep.json --post 20 --slug probe-lab     --csv data/interaction-verification.csv
 wp eval-file tools/theme_export.php active > theme.json
 wp eval-file tools/theme_import.php theme.json "Copy" rebind activate
+python tools/theme_zip.py export --config c.json --out theme.zip
+python tools/theme_zip.py import --config c.json --zip theme.zip            # test mode
+python tools/theme_zip.py import --config c.json --zip theme.zip --activate # goes live
+wp eval-file tools/theme_zip_compare.php <source> <copy> theme-zip-verification.csv
+wp eval-file tools/theme_delete.php <copy>
 python tools/probe.py --config lab.json --cases cases.json   # ad-hoc measurement
 python tools/check_placement_predicts.py
 ```

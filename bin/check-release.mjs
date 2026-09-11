@@ -142,6 +142,17 @@ if (!acc.startsWith("step,result,detail"))
   fail("data/accordion-verification.csv is not the table probe_accordion.py writes");
 if (/,FAIL,/.test(acc)) fail("data/accordion-verification.csv carries a failed check");
 
+// The ZIP round trip: a table of PASS rows that must stay PASS, because the day the
+// native import starts dropping something other than orphans is the day this skill
+// starts recommending a tool that loses pages.
+const zip = read("data/theme-zip-verification.csv");
+if (!zip.startsWith("check,result,detail"))
+  fail("data/theme-zip-verification.csv is not the table theme_zip_compare.php writes");
+for (const need of ["nodes", "tree shape", "live untouched"])
+  if (!new RegExp(`^"?${need}"?,PASS`, "m").test(zip))
+    fail(`theme-zip-verification.csv: ${need} did not pass`);
+if (/,FAIL,/.test(zip)) fail("data/theme-zip-verification.csv carries a failed check");
+
 const audit = read("data/design-audit.csv");
 if (!audit.startsWith("url,breakpoints,check,level"))
   fail("data/design-audit.csv is not the audit table verify_browser.py writes");
