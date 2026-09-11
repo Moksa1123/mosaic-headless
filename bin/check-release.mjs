@@ -153,6 +153,23 @@ for (const need of ["nodes", "tree shape", "live untouched"])
     fail(`theme-zip-verification.csv: ${need} did not pass`);
 if (/,FAIL,/.test(zip)) fail("data/theme-zip-verification.csv carries a failed check");
 
+// The READMEs quote the same counts as SKILL.md, in four languages, and they are
+// what a visitor reads first. A count that moved in the CSV and not in a README was
+// a public claim that stayed wrong for a week; so every README must carry the live
+// rwd and browser counts, and must not carry the previous ones.
+{
+  const fmt = (n) => n.toLocaleString("en-US");
+  const want = [rows("data/rwd-verification.csv"), rows("data/browser-verification.csv")];
+  for (const readme of ["README.md", "README.zh-TW.md", "README.ja.md", "README.ko.md"]) {
+    const text = read(readme);
+    for (const n of want)
+      if (!text.includes(fmt(n)) && !text.includes(String(n)))
+        fail(`${readme} does not quote ${fmt(n)} - it is quoting a stale count`);
+    if (/0 findings|指摘 0 件|지적 0건|0 項發現/.test(text))
+      fail(`${readme} still claims a design audit with 0 findings`);
+  }
+}
+
 const audit = read("data/design-audit.csv");
 if (!audit.startsWith("url,breakpoints,check,level"))
   fail("data/design-audit.csv is not the audit table verify_browser.py writes");

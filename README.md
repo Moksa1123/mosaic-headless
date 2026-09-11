@@ -24,8 +24,11 @@ from memory. Look it up in `data/`.**
 
 And look it up with `mo.py`, not grep. Grep answers the question you typed; it does
 not answer the question you have. Ask grep about `accordion-content` and it confirms
-the type exists. It does not mention that placing one commits cleanly and then
-reduces the whole public page to a 54-byte error string.
+the type exists. The sweep says BROKE_PAGE: place one and the whole public page
+becomes a 54-byte error string. Both true, both the wrong answer — the note beside
+the row says that string names a missing parent, and that nested under
+`accordion > accordion-item` the type commits, renders, and hands you a
+keyboard-operable disclosure. `mo.py type` shows all three at once.
 
 ```bash
 python tools/mo.py type accordion-content   # one type, joined to every live sweep
@@ -63,14 +66,16 @@ factories, so Pro types register and render regardless.
 | **node types** | 122 / 122 swept one per document, committed → rendered → asserted → deleted: 70 RENDERED, 30 COMMITTED, 15 COMMIT_5xx, 7 BROKE_PAGE |
 | **style properties** | 98 / 98 written to a live page and checked against the compiled CSS: 58 COMPILED, 18 ABSENT, 21 SKIPPED |
 | **node properties** | 181 / 181 re-probed with a value shaped by each property's own validator chain: 35 APPLIED, 42 NO_EFFECT, 55 NO_HOST, 47 SKIPPED |
-| **responsive** | 688 `_t`/`_m` declarations across two sites asserted against the stylesheet the site actually served — all verified |
+| **responsive** | 731 `_t`/`_m` declarations across two sites asserted against the stylesheet the site actually served — all verified |
 | **components** | the component system driven end to end, **8 of 8**: created under a category, document healed, tree filled through the writable instance, the read-only one refused the same write as a negative control, and two instances on a page rendering one definition twice |
 | **style states** | 52 of the 53 states written to a live page and matched against the selector the table promises: **36 compiled exactly**, 12 NO_HOST, 3 SKIPPED, 1 BROKE_PAGE. All seven globally usable states verified |
 | **interactions** | the JS animation path probed with negative controls and the row read back: `propertyMetas` **is** accepted and stored; the property values still do not bind, and the boundary is now exact |
-| **entrance animation** | the page-load sequence sampled at ten timestamps and asserted on seven counts — it plays, its animated `@property` counter reaches 100, the veil leaves hit-testing, nothing in the viewport is stranded at opacity 0, a real click reaches the document, and under `prefers-reduced-motion` the veil never exists at all |
-| **browser** | 3,841 computed-style readings on the delivered page in Chromium at three viewports: 2,929 compared and agreed, 912 not-comparable and labelled, **0 overridden** |
-| **design audit** | contrast, font fallback, CJK tracking, overflow, clipped text, line measure — run in the browser, **0 findings** |
-| **theme export/import** | round-tripped: a full theme exported, re-imported as a copy, and the copy served byte-identical pages |
+| **entrance animation** | the page-load sequence sampled at fifteen timestamps on a monotonic clock and asserted on eight counts — it plays, its animated `@property` counter reaches 100, the veil leaves hit-testing, nothing in the viewport is stranded at opacity 0, a real click reaches the document, under `prefers-reduced-motion` the veil never exists, and something is still moving once everything has settled. Costs one late frame over a page with no animation at all, because it waits for the document's first layout |
+| **perpetual animation** | a corner plate that keeps printing itself and opens to full size when tapped, **28 checks**: periodicity proved by scrubbing a paused timeline, occlusion of text *and* controls at five widths and twenty-five scroll stops with "never readable" as the failing condition, opened by pointer and by Enter, still under reduced motion. Built on Mosaic's own accordion |
+| **accordion** | `accordion-item` and `accordion-content` sit in the sweep table as BROKE_PAGE; nested as their factory requires they commit and render, **7 of 7**. The note now lives beside the row |
+| **browser** | 3,988 computed-style readings on two delivered pages in Chromium at three viewports: 2,929 compared and agreed, 912 not-comparable and labelled, **0 overridden** |
+| **design audit** | contrast, font fallback, CJK tracking, overflow, clipped text, line measure — run in the browser, **26 findings, every one ruled on in writing** — an acknowledgement without a reason is refused by the release gate |
+| **theme export/import** | two paths, both round-tripped. `theme_export.php` moves rows as JSON over WP-CLI, ids intact, and the copy served byte-identical pages. `theme_zip.py` drives Mosaic's **own** ZIP export/import over its milestone protocol — import lands in test mode unless told `--activate`, because the default is to switch the live site — and **22 checks** hold the copy against the source tree for tree: every table equal, 68,337 node ids kept, override nodes re-keyed, the one missing row an orphan no tree-walk should carry |
 | **measured live** | 114 REST routes, 151 element classes, 59 condition subjects, 23 tables / 206 columns |
 
 `SKIPPED`, `NO_HOST` and `INCONCLUSIVE` are never folded into a pass rate. A sweep

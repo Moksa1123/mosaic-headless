@@ -1,7 +1,7 @@
 ---
 name: "mosaic-headless"
 description: |
-  Build and modify Mosaic Pro (Nextend) sites by writing the underlying data model directly - no visual editor, no DOM. Query the real surface with `mo.py`, which joins every source table to the live sweeps so a lookup leads with the measured verdict rather than the declaration (122 node types, 181 properties, 98 style properties with 20 structured value shapes pinned down, 53 style states, 151 element classes, 74 dynamic variables, 12 interaction triggers, 114 REST routes, 23 tables) instead of guessing, with every node type placed on a live site one at a time and asserted against the delivered HTML, the design-token and element-class layers verified against compiled CSS, the @VAR() dynamic language verified against rendered output, nine designed pages built through the tables themselves, and the delivered page re-read in Chromium at three viewports so a rule that is present, correct and still wrong cannot pass.
+  Build and modify Mosaic Pro (Nextend) sites by writing the underlying data model directly - no visual editor, no DOM. Query the real surface with `mo.py`, which joins every source table to the live sweeps so a lookup leads with the measured verdict rather than the declaration (122 node types, 181 properties, 98 style properties with 20 structured value shapes pinned down, 53 style states, 151 element classes, 74 dynamic variables, 12 interaction triggers, 114 REST routes, 23 tables) instead of guessing, with every node type placed on a live site one at a time and asserted against the delivered HTML, the design-token and element-class layers verified against compiled CSS, the @VAR() dynamic language verified against rendered output, nine designed pages built through the tables themselves, and the delivered pages re-read in Chromium at three viewports so a rule that is present, correct and still wrong cannot pass. Drives Mosaic's own theme export/import from outside the editor and holds the copy against the source tree for tree.
 license: "MIT"
 author: "moksa (https://moksaweb.com)"
 version: "1.15.1"
@@ -23,9 +23,14 @@ from memory. Look it up in `data/`.**
 
 And look it up with `mo.py`, not with grep. Grep answers the question you typed;
 it does not answer the question you have. Ask grep about `accordion-content` and it
-confirms the type exists. It does not mention that placing one commits cleanly and
-then reduces the entire public page to a 54-byte error string - which is the only
-thing about that type worth knowing.
+confirms the type exists. The sweep table says BROKE_PAGE: place one and the entire
+public page becomes a 54-byte error string. Both are true, and both are the wrong
+answer - the note beside the row says the string is `AccordionItemElementMResource
+instance required`, that this is a type committed without the parent its factory
+needs, and that nested under `accordion > accordion-item` it commits, renders and
+gives you a keyboard-operable disclosure for free. `mo.py type` shows all three in
+one answer. Grep shows one, the CSV shows two, and the skill was itself wrong about
+this type for a week.
 
 ```bash
 python tools/mo.py stats                    # the surface, and what is unsafe
@@ -123,6 +128,12 @@ NODE SWEEP   122 of 122 node types, ONE PER DOCUMENT, committed then rendered th
                  COMMIT_5xx  15   PHP fatal on commit
                  BROKE_PAGE   7   committed, then the whole page died
              Free 74: 43/22/6/3.  Pro 48: 27/8/9/4.  data/node-verification.csv
+             Three of the non-rendering outcomes are artefacts of the sweep's own
+             method - one type per document, under a plain div - and not of the
+             type: `component-instance` (needs `component-instance/<id>`),
+             `accordion-item` and `accordion-content` (need their parent). Each is
+             proven to work as built, and `data/node-type-notes.csv` says so
+             beside the row. The sweep verdict stands; the note is what to read.
 
 STYLE        the states[state][breakpoint][property] shape confirmed by writing it
              and reading back the compiled CSS; 20 of 22 structured value shapes
@@ -170,19 +181,25 @@ INTERACTION  the JS animation path, probed with negative controls and the row re
              written straight into the table with caches flushed.
              data/interaction-verification.csv
 
-INTRO        the page-load sequence - an ukiyo-e sheet printing itself one carved
-             block at a time, each impression landing out of register and snapping
-             true against the kento marks - sampled at thirteen timestamps across
-             its life
-             and
-             asserted on seven counts - it plays, the animated `@property` counter
-             reaches 100, the veil leaves hit-testing, no in-viewport content is
-             stranded at opacity 0, a real click reaches the document, and under
-             `prefers-reduced-motion` the veil never exists at all - plus AMBIENT,
-             which takes the last two readings and counts how many elements still
-             differ with no input at all. Every other motion check here fires on an
-             EVENT; a page can pass all of them and be completely static the moment
-             you stop scrolling. All pass. data/intro-verification.csv
+INTRO        the page-load sequence - an ukiyo-e sheet printing itself eleven
+             carved blocks at a time, each impression landing out of register and
+             easing true against the kento marks - sampled at fifteen timestamps
+             on a monotonic clock (the first version scheduled against the previous
+             sample and drifted fourteen seconds) and asserted on eight counts: it
+             plays, the animated `@property` counter reaches 100, the veil leaves
+             hit-testing, no in-viewport content is stranded at opacity 0 (elements
+             waiting on a scroll timeline are exempt, and a `position:fixed` one
+             was the case that showed the exemption had to be by timeline and not
+             by position), a real click reaches the document, under
+             `prefers-reduced-motion` the veil never exists and nothing is
+             invisible at 120ms, plus AMBIENT, which counts how many elements still
+             move with no input once everything has settled. Every other motion
+             check here fires on an EVENT; a page can pass all of them and be
+             completely static the moment you stop scrolling. Also measured, with
+             CPU-time counters rather than frame timing, which proved unusable:
+             the sequence costs one late frame over a page with no animation in it,
+             because it no longer starts until the document's own first layout is
+             done. All pass. data/intro-verification.csv
 
 LOOP         28 assertions about the one animation nothing else here can see: the
              ukiyo-e plate that keeps printing itself in the corner of the page,
@@ -190,12 +207,13 @@ LOOP         28 assertions about the one animation nothing else here can see: th
              eleven moving parts are SVG groups inside a raw-HTML `code` node, so no
              checker that walks the spec tree knows they exist. RUNS reads them on the clock across a full period; each part is
              then proved periodic by PAUSING its animation and scrubbing
-             `currentTime` to T and T + 11s, which is the only way to compare a
-             compositor-driven transform exactly. CLEAR is the one that found a real
-             defect: a fixed decoration is opaque, and on a full-bleed page no
-             rectangle anywhere along the right edge misses text at every scroll
-             offset - so the test is not "never overlaps" but "never makes anything
-             unreadable", per element, at four widths and twenty-five scroll stops.
+             `currentTime` to T and T + one period (14s), past the stagger, which
+             is the only way to compare a compositor-driven transform exactly.
+             CLEAR is the one that found a real defect: a fixed decoration is
+             opaque, and on a full-bleed page no rectangle anywhere along the right
+             edge misses text at every scroll offset - so the test is not "never
+             overlaps" but "never makes anything unreadable", per element, at five
+             widths and twenty-five scroll stops.
              It caught three footer links buried at the position a reader cannot
              scroll past. Once the plate became a control, REACHABLE holds links and
              buttons to the same rule - swallowing a click is worse than covering a
@@ -380,7 +398,7 @@ so the pattern is in the data, not just in this paragraph.
 | `data/theme-zip-verification.csv` | 22 | **round-tripped live** - Mosaic's own ZIP export imported in test mode and compared to its source, table by table and tree by tree |
 | `data/node-type-notes.csv` | 8 | where a sweep outcome is true but misleading on its own, why. Surfaced by `mo.py type` |
 | `data/interaction-verification.csv` | 7 | **probed live** - interaction animation shapes, with negative controls and the stored row beside the payload |
-| `data/intro-verification.csv` | 7 + 10 | **sampled live** - the entrance sequence over ten timestamps, plus the seven assertions about it |
+| `data/intro-verification.csv` | 8 + 15 | **sampled live** - the entrance sequence over fifteen timestamps on a monotonic clock, plus the eight assertions about it |
 | `data/element-classes.csv` | 151 | **live** — the built-in class metas; their IDs are what an `elementClass` record must use |
 | `data/dynamic-variables.csv` | 74 | source — every `@VAR('ns/name')` expression, by namespace |
 | `data/evaluator-functions.csv` | 19 | source — the `@` functions with their arity |
@@ -495,6 +513,29 @@ post — `build_all.py` resets first for that reason.
   number is not stable. The sibling `M_EL_<Type>` class is.
 - **`body{opacity:0}`** — the theme reveals itself from JavaScript. Screenshot tooling
   must let scripts run or it captures a blank page.
+- **Two themes can carry the same name, and only the ACTIVE one is bound to
+  anything.** Every write to `theme/<themeID>/...` succeeds against an inactive
+  theme - master, nodes, components, tokens, all of it - and then
+  `createManualTemplate` answers `Master not found`, because it resolves the theme
+  from the request, not from your URL. Read the active theme's id off
+  `wp theme list --status=active` (`mosaic-1-1-<themeID>`) before building.
+- **Page caches stack.** The demo host ran Varnish AND Breeze; purging Varnish
+  changed nothing because Breeze still had the old document. `build_site.py`
+  fetches the plain URL and a cache-busted one at the same moment and reports
+  STALE CACHE when they differ by more than a percent - believe it, then find
+  every layer. `wp breeze purge --cache=all` was the one that mattered.
+- **A `code` node is a wrapper, not a splice.** `insertLocation:"inPlace"` puts your
+  markup INSIDE `<div class="M_EL_Code">`, one level down - so a sibling combinator
+  from injected HTML to a Mosaic node never matches, and a control you inject has
+  to be styled through its own ancestors or through `:has()`. The native accordion
+  avoided the question entirely.
+- **`section` arrives with 80px of top and bottom padding.** Measured on a node
+  whose spec set neither; between a masthead and the block below it that is a
+  160px hole. Set `paddingTop`/`paddingBottom` explicitly when a section's rhythm
+  is meant to come from its contents.
+- **The front page 301s.** When a post is `page_on_front`, its own permalink
+  (`/moksa/`) redirects to `/`; a fetch that does not follow redirects reads 0
+  bytes and looks like an outage.
 
 ## Rendered-tag facts you would otherwise guess wrong
 
@@ -515,6 +556,8 @@ post — `build_all.py` resets first for that reason.
 | `verify_rwd.py` | does every `_t`/`_m` declaration reach the served stylesheet? |
 | `verify_browser.py` | does the **browser** compute what the stylesheet promised - and does the result pass a design audit? |
 | `verify_intro.py` | does the page-load animation play, and - the part that matters - does it END and hand the page back? |
+| `verify_loop.py` | a decoration that runs forever: does it loop (paused-timeline scrub), does it bury text or controls anywhere a reader can rest, does it open by pointer and by keyboard, is it still under reduced motion? |
+| `probe_accordion.py` | the accordion family nested as its factory requires, plus the guard's refusal of the bare node - the probe that corrected two rows of this skill's own tables |
 | `sweep_node_types.py` | commit every node type one per document and assert the delivered HTML |
 | `sweep_style_properties.py` | write every style property and check the compiled CSS |
 | `sweep_node_properties.py` | probe every node property with a value from its own validator chain |
@@ -556,6 +599,10 @@ python tools/sweep_style_properties.py --config sweep.json --page moksa --csv da
 python tools/sweep_node_properties.py  --config sweep.json --page moksa --csv data/node-property-verification.csv
 python tools/sweep_style_states.py --config sweep.json --post 20 --slug probe-lab     --csv data/style-state-verification.csv
 python tools/sweep_interactions.py --config sweep.json --post 20 --slug probe-lab     --csv data/interaction-verification.csv
+python tools/verify_loop.py --url https://site/ --window mk-loop --toggle mk-plate-title --panel mk-plate-item \
+    --parts ukw-sky,ukw-sun,ukw-fuji,ukw-mist,ukw-sea,ukw-crest,ukw-boat,ukw-wave,ukw-claw,ukw-swell,ukw-key,mk-loop-seal \
+    --period 14000 --csv data/loop-verification.csv
+python tools/probe_accordion.py --config sweep.json --post 20 --slug probe-lab --csv data/accordion-verification.csv
 wp eval-file tools/theme_export.php active > theme.json
 wp eval-file tools/theme_import.php theme.json "Copy" rebind activate
 python tools/theme_zip.py export --config c.json --out theme.zip
