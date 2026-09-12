@@ -4,3 +4,7 @@ IMAGES,PASS,16 of 16 source images present
 LINKS,PASS,21 of 21 source link targets present
 HEADINGS,PASS,"27 real h1-h6 headings, levels intact"
 RENDERS,PASS,102656 bytes delivered
+RWD,PASS,96 responsive declarations reach the served stylesheet in their own media query
+COMPUTED,PASS,"5595 of 5910 declarations are what the browser computed, 315 not-comparable, 0 overridden"
+FIDELITY,PASS,"49 audit finding(s): 46 inherited from the source's own colours, 3 inside the source's raw HTML, 0 introduced by the conversion"
+AUDIT,INFO,"12 error(s) and 37 warning(s) - the source design's, and still real; fix them in Elementor or in the spec, they do not pass by being inherited"

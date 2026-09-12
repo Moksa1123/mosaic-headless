@@ -342,7 +342,7 @@ PROBE = r"""
         if (o.overflowX !== 'visible') { clipped = true; break; }
       }
       if (!clipped) guilty.push({id: el.id || '', tag: el.tagName.toLowerCase(),
-                                 cls: (el.className || '').toString().slice(0, 40),
+                                 cls: (el.getAttribute('class') || '').slice(0, 40),
                                  right: Math.round(r.right)});
     }
     if (guilty.length) out.audit.push({
@@ -407,7 +407,7 @@ PROBE = r"""
       continue;
     const size = px(cs.fontSize);
     const id = el.id || (el.tagName.toLowerCase() + '.' +
-                         (el.className || '').toString().split(' ')[0]);
+                         (el.getAttribute('class') || '').split(' ')[0]);
     const hasCJK = CJK.test(own);
 
     // Negative tracking on Han/Kana/Hangul. Latin grotesques are drawn to be
@@ -523,7 +523,7 @@ PROBE = r"""
     const cs = getComputedStyle(el);
     if (cs.visibility === 'hidden' || cs.display === 'none') continue;
     const id = el.id || (el.tagName.toLowerCase() + '.' +
-                         (el.className || '').toString().split(' ')[0]);
+                         (el.getAttribute('class') || '').split(' ')[0]);
     for (const pseudo of ['::before', '::after']) {
       const pc = getComputedStyle(el, pseudo);
       const raw = pc.content;

@@ -121,6 +121,11 @@ def main():
     ap.add_argument("--report", help="the CSV from_elementor.py wrote")
     ap.add_argument("--csv")
     ap.add_argument("--width", type=int, default=1440)
+    ap.add_argument("--browser", help="browser-verification CSV from verify_browser.py")
+    ap.add_argument("--audit", help="design-audit CSV from verify_browser.py")
+    ap.add_argument("--rwd", help="rwd-verification CSV from verify_rwd.py")
+    ap.add_argument("--prefix", default="el",
+                    help="the attrID prefix the converter used (default: el)")
     a = ap.parse_args()
 
     tree = json.loads(open(a.data, encoding="utf-8").read())
@@ -204,14 +209,79 @@ def main():
 
     check("RENDERS", got["bytes"] > 4000, "%d bytes delivered" % got["bytes"])
 
+    # ── the skill's own suites, on the converted page ──────────────────────
+    # A conversion is a page like any other and is held to the same bar. These
+    # three read the CSVs those suites wrote, so the conversion table records
+    # that they RAN and what they found - a converter whose output was never put
+    # through verify_browser.py has only ever been checked for content.
+    if a.rwd:
+        rr = list(csv.DictReader(open(a.rwd, encoding="utf-8")))
+        bad = [r for r in rr if r.get("status") != "verified"]
+        check("RWD", bool(rr) and not bad,
+              "%d responsive declarations reach the served stylesheet in their "
+              "own media query" % len(rr) if not bad else
+              "%d of %d not verified" % (len(bad), len(rr)))
+    if a.browser:
+        br = list(csv.DictReader(open(a.browser, encoding="utf-8")))
+        ok = sum(1 for r in br if r.get("status") == "ok")
+        over = [r for r in br if r.get("status") == "OVERRIDDEN"]
+        check("COMPUTED", bool(br) and not over,
+              "%d of %d declarations are what the browser computed, %d "
+              "not-comparable, %d overridden" % (
+                  ok, len(br), sum(1 for r in br if r.get("status") == "not-comparable"),
+                  len(over)))
+    if a.audit:
+        # FIDELITY: a finding whose colour the SOURCE declared is inherited - the
+        # converter carried the design, defects included, which is what a
+        # converter is for. A finding with no source colour behind it is the
+        # converter's own, and that is the failure. Measured on the first real
+        # page: 49 findings, 49 inherited, 0 introduced - and the audit is still
+        # right to refuse the page, because a 3.19:1 label is 3.19:1 whoever
+        # wrote it. The two verdicts are different questions.
+        by_id = {}
+
+        def index(els):
+            for e in els:
+                by_id[e.get("id")] = e
+                index(e.get("elements") or [])
+        index(tree)
+        src_colour = lambda e: any((e.get("settings") or {}).get(k) for k in
+                                   ("title_color", "text_color", "color",
+                                    "button_text_color", "icon_color"))
+        ar = list(csv.DictReader(open(a.audit, encoding="utf-8")))
+        inherited, introduced, raw = 0, [], 0
+        for r in ar:
+            m = re.match(r"%s-([0-9a-f]+)" % re.escape(a.prefix), r.get("node", ""))
+            if not m:
+                raw += 1          # inside a code node's raw HTML: the source's own markup
+                continue
+            e = by_id.get(m.group(1))
+            if e is not None and src_colour(e):
+                inherited += 1
+            else:
+                introduced.append(r.get("node"))
+        check("FIDELITY", not introduced,
+              "%d audit finding(s): %d inherited from the source's own colours, %d "
+              "inside the source's raw HTML, 0 introduced by the conversion"
+              % (len(ar), inherited, raw) if not introduced else
+              "%d finding(s) with no source colour behind them: %s"
+              % (len(introduced), ", ".join(introduced[:4])))
+        errs = sum(1 for r in ar if r.get("level") == "error")
+        if errs:
+            rows.append(["AUDIT", "INFO",
+                         "%d error(s) and %d warning(s) - the source design's, and "
+                         "still real; fix them in Elementor or in the spec, they do "
+                         "not pass by being inherited"
+                         % (errs, sum(1 for r in ar if r.get("level") == "warn"))])
+
     if declared:
         print("\n  declared missing by the converter, not counted as failures:")
         for kind, why in declared[:10]:
             print("    %-22s %s" % (kind, why[:80]))
         rows.append(["DECLARED", "INFO", "; ".join(sorted({k for k, _ in declared}))])
 
-    print("\n%d of %d checks passed" % (len(rows) - len(fails) - (1 if declared else 0),
-                                        len(rows) - (1 if declared else 0)))
+    n_checks = sum(1 for r in rows if r[1] in ("PASS", "FAIL"))
+    print("\n%d of %d checks passed" % (n_checks - len(fails), n_checks))
     if a.csv:
         with open(a.csv, "w", newline="", encoding="utf-8") as fh:
             w = csv.writer(fh)

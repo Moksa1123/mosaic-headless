@@ -237,6 +237,13 @@ CONVERSION   an Elementor page turned into a Mosaic spec and built, then checked
              `dropdown-toggle` declare - 19 of 21 link targets accepted, stored
              and silently emitting no anchor, this platform's signature failure -
              and it caught two bugs in ITSELF that had blamed the converter.
+             Then the converted page went through the skill's own suites like any
+             other: 96 responsive declarations verified, 5,595 computed values
+             with 0 overridden, and a design audit of 49 CONTRAST findings -
+             every one traced back to a colour the Elementor source declared,
+             none introduced by the conversion. That split is a check of its own,
+             FIDELITY, and the inherited defects are recorded beside it as still
+             real: a 3.19:1 label is 3.19:1 whoever wrote it. 8 of 8.
              data/conversion-verification.csv
 
 ACCORDION    7 checks that resolve a wrong entry in this skill's own tables.
@@ -413,7 +420,7 @@ so the pattern is in the data, not just in this paragraph.
 | `data/component-verification.csv` | 8 | **driven live** - the component lifecycle, each step asserted against the row or the delivered HTML |
 | `data/loop-verification.csv` | 28 | **measured live** - a perpetual animation: periodicity by scrubbing a paused timeline, per-element occlusion of both text and controls at five widths, and the enlarged view opened by pointer and by keyboard |
 | `data/accordion-verification.csv` | 7 | **driven live** - the accordion family nested the way its factory requires, against the guard that refuses it unparented. Resolves two BROKE_PAGE rows |
-| `data/conversion-verification.csv` | 5 | **converted then checked live** - an Elementor page rebuilt as Mosaic and held against its source: text, images, link targets, heading levels |
+| `data/conversion-verification.csv` | 8 | **converted then checked live** - an Elementor page rebuilt as Mosaic and held against its source (text, images, links, heading levels), then put through rwd, browser and the design audit with every finding classified inherited-or-introduced |
 | `data/theme-zip-verification.csv` | 22 | **round-tripped live** - Mosaic's own ZIP export imported in test mode and compared to its source, table by table and tree by tree |
 | `data/node-type-notes.csv` | 8 | where a sweep outcome is true but misleading on its own, why. Surfaced by `mo.py type` |
 | `data/interaction-verification.csv` | 7 | **probed live** - interaction animation shapes, with negative controls and the stored row beside the payload |
@@ -637,7 +644,9 @@ python tools/verify_loop.py --url https://site/ --window mk-loop --toggle mk-pla
     --period 14000 --csv data/loop-verification.csv
 python tools/probe_accordion.py --config sweep.json --post 20 --slug probe-lab --csv data/accordion-verification.csv
 python tools/from_elementor.py --data _elementor_data.json --out spec.json --report conv.csv     --uploads-base https://site/wp-content/uploads --slug converted --post 208
-python tools/verify_conversion.py --data _elementor_data.json --url https://site/converted/     --report conv.csv --csv data/conversion-verification.csv
+python tools/verify_rwd.py     --config c.json --site spec.json --csv rwd.csv
+python tools/verify_browser.py --config c.json --site spec.json --csv browser.csv --audit audit.csv
+python tools/verify_conversion.py --data _elementor_data.json --url https://site/converted/     --report conv.csv --prefix p2360 --rwd rwd.csv --browser browser.csv --audit audit.csv     --csv data/conversion-verification.csv
 wp eval-file tools/theme_export.php active > theme.json
 wp eval-file tools/theme_import.php theme.json "Copy" rebind activate
 python tools/theme_zip.py export --config c.json --out theme.zip

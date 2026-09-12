@@ -176,7 +176,7 @@ if (/,FAIL,/.test(zip)) fail("data/theme-zip-verification.csv carries a failed c
 const conv = read("data/conversion-verification.csv");
 if (!conv.startsWith("check,result,detail"))
   fail("data/conversion-verification.csv is not the table verify_conversion.py writes");
-for (const need of ["TEXT", "IMAGES", "LINKS", "HEADINGS"])
+for (const need of ["TEXT", "IMAGES", "LINKS", "HEADINGS", "RWD", "COMPUTED", "FIDELITY"])
   if (!new RegExp(`^${need},PASS`, "m").test(conv))
     fail(`conversion-verification.csv: ${need} did not pass`);
 if (/,FAIL,/.test(conv)) fail("data/conversion-verification.csv carries a failed check");
