@@ -1,0 +1,6 @@
+check,result,detail
+TEXT,PASS,113 of 113 source strings on the page
+IMAGES,PASS,16 of 16 source images present
+LINKS,PASS,21 of 21 source link targets present
+HEADINGS,PASS,"27 real h1-h6 headings, levels intact"
+RENDERS,PASS,102656 bytes delivered

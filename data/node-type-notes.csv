@@ -7,3 +7,5 @@ component-instance,"Swept as COMMIT_500, which is what a BARE one does. The node
 component-internal,"The component's content hangs under THIS node, in the `node/component/<id>` key of a componentDocumentInstance. `component-root` looks like the parent and accepts no children."
 component-root,"Accepts no children. It frames the component's preview document, not its content."
 loop,COMMIT_500 on a bare page: the loop needs a query context that a plain document does not provide.
+menu-link,"Renders as <span> with no `url` and as a real <a href> with one - probed, `target=""_blank""` included. `children: rule=any`, so it is the way to make anything clickable: a linked heading or image is a menu-link WRAPPING it."
+text,"Does NOT take `url`. Only button, menu-link, wysiwyg-link and dropdown-toggle declare it; setting one on a text or image node is accepted, stored, and emits no anchor at all. Measured after from_elementor.py lost 19 of 21 link targets on one page that way. Wrap in menu-link instead."

@@ -221,6 +221,24 @@ LOOP         28 assertions about the one animation nothing else here can see: th
              delivered page, including that Enter works on it. Five widths from 390
              up. data/loop-verification.csv
 
+CONVERSION   an Elementor page turned into a Mosaic spec and built, then checked
+             against its own source: every text string, every image, every link
+             target, every h1-h6 level. 5 of 5 on a page with 16 images and 21
+             links. Scope was decided by counting a real site rather than by
+             taste - across 19 Elementor pages and 3,292 element instances,
+             container/heading/text-editor/button/html/icon-list/divider/image
+             are 99.6% of everything present, and the long tail (loop-grid, form,
+             posts, countdown, third-party addons) is dynamic: a query and a
+             server-side action have no node to become. Those are reported per
+             element with a reason, never dropped, and `--strict` refuses to
+             write a spec while any remain. The verifier earned its place twice
+             over: it caught the converter writing `url` onto `text` and `image`
+             nodes, which only `button`, `menu-link`, `wysiwyg-link` and
+             `dropdown-toggle` declare - 19 of 21 link targets accepted, stored
+             and silently emitting no anchor, this platform's signature failure -
+             and it caught two bugs in ITSELF that had blamed the converter.
+             data/conversion-verification.csv
+
 ACCORDION    7 checks that resolve a wrong entry in this skill's own tables.
              `accordion-item` and `accordion-content` are recorded BROKE_PAGE, which
              is true and misleading in exactly the way `component-instance` was:
@@ -395,6 +413,7 @@ so the pattern is in the data, not just in this paragraph.
 | `data/component-verification.csv` | 8 | **driven live** - the component lifecycle, each step asserted against the row or the delivered HTML |
 | `data/loop-verification.csv` | 28 | **measured live** - a perpetual animation: periodicity by scrubbing a paused timeline, per-element occlusion of both text and controls at five widths, and the enlarged view opened by pointer and by keyboard |
 | `data/accordion-verification.csv` | 7 | **driven live** - the accordion family nested the way its factory requires, against the guard that refuses it unparented. Resolves two BROKE_PAGE rows |
+| `data/conversion-verification.csv` | 5 | **converted then checked live** - an Elementor page rebuilt as Mosaic and held against its source: text, images, link targets, heading levels |
 | `data/theme-zip-verification.csv` | 22 | **round-tripped live** - Mosaic's own ZIP export imported in test mode and compared to its source, table by table and tree by tree |
 | `data/node-type-notes.csv` | 8 | where a sweep outcome is true but misleading on its own, why. Surfaced by `mo.py type` |
 | `data/interaction-verification.csv` | 7 | **probed live** - interaction animation shapes, with negative controls and the stored row beside the payload |
@@ -545,6 +564,18 @@ post — `build_all.py` resets first for that reason.
   `<mosaic-tabs>`, `<mosaic-accordion>`, `<mosaic-vimeo>`, `<mosaic-youtube>` and
   friends. A selector written against `div`/`nav` misses all of them.
 - **`icon` renders inline `<svg>`.**
+- **Only four types take a `url`**: `button`, `menu-link`, `wysiwyg-link`,
+  `dropdown-toggle`. Put one on a `text` or an `image` and it is accepted, stored,
+  and emits no anchor whatsoever. To make anything else clickable, WRAP it in a
+  `menu-link` - that type takes `children: rule=any` and becomes a real `<a href>`
+  as soon as it has a `url` (`target="_blank"` included; both probed).
+- **An image's attachment-protocol path is relative to the UPLOADS directory.**
+  `wp-attachment://image/<id>/<size>/2026/09/pic.png` resolves, and carries the
+  attachment's `width`/`height` onto the tag. Give it the full
+  `wp-content/uploads/2026/09/pic.png` - the obvious guess - and Mosaic prefixes
+  the uploads base a second time, serving a broken `src` with no error and no
+  dimensions. A plain `https://` URL also works, and is the right fallback for an
+  image that is not an attachment on this site.
 
 ## Tools
 
@@ -558,6 +589,8 @@ post — `build_all.py` resets first for that reason.
 | `verify_intro.py` | does the page-load animation play, and - the part that matters - does it END and hand the page back? |
 | `verify_loop.py` | a decoration that runs forever: does it loop (paused-timeline scrub), does it bury text or controls anywhere a reader can rest, does it open by pointer and by keyboard, is it still under reduced motion? |
 | `probe_accordion.py` | the accordion family nested as its factory requires, plus the guard's refusal of the bare node - the probe that corrected two rows of this skill's own tables |
+| `from_elementor.py` | an Elementor `_elementor_data` tree -> a Mosaic page spec, with every element it cannot convert reported by name and reason (`--strict` to refuse a lossy spec) |
+| `verify_conversion.py` | did the conversion carry the page? every source string, image, link and heading level looked for on the delivered Mosaic page |
 | `sweep_node_types.py` | commit every node type one per document and assert the delivered HTML |
 | `sweep_style_properties.py` | write every style property and check the compiled CSS |
 | `sweep_node_properties.py` | probe every node property with a value from its own validator chain |
@@ -603,6 +636,8 @@ python tools/verify_loop.py --url https://site/ --window mk-loop --toggle mk-pla
     --parts ukw-sky,ukw-sun,ukw-fuji,ukw-mist,ukw-sea,ukw-crest,ukw-boat,ukw-wave,ukw-claw,ukw-swell,ukw-key,mk-loop-seal \
     --period 14000 --csv data/loop-verification.csv
 python tools/probe_accordion.py --config sweep.json --post 20 --slug probe-lab --csv data/accordion-verification.csv
+python tools/from_elementor.py --data _elementor_data.json --out spec.json --report conv.csv     --uploads-base https://site/wp-content/uploads --slug converted --post 208
+python tools/verify_conversion.py --data _elementor_data.json --url https://site/converted/     --report conv.csv --csv data/conversion-verification.csv
 wp eval-file tools/theme_export.php active > theme.json
 wp eval-file tools/theme_import.php theme.json "Copy" rebind activate
 python tools/theme_zip.py export --config c.json --out theme.zip

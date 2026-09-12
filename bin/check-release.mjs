@@ -170,6 +170,19 @@ if (/,FAIL,/.test(zip)) fail("data/theme-zip-verification.csv carries a failed c
   }
 }
 
+// The conversion table is the one that can rot without anyone noticing: the
+// converter keeps reporting "N elements converted" whatever it produces, and only
+// this table says whether the page survived.
+const conv = read("data/conversion-verification.csv");
+if (!conv.startsWith("check,result,detail"))
+  fail("data/conversion-verification.csv is not the table verify_conversion.py writes");
+for (const need of ["TEXT", "IMAGES", "LINKS", "HEADINGS"])
+  if (!new RegExp(`^${need},PASS`, "m").test(conv))
+    fail(`conversion-verification.csv: ${need} did not pass`);
+if (/,FAIL,/.test(conv)) fail("data/conversion-verification.csv carries a failed check");
+if (/^IMAGES,PASS,"?0 of 0/m.test(conv))
+  fail("conversion-verification.csv: IMAGES passed vacuously on a page with no images");
+
 const audit = read("data/design-audit.csv");
 if (!audit.startsWith("url,breakpoints,check,level"))
   fail("data/design-audit.csv is not the audit table verify_browser.py writes");

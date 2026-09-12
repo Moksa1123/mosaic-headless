@@ -21,3 +21,6 @@ objectFitStyle,object,"{""objectFit"":""cover"",""objectPositionX"":""50%"",""ob
 mask,array,"[{""type"":""gradient"",""gradientOptions"":{""subType"":""linear"",""linearOptions"":{""angle"":""180deg""},""dots"":[...]},""uuid"":""<uuid>""}]",mask-image:linear-gradient(...),"PARTIAL - compiles, but only the last dot survives"
 backgroundStyle,array,"[{""type"":""overlay"",""overlayOptions"":{""color"":""rgba(..)""},""uuid"":""<uuid>""}]","(accepted, emits background-image:none)",UNRESOLVED - use customStyles
 customStyles,string,"""outline: 2px dashed rgb(7,8,9);""",emitted verbatim into the rule,OK - the escape hatch; bypasses the collection-variable layer
+image,string,wp-attachment://image/<attachmentID>/<size>/<path-relative-to-uploads>,"<img src=""..."" width=""2500"" height=""1686""> - dimensions resolved off the attachment",OK
+image (full path),string,wp-attachment://image/37/full/wp-content/uploads/2026/09/x.png,"src="".../wp-content/uploads/wp-content/uploads/2026/09/x.png"" - uploads base prefixed TWICE, no error, no dimensions",TRAP - the last segment is uploads-RELATIVE
+image (plain url),string,https://site/wp-content/uploads/2026/09/x.png,"<img src=""...""> - works; width/height only when the URL resolves to an attachment",OK
