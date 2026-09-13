@@ -269,3 +269,28 @@ python tools/sweep_node_types.py --config sweep.json --sweep
 ```
 
 The sweep is destructive by design and must only be pointed at a scratch site.
+
+## Render-time fatal from content: HTTP 500 after a clean commit
+
+A `code` node's content is run through Mosaic's templating parser at render, which
+is how `@VAR('post/title')` works inside raw HTML. It also means a CSS at-rule
+written without a space - `@media(max-width:767px)`, which is how every minifier
+writes it - is read as a call to a function named `media` with arguments the
+parser cannot tokenise:
+
+```
+commit  -> HTTP 200, 238 nodes, syncResponseEnvelopes all "create"
+render  -> HTTP 500. PHP Fatal: Parser::matchOperator(): Argument #1 ($token)
+           must be of type Token, null given  (TemplatingParser/Parser.php:151)
+```
+
+Measured on the demo site with each form alone on a page: `@media (` renders,
+`@media(` does not; `@supports(` the same. Text nodes are NOT parsed - a paragraph
+containing `@media(max-width:1px)` or `info@example.com` renders literally - so the
+trap is scoped to `code`. `build_page.py` refuses a `code` node whose content
+matches a glued at-rule, and `from_elementor.py` inserts the space and reports it.
+
+The other half of this finding is about the checkers: WordPress's "critical error"
+page is 2,697 bytes, above the 2,000-byte healthy floor, and `Client.page()` was
+returning an HTTPError's body as the page - so `build_site` announced `OK` over a
+500 and a whole batch believed it. A 5xx now returns an empty body.

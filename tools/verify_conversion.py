@@ -50,12 +50,20 @@ def text_of(v):
     return re.sub(r"\s+", " ", t).strip()
 
 
-def harvest(tree):
-    """Every piece of content the source page claims to have."""
+def harvest(tree, skip_ids=frozenset()):
+    """Every piece of content the source page claims to have.
+
+    `skip_ids` are the elements the converter's report declared SKIPPED. Their
+    whole subtree is left out here, because the converter already said, in
+    writing and with a reason, that it did not carry them - counting their text
+    as lost a second time would make the report look worse the more honest the
+    converter was. They are still shown, under `declared`."""
     texts, images, links, headings, skipped_kinds = [], [], [], [], []
 
     def walk(els):
         for e in els:
+            if e.get("id") in skip_ids:
+                continue
             s = e.get("settings") or {}
             kind = e.get("widgetType") or e.get("elType")
             for k in ("title", "text", "button_text", "editor"):
@@ -131,13 +139,13 @@ def main():
     tree = json.loads(open(a.data, encoding="utf-8").read())
     if isinstance(tree, dict):
         tree = tree.get("content") or tree.get("elements") or [tree]
-    texts, images, links, headings, _ = harvest(tree)
-
-    declared = []
+    declared, skip_ids = [], set()
     if a.report:
         for r in csv.DictReader(open(a.report, encoding="utf-8")):
             if r["result"] == "SKIPPED":
                 declared.append((r["kind"], r["detail"]))
+                skip_ids.add(r["elementor_id"])
+    texts, images, links, headings, _ = harvest(tree, frozenset(skip_ids))
 
     with sync_playwright() as pw:
         b = pw.chromium.launch()

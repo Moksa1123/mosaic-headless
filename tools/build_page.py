@@ -43,6 +43,7 @@ import argparse
 import csv
 import json
 import os
+import re
 import sys
 import uuid
 
@@ -62,6 +63,11 @@ RESERVED = {"type", "text", "data", "children", "style"}
 def load_csv(name):
     with open(os.path.join(DATA, name), encoding="utf-8") as fh:
         return list(csv.DictReader(fh))
+
+
+AT_RULE_GLUED = re.compile(
+    r"@(media|supports|container|layer|scope|import|page|starting-style|"
+    r"font-feature-values|counter-style|property|document)\(")
 
 
 class Surface:
@@ -90,6 +96,20 @@ class Surface:
         if t not in self.types:
             problems.append("unknown node type %r" % t)
             return problems
+        # A `code` node's content is parsed as a Mosaic template at render time,
+        # and a CSS at-rule glued to its parenthesis - `@media(`, the way every
+        # minifier writes it - is read as a function call whose arguments cannot
+        # be parsed. The commit succeeds; the public page becomes an HTTP 500.
+        # Measured both ways on the demo site (`@media (` renders, `@media(`
+        # does not). Refused here for the same reason an unsafe type is: the
+        # failure is silent at the only point this tool can still stop it.
+        if t == "code" and not force:
+            content = (node.get("data") or {}).get("content") or ""
+            hit = AT_RULE_GLUED.search(content)
+            if hit:
+                problems.append("code content contains `%s` - Mosaic's template parser reads "
+                                "it as a function call and the page renders as HTTP 500; "
+                                "write `%s (`" % (hit.group(0), hit.group(0)[:-1]))
         # node-verification.csv measured every type UNDER A PLAIN DIV. A type that broke
         # there is not broken in general - most of them are family members that simply
         # need their own parent. So the measured verdict only applies when the parent is

@@ -281,10 +281,27 @@ def as_button(el, ctx):
     return styled(node, s, extra)
 
 
+# CSS at-rules that minifiers glue to their parenthesis. Mosaic parses a `code`
+# node's content as a template - `@VAR(...)`, `@concat(...)` - and reads
+# `@media(` as a function call whose arguments it then cannot parse:
+#   TypeError: Parser::matchOperator(): Argument #1 must be Token, null given
+# at RENDER time, as an HTTP 500 for the whole page, after a commit that went
+# through cleanly. `@media (` with the space is left alone. Measured on the
+# demo site, both forms, alone on a page; text nodes are not parsed and are safe.
+AT_RULE_GLUED = re.compile(
+    r"@(media|supports|container|layer|scope|import|page|starting-style|"
+    r"font-feature-values|counter-style|property|document)\(")
+
+
 @handler("html", "shortcode")
 def as_html(el, ctx):
     s = el.get("settings") or {}
     raw = s.get("html") or s.get("shortcode") or ""
+    fixed, n = AT_RULE_GLUED.subn(lambda m: "@%s (" % m.group(1), raw)
+    if n:
+        ctx.note(el, "%d CSS at-rule(s) written as `@media(` given the space Mosaic's "
+                     "template parser needs - `@media(` renders as HTTP 500" % n)
+        raw = fixed
     return {"type": "code",
             "data": {"attrID": ctx.attr(el), "insertLocation": "inPlace",
                      "content": raw,

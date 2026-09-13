@@ -183,6 +183,16 @@ if (/,FAIL,/.test(conv)) fail("data/conversion-verification.csv carries a failed
 if (/^IMAGES,PASS,"?0 of 0/m.test(conv))
   fail("conversion-verification.csv: IMAGES passed vacuously on a page with no images");
 
+// The batch table: every page of the site through the converter. One FAIL row
+// means the converter regressed on a real page, which the single-page table can
+// hide by simply being run on the page that still works.
+const batch = read("data/conversion-batch.csv");
+if (!batch.startsWith("elementor_post,converted,skipped,result"))
+  fail("data/conversion-batch.csv is not the batch table");
+if (/,FAIL,/.test(batch)) fail("data/conversion-batch.csv carries a page that did not pass");
+if ((batch.match(/,PASS,/g) || []).length < 10)
+  fail("data/conversion-batch.csv has fewer than 10 passing pages - the batch was not run");
+
 const audit = read("data/design-audit.csv");
 if (!audit.startsWith("url,breakpoints,check,level"))
   fail("data/design-audit.csv is not the audit table verify_browser.py writes");

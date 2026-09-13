@@ -73,7 +73,18 @@ right rule, wrong result    HTTP 200, in the stylesheet, correct, and the BROWSE
                             something you forgot, a font that cannot render the
                             text, a property the layout mode overrides
 no template for the URL     HTTP 406 with an EMPTY BODY for anyone not logged in
+render-time fatal from      HTTP 500 - the commit went through and the page dies
+CONTENT                     when Mosaic parses it. A `code` node's content is a
+                            template: `@media(` (as every minifier writes it) is
+                            read as a function call and kills the whole page.
+                            `@media (` renders. build_page refuses the former.
 ```
+
+That last one also fooled every checker here for a day: WordPress answers a fatal
+with a 2,697-byte error document, which is larger than the 2,000-byte "healthy"
+floor, and `Client.page()` returned that body as if it were the page - so
+`build_site` printed `OK 2645 bytes` over an HTTP 500. A 5xx now reads as an
+empty page, which is what it is.
 
 **406 is Mosaic's "no template matched".** `FrontendRenderer` answers
 `TemplateNotFoundException` with `status_header(406)` and prints the explanation
@@ -244,7 +255,12 @@ CONVERSION   an Elementor page turned into a Mosaic spec and built, then checked
              none introduced by the conversion. That split is a check of its own,
              FIDELITY, and the inherited defects are recorded beside it as still
              real: a 3.19:1 label is 3.19:1 whoever wrote it. 8 of 8.
-             data/conversion-verification.csv
+             Then all 19 pages of the site, each re-converted, built onto one
+             post, cache purged and content-checked in turn: 19 of 19, 3,281
+             elements carried and 11 declared. The one that did not pass the
+             first time was the HTTP 500 above - an "open source" page whose
+             `<style>` blocks wrote `@media(`. data/conversion-verification.csv,
+             data/conversion-batch.csv
 
 ACCORDION    7 checks that resolve a wrong entry in this skill's own tables.
              `accordion-item` and `accordion-content` are recorded BROKE_PAGE, which
@@ -421,6 +437,7 @@ so the pattern is in the data, not just in this paragraph.
 | `data/loop-verification.csv` | 28 | **measured live** - a perpetual animation: periodicity by scrubbing a paused timeline, per-element occlusion of both text and controls at five widths, and the enlarged view opened by pointer and by keyboard |
 | `data/accordion-verification.csv` | 7 | **driven live** - the accordion family nested the way its factory requires, against the guard that refuses it unparented. Resolves two BROKE_PAGE rows |
 | `data/conversion-verification.csv` | 8 | **converted then checked live** - an Elementor page rebuilt as Mosaic and held against its source (text, images, links, heading levels), then put through rwd, browser and the design audit with every finding classified inherited-or-introduced |
+| `data/conversion-batch.csv` | 19 | **converted, built and checked live, one page after another** - every Elementor page of a production site through the converter, with per-page element and content counts |
 | `data/theme-zip-verification.csv` | 22 | **round-tripped live** - Mosaic's own ZIP export imported in test mode and compared to its source, table by table and tree by tree |
 | `data/node-type-notes.csv` | 8 | where a sweep outcome is true but misleading on its own, why. Surfaced by `mo.py type` |
 | `data/interaction-verification.csv` | 7 | **probed live** - interaction animation shapes, with negative controls and the stored row beside the payload |
@@ -559,6 +576,11 @@ post — `build_all.py` resets first for that reason.
   whose spec set neither; between a masthead and the block below it that is a
   160px hole. Set `paddingTop`/`paddingBottom` explicitly when a section's rhythm
   is meant to come from its contents.
+- **A `code` node's content is a template, and `@media(` is a function call.**
+  Mosaic parses `code` content for `@VAR(...)`; a CSS at-rule glued to its
+  parenthesis - the form every minifier emits - is parsed as a call with
+  unparseable arguments and the page renders as HTTP 500, after a clean commit.
+  Write `@media (`. Text nodes are not parsed and are safe; measured both.
 - **The front page 301s.** When a post is `page_on_front`, its own permalink
   (`/moksa/`) redirects to `/`; a fetch that does not follow redirects reads 0
   bytes and looks like an outage.

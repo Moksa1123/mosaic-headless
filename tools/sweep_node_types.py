@@ -85,6 +85,15 @@ class Client:
             with urllib.request.urlopen(req, timeout=120) as r:
                 return r.read().decode("utf-8", "replace")
         except urllib.error.HTTPError as e:
+            # A 5xx is not a page. WordPress answers a render-time PHP fatal with a
+            # 2,697-byte "critical error" document, which is LARGER than
+            # MIN_HEALTHY_BYTES - so returning that body made build_site print
+            # "OK 2645 bytes" over a dead page, and probe.py call it healthy. An
+            # empty string is what every byte-based check downstream already
+            # treats as broken. 4xx bodies are kept: a 404 page is real content
+            # and a 406 has none.
+            if e.code >= 500:
+                return ""
             return e.read().decode("utf-8", "replace")
 
 
