@@ -193,6 +193,18 @@ if (/,FAIL,/.test(batch)) fail("data/conversion-batch.csv carries a page that di
 if ((batch.match(/,PASS,/g) || []).length < 10)
   fail("data/conversion-batch.csv has fewer than 10 passing pages - the batch was not run");
 
+// The eval suite ships with the skill. Five cases with an LLM criteria grader each
+// is the floor; a suite that has quietly lost its cases would let the "1.00 vs 0.00"
+// claim in SKILL.md go stale.
+{
+  const cases = fs.readdirSync(path.join(ROOT, "evals"), { withFileTypes: true })
+    .filter(d => d.isDirectory() && d.name !== "results").map(d => d.name);
+  if (cases.length < 5) fail(`evals/ has ${cases.length} cases, SKILL.md claims five`);
+  for (const c of cases)
+    if (!fs.existsSync(path.join(ROOT, "evals", c, "graders", "criteria.md")))
+      fail(`evals/${c} has no graders/criteria.md`);
+}
+
 const audit = read("data/design-audit.csv");
 if (!audit.startsWith("url,breakpoints,check,level"))
   fail("data/design-audit.csv is not the audit table verify_browser.py writes");

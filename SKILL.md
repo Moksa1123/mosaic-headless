@@ -299,6 +299,17 @@ BUILD        nine complete designed pages built through the tables alone and che
              colour anywhere, plus a real studio homepage rebuilt from the
              live moksaweb.com. sites/_moksa.py is the one that ships.
 
+EVAL         the skill itself, put in front of the model with and without it loaded
+             (`claude plugin eval .`, 5 cases x 3 runs x 2 arms, three LLM judges
+             per run). Every case is a question a user of this skill would ask
+             where the measured facts decide the answer: an invented `heading`
+             type, a `code` node that 500s on `@media(`, whether the accordion is
+             usable, moving a theme without going live by accident, placing a grid
+             child on tablet only. With the skill: 1.00 on all five. Without it:
+             0.00 on all five - and the baseline's best answer was to refuse ("I
+             don't have reliable knowledge of Mosaic Pro's spec format"), which is
+             the right thing for a model with no data to do. evals/
+
 MEASURED     114 REST routes, 151 element classes, 59 condition subjects,
              23 tables / 206 columns - read off the running site.
 
@@ -678,6 +689,9 @@ wp eval-file tools/theme_zip_compare.php <source> <copy> theme-zip-verification.
 wp eval-file tools/theme_delete.php <copy>
 python tools/probe.py --config lab.json --cases cases.json   # ad-hoc measurement
 python tools/check_placement_predicts.py
+claude plugin eval . --runs 3 -j 3 --no-publish   # the skill vs no skill, 5 cases; Bash is
+                                                  # not granted (no sandbox on Windows), the
+                                                  # agent reads data/ instead of running mo.py
 ```
 
 `bootstrap_probe_theme.php` exists because Mosaic's own new-theme flow calls
