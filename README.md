@@ -3,11 +3,33 @@
 [![npm downloads](https://img.shields.io/npm/dt/mosaic-headless?label=npm%20downloads&color=cb3837)](https://www.npmjs.com/package/mosaic-headless)
 
 Build and modify [Mosaic Pro](https://mosaicbuilder.com) (Nextend) sites by writing
-the data model directly — no visual editor, no DOM.
+the data model directly — no visual editor, no DOM. Convert Elementor pages into it.
+Move whole themes between installs. Every claim measured on a live site.
 
 *Read this in [繁體中文](README.zh-TW.md) · [日本語](README.ja.md) · [한국어](README.ko.md)*
 
 ---
+
+## Install
+
+```bash
+npx mosaic-headless                          # interactive: pick a platform
+npx mosaic-headless claude-code --global     # Claude Code, into ~/.claude/skills/
+npx mosaic-headless cursor --to ./my-project
+npx mosaic-headless --list                   # all eight platforms
+```
+
+**Updating does not happen on its own.** A new version on npm changes nothing in
+the folder your agent loads; re-run the installer with `--force` (without it, it
+refuses to overwrite a SKILL.md you may have edited):
+
+```bash
+npx mosaic-headless@latest claude-code --global --force
+```
+
+Python 3 and Playwright are needed to *run* the tools, not to install.
+
+## What this is
 
 Mosaic keeps a page in **23 custom database tables**, not in `post_content` and not
 in `postmeta`. One row per element, the tree carried by a `parentID` column, sibling
@@ -15,7 +37,8 @@ order by a fractional-index string. The editor is one client of that model. It i
 the format, and you do not need it.
 
 This skill is the map of that model — measured against a live install rather than
-read off the source.
+read off the source — plus the tools to write through it, check what came out, and
+bring pages in from Elementor.
 
 ## The one rule
 
@@ -33,13 +56,14 @@ keyboard-operable disclosure. `mo.py type` shows all three at once.
 ```bash
 python tools/mo.py type accordion-content   # one type, joined to every live sweep
 python tools/mo.py check div text button    # exits 1 on an unsafe or unknown type
+python tools/mo.py params text              # everything settable on one type
 python tools/mo.py style --grouped          # the 20 that are inert set on their own
 python tools/mo.py states --verified        # the states measured to compile
-python tools/mo.py params text              # everything settable on one type
+python tools/mo.py css grid-column          # which Mosaic key drives this CSS
 ```
 
-Then check the page. Mosaic has four failure modes and **only one of them changes the
-HTTP status code**:
+Then check the page. Mosaic has **seven** failure modes and only two of them change
+the HTTP status code:
 
 ```
 clean validator rejection   HTTP 200  + an `exceptions` array in the body
@@ -50,10 +74,17 @@ wrong value SHAPE           HTTP 200, stored, and the CSS rule is simply absent
 right rule, wrong result    HTTP 200, in the stylesheet, correct, and the BROWSER
                             computes something else
 no template for the URL     HTTP 406 with an EMPTY BODY for anyone not logged in
+render-time fatal from      HTTP 500 - the commit went through, the page dies when
+CONTENT                     Mosaic parses it. A `code` node's content is a template:
+                            `@media(` as every minifier writes it is read as a
+                            function call. `@media (` renders. build_page refuses
+                            the former.
 ```
 
 A successful commit is not evidence of a working page, and neither is a correct
-stylesheet.
+stylesheet. Every tool here fetches the page afterwards — and treats a 5xx as an
+empty page, because WordPress's "critical error" screen is 2,697 bytes and larger
+than any naive healthy-page floor.
 
 ## What was verified, and how
 
@@ -63,25 +94,27 @@ factories, so Pro types register and render regardless.
 
 | pass | result |
 |---|---|
-| **node types** | 122 / 122 swept one per document, committed → rendered → asserted → deleted: 70 RENDERED, 30 COMMITTED, 15 COMMIT_5xx, 7 BROKE_PAGE |
+| **node types** | 122 / 122 swept one per document, committed → rendered → asserted → deleted: 70 RENDERED, 30 COMMITTED, 15 COMMIT_5xx, 7 BROKE_PAGE. Three of the non-rendering rows are artefacts of committing without the required parent, and say so beside the row |
 | **style properties** | 98 / 98 written to a live page and checked against the compiled CSS: 58 COMPILED, 18 ABSENT, 21 SKIPPED |
 | **node properties** | 181 / 181 re-probed with a value shaped by each property's own validator chain: 35 APPLIED, 42 NO_EFFECT, 55 NO_HOST, 47 SKIPPED |
 | **responsive** | 731 `_t`/`_m` declarations across two sites asserted against the stylesheet the site actually served — all verified |
-| **components** | the component system driven end to end, **8 of 8**: created under a category, document healed, tree filled through the writable instance, the read-only one refused the same write as a negative control, and two instances on a page rendering one definition twice |
-| **style states** | 52 of the 53 states written to a live page and matched against the selector the table promises: **36 compiled exactly**, 12 NO_HOST, 3 SKIPPED, 1 BROKE_PAGE. All seven globally usable states verified |
-| **interactions** | the JS animation path probed with negative controls and the row read back: `propertyMetas` **is** accepted and stored; the property values still do not bind, and the boundary is now exact |
-| **entrance animation** | the page-load sequence sampled at fifteen timestamps on a monotonic clock and asserted on eight counts — it plays, its animated `@property` counter reaches 100, the veil leaves hit-testing, nothing in the viewport is stranded at opacity 0, a real click reaches the document, under `prefers-reduced-motion` the veil never exists, and something is still moving once everything has settled. Costs one late frame over a page with no animation at all, because it waits for the document's first layout |
-| **perpetual animation** | a corner plate that keeps printing itself and opens to full size when tapped, **28 checks**: periodicity proved by scrubbing a paused timeline, occlusion of text *and* controls at five widths and twenty-five scroll stops with "never readable" as the failing condition, opened by pointer and by Enter, still under reduced motion. Built on Mosaic's own accordion |
-| **accordion** | `accordion-item` and `accordion-content` sit in the sweep table as BROKE_PAGE; nested as their factory requires they commit and render, **7 of 7**. The note now lives beside the row |
 | **browser** | 3,988 computed-style readings on two delivered pages in Chromium at three viewports: 2,929 compared and agreed, 912 not-comparable and labelled, **0 overridden** |
 | **design audit** | contrast, font fallback, CJK tracking, overflow, clipped text, line measure — run in the browser, **26 findings, every one ruled on in writing** — an acknowledgement without a reason is refused by the release gate |
-| **theme export/import** | two paths, both round-tripped. `theme_export.php` moves rows as JSON over WP-CLI, ids intact, and the copy served byte-identical pages. `theme_zip.py` drives Mosaic's **own** ZIP export/import over its milestone protocol — import lands in test mode unless told `--activate`, because the default is to switch the live site — and **22 checks** hold the copy against the source tree for tree: every table equal, 68,337 node ids kept, override nodes re-keyed, the one missing row an orphan no tree-walk should carry |
+| **components** | the component system driven end to end, **8 of 8**: created under a category, document healed, tree filled through the writable instance, the read-only one refused the same write as a negative control, two instances on a page rendering one definition twice |
+| **style states** | 52 of the 53 states written to a live page and matched against the selector the table promises: **36 compiled exactly**, 12 NO_HOST, 3 SKIPPED, 1 BROKE_PAGE. Pseudo-classes are emitted UPPERCASE (`.M_EL9:HOVER`) |
+| **interactions** | the JS animation path probed with negative controls and the row read back: `propertyMetas` **is** accepted and stored; the property values still do not bind, and the boundary is now exact |
+| **accordion** | `accordion-item` and `accordion-content` sit in the sweep table as BROKE_PAGE; nested as their factory requires they commit and render, **7 of 7** |
+| **entrance animation** | the page-load sequence sampled at fifteen timestamps on a monotonic clock and asserted on eight counts. Costs one late frame over a page with no animation at all, because it waits for the document's first layout |
+| **perpetual animation** | a corner plate that keeps printing itself and opens to full size when tapped, **28 checks**: periodicity by scrubbing a paused timeline, occlusion of text *and* controls at five widths and twenty-five scroll stops with "never readable" as the failing condition, opened by pointer and by Enter, still under reduced motion |
+| **Elementor conversion** | every Elementor page of a production site — 19 pages, 3,292 elements — converted, built and checked against its source: **19 of 19**, 3,281 elements carried, 11 declared. Then the converted page through rwd, browser and the audit, with every finding classified inherited-or-introduced: **0 introduced** |
+| **theme export/import** | two paths, both round-tripped. `theme_export.php` moves rows as JSON over WP-CLI, ids intact. `theme_zip.py` drives Mosaic's **own** ZIP export/import — import lands in test mode unless told `--activate`, because the default is to switch the live site — and **22 checks** hold the copy against the source tree for tree |
+| **the skill itself** | `claude plugin eval .` — five cases a user would ask, three runs each, with and without the skill loaded, three LLM judges a run. **With: 1.00 on all five. Without: 0.00 on all five.** The baseline's best answer was to refuse |
 | **measured live** | 114 REST routes, 151 element classes, 59 condition subjects, 23 tables / 206 columns |
 
 `SKIPPED`, `NO_HOST` and `INCONCLUSIVE` are never folded into a pass rate. A sweep
 that scores its own blind spots as successes is the thing this skill argues against.
 
-### Two results worth knowing before you write anything
+### Results worth knowing before you write anything
 
 **A property that belongs to a `group` is inert when set on its own.** Exact in both
 directions: 78 ungrouped properties gave 58 COMPILED and 0 ABSENT; all 20 grouped
@@ -90,24 +123,66 @@ three instances of one rule, not three oddities. Use the grouped shape — `bord
 takes `{width, style, color}` — or `customStyles`.
 
 **A breakpoint override can CHANGE a property but never REMOVE one.** Narrow-screen
-`customStyles` that merely omits a border leaves the wide-screen border standing,
-drawing rules down the middle of a collapsed layout. Say `border-left:0` out loud.
+`customStyles` that merely omits a border leaves the wide-screen border standing.
+Say `border-left:0` out loud.
+
+**Only four types take a `url`**: `button`, `menu-link`, `wysiwyg-link`,
+`dropdown-toggle`. On a `text` or an `image` it is accepted, stored, and emits no
+anchor. Wrap the thing in a `menu-link` instead — it takes any children and becomes
+a real `<a href>`.
+
+**An image's attachment-protocol path is relative to the uploads directory.**
+`wp-attachment://image/<id>/full/2026/09/pic.png` resolves and carries the
+attachment's width and height. Give it the full `wp-content/uploads/...` path — the
+obvious guess — and Mosaic prefixes the uploads base a second time, silently.
+
+## Elementor → Mosaic
+
+```bash
+wp post meta get 2360 _elementor_data > page.json
+python tools/from_elementor.py --data page.json --out spec.json --report conv.csv \
+    --uploads-base https://site/wp-content/uploads --slug works --post 208
+python tools/build_site.py --config c.json --site spec.json
+python tools/verify_conversion.py --data page.json --url https://site/works/ --report conv.csv
+```
+
+Scope was decided by counting, not by taste: across a real site's 19 pages,
+container / heading / text-editor / button / html / icon-list / divider / image are
+99.6% of every element present. The long tail — loop grids, forms, countdowns,
+third-party addons — is dynamic and has no node to become; each is reported by
+name and reason, never dropped, and `--strict` refuses to write a lossy spec.
+
+Layout, typography, colour, borders, links and images cross over, at all three
+breakpoints (`_tablet`/`_mobile` → `_t`/`_m`). What does not: entrance animations
+(Mosaic's interaction binding is unsolved), shape dividers, gradient overlays. The
+verifier then holds the built page against the source — every string, image, link
+and heading level — and it earned its place at once: it caught the converter losing
+19 of 21 links by writing `url` onto nodes that ignore it.
 
 ## Tools
 
-```bash
-wp eval-file tools/bootstrap_probe_theme.php          # licence-free scratch theme
-python tools/build_site.py   --config c.json --site sites/moksa.json
-python tools/verify_rwd.py   --config c.json --site sites/moksa.json --csv rwd.csv
-python tools/copy_styles.py  --config c.json --from a --to-prefix b- --only "&._m"
-wp eval-file tools/theme_export.php active > theme.json
-wp eval-file tools/theme_import.php theme.json "Name" rebind activate
-```
+| tool | does |
+|---|---|
+| `mo.py` | query the measured surface — **the front door** |
+| `build_page.py` / `build_site.py` | commit a spec through the guarded write path; refuses what is measured to break |
+| `from_elementor.py` / `verify_conversion.py` | Elementor → Mosaic, and proof the content arrived |
+| `verify_browser.py` | does the browser compute what the stylesheet promised, and does it pass a design audit |
+| `verify_rwd.py` | does every `_t`/`_m` declaration reach the served stylesheet |
+| `verify_intro.py` / `verify_loop.py` | a page-load sequence that ENDS; a perpetual one that loops, hides nothing, and opens |
+| `theme_export.php` / `theme_import.php` | a whole theme as JSON rows over WP-CLI, ids intact |
+| `theme_zip.py` / `theme_zip_compare.php` / `theme_delete.php` | Mosaic's own ZIP export/import from outside the editor, the copy held against the source, and a clean delete that refuses the live theme |
+| `sweep_*.py` / `probe_*.py` | the instruments the tables were made with |
+| `bootstrap_probe_theme.php` / `mint_session.php` | a licence-free scratch theme and a REST session from WP-CLI |
 
-`sites/_moksa.py` is the worked example: a real studio homepage — masthead, spec
-block, services, a nine-row work table, process, stack, products, testimonials,
-contact — 618 nodes committed entirely through the tables, with a scroll-tracking
-clause index built on named view timelines and no JavaScript.
+## The worked example, live
+
+`sites/_moksa.py` builds a real studio site through the tables alone and ships as
+the reference. It is up at **https://mosaic.moksaweb.com/**: a homepage of 1,286
+nodes with a scroll-tracking clause index on named view timelines, an entrance
+sequence that prints an ukiyo-e sheet one carved block at a time, a corner plate
+that keeps printing forever and opens when tapped, and a WooCommerce
+[My Account](https://mosaic.moksaweb.com/my-account/) page whose UI arrives through
+one `code` node running a shortcode. No JavaScript of its own anywhere.
 
 ## Where to start
 
@@ -120,51 +195,21 @@ clause index built on named view timelines and no JavaScript.
 
 ## Releasing
 
-One command. The version lives in three places — `package.json`, the SKILL.md
-frontmatter an agent reads, and the frontmatter each platform template writes on
-install — and nothing keeps them together on its own.
-
 ```bash
-npm version patch      # or minor / major
+npm version minor      # bumps package.json, SKILL.md and eight platform templates,
+                       # commits, tags, pushes; the tag triggers release.yml
 ```
 
-That runs, in order:
+`bin/check-release.mjs` gates every release on the things that are easy to get
+wrong: the version numbers agree, every `files` glob matches, every verification
+CSV still has the row count SKILL.md and the four READMEs quote, no design-audit
+finding is unreviewed, the eval suite is present, and **the tarball itself is
+inspected** — npm's `files` allowlist overrides `.gitignore`, and once put a real
+client's site into a package that was about to publish.
 
-1. `preversion` → `bin/check-release.mjs`
-2. npm bumps `package.json`
-3. `version` → `bin/sync-version.mjs` writes the new number into SKILL.md and all
-   eight platform templates, and stages them
-4. npm commits and tags `vX.Y.Z`
-5. `postversion` → pushes the commit and the tag
-
-The tag push triggers `.github/workflows/release.yml`, which refuses to publish
-unless the tag matches `package.json`, re-runs the release checks, proves the
-installer runs, prints the tarball, then publishes with provenance and opens a
-GitHub release.
-
-`bin/check-release.mjs` is the gate, and it checks the things that are easy to get
-wrong rather than the things that are easy to check:
-
-- the three version numbers agree
-- every glob in `files` matches something
-- the row counts in the verification CSVs still equal the numbers SKILL.md quotes
-- `SKIPPED` labels survive into the shipped data, because a sweep that hides its
-  blind spots is the failure this skill argues against
-- **the tarball itself is inspected**, not the intent. npm's `files` allowlist
-  *overrides* `.gitignore`: naming a directory ships everything inside it, ignored
-  or not. Listing `sites/` once put a real client's generator and content into the
-  tarball — gitignored, and about to be published anyway.
-
-Publishing runs on npm trusted publishing (OIDC): npm trusts this repository's
-`release.yml` directly, so there is no token in the repository's secrets and
-nothing to rotate. Provenance is attached automatically.
-
-One-time setup, on npmjs.com under the package's Settings → Trusted Publisher:
-publisher `GitHub Actions`, organisation `Moksa1123`, repository
-`mosaic-headless`, workflow filename `release.yml`, environment name left
-**empty** — the workflow declares no environment, and a value here that the run
-does not match is refused. The connection cannot be edited afterwards, only
-deleted and recreated.
+Publishing runs on npm trusted publishing (OIDC): no token anywhere. Setup on
+npmjs.com under the package's Trusted Publisher: GitHub Actions, `Moksa1123` /
+`mosaic-headless`, workflow `release.yml`, environment **empty**.
 
 ## Licence
 

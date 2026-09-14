@@ -3,120 +3,205 @@
 [![npm downloads](https://img.shields.io/npm/dt/mosaic-headless?label=npm%20downloads&color=cb3837)](https://www.npmjs.com/package/mosaic-headless)
 
 [Mosaic Pro](https://mosaicbuilder.com)（Nextend）のサイトを、データモデルを直接書いて
-構築・変更する — ビジュアルエディタも DOM も使わない。
+構築・変更する — ビジュアルエディタも DOM も使わない。Elementor のページを取り込む。
+テーマをまるごと別のインストールへ移す。すべての主張は実際のサイトで計測済み。
 
 *他の言語：[English](README.md) · [繁體中文](README.zh-TW.md) · [한국어](README.ko.md)*
 
 ---
 
+## インストール
+
+```bash
+npx mosaic-headless                          # 対話式：プラットフォームを選ぶ
+npx mosaic-headless claude-code --global     # Claude Code、~/.claude/skills/ へ
+npx mosaic-headless cursor --to ./my-project
+npx mosaic-headless --list                   # 対応 8 プラットフォーム
+```
+
+**更新は自動では起きない。** npm に新版が出ても、エージェントが読み込むフォルダは変わらない。
+インストーラを `--force` 付きで再実行する（付けないと、手を入れた可能性のある SKILL.md の
+上書きを拒否する）：
+
+```bash
+npx mosaic-headless@latest claude-code --global --force
+```
+
+Python 3 と Playwright はツールを*動かす*ときに必要で、インストールには不要。
+
+## これは何か
+
 Mosaic はページを **23 個のカスタムテーブル**に保持する。`post_content` でもなければ
 `postmeta` でもない。要素ひとつにつき 1 行、ツリー構造は `parentID` カラム、兄弟の順序は
-fractional-index の文字列。エディタはこのモデルの一クライアントにすぎない。
-フォーマットそのものではないし、使う必要もない。
+fractional-index の文字列。エディタはこのモデルの一クライアントにすぎない。フォーマット
+そのものではないし、なくても困らない。
 
-この skill はそのモデルの地図であり、**ソースを読んだものではなく、実際のインストールに
-対して測定したもの**である。
+このスキルはそのモデルの地図 — ソースを読んで得たものではなく、実際のインストールに対して
+計測したもの — と、モデルを通して書き、出てきたものを検証し、Elementor からページを持ち込む
+ためのツール群である。
 
-## すべてに優先するただ一つの規則
+## 唯一のルール
 
-**ノードタイプ、プロパティ名、列挙値、スタイルキー、Free/Pro の判断を記憶で書かないこと。
-`data/` を引くこと。**
+**ノード型、プロパティ名、列挙値、スタイルキー、Free/Pro の判断を記憶から書かない。
+`data/` で引く。**
 
-しかも grep ではなく `mo.py` で引く。grep は打った質問には答えるが、本当に抱えている
-質問には答えない。`accordion-content` を grep すればその型が存在することは分かる。
-スイープ表は BROKE_PAGE だと言う — 置けば公開ページ全体が 54 バイトのエラー文字列に
-なる。どちらも本当で、どちらも間違った答えだ。行の横の注記は、その文字列が「親がない」
-ことを名指ししていること、`accordion > accordion-item` の下に入れ子にすれば commit も
-描画も通り、キーボードで操作できる開閉 UI までついてくることを言っている。
-`mo.py type` はその三つを一度に見せる。
+しかも grep ではなく `mo.py` で引く。grep は打った質問には答えるが、本当に抱えている質問には
+答えない。`accordion-content` を grep すればその型が存在することは分かる。スイープ表は
+BROKE_PAGE だと言う — 置けば公開ページ全体が 54 バイトのエラー文字列になる。どちらも本当で、
+どちらも間違った答えだ。行の横の注記は、その文字列が「親がない」ことを名指ししていること、
+`accordion > accordion-item` の下に入れ子にすれば commit も描画も通り、キーボードで操作できる
+開閉 UI までついてくることを言っている。`mo.py type` はその三つを一度に見せる。
 
 ```bash
 python tools/mo.py type accordion-content   # 1 つの型を、全ライブスイープに接続して表示
-python tools/mo.py check div text button    # 危険な型・未知の型があれば exit 1
-python tools/mo.py style --grouped          # 単独設定では必ず効かない 20 個
-python tools/mo.py states --verified        # 実測でコンパイルされた状態だけ
-python tools/mo.py params text              # 1 つの型に設定できるものすべて
+python tools/mo.py check div text button    # 安全でない／未知の型があれば 1 で終了
+python tools/mo.py params text              # 1 つの型に設定できるすべて
+python tools/mo.py style --grouped          # 単独では無効になる 20 個
+python tools/mo.py states --verified        # コンパイルされることが計測済みの状態
+python tools/mo.py css grid-column          # この CSS を出す Mosaic のキー
 ```
 
-そのうえでページを見る。Mosaic の失敗の仕方は 4 通りあり、
-**HTTP ステータスが変わるのはそのうち 1 つだけ**：
+そのうえでページを見る。Mosaic には **7 つ**の失敗モードがあり、HTTP ステータスが変わるのは
+そのうち 2 つだけ：
 
 ```
-バリデータによる正常な拒否   HTTP 200  + body に exceptions 配列
-commit 中の PHP fatal        HTTP 500  （122 タイプ中 15、素の div の中でも起きる）
-構造的に不正なノード         HTTP 200、コミット済み、DB に行もある。そして
-                             公開ページ全体が 54 バイトのエラー文字列になる
-値の「形」が違う             HTTP 200、保存される。ただし CSS ルールが存在しない
-ルールは正しいが結果が違う   HTTP 200、スタイルシートにあり、内容も正しい。それでも
-                             ブラウザは別の値を計算する
-URL に対応するテンプレなし   HTTP 406、未ログインには空の body
+バリデータの正常な拒否       HTTP 200 + 本文に `exceptions` 配列
+commit 中の PHP fatal        HTTP 500（122 型のうち 15 が plain div の下でこうなる）
+構造的に不正なノード         HTTP 200、commit 済み、DB に行あり、そして公開ページ全体が
+                             54 バイトのエラー文字列になる
+値の「形」が違う             HTTP 200、保存済み、CSS ルールがただ出ない
+ルールは正しく結果が違う     HTTP 200、スタイルシートにあり、正しく、ブラウザが別の値を計算する
+URL にテンプレートがない     HTTP 406、未ログインには空の本文
+内容による描画時 fatal       HTTP 500 — commit は通り、Mosaic がページを解析する時に死ぬ。
+                             `code` ノードの内容はテンプレートで、minifier が書く `@media(` は
+                             関数呼び出しとして読まれる。`@media (` なら描画される。
+                             build_page は前者を拒否する。
 ```
 
-**commit の成功も、正しいスタイルシートも、ページが動いている証拠にはならない。**
+commit の成功はページが動く証拠ではないし、正しいスタイルシートもそうではない。ここの
+ツールはすべて書いた後にページを取得し、5xx を空ページとして扱う — WordPress の
+「重大なエラー」画面は 2,697 バイトで、素朴な「健全なページ」の下限より大きいからだ。
 
 ## 何を、どう検証したか
 
-すべて実際のインストール上で実行 — WordPress 7.1、WooCommerce 11.1、Mosaic Pro 1.0.7、
+すべて実際のインストールに対して実行 — WordPress 7.1、WooCommerce 11.1、Mosaic Pro 1.0.7、
 **ライセンスなし**：ライセンスが制限するのはテーマライブラリと更新であってノードファクトリ
-ではないため、Pro のタイプも登録され描画される。
+ではないので、Pro の型も登録・描画される。
 
-| 対象 | 結果 |
+| 項目 | 結果 |
 |---|---|
-| **ノードタイプ** | 122 / 122。1 ドキュメントにつき 1 タイプで commit → 描画 → 断言 → 削除。70 RENDERED、30 COMMITTED、15 COMMIT_5xx、7 BROKE_PAGE |
+| **ノード型** | 122 / 122 を 1 型 1 ドキュメントでスイープ、commit → 描画 → 断言 → 削除：70 RENDERED、30 COMMITTED、15 COMMIT_5xx、7 BROKE_PAGE。描画されなかった行のうち 3 つは「必要な親なしで commit した」というスイープ手法の産物で、その旨が行の横にある |
 | **スタイルプロパティ** | 98 / 98 を実ページに書き、コンパイル済み CSS と照合：58 COMPILED、18 ABSENT、21 SKIPPED |
-| **ノードプロパティ** | 181 / 181 を、各プロパティ自身の validator chain から導いた値で再測定：35 APPLIED、42 NO_EFFECT、55 NO_HOST、47 SKIPPED |
+| **ノードプロパティ** | 181 / 181 を各プロパティ自身のバリデータ連鎖から導いた値で再探査：35 APPLIED、42 NO_EFFECT、55 NO_HOST、47 SKIPPED |
 | **レスポンシブ** | 2 サイト計 731 件の `_t`/`_m` 宣言を、サイトが実際に配信したスタイルシートに対して 1 件ずつ断言 — 全件検証済み |
-| **コンポーネント** | コンポーネント機構を端から端まで実行し **8 / 8**：カテゴリ配下に作成、ドキュメントを heal、書き込み可能な instance 経由でツリーを投入、読み取り専用の方は同じ書き込みを拒否（ネガティブコントロール）、最後に 2 つのインスタンスが 1 つの定義から描画 |
-| **スタイル状態** | 53 状態のうち 52 を実ページに書き、テーブルが約束するセレクタと照合：**36 件が完全一致**、12 件 NO_HOST、3 件 SKIPPED、1 件 BROKE_PAGE。どの要素にも使えるグローバル 7 状態はすべて検証済み |
-| **インタラクション** | JS アニメーション経路を、ネガティブコントロール付きで保存行を読み戻しながら検証：`propertyMetas` は**受理され保存される**。プロパティ値は依然としてバインドされないが、その境界は厳密になった |
-| **入場アニメーション** | 単調時計でページ読み込み後の 15 時点をサンプリングし 8 項目を断言 — 再生されること、アニメーションする `@property` カウンタが 100 に達すること、ベールがヒットテストから外れること、ビューポート内に opacity 0 のまま取り残された要素がないこと、実際のクリックが文書に届くこと、`prefers-reduced-motion` ではベールがそもそも存在しないこと、そして全てが落ち着いた後もなお動いているものがあること。文書の初回レイアウトを待ってから始まるため、アニメーションの全くないページに対して遅れフレームは 1 つだけ |
-| **常時アニメーション** | 隅で刷り続け、タップすると拡大する版 — **28 項目**：一時停止したタイムラインをスクラブして周期性を証明、5 つの幅 × 25 のスクロール位置でテキスト*と*操作要素の遮蔽を「決して読めない」を失敗条件として計測、ポインタでも Enter でも開くこと、reduced motion では静止すること。Mosaic 自身のアコーディオンの上に構築 |
-| **アコーディオン** | `accordion-item` と `accordion-content` はスイープ表では BROKE_PAGE。ファクトリが要求する通りに入れ子にすれば commit も描画も通る、**7 件中 7 件**。注記はその行の横にある |
 | **ブラウザ** | 配信された 2 ページを Chromium の 3 つのビューポートで計算スタイル 3,988 件読み取り：2,929 件が一致、912 件は比較不能として明示、**上書き 0 件** |
 | **デザイン監査** | コントラスト、フォントフォールバック、CJK の字送り、横溢れ、テキストの切れ、1 行の文字数 — ブラウザ上で実行、**指摘 26 件、すべて理由付きで裁定済み** — 理由のない容認はリリースゲートが拒否する |
-| **テーマの書き出し／読み込み** | 経路は二つ、どちらも往復検証済み。`theme_export.php` は WP-CLI で行を JSON として移し、id は不変、コピーはバイト単位で同一のページを配信。`theme_zip.py` は Mosaic **自身**の ZIP 書き出し／読み込みをそのマイルストーン・プロトコルで駆動する — 読み込みは `--activate` を付けない限りテストモードに入る、既定がライブサイトの切り替えだからだ — そして **22 項目**でコピーを元とツリー単位で突き合わせる：全テーブル一致、68,337 のノード id を保持、override ノードは再採番、足りない 1 行はツリー走査が運ぶべきでない孤児 |
-| **実測** | REST ルート 114、element class 151、条件サブジェクト 59、23 テーブル / 206 カラム |
+| **コンポーネント** | コンポーネントシステムを端から端まで駆動、**8 件中 8 件**：カテゴリの下に作成、ドキュメントが自己修復、書き込み可能インスタンス経由でツリーを充填、読み取り専用インスタンスは同じ書き込みを拒否（ネガティブコントロール）、ページ上の 2 インスタンスが 1 つの定義を 2 度描画 |
+| **スタイル状態** | 53 状態のうち 52 を実ページに書き、表が約束するセレクタと照合：**36 が完全一致**、12 NO_HOST、3 SKIPPED、1 BROKE_PAGE。擬似クラスは大文字で出力される（`.M_EL9:HOVER`） |
+| **インタラクション** | JS アニメーション経路をネガティブコントロール付きで探査し行を読み戻し：`propertyMetas` **は**受理・保存される；プロパティ値は依然として結び付かず、その境界は正確になった |
+| **アコーディオン** | `accordion-item` と `accordion-content` はスイープ表では BROKE_PAGE。ファクトリが要求する通りに入れ子にすれば commit も描画も通る、**7 件中 7 件** |
+| **入場アニメーション** | 単調時計で 15 時点をサンプリングし 8 項目を断言。文書の初回レイアウトを待ってから始まるため、アニメーションの全くないページに対して遅れフレームは 1 つだけ |
+| **常時アニメーション** | 隅で刷り続け、タップすると拡大する版 — **28 項目**：一時停止したタイムラインをスクラブして周期性を証明、5 つの幅 × 25 のスクロール位置でテキスト*と*操作要素の遮蔽を「決して読めない」を失敗条件として計測、ポインタでも Enter でも開く、reduced motion では静止 |
+| **Elementor 変換** | 本番サイトの全 Elementor ページ — 19 ページ、3,292 要素 — を変換・構築し、元と照合：**19 件中 19 件**、3,281 要素を運び、11 要素を明示的に除外。さらに変換後ページをレスポンシブ・ブラウザ・監査にかけ、指摘をすべて「継承」か「導入」かに分類：**導入 0 件** |
+| **テーマの書き出し／読み込み** | 経路は二つ、どちらも往復検証済み。`theme_export.php` は WP-CLI で行を JSON として移し、id は不変。`theme_zip.py` は Mosaic **自身**の ZIP 書き出し／読み込みを駆動 — 読み込みは `--activate` を付けない限りテストモードに入る、既定がライブサイトの切り替えだからだ — **22 項目**でコピーを元とツリー単位で突き合わせる |
+| **スキル自身** | `claude plugin eval .` — ユーザーが実際に尋ねる 5 問を各 3 回、スキルあり／なしの 2 腕、1 回ごとに LLM 審査 3 名。**あり：5 問すべて 1.00。なし：5 問すべて 0.00。** ベースラインの最善の回答は回答拒否だった |
+| **ライブ計測** | REST ルート 114、element class 151、条件サブジェクト 59、23 テーブル / 206 カラム |
 
-`SKIPPED`、`NO_HOST`、`INCONCLUSIVE` を合格率に混ぜることは決してしない。
-**自分の死角を成功として数えるスイープこそ、この skill が反対しているものである。**
+`SKIPPED`、`NO_HOST`、`INCONCLUSIVE` は合格率に決して繰り込まない。自らの盲点を成功として
+数えるスイープこそ、このスキルが反対しているものだ。
 
-### 書き始める前に知っておく価値のある 2 つの結果
+### 書く前に知っておくべき結果
 
-**`group` を持つプロパティは、単独で設定しても効かない。** 両方向とも厳密：group を持たない
-78 個は 58 COMPILED / 0 ABSENT、group を持つ 20 個はすべて 0 COMPILED。つまり
-`borderLeftWidth`、`outlineColor`、`gridColumnStart` は 3 つの別々の奇癖ではなく
-**同一の規則の 3 つの実例**である。グループ形状を使うか（`border` は
-`{width, style, color}` を取る）、`customStyles` に落とす。
+**`group` に属するプロパティは単独で設定しても無効。** 両方向で厳密：グループ外の 78 個は
+58 COMPILED・0 ABSENT、グループ内の 20 個はすべて 0 COMPILED。`borderLeftWidth`、`outlineColor`、
+`gridColumnStart` は一つのルールの三つの例。グループの形 — `border` は `{width, style, color}` —
+か `customStyles` を使う。
 
 **ブレークポイントの上書きはプロパティを「変える」ことはできても「消す」ことはできない。**
-狭い画面の `customStyles` が単に境界線を書いていないだけなら、広い画面の境界線は生き残り、
-1 カラムに畳まれたレイアウトの真ん中に線を引く。**`border-left:0` と明示すること。**
+狭い画面の `customStyles` が単にボーダーを書かないだけなら、広い画面のボーダーは立ったままだ。
+`border-left:0` と声に出す。
+
+**`url` を受け取る型は 4 つだけ**：`button`、`menu-link`、`wysiwyg-link`、`dropdown-toggle`。
+`text` や `image` に置くと、受理され、保存され、アンカーは一切出ない。代わりに `menu-link` で
+包む — 任意の子を取り、`url` があれば本物の `<a href>` になる。
+
+**画像の attachment protocol のパスは uploads ディレクトリからの相対。**
+`wp-attachment://image/<id>/full/2026/09/pic.png` は解決され、添付の幅と高さも乗る。フルパスの
+`wp-content/uploads/...` を渡すと — 一番自然な推測だが — Mosaic は uploads のベースをもう一度
+前置し、しかもエラーを出さない。
+
+## Elementor → Mosaic
+
+```bash
+wp post meta get 2360 _elementor_data > page.json
+python tools/from_elementor.py --data page.json --out spec.json --report conv.csv \
+    --uploads-base https://site/wp-content/uploads --slug works --post 208
+python tools/build_site.py --config c.json --site spec.json
+python tools/verify_conversion.py --data page.json --url https://site/works/ --report conv.csv
+```
+
+対象範囲は好みではなく数えて決めた：実サイト 19 ページのうち、container / heading /
+text-editor / button / html / icon-list / divider / image で全要素の 99.6%。ロングテール —
+loop grid、フォーム、カウントダウン、サードパーティ addon — は動的で、なるべきノードがない。
+それぞれ名前と理由付きで報告され、黙って落とされることはなく、`--strict` は損失のある spec の
+出力を拒否する。
+
+レイアウト、タイポグラフィ、色、ボーダー、リンク、画像は 3 つのブレークポイントすべてで移る
+（`_tablet`/`_mobile` → `_t`/`_m`）。移らないもの：入場アニメーション（Mosaic のインタラクション
+結合は未解決）、shape divider、グラデーションオーバーレイ。検証ツールは構築後のページを元と
+突き合わせ — 文字列、画像、リンク、見出しレベルをすべて — 初回から役に立った：`url` を無視する
+ノードに書いていたせいで 21 リンク中 19 を落としていた変換器を捕まえた。
 
 ## ツール
 
-```bash
-wp eval-file tools/bootstrap_probe_theme.php          # ライセンス不要の作業用テーマ
-python tools/build_site.py   --config c.json --site sites/moksa.json
-python tools/verify_rwd.py   --config c.json --site sites/moksa.json --csv rwd.csv
-python tools/copy_styles.py  --config c.json --from a --to-prefix b- --only "&._m"
-wp eval-file tools/theme_export.php active > theme.json
-wp eval-file tools/theme_import.php theme.json "名前" rebind activate
-```
+| ツール | 役割 |
+|---|---|
+| `mo.py` | 計測済みの表面を引く — **正面玄関** |
+| `build_page.py` / `build_site.py` | ガード付きの書き込み経路で spec を commit；壊れると計測されたものは拒否 |
+| `from_elementor.py` / `verify_conversion.py` | Elementor → Mosaic と、内容が届いたことの証明 |
+| `verify_browser.py` | ブラウザがスタイルシートの約束通りに計算したか、デザイン監査に通るか |
+| `verify_rwd.py` | すべての `_t`/`_m` 宣言が配信スタイルシートに届いているか |
+| `verify_intro.py` / `verify_loop.py` | 「終わる」ロードアニメーション；ループし、何も隠さず、開く常時アニメーション |
+| `theme_export.php` / `theme_import.php` | テーマ全体を JSON 行として WP-CLI で移動、id は不変 |
+| `theme_zip.py` / `theme_zip_compare.php` / `theme_delete.php` | Mosaic 自身の ZIP 書き出し／読み込みをエディタの外から駆動、コピーを元とツリー単位で照合、ライブテーマを拒否する完全削除 |
+| `sweep_*.py` / `probe_*.py` | 表を作った計測器そのもの |
+| `bootstrap_probe_theme.php` / `mint_session.php` | ライセンス不要の実験用テーマと、WP-CLI から作る REST セッション |
 
-`sites/_moksa.py` が完全な実例：実在するスタジオのトップページ — マストヘッド、仕様ブロック、
-サービス、9 行の実績テーブル、プロセス、技術スタック、プロダクト、推薦の声、連絡先 —
-**618 ノードをすべてテーブル経由で commit**。名前付き view timeline で作った、スクロールに
-追随する条項インデックスも含め、JavaScript は一切使っていない。
+## 実例、ライブで
 
-## どこから読むか
+`sites/_moksa.py` はテーブルだけで本物のスタジオサイトを構築し、参照実装として同梱される。
+**https://mosaic.moksaweb.com/** で公開中：1,286 ノードのホームページに、名前付き view timeline
+によるスクロール追従の条項インデックス；浮世絵の版を一枚ずつ刷っていく入場シーケンス；
+隅で永遠に刷り続け、タップで拡大する版；そして UI 全体が shortcode を実行する 1 つの `code`
+ノードから届く WooCommerce の [My Account](https://mosaic.moksaweb.com/my-account/) ページ。
+自前の JavaScript はどこにもない。
 
-1. `references/data-model.md` — ページが実際にどこにあるか。
+## どこから始めるか
+
+1. `references/data-model.md` — ページが実際に住んでいる場所。
 2. `references/write-protocol.md` — checkout / check / commit。
-3. `references/failure-modes.md` — Mosaic の壊れ方、すべて実測。**書く前に読む。**
-4. `references/responsive.md` — state / breakpoint / property という軸。
+3. `references/failure-modes.md` — Mosaic の失敗のしかた、計測版。**書く前に読む。**
+4. `references/responsive.md` — 状態／ブレークポイント／プロパティの軸。
 5. `references/styling.md` — スタイル値が CSS になるまで。
 6. `references/design-system.md` — element class とデザイントークン。
 
+## リリース
+
+```bash
+npm version minor      # package.json、SKILL.md、8 つのプラットフォームテンプレートの版を上げ、
+                       # commit、tag、push；tag が release.yml を起動する
+```
+
+`bin/check-release.mjs` がすべてのリリースを門番する。検査するのは「検査しやすいこと」ではなく
+「間違えやすいこと」：版番号の一致、`files` の各 glob が何かに一致すること、各検証 CSV の行数が
+SKILL.md と 4 つの README が引用する数と等しいこと、未裁定のデザイン監査指摘がないこと、eval
+スイートが存在すること、そして **tarball そのものの検査** — npm の `files` 許可リストは
+`.gitignore` を上書きし、かつて本物のクライアントのサイトを公開直前のパッケージに入れかけた。
+
+公開は npm の trusted publishing（OIDC）：トークンはどこにもない。npmjs.com のパッケージ設定
+Trusted Publisher にて：GitHub Actions、`Moksa1123` / `mosaic-headless`、workflow `release.yml`、
+environment は**空**。
+
 ## ライセンス
 
-MIT。Mosaic Pro 自体はライセンス製品であり、この repo に**含まれていない**。
+MIT。Mosaic Pro 自体はライセンスされたサードパーティ製ソフトウェアで、ここには**含まれない**。
