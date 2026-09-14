@@ -19,6 +19,20 @@ npx mosaic-headless cursor --to ./my-project
 npx mosaic-headless --list                   # 지원하는 8개 플랫폼
 ```
 
+| 플랫폼 | 무엇이 설치되나 | 어디에 |
+|---|---|---|
+| Claude Code | 스킬 전체: SKILL.md + references/ + tools/ + data/ + sites/ | `~/.claude/skills/` 또는 `./.claude/skills/` |
+| Codex CLI | 스킬 전체 | `~/.codex/` |
+| Gemini CLI | 스킬 전체 | `~/.gemini/` |
+| GitHub Copilot | 스킬 전체, 그리고 `copilot-instructions.md`에 섹션 추가 | `./.github/` |
+| Cursor | references를 내장한 `.mdc` 규칙 파일 하나 | `~/.cursor/rules/` |
+| Windsurf | references를 내장한 규칙 파일 하나 | `./.devin/` |
+| Continue | references를 내장한 규칙 파일 하나 | `~/.continue/` |
+| Claude.ai | 프로젝트 스킬로 업로드할 zip | 저장한 곳 |
+
+모든 플랫폼 설치는 릴리스 게이트가 템플릿에 대해 검증한다. 도구 실행에는 Python 3와
+Playwright가 필요하다; 규칙 파일 플랫폼은 지식만 받고 도구는 받지 않는다.
+
 **업데이트는 저절로 되지 않는다.** npm에 새 버전이 올라가도 에이전트가 읽는 폴더는 그대로다.
 인스톨러를 `--force`와 함께 다시 실행할 것(없으면 손댔을지 모르는 SKILL.md 덮어쓰기를 거부한다):
 
@@ -26,7 +40,6 @@ npx mosaic-headless --list                   # 지원하는 8개 플랫폼
 npx mosaic-headless@latest claude-code --global --force
 ```
 
-Python 3와 Playwright는 도구를 *실행*할 때 필요하고, 설치에는 필요 없다.
 
 ## 이것은 무엇인가
 
@@ -36,6 +49,40 @@ Mosaic은 페이지를 **23개의 커스텀 테이블**에 보관한다. `post_c
 
 이 스킬은 그 모델의 지도 — 소스를 읽어 얻은 것이 아니라 실제 설치에 대해 측정한 것 — 에,
 모델을 통해 쓰고, 나온 것을 검증하고, Elementor에서 페이지를 들여오는 도구를 더한 것이다.
+
+## 부품이 맞물리는 방식
+
+```mermaid
+flowchart LR
+    subgraph measure["한 번만, 실제 사이트에 대해 측정"]
+        SRC[플러그인 소스] -->|extract_*.py| D[(data/*.csv)]
+        SW[sweep_*.py / probe_*.py] -->|commit·렌더·단언| D
+    end
+
+    subgraph write["당신이 만드는 모든 페이지"]
+        Q[mo.py] -->|답 하나, 측정 판정이 먼저| SPEC[페이지 spec]
+        EL[Elementor _elementor_data] -->|from_elementor.py| SPEC
+        SPEC -->|build_page.py가 깨질 것을 거부| REST[Mosaic REST: checkout·check·commit]
+        REST --> DB[(23 테이블)]
+        DB --> PAGE[전달된 페이지]
+    end
+
+    subgraph verify["commit을 믿지 않는다"]
+        PAGE --> V1[verify_rwd.py]
+        PAGE --> V2[verify_browser.py + 디자인 감사]
+        PAGE --> V3[verify_intro.py / verify_loop.py]
+        PAGE --> V4[verify_conversion.py]
+        V1 & V2 & V3 & V4 --> CSV[(검증 CSV)]
+        CSV --> GATE[check-release.mjs]
+    end
+
+    D --> Q
+    D --> SPEC
+```
+
+왼쪽에서 오른쪽으로: 표는 한 번만 측정해 동봉한다; 모든 페이지는 표를 통해 쓰이고 표가
+아니라고 하면 거부된다; 전달된 페이지를 읽어 되돌리고 그 결과가 릴리스 게이트가 검사하는
+표에 기록되기 전까지는 아무것도 믿지 않는다.
 
 ## 단 하나의 규칙
 
@@ -107,6 +154,24 @@ commit 성공은 페이지가 동작한다는 증거가 아니고, 올바른 스
 `SKIPPED`, `NO_HOST`, `INCONCLUSIVE`는 결코 합격률에 섞지 않는다. 자기 사각지대를 성공으로
 세는 스윕이야말로 이 스킬이 반대하는 것이다.
 
+## 조회 한 번의 비용
+
+Mosaic 노드 타입이나 스타일 키가 실제로 무엇을 받는지 에이전트가 알아내는 방법은 셋. 같은
+여섯 과제를 tiktoken으로 측정(`tools/benchmark_tokens.py`, 직접 실행 가능):
+
+| 과제 | 소스 읽기 | 전체 표 로드 | `mo.py` 조회 |
+|---|---:|---:|---:|
+| 제목, 문단, 링크 버튼 배치 | 10,005 | 259,539 | **961** |
+| padding, 테두리, 둥근 모서리를 반응형으로 | 3,490 | 259,539 | **396** |
+| 아코디언이 쓸 만한지, 어떻게 중첩하는지 | 15,615 | 259,539 | **397** |
+| 실제로 컴파일되는 hover/focus 상태 찾기 | 3,619 | 259,539 | **1,054** |
+| 어떤 CSS를 내는 Mosaic 키 찾기 | 1,862 | 259,539 | **51** |
+| commit 전에 무엇이 위험한지 알기 | 63,172 | 259,539 | **288** |
+
+**소스 읽기보다 71–99.5%, 전체 표 로드보다 99.6% 이상 적은 토큰** — 게다가 여섯 중 넷은
+소스로는 애초에 답할 수 없다. "선언됨"과 "컴파일됨"은 다른 질문이고, 후자를 물은 것은
+스윕뿐이다. 표는 합쳐서 259,539 토큰; 절대 통째로 로드하지 말 것. `mo.py`가 쿼리다.
+
 ### 쓰기 전에 알아둘 결과
 
 **`group`에 속한 프로퍼티는 단독으로 설정하면 무효다.** 양방향 모두 정확: 그룹 밖 78개는
@@ -163,14 +228,13 @@ loop grid, 폼, 카운트다운, 서드파티 addon — 은 동적이라 될 노
 | `sweep_*.py` / `probe_*.py` | 표를 만든 계측기 그 자체 |
 | `bootstrap_probe_theme.php` / `mint_session.php` | 라이선스 없는 실험용 테마와 WP-CLI에서 만드는 REST 세션 |
 
-## 실제 예제, 라이브로
+## 실제 예제
 
-`sites/_moksa.py`는 테이블만으로 진짜 스튜디오 사이트를 구축하며 참조 구현으로 동봉된다.
-**https://mosaic.moksaweb.com/** 에 올라가 있다: 1,286 노드의 홈페이지에 이름 있는 view
-timeline으로 스크롤을 추적하는 조항 인덱스; 우키요에 판을 한 장씩 찍어내는 진입 시퀀스;
-구석에서 영원히 찍어내고 탭하면 확대되는 판; 그리고 UI 전체가 shortcode를 실행하는 하나의
-`code` 노드로 들어오는 WooCommerce [My Account](https://mosaic.moksaweb.com/my-account/)
-페이지. 자체 JavaScript는 어디에도 없다.
+`sites/_moksa.py`는 테이블만으로 진짜 스튜디오 사이트를 구축하며 참조 구현으로 동봉된다:
+1,286 노드의 홈페이지에 이름 있는 view timeline으로 스크롤을 추적하는 조항 인덱스; 우키요에
+판을 한 장씩 찍어내는 진입 시퀀스; 구석에서 영원히 찍어내고 탭하면 확대되는 판; 그리고 UI
+전체가 shortcode를 실행하는 하나의 `code` 노드로 들어오는 WooCommerce My Account 페이지.
+자체 JavaScript는 어디에도 없다. `data/`의 모든 검증 표는 이것에 대해 만들어졌다.
 
 ## 어디서 시작할까
 

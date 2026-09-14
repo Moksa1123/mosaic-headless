@@ -19,6 +19,21 @@ npx mosaic-headless cursor --to ./my-project
 npx mosaic-headless --list                   # 対応 8 プラットフォーム
 ```
 
+| プラットフォーム | 何が入るか | どこに |
+|---|---|---|
+| Claude Code | スキル一式：SKILL.md + references/ + tools/ + data/ + sites/ | `~/.claude/skills/` または `./.claude/skills/` |
+| Codex CLI | スキル一式 | `~/.codex/` |
+| Gemini CLI | スキル一式 | `~/.gemini/` |
+| GitHub Copilot | スキル一式に加え、`copilot-instructions.md` へ追記 | `./.github/` |
+| Cursor | references を埋め込んだ `.mdc` ルール 1 本 | `~/.cursor/rules/` |
+| Windsurf | references を埋め込んだルールファイル 1 本 | `./.devin/` |
+| Continue | references を埋め込んだルールファイル 1 本 | `~/.continue/` |
+| Claude.ai | プロジェクトスキルとしてアップロードする zip | 保存した場所 |
+
+各プラットフォームのインストールはリリースゲートがテンプレートに対して検証する。ツールの
+実行には Python 3 と Playwright が必要。ルールファイル型のプラットフォームには知識だけが
+入り、ツールは入らない。
+
 **更新は自動では起きない。** npm に新版が出ても、エージェントが読み込むフォルダは変わらない。
 インストーラを `--force` 付きで再実行する（付けないと、手を入れた可能性のある SKILL.md の
 上書きを拒否する）：
@@ -27,7 +42,6 @@ npx mosaic-headless --list                   # 対応 8 プラットフォーム
 npx mosaic-headless@latest claude-code --global --force
 ```
 
-Python 3 と Playwright はツールを*動かす*ときに必要で、インストールには不要。
 
 ## これは何か
 
@@ -39,6 +53,40 @@ fractional-index の文字列。エディタはこのモデルの一クライア
 このスキルはそのモデルの地図 — ソースを読んで得たものではなく、実際のインストールに対して
 計測したもの — と、モデルを通して書き、出てきたものを検証し、Elementor からページを持ち込む
 ためのツール群である。
+
+## 部品のつながり
+
+```mermaid
+flowchart LR
+    subgraph measure["一度だけ、実サイトに対して計測"]
+        SRC[プラグインのソース] -->|extract_*.py| D[(data/*.csv)]
+        SW[sweep_*.py / probe_*.py] -->|commit・描画・断言| D
+    end
+
+    subgraph write["あなたが作るすべてのページ"]
+        Q[mo.py] -->|答えは一つ、計測結果が先頭| SPEC[ページ spec]
+        EL[Elementor _elementor_data] -->|from_elementor.py| SPEC
+        SPEC -->|build_page.py が壊れるものを拒否| REST[Mosaic REST：checkout・check・commit]
+        REST --> DB[(23 テーブル)]
+        DB --> PAGE[配信されたページ]
+    end
+
+    subgraph verify["commit を信用しない"]
+        PAGE --> V1[verify_rwd.py]
+        PAGE --> V2[verify_browser.py + デザイン監査]
+        PAGE --> V3[verify_intro.py / verify_loop.py]
+        PAGE --> V4[verify_conversion.py]
+        V1 & V2 & V3 & V4 --> CSV[(検証 CSV)]
+        CSV --> GATE[check-release.mjs]
+    end
+
+    D --> Q
+    D --> SPEC
+```
+
+左から右へ：表は一度だけ計測して同梱される；すべてのページは表を通して書かれ、表が否と
+言えば拒否される；配信されたページを読み戻し、結果がリリースゲートの見る表に記録される
+までは何も信用しない。
 
 ## 唯一のルール
 
@@ -110,6 +158,25 @@ commit の成功はページが動く証拠ではないし、正しいスタイ�
 `SKIPPED`、`NO_HOST`、`INCONCLUSIVE` は合格率に決して繰り込まない。自らの盲点を成功として
 数えるスイープこそ、このスキルが反対しているものだ。
 
+## 引くのに何トークンかかるか
+
+Mosaic のノード型やスタイルキーが実際に何を受け取るかをエージェントが知る方法は三つ。
+同じ六つの課題を tiktoken で計測（`tools/benchmark_tokens.py`、自分で実行できる）：
+
+| 課題 | ソースを読む | 全テーブル読込 | `mo.py` で引く |
+|---|---:|---:|---:|
+| 見出し・段落・リンク付きボタンを置く | 10,005 | 259,539 | **961** |
+| padding・ボーダー・角丸をレスポンシブに設定 | 3,490 | 259,539 | **396** |
+| アコーディオンが使えるか、どう入れ子にするか | 15,615 | 259,539 | **397** |
+| 実際にコンパイルされる hover/focus 状態を探す | 3,619 | 259,539 | **1,054** |
+| ある CSS を出す Mosaic のキーを探す | 1,862 | 259,539 | **51** |
+| commit 前に何が危険かを知る | 63,172 | 259,539 | **288** |
+
+**ソースを読むより 71〜99.5%、全テーブル読込より 99.6% 以上トークンが少ない** — しかも
+六つのうち四つはソースでは答えられない。「宣言されている」と「コンパイルされる」は別の
+問いで、後者を問うたのはスイープだけだからだ。テーブルは合計 259,539 トークン。決して
+まとめて読み込まないこと。`mo.py` がクエリである。
+
 ### 書く前に知っておくべき結果
 
 **`group` に属するプロパティは単独で設定しても無効。** 両方向で厳密：グループ外の 78 個は
@@ -167,14 +234,13 @@ loop grid、フォーム、カウントダウン、サードパーティ addon �
 | `sweep_*.py` / `probe_*.py` | 表を作った計測器そのもの |
 | `bootstrap_probe_theme.php` / `mint_session.php` | ライセンス不要の実験用テーマと、WP-CLI から作る REST セッション |
 
-## 実例、ライブで
+## 実例
 
-`sites/_moksa.py` はテーブルだけで本物のスタジオサイトを構築し、参照実装として同梱される。
-**https://mosaic.moksaweb.com/** で公開中：1,286 ノードのホームページに、名前付き view timeline
-によるスクロール追従の条項インデックス；浮世絵の版を一枚ずつ刷っていく入場シーケンス；
-隅で永遠に刷り続け、タップで拡大する版；そして UI 全体が shortcode を実行する 1 つの `code`
-ノードから届く WooCommerce の [My Account](https://mosaic.moksaweb.com/my-account/) ページ。
-自前の JavaScript はどこにもない。
+`sites/_moksa.py` はテーブルだけで本物のスタジオサイトを構築し、参照実装として同梱される：
+1,286 ノードのホームページに、名前付き view timeline によるスクロール追従の条項インデックス；
+浮世絵の版を一枚ずつ刷っていく入場シーケンス；隅で永遠に刷り続け、タップで拡大する版；
+そして UI 全体が shortcode を実行する 1 つの `code` ノードから届く WooCommerce の My Account
+ページ。自前の JavaScript はどこにもない。`data/` のすべての検証表はこれに対して作られた。
 
 ## どこから始めるか
 

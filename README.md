@@ -19,6 +19,21 @@ npx mosaic-headless cursor --to ./my-project
 npx mosaic-headless --list                   # all eight platforms
 ```
 
+| platform | what is installed | where |
+|---|---|---|
+| Claude Code | full skill: SKILL.md + references/ + tools/ + data/ + sites/ | `~/.claude/skills/` or `./.claude/skills/` |
+| Codex CLI | full skill | `~/.codex/` |
+| Gemini CLI | full skill | `~/.gemini/` |
+| GitHub Copilot | full skill, plus a section appended to `copilot-instructions.md` | `./.github/` |
+| Cursor | one `.mdc` rule with the references embedded | `~/.cursor/rules/` |
+| Windsurf | one rule file with the references embedded | `./.devin/` |
+| Continue | one rule file with the references embedded | `~/.continue/` |
+| Claude.ai | a zip to upload as a project skill | wherever you save it |
+
+Every platform install is verified by the release gate against its template. The
+tools need Python 3 and Playwright to run; the rule-file platforms get the knowledge
+without the tools.
+
 **Updating does not happen on its own.** A new version on npm changes nothing in
 the folder your agent loads; re-run the installer with `--force` (without it, it
 refuses to overwrite a SKILL.md you may have edited):
@@ -27,7 +42,6 @@ refuses to overwrite a SKILL.md you may have edited):
 npx mosaic-headless@latest claude-code --global --force
 ```
 
-Python 3 and Playwright are needed to *run* the tools, not to install.
 
 ## What this is
 
@@ -39,6 +53,41 @@ the format, and you do not need it.
 This skill is the map of that model — measured against a live install rather than
 read off the source — plus the tools to write through it, check what came out, and
 bring pages in from Elementor.
+
+## How the pieces fit
+
+```mermaid
+flowchart LR
+    subgraph measure["measured once, against a live install"]
+        SRC[plugin source] -->|extract_*.py| D[(data/*.csv)]
+        SW[sweep_*.py / probe_*.py] -->|commit, render, assert| D
+    end
+
+    subgraph write["every page you build"]
+        Q[mo.py] -->|one answer, verdict first| SPEC[page spec]
+        EL[Elementor _elementor_data] -->|from_elementor.py| SPEC
+        SPEC -->|build_page.py refuses what breaks| REST[Mosaic REST: checkout, check, commit]
+        REST --> DB[(23 tables)]
+        DB --> PAGE[served page]
+    end
+
+    subgraph verify["never trust the commit"]
+        PAGE --> V1[verify_rwd.py]
+        PAGE --> V2[verify_browser.py + design audit]
+        PAGE --> V3[verify_intro.py / verify_loop.py]
+        PAGE --> V4[verify_conversion.py]
+        V1 & V2 & V3 & V4 --> CSV[(verification CSVs)]
+        CSV --> GATE[check-release.mjs]
+    end
+
+    D --> Q
+    D --> SPEC
+```
+
+Left to right: the tables are measured once and shipped; every page is written
+through them and refused when they say no; and nothing is believed until the
+delivered page has been read back and the result recorded in a table that the
+release gate checks.
 
 ## The one rule
 
@@ -114,6 +163,26 @@ factories, so Pro types register and render regardless.
 `SKIPPED`, `NO_HOST` and `INCONCLUSIVE` are never folded into a pass rate. A sweep
 that scores its own blind spots as successes is the thing this skill argues against.
 
+## What it costs to consult
+
+Three ways an agent can learn what a Mosaic node type or style key actually takes,
+priced on the same six tasks with tiktoken (`tools/benchmark_tokens.py`; run it
+yourself):
+
+| task | read the source | load every table | `mo.py` query |
+|---|---:|---:|---:|
+| place a heading, a paragraph and a linked button | 10,005 | 259,539 | **961** |
+| set padding, a border and a radius, responsively | 3,490 | 259,539 | **396** |
+| decide whether the accordion is usable, and how to nest it | 15,615 | 259,539 | **397** |
+| find which hover/focus states actually compile | 3,619 | 259,539 | **1,054** |
+| find which Mosaic key drives one CSS property | 1,862 | 259,539 | **51** |
+| know what is unsafe before committing anything | 63,172 | 259,539 | **288** |
+
+**71–99.5% fewer tokens than reading the source, 99.6%+ fewer than loading the
+tables** — and the source could not have answered four of the six at all, because
+"declared" and "compiles" are different questions and only the sweeps asked the
+second one. The tables total 259,539 tokens; never load them. `mo.py` is the query.
+
 ### Results worth knowing before you write anything
 
 **A property that belongs to a `group` is inert when set on its own.** Exact in both
@@ -174,15 +243,15 @@ and heading level — and it earned its place at once: it caught the converter l
 | `sweep_*.py` / `probe_*.py` | the instruments the tables were made with |
 | `bootstrap_probe_theme.php` / `mint_session.php` | a licence-free scratch theme and a REST session from WP-CLI |
 
-## The worked example, live
+## The worked example
 
 `sites/_moksa.py` builds a real studio site through the tables alone and ships as
-the reference. It is up at **https://mosaic.moksaweb.com/**: a homepage of 1,286
-nodes with a scroll-tracking clause index on named view timelines, an entrance
-sequence that prints an ukiyo-e sheet one carved block at a time, a corner plate
-that keeps printing forever and opens when tapped, and a WooCommerce
-[My Account](https://mosaic.moksaweb.com/my-account/) page whose UI arrives through
-one `code` node running a shortcode. No JavaScript of its own anywhere.
+the reference: a homepage of 1,286 nodes with a scroll-tracking clause index on named
+view timelines, an entrance sequence that prints an ukiyo-e sheet one carved block
+at a time, a corner plate that keeps printing forever and opens when tapped, and a
+WooCommerce My Account page whose UI arrives through one `code` node running a
+shortcode. No JavaScript of its own anywhere. Every verification table in `data/`
+was produced against it.
 
 ## Where to start
 

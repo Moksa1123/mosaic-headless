@@ -1,0 +1,7 @@
+task,commands,tokens_read_source,tokens_load_tables,tokens_query,saving_vs_source_pct,saving_vs_tables_pct
+"Place a heading, a paragraph and a linked button",mo.py params text ; mo.py params button ; mo.py prop url,10005,259539,961,90.4,99.63
+"Set padding, a border and a radius, responsively",mo.py style --grouped ; mo.py css border-left-width ; mo.py css border-radius,3490,259539,396,88.7,99.85
+"Decide whether the accordion is usable, and how to nest it",mo.py type accordion-content ; mo.py placement accordion-item,15615,259539,397,97.5,99.85
+Find which hover/focus states actually compile,mo.py states --verified,3619,259539,1054,70.9,99.59
+Find which Mosaic key drives one CSS property,mo.py css grid-column,1862,259539,51,97.3,99.98
+Know what is unsafe before committing anything,mo.py stats ; mo.py check div text button accordion-content,63172,259539,288,99.5,99.89

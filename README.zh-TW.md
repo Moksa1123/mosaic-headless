@@ -19,6 +19,20 @@ npx mosaic-headless cursor --to ./my-project
 npx mosaic-headless --list                   # 全部八個平台
 ```
 
+| 平台 | 裝什麼 | 裝到哪 |
+|---|---|---|
+| Claude Code | 完整技能：SKILL.md + references/ + tools/ + data/ + sites/ | `~/.claude/skills/` 或 `./.claude/skills/` |
+| Codex CLI | 完整技能 | `~/.codex/` |
+| Gemini CLI | 完整技能 | `~/.gemini/` |
+| GitHub Copilot | 完整技能，外加一段附到 `copilot-instructions.md` | `./.github/` |
+| Cursor | 一個內嵌 references 的 `.mdc` 規則檔 | `~/.cursor/rules/` |
+| Windsurf | 一個內嵌 references 的規則檔 | `./.devin/` |
+| Continue | 一個內嵌 references 的規則檔 | `~/.continue/` |
+| Claude.ai | 一個 zip，上傳為專案技能 | 你存的地方 |
+
+每個平台的安裝都由發布閘門對照其模板驗證。工具要跑需要 Python 3 和 Playwright；規則檔類的
+平台拿到的是知識，沒有工具。
+
 **更新不會自己發生。** npm 上有新版，不代表你的 agent 載入的那個資料夾有變；要重跑安裝器並加
 `--force`（不加的話它會拒絕覆蓋你可能改過的 SKILL.md）：
 
@@ -26,7 +40,6 @@ npx mosaic-headless --list                   # 全部八個平台
 npx mosaic-headless@latest claude-code --global --force
 ```
 
-Python 3 和 Playwright 是*跑工具*時才需要，安裝不用。
 
 ## 這是什麼
 
@@ -36,6 +49,39 @@ Mosaic 把一個頁面放在 **23 張自訂資料表**裡，不在 `post_content
 
 這個技能就是那個模型的地圖——對照真實站台量出來的，不是讀原始碼讀出來的——外加一組
 工具：透過模型寫入、檢查寫出來的東西、把 Elementor 的頁面搬進來。
+
+## 各部分怎麼接起來
+
+```mermaid
+flowchart LR
+    subgraph measure["量一次，對著真實站台"]
+        SRC[外掛原始碼] -->|extract_*.py| D[(data/*.csv)]
+        SW[sweep_*.py / probe_*.py] -->|寫入、渲染、斷言| D
+    end
+
+    subgraph write["你建的每一頁"]
+        Q[mo.py] -->|一個答案，量測結論在前| SPEC[頁面 spec]
+        EL[Elementor _elementor_data] -->|from_elementor.py| SPEC
+        SPEC -->|build_page.py 拒絕量到會壞的| REST[Mosaic REST：checkout、check、commit]
+        REST --> DB[(23 張表)]
+        DB --> PAGE[送出的頁面]
+    end
+
+    subgraph verify["永遠不信任 commit"]
+        PAGE --> V1[verify_rwd.py]
+        PAGE --> V2[verify_browser.py + 設計稽核]
+        PAGE --> V3[verify_intro.py / verify_loop.py]
+        PAGE --> V4[verify_conversion.py]
+        V1 & V2 & V3 & V4 --> CSV[(驗證表)]
+        CSV --> GATE[check-release.mjs]
+    end
+
+    D --> Q
+    D --> SPEC
+```
+
+由左到右：表格量一次、隨套件出貨；每一頁都透過表格寫入、表格說不行就拒絕；在送出的頁面被
+讀回來、結果記進發布閘門會檢查的表之前，什麼都不信。
 
 ## 唯一的規則
 
@@ -102,6 +148,24 @@ commit 成功不代表頁面能用，樣式表正確也不代表。這裡每個�
 `SKIPPED`、`NO_HOST`、`INCONCLUSIVE` 從不折算進通過率。把自己的盲點算成成功的掃描，
 正是這個技能反對的東西。
 
+## 查一次要花多少
+
+agent 要知道一個 Mosaic 節點型別或樣式鍵到底吃什麼，有三條路。同樣六個任務，用 tiktoken
+算（`tools/benchmark_tokens.py`，可以自己跑）：
+
+| 任務 | 讀原始碼 | 整包表格載入 | `mo.py` 查詢 |
+|---|---:|---:|---:|
+| 放一個標題、一段文字、一顆帶連結的按鈕 | 10,005 | 259,539 | **961** |
+| 設定 padding、邊框、圓角，含響應式 | 3,490 | 259,539 | **396** |
+| 判斷 accordion 能不能用、怎麼嵌套 | 15,615 | 259,539 | **397** |
+| 找出哪些 hover/focus 狀態真的會編譯 | 3,619 | 259,539 | **1,054** |
+| 找出哪個 Mosaic 鍵驅動某條 CSS | 1,862 | 259,539 | **51** |
+| commit 之前知道什麼不安全 | 63,172 | 259,539 | **288** |
+
+**比讀原始碼省 71–99.5% 的 token，比整包載入省 99.6% 以上**——而且六題裡有四題原始碼根本
+答不了：「有宣告」和「會編譯」是兩個問題，只有掃描問了第二個。表格總共 259,539 tokens；
+永遠不要整包載入，`mo.py` 才是查詢。
+
 ### 動手前值得知道的結果
 
 **屬於某個 `group` 的屬性單獨設定時無效。** 兩個方向都精確：78 個未分組屬性給出 58 COMPILED、
@@ -154,13 +218,13 @@ button / html / icon-list / divider / image 佔了全部元素的 99.6%。長尾
 | `sweep_*.py` / `probe_*.py` | 那些表格是用這些儀器量出來的 |
 | `bootstrap_probe_theme.php` / `mint_session.php` | 免授權的實驗主題，以及從 WP-CLI 鑄出 REST session |
 
-## 線上的工作範例
+## 工作範例
 
-`sites/_moksa.py` 只透過資料表建出一個真實的工作室網站，隨套件出貨作為參考。它就在
-**https://mosaic.moksaweb.com/**：1,286 個節點的首頁，用具名 view timeline 做捲動追蹤的條款索引；
-一段一次印一塊版、把浮世繪印出來的入口動畫；一塊在角落永遠印下去、點了會放大的版子；
-還有一個 WooCommerce [My Account](https://mosaic.moksaweb.com/my-account/) 頁，它的 UI 全部
-透過一個跑 shortcode 的 `code` 節點進來。全程沒有自己寫任何 JavaScript。
+`sites/_moksa.py` 只透過資料表建出一個真實的工作室網站，隨套件出貨作為參考：1,286 個節點的
+首頁，用具名 view timeline 做捲動追蹤的條款索引；一段一次印一塊版、把浮世繪印出來的入口動畫；
+一塊在角落永遠印下去、點了會放大的版子；還有一個 WooCommerce My Account 頁，它的 UI 全部透過
+一個跑 shortcode 的 `code` 節點進來。全程沒有自己寫任何 JavaScript。`data/` 裡每一張驗證表
+都是對著它量出來的。
 
 ## 從哪裡開始
 

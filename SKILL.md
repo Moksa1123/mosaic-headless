@@ -449,6 +449,7 @@ so the pattern is in the data, not just in this paragraph.
 | `data/accordion-verification.csv` | 7 | **driven live** - the accordion family nested the way its factory requires, against the guard that refuses it unparented. Resolves two BROKE_PAGE rows |
 | `data/conversion-verification.csv` | 8 | **converted then checked live** - an Elementor page rebuilt as Mosaic and held against its source (text, images, links, heading levels), then put through rwd, browser and the design audit with every finding classified inherited-or-introduced |
 | `data/conversion-batch.csv` | 19 | **converted, built and checked live, one page after another** - every Elementor page of a production site through the converter, with per-page element and content counts |
+| `data/token-benchmark.csv` | 6 | **measured with tiktoken** - the same six lookups priced three ways: reading the plugin source, loading every table, querying `mo.py`. 71-99.5% fewer tokens than the source and 99.6%+ fewer than the tables, which total 259,539 - never load them, query them |
 | `data/theme-zip-verification.csv` | 22 | **round-tripped live** - Mosaic's own ZIP export imported in test mode and compared to its source, table by table and tree by tree |
 | `data/node-type-notes.csv` | 8 | where a sweep outcome is true but misleading on its own, why. Surfaced by `mo.py type` |
 | `data/interaction-verification.csv` | 7 | **probed live** - interaction animation shapes, with negative controls and the stored row beside the payload |
@@ -622,6 +623,7 @@ post — `build_all.py` resets first for that reason.
 | tool | does |
 |---|---|
 | `mo.py` | query the measured surface - **the front door** |
+| `benchmark_tokens.py` | reproduce the token figures: source vs tables vs query, six tasks |
 | `build_page.py` | commit one page spec through the verified write path |
 | `build_site.py` | a whole site: one master with the shell, one document per page |
 | `verify_rwd.py` | does every `_t`/`_m` declaration reach the served stylesheet? |
