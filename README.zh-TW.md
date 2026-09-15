@@ -102,7 +102,7 @@ python tools/mo.py states --verified        # 實測會編譯的狀態
 python tools/mo.py css grid-column          # 哪個 Mosaic 鍵驅動這條 CSS
 ```
 
-然後去看頁面。Mosaic 有**七種**失敗模式，只有兩種會改變 HTTP 狀態碼：
+然後去看頁面。Mosaic 有**八種**失敗模式，只有三種會改變 HTTP 狀態碼：
 
 ```
 驗證器乾淨拒絕            HTTP 200 + 內文帶 `exceptions` 陣列
@@ -115,6 +115,10 @@ commit 時 PHP fatal       HTTP 500（122 個型別裡有 15 個放在一般 div
 內容造成渲染時 fatal      HTTP 500——commit 通過了，Mosaic 解析頁面時死掉。`code` 節點
                           的內容是模板：壓縮 CSS 慣用的 `@media(` 會被讀成函式呼叫。
                           `@media (` 就正常。build_page 會拒絕前者。
+外掛升級改了頁面輸出      HTTP 200、頁面完好、資料列都遷移了——但你針對輸出 class 寫的 CSS
+                          再也對不上。1.0.8 把 `M_EL4 M_EL_Div` 改成 `m-div _e`、狀態 class
+                          跟著改、`customStyles` 改成 `customDeclarations`。範例站的點擊放大
+                          就此打不開，是 verify_loop.py 說出來的。
 ```
 
 commit 成功不代表頁面能用，樣式表正確也不代表。這裡每個工具都會在寫入後把頁面抓回來——
@@ -123,19 +127,19 @@ commit 成功不代表頁面能用，樣式表正確也不代表。這裡每個�
 
 ## 驗證了什麼，怎麼驗的
 
-全部在真實站台上跑——WordPress 7.1、WooCommerce 11.1、Mosaic Pro 1.0.7，**未授權**：
+全部在真實站台上跑——WordPress 7.1、WooCommerce 11.1、Mosaic Pro 1.0.8，**未授權**：
 授權鎖的是主題庫和更新，不是節點工廠，所以 Pro 型別照樣註冊、照樣渲染。
 
 | 項目 | 結果 |
 |---|---|
-| **節點型別** | 122 / 122 逐一放進獨立文件，寫入 → 渲染 → 斷言 → 刪除：70 RENDERED、30 COMMITTED、15 COMMIT_5xx、7 BROKE_PAGE。未渲染的當中有三個是「沒給父層」的掃描方法產物，註記就在列旁 |
+| **節點型別** | 122 / 122 逐一放進獨立文件，寫入 → 渲染 → 斷言 → 刪除：70 RENDERED、25 COMMITTED、15 COMMIT_5xx、12 BROKE_PAGE。在 1.0.8 上重掃：五個以前默默寫入的型別，沒放對父節點現在會直接弄死頁面。未渲染的當中有三個是「沒給父層」的掃描方法產物，註記就在列旁 |
 | **樣式屬性** | 98 / 98 寫進真實頁面、對照編譯出的 CSS：58 COMPILED、18 ABSENT、21 SKIPPED |
-| **節點屬性** | 181 / 181 用各自驗證鏈推出的值重新探測：35 APPLIED、42 NO_EFFECT、55 NO_HOST、47 SKIPPED |
+| **節點屬性** | 182 / 182 用各自驗證鏈推出的值重新探測：35 APPLIED、43 NO_EFFECT、55 NO_HOST、47 SKIPPED |
 | **響應式** | 兩個站共 731 條 `_t`/`_m` 宣告，對照網站實際送出的樣式表逐條斷言——全數通過 |
 | **瀏覽器** | 在 Chromium 三個視窗寬度上對兩個交付頁面做 3,988 次計算樣式讀取：2,929 條比對相符、912 條標為無法比對、**0 條被覆蓋** |
 | **設計稽核** | 對比度、字體回退、CJK 字距、水平溢出、文字裁切、每行字數——在瀏覽器裡跑，**26 項發現，每一項都有書面裁定**——沒寫理由的 acknowledge 會被發布閘門拒絕 |
 | **元件** | 元件系統從頭驅動到尾，**8 之 8**：在分類下建立、文件自癒、透過可寫實例填入樹、唯讀實例拒絕同一筆寫入作為負控制、頁面上兩個實例渲染同一個定義 |
-| **樣式狀態** | 53 個狀態中的 52 個寫進真實頁面，對照表格承諾的選擇器：**36 個完全吻合**、12 NO_HOST、3 SKIPPED、1 BROKE_PAGE。偽類是大寫輸出的（`.M_EL9:HOVER`） |
+| **樣式狀態** | 53 個狀態中的 52 個寫進真實頁面，對照表格承諾的選擇器：**36 個完全吻合**、13 NO_HOST、3 SKIPPED、0 BROKE_PAGE。偽類是大寫輸出的（`.M_EL9:HOVER`） |
 | **互動** | JS 動畫路徑以負控制探測並讀回資料列：`propertyMetas` **會**被接受並儲存；屬性值仍然綁不上，但邊界現在是精確的 |
 | **accordion** | `accordion-item` 與 `accordion-content` 在掃描表裡是 BROKE_PAGE；照工廠要求嵌套後能寫入、能渲染，**7 之 7** |
 | **入口動畫** | 以單調時鐘在十五個時間點取樣、做八項斷言。相較於完全沒有動畫的同一頁只多掉一幀，因為它會等文件第一次排版做完才開始 |
@@ -143,7 +147,8 @@ commit 成功不代表頁面能用，樣式表正確也不代表。這裡每個�
 | **Elementor 轉換** | 一個正式站的全部 Elementor 頁面——19 頁、3,292 個元素——轉換、建置、對照來源檢查：**19 之 19**，3,281 個元素搬過去、11 個書面宣告。再把轉出的頁面跑過響應式、瀏覽器和稽核，每一項發現都分類為「繼承」或「引入」：**引入 0 個** |
 | **主題匯出／匯入** | 兩條路徑，都來回驗證過。`theme_export.php` 用 WP-CLI 把資料列搬成 JSON、ID 不變。`theme_zip.py` 驅動 Mosaic **自己**的 ZIP 匯出匯入——匯入預設進 test mode，要 `--activate` 才上線，因為它的預設是直接切換 live 站——**22 項檢查**逐表、逐樹比對副本與來源 |
 | **技能本身** | `claude plugin eval .`——五個使用者真的會問的問題，各跑三次，有載技能和沒載各一臂，每次三個 LLM 裁判。**有：五題全 1.00。沒有：五題全 0.00。** 基準線最好的回答是拒答 |
-| **線上量測** | 114 條 REST 路由、151 個 element class、59 個條件主體、23 張表 / 206 個欄位 |
+| **線上量測** | 114 條 REST 路由、152 個 variant、59 個條件主體、23 張表 / 210 個欄位 |
+| **線上升級** | 1.0.7 → 1.0.8 走外掛自己的 milestone 路由、在 wp-admin 之外驅動：6 個 milestone、四張表改名、每個輸出 class 名稱都變、每個 `customStyles` 都重寫——然後上面每一項掃描在結果上重跑 |
 
 `SKIPPED`、`NO_HOST`、`INCONCLUSIVE` 從不折算進通過率。把自己的盲點算成成功的掃描，
 正是這個技能反對的東西。
@@ -170,9 +175,9 @@ agent 要知道一個 Mosaic 節點型別或樣式鍵到底吃什麼，有三條
 
 **屬於某個 `group` 的屬性單獨設定時無效。** 兩個方向都精確：78 個未分組屬性給出 58 COMPILED、
 0 ABSENT；20 個分組屬性全部 0 COMPILED。所以 `borderLeftWidth`、`outlineColor`、`gridColumnStart`
-是同一條規則的三個實例。用分組形狀——`border` 吃 `{width, style, color}`——或 `customStyles`。
+是同一條規則的三個實例。用分組形狀——`border` 吃 `{width, style, color}`——或 `customDeclarations`。
 
-**斷點覆寫可以「改」一個屬性，永遠不能「拿掉」一個。** 窄螢幕的 `customStyles` 只是不提邊框，
+**斷點覆寫可以「改」一個屬性，永遠不能「拿掉」一個。** 窄螢幕的 `customDeclarations` 只是不提邊框，
 寬螢幕的邊框就繼續站在那裡。把 `border-left:0` 說出口。
 
 **只有四個型別吃 `url`**：`button`、`menu-link`、`wysiwyg-link`、`dropdown-toggle`。放在 `text`
@@ -215,6 +220,7 @@ button / html / icon-list / divider / image 佔了全部元素的 99.6%。長尾
 | `verify_intro.py` / `verify_loop.py` | 會「結束」的載入動畫；會循環、不遮東西、能打開的永續動畫 |
 | `theme_export.php` / `theme_import.php` | 整個主題以 JSON 資料列透過 WP-CLI 搬移，ID 不變 |
 | `theme_zip.py` / `theme_zip_compare.php` / `theme_delete.php` | 在編輯器外驅動 Mosaic 自己的 ZIP 匯出匯入、副本對來源逐樹比對、以及拒絕刪 live 主題的乾淨刪除 |
+| `data_upgrade.py` | 外掛更新後，走 Mosaic 自己的 milestone 路由跑資料遷移——沒跑完之前編輯器 API 是不存在的 |
 | `sweep_*.py` / `probe_*.py` | 那些表格是用這些儀器量出來的 |
 | `bootstrap_probe_theme.php` / `mint_session.php` | 免授權的實驗主題，以及從 WP-CLI 鑄出 REST session |
 
@@ -233,7 +239,7 @@ button / html / icon-list / divider / image 佔了全部元素的 99.6%。長尾
 3. `references/failure-modes.md`——Mosaic 怎麼失敗，量測版。**動手前先讀。**
 4. `references/responsive.md`——狀態／斷點／屬性三軸。
 5. `references/styling.md`——樣式值怎麼變成 CSS。
-6. `references/design-system.md`——element class 與設計 token。
+6. `references/design-system.md`——variant（element class）與設計 token。
 
 ## 發版
 

@@ -2,7 +2,6 @@ route,methods,args,raw_route
 /mosaic/v<version>,GET,context|namespace,/mosaic/v(?P<mosaicVersion>(\d+\.)?(\d+\.)*(\d+))
 /mosaic/v<version>/attachmentUrl/(?P<attachmentID>\d+)/(?P<attachmentSize>[\S]+),GET,attachmentID|attachmentSize,/mosaic/v(?P<mosaicVersion>(\d+\.)?(\d+\.)*(\d+))/attachmentUrl/(?P<attachmentID>\d+)/(?P<attachmentSize>[\S]+)
 /mosaic/v<version>/cache/clear,POST,,/mosaic/v(?P<mosaicVersion>(\d+\.)?(\d+\.)*(\d+))/cache/clear
-/mosaic/v<version>/elementClassMeta,GET,,/mosaic/v(?P<mosaicVersion>(\d+\.)?(\d+\.)*(\d+))/elementClassMeta
 /mosaic/v<version>/evaluatorEngineMetas/element,GET,,/mosaic/v(?P<mosaicVersion>(\d+\.)?(\d+\.)*(\d+))/evaluatorEngineMetas/element
 /mosaic/v<version>/evaluatorEngineMetas/formAction,GET,,/mosaic/v(?P<mosaicVersion>(\d+\.)?(\d+\.)*(\d+))/evaluatorEngineMetas/formAction
 /mosaic/v<version>/evaluatorEngineMetas/interaction,GET,,/mosaic/v(?P<mosaicVersion>(\d+\.)?(\d+\.)*(\d+))/evaluatorEngineMetas/interaction
@@ -109,6 +108,7 @@ route,methods,args,raw_route
 /mosaic/v<version>/themes/adminThemeEditorInstance/commit,POST,revisionEnvelopes|syncCheckEnvelopes,/mosaic/v(?P<mosaicVersion>(\d+\.)?(\d+\.)*(\d+))/themes/adminThemeEditorInstance/commit
 /mosaic/v<version>/themes/theme/<themeID>/thumbnail,"PATCH,POST,PUT",themeID,/mosaic/v(?P<mosaicVersion>(\d+\.)?(\d+\.)*(\d+))/themes/theme/(?P<themeID>[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12})/thumbnail
 /mosaic/v<version>/user/isTrackingUsageDataAllowed,POST,isTrackingUsageDataAllowed,/mosaic/v(?P<mosaicVersion>(\d+\.)?(\d+\.)*(\d+))/user/isTrackingUsageDataAllowed
+/mosaic/v<version>/variantCatalog,GET,,/mosaic/v(?P<mosaicVersion>(\d+\.)?(\d+\.)*(\d+))/variantCatalog
 /mosaic/v<version>/wizard/<themeID>/finish,POST,isCancel|masterData|milestoneID|pagesData|settingsData|templatesData|themeID,/mosaic/v(?P<mosaicVersion>(\d+\.)?(\d+\.)*(\d+))/wizard/(?P<themeID>[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12})/finish
 /mosaic/v<version>/wordpress/rebuild-themes,POST,isCancel|milestoneID|processingID,/mosaic/v(?P<mosaicVersion>(\d+\.)?(\d+\.)*(\d+))/wordpress/rebuild-themes
 /mosaic/v<version>/wordpress/themes/live-mode,"PATCH,POST,PUT",themeID,/mosaic/v(?P<mosaicVersion>(\d+\.)?(\d+\.)*(\d+))/wordpress/themes/live-mode

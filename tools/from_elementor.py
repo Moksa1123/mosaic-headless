@@ -181,7 +181,7 @@ def style_for(settings, bp, extra_map=None):
 
     # Borders: Mosaic's per-side longhands are grouped and inert on their own
     # (SKILL.md - 20 properties, zero exceptions), so this goes through
-    # customStyles, which is the documented way out.
+    # customDeclarations, which is the documented way out.
     bw, bc, bs = g("border_width"), colour(g("border_color")), g("border_border")
     if isinstance(bw, dict) and (bs or bc):
         decls = []
@@ -190,7 +190,7 @@ def style_for(settings, bp, extra_map=None):
             if w and w not in ("0px", "0"):
                 decls.append("border-%s:%s %s %s;" % (side, w, bs or "solid", bc or "currentColor"))
         if decls:
-            st["customStyles"] = st.get("customStyles", "") + "".join(decls)
+            st["customDeclarations"] = st.get("customDeclarations", "") + "".join(decls)
     r = g("border_radius")
     if isinstance(r, dict):
         corners = [dim(r, s) for s in ("top", "right", "bottom", "left")]
@@ -329,7 +329,7 @@ def as_divider(el, ctx):
     w = size(s.get("weight")) or "1px"
     c = colour(s.get("color")) or "currentColor"
     node = {"type": "div", "data": {"attrID": ctx.attr(el)}, "children": []}
-    return styled(node, s, {"customStyles": "border-top:%s solid %s;" % (w, c),
+    return styled(node, s, {"customDeclarations": "border-top:%s solid %s;" % (w, c),
                             "width": size(s.get("width")) or "100%"})
 
 

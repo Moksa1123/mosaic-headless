@@ -42,8 +42,8 @@ $count = fn(string $t, string $id, string $extra = '') => (int)$wpdb->get_var(
 // ── every theme-scoped table except nodes must match exactly ────────────────
 $tables = ['masters', 'templates', 'components', 'component_categories', 'component_documents',
            'collections', 'collection_groups', 'collection_modes', 'collection_skins',
-           'collection_variables', 'breakpoints', 'element_classes', 'sub_classes',
-           'utility_classes', 'utility_sub_classes', 'styleguides', 'template_assigns'];
+           'collection_variables', 'breakpoints', 'variants', 'variant_sub_classes',
+           'universal_classes', 'universal_sub_classes', 'styleguides', 'template_assigns'];
 foreach ($tables as $t) {
     $a = $count($t, $src);
     $b = $count($t, $cp);

@@ -53,7 +53,7 @@ page" usually means editing a template, and the blast radius is every post that
 template is assigned to. Check `mosaic_template_assigns` before you edit.
 
 **"Style the element."** Elementor puts controls on the widget. Mosaic puts styling
-in a **class system** (151 built-in element classes) layered over a **token system**
+in a **class system** (152 built-in variants - element classes) layered over a **token system**
 (collections → modes/skins → variables). Writing styles onto individual nodes works
 and is almost always wrong; it opts that node out of both layers.
 

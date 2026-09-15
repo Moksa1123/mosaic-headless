@@ -29,7 +29,7 @@ if (getenv('MOSAIC_PROBE_RESET') === '1') {
     $tables = [
         'nodes', 'templates', 'template_assigns', 'masters', 'styleguides',
         'components', 'component_documents', 'component_categories',
-        'element_classes', 'sub_classes', 'utility_classes', 'utility_sub_classes',
+        'variants', 'variant_sub_classes', 'universal_classes', 'universal_sub_classes',
         'breakpoints', 'collections', 'collection_modes', 'collection_skins',
         'collection_groups', 'collection_variables', 'themes',
     ];

@@ -29,7 +29,7 @@ RE_CLASS = re.compile(r"^\s*(?:final\s+)?(abstract\s+)?class\s+(\w+)\s+extends\s
 RE_METHOD_BOOL = re.compile(r"function\s+(\w+)\s*\([^)]*\)\s*:\s*bool\s*\{\s*return\s+(true|false)\s*;", re.S)
 RE_ALIAS = re.compile(r"function\s+getAliasTypes\s*\([^)]*\)\s*:\s*array\s*\{\s*return\s*\[(.*?)\]", re.S)
 RE_DEFAULT_CLASS = re.compile(
-    r"function\s+getDefaultElementClassID\s*\([^)]*\)\s*:\s*string\s*\{\s*return\s+([^;]+);", re.S
+    r"function\s+getDefault(?:Variant|ElementClass)ID\s*\([^)]*\)\s*:\s*string\s*\{\s*return\s+([^;]+);", re.S
 )
 # createDataSimple('name', ... ) / createDataSub / createDataArray / createDataResponsive ...
 RE_CREATE_DATA = re.compile(r"\$this->(createData\w*)\s*\(\s*'([^']+)'", re.S)

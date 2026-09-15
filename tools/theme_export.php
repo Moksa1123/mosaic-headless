@@ -49,8 +49,8 @@ if (!$theme) {
 // deliberately absent: they are site state, not part of a theme.
 $tables = [
     'breakpoints', 'collections', 'collection_modes', 'collection_skins',
-    'collection_groups', 'collection_variables', 'element_classes', 'sub_classes',
-    'utility_classes', 'utility_sub_classes', 'styleguides', 'masters', 'templates',
+    'collection_groups', 'collection_variables', 'variants', 'variant_sub_classes',
+    'universal_classes', 'universal_sub_classes', 'styleguides', 'masters', 'templates',
     'template_assigns', 'nodes', 'components', 'component_documents',
     'component_categories', 'submissions',
 ];

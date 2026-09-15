@@ -45,7 +45,7 @@ import urllib.request
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 from build_page import Surface  # noqa: E402
 from build_site import bind_page, build_page_document, build_shell  # noqa: E402
-from sweep_node_types import Client  # noqa: E402
+from sweep_node_types import Client, token_by_id  # noqa: E402
 
 DATA = os.path.join(os.path.dirname(os.path.abspath(__file__)), "..", "data")
 UNSAFE = {"COMMIT_500", "COMMIT_502", "BROKE_PAGE"}
@@ -167,7 +167,7 @@ def main():
         page_ok[host] = healthy
         print("  host %-28s %-7s %6d bytes  %d states"
               % (host, "ok" if healthy else "BROKEN", len(html), len(batches[host])))
-        for attr, cls in re.findall(r'id="(st-\d+)"[^>]*class="(M_EL\d+)', html):
+        for attr, cls in token_by_id(html, r"st-\d+").items():
             cls_of[(host, attr)] = cls
         rules_of[host] = re.findall(r"([^{}]+)\{([^{}]*)\}", html)
     print()

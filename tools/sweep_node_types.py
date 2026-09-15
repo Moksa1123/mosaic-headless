@@ -97,6 +97,26 @@ class Client:
             return e.read().decode("utf-8", "replace")
 
 
+def token_by_id(html, id_pattern):
+    """{id: generated element token} for every tag whose id matches `id_pattern`.
+
+    1.0.8 emits `<div class="m-div _e" id="x">` - class BEFORE id - where 1.0.7 emitted
+    `<div id="x" class="M_EL4 M_EL_Div">`, so the token is read off the whole opening
+    tag rather than assumed to follow the id. The token is the one class that opens
+    with `_` (ElementTokenHelper); no user class may."""
+    out = {}
+    for tag in re.finditer(r"<[a-zA-Z][^>]*>", html):
+        t = tag.group(0)
+        i = re.search(r'\bid="(%s)"' % id_pattern, t)
+        if not i:
+            continue
+        c = re.search(r'\bclass="([^"]*)"', t)
+        tok = re.findall(r"(?:^|\s)(_[a-z0-9_-]+)(?=\s|$)", c.group(1)) if c else []
+        if tok:
+            out.setdefault(i.group(1), tok[0])
+    return out
+
+
 def envelopes(doc):
     return {k: [[x["ID"], x["revision"]] for x in v] for k, v in doc.items()}
 

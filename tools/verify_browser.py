@@ -80,7 +80,7 @@ INCOMPARABLE = {
 
 
 def expand_custom(raw):
-    """`customStyles` into its individual declarations.
+    """`customDeclarations` into its individual declarations.
 
     It is a raw CSS string, and treating it as one opaque value made it the single
     largest blind spot in this tool - three hundred not-comparable rows on the
@@ -208,14 +208,14 @@ def tidy(text):
     """Whitespace and decimal shorthand are not differences.
 
     `rgba(22,24,28,.16)` and `rgba(22, 24, 28, 0.16)` are the same declaration; the
-    browser simply prints it the long way. Without this the customStyles pass would
+    browser simply prints it the long way. Without this the customDeclarations pass would
     report every hairline on the page as overridden."""
     t = re.sub(r"\s*,\s*", ",", (text or "").strip().lower())
     t = re.sub(r"\s+", " ", t)
     return re.sub(r"(?<![\d.])\.(\d)", r"0.", t)
 
 
-# The comparison knows properties by their Mosaic key, but customStyles hands it raw
+# The comparison knows properties by their Mosaic key, but customDeclarations hands it raw
 # CSS names. One spelling has to be canonical, so the CSS name maps back.
 FROM_CSS = {"font-family": "fontFamily", "line-height": "lineHeight",
             "grid-template-columns": "gridCols", "transition": "transitionAll",
@@ -645,7 +645,8 @@ def main():
                                        node.get("--font-size-px", "16")) or 16)
                 for key, value in live.items():
                     value = resolve_tokens(value, spec)
-                    if key == "customStyles" and isinstance(value, str):
+                    # both spellings of the raw-CSS escape hatch: 1.0.8 renamed customStyles
+                    if key in ("customDeclarations", "customStyles") and isinstance(value, str):
                         for prop, raw in expand_custom(value):
                             computed = node.get(prop, "")
                             if prop.startswith("--"):
@@ -658,7 +659,7 @@ def main():
                             else:
                                 status, note = compare(prop, raw, computed,
                                                        font_px, root_px)
-                            rows.append([url, bp, attr, "customStyles:" + prop, raw,
+                            rows.append([url, bp, attr, "customDeclarations:" + prop, raw,
                                          note if status != "ok" else computed,
                                          status])
                         continue

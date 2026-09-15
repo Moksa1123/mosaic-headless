@@ -7,7 +7,7 @@ page's structure in `wp_posts` or `wp_postmeta`. It owns **23 of its own tables*
 all prefixed `wp_mosaic_`, and the WordPress post is only one of several things a
 Mosaic *template* can be assigned to.
 
-Measured on a real install (`data/db-columns.csv`, 23 tables / 206 columns):
+Measured on a real install (`data/db-columns.csv`, 23 tables / 210 columns, Mosaic 1.0.8):
 
 | table | holds |
 |---|---|
@@ -18,8 +18,8 @@ Measured on a real install (`data/db-columns.csv`, 23 tables / 206 columns):
 | `mosaic_nodes` | **the element tree** — one row per element, on every document |
 | `mosaic_components`, `mosaic_component_documents`, `mosaic_component_categories` | reusable components and their category tree |
 | `mosaic_styleguides` | style guide documents |
-| `mosaic_element_classes`, `mosaic_sub_classes` | the built-in class system (151 classes, see `data/element-classes.csv`) |
-| `mosaic_utility_classes`, `mosaic_utility_sub_classes` | user-defined utility classes |
+| `mosaic_variants`, `mosaic_variant_sub_classes` | the built-in class system - the variant catalog (152 entries, see `data/variants.csv`) and the user's sub classes under each. Named `mosaic_element_classes` / `mosaic_sub_classes` before 1.0.8 |
+| `mosaic_universal_classes`, `mosaic_universal_sub_classes` | user-defined classes that apply to any element. `mosaic_utility_classes` / `mosaic_utility_sub_classes` before 1.0.8 |
 | `mosaic_collections`, `mosaic_collection_modes`, `mosaic_collection_skins`, `mosaic_collection_groups`, `mosaic_collection_variables` | the design-token system (a collection has modes and skins; variables resolve per mode) |
 | `mosaic_breakpoints` | responsive breakpoints, per theme — not global |
 | `mosaic_settings` | theme-scoped settings |
@@ -84,10 +84,11 @@ object instead of a literal — that is Mosaic's dynamic-tag equivalent.
 ## Styling
 
 Mosaic does not attach CSS to a node the way Elementor attaches controls to a
-widget. Styling goes through the **element class** system: 151 built-in classes
-(`data/element-classes.csv`), each with its own CSS selectors, arranged in a parent
+widget. Styling goes through the **variant** system (Mosaic's name since 1.0.8 for
+its element classes): 152 built-in entries (`data/variants.csv`), each with its
+own CSS selectors and the class name it emits, arranged in a parent
 tree, some marked `metaIsGroup` (organisational) and some `metaIsEditable`. A node
-points at a default element class (`default_element_class` in `node-types.csv`) and
+points at a default variant (`default_element_class` in `node-types.csv`) and
 takes variations from there.
 
 That is why the same visual change can be made in two very different places, and

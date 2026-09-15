@@ -1,6 +1,6 @@
 step,result,detail
 nested commit accepted,PASS,no exception from the commit
-page still renders,PASS,28853 bytes delivered
+page still renders,PASS,28783 bytes delivered
 title rendered,PASS,the accordion title is in the delivered HTML
 content rendered,PASS,the accordion content is in the delivered HTML
 carries plugin markup,PASS,found 'mosaic-accordion' in the output

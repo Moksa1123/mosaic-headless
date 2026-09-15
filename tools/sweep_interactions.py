@@ -60,7 +60,7 @@ import uuid
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 from build_page import Surface  # noqa: E402
 from build_site import bind_page, build_page_document, build_shell  # noqa: E402
-from sweep_node_types import Client  # noqa: E402
+from sweep_node_types import Client, token_by_id  # noqa: E402
 
 # Read off PredefinedKeyframePropertyMetaTypeFactory's constructor. `data/animatable-
 # properties.csv` carries the full list; these are the ones each candidate drives.
@@ -294,7 +294,7 @@ def main():
     site = {"pages": [], "shell": {}}
     master = build_shell(client, cfg, site, surface)
     template = bind_page(client, cfg, master, a.slug, a.post)
-    n = build_page_document(client, cfg, master, template, probe_tree(cases), surface)
+    n, _uses = build_page_document(client, cfg, master, template, probe_tree(cases), surface)
 
     if a.second_pass:
         second_pass(client, master, template, cases)
@@ -311,7 +311,7 @@ def main():
 
     # The frontend keys each entry by the trigger's generated class, so map each probe
     # id to its class the same way verify_rwd does, then match entries by that class.
-    by_class = dict(re.findall(r'id="(ix-[^"]+)"[^>]*class="(M_EL\d+)', html))
+    by_class = token_by_id(html, r"ix-[^\"]+")
     entries = {e.get("triggerSelector", "").lstrip("."): e for e in payload}
 
     rows, solved = [], 0

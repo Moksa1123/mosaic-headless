@@ -27,7 +27,7 @@ Both `checkout` and `check` take one required string parameter, `syncCheckEnvelo
 pairs:
 
 ```json
-{"node": [["<nodeID>", "<revision>"], ...], "elementClass": [[...]]}
+{"node": [["<nodeID>", "<revision>"], ...], "variant": [[...]]}
 ```
 
 The `revision` is the value from the row's `revision` column when you read it. The

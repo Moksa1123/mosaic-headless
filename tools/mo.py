@@ -557,20 +557,21 @@ def cmd_states(a):
         if usable:
             print("%d go on ANY element: %s"
                   % (len(usable), ", ".join(r["state"] for r in usable)))
-        print("The pseudo-class is emitted UPPERCASE (`.M_EL9:HOVER`), so grepping a "
+        print("The pseudo-class is emitted UPPERCASE (`._j:HOVER`), so grepping a "
               "stylesheet\nfor `:hover` finds nothing.")
 
     emit(out, render)
 
 
 def cmd_classes(a):
-    out = [r for r in rows("element-classes")
+    out = [r for r in rows("variants")
            if matches(r["name"], a.grep) or matches(r["selectors"], a.grep)]
     emit(out, lambda: (
-        table(["name", "selectors", "id"],
-              [[r["name"], r["selectors"][:40], r["id"]] for r in out]),
-        print("\n%d classes. These are THEME-GLOBAL: styling `Heading 1` restyles "
-              "every h1 on the install." % len(out))))
+        table(["name", "class", "selectors", "id"],
+              [[r["name"], r["class_name"], r["selectors"][:40], r["id"]] for r in out]),
+        print("\n%d variants - what Mosaic 1.0.8 calls the built-in element classes. "
+              "THEME-GLOBAL: styling `Heading 1` restyles every h1 on the install; "
+              "`class` is what the element emits (`m-heading-1`)." % len(out))))
 
 
 # ── dynamic content, interactions, conditions ─────────────────────────────────
@@ -715,7 +716,7 @@ def cmd_stats(a):
         "style_properties": len(rows("style-properties")),
         "style_outcomes": sv,
         "style_states": len(rows("style-states")),
-        "element_classes": len(rows("element-classes")),
+        "variants": len(rows("variants")),
         "dynamic_variables": len(rows("dynamic-variables")),
         "rest_routes": len(rows("rest-routes")),
         "tables": len({r["table"] for r in rows("db-columns")}),
@@ -735,7 +736,7 @@ def cmd_stats(a):
             payload["style_properties"],
             "  ".join("%s %d" % (k, v) for k, v in sorted(sv.items()))))
         print("style states      %3d" % payload["style_states"])
-        print("element classes   %3d   (theme-global)" % payload["element_classes"])
+        print("variants          %3d   (theme-global)" % payload["variants"])
         print("dynamic variables %3d" % payload["dynamic_variables"])
         print("REST routes       %3d" % payload["rest_routes"])
         print("tables            %3d   %d columns"
@@ -807,7 +808,7 @@ def main():
     p.add_argument("--verified", action="store_true",
                    help="only states measured to compile to their promised selector")
 
-    p = add("classes", cmd_classes, "element classes (theme-global)")
+    p = add("classes", cmd_classes, "variants - the theme-global element classes")
     p.add_argument("--grep")
 
     p = add("vars", cmd_vars, "@VAR() dynamic variables")

@@ -65,7 +65,7 @@ def card(attr):
     return {"type": "div", "data": {"attrID": attr},
             "style": {"&": {"_": {"paddingTop": "18px", "paddingBottom": "18px",
                                   "paddingLeft": "20px", "paddingRight": "20px",
-                                  "customStyles":
+                                  "customDeclarations":
                                       "border:1px solid rgb(214,214,206);"}}},
             "children": [
                 {"type": "text",

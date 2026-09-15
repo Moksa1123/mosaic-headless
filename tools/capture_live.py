@@ -5,7 +5,14 @@ Usage:
     python capture_live.py <data-dir>
 
 Reads <data-dir>/raw/*.json (captured from a real install, see references/measuring.md)
-and writes rest-routes.csv, element-classes.csv and condition-subjects.csv beside them.
+and writes rest-routes.csv, variants.csv, db-columns.csv and condition-subjects.csv
+beside them.
+
+Raw captures (all under <data-dir>/raw, cookie + X-WP-Nonce authenticated):
+  rest-index.json                 GET /wp-json/mosaic/v<version>
+  variantCatalog.json             GET .../variantCatalog/   (elementClassMeta.json before 1.0.8)
+  evaluatorEngineMetas-<ctx>.json GET .../evaluatorEngineMetas/<ctx>  ctx = element|template|interaction|formAction
+  db-columns.txt                  `### <table>` lines followed by `<column>\t<type>` from SHOW COLUMNS
 
 Everything here is measured rather than inferred: the route table comes from the
 site's own `/wp-json/mosaic/v<version>` index, so it reflects what that install
@@ -66,8 +73,17 @@ def rest_routes(data_dir, out_dir):
     write_csv(os.path.join(out_dir, "rest-routes.csv"), ["route", "methods", "args", "raw_route"], rows)
 
 
-def element_classes(data_dir, out_dir):
-    d = load(data_dir, "elementClassMeta.json")
+def variants(data_dir, out_dir):
+    """The variant catalog: Mosaic's built-in, theme-global element classes.
+
+    1.0.8 renamed the family (element classes -> variants, sub classes -> variant sub
+    classes, utility classes -> universal classes) and gave every catalog entry the
+    class name it emits (`metaClassName`, e.g. `m-heading-1`) plus whether that name
+    is rendered onto the element at all (`metaRenderClassName`). The 1.0.7 capture
+    (elementClassMeta.json) is still read so an older site can be measured; it just
+    has no class-name columns to fill.
+    """
+    d = load(data_dir, "variantCatalog.json") or load(data_dir, "elementClassMeta.json")
     if not d:
         return
     rows = []
@@ -76,6 +92,8 @@ def element_classes(data_dir, out_dir):
             {
                 "id": c.get("ID", ""),
                 "name": c.get("metaName", ""),
+                "class_name": c.get("metaClassName", ""),
+                "renders_class": c.get("metaRenderClassName", ""),
                 "type": c.get("metaType", ""),
                 "selectors": "|".join(c.get("metaSelectors") or []),
                 "parent": c.get("metaParent", ""),
@@ -86,10 +104,27 @@ def element_classes(data_dir, out_dir):
             }
         )
     write_csv(
-        os.path.join(out_dir, "element-classes.csv"),
-        ["id", "name", "type", "selectors", "parent", "is_group", "is_editable", "is_required", "ordering"],
+        os.path.join(out_dir, "variants.csv"),
+        ["id", "name", "class_name", "renders_class", "type", "selectors", "parent",
+         "is_group", "is_editable", "is_required", "ordering"],
         rows,
     )
+
+
+def db_columns(data_dir, out_dir):
+    """SHOW COLUMNS of every mosaic_* table, as captured into raw/db-columns.txt."""
+    path = os.path.join(data_dir, "raw", "db-columns.txt")
+    if not os.path.exists(path):
+        return
+    rows, table = [], None
+    for line in open(path, encoding="utf-8"):
+        line = line.rstrip("\n")
+        if line.startswith("### "):
+            table = line[4:].strip()
+        elif table and "\t" in line:
+            col, typ = line.split("\t", 1)
+            rows.append({"table": table, "column": col.strip(), "type": typ.strip()})
+    write_csv(os.path.join(out_dir, "db-columns.csv"), ["table", "column", "type"], rows)
 
 
 def condition_subjects(data_dir, out_dir):
@@ -126,5 +161,6 @@ if __name__ == "__main__":
         sys.exit(__doc__)
     data_dir = sys.argv[1]
     rest_routes(data_dir, data_dir)
-    element_classes(data_dir, data_dir)
+    variants(data_dir, data_dir)
+    db_columns(data_dir, data_dir)
     condition_subjects(data_dir, data_dir)

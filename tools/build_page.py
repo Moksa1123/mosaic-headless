@@ -141,7 +141,8 @@ class Surface:
                 allowed = rule["allowed_children"].split("|") + self.default_children.get(parent_type, [])
                 if t not in allowed:
                     problems.append("%s accepts only %s, not %s" % (parent_type, "/".join(allowed), t))
-        shorthands = {"radius", "shadow", "transitionAll", "move", "border", "gridCols"}
+        # customStyles is the pre-1.0.8 name of customDeclarations; expand_shorthands maps it
+        shorthands = {"radius", "shadow", "transitionAll", "move", "border", "gridCols", "customStyles"}
         for state, per_bp in node.get("style", {}).items():
             if state not in self.states:
                 problems.append("unknown style state %r on %s" % (state, t))
@@ -175,7 +176,7 @@ def expand_shorthands(props):
             # gridTemplateColumns is a CSSGridTemplateStylePropertyFactory property: a
             # plain "repeat(3, 1fr)" string is accepted and then compiles to nothing at
             # all, so a grid silently collapses to one column. Until that structured
-            # shape is pinned down, route it through the customStyles escape hatch.
+            # shape is pinned down, route it through the customDeclarations escape hatch.
             extra_css.append("grid-template-columns:%s;" % value)
         elif key == "radius" and isinstance(value, str):
             out["borderRadius"] = {"type": "all", "allOptions": {"borderRadiusValue": value}}
@@ -206,8 +207,12 @@ def expand_shorthands(props):
         else:
             out[key] = value
     if extra_css:
-        # merge with any customStyles the spec set itself rather than clobbering it
-        out["customStyles"] = (out.get("customStyles", "") + "".join(extra_css))
+        # merge with any customDeclarations the spec set itself rather than clobbering it
+        out["customDeclarations"] = (out.get("customDeclarations", "") + "".join(extra_css))
+    if "customStyles" in out:
+        # the 1.0.7 spelling; 1.0.8 renamed the raw-CSS escape hatch and the validator
+        # drops the old key silently, so specs written before the rename still build
+        out["customDeclarations"] = out.pop("customStyles") + out.get("customDeclarations", "")
     return out
 
 
@@ -275,11 +280,12 @@ def ordering_for(index):
 
 
 def theme_records(spec, doc, surface):
-    """Turn the spec's `theme` block into collectionVariable + elementClass records.
+    """Turn the spec's `theme` block into collectionVariable + variant records.
 
     Both are theme-scoped rather than per-node, and both are how a real Mosaic site is
-    meant to be styled: variables are the tokens, element classes apply them to every
-    element of a kind. See references/design-system.md.
+    meant to be styled: variables are the tokens, variants (the theme-global element
+    classes - `elementClasses` before 1.0.8) apply them to every element of a kind.
+    See references/design-system.md.
     """
     theme = spec.get("theme") or {}
     out = {}
@@ -336,16 +342,16 @@ def theme_records(spec, doc, surface):
         # tokens too, and expand_shorthands resolves {"token": ...} from this map
         VAR_IDS.update(spec["_varIDs"])
 
-    classes = theme.get("elementClasses") or {}
+    classes = theme.get("variants") or theme.get("elementClasses") or {}
     if classes:
         by_name = {}
-        for row in load_csv("element-classes.csv"):
+        for row in load_csv("variants.csv"):
             by_name.setdefault(row["name"], []).append(row)
         recs = []
         for name, states in classes.items():
             matches = by_name.get(name) or []
             if not matches:
-                sys.exit("no element-class meta named %r; see data/element-classes.csv" % name)
+                sys.exit("no variant named %r; see data/variants.csv" % name)
             # a fresh UUID here is accepted and then silently dropped, so the meta ID
             # is the only thing that works - take the top-level (parent-less) one
             top = next((m for m in matches if not m["parent"]), matches[0])
@@ -356,7 +362,7 @@ def theme_records(spec, doc, surface):
                                          for bp, props in per_bp.items()}
                                     for st, per_bp in states.items()}}},
                 "originalRevisionRecord": None})
-        out["elementClass"] = recs
+        out["variant"] = recs
     return out
 
 

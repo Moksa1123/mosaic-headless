@@ -19,7 +19,7 @@ a theme.
 ## Site spec
 
     {
-      "theme":  {"variables": {...}, "elementClasses": {...}},   as build_page.py
+      "theme":  {"variables": {...}, "variants": {...}},   as build_page.py
       "master": "Zidanna shell",
       "shell":  {"header": <node>, "footer": <node>},
       "pages":  [{"slug": "...", "title": "...", "tree": <node>}, ...]

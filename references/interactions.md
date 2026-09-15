@@ -47,7 +47,7 @@ var mosaicInteractionTypes={"progress":[{"id":"scrollIntoView",
   "defaultSettings":{"allowBackward":"1","smoothing":"60","startWhen":"middleOfTheScreen",
                      "startOffset":"0px","endWhen":"middleOfTheScreen","endOffset":"0px"},
   "supportsLivePreview":true,"timelineKeys":["_"]}]};
-var mosaicInteractions=[{"type":"scrollIntoView","triggerSelector":".M_EL3",
+var mosaicInteractions=[{"type":"scrollIntoView","triggerSelector":"._d",
   "action":{"scrollIntoView":{"actions":[{"type":"animation","data":{},
     "animationOptions":{"timelines":{"_":{"keyframes":[
       {"progressData":{"delay":0,"duration":100},"easing":"ease"}]}}}}]}}}];

@@ -78,11 +78,11 @@ def T(tag, text, _t=None, _m=None, **st):
 # The keyboard is a state too.
 #
 # `focus-visible` was verified by sweep_style_states.py to compile to
-# `.M_EL<n>:FOCUS-VISIBLE` - note the UPPERCASE pseudo-class Mosaic emits, which is
+# `._<token>:FOCUS-VISIBLE` - note the UPPERCASE pseudo-class Mosaic emits, which is
 # why grepping a delivered stylesheet for ":focus-visible" finds nothing at all. Of
 # the seven globally usable states this page used exactly one, `hover`, which means
 # every route through it was invisible to anyone not using a mouse.
-FOCUS_RING = {"customStyles": "outline:2px solid rgb(255,90,54);outline-offset:3px;"}
+FOCUS_RING = {"customDeclarations": "outline:2px solid rgb(255,90,54);outline-offset:3px;"}
 
 
 def box(attr, style, children, hover=None, focus=None, _t=None, _m=None):
@@ -157,7 +157,7 @@ def figure(attr, num, size="56px", t="44px", m="34px"):
     return {"type": "div", "data": {"attrID": attr},
             "style": {"&": {"_": {"display": "flex", "alignItems": "baseline",
                                   "columnGap": "0px",
-                                  "customStyles":
+                                  "customDeclarations":
                                       "font-variant-numeric:tabular-nums;"}}},
             "children": [
                 {"type": "div", "data": {"attrID": attr + "-d%d" % j},
@@ -166,7 +166,7 @@ def figure(attr, num, size="56px", t="44px", m="34px"):
                  # in the stylesheet, correct, and computed to `block` anyway -
                  # which is exactly the class of dead code verify_browser.py exists
                  # to find, and it found this one.
-                 "style": {"&": {"_": {"customStyles":
+                 "style": {"&": {"_": {"customDeclarations":
                                            "overflow:hidden;"
                                            "--d:%dms;" % (j * 70)}}},
                  "children": [T("h3", ch, color={"token": "--mk-ink"}, fontSize=size,
@@ -186,7 +186,7 @@ def clause(num, en, zh, attr):
     return box(attr, {"display": "grid", "gridCols": "84px 1fr",
                       "columnGap": "0px", "alignItems": "start",
                       "paddingTop": "22px",
-                      "customStyles": "border-top:1px solid " + RULE + ";"},
+                      "customDeclarations": "border-top:1px solid " + RULE + ";"},
                _m={"gridCols": "48px 1fr"},
                children=[
                    mono("§" + num, size="12px", color="--mk-accent-ink",
@@ -239,7 +239,7 @@ def mask_line(attr, text, tag="h1", **st):
     newline gives the browser one box and nothing to slide behind.
     """
     return {"type": "div", "data": {"attrID": attr + "-mask"},
-            "style": {"&": {"_": {"customStyles":
+            "style": {"&": {"_": {"customDeclarations":
                                       "overflow:hidden;padding-bottom:.08em;"}}},
             "children": [T(tag, text, **st)]}
 
@@ -839,21 +839,26 @@ def motion_css():
         # ── opened ──────────────────────────────────────────────────────
         # The item itself becomes the overlay. Nothing above it is styled, so
         # no `:has()` is needed and no ancestor has to know this state exists.
-        "#mk-plate-item.M_EL_AccordionItem--opened{position:fixed;inset:0;"
+        # The state class is the runtime's, and its spelling is the plugin's, not
+        # ours: 1.0.7 toggled `M_EL_AccordionItem--opened`, 1.0.8 renamed every
+        # emitted class (`m-accordion-item--opened`) and the tap-to-enlarge silently
+        # stopped working on upgrade until this selector followed. Any CSS that
+        # names an emitted class is coupled to the plugin version.
+        "#mk-plate-item.m-accordion-item--opened{position:fixed;inset:0;"
         "z-index:200;width:auto;border:none;background:rgba(250,250,247,.97);"
         "display:grid;align-content:center;justify-items:center;"
         "padding:24px}",
-        "#mk-plate-item.M_EL_AccordionItem--opened::after{display:none}",
-        "#mk-plate-item.M_EL_AccordionItem--opened #mk-plate-title{"
+        "#mk-plate-item.m-accordion-item--opened::after{display:none}",
+        "#mk-plate-item.m-accordion-item--opened #mk-plate-title{"
         "cursor:zoom-out;width:min(760px,88vw);"
         "border:1px solid rgb(214,214,206)}",
-        "#mk-plate-item.M_EL_AccordionItem--opened #mk-loop-bar{"
+        "#mk-plate-item.m-accordion-item--opened #mk-loop-bar{"
         "padding:8px 12px 9px}",
-        "#mk-plate-item.M_EL_AccordionItem--opened #mk-plate-body{"
+        "#mk-plate-item.m-accordion-item--opened #mk-plate-body{"
         "width:min(760px,88vw)}",
-        "#mk-plate-item.M_EL_AccordionItem--opened #mk-loop-seal{"
+        "#mk-plate-item.m-accordion-item--opened #mk-loop-seal{"
         "inset:auto 16px 14px auto;width:38px;height:38px}",
-        "#mk-plate-item.M_EL_AccordionItem--opened #mk-loop-seal::after{"
+        "#mk-plate-item.m-accordion-item--opened #mk-loop-seal::after{"
         "font-size:21px}",
         "@media (max-width:1079px){#mk-loop{right:24px;width:154px}}",
         # the phone gets the plate too, tucked above the scroll cue and small
@@ -1257,7 +1262,7 @@ def motion_css():
 # ── the shared shell ──────────────────────────────────────────────────────────
 HEADER = box("mk-shell-top", {}, [
     # a `code` node with insertLocation "head" is the only way to get @keyframes into
-    # the document - customStyles is emitted inside a rule and cannot hold one
+    # the document - customDeclarations is emitted inside a rule and cannot hold one
     {"type": "code", "data": {"attrID": "mk-motion-css", "insertLocation": "head",
                               "content": motion_css(), "processShortcodes": "0"}},
     # the fill and the track are separate elements: nested, the fill's width is a
@@ -1403,11 +1408,11 @@ FOOTER = box("mk-footer",
             ]),
         box("mk-f-legal",
             {"paddingTop": "18px",
-             "customStyles": "border-top:1px solid " + RULE_DARK + ";"},
+             "customDeclarations": "border-top:1px solid " + RULE_DARK + ";"},
             [{"type": "div", "data": {"attrID": "mk-f-legal-row"},
               "style": bp({"display": "flex", "justifyContent": "space-between",
                            "columnGap": "20px", "rowGap": "6px",
-                           "customStyles": "flex-wrap:wrap;"}, None, None),
+                           "customDeclarations": "flex-wrap:wrap;"}, None, None),
               "children": [
                   mono("© 2026 MOKSA WEB — ALL RIGHTS RESERVED", size="10px",
                        color="rgb(128,130,138)", track="0.1em"),
@@ -1449,7 +1454,7 @@ MASTHEAD = section("mk-mast", [wrap("mk-mast-in", [
     # the document's own header block: what this is, where it is from, which revision
     box("mk-mast-meta",
         {"display": "flex", "justifyContent": "space-between", "columnGap": "20px",
-         "rowGap": "6px", "customStyles": "flex-wrap:wrap;"},
+         "rowGap": "6px", "customDeclarations": "flex-wrap:wrap;"},
         [mono("MOKSA WEB — STUDIO PROFILE", color="--mk-ink", track="0.16em"),
          mono("TAICHUNG, TW", track="0.16em"),
          mono("REV. 2026.09", track="0.16em")]),
@@ -1490,18 +1495,18 @@ MASTHEAD = section("mk-mast", [wrap("mk-mast-in", [
                "color": {"token": "--mk-ink"},
                "paddingLeft": "22px", "paddingRight": "22px",
                "paddingTop": "13px", "paddingBottom": "13px",
-               "customStyles": "border:1px solid rgb(255,90,54);"}
+               "customDeclarations": "border:1px solid rgb(255,90,54);"}
               if n == 1 else
               {"backgroundColor": "rgba(0,0,0,0)", "color": {"token": "--mk-ink"},
                "paddingLeft": "0px", "paddingRight": "0px",
                "paddingTop": "13px", "paddingBottom": "13px",
-               "customStyles": "border:1px solid rgba(0,0,0,0);"
+               "customDeclarations": "border:1px solid rgba(0,0,0,0);"
                                "border-bottom-color:rgb(22,24,28);"},
               fontSize="13px", fontFamily=MONO, letterSpacing="0.1em",
               radius="0px", cursor="pointer", transitionAll="180ms ease")},
                     "focus-visible": {"_": FOCUS_RING},
                     "hover": {"_": ({"backgroundColor": {"token": "--mk-ink"},
-                                     "customStyles": "border:1px solid rgb(22,24,28);"}
+                                     "customDeclarations": "border:1px solid rgb(22,24,28);"}
                                     if n == 1
                                     else {"color": {"token": "--mk-accent"}})}},
           "text": text}
@@ -1512,14 +1517,14 @@ MASTHEAD = section("mk-mast", [wrap("mk-mast-in", [
           # the right-hand column: what a spec sheet puts in its header block
           box("mk-mast-side",
               {"display": "grid", "rowGap": "0px",
-               "customStyles": "border-top:1px solid " + RULE_INK + ";"},
-              _m={"customStyles": "border-top:1px solid " + RULE + ";"},
+               "customDeclarations": "border-top:1px solid " + RULE_INK + ";"},
+              _m={"customDeclarations": "border-top:1px solid " + RULE + ";"},
               children=[
                   box("mk-mast-side-%d" % i,
                       {"display": "grid", "gridCols": "1fr auto",
                        "columnGap": "14px", "alignItems": "baseline",
                        "paddingTop": "11px", "paddingBottom": "11px",
-                       "customStyles": ("" if i == 0
+                       "customDeclarations": ("" if i == 0
                                         else "border-top:1px solid " + RULE + ";")},
                       [mono(k, size="10px", color="--mk-faint", track="0.18em"),
                        mono(v, size="12px", color="--mk-ink", track="0.02em")])
@@ -1533,14 +1538,14 @@ MASTHEAD = section("mk-mast", [wrap("mk-mast-in", [
              box("mk-spec-%d" % i,
                  {"paddingRight": "22px",
                   "paddingLeft": "0px" if i == 0 else "22px",
-                  "customStyles": ("" if i == 0
+                  "customDeclarations": ("" if i == 0
                                    else "border-left:1px solid " + RULE + ";")},
                  # at two-up the rule falls on the odd cells instead, and
                  # `border-left:0` has to be set explicitly - omitting it leaves the
                  # four-up rule standing
                  _t={"paddingTop": "18px", "paddingBottom": "18px",
                      "paddingLeft": "0px" if i % 2 == 0 else "18px",
-                     "customStyles": ("border-left:0;" if i % 2 == 0
+                     "customDeclarations": ("border-left:0;" if i % 2 == 0
                                       else "border-left:1px solid " + RULE + ";")
                                      + ("border-top:1px solid " + RULE + ";" if i > 1
                                         else "border-top:0;")},
@@ -1564,12 +1569,12 @@ MASTHEAD = section("mk-mast", [wrap("mk-mast-in", [
 
 TICKER_BAND = box("mk-ticker",
     {"backgroundColor": {"token": "--mk-ink"}, "paddingTop": "11px",
-     "paddingBottom": "11px", "customStyles": "overflow:hidden;"},
+     "paddingBottom": "11px", "customDeclarations": "overflow:hidden;"},
     [box("mk-ticker-track", {"display": "flex", "columnGap": "0px"},
          # duplicated so the loop can translate exactly -50% and never show a seam
          [T("p", w, color="rgb(250,250,247)", fontSize="11px", fontWeight="400",
             letterSpacing="0.2em", fontFamily=MONO,
-            customStyles=("padding:0 22px;white-space:nowrap;"
+            customDeclarations=("padding:0 22px;white-space:nowrap;"
                           "border-right:1px solid rgba(250,250,247,.22);"))
           for w in TICKER * 2])])
 
@@ -1598,7 +1603,7 @@ SERVICE_ROW = box("svc-row",
                   {"display": "grid", "gridCols": "84px 1fr 1.35fr",
                    "columnGap": "24px", "alignItems": "start",
                    "paddingTop": "26px", "paddingBottom": "26px",
-                   "customStyles": "border-top:1px solid " + RULE + ";"},
+                   "customDeclarations": "border-top:1px solid " + RULE + ";"},
                   _t={"gridCols": "72px 1fr 1.2fr", "columnGap": "18px"},
                   _m={"gridCols": "repeat(1, 1fr)", "rowGap": "10px",
                       "paddingTop": "20px", "paddingBottom": "20px"},
@@ -1652,7 +1657,7 @@ PROCESS_SEC = section("process", [wrap("mk-proc-in", [
                 grid("mk-proc-grid", 4, "24px", tcols=2, mcols=1, children=[
                     box("mk-proc-%d" % i,
                         {"paddingTop": "26px", "paddingRight": "18px",
-                         "customStyles": "border-top:1px solid " + RULE + ";"},
+                         "customDeclarations": "border-top:1px solid " + RULE + ";"},
                         _m={"paddingTop": "20px", "paddingRight": "0px"},
                         children=[
                             box("mk-proc-dot-%d" % i, {}, []),
@@ -1688,7 +1693,7 @@ STACK_SEC = section("stack", [wrap("mk-stack-in", [
                      # animation-range further down the scroll rather than by a
                      # delay: a scroll-driven animation has no clock to delay
                      # against, so the offset has to live in the range.
-                     "customStyles":
+                     "customDeclarations":
                          "border-top:1px solid " + RULE + ";"
                          "animation:mk-rise both;animation-timeline:view();"
                          "animation-range:entry %d%% cover %d%%;"
@@ -1699,9 +1704,9 @@ STACK_SEC = section("stack", [wrap("mk-stack-in", [
                         mono(group, size="10px", color="--mk-faint", track="0.18em"),
                         box("mk-stack-tags-%d" % i,
                             {"display": "flex", "columnGap": "8px", "rowGap": "8px",
-                             "customStyles": "flex-wrap:wrap;"},
+                             "customDeclarations": "flex-wrap:wrap;"},
                             [box("mk-tag-%d-%d" % (i, j),
-                                 {"customStyles":
+                                 {"customDeclarations":
                                       "border:1px solid " + RULE + ";"
                                       "padding:5px 10px;"
                                       "transition:border-color .2s ease,"
@@ -1726,7 +1731,7 @@ WORK_SEC = section("works", [wrap("mk-works-in", [
                 box("mk-works-thead",
                     {"display": "grid", "gridCols": "60px 1.4fr 1fr 1fr",
                      "columnGap": "20px", "paddingBottom": "12px",
-                     "customStyles":
+                     "customDeclarations":
                          "border-bottom:1px solid rgba(22,24,28,.34);"},
                     _m={"display": "none"},
                     children=[
@@ -1744,7 +1749,7 @@ WORK_SEC = section("works", [wrap("mk-works-in", [
                      "columnGap": "20px", "alignItems": "baseline",
                      "paddingTop": "17px", "paddingBottom": "17px",
                      "cursor": "pointer",
-                     "customStyles": "border-bottom:1px solid " + RULE + ";"},
+                     "customDeclarations": "border-bottom:1px solid " + RULE + ";"},
                     _m={"gridCols": "1fr", "rowGap": "5px",
                         "paddingTop": "15px", "paddingBottom": "15px"},
                     children=[
@@ -1777,7 +1782,7 @@ PRODUCT_SEC = section("products", [wrap("mk-prod-in", [
             box("mk-prod-head",
                 {"display": "grid", "gridCols": "84px 1fr", "columnGap": "0px",
                  "alignItems": "start", "paddingTop": "22px",
-                 "customStyles": "border-top:1px solid " + RULE_DARK + ";"},
+                 "customDeclarations": "border-top:1px solid " + RULE_DARK + ";"},
                 _m={"gridCols": "48px 1fr"},
                 children=[
                     mono("§05", size="12px", color="--mk-accent", track="0.06em"),
@@ -1796,7 +1801,7 @@ PRODUCT_SEC = section("products", [wrap("mk-prod-in", [
                         {"display": "grid", "gridCols": "84px 1fr 1.3fr",
                          "columnGap": "24px", "alignItems": "start",
                          "paddingTop": "26px", "paddingBottom": "26px",
-                         "customStyles": "border-top:1px solid " + RULE_DARK + ";"},
+                         "customDeclarations": "border-top:1px solid " + RULE_DARK + ";"},
                         _t={"gridCols": "72px 1fr 1.2fr", "columnGap": "18px",
                             "rowGap": "14px"},
                         _m={"gridCols": "repeat(1, 1fr)", "rowGap": "12px",
@@ -1816,7 +1821,7 @@ PRODUCT_SEC = section("products", [wrap("mk-prod-in", [
                                 # the 72px number gutter on row two at tablet
                                 box("mk-prod-s-%d" % i,
                                     {"marginTop": "14px",
-                                     "customStyles":
+                                     "customDeclarations":
                                          "border:1px solid rgba(255,90,54,.6);"
                                          "padding:5px 10px;display:inline-block;"
                                          "width:max-content;"},
@@ -1838,16 +1843,16 @@ VOICE_SEC = section("mk-voices", [wrap("mk-voice-in", [
             box("mk-voice-%d" % i,
                 {"paddingTop": "26px", "paddingRight": "28px", "paddingBottom": "26px",
                  "paddingLeft": "0px" if i == 0 else "28px",
-                 "customStyles": "border-top:1px solid " + RULE + ";"
+                 "customDeclarations": "border-top:1px solid " + RULE + ";"
                                  + ("" if i == 0
                                     else "border-left:1px solid " + RULE + ";")},
                 # one column: the column rule and the gutter both have to be switched
                 # off explicitly - omitting them leaves the three-up rule standing
                 _t={"paddingLeft": "0px", "paddingRight": "0px",
-                    "customStyles": "border-top:1px solid " + RULE + ";"
+                    "customDeclarations": "border-top:1px solid " + RULE + ";"
                                     "border-left:0;"},
                 _m={"paddingLeft": "0px", "paddingRight": "0px",
-                    "customStyles": "border-top:1px solid " + RULE + ";"
+                    "customDeclarations": "border-top:1px solid " + RULE + ";"
                                     "border-left:0;"},
                 children=[
                     mono("“", size="24px", color="--mk-accent-ink", track="0"),
@@ -1870,7 +1875,7 @@ CONTACT = section("contact", [wrap("mk-contact-in", [
             box("mk-contact-head",
                 {"display": "grid", "gridCols": "84px 1fr", "columnGap": "0px",
                  "alignItems": "start", "paddingTop": "22px",
-                 "customStyles": "border-top:1px solid " + RULE + ";"},
+                 "customDeclarations": "border-top:1px solid " + RULE + ";"},
                 _m={"gridCols": "48px 1fr"},
                 children=[
                     mono("§07", size="12px", color="--mk-accent-ink",
@@ -1895,7 +1900,7 @@ CONTACT = section("contact", [wrap("mk-contact-in", [
                                  {"display": "grid", "gridCols": "150px 1fr",
                                   "columnGap": "20px", "alignItems": "baseline",
                                   "paddingTop": "15px", "paddingBottom": "15px",
-                                  "customStyles":
+                                  "customDeclarations":
                                       "border-top:1px solid " + RULE + ";"},
                                  _m={"gridCols": "84px 1fr", "columnGap": "12px"},
                                  children=[
@@ -1938,7 +1943,7 @@ def flap(attr, items, cell, size, family=MONO, weight="500", colour="--mk-paper"
     n/(n+1) of the strip's own height, which the CSS computes from the same count.
     """
     return box(attr,
-               dict({"customStyles": "overflow:hidden;height:%s;" % cell}, **st),
+               dict({"customDeclarations": "overflow:hidden;height:%s;" % cell}, **st),
                [box(attr + "-s", {},
                     [box("%s-i-%d" % (attr, j), {},
                          [T("p", v, color={"token": colour} if colour.startswith("--")
@@ -1955,14 +1960,14 @@ BOARD = section("board", [wrap("mk-board-in", [
             box("mk-board-head",
                 {"display": "flex", "justifyContent": "space-between",
                  "columnGap": "20px", "rowGap": "8px",
-                 "customStyles": "flex-wrap:wrap;"},
+                 "customDeclarations": "flex-wrap:wrap;"},
                 [mono("BOARD 01 — WHERE WE WORK", size="10px",
                       color="--mk-accent", track="0.22em"),
                  mono("REMOTE / %d DESTINATIONS" % len(CITIES), size="10px",
                       color="rgb(140,142,150)", track="0.2em")]),
             box("mk-board-row",
                 {"display": "flex", "alignItems": "center", "columnGap": "26px",
-                 "marginTop": "34px", "customStyles": "flex-wrap:wrap;"},
+                 "marginTop": "34px", "customDeclarations": "flex-wrap:wrap;"},
                 _m={"columnGap": "14px", "marginTop": "24px"},
                 children=[
                     # the three letter windows, transposed out of the code list
@@ -1973,7 +1978,7 @@ BOARD = section("board", [wrap("mk-board-in", [
                             flap("mk-flap-%d" % k,
                                  [c[0][k] for c in CITIES],
                                  "86px", "74px", weight="600",
-                                 customStyles="overflow:hidden;height:86px;"
+                                 customDeclarations="overflow:hidden;height:86px;"
                                               "background:rgb(30,32,37);"
                                               "padding:0 16px;"
                                               "border:1px solid rgba(250,250,247,.14);")
@@ -1998,7 +2003,7 @@ PAN_WORDS = ["WEB", "COMMERCE", "AUTOMATION", "AI", "ERP", "SEO", "SOFTWARE"]
 PAN = box("mk-pan",
           {"backgroundColor": {"token": "--mk-accent"},
            "paddingTop": "34px", "paddingBottom": "34px",
-           "customStyles": "overflow:hidden;"},
+           "customDeclarations": "overflow:hidden;"},
           _m={"paddingTop": "22px", "paddingBottom": "22px"},
           children=[
               # Two nested motions, because one transform cannot do both jobs.
@@ -2006,11 +2011,11 @@ PAN = box("mk-pan",
               # its own clock so the band is still moving when nobody is scrolling.
               # The word list is emitted TWICE and the loop travels exactly half its
               # own width, which is what makes the wrap invisible.
-              box("mk-pan-track", {"customStyles": "width:max-content;"}, [
+              box("mk-pan-track", {"customDeclarations": "width:max-content;"}, [
                   box("mk-pan-loop",
                       {"display": "flex", "columnGap": "56px",
                        "alignItems": "baseline",
-                       "customStyles": "white-space:nowrap;width:max-content;"},
+                       "customDeclarations": "white-space:nowrap;width:max-content;"},
                       _m={"columnGap": "30px"},
                       children=[
                           node for c in range(2)
@@ -2067,7 +2072,7 @@ MATRIX_SEC = section("matrix", [wrap("mk-mx-in", [
             box("mk-mx-head",
                 {"display": "flex", "justifyContent": "space-between",
                  "columnGap": "20px", "rowGap": "8px", "alignItems": "baseline",
-                 "customStyles": "flex-wrap:wrap;"},
+                 "customDeclarations": "flex-wrap:wrap;"},
                 [mono("TABLE 01 — CAPABILITY", size="10px",
                       color="--mk-accent-ink", track="0.22em"),
                  mono("● 標準   ◐ 選配   ○ 不含", size="10px",
@@ -2077,7 +2082,7 @@ MATRIX_SEC = section("matrix", [wrap("mk-mx-in", [
                 {"display": "grid", "gridCols": "1fr repeat(3, 78px)",
                  "columnGap": "10px", "alignItems": "end", "marginTop": "26px",
                  "paddingBottom": "10px",
-                 "customStyles": "border-bottom:1px solid " + RULE_INK + ";"},
+                 "customDeclarations": "border-bottom:1px solid " + RULE_INK + ";"},
                 _m={"gridCols": "1fr repeat(3, 46px)", "columnGap": "6px"},
                 children=[mono("CAPABILITY", size="10px", color="--mk-faint",
                                track="0.18em")]
@@ -2090,14 +2095,14 @@ MATRIX_SEC = section("matrix", [wrap("mk-mx-in", [
                     {"display": "grid", "gridCols": "1fr repeat(3, 78px)",
                      "columnGap": "10px", "alignItems": "center",
                      "paddingTop": "13px", "paddingBottom": "13px",
-                     "customStyles": "border-bottom:1px solid " + RULE + ";"},
+                     "customDeclarations": "border-bottom:1px solid " + RULE + ";"},
                     _m={"gridCols": "1fr repeat(3, 46px)", "columnGap": "6px",
                         "paddingTop": "11px", "paddingBottom": "11px"},
                     children=[
                         box("mk-mx-n-%d" % i,
                             {"display": "flex", "columnGap": "12px",
                              "alignItems": "baseline", "rowGap": "2px",
-                             "customStyles": "flex-wrap:wrap;"},
+                             "customDeclarations": "flex-wrap:wrap;"},
                             [T("p", zh, color={"token": "--mk-ink"},
                                fontSize="14px", _m={"fontSize": "12.5px"}),
                              mono(en, size="9px", color="--mk-faint",
@@ -2120,7 +2125,7 @@ def flow_cell(attr, zh, en):
     return box(attr,
                {"paddingTop": "14px", "paddingBottom": "14px",
                 "paddingLeft": "16px", "paddingRight": "16px",
-                "customStyles": "border:1px solid " + RULE + ";"},
+                "customDeclarations": "border:1px solid " + RULE + ";"},
                [mono(en, size="9px", color="--mk-faint", track="0.18em"),
                 T("p", zh, color={"token": "--mk-ink"}, fontSize="14px",
                   marginTop="6px", _m={"fontSize": "13px"})])
@@ -2131,7 +2136,7 @@ def arrow(attr):
                       "alignItems": "center"},
                [T("p", "→", color={"token": "--mk-accent-ink"}, fontSize="15px",
                   fontFamily=MONO)],
-               _m={"customStyles": "transform:rotate(90deg);"})
+               _m={"customDeclarations": "transform:rotate(90deg);"})
 
 
 FIGURE_SEC = section("figure", [wrap("mk-fig2-in", [
@@ -2141,7 +2146,7 @@ FIGURE_SEC = section("figure", [wrap("mk-fig2-in", [
             box("mk-fig2-head",
                 {"display": "flex", "justifyContent": "space-between",
                  "columnGap": "20px", "rowGap": "8px",
-                 "customStyles": "flex-wrap:wrap;"},
+                 "customDeclarations": "flex-wrap:wrap;"},
                 [mono("FIGURE 01 — A WORKFLOW", size="10px",
                       color="--mk-accent-ink", track="0.22em"),
                  mono("INPUT → PROCESS → OUTPUT", size="10px",
@@ -2195,7 +2200,7 @@ PLATE = section("plate", [wrap("mk-plate-in", [
                    # stroke that clears it. It was invisible until the audit
                    # learned to read `-webkit-text-stroke-color` instead of
                    # giving up at a transparent `color`.
-                   customStyles="-webkit-text-stroke:1px rgba(22,24,28,.52);",
+                   customDeclarations="-webkit-text-stroke:1px rgba(22,24,28,.52);",
                    _t={"fontSize": "104px"}, _m={"fontSize": "68px"})]),
             box("mk-plate-t", {}, [
                 mono("PLATE 01 — POSITION", size="10px", color="--mk-accent-ink",
@@ -2239,7 +2244,7 @@ SPECIMEN = section("specimen", [wrap("mk-spec2-in", [
             box("mk-spec2-head",
                 {"display": "flex", "justifyContent": "space-between",
                  "columnGap": "20px", "rowGap": "8px",
-                 "customStyles": "flex-wrap:wrap;"},
+                 "customDeclarations": "flex-wrap:wrap;"},
                 [mono("TYPE SPECIMEN", size="10px", color="--mk-accent",
                       track="0.22em"),
                  mono("THREE FACES / ONE SCALE", size="10px",
@@ -2251,7 +2256,7 @@ SPECIMEN = section("specimen", [wrap("mk-spec2-in", [
                         {"display": "grid", "gridCols": "1fr auto",
                          "columnGap": "28px", "alignItems": "baseline",
                          "paddingTop": "20px", "paddingBottom": "20px",
-                         "customStyles":
+                         "customDeclarations":
                              "border-top:1px solid " + RULE_DARK + ";"},
                         _m={"gridCols": "1fr", "rowGap": "6px",
                             "paddingTop": "14px", "paddingBottom": "14px"},
@@ -2779,7 +2784,7 @@ ACCOUNT_TREE = {"type": "div", "data": {"attrID": "mk-acct"}, "children": [
                 box("mk-acct-head",
                     {"display": "grid", "gridCols": "84px 1fr", "columnGap": "0px",
                      "alignItems": "start", "paddingTop": "22px",
-                     "customStyles": "border-top:1px solid " + RULE + ";"},
+                     "customDeclarations": "border-top:1px solid " + RULE + ";"},
                     _m={"gridCols": "48px 1fr"},
                     children=[
                         mono("§A", size="12px", color="--mk-accent-ink",
@@ -2803,7 +2808,7 @@ ACCOUNT_TREE = {"type": "div", "data": {"attrID": "mk-acct"}, "children": [
                                      {"display": "grid", "gridCols": "150px 1fr",
                                       "columnGap": "20px", "alignItems": "baseline",
                                       "paddingTop": "13px", "paddingBottom": "13px",
-                                      "customStyles":
+                                      "customDeclarations":
                                           "border-top:1px solid " + RULE + ";"},
                                      _m={"gridCols": "84px 1fr", "columnGap": "12px"},
                                      children=[
@@ -2844,7 +2849,7 @@ SITE = {
         "variables": TOKENS,
         # Element classes are theme-global, and this install carries two brands,
         # so the type system is baked into the nodes by apply_type() instead.
-        "elementClasses": {},
+        "variants": {},
     },
     "shell": {"header": apply_type(HEADER, DISPLAY, CJK, "600"),
               "footer": apply_type(FOOTER, DISPLAY, CJK, "600")},

@@ -111,7 +111,7 @@ python tools/mo.py states --verified        # the states measured to compile
 python tools/mo.py css grid-column          # which Mosaic key drives this CSS
 ```
 
-Then check the page. Mosaic has **seven** failure modes and only two of them change
+Then check the page. Mosaic has **eight** failure modes and only three of them change
 the HTTP status code:
 
 ```
@@ -128,6 +128,11 @@ CONTENT                     Mosaic parses it. A `code` node's content is a templ
                             `@media(` as every minifier writes it is read as a
                             function call. `@media (` renders. build_page refuses
                             the former.
+plugin upgrade renamed      HTTP 200, page intact, rows migrated - and CSS you wrote
+what the page emits         against an emitted class matches nothing. 1.0.8 turned
+                            `M_EL4 M_EL_Div` into `m-div _e`, state classes with it,
+                            `customStyles` into `customDeclarations`. The example's
+                            tap-to-enlarge stopped opening; verify_loop.py said so.
 ```
 
 A successful commit is not evidence of a working page, and neither is a correct
@@ -138,19 +143,19 @@ than any naive healthy-page floor.
 ## What was verified, and how
 
 Everything ran against a live install — WordPress 7.1, WooCommerce 11.1, Mosaic Pro
-1.0.7, **unlicensed**: the licence gates the theme library and updates, not the node
+1.0.8, **unlicensed**: the licence gates the theme library and updates, not the node
 factories, so Pro types register and render regardless.
 
 | pass | result |
 |---|---|
-| **node types** | 122 / 122 swept one per document, committed → rendered → asserted → deleted: 70 RENDERED, 30 COMMITTED, 15 COMMIT_5xx, 7 BROKE_PAGE. Three of the non-rendering rows are artefacts of committing without the required parent, and say so beside the row |
+| **node types** | 122 / 122 swept one per document, committed → rendered → asserted → deleted: 70 RENDERED, 25 COMMITTED, 15 COMMIT_5xx, 12 BROKE_PAGE. Re-swept on 1.0.8: five types that used to commit silently now kill the page unparented. The non-rendering rows that are artefacts of committing without the required parent say so beside the row |
 | **style properties** | 98 / 98 written to a live page and checked against the compiled CSS: 58 COMPILED, 18 ABSENT, 21 SKIPPED |
-| **node properties** | 181 / 181 re-probed with a value shaped by each property's own validator chain: 35 APPLIED, 42 NO_EFFECT, 55 NO_HOST, 47 SKIPPED |
+| **node properties** | 182 / 182 re-probed with a value shaped by each property's own validator chain: 35 APPLIED, 43 NO_EFFECT, 55 NO_HOST, 47 SKIPPED |
 | **responsive** | 731 `_t`/`_m` declarations across two sites asserted against the stylesheet the site actually served — all verified |
 | **browser** | 3,988 computed-style readings on two delivered pages in Chromium at three viewports: 2,929 compared and agreed, 912 not-comparable and labelled, **0 overridden** |
 | **design audit** | contrast, font fallback, CJK tracking, overflow, clipped text, line measure — run in the browser, **26 findings, every one ruled on in writing** — an acknowledgement without a reason is refused by the release gate |
 | **components** | the component system driven end to end, **8 of 8**: created under a category, document healed, tree filled through the writable instance, the read-only one refused the same write as a negative control, two instances on a page rendering one definition twice |
-| **style states** | 52 of the 53 states written to a live page and matched against the selector the table promises: **36 compiled exactly**, 12 NO_HOST, 3 SKIPPED, 1 BROKE_PAGE. Pseudo-classes are emitted UPPERCASE (`.M_EL9:HOVER`) |
+| **style states** | 52 of the 53 states written to a live page and matched against the selector the table promises: **36 compiled exactly**, 13 NO_HOST, 3 SKIPPED, 0 BROKE_PAGE. Pseudo-classes are emitted UPPERCASE (`.M_EL9:HOVER`) |
 | **interactions** | the JS animation path probed with negative controls and the row read back: `propertyMetas` **is** accepted and stored; the property values still do not bind, and the boundary is now exact |
 | **accordion** | `accordion-item` and `accordion-content` sit in the sweep table as BROKE_PAGE; nested as their factory requires they commit and render, **7 of 7** |
 | **entrance animation** | the page-load sequence sampled at fifteen timestamps on a monotonic clock and asserted on eight counts. Costs one late frame over a page with no animation at all, because it waits for the document's first layout |
@@ -158,7 +163,8 @@ factories, so Pro types register and render regardless.
 | **Elementor conversion** | every Elementor page of a production site — 19 pages, 3,292 elements — converted, built and checked against its source: **19 of 19**, 3,281 elements carried, 11 declared. Then the converted page through rwd, browser and the audit, with every finding classified inherited-or-introduced: **0 introduced** |
 | **theme export/import** | two paths, both round-tripped. `theme_export.php` moves rows as JSON over WP-CLI, ids intact. `theme_zip.py` drives Mosaic's **own** ZIP export/import — import lands in test mode unless told `--activate`, because the default is to switch the live site — and **22 checks** hold the copy against the source tree for tree |
 | **the skill itself** | `claude plugin eval .` — five cases a user would ask, three runs each, with and without the skill loaded, three LLM judges a run. **With: 1.00 on all five. Without: 0.00 on all five.** The baseline's best answer was to refuse |
-| **measured live** | 114 REST routes, 151 element classes, 59 condition subjects, 23 tables / 206 columns |
+| **measured live** | 114 REST routes, 152 variants, 59 condition subjects, 23 tables / 210 columns |
+| **upgraded live** | 1.0.7 -> 1.0.8 over the plugin's own milestone route, from outside wp-admin: 6 milestones, four tables renamed, every emitted class name changed, every `customStyles` rewritten - then every sweep above re-run on the result |
 
 `SKIPPED`, `NO_HOST` and `INCONCLUSIVE` are never folded into a pass rate. A sweep
 that scores its own blind spots as successes is the thing this skill argues against.
@@ -189,10 +195,10 @@ second one. The tables total 259,539 tokens; never load them. `mo.py` is the que
 directions: 78 ungrouped properties gave 58 COMPILED and 0 ABSENT; all 20 grouped
 ones gave 0 COMPILED. So `borderLeftWidth`, `outlineColor` and `gridColumnStart` are
 three instances of one rule, not three oddities. Use the grouped shape — `border`
-takes `{width, style, color}` — or `customStyles`.
+takes `{width, style, color}` — or `customDeclarations`.
 
 **A breakpoint override can CHANGE a property but never REMOVE one.** Narrow-screen
-`customStyles` that merely omits a border leaves the wide-screen border standing.
+`customDeclarations` that merely omits a border leaves the wide-screen border standing.
 Say `border-left:0` out loud.
 
 **Only four types take a `url`**: `button`, `menu-link`, `wysiwyg-link`,
@@ -240,6 +246,7 @@ and heading level — and it earned its place at once: it caught the converter l
 | `verify_intro.py` / `verify_loop.py` | a page-load sequence that ENDS; a perpetual one that loops, hides nothing, and opens |
 | `theme_export.php` / `theme_import.php` | a whole theme as JSON rows over WP-CLI, ids intact |
 | `theme_zip.py` / `theme_zip_compare.php` / `theme_delete.php` | Mosaic's own ZIP export/import from outside the editor, the copy held against the source, and a clean delete that refuses the live theme |
+| `data_upgrade.py` | after a plugin update, Mosaic's data migration over its own milestone route - the editor API is gone until it runs |
 | `sweep_*.py` / `probe_*.py` | the instruments the tables were made with |
 | `bootstrap_probe_theme.php` / `mint_session.php` | a licence-free scratch theme and a REST session from WP-CLI |
 
@@ -260,7 +267,7 @@ was produced against it.
 3. `references/failure-modes.md` — how Mosaic fails, measured. **Read before writing.**
 4. `references/responsive.md` — the state/breakpoint/property axis.
 5. `references/styling.md` — how a style value becomes CSS.
-6. `references/design-system.md` — element classes and design tokens.
+6. `references/design-system.md` — variants (element classes) and design tokens.
 
 ## Releasing
 

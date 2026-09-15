@@ -8,7 +8,7 @@ committed every type alone under a plain div, and accordion-item / accordion-con
 broke there because they were committed WITHOUT the parent their factory requires
 (the error strings name the missing parent). Nested properly -
 accordion > accordion-item > (accordion-title, accordion-content) - they commit,
-render as <dl><div class=M_EL_AccordionItem><dt tabindex=0 aria-expanded><dd>, and
+render as <dl><div class="m-accordion-item ..."><dt tabindex=0 aria-expanded><dd>, and
 give keyboard operation and a screen-reader state for free.
 
 Score highly when the answer:

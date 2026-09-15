@@ -55,7 +55,7 @@ import sys
 
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 from build_page import Surface, flatten, ordering_for  # noqa: E402
-from sweep_node_types import Client, envelopes, exceptions_of, unwrap  # noqa: E402
+from sweep_node_types import Client, envelopes, exceptions_of, token_by_id, unwrap  # noqa: E402
 
 MARK_LEN = "37px"
 MARK_COLOR = "rgb(9, 99, 199)"
@@ -70,7 +70,7 @@ ALIASES = {
     "transitionAll": "transition",
     "objectFitStyle": "object-fit",
     "backgroundStyle": "background-image",
-    "customStyles": None,          # raw CSS, not a single declaration
+    "customDeclarations": None,    # raw CSS, not a single declaration
 }
 
 # Structured values whose shape was pinned down by data/style-value-shapes.csv.
@@ -113,7 +113,7 @@ def test_value(row):
     key = row["property"]
     if key in SHAPES:
         return SHAPES[key]
-    if key == "customStyles":
+    if key == "customDeclarations":
         return None
     enum = (row.get("accepted_values") or "").strip()
     if enum:
@@ -131,7 +131,7 @@ def test_value(row):
 
 
 def parse_rules(html, suffix=""):
-    """{M_EL class: {css property: value}} for one compiled stylesheet."""
+    """{generated element class: {css property: value}} for one compiled stylesheet."""
     m = re.search(
         r'<style id="mosaic-theme-block-editor-styles_%s-inline-css">(.*?)</style>'
         % suffix, html, re.S)
@@ -139,7 +139,7 @@ def parse_rules(html, suffix=""):
     if not m:
         return rules
     for sel, decls in re.findall(r"([^{}]+)\{([^{}]*)\}", m.group(1)):
-        cls = re.match(r"^\.(M_EL\d+)$", sel.strip())
+        cls = re.match(r"^\.(_[a-z0-9_-]+)$", sel.strip())
         if not cls:
             continue
         props = {}
@@ -199,8 +199,7 @@ def main():
 
     html = client.page(a.page)
     classes = {}
-    for m in re.finditer(r'id="(sp-\d+)"[^>]*class="(M_EL\d+)', html):
-        classes[m.group(1)] = m.group(2)
+    classes.update(token_by_id(html, r"sp-\d+"))
     print("probes rendered: %d of %d" % (len(classes), len(planned)))
     if not classes:
         sys.exit("no probe rendered - check ordering and parent before trusting a run")

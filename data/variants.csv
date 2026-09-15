@@ -1,0 +1,153 @@
+id,name,class_name,renders_class,type,selectors,parent,is_group,is_editable,is_required,ordering
+6a5c0d91-8f1f-047b-a147-152bd61bcfc7,Master,m-master,False,,html,,False,False,False,a0
+cd4e6dc8-7e4c-0eac-8366-d86f54cab5ba,External style,m-external-style,False,,html,,False,False,False,a1
+5c221b34-26ab-0ccc-be0e-fd89986c79af,Context,m-context,False,,html,,False,False,False,a2
+4617493c-a85a-0239-8edd-1080ad2108b2,Unknown element,m-unknown-element,False,tag,,,False,True,False,a3
+f3736dce-3f24-0c49-a6eb-cbafbe435696,HTML,m-html,False,,html,,False,True,True,a4
+b846789e-f2e7-02d2-87cf-2f2cd3a69e7c,Body,m-body,False,,body,,False,True,True,a5
+b4c8c69a-566a-07cb-8bd8-f141c8d12105,A,m-a,False,,"a:where(:not(.m-button,.m-link,.m-menu-link,.m-badge))",,False,True,True,a6
+68d3854a-9f6a-033b-9405-4e169331f611,Text,m-text,True,,.m-text,,True,True,False,a7
+95e31da0-1f58-0b03-a598-214f6244fc46,Paragraph,m-paragraph,True,,p|.m-paragraph,68d3854a-9f6a-033b-9405-4e169331f611,False,True,True,a8
+659be41c-cf10-0ed5-ac59-ad19fbb750fc,Heading 1,m-heading-1,True,,h1|.m-heading-1,68d3854a-9f6a-033b-9405-4e169331f611,False,True,True,a9
+d1642e3d-12cc-0379-ac2a-33f5292aa0dd,Heading 2,m-heading-2,True,,h2|.m-heading-2,68d3854a-9f6a-033b-9405-4e169331f611,False,True,True,aA
+f4215e61-521c-021e-a292-c5d98d785b4e,Heading 3,m-heading-3,True,,h3|.m-heading-3,68d3854a-9f6a-033b-9405-4e169331f611,False,True,True,aB
+81e96cdb-960b-0efa-a1fd-ff819900be5d,Heading 4,m-heading-4,True,,h4|.m-heading-4,68d3854a-9f6a-033b-9405-4e169331f611,False,True,True,aC
+ed6da0b6-c772-03db-911a-0d1ae081351e,Heading 5,m-heading-5,True,,h5|.m-heading-5,68d3854a-9f6a-033b-9405-4e169331f611,False,True,True,aD
+63b3d467-1cee-076b-a08a-2d35c1411df7,Heading 6,m-heading-6,True,,h6|.m-heading-6,68d3854a-9f6a-033b-9405-4e169331f611,False,True,True,aE
+6381b2f3-7a23-05db-87b9-c808a98a292b,Inherited text,m-inherited-text,True,,.m-inherited-text,68d3854a-9f6a-033b-9405-4e169331f611,False,True,False,aF
+f671bc01-2859-06da-a49e-58d6f1d6a055,Link,m-link,True,,.m-link,,False,True,False,aG
+bb9e3876-120f-0c2f-a1ec-5f23e9843911,Button,m-button,True,,.m-button,,False,True,False,aH
+1d964ef1-1b07-0edc-841e-42a96286a032,Badge,m-badge,True,,.m-badge,,False,True,False,aI
+9ece09dc-d417-0dd9-b8d7-aeabad8a0f1b,Menu,m-menu,True,,.m-menu,,True,True,False,aJ
+7c972b2e-bccd-06e6-9b91-39e3435e841b,Menu link,m-menu-link,True,,.m-menu-link,9ece09dc-d417-0dd9-b8d7-aeabad8a0f1b,False,True,False,aK
+385cba11-b864-0e81-ad84-bc5e6e82d8ed,WP menu,m-wp-menu,True,,.m-wp-menu,9ece09dc-d417-0dd9-b8d7-aeabad8a0f1b,True,True,False,aL
+ad2337c7-0dd3-0113-808c-559834a4eb55,Menu item,m-wp-menu-item,True,,.m-wp-menu-item,385cba11-b864-0e81-ad84-bc5e6e82d8ed,False,True,False,aM
+8a83d2ce-a34b-0075-9471-532b7e19bd17,Dropdown,m-dropdown-narrow,True,,.m-dropdown-narrow,9ece09dc-d417-0dd9-b8d7-aeabad8a0f1b,True,True,False,aN
+b18434de-cc91-0aac-8919-78aa00580530,Toggle,m-dropdown-toggle,True,,.m-dropdown-toggle,8a83d2ce-a34b-0075-9471-532b7e19bd17,False,True,False,aO
+50b228f1-ce49-064c-9d69-be7e58fbd85f,Wrapper,m-dropdown-wrapper-narrow,True,,.m-dropdown-wrapper-narrow,8a83d2ce-a34b-0075-9471-532b7e19bd17,False,True,False,aP
+7ef9c2b8-1695-08aa-bd4f-af6116fe1398,Dropdown wide,m-dropdown-wide,True,,.m-dropdown-wide,8a83d2ce-a34b-0075-9471-532b7e19bd17,False,True,False,aQ
+4a2824e2-9212-082b-a452-ccd1a481d77f,Wrapper,m-dropdown-wrapper-wide,True,,.m-dropdown-wrapper-wide,7ef9c2b8-1695-08aa-bd4f-af6116fe1398,False,True,False,aR
+baece9ef-aac1-02ce-8157-0e3024d3ca70,Navbar,m-navbar,True,,.m-navbar,,True,True,False,aS
+9ef1a7af-050d-0ad9-a167-7960d648fc8e,Menu button,m-navbar-toggle,True,,.m-navbar-toggle,baece9ef-aac1-02ce-8157-0e3024d3ca70,False,True,False,aT
+0622750f-24f9-0485-aa18-b7d1880c3635,Navigation,m-navbar-navigation,True,,.m-navbar-navigation,baece9ef-aac1-02ce-8157-0e3024d3ca70,False,True,False,aU
+10353f9b-22f0-0cc5-89df-2fd8fc663f1f,Mobile menu,m-mobile-menu,True,,.m-mobile-menu,baece9ef-aac1-02ce-8157-0e3024d3ca70,True,True,False,aV
+d86b3995-5459-0504-9e54-62ce10e30874,Toggle,m-mobile-menu-toggle,True,,.m-mobile-menu-toggle,10353f9b-22f0-0cc5-89df-2fd8fc663f1f,False,True,False,aW
+09b9acdb-f909-0a03-8bca-630bbdf4f927,Wrapper,m-mobile-menu-wrapper,True,,.m-mobile-menu-wrapper,10353f9b-22f0-0cc5-89df-2fd8fc663f1f,False,True,False,aX
+bfec97fe-19d6-06a4-b0a0-60cbc5797d4d,Content,m-mobile-menu-content,True,,.m-mobile-menu-content,10353f9b-22f0-0cc5-89df-2fd8fc663f1f,False,True,False,aY
+f2114217-3daa-00e5-b670-f226fc1d00c1,Tabs,m-tabs,True,,.m-tabs,,True,True,False,aZ
+4a634363-2dc9-0e5d-b390-c2c191abacb8,Menu,m-tabs-menu,True,,.m-tabs-menu,f2114217-3daa-00e5-b670-f226fc1d00c1,False,True,False,aa
+0f605bba-1355-0878-b357-20fa918eff01,Loop tabs,m-loop-tabs,True,,.m-loop-tabs,f2114217-3daa-00e5-b670-f226fc1d00c1,False,True,False,ab
+1b5f8030-533d-0ce4-a14d-78e4a671da11,Tab,m-tab,True,,.m-tab,f2114217-3daa-00e5-b670-f226fc1d00c1,False,True,False,ac
+522f42dc-c268-00ca-83f9-1e428eedcee9,Content,m-tabs-content,True,,.m-tabs-content,f2114217-3daa-00e5-b670-f226fc1d00c1,False,True,False,ad
+9cf2dae1-7add-0eb1-85c5-cac58d8ce1bc,Tab pane,m-tab-pane,True,,.m-tab-pane,f2114217-3daa-00e5-b670-f226fc1d00c1,False,True,False,ae
+c00b2bc8-fb71-096a-8f90-32ac9bcc488d,Loop tab panes,m-loop-tab-panes,True,,.m-loop-tab-panes,f2114217-3daa-00e5-b670-f226fc1d00c1,False,True,False,af
+675b2714-ea8f-0e88-aec8-38aa7394a958,Accordion,m-accordion,True,,dl:where(.m-accordion)|:where(.m-accordion) > dl,,False,True,False,ag
+5512dc41-4d87-06d1-8d97-8535063f136a,Loop items,m-accordion-loop-items,True,,.m-accordion-loop-items,675b2714-ea8f-0e88-aec8-38aa7394a958,False,True,False,ah
+e0e364a6-091f-0979-b87e-1b5fe55c9906,Item,m-accordion-item,True,,.m-accordion-item,675b2714-ea8f-0e88-aec8-38aa7394a958,False,True,False,ai
+7e687a6c-7659-0220-968c-82eb8ad593bc,Title,m-accordion-title,True,,.m-accordion-title,675b2714-ea8f-0e88-aec8-38aa7394a958,False,True,False,aj
+d276b3d7-867d-027e-b990-baadcd4c42f0,Content,m-accordion-content-inner,False,,.m-accordion-content-inner:where(.m-accordion-content > .m-accordion-content-inner),675b2714-ea8f-0e88-aec8-38aa7394a958,False,True,False,ak
+98f4a220-2b3b-0bf6-9b07-653abba87e32,Section,m-section,True,,.m-section,,False,True,False,al
+7090e1d3-06e6-08d5-8fcc-149cb93cb6f1,Div,m-div,True,,.m-div,,True,True,False,am
+dca6c43a-32df-0dd1-8fa5-205125325cef,Grid,m-grid,True,,.m-grid,7090e1d3-06e6-08d5-8fcc-149cb93cb6f1,False,True,False,an
+4dedb815-bf1f-0f3b-9d96-ed6e66fdedb2,Rows,m-rows,True,,.m-rows,7090e1d3-06e6-08d5-8fcc-149cb93cb6f1,False,True,False,ao
+e12a4a18-fdbe-051d-80db-d9b81d11b386,Columns,m-columns,True,,.m-columns,7090e1d3-06e6-08d5-8fcc-149cb93cb6f1,False,True,False,ap
+47226be6-d28d-4a56-af71-ca540f55a7ca,Container,m-container,True,,.m-container,7090e1d3-06e6-08d5-8fcc-149cb93cb6f1,False,True,False,aq
+c0ae309a-d4cd-0d0d-8a9c-5a5ff24d7acb,Image,m-image,True,,.m-image,,False,True,False,ar
+7fe0ee8e-7ab5-0db3-928e-d91d06db2661,Code,m-code,True,,.m-code,,False,True,False,as
+ba5adb79-0b53-04d7-9acb-5a3219841114,Form wrapper,m-form-wrapper,True,,.m-form-wrapper,,True,True,False,at
+20add32e-6c96-051f-a508-323c5a6da3d9,Success screen,m-success-screen,True,,.m-success-screen,ba5adb79-0b53-04d7-9acb-5a3219841114,False,True,False,au
+d03f32fa-b3c4-00c5-9886-43a839150da5,Error message,m-form-error,True,,.m-form-error,ba5adb79-0b53-04d7-9acb-5a3219841114,False,True,False,av
+b8e4f2a1-6c3d-04e7-9a52-1f8b3c6d9e04,Turnstile,m-turnstile,True,,.m-turnstile,ba5adb79-0b53-04d7-9acb-5a3219841114,False,True,False,aw
+11dbbc9a-3d88-09bd-9f1c-e2a3609492a9,reCAPTCHA,m-recaptcha,True,,.m-recaptcha,ba5adb79-0b53-04d7-9acb-5a3219841114,False,True,False,ax
+5c12674c-a997-0ce8-9e6e-f84fa2f03e63,Form,m-form,True,,.m-form,ba5adb79-0b53-04d7-9acb-5a3219841114,False,True,False,ay
+2ca59c0b-d68e-0b85-8c36-3ba993c46a00,Field,m-field,True,,.m-field,ba5adb79-0b53-04d7-9acb-5a3219841114,False,True,False,az
+0aba491f-bf49-0ce1-ae11-a5b8b78ec4cd,Choice field,m-choice-field,True,,.m-choice-field,ba5adb79-0b53-04d7-9acb-5a3219841114,True,True,False,b00
+2af6a181-9af4-0ad4-96cd-b3ae22097f78,Legend,m-choice-legend,True,,.m-choice-legend,0aba491f-bf49-0ce1-ae11-a5b8b78ec4cd,False,True,False,b01
+e67d2ba0-cae8-0a19-86ca-3013c1f3533b,Content,m-choice-content,True,,.m-choice-content,0aba491f-bf49-0ce1-ae11-a5b8b78ec4cd,False,True,False,b02
+f49823ca-a455-0356-9235-0bd9780d3ccf,Choice,m-choice,True,,.m-choice,0aba491f-bf49-0ce1-ae11-a5b8b78ec4cd,False,True,False,b03
+c845d80f-61e1-067e-be83-99b787b334e6,Choice label,m-choice-label,True,,.m-choice-label,0aba491f-bf49-0ce1-ae11-a5b8b78ec4cd,False,True,False,b04
+d7aeb839-578f-0ab5-af09-e62f43acffa2,Field set,m-fieldset,True,,.m-fieldset,ba5adb79-0b53-04d7-9acb-5a3219841114,True,True,False,b05
+041c172a-a74b-0ad9-a5c7-2d5c17578f29,Legend,m-fieldset-legend,True,,.m-fieldset-legend,d7aeb839-578f-0ab5-af09-e62f43acffa2,False,True,False,b06
+7a7df079-d694-0a6f-a266-d78c03cdd6fe,Content,m-fieldset-content,True,,.m-fieldset-content,d7aeb839-578f-0ab5-af09-e62f43acffa2,False,True,False,b07
+6867f71f-899b-0b31-9c03-f77073736193,Checkbox input,m-checkbox,True,,.m-checkbox,2af6a181-9af4-0ad4-96cd-b3ae22097f78,False,True,False,b08
+82d072da-c32f-01c6-b00e-b5b55d3519cc,File upload,m-file-upload,True,,.m-file-upload,ba5adb79-0b53-04d7-9acb-5a3219841114,False,True,False,b09
+21e86ec1-e113-40b6-81fd-4bc7e720d199,Hidden input,m-hidden-input,True,,.m-hidden-input,ba5adb79-0b53-04d7-9acb-5a3219841114,False,True,False,b0A
+b2032c7e-adf1-09cd-ac3b-52daab13d3ab,Input,m-input,True,,.m-input,ba5adb79-0b53-04d7-9acb-5a3219841114,False,True,False,b0B
+ed5a3838-6b8c-0018-a497-57bb81a05511,Label,m-label,True,,.m-label,ba5adb79-0b53-04d7-9acb-5a3219841114,False,True,False,b0C
+3ed458ca-ce0f-01f7-b7fe-427895279f54,Multi steps,m-multi-steps,True,,.m-multi-steps,ba5adb79-0b53-04d7-9acb-5a3219841114,True,True,False,b0D
+154e9d33-a838-0bc4-aed6-ddd24c111ed0,Steps,m-multi-steps-nav,True,,.m-multi-steps-nav,3ed458ca-ce0f-01f7-b7fe-427895279f54,False,True,False,b0E
+6800fb72-331f-0926-9333-137cb0ac34da,Step,m-multi-steps-step-tab,True,,.m-multi-steps-step-tab,3ed458ca-ce0f-01f7-b7fe-427895279f54,False,True,False,b0F
+3295e0ec-4633-06d1-b60e-4baaddde1ae2,Forms,m-multi-steps-content,True,,.m-multi-steps-content,3ed458ca-ce0f-01f7-b7fe-427895279f54,False,True,False,b0G
+9adf1aa8-afb6-0afb-87c2-0e1fe047a741,Form step,m-form-step,True,,.m-form-step,3ed458ca-ce0f-01f7-b7fe-427895279f54,False,True,False,b0H
+4e48111e-cd4b-0552-9001-20952f140103,Button,m-form-step-button,True,,.m-form-step-button-back|.m-form-step-button-next,3ed458ca-ce0f-01f7-b7fe-427895279f54,False,True,False,b0I
+8234ef14-32e1-0dbc-b603-c1c81bc61496,Radio input,m-radio,True,,.m-radio,0aba491f-bf49-0ce1-ae11-a5b8b78ec4cd,False,True,False,b0J
+05fbeaf8-2ba9-0d9d-9c3b-36cd70256005,Select,m-select,True,,.m-select,ba5adb79-0b53-04d7-9acb-5a3219841114,True,True,False,b0K
+df2d64e1-e3ee-0c6d-8660-bb7cc614cad7,Option,m-select-option,True,,.m-select-option,05fbeaf8-2ba9-0d9d-9c3b-36cd70256005,False,True,False,b0L
+9b8bc2c1-08f4-0644-a198-c9b4dfb77168,Submit button,m-submit-button,True,,.m-submit-button,ba5adb79-0b53-04d7-9acb-5a3219841114,True,True,False,b0M
+9c9cd6b9-a966-0f5a-9dda-bb579a6c0dbc,Submit label,m-submit-label,True,,.m-submit-label,9b8bc2c1-08f4-0644-a198-c9b4dfb77168,True,True,False,b0N
+52919ea1-dc2a-087c-b3ed-9cdfc0dfa3e5,Submit loading,m-submit-loading,True,,.m-submit-loading,9b8bc2c1-08f4-0644-a198-c9b4dfb77168,True,True,False,b0O
+2abe4d7d-6b0d-0ef6-98cd-435b52598cf9,Text area,m-textarea,True,,.m-textarea,ba5adb79-0b53-04d7-9acb-5a3219841114,False,True,False,b0P
+9199c944-4081-0d5b-9997-683614c79902,Icon,m-icon,True,,.m-icon,,False,True,False,b0Q
+ed14cb45-d01b-0fd5-bdb1-173089b7eca0,Icon box,m-icon-box,True,,.m-icon-box,,False,True,False,b0R
+c7f25ef0-944c-0970-aa19-f06f487a2717,Loop,m-loop,True,,.m-loop,,True,True,False,b0S
+cdcc719a-b0c5-0749-bcd9-4afe63cb1ef9,Pagination,m-loop-pagination,True,,.m-loop-pagination,c7f25ef0-944c-0970-aa19-f06f487a2717,False,True,False,b0T
+364c2cfa-bcc1-0d2e-956f-579b07c5ee4b,Numbers,m-loop-pagination-numbers,True,,.m-loop-pagination-numbers,c7f25ef0-944c-0970-aa19-f06f487a2717,False,True,False,b0U
+57b78edf-a0c6-0d28-90b7-df46cee06d10,No result,m-loop-no-result,True,,.m-loop-no-result,c7f25ef0-944c-0970-aa19-f06f487a2717,False,True,False,b0V
+0c33aca6-67a0-029f-8be6-4e8d5aa28c3c,Items,m-loop-items,True,,.m-loop-items,c7f25ef0-944c-0970-aa19-f06f487a2717,False,True,False,b0W
+5e8a088d-bee4-0835-8493-a3152f9c641f,Item,m-loop-item,True,,.m-loop-item,c7f25ef0-944c-0970-aa19-f06f487a2717,False,True,False,b0X
+8b4f19bb-55a1-0a61-a4b9-af8e0dee197f,Pagination button,m-loop-pagination-button,True,,.m-loop-pagination-button-previous|.m-loop-pagination-button-next,c7f25ef0-944c-0970-aa19-f06f487a2717,False,True,False,b0Y
+86785945-a2de-0d7b-aeec-fb3dd4ba38da,Number,m-loop-pagination-number,True,,.m-loop-pagination-number,c7f25ef0-944c-0970-aa19-f06f487a2717,False,True,False,b0Z
+ee488e25-50e4-0be6-8bde-080c69a88959,Slider,m-slider,True,,.m-slider,,True,True,False,b0a
+655d4861-c507-07a9-bea4-82687cf750c3,Slides,m-slides,True,,.m-slides,ee488e25-50e4-0be6-8bde-080c69a88959,False,True,False,b0b
+74bd7093-f924-033d-a67c-fdb8c320adfe,Loop slides,m-loop-slides,True,,.m-loop-slides,ee488e25-50e4-0be6-8bde-080c69a88959,False,True,False,b0c
+5e0d0554-d43a-01e4-ac4e-84a3cd493660,Slide,m-slide-content,False,,.m-slide-content:where(.m-slide > .m-slide-content),ee488e25-50e4-0be6-8bde-080c69a88959,False,True,False,b0d
+49772031-10a1-0a84-b2dd-df0666fcf907,Navigation,m-slider-navigation,True,,.m-slider-navigation,ee488e25-50e4-0be6-8bde-080c69a88959,False,True,False,b0e
+21db5141-ef34-0e46-a1bd-66ecbcc945c8,Bullet,m-slider-bullet,True,,.m-slider-bullet,ee488e25-50e4-0be6-8bde-080c69a88959,False,True,False,b0f
+829de3ab-c95a-0f0d-a522-7e13e156635b,Button,m-slider-arrow,True,,.m-slider-arrow-left|.m-slider-arrow-right,ee488e25-50e4-0be6-8bde-080c69a88959,False,True,False,b0g
+246ad9ac-c8db-07ae-8bb3-11c428511643,Post content,m-post-content,True,,.m-post-content|.wp-block-post-content,,False,True,True,b0h
+07923762-4124-4514-9410-84ba6a3d25c9,Shortcode,m-shortcode,True,,.m-shortcode,,False,True,False,b0i
+e5fb8634-963c-0dd3-9a71-4c6efdba06ad,Inline link,m-inline-link,True,,.m-inline-link,,False,True,False,b0j
+29311743-3270-043f-b298-ea31d4c7f70a,Span,m-span,True,,.m-span,,False,True,False,b0k
+fcf8c83b-547b-018b-b646-6d7b34101792,Template,m-template-external,False,,.m-template-external,,False,False,False,b0l
+6a9dad32-018a-04da-9bb7-2a6c6996e165,Template,m-template-internal,False,,.m-template-internal,,False,False,False,b0m
+43b7ad91-51a2-0483-8c14-9b3e56dca5b6,Component,m-component-external,True,,.unknown,,False,False,False,b0n
+e2096bb4-3ac7-0839-9125-0703ccf66d72,Component,m-component-internal,True,,.unknown,,False,False,False,b0o
+03f7dc2d-5a63-0582-8b70-81f69956473f,Instance,m-component-instance,True,,.m-component-instance,,False,False,False,b0p
+0d4bea5d-0712-0019-b509-f36b453c8457,Unknown,m-unknown,False,,.unknown,,False,False,False,b0q
+3ab5005c-d401-00e6-ac68-20be50a4da3f,H1,m-gutenberg-h1,False,tag,":is(.entry-content, .wp-block-post-content) h1",,False,True,True,b0r
+b6c9bcd9-402a-0227-828c-3df96d5e843d,H2,m-gutenberg-h2,False,tag,":is(.entry-content, .wp-block-post-content) h2",,False,True,True,b0s
+60e8d822-bd39-0652-b1fd-b397b80e4e33,H3,m-gutenberg-h3,False,tag,":is(.entry-content, .wp-block-post-content) h3",,False,True,True,b0t
+1b641570-c214-0fe8-b21a-eeb7e12835da,H4,m-gutenberg-h4,False,tag,":is(.entry-content, .wp-block-post-content) h4",,False,True,True,b0u
+5717294e-7610-01bf-be2c-86fc4a4538ff,H5,m-gutenberg-h5,False,tag,":is(.entry-content, .wp-block-post-content) h5",,False,True,True,b0v
+bd88afbc-f1e6-0de9-8565-a12e36ccecfd,H6,m-gutenberg-h6,False,tag,":is(.entry-content, .wp-block-post-content) h6",,False,True,True,b0w
+9f74c74c-1f2b-002d-aa06-796eebaed2e1,Paragraph,m-gutenberg-paragraph,False,tag,":is(.entry-content, .wp-block-post-content) p",,False,True,True,b0x
+15f329b4-55bc-080b-86cf-399cb95bd0e4,Quote,m-gutenberg-quote,False,tag,":is(.entry-content, .wp-block-post-content) blockquote.wp-block-quote",,False,True,True,b0y
+84065d85-b043-0487-8be8-2bb95caee182,Cite,m-gutenberg-cite,False,tag,":is(.entry-content, .wp-block-post-content) blockquote.wp-block-quote cite",,False,True,True,b0z
+ae7da051-2971-0395-af33-9615547c8cf8,Image,m-gutenberg-image,False,tag,.wp-block-image,,False,True,True,b10
+01a0c2e8-679f-06ce-a2ab-86abb0ef8995,Img,m-gutenberg-img,False,tag,.wp-block-image img,,False,True,True,b11
+8d2c161c-d3f7-01ab-844a-d266eef4b7a6,Caption,m-gutenberg-caption,False,tag,.wp-block-image .wp-element-caption,,False,True,True,b12
+98c4e76d-2723-0467-be0d-69c57ebbd02a,List,m-gutenberg-list,False,tag,":is(.entry-content, .wp-block-post-content) ul.wp-block-list",,False,True,True,b13
+1f9fe5d4-900a-05d0-a7d6-601c9eae178e,Ordered list,m-gutenberg-ordered-list,False,tag,":is(.entry-content, .wp-block-post-content) ol.wp-block-list",,False,True,True,b14
+f68b7526-9fbb-0986-a696-bbc65e7133fc,Footnotes,m-gutenberg-footnotes,False,tag,":is(.entry-content, .wp-block-post-content) ol.wp-block-footnotes",,False,True,True,b15
+d2664160-1b51-03f8-aaa7-4f3d007e75f8,List item,m-gutenberg-list-item,False,tag,":is(.entry-content, .wp-block-post-content) ul.wp-block-list li|:is(.entry-content, .wp-block-post-content) ol.wp-block-list li|:is(.entry-content, .wp-block-post-content) ol.wp-block-footnotes li",,False,True,True,b16
+9d4fa324-3bad-0a22-8457-d025a3e3ce57,Code,m-gutenberg-code,False,tag,":is(.entry-content, .wp-block-post-content) pre.wp-block-code",,False,True,True,b17
+8676e9bf-8f29-07b6-8029-cad1a7c3711f,Preformatted,m-gutenberg-preformatted,False,tag,":is(.entry-content, .wp-block-post-content) pre.wp-block-preformatted",,False,True,True,b18
+23a935c5-fdcc-02f3-a6c6-37391dd6c5a6,Verse,m-gutenberg-verse,False,tag,":is(.entry-content, .wp-block-post-content) pre.wp-block-verse",,False,True,True,b19
+af0741e0-9b1e-06c5-8dd3-7b44bfce9a53,Pullquote,m-gutenberg-pullquote,False,tag,":is(.entry-content, .wp-block-post-content) figure.wp-block-pullquote",,False,True,True,b1A
+066d36f6-6f2f-01b7-b2ac-0c8c43544c12,Paragraph,m-gutenberg-pullquote-paragraph,False,tag,":is(.entry-content, .wp-block-post-content) figure.wp-block-pullquote p",,False,True,True,b1B
+eb830eeb-7a4e-05b7-9363-13f3d57d77a8,Cite,m-gutenberg-pullquote-cite,False,tag,":is(.entry-content, .wp-block-post-content) figure.wp-block-pullquote cite",,False,True,True,b1C
+16f872be-f86d-0d71-8528-196401a8dbdb,Separator,m-gutenberg-separator,False,tag,":is(.entry-content, .wp-block-post-content) hr.wp-block-separator.is-style-default",,False,True,True,b1D
+86ab7467-0875-01c2-8ff5-13e91ce121fe,Wide separator,m-gutenberg-wide-separator,False,tag,":is(.entry-content, .wp-block-post-content) hr.wp-block-separator.is-style-wide",,False,True,True,b1E
+5a718f74-12da-42a8-8607-3a26ce696190,Dots separator,m-gutenberg-dots-separator,False,tag,":is(.entry-content, .wp-block-post-content) hr.wp-block-separator.is-style-dots",,False,True,True,b1F
+7e70a40a-205f-4bed-89f4-6f6e3a074b4c,Button,m-gutenberg-button,False,tag,":is(.entry-content, .wp-block-post-content) .wp-block-button__link:where(div.wp-block-button:not(.is-style-outline) > a.wp-element-button.wp-block-button__link)",,False,True,True,b1G
+760f938d-5475-48de-a776-6a956df43d53,Outline button,m-gutenberg-outline-button,False,tag,":is(.entry-content, .wp-block-post-content) .wp-block-button__link:where(div.wp-block-button.is-style-outline > a.wp-element-button.wp-block-button__link)",,False,True,True,b1H
+8de49a77-f767-0054-b1ac-e913ac6562ba,Video,m-video,True,,.m-video,,False,True,False,b1I
+c637b22c-61b9-0964-bcdb-d5ae0d16986a,Google Maps,m-google-maps,True,,.m-google-maps,,False,True,False,b1J
+0dce60de-c4a6-0a2d-9990-b93070aeb7da,YouTube,m-youtube,True,,.m-youtube,,False,True,False,b1K
+be107226-ba10-0fc6-b22e-f984fb21d63b,Vimeo,m-vimeo,True,,.m-vimeo,,False,True,False,b1L
+ea692231-151b-02df-bea7-d567347d1422,List,m-list,True,,.m-list,,True,True,False,b1M
+69a8ab3f-dbdf-09bd-8449-6420570155b8,Horizontal list,m-list-horizontal,True,,.m-list-horizontal,ea692231-151b-02df-bea7-d567347d1422,False,True,False,b1N
+3a8cfda3-1ded-0a3c-9e55-b56510827850,Unordered list,m-list-unordered,True,,.m-list-unordered,ea692231-151b-02df-bea7-d567347d1422,False,True,False,b1O
+7dbba514-fd83-0e8f-ac46-68e6f651f2ff,Ordered list,m-list-ordered,True,,.m-list-ordered,ea692231-151b-02df-bea7-d567347d1422,False,True,False,b1P
+1864859b-2942-44db-b09d-c7073d1df01e,Item,m-list-item,True,,.m-list-item,ea692231-151b-02df-bea7-d567347d1422,False,True,False,b1Q
+fb0c2625-dd5a-43c5-82e2-22e8c09ca06c,Loop items,m-list-loop-items,True,,.m-list-loop-items,ea692231-151b-02df-bea7-d567347d1422,False,True,False,b1R

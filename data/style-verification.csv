@@ -96,4 +96,4 @@ aspectRatio,,aspect-ratio,,,SKIPPED
 backgroundColor,,background-color,"""rgb(9, 99, 199)""","rgb(9, 99, 199)",COMPILED
 backgroundStyle,,background-image,,,SKIPPED
 cursor,,cursor,"""unset""",unset,COMPILED
-customStyles,,,,,SKIPPED
+customDeclarations,,,,,SKIPPED

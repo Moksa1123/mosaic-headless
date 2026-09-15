@@ -106,7 +106,7 @@ def run(client, cfg, cases, out_path):
                 markup, css = split_markup_and_css(html)
                 m = re.search(r'<([a-zA-Z0-9-]+)[^>]*\bid="%s"[^>]*>' % PROBE_ID, markup)
                 element = m.group(0)[:160] if m else ""
-                cls = re.search(r'class="(M_EL\d+)', element or "")
+                cls = re.search(r'class="[^"]*?(?:^|\s|")(_[a-z0-9_-]+)(?=\s|")', element or "")
                 rules = rule_for(css, cls.group(1)) if cls else []
                 css_rule = " ".join(r.strip() for r in rules)[:400]
                 missing = [e for e in (case.get("expect") or []) if e not in css_rule + element]

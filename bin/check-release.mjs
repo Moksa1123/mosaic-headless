@@ -77,7 +77,7 @@ const rows = (p) => read(p).trim().split("\n").length - 1;   // minus the header
 const counts = {
   "data/node-verification.csv": 122,
   "data/style-verification.csv": 98,
-  "data/node-property-verification.csv": 181,
+  "data/node-property-verification.csv": 182,
   "data/rwd-verification.csv": 731,
   "data/browser-verification.csv": 3988,
   "data/style-state-verification.csv": 52,

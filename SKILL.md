@@ -1,10 +1,10 @@
 ---
 name: "mosaic-headless"
 description: |
-  Build and modify Mosaic Pro (Nextend) sites by writing the underlying data model directly - no visual editor, no DOM. Query the real surface with `mo.py`, which joins every source table to the live sweeps so a lookup leads with the measured verdict rather than the declaration (122 node types, 181 properties, 98 style properties with 20 structured value shapes pinned down, 53 style states, 151 element classes, 74 dynamic variables, 12 interaction triggers, 114 REST routes, 23 tables) instead of guessing, with every node type placed on a live site one at a time and asserted against the delivered HTML, the design-token and element-class layers verified against compiled CSS, the @VAR() dynamic language verified against rendered output, nine designed pages built through the tables themselves, and the delivered pages re-read in Chromium at three viewports so a rule that is present, correct and still wrong cannot pass. Drives Mosaic's own theme export/import from outside the editor and holds the copy against the source tree for tree.
+  Build and modify Mosaic Pro (Nextend) sites by writing the underlying data model directly - no visual editor, no DOM. Query the real surface with `mo.py`, which joins every source table to the live sweeps so a lookup leads with the measured verdict rather than the declaration (122 node types, 182 properties, 98 style properties with 20 structured value shapes pinned down, 53 style states, 152 variants, 74 dynamic variables, 12 interaction triggers, 114 REST routes, 23 tables) instead of guessing, with every node type placed on a live site one at a time and asserted against the delivered HTML, the design-token and element-class layers verified against compiled CSS, the @VAR() dynamic language verified against rendered output, nine designed pages built through the tables themselves, and the delivered pages re-read in Chromium at three viewports so a rule that is present, correct and still wrong cannot pass. Drives Mosaic's own theme export/import and its plugin data upgrade from outside the editor and holds the copy against the source tree for tree. Measured on Mosaic Pro 1.0.8, with the 1.0.7 -> 1.0.8 migration (variants, universal classes, `m-` class names, customDeclarations) run and re-verified.
 license: "MIT"
 author: "moksa (https://moksaweb.com)"
-version: "1.17.2"
+version: "1.18.0"
 ---
 
 # Headless Mosaic
@@ -48,7 +48,7 @@ python tools/mo.py css border-radius        # which Mosaic key drives this CSS
 python tools/mo.py states --grep hover      # state IDs and their selector templates
 python tools/mo.py states --verified        # only the ones measured to compile
 python tools/mo.py vars --namespace post    # the @VAR() surface
-python tools/mo.py classes --grep Heading   # element classes (theme-global)
+python tools/mo.py classes --grep Heading   # variants: the theme-global element classes
 python tools/mo.py routes --grep template
 python tools/mo.py tables wp_mosaic_nodes
 python tools/mo.py skeleton                 # a minimal valid page spec
@@ -58,7 +58,7 @@ python tools/mo.py skeleton                 # a minimal valid page spec
 measured verdict rather than the declaration, because on this platform the two
 disagree for 52 of the 122 types.
 
-Then check the page. Mosaic has four failure modes and **only one of them changes the
+Then check the page. Mosaic has eight failure modes and **only three of them change the
 HTTP status code**:
 
 ```
@@ -78,6 +78,12 @@ CONTENT                     when Mosaic parses it. A `code` node's content is a
                             template: `@media(` (as every minifier writes it) is
                             read as a function call and kills the whole page.
                             `@media (` renders. build_page refuses the former.
+plugin upgrade renamed      HTTP 200, page intact, rows migrated - and a selector
+what the page emits         you wrote against an emitted class matches nothing.
+                            1.0.8: `M_EL4 M_EL_Div` -> `m-div _e`, the state
+                            classes with them, `customStyles` -> `customDeclarations`.
+                            The worked example's tap-to-enlarge stopped opening
+                            and only `verify_loop.py` OPENS said so.
 ```
 
 That last one also fooled every checker here for a day: WordPress answers a fatal
@@ -125,8 +131,11 @@ measured.
 ## What was verified, and how
 
 Everything ran against a live install: WordPress 7.1, WooCommerce 11.1,
-Mosaic Pro 1.0.7, **unlicensed** — the licence gates the theme library and updates,
-not the node factories, so the Pro types register and render regardless.
+Mosaic Pro 1.0.8, **unlicensed** — the licence gates the theme library and updates,
+not the node factories, so the Pro types register and render regardless. The
+site was built on 1.0.7 and upgraded in place: the 1.0.8 data migration
+(`tools/data_upgrade.py`) ran over the real theme, and every sweep below was
+re-run on the result, so the tables describe 1.0.8 as delivered, not as declared.
 
 ```
 WRITE PATH   verified end to end over REST
@@ -135,10 +144,15 @@ WRITE PATH   verified end to end over REST
 NODE SWEEP   122 of 122 node types, ONE PER DOCUMENT, committed then rendered then
              deleted, asserting each type's attrID against the delivered HTML:
                  RENDERED    70   id found; tag and classes recorded
-                 COMMITTED   30   row exists, nothing reached the page
+                 COMMITTED   25   row exists, nothing reached the page
                  COMMIT_5xx  15   PHP fatal on commit
-                 BROKE_PAGE   7   committed, then the whole page died
-             Free 74: 43/22/6/3.  Pro 48: 27/8/9/4.  data/node-verification.csv
+                 BROKE_PAGE  12   committed, then the whole page died
+             Free 74: 43/18/6/7.  Pro 48: 27/7/9/5.  data/node-verification.csv
+             Re-swept on 1.0.8: five types that used to commit and render
+             nothing (accordion-title, loop-pagination and its two buttons,
+             multi-steps-form-step) now kill the page instead - the render
+             guard on their required parent throws. Same advice, louder
+             failure: nest them. `button` now renders `<button>`, not `<span>`.
              Three of the non-rendering outcomes are artefacts of the sweep's own
              method - one type per document, under a plain div - and not of the
              type: `component-instance` (needs `component-instance/<id>`),
@@ -150,9 +164,10 @@ STYLE        the states[state][breakpoint][property] shape confirmed by writing 
              and reading back the compiled CSS; 20 of 22 structured value shapes
              pinned down the same way. data/style-value-shapes.csv
 
-DESIGN SYS   element classes and collection variables both verified against compiled
-             CSS: an elementClass on the Heading 2 meta emitted a site-wide
-             h2,.M_EL_Text__Heading2{...} rule, and a collection variable emitted
+DESIGN SYS   variants and collection variables both verified against compiled
+             CSS: a variant on the Heading 2 catalog entry emitted a site-wide
+             h2,.m-heading-2{...} rule (1.0.7: h2,.M_EL_Text__Heading2), and a
+             collection variable emitted
              :root{--brand: rgb(9, 99, 199)} with background-color:var(--brand).
              references/design-system.md
 
@@ -167,9 +182,10 @@ PROPERTIES   170 probes over the declared property surface, each value asserted
 
 STATES       52 of the 53 style states written to a live page and matched against
              the selector `data/style-states.csv` promises: 36 COMPILED exactly,
-             1 BROKE_PAGE, 12 NO_HOST (their node type cannot be committed safely),
-             3 SKIPPED. All seven globally usable states verified - and the
-             pseudo-classes are emitted UPPERCASE (`.M_EL9:HOVER`), so grepping a
+             13 NO_HOST (their node type cannot be committed safely), 3 SKIPPED,
+             0 BROKE_PAGE on 1.0.8 (the one host that broke the page on 1.0.7
+             now refuses to commit alone, so it is NO_HOST). All seven globally usable states verified - and the
+             pseudo-classes are emitted UPPERCASE (`._j:HOVER`), so grepping a
              stylesheet for `:hover` finds nothing. data/style-state-verification.csv
 
 COMPONENTS   used on the example page: the service row is committed ONCE to the
@@ -310,10 +326,17 @@ EVAL         the skill itself, put in front of the model with and without it loa
              don't have reliable knowledge of Mosaic Pro's spec format"), which is
              the right thing for a model with no data to do. evals/
 
-MEASURED     114 REST routes, 151 element classes, 59 condition subjects,
-             23 tables / 206 columns - read off the running site.
+MEASURED     114 REST routes, 152 variants, 59 condition subjects,
+             23 tables / 210 columns - read off the running site.
 
-FROM SOURCE  122 node types, 181 properties (61 with enums), 207 pluggable IDs,
+UPGRADE      1.0.7 -> 1.0.8 driven over the plugin's own milestone route from
+             outside wp-admin (6 milestones, 17 calls): four class tables renamed,
+             every emitted class name changed (M_EL4 M_EL_Div -> m-div _e),
+             customStyles -> customDeclarations in every stored row - and the
+             one selector on the worked example that named an emitted class
+             stopped matching until it was rewritten. references/upgrading.md
+
+FROM SOURCE  122 node types, 182 properties (61 with enums), 207 pluggable IDs,
              122 placement rules, 10 composite default structures, 98 style
              properties, 53 style states.
 ```
@@ -324,8 +347,8 @@ the difference is worth being exact about:
 
 ```
 node types        122 / 122   swept live, one per document
-node properties   181 / 181   re-probed with a value shaped by each property's
-                              own validator chain: 35 APPLIED, 42 NO_EFFECT,
+node properties   182 / 182   re-probed with a value shaped by each property's
+                              own validator chain: 35 APPLIED, 43 NO_EFFECT,
                               2 EDITOR_ONLY, 55 NO_HOST (no rendering type
                               declares them), 2 INSTRUMENT, 45 SKIPPED
 style properties   98 /  98   swept live; 58 COMPILED, 18 ABSENT, 1 NO_ELEMENT,
@@ -334,7 +357,7 @@ style properties   98 /  98   swept live; 58 COMPILED, 18 ABSENT, 1 NO_ELEMENT,
 ```
 
 **A same-value probe measures the probe, not the surface.** The first property run
-sent the string `MPROP0000X` to all 181 properties regardless of what each wanted,
+sent the string `MPROP0000X` to all 181 properties (182 since 1.0.8) regardless of what each wanted,
 and reported 91 NO_EFFECT. The tell was that `tagName` was in that list while the
 entire demo site is built on it. Re-probed with a value derived from the declared
 validator chain - array for `ValidatorArray`, boolean for `ValidatorBoolean`, a legal
@@ -351,7 +374,8 @@ located by `attrID`. They are labelled **INSTRUMENT**, which is not a pass eithe
 and the label carries the file and row count that does cover them.
 
 **Some properties are gated by a companion.** `target` and `rel` did nothing until
-the node also carried a `url`: `button` and `menu-link` render a `<span>` without one
+the node also carried a `url`: `menu-link` renders a `<span>` without one (and so did
+`button` before 1.0.8; it is a `<button>` now)
 and an `<a href>` with it, so an anchor-only attribute has nothing to attach to. A
 NO_EFFECT is only meaningful once the property has been given the context it needs.
 
@@ -371,13 +395,13 @@ Zero exceptions in either direction. The 20 are the `borderStyle` per-side longh
 (12), `outlineStyle` (4) and `gridChildPosition` (4) — so `borderLeftWidth`,
 `outlineColor` and `gridColumnStart` are all instances of one rule rather than three
 oddities. Set the grouped shape instead (`border` takes `{width, style, color}`), or
-use `customStyles`. `data/style-verification.csv` carries the group beside the result
+use `customDeclarations`. `data/style-verification.csv` carries the group beside the result
 so the pattern is in the data, not just in this paragraph.
 
 **Known gaps, stated rather than papered over.**
 
 - `backgroundStyle` is the one style property whose shape resisted every attempt — it
-  accepts what you send and emits `background-image:none`. Use `customStyles` for
+  accepts what you send and emits `background-image:none`. Use `customDeclarations` for
   gradients, as the glass and darkglow pages do.
 - **`gridColumnStart` / `gridColumnEnd` / `gridRowStart` / `gridRowEnd` emit nothing.**
   All four are real entries in `data/style-properties.csv`, under `gridChildPosition`.
@@ -412,7 +436,7 @@ so the pattern is in the data, not just in this paragraph.
 6. `references/responsive.md` - the state/breakpoint/property axis, the two
    breakpoint rows, and the override that can change a property but never remove
    one. **Read before writing any `_t` or `_m` value.**
-7. `references/design-system.md` — element classes and design tokens. **Read this
+7. `references/design-system.md` — variants (element classes) and design tokens. **Read this
    before styling anything beyond a one-off page**; per-node style is the wrong layer
    for a real site.
 8. `references/dynamic-content.md` — the `@VAR()` language. The syntax is not
@@ -422,6 +446,9 @@ so the pattern is in the data, not just in this paragraph.
 10. `references/interactions.md` — the JavaScript animation system, and how far it is
    verified.
 11. `references/vs-elementor-gutenberg.md` — which builder habits transfer.
+12. `references/upgrading.md` — what a plugin update does to the data and to the
+   delivered page, measured on 1.0.7 -> 1.0.8; how to drive the migration and what
+   to re-verify afterwards.
 
 ## The data files
 
@@ -429,14 +456,14 @@ so the pattern is in the data, not just in this paragraph.
 |---|---|---|
 | `data/node-verification.csv` | 122 | **swept live** — outcome, rendered tag and classes, page bytes, failure detail |
 | `data/node-types.csv` | 122 | source — slug, label, edition, aliases, data class |
-| `data/node-properties.csv` | 181 | source — property, validator chain, **accepted enum values**, `supportsInherit` |
+| `data/node-properties.csv` | 182 | source — property, validator chain, **accepted enum values**, `supportsInherit` |
 | `data/placement-rules.csv` | 122 | source — which children each type accepts |
 | `data/default-children.csv` | 10 | source — what a composite type needs **inside** it |
 | `data/style-properties.csv` | 98 | source — every settable CSS property and its value shape |
 | `data/style-value-shapes.csv` | 22 | **probed live** — the exact JSON shape for each structured value, and what it compiled to |
 | `data/style-states.csv` | 53 | source — state IDs with their exact CSS selector templates |
 | `data/property-verification.csv` | 170 | **probed live** — per-property effect on markup vs CSS, with unprovable enums marked INCONCLUSIVE |
-| `data/node-property-verification.csv` | 181 | **swept live** — each property probed with a value shaped by its own validator chain, on a type that declares it |
+| `data/node-property-verification.csv` | 182 | **swept live** — each property probed with a value shaped by its own validator chain, on a type that declares it |
 | `data/style-verification.csv` | 98 | **swept live** — every style property written to a page and checked against the compiled CSS, with its group beside the result |
 | `data/rwd-verification.csv` | 731 | **checked live** - every `_t`/`_m` declaration vs the served stylesheet, with status per row |
 | `data/browser-verification.csv` | 3988 | **computed in Chromium** - declared vs `getComputedStyle` at three viewports, `not-comparable` labelled per row |
@@ -454,7 +481,7 @@ so the pattern is in the data, not just in this paragraph.
 | `data/node-type-notes.csv` | 8 | where a sweep outcome is true but misleading on its own, why. Surfaced by `mo.py type` |
 | `data/interaction-verification.csv` | 7 | **probed live** - interaction animation shapes, with negative controls and the stored row beside the payload |
 | `data/intro-verification.csv` | 8 + 15 | **sampled live** - the entrance sequence over fifteen timestamps on a monotonic clock, plus the eight assertions about it |
-| `data/element-classes.csv` | 151 | **live** — the built-in class metas; their IDs are what an `elementClass` record must use |
+| `data/variants.csv` | 152 | **live** — the variant catalog (Mosaic's built-in element classes); their IDs are what a `variant` record must use, and `class_name` is what the element emits |
 | `data/dynamic-variables.csv` | 74 | source — every `@VAR('ns/name')` expression, by namespace |
 | `data/evaluator-functions.csv` | 19 | source — the `@` functions with their arity |
 | `data/interaction-types.csv` | 12 | source — trigger types, `timed` vs `progress` |
@@ -463,7 +490,7 @@ so the pattern is in the data, not just in this paragraph.
 | `data/condition-comparators.csv` | 12 | **live** — comparators and their operator sets |
 | `data/pluggables.csv` | 207 | source — every `setID()` by registry |
 | `data/rest-routes.csv` | 114 | **live** — method, path, args |
-| `data/db-columns.csv` | 206 | **live** — every column of all 23 tables |
+| `data/db-columns.csv` | 210 | **live** — every column of all 23 tables |
 
 ## Building a page
 
@@ -490,19 +517,19 @@ tokens and element-class typography rather than per-node values:
 ```jsonc
 "theme": {
   "variables": {"--brand": {"type": "color", "value": "rgb(13,108,102)"}},
-  "elementClasses": {"Heading 1": {"&": {"_": {"color": {"token": "--brand"}}}}}
+  "variants": {"Heading 1": {"&": {"_": {"color": {"token": "--brand"}}}}}
 }
 ```
 
 `{"token": "--brand"}` anywhere in a style resolves to the `{"var": "<uuid>"}`
 reference the compiler wants.
 
-**Two brands in one theme need namespaced tokens and no element classes at all.**
-Collection variables and element classes are both theme-global: two specs that each
+**Two brands in one theme need namespaced tokens and no variants at all.**
+Collection variables and variants are both theme-global: two specs that each
 declare `--ink` produce one `:root` with duplicate declarations, and two specs that
 each style `Heading 1` produce one set of rules. Whichever committed last wins, for
 every page. `sites/_moksa.py` namespaces its tokens (`--mk-*`) and bakes the type
-system onto the nodes with `apply_type()` instead of using element classes, which is
+system onto the nodes with `apply_type()` instead of using variants, which is
 what lets it share an install with a completely different design.
 
 Whole themes move between installs with `theme_export.php` / `theme_import.php`.
@@ -552,8 +579,10 @@ post — `build_all.py` resets first for that reason.
 
 ## Facts worth knowing before you look anything up
 
-- **The REST namespace contains the plugin version** (`/wp-json/mosaic/v1.0.7`). Read
-  it from `mosaicOptions.rest_api_url`, never hardcode.
+- **The REST namespace contains the plugin version** (`/wp-json/mosaic/v1.0.8`). Read
+  it from `mosaicOptions.rest_api_url`, never hardcode. After a plugin update the
+  editor namespace is GONE until the data upgrade has run; only
+  `mosaic/<dataVersion>/<version>/upgrade` answers. `tools/data_upgrade.py`.
 - **`ordering` is a fractional-index string**, not a number.
 - **The tree is a `parentID` column**, not nesting. There is no page-level JSON blob.
 - **Everything is scoped to a `themeID`**, breakpoints included.
@@ -564,8 +593,13 @@ post — `build_all.py` resets first for that reason.
 - **Commit has side effects.** `heal()` runs inside it and creates breakpoints,
   collections and child nodes you never sent. Take every revision in the response.
 - **`modified_gmt` is server-assigned.**
-- **Styling hangs on the generated `.M_EL<n>` class, not your `attrID`**, and that
-  number is not stable. The sibling `M_EL_<Type>` class is.
+- **Styling hangs on the generated `._<token>` class, not your `attrID`**, and the
+  token (`_a`, `_b`, ... `_ba`: a base-38 per-document counter) is not stable. The
+  sibling `m-<type>` class is (`m-div`, `m-text m-wysiwyg`, `m-menu-link`), and a
+  variant that renders its name adds it (`m-heading-2`). Before 1.0.8 the same
+  three were `M_EL4`, `M_EL_Div` and `M_EL_Text__Heading2`; state classes moved
+  with them (`m-accordion-item--opened`, `m-menu-link--current`, `m-tab--active`).
+  Any CSS you write against an emitted class is coupled to the plugin version.
 - **`body{opacity:0}`** — the theme reveals itself from JavaScript. Screenshot tooling
   must let scripts run or it captures a blank page.
 - **Two themes can carry the same name, and only the ACTIVE one is bound to
@@ -580,7 +614,7 @@ post — `build_all.py` resets first for that reason.
   STALE CACHE when they differ by more than a percent - believe it, then find
   every layer. `wp breeze purge --cache=all` was the one that mattered.
 - **A `code` node is a wrapper, not a splice.** `insertLocation:"inPlace"` puts your
-  markup INSIDE `<div class="M_EL_Code">`, one level down - so a sibling combinator
+  markup INSIDE `<div class="m-code _x">`, one level down - so a sibling combinator
   from injected HTML to a Mosaic node never matches, and a control you inject has
   to be styled through its own ancestors or through `:has()`. The native accordion
   avoided the question entirely.
@@ -596,10 +630,31 @@ post — `build_all.py` resets first for that reason.
 - **The front page 301s.** When a post is `page_on_front`, its own permalink
   (`/moksa/`) redirects to `/`; a fetch that does not follow redirects reads 0
   bytes and looks like an outage.
+- **Every `build_site.py` run leaves a master behind, and they add up.** After a
+  season of probing the test theme held 223 masters and 98,261 nodes with 25
+  masters actually bound; Mosaic's ZIP import then spent 230s on masters and died
+  in templates when nginx closed the upstream at five minutes. Pruned to the bound
+  set (masters not reached from a bound template, their templates, their nodes)
+  the same import took under two minutes and compared 22 of 22. Prune before you
+  export; `wp_mosaic_template_assigns.parentID` -> template -> `masterID` is the
+  bound set, plus any `assign="auto"` template.
+- **A variant row cannot be deleted, only emptied.** `status:"delete"` on a
+  variant is accepted and ignored - the row is catalog-backed. Commit it back with
+  `{"states": {"&": {"_": {}}}}` and the rule disappears; measured on Heading 2.
+- **User class names have a grammar.** Variant sub classes and universal classes
+  emit `[a-z0-9_-]` segments joined by `--` (`m-button--primary--sm`), each segment
+  at most 60 characters, never starting with `_`, a digit or the reserved `m-`;
+  names that do not sanitize fall back to `class`, and collisions get `-2`, `-3`.
+  The emitted name is UNIQUE per theme (an `emittedName` column with a unique
+  index on four tables), so two classes cannot share a spelling.
 
 ## Rendered-tag facts you would otherwise guess wrong
 
-- **`button` renders as `<span>`**, not `<button>`. So do `menu-link` and `wysiwyg-link`.
+- **`button` renders three tags since 1.0.8, by two properties.** With a `url` it is
+  `<a href>`; without one it is `<button type="button">` (1.0.7 emitted `<span>`);
+  with `inactive:"1"` - the new integer-as-string property, the Badge variant's
+  default - it is a `<span>`, a label rather than a control. Measured all three.
+  `menu-link` and `wysiwyg-link` still render `<span>` without a `url`.
 - **`text` renders as `<div>` by default** — set `tagName` for `<h1>`, `<p>` and so on.
 - **Eight types emit custom elements**: `<mosaic-dropdown>`, `<mosaic-navbar>`,
   `<mosaic-tabs>`, `<mosaic-accordion>`, `<mosaic-vimeo>`, `<mosaic-youtube>` and
@@ -643,6 +698,7 @@ post — `build_all.py` resets first for that reason.
 | `theme_zip.py` | drive Mosaic's OWN export/import - the ZIP the editor makes, attachments included, over the milestone protocol; import lands in test mode unless told `--activate` |
 | `theme_zip_compare.php` | hold an imported copy against its source, tree for tree - every scoped table, the (parentType, type) shape, which ids survive, and orphans named rather than counted |
 | `theme_delete.php` | remove a theme completely through the plugin's own routine; refuses the live one |
+| `data_upgrade.py` | after a plugin update, run Mosaic's data migration over its own milestone route - the step wp-admin does from a screen - and set the config's version when the editor API is back |
 | `copy_styles.py` | push one node's style onto others, by attrID or prefix |
 | `bootstrap_probe_theme.php` | a licence-free scratch theme |
 | `mint_session.php` | a matching cookie + `wp_rest` nonce from WP-CLI |
@@ -657,7 +713,7 @@ python tools/extract_default_children.py <plugin-root> data/
 python tools/extract_style_properties.py <plugin-root> data/
 python tools/extract_interactions.py     <plugin-root> data/
 python tools/extract_dynamic_variables.py <plugin-root> data/
-python tools/capture_live.py             data/          # from data/raw/*.json
+python tools/capture_live.py             data/          # from data/raw/*.json + db-columns.txt
                                                         # (raw dumps are gitignored;
                                                         #  re-capture from a live site)
 

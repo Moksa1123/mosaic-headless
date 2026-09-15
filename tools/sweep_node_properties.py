@@ -54,7 +54,7 @@ from build_page import Surface, flatten  # noqa: E402
 from sweep_node_types import Client, envelopes, exceptions_of, unwrap  # noqa: E402
 
 MARK = "mprobe37"
-# 7 collided with the attrID (np-037) and the generated class (M_EL37), turning
+# 7 collided with the attrID (np-037) and the generated class (M_EL37 then, _<token> now), turning
 # substring checks into false APPLIEDs. Use a number that cannot occur by chance.
 MARK_INT = 371337
 

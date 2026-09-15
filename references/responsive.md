@@ -42,9 +42,9 @@ One inline stylesheet per breakpoint, in the head, each wrapped in its own query
 <style id="mosaic-theme-block-editor-styles_m-inline-css">   <!-- @media (max-width:767px) -->
 ```
 
-Rules inside them hang off the generated `.M_EL<n>` class, **never off your
+Rules inside them hang off the generated `._<token>` class, **never off your
 `attrID`**. The id is in the HTML and the rule is in the CSS, and the only bridge
-between them is `id="<attrID>" class="M_EL<n>"` in the delivered markup. Any tool
+between them is `id="<attrID>" class="m-div _<token>"` in the delivered markup. Any tool
 that wants to check a breakpoint value has to read that mapping first.
 
 ## The trap that has cost the most: an override cannot REMOVE
@@ -55,8 +55,8 @@ most repeated bug in this codebase, because the shape of the data invites it:
 
 ```python
 # WRONG - and it looks right
-"_":  {"customStyles": "border-left:1px solid #ddd;"},   # 4-up: rule between cells
-"_m": {"customStyles": ""},                              # 1-up: no rule wanted
+"_":  {"customDeclarations": "border-left:1px solid #ddd;"},   # 4-up: rule between cells
+"_m": {"customDeclarations": ""},                              # 1-up: no rule wanted
 ```
 
 The mobile value declares nothing, so nothing overrides, so the desktop
@@ -65,7 +65,7 @@ middle of a single column. Same for the asymmetric padding that went with it.
 
 ```python
 # RIGHT - say zero out loud
-"_m": {"customStyles": "border-left:0;"},
+"_m": {"customDeclarations": "border-left:0;"},
 ```
 
 Measured twice on the same page: a 3×2 hairline list that kept a column rule and a
@@ -166,7 +166,7 @@ scores its own blind spots as successes is worse than no tool.
   clean verifier run — see the gutter trap above. Every width still needs a real
   browser at 1440 / 1024 / 390.
 - **Nodes with no `attrID`.** The bridge from a spec declaration to a compiled rule
-  is `id="<attrID>" class="M_EL<n>"`, so a node that was never given an id is
+  is `id="<attrID>" class="m-div _<token>"`, so a node that was never given an id is
   invisible to the tool. The services body text was exactly that: it carried a
   responsive declaration the tool never saw. Give an `attrID` to anything whose
   responsive behaviour you want checked.

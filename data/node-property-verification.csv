@@ -6,41 +6,41 @@ alt,,,NO_HOST,
 animation,,,NO_HOST,
 animation,,,NO_HOST,
 animation,,,NO_HOST,
-animation,navbar,"""flipDown""",APPLIED,"<mosaic-navbar id=""np-054"" class=""M_EL37 M_EL_Navbar"" data-toggle-breakpoint-id=""_m"" data-animation=""flipDown"""
+animation,navbar,"""flipDown""",APPLIED,"<mosaic-navbar class=""m-navbar _bg"" id=""np-055"" data-toggle-breakpoint-id=""_m"" data-animation=""flipDown"">"
 appearance,,,NO_HOST,
 ariaLabel,,,NO_HOST,
-attrID,,,INSTRUMENT,this sweep locates and reads nodes THROUGH it; asserted instead by style-verification.csv (98 rows); rwd-verification.csv (576 rows)
-attributes,div,"[{""name"": ""data-mprobe37"", ""value"": ""yes""}]",NO_EFFECT,"<div id=""np-015"" class=""M_EL24 M_EL_Div"">"
-autoScale,icon,371337,NO_EFFECT,"<svg xmlns=""http://www.w3.org/2000/svg"" viewBox=""0 0 24 24"" fill=""none"" id=""np-026"" class=""M_EL26 M_EL_Icon"">"
+attrID,,,INSTRUMENT,this sweep locates and reads nodes THROUGH it; asserted instead by style-verification.csv (98 rows); rwd-verification.csv (731 rows)
+attributes,div,"[{""name"": ""data-mprobe37"", ""value"": ""yes""}]",NO_EFFECT,"<div class=""m-div _5"" id=""np-016"">"
+autoScale,icon,371337,NO_EFFECT,"<svg xmlns=""http://www.w3.org/2000/svg"" viewBox=""0 0 24 24"" fill=""none"" class=""m-icon _7"" id=""np-027"">"
 autocomplete,,,SKIPPED,
 autocomplete,,,SKIPPED,
-autoplay,video,"""1""",APPLIED,"<video id=""np-143"" class=""M_EL85 M_EL_Video"" data-autoplay=""1"" muted=""1"" controls=""1"" playsinline=""1"" preload="
-autoplay,vimeo,"""1""",APPLIED,"<mosaic-vimeo id=""np-154"" class=""M_EL94 M_EL_Vimeo"" data-autoplay=""1"" data-mute=""1"" data-playsinline=""1"">"
-autoplay,youtube,"""1""",APPLIED,"<mosaic-youtube id=""np-172"" class=""M_EL104 M_EL_YouTube"" data-autoplay=""1"" data-mute=""1"" data-playsinline=""1"">"
+autoplay,video,"""1""",APPLIED,"<video class=""m-video _cs"" id=""np-144"" data-autoplay=""1"" muted=""1"" controls=""1"" playsinline=""1"" preload=""metad"
+autoplay,vimeo,"""1""",APPLIED,"<mosaic-vimeo class=""m-vimeo _c1"" id=""np-155"" data-autoplay=""1"" data-mute=""1"" data-playsinline=""1"">"
+autoplay,youtube,"""1""",APPLIED,"<mosaic-youtube class=""m-youtube _c_"" id=""np-173"" data-autoplay=""1"" data-mute=""1"" data-playsinline=""1"">"
 autoplayDelay,,,NO_HOST,
 autoplayLimit,,,NO_HOST,
-buttonBreakpoint,navbar,"""none""",APPLIED,"<mosaic-navbar id=""np-053"" class=""M_EL36 M_EL_Navbar"" data-toggle-breakpoint-id=""none"" data-animation=""fade"">"
+buttonBreakpoint,navbar,"""none""",APPLIED,"<mosaic-navbar class=""m-navbar _bf"" id=""np-054"" data-toggle-breakpoint-id=""none"" data-animation=""fade"">"
 checked,,,NO_HOST,
 checked,,,NO_HOST,
 colors,,,SKIPPED,
 conditions,,,SKIPPED,
 content,,,SKIPPED,
-content,code,"""mprobe37""",NO_EFFECT,"<div id=""np-059"" class=""M_EL40 M_EL_Code"">"
-controls,video,"""1""",APPLIED,"<video id=""np-146"" class=""M_EL88 M_EL_Video"" controls=""1"" preload=""metadata"">"
-controls,vimeo,"""1""",NO_EFFECT,"<mosaic-vimeo id=""np-156"" class=""M_EL96 M_EL_Vimeo"" data-autoplay=""0"" data-mute=""0"" data-playsinline=""0"">"
-controls,youtube,"""1""",NO_EFFECT,"<mosaic-youtube id=""np-174"" class=""M_EL106 M_EL_YouTube"" data-autoplay=""0"" data-mute=""0"" data-playsinline=""0"">"
-cssClasses,div,"[""mprobe37-cls""]",NO_EFFECT,"<div id=""np-016"" class=""M_EL25 M_EL_Div"">"
+content,code,"""mprobe37""",NO_EFFECT,"<div class=""m-code _bj"" id=""np-060"">"
+controls,video,"""1""",APPLIED,"<video class=""m-video _cv"" id=""np-147"" controls=""1"" preload=""metadata"">"
+controls,vimeo,"""1""",NO_EFFECT,"<mosaic-vimeo class=""m-vimeo _c3"" id=""np-157"" data-autoplay=""0"" data-mute=""0"" data-playsinline=""0"">"
+controls,youtube,"""1""",NO_EFFECT,"<mosaic-youtube class=""m-youtube _db"" id=""np-175"" data-autoplay=""0"" data-mute=""0"" data-playsinline=""0"">"
+cssClasses,div,"[""mprobe37-cls""]",NO_EFFECT,"<div class=""m-div _6"" id=""np-017"">"
 currentStatus,,,SKIPPED,
 defaultSlideIndex,,,NO_HOST,
-defaultTabIndex,tabs,371337,NO_EFFECT,"<mosaic-tabs id=""np-136"" class=""M_EL75 M_EL_Tabs"">"
+defaultTabIndex,tabs,371337,NO_EFFECT,"<mosaic-tabs class=""m-tabs _ci"" id=""np-137"">"
 defaultValue,,,SKIPPED,
 defaultValue,,,SKIPPED,
 defaultValue,,,SKIPPED,
 defaultValue,,,SKIPPED,
 defaultValue,,,SKIPPED,
-disableScroll,navbar,"""1""",NO_EFFECT,"<mosaic-navbar id=""np-055"" class=""M_EL38 M_EL_Navbar M_EL_Navbar--disable-scroll"" data-toggle-breakpoint-id=""_"
-disabled,select-option,371337,NO_EFFECT,"<option id=""np-098"" class=""M_EL65 M_EL_SelectOption"" value disabled=""true"">"
-disabled,text-input,371337,NO_EFFECT,"<input id=""np-084"" class=""M_EL57 M_EL_InputText"" type=""text"">"
+disableScroll,navbar,"""1""",NO_EFFECT,"<mosaic-navbar class=""m-navbar m-navbar--disable-scroll _bh"" id=""np-056"" data-toggle-breakpoint-id=""_m"" data-a"
+disabled,select-option,371337,NO_EFFECT,"<option class=""m-select-option _b9"" id=""np-099"" value disabled=""true"">"
+disabled,text-input,371337,NO_EFFECT,"<input class=""m-input _b1"" id=""np-085"" type=""text"">"
 duration,,,NO_HOST,
 dynamicCode,,,SKIPPED,
 dynamicSources,,,SKIPPED,
@@ -50,46 +50,47 @@ firstOpened,,,NO_HOST,
 format,,,NO_HOST,
 format,,,NO_HOST,
 height,,,NO_HOST,
-height,video,371337,APPLIED,"<video id=""np-149"" class=""M_EL91 M_EL_Video"" controls=""1"" height=""371337"" preload=""metadata"">"
+height,video,371337,APPLIED,"<video class=""m-video _cy"" id=""np-150"" controls=""1"" height=""371337"" preload=""metadata"">"
 hidden,,,SKIPPED,
-horizontalAlign,dropdown,"""right""",APPLIED,"<mosaic-dropdown id=""np-048"" class=""M_EL31 M_EL_Dropdown dropdown-mode M_EL_DropdownNarrow"" data-open-on=""clic"
+horizontalAlign,dropdown,"""right""",APPLIED,"<mosaic-dropdown class=""m-dropdown-narrow m-dropdown dropdown-mode _ba"" id=""np-049"" data-open-on=""click"" data-"
 image,,,SKIPPED,
 image,,,SKIPPED,
 image,,,SKIPPED,
+inactive,button,371337,NO_EFFECT,"<span class=""m-button _z"" id=""np-006"">"
 insertLocation,code,"""bodyEnd""",APPLIED,output relocated out of the tree
 interactions,,,SKIPPED,
 isAutoplay,,,NO_HOST,
 isCarousel,,,NO_HOST,
 lazyLoad,,,NO_HOST,
-lazyLoad,vimeo,"""1""",NO_EFFECT,"<mosaic-vimeo id=""np-159"" class=""M_EL99 M_EL_Vimeo"" data-autoplay=""0"" data-mute=""0"" data-playsinline=""0"">"
-lazyLoad,youtube,"""1""",NO_EFFECT,"<mosaic-youtube id=""np-177"" class=""M_EL109 M_EL_YouTube"" data-autoplay=""0"" data-mute=""0"" data-playsinline=""0"">"
+lazyLoad,vimeo,"""1""",NO_EFFECT,"<mosaic-vimeo class=""m-vimeo _c6"" id=""np-160"" data-autoplay=""0"" data-mute=""0"" data-playsinline=""0"">"
+lazyLoad,youtube,"""1""",NO_EFFECT,"<mosaic-youtube class=""m-youtube _de"" id=""np-178"" data-autoplay=""0"" data-mute=""0"" data-playsinline=""0"">"
 listStart,,,SKIPPED,
 listType,,,NO_HOST,
 loading,,,NO_HOST,
-locked,div,true,EDITOR_ONLY,"<div id=""np-012"" class=""M_EL23 M_EL_Div"">"
+locked,div,true,EDITOR_ONLY,"<div class=""m-div _4"" id=""np-013"">"
 logging,,,NO_HOST,
-logging,choice-field,"""exclude""",NO_EFFECT,"<fieldset id=""np-069"" class=""M_EL48 M_EL_ChoiceField"">"
-logging,fileupload-input,"""mask""",NO_EFFECT,"<input id=""np-074"" class=""M_EL53 M_EL_FileUpload"" accept="".jpg, .png, .jpeg, .avif"" type=""file"">"
-logging,select-input,"""exclude""",NO_EFFECT,"<select id=""np-104"" class=""M_EL69 M_EL_Select"" size=""1"">"
-logging,text-input,"""exclude""",NO_EFFECT,"<input id=""np-087"" class=""M_EL59 M_EL_InputText"" type=""text"">"
-logging,textarea-input,"""exclude""",NO_EFFECT,"<textarea id=""np-112"" class=""M_EL74 M_EL_TextArea"">"
-loop,video,"""1""",APPLIED,"<video id=""np-145"" class=""M_EL87 M_EL_Video"" loop=""1"" controls=""1"" preload=""metadata"">"
+logging,choice-field,"""exclude""",NO_EFFECT,"<fieldset class=""m-choice-field _bs"" id=""np-070"">"
+logging,fileupload-input,"""mask""",NO_EFFECT,"<input class=""m-file-upload _bx"" id=""np-075"" accept="".jpg, .png, .jpeg, .avif"" type=""file"">"
+logging,select-input,"""exclude""",NO_EFFECT,"<select class=""m-select _cb"" id=""np-105"" size=""1"">"
+logging,text-input,"""exclude""",NO_EFFECT,"<input class=""m-input _b3"" id=""np-088"" type=""text"">"
+logging,textarea-input,"""exclude""",NO_EFFECT,"<textarea class=""m-textarea _cg"" id=""np-113"">"
+loop,video,"""1""",APPLIED,"<video class=""m-video _cu"" id=""np-146"" loop=""1"" controls=""1"" preload=""metadata"">"
 maptype,,,NO_HOST,
-maxlength,textarea-input,371337,APPLIED,"<textarea id=""np-109"" class=""M_EL72 M_EL_TextArea"" maxlength=""371337"">"
-mediaLibrary,fileupload-input,371337,NO_EFFECT,"<input id=""np-075"" class=""M_EL54 M_EL_FileUpload"" accept="".jpg, .png, .jpeg, .avif"" type=""file"">"
+maxlength,textarea-input,371337,APPLIED,"<textarea class=""m-textarea _ce"" id=""np-110"" maxlength=""371337"">"
+mediaLibrary,fileupload-input,371337,NO_EFFECT,"<input class=""m-file-upload _by"" id=""np-076"" accept="".jpg, .png, .jpeg, .avif"" type=""file"">"
 menuID,,,SKIPPED,
-minlength,textarea-input,371337,APPLIED,"<textarea id=""np-108"" class=""M_EL71 M_EL_TextArea"" minlength=""371337"">"
+minlength,textarea-input,371337,APPLIED,"<textarea class=""m-textarea _cd"" id=""np-109"" minlength=""371337"">"
 mode,,,NO_HOST,
 mode,,,NO_HOST,
 mode,,,NO_HOST,
-mode,list-item,"""separator""",NO_EFFECT,"<li id=""np-037"" class=""M_EL27 M_EL_ListItem"">"
-mode,loop-item,"""separator""",NO_EFFECT,"<div id=""np-038"" class=""M_EL28 M_EL_LoopItem M_Interaction_Jail"">"
-multiple,fileupload-input,371337,NO_EFFECT,"<input id=""np-072"" class=""M_EL51 M_EL_FileUpload"" accept="".jpg, .png, .jpeg, .avif"" multiple type=""file"">"
-multiple,select-input,371337,NO_EFFECT,"<select id=""np-101"" class=""M_EL66 M_EL_Select"" multiple size=""1"">"
-muted,video,"""1""",APPLIED,"<video id=""np-144"" class=""M_EL86 M_EL_Video"" muted=""1"" controls=""1"" preload=""metadata"">"
-muted,vimeo,"""1""",APPLIED,"<mosaic-vimeo id=""np-155"" class=""M_EL95 M_EL_Vimeo"" data-autoplay=""0"" data-mute=""1"" data-playsinline=""0"">"
-muted,youtube,"""1""",APPLIED,"<mosaic-youtube id=""np-173"" class=""M_EL105 M_EL_YouTube"" data-autoplay=""0"" data-mute=""1"" data-playsinline=""0"">"
-name,div,"""mprobe37""",EDITOR_ONLY,"<div id=""np-011"" class=""M_EL22 M_EL_Div"">"
+mode,list-item,"""separator""",NO_EFFECT,"<li class=""m-list-item _8"" id=""np-038"">"
+mode,loop-item,"""separator""",NO_EFFECT,"<div class=""m-loop-item M_IJ _9"" id=""np-039"">"
+multiple,fileupload-input,371337,NO_EFFECT,"<input class=""m-file-upload _bv"" id=""np-073"" accept="".jpg, .png, .jpeg, .avif"" multiple type=""file"">"
+multiple,select-input,371337,NO_EFFECT,"<select class=""m-select _b-"" id=""np-102"" multiple size=""1"">"
+muted,video,"""1""",APPLIED,"<video class=""m-video _ct"" id=""np-145"" muted=""1"" controls=""1"" preload=""metadata"">"
+muted,vimeo,"""1""",APPLIED,"<mosaic-vimeo class=""m-vimeo _c2"" id=""np-156"" data-autoplay=""0"" data-mute=""1"" data-playsinline=""0"">"
+muted,youtube,"""1""",APPLIED,"<mosaic-youtube class=""m-youtube _da"" id=""np-174"" data-autoplay=""0"" data-mute=""1"" data-playsinline=""0"">"
+name,div,"""mprobe37""",EDITOR_ONLY,"<div class=""m-div _3"" id=""np-012"">"
 nameAttribute,,,SKIPPED,
 nameAttribute,,,SKIPPED,
 nameAttribute,,,SKIPPED,
@@ -104,64 +105,64 @@ pagesAfter,,,NO_HOST,
 pagesBefore,,,NO_HOST,
 pagesEnd,,,NO_HOST,
 pagesStart,,,NO_HOST,
-placeholderText,text-input,"""mprobe37""",APPLIED,"<input id=""np-085"" class=""M_EL58 M_EL_InputText"" placeholder=""mprobe37"" type=""text"">"
-placeholderText,textarea-input,"""mprobe37""",APPLIED,"<textarea id=""np-107"" class=""M_EL70 M_EL_TextArea"" placeholder=""mprobe37"">"
-playsinline,video,"""1""",APPLIED,"<video id=""np-147"" class=""M_EL89 M_EL_Video"" controls=""1"" playsinline=""1"" preload=""metadata"">"
-playsinline,vimeo,"""1""",APPLIED,"<mosaic-vimeo id=""np-157"" class=""M_EL97 M_EL_Vimeo"" data-autoplay=""0"" data-mute=""0"" data-playsinline=""1"">"
-playsinline,youtube,"""1""",APPLIED,"<mosaic-youtube id=""np-175"" class=""M_EL107 M_EL_YouTube"" data-autoplay=""0"" data-mute=""0"" data-playsinline=""1"">"
+placeholderText,text-input,"""mprobe37""",APPLIED,"<input class=""m-input _b2"" id=""np-086"" placeholder=""mprobe37"" type=""text"">"
+placeholderText,textarea-input,"""mprobe37""",APPLIED,"<textarea class=""m-textarea _cc"" id=""np-108"" placeholder=""mprobe37"">"
+playsinline,video,"""1""",APPLIED,"<video class=""m-video _cw"" id=""np-148"" controls=""1"" playsinline=""1"" preload=""metadata"">"
+playsinline,vimeo,"""1""",APPLIED,"<mosaic-vimeo class=""m-vimeo _c4"" id=""np-158"" data-autoplay=""0"" data-mute=""0"" data-playsinline=""1"">"
+playsinline,youtube,"""1""",APPLIED,"<mosaic-youtube class=""m-youtube _dc"" id=""np-176"" data-autoplay=""0"" data-mute=""0"" data-playsinline=""1"">"
 positionX,,,SKIPPED,
 positionY,,,SKIPPED,
 poster,,,SKIPPED,
-preload,video,"""none""",APPLIED,"<video id=""np-150"" class=""M_EL92 M_EL_Video"" controls=""1"" preload=""none"">"
-privacy,vimeo,"""1""",NO_EFFECT,"<mosaic-vimeo id=""np-158"" class=""M_EL98 M_EL_Vimeo"" data-autoplay=""0"" data-mute=""0"" data-playsinline=""0"">"
-privacy,youtube,"""1""",NO_EFFECT,"<mosaic-youtube id=""np-176"" class=""M_EL108 M_EL_YouTube"" data-autoplay=""0"" data-mute=""0"" data-playsinline=""0"">"
-processShortcodes,code,"""1""",NO_EFFECT,"<div id=""np-060"" class=""M_EL41 M_EL_Code"">"
+preload,video,"""none""",APPLIED,"<video class=""m-video _cz"" id=""np-151"" controls=""1"" preload=""none"">"
+privacy,vimeo,"""1""",NO_EFFECT,"<mosaic-vimeo class=""m-vimeo _c5"" id=""np-159"" data-autoplay=""0"" data-mute=""0"" data-playsinline=""0"">"
+privacy,youtube,"""1""",NO_EFFECT,"<mosaic-youtube class=""m-youtube _dd"" id=""np-177"" data-autoplay=""0"" data-mute=""0"" data-playsinline=""0"">"
+processShortcodes,code,"""1""",NO_EFFECT,"<div class=""m-code _bk"" id=""np-061"">"
 query,,,NO_HOST,
-readonly,text-input,371337,NO_EFFECT,"<input id=""np-083"" class=""M_EL56 M_EL_InputText"" type=""text"">"
-rel,button,"[""mprobe37""]",APPLIED,"<a id=""np-008"" class=""M_EL20 M_EL_Button"" href=""https://example.com/mprobe37"" rel=""mprobe37"">"
-rel,dropdown-toggle,"[""mprobe37""]",APPLIED,"<a id=""np-047"" class=""M_EL30 M_EL_DropdownToggle"" href=""https://example.com/mprobe37"" rel=""mprobe37"" aria-hasp"
-rel,menu-link,"[""mprobe37""]",APPLIED,"<a id=""np-051"" class=""M_EL35 M_EL_MenuLink"" href=""https://example.com/mprobe37"" rel=""mprobe37"">"
-rel,wysiwyg-link,"[""mprobe37""]",APPLIED,"<a id=""np-166"" class=""M_EL103 M_EL_WysiwygLink"" href=""https://example.com/mprobe37"" rel=""mprobe37"">"
+readonly,text-input,371337,NO_EFFECT,"<input class=""m-input _b0"" id=""np-084"" type=""text"">"
+rel,button,"[""mprobe37""]",APPLIED,"<a class=""m-button _1"" id=""np-009"" href=""https://example.com/mprobe37"" rel=""mprobe37"">"
+rel,dropdown-toggle,"[""mprobe37""]",APPLIED,"<a class=""m-dropdown-toggle __"" id=""np-048"" href=""https://example.com/mprobe37"" rel=""mprobe37"" aria-haspopup="""
+rel,menu-link,"[""mprobe37""]",APPLIED,"<a class=""m-menu-link _be"" id=""np-052"" href=""https://example.com/mprobe37"" rel=""mprobe37"">"
+rel,wysiwyg-link,"[""mprobe37""]",APPLIED,"<a class=""m-inline-link _c-"" id=""np-167"" href=""https://example.com/mprobe37"" rel=""mprobe37"">"
 requireOneOpen,,,NO_HOST,
 required,,,NO_HOST,
-required,choice-field,371337,NO_EFFECT,"<fieldset id=""np-067"" class=""M_EL42 M_EL_ChoiceField"">"
-required,fileupload-input,371337,NO_EFFECT,"<input id=""np-073"" class=""M_EL52 M_EL_FileUpload"" accept="".jpg, .png, .jpeg, .avif"" required type=""file"">"
-required,select-input,371337,NO_EFFECT,"<select id=""np-102"" class=""M_EL67 M_EL_Select"" required size=""1"">"
-required,text-input,371337,NO_EFFECT,"<input id=""np-082"" class=""M_EL55 M_EL_InputText"" required type=""text"">"
-required,textarea-input,371337,NO_EFFECT,"<textarea id=""np-111"" class=""M_EL73 M_EL_TextArea"" required>"
-requiredMin,choice-field,371337,NO_EFFECT,"<fieldset id=""np-068"" class=""M_EL45 M_EL_ChoiceField"">"
-selected,select-option,371337,NO_EFFECT,"<option id=""np-097"" class=""M_EL64 M_EL_SelectOption"" value selected=""true"">"
-shortcode,wpShortcode,"""mprobe37""",NO_EFFECT,"<div id=""np-163"" class=""M_EL101 M_EL_WPShortcode"">"
+required,choice-field,371337,NO_EFFECT,"<fieldset class=""m-choice-field _bm"" id=""np-068"">"
+required,fileupload-input,371337,NO_EFFECT,"<input class=""m-file-upload _bw"" id=""np-074"" accept="".jpg, .png, .jpeg, .avif"" required type=""file"">"
+required,select-input,371337,NO_EFFECT,"<select class=""m-select _b_"" id=""np-103"" required size=""1"">"
+required,text-input,371337,NO_EFFECT,"<input class=""m-input _bz"" id=""np-083"" required type=""text"">"
+required,textarea-input,371337,NO_EFFECT,"<textarea class=""m-textarea _cf"" id=""np-112"" required>"
+requiredMin,choice-field,371337,NO_EFFECT,"<fieldset class=""m-choice-field _bp"" id=""np-069"">"
+selected,select-option,371337,NO_EFFECT,"<option class=""m-select-option _b8"" id=""np-098"" value selected=""true"">"
+shortcode,wpShortcode,"""mprobe37""",NO_EFFECT,"<div class=""m-shortcode _c8"" id=""np-164"">"
 size,,,NO_HOST,
-size,select-input,371337,APPLIED,"<select id=""np-103"" class=""M_EL68 M_EL_Select"" size=""371337"">"
+size,select-input,371337,APPLIED,"<select class=""m-select _ca"" id=""np-104"" size=""371337"">"
 sizes,,,NO_HOST,
 sizes,,,NO_HOST,
-sources,video,"[""mprobe37""]",NO_EFFECT,"<video id=""np-142"" class=""M_EL84 M_EL_Video"" controls=""1"" preload=""metadata"">"
+sources,video,"[""mprobe37""]",NO_EFFECT,"<video class=""m-video _cr"" id=""np-143"" controls=""1"" preload=""metadata"">"
 srcset,,,NO_HOST,
 srcset,,,NO_HOST,
 startTime,,,SKIPPED,
 startTime,,,SKIPPED,
 stepActive,,,NO_HOST,
-stepActive,form-multi-steps-step,true,NO_EFFECT,"<div id=""np-091"" class=""M_EL61 M_EL_Step"" onclick=""(() =>"
+stepActive,form-multi-steps-step,true,NO_EFFECT,"<div class=""m-multi-steps-step-tab _b5"" id=""np-092"" onclick=""(() =>"
 stepIndex,,,NO_HOST,
-stepIndex,form-multi-steps-step,371337,NO_EFFECT,"<div id=""np-090"" class=""M_EL60 M_EL_Step"" onclick=""(() =>"
-style,,,INSTRUMENT,this sweep locates and reads nodes THROUGH it; asserted instead by style-verification.csv (98 rows); rwd-verification.csv (576 rows)
+stepIndex,form-multi-steps-step,371337,NO_EFFECT,"<div class=""m-multi-steps-step-tab _b4"" id=""np-091"" onclick=""(() =>"
+style,,,INSTRUMENT,this sweep locates and reads nodes THROUGH it; asserted instead by style-verification.csv (98 rows); rwd-verification.csv (731 rows)
 submitType,,,SKIPPED,
-suggestedVideos,youtube,"""1""",NO_EFFECT,"<mosaic-youtube id=""np-179"" class=""M_EL110 M_EL_YouTube"" data-autoplay=""0"" data-mute=""0"" data-playsinline=""0"">"
+suggestedVideos,youtube,"""1""",NO_EFFECT,"<mosaic-youtube class=""m-youtube _df"" id=""np-180"" data-autoplay=""0"" data-mute=""0"" data-playsinline=""0"">"
 svg,,,SKIPPED,
-tagName,div,"""h4""",APPLIED,"<h4 id=""np-009"" class=""M_EL21 M_EL_Div"">"
-tagName,section,"""h4""",APPLIED,"<h4 id=""np-139"" class=""M_EL82 M_EL_Section"">"
-tagName,text,"""h4""",APPLIED,"<h4 id=""np-140"" class=""M_EL83 M_EL_Text M_EL_WYSIWYG"">"
-target,button,"""_top""",APPLIED,"<a id=""np-007"" class=""M_EL19 M_EL_Button"" href=""https://example.com/mprobe37"" target=""_top"">"
-target,dropdown-toggle,"""_top""",APPLIED,"<a id=""np-046"" class=""M_EL29 M_EL_DropdownToggle"" href=""https://example.com/mprobe37"" target=""_top"" aria-haspo"
-target,menu-link,"""_top""",APPLIED,"<a id=""np-050"" class=""M_EL34 M_EL_MenuLink"" href=""https://example.com/mprobe37"" target=""_top"">"
-target,wysiwyg-link,"""_top""",APPLIED,"<a id=""np-165"" class=""M_EL102 M_EL_WysiwygLink"" href=""https://example.com/mprobe37"" target=""_top"">"
+tagName,div,"""h4""",APPLIED,"<h4 class=""m-div _2"" id=""np-010"">"
+tagName,section,"""h4""",APPLIED,"<h4 class=""m-section _cp"" id=""np-140"">"
+tagName,text,"""h4""",APPLIED,"<h4 class=""m-text m-wysiwyg _cq"" id=""np-141"">"
+target,button,"""_top""",APPLIED,"<a class=""m-button _0"" id=""np-008"" href=""https://example.com/mprobe37"" target=""_top"">"
+target,dropdown-toggle,"""_top""",APPLIED,"<a class=""m-dropdown-toggle _-"" id=""np-047"" href=""https://example.com/mprobe37"" target=""_top"" aria-haspopup=""t"
+target,menu-link,"""_top""",APPLIED,"<a class=""m-menu-link _bd"" id=""np-051"" href=""https://example.com/mprobe37"" target=""_top"">"
+target,wysiwyg-link,"""_top""",APPLIED,"<a class=""m-inline-link _c9"" id=""np-166"" href=""https://example.com/mprobe37"" target=""_top"">"
 text,,,NO_HOST,
-text,select-option,"""mprobe37""",NO_EFFECT,"<option id=""np-096"" class=""M_EL63 M_EL_SelectOption"" value>"
+text,select-option,"""mprobe37""",NO_EFFECT,"<option class=""m-select-option _b7"" id=""np-097"" value>"
 theme,,,NO_HOST,
-threshold,video,371337,NO_EFFECT,"<video id=""np-152"" class=""M_EL93 M_EL_Video"" controls=""1"" preload=""metadata"" data-threshold=""100"">"
-threshold,vimeo,371337,NO_EFFECT,"<mosaic-vimeo id=""np-161"" class=""M_EL100 M_EL_Vimeo"" data-autoplay=""0"" data-mute=""0"" data-playsinline=""0"" data"
-threshold,youtube,371337,NO_EFFECT,"<mosaic-youtube id=""np-180"" class=""M_EL111 M_EL_YouTube"" data-autoplay=""0"" data-mute=""0"" data-playsinline=""0"" "
+threshold,video,371337,NO_EFFECT,"<video class=""m-video _c0"" id=""np-153"" controls=""1"" preload=""metadata"" data-threshold=""100"">"
+threshold,vimeo,371337,NO_EFFECT,"<mosaic-vimeo class=""m-vimeo _c7"" id=""np-162"" data-autoplay=""0"" data-mute=""0"" data-playsinline=""0"" data-thresh"
+threshold,youtube,371337,NO_EFFECT,"<mosaic-youtube class=""m-youtube _dg"" id=""np-181"" data-autoplay=""0"" data-mute=""0"" data-playsinline=""0"" data-th"
 thumbnail,,,SKIPPED,
 thumbnailAlt,,,NO_HOST,
 title,,,NO_HOST,
@@ -173,10 +174,10 @@ url,,,SKIPPED,
 useAsBackground,,,NO_HOST,
 value,,,NO_HOST,
 value,,,NO_HOST,
-value,select-option,"""mprobe37""",APPLIED,"<option id=""np-095"" class=""M_EL62 M_EL_SelectOption"" value=""mprobe37"">"
+value,select-option,"""mprobe37""",APPLIED,"<option class=""m-select-option _b6"" id=""np-096"" value=""mprobe37"">"
 video,,,SKIPPED,
 vimeoUrl,,,SKIPPED,
 width,,,NO_HOST,
-width,video,371337,APPLIED,"<video id=""np-148"" class=""M_EL90 M_EL_Video"" controls=""1"" width=""371337"" preload=""metadata"">"
+width,video,371337,APPLIED,"<video class=""m-video _cx"" id=""np-149"" controls=""1"" width=""371337"" preload=""metadata"">"
 youtubeUrl,,,SKIPPED,
 zoom,,,NO_HOST,

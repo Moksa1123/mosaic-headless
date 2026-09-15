@@ -105,8 +105,8 @@ python tools/mo.py states --verified        # 컴파일됨이 측정된 상태�
 python tools/mo.py css grid-column          # 이 CSS를 내는 Mosaic 키
 ```
 
-그다음 페이지를 본다. Mosaic에는 **일곱 가지** 실패 모드가 있고, HTTP 상태 코드가 바뀌는 것은
-그중 둘뿐이다:
+그다음 페이지를 본다. Mosaic에는 **여덟 가지** 실패 모드가 있고, HTTP 상태 코드가 바뀌는 것은
+그중 셋뿐이다:
 
 ```
 검증기의 정상적 거부         HTTP 200 + 본문에 `exceptions` 배열
@@ -120,6 +120,11 @@ URL에 템플릿 없음            HTTP 406, 비로그인에게는 빈 본문
                              `code` 노드의 내용은 템플릿이라, minifier가 쓰는 `@media(`는
                              함수 호출로 읽힌다. `@media (`는 렌더링된다. build_page는
                              전자를 거부한다.
+플러그인 업그레이드가 출력을 바꿈 HTTP 200, 페이지 멀쩡, 행도 이관됨 — 그런데 출력 클래스를 겨냥해
+                             쓴 CSS가 아무것에도 안 맞는다. 1.0.8은 `M_EL4 M_EL_Div`를
+                             `m-div _e`로, 상태 클래스도 함께, `customStyles`를
+                             `customDeclarations`로 바꿨다. 예제의 탭 확대가 안 열리게 됐고,
+                             그걸 말해준 건 verify_loop.py였다.
 ```
 
 commit 성공은 페이지가 동작한다는 증거가 아니고, 올바른 스타일시트도 마찬가지다. 여기의 모든
@@ -128,20 +133,20 @@ commit 성공은 페이지가 동작한다는 증거가 아니고, 올바른 스
 
 ## 무엇을, 어떻게 검증했나
 
-전부 실제 설치에서 실행 — WordPress 7.1, WooCommerce 11.1, Mosaic Pro 1.0.7, **라이선스 없음**:
+전부 실제 설치에서 실행 — WordPress 7.1, WooCommerce 11.1, Mosaic Pro 1.0.8, **라이선스 없음**:
 라이선스가 막는 것은 테마 라이브러리와 업데이트지 노드 팩토리가 아니라서 Pro 타입도 등록되고
 렌더링된다.
 
 | 항목 | 결과 |
 |---|---|
-| **노드 타입** | 122 / 122를 문서당 하나씩 스윕, commit → 렌더 → 단언 → 삭제: 70 RENDERED, 30 COMMITTED, 15 COMMIT_5xx, 7 BROKE_PAGE. 렌더되지 않은 행 중 셋은 "필요한 부모 없이 commit"한 스윕 방식의 산물이며, 그 사실이 행 옆에 적혀 있다 |
+| **노드 타입** | 122 / 122를 문서당 하나씩 스윕, commit → 렌더 → 단언 → 삭제: 70 RENDERED, 25 COMMITTED, 15 COMMIT_5xx, 12 BROKE_PAGE. 1.0.8에서 재스윕: 전에는 조용히 commit되던 5개 타입이 부모 없이는 페이지를 죽인다. 렌더되지 않은 행 중 셋은 "필요한 부모 없이 commit"한 스윕 방식의 산물이며, 그 사실이 행 옆에 적혀 있다 |
 | **스타일 프로퍼티** | 98 / 98을 실제 페이지에 쓰고 컴파일된 CSS와 대조: 58 COMPILED, 18 ABSENT, 21 SKIPPED |
-| **노드 프로퍼티** | 181 / 181을 각 프로퍼티 자신의 검증기 체인에서 도출한 값으로 재탐사: 35 APPLIED, 42 NO_EFFECT, 55 NO_HOST, 47 SKIPPED |
+| **노드 프로퍼티** | 182 / 182을 각 프로퍼티 자신의 검증기 체인에서 도출한 값으로 재탐사: 35 APPLIED, 43 NO_EFFECT, 55 NO_HOST, 47 SKIPPED |
 | **반응형** | 두 사이트 합쳐 731개의 `_t`/`_m` 선언을, 사이트가 실제로 내보낸 스타일시트에 대해 하나씩 단언 — 전부 검증됨 |
 | **브라우저** | 전달된 두 페이지를 Chromium의 세 가지 뷰포트에서 계산 스타일 3,988건 판독: 2,929건 일치, 912건은 비교 불가로 명시, **덮어쓰기 0건** |
 | **디자인 감사** | 명암비, 폰트 폴백, CJK 자간, 가로 넘침, 텍스트 잘림, 한 줄 글자 수 — 브라우저에서 실행, **지적 26건, 모두 서면으로 판정** — 이유 없는 승인은 릴리스 게이트가 거부한다 |
 | **컴포넌트** | 컴포넌트 시스템을 끝에서 끝까지 구동, **8건 중 8건**: 카테고리 아래 생성, 문서 자가 치유, 쓰기 가능 인스턴스로 트리 채움, 읽기 전용 인스턴스는 같은 쓰기를 거부(네거티브 컨트롤), 페이지의 두 인스턴스가 하나의 정의를 두 번 렌더 |
-| **스타일 상태** | 53개 상태 중 52개를 실제 페이지에 쓰고 표가 약속한 셀렉터와 대조: **36개 정확히 일치**, 12 NO_HOST, 3 SKIPPED, 1 BROKE_PAGE. 의사 클래스는 대문자로 출력된다(`.M_EL9:HOVER`) |
+| **스타일 상태** | 53개 상태 중 52개를 실제 페이지에 쓰고 표가 약속한 셀렉터와 대조: **36개 정확히 일치**, 13 NO_HOST, 3 SKIPPED, 0 BROKE_PAGE. 의사 클래스는 대문자로 출력된다(`.M_EL9:HOVER`) |
 | **인터랙션** | JS 애니메이션 경로를 네거티브 컨트롤과 함께 탐사하고 행을 읽어 되돌림: `propertyMetas`**는** 수락·저장된다; 프로퍼티 값은 여전히 바인딩되지 않으며, 그 경계는 이제 정확하다 |
 | **아코디언** | `accordion-item`과 `accordion-content`는 스윕 표에서 BROKE_PAGE. 팩토리가 요구하는 대로 중첩하면 commit과 렌더링이 되며, **7건 중 7건** |
 | **인트로 애니메이션** | 단조 시계로 15개 시점을 샘플링해 8가지를 단언. 문서의 첫 레이아웃을 기다린 뒤 시작하므로, 애니메이션이 전혀 없는 페이지 대비 늦은 프레임은 하나뿐 |
@@ -149,7 +154,8 @@ commit 성공은 페이지가 동작한다는 증거가 아니고, 올바른 스
 | **Elementor 변환** | 운영 사이트의 모든 Elementor 페이지 — 19페이지, 3,292 요소 — 를 변환·구축하고 원본과 대조: **19건 중 19건**, 3,281 요소 이전, 11 요소 명시적 제외. 이어 변환된 페이지를 반응형·브라우저·감사에 통과시키고 모든 지적을 "상속"과 "도입"으로 분류: **도입 0건** |
 | **테마 내보내기/가져오기** | 두 경로, 모두 왕복 검증. `theme_export.php`는 WP-CLI로 행을 JSON으로 옮기며 id는 그대로. `theme_zip.py`는 Mosaic **자체**의 ZIP 내보내기/가져오기를 구동 — 가져오기는 `--activate`가 없으면 테스트 모드에 놓이는데, 기본값이 라이브 사이트 전환이기 때문이다 — **22개 검사**로 사본을 원본과 트리 단위로 대조 |
 | **스킬 자체** | `claude plugin eval .` — 사용자가 실제로 묻는 5문항을 각 3회, 스킬 있음/없음 두 팔로, 매회 LLM 심사 3명. **있음: 5문항 모두 1.00. 없음: 5문항 모두 0.00.** 베이스라인의 최선은 답변 거부였다 |
-| **라이브 측정** | REST 라우트 114, element class 151, 조건 subject 59, 23 테이블 / 206 컬럼 |
+| **라이브 측정** | REST 라우트 114, variant 152, 조건 subject 59, 23 테이블 / 210 컬럼 |
+| **라이브 업그레이드** | 1.0.7 → 1.0.8을 플러그인 자체 milestone 라우트로 wp-admin 밖에서 구동: 6 milestone, 테이블 4개 이름 변경, 출력 클래스 이름 전부 변경, `customStyles` 전부 재작성 — 그 결과 위에서 위의 측정을 전부 다시 실행 |
 
 `SKIPPED`, `NO_HOST`, `INCONCLUSIVE`는 결코 합격률에 섞지 않는다. 자기 사각지대를 성공으로
 세는 스윕이야말로 이 스킬이 반대하는 것이다.
@@ -177,10 +183,10 @@ Mosaic 노드 타입이나 스타일 키가 실제로 무엇을 받는지 에이
 **`group`에 속한 프로퍼티는 단독으로 설정하면 무효다.** 양방향 모두 정확: 그룹 밖 78개는
 58 COMPILED·0 ABSENT, 그룹 안 20개는 모두 0 COMPILED. `borderLeftWidth`, `outlineColor`,
 `gridColumnStart`는 한 규칙의 세 사례다. 그룹 형태 — `border`는 `{width, style, color}` — 나
-`customStyles`를 쓸 것.
+`customDeclarations`를 쓸 것.
 
 **브레이크포인트 오버라이드는 프로퍼티를 "바꿀" 수는 있어도 "지울" 수는 없다.** 좁은 화면의
-`customStyles`가 테두리를 그저 언급하지 않으면, 넓은 화면의 테두리는 그대로 서 있다.
+`customDeclarations`가 테두리를 그저 언급하지 않으면, 넓은 화면의 테두리는 그대로 서 있다.
 `border-left:0`을 소리 내어 말할 것.
 
 **`url`을 받는 타입은 넷뿐**: `button`, `menu-link`, `wysiwyg-link`, `dropdown-toggle`.
@@ -225,6 +231,7 @@ loop grid, 폼, 카운트다운, 서드파티 addon — 은 동적이라 될 노
 | `verify_intro.py` / `verify_loop.py` | "끝나는" 로드 애니메이션; 루프하고, 아무것도 가리지 않고, 열리는 상시 애니메이션 |
 | `theme_export.php` / `theme_import.php` | 테마 전체를 JSON 행으로 WP-CLI를 통해 이동, id 그대로 |
 | `theme_zip.py` / `theme_zip_compare.php` / `theme_delete.php` | Mosaic 자체 ZIP 내보내기/가져오기를 에디터 밖에서 구동, 사본을 원본과 트리 단위로 대조, 라이브 테마를 거부하는 깨끗한 삭제 |
+| `data_upgrade.py` | 플러그인 업데이트 후 Mosaic의 데이터 이관을 자체 milestone 라우트로 실행 — 끝나기 전까지 에디터 API는 존재하지 않는다 |
 | `sweep_*.py` / `probe_*.py` | 표를 만든 계측기 그 자체 |
 | `bootstrap_probe_theme.php` / `mint_session.php` | 라이선스 없는 실험용 테마와 WP-CLI에서 만드는 REST 세션 |
 
@@ -243,7 +250,7 @@ loop grid, 폼, 카운트다운, 서드파티 addon — 은 동적이라 될 노
 3. `references/failure-modes.md` — Mosaic이 실패하는 방식, 측정판. **쓰기 전에 읽을 것.**
 4. `references/responsive.md` — 상태/브레이크포인트/프로퍼티 축.
 5. `references/styling.md` — 스타일 값이 CSS가 되기까지.
-6. `references/design-system.md` — element class와 디자인 토큰.
+6. `references/design-system.md` — variant(element class)와 디자인 토큰.
 
 ## 릴리스
 

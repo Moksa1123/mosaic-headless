@@ -1,6 +1,8 @@
 # Mosaic Pro plugin source - licensed third-party code, never commit
 mosaic/
+mosaic-*/
 mosaic.zip
+mosaic-*.zip
 
 # local capture artefacts
 data/raw/*.local.json

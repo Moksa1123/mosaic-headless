@@ -26,8 +26,8 @@ Mosaic compiles each breakpoint into its own inline stylesheet in the head:
     <style id="mosaic-theme-block-editor-styles_t-inline-css">   @media (max-width:1079px)
     <style id="mosaic-theme-block-editor-styles_m-inline-css">   @media (max-width:767px)
 
-Rules inside them hang off the generated `.M_EL<n>` class, never off the `attrID`
-you wrote - so the tool reads `id="<attrID>" class="M_EL<n>"` out of the delivered
+Rules inside them hang off the generated `._<token>` class (`M_EL<n>` before 1.0.8), never
+off the `attrID` you wrote - so the tool reads `id="<attrID>" class="m-div _<token>"` out of the delivered
 HTML to bridge the two. That mapping is the only reason a declaration in the spec
 can be tied to a rule in the stylesheet.
 
@@ -43,7 +43,7 @@ blind spots as successes is worse than no tool.
 
 The second pass is a lint for one specific bug that has bitten this codebase twice:
 a breakpoint override can only CHANGE a property, never REMOVE one the base
-breakpoint declared. Writing narrow-screen `customStyles` that simply omit a border
+breakpoint declared. Writing narrow-screen `customDeclarations` that simply omit a border
 leaves the wide-screen border standing, drawing rules in the middle of nowhere on a
 collapsed layout. Every such omission is reported as RESET-RISK.
 """
@@ -71,7 +71,9 @@ ALIASES = {
 }
 
 # Keys that are not single CSS declarations and are handled separately.
-RAW = {"customStyles"}
+# the raw-CSS escape hatch under both its names: 1.0.8 renamed customStyles, and a spec
+# written before that still builds (build_page maps it), so it is verified the same way
+RAW = {"customDeclarations", "customStyles"}
 
 
 def kebab(name):
@@ -104,7 +106,7 @@ def walk(node, out):
 
 
 def base_customstyles(node, out):
-    """Collect base-breakpoint customStyles per attrID, for the reset lint."""
+    """Collect base-breakpoint customDeclarations per attrID, for the reset lint."""
     if isinstance(node, dict):
         data = node.get("data")
         attr = data.get("attrID") if isinstance(data, dict) else None
@@ -112,7 +114,7 @@ def base_customstyles(node, out):
         state = style.get("&") if isinstance(style, dict) else None
         state = state if isinstance(state, dict) else {}
         if attr and isinstance(state.get("_"), dict):
-            cs = state["_"].get("customStyles")
+            cs = state["_"].get("customDeclarations") or state["_"].get("customStyles")
             if cs:
                 out[attr] = cs
         for v in node.values():
@@ -143,28 +145,28 @@ def fetch(url):
 
 
 def class_map(html):
-    """attrID -> EVERY generated M_EL class on it. The stylesheet targets the class.
+    """attrID -> EVERY generated element class on it. The stylesheet targets the class.
 
     All of them, not the first. A component instance's inner node carries two: its
-    own, and the one belonging to the definition it came from - `M_EL293 M_EL292` -
+    own, and the one belonging to the definition it came from - `_hv _hu` -
     and the rules live on the second. Reading only the first reported twenty-four
     responsive declarations MISSING on a page whose CSS was completely correct,
     which is the worse kind of false result: it would have sent someone to fix
     something that was not broken."""
     out = {}
     for m in re.finditer(r'id="([^"]+)"[^>]*?class="([^"]*)"', html):
-        found = re.findall(r"M_EL\d+", m.group(2))
+        found = re.findall(r"(?:^|\s)(_[a-z0-9_-]+)(?=\s|$)", m.group(2))
         if found:
             out.setdefault(m.group(1), found)
     for m in re.finditer(r'class="([^"]*)"[^>]*?id="([^"]+)"', html):
-        found = re.findall(r"M_EL\d+", m.group(1))
+        found = re.findall(r"(?:^|\s)(_[a-z0-9_-]+)(?=\s|$)", m.group(1))
         if found:
             out.setdefault(m.group(2), found)
     return out
 
 
 def breakpoint_rules(html, suffix):
-    """{M_EL class: {css property: value}} for one breakpoint's inline stylesheet."""
+    """{generated element class: {css property: value}} for one breakpoint's inline stylesheet."""
     m = re.search(
         r'<style id="mosaic-theme-block-editor-styles_%s-inline-css">(.*?)</style>'
         % suffix, html, re.S)
@@ -182,7 +184,7 @@ def breakpoint_rules(html, suffix):
                 props[k.strip()] = v.strip()
         for one in sel.split(","):
             one = one.strip()
-            cls = re.match(r"^\.(M_EL\d+)$", one)
+            cls = re.match(r"^\.(_[a-z0-9_-]+)$", one)
             if cls:
                 rules.setdefault(cls.group(1), {}).update(props)
     return rules
@@ -209,7 +211,7 @@ def check_page(url, tree, rows):
         for cls in reversed(cls_list):
             props.update(compiled[bp_key].get(cls, {}))
         if key in RAW:
-            # customStyles is raw CSS: every declaration in it must be present
+            # customDeclarations is raw CSS: every declaration in it must be present
             for decl in str(value).split(";"):
                 if ":" not in decl:
                     continue
@@ -240,8 +242,8 @@ def _flat(v):
 def reset_lint(tree, rows):
     """A breakpoint override changes a property; it cannot remove one.
 
-    If the base breakpoint's customStyles declares a border and the narrow-screen
-    customStyles for the same element does not mention it, the wide-screen border
+    If the base breakpoint's customDeclarations declares a border and the narrow-screen
+    customDeclarations for the same element does not mention it, the wide-screen border
     survives into the collapsed layout. That is not a style question - it is the
     single most repeated bug in this codebase.
     """

@@ -16,7 +16,7 @@ The commit is accepted, the row is stored, and the stylesheet simply has no such
 declaration. Meanwhile every one of the 58 testable ungrouped properties compiled.
 
 Use the grouped shape — `border` takes `{"width": "3px", "style": "dashed", "color":
-"rgb(...)"}` and does compile — or drop to `customStyles`. If you need a child in a
+"rgb(...)"}` and does compile — or drop to `customDeclarations`. If you need a child in a
 particular grid column, change the template rather than trying to place the child.
 
 `data/style-verification.csv` is per-property, with the group beside the result.
@@ -48,7 +48,10 @@ A node's `data.style` is addressed by three axes — **state, breakpoint, proper
   `_m` (Mobile, ≤767px). Custom breakpoints get UUIDs.
 - The leaf keys are the camelCase properties in `data/style-properties.csv`.
 
-`style` also carries `elementClass`, `utilityClasses`, `defaultClass` and
+`style` also carries `variant`, `universalClasses`, `defaultStyleSelector` (whose
+`type` is `variant` | `variantSubClass` | `universalClass` | `universalSubClass` |
+`local`; before 1.0.8 these keys were `elementClass`, `utilityClasses`,
+`defaultClass` with type `custom`, and the upgrade rewrites stored rows) and
 `localStates` alongside `states` — those are the class/token layer, not per-node values.
 
 ## What comes out
@@ -56,15 +59,15 @@ A node's `data.style` is addressed by three axes — **state, breakpoint, proper
 That exact payload produced, in the delivered page:
 
 ```html
-<div id="styleprobe" class="M_EL4 M_EL_Div">
+<div id="styleprobe" class="m-div _e">
 
 <style id="mosaic-theme-block-editor-styles_-inline-css">
 html{overflow-x:clip}body{opacity:0}html,body{margin:0}
-.M_EL4{padding-top:37px;background-color:rgb(11, 22, 33)}.M_EL4:HOVER{background-color:rgb(77, 88, 99)}
+._e{padding-top:37px;background-color:rgb(11, 22, 33)}._e:HOVER{background-color:rgb(77, 88, 99)}
 </style>
 
 <style id="mosaic-theme-block-editor-styles_m-inline-css">
-@media only screen and (max-width: 767px){.M_EL4{padding-top:9px}}
+@media only screen and (max-width: 767px){._e{padding-top:9px}}
 </style>
 ```
 
@@ -76,14 +79,18 @@ block per breakpoint. Tooling that looks for a `<link rel="stylesheet">` to diff
 nothing — and would wrongly conclude the style had no effect. (That bug was in this
 skill's own property sweep until the probe above caught it.)
 
-**The selector is the element's generated class**, `.M_EL4`, not the `id` you set.
+**The selector is the element's generated class**, `._e`, not the `id` you set.
 `attrID` gives you an `id` attribute for your own use; it is not what styling hangs on.
-The `M_EL<n>` number is assigned per element per document and is **not stable** — do
-not write selectors against it. The companion `M_EL_Div` / `M_EL_Text` / `M_EL_Button`
-class *is* stable and is the type's marker.
+The token after `_` is a base-38 counter assigned per element per document
+(`_a` … `_9`, `_-`, `__`, then `_ba`) and is **not stable** — do not write selectors
+against it. The companion `m-div` / `m-text` / `m-button` class *is* stable and is
+the type's marker; a variant that renders its name adds a third (`m-heading-2`).
+Before 1.0.8 the same element read `class="M_EL4 M_EL_Div"` and the rule was
+`.M_EL4{...}`; the order flipped too (type classes first, token last). Sweeps that
+read the token out of the markup match `(?:^|\s)(_[a-z0-9_-]+)(?=\s|")` now.
 
 **States compile through their selector template.** `hover` used
-`&:HOVER` from `style-states.csv` and produced `.M_EL4:HOVER` — uppercase, exactly as
+`&:HOVER` from `style-states.csv` and produced `._e:HOVER` — uppercase, exactly as
 the template is written. Everything in that CSV compiles the same way, so the template
 column tells you in advance what rule you will get.
 
@@ -117,8 +124,8 @@ on every node.
 Setting `style` directly on a node works — everything above proves it — but it is the
 lowest layer and it opts that node out of both reuse mechanisms:
 
-1. **Element classes** (`data/element-classes.csv`, 151 built in) carry the shared
-   look; a node points at one through `style.elementClass`.
+1. **Variants** (`data/variants.csv`, 152 built in - Mosaic's element classes) carry
+   the shared look; a node points at one through `style.variant`.
 2. **Collections → modes/skins → variables** are the token layer, the thing the
    34 token-referencable properties reference.
 
@@ -163,8 +170,10 @@ other type-switched groups too.
 `ScaleTransformTypeFactory`, which takes separate axes. Use `scaleX`/`scaleY` instead,
 which are `SingleTransformTypeFactory` and do take `{"value": …}`.
 
-**The escape hatch.** `customStyles` accepts raw CSS text and emits it verbatim into
-the rule: `"customStyles": "outline: 2px dashed rgb(7,8,9);"` compiled through
+**The escape hatch.** `customDeclarations` (`customStyles` before 1.0.8; the upgrade
+rewrites stored rows, and `build_page.py` still accepts the old spelling in a spec)
+accepts raw CSS text and emits it verbatim into the rule:
+`"customDeclarations": "outline: 2px dashed rgb(7,8,9);"` compiled through
 unchanged. It is the fallback for anything whose structured shape you have not pinned
 down — at the cost of bypassing the collection-variable layer entirely.
 
