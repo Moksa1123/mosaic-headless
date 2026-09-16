@@ -159,6 +159,7 @@ commit の成功はページが動く証拠ではないし、正しいスタイ�
 | **テーマの書き出し／読み込み** | 経路は二つ、どちらも往復検証済み。`theme_export.php` は WP-CLI で行を JSON として移し、id は不変。`theme_zip.py` は Mosaic **自身**の ZIP 書き出し／読み込みを駆動 — 読み込みは `--activate` を付けない限りテストモードに入る、既定がライブサイトの切り替えだからだ — **22 項目**でコピーを元とツリー単位で突き合わせる |
 | **スキル自身** | `claude plugin eval .` — ユーザーが実際に尋ねる 5 問を各 3 回、スキルあり／なしの 2 腕、1 回ごとに LLM 審査 3 名。**あり：5 問すべて 1.00。なし：5 問すべて 0.00。** ベースラインの最善の回答は回答拒否だった |
 | **ライブ計測** | REST ルート 114、variant 152、条件サブジェクト 59、23 テーブル / 210 カラム |
+| **カスタムフィールド** | ACF と Meta Box、1 ページに 40 フィールド、`@VAR` / `@LOOP` で配信 HTML から読み戻し：62 のうち 59 が解決、3 つの空は理由付き；複数値フィールドのループはフィールドの行数どおりに描画。`tools/list_fields.php` が Mosaic の実際の登録名を出す |
 | **ライブ更新** | 1.0.7 → 1.0.8 をプラグイン自身の milestone ルートで wp-admin の外から駆動：6 milestone、4 テーブル改名、出力クラス名は全部変わり、`customStyles` は全部書き換え — その結果に対して上の計測をすべて再実行 |
 
 `SKIPPED`、`NO_HOST`、`INCONCLUSIVE` は合格率に決して繰り込まない。自らの盲点を成功として
@@ -237,6 +238,7 @@ loop grid、フォーム、カウントダウン、サードパーティ addon �
 | `verify_intro.py` / `verify_loop.py` | 「終わる」ロードアニメーション；ループし、何も隠さず、開く常時アニメーション |
 | `theme_export.php` / `theme_import.php` | テーマ全体を JSON 行として WP-CLI で移動、id は不変 |
 | `theme_zip.py` / `theme_zip_compare.php` / `theme_delete.php` | Mosaic 自身の ZIP 書き出し／読み込みをエディタの外から駆動、コピーを元とツリー単位で照合、ライブテーマを拒否する完全削除 |
+| `list_fields.php` | ある投稿のカスタムフィールドが登録する `@VAR` / `@LOOP` 名をすべて、値付きで |
 | `data_upgrade.py` | プラグイン更新後、Mosaic のデータ移行を自身の milestone ルートで実行 — 終わるまでエディタ API は存在しない |
 | `sweep_*.py` / `probe_*.py` | 表を作った計測器そのもの |
 | `bootstrap_probe_theme.php` / `mint_session.php` | ライセンス不要の実験用テーマと、WP-CLI から作る REST セッション |

@@ -164,6 +164,7 @@ factories, so Pro types register and render regardless.
 | **theme export/import** | two paths, both round-tripped. `theme_export.php` moves rows as JSON over WP-CLI, ids intact. `theme_zip.py` drives Mosaic's **own** ZIP export/import — import lands in test mode unless told `--activate`, because the default is to switch the live site — and **22 checks** hold the copy against the source tree for tree |
 | **the skill itself** | `claude plugin eval .` — five cases a user would ask, three runs each, with and without the skill loaded, three LLM judges a run. **With: 1.00 on all five. Without: 0.00 on all five.** The baseline's best answer was to refuse |
 | **measured live** | 114 REST routes, 152 variants, 59 condition subjects, 23 tables / 210 columns |
+| **custom fields** | ACF and Meta Box, forty fields on a page, read back through `@VAR` / `@LOOP` off the delivered HTML: 59 of 62 resolve, 3 empties explained; loops over multi-value fields rendered exactly the field's rows. `tools/list_fields.php` prints the names Mosaic actually registers |
 | **upgraded live** | 1.0.7 -> 1.0.8 over the plugin's own milestone route, from outside wp-admin: 6 milestones, four tables renamed, every emitted class name changed, every `customStyles` rewritten - then every sweep above re-run on the result |
 
 `SKIPPED`, `NO_HOST` and `INCONCLUSIVE` are never folded into a pass rate. A sweep
@@ -246,6 +247,7 @@ and heading level — and it earned its place at once: it caught the converter l
 | `verify_intro.py` / `verify_loop.py` | a page-load sequence that ENDS; a perpetual one that loops, hides nothing, and opens |
 | `theme_export.php` / `theme_import.php` | a whole theme as JSON rows over WP-CLI, ids intact |
 | `theme_zip.py` / `theme_zip_compare.php` / `theme_delete.php` | Mosaic's own ZIP export/import from outside the editor, the copy held against the source, and a clean delete that refuses the live theme |
+| `list_fields.php` | every `@VAR` / `@LOOP` name a post's custom fields register, with values |
 | `data_upgrade.py` | after a plugin update, Mosaic's data migration over its own milestone route - the editor API is gone until it runs |
 | `sweep_*.py` / `probe_*.py` | the instruments the tables were made with |
 | `bootstrap_probe_theme.php` / `mint_session.php` | a licence-free scratch theme and a REST session from WP-CLI |

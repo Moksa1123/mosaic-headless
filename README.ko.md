@@ -155,6 +155,7 @@ commit 성공은 페이지가 동작한다는 증거가 아니고, 올바른 스
 | **테마 내보내기/가져오기** | 두 경로, 모두 왕복 검증. `theme_export.php`는 WP-CLI로 행을 JSON으로 옮기며 id는 그대로. `theme_zip.py`는 Mosaic **자체**의 ZIP 내보내기/가져오기를 구동 — 가져오기는 `--activate`가 없으면 테스트 모드에 놓이는데, 기본값이 라이브 사이트 전환이기 때문이다 — **22개 검사**로 사본을 원본과 트리 단위로 대조 |
 | **스킬 자체** | `claude plugin eval .` — 사용자가 실제로 묻는 5문항을 각 3회, 스킬 있음/없음 두 팔로, 매회 LLM 심사 3명. **있음: 5문항 모두 1.00. 없음: 5문항 모두 0.00.** 베이스라인의 최선은 답변 거부였다 |
 | **라이브 측정** | REST 라우트 114, variant 152, 조건 subject 59, 23 테이블 / 210 컬럼 |
+| **커스텀 필드** | ACF와 Meta Box, 한 페이지에 40개 필드, `@VAR` / `@LOOP`로 전달된 HTML에서 읽어냄: 62개 중 59개 해석, 빈 3개는 이유 있음; 다중값 필드 루프는 필드의 행 수 그대로 렌더링. `tools/list_fields.php`가 Mosaic이 실제 등록하는 이름을 출력 |
 | **라이브 업그레이드** | 1.0.7 → 1.0.8을 플러그인 자체 milestone 라우트로 wp-admin 밖에서 구동: 6 milestone, 테이블 4개 이름 변경, 출력 클래스 이름 전부 변경, `customStyles` 전부 재작성 — 그 결과 위에서 위의 측정을 전부 다시 실행 |
 
 `SKIPPED`, `NO_HOST`, `INCONCLUSIVE`는 결코 합격률에 섞지 않는다. 자기 사각지대를 성공으로
@@ -231,6 +232,7 @@ loop grid, 폼, 카운트다운, 서드파티 addon — 은 동적이라 될 노
 | `verify_intro.py` / `verify_loop.py` | "끝나는" 로드 애니메이션; 루프하고, 아무것도 가리지 않고, 열리는 상시 애니메이션 |
 | `theme_export.php` / `theme_import.php` | 테마 전체를 JSON 행으로 WP-CLI를 통해 이동, id 그대로 |
 | `theme_zip.py` / `theme_zip_compare.php` / `theme_delete.php` | Mosaic 자체 ZIP 내보내기/가져오기를 에디터 밖에서 구동, 사본을 원본과 트리 단위로 대조, 라이브 테마를 거부하는 깨끗한 삭제 |
+| `list_fields.php` | 한 글의 커스텀 필드가 등록하는 모든 `@VAR` / `@LOOP` 이름을 값과 함께 |
 | `data_upgrade.py` | 플러그인 업데이트 후 Mosaic의 데이터 이관을 자체 milestone 라우트로 실행 — 끝나기 전까지 에디터 API는 존재하지 않는다 |
 | `sweep_*.py` / `probe_*.py` | 표를 만든 계측기 그 자체 |
 | `bootstrap_probe_theme.php` / `mint_session.php` | 라이선스 없는 실험용 테마와 WP-CLI에서 만드는 REST 세션 |

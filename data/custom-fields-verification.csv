@@ -1,0 +1,63 @@
+provider,field,expression,expected,rendered,result
+ACF,text,@VAR('post/meta_acf_text'),ACF plain text,ACF plain text,PASS
+ACF,"textarea (newline kept, no <br>)",@VAR('post/meta_acf_area'),line one\nline two,line one\nline two,PASS
+ACF,number,@VAR('post/meta_acf_num'),42,42,PASS
+ACF,true_false,@VAR('post/meta_acf_bool'),1,1,PASS
+ACF,url,@VAR('post/meta_acf_url'),https://example.com/acf,https://example.com/acf,PASS
+ACF,email,@VAR('post/meta_acf_email'),acf@example.com,acf@example.com,PASS
+ACF,color_picker,@VAR('post/meta_acf_color'),#ff5a36,#ff5a36,PASS
+ACF,date_picker (return Y-m-d),@VAR('post/meta_acf_date'),2026-09-15,2026-09-15,PASS
+ACF,wysiwyg,@VAR_RAW('post/meta_acf_wys'),Rich text,Rich text,PASS
+ACF,select (return value),@VAR('post/meta_acf_select'),b,b,PASS
+ACF,select (return value) __label,@VAR('post/meta_acf_select__label'),,,EMPTY
+ACF,radio,@VAR('post/meta_acf_radio'),r2,r2,PASS
+ACF,image (return array),@VAR('post/meta_acf_img'),https://mosaic.moksaweb.com/wp-content/uploads/woocommerce-placeholder.webp,https://mosaic.moksaweb.com/wp-content/uploads/woocommerce-placeholder.webp,PASS
+ACF,image (return array) __id,@VAR('post/meta_acf_img__id'),5,5,PASS
+ACF,image (return id),@VAR('post/meta_acf_img_id'),https://mosaic.moksaweb.com/wp-content/uploads/2026/09/richmenu-a.png,https://mosaic.moksaweb.com/wp-content/uploads/2026/09/richmenu-a.png,PASS
+ACF,image (return id) __id,@VAR('post/meta_acf_img_id__id'),37,37,PASS
+ACF,file (return url),@VAR('post/meta_acf_file'),https://mosaic.moksaweb.com/wp-content/uploads/woocommerce-placeholder.webp,https://mosaic.moksaweb.com/wp-content/uploads/woocommerce-placeholder.webp,PASS
+ACF,link (return array),@VAR('post/meta_acf_link'),https://example.com/link,https://example.com/link,PASS
+ACF,link __title,@VAR('post/meta_acf_link__title'),Link title,Link title,PASS
+ACF,link __target,@VAR('post/meta_acf_link__target'),_blank,_blank,PASS
+ACF,page_link,@VAR('post/meta_acf_pl'),https://mosaic.moksaweb.com/sample-page/,https://mosaic.moksaweb.com/sample-page/,PASS
+ACF,post_object,@VAR('post/meta_acf_po'),6,6,PASS
+ACF,post_object __label,@VAR('post/meta_acf_po__label'),Shop,Shop,PASS
+ACF,post_object __url,@VAR('post/meta_acf_po__url'),https://mosaic.moksaweb.com/shop/,https://mosaic.moksaweb.com/shop/,PASS
+ACF,user,@VAR('post/meta_acf_user'),1,1,PASS
+ACF,user __label,@VAR('post/meta_acf_user__label'),Cheng-Chun Chang,Cheng-Chun Chang,PASS
+ACF,user __url,@VAR('post/meta_acf_user__url'),https://mosaic.moksaweb.com/author/moksa/,https://mosaic.moksaweb.com/author/moksa/,PASS
+ACF,oembed in a text node,@VAR_RAW('post/meta_acf_oembed'),,,EMPTY
+Meta Box,text,@VAR('post/meta_mb_text'),MB plain text,MB plain text,PASS
+Meta Box,number,@VAR('post/meta_mb_num'),17,17,PASS
+Meta Box,checkbox,@VAR('post/meta_mb_check'),1,1,PASS
+Meta Box,select,@VAR('post/meta_mb_select'),a,a,PASS
+Meta Box,select __label,@VAR('post/meta_mb_select__label'),Alpha,Alpha,PASS
+Meta Box,date,@VAR('post/meta_mb_date'),2026-09-15,2026-09-15,PASS
+Meta Box,color,@VAR('post/meta_mb_color'),#0a84ff,#0a84ff,PASS
+Meta Box,url,@VAR('post/meta_mb_url'),https://example.com/mb,https://example.com/mb,PASS
+Meta Box,wysiwyg,@VAR('post/meta_mb_wys'),MB rich,MB rich,PASS
+Meta Box,single_image,@VAR('post/meta_mb_single'),https://mosaic.moksaweb.com/wp-content/uploads/woocommerce-placeholder.webp,https://mosaic.moksaweb.com/wp-content/uploads/woocommerce-placeholder.webp,PASS
+Meta Box,single_image __id,@VAR('post/meta_mb_single__id'),5,5,PASS
+Meta Box,user,@VAR('post/meta_mb_user'),Cheng-Chun Chang,Cheng-Chun Chang,PASS
+Meta Box,user __id,@VAR('post/meta_mb_user__id'),1,1,PASS
+Meta Box,user __url,@VAR('post/meta_mb_user__url'),https://mosaic.moksaweb.com/author/moksa/,https://mosaic.moksaweb.com/author/moksa/,PASS
+Meta Box,oembed in a text node,@VAR_RAW('post/meta_mb_oembed'),,,EMPTY
+Meta Box,oembed __url,@VAR('post/meta_mb_oembed__url'),https://www.youtube.com/watch?v=dQw4w9WgXcQ,https://www.youtube.com/watch?v=dQw4w9WgXcQ,PASS
+ACF,"relationship, one row inline (index 1)","@LOOP('post/loopacf_rel', 1, 'value__url')",https://mosaic.moksaweb.com/sample-page/,https://mosaic.moksaweb.com/sample-page/,PASS
+ACF,"relationship, every row inline (index 0)","@LOOP('post/loopacf_rel', 0, 'value__label')","Sample Page, Shop","Sample Page, Shop",PASS
+ACF,"group, one row inline","@LOOP('post/loop-acf_group', 1, 'value_ga')",group text,group text,PASS
+ACF,relationship loop row value (= ID),loop post/loopacf_rel -> @VAR('item/value'),2 | 6,2 | 6,PASS
+ACF,relationship loop row __label,loop post/loopacf_rel -> @VAR('item/value__label'),Sample Page | Shop,Sample Page | Shop,PASS
+ACF,relationship loop row __url,loop post/loopacf_rel -> @VAR('item/value__url'),https://mosaic.moksaweb.com/sample-page/ | https://mosaic.moksaweb.com/shop/,https://mosaic.moksaweb.com/sample-page/ | https://mosaic.moksaweb.com/shop/,PASS
+ACF,relationship loop row index,loop post/loopacf_rel -> @VAR('item/index'),1 | 2,1 | 2,PASS
+ACF,checkbox loop row value,loop post/loopacf_check -> @VAR('item/value'),x | z,x | z,PASS
+ACF,taxonomy loop row __label,loop post/loopacf_tax -> @VAR('item/value__label'),Uncategorized,Uncategorized,PASS
+ACF,taxonomy loop row __url,loop post/loopacf_tax -> @VAR('item/value__url'),https://mosaic.moksaweb.com/category/uncategorized/,https://mosaic.moksaweb.com/category/uncategorized/,PASS
+ACF,group loop row sub-field,loop post/loop-acf_group -> @VAR('item/value_ga'),group text,group text,PASS
+ACF,group loop row sub-field (number),loop post/loop-acf_group -> @VAR('item/value_gb'),7,7,PASS
+Meta Box,image_advanced loop row __id,loop post/loopmb_img -> @VAR('item/value__id'),5 | 37,5 | 37,PASS
+Meta Box,checkbox_list loop row value,loop post/loopmb_multi -> @VAR('item/value'),x | y,x | y,PASS
+Meta Box,checkbox_list loop row __label,loop post/loopmb_multi -> @VAR('item/value__label'),Ex | Why,Ex | Why,PASS
+Meta Box,cloneable text loop row value,loop post/loopmb_text_clone -> @VAR('item/value'),clone one | clone two,clone one | clone two,PASS
+ACF,oembed through a code node,code: @VAR_RAW('post/meta_acf_oembed'),<iframe,"<iframe title=""Rick Astley - Never Gonna Give You Up (Offici",PASS
+Meta Box,wysiwyg through a code node,code: @VAR_RAW('post/meta_mb_wys'),<p>MB <em>rich</em></p>,"<div class=""wp-site-blocks""><div class=""entry-content alignf",PASS

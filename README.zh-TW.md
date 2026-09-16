@@ -148,6 +148,7 @@ commit 成功不代表頁面能用，樣式表正確也不代表。這裡每個�
 | **主題匯出／匯入** | 兩條路徑，都來回驗證過。`theme_export.php` 用 WP-CLI 把資料列搬成 JSON、ID 不變。`theme_zip.py` 驅動 Mosaic **自己**的 ZIP 匯出匯入——匯入預設進 test mode，要 `--activate` 才上線，因為它的預設是直接切換 live 站——**22 項檢查**逐表、逐樹比對副本與來源 |
 | **技能本身** | `claude plugin eval .`——五個使用者真的會問的問題，各跑三次，有載技能和沒載各一臂，每次三個 LLM 裁判。**有：五題全 1.00。沒有：五題全 0.00。** 基準線最好的回答是拒答 |
 | **線上量測** | 114 條 REST 路由、152 個 variant、59 個條件主體、23 張表 / 210 個欄位 |
+| **自訂欄位** | ACF 與 Meta Box，一頁四十個欄位，透過 `@VAR` / `@LOOP` 從送達的 HTML 讀回：62 個裡 59 個解析正確、3 個空值有解釋；多值欄位的迴圈剛好渲染出欄位的列數。`tools/list_fields.php` 列出 Mosaic 真正註冊的名字 |
 | **線上升級** | 1.0.7 → 1.0.8 走外掛自己的 milestone 路由、在 wp-admin 之外驅動：6 個 milestone、四張表改名、每個輸出 class 名稱都變、每個 `customStyles` 都重寫——然後上面每一項掃描在結果上重跑 |
 
 `SKIPPED`、`NO_HOST`、`INCONCLUSIVE` 從不折算進通過率。把自己的盲點算成成功的掃描，
@@ -220,6 +221,7 @@ button / html / icon-list / divider / image 佔了全部元素的 99.6%。長尾
 | `verify_intro.py` / `verify_loop.py` | 會「結束」的載入動畫；會循環、不遮東西、能打開的永續動畫 |
 | `theme_export.php` / `theme_import.php` | 整個主題以 JSON 資料列透過 WP-CLI 搬移，ID 不變 |
 | `theme_zip.py` / `theme_zip_compare.php` / `theme_delete.php` | 在編輯器外驅動 Mosaic 自己的 ZIP 匯出匯入、副本對來源逐樹比對、以及拒絕刪 live 主題的乾淨刪除 |
+| `list_fields.php` | 一篇文章的自訂欄位註冊了哪些 `@VAR` / `@LOOP` 名字，連值一起列出 |
 | `data_upgrade.py` | 外掛更新後，走 Mosaic 自己的 milestone 路由跑資料遷移——沒跑完之前編輯器 API 是不存在的 |
 | `sweep_*.py` / `probe_*.py` | 那些表格是用這些儀器量出來的 |
 | `bootstrap_probe_theme.php` / `mint_session.php` | 免授權的實驗主題，以及從 WP-CLI 鑄出 REST session |

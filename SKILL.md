@@ -171,6 +171,16 @@ DESIGN SYS   variants and collection variables both verified against compiled
              :root{--brand: rgb(9, 99, 199)} with background-color:var(--brand).
              references/design-system.md
 
+FIELDS       ACF 6.8 and Meta Box 5.15, forty fields registered in code on a page,
+             read back off the delivered HTML: 59 of 62 expressions resolve to the
+             value expected, the 3 empties explained (select label needs ACF's
+             array format; oEmbed dies in a text node, lives in a code node).
+             Loops over relationship / checkbox / taxonomy / gallery / clone /
+             group fields rendered exactly the rows the field holds. The names
+             are not guessable (meta_k, meta_k__label, loopk, loop-k for a
+             group, item/value_sub) - tools/list_fields.php prints them.
+             data/custom-fields-verification.csv, references/custom-fields.md
+
 DYNAMIC      the @VAR('namespace/name') language verified against rendered output -
              @VAR('post/title') produced the real post title, @concat/@substr/
              @fallback all compose over it. 74 variables in
@@ -446,7 +456,10 @@ so the pattern is in the data, not just in this paragraph.
 10. `references/interactions.md` — the JavaScript animation system, and how far it is
    verified.
 11. `references/vs-elementor-gutenberg.md` — which builder habits transfer.
-12. `references/upgrading.md` — what a plugin update does to the data and to the
+12. `references/custom-fields.md` — ACF and Meta Box fields as `@VAR` / `@LOOP`:
+   the names, what each field type resolves to, and the loop element that walks
+   a multi-value field. Measured, 62 rows.
+13. `references/upgrading.md` — what a plugin update does to the data and to the
    delivered page, measured on 1.0.7 -> 1.0.8; how to drive the migration and what
    to re-verify afterwards.
 
@@ -477,6 +490,7 @@ so the pattern is in the data, not just in this paragraph.
 | `data/conversion-verification.csv` | 8 | **converted then checked live** - an Elementor page rebuilt as Mosaic and held against its source (text, images, links, heading levels), then put through rwd, browser and the design audit with every finding classified inherited-or-introduced |
 | `data/conversion-batch.csv` | 19 | **converted, built and checked live, one page after another** - every Elementor page of a production site through the converter, with per-page element and content counts |
 | `data/token-benchmark.csv` | 6 | **measured with tiktoken** - the same six lookups priced three ways: reading the plugin source, loading every table, querying `mo.py`. 71-99.5% fewer tokens than the source and 99.6%+ fewer than the tables, which total 259,539 - never load them, query them |
+| `data/custom-fields-verification.csv` | 62 | **rendered live** - ACF and Meta Box fields of every common type read back through `@VAR` / `@LOOP` off the delivered page, loops included |
 | `data/theme-zip-verification.csv` | 22 | **round-tripped live** - Mosaic's own ZIP export imported in test mode and compared to its source, table by table and tree by tree |
 | `data/node-type-notes.csv` | 8 | where a sweep outcome is true but misleading on its own, why. Surfaced by `mo.py type` |
 | `data/interaction-verification.csv` | 7 | **probed live** - interaction animation shapes, with negative controls and the stored row beside the payload |
@@ -638,6 +652,13 @@ post — `build_all.py` resets first for that reason.
   the same import took under two minutes and compared 22 of 22. Prune before you
   export; `wp_mosaic_template_assigns.parentID` -> template -> `masterID` is the
   bound set, plus any `assign="auto"` template.
+- **A custom field is `@VAR('post/meta_<key>')`, and a multi-value one is a LOOP.**
+  ACF and Meta Box both, plus bare post meta. Derived properties hang off the
+  name with two underscores (`meta_k__label`, `__url`, `__id`); an ACF group is
+  `loop-k` (hyphen) with `item/value_<sub>` rows; ACF puts the ID in a
+  reference's primary slot where Meta Box puts the title. Run
+  `tools/list_fields.php` on the post rather than guessing - a name it does not
+  print does not exist. references/custom-fields.md
 - **A variant row cannot be deleted, only emptied.** `status:"delete"` on a
   variant is accepted and ignored - the row is catalog-backed. Commit it back with
   `{"states": {"&": {"_": {}}}}` and the rule disappears; measured on Heading 2.
@@ -698,6 +719,7 @@ post — `build_all.py` resets first for that reason.
 | `theme_zip.py` | drive Mosaic's OWN export/import - the ZIP the editor makes, attachments included, over the milestone protocol; import lands in test mode unless told `--activate` |
 | `theme_zip_compare.php` | hold an imported copy against its source, tree for tree - every scoped table, the (parentType, type) shape, which ids survive, and orphans named rather than counted |
 | `theme_delete.php` | remove a theme completely through the plugin's own routine; refuses the live one |
+| `list_fields.php` | every `@VAR` / `@LOOP` name Mosaic registers for one post - custom fields, their derived `__label` / `__url` / `__id` properties, the row variables of each loop - with the value each resolves to (`wp eval-file`) |
 | `data_upgrade.py` | after a plugin update, run Mosaic's data migration over its own milestone route - the step wp-admin does from a screen - and set the config's version when the editor API is back |
 | `copy_styles.py` | push one node's style onto others, by attrID or prefix |
 | `bootstrap_probe_theme.php` | a licence-free scratch theme |
