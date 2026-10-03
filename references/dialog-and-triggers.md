@@ -199,3 +199,36 @@ from the CSS, and a checker must not read "no token" as "the node did not render
 **`youtube`'s `privacy` property suppresses the element.** Set on its own it emits
 nothing at all, where 1.0.8 rendered the element and recorded NO_EFFECT. One row of
 `data/node-property-verification.csv`, the only `NO_OUTPUT` in the table.
+
+## The worked example's own modal
+
+`sites/_moksa.py` carries one: a colophon card shown to a reader about to leave —
+paper ground, hairline border, the document's own trim marks at two corners, a mono
+eyebrow, one accent action and one quiet dismissal. It is built entirely from the
+shorthand, so nothing on the page points at it:
+
+```python
+COLOPHON_NODE_ID = str(uuid.uuid4())     # minted per generation, never fixed
+
+{"type": "modal", "nodeID": COLOPHON_NODE_ID,
+ "data": {"accessibleLabel": "開始一個專案", "closedby": "everything",
+          "interactionShorthand": {
+              "type": "exitIntent",
+              "exitIntentOptions": {
+                  "settings": {"awayFor": "500ms"},
+                  "runs": {"rules": [{"uuid": …, "type": "cap",
+                                      "capOptions": {"max": "1", "remember": "session",
+                                                     "name": "mk-colophon"}}]}}}},
+ "children": [modal-overlay, modal-window → the card]}
+```
+
+11 of 11 checks against the live page, and two things it taught on the way:
+
+- **The card has to be a `modal-window`, not a styled `div`.** A plain div inside the
+  dialog renders and looks right, and `verify_dialog.py` STRUCTURE fails it — the
+  window is what Mosaic scrolls and focus-traps.
+- **The design audit failed the first draft.** The heading carried
+  `letterSpacing: "-0.02em"`, inherited from the page's Latin display sizes, and
+  CJK_NEGATIVE_TRACKING caught it at −0.68px on a Chinese heading at two
+  breakpoints. A Han glyph sits on a full em body and is already as close as it is
+  meant to be; the line is `0.005em` now, matching the masthead.

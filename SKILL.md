@@ -314,7 +314,7 @@ ACCORDION    7 checks that resolve a wrong entry in this skill's own tables.
              version of the probe destroyed the positive result it had just
              produced. data/accordion-verification.csv
 
-BROWSER      3,988 computed-style readings on the delivered pages in Chromium, at
+BROWSER      4,132 computed-style readings on the delivered pages in Chromium, at
              three viewports: every declared property vs `getComputedStyle` on the
              node it targets. 2,929 compared and agreed, 912 not-comparable and
              labelled as such, 0 overridden. Plus a design audit that only a browser
@@ -326,7 +326,7 @@ BROWSER      3,988 computed-style readings on the delivered pages in Chromium, a
              sweep's NO_EFFECT on `processShortcodes` was the sweep, not the flag.
              data/browser-verification.csv, data/design-audit.csv
 
-RWD          731 responsive declarations across two sites asserted against the
+RWD          733 responsive declarations across two sites asserted against the
              stylesheet the site actually served - each `_t`/`_m` property matched
              to its element's generated class inside that breakpoint's own media
              query. All verified; the checker is itself checked against a poisoned
@@ -493,8 +493,8 @@ so the pattern is in the data, not just in this paragraph.
 | `data/property-verification.csv` | 170 | **probed live** — per-property effect on markup vs CSS, with unprovable enums marked INCONCLUSIVE |
 | `data/node-property-verification.csv` | 191 | **swept live** — each property probed with a value shaped by its own validator chain, on a type that declares it |
 | `data/style-verification.csv` | 98 | **swept live** — every style property written to a page and checked against the compiled CSS, with its group beside the result |
-| `data/rwd-verification.csv` | 731 | **checked live** - every `_t`/`_m` declaration vs the served stylesheet, with status per row |
-| `data/browser-verification.csv` | 3988 | **computed in Chromium** - declared vs `getComputedStyle` at three viewports, `not-comparable` labelled per row |
+| `data/rwd-verification.csv` | 733 | **checked live** - every `_t`/`_m` declaration vs the served stylesheet, with status per row |
+| `data/browser-verification.csv` | 4132 | **computed in Chromium** - declared vs `getComputedStyle` at three viewports, `not-comparable` labelled per row |
 | `data/design-audit-acknowledged.csv` | 3 | reviewed findings that will not be fixed, each with a written reason. An acknowledgement without a reason is a suppression wearing a better name, and the release gate refuses one |
 | `data/design-audit.csv` | 26 | **computed in Chromium** - contrast, font fallback, CJK tracking, overflow, measure. Empty means it ran and found nothing |
 | `data/data-class-hierarchy.csv` | 125 | source - every data class and its parent, so a type's inherited properties can be resolved |

@@ -95,8 +95,9 @@ def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--url", required=True)
     ap.add_argument("--modal", required=True, help="attrID of the button-driven modal")
-    ap.add_argument("--open", required=True, help="attrID of the element whose click opens it")
-    ap.add_argument("--close", required=True, help="attrID of the close control inside it")
+    ap.add_argument("--open", help="attrID of an element whose click opens it; omit for a "
+                                   "modal that only its own shorthand opens")
+    ap.add_argument("--close", help="attrID of a close control inside it")
     ap.add_argument("--shorthand-modal", help="attrID of a modal opened by its own shorthand")
     ap.add_argument("--remember", help="attrID of a button carrying a remember action")
     ap.add_argument("--forget", help="attrID of a button carrying a forget action")
@@ -136,40 +137,42 @@ def main():
         check("CLOSED_AT_REST", bool(st) and not st["open"],
               "dialog.open=%s display=%s" % (st["open"], st["display"]) if st else "-")
 
-        # ── a modalOpen action opens it ────────────────────────────────────
-        pg.click("#" + a.open)
-        pg.wait_for_timeout(400)
-        st = pg.evaluate(DIALOG_STATE, a.modal)
-        check("OPENS", st["open"] and st["visible"],
-              "dialog.open=%s display=%s top-layer=%s"
-              % (st["open"], st["display"], st["inTopLayer"]))
+        # ── opened and closed by actions, when something authors them ─────
+        # A modal whose only opener is its own shorthand has no such control, and
+        # that is the 1.0.9 feature rather than a gap: its contract is the
+        # SHORTHAND_* checks below.
+        if a.open and a.close:
+            pg.click("#" + a.open)
+            pg.wait_for_timeout(400)
+            st = pg.evaluate(DIALOG_STATE, a.modal)
+            check("OPENS", st["open"] and st["visible"],
+                  "dialog.open=%s display=%s top-layer=%s"
+                  % (st["open"], st["display"], st["inTopLayer"]))
 
-        # ── a modalClose action closes it ──────────────────────────────────
-        pg.click("#" + a.close)
-        pg.wait_for_timeout(400)
-        st = pg.evaluate(DIALOG_STATE, a.modal)
-        check("CLOSES", not st["open"], "dialog.open=%s" % st["open"])
+            pg.click("#" + a.close)
+            pg.wait_for_timeout(400)
+            st = pg.evaluate(DIALOG_STATE, a.modal)
+            check("CLOSES", not st["open"], "dialog.open=%s" % st["open"])
 
-        # ── closedby, actually exercised ───────────────────────────────────
-        policy = st["closedby"]
-        pg.click("#" + a.open)
-        pg.wait_for_timeout(300)
-        pg.keyboard.press("Escape")
-        pg.wait_for_timeout(400)
-        esc = pg.evaluate(DIALOG_STATE, a.modal)
-        want_esc = policy in ("everything", "esc")
-        check("CLOSEDBY_ESC", (not esc["open"]) == want_esc,
-              "closedby=%s, Esc %s it" % (policy, "closed" if not esc["open"] else "did not close"))
-
-        if esc["open"]:
+            # closedby, actually exercised rather than read off the attribute
+            policy = st["closedby"]
+            pg.click("#" + a.open)
+            pg.wait_for_timeout(300)
             pg.keyboard.press("Escape")
-            pg.wait_for_timeout(200)
+            pg.wait_for_timeout(400)
+            esc = pg.evaluate(DIALOG_STATE, a.modal)
+            want_esc = policy in ("everything", "esc")
+            check("CLOSEDBY_ESC", (not esc["open"]) == want_esc,
+                  "closedby=%s, Esc %s it"
+                  % (policy, "closed" if not esc["open"] else "did not close"))
+            if esc["open"]:
+                pg.keyboard.press("Escape")
+                pg.wait_for_timeout(200)
 
-        # ── keyboard reachability of the control that opens it ─────────────
-        focused = pg.evaluate(
-            """id => { const el = document.getElementById(id); if (!el) return null;
-                       el.focus(); return document.activeElement === el; }""", a.open)
-        check("KEYBOARD", bool(focused), "the opening control takes focus")
+            focused = pg.evaluate(
+                """id => { const el = document.getElementById(id); if (!el) return null;
+                           el.focus(); return document.activeElement === el; }""", a.open)
+            check("KEYBOARD", bool(focused), "the opening control takes focus")
 
         # ── memory actions write and clear storage ─────────────────────────
         if a.remember and a.forget:
@@ -228,6 +231,30 @@ def main():
             check("SHORTHAND_OPENS", bool(st1) and st1["open"],
                   "exit intent opened it with no authored interaction"
                   if st1 and st1["open"] else "did not open")
+
+            # For a shorthand-only modal this is the one moment its controls are
+            # reachable, so the dismissal checks happen here rather than above.
+            if st1 and st1["open"] and not (a.open and a.close):
+                if a.close:
+                    reachable = pg2.evaluate(
+                        """id => { const el = document.getElementById(id);
+                                   if (!el) return null; el.focus();
+                                   return document.activeElement === el; }""", a.close)
+                    check("KEYBOARD", bool(reachable),
+                          "the close control inside it takes focus")
+                    pg2.click("#" + a.close)
+                    pg2.wait_for_timeout(400)
+                    check("CLOSES", not pg2.evaluate(DIALOG_STATE, a.shorthand_modal)["open"],
+                          "a modalClose action inside it closes it")
+                    pg2.evaluate(EXIT_INTENT)   # re-open for the Esc check
+                    pg2.wait_for_timeout(700)
+                policy = st1["closedby"]
+                pg2.keyboard.press("Escape")
+                pg2.wait_for_timeout(400)
+                esc = pg2.evaluate(DIALOG_STATE, a.shorthand_modal)
+                check("CLOSEDBY_ESC", (not esc["open"]) == (policy in ("everything", "esc")),
+                      "closedby=%s, Esc %s it"
+                      % (policy, "closed" if not esc["open"] else "did not close"))
 
             # The cap, on a RELOAD OF THE SAME TAB. `remember: session` is
             # sessionStorage, which browsers scope per tab, not per context - a new

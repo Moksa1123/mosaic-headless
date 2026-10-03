@@ -26,6 +26,7 @@ Run from this directory: python _moksa.py
 """
 import json
 import os
+import uuid
 
 # Monospace leads. The grotesque is the display face and appears at three sizes only;
 # Noto Sans TC carries running Chinese text.
@@ -748,6 +749,24 @@ def motion_css():
         "#mk-mark-3{bottom:20px;right:40px;border-right:1px solid " + RULE_INK
         + ";border-bottom:1px solid " + RULE_INK + "}",
         "@media (max-width:1279px){" + marks + "{display:none}}",
+        # the colophon card's own trim marks, inside it rather than fixed to the
+        # viewport - the card is a leaf of the same document
+        "#mk-colophon-mark-tl,#mk-colophon-mark-br{position:absolute;"
+        "width:11px;height:11px;pointer-events:none}",
+        "#mk-colophon-mark-tl{top:9px;left:9px;border-left:1px solid " + RULE_INK
+        + ";border-top:1px solid " + RULE_INK + "}",
+        "#mk-colophon-mark-br{bottom:9px;right:9px;border-right:1px solid " + RULE_INK
+        + ";border-bottom:1px solid " + RULE_INK + "}",
+        # the dialog itself: Mosaic lays the host out as a centred grid, so the
+        # card only has to say how wide it is. The entrance is the card's, not the
+        # veil's - a 1px rule sliding up reads as a page being laid down.
+        "#mk-colophon[open] #mk-colophon-card{animation:mk-colophon-in .42s "
+        "cubic-bezier(.2,.7,.3,1) both}",
+        "@keyframes mk-colophon-in{from{opacity:0;transform:translateY(14px)}"
+        "to{opacity:1;transform:none}}",
+        "@media (prefers-reduced-motion:reduce){"
+        "#mk-colophon[open] #mk-colophon-card{animation:none}}",
+
 
         # the clause index. It needs room outside the document margin, so it only
         # appears once the viewport is wide enough to have that room.
@@ -2526,10 +2545,154 @@ INDEX = box("mk-index", {}, [
     for i, (num, name, href, _tl) in enumerate(CLAUSES)
 ])
 
+# The colophon modal's own node id. A modalClose action targets a NODE id, so the
+# button inside the modal has to know it before either row is written - which is
+# why it is a constant here rather than something build_page mints.
+#
+# Minted fresh on every generation, never hard-coded: wp_mosaic_nodes' primary key
+# is (ID, themeID), so a fixed id collides with the row the PREVIOUS build of this
+# same page left in the same theme, and the commit dies on a duplicate key.
+COLOPHON_NODE_ID = str(uuid.uuid4())
+
 CUE = box("mk-cue", {}, [
     mono("SCROLL", size="10px", color="--mk-faint", track="0.22em"),
     box("mk-cue-rail", {}, []),
 ])
+
+
+# ── §9 the colophon modal ─────────────────────────────────────────────────────
+# Mosaic 1.0.9's dialog, in this document's voice rather than a popup's: paper
+# ground, hairline border, trim marks at two corners, mono label, no radius, the
+# accent on one action only. It is the last page of a printed document - the
+# colophon - shown to a reader who is about to leave.
+#
+# Nothing on the page points at it. The modal names its own trigger in
+# `interactionShorthand`, which Mosaic expands at render into a real interaction
+# carrying the element's own `modalOpen` - the one element type that offers the
+# shorthand is the modal, because "open this when ..." is the only thing it would
+# ever mean. The cap rule beside it is what keeps the thing civil: once a session,
+# remembered under a name of its own, and `exitIntent` never fires on a touch
+# device at all, so a phone reader is never shown it.
+#
+# `closedby: "everything"` means Esc and a click on the overlay both close it; the
+# overlay child is also what makes Mosaic emit `aria-modal="true"`, because the
+# overlay is what actually blocks the page. The close control is a real button so
+# it is in the tab order, and the whole thing is reachable and dismissable from
+# the keyboard alone - measured, not assumed (tools/verify_dialog.py).
+COLOPHON = {
+    "type": "modal",
+    "data": {
+        "attrID": "mk-colophon",
+        "accessibleLabel": "開始一個專案",
+        "closedby": "everything",
+        "interactionShorthand": {
+            "type": "exitIntent",
+            "exitIntentOptions": {
+                "settings": {"awayFor": "500ms"},
+                "runs": {"rules": [{
+                    "uuid": "6f1d3a92-5c84-4e71-9b20-7d8a1f4c2e55",
+                    "type": "cap",
+                    "capOptions": {"max": "1", "remember": "session",
+                                   "name": "mk-colophon"}}]}}},
+    },
+    "style": bp({"paddingLeft": "40px", "paddingRight": "40px"},
+                None, {"paddingLeft": "18px", "paddingRight": "18px"}),
+    "children": [
+        {"type": "modal-overlay", "data": {"attrID": "mk-colophon-veil"},
+         "style": {"&": {"_": {"backgroundColor": "rgba(22,24,28,.62)"}}}},
+        # a modal-window, not a plain div: the window is what Mosaic scrolls and
+        # focus-traps, and a modal without one is a dialog with loose children
+        dict(box("mk-colophon-card",
+            {"backgroundColor": {"token": "--mk-paper"},
+             "maxWidth": "520px", "width": "100%",
+             "flexDirection": "column", "rowGap": "0px",
+             "position": "relative",
+             "paddingTop": "34px", "paddingBottom": "30px",
+             "paddingLeft": "34px", "paddingRight": "34px",
+             "customDeclarations": "border:1px solid rgb(22,24,28);"},
+            [
+                # the same trim marks the document uses, so the card reads as a
+                # leaf of it rather than something the site threw at the reader
+                box("mk-colophon-mark-tl", {}, []),
+                box("mk-colophon-mark-br", {}, []),
+                box("mk-colophon-head",
+                    {"display": "flex", "justifyContent": "space-between",
+                     "alignItems": "baseline", "columnGap": "16px",
+                     "paddingBottom": "14px",
+                     "customDeclarations": "border-bottom:1px solid " + RULE + ";"},
+                    [mono("COLOPHON", size="10px", color="--mk-faint", track="0.26em"),
+                     mono("09 / 離開前", size="10px", color="--mk-faint", track="0.18em")]),
+                ml("h2", "還沒找到\n要的東西？",
+                   fontFamily=DISPLAY, fontWeight="600", fontSize="34px",
+                   # positive, not tight: a Han glyph sits on a full em body and is
+                   # already as close as it is meant to be. The design audit fails a
+                   # CJK run below -0.15px, and caught this line at -0.68px.
+                   lineHeight="1.12", letterSpacing="0.005em",
+                   color={"token": "--mk-ink"}, marginTop="20px",
+                   _m={"fontSize": "28px"}),
+                T("p", "把想做的事寫三行給我，兩個工作天內會收到一份能直接討論的提案——"
+                       "範圍、做法、時間，不是報價單。",
+                  fontFamily=CJK, fontSize="14px", lineHeight="1.85",
+                  color={"token": "--mk-muted"}, marginTop="14px"),
+                box("mk-colophon-cta",
+                    {"display": "flex", "columnGap": "14px", "rowGap": "10px",
+                     "marginTop": "26px", "flexWrap": "wrap",
+                     "alignItems": "center"},
+                    [
+                        {"type": "button",
+                         "data": {"attrID": "mk-colophon-go", "url": "#contact"},
+                         "style": {"&": {"_": {
+                             "backgroundColor": {"token": "--mk-accent"},
+                             "color": {"token": "--mk-ink"},
+                             "fontFamily": MONO, "fontSize": "11px",
+                             "letterSpacing": "0.18em", "fontWeight": "500",
+                             "paddingLeft": "22px", "paddingRight": "22px",
+                             "paddingTop": "13px", "paddingBottom": "13px",
+                             "customDeclarations": "border:1px solid rgb(255,90,54);"}},
+                             "hover": {"_": {"backgroundColor": {"token": "--mk-ink"},
+                                             "color": {"token": "--mk-paper"},
+                                             "customDeclarations":
+                                                 "border:1px solid rgb(22,24,28);"}},
+                             "focus-visible": {"_": dict(FOCUS_RING)}},
+                         "children": [{"type": "wysiwyg-text",
+                                       "data": {"text": "START A PROJECT"}}]},
+                        # closes the dialog and nothing else: a modalClose action
+                        # aimed at the modal's own node id
+                        {"type": "button",
+                         "data": {"attrID": "mk-colophon-stay",
+                                  "interactions": [{
+                                      "type": "click",
+                                      "uuid": "8b2e5d14-9af3-4c60-8e71-3c5d9b07a4f2",
+                                      "clickOptions": {
+                                          "name": "close", "ID":
+                                              "c41a7e69-0b52-4d38-9f84-61e0ad3b5c77",
+                                          "actionSlots": {"click": {"actions": [{
+                                              "type": "modalClose",
+                                              "uuid": "2d8f4b31-7c06-4e95-a3b2-58d1f9e60c84",
+                                              "settings": {"target": {
+                                                  "type": "element",
+                                                  "uuid": COLOPHON_NODE_ID}}}]}}}}]},
+                         "style": {"&": {"_": {
+                             "backgroundColor": "rgba(0,0,0,0)",
+                             "color": {"token": "--mk-muted"},
+                             "fontFamily": MONO, "fontSize": "11px",
+                             "letterSpacing": "0.18em", "fontWeight": "400",
+                             "paddingLeft": "4px", "paddingRight": "4px",
+                             "paddingTop": "13px", "paddingBottom": "13px",
+                             "cursor": "pointer"}},
+                             "hover": {"_": {"color": {"token": "--mk-ink"}}},
+                             "focus-visible": {"_": dict(FOCUS_RING)}},
+                         "children": [{"type": "wysiwyg-text",
+                                       "data": {"text": "繼續閱讀"}}]},
+                    ]),
+            ]), type="modal-window"),
+    ],
+    # The node id is pinned because the close button has to name it, and both are
+    # written in the same commit - there is no second pass in which to learn it.
+    # Unique per THEME, not per document: wp_mosaic_nodes' key is (ID, themeID).
+    "nodeID": COLOPHON_NODE_ID,
+}
+
 
 HOME_TREE = {"type": "div", "data": {"attrID": "mk-home"},
              "children": [BOOT, box("mk-doc", {}, [
@@ -2538,7 +2701,7 @@ HOME_TREE = {"type": "div", "data": {"attrID": "mk-home"},
                  # changes ground five times so it reads as chapters
                  MASTHEAD, TICKER_BAND, PLATE, SERVICE_SEC, MATRIX_SEC,
                  PROCESS_SEC, FIGURE_SEC, WORK_SEC, PAN, SPECIMEN, STACK_SEC,
-                 BOARD, PRODUCT_SEC, VOICE_SEC, CONTACT,
+                 BOARD, PRODUCT_SEC, VOICE_SEC, CONTACT, COLOPHON,
              ])]}
 
 
