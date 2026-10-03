@@ -229,6 +229,44 @@ def to_style(spec_style):
 COMPONENT_USES = []
 
 
+
+def refresh_node_ids(tree):
+    """Give every pinned `nodeID` in a tree a fresh uuid, and carry the rename
+    through every reference to it.
+
+    A pin exists so that two nodes written in the SAME pass can agree on an id -
+    a `modalOpen` action names the modal's node id, and neither exists yet. It is
+    not a claim that this exact uuid must be the one in the database, and treating
+    it as one makes the spec single-use: `wp_mosaic_nodes`' primary key is
+    (ID, themeID), so the second build of the same spec into the same theme dies
+    on a duplicate key, with the page already half written.
+
+    Rewriting at build time keeps the agreement (both halves move together) and
+    drops the false claim. Done on the serialized tree because a reference can sit
+    anywhere - `settings.target.uuid` today, somewhere else tomorrow - and a
+    structural walk would have to know every one of them.
+    """
+    ids = []
+
+    def collect(node):
+        if isinstance(node, dict):
+            if isinstance(node.get("nodeID"), str):
+                ids.append(node["nodeID"])
+            for v in node.values():
+                collect(v)
+        elif isinstance(node, list):
+            for v in node:
+                collect(v)
+
+    collect(tree)
+    if not ids:
+        return tree
+    blob = json.dumps(tree, ensure_ascii=False)
+    for old in dict.fromkeys(ids):
+        blob = blob.replace(old, str(uuid.uuid4()))
+    return json.loads(blob)
+
+
 def flatten(node, parent_id, master_id, surface, force, ordering="a0", parent_type=None, out=None):
     """Depth-first walk producing revision records, checking placement as it goes."""
     out = out if out is not None else []
@@ -417,7 +455,8 @@ def build(client, cfg, spec, force):
     VAR_IDS.clear()
     extra = theme_records(spec, doc, surface)
 
-    records = flatten(spec["tree"], body["ID"], master_id, surface, force, parent_type="body")
+    records = flatten(refresh_node_ids(spec["tree"]), body["ID"], master_id, surface,
+                      force, parent_type="body")
     payload = dict(extra)
     payload[key] = [{"newRevisionRecord": r, "originalRevisionRecord": None} for r in records]
     resp = client.commit("masterDocumentInstance/%s" % master_id, envelopes(doc), payload)

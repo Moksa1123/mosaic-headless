@@ -179,6 +179,17 @@ def style_for(settings, bp, extra_map=None):
     if extra_map:
         st.update(extra_map)
 
+    # A px width out of Elementor is a DESKTOP INTENT, not a size the element
+    # holds at every width - Elementor's own stylesheet caps every widget with
+    # `max-width:100%`, so `_element_custom_width: 600px` renders 346px inside a
+    # 346px column on a phone. Carrying the width across without the cap is the
+    # one difference that made converted pages scroll sideways at 390px while the
+    # Elementor original did not: the element kept its 600px and pushed the
+    # document to 662px. Measured on both, same page, same viewport.
+    if st.get("width", "").endswith("px") and "maxWidth" not in st:
+        st["maxWidth"] = "100%"
+
+
     # Borders: Mosaic's per-side longhands are grouped and inert on their own
     # (SKILL.md - 20 properties, zero exceptions), so this goes through
     # customDeclarations, which is the documented way out.

@@ -71,3 +71,22 @@ revision is rejected, and the rejection arrives as HTTP 200. See
 - An Elementor site, page-level construction → `elementor-headless`.
 - A Mosaic site → here. The write path and all 74 free node types are measured; the
   48 Pro-only types are extracted from source but not render-verified.
+
+## One thing the converter has to add, not copy
+
+Elementor's own stylesheet caps every widget with `max-width: 100%`. So a width
+set in the editor - `_element_custom_width: {size: 600, unit: px}`, with no mobile
+value beside it - is a DESKTOP INTENT: Elementor renders it as 346px inside a 346px
+column on a phone, and the author never sees a problem.
+
+Copy that width across on its own and the element keeps all 600px. Nineteen
+converted pages did exactly that: at 390px the document was 662px wide and every
+page scrolled sideways, while the Elementor original at the same viewport did not.
+Nothing in the per-page checks caught it, and that is the instructive part -
+`verify_rwd` asks whether a declaration reached the stylesheet, and a 640px width
+on a phone reaches it perfectly.
+
+`from_elementor.py` now emits `maxWidth: "100%"` beside any px `width` it carries
+over, after the element handlers have had their say so a width a handler supplies
+is capped too. `verify_navigation.py --viewports 390,768,1280` opens every page of
+a site and fails the one that scrolls sideways, naming the widest element in it.

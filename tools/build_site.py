@@ -37,7 +37,7 @@ import urllib.parse
 import uuid
 
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
-from build_page import (  # noqa: E402
+from build_page import (refresh_node_ids,   # noqa: E402
     COMPONENT_USES,
     VAR_IDS,
     Surface,
@@ -323,7 +323,8 @@ def build_page_document(client, cfg, master_id, template_id, tree, surface):
         sys.exit("template %s has no template-internal root" % template_id[:8])
 
     COMPONENT_USES.clear()
-    records = flatten(tree, root["ID"], template_id, surface, False, parent_type="template-internal")
+    records = flatten(refresh_node_ids(tree), root["ID"], template_id, surface,
+                      False, parent_type="template-internal")
     for r in records:
         r["documentType"] = "template"          # these rows belong to the template,
         r["documentID"] = template_id           # not to the master that frames them

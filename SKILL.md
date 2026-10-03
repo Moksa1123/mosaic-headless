@@ -190,7 +190,7 @@ SITE         the nineteen converted Elementor pages assembled into one real site
              <a href>, a WordPress page each, and a modal on every page - six
              distinct configurations across pageLoad / exitIntent / scrollDepth,
              cap / cooldown / firstRunWindow, page / session / forever memory and
-             four closedby policies. 27 of 27 navigation checks, 19 of 19 pages
+             four closedby policies. 46 of 46 navigation checks (including no page scrolling sideways at three widths), 19 of 19 pages
              carrying a working modal. data/navigation-verification.csv,
              data/page-modal-verification.csv
 
@@ -530,7 +530,7 @@ so the pattern is in the data, not just in this paragraph.
 | `data/conversion-batch.csv` | 19 | **converted, built and checked live, one page after another** - every Elementor page of a production site through the converter, with per-page element and content counts |
 | `data/token-benchmark.csv` | 6 | **measured with tiktoken** - the same six lookups priced three ways: reading the plugin source, loading every table, querying `mo.py`. 71-99.5% fewer tokens than the source and 99.6%+ fewer than the tables, which total 259,539 - never load them, query them |
 | `data/slider-verification.csv` | 19 | **driven live** - two sliders, one autoplaying and one a carousel: advance, arrows, bullets, keyboard, reduced motion |
-| `data/navigation-verification.csv` | 27 | **fetched live** - every menu item is a real `<a href>` and every page of the nineteen answers 200 |
+| `data/navigation-verification.csv` | 46 | **fetched and opened live** - every menu item is a real `<a href>`, every page of the nineteen answers 200, and no page scrolls sideways at 390 / 768 / 1280 |
 | `data/page-modal-verification.csv` | 19 | **read live** - one modal per page, and what each one's trigger, run rule, memory scope and dismissal policy actually came out as |
 | `data/dialog-verification.csv` | 19 | **driven live** - the 1.0.9 modal, its triggers, its run rules and the memory actions, each exercised in a real browser |
 | `data/custom-fields-verification.csv` | 62 | **rendered live** - ACF and Meta Box fields of every common type read back through `@VAR` / `@LOOP` off the delivered page, loops included |
@@ -700,6 +700,12 @@ post — `build_all.py` resets first for that reason.
   rows and `theme_zip_compare.php` reports a tree that does not match - delete
   nodes with a missing parent REPEATEDLY until none are left, because each pass
   orphans the next level down.
+- **A width copied out of Elementor needs `maxWidth: "100%"` beside it.**
+  Elementor caps every widget with `max-width:100%`, so a px width there is a
+  desktop intent its own CSS already constrains; carried across bare it keeps the
+  full 600px and the page scrolls sideways on a phone. `verify_rwd` cannot see it
+  - the declaration did reach the stylesheet - and nineteen converted pages were
+  green on every per-page check while all nineteen overflowed at 390px.
 - **Only three interaction types can be an `interactionShorthand`**: `pageLoad`,
   `exitIntent`, `scrollDepth` (`InteractionTypesManager::getShorthandInteractionTypes`).
   Any other is dropped in silence - the modal renders with its aria and its
@@ -713,9 +719,13 @@ post — `build_all.py` resets first for that reason.
   itself at the end it cannot pass unless the slider is a carousel, so a test
   that clicks `next` after autoplay has parked the slider finds nothing there.
 - **An interaction that targets another element stores that element's NODE id**,
-  not its attrID, so both have to be written in one pass (`nodeID` on a spec
-  node pins it). The id must be unique in the THEME - `wp_mosaic_nodes`' primary
-  key is `(ID, themeID)` - so mint it per run rather than hard-coding one.
+  not its attrID, so both have to be written in one pass (`nodeID` on a spec node
+  pins it). The pin means "these two halves must agree", never "this uuid must be
+  the one in the database" - `wp_mosaic_nodes`' key is `(ID, themeID)`, so a fixed
+  id makes the spec single-use and the SECOND build dies on a duplicate key with
+  the page half written. `build_page.refresh_node_ids()` now rewrites every pin and
+  every reference to it at build time, so a spec with pins rebuilds as many times
+  as you like.
 - **Since 1.0.9 the three per-breakpoint stylesheets are one.**
   `mosaic-theme-document-styles-inline-css` carries the base rules and the
   `@media` blocks together; the old `mosaic-theme-block-editor-styles_<bp>-inline-css`
@@ -789,7 +799,7 @@ post — `build_all.py` resets first for that reason.
 | `theme_zip_compare.php` | hold an imported copy against its source, tree for tree - every scoped table, the (parentType, type) shape, which ids survive, and orphans named rather than counted |
 | `theme_delete.php` | remove a theme completely through the plugin's own routine; refuses the live one |
 | `verify_slider.py` | the slider in a real browser: does it advance, do the arrows and bullets drive it, does the keyboard, does it stop when motion is not wanted |
-| `verify_navigation.py` | a multi-page site: is every menu item a real `<a href>`, and does every page answer 200 (a template that was never bound answers 406 with an empty body, which only a logged-out visitor sees) |
+| `verify_navigation.py` | a multi-page site: is every menu item a real `<a href>`, does every page answer 200 (a template that was never bound answers 406 with an empty body, which only a logged-out visitor sees), and with `--viewports` does any page scroll SIDEWAYS - the one question no per-page checker asks |
 | `verify_dialog.py` | the 1.0.9 modal in a real browser: does it open, close, answer Esc, remember, cap - and does an OpenStreetMap carry the coordinates it was given |
 | `list_fields.php` | every `@VAR` / `@LOOP` name Mosaic registers for one post - custom fields, their derived `__label` / `__url` / `__id` properties, the row variables of each loop - with the value each resolves to (`wp eval-file`) |
 | `data_upgrade.py` | after a plugin update, run Mosaic's data migration over its own milestone route - the step wp-admin does from a screen - and set the config's version when the editor API is back |

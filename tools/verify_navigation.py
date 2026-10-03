@@ -17,6 +17,13 @@ Then every page is fetched, because a one-page site converted into a real one ha
 a specific failure: the template binding is per post, and a page whose template was
 never bound answers 406 with an empty body to anyone not logged in - which a
 logged-in author never sees.
+
+With `--viewports` each page is also opened in a browser at those widths and asked
+whether the document scrolls SIDEWAYS, with the widest offender named. `verify_rwd`
+cannot answer that - it checks that a declaration reached the stylesheet, which a
+640px width on a phone does perfectly - and `verify_browser` can, but only for the
+pages of the one spec it is pointed at. A site is the unit here: nineteen converted
+pages all overflowed at 390px and every per-page tool was green.
 """
 from __future__ import annotations
 
@@ -54,6 +61,29 @@ def anchors(html, container_id):
                                    m.group(1), re.S)]
 
 
+# `scrollWidth > clientWidth` says the page scrolls sideways; it does not say what
+# did it, and a report without the culprit sends someone hunting. Position:fixed is
+# excluded - a fixed decoration outside the viewport is not what widens a document.
+OVERFLOW = """() => {
+  const de = document.documentElement;
+  const over = de.scrollWidth - de.clientWidth;
+  let widest = null, edge = de.clientWidth + 1;
+  if (over > 1) {
+    for (const el of document.querySelectorAll('body *')) {
+      const r = el.getBoundingClientRect();
+      if (r.width === 0 || r.height === 0) continue;
+      if (getComputedStyle(el).position === 'fixed') continue;
+      if (r.right > edge) {
+        edge = r.right;
+        widest = el.tagName.toLowerCase() + (el.id ? '#' + el.id : '') +
+                 ' to ' + Math.round(r.right) + 'px';
+      }
+    }
+  }
+  return {over, doc: de.scrollWidth, view: de.clientWidth, widest};
+}"""
+
+
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--site", required=True, help="the site spec that was built")
@@ -61,6 +91,9 @@ def main():
     ap.add_argument("--nav", default="mw-nav", help="attrID of the nav container")
     ap.add_argument("--home-slug", default="home",
                     help="the slug bound to the front page, reachable at /")
+    ap.add_argument("--viewports",
+                    help="comma-separated widths to check for sideways scroll, "
+                         "e.g. 390,768,1280 (needs playwright)")
     ap.add_argument("--csv")
     a = ap.parse_args()
 
@@ -99,6 +132,31 @@ def main():
         st, body = fetch(url)
         ok = st == 200 and len(body) > 2000
         check("PAGE %s" % slug[:21], ok, "HTTP %d, %d bytes" % (st, len(body)))
+
+    # ── does any page scroll sideways ───────────────────────────────────────
+    if a.viewports:
+        widths = [int(w) for w in a.viewports.split(",") if w.strip()]
+        from playwright.sync_api import sync_playwright
+        with sync_playwright() as pw:
+            br = pw.chromium.launch()
+            for page in spec["pages"]:
+                slug = page["slug"]
+                url = base + ("/" if slug == a.home_slug else "/%s/" % slug)
+                bad = []
+                for w in widths:
+                    pg = br.new_page(viewport={"width": w, "height": 880})
+                    pg.goto("%s?_v=%d" % (url, int(time.time() * 1000)),
+                            wait_until="load")
+                    pg.wait_for_timeout(1200)
+                    r = pg.evaluate(OVERFLOW)
+                    if r["over"] > 1:
+                        bad.append("%dpx: doc %d, widest %s"
+                                   % (w, r["doc"], r["widest"] or "?"))
+                    pg.close()
+                check("WIDTH %s" % slug[:20], not bad,
+                      ("no sideways scroll at %s" % a.viewports) if not bad
+                      else "; ".join(bad))
+            br.close()
 
     print("\n%d of %d checks passed" % (len(rows) - len(fails), len(rows)))
     if a.csv:

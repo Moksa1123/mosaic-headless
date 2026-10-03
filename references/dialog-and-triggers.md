@@ -68,8 +68,11 @@ which the page resolves to `{"targetSelectorData": [{"type": "all", "selector": 
   `nodeID` on any spec node for exactly this.
 - **That id must be unique in the THEME, not the document.** `wp_mosaic_nodes`'
   primary key is `(ID, themeID)`, so a hard-coded id collides with whatever an
-  earlier build left behind — the commit answers HTTP 500 on a duplicate key. Mint
-  it per run.
+  earlier build left behind — the commit answers HTTP 500 on a duplicate key, with
+  the page already half written. `build_page.refresh_node_ids()` rewrites every
+  pinned `nodeID` and every reference to it as the tree is built, so the pin keeps
+  doing its real job (two halves of one spec agreeing) without claiming the uuid
+  itself, and a spec carrying pins can be rebuilt any number of times.
 
 `type` accepts `element`, `variant` or `universalClass` — the last two aim an action
 at every element of a class.
