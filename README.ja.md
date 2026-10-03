@@ -267,7 +267,7 @@ npm version minor      # package.json、SKILL.md、8 つのプラットフォー
                        # commit、tag、push；tag が release.yml を起動する
 ```
 
-`bin/check-release.mjs` がすべてのリリースを門番する。検査するのは「検査しやすいこと」ではなく
+`scripts/check-release.mjs` がすべてのリリースを門番する。検査するのは「検査しやすいこと」ではなく
 「間違えやすいこと」：版番号の一致、`files` の各 glob が何かに一致すること、各検証 CSV の行数が
 SKILL.md と 4 つの README が引用する数と等しいこと、未裁定のデザイン監査指摘がないこと、eval
 スイートが存在すること、そして **tarball そのものの検査** — npm の `files` 許可リストは

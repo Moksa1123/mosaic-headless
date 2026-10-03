@@ -41,6 +41,38 @@ npx mosaic-headless@latest claude-code --global --force
 ```
 
 
+## 以 Claude plugin 安裝
+
+這個 repo 同時也是一個 Claude plugin：根目錄有 `.claude-plugin/plugin.json`，根目錄的
+`SKILL.md` 就是它唯一的技能。上架到 Claude 目錄之後可以直接從目錄安裝；在那之前，Claude
+Code 可以直接載入 clone 下來的資料夾：
+
+```bash
+git clone https://github.com/Moksa1123/mosaic-headless
+claude --plugin-dir ./mosaic-headless
+```
+
+這是獨立專案，不是 Mosaic Pro 開發商 Nextend 的產品，也沒有得到 Nextend 背書或與其合作。
+
+## 這個 plugin 會執行什麼、連到哪裡
+
+這個 plugin 沒有 hook、沒有 MCP 伺服器、沒有背景程序。下面這些都只在 Claude 依照
+`SKILL.md` 執行、而且你核准指令時才會跑：
+
+- **`tools/mo.py`**：讀 `data/` 裡的 CSV 表並印出答案，不寫入任何東西，也不連線。
+- **`tools/*.php`**：透過 `wp eval-file` 在你自己的 WordPress 裡執行，讀寫該網站上 Mosaic
+  自己的資料表和主題資料。
+- **`tools/mint_session.php`**：替*你自己網站*上的帳號建立登入 session 和對應的 REST
+  nonce。你把它們放進本機的設定檔（`--config sweep.json`）；它們只印在你的終端機，不會送到別處。
+- **`tools/build_site.py`、`data_upgrade.py`、`theme_zip.py`、`probe_accordion.py` 和 `sweep_*.py`**：用那份
+  session 呼叫設定檔裡那個網站的 Mosaic REST 路由，讀寫頁面、元件和主題。只連到那個網站。
+- **`tools/verify_*.py`**：用 Playwright（Chromium）或 `urllib` 開同一個網站的頁面，比對實際
+  輸出和寫入的內容。
+- **`sites/`**：工作範例（作者自己的網站）的資料。它的設計有載入 Google Fonts，所以用它建出來的
+  頁面，訪客的瀏覽器會向 Google 抓字型，跟任何使用 Google Fonts 的網頁一樣。
+
+工具需要 Python 3 和 Playwright。安裝時不會下載任何東西，也不會把資料送給作者或第三方。
+
 ## 這是什麼
 
 Mosaic 把一個頁面放在 **23 張自訂資料表**裡，不在 `post_content`，也不在 `postmeta`。
@@ -250,7 +282,7 @@ npm version minor      # 更新 package.json、SKILL.md 和八個平台模板的
                        # commit、打 tag、push；tag 觸發 release.yml
 ```
 
-`bin/check-release.mjs` 把關每一次發版，檢查的是容易出錯而不是容易檢查的事：版號一致、
+`scripts/check-release.mjs` 把關每一次發版，檢查的是容易出錯而不是容易檢查的事：版號一致、
 `files` 的每個 glob 都對到東西、每張驗證表的列數仍然等於 SKILL.md 和四份 README 引用的數字、
 沒有未裁定的設計稽核發現、eval 套件在場，以及**直接檢查 tarball 本身**——npm 的 `files` 白名單
 會蓋過 `.gitignore`，曾經把一個真實客戶的網站放進即將發布的套件裡。

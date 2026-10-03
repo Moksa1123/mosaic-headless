@@ -2,16 +2,16 @@
 /**
  * Refuse to publish a package that does not hold together.
  *
- *   node bin/check-release.mjs
+ *   node scripts/check-release.mjs
  *
  * Runs as `preversion` and again as `prepublishOnly`, so a release cannot be cut or
  * pushed while any of this is false. Exits non-zero with the reason.
  *
- * The version number exists in three places - package.json, the SKILL.md
- * frontmatter an agent reads, and the frontmatter each platform template writes on
- * install. Nothing keeps them together on its own, and a skill that reports a
- * version it is not is worse than one that reports none. `npm version` runs
- * sync-version.mjs to write all three; this asserts it worked.
+ * The version number exists in four places - package.json, the SKILL.md
+ * frontmatter an agent reads, the frontmatter each platform template writes on
+ * install, and the Claude plugin manifest. Nothing keeps them together on its own,
+ * and a skill that reports a version it is not is worse than one that reports none.
+ * `npm version` runs sync-version.mjs to write all four; this asserts it worked.
  *
  * It also checks that every path in package.json `files` exists, that the data files
  * the skill's own claims rest on are present and non-trivial, and that the
@@ -48,6 +48,20 @@ for (const f of fs.readdirSync(platDir).filter((x) => x.endsWith(".json"))) {
   if (JSON.stringify(cfg).includes("gutenberg-headless"))
     fail(`${f} still names another skill`);
 }
+
+// The Claude plugin manifest carries the version too: the plugin directory lists it
+// and Claude Code pins installs to it, so a stale one serves an old version.
+const manPath = path.join(ROOT, ".claude-plugin", "plugin.json");
+if (!fs.existsSync(manPath)) fail(".claude-plugin/plugin.json missing");
+else {
+  const man = JSON.parse(fs.readFileSync(manPath, "utf8"));
+  if (man.version !== want) fail(`.claude-plugin/plugin.json version ${man.version} != ${want}`);
+  if (man.name !== pkg.name) fail(`.claude-plugin/plugin.json name ${man.name} != ${pkg.name}`);
+}
+// A top-level bin/ goes on the Bash PATH while the plugin is enabled, and claude.ai
+// and Cowork refuse to install a plugin that has one. The npm entry points live in
+// scripts/ for that reason.
+if (fs.existsSync(path.join(ROOT, "bin"))) fail("a top-level bin/ makes claude.ai and Cowork refuse the plugin - keep scripts in scripts/");
 
 // ---------- everything the package claims to ship actually exists -----------
 

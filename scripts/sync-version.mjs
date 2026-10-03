@@ -2,16 +2,17 @@
 /**
  * Write package.json's version into every other place that carries one.
  *
- *   node bin/sync-version.mjs
+ *   node scripts/sync-version.mjs
  *
  * Runs from the `version` npm lifecycle script, after npm has bumped package.json
  * and before it makes the commit and the tag - so the tagged commit already has all
- * three versions agreeing, and `npm version patch` is the only command anyone has to
+ * four versions agreeing, and `npm version patch` is the only command anyone has to
  * remember.
  *
  * Targets:
  *   SKILL.md                              frontmatter `version:`
  *   assets/templates/platforms/*.json     frontmatter.version, where present
+ *   .claude-plugin/plugin.json            version (the Claude plugin directory reads it)
  *
  * check-release.mjs asserts afterwards that this worked, so a silent miss here
  * cannot reach npm.
@@ -57,6 +58,17 @@ for (const f of fs.readdirSync(platDir).filter((x) => x.endsWith(".json"))) {
     cfg.frontmatter.version = v;
     fs.writeFileSync(p, JSON.stringify(cfg, null, 2) + "\n");
     touched.push(`assets/templates/platforms/${f}`);
+  }
+}
+
+// Claude plugin manifest - the directory listing and Claude Code's version pinning read it
+const manPath = path.join(ROOT, ".claude-plugin", "plugin.json");
+if (fs.existsSync(manPath)) {
+  const man = JSON.parse(fs.readFileSync(manPath, "utf8"));
+  if (man.version !== v) {
+    man.version = v;
+    fs.writeFileSync(manPath, JSON.stringify(man, null, 2) + "\n");
+    touched.push(".claude-plugin/plugin.json");
   }
 }
 
