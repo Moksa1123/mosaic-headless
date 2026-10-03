@@ -117,6 +117,91 @@ def token_by_id(html, id_pattern):
     return out
 
 
+def document_styles(html, suffix=""):
+    """{generated element class: {css property: value}} for one breakpoint's rules.
+
+    `suffix` is the breakpoint's own key with the leading underscore dropped: "" is
+    the base, "t" tablet, "m" mobile - the same spelling the three separate style
+    blocks used before 1.0.9.
+
+    1.0.9 merged those three blocks into ONE `mosaic-theme-document-styles-inline-css`
+    with the breakpoints as `@media` blocks inside it, so a suffix is now a position
+    in one stylesheet rather than a block id. The old ids are still read first, so
+    the same tool measures a 1.0.8 site unchanged.
+
+    The base is everything OUTSIDE any at-rule: scanning the whole block for `._x{...}`
+    would read a tablet override as if it were the base, which is exactly the error
+    the three-block layout made impossible.
+    """
+    old = re.search(
+        r'<style id="mosaic-theme-block-editor-styles_%s-inline-css">(.*?)</style>'
+        % re.escape(suffix), html, re.S)
+    if old:
+        css = old.group(1)
+        inner = re.search(r"@media[^{]*\{(.*)\}\s*$", css, re.S)
+        return _rules_of(inner.group(1) if inner else css)
+
+    one = re.search(r'<style id="mosaic-theme-document-styles-inline-css">(.*?)</style>',
+                    html, re.S)
+    if not one:
+        return None
+    css = one.group(1)
+    blocks = _at_rule_blocks(css)
+    if suffix == "":
+        outside = css
+        for start, end, _head in blocks:
+            outside = outside.replace(css[start:end], " ")
+        return _rules_of(outside)
+    # a breakpoint block is a max-width media query; they appear widest-first, the
+    # order Mosaic emits them in, so "t" is the first and "m" the second
+    media = [(s, e, h) for s, e, h in blocks if "max-width" in h]
+    want = {"t": 0, "m": 1}.get(suffix)
+    if want is None or want >= len(media):
+        return None
+    s, e, _h = media[want]
+    body = css[css.index("{", s) + 1:e - 1]
+    return _rules_of(body)
+
+
+def _at_rule_blocks(css):
+    """[(start, end, header)] for every top-level at-rule, found by brace depth."""
+    out, i, n = [], 0, len(css)
+    while True:
+        at = css.find("@", i)
+        if at < 0:
+            return out
+        brace = css.find("{", at)
+        if brace < 0:
+            return out
+        depth, j = 0, brace
+        while j < n:
+            if css[j] == "{":
+                depth += 1
+            elif css[j] == "}":
+                depth -= 1
+                if depth == 0:
+                    break
+            j += 1
+        out.append((at, j + 1, css[at:brace]))
+        i = j + 1
+
+
+def _rules_of(css):
+    """{class: {prop: value}} from flat CSS, ignoring anything nested in an at-rule."""
+    rules = {}
+    for sel, decls in re.findall(r"([^{}]+)\{([^{}]*)\}", css):
+        props = {}
+        for decl in decls.split(";"):
+            if ":" in decl:
+                k, v = decl.split(":", 1)
+                props[k.strip()] = v.strip()
+        for one in sel.split(","):
+            cls = re.match(r"^\.(_[a-z0-9_-]+)$", one.strip())
+            if cls:
+                rules.setdefault(cls.group(1), {}).update(props)
+    return rules
+
+
 def envelopes(doc):
     return {k: [[x["ID"], x["revision"]] for x in v] for k, v in doc.items()}
 

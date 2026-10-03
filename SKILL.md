@@ -1,7 +1,7 @@
 ---
 name: "mosaic-headless"
 description: |
-  Build and modify Mosaic Pro (Nextend) sites by writing the underlying data model directly - no visual editor, no DOM. Query the real surface with `mo.py`, which joins every source table to the live sweeps so a lookup leads with the measured verdict rather than the declaration (122 node types, 182 properties, 98 style properties with 20 structured value shapes pinned down, 53 style states, 152 variants, 74 dynamic variables, 12 interaction triggers, 114 REST routes, 23 tables) instead of guessing, with every node type placed on a live site one at a time and asserted against the delivered HTML, the design-token and element-class layers verified against compiled CSS, the @VAR() dynamic language verified against rendered output, nine designed pages built through the tables themselves, and the delivered pages re-read in Chromium at three viewports so a rule that is present, correct and still wrong cannot pass. Drives Mosaic's own theme export/import and its plugin data upgrade from outside the editor and holds the copy against the source tree for tree. Measured on Mosaic Pro 1.0.8, with the 1.0.7 -> 1.0.8 migration (variants, universal classes, `m-` class names, customDeclarations) run and re-verified.
+  Build and modify Mosaic Pro (Nextend) sites by writing the underlying data model directly - no visual editor, no DOM. Query the real surface with `mo.py`, which joins every source table to the live sweeps so a lookup leads with the measured verdict rather than the declaration (126 node types, 191 properties, 98 style properties with 20 structured value shapes pinned down, 53 style states, 156 variants, 74 dynamic variables, 15 interaction triggers, 115 REST routes, 23 tables) instead of guessing, with every node type placed on a live site one at a time and asserted against the delivered HTML, the design-token and element-class layers verified against compiled CSS, the @VAR() dynamic language verified against rendered output, nine designed pages built through the tables themselves, and the delivered pages re-read in Chromium at three viewports so a rule that is present, correct and still wrong cannot pass. Drives Mosaic's own theme export/import and its plugin data upgrade from outside the editor and holds the copy against the source tree for tree. Measured on Mosaic Pro 1.0.9: the modal (`<dialog>`), OpenStreetMap, the exit-intent and scroll-depth triggers, run rules and the memory actions all built on a live page and read back, and the 1.0.7 -> 1.0.8 -> 1.0.9 migrations driven from outside wp-admin.
 license: "MIT"
 author: "moksa (https://moksaweb.com)"
 version: "1.19.0"
@@ -131,11 +131,11 @@ measured.
 ## What was verified, and how
 
 Everything ran against a live install: WordPress 7.1, WooCommerce 11.1,
-Mosaic Pro 1.0.8, **unlicensed** — the licence gates the theme library and updates,
+Mosaic Pro 1.0.9, **unlicensed** — the licence gates the theme library and updates,
 not the node factories, so the Pro types register and render regardless. The
-site was built on 1.0.7 and upgraded in place: the 1.0.8 data migration
+site was built on 1.0.7 and upgraded in place twice: both data migrations
 (`tools/data_upgrade.py`) ran over the real theme, and every sweep below was
-re-run on the result, so the tables describe 1.0.8 as delivered, not as declared.
+re-run on the result, so the tables describe 1.0.9 as delivered, not as declared.
 
 ```
 WRITE PATH   verified end to end over REST
@@ -143,11 +143,12 @@ WRITE PATH   verified end to end over REST
 
 NODE SWEEP   122 of 122 node types, ONE PER DOCUMENT, committed then rendered then
              deleted, asserting each type's attrID against the delivered HTML:
-                 RENDERED    70   id found; tag and classes recorded
+                 RENDERED    74   id found; tag and classes recorded
                  COMMITTED   25   row exists, nothing reached the page
                  COMMIT_5xx  15   PHP fatal on commit
                  BROKE_PAGE  12   committed, then the whole page died
-             Free 74: 43/18/6/7.  Pro 48: 27/7/9/5.  data/node-verification.csv
+             data/node-verification.csv. 1.0.9's four new types - modal,
+             modal-window, modal-overlay, openstreetmap - all render.
              Re-swept on 1.0.8: five types that used to commit and render
              nothing (accordion-title, loop-pagination and its two buttons,
              multi-steps-form-step) now kill the page instead - the render
@@ -170,6 +171,18 @@ DESIGN SYS   variants and collection variables both verified against compiled
              collection variable emitted
              :root{--brand: rgb(9, 99, 199)} with background-color:var(--brand).
              references/design-system.md
+
+DIALOG       1.0.9's features built on a live page and read back out of the
+             browser, 19 of 19: the modal renders a real <dialog> (aria-modal
+             appears only with an overlay child), a modalOpen action opens it and
+             modalClose closes it, closedby=everything is answered by Esc,
+             remember/forget write and clear mos:v1:r:<name> in local AND session
+             storage, scrollDepth fires, and an exitIntent modal opened by the
+             interaction SHORTHAND alone - nothing in the page points at it -
+             runs once a session and again in a new one, which is the cap rule
+             holding. The OpenStreetMap element carries the coordinates only in
+             the {"v": ...} object form. data/dialog-verification.csv,
+             references/dialog-and-triggers.md
 
 FIELDS       ACF 6.8 and Meta Box 5.15, forty fields registered in code on a page,
              read back off the delivered HTML: 59 of 62 expressions resolve to the
@@ -336,7 +349,7 @@ EVAL         the skill itself, put in front of the model with and without it loa
              don't have reliable knowledge of Mosaic Pro's spec format"), which is
              the right thing for a model with no data to do. evals/
 
-MEASURED     114 REST routes, 152 variants, 59 condition subjects,
+MEASURED     115 REST routes, 156 variants, 59 condition subjects,
              23 tables / 210 columns - read off the running site.
 
 UPGRADE      1.0.7 -> 1.0.8 driven over the plugin's own milestone route from
@@ -346,9 +359,9 @@ UPGRADE      1.0.7 -> 1.0.8 driven over the plugin's own milestone route from
              one selector on the worked example that named an emitted class
              stopped matching until it was rewritten. references/upgrading.md
 
-FROM SOURCE  122 node types, 182 properties (61 with enums), 207 pluggable IDs,
-             122 placement rules, 10 composite default structures, 98 style
-             properties, 53 style states.
+FROM SOURCE  126 node types, 191 properties (61 with enums), 249 pluggable IDs,
+             126 placement rules, 10 composite default structures, 98 style
+             properties, 53 style states, 15 interaction triggers.
 ```
 
 **Coverage, stated as a fraction rather than as a headline.** The verification
@@ -357,8 +370,8 @@ the difference is worth being exact about:
 
 ```
 node types        122 / 122   swept live, one per document
-node properties   182 / 182   re-probed with a value shaped by each property's
-                              own validator chain: 35 APPLIED, 43 NO_EFFECT,
+node properties   191 / 191   re-probed with a value shaped by each property's
+                              own validator chain: 38 APPLIED, 45 NO_EFFECT,
                               2 EDITOR_ONLY, 55 NO_HOST (no rendering type
                               declares them), 2 INSTRUMENT, 45 SKIPPED
 style properties   98 /  98   swept live; 58 COMPILED, 18 ABSENT, 1 NO_ELEMENT,
@@ -367,7 +380,7 @@ style properties   98 /  98   swept live; 58 COMPILED, 18 ABSENT, 1 NO_ELEMENT,
 ```
 
 **A same-value probe measures the probe, not the surface.** The first property run
-sent the string `MPROP0000X` to all 181 properties (182 since 1.0.8) regardless of what each wanted,
+sent the string `MPROP0000X` to all 181 properties (191 by 1.0.9) regardless of what each wanted,
 and reported 91 NO_EFFECT. The tell was that `tagName` was in that list while the
 entire demo site is built on it. Re-probed with a value derived from the declared
 validator chain - array for `ValidatorArray`, boolean for `ValidatorBoolean`, a legal
@@ -459,7 +472,9 @@ so the pattern is in the data, not just in this paragraph.
 12. `references/custom-fields.md` — ACF and Meta Box fields as `@VAR` / `@LOOP`:
    the names, what each field type resolves to, and the loop element that walks
    a multi-value field. Measured, 62 rows.
-13. `references/upgrading.md` — what a plugin update does to the data and to the
+13. `references/dialog-and-triggers.md` — 1.0.9's modal, OpenStreetMap, the
+   exit-intent / scroll-depth triggers, run rules, memory and the shorthand.
+14. `references/upgrading.md` — what a plugin update does to the data and to the
    delivered page, measured on 1.0.7 -> 1.0.8; how to drive the migration and what
    to re-verify afterwards.
 
@@ -469,20 +484,20 @@ so the pattern is in the data, not just in this paragraph.
 |---|---|---|
 | `data/node-verification.csv` | 122 | **swept live** — outcome, rendered tag and classes, page bytes, failure detail |
 | `data/node-types.csv` | 122 | source — slug, label, edition, aliases, data class |
-| `data/node-properties.csv` | 182 | source — property, validator chain, **accepted enum values**, `supportsInherit` |
+| `data/node-properties.csv` | 191 | source — property, validator chain, **accepted enum values**, `supportsInherit` |
 | `data/placement-rules.csv` | 122 | source — which children each type accepts |
 | `data/default-children.csv` | 10 | source — what a composite type needs **inside** it |
 | `data/style-properties.csv` | 98 | source — every settable CSS property and its value shape |
 | `data/style-value-shapes.csv` | 22 | **probed live** — the exact JSON shape for each structured value, and what it compiled to |
 | `data/style-states.csv` | 53 | source — state IDs with their exact CSS selector templates |
 | `data/property-verification.csv` | 170 | **probed live** — per-property effect on markup vs CSS, with unprovable enums marked INCONCLUSIVE |
-| `data/node-property-verification.csv` | 182 | **swept live** — each property probed with a value shaped by its own validator chain, on a type that declares it |
+| `data/node-property-verification.csv` | 191 | **swept live** — each property probed with a value shaped by its own validator chain, on a type that declares it |
 | `data/style-verification.csv` | 98 | **swept live** — every style property written to a page and checked against the compiled CSS, with its group beside the result |
 | `data/rwd-verification.csv` | 731 | **checked live** - every `_t`/`_m` declaration vs the served stylesheet, with status per row |
 | `data/browser-verification.csv` | 3988 | **computed in Chromium** - declared vs `getComputedStyle` at three viewports, `not-comparable` labelled per row |
 | `data/design-audit-acknowledged.csv` | 3 | reviewed findings that will not be fixed, each with a written reason. An acknowledgement without a reason is a suppression wearing a better name, and the release gate refuses one |
 | `data/design-audit.csv` | 26 | **computed in Chromium** - contrast, font fallback, CJK tracking, overflow, measure. Empty means it ran and found nothing |
-| `data/data-class-hierarchy.csv` | 121 | source - every data class and its parent, so a type's inherited properties can be resolved |
+| `data/data-class-hierarchy.csv` | 125 | source - every data class and its parent, so a type's inherited properties can be resolved |
 | `data/style-state-verification.csv` | 52 | **swept live** - each state written on a host of its own type and matched against its promised selector |
 | `data/component-verification.csv` | 8 | **driven live** - the component lifecycle, each step asserted against the row or the delivered HTML |
 | `data/loop-verification.csv` | 28 | **measured live** - a perpetual animation: periodicity by scrubbing a paused timeline, per-element occlusion of both text and controls at five widths, and the enlarged view opened by pointer and by keyboard |
@@ -490,20 +505,21 @@ so the pattern is in the data, not just in this paragraph.
 | `data/conversion-verification.csv` | 8 | **converted then checked live** - an Elementor page rebuilt as Mosaic and held against its source (text, images, links, heading levels), then put through rwd, browser and the design audit with every finding classified inherited-or-introduced |
 | `data/conversion-batch.csv` | 19 | **converted, built and checked live, one page after another** - every Elementor page of a production site through the converter, with per-page element and content counts |
 | `data/token-benchmark.csv` | 6 | **measured with tiktoken** - the same six lookups priced three ways: reading the plugin source, loading every table, querying `mo.py`. 71-99.5% fewer tokens than the source and 99.6%+ fewer than the tables, which total 259,539 - never load them, query them |
+| `data/dialog-verification.csv` | 19 | **driven live** - the 1.0.9 modal, its triggers, its run rules and the memory actions, each exercised in a real browser |
 | `data/custom-fields-verification.csv` | 62 | **rendered live** - ACF and Meta Box fields of every common type read back through `@VAR` / `@LOOP` off the delivered page, loops included |
 | `data/theme-zip-verification.csv` | 22 | **round-tripped live** - Mosaic's own ZIP export imported in test mode and compared to its source, table by table and tree by tree |
 | `data/node-type-notes.csv` | 8 | where a sweep outcome is true but misleading on its own, why. Surfaced by `mo.py type` |
 | `data/interaction-verification.csv` | 7 | **probed live** - interaction animation shapes, with negative controls and the stored row beside the payload |
 | `data/intro-verification.csv` | 8 + 15 | **sampled live** - the entrance sequence over fifteen timestamps on a monotonic clock, plus the eight assertions about it |
-| `data/variants.csv` | 152 | **live** — the variant catalog (Mosaic's built-in element classes); their IDs are what a `variant` record must use, and `class_name` is what the element emits |
+| `data/variants.csv` | 156 | **live** — the variant catalog (Mosaic's built-in element classes); their IDs are what a `variant` record must use, and `class_name` is what the element emits |
 | `data/dynamic-variables.csv` | 74 | source — every `@VAR('ns/name')` expression, by namespace |
 | `data/evaluator-functions.csv` | 19 | source — the `@` functions with their arity |
-| `data/interaction-types.csv` | 12 | source — trigger types, `timed` vs `progress` |
+| `data/interaction-types.csv` | 15 | source — trigger types, `timed` vs `progress`; 1.0.9 adds exitIntent, scrollDepth and modal |
 | `data/animatable-properties.csv` | 22 | source — what a keyframe can drive (**not** the same set as the style properties) |
 | `data/condition-subjects.csv` | 59 | **live** — condition subjects per context |
 | `data/condition-comparators.csv` | 12 | **live** — comparators and their operator sets |
-| `data/pluggables.csv` | 207 | source — every `setID()` by registry |
-| `data/rest-routes.csv` | 114 | **live** — method, path, args |
+| `data/pluggables.csv` | 249 | source — every `setID()` by registry |
+| `data/rest-routes.csv` | 115 | **live** — method, path, args |
 | `data/db-columns.csv` | 210 | **live** — every column of all 23 tables |
 
 ## Building a page
@@ -593,7 +609,7 @@ post — `build_all.py` resets first for that reason.
 
 ## Facts worth knowing before you look anything up
 
-- **The REST namespace contains the plugin version** (`/wp-json/mosaic/v1.0.8`). Read
+- **The REST namespace contains the plugin version** (`/wp-json/mosaic/v1.0.9`). Read
   it from `mosaicOptions.rest_api_url`, never hardcode. After a plugin update the
   editor namespace is GONE until the data upgrade has run; only
   `mosaic/<dataVersion>/<version>/upgrade` answers. `tools/data_upgrade.py`.
@@ -651,7 +667,21 @@ post — `build_all.py` resets first for that reason.
   set (masters not reached from a bound template, their templates, their nodes)
   the same import took under two minutes and compared 22 of 22. Prune before you
   export; `wp_mosaic_template_assigns.parentID` -> template -> `masterID` is the
-  bound set, plus any `assign="auto"` template.
+  bound set, plus any `assign="auto"` template. Then sweep ORPHANS: a probe run
+  that half-failed, or a prune that removed a parent, leaves nodes whose parent id
+  points at nothing. The export skips them, so the copy is short by exactly those
+  rows and `theme_zip_compare.php` reports a tree that does not match - delete
+  nodes with a missing parent REPEATEDLY until none are left, because each pass
+  orphans the next level down.
+- **An interaction that targets another element stores that element's NODE id**,
+  not its attrID, so both have to be written in one pass (`nodeID` on a spec
+  node pins it). The id must be unique in the THEME - `wp_mosaic_nodes`' primary
+  key is `(ID, themeID)` - so mint it per run rather than hard-coding one.
+- **Since 1.0.9 the three per-breakpoint stylesheets are one.**
+  `mosaic-theme-document-styles-inline-css` carries the base rules and the
+  `@media` blocks together; the old `mosaic-theme-block-editor-styles_<bp>-inline-css`
+  ids are gone. And an element whose styles compile to nothing is emitted with
+  no generated class at all, so "no `_token`" no longer means "did not render".
 - **A custom field is `@VAR('post/meta_<key>')`, and a multi-value one is a LOOP.**
   ACF and Meta Box both, plus bare post meta. Derived properties hang off the
   name with two underscores (`meta_k__label`, `__url`, `__id`); an ACF group is
@@ -719,6 +749,7 @@ post — `build_all.py` resets first for that reason.
 | `theme_zip.py` | drive Mosaic's OWN export/import - the ZIP the editor makes, attachments included, over the milestone protocol; import lands in test mode unless told `--activate` |
 | `theme_zip_compare.php` | hold an imported copy against its source, tree for tree - every scoped table, the (parentType, type) shape, which ids survive, and orphans named rather than counted |
 | `theme_delete.php` | remove a theme completely through the plugin's own routine; refuses the live one |
+| `verify_dialog.py` | the 1.0.9 modal in a real browser: does it open, close, answer Esc, remember, cap - and does an OpenStreetMap carry the coordinates it was given |
 | `list_fields.php` | every `@VAR` / `@LOOP` name Mosaic registers for one post - custom fields, their derived `__label` / `__url` / `__id` properties, the row variables of each loop - with the value each resolves to (`wp eval-file`) |
 | `data_upgrade.py` | after a plugin update, run Mosaic's data migration over its own milestone route - the step wp-admin does from a screen - and set the config's version when the editor API is back |
 | `copy_styles.py` | push one node's style onto others, by attrID or prefix |

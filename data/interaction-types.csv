@@ -1,13 +1,16 @@
 id,family,label,description,declared_in
-pointerMove,progress,Mouse move,Animate as the mouse moves over the element.,Mosaic/Plugins/InteractionTypes/progress/pointermove/InteractionTypePointerMove.php
-scrollIntoView,progress,While scrolling,Tracks the visibility of an element as it enters and exits the viewport.,Mosaic/Plugins/InteractionTypes/progress/scrollIntoView/InteractionTypeScrollIntoView.php
-accordionItemChange,timed,Accordion item change,Animate when the accordion item opens or closes.,Mosaic/Plugins/InteractionTypes/timed/accordionitemchange/InteractionTypeAccordionItemChange.php
-click,timed,Click,Animate on the first/second click.,Mosaic/Plugins/InteractionTypes/timed/click/InteractionTypeClick.php
-dropdownChange,timed,Dropdown change,Animate when the dropdown opens or closes.,Mosaic/Plugins/InteractionTypes/timed/dropdownchange/InteractionTypeDropdownChange.php
-elementScrollIntoView,timed,Scroll into view,Animate when the element enters viewport.,Mosaic/Plugins/InteractionTypes/timed/elementscrollintoview/InteractionTypeElementScrollIntoView.php
-formSubmit,timed,Form submit,Runs when the form reaches a submission outcome.,Mosaic/Plugins/InteractionTypes/timed/formsubmit/InteractionTypeFormSubmit.php
-hover,timed,Hover,Animate when the cursor hovers the element.,Mosaic/Plugins/InteractionTypes/timed/hover/InteractionTypeHover.php
-pageLoad,timed,Page load,Activates when the page finishes loading.,Mosaic/Plugins/InteractionTypes/timed/pageload/InteractionTypePageLoad.php
-scrollDirectionChange,timed,Scroll direction change,Animate when the scroll direction changes.,Mosaic/Plugins/InteractionTypes/timed/scrolldirectionchange/InteractionTypeScrollDirectionChange.php
-slideChange,timed,Slide change,Animate when the slide slides in or out.,Mosaic/Plugins/InteractionTypes/timed/slidechange/InteractionTypeSlideChange.php
-tabChange,timed,Tab change,Animate when the tab becomes active or inactive.,Mosaic/Plugins/InteractionTypes/timed/tabchange/InteractionTypeTabChange.php
+pointerMove,progress,Mouse,Animate as the mouse moves over the element.,Mosaic/Plugins/InteractionTypes/progress/pointermove/InteractionTypePointerMove.php
+scrollIntoView,progress,Page & scroll,Tracks the visibility of an element as it enters and exits the viewport.,Mosaic/Plugins/InteractionTypes/progress/scrollIntoView/InteractionTypeScrollIntoView.php
+accordionItemChange,timed,Element events,Animate when the accordion item opens or closes.,Mosaic/Plugins/InteractionTypes/timed/accordionitemchange/InteractionTypeAccordionItemChange.php
+click,timed,Mouse,Animate on the first/second click.,Mosaic/Plugins/InteractionTypes/timed/click/InteractionTypeClick.php
+dropdownChange,timed,Element events,Animate when the dropdown opens or closes.,Mosaic/Plugins/InteractionTypes/timed/dropdownchange/InteractionTypeDropdownChange.php
+elementScrollIntoView,timed,Page & scroll,Animate when the element enters viewport.,Mosaic/Plugins/InteractionTypes/timed/elementscrollintoview/InteractionTypeElementScrollIntoView.php
+exitIntent,timed,Page & scroll,Activates when the mouse leaves the page. Desktop only - it never runs on touch devices.,Mosaic/Plugins/InteractionTypes/timed/exitintent/InteractionTypeExitIntent.php
+formSubmit,timed,Element events,Runs when the form reaches a submission outcome.,Mosaic/Plugins/InteractionTypes/timed/formsubmit/InteractionTypeFormSubmit.php
+hover,timed,Mouse,Animate when the cursor hovers the element.,Mosaic/Plugins/InteractionTypes/timed/hover/InteractionTypeHover.php
+modal,timed,Element events,Animates the modal as it opens and closes.,Mosaic/Plugins/InteractionTypes/timed/modal/InteractionTypeModal.php
+pageLoad,timed,Page & scroll,Activates when the page finishes loading.,Mosaic/Plugins/InteractionTypes/timed/pageload/InteractionTypePageLoad.php
+scrollDepth,timed,Page & scroll,Activates when the visitor scrolls this far down the page.,Mosaic/Plugins/InteractionTypes/timed/scrolldepth/InteractionTypeScrollDepth.php
+scrollDirectionChange,timed,Page & scroll,Animate when the scroll direction changes.,Mosaic/Plugins/InteractionTypes/timed/scrolldirectionchange/InteractionTypeScrollDirectionChange.php
+slideChange,timed,Element events,Animate when the slide slides in or out.,Mosaic/Plugins/InteractionTypes/timed/slidechange/InteractionTypeSlideChange.php
+tabChange,timed,Element events,Animate when the tab becomes active or inactive.,Mosaic/Plugins/InteractionTypes/timed/tabchange/InteractionTypeTabChange.php
