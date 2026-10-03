@@ -19,7 +19,6 @@
     "wp-cli",
     "elementor-migration"
   ],
-  "icon": "./.claude-plugin/icon.png",
   "documentationUrl": "https://github.com/Moksa1123/mosaic-headless#readme",
   "supportUrl": "https://github.com/Moksa1123/mosaic-headless/issues",
   "skills": [
