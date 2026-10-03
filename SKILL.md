@@ -647,10 +647,10 @@ post — `build_all.py` resets first for that reason.
 - **Every `build_site.py` run leaves a master behind, and they add up.** After a
   season of probing the test theme held 223 masters and 98,261 nodes with 25
   masters actually bound; Mosaic's ZIP import then spent 230s on masters and died
-  in templates when nginx closed the upstream at five minutes. Pruned to the bound
-  set (masters not reached from a bound template, their templates, their nodes)
-  the same import took under two minutes and compared 22 of 22. Prune before you
-  export; `wp_mosaic_template_assigns.parentID` -> template -> `masterID` is the
+  in templates when nginx closed the upstream at five minutes. Pruned to the
+  bound set (masters not reached from a bound template, their templates, their
+  nodes) the same import took under two minutes and compared 22 of 22. Prune
+  before you export; `wp_mosaic_template_assigns.parentID` -> template -> `masterID` is the
   bound set, plus any `assign="auto"` template.
 - **A custom field is `@VAR('post/meta_<key>')`, and a multi-value one is a LOOP.**
   ACF and Meta Box both, plus bare post meta. Derived properties hang off the
