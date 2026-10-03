@@ -4,7 +4,7 @@ description: |
   Build and modify Mosaic Pro (Nextend) sites by writing the underlying data model directly - no visual editor, no DOM. Query the real surface with `mo.py`, which joins every source table to the live sweeps so a lookup leads with the measured verdict rather than the declaration (126 node types, 191 properties, 98 style properties with 20 structured value shapes pinned down, 53 style states, 156 variants, 74 dynamic variables, 15 interaction triggers, 115 REST routes, 23 tables) instead of guessing, with every node type placed on a live site one at a time and asserted against the delivered HTML, the design-token and element-class layers verified against compiled CSS, the @VAR() dynamic language verified against rendered output, nine designed pages built through the tables themselves, and the delivered pages re-read in Chromium at three viewports so a rule that is present, correct and still wrong cannot pass. Drives Mosaic's own theme export/import and its plugin data upgrade from outside the editor and holds the copy against the source tree for tree. Measured on Mosaic Pro 1.0.9: the modal (`<dialog>`), OpenStreetMap, the exit-intent and scroll-depth triggers, run rules and the memory actions all built on a live page and read back, and the 1.0.7 -> 1.0.8 -> 1.0.9 migrations driven from outside wp-admin.
 license: "MIT"
 author: "moksa (https://moksaweb.com)"
-version: "1.20.1"
+version: "1.21.0"
 ---
 
 # Headless Mosaic
