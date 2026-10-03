@@ -143,11 +143,15 @@ eb830eeb-7a4e-05b7-9363-13f3d57d77a8,Cite,m-gutenberg-pullquote-cite,False,tag,"
 760f938d-5475-48de-a776-6a956df43d53,Outline button,m-gutenberg-outline-button,False,tag,":is(.entry-content, .wp-block-post-content) .wp-block-button__link:where(div.wp-block-button.is-style-outline > a.wp-element-button.wp-block-button__link)",,False,True,True,b1H
 8de49a77-f767-0054-b1ac-e913ac6562ba,Video,m-video,True,,.m-video,,False,True,False,b1I
 c637b22c-61b9-0964-bcdb-d5ae0d16986a,Google Maps,m-google-maps,True,,.m-google-maps,,False,True,False,b1J
-0dce60de-c4a6-0a2d-9990-b93070aeb7da,YouTube,m-youtube,True,,.m-youtube,,False,True,False,b1K
-be107226-ba10-0fc6-b22e-f984fb21d63b,Vimeo,m-vimeo,True,,.m-vimeo,,False,True,False,b1L
-ea692231-151b-02df-bea7-d567347d1422,List,m-list,True,,.m-list,,True,True,False,b1M
-69a8ab3f-dbdf-09bd-8449-6420570155b8,Horizontal list,m-list-horizontal,True,,.m-list-horizontal,ea692231-151b-02df-bea7-d567347d1422,False,True,False,b1N
-3a8cfda3-1ded-0a3c-9e55-b56510827850,Unordered list,m-list-unordered,True,,.m-list-unordered,ea692231-151b-02df-bea7-d567347d1422,False,True,False,b1O
-7dbba514-fd83-0e8f-ac46-68e6f651f2ff,Ordered list,m-list-ordered,True,,.m-list-ordered,ea692231-151b-02df-bea7-d567347d1422,False,True,False,b1P
-1864859b-2942-44db-b09d-c7073d1df01e,Item,m-list-item,True,,.m-list-item,ea692231-151b-02df-bea7-d567347d1422,False,True,False,b1Q
-fb0c2625-dd5a-43c5-82e2-22e8c09ca06c,Loop items,m-list-loop-items,True,,.m-list-loop-items,ea692231-151b-02df-bea7-d567347d1422,False,True,False,b1R
+1a360ae2-3d10-017a-9db6-cece7b44ce17,OpenStreet​Map,m-osm,True,,.m-osm,,False,True,False,b1K
+0dce60de-c4a6-0a2d-9990-b93070aeb7da,YouTube,m-youtube,True,,.m-youtube,,False,True,False,b1L
+be107226-ba10-0fc6-b22e-f984fb21d63b,Vimeo,m-vimeo,True,,.m-vimeo,,False,True,False,b1M
+ea692231-151b-02df-bea7-d567347d1422,List,m-list,True,,.m-list,,True,True,False,b1N
+69a8ab3f-dbdf-09bd-8449-6420570155b8,Horizontal list,m-list-horizontal,True,,.m-list-horizontal,ea692231-151b-02df-bea7-d567347d1422,False,True,False,b1O
+3a8cfda3-1ded-0a3c-9e55-b56510827850,Unordered list,m-list-unordered,True,,.m-list-unordered,ea692231-151b-02df-bea7-d567347d1422,False,True,False,b1P
+7dbba514-fd83-0e8f-ac46-68e6f651f2ff,Ordered list,m-list-ordered,True,,.m-list-ordered,ea692231-151b-02df-bea7-d567347d1422,False,True,False,b1Q
+1864859b-2942-44db-b09d-c7073d1df01e,Item,m-list-item,True,,.m-list-item,ea692231-151b-02df-bea7-d567347d1422,False,True,False,b1R
+fb0c2625-dd5a-43c5-82e2-22e8c09ca06c,Loop items,m-list-loop-items,True,,.m-list-loop-items,ea692231-151b-02df-bea7-d567347d1422,False,True,False,b1S
+d1a109c7-3b52-04ef-9a6c-11e0dc0d1a70,Modal,m-modal,True,,.m-modal,,False,True,False,b1T
+d1a1090d-6e4f-04ef-9a6c-11e0dc0d1a71,Window,m-modal-window,True,,.m-modal-window,d1a109c7-3b52-04ef-9a6c-11e0dc0d1a70,False,True,False,b1U
+d1a10004-e51a-04ef-9a6c-11e0dc0d1a72,Overlay,m-modal-overlay,True,,.m-modal-overlay,d1a109c7-3b52-04ef-9a6c-11e0dc0d1a70,False,True,False,b1V

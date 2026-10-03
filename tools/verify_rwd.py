@@ -20,11 +20,17 @@ spec declares, read what the site actually served, and compare them key by key.
 
 How it works
 ------------
-Mosaic compiles each breakpoint into its own inline stylesheet in the head:
+Mosaic compiles the breakpoints into inline CSS in the head. Through 1.0.8 that was
+one stylesheet per breakpoint:
 
     <style id="mosaic-theme-block-editor-styles_-inline-css">    base, no media query
     <style id="mosaic-theme-block-editor-styles_t-inline-css">   @media (max-width:1079px)
     <style id="mosaic-theme-block-editor-styles_m-inline-css">   @media (max-width:767px)
+
+1.0.9 merged them into ONE `mosaic-theme-document-styles-inline-css` carrying the
+same rules with the media queries inside it. `document_styles()` reads either, so a
+breakpoint is still addressed by its own key; what changed is that the base is now
+"outside every at-rule" rather than "its own block".
 
 Rules inside them hang off the generated `._<token>` class (`M_EL<n>` before 1.0.8), never
 off the `attrID` you wrote - so the tool reads `id="<attrID>" class="m-div _<token>"` out of the delivered
@@ -55,6 +61,9 @@ import re
 import sys
 import time
 import urllib.request
+
+sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+from sweep_node_types import document_styles  # noqa: E402
 
 BREAKPOINTS = {"_t": ("t", "max-width: 1079px"), "_m": ("m", "max-width: 767px")}
 
@@ -165,37 +174,12 @@ def class_map(html):
     return out
 
 
-def breakpoint_rules(html, suffix):
-    """{generated element class: {css property: value}} for one breakpoint's inline stylesheet."""
-    m = re.search(
-        r'<style id="mosaic-theme-block-editor-styles_%s-inline-css">(.*?)</style>'
-        % suffix, html, re.S)
-    if not m:
-        return None
-    css = m.group(1)
-    inner = re.search(r"@media[^{]*\{(.*)\}\s*$", css, re.S)
-    body = inner.group(1) if inner else css
-    rules = {}
-    for sel, decls in re.findall(r"([^{}]+)\{([^{}]*)\}", body):
-        props = {}
-        for decl in decls.split(";"):
-            if ":" in decl:
-                k, v = decl.split(":", 1)
-                props[k.strip()] = v.strip()
-        for one in sel.split(","):
-            one = one.strip()
-            cls = re.match(r"^\.(_[a-z0-9_-]+)$", one)
-            if cls:
-                rules.setdefault(cls.group(1), {}).update(props)
-    return rules
-
-
 def check_page(url, tree, rows):
     html = fetch(url)
     classes = class_map(html)
     compiled = {}
     for bp_key, (suffix, _q) in BREAKPOINTS.items():
-        r = breakpoint_rules(html, suffix)
+        r = document_styles(html, suffix)
         if r is None:
             print("  !! no %s stylesheet in the delivered page" % bp_key)
         compiled[bp_key] = r or {}

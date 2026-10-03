@@ -54,6 +54,9 @@ loop-pagination-numbers,allow,loop-pagination-number,yes,Mosaic/NodeTypes/Loop/L
 master-root,none,,,Mosaic/NodeTypes/Root/Master/MasterRootElementTypeFactory.php
 menu,any,,,Mosaic/NodeTypes/Menu/MenuElementTypeFactory.php
 menu-link,any,,,Mosaic/NodeTypes/Menu/MenuLink/MenuLinkElementTypeFactory.php
+modal,any,,,Mosaic/NodeTypes/Dialog/Modal/ModalElementTypeFactory.php
+modal-overlay,any,,yes,Mosaic/NodeTypes/Dialog/Modal/ModalOverlay/ModalOverlayElementTypeFactory.php
+modal-window,any,,,Mosaic/NodeTypes/Dialog/Modal/ModalWindow/ModalWindowElementTypeFactory.php
 multi-steps-back-button,any,,yes,Mosaic/NodeTypes/Pro/Form/Form/MElements/MultiSteps/Forms/FormStep/Button/ButtonStepBack/FormStepButtonBackElementTypeFactory.php
 multi-steps-form-step,any,,,Mosaic/NodeTypes/Pro/Form/Form/MElements/MultiSteps/Forms/FormStep/FormStepElementTypeFactory.php
 multi-steps-forms,allow,form-multi-steps,,Mosaic/NodeTypes/Pro/Form/Form/MElements/MultiSteps/Forms/FormsElementTypeFactory.php
@@ -61,6 +64,7 @@ multi-steps-next-button,any,,yes,Mosaic/NodeTypes/Pro/Form/Form/MElements/MultiS
 navbar,none,,yes,Mosaic/NodeTypes/Navbar/NavbarElementTypeFactory.php
 navbar-toggle,any,,yes,Mosaic/NodeTypes/Navbar/NavbarToggle/NavbarToggleElementTypeFactory.php
 navigation,any,,yes,Mosaic/NodeTypes/Navbar/Navigation/NavigationElementTypeFactory.php
+openstreetmap,none,,,Mosaic/NodeTypes/OpenStreetMap/OpenStreetMapElementTypeFactory.php
 radio-input,none,,yes,Mosaic/NodeTypes/Pro/Form/Form/MElements/Radio/RadioInput/RadioInputElementTypeFactory.php
 recaptcha,none,,yes,Mosaic/NodeTypes/Pro/Form/Form/MElements/Recaptcha/RecaptchaElementTypeFactory.php
 section,any,,yes,Mosaic/NodeTypes/Section/SectionElementTypeFactory.php

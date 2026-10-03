@@ -159,14 +159,14 @@ commit 成功不代表頁面能用，樣式表正確也不代表。這裡每個�
 
 ## 驗證了什麼，怎麼驗的
 
-全部在真實站台上跑——WordPress 7.1、WooCommerce 11.1、Mosaic Pro 1.0.8，**未授權**：
+全部在真實站台上跑——WordPress 7.1、WooCommerce 11.1、Mosaic Pro 1.0.9，**未授權**：
 授權鎖的是主題庫和更新，不是節點工廠，所以 Pro 型別照樣註冊、照樣渲染。
 
 | 項目 | 結果 |
 |---|---|
-| **節點型別** | 122 / 122 逐一放進獨立文件，寫入 → 渲染 → 斷言 → 刪除：70 RENDERED、25 COMMITTED、15 COMMIT_5xx、12 BROKE_PAGE。在 1.0.8 上重掃：五個以前默默寫入的型別，沒放對父節點現在會直接弄死頁面。未渲染的當中有三個是「沒給父層」的掃描方法產物，註記就在列旁 |
+| **節點型別** | 122 / 122 逐一放進獨立文件，寫入 → 渲染 → 斷言 → 刪除：74 RENDERED、25 COMMITTED、15 COMMIT_5xx、12 BROKE_PAGE。在 1.0.8 上重掃：五個以前默默寫入的型別，沒放對父節點現在會直接弄死頁面。未渲染的當中有三個是「沒給父層」的掃描方法產物，註記就在列旁 |
 | **樣式屬性** | 98 / 98 寫進真實頁面、對照編譯出的 CSS：58 COMPILED、18 ABSENT、21 SKIPPED |
-| **節點屬性** | 182 / 182 用各自驗證鏈推出的值重新探測：35 APPLIED、43 NO_EFFECT、55 NO_HOST、47 SKIPPED |
+| **節點屬性** | 191 / 191 用各自驗證鏈推出的值重新探測：35 APPLIED、43 NO_EFFECT、55 NO_HOST、47 SKIPPED |
 | **響應式** | 兩個站共 731 條 `_t`/`_m` 宣告，對照網站實際送出的樣式表逐條斷言——全數通過 |
 | **瀏覽器** | 在 Chromium 三個視窗寬度上對兩個交付頁面做 3,988 次計算樣式讀取：2,929 條比對相符、912 條標為無法比對、**0 條被覆蓋** |
 | **設計稽核** | 對比度、字體回退、CJK 字距、水平溢出、文字裁切、每行字數——在瀏覽器裡跑，**26 項發現，每一項都有書面裁定**——沒寫理由的 acknowledge 會被發布閘門拒絕 |
@@ -179,7 +179,8 @@ commit 成功不代表頁面能用，樣式表正確也不代表。這裡每個�
 | **Elementor 轉換** | 一個正式站的全部 Elementor 頁面——19 頁、3,292 個元素——轉換、建置、對照來源檢查：**19 之 19**，3,281 個元素搬過去、11 個書面宣告。再把轉出的頁面跑過響應式、瀏覽器和稽核，每一項發現都分類為「繼承」或「引入」：**引入 0 個** |
 | **主題匯出／匯入** | 兩條路徑，都來回驗證過。`theme_export.php` 用 WP-CLI 把資料列搬成 JSON、ID 不變。`theme_zip.py` 驅動 Mosaic **自己**的 ZIP 匯出匯入——匯入預設進 test mode，要 `--activate` 才上線，因為它的預設是直接切換 live 站——**22 項檢查**逐表、逐樹比對副本與來源 |
 | **技能本身** | `claude plugin eval .`——五個使用者真的會問的問題，各跑三次，有載技能和沒載各一臂，每次三個 LLM 裁判。**有：五題全 1.00。沒有：五題全 0.00。** 基準線最好的回答是拒答 |
-| **線上量測** | 114 條 REST 路由、152 個 variant、59 個條件主體、23 張表 / 210 個欄位 |
+| **線上量測** | 115 條 REST 路由、156 個 variant、59 個條件主體、23 張表 / 210 個欄位 |
+| **1.0.9 新功能** | modal（`<dialog>`）、OpenStreetMap、exit-intent 與 scroll-depth 觸發、run rules、memory action 與 modal shorthand，全部建在真實頁面上並用瀏覽器實際操作：19 之 19。「離開意圖彈窗、每個 session 只出現一次」只需要一個物件，不用接線 |
 | **自訂欄位** | ACF 與 Meta Box，一頁四十個欄位，透過 `@VAR` / `@LOOP` 從送達的 HTML 讀回：62 個裡 59 個解析正確、3 個空值有解釋；多值欄位的迴圈剛好渲染出欄位的列數。`tools/list_fields.php` 列出 Mosaic 真正註冊的名字 |
 | **線上升級** | 1.0.7 → 1.0.8 走外掛自己的 milestone 路由、在 wp-admin 之外驅動：6 個 milestone、四張表改名、每個輸出 class 名稱都變、每個 `customStyles` 都重寫——然後上面每一項掃描在結果上重跑 |
 
@@ -254,6 +255,7 @@ button / html / icon-list / divider / image 佔了全部元素的 99.6%。長尾
 | `theme_export.php` / `theme_import.php` | 整個主題以 JSON 資料列透過 WP-CLI 搬移，ID 不變 |
 | `theme_zip.py` / `theme_zip_compare.php` / `theme_delete.php` | 在編輯器外驅動 Mosaic 自己的 ZIP 匯出匯入、副本對來源逐樹比對、以及拒絕刪 live 主題的乾淨刪除 |
 | `list_fields.php` | 一篇文章的自訂欄位註冊了哪些 `@VAR` / `@LOOP` 名字，連值一起列出 |
+| `verify_dialog.py` | 在瀏覽器裡實際操作 1.0.9 的 modal、觸發、run rules 與 memory |
 | `data_upgrade.py` | 外掛更新後，走 Mosaic 自己的 milestone 路由跑資料遷移——沒跑完之前編輯器 API 是不存在的 |
 | `sweep_*.py` / `probe_*.py` | 那些表格是用這些儀器量出來的 |
 | `bootstrap_probe_theme.php` / `mint_session.php` | 免授權的實驗主題，以及從 WP-CLI 鑄出 REST session |

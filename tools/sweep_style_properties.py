@@ -55,7 +55,8 @@ import sys
 
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 from build_page import Surface, flatten, ordering_for  # noqa: E402
-from sweep_node_types import Client, envelopes, exceptions_of, token_by_id, unwrap  # noqa: E402
+from sweep_node_types import (  # noqa: E402
+    Client, document_styles, envelopes, exceptions_of, token_by_id, unwrap)
 
 MARK_LEN = "37px"
 MARK_COLOR = "rgb(9, 99, 199)"
@@ -130,27 +131,6 @@ def test_value(row):
     return None
 
 
-def parse_rules(html, suffix=""):
-    """{generated element class: {css property: value}} for one compiled stylesheet."""
-    m = re.search(
-        r'<style id="mosaic-theme-block-editor-styles_%s-inline-css">(.*?)</style>'
-        % suffix, html, re.S)
-    rules = {}
-    if not m:
-        return rules
-    for sel, decls in re.findall(r"([^{}]+)\{([^{}]*)\}", m.group(1)):
-        cls = re.match(r"^\.(_[a-z0-9_-]+)$", sel.strip())
-        if not cls:
-            continue
-        props = {}
-        for d in decls.split(";"):
-            if ":" in d:
-                k, v = d.split(":", 1)
-                props[k.strip()] = v.strip()
-        rules.setdefault(cls.group(1), {}).update(props)
-    return rules
-
-
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--config", required=True)
@@ -204,7 +184,7 @@ def main():
     if not classes:
         sys.exit("no probe rendered - check ordering and parent before trusting a run")
 
-    rules = parse_rules(html)
+    rules = document_styles(html) or {}
 
     rows = []
     for attr, key_name, value in planned:
@@ -217,7 +197,13 @@ def main():
                 (v for k, v in got.items() if k.startswith(name)), None)
         want = value if isinstance(value, str) else None
         if cls is None:
-            status = "NO_ELEMENT"
+            # Since 1.0.9 an element whose local styles compile to NOTHING is
+            # emitted without a generated class at all - `<div class="m-div"
+            # id="sp-015">`, no `_token`. So "no class" no longer means the node
+            # failed to render; for a probe that did render it means the property
+            # produced no CSS, which is what ABSENT has always meant. The two are
+            # told apart by looking for the id in the markup.
+            status = "ABSENT" if ('id="%s"' % attr) in html else "NO_ELEMENT"
         elif hit is None:
             status = "ABSENT"
         elif want is None or want.replace(" ", "") in hit.replace(" ", ""):

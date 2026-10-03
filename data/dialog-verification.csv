@@ -1,0 +1,20 @@
+check,result,detail
+HOST,PASS,renders <dialog>
+STRUCTURE,PASS,overlay and window children present
+ARIA,PASS,aria-modal=true aria-label='Feature probe dialog' role=dialog
+CLOSED_AT_REST,PASS,dialog.open=False display=none
+OPENS,PASS,dialog.open=True display=grid top-layer=False
+CLOSES,PASS,dialog.open=False
+CLOSEDBY_ESC,PASS,"closedby=everything, Esc closed it"
+KEYBOARD,PASS,the opening control takes focus
+REMEMBER,PASS,"wrote local:mos:v1:r:probe-seen, session:mos:v1:r:probe-seen"
+FORGET,PASS,"cleared local:mos:v1:r:probe-seen, session:mos:v1:r:probe-seen"
+SCROLL_DEPTH,PASS,opacity 1 after scrolling to the bottom
+RUN_RULE_STORED,PASS,"a run rule left state: cookie, local:mos:v1:r:probe-depth, session:mos:v1:r:probe-depth"
+SHORTHAND_REST,PASS,closed before the trigger
+SHORTHAND_OPENS,PASS,exit intent opened it with no authored interaction
+RUN_RULE_CAP,PASS,"same tab reloaded, same session: open=False (cap max=1)"
+RUN_RULE_SESSION,PASS,a new session opens it again (remember=session)
+MAP_RENDERS,PASS,"<mosaic-openstreetmap> 1232x320, iframe present"
+MAP_AT,PASS,"marker at 25.0330,121.5654: yes"
+MAP_LAZY,PASS,iframe loading=lazy (lazyLoad=1)

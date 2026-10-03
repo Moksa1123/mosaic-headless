@@ -182,14 +182,14 @@ than any naive healthy-page floor.
 ## What was verified, and how
 
 Everything ran against a live install — WordPress 7.1, WooCommerce 11.1, Mosaic Pro
-1.0.8, **unlicensed**: the licence gates the theme library and updates, not the node
+1.0.9, **unlicensed**: the licence gates the theme library and updates, not the node
 factories, so Pro types register and render regardless.
 
 | pass | result |
 |---|---|
-| **node types** | 122 / 122 swept one per document, committed → rendered → asserted → deleted: 70 RENDERED, 25 COMMITTED, 15 COMMIT_5xx, 12 BROKE_PAGE. Re-swept on 1.0.8: five types that used to commit silently now kill the page unparented. The non-rendering rows that are artefacts of committing without the required parent say so beside the row |
+| **node types** | 122 / 122 swept one per document, committed → rendered → asserted → deleted: 74 RENDERED, 25 COMMITTED, 15 COMMIT_5xx, 12 BROKE_PAGE. Re-swept on 1.0.8: five types that used to commit silently now kill the page unparented. The non-rendering rows that are artefacts of committing without the required parent say so beside the row |
 | **style properties** | 98 / 98 written to a live page and checked against the compiled CSS: 58 COMPILED, 18 ABSENT, 21 SKIPPED |
-| **node properties** | 182 / 182 re-probed with a value shaped by each property's own validator chain: 35 APPLIED, 43 NO_EFFECT, 55 NO_HOST, 47 SKIPPED |
+| **node properties** | 191 / 191 re-probed with a value shaped by each property's own validator chain: 35 APPLIED, 43 NO_EFFECT, 55 NO_HOST, 47 SKIPPED |
 | **responsive** | 731 `_t`/`_m` declarations across two sites asserted against the stylesheet the site actually served — all verified |
 | **browser** | 3,988 computed-style readings on two delivered pages in Chromium at three viewports: 2,929 compared and agreed, 912 not-comparable and labelled, **0 overridden** |
 | **design audit** | contrast, font fallback, CJK tracking, overflow, clipped text, line measure — run in the browser, **26 findings, every one ruled on in writing** — an acknowledgement without a reason is refused by the release gate |
@@ -202,7 +202,8 @@ factories, so Pro types register and render regardless.
 | **Elementor conversion** | every Elementor page of a production site — 19 pages, 3,292 elements — converted, built and checked against its source: **19 of 19**, 3,281 elements carried, 11 declared. Then the converted page through rwd, browser and the audit, with every finding classified inherited-or-introduced: **0 introduced** |
 | **theme export/import** | two paths, both round-tripped. `theme_export.php` moves rows as JSON over WP-CLI, ids intact. `theme_zip.py` drives Mosaic's **own** ZIP export/import — import lands in test mode unless told `--activate`, because the default is to switch the live site — and **22 checks** hold the copy against the source tree for tree |
 | **the skill itself** | `claude plugin eval .` — five cases a user would ask, three runs each, with and without the skill loaded, three LLM judges a run. **With: 1.00 on all five. Without: 0.00 on all five.** The baseline's best answer was to refuse |
-| **measured live** | 114 REST routes, 152 variants, 59 condition subjects, 23 tables / 210 columns |
+| **measured live** | 115 REST routes, 156 variants, 59 condition subjects, 23 tables / 210 columns |
+| **1.0.9 features** | the modal (`<dialog>`), OpenStreetMap, the exit-intent and scroll-depth triggers, run rules, memory actions and the modal shorthand, each built on a live page and exercised in a real browser: 19 of 19. An exit-intent popup that fires once a session is one object, no wiring |
 | **custom fields** | ACF and Meta Box, forty fields on a page, read back through `@VAR` / `@LOOP` off the delivered HTML: 59 of 62 resolve, 3 empties explained; loops over multi-value fields rendered exactly the field's rows. `tools/list_fields.php` prints the names Mosaic actually registers |
 | **upgraded live** | 1.0.7 -> 1.0.8 over the plugin's own milestone route, from outside wp-admin: 6 milestones, four tables renamed, every emitted class name changed, every `customStyles` rewritten - then every sweep above re-run on the result |
 
@@ -287,6 +288,7 @@ and heading level — and it earned its place at once: it caught the converter l
 | `theme_export.php` / `theme_import.php` | a whole theme as JSON rows over WP-CLI, ids intact |
 | `theme_zip.py` / `theme_zip_compare.php` / `theme_delete.php` | Mosaic's own ZIP export/import from outside the editor, the copy held against the source, and a clean delete that refuses the live theme |
 | `list_fields.php` | every `@VAR` / `@LOOP` name a post's custom fields register, with values |
+| `verify_dialog.py` | the 1.0.9 modal, triggers, run rules and memory, driven in a browser |
 | `data_upgrade.py` | after a plugin update, Mosaic's data migration over its own milestone route - the editor API is gone until it runs |
 | `sweep_*.py` / `probe_*.py` | the instruments the tables were made with |
 | `bootstrap_probe_theme.php` / `mint_session.php` | a licence-free scratch theme and a REST session from WP-CLI |

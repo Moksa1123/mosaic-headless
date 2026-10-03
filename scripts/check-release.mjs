@@ -89,15 +89,16 @@ if (!fs.existsSync(path.join(ROOT, pkg.bin["mosaic-headless"])))
 
 const rows = (p) => read(p).trim().split("\n").length - 1;   // minus the header
 const counts = {
-  "data/node-verification.csv": 122,
+  "data/node-verification.csv": 126,
   "data/style-verification.csv": 98,
-  "data/node-property-verification.csv": 182,
+  "data/node-property-verification.csv": 191,
   "data/rwd-verification.csv": 731,
   "data/browser-verification.csv": 3988,
   "data/style-state-verification.csv": 52,
   "data/interaction-verification.csv": 7,
-  "data/data-class-hierarchy.csv": 121,
+  "data/data-class-hierarchy.csv": 125,
   "data/custom-fields-verification.csv": 62,
+  "data/dialog-verification.csv": 19,
 };
 for (const [file, expected] of Object.entries(counts)) {
   if (!fs.existsSync(path.join(ROOT, file))) { fail(`${file} missing`); continue; }

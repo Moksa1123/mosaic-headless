@@ -21,7 +21,7 @@ CLEAR@1280,PASS,"crosses 3 of 36 text elements, every one of them free at some o
 REACHABLE@1280,PASS,"crosses 0 of 8 links and buttons, every one of them free at some other scroll position"
 CLEAR@1440,PASS,"crosses 3 of 36 text elements, every one of them free at some other scroll position"
 REACHABLE@1440,PASS,"crosses 0 of 15 links and buttons, every one of them free at some other scroll position"
-CLEAR@1920,PASS,"crosses 0 of 36 text elements, every one of them free at some other scroll position"
+CLEAR@1920,PASS,"crosses 1 of 36 text elements, every one of them free at some other scroll position"
 REACHABLE@1920,PASS,"crosses 0 of 15 links and buttons, every one of them free at some other scroll position"
 OPENS,PASS,"186x161 -> 1920x900, aria-expanded=true"
 CLOSES,PASS,"back to 186x161, aria-expanded=false"

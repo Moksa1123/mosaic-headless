@@ -238,7 +238,15 @@ def flatten(node, parent_id, master_id, surface, force, ordering="a0", parent_ty
     if problems:
         raise SystemExit("refusing to build:\n  " + "\n  ".join(problems))
 
-    nid = str(uuid.uuid4())
+    # `nodeID` pins the node's own id instead of minting one. An interaction that
+    # targets another element stores that element's NODE id (`settings.target =
+    # {"type": "element", "uuid": <nodeID>}`), not its attrID, so the two have to be
+    # written in the same pass - there is no way to point at a node whose id the
+    # spec never sees. The id must be unique in the THEME, not the document:
+    # wp_mosaic_nodes' primary key is (ID, themeID), so a hard-coded one collides
+    # with whatever a previous build left behind and the commit 500s on a duplicate
+    # key. Mint it per run.
+    nid = node.get("nodeID") or str(uuid.uuid4())
     data = dict(node.get("data") or {})
     style = to_style(node.get("style"))
     if style:

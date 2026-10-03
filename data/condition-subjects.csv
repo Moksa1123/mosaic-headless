@@ -1,60 +1,60 @@
 context,rule_type,id,label,group,group_label,settings_fields,field_types,default_comparator,default_operator
-element,serverCondition,variable,Variable,editor,Editor,dynamicCode,dynamicCode,text,equals
-element,serverCondition,httpGet,Query parameter,http,HTTP,name,text,text,equals
-element,serverCondition,userLoggedIn,Logged-in status,currentUser,Current user,,,,
-element,serverCondition,userRole,User role,currentUser,Current user,,,,
-element,serverCondition,userCapability,User capability,currentUser,Current user,,,,
-element,serverCondition,userFields,User fields,currentUser,Current user,field,ajaxList,text,equals
-element,serverCondition,userMeta,User meta,currentUser,Current user,meta,ajaxList,text,equals
-element,serverCondition,postCategory,Categories,post,Posts,,,,
-element,serverCondition,postPostTag,Tags,post,Posts,,,,
-element,serverCondition,postPostFormat,Formats,post,Posts,,,,
-element,serverCondition,postProductBrand,Product brands,product,Products,,,,
-element,serverCondition,postProductCat,Product categories,product,Products,,,,
-element,serverCondition,postProductTag,Product tags,product,Products,,,,
-element,serverCondition,postMetaPost,Post meta,post,Posts,name,ajaxList,text,equals
-element,serverCondition,postMetaPage,Post meta,page,Pages,name,ajaxList,text,equals
-element,serverCondition,postMetaAttachment,Post meta,attachment,Media,name,ajaxList,text,equals
-element,serverCondition,postMetaProduct,Post meta,product,Products,name,ajaxList,text,equals
+element,serverCondition,variable,可變,editor,編輯,dynamicCode,dynamicCode,text,equals
+element,serverCondition,httpGet,查詢參數,http,HTTP,name,text,text,equals
+element,serverCondition,userLoggedIn,登入近況簡述,currentUser,目前使用者,,,,
+element,serverCondition,userRole,使用者角色,currentUser,目前使用者,,,,
+element,serverCondition,userCapability,使用者權限,currentUser,目前使用者,,,,
+element,serverCondition,userFields,使用者欄位,currentUser,目前使用者,field,ajaxList,text,equals
+element,serverCondition,userMeta,使用者詮釋資料,currentUser,目前使用者,meta,ajaxList,text,equals
+element,serverCondition,postCategory,分類,post,文章,,,,
+element,serverCondition,postPostTag,標籤,post,文章,,,,
+element,serverCondition,postPostFormat,文章格式,post,文章,,,,
+element,serverCondition,postProductBrand,產品品牌,product,商品,,,,
+element,serverCondition,postProductCat,商品分類,product,商品,,,,
+element,serverCondition,postProductTag,商品標籤,product,商品,,,,
+element,serverCondition,postMetaPost,文章詮釋資料,post,文章,name,ajaxList,text,equals
+element,serverCondition,postMetaPage,文章詮釋資料,page,頁面,name,ajaxList,text,equals
+element,serverCondition,postMetaAttachment,文章詮釋資料,attachment,媒體,name,ajaxList,text,equals
+element,serverCondition,postMetaProduct,文章詮釋資料,product,商品,name,ajaxList,text,equals
 element,serverCondition,httpCookie,Cookie,http,HTTP,name,text,text,equals
-template,serverCondition,httpGet,Query parameter,http,HTTP,name,text,text,equals
-template,serverCondition,userLoggedIn,Logged-in status,currentUser,Current user,,,,
-template,serverCondition,userRole,User role,currentUser,Current user,,,,
-template,serverCondition,userCapability,User capability,currentUser,Current user,,,,
-template,serverCondition,userFields,User fields,currentUser,Current user,field,ajaxList,text,equals
-template,serverCondition,userMeta,User meta,currentUser,Current user,meta,ajaxList,text,equals
-template,serverCondition,postCategory,Categories,post,Posts,,,,
-template,serverCondition,postPostTag,Tags,post,Posts,,,,
-template,serverCondition,postPostFormat,Formats,post,Posts,,,,
-template,serverCondition,postProductBrand,Product brands,product,Products,,,,
-template,serverCondition,postProductCat,Product categories,product,Products,,,,
-template,serverCondition,postProductTag,Product tags,product,Products,,,,
+template,serverCondition,httpGet,查詢參數,http,HTTP,name,text,text,equals
+template,serverCondition,userLoggedIn,登入近況簡述,currentUser,目前使用者,,,,
+template,serverCondition,userRole,使用者角色,currentUser,目前使用者,,,,
+template,serverCondition,userCapability,使用者權限,currentUser,目前使用者,,,,
+template,serverCondition,userFields,使用者欄位,currentUser,目前使用者,field,ajaxList,text,equals
+template,serverCondition,userMeta,使用者詮釋資料,currentUser,目前使用者,meta,ajaxList,text,equals
+template,serverCondition,postCategory,分類,post,文章,,,,
+template,serverCondition,postPostTag,標籤,post,文章,,,,
+template,serverCondition,postPostFormat,文章格式,post,文章,,,,
+template,serverCondition,postProductBrand,產品品牌,product,商品,,,,
+template,serverCondition,postProductCat,商品分類,product,商品,,,,
+template,serverCondition,postProductTag,商品標籤,product,商品,,,,
 template,serverCondition,httpCookie,Cookie,http,HTTP,name,text,text,equals
-interaction,serverCondition,httpGet,Query parameter,http,HTTP,name,text,text,equals
-interaction,serverCondition,userLoggedIn,Logged-in status,currentUser,Current user,,,,
-interaction,serverCondition,userRole,User role,currentUser,Current user,,,,
-interaction,serverCondition,userCapability,User capability,currentUser,Current user,,,,
-interaction,serverCondition,userFields,User fields,currentUser,Current user,field,ajaxList,text,equals
-interaction,serverCondition,userMeta,User meta,currentUser,Current user,meta,ajaxList,text,equals
-interaction,browserCondition,breakpoint,Breakpoint,core,Core,,,,
-interaction,browserCondition,reducedMotion,Motion,core,Core,,,,
-interaction,browserCondition,localStorage,Local storage,browserStorage,Browser storage,name,text,text,equals
-interaction,browserCondition,httpCookie,Cookie,browserStorage,Browser storage,name,text,text,equals
-formAction,serverCondition,variable,Variable,editor,Editor,dynamicCode,dynamicCode,text,equals
-formAction,serverCondition,httpGet,Query parameter,http,HTTP,name,text,text,equals
-formAction,serverCondition,userLoggedIn,Logged-in status,currentUser,Current user,,,,
-formAction,serverCondition,userRole,User role,currentUser,Current user,,,,
-formAction,serverCondition,userCapability,User capability,currentUser,Current user,,,,
-formAction,serverCondition,userFields,User fields,currentUser,Current user,field,ajaxList,text,equals
-formAction,serverCondition,userMeta,User meta,currentUser,Current user,meta,ajaxList,text,equals
-formAction,serverCondition,postCategory,Categories,post,Posts,,,,
-formAction,serverCondition,postPostTag,Tags,post,Posts,,,,
-formAction,serverCondition,postPostFormat,Formats,post,Posts,,,,
-formAction,serverCondition,postProductBrand,Product brands,product,Products,,,,
-formAction,serverCondition,postProductCat,Product categories,product,Products,,,,
-formAction,serverCondition,postProductTag,Product tags,product,Products,,,,
-formAction,serverCondition,postMetaPost,Post meta,post,Posts,name,ajaxList,text,equals
-formAction,serverCondition,postMetaPage,Post meta,page,Pages,name,ajaxList,text,equals
-formAction,serverCondition,postMetaAttachment,Post meta,attachment,Media,name,ajaxList,text,equals
-formAction,serverCondition,postMetaProduct,Post meta,product,Products,name,ajaxList,text,equals
+interaction,serverCondition,httpGet,查詢參數,http,HTTP,name,text,text,equals
+interaction,serverCondition,userLoggedIn,登入近況簡述,currentUser,目前使用者,,,,
+interaction,serverCondition,userRole,使用者角色,currentUser,目前使用者,,,,
+interaction,serverCondition,userCapability,使用者權限,currentUser,目前使用者,,,,
+interaction,serverCondition,userFields,使用者欄位,currentUser,目前使用者,field,ajaxList,text,equals
+interaction,serverCondition,userMeta,使用者詮釋資料,currentUser,目前使用者,meta,ajaxList,text,equals
+interaction,browserCondition,breakpoint,中斷點,core,核心程式,,,,
+interaction,browserCondition,reducedMotion,動態,core,核心程式,,,,
+interaction,browserCondition,localStorage,本機儲存空間,browserStorage,瀏覽器儲存空間,name,text,text,equals
+interaction,browserCondition,httpCookie,Cookie,browserStorage,瀏覽器儲存空間,name,text,text,equals
+formAction,serverCondition,variable,可變,editor,編輯,dynamicCode,dynamicCode,text,equals
+formAction,serverCondition,httpGet,查詢參數,http,HTTP,name,text,text,equals
+formAction,serverCondition,userLoggedIn,登入近況簡述,currentUser,目前使用者,,,,
+formAction,serverCondition,userRole,使用者角色,currentUser,目前使用者,,,,
+formAction,serverCondition,userCapability,使用者權限,currentUser,目前使用者,,,,
+formAction,serverCondition,userFields,使用者欄位,currentUser,目前使用者,field,ajaxList,text,equals
+formAction,serverCondition,userMeta,使用者詮釋資料,currentUser,目前使用者,meta,ajaxList,text,equals
+formAction,serverCondition,postCategory,分類,post,文章,,,,
+formAction,serverCondition,postPostTag,標籤,post,文章,,,,
+formAction,serverCondition,postPostFormat,文章格式,post,文章,,,,
+formAction,serverCondition,postProductBrand,產品品牌,product,商品,,,,
+formAction,serverCondition,postProductCat,商品分類,product,商品,,,,
+formAction,serverCondition,postProductTag,商品標籤,product,商品,,,,
+formAction,serverCondition,postMetaPost,文章詮釋資料,post,文章,name,ajaxList,text,equals
+formAction,serverCondition,postMetaPage,文章詮釋資料,page,頁面,name,ajaxList,text,equals
+formAction,serverCondition,postMetaAttachment,文章詮釋資料,attachment,媒體,name,ajaxList,text,equals
+formAction,serverCondition,postMetaProduct,文章詮釋資料,product,商品,name,ajaxList,text,equals
 formAction,serverCondition,httpCookie,Cookie,http,HTTP,name,text,text,equals

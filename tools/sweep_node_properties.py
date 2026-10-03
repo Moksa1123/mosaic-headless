@@ -132,7 +132,11 @@ def searchable(tag):
 def judge(prop, value, tag):
     """Did this property change the delivered markup the way it claims to?"""
     if tag is None:
-        return "NO_ELEMENT", ""
+        # The probe was committed and the page rendered, so the node exists; the
+        # property suppressed its own element's output. `youtube.privacy` does
+        # exactly this since 1.0.9 - on 1.0.8 the same probe rendered and read
+        # NO_EFFECT - so it is its own outcome, not a missing host.
+        return "NO_OUTPUT", "the element emitted nothing with this property set"
     body = searchable(tag)
     if prop == "cssClasses":
         return ("APPLIED" if MARK + "-cls" in tag else "NO_EFFECT"), tag[:110]
@@ -265,9 +269,21 @@ def main():
         # from an earlier run share the id space, and two runs can give the same id
         # to different node types. If the page does not carry exactly the probes
         # this run planned, nothing measured from it means anything.
-        sys.exit("expected %d probes on the page, found %d - clear previous probes "
-                 "and re-run before believing any measurement"
-                 % (len(live) - len(moved), rendered))
+        on_page = set(re.findall(r'id="(np-\d+)"', html))
+        extra = sorted(on_page - {attr for attr, _h, _p, _v in live})
+        # An id this run did not plan is contamination: two runs can give the same
+        # id to different node types and nothing measured from the page would mean
+        # anything. A probe that this run DID plan and that is simply not there is
+        # a result, not contamination - the property suppressed its own element -
+        # so it is recorded as NO_OUTPUT below instead of aborting the run.
+        if extra:
+            sys.exit("probes on the page that this run did not plan: %s\n"
+                     "clear them and re-run before believing any measurement"
+                     % ", ".join(extra))
+        missing = [(attr, host, prop) for attr, host, prop, _v in live
+                   if attr not in on_page and attr not in moved]
+        print("  %d planned probe(s) rendered nothing: %s"
+              % (len(missing), ", ".join("%s.%s" % (h, p) for _a, h, p in missing)))
 
     rows = []
     for attr, host, prop, value in live:
@@ -291,7 +307,7 @@ def main():
     for r in rows:
         counts[r[3]] = counts.get(r[3], 0) + 1
     print()
-    for k in ("APPLIED", "NO_EFFECT", "EDITOR_ONLY", "NO_ELEMENT", "NO_HOST",
+    for k in ("APPLIED", "NO_EFFECT", "NO_OUTPUT", "EDITOR_ONLY", "NO_ELEMENT", "NO_HOST",
               "INSTRUMENT", "SKIPPED"):
         if counts.get(k):
             print("  %-12s %d" % (k, counts[k]))
