@@ -30,6 +30,10 @@ designs/
 # Client work - a real client's content and copy, not part of the skill
 sites/_zidanna.py
 sites/zidanna.json
+# The agency's own site assembled from the converted pages: it enumerates a real
+# page roster and real client case studies. The PATTERN is in
+# references/dialog-and-triggers.md; the roster is not the skill's to publish.
+sites/_moksaweb_site.py
 
 # Drove designs/ and shots/, which no longer ship
 tools/build_all.py

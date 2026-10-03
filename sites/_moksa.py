@@ -2694,8 +2694,15 @@ COLOPHON = {
 }
 
 
+INTRO_TREE = {"type": "div", "data": {"attrID": "mk-intro-page"},
+              "children": [BOOT, box("mk-doc", {}, [MARKS, MASTHEAD, TICKER_BAND,
+                                                   BOARD, CONTACT])]}
+
+
 HOME_TREE = {"type": "div", "data": {"attrID": "mk-home"},
-             "children": [BOOT, box("mk-doc", {}, [
+             # The entrance sequence is withdrawn for now. BOOT and its CSS are
+             # still here, unreferenced: putting it back is adding it to this list.
+             "children": [box("mk-doc", {}, [
                  MARKS, INDEX, CUE, LOOP_WINDOW, box("mk-sweep", {}, []),
                  # paper, panel, paper, ink, paper, ink, paper - the page
                  # changes ground five times so it reads as chapters
@@ -3021,6 +3028,13 @@ SITE = {
          "tree": apply_type(HOME_TREE, DISPLAY, CJK, "600")},
         {"slug": "my-account", "post_id": 9, "title": "My account",
          "tree": apply_type(ACCOUNT_TREE, DISPLAY, CJK, "600")},
+        # The entrance sequence, on a page of its own. It was the homepage's and
+        # cost every visitor eight seconds before the document appeared, which is
+        # the wrong trade for a page people come back to; withdrawing it entirely
+        # would also have retired a measurement that is still true, so it lives
+        # here instead and verify_intro.py still has something to measure.
+        {"slug": "intro", "post_id": 245, "title": "Entrance sequence",
+         "tree": apply_type(INTRO_TREE, DISPLAY, CJK, "600")},
     ],
 }
 

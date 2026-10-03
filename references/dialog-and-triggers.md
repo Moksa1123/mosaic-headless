@@ -133,7 +133,7 @@ then runs as a no-op that writes nothing, because the source skips an unnamed
 memory rather than inventing a key. The server reshapes the accepted one into
 `rememberOptions.timelines._.name`, which is what the payload shows.
 
-## The interaction shorthand — modals only
+## The interaction shorthand — modals only, and three triggers only
 
 Every element's data can carry `interactionShorthand`, but `ModalElementMResourceData`
 is the only class that overrides `getInteractionShorthandActionTypes()` (it returns
@@ -155,6 +155,19 @@ the type, action from the element — and the page's `mosaicInteractions` gains
 `{"type":"exitIntent","triggerSelector":"._0","action":{"exitIntent":{"actions":[{"type":"modalOpen"…`
 with the cap attached. No trigger element, no action, no target: an exit-intent
 popup that fires once a session is one object.
+
+**Only three interaction types can be a shorthand**, and the list is in the
+source rather than inferable: `InteractionTypesManager::getShorthandInteractionTypes()`
+returns `pageLoad`, `exitIntent`, `scrollDepth`. Those are exactly the three that do
+not need the element to be visible or interactive first — which a modal never is,
+since it is `display:none` until something opens it.
+
+Anything else is **dropped in silence**. A modal given
+`interactionShorthand: {"type": "elementScrollIntoView", …}` renders with its
+`aria-modal`, its `aria-label` and its `data-mosaic-modal-closedby` all correct, the
+page's `mosaicInteractions` carries nothing for it, and it never opens. Measured:
+one page of the nineteen-page site was built that way and read back as the only
+modal on the site with no trigger at all.
 
 `"type": "manual"` is the stored answer for "nothing opens this automatically" —
 spelled as a word rather than left absent, because absent means *inherit* on a
@@ -232,3 +245,31 @@ COLOPHON_NODE_ID = str(uuid.uuid4())     # minted per generation, never fixed
   CJK_NEGATIVE_TRACKING caught it at −0.68px on a Chinese heading at two
   breakpoints. A Han glyph sits on a full em body and is already as close as it is
   meant to be; the line is `0.005em` now, matching the masthead.
+
+## A modal per page, each configured differently
+
+A nineteen-page site was assembled from converted Elementor pages - one shared
+shell, a menu of `menu-link` nodes, one WordPress page each - and every page given
+its own modal. Six distinct configurations came out of it, and each one is a
+different answer to "when, how often, and how do they get out":
+
+| page | trigger | run rule | memory | closedby | what it is for |
+|---|---|---|---|---|---|
+| home | `exitIntent` 500ms | `cap` 1 | session | `everything` | the one offer, once a visit |
+| services | `scrollDepth` 70% | `cooldown` 1 day | forever | `everything` | read most of it, then asked - and not again tomorrow |
+| works | `scrollDepth` 40% | `cap` 2 | session | `clickOutside` | earlier, twice, dismissed by clicking away |
+| plan | `pageLoad` | `firstRunWindow` 10 min | session | `esc` | immediate, but only in the first ten minutes of the visit |
+| about | `exitIntent` 800ms | `cap` 1 | forever | `nothing` | once ever, and the only way out is the button inside |
+| contact | `scrollDepth` 50% | `cap` 3 | page | `everything` | three times per page load, cheap and repeatable |
+
+All six were read back out of each page's own `mosaicInteractions` payload
+(`data/page-modal-verification.csv`), and three were then driven in a browser:
+`plan` opened by itself on load and Esc closed it; `services` stayed shut at rest
+and opened past 70% scroll; `about` opened on exit intent and Esc did **not** close
+it, which is what `closedby: "nothing"` promises and what a cookie gate or an age
+gate needs.
+
+The pattern is worth stating on its own: because the trigger lives in the modal's
+own `interactionShorthand`, a page's popup policy is one object in that page's data.
+Nothing else on the page changes, no trigger element is placed, and two pages of the
+same site can behave completely differently without sharing anything.

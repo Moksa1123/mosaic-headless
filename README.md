@@ -204,6 +204,8 @@ factories, so Pro types register and render regardless.
 | **the skill itself** | `claude plugin eval .` — five cases a user would ask, three runs each, with and without the skill loaded, three LLM judges a run. **With: 1.00 on all five. Without: 0.00 on all five.** The baseline's best answer was to refuse |
 | **measured live** | 115 REST routes, 156 variants, 59 condition subjects, 23 tables / 210 columns |
 | **1.0.9 features** | the modal (`<dialog>`), OpenStreetMap, the exit-intent and scroll-depth triggers, run rules, memory actions and the modal shorthand, each built on a live page and exercised in a real browser: 19 of 19. An exit-intent popup that fires once a session is one object, no wiring |
+| **slider** | the whole family nested as its factories require and driven in a browser, 19 of 19: advances on its own delay, arrows and bullets and the keyboard move it, holds still under `prefers-reduced-motion`. The bullet turns out to be a template repeated per slide - same id on every copy |
+| **a real site** | the nineteen converted Elementor pages assembled into one site with a real menu and a modal per page: 27 of 27 navigation checks, 19 of 19 modals, six distinct trigger / run-rule / memory / dismissal configurations |
 | **custom fields** | ACF and Meta Box, forty fields on a page, read back through `@VAR` / `@LOOP` off the delivered HTML: 59 of 62 resolve, 3 empties explained; loops over multi-value fields rendered exactly the field's rows. `tools/list_fields.php` prints the names Mosaic actually registers |
 | **upgraded live** | 1.0.7 -> 1.0.8 over the plugin's own milestone route, from outside wp-admin: 6 milestones, four tables renamed, every emitted class name changed, every `customStyles` rewritten - then every sweep above re-run on the result |
 
@@ -289,6 +291,7 @@ and heading level — and it earned its place at once: it caught the converter l
 | `theme_zip.py` / `theme_zip_compare.php` / `theme_delete.php` | Mosaic's own ZIP export/import from outside the editor, the copy held against the source, and a clean delete that refuses the live theme |
 | `list_fields.php` | every `@VAR` / `@LOOP` name a post's custom fields register, with values |
 | `verify_dialog.py` | the 1.0.9 modal, triggers, run rules and memory, driven in a browser |
+| `verify_slider.py` / `verify_navigation.py` | does the slider actually move; is every menu item a real link and every page reachable |
 | `data_upgrade.py` | after a plugin update, Mosaic's data migration over its own milestone route - the editor API is gone until it runs |
 | `sweep_*.py` / `probe_*.py` | the instruments the tables were made with |
 | `bootstrap_probe_theme.php` / `mint_session.php` | a licence-free scratch theme and a REST session from WP-CLI |

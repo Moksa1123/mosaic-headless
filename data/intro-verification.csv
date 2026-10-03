@@ -2,25 +2,25 @@ check,result,detail
 PLAYS,PASS,43 of 43 intro elements changed state
 COUNTS,PASS,--mk-n reached 100
 ENDS,PASS,veil is out of hit-testing from 8900ms
-NO_TRAP,PASS,"0 content elements still at opacity 0 in the viewport (60 below the fold and 1 on a scroll timeline awaiting it, 1 mid-blink)"
+NO_TRAP,PASS,"0 content elements still at opacity 0 in the viewport (1 below the fold and 0 on a scroll timeline awaiting it, 1 mid-blink)"
 CLEARS,PASS,a real click landed on 'mk-caret-row'
-AMBIENT,PASS,"9 elements still moving between 11000ms and 13000ms with no input: mk-board-city-s, mk-board-utc-s, mk-clock-s, mk-flap-0-s, mk-flap-1-s, mk-flap-2-s"
+AMBIENT,PASS,"7 elements still moving between 11000ms and 13000ms with no input: mk-board-city-s, mk-board-utc-s, mk-clock-s, mk-flap-0-s, mk-flap-1-s, mk-flap-2-s"
 DEGRADES,PASS,with reduced motion the veil is display:none throughout
 READABLE,PASS,0 elements invisible at 120ms with reduced motion
 
 t_ms,counter,veil_visibility,veil_clip,veil_covers_centre,hit_centre,invisible_content
 120,,,,False,html.no-js,0
 700,--mk-n=0;--mk-s=0;--mk-m=0,visible,none,True,mk-boot-num,7
-1400,--mk-n=6;--mk-s=0;--mk-m=0,visible,none,True,mk-boot-num,7
-2200,--mk-n=41;--mk-s=0;--mk-m=0,visible,none,True,mk-boot-num,3
+1400,--mk-n=5;--mk-s=0;--mk-m=0,visible,none,True,mk-boot-num,7
+2200,--mk-n=40;--mk-s=0;--mk-m=0,visible,none,True,mk-boot-num,3
 3000,--mk-n=71;--mk-s=0;--mk-m=0,visible,none,True,mk-boot-num,3
-3800,--mk-n=88;--mk-s=0;--mk-m=0,visible,none,True,mk-boot-num,3
+3800,--mk-n=87;--mk-s=0;--mk-m=0,visible,none,True,mk-boot-num,3
 4600,--mk-n=95;--mk-s=0;--mk-m=0,visible,none,True,mk-boot-num,3
 5400,--mk-n=98;--mk-s=0;--mk-m=0,visible,none,True,mk-boot-num,3
 6200,--mk-n=100;--mk-s=0;--mk-m=0,visible,none,True,mk-boot-num,3
 7000,--mk-n=100;--mk-s=0;--mk-m=0,visible,none,True,mk-boot-num,3
 7800,--mk-n=100;--mk-s=0;--mk-m=0,visible,none,True,p.m-text,2
-8300,--mk-n=100;--mk-s=0;--mk-m=0,visible,none,False,mk-caret-row,0
+8300,--mk-n=100;--mk-s=0;--mk-m=0,visible,none,False,mk-caret-row,1
 8900,--mk-n=0;--mk-s=0;--mk-m=0,hidden,none,False,mk-caret-row,0
 11000,--mk-n=0;--mk-s=0;--mk-m=0,hidden,none,False,mk-caret-row,0
 13000,--mk-n=0;--mk-s=0;--mk-m=0,hidden,none,False,mk-caret-row,0

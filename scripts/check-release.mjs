@@ -99,6 +99,9 @@ const counts = {
   "data/data-class-hierarchy.csv": 125,
   "data/custom-fields-verification.csv": 62,
   "data/dialog-verification.csv": 19,
+  "data/slider-verification.csv": 19,
+  "data/navigation-verification.csv": 27,
+  "data/page-modal-verification.csv": 19,
 };
 for (const [file, expected] of Object.entries(counts)) {
   if (!fs.existsSync(path.join(ROOT, file))) { fail(`${file} missing`); continue; }

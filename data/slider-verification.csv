@@ -1,0 +1,20 @@
+slider,check,result,detail
+slide+autoplay,HOST,PASS,"<mosaic-slider> animation=slide carousel=None, 3 slides"
+slide+autoplay,TRACK,PASS,<mosaic-slider-slides> aria-live=off
+slide+autoplay,HAS_CURRENT,PASS,slide 0 is current at rest
+slide+autoplay,BULLET_TEMPLATE,PASS,"3 bullets for 3 slides, all with id='sl-dot-0' - one authored bullet is repeated per slide, duplicate ids included"
+slide+autoplay,BULLET_ARIA,PASS,"role=button tabindex=0 labels=ONE / 浮世繪, TWO / 版面, THREE / 色票 - taken from each slide's own title"
+slide+autoplay,ADVANCES,PASS,reached 3 of 3 slides unaided
+slide+autoplay,AUTOPLAY_DECLARED,PASS,data-autoplay=true delay=2200
+slide+autoplay,BULLET_GOES,PASS,bullet 0 -> slide 0
+slide+autoplay,ARROW_ENDS,PASS,"on slide 0 prev hides itself (hidden=True), next does not (hidden=False)"
+slide+autoplay,ARROW_ARIA,PASS,role=button tabindex=0 label='下一張投影片'
+slide+autoplay,NEXT,PASS,slide 0 -> 1
+slide+autoplay,PREV,PASS,slide 1 -> 0
+slide+autoplay,KEYBOARD,PASS,"focus bullet 2 taken, Enter -> slide 2"
+slide+autoplay,REDUCED,PASS,under prefers-reduced-motion it holds still (slide 0 -> 0)
+crossFade+carousel,HOST,PASS,"<mosaic-slider> animation=crossFade carousel=true, 4 slides"
+crossFade+carousel,TRACK,PASS,<mosaic-slider-slides> aria-live=polite
+crossFade+carousel,HAS_CURRENT,PASS,slide 0 is current at rest
+crossFade+carousel,STAYS_PUT,PASS,autoplay off: still on slide 0 after 2.6s
+crossFade+carousel,REDUCED,PASS,under prefers-reduced-motion it holds still (slide 0 -> 0)

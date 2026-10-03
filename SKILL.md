@@ -172,6 +172,28 @@ DESIGN SYS   variants and collection variables both verified against compiled
              :root{--brand: rgb(9, 99, 199)} with background-color:var(--brand).
              references/design-system.md
 
+SLIDER       the slider family nested as its factories require, driven in a
+             browser, 19 of 19 across two configurations: it advances unaided on
+             its declared delay, the arrows and bullets move it, Enter on a
+             focused bullet moves it, and under prefers-reduced-motion it holds
+             still on its own. The sweep calls the whole family COMMIT_500 /
+             BROKE_PAGE, which is what a bare `slider` does under a plain div and
+             nothing about the component - the same kind of row the accordion
+             probe corrected. Two facts no markup announces: a
+             slider-navigation-bullet is a TEMPLATE, repeated once per slide with
+             the SAME id on every copy and an aria-label taken from each slide's
+             own title; and an arrow hides ITSELF at the end it cannot pass.
+             data/slider-verification.csv
+
+SITE         the nineteen converted Elementor pages assembled into one real site:
+             a shared shell, a menu of `menu-link` nodes that render real
+             <a href>, a WordPress page each, and a modal on every page - six
+             distinct configurations across pageLoad / exitIntent / scrollDepth,
+             cap / cooldown / firstRunWindow, page / session / forever memory and
+             four closedby policies. 27 of 27 navigation checks, 19 of 19 pages
+             carrying a working modal. data/navigation-verification.csv,
+             data/page-modal-verification.csv
+
 DIALOG       1.0.9's features built on a live page and read back out of the
              browser, 19 of 19: the modal renders a real <dialog> (aria-modal
              appears only with an overlay child), a modalOpen action opens it and
@@ -469,12 +491,14 @@ so the pattern is in the data, not just in this paragraph.
 10. `references/interactions.md` — the JavaScript animation system, and how far it is
    verified.
 11. `references/vs-elementor-gutenberg.md` — which builder habits transfer.
-12. `references/custom-fields.md` — ACF and Meta Box fields as `@VAR` / `@LOOP`:
+12. `references/slider.md` — the slider nested as its factories require, and the
+   two things about it the markup does not announce.
+13. `references/custom-fields.md` — ACF and Meta Box fields as `@VAR` / `@LOOP`:
    the names, what each field type resolves to, and the loop element that walks
    a multi-value field. Measured, 62 rows.
-13. `references/dialog-and-triggers.md` — 1.0.9's modal, OpenStreetMap, the
+14. `references/dialog-and-triggers.md` — 1.0.9's modal, OpenStreetMap, the
    exit-intent / scroll-depth triggers, run rules, memory and the shorthand.
-14. `references/upgrading.md` — what a plugin update does to the data and to the
+15. `references/upgrading.md` — what a plugin update does to the data and to the
    delivered page, measured on 1.0.7 -> 1.0.8; how to drive the migration and what
    to re-verify afterwards.
 
@@ -505,6 +529,9 @@ so the pattern is in the data, not just in this paragraph.
 | `data/conversion-verification.csv` | 8 | **converted then checked live** - an Elementor page rebuilt as Mosaic and held against its source (text, images, links, heading levels), then put through rwd, browser and the design audit with every finding classified inherited-or-introduced |
 | `data/conversion-batch.csv` | 19 | **converted, built and checked live, one page after another** - every Elementor page of a production site through the converter, with per-page element and content counts |
 | `data/token-benchmark.csv` | 6 | **measured with tiktoken** - the same six lookups priced three ways: reading the plugin source, loading every table, querying `mo.py`. 71-99.5% fewer tokens than the source and 99.6%+ fewer than the tables, which total 259,539 - never load them, query them |
+| `data/slider-verification.csv` | 19 | **driven live** - two sliders, one autoplaying and one a carousel: advance, arrows, bullets, keyboard, reduced motion |
+| `data/navigation-verification.csv` | 27 | **fetched live** - every menu item is a real `<a href>` and every page of the nineteen answers 200 |
+| `data/page-modal-verification.csv` | 19 | **read live** - one modal per page, and what each one's trigger, run rule, memory scope and dismissal policy actually came out as |
 | `data/dialog-verification.csv` | 19 | **driven live** - the 1.0.9 modal, its triggers, its run rules and the memory actions, each exercised in a real browser |
 | `data/custom-fields-verification.csv` | 62 | **rendered live** - ACF and Meta Box fields of every common type read back through `@VAR` / `@LOOP` off the delivered page, loops included |
 | `data/theme-zip-verification.csv` | 22 | **round-tripped live** - Mosaic's own ZIP export imported in test mode and compared to its source, table by table and tree by tree |
@@ -673,6 +700,18 @@ post — `build_all.py` resets first for that reason.
   rows and `theme_zip_compare.php` reports a tree that does not match - delete
   nodes with a missing parent REPEATEDLY until none are left, because each pass
   orphans the next level down.
+- **Only three interaction types can be an `interactionShorthand`**: `pageLoad`,
+  `exitIntent`, `scrollDepth` (`InteractionTypesManager::getShorthandInteractionTypes`).
+  Any other is dropped in silence - the modal renders with its aria and its
+  `closedby`, the page carries no interaction, and nothing ever opens it. The
+  three that remain are exactly the ones that do not need the element to be
+  visible first, which a modal never is.
+- **A `slider-navigation-bullet` is a template, not a list item.** One authored
+  bullet is repeated once per slide, every copy carrying the SAME id - writing
+  three gets three templates and a document full of duplicate ids. The
+  `aria-label` is Mosaic's, taken from each slide's own `title`. An arrow hides
+  itself at the end it cannot pass unless the slider is a carousel, so a test
+  that clicks `next` after autoplay has parked the slider finds nothing there.
 - **An interaction that targets another element stores that element's NODE id**,
   not its attrID, so both have to be written in one pass (`nodeID` on a spec
   node pins it). The id must be unique in the THEME - `wp_mosaic_nodes`' primary
@@ -749,6 +788,8 @@ post — `build_all.py` resets first for that reason.
 | `theme_zip.py` | drive Mosaic's OWN export/import - the ZIP the editor makes, attachments included, over the milestone protocol; import lands in test mode unless told `--activate` |
 | `theme_zip_compare.php` | hold an imported copy against its source, tree for tree - every scoped table, the (parentType, type) shape, which ids survive, and orphans named rather than counted |
 | `theme_delete.php` | remove a theme completely through the plugin's own routine; refuses the live one |
+| `verify_slider.py` | the slider in a real browser: does it advance, do the arrows and bullets drive it, does the keyboard, does it stop when motion is not wanted |
+| `verify_navigation.py` | a multi-page site: is every menu item a real `<a href>`, and does every page answer 200 (a template that was never bound answers 406 with an empty body, which only a logged-out visitor sees) |
 | `verify_dialog.py` | the 1.0.9 modal in a real browser: does it open, close, answer Esc, remember, cap - and does an OpenStreetMap carry the coordinates it was given |
 | `list_fields.php` | every `@VAR` / `@LOOP` name Mosaic registers for one post - custom fields, their derived `__label` / `__url` / `__id` properties, the row variables of each loop - with the value each resolves to (`wp eval-file`) |
 | `data_upgrade.py` | after a plugin update, run Mosaic's data migration over its own milestone route - the step wp-admin does from a screen - and set the config's version when the editor API is back |
