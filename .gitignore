@@ -38,6 +38,8 @@ tools/build_report.py
 # stray screenshots at the repo root
 *.png
 *.jpg
+# ...but the plugin directory listing icon ships
+!.claude-plugin/icon.png
 
 # npm
 node_modules/
