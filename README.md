@@ -43,6 +43,45 @@ npx mosaic-headless@latest claude-code --global --force
 ```
 
 
+## Install as a Claude plugin
+
+The repository is also a Claude plugin: `.claude-plugin/plugin.json` at the root, and
+the root `SKILL.md` loads as its one skill. Once the plugin is listed in the Claude
+directory, install it from there. Until then, Claude Code can load a clone directly:
+
+```bash
+git clone https://github.com/Moksa1123/mosaic-headless
+claude --plugin-dir ./mosaic-headless
+```
+
+This is an independent project. It is not made by, endorsed by, or affiliated with
+Nextend, the maker of Mosaic Pro.
+
+## What this plugin runs and connects to
+
+The plugin has no hooks, no MCP servers and no background processes. Everything
+below runs only when Claude follows `SKILL.md` and you approve the command:
+
+- **`tools/mo.py`** reads the CSV tables in `data/` and prints answers. It writes
+  nothing and contacts nothing.
+- **`tools/*.php`** run inside your own WordPress through `wp eval-file`. They read
+  and write Mosaic's own tables and theme data on that site.
+- **`tools/mint_session.php`** creates a logged-in WordPress session and a matching
+  REST nonce for an account on *your* site. You put them in a local config file
+  (`--config sweep.json`); they are printed to your terminal and sent nowhere else.
+- **`tools/build_site.py`, `data_upgrade.py`, `theme_zip.py`, `probe_accordion.py` and the `sweep_*.py`
+  tools** call Mosaic's REST routes on the site in that config file, with that
+  session, to read and write pages, components and themes. They contact only that
+  site.
+- **`tools/verify_*.py`** open pages of that same site with Playwright (Chromium) or
+  `urllib` and compare what was delivered with what was written.
+- **`sites/`** holds the worked example (the author's own site) as data. Its design
+  loads Google Fonts, so pages built from it make visitors' browsers fetch fonts from
+  Google, as any page using Google Fonts does.
+
+The tools need Python 3 and Playwright. Nothing is downloaded at install time, and no
+data is sent to the author or any third party.
+
 ## What this is
 
 Mosaic keeps a page in **23 custom database tables**, not in `post_content` and not
@@ -278,7 +317,7 @@ npm version minor      # bumps package.json, SKILL.md and eight platform templat
                        # commits, tags, pushes; the tag triggers release.yml
 ```
 
-`bin/check-release.mjs` gates every release on the things that are easy to get
+`scripts/check-release.mjs` gates every release on the things that are easy to get
 wrong: the version numbers agree, every `files` glob matches, every verification
 CSV still has the row count SKILL.md and the four READMEs quote, no design-audit
 finding is unreviewed, the eval suite is present, and **the tarball itself is

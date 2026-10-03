@@ -52,12 +52,12 @@ jobs:
       # exists, and the row counts in the verification CSVs still match the numbers
       # SKILL.md quotes.
       - name: Release checks
-        run: node bin/check-release.mjs
+        run: node scripts/check-release.mjs
 
       - name: Installer must run
         run: |
-          node bin/install.mjs --list
-          node bin/install.mjs --dry-run claude-code
+          node scripts/install.mjs --list
+          node scripts/install.mjs --dry-run claude-code
 
       - name: Show exactly what will ship
         run: npm pack --dry-run

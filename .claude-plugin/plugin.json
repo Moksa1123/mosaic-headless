@@ -1,0 +1,27 @@
+{
+  "name": "mosaic-headless",
+  "displayName": "Mosaic Headless (unofficial)",
+  "version": "1.19.0",
+  "description": "Build and modify Mosaic Pro (Nextend) WordPress sites by writing the data model directly, with every node type, style property and node property measured on a live install. Unofficial: not made by or affiliated with Nextend.",
+  "author": {
+    "name": "moksa",
+    "url": "https://moksaweb.com"
+  },
+  "homepage": "https://github.com/Moksa1123/mosaic-headless#readme",
+  "repository": "https://github.com/Moksa1123/mosaic-headless",
+  "license": "MIT",
+  "keywords": [
+    "wordpress",
+    "mosaic-pro",
+    "nextend",
+    "page-builder",
+    "headless",
+    "wp-cli",
+    "elementor-migration"
+  ],
+  "documentationUrl": "https://github.com/Moksa1123/mosaic-headless#readme",
+  "supportUrl": "https://github.com/Moksa1123/mosaic-headless/issues",
+  "skills": [
+    "./"
+  ]
+}

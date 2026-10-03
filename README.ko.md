@@ -261,7 +261,7 @@ npm version minor      # package.json, SKILL.md, 8개 플랫폼 템플릿의 버
                        # commit, tag, push; tag가 release.yml을 트리거
 ```
 
-`bin/check-release.mjs`가 모든 릴리스를 지킨다. 검사하는 것은 "검사하기 쉬운 것"이 아니라
+`scripts/check-release.mjs`가 모든 릴리스를 지킨다. 검사하는 것은 "검사하기 쉬운 것"이 아니라
 "틀리기 쉬운 것": 버전 번호 일치, `files`의 각 glob이 무언가와 매칭, 각 검증 CSV의 행 수가
 SKILL.md와 네 README가 인용하는 수와 같음, 판정되지 않은 디자인 감사 지적 없음, eval 스위트
 존재, 그리고 **tarball 자체 검사** — npm의 `files` 허용 목록은 `.gitignore`를 덮어쓰며, 한때

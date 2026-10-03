@@ -27,10 +27,10 @@
   "author": "moksa (https://moksaweb.com)",
   "type": "module",
   "bin": {
-    "mosaic-headless": "bin/install.mjs"
+    "mosaic-headless": "scripts/install.mjs"
   },
   "files": [
-    "bin/",
+    "scripts/",
     "assets/",
     "data/*.csv",
     "references/",
@@ -50,10 +50,10 @@
     "node": ">=18"
   },
   "scripts": {
-    "install-skill": "node bin/install.mjs",
-    "check": "node bin/check-release.mjs",
+    "install-skill": "node scripts/install.mjs",
+    "check": "node scripts/check-release.mjs",
     "preversion": "npm run check",
-    "version": "node bin/sync-version.mjs && git add SKILL.md assets/templates/platforms",
+    "version": "node scripts/sync-version.mjs && git add SKILL.md assets/templates/platforms .claude-plugin/plugin.json",
     "postversion": "git push && git push --tags",
     "prepublishOnly": "npm run check"
   }
