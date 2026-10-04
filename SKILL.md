@@ -700,6 +700,12 @@ post — `build_all.py` resets first for that reason.
   rows and `theme_zip_compare.php` reports a tree that does not match - delete
   nodes with a missing parent REPEATEDLY until none are left, because each pass
   orphans the next level down.
+- **`width` / `height` and their min/max take the keyword `stretch` since 1.0.9**,
+  and Mosaic emits `-webkit-fill-available` before it so an older engine still gets
+  something. They are still token-referencable - `CSSSizePropertyFactory` extends
+  the collection-variable one, which is why `data/style-properties.csv` resolves a
+  factory's ancestry rather than testing its name. 39 properties take a token, not
+  the 34 counted before that fix.
 - **A width copied out of Elementor needs `maxWidth: "100%"` beside it.**
   Elementor caps every widget with `max-width:100%`, so a px width there is a
   desktop intent its own CSS already constrains; carried across bare it keeps the

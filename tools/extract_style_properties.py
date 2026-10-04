@@ -110,6 +110,44 @@ def style_enums(plugin_root):
     return out
 
 
+def factory_parents(plugin_root):
+    """class -> its parent, for every property factory under Builder/Style.
+
+    Read because a factory's NAME stopped being enough in 1.0.9:
+    `CSSSizePropertyFactory extends CSSCollectionVariablePropertyFactory` and drives
+    width / height and their min and max, which still take a collection variable -
+    but a name test for "CollectionVariable" misses it and the table then says six
+    length properties cannot reference a design token, which is false.
+    """
+    parents = {}
+    base = os.path.join(plugin_root, "Mosaic", "Builder", "Style")
+    for root, _dirs, files in os.walk(base):
+        for name in files:
+            if not name.endswith(".php"):
+                continue
+            with open(os.path.join(root, name), encoding="utf-8", errors="replace") as fh:
+                src = fh.read()
+            # `extends Foo` and `extends \Name\Space\Foo` both; only the last
+            # segment is kept, which is what the factory column shows.
+            bs = chr(92)
+            for m in re.finditer("class" + r"\s+(\w+)\s+extends\s+([" + bs * 2
+                                 + r"\w]+)", src):
+                parents[m.group(1)] = m.group(2).split(bs)[-1]
+    return parents
+
+
+def is_tokenable(factory, value_class, parents):
+    """Does this factory, or anything it inherits from, accept a collection variable?"""
+    for name in (factory, value_class):
+        seen = set()
+        while name and name not in seen:
+            if "CollectionVariable" in name or "Color" in name:
+                return True
+            seen.add(name)
+            name = parents.get(name)
+    return False
+
+
 def extract(plugin_root, out_dir):
     enums = style_enums(plugin_root)
     path = os.path.join(plugin_root, "Mosaic", "Builder", "Style", "SupportedStyleProperties.php")
@@ -118,6 +156,7 @@ def extract(plugin_root, out_dir):
     with open(path, encoding="utf-8", errors="replace") as fh:
         src = fh.read()
 
+    parents = factory_parents(plugin_root)
     rows = []
     for factory, first, member, value_class in RE_ADD.findall(src):
         grouped = factory == "CSSGrouppedPropertyFactory"
@@ -128,10 +167,9 @@ def extract(plugin_root, out_dir):
                 "factory": factory,
                 "value_class": value_class.split("\\")[-1] if value_class else "",
                 "accepted_values": "|".join(enums.get(member if grouped else first, [])),
-                "tokenable": "yes" if (
-                    "CollectionVariable" in factory or "Color" in factory
-                    or "CollectionVariable" in (value_class or "")
-                ) else "",
+                "tokenable": "yes" if is_tokenable(
+                    factory, value_class.split("\\")[-1] if value_class else "",
+                    parents) else "",
             }
         )
 

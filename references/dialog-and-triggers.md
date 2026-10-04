@@ -198,6 +198,33 @@ anywhere. That is the skill's existing rule (`ValidatorDynamicCode` = bare strin
 `ValidatorDynamicCodeObject` = `{"v": …}`) applying to a new element, and it is also
 why those three can hold `@VAR('post/meta_lat')` and a custom field can drive the map.
 
+## The rest of 1.0.9, briefly
+
+Not everything in the release is a node you place. Four things that change how the
+plugin behaves rather than what you can build:
+
+- **`stretch` on the size properties.** `width`, `height` and their min/max moved to
+  `CSSSizePropertyFactory`, which accepts the keyword and emits
+  `width:-webkit-fill-available` **then** `width:stretch` — the modern value last so
+  a current engine lands on it and an older one keeps the alias. Measured on all
+  three of width / height / max-width; the author's casing is preserved as typed.
+- **`ElementClassPruner`.** The generated `_<token>` class is now a placeholder while
+  the tree renders, and one pass over the finished HTML keeps it only where a
+  selector actually claimed it. The marker is random per render, so the pass can
+  never touch a class that arrived from post content or a shortcode. This is the
+  mechanism behind "an element whose styles compile to nothing has no generated
+  class" — it is a deliberate feature, not an accident.
+- **Author and term page instances.** `PageInstance/PageTypes/Author` and `Term` let
+  the editor put a specific author or taxonomy term in front of an archive template;
+  a term has no assign of its own, because a term archive is only ever rendered by
+  its path.
+- **`POST /template/createAutoTemplate`** (`resourceQuery`, `masterID`) creates the
+  automatic template a post type is missing — a template on the post type's PATH,
+  with nothing recorded against the resource that prompted it. Deliberately not the
+  assign endpoint: a post type whose resources cannot carry an assign still needs a
+  way to be designed, and conflating the two would make this look like an assign.
+  115 routes now, up from 114.
+
 ## What else moved in the delivered page
 
 **The three per-breakpoint stylesheets became one.** Through 1.0.8 a page carried

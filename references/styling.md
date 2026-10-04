@@ -109,12 +109,13 @@ The `factory` column in `data/style-properties.csv` tells you the value shape:
 | factory | write |
 |---|---|
 | `CSSPropertyFactory` (29) | a plain CSS value string — `"flex"`, `"center"`, `"700"` |
-| `CSSCollectionVariablePropertyFactory` (26) | a length string, or a reference to a collection variable |
+| `CSSCollectionVariablePropertyFactory` (20) | a length string, or a reference to a collection variable |
+| `CSSSizePropertyFactory` (6) | `width`, `height` and their min/max. A collection-variable length like the row above - it is a subclass - plus the keyword **`stretch`**, which Mosaic emits as `-webkit-fill-available` FIRST and `stretch` second, so a current engine takes the standard value and an older one the alias. New in 1.0.9; measured. |
 | `CSSColorPropertyFactory` (2) | `color`, `backgroundColor` — a colour string or variable reference |
 | `CSSGrouppedPropertyFactory` (20) | one leg of `borderStyle`, `outlineStyle` or `gridChildPosition`; the data is keyed under the group |
 | the other 21 | purpose-built shapes — shadow, transform, gradient, filter, mask. Read the factory named in the CSV. |
 
-Plain strings were accepted verbatim for the properties probed above. The 34
+Plain strings were accepted verbatim for the properties probed above. The 39
 token-referencable properties are the interface to the collection/variable layer,
 which is how a design system is meant to be expressed rather than hard-coding values
 on every node.
@@ -127,7 +128,11 @@ lowest layer and it opts that node out of both reuse mechanisms:
 1. **Variants** (`data/variants.csv`, 152 built in - Mosaic's element classes) carry
    the shared look; a node points at one through `style.variant`.
 2. **Collections → modes/skins → variables** are the token layer, the thing the
-   34 token-referencable properties reference.
+   39 token-referencable properties reference. (34 until this was last counted:
+   `data/style-properties.csv` resolves a factory's ANCESTRY now rather than
+   testing its name, which 1.0.9 made necessary - `CSSSizePropertyFactory` extends
+   the collection-variable one - and which also recovered the five grouped colour
+   legs whose value class was always `CSSColorProperty`.)
 
 Per-node `style` is for the exception, not the rule. Build a design by putting values
 in the class and token layers and letting nodes inherit; reach for per-node style when
