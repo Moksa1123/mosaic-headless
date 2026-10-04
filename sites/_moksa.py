@@ -26,6 +26,7 @@ Run from this directory: python _moksa.py
 """
 import json
 import os
+import sys
 import uuid
 
 # Monospace leads. The grotesque is the display face and appears at three sizes only;
@@ -247,7 +248,8 @@ def mask_line(attr, text, tag="h1", **st):
 
 # ── content, all of it Moksa Web's own ───────────────────────────────────────
 NAV = [("服務", "#services"), ("作品", "#works"),
-       ("產品", "#products"), ("聯絡", "#contact")]
+       ("產品", "#products"), ("彈窗", "/dialogs/"),
+       ("聯絡", "#contact")]
 
 # key / figure / caption, read as a datasheet rather than as four big numbers
 SPEC = [
@@ -3050,6 +3052,15 @@ def clean(node):
 
 if __name__ == "__main__":
     here = os.path.dirname(os.path.abspath(__file__))
+    sys.path.insert(0, here)
+    # Deferred on purpose. `_dialogs` imports this module's helpers, so importing
+    # it at the top would be circular; down here the file re-imports cleanly as
+    # `_moksa` (this copy is `__main__`), its own main block does not run, and the
+    # helpers it reads are pure functions - two copies produce identical dicts.
+    import _dialogs
+    SITE["pages"].append({"slug": "dialogs", "post_id": 268,
+                          "title": "彈窗實驗室",
+                          "tree": apply_type(_dialogs.TREE, DISPLAY, CJK, "600")})
     path = os.path.join(here, "moksa.json")
     with open(path, "w", encoding="utf-8") as fh:
         json.dump(clean(SITE), fh, indent=1, ensure_ascii=False)

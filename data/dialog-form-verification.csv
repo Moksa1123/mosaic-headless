@@ -1,0 +1,50 @@
+check,result,detail
+HOST/centre,PASS,"['dialog', 'everything']"
+HOST/sheet,PASS,"['dialog', 'clickOutside']"
+HOST/drawer,PASS,"['dialog', 'esc']"
+HOST/toast,PASS,"['dialog', 'everything']"
+HOST/takeover,PASS,"['dialog', 'everything']"
+HOST/gate,PASS,"['dialog', 'nothing']"
+HOST/exit,PASS,"['dialog', 'everything']"
+HOST/depth,PASS,"['dialog', 'clickOutside']"
+HOST/aba,PASS,"['dialog', 'everything']"
+HOST/abb,PASS,"['dialog', 'everything']"
+TOAST/pageLoad,PASS,opened on load
+TOAST/overlay-synthesised,PASS,authored none; heal inserted one
+TOAST/aria-modal-unavoidable,PASS,aria-modal='true' despite no authored overlay
+TOAST/top-right,PASS,x=911 y=114 w=330 vw=1280
+TOAST/wheel-blocked,PASS,"a corner toast is a LAYOUT, not a non-blocking modal"
+CLOSED_IS_HIDDEN,PASS,every closed modal is display:none
+CENTRE/centred,PASS,x=385 w=520 vw=1280
+CENTRE/aria-modal,PASS,aria-modal='true' (overlay=True)
+CENTRE/esc-closes,PASS,closedby=everything
+SHEET/at-bottom,PASS,y+h=900 vh=900
+SHEET/wide,PASS,w=720
+SHEET/esc-does-nothing,PASS,"closedby=clickOutside, so Esc must not close it"
+DRAWER/right-edge,PASS,x+w=1265  layer right=1265
+DRAWER/full-height,PASS,h=900 vh=900
+DRAWER/esc-closes,PASS,closedby=esc
+TAKEOVER/fills-viewport,PASS,1265x900 vs layer 1265x900
+GATE/esc-refused,PASS,closedby=nothing
+GATE/outside-refused,PASS,clicking the overlay must not close it
+GATE/button-closes,PASS,the modalClose inside is the only exit
+DEPTH/shut-at-rest,PASS,
+DEPTH/opens-past-75,PASS,scrollDepth threshold 75%
+EXIT/opens,PASS,exitIntent is desktop-only and synthetic leave is approximate
+LATCH/record-abb,PASS,"{""counter"":1,""firstAt"":1791091416059,""lastAt"":1791091416059,""lastID"":""2c17cec6-3"
+LATCH/B-first-wins,PASS,"6/6 as predicted, 0 lost clicks  {'abb>abb,aba>none': 6}"
+LATCH/record-aba,PASS,"{""counter"":1,""firstAt"":1791091466323,""lastAt"":1791091466323,""lastID"":""031d462e-7"
+LATCH/A-first-wins,PASS,"6/6 as predicted, 0 lost clicks  {'aba>aba,abb>none': 6}"
+LATCH/order-decides,PASS,"the winner flips with click order, so it is the first EVALUATED, not the first authored"
+FIT390/centre,PASS,scrollW=349/349 childOverflow=0 pageScrollsSideways=False
+FIT390/sheet,PASS,scrollW=373/373 childOverflow=0 pageScrollsSideways=False
+FIT390/drawer,PASS,scrollW=350/350 childOverflow=0 pageScrollsSideways=False
+FIT390/takeover,PASS,scrollW=375/375 childOverflow=0 pageScrollsSideways=False
+FIT390/gate,PASS,scrollW=349/349 childOverflow=0 pageScrollsSideways=False
+FIT390/aba,PASS,scrollW=349/349 childOverflow=0 pageScrollsSideways=False
+FIT768/centre,PASS,scrollW=518/518 childOverflow=0 pageScrollsSideways=False
+FIT768/sheet,PASS,scrollW=718/718 childOverflow=0 pageScrollsSideways=False
+FIT768/drawer,PASS,scrollW=399/399 childOverflow=0 pageScrollsSideways=False
+FIT768/takeover,PASS,scrollW=753/753 childOverflow=0 pageScrollsSideways=False
+FIT768/gate,PASS,scrollW=458/458 childOverflow=0 pageScrollsSideways=False
+FIT768/aba,PASS,scrollW=438/438 childOverflow=0 pageScrollsSideways=False

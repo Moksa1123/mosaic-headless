@@ -318,3 +318,29 @@ everyone remembers.
 The general shape, worth carrying beyond this repo: a derived artifact checked into
 the tree is only as fresh as the last time someone re-derived it, and if the deriving
 input is not in the tree, no amount of CI will notice.
+
+## Setting `display` on a `<dialog>` pins it open, and open-state checks cannot see it
+
+The modal host is a `<dialog>`. Its open/closed visibility is not a class or an
+attribute Mosaic manages — it is the UA stylesheet rule
+`dialog:not([open]) { display: none }`. Any author-level `display` on that element
+wins the cascade, and every modal in the document is then on screen permanently,
+stacked over the page in DOM order.
+
+`display:flex` on the host is exactly what you reach for when you want to centre
+the window, so this is not an exotic mistake. What makes it worth its own section
+is that **it survives a thorough test suite**: 36 checks drove the modals' triggers,
+run rules, dismissal policies and geometry, every one of them PASSED, and the page
+they passed against had all ten of its dialogs open at once. Every check asked
+"when this is open, is it right?" — none asked "when it is closed, is it gone?"
+
+Two rules come out of it:
+
+- **Lay a modal's form out by positioning the window** (`position:absolute` plus
+  edges inside the fixed, `inset:0` host), never by making the host a flex or grid
+  container.
+- **Assert the closed state.** `tools/verify_dialog_lab.py` now closes everything
+  first and fails if any `dialog:not([open])` still has a box. The general form of
+  that lesson: for anything with a visible and an invisible state, a suite that
+  only exercises the visible one is testing half a component, and the half it
+  skips is the one the visitor sees most of the time.

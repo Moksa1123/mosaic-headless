@@ -184,3 +184,32 @@ down — at the cost of bypassing the collection-variable layer entirely.
 
 `tools/build_page.py` wraps the five shapes above as `radius`, `shadow`,
 `transitionAll`, `move` and `border` shorthands so a design spec cannot get them wrong.
+
+## Properties that exist in CSS but not in Mosaic
+
+`data/style-properties.csv` is the whole registry, and the fastest way to lose an
+hour is to assume a property is in it because CSS has it. Two that catch people,
+both found by writing a page rather than by reading the table:
+
+**`flexGrow` and `flexShrink` do not exist.** Mosaic models both as one
+type-switched group, `flexSizing`:
+
+```jsonc
+"flexSizing": {"type": "grow"}     // flex-grow:1; flex-shrink:0
+"flexSizing": {"type": "shrink"}
+"flexSizing": {"type": "none"}     // the fixed-width column in a flex row
+"flexSizing": {"type": "custom", "customOptions": {…}}
+```
+
+`none` is what you want for a label column that must not be squeezed, and `grow`
+for the cell that takes the slack — the pair that `flex-shrink:0` / `flex-grow:1`
+would have been.
+
+**There is no `overflowX` or `overflowY`** — only the shorthand `overflow`, with
+`visible | hidden | clip | scroll | auto`. One axis at a time is not expressible
+through the style system; it needs `customDeclarations`.
+
+Both of these are refused at build time by `build_page.py` rather than silently
+dropped, which is the only reason they cost minutes instead of a debugging session
+— a property that is not in the registry cannot be set at all, and Mosaic's own
+API accepts the write and discards it.

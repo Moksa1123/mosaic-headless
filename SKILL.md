@@ -4,7 +4,7 @@ description: |
   Build and modify Mosaic Pro (Nextend) sites by writing the underlying data model directly - no visual editor, no DOM. Query the real surface with `mo.py`, which joins every source table to the live sweeps so a lookup leads with the measured verdict rather than the declaration (126 node types, 191 properties, 98 style properties with 20 structured value shapes pinned down, 53 style states, 156 variants, 74 dynamic variables, 15 interaction triggers, 115 REST routes, 23 tables) instead of guessing, with every node type placed on a live site one at a time and asserted against the delivered HTML, the design-token and element-class layers verified against compiled CSS, the @VAR() dynamic language verified against rendered output, nine designed pages built through the tables themselves, and the delivered pages re-read in Chromium at three viewports so a rule that is present, correct and still wrong cannot pass. Drives Mosaic's own theme export/import and its plugin data upgrade from outside the editor and holds the copy against the source tree for tree. Measured on Mosaic Pro 1.0.9: the modal (`<dialog>`), OpenStreetMap, the exit-intent and scroll-depth triggers, run rules and the memory actions all built on a live page and read back, and the 1.0.7 -> 1.0.8 -> 1.0.9 migrations driven from outside wp-admin.
 license: "MIT"
 author: "moksa (https://moksaweb.com)"
-version: "1.22.0"
+version: "1.23.0"
 ---
 
 # Headless Mosaic
@@ -533,6 +533,7 @@ so the pattern is in the data, not just in this paragraph.
 | `data/navigation-verification.csv` | 46 | **fetched and opened live** - every menu item is a real `<a href>`, every page of the nineteen answers 200, and no page scrolls sideways at 390 / 768 / 1280 |
 | `data/page-modal-verification.csv` | 19 | **read live** - one modal per page, and what each one's trigger, run rule, memory scope and dismissal policy actually came out as |
 | `data/dialog-verification.csv` | 19 | **driven live** - the 1.0.9 modal, its triggers, its run rules and the memory actions, each exercised in a real browser |
+| `data/dialog-form-verification.csv` | 49 | **driven live** - the same three nodes made into five FORMS (sheet, drawer, corner, takeover, gate), each re-opened at 390px and 768px; also where `pickOne` on a click turned out to be a latch rather than a lottery |
 | `data/custom-fields-verification.csv` | 62 | **rendered live** - ACF and Meta Box fields of every common type read back through `@VAR` / `@LOOP` off the delivered page, loops included |
 | `data/theme-zip-verification.csv` | 22 | **round-tripped live** - Mosaic's own ZIP export imported in test mode and compared to its source, table by table and tree by tree |
 | `data/node-type-notes.csv` | 8 | where a sweep outcome is true but misleading on its own, why. Surfaced by `mo.py type` |
@@ -807,6 +808,7 @@ post — `build_all.py` resets first for that reason.
 | `verify_slider.py` | the slider in a real browser: does it advance, do the arrows and bullets drive it, does the keyboard, does it stop when motion is not wanted |
 | `verify_navigation.py` | a multi-page site: is every menu item a real `<a href>`, does every page answer 200 (a template that was never bound answers 406 with an empty body, which only a logged-out visitor sees), and with `--viewports` does any page scroll SIDEWAYS - the one question no per-page checker asks |
 | `verify_dialog.py` | the 1.0.9 modal in a real browser: does it open, close, answer Esc, remember, cap - and does an OpenStreetMap carry the coordinates it was given |
+| `verify_dialog_lab.py` | the question after "does the modal work": can three nodes be made into a bottom sheet, a side drawer, a corner notice, a full takeover and a gate with no way out - and does each one still fit at phone width, which the page's own width check cannot see |
 | `list_fields.php` | every `@VAR` / `@LOOP` name Mosaic registers for one post - custom fields, their derived `__label` / `__url` / `__id` properties, the row variables of each loop - with the value each resolves to (`wp eval-file`) |
 | `data_upgrade.py` | after a plugin update, run Mosaic's data migration over its own milestone route - the step wp-admin does from a screen - and set the config's version when the editor API is back |
 | `copy_styles.py` | push one node's style onto others, by attrID or prefix |

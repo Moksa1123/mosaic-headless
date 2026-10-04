@@ -65,6 +65,11 @@ def load_csv(name):
         return list(csv.DictReader(fh))
 
 
+# Tags that may legitimately appear inside wysiwyg-text, which is raw HTML and is
+# where this skill's own pages put their inline emphasis. Everything else in prose
+# is almost certainly a tag NAME being discussed rather than markup intended to run.
+PROSE_TAG = re.compile(r"</?(?!(?:b|i|em|strong|br|span|a|code|sup|sub)\b)"
+                       r"[a-zA-Z][a-zA-Z0-9-]*\s*[^>]*>")
 AT_RULE_GLUED = re.compile(
     r"@(media|supports|container|layer|scope|import|page|starting-style|"
     r"font-feature-values|counter-style|property|document)\(")
@@ -103,6 +108,21 @@ class Surface:
         # Measured both ways on the demo site (`@media (` renders, `@media(`
         # does not). Refused here for the same reason an unsafe type is: the
         # failure is silent at the only point this tool can still stop it.
+        # `wysiwyg-text` is RAW HTML, not escaped text, so a tag NAME written in
+        # prose opens an element and swallows the rest of the paragraph. "Mosaic's
+        # modal is a real <dialog>" delivered the words up to "real" and nothing
+        # after it. The commit succeeds and the page renders - it is just missing
+        # most of its sentence, which is why this is worth refusing rather than
+        # leaving to proofreading. Inline formatting tags are let through; anything
+        # else has to be written as an entity.
+        if t == "wysiwyg-text" and not force:
+            text = (node.get("data") or {}).get("text") or ""
+            hit = PROSE_TAG.search(text)
+            if hit:
+                problems.append("wysiwyg-text contains `%s` - the text is raw HTML, so "
+                                "this opens an element and the rest of the paragraph "
+                                "disappears; write it as &lt;%s&gt;"
+                                % (hit.group(0), hit.group(0).strip("<>/")))
         if t == "code" and not force:
             content = (node.get("data") or {}).get("content") or ""
             hit = AT_RULE_GLUED.search(content)

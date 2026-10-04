@@ -102,7 +102,8 @@ const counts = {
   "data/slider-verification.csv": 19,
   "data/navigation-verification.csv": 46,
   "data/page-modal-verification.csv": 19,
-  "data/interaction-rules-verification.csv": 13,
+  "data/interaction-rules-verification.csv": 17,
+  "data/dialog-form-verification.csv": 49,
   "data/value-coercion-verification.csv": 12,
 };
 for (const [file, expected] of Object.entries(counts)) {

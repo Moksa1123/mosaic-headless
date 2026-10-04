@@ -4,6 +4,10 @@ pickOne,"8 reloads of one tab, remember=page",PASS,re-drawn on every load: 6/1/1
 pickOne,"8 reloads of one tab, remember=forever",PASS,the same contender all 8 times
 pickOne,"6 fresh browser contexts, remember=forever",PASS,draws again in a new context: 1/3/2 - the record is per browser profile
 pickOne,storage record,PASS,"mos:v1:r:<name> gains lastID, naming the contender the draw chose"
+pickOne,"two buttons, group dl-ab, click B then A",PASS,"B opens, A then does nothing - 6/6 fresh visitors"
+pickOne,"same two buttons, click A then B",PASS,"A opens, B then does nothing - 6/6; the winner flips with the ORDER"
+pickOne,both interactions on ONE button,PASS,the same contender 14/14 - one evaluates first and records itself
+pickOne,what the rule actually does,PASS,"draws among contenders that evaluate TOGETHER; a click delivers one at a time, so click+pickOne is a latch, not a lottery"
 targetModifiers,plain element,PASS,"[{""type"":""all"",""selector"":""._e""}]"
 targetModifiers,plain variant,PASS,"[{""type"":""all"",""selector"":""h2,.m-heading-2""}] - a variant resolves to its own selectors"
 targetModifiers,children(variant),PASS,"appends {""type"":""children"",""selector"":""h2,.m-heading-2""}"

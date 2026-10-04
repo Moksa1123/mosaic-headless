@@ -33,9 +33,23 @@ delivers
 </dialog>
 ```
 
-- **`aria-modal="true"` is emergent, not authored.** It appears exactly when the
-  modal has an overlay child, because the overlay is what actually blocks the page.
-  No overlay, no `aria-modal`.
+- **`aria-modal="true"` is emergent, not authored — and you cannot shed it.**
+  The render sets it exactly when the modal has an overlay child, because the
+  overlay is what actually blocks the page. An earlier version of this page drew
+  the obvious conclusion — *no overlay, no `aria-modal`* — and that conclusion is
+  **wrong**, because the overlay-less modal is unreachable. A modal committed with
+  no `modal-overlay` child comes back from the server with one: `onHeal()` inserts
+  it at the end of the child order, and the source says why — *"the overlay is a
+  required structural part — non-deletable, one per Modal"*. The synthetic one
+  carries no style token and no id, which is the only way to tell it from an
+  authored one.
+
+  Measured on a modal authored with no overlay: the delivered HTML contains
+  `<div class="m-modal-overlay" tabindex="-1">`, the host carries
+  `aria-modal="true"`, and a real wheel event over the page moves it 0px while the
+  same page scrolls 700px with nothing open. **There is no non-blocking modal in
+  1.0.9.** A corner notice that must not trap the reader has to be built from
+  ordinary nodes, not from `modal`.
 - **`closedby` is `everything` | `clickOutside` | `esc` | `nothing`**, and it is
   emitted as `data-mosaic-modal-closedby`, NOT as the native `closedby` attribute —
   Mosaic opens the host with `show()`, where the native light-dismiss does not
@@ -145,6 +159,36 @@ That is what makes the choice stick, and it is also how you read the drawn varia
 back in a test without inspecting which modal is open.
 
 `data/interaction-rules-verification.csv` has the runs.
+
+### …and what `pickOne` does on a trigger that is NOT `pageLoad`
+
+Run rules apply to any `timed` interaction, and `click` is one, so the obvious
+next question is whether a click-driven `pickOne` is also a lottery. It is not,
+and the difference matters enough to state as a rule:
+
+> **`pickOne` draws among the contenders that evaluate TOGETHER.**
+
+`pageLoad` schedules every member of the group in the same pass, so the draw has
+a real field and a real winner. A click delivers one contender at a time: the
+first one to evaluate records itself and every other member of the group is then
+suppressed for as long as `remember` holds.
+
+Measured with two buttons, one modal each, both carrying the group `dl-ab`, six
+fresh visitors each way:
+
+| order clicked | result |
+|---|---|
+| B then A | B opens, then A does nothing — 6/6 |
+| A then B | A opens, then B does nothing — 6/6 |
+
+The winner flips with the click order, so it is the first *evaluated*, not the
+first authored. An earlier attempt with both interactions on ONE button drew the
+same contender 14 times out of 14, which is the same fact seen from a worse angle.
+
+So click + `pickOne` is a **latch**, not an A/B test: *whichever of these the
+visitor takes first, the others stop offering.* That is genuinely useful — one of
+several calls to action, a first-choice-wins offer — but if you want to split an
+audience, the rule has to sit on `pageLoad`.
 
 ## Memory: remember / forget
 
@@ -330,3 +374,49 @@ The pattern is worth stating on its own: because the trigger lives in the modal'
 own `interactionShorthand`, a page's popup policy is one object in that page's data.
 Nothing else on the page changes, no trigger element is placed, and two pages of the
 same site can behave completely differently without sharing anything.
+
+## Five forms out of three nodes — and the one property you must not set
+
+"A modal" in most builders means one centred card, because the builder owns the
+chrome. Mosaic owns none of it: `.m-modal` is a `position:fixed; inset:0` layer
+with `pointer-events:none`, `.m-modal-overlay` is a second fixed layer that takes
+pointer events back, and `.m-modal-window` is an ordinary child of the first. The
+form is decided by where the window is pinned inside that layer.
+
+**Never set `display` on the `modal` host.** A `<dialog>`'s open/closed visibility
+*is* its display property — the UA stylesheet hides it with
+`dialog:not([open]) { display: none }` — so an author-level `display:flex` on the
+host wins the cascade and every modal on the page is permanently on screen. It is
+a tempting thing to write, because flex centring is the obvious way to place the
+window, and it fails in a way that no open-state check can see: a page built this
+way passed 36 of 36 modal checks while all ten of its dialogs sat open in the
+document. Lay the forms out by positioning the WINDOW instead, which leaves
+`display` alone:
+
+| form | host | window (`position:absolute`) |
+|---|---|---|
+| centred card | padding only | `top:50%; left:50%` + `translateX(-50%) translateY(-50%)`, `max-width` |
+| bottom sheet | no side/bottom padding | `left:0; right:0; bottom:0`, `margin-inline:auto`, `max-width` |
+| side drawer | no top/bottom/right padding | `top:0; right:0; bottom:0`, `max-width` |
+| corner notice | no padding | `top:90px; right:24px`, a small `max-width` |
+| full takeover | no padding | `top:0; right:0; bottom:0; left:0`, `max-width:none` |
+
+`transform` is a structured value, so the centring pull-back is two entries
+(`translateX`, `translateY`), not a string — `references/styling.md` has the shape.
+
+All five were built on one page and driven in a browser — 49 checks in
+`data/dialog-form-verification.csv`, written by `tools/verify_dialog_lab.py`,
+whose first assertion is now that a CLOSED modal has no box at all. Three more
+things that only showed up by building them:
+
+- **Measure the window against the LAYER, not the viewport.** `.m-modal` is inset
+  into the viewport *minus the scrollbar*, so a drawer flush against the right
+  edge sits at `innerWidth - 15` and a naive check calls it a 15px gap. Compare
+  the window's rect to the host's rect.
+- **Give `modal-window` `overflow: auto` and `max-height: 100%`.** Mosaic has no
+  `overflowX`/`overflowY` — only the shorthand — and without it a tall dialog
+  grows past the viewport instead of scrolling inside itself.
+- **A page that passes a width check says nothing about its modals.** They are a
+  layer that only exists once something opens them, so the document underneath can
+  measure clean at 390px while a takeover with desktop padding overflows. The
+  verifier re-opens every form at each `--viewports` width for this reason.
