@@ -35,7 +35,7 @@ PAPER = "rgb(250,250,247)"
 # ---------------------------------------------------------------- pieces
 
 def slide(attr, title, bg, fg, index, head, caption, big="64px", big_m="40px",
-          pad_bottom="74px", pad_bottom_m="58px"):
+          pad_bottom="74px", pad_bottom_m="76px"):
     """One slide: a colour field with type on it.
 
     `title` is not decoration - Mosaic reads it for the `aria-label` of the
@@ -109,7 +109,13 @@ def bullets(attr, fg):
                  "data": {"attrID": attr + "-dot"},
                  "style": {"&": {"_": {
                      "width": "22px", "height": "3px", "cursor": "pointer",
-                     "backgroundColor": "rgba(250,250,247,.38)"}},
+                     "backgroundColor": "rgba(250,250,247,.38)"},
+                     # the mark stays 3px; the hit area does not. Padding plus a
+                     # content-box keeps the bar thin while the tappable region
+                     # reaches the ~24px a thumb needs.
+                     "_t": {"width": "26px", "height": "3px",
+                            "paddingTop": "14px", "paddingBottom": "14px",
+                            "customDeclarations": "background-clip:content-box;"}},
                      "hover": {"_": {"backgroundColor": fg}},
                      "focus-visible": {"_": dict(FOCUS_RING)}}}]}
 
@@ -157,7 +163,7 @@ def spec_line(label, value):
         "customDeclarations": "border-top:1px solid " + RULE + ";"}, [
         box("sl-spec-k", {"width": "86px", "flexSizing": {"type": "none"}},
             [mono(label, size="10px", color="--mk-faint", track="0.16em")]),
-        box("sl-spec-v", {"flexSizing": {"type": "grow"}},
+        box("sl-spec-v", {"flexSizing": {"type": "custom", "customOptions": {"flexGrow": "1", "flexShrink": "1"}}, "minWidth": "0px"},
             [mono(value, size="10px", color="--mk-ink", track="0.04em")])])
 
 
@@ -190,7 +196,7 @@ HERO_SLIDES = [
 ]
 
 HERO = section("sl-hero", [wrap("sl-hero-w", [
-    box("sl-hero-pad", {"paddingTop": "76px"}, []),
+    box("sl-hero-pad", {"paddingTop": "76px"}, [], _m={"paddingTop": "26px"}),
     mono("SLIDER LAB / 輪播實驗室", size="11px",
          color="--mk-faint", track="0.26em"),
     ml("h1", "輪播看起來很舅，\n通常不是輪播的錯。",
@@ -206,9 +212,10 @@ HERO = section("sl-hero", [wrap("sl-hero-w", [
       color={"token": "--mk-ink"}, marginTop="20px", maxWidth="660px"),
     box("sl-hero-gap", {"paddingTop": "34px"}, []),
     slider("sl-main", HERO_SLIDES, animation="slide", autoplay="3600",
-           label="輪播示範：四張投影片"),
+           label="輪播示範：四張投影片",
+           height_m="440px"),
     box("sl-hero-foot", {"paddingTop": "60px"}, []),
-])])
+])], pad_y="0px")
 
 
 # ---------------------------------------------------------------- the four
@@ -264,7 +271,7 @@ FOUR = section("sl-four", [wrap("sl-four-w", [
              "沒有空窗，收尾比 fadeOut 乾淨。", start="1"),
     ], tcols=2, mcols=1),
     box("sl-four-foot", {"paddingTop": "64px"}, []),
-])], bg="--mk-panel")
+])], bg="--mk-panel", pad_y="0px")
 
 
 # ---------------------------------------------------------------- carousel
@@ -298,7 +305,7 @@ CAROUSEL = section("sl-car", [wrap("sl-car-w", [
            carousel="1", label="輪轉示範", height="180px",
            height_m="150px", chrome=True, duration="600"),
     box("sl-car-foot", {"paddingTop": "60px"}, []),
-])])
+])], pad_y="0px")
 
 
 # ---------------------------------------------------------------- the notes
@@ -362,7 +369,7 @@ NOTES = section("sl-notes", [wrap("sl-notes-w", [
             ], tcols=2, mcols=1),
         ]),
     ]),
-])])
+])], pad_y="0px")
 
 TREE = {"type": "div", "data": {"attrID": "sl-page"},
         "children": [HERO, FOUR, CAROUSEL, NOTES]}

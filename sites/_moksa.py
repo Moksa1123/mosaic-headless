@@ -110,13 +110,24 @@ def grid(attr, cols, gap, children, tcols=None, mcols=1, **extra):
             "children": children}
 
 
-def section(attr, children, bg="--mk-paper"):
-    """Sections carry no vertical padding here - the document's rhythm is set by the
-    rules between clauses, not by a stack of padded bands."""
+def section(attr, children, bg="--mk-paper", pad_y=None):
+    """A band of the document.
+
+    The comment here used to say sections carry no vertical padding. They do:
+    `section` arrives with 80px top and bottom of its own, which is Mosaic's
+    default and is what sets this page's rhythm. It is invisible until a page adds
+    its own spacing on top, and then every band on a phone carries 80 + 80 + your
+    own - the showcase pages opened with about 200px of nothing above the first
+    line. Pass `pad_y` to take the vertical rhythm into your own hands.
+    """
+    base = {"backgroundColor": {"token": bg},
+            "paddingLeft": "40px", "paddingRight": "40px",
+            "fontFamily": CJK}
+    if pad_y is not None:
+        base["paddingTop"] = pad_y
+        base["paddingBottom"] = pad_y
     return {"type": "section", "data": {"attrID": attr},
-            "style": bp({"backgroundColor": {"token": bg},
-                         "paddingLeft": "40px", "paddingRight": "40px",
-                         "fontFamily": CJK},
+            "style": bp(base,
                         {"paddingLeft": "28px", "paddingRight": "28px"},
                         {"paddingLeft": "18px", "paddingRight": "18px"}),
             "children": children}
@@ -139,11 +150,30 @@ def ml(tag, text, **st):
     return T(tag, text, **st)
 
 
+# Below this, mono text stops being quiet and starts being unreadable - on a phone
+# in particular, where there is no leaning in. The audit at 390px found 80 runs at
+# 10px on one page alone, which is a decision taken 80 times by accident.
+MONO_FLOOR_M = 12
+
+
 def mono(text, size="11px", color="--mk-muted", track="0.14em", **st):
     """The page's primary voice. Everything that is a label, a key, a figure or an
-    address is set in it."""
+    address is set in it.
+
+    A size authored below `MONO_FLOOR_M` is raised to it on phones. The desktop
+    value is left alone: 10px works at arm's length on a large screen and is part
+    of the typographic hierarchy there, so this is a floor rather than a rewrite.
+    """
     st.setdefault("fontFamily", MONO)
     st.setdefault("fontWeight", "400")
+    try:
+        authored = float(str(size).replace("px", ""))
+    except ValueError:
+        authored = None
+    if authored is not None and authored < MONO_FLOOR_M:
+        t = dict(st.get("_t") or {})
+        t.setdefault("fontSize", "%dpx" % MONO_FLOOR_M)
+        st["_t"] = t
     return T("p", text,
              color={"token": color} if color.startswith("--") else color,
              fontSize=size, letterSpacing=track, **st)
@@ -248,7 +278,7 @@ def mask_line(attr, text, tag="h1", **st):
 
 # ── content, all of it Moksa Web's own ───────────────────────────────────────
 NAV = [("服務", "#services"), ("作品", "#works"),
-       ("產品", "#products"), ("彈窗", "/dialogs/"), ("輪播", "/sliders/"),
+       ("產品", "#products"), ("彈窗", "/dialogs/"), ("輪播", "/sliders/"), ("系統", "/tokens/"), ("資料", "/dynamic/"), ("轉換", "/conversion/"),
        ("聯絡", "#contact")]
 
 # key / figure / caption, read as a datasheet rather than as four big numbers
@@ -611,6 +641,17 @@ def motion_css():
         "-webkit-backdrop-filter:blur(10px);backdrop-filter:blur(10px)}",
         '#mk-header::after{content:"";position:absolute;left:0;right:0;bottom:0;'
         "height:1px;background:" + RULE + ";opacity:0}",
+        # On a phone the bar is no longer one line. The nav grew to nine items
+        # and wraps to two rows, which took the FIXED header to 177px - a quarter
+        # of the viewport permanently, with the first 97px of every page hidden
+        # underneath it, because the pages clear a header height that was decided
+        # when it was one line. A fixed element whose height depends on its
+        # content cannot be cleared by a constant, so below 768px it simply joins
+        # the flow and the problem cannot come back.
+        "@media (max-width:767px){#mk-header{position:static;"
+        "background:rgb(250,250,247);"
+        "-webkit-backdrop-filter:none;backdrop-filter:none;"
+        "border-bottom:1px solid " + RULE + "}}",
         "#mk-nav>*{position:relative}",
         '#mk-nav>*::after{content:"";position:absolute;left:0;right:100%;bottom:-5px;'
         "height:1px;background:rgb(255,90,54);"
@@ -1298,9 +1339,17 @@ HEADER = box("mk-shell-top", {}, [
         children=
         [wrap("mk-header-in", [
             {"type": "div", "data": {"attrID": "mk-header-row"},
+             # The nav grew from four items to seven as the showcase pages were
+             # added, and on a phone the row simply ran off the right edge - the
+             # last two links sat at left=393 and left=436 in a 390px viewport,
+             # which is to say they were unreachable. One line is not a layout
+             # that survives new content, so on `_m` the row wraps and the nav
+             # takes the second line to itself.
              "style": bp({"display": "flex", "alignItems": "center",
                           "justifyContent": "space-between", "columnGap": "40px"},
-                         {"columnGap": "24px"}, {"columnGap": "12px"}),
+                         {"columnGap": "24px"},
+                         {"columnGap": "12px", "flexWrap": "wrap",
+                          "rowGap": "10px"}),
              "children": [
                  # the wordmark is the only route back to the top on a one-pager, so
                  # it has to be a link. `menu-link` with a url renders a real <a>.
@@ -1319,7 +1368,7 @@ HEADER = box("mk-shell-top", {}, [
                  # time of day - a page cannot know that without JavaScript, and
                  # labelling a page-load counter "14:32" would be a small lie told
                  # in the most trustworthy typeface on the site.
-                 box("mk-clock", {}, [
+                 box("mk-clock", {}, _m={"display": "none"}, children=[
                      box("mk-clock-dot", {}, []),
                      T("p", "T+", color={"token": "--mk-faint"}, fontSize="10px",
                        fontFamily=MONO, letterSpacing="0.18em"),
@@ -1331,7 +1380,14 @@ HEADER = box("mk-shell-top", {}, [
                  {"type": "menu", "data": {"attrID": "mk-nav"},
                   "style": bp({"display": "flex", "columnGap": "30px",
                                "alignItems": "center"},
-                              {"columnGap": "20px"}, {"columnGap": "15px"}),
+                              {"columnGap": "20px", "flexWrap": "wrap",
+                               "rowGap": "6px"},
+                              {"columnGap": "16px", "rowGap": "6px",
+                               "flexWrap": "wrap", "width": "100%",
+                               "justifyContent": "flex-start",
+                               "customDeclarations":
+                                   "order:3;border-top:1px solid " + RULE
+                                   + ";padding-top:10px;"}),
                   "children": [
                       {"type": "menu-link",
                        "data": {"attrID": "mk-nav-%d" % i, "url": href},
@@ -1341,7 +1397,9 @@ HEADER = box("mk-shell-top", {}, [
                                              "fontFamily": MONO,
                                              "transitionAll": "160ms ease",
                                              "cursor": "pointer"},
-                                       "_m": {"fontSize": "12px"}},
+                                       "_t": {"fontSize": "12px",
+                                              "paddingTop": "8px",
+                                              "paddingBottom": "8px"}},
                                  "hover": {"_": {"color": {"token": "--mk-accent"}}},
                                  "focus-visible": {"_": FOCUS_RING}},
                        "text": text}
@@ -3059,6 +3117,18 @@ if __name__ == "__main__":
     # helpers it reads are pure functions - two copies produce identical dicts.
     import _dialogs
     import _sliders
+    import _tokens
+    import _dynamic
+    import _conversion
+    SITE["pages"].append({"slug": "conversion", "post_id": 273,
+                          "title": "Elementor 轉換",
+                          "tree": apply_type(_conversion.TREE, DISPLAY, CJK, "600")})
+    SITE["pages"].append({"slug": "dynamic", "post_id": 272,
+                          "title": "動態內容",
+                          "tree": apply_type(_dynamic.TREE, DISPLAY, CJK, "600")})
+    SITE["pages"].append({"slug": "tokens", "post_id": 271,
+                          "title": "設計系統",
+                          "tree": apply_type(_tokens.TREE, DISPLAY, CJK, "600")})
     SITE["pages"].append({"slug": "sliders", "post_id": 270,
                           "title": "輪播實驗室",
                           "tree": apply_type(_sliders.TREE, DISPLAY, CJK, "600")})

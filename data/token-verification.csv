@@ -1,0 +1,16 @@
+check,result,detail
+ROOT_PRESENT,PASS,9 custom properties on :root matching '--mk-'
+NO_DUPLICATES,PASS,every property declared once
+NO_EMPTY,PASS,every token has a value
+NOT_DEFAULT_WHITE,PASS,none
+ALL_COLOUR_TOKENS_USED,PASS,all 9 colour tokens are resolved by at least one element
+NON_COLOUR_TOKENS,PASS,"3 not judged by colour (they are numbers or lengths): --mk-m=0, --mk-n=0, --mk-s=0"
+USED/--mk-accent,PASS,"5 element(s), e.g. mk-progress-track, mk-progress, mk-clock-dot"
+USED/--mk-accent-ink,PASS,"2 element(s), e.g. mk-header-cta, tk-chip-mk-accent-ink"
+USED/--mk-ai,PASS,"1 element(s), e.g. tk-chip-mk-ai"
+USED/--mk-faint,PASS,"1 element(s), e.g. tk-chip-mk-faint"
+USED/--mk-ink,PASS,"76 element(s), e.g. mk-clock-m, mk-clock-m, mk-clock-s"
+USED/--mk-muted,PASS,"1 element(s), e.g. tk-chip-mk-muted"
+USED/--mk-panel,PASS,"3 element(s), e.g. tk-sw, tk-chip-mk-panel, tk-props"
+USED/--mk-paper,PASS,"7 element(s), e.g. tk-head, tk-chip-mk-paper, tk-pipe"
+USED/--mk-rule,PASS,"1 element(s), e.g. tk-chip-mk-rule"

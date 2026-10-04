@@ -101,7 +101,7 @@ def spec_line(label, value):
         "customDeclarations": "border-top:1px solid " + RULE + ";"}, [
         box("dl-spec-k", {"width": "88px", "flexSizing": {"type": "none"}},
             [mono(label, size="10px", color="--mk-faint", track="0.16em")]),
-        box("dl-spec-v", {"flexSizing": {"type": "grow"}},
+        box("dl-spec-v", {"flexSizing": {"type": "custom", "customOptions": {"flexGrow": "1", "flexShrink": "1"}}, "minWidth": "0px"},
             [mono(value, size="10px", color="--mk-ink", track="0.04em")])])
 
 
@@ -473,7 +473,7 @@ def card(key, num, title, specs, how):
             ml("h3", title, fontFamily=DISPLAY, fontWeight="600", fontSize="19px",
                lineHeight="1.25", letterSpacing="0.005em",
                color={"token": "--mk-ink"}, marginTop="12px"),
-            box("dl-card-spec-" + key, {"marginTop": "14px", "flexSizing": {"type": "grow"}},
+            box("dl-card-spec-" + key, {"marginTop": "14px", "flexSizing": {"type": "grow"}, "minWidth": "0px"},
                 [spec_line(k, v) for k, v in specs[:3]]),
             box("dl-card-foot-" + key,
                 {"marginTop": "18px", "display": "flex", "columnGap": "12px",
@@ -511,8 +511,8 @@ HEAD = section("dl-head", [wrap("dl-head-w", [
       "不按也讀得完。",
       fontFamily=CJK, fontSize="14px", lineHeight="1.9",
       color={"token": "--mk-muted"}, marginTop="12px", maxWidth="640px"),
-    box("dl-head-pad", {"paddingTop": "46px"}, []),
-])])
+    box("dl-head-pad", {"paddingTop": "46px"}, [], _m={"paddingTop": "26px"}),
+])], pad_y="0px")
 
 GALLERY = section("dl-gallery", [wrap("dl-gallery-w", [
     grid("dl-grid", 3, "18px",
@@ -533,7 +533,7 @@ GALLERY = section("dl-gallery", [wrap("dl-gallery-w", [
                     fontFamily=DISPLAY, fontWeight="600", fontSize="19px",
                     lineHeight="1.25", letterSpacing="0.005em",
                     color={"token": "--mk-ink"}, marginTop="12px"),
-                 box("dl-card-spec-ab", {"marginTop": "14px", "flexSizing": {"type": "grow"}},
+                 box("dl-card-spec-ab", {"marginTop": "14px", "flexSizing": {"type": "grow"}, "minWidth": "0px"},
                      [spec_line("觸發", "click，兩顆各自一個"),
                       spec_line("執行規則", "pickOne，群組 dl-ab"),
                       spec_line("實測", "先按的那顆贏，另一顆失效")]),
@@ -545,7 +545,7 @@ GALLERY = section("dl-gallery", [wrap("dl-gallery-w", [
              ])],
          tcols=2, mcols=1),
     box("dl-gallery-pad", {"paddingTop": "64px"}, []),
-])], bg="--mk-panel")
+])], bg="--mk-panel", pad_y="0px")
 
 NOTE = section("dl-note", [wrap("dl-note-w", [
     box("dl-note-inner", {
@@ -573,7 +573,7 @@ NOTE = section("dl-note", [wrap("dl-note-w", [
               fontFamily=CJK, fontSize="15px", lineHeight="1.95",
               color={"token": "--mk-muted"}, marginTop="14px", maxWidth="680px"),
         ]),
-])])
+])], pad_y="0px")
 
 TREE = {"type": "div", "data": {"attrID": "dl-page"},
         "children": [HEAD, GALLERY, NOTE] + MODALS}

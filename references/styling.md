@@ -201,9 +201,23 @@ type-switched group, `flexSizing`:
 "flexSizing": {"type": "custom", "customOptions": {…}}
 ```
 
-`none` is what you want for a label column that must not be squeezed, and `grow`
-for the cell that takes the slack — the pair that `flex-shrink:0` / `flex-grow:1`
-would have been.
+**`grow` carries `flex-shrink:0`, so it is not `flex: 1`.** An item set with it
+grows but never yields, and one long string then pushes its whole container wider
+than the viewport — which is a bug a horizontal-overflow check does not catch,
+because the document simply becomes wider rather than scrolling. The emitted CSS:
+
+| type | emitted |
+|---|---|
+| `none` | `flex-grow:0; flex-shrink:0` |
+| `shrink` | `flex-grow:0; flex-shrink:1` |
+| `grow` | `flex-grow:1; flex-shrink:0` |
+| `custom` | whichever of `flexGrow` / `flexShrink` you set |
+
+`none` is right for a label column that must not be squeezed. For the cell that
+takes the slack AND has to give ground on a phone, `custom` with both set to `1`
+is the only type that says so. Pair it with `minWidth: 0`, because a flex or grid
+item defaults to `min-width: auto` — min-content — and a `white-space: pre` block
+inside one will hold the track open at its longest line.
 
 **There is no `overflowX` or `overflowY`** — only the shorthand `overflow`, with
 `visible | hidden | clip | scroll | auto`. One axis at a time is not expressible

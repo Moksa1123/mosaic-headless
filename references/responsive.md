@@ -172,3 +172,56 @@ scores its own blind spots as successes is worse than no tool.
   responsive behaviour you want checked.
 
 The tool tells you the values arrived. Only the browser tells you they add up.
+
+## Five ways a page passes the width check and is still broken on a phone
+
+`verify_navigation.py --viewports` asks one question — does the document scroll
+sideways — and a page can pass it while being unusable. `tools/audit_mobile.py`
+asks the rest, re-opening each page at every width and reporting WIDE, OUTSIDE,
+CLIPPED, TINY_TYPE, SMALL_TARGET, GRID_NOT_COLLAPSED and LONG_MEASURE. Run on the
+five showcase pages it found all five of the following, none of which the width
+check could see.
+
+**`flexSizing: {"type": "grow"}` is `flex-grow:1; flex-shrink:0`.** It is not
+`flex: 1`. A value column set with it can grow but can never give ground, so one
+long mono string in a 310px card pushed the whole document out to 440px — and the
+page still "did not scroll sideways", because the document itself had simply become
+wider. The four types compile as:
+
+| type | emitted |
+|---|---|
+| `none` | `flex-grow:0; flex-shrink:0` |
+| `shrink` | `flex-grow:0; flex-shrink:1` |
+| `grow` | `flex-grow:1; flex-shrink:0` |
+| `custom` | whichever of `flexGrow` / `flexShrink` you set |
+
+So an item that must both fill and yield needs `custom` with both set to `1`.
+
+**A grid or flex item defaults to `min-width: auto`, which means min-content.** A
+code block in `white-space: pre` has a min-content width of its longest LINE, so
+the track refuses to shrink and the grid overflows its container. `overflow: auto`
+on the block does not help — the item ABOVE it is what is too wide. `minWidth: 0`
+on the item is the fix.
+
+**`section` arrives with 80px of vertical padding.** It is invisible until a page
+adds its own spacing, and then every band carries 80 + 80 + yours; the showcase
+pages opened with about 200px of nothing. `section()` in the demo now takes a
+`pad_y` so a page can take that rhythm into its own hands.
+
+**A fixed header's height is not a constant.** The demo's nav grew from four items
+to nine as pages were added; on a phone it wrapped to two rows and took the fixed
+header to 177px, with the first 97px of every page hidden underneath it, because
+the pages cleared a height decided when it was one line. Below 768px the header
+simply joins the flow now, which removes the whole class of bug.
+
+**A type scale needs a floor, not just a ramp.** 10px mono labels are part of the
+hierarchy on a large screen and illegible on a phone; the audit found 80 runs of
+them on one page. The demo's `mono()` raises anything under 12px at `_t` — which
+is `<=1079px`, so it covers the tablet too, where a 768px touch device was still
+being served desktop values.
+
+`data/mobile-audit.csv` is the standing result. Three classes in it are accepted
+rather than fixed, and are worth stating so they are not re-opened: the footer link
+list is deliberately two columns, the slider bullets are 26x28 (a secondary control
+below the 30px the tool asks for), and LONG_MEASURE flags CJK lines over 42
+characters, which at 768px is a preference rather than a defect.

@@ -31,9 +31,9 @@ GATE/button-closes,PASS,the modalClose inside is the only exit
 DEPTH/shut-at-rest,PASS,
 DEPTH/opens-past-75,PASS,scrollDepth threshold 75%
 EXIT/opens,PASS,exitIntent is desktop-only and synthetic leave is approximate
-LATCH/record-abb,PASS,"{""counter"":1,""firstAt"":1791092432503,""lastAt"":1791092432503,""lastID"":""a00fdaff-b"
+LATCH/record-abb,PASS,"{""counter"":1,""firstAt"":1791103196338,""lastAt"":1791103196338,""lastID"":""75cb0b1a-7"
 LATCH/B-first-wins,PASS,"6/6 as predicted, 0 lost clicks  {'abb>abb,aba>none': 6}"
-LATCH/record-aba,PASS,"{""counter"":1,""firstAt"":1791092481637,""lastAt"":1791092481637,""lastID"":""d3745edf-4"
+LATCH/record-aba,PASS,"{""counter"":1,""firstAt"":1791103249401,""lastAt"":1791103249401,""lastID"":""fbc055d4-7"
 LATCH/A-first-wins,PASS,"6/6 as predicted, 0 lost clicks  {'aba>aba,abb>none': 6}"
 LATCH/order-decides,PASS,"the winner flips with click order, so it is the first EVALUATED, not the first authored"
 FIT390/centre,PASS,scrollW=349/349 childOverflow=0 pageScrollsSideways=False
