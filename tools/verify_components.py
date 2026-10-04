@@ -46,6 +46,13 @@ def main():
     ap.add_argument("--faq", default="cp-faq-q-%d/cp-faq-a-%d:4")
     ap.add_argument("--form", default="cp-form")
     ap.add_argument("--map", default="cp-map")
+    ap.add_argument("--loop-slider", default="ct-slider",
+                    help="a slider whose slides come from a loop")
+    ap.add_argument("--loop-tabs", default="ct-tabs-menu")
+    ap.add_argument("--pagination", default="ct-arch-nums",
+                    help="a loop-pagination-numbers whose children are page links")
+    ap.add_argument("--paged-item", default="ct-arch-title",
+                    help="the repeated attrID whose text should change per page")
     a = ap.parse_args()
 
     rows, fails = [], []
@@ -157,6 +164,59 @@ def main():
                                  a.form)
             check("FORM/required_blocks", bool(invalid),
                   "empty form reports invalid: %s" % invalid[:4])
+
+        # ---- components whose children come from a loop
+        #
+        # One authored template, repeated per row. The assertion is COUNT: a
+        # template that failed to loop renders exactly once and looks fine.
+        if not present(a.loop_slider):
+            skip("LOOP/slider", "not on this page")
+        else:
+            n = p.evaluate("""(id) => document.querySelectorAll(
+                '#' + id + ' mosaic-slider-slide').length""", a.loop_slider)
+            check("LOOP/slider", n > 1,
+                  "%d slides from one authored slider-slide" % n)
+        if not present(a.loop_tabs):
+            skip("LOOP/tabs", "not on this page")
+        else:
+            n = p.evaluate("""(id) => document.querySelectorAll(
+                '#' + id + ' .m-tab').length""", a.loop_tabs)
+            labels = p.evaluate("""(id) => [...document.querySelectorAll(
+                '#' + id + ' .m-tab')].map(e => e.textContent.trim())""", a.loop_tabs)
+            check("LOOP/tabs", n > 1, "%d tabs from one authored tabs-tab" % n)
+            # @substr counts BYTES; a cut through a multi-byte character leaves
+            # U+FFFD, which is invisible in a count and obvious to a reader
+            check("LOOP/tab_labels_intact",
+                  all("�" not in x for x in labels),
+                  "no replacement characters - @substr counts bytes, so a length "
+                  "that is not a multiple of the encoding cuts a glyph in half")
+
+        # ---- pagination actually pages
+        if not present(a.pagination):
+            skip("LOOP/pagination", "not on this page")
+        else:
+            def titles():
+                return p.evaluate("""(id) => [...document.querySelectorAll(
+                    '[id=' + id + ']')].map(e => e.textContent.trim())""",
+                                  a.paged_item)
+            links = p.evaluate("""(id) => [...document.getElementById(id).children]
+                .map(e => e.getAttribute('href'))""", a.pagination)
+            check("LOOP/pagination_links", len(links) > 1 and all(links),
+                  "%d page links: %s" % (len(links),
+                                         [l.split("?")[-1] for l in links if l][:3]))
+            # `p` is one of WordPress's own query vars - ?p=2 is a 301 to post 2 -
+            # so a paginationKey of "p" takes the visitor off the page entirely
+            bad_key = [l for l in links if l and ("?p=" in l or "&p=" in l)]
+            check("LOOP/pagination_key_is_safe", not bad_key,
+                  "paginationKey does not collide with a WordPress query var"
+                  if not bad_key else "uses ?p=, which WordPress reads as a post ID")
+            before = titles()
+            p.click("#%s > *:nth-child(2)" % a.pagination)
+            p.wait_for_timeout(2000)
+            after = titles()
+            check("LOOP/pagination_changes_rows",
+                  bool(after) and set(after) != set(before),
+                  "page 1 %s -> page 2 %s" % (len(before), len(after)))
 
         # ---- map
         if not present(a.map):

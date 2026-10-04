@@ -195,6 +195,19 @@ class Surface:
                 problems.append("%s is a leaf and accepts no children (tried %s)" % (parent_type, t))
             elif rule.get("rule") == "allow":
                 allowed = rule["allowed_children"].split("|") + self.default_children.get(parent_type, [])
+                # A loop container stands in for its parent's children: a
+                # `slider-loop-slides` sits inside `slider-slides` and repeats a
+                # `slider-slide`, so what it accepts is what `slider-slides`
+                # accepts. The plugin's own canBeParentFor says `slider-slides`
+                # here, which would nest the track inside its own loop - and the
+                # factory's default children say `slider-slide`, which is the
+                # structure the editor builds. Rather than hard-code the
+                # disagreement, take the rule from the grandparent, which is both
+                # types' actual authority.
+                # ancestors[-1] IS the parent; the grandparent is one further up
+                if t not in allowed and "-loop-" in parent_type and len(ancestors) > 1:
+                    gp = self.rules.get(ancestors[-2], {})
+                    allowed = allowed + (gp.get("allowed_children") or "").split("|")
                 if t not in allowed:
                     problems.append("%s accepts only %s, not %s" % (parent_type, "/".join(allowed), t))
         # customStyles is the pre-1.0.8 name of customDeclarations; expand_shorthands maps it

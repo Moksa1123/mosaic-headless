@@ -4,7 +4,7 @@ description: |
   Build and modify Mosaic Pro (Nextend) sites by writing the underlying data model directly - no visual editor, no DOM. Query the real surface with `mo.py`, which joins every source table to the live sweeps so a lookup leads with the measured verdict rather than the declaration (128 node types, 191 properties, 98 style properties with 20 structured value shapes pinned down, 53 style states, 156 variants, 74 dynamic variables, 15 interaction triggers, 115 REST routes, 23 tables) instead of guessing, with every node type placed on a live site one at a time and asserted against the delivered HTML, the design-token and element-class layers verified against compiled CSS, the @VAR() dynamic language verified against rendered output, nine designed pages built through the tables themselves, and the delivered pages re-read in Chromium at three viewports so a rule that is present, correct and still wrong cannot pass. Drives Mosaic's own theme export/import and its plugin data upgrade from outside the editor and holds the copy against the source tree for tree. Measured on Mosaic Pro 1.0.9: the modal (`<dialog>`), OpenStreetMap, the exit-intent and scroll-depth triggers, run rules and the memory actions all built on a live page and read back, and the 1.0.7 -> 1.0.8 -> 1.0.9 migrations driven from outside wp-admin.
 license: "MIT"
 author: "moksa (https://moksaweb.com)"
-version: "1.27.0"
+version: "1.28.0"
 ---
 
 # Headless Mosaic
@@ -530,14 +530,15 @@ so the pattern is in the data, not just in this paragraph.
 | `data/conversion-batch.csv` | 19 | **converted, built and checked live, one page after another** - every Elementor page of a production site through the converter, with per-page element and content counts |
 | `data/token-benchmark.csv` | 6 | **measured with tiktoken** - the same six lookups priced three ways: reading the plugin source, loading every table, querying `mo.py`. 71-99.5% fewer tokens than the source and 99.6%+ fewer than the tables, which total 259,539 - never load them, query them |
 | `data/slider-verification.csv` | 30 | **driven live** - two sliders, one autoplaying and one a carousel: advance, arrows, bullets, keyboard, reduced motion |
-| `data/navigation-verification.csv` | 36 | **fetched and opened live** - every menu item is a real `<a href>`, every page of the nineteen answers 200, and no page scrolls sideways at 390 / 768 / 1280 |
+| `data/navigation-verification.csv` | 39 | **fetched and opened live** - every menu item is a real `<a href>`, every page of the nineteen answers 200, and no page scrolls sideways at 390 / 768 / 1280 |
 | `data/page-modal-verification.csv` | 19 | **read live** - one modal per page, and what each one's trigger, run rule, memory scope and dismissal policy actually came out as |
 | `data/dialog-verification.csv` | 19 | **driven live** - the 1.0.9 modal, its triggers, its run rules and the memory actions, each exercised in a real browser |
 | `data/dialog-form-verification.csv` | 49 | **driven live** - the same three nodes made into five FORMS (sheet, drawer, corner, takeover, gate), each re-opened at 390px and 768px; also where `pickOne` on a click turned out to be a latch rather than a lottery |
 | `data/token-verification.csv` | 15 | **driven live** - every `:root` custom property declared once, non-empty, and resolved by something on the page; a token nothing points at is a token that is not working |
-| `data/mobile-audit.csv` | 60 | **driven live** - what a sideways-scroll check cannot see: type under the legible floor, controls too small to hit, a grid that never collapsed, content escaping its box |
+| `data/mobile-audit.csv` | 63 | **driven live** - what a sideways-scroll check cannot see: type under the legible floor, controls too small to hit, a grid that never collapsed, content escaping its box |
 | `data/component-wall-verification.csv` | 13 | **driven live** - tabs switched, an accordion opened, a form's fields and Mosaic's own honeypot, and an OpenStreetMap asserted on the coordinates it was GIVEN rather than the default it falls back to |
 | `data/form-surface-verification.csv` | 8 | **driven live** - every field type Mosaic ships in one form: select with labelled options, radio and checkbox groups, file upload, and the browser's own validation refusing an empty submit |
+| `data/content-loop-verification.csv` | 10 | **driven live** - a slider, a tab bar, a list and a paginated archive whose children all come from one authored template repeated per post; the pagination is clicked and the rows asserted to CHANGE |
 | `data/custom-fields-verification.csv` | 62 | **rendered live** - ACF and Meta Box fields of every common type read back through `@VAR` / `@LOOP` off the delivered page, loops included |
 | `data/theme-zip-verification.csv` | 22 | **round-tripped live** - Mosaic's own ZIP export imported in test mode and compared to its source, table by table and tree by tree |
 | `data/node-type-notes.csv` | 8 | where a sweep outcome is true but misleading on its own, why. Surfaced by `mo.py type` |

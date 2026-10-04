@@ -111,3 +111,57 @@ attachment(2)  find_image(2)  find_link(2)  find_video(2)       media
 `sum`, `avg`, `concat` and `fallback` are variadic. `date()`'s timestamp argument is a
 true GMT Unix timestamp — pair it with `post/publish_timestamp_gmt`, not
 `publish_timestamp`, unless you want the local-time value re-interpreted as UTC.
+
+## A loop in place of a component's children
+
+Three component families take a loop INSTEAD of hand-authored children, which is
+the thing a page builder needs a plugin per component to do:
+
+```
+slider-slides > slider-loop-slides  > slider-slide      one slide per row
+tabs-menu     > tabs-loop-tabs      > tabs-tab
+tabs-content  > tabs-loop-tab-panes > tabs-tab-pane
+list          > list-loop-items     > list-item
+accordion     > accordion-loop-items> accordion-item
+```
+
+Each loop container carries the same three keys an ordinary `loop` does —
+`loopType`, `loopNamespace` and a `<loopType>Options` group — and the template
+inside reads its row with `@VAR('<namespace>/…')`. You author ONE slide, one tab,
+one row; the count comes from the content. The assertion that matters is therefore
+a COUNT: a template that failed to loop renders exactly once and looks correct.
+
+**`canBeParentFor` disagrees with the factory's own default data on these.**
+`SliderLoopSlidesElementTypeFactory::canBeParentFor()` returns true for
+`SliderSlidesElementTypeFactory` — the track, not the slide — while its
+`getDefaultData()` seeds itself with a `slider-slide`. `accordion-loop-items` says
+`accordion` the same way. The structure the editor actually builds is the second
+one. `build_page.py` resolves it by treating a loop container as standing in for
+its parent's children: what `slider-loop-slides` accepts is what `slider-slides`
+accepts.
+
+## `loop-pagination`, and the key you must not use
+
+```
+loop > loop-pagination > loop-pagination-button-previous
+                       > loop-pagination-numbers > loop-pagination-number
+                       > loop-pagination-button-next
+```
+
+`loop-pagination-number` is a TEMPLATE repeated per page, the same rule as a
+slider bullet — author one. `loop-pagination-numbers` takes `pagesBefore` /
+`pagesAfter` / `pagesStart` / `pagesEnd` to decide how much of a long range to
+show.
+
+**Do not set `paginationKey` to `p`.** It is one of WordPress's own reserved query
+vars, meaning "post ID": `?p=2` answers **HTTP 301** to post 2, so the visitor
+leaves the page entirely and the loop renders nothing. Measured. Any other key
+works — `?notes=2` on the demo pages the archive and changes all three rows.
+
+## `@substr` counts BYTES
+
+`@substr(@VAR('post/title'), 0, 14)` on a Han title cuts the fifth character in
+half and the output ends in U+FFFD. Lengths have to be a multiple of the encoding
+width — 18 for six three-byte characters — or the truncation has to be left to CSS.
+A count-based check cannot see this; `verify_components.py` looks for the
+replacement character directly.
