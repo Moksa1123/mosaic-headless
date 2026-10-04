@@ -4,7 +4,7 @@ description: |
   Build and modify Mosaic Pro (Nextend) sites by writing the underlying data model directly - no visual editor, no DOM. Query the real surface with `mo.py`, which joins every source table to the live sweeps so a lookup leads with the measured verdict rather than the declaration (126 node types, 191 properties, 98 style properties with 20 structured value shapes pinned down, 53 style states, 156 variants, 74 dynamic variables, 15 interaction triggers, 115 REST routes, 23 tables) instead of guessing, with every node type placed on a live site one at a time and asserted against the delivered HTML, the design-token and element-class layers verified against compiled CSS, the @VAR() dynamic language verified against rendered output, nine designed pages built through the tables themselves, and the delivered pages re-read in Chromium at three viewports so a rule that is present, correct and still wrong cannot pass. Drives Mosaic's own theme export/import and its plugin data upgrade from outside the editor and holds the copy against the source tree for tree. Measured on Mosaic Pro 1.0.9: the modal (`<dialog>`), OpenStreetMap, the exit-intent and scroll-depth triggers, run rules and the memory actions all built on a live page and read back, and the 1.0.7 -> 1.0.8 -> 1.0.9 migrations driven from outside wp-admin.
 license: "MIT"
 author: "moksa (https://moksaweb.com)"
-version: "1.21.2"
+version: "1.22.0"
 ---
 
 # Headless Mosaic
@@ -812,6 +812,7 @@ post — `build_all.py` resets first for that reason.
 | `copy_styles.py` | push one node's style onto others, by attrID or prefix |
 | `bootstrap_probe_theme.php` | a licence-free scratch theme |
 | `mint_session.php` | a matching cookie + `wp_rest` nonce from WP-CLI |
+| `check_tables.py` | re-extract all eleven source-derived tables and diff them against the shipped ones - the check for a table that is not wrong but STALE, which nothing else can see |
 
 ## Regenerating everything
 
@@ -823,6 +824,12 @@ python tools/extract_default_children.py <plugin-root> data/
 python tools/extract_style_properties.py <plugin-root> data/
 python tools/extract_interactions.py     <plugin-root> data/
 python tools/extract_dynamic_variables.py <plugin-root> data/
+
+# and then, always: a table extracted BEFORE its extractor was repaired keeps
+# describing the old source and ships silently. Row counts cannot see it and the
+# release gate never sees the plugin. Run this after ANY change to an extractor,
+# not only after a plugin upgrade.
+python tools/check_tables.py              <plugin-root>
 python tools/capture_live.py             data/          # from data/raw/*.json + db-columns.txt
                                                         # (raw dumps are gitignored;
                                                         #  re-capture from a live site)

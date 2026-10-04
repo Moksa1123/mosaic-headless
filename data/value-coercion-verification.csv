@@ -1,0 +1,13 @@
+validator,probed_on,sent,result,note
+ValidatorInteger,maxlength on textarea-input,"""12""",12,accepted
+ValidatorInteger,maxlength on textarea-input,"""12abc""",12,"trailing garbage ignored - parseInt semantics, new in 1.0.9"
+ValidatorInteger,maxlength on textarea-input,"""abc""",(absent),"no leading digits, rejected"
+ValidatorInteger,maxlength on textarea-input,"""-5x""",(absent),"parses to -5, then refused by the property's own min:0 - the parser accepted it"
+ValidatorInteger,maxlength on textarea-input,""" 7 """,7,leading and trailing whitespace tolerated
+ValidatorInteger,maxlength on textarea-input,"""0012""",12,"leading zeros are decimal, not octal"
+ValidatorInteger,maxlength on textarea-input,"""1e3""",1,NOT 1000 - the exponent is trailing garbage
+ValidatorInteger,maxlength on textarea-input,"""12.9""",12,"truncated toward zero, not rounded"
+stretch,width,"""stretch""",width:-webkit-fill-available then width:stretch,"both emitted, prefix first"
+stretch,height,"""stretch""",height:-webkit-fill-available then height:stretch,both emitted
+stretch,maxWidth,"""stretch""",max-width:-webkit-fill-available then max-width:stretch,both emitted
+stretch,width,"""STRETCH""",width:STRETCH,"kept as typed - the match is case-sensitive, and CSS keywords are not, so it still applies"

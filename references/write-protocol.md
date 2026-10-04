@@ -77,3 +77,34 @@ A failed validator does not return an HTTP error. The response is a
 `RESTJSONExceptionEnvelope`: HTTP 200 with an `exceptions` array in the body. Code
 that only checks the status code will report a clean save on a rejected write.
 Always read `exceptions` before believing a commit landed.
+
+## Validators coerce before they reject — a number need not arrive as a number
+
+Silent rejection is the documented hazard, but the quieter one is silent *acceptance*
+of something other than what you sent. As of 1.0.9 `ValidatorInteger` mirrors
+JavaScript's `parseInt()`: it takes the leading integer and discards the rest, where
+the previous release fell back to PHP's `intval()` and treated a zero result as a
+failure. Measured on `textarea-input`'s `maxlength`:
+
+| sent | stored | |
+|---|---|---|
+| `"12"` | 12 | |
+| `" 7 "` | 7 | whitespace tolerated |
+| `"0012"` | 12 | decimal, not octal |
+| `"12abc"` | **12** | trailing garbage ignored |
+| `"12.9"` | **12** | truncated toward zero, not rounded |
+| `"1e3"` | **1** | **not** 1000 — the exponent is trailing garbage |
+| `"abc"` | absent | no leading digits |
+| `"-5x"` | absent | parsed fine as −5; refused by the property's own `min: 0` |
+
+`"1e3"` is the row to remember: a value that looks numeric to a human, is numeric to
+`floatval()`, and lands as 1. A typo in a unit (`"16px"` where a bare integer was
+wanted) likewise stores 16 and never complains. Send integers as integers, and read
+the row back when you did not.
+
+The companion change is `ValidatorMimeType`, which now accepts any number of media
+type parameters including quoted values containing spaces — so
+`video/mp4; codecs="avc1.42E01E, mp4a.40.2"` is valid where 1.0.8 rejected it.
+
+`data/value-coercion-verification.csv` has these runs, along with the `stretch`
+keyword's emitted declarations.

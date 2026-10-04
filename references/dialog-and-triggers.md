@@ -119,6 +119,33 @@ What that writes, measured: `localStorage` **and** `sessionStorage`, both under
 that opens a second tab to prove a cap is testing nothing — reload the same tab.
 That mistake made the cap look broken here until the tab was reused.
 
+### `pickOne`, measured
+
+`pickOne` is the one rule that is about a GROUP rather than one interaction, and the
+group is the `name`: give three modals the same `name` and exactly one of them opens.
+Three `pageLoad` modals sharing `probe-pick` were loaded repeatedly:
+
+| what | result |
+|---|---|
+| 12 fresh browser contexts, `remember: "page"` | one modal every time, 4 / 6 / 2 across the three |
+| 8 reloads of the SAME tab, `remember: "page"` | re-drawn each load — 6 / 1 / 1 |
+| 8 reloads of the same tab, `remember: "forever"` | the same contender all 8 times |
+| 6 fresh contexts, `remember: "forever"` | draws again — 1 / 3 / 2 |
+
+No load ever opened more than one. So `remember` on `pickOne` does not mean "how long
+until it may run again", it means **how long the draw is kept**: `page` re-rolls on
+every navigation, `session` and `forever` hand one visitor the same variant each time
+— which is the whole point, since a popup that changes on reload reads as a bug. The
+last row is the limit worth knowing: `forever` is localStorage, so it is per browser
+profile, and a fresh context is a fresh visitor who draws again.
+
+The record gains one field for this: alongside `counter` / `firstAt` / `lastAt`,
+`mos:v1:r:<name>` carries **`lastID`**, the uuid of the interaction that won the draw.
+That is what makes the choice stick, and it is also how you read the drawn variant
+back in a test without inspecting which modal is open.
+
+`data/interaction-rules-verification.csv` has the runs.
+
 ## Memory: remember / forget
 
 Two actions that write and clear the same records a run rule reads, so one

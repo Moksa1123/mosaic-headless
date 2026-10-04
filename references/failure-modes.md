@@ -294,3 +294,27 @@ The other half of this finding is about the checkers: WordPress's "critical erro
 page is 2,697 bytes, above the 2,000-byte healthy floor, and `Client.page()` was
 returning an HTTPError's body as the page - so `build_site` announced `OK` over a
 500 and a whole batch believed it. A 5xx now returns an empty body.
+
+## A shipped table can be stale rather than wrong
+
+The failure this skill nearly shipped three times in a row is not a bad value, it is
+an old one. `data/node-types.csv` carried an empty `default_element_class` for three
+releases: the column's regex was repaired AFTER the extraction run that produced the
+table, so the file went on describing the previous source and nothing compared the
+two again.
+
+Nothing in place could see it. Row counts were right the whole time — the table had
+the correct number of rows, with one column quietly blank. The release gate counts
+verification tables but never sees the plugin source, because that source is licensed
+third-party code and is not in the repository, so it cannot re-derive anything. And a
+reader of the skill has no way to tell a legitimately-empty column from a lost one.
+
+`tools/check_tables.py` closes it: it re-runs all seven extractors into a tempdir and
+diffs every output against the shipped file, naming the first differing line rather
+than just the filename. The moment to run it is **after any change to a
+`tools/extract_*.py`**, not only after a plugin upgrade — the upgrade is the case
+everyone remembers.
+
+The general shape, worth carrying beyond this repo: a derived artifact checked into
+the tree is only as fresh as the last time someone re-derived it, and if the deriving
+input is not in the tree, no amount of CI will notice.

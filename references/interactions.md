@@ -143,6 +143,39 @@ Mosaic also *added* a `uuid` of its own. So on this data model:
 
 That check is worth applying to any deeply-nested Mosaic write, not just interactions.
 
+## Aiming an action somewhere else: `targetModifiers`
+
+Every pluggable action takes a `settings.target`, and a target is either
+`{"type": "element", "uuid": "<nodeID>"}` or `{"type": "variant", "uuid": "<variantID>"}`.
+`settings.targetModifiers` then narrows or widens it — a list of
+`{"uuid", "type", "data"}` where `data` is another target of the same two shapes and
+`type` is one of `children`, `sibling`, `parent`, `include`, `exclude`.
+
+The thing worth knowing is what that compiles to. The page hands the runtime a
+`targetSelectorData` **pipeline**: one entry for the base target, then one per
+modifier, applied in the order written.
+
+```
+plain element                 [{"type":"all","selector":"._e"}]
+plain variant                 [{"type":"all","selector":"h2,.m-heading-2"}]
+element + children(variant)   [{"type":"all","selector":"._e"},
+                               {"type":"children","selector":"h2,.m-heading-2"}]
+element + sibling(variant)    [... {"type":"sibling",   ...}]
+element + parent(variant)     [... {"type":"parent",    ...}]
+variant + include(element)    [... {"type":"include",   ...}]
+variant + exclude(element)    [... {"type":"exclude",   ...}]
+children then exclude         three entries, in that order
+```
+
+Two consequences. A **variant target resolves to the variant's own CSS selectors**,
+so "every H2" costs you nothing — you do not have to enumerate nodes. And because it
+is a pipeline rather than a filter set, **order matters**: `children` then `exclude`
+excludes from the children, while the reverse excludes from the base and then
+descends. Write the modifiers in the order you want them applied.
+
+All eight shapes above were committed and read back from the delivered page;
+`data/interaction-rules-verification.csv` has them.
+
 ## The surface, extracted
 
 `data/interaction-types.csv` — 12 trigger types in two families:
