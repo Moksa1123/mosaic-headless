@@ -99,6 +99,18 @@ at every element of a class.
 | `scrollDepth` | timed | the visitor scrolls this far down | `threshold: 50%` |
 | `modal` | timed | the modal opens or closes | — |
 
+**`exitIntent` cannot catch someone who has decided to leave.** The gesture it
+detects — pointer travelling up and out through the top — is the same gesture as
+reaching for Back, the tab strip or the address bar. With `awayFor: 600ms` it fires
+*after* the pointer has been gone that long, by which time the visitor is already
+resting on the button, so the modal appears and the navigation takes the whole page
+away a moment later. Measured, after a user reported "it only flashes when I press
+Back": the modal does not close itself and nothing is wrong with it — it opens and
+stays open — the page simply stops existing. So an exit-intent offer reaches the
+visitor whose pointer *drifts* upward without committing, and never the one who has
+already chosen to go. Budget for that when you decide what to put in it, and give
+the modal a manual opener too if anyone ever needs to read it on purpose.
+
 They are ordinary interaction types, so they take the envelope the rest of the
 language uses (`references/interactions.md`). The interaction type list is also
 re-grouped in 1.0.9 — Mouse / Page & scroll / Element events — which changes the

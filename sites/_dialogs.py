@@ -314,11 +314,20 @@ EXIT_MODAL = M(
     "exit", 7, "離站挽留",
     "游標往上離開頁面時出現——而且只有桌機會。",
     "exitIntent 偵測的是指標從頁面頂端離開，觸控裝置上永遠不會觸發，"
-    "這是它的設計而不是缺陷：手機沒有「游標離開」這件事，"
-    "硬要模擬只會在捲動時誤觸。awayFor 600ms 是離開多久才算數。"
-    "搭配 cap 1 / session，一次瀏覽最多攔你一次。",
+    "這是它的設計而不是缺陷：手機沒有「游標離開」這件事。"
+    "awayFor 600ms 是指標離開多久才算數。"
+    "最值得知道的是它的先天限制："
+    "你為了離開而把游標往上移（去按上一頁、關分頁、打網址），"
+    "那個動作本身就是 exitIntent 的定義——"
+    "等它滿 600ms 觸發時，你已經停在那顆按鈕上了，"
+    "所以彈窗常常只來得及一閃就跟著頁面一起消失。"
+    "實測過：這不是彈窗自己關掉，是導覽把整個頁面帶走了。"
+    "所以 exitIntent 真正接得到的，是游標漂上去但還沒決定要走的人；"
+    "已經按下上一頁的人，你是攔不到的。"
+    "這張卡片因此多給了一顆「手動開啟」，不然你永遠讀不完它。",
     [("觸發", "exitIntent，awayFor 600ms（僅桌機）"), ("執行規則", "cap max 1"),
-     ("記憶", "session"), ("關閉", "everything"), ("注意", "觸控裝置永不觸發")],
+     ("記憶", "session"), ("關閉", "everything"),
+     ("限制", "按上一頁的人攔不到，只會一閃")],
     CENTRE, centred(maxWidth="480px"),
     shorthand={"type": "exitIntent",
                "exitIntentOptions": {
@@ -327,7 +336,7 @@ EXIT_MODAL = M(
                        {"uuid": U(), "type": "cap",
                         "capOptions": {"max": "1", "remember": "session",
                                        "name": "dl-exit"}}]}}},
-    _card="游標離開頁面頂端時（桌機）")
+    _card="游標離開頂端時自動出現（桌機），或：")
 
 DEPTH_MODAL = M(
     "depth", 8, "讀到一半才問",
@@ -437,6 +446,11 @@ MODALS = [CENTRE_MODAL, SHEET_MODAL, DRAWER_MODAL, TOAST_MODAL, TAKEOVER_MODAL,
 
 # ---------------------------------------------------------------- the page
 
+# Self-opening cards that ALSO need a button, because their trigger cannot be
+# performed on demand by a reader who wants to look at the thing.
+ALSO_BUTTON = {"exit"}
+
+
 def card(key, num, title, specs, how):
     """The grid cell that opens one modal - and states its configuration first.
 
@@ -461,9 +475,18 @@ def card(key, num, title, specs, how):
                color={"token": "--mk-ink"}, marginTop="12px"),
             box("dl-card-spec-" + key, {"marginTop": "14px", "flexSizing": {"type": "grow"}},
                 [spec_line(k, v) for k, v in specs[:3]]),
-            box("dl-card-foot-" + key, {"marginTop": "18px"},
-                [open_btn(key) if not self_opening
-                 else mono(how, size="10px", color="--mk-muted", track="0.1em")]),
+            box("dl-card-foot-" + key,
+                {"marginTop": "18px", "display": "flex", "columnGap": "12px",
+                 "rowGap": "8px", "flexWrap": "wrap", "alignItems": "center"},
+                ([] if not self_opening
+                 else [mono(how, size="10px", color="--mk-muted", track="0.1em")])
+                # exitIntent fires on the gesture of reaching for the browser
+                # chrome, so on a page you are about to leave you only ever glimpse
+                # it. On a showcase page that is the same as not shipping it, so
+                # this one gets a manual opener as well as its real trigger.
+                + ([open_btn(key, "手動開啟", accent=False)]
+                   if key in ALSO_BUTTON else
+                   ([] if self_opening else [open_btn(key)]))),
         ],
         hover={"customDeclarations": "border:1px solid rgb(22,24,28);"})
 

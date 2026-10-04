@@ -17108,7 +17108,7 @@
                       "settings": {
                        "target": {
                         "type": "element",
-                        "uuid": "fc00e9a4-f617-42a3-a657-bd9e30122b0e"
+                        "uuid": "f29b76d3-d9c0-44e8-8f3d-49aeb63ca969"
                        }
                       }
                      }
@@ -17164,7 +17164,7 @@
           ]
          }
         ],
-        "nodeID": "fc00e9a4-f617-42a3-a657-bd9e30122b0e"
+        "nodeID": "f29b76d3-d9c0-44e8-8f3d-49aeb63ca969"
        }
       ]
      }
@@ -23986,7 +23986,12 @@
               "style": {
                "&": {
                 "_": {
-                 "marginTop": "18px"
+                 "marginTop": "18px",
+                 "display": "flex",
+                 "columnGap": "12px",
+                 "rowGap": "8px",
+                 "flexWrap": "wrap",
+                 "alignItems": "center"
                 }
                }
               },
@@ -23998,20 +24003,20 @@
                  "interactions": [
                   {
                    "type": "click",
-                   "uuid": "87b18540-2307-4b5b-a333-737259a1e5a3",
+                   "uuid": "d87ff991-009b-4947-8c09-bbcebe790e7f",
                    "clickOptions": {
                     "name": "dl-open-centre",
-                    "ID": "911187fd-f2d9-4278-b244-090dad881256",
+                    "ID": "33524581-a2d4-47b9-a47f-9fc33dfbc5df",
                     "actionSlots": {
                      "click": {
                       "actions": [
                        {
                         "type": "modalOpen",
-                        "uuid": "6f314f60-d1a5-43f0-ae8e-3a6c8e8a26ba",
+                        "uuid": "8222a3a3-7a05-46f9-aa92-47e450e44a55",
                         "settings": {
                          "target": {
                           "type": "element",
-                          "uuid": "eba79298-3657-4133-821a-d43773937845"
+                          "uuid": "5d33da88-073a-401b-8beb-22c9456a008a"
                          }
                         }
                        }
@@ -24493,7 +24498,12 @@
               "style": {
                "&": {
                 "_": {
-                 "marginTop": "18px"
+                 "marginTop": "18px",
+                 "display": "flex",
+                 "columnGap": "12px",
+                 "rowGap": "8px",
+                 "flexWrap": "wrap",
+                 "alignItems": "center"
                 }
                }
               },
@@ -24505,20 +24515,20 @@
                  "interactions": [
                   {
                    "type": "click",
-                   "uuid": "5f00e7e8-1d5a-482e-8594-d2fe63b66a35",
+                   "uuid": "1f880c19-84c6-4c84-a6ae-e61b250dfc1e",
                    "clickOptions": {
                     "name": "dl-open-sheet",
-                    "ID": "f5f6976e-6996-48aa-80af-0c28f045ae53",
+                    "ID": "1f16915e-ceee-44ee-9b3c-fb6266194d42",
                     "actionSlots": {
                      "click": {
                       "actions": [
                        {
                         "type": "modalOpen",
-                        "uuid": "396836b5-0cd0-4eaf-a816-711e8bd2dcd7",
+                        "uuid": "00aa8e00-45a4-4887-a173-c9a50ef060d4",
                         "settings": {
                          "target": {
                           "type": "element",
-                          "uuid": "2ecab407-6721-48aa-bf9c-d64eabe4794a"
+                          "uuid": "beab43ba-3531-4cc2-bb84-68d901acf88c"
                          }
                         }
                        }
@@ -25000,7 +25010,12 @@
               "style": {
                "&": {
                 "_": {
-                 "marginTop": "18px"
+                 "marginTop": "18px",
+                 "display": "flex",
+                 "columnGap": "12px",
+                 "rowGap": "8px",
+                 "flexWrap": "wrap",
+                 "alignItems": "center"
                 }
                }
               },
@@ -25012,20 +25027,20 @@
                  "interactions": [
                   {
                    "type": "click",
-                   "uuid": "13f024d9-d2b1-4415-bddd-a5280d9f5aa1",
+                   "uuid": "38cc3404-e10a-417c-947d-18342396e973",
                    "clickOptions": {
                     "name": "dl-open-drawer",
-                    "ID": "88574358-3cfc-4440-8407-366505d0c842",
+                    "ID": "13a87d13-691d-4eff-9427-4172d3075b09",
                     "actionSlots": {
                      "click": {
                       "actions": [
                        {
                         "type": "modalOpen",
-                        "uuid": "38face50-b969-49ce-9272-00b6db089bd5",
+                        "uuid": "8feccb8b-b3af-4ad3-9a60-fe267b4ba3a5",
                         "settings": {
                          "target": {
                           "type": "element",
-                          "uuid": "0de5b9f8-bf1d-4e7e-9372-2b61b49b50e7"
+                          "uuid": "e67f1a60-c6e6-4d60-aff6-fee59da9ce86"
                          }
                         }
                        }
@@ -25507,7 +25522,12 @@
               "style": {
                "&": {
                 "_": {
-                 "marginTop": "18px"
+                 "marginTop": "18px",
+                 "display": "flex",
+                 "columnGap": "12px",
+                 "rowGap": "8px",
+                 "flexWrap": "wrap",
+                 "alignItems": "center"
                 }
                }
               },
@@ -25956,7 +25976,12 @@
               "style": {
                "&": {
                 "_": {
-                 "marginTop": "18px"
+                 "marginTop": "18px",
+                 "display": "flex",
+                 "columnGap": "12px",
+                 "rowGap": "8px",
+                 "flexWrap": "wrap",
+                 "alignItems": "center"
                 }
                }
               },
@@ -25968,20 +25993,20 @@
                  "interactions": [
                   {
                    "type": "click",
-                   "uuid": "54ff5b9e-2f3c-4532-b493-29d76a619224",
+                   "uuid": "d21f4f61-a3af-4ec4-8e8a-e81731d8e91d",
                    "clickOptions": {
                     "name": "dl-open-takeover",
-                    "ID": "c5ba790f-6b9c-4d0a-b236-64e9c4b6a449",
+                    "ID": "c7d4934b-abe4-46cb-92e9-426c2409e9c6",
                     "actionSlots": {
                      "click": {
                       "actions": [
                        {
                         "type": "modalOpen",
-                        "uuid": "3ad41f0c-f98d-45c3-a8c3-6c36c8858d39",
+                        "uuid": "0dd8e3cf-1089-48a2-b2e9-3f344de63f8e",
                         "settings": {
                          "target": {
                           "type": "element",
-                          "uuid": "00564661-bed4-46fd-ab3b-3190e2943a40"
+                          "uuid": "8c7632ce-eddd-4d0a-ba5a-7218aa7f4b72"
                          }
                         }
                        }
@@ -26463,7 +26488,12 @@
               "style": {
                "&": {
                 "_": {
-                 "marginTop": "18px"
+                 "marginTop": "18px",
+                 "display": "flex",
+                 "columnGap": "12px",
+                 "rowGap": "8px",
+                 "flexWrap": "wrap",
+                 "alignItems": "center"
                 }
                }
               },
@@ -26475,20 +26505,20 @@
                  "interactions": [
                   {
                    "type": "click",
-                   "uuid": "8f8d0e18-f1c0-4dd6-bc18-a111435b19df",
+                   "uuid": "9d438c00-302d-4af4-bec1-480d699ec148",
                    "clickOptions": {
                     "name": "dl-open-gate",
-                    "ID": "819ef86f-3a1b-45da-bdaa-fb0b1849fd49",
+                    "ID": "0c2a7514-bb30-4278-a08f-3f7e0fe73859",
                     "actionSlots": {
                      "click": {
                       "actions": [
                        {
                         "type": "modalOpen",
-                        "uuid": "1c371ee5-6c79-4f6b-bf30-a5df775413e4",
+                        "uuid": "e56fc8f6-453a-4406-9350-14ae61ec844a",
                         "settings": {
                          "target": {
                           "type": "element",
-                          "uuid": "744cef24-58e9-444b-b965-c3eeea20fdc7"
+                          "uuid": "91a3d3c2-6619-44d4-aa56-ecc06f5a7d47"
                          }
                         }
                        }
@@ -26970,7 +27000,12 @@
               "style": {
                "&": {
                 "_": {
-                 "marginTop": "18px"
+                 "marginTop": "18px",
+                 "display": "flex",
+                 "columnGap": "12px",
+                 "rowGap": "8px",
+                 "flexWrap": "wrap",
+                 "alignItems": "center"
                 }
                }
               },
@@ -26980,7 +27015,7 @@
                 "data": {
                  "tagName": "p"
                 },
-                "text": "游標離開頁面頂端時（桌機）",
+                "text": "游標離開頂端時自動出現（桌機），或：",
                 "style": {
                  "&": {
                   "_": {
@@ -26994,6 +27029,82 @@
                   }
                  }
                 }
+               },
+               {
+                "type": "button",
+                "data": {
+                 "attrID": "dl-open-exit",
+                 "interactions": [
+                  {
+                   "type": "click",
+                   "uuid": "8483e722-249f-4da2-8aa0-e960e88dab25",
+                   "clickOptions": {
+                    "name": "dl-open-exit",
+                    "ID": "584389c1-225f-4370-9942-b4355b20fc03",
+                    "actionSlots": {
+                     "click": {
+                      "actions": [
+                       {
+                        "type": "modalOpen",
+                        "uuid": "9bd18f00-f77d-4702-afdf-d309f8d858c9",
+                        "settings": {
+                         "target": {
+                          "type": "element",
+                          "uuid": "5cd1a916-58ac-4b6f-a707-8bc36fa5f0aa"
+                         }
+                        }
+                       }
+                      ]
+                     }
+                    }
+                   }
+                  }
+                 ]
+                },
+                "style": {
+                 "&": {
+                  "_": {
+                   "backgroundColor": "rgba(0,0,0,0)",
+                   "color": {
+                    "token": "--mk-ink"
+                   },
+                   "fontFamily": "'IBM Plex Mono',ui-monospace,SFMono-Regular,Menlo,Consolas,monospace",
+                   "fontSize": "11px",
+                   "letterSpacing": "0.18em",
+                   "fontWeight": "500",
+                   "cursor": "pointer",
+                   "paddingLeft": "18px",
+                   "paddingRight": "18px",
+                   "paddingTop": "11px",
+                   "paddingBottom": "11px",
+                   "customDeclarations": "border:1px solid rgba(22,24,28,.28);"
+                  }
+                 },
+                 "hover": {
+                  "_": {
+                   "backgroundColor": {
+                    "token": "--mk-ink"
+                   },
+                   "color": {
+                    "token": "--mk-paper"
+                   },
+                   "customDeclarations": "border:1px solid rgb(22,24,28);"
+                  }
+                 },
+                 "focus-visible": {
+                  "_": {
+                   "customDeclarations": "outline:2px solid rgb(255,90,54);outline-offset:3px;"
+                  }
+                 }
+                },
+                "children": [
+                 {
+                  "type": "wysiwyg-text",
+                  "data": {
+                   "text": "手動開啟"
+                  }
+                 }
+                ]
                }
               ]
              }
@@ -27419,7 +27530,12 @@
               "style": {
                "&": {
                 "_": {
-                 "marginTop": "18px"
+                 "marginTop": "18px",
+                 "display": "flex",
+                 "columnGap": "12px",
+                 "rowGap": "8px",
+                 "flexWrap": "wrap",
+                 "alignItems": "center"
                 }
                }
               },
@@ -27878,14 +27994,14 @@
                  "interactions": [
                   {
                    "type": "click",
-                   "uuid": "031d462e-7eec-4856-a5a7-b4e4caa69af3",
+                   "uuid": "d3745edf-42f6-4c45-a922-11be06f65981",
                    "clickOptions": {
                     "name": "dl-ab-aba",
-                    "ID": "fcac5553-cdf3-4c6e-afb7-8f9af972ebb6",
+                    "ID": "eef8b031-ecb6-4f29-ba4a-b7c1dad7a429",
                     "runs": {
                      "rules": [
                       {
-                       "uuid": "eba9671b-ca46-4728-9e9f-5f369671f28e",
+                       "uuid": "03b6a2cc-f979-42af-aff9-779ca7a11adf",
                        "type": "pickOne",
                        "pickOneOptions": {
                         "remember": "page",
@@ -27899,11 +28015,11 @@
                       "actions": [
                        {
                         "type": "modalOpen",
-                        "uuid": "2db35389-da32-4d45-a988-45c419e7a5b7",
+                        "uuid": "0385bc10-c1c4-4986-b74d-97769362cc40",
                         "settings": {
                          "target": {
                           "type": "element",
-                          "uuid": "da29377a-29a4-4de6-8e17-84449721042f"
+                          "uuid": "27f20d17-3a9c-496f-b056-a051167dfd4a"
                          }
                         }
                        }
@@ -27966,14 +28082,14 @@
                  "interactions": [
                   {
                    "type": "click",
-                   "uuid": "2c17cec6-3070-4147-8982-524e208250fc",
+                   "uuid": "a00fdaff-bb1c-4d75-9215-173fd879784e",
                    "clickOptions": {
                     "name": "dl-ab-abb",
-                    "ID": "fccc2105-0f61-4dec-9c7f-a4f2909f95d6",
+                    "ID": "8ab397bd-10a4-42b3-9f45-a0bf00b9e1d1",
                     "runs": {
                      "rules": [
                       {
-                       "uuid": "23510458-cb30-48d8-96a6-da3d7f452cda",
+                       "uuid": "5b6c82d2-be94-4ff7-bc46-2cc6aed921f1",
                        "type": "pickOne",
                        "pickOneOptions": {
                         "remember": "page",
@@ -27987,11 +28103,11 @@
                       "actions": [
                        {
                         "type": "modalOpen",
-                        "uuid": "0e44a80f-b4b8-4d39-9589-d40fc010c51c",
+                        "uuid": "a48e0e8f-2595-482b-aa70-4c544a2899c8",
                         "settings": {
                          "target": {
                           "type": "element",
-                          "uuid": "24a60a20-315e-474b-bf15-ee0611055aa7"
+                          "uuid": "45ca6618-bae1-4502-bca1-31f97ff16a1f"
                          }
                         }
                        }
@@ -28256,14 +28372,14 @@
              "translateXOptions": {
               "value": "-50%"
              },
-             "uuid": "8a2ed91c-740b-4471-bb45-a4a7755acffc"
+             "uuid": "a8dd06fe-6223-4479-9a10-e0f2b3492086"
             },
             {
              "type": "translateY",
              "translateYOptions": {
               "value": "-50%"
              },
-             "uuid": "c929b016-e9b7-4355-a3fc-3f04dc7ff9f7"
+             "uuid": "b8840221-7ac9-44da-a3b4-a4b1ab658740"
             }
            ],
            "width": "100%",
@@ -28912,20 +29028,20 @@
              "interactions": [
               {
                "type": "click",
-               "uuid": "8696e33c-538d-441b-aaf5-68a797b97633",
+               "uuid": "4ce52f3d-e116-4ff8-b326-e5c70127c0bf",
                "clickOptions": {
                 "name": "dl-close-centre",
-                "ID": "02ef599d-001c-4399-8153-baf1d3c34b70",
+                "ID": "5782c2d8-d834-4dd8-9a02-d738234fb4b0",
                 "actionSlots": {
                  "click": {
                   "actions": [
                    {
                     "type": "modalClose",
-                    "uuid": "037349af-6ff6-4bf6-ab4d-a2ac78c9fa30",
+                    "uuid": "bf54d966-086b-4d62-8c62-f9caa1a407e9",
                     "settings": {
                      "target": {
                       "type": "element",
-                      "uuid": "eba79298-3657-4133-821a-d43773937845"
+                      "uuid": "5d33da88-073a-401b-8beb-22c9456a008a"
                      }
                     }
                    }
@@ -28986,7 +29102,7 @@
         ]
        }
       ],
-      "nodeID": "eba79298-3657-4133-821a-d43773937845"
+      "nodeID": "5d33da88-073a-401b-8beb-22c9456a008a"
      },
      {
       "type": "modal",
@@ -29690,20 +29806,20 @@
              "interactions": [
               {
                "type": "click",
-               "uuid": "d774ae64-f4c6-47bc-9c20-fbab752739dc",
+               "uuid": "b2ed1ad6-7438-4301-b550-907b7fa809ec",
                "clickOptions": {
                 "name": "dl-close-sheet",
-                "ID": "af1650d9-52c6-4a20-8c82-c4a0ca0452e3",
+                "ID": "07d7a45d-04fc-4acb-a454-d900d71791e6",
                 "actionSlots": {
                  "click": {
                   "actions": [
                    {
                     "type": "modalClose",
-                    "uuid": "11f76afc-fa2e-4635-a019-43193495ffac",
+                    "uuid": "e5e4a9c4-0d2b-4c6e-ba56-c4fe34a98508",
                     "settings": {
                      "target": {
                       "type": "element",
-                      "uuid": "2ecab407-6721-48aa-bf9c-d64eabe4794a"
+                      "uuid": "beab43ba-3531-4cc2-bb84-68d901acf88c"
                      }
                     }
                    }
@@ -29764,7 +29880,7 @@
         ]
        }
       ],
-      "nodeID": "2ecab407-6721-48aa-bf9c-d64eabe4794a"
+      "nodeID": "beab43ba-3531-4cc2-bb84-68d901acf88c"
      },
      {
       "type": "modal",
@@ -30467,20 +30583,20 @@
              "interactions": [
               {
                "type": "click",
-               "uuid": "a9d88cde-bdb7-4b56-9d6c-5e2881ae86ce",
+               "uuid": "d47dd955-dafb-4d3e-b526-81b92d1e7268",
                "clickOptions": {
                 "name": "dl-close-drawer",
-                "ID": "a606e8b2-8e2a-4976-8420-8ceaf0134bb1",
+                "ID": "4a6f1775-e2e4-471d-8926-266818207ec8",
                 "actionSlots": {
                  "click": {
                   "actions": [
                    {
                     "type": "modalClose",
-                    "uuid": "cf5da088-9ea9-4f77-8c16-055d00b826c9",
+                    "uuid": "371ac42e-31d7-48c8-ad60-1db063292a23",
                     "settings": {
                      "target": {
                       "type": "element",
-                      "uuid": "0de5b9f8-bf1d-4e7e-9372-2b61b49b50e7"
+                      "uuid": "e67f1a60-c6e6-4d60-aff6-fee59da9ce86"
                      }
                     }
                    }
@@ -30541,7 +30657,7 @@
         ]
        }
       ],
-      "nodeID": "0de5b9f8-bf1d-4e7e-9372-2b61b49b50e7"
+      "nodeID": "e67f1a60-c6e6-4d60-aff6-fee59da9ce86"
      },
      {
       "type": "modal",
@@ -30555,7 +30671,7 @@
          "runs": {
           "rules": [
            {
-            "uuid": "0c11d5b0-6974-45d2-8a92-a23ae15a741a",
+            "uuid": "5b64d84a-2f5c-4fc0-86b1-72625f657f0a",
             "type": "cap",
             "capOptions": {
              "max": "1",
@@ -31261,20 +31377,20 @@
              "interactions": [
               {
                "type": "click",
-               "uuid": "588a181e-46dc-42a3-8b10-e7fd7c0930eb",
+               "uuid": "622b8891-4bdc-46fd-adc0-73d168215f97",
                "clickOptions": {
                 "name": "dl-close-toast",
-                "ID": "bca16ff4-281f-4d41-b7f5-1df202fd8d66",
+                "ID": "7bb3cac2-bbc5-4e65-9ebe-46939782c9a8",
                 "actionSlots": {
                  "click": {
                   "actions": [
                    {
                     "type": "modalClose",
-                    "uuid": "ee7b7cfb-c46c-41ce-9d0e-22ff69eb8036",
+                    "uuid": "b2787211-54f5-42a7-82ec-27c872694cdc",
                     "settings": {
                      "target": {
                       "type": "element",
-                      "uuid": "74ea2488-5e69-41fe-8419-bd46606bc70d"
+                      "uuid": "46bb5bfa-674e-447b-9cdf-333157a8022d"
                      }
                     }
                    }
@@ -31335,7 +31451,7 @@
         ]
        }
       ],
-      "nodeID": "74ea2488-5e69-41fe-8419-bd46606bc70d"
+      "nodeID": "46bb5bfa-674e-447b-9cdf-333157a8022d"
      },
      {
       "type": "modal",
@@ -32044,20 +32160,20 @@
              "interactions": [
               {
                "type": "click",
-               "uuid": "ffc4dc98-183d-4e1f-81d0-00f6dbdf5b64",
+               "uuid": "eb774e94-ed95-4125-bb34-2d809e1393e0",
                "clickOptions": {
                 "name": "dl-close-takeover",
-                "ID": "f9082bf2-0ea7-4de7-8903-24e15f2cabd3",
+                "ID": "b0ced3c2-f861-4b44-8d25-84fda135c7fa",
                 "actionSlots": {
                  "click": {
                   "actions": [
                    {
                     "type": "modalClose",
-                    "uuid": "28538189-8e56-40be-9db8-2f06cb8e6429",
+                    "uuid": "4da397c7-853e-48e3-a483-d041d29acfb5",
                     "settings": {
                      "target": {
                       "type": "element",
-                      "uuid": "00564661-bed4-46fd-ab3b-3190e2943a40"
+                      "uuid": "8c7632ce-eddd-4d0a-ba5a-7218aa7f4b72"
                      }
                     }
                    }
@@ -32118,7 +32234,7 @@
         ]
        }
       ],
-      "nodeID": "00564661-bed4-46fd-ab3b-3190e2943a40"
+      "nodeID": "8c7632ce-eddd-4d0a-ba5a-7218aa7f4b72"
      },
      {
       "type": "modal",
@@ -32180,14 +32296,14 @@
              "translateXOptions": {
               "value": "-50%"
              },
-             "uuid": "15d40221-aa24-4b92-b440-cf26a77830be"
+             "uuid": "e71c44c2-d7ca-41ad-8e77-9381ffa02441"
             },
             {
              "type": "translateY",
              "translateYOptions": {
               "value": "-50%"
              },
-             "uuid": "da3797fb-4bec-419c-9bbe-8084e22dad9d"
+             "uuid": "ab3f4678-dd6c-47bd-b2fb-ca921113d876"
             }
            ],
            "width": "100%",
@@ -32836,20 +32952,20 @@
              "interactions": [
               {
                "type": "click",
-               "uuid": "ff44755a-6d20-4149-b5f7-09502c455e05",
+               "uuid": "4528025c-2187-4595-9439-75670605f578",
                "clickOptions": {
                 "name": "dl-close-gate",
-                "ID": "caa9aafc-d209-413d-9cb1-c2af41ecfe37",
+                "ID": "cd0cb2a8-936e-4914-a188-8df24cd97831",
                 "actionSlots": {
                  "click": {
                   "actions": [
                    {
                     "type": "modalClose",
-                    "uuid": "5c13c293-c2fd-44f4-a15a-9c783ed66086",
+                    "uuid": "96a1eb5d-e962-464d-8186-9d018ca6da46",
                     "settings": {
                      "target": {
                       "type": "element",
-                      "uuid": "744cef24-58e9-444b-b965-c3eeea20fdc7"
+                      "uuid": "91a3d3c2-6619-44d4-aa56-ecc06f5a7d47"
                      }
                     }
                    }
@@ -32910,7 +33026,7 @@
         ]
        }
       ],
-      "nodeID": "744cef24-58e9-444b-b965-c3eeea20fdc7"
+      "nodeID": "91a3d3c2-6619-44d4-aa56-ecc06f5a7d47"
      },
      {
       "type": "modal",
@@ -32927,7 +33043,7 @@
          "runs": {
           "rules": [
            {
-            "uuid": "148ad27b-07ad-4371-9bb3-e86d40566d5b",
+            "uuid": "1bed11b3-98c7-46a9-bb0a-e56f107f0175",
             "type": "cap",
             "capOptions": {
              "max": "1",
@@ -32993,14 +33109,14 @@
              "translateXOptions": {
               "value": "-50%"
              },
-             "uuid": "9f869bd9-3c29-43b8-b7de-7856fceef08f"
+             "uuid": "b0141b84-c612-4389-b108-05150836087b"
             },
             {
              "type": "translateY",
              "translateYOptions": {
               "value": "-50%"
              },
-             "uuid": "0d6452ab-cffa-41c4-a991-ba325f7c765d"
+             "uuid": "ed103e2c-73e0-46b6-b4b3-20f5738ca36b"
             }
            ],
            "width": "100%",
@@ -33120,7 +33236,7 @@
           "data": {
            "tagName": "p"
           },
-          "text": "exitIntent 偵測的是指標從頁面頂端離開，觸控裝置上永遠不會觸發，這是它的設計而不是缺陷：手機沒有「游標離開」這件事，硬要模擬只會在捲動時誤觸。awayFor 600ms 是離開多久才算數。搭配 cap 1 / session，一次瀏覽最多攔你一次。",
+          "text": "exitIntent 偵測的是指標從頁面頂端離開，觸控裝置上永遠不會觸發，這是它的設計而不是缺陷：手機沒有「游標離開」這件事。awayFor 600ms 是指標離開多久才算數。最值得知道的是它的先天限制：你為了離開而把游標往上移（去按上一頁、關分頁、打網址），那個動作本身就是 exitIntent 的定義——等它滿 600ms 觸發時，你已經停在那顆按鈕上了，所以彈窗常常只來得及一閃就跟著頁面一起消失。實測過：這不是彈窗自己關掉，是導覽把整個頁面帶走了。所以 exitIntent 真正接得到的，是游標漂上去但還沒決定要走的人；已經按下上一頁的人，你是攔不到的。這張卡片因此多給了一顆「手動開啟」，不然你永遠讀不完它。",
           "style": {
            "&": {
             "_": {
@@ -33567,7 +33683,7 @@
                 "data": {
                  "tagName": "p"
                 },
-                "text": "注意",
+                "text": "限制",
                 "style": {
                  "&": {
                   "_": {
@@ -33604,7 +33720,7 @@
                 "data": {
                  "tagName": "p"
                 },
-                "text": "觸控裝置永不觸發",
+                "text": "按上一頁的人攔不到，只會一閃",
                 "style": {
                  "&": {
                   "_": {
@@ -33649,20 +33765,20 @@
              "interactions": [
               {
                "type": "click",
-               "uuid": "d2c66d38-c773-4df6-9c21-3ecd70733050",
+               "uuid": "ac08dd07-6285-44ec-975e-10a4e37e19bf",
                "clickOptions": {
                 "name": "dl-close-exit",
-                "ID": "ff3e2e64-9b3c-4f66-a0fb-e46b07944639",
+                "ID": "c62f2d6b-690e-45ce-8346-8772b3228351",
                 "actionSlots": {
                  "click": {
                   "actions": [
                    {
                     "type": "modalClose",
-                    "uuid": "372d84c3-253a-4c8f-85dd-96e720e34405",
+                    "uuid": "03036ce1-f111-44c9-96b9-5f70bbf4ee47",
                     "settings": {
                      "target": {
                       "type": "element",
-                      "uuid": "a190f2e0-c55f-4df6-b827-d4231f273683"
+                      "uuid": "5cd1a916-58ac-4b6f-a707-8bc36fa5f0aa"
                      }
                     }
                    }
@@ -33723,7 +33839,7 @@
         ]
        }
       ],
-      "nodeID": "a190f2e0-c55f-4df6-b827-d4231f273683"
+      "nodeID": "5cd1a916-58ac-4b6f-a707-8bc36fa5f0aa"
      },
      {
       "type": "modal",
@@ -33740,7 +33856,7 @@
          "runs": {
           "rules": [
            {
-            "uuid": "31d98a5d-e1a7-468e-a08d-98aeac0a6f11",
+            "uuid": "3af52cf2-f281-4bb4-9e13-e1faa13b2b76",
             "type": "cooldown",
             "cooldownOptions": {
              "duration": "1",
@@ -34447,20 +34563,20 @@
              "interactions": [
               {
                "type": "click",
-               "uuid": "46742ee2-f777-4818-82bb-93edc1639e2d",
+               "uuid": "c4b18dcf-c6cd-461d-a43d-7eb5ba337104",
                "clickOptions": {
                 "name": "dl-close-depth",
-                "ID": "bf14e005-ad6e-4b0f-b93d-ba1308e933ee",
+                "ID": "714969ea-37cf-4c20-8e3c-9ffa55c9abb9",
                 "actionSlots": {
                  "click": {
                   "actions": [
                    {
                     "type": "modalClose",
-                    "uuid": "c69a3601-0763-4abf-bdd3-dd56841e404a",
+                    "uuid": "edf09979-5a08-401a-be44-8155e342fa2f",
                     "settings": {
                      "target": {
                       "type": "element",
-                      "uuid": "1fe57847-f10f-478e-8f94-0745cafdeea1"
+                      "uuid": "c0125209-ff16-46e6-ade4-1d356f27e8da"
                      }
                     }
                    }
@@ -34521,7 +34637,7 @@
         ]
        }
       ],
-      "nodeID": "1fe57847-f10f-478e-8f94-0745cafdeea1"
+      "nodeID": "c0125209-ff16-46e6-ade4-1d356f27e8da"
      },
      {
       "type": "modal",
@@ -34583,14 +34699,14 @@
              "translateXOptions": {
               "value": "-50%"
              },
-             "uuid": "2602c645-7a60-4c40-9c8d-a04be31585f3"
+             "uuid": "0d926056-cd1a-416d-9e39-47c893c855f9"
             },
             {
              "type": "translateY",
              "translateYOptions": {
               "value": "-50%"
              },
-             "uuid": "0c007654-a073-426e-a1a8-b1297dce84b1"
+             "uuid": "373617ac-2dab-4a1b-ba46-9f9c4f2ff480"
             }
            ],
            "width": "100%",
@@ -35239,20 +35355,20 @@
              "interactions": [
               {
                "type": "click",
-               "uuid": "5171ff65-6c49-4d6f-a928-96ec97820a8d",
+               "uuid": "820f58f4-ce8f-4614-9248-7dc21f919316",
                "clickOptions": {
                 "name": "dl-close-aba",
-                "ID": "44fa4a16-4ca0-45ee-94ba-e6cba258ef94",
+                "ID": "159b0c07-0aca-4dbb-bf90-2dba9a518263",
                 "actionSlots": {
                  "click": {
                   "actions": [
                    {
                     "type": "modalClose",
-                    "uuid": "ed03e7ce-94ef-4d05-b0c8-1f359fd479c7",
+                    "uuid": "68d620ea-d5a5-47a8-8e94-bec920328356",
                     "settings": {
                      "target": {
                       "type": "element",
-                      "uuid": "da29377a-29a4-4de6-8e17-84449721042f"
+                      "uuid": "27f20d17-3a9c-496f-b056-a051167dfd4a"
                      }
                     }
                    }
@@ -35313,7 +35429,7 @@
         ]
        }
       ],
-      "nodeID": "da29377a-29a4-4de6-8e17-84449721042f"
+      "nodeID": "27f20d17-3a9c-496f-b056-a051167dfd4a"
      },
      {
       "type": "modal",
@@ -35375,14 +35491,14 @@
              "translateXOptions": {
               "value": "-50%"
              },
-             "uuid": "60b83a6d-0ca1-4708-b0df-832eec2dad64"
+             "uuid": "3686b47b-056c-476d-8212-e27e6bdef406"
             },
             {
              "type": "translateY",
              "translateYOptions": {
               "value": "-50%"
              },
-             "uuid": "2a5ed19d-6cff-450f-8637-f065fea6952a"
+             "uuid": "e26a5016-7aea-49d4-909d-84e405950abd"
             }
            ],
            "width": "100%",
@@ -36031,20 +36147,20 @@
              "interactions": [
               {
                "type": "click",
-               "uuid": "c25e465c-cbe2-408e-a2f5-1e7873ee2900",
+               "uuid": "69b252d7-574a-46b7-9b10-a65c3f9ac814",
                "clickOptions": {
                 "name": "dl-close-abb",
-                "ID": "15aaa82f-0366-4719-ad41-9c5def99b8ed",
+                "ID": "b7e36de1-8a5c-4325-b94e-6974226df096",
                 "actionSlots": {
                  "click": {
                   "actions": [
                    {
                     "type": "modalClose",
-                    "uuid": "be3df0fe-e98c-467a-aa06-6b30a347c09c",
+                    "uuid": "d4e7da2d-146f-4a5e-9072-1b29d8a7b04f",
                     "settings": {
                      "target": {
                       "type": "element",
-                      "uuid": "24a60a20-315e-474b-bf15-ee0611055aa7"
+                      "uuid": "45ca6618-bae1-4502-bca1-31f97ff16a1f"
                      }
                     }
                    }
@@ -36105,7 +36221,7 @@
         ]
        }
       ],
-      "nodeID": "24a60a20-315e-474b-bf15-ee0611055aa7"
+      "nodeID": "45ca6618-bae1-4502-bca1-31f97ff16a1f"
      }
     ]
    }
