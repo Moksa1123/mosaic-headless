@@ -42,6 +42,11 @@ AUDIT = r"""() => {
     const t = txt(el);
 
     const inClip = clipped(el);
+    // `left:-9999px` is the standard way to put something off screen for
+    // assistive tech only - a form's honeypot, a skip link, a visually-hidden
+    // label. It is deliberate, so it is not "outside the viewport" in the sense
+    // this audit means.
+    if (r.right < -1000 || r.left > vw + 1000) continue;
 
     // 1. anything wider than the viewport
     if (r.width > vw + 1 && !inClip)

@@ -300,6 +300,8 @@ CONVERTED_COUNT = _count("conversion-batch.csv",
 
 # label, href, one line of what it demonstrates
 CAPABILITIES = [
+    ("元件牆", "/components/",
+     "分頁、手風琴、表單、地圖——都能直接操作"),
     ("彈窗與觸發", "/dialogs/",
      "九種形態、四種觸發、四種執行規則"),
     ("輪播", "/sliders/",
@@ -1369,7 +1371,7 @@ def capability_dropdown():
     table now carries a `takes_children` column and the build guard reads it.
     """
     return {"type": "dropdown",
-            "data": {"attrID": "mk-cap", "horizontalAlign": "left"},
+            "data": {"attrID": "mk-cap", "horizontalAlign": "right"},
             "style": {"&": {"_": {"position": "relative"}}},
             "children": [
                 {"type": "dropdown-toggle",
@@ -1398,9 +1400,13 @@ def capability_dropdown():
                                   "border:1px solid rgb(22,24,28);"
                                   "box-shadow:0 20px 48px rgba(22,24,28,.14);"},
                              None,
-                             {"minWidth": "0px", "width": "100%",
+                             # NOT width:100% - that is 100% of the toggle-sized
+                             # host, and the panel came out 79px wide and 1124px
+                             # tall. A fixed width, right-aligned, fits 390px.
+                             {"minWidth": "0px", "width": "296px",
                               "customDeclarations":
-                                  "border:1px solid " + RULE + ";box-shadow:none;"}),
+                                  "border:1px solid rgb(22,24,28);"
+                                  "box-shadow:0 18px 40px rgba(22,24,28,.16);"}),
                  "children": [
                      {"type": "menu-link",
                       "data": {"attrID": "mk-cap-%d" % i, "url": href},
@@ -3218,6 +3224,10 @@ if __name__ == "__main__":
     # helpers it reads are pure functions - two copies produce identical dicts.
     import _dialogs
     import _sliders
+    import _components
+    SITE["pages"].append({"slug": "components", "post_id": 281,
+                          "title": "元件",
+                          "tree": apply_type(_components.TREE, DISPLAY, CJK, "600")})
     import _tokens
     import _dynamic
     import _conversion

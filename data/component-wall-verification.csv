@@ -1,0 +1,12 @@
+check,result,detail
+TABS/one_pane_at_rest,PASS,visible panes at rest: [0]
+TABS/click_switches,PASS,clicked tab 3 -> panes [3]
+TABS/active_label_readable,PASS,"{'bg': 'rgb(22, 24, 28)', 'labels': ['rgba(250, 250, 247, 0.6)', 'rgb(250, 250, 247)']}"
+ACCORDION/shut_at_rest,PASS,open: []
+ACCORDION/click_opens_one,PASS,clicked 1 -> open [1]
+ACCORDION/keyboard_reachable,PASS,title tabindex='0' - the plugin puts it in the tab order
+FORM/fields,PASS,"named fields: ['name', 'email', 'message']"
+FORM/required,PASS,every author field is required
+FORM/honeypot,PASS,"Mosaic adds its own spam trap: ['mosaic_hp_url', 'mosaic_hp_ts']"
+MAP/frame,PASS,renders an openstreetmap iframe
+MAP/coordinates_applied,PASS,"marker=24.147700,120.673600"

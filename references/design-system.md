@@ -160,3 +160,39 @@ so knew nothing about children a type HEALS into itself — modal's overlay, loo
 `loop-items`, slider's `slider-slides`, dropdown's own two. Both fixes are the same
 move: the question the table answers was narrower than the question the table's
 name suggests, so read the other source as well and say which is which.
+
+## Component states live on the element the selector names
+
+Two of Mosaic's component states read as a parent/child pair and only one of them
+is about the component itself:
+
+```
+___tab--active                &.m-tab--active          the tab
+___tab--active___descendants  .m-tab--active &         anything inside it
+___slider_navigation_bullet--active   &.m-slider-bullet--active
+___slide--active                      .m-slide--active > &
+___arrow_hidden                       &:where(.m-slider-arrow--hidden)
+```
+
+`___tab--active___descendants` compiles with `&` in the DESCENDANT position, so it
+must be committed on the child node. Put it on the tab and it reads "a descendant
+of an active tab that is also that tab", which matches nothing — the plugin
+darkens the active tab, the label keeps the colour you gave it, and the current
+tab is ink on ink. Measured both ways; the fix is to style the label node, not
+the tab.
+
+The same shape governs `___slide--active` (`.m-slide--active > &`, so it goes on
+the slide's content) and the slider bullet's own `--active`, which is what turns a
+row of identical hairlines into a position indicator.
+
+## What `openstreetmap` is called
+
+`latitude`, `longitude`, `zoom`, `layer`, `lazyLoad` — not `lat` / `lon`. An
+unknown property name is dropped without a word and the element falls back to its
+default centre, which is Times Square: a map that renders, looks deliberate, and
+is in the wrong hemisphere. The three coordinate properties take
+`ValidatorDynamicCodeObject`, so the `{"v": "…"}` object form.
+
+The element is an `<iframe>` to openstreetmap.org, not a tile layer, so "how many
+tiles loaded" is unanswerable from the parent document — assert on the frame's
+`src`, which carries `marker=lat,lon`.

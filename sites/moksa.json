@@ -658,7 +658,7 @@
              "type": "dropdown",
              "data": {
               "attrID": "mk-cap",
-              "horizontalAlign": "left"
+              "horizontalAlign": "right"
              },
              "style": {
               "&": {
@@ -769,8 +769,8 @@
                  },
                  "_m": {
                   "minWidth": "0px",
-                  "width": "100%",
-                  "customDeclarations": "border:1px solid rgba(22,24,28,.16);box-shadow:none;"
+                  "width": "296px",
+                  "customDeclarations": "border:1px solid rgb(22,24,28);box-shadow:0 18px 40px rgba(22,24,28,.16);"
                  }
                 }
                },
@@ -779,6 +779,78 @@
                  "type": "menu-link",
                  "data": {
                   "attrID": "mk-cap-0",
+                  "url": "/components/"
+                 },
+                 "style": {
+                  "&": {
+                   "_": {
+                    "display": "block",
+                    "cursor": "pointer",
+                    "paddingTop": "9px",
+                    "paddingBottom": "9px",
+                    "paddingLeft": "16px",
+                    "paddingRight": "16px"
+                   }
+                  },
+                  "hover": {
+                   "_": {
+                    "backgroundColor": {
+                     "token": "--mk-panel"
+                    }
+                   }
+                  },
+                  "focus-visible": {
+                   "_": {
+                    "customDeclarations": "outline:2px solid rgb(255,90,54);outline-offset:3px;"
+                   }
+                  }
+                 },
+                 "children": [
+                  {
+                   "type": "text",
+                   "data": {
+                    "tagName": "p"
+                   },
+                   "text": "元件牆",
+                   "style": {
+                    "&": {
+                     "_": {
+                      "fontFamily": "'Noto Sans TC','PingFang TC','Hiragino Sans TC','Microsoft JhengHei',sans-serif",
+                      "fontSize": "13px",
+                      "fontWeight": "500",
+                      "color": {
+                       "token": "--mk-ink"
+                      }
+                     }
+                    }
+                   }
+                  },
+                  {
+                   "type": "text",
+                   "data": {
+                    "tagName": "p"
+                   },
+                   "text": "分頁、手風琴、表單、地圖——都能直接操作",
+                   "style": {
+                    "&": {
+                     "_": {
+                      "fontFamily": "'Noto Sans TC','PingFang TC','Hiragino Sans TC','Microsoft JhengHei',sans-serif",
+                      "fontSize": "11px",
+                      "lineHeight": "1.6",
+                      "color": {
+                       "token": "--mk-muted"
+                      },
+                      "marginTop": "3px"
+                     }
+                    }
+                   }
+                  }
+                 ]
+                },
+                {
+                 "type": "menu-link",
+                 "data": {
+                  "attrID": "mk-cap-1",
                   "url": "/dialogs/"
                  },
                  "style": {
@@ -850,7 +922,7 @@
                 {
                  "type": "menu-link",
                  "data": {
-                  "attrID": "mk-cap-1",
+                  "attrID": "mk-cap-2",
                   "url": "/sliders/"
                  },
                  "style": {
@@ -922,7 +994,7 @@
                 {
                  "type": "menu-link",
                  "data": {
-                  "attrID": "mk-cap-2",
+                  "attrID": "mk-cap-3",
                   "url": "/tokens/"
                  },
                  "style": {
@@ -994,7 +1066,7 @@
                 {
                  "type": "menu-link",
                  "data": {
-                  "attrID": "mk-cap-3",
+                  "attrID": "mk-cap-4",
                   "url": "/dynamic/"
                  },
                  "style": {
@@ -1066,7 +1138,7 @@
                 {
                  "type": "menu-link",
                  "data": {
-                  "attrID": "mk-cap-4",
+                  "attrID": "mk-cap-5",
                   "url": "/conversion/"
                  },
                  "style": {
@@ -18049,7 +18121,7 @@
                       "settings": {
                        "target": {
                         "type": "element",
-                        "uuid": "9ca04387-3373-41b9-9e54-b459d04e5f75"
+                        "uuid": "b88e1f50-94a8-40ca-88b8-2ccc28d9689b"
                        }
                       }
                      }
@@ -18105,7 +18177,7 @@
           ]
          }
         ],
-        "nodeID": "9ca04387-3373-41b9-9e54-b459d04e5f75"
+        "nodeID": "b88e1f50-94a8-40ca-88b8-2ccc28d9689b"
        }
       ]
      }
@@ -24374,6 +24446,3178 @@
             ]
            }
           ]
+         }
+        ]
+       }
+      ]
+     }
+    ]
+   }
+  },
+  {
+   "slug": "components",
+   "post_id": 281,
+   "title": "元件",
+   "tree": {
+    "type": "div",
+    "data": {
+     "attrID": "cp-page"
+    },
+    "children": [
+     {
+      "type": "section",
+      "data": {
+       "attrID": "cp-head"
+      },
+      "style": {
+       "&": {
+        "_": {
+         "backgroundColor": {
+          "token": "--mk-paper"
+         },
+         "paddingLeft": "40px",
+         "paddingRight": "40px",
+         "fontFamily": "'Noto Sans TC','PingFang TC','Hiragino Sans TC','Microsoft JhengHei',sans-serif",
+         "paddingTop": "0px",
+         "paddingBottom": "0px"
+        },
+        "_t": {
+         "paddingLeft": "28px",
+         "paddingRight": "28px"
+        },
+        "_m": {
+         "paddingLeft": "18px",
+         "paddingRight": "18px"
+        }
+       }
+      },
+      "children": [
+       {
+        "type": "div",
+        "data": {
+         "attrID": "cp-head-w"
+        },
+        "style": {
+         "&": {
+          "_": {
+           "width": "100%",
+           "maxWidth": "1240px",
+           "marginLeft": "auto",
+           "marginRight": "auto"
+          }
+         }
+        },
+        "children": [
+         {
+          "type": "div",
+          "data": {
+           "attrID": "cp-head-pad"
+          },
+          "style": {
+           "&": {
+            "_": {
+             "paddingTop": "116px"
+            },
+            "_m": {
+             "paddingTop": "26px"
+            }
+           }
+          },
+          "children": []
+         },
+         {
+          "type": "text",
+          "data": {
+           "tagName": "p"
+          },
+          "text": "COMPONENTS / 元件",
+          "style": {
+           "&": {
+            "_": {
+             "color": {
+              "token": "--mk-faint"
+             },
+             "fontSize": "11px",
+             "letterSpacing": "0.26em",
+             "fontFamily": "'IBM Plex Mono',ui-monospace,SFMono-Regular,Menlo,Consolas,monospace",
+             "fontWeight": "400"
+            },
+            "_t": {
+             "fontSize": "12px"
+            }
+           }
+          }
+         },
+         {
+          "type": "text",
+          "data": {
+           "tagName": "h1"
+          },
+          "text": "按看看。",
+          "style": {
+           "&": {
+            "_": {
+             "fontFamily": "'Space Grotesk','Noto Sans TC','PingFang TC','Microsoft JhengHei',sans-serif",
+             "fontWeight": "600",
+             "fontSize": "62px",
+             "lineHeight": "1.06",
+             "letterSpacing": "0.005em",
+             "color": {
+              "token": "--mk-ink"
+             },
+             "marginTop": "18px",
+             "whiteSpace": "pre-wrap"
+            },
+            "_t": {
+             "fontSize": "48px"
+            },
+            "_m": {
+             "fontSize": "36px"
+            }
+           }
+          }
+         },
+         {
+          "type": "text",
+          "data": {
+           "tagName": "p"
+          },
+          "text": "這一頁不解釋任何東西。下面每一塊都是可以直接操作的元件，內容是 Moksa Web 自己的——不是截圖，也沒有外掛，整頁就是一份 Mosaic 文件。",
+          "style": {
+           "&": {
+            "_": {
+             "fontFamily": "'Noto Sans TC','PingFang TC','Hiragino Sans TC','Microsoft JhengHei',sans-serif",
+             "fontSize": "16px",
+             "lineHeight": "1.95",
+             "color": {
+              "token": "--mk-ink"
+             },
+             "marginTop": "20px",
+             "maxWidth": "620px"
+            }
+           }
+          }
+         },
+         {
+          "type": "div",
+          "data": {
+           "attrID": "cp-head-gap"
+          },
+          "style": {
+           "&": {
+            "_": {
+             "paddingTop": "20px"
+            }
+           }
+          },
+          "children": []
+         }
+        ]
+       }
+      ]
+     },
+     {
+      "type": "section",
+      "data": {
+       "attrID": "cp-tabs-s"
+      },
+      "style": {
+       "&": {
+        "_": {
+         "backgroundColor": {
+          "token": "--mk-paper"
+         },
+         "paddingLeft": "40px",
+         "paddingRight": "40px",
+         "fontFamily": "'Noto Sans TC','PingFang TC','Hiragino Sans TC','Microsoft JhengHei',sans-serif",
+         "paddingTop": "0px",
+         "paddingBottom": "0px"
+        },
+        "_t": {
+         "paddingLeft": "28px",
+         "paddingRight": "28px"
+        },
+        "_m": {
+         "paddingLeft": "18px",
+         "paddingRight": "18px"
+        }
+       }
+      },
+      "children": [
+       {
+        "type": "div",
+        "data": {
+         "attrID": "cp-tabs-s-w"
+        },
+        "style": {
+         "&": {
+          "_": {
+           "width": "100%",
+           "maxWidth": "1240px",
+           "marginLeft": "auto",
+           "marginRight": "auto"
+          }
+         }
+        },
+        "children": [
+         {
+          "type": "div",
+          "data": {
+           "attrID": "cp-tabs-s-pad"
+          },
+          "style": {
+           "&": {
+            "_": {
+             "paddingTop": "70px"
+            },
+            "_m": {
+             "paddingTop": "44px"
+            }
+           }
+          },
+          "children": []
+         },
+         {
+          "type": "div",
+          "data": {
+           "attrID": "cp-strip-tabs-/-分頁"
+          },
+          "style": {
+           "&": {
+            "_": {
+             "display": "flex",
+             "justifyContent": "space-between",
+             "alignItems": "baseline",
+             "columnGap": "16px",
+             "flexWrap": "wrap",
+             "rowGap": "6px",
+             "paddingBottom": "14px",
+             "marginBottom": "26px",
+             "customDeclarations": "border-bottom:1px solid rgb(22,24,28);"
+            }
+           }
+          },
+          "children": [
+           {
+            "type": "text",
+            "data": {
+             "tagName": "p"
+            },
+            "text": "TABS / 分頁",
+            "style": {
+             "&": {
+              "_": {
+               "color": {
+                "token": "--mk-ink"
+               },
+               "fontSize": "11px",
+               "letterSpacing": "0.26em",
+               "fontFamily": "'IBM Plex Mono',ui-monospace,SFMono-Regular,Menlo,Consolas,monospace",
+               "fontWeight": "400"
+              },
+              "_t": {
+               "fontSize": "12px"
+              }
+             }
+            }
+           },
+           {
+            "type": "text",
+            "data": {
+             "tagName": "p"
+            },
+            "text": "tabs › tabs-menu › tabs-tab + tabs-content › tabs-tab-pane",
+            "style": {
+             "&": {
+              "_": {
+               "color": {
+                "token": "--mk-faint"
+               },
+               "fontSize": "10px",
+               "letterSpacing": "0.08em",
+               "fontFamily": "'IBM Plex Mono',ui-monospace,SFMono-Regular,Menlo,Consolas,monospace",
+               "fontWeight": "400"
+              },
+              "_t": {
+               "fontSize": "12px"
+              }
+             }
+            }
+           }
+          ]
+         },
+         {
+          "type": "tabs",
+          "data": {
+           "attrID": "cp-tabs"
+          },
+          "children": [
+           {
+            "type": "tabs-menu",
+            "data": {
+             "attrID": "cp-tabs-menu"
+            },
+            "style": {
+             "&": {
+              "_": {
+               "display": "grid",
+               "gridCols": "repeat(4, 1fr)",
+               "columnGap": "0px"
+              },
+              "_t": {
+               "gridCols": "repeat(2, 1fr)"
+              },
+              "_m": {
+               "gridCols": "repeat(2, 1fr)"
+              }
+             }
+            },
+            "children": [
+             {
+              "type": "tabs-tab",
+              "data": {
+               "attrID": "cp-tab-0"
+              },
+              "style": {
+               "&": {
+                "_": {
+                 "cursor": "pointer",
+                 "display": "flex",
+                 "flexDirection": "column",
+                 "rowGap": "4px",
+                 "paddingTop": "14px",
+                 "paddingBottom": "14px",
+                 "paddingLeft": "18px",
+                 "paddingRight": "18px",
+                 "customDeclarations": "border:1px solid rgba(22,24,28,.16);border-bottom:0;"
+                }
+               },
+               "hover": {
+                "_": {
+                 "backgroundColor": {
+                  "token": "--mk-panel"
+                 }
+                }
+               },
+               "___tab--active": {
+                "_": {
+                 "backgroundColor": {
+                  "token": "--mk-ink"
+                 },
+                 "customDeclarations": "border:1px solid rgb(22,24,28);border-bottom:0;"
+                }
+               },
+               "focus-visible": {
+                "_": {
+                 "customDeclarations": "outline:2px solid rgb(255,90,54);outline-offset:3px;"
+                }
+               }
+              },
+              "children": [
+               {
+                "type": "text",
+                "data": {
+                 "tagName": "p",
+                 "attrID": "cp-tab-en-0"
+                },
+                "style": {
+                 "&": {
+                  "_": {
+                   "fontFamily": "'IBM Plex Mono',ui-monospace,SFMono-Regular,Menlo,Consolas,monospace",
+                   "fontSize": "10px",
+                   "letterSpacing": "0.18em",
+                   "fontWeight": "400",
+                   "color": {
+                    "token": "--mk-faint"
+                   }
+                  },
+                  "_t": {
+                   "fontSize": "12px",
+                   "letterSpacing": "0.1em"
+                  }
+                 },
+                 "___tab--active___descendants": {
+                  "_": {
+                   "color": "rgba(250,250,247,.6)"
+                  }
+                 }
+                },
+                "children": [
+                 {
+                  "type": "wysiwyg-text",
+                  "data": {
+                   "text": "WEB & E-COMMERCE"
+                  }
+                 }
+                ]
+               },
+               {
+                "type": "text",
+                "data": {
+                 "tagName": "p",
+                 "attrID": "cp-tab-zh-0"
+                },
+                "style": {
+                 "&": {
+                  "_": {
+                   "fontFamily": "'Noto Sans TC','PingFang TC','Hiragino Sans TC','Microsoft JhengHei',sans-serif",
+                   "fontSize": "14px",
+                   "fontWeight": "500",
+                   "color": {
+                    "token": "--mk-ink"
+                   }
+                  }
+                 },
+                 "___tab--active___descendants": {
+                  "_": {
+                   "color": "rgb(250,250,247)"
+                  }
+                 }
+                },
+                "children": [
+                 {
+                  "type": "wysiwyg-text",
+                  "data": {
+                   "text": "網站與電商"
+                  }
+                 }
+                ]
+               }
+              ]
+             },
+             {
+              "type": "tabs-tab",
+              "data": {
+               "attrID": "cp-tab-1"
+              },
+              "style": {
+               "&": {
+                "_": {
+                 "cursor": "pointer",
+                 "display": "flex",
+                 "flexDirection": "column",
+                 "rowGap": "4px",
+                 "paddingTop": "14px",
+                 "paddingBottom": "14px",
+                 "paddingLeft": "18px",
+                 "paddingRight": "18px",
+                 "customDeclarations": "border:1px solid rgba(22,24,28,.16);border-bottom:0;"
+                }
+               },
+               "hover": {
+                "_": {
+                 "backgroundColor": {
+                  "token": "--mk-panel"
+                 }
+                }
+               },
+               "___tab--active": {
+                "_": {
+                 "backgroundColor": {
+                  "token": "--mk-ink"
+                 },
+                 "customDeclarations": "border:1px solid rgb(22,24,28);border-bottom:0;"
+                }
+               },
+               "focus-visible": {
+                "_": {
+                 "customDeclarations": "outline:2px solid rgb(255,90,54);outline-offset:3px;"
+                }
+               }
+              },
+              "children": [
+               {
+                "type": "text",
+                "data": {
+                 "tagName": "p",
+                 "attrID": "cp-tab-en-1"
+                },
+                "style": {
+                 "&": {
+                  "_": {
+                   "fontFamily": "'IBM Plex Mono',ui-monospace,SFMono-Regular,Menlo,Consolas,monospace",
+                   "fontSize": "10px",
+                   "letterSpacing": "0.18em",
+                   "fontWeight": "400",
+                   "color": {
+                    "token": "--mk-faint"
+                   }
+                  },
+                  "_t": {
+                   "fontSize": "12px",
+                   "letterSpacing": "0.1em"
+                  }
+                 },
+                 "___tab--active___descendants": {
+                  "_": {
+                   "color": "rgba(250,250,247,.6)"
+                  }
+                 }
+                },
+                "children": [
+                 {
+                  "type": "wysiwyg-text",
+                  "data": {
+                   "text": "AI & AUTOMATION"
+                  }
+                 }
+                ]
+               },
+               {
+                "type": "text",
+                "data": {
+                 "tagName": "p",
+                 "attrID": "cp-tab-zh-1"
+                },
+                "style": {
+                 "&": {
+                  "_": {
+                   "fontFamily": "'Noto Sans TC','PingFang TC','Hiragino Sans TC','Microsoft JhengHei',sans-serif",
+                   "fontSize": "14px",
+                   "fontWeight": "500",
+                   "color": {
+                    "token": "--mk-ink"
+                   }
+                  }
+                 },
+                 "___tab--active___descendants": {
+                  "_": {
+                   "color": "rgb(250,250,247)"
+                  }
+                 }
+                },
+                "children": [
+                 {
+                  "type": "wysiwyg-text",
+                  "data": {
+                   "text": "AI・自動化・軟體"
+                  }
+                 }
+                ]
+               }
+              ]
+             },
+             {
+              "type": "tabs-tab",
+              "data": {
+               "attrID": "cp-tab-2"
+              },
+              "style": {
+               "&": {
+                "_": {
+                 "cursor": "pointer",
+                 "display": "flex",
+                 "flexDirection": "column",
+                 "rowGap": "4px",
+                 "paddingTop": "14px",
+                 "paddingBottom": "14px",
+                 "paddingLeft": "18px",
+                 "paddingRight": "18px",
+                 "customDeclarations": "border:1px solid rgba(22,24,28,.16);border-bottom:0;"
+                }
+               },
+               "hover": {
+                "_": {
+                 "backgroundColor": {
+                  "token": "--mk-panel"
+                 }
+                }
+               },
+               "___tab--active": {
+                "_": {
+                 "backgroundColor": {
+                  "token": "--mk-ink"
+                 },
+                 "customDeclarations": "border:1px solid rgb(22,24,28);border-bottom:0;"
+                }
+               },
+               "focus-visible": {
+                "_": {
+                 "customDeclarations": "outline:2px solid rgb(255,90,54);outline-offset:3px;"
+                }
+               }
+              },
+              "children": [
+               {
+                "type": "text",
+                "data": {
+                 "tagName": "p",
+                 "attrID": "cp-tab-en-2"
+                },
+                "style": {
+                 "&": {
+                  "_": {
+                   "fontFamily": "'IBM Plex Mono',ui-monospace,SFMono-Regular,Menlo,Consolas,monospace",
+                   "fontSize": "10px",
+                   "letterSpacing": "0.18em",
+                   "fontWeight": "400",
+                   "color": {
+                    "token": "--mk-faint"
+                   }
+                  },
+                  "_t": {
+                   "fontSize": "12px",
+                   "letterSpacing": "0.1em"
+                  }
+                 },
+                 "___tab--active___descendants": {
+                  "_": {
+                   "color": "rgba(250,250,247,.6)"
+                  }
+                 }
+                },
+                "children": [
+                 {
+                  "type": "wysiwyg-text",
+                  "data": {
+                   "text": "INTEGRATION & MIGRATION"
+                  }
+                 }
+                ]
+               },
+               {
+                "type": "text",
+                "data": {
+                 "tagName": "p",
+                 "attrID": "cp-tab-zh-2"
+                },
+                "style": {
+                 "&": {
+                  "_": {
+                   "fontFamily": "'Noto Sans TC','PingFang TC','Hiragino Sans TC','Microsoft JhengHei',sans-serif",
+                   "fontSize": "14px",
+                   "fontWeight": "500",
+                   "color": {
+                    "token": "--mk-ink"
+                   }
+                  }
+                 },
+                 "___tab--active___descendants": {
+                  "_": {
+                   "color": "rgb(250,250,247)"
+                  }
+                 }
+                },
+                "children": [
+                 {
+                  "type": "wysiwyg-text",
+                  "data": {
+                   "text": "串接與轉移"
+                  }
+                 }
+                ]
+               }
+              ]
+             },
+             {
+              "type": "tabs-tab",
+              "data": {
+               "attrID": "cp-tab-3"
+              },
+              "style": {
+               "&": {
+                "_": {
+                 "cursor": "pointer",
+                 "display": "flex",
+                 "flexDirection": "column",
+                 "rowGap": "4px",
+                 "paddingTop": "14px",
+                 "paddingBottom": "14px",
+                 "paddingLeft": "18px",
+                 "paddingRight": "18px",
+                 "customDeclarations": "border:1px solid rgba(22,24,28,.16);border-bottom:0;"
+                }
+               },
+               "hover": {
+                "_": {
+                 "backgroundColor": {
+                  "token": "--mk-panel"
+                 }
+                }
+               },
+               "___tab--active": {
+                "_": {
+                 "backgroundColor": {
+                  "token": "--mk-ink"
+                 },
+                 "customDeclarations": "border:1px solid rgb(22,24,28);border-bottom:0;"
+                }
+               },
+               "focus-visible": {
+                "_": {
+                 "customDeclarations": "outline:2px solid rgb(255,90,54);outline-offset:3px;"
+                }
+               }
+              },
+              "children": [
+               {
+                "type": "text",
+                "data": {
+                 "tagName": "p",
+                 "attrID": "cp-tab-en-3"
+                },
+                "style": {
+                 "&": {
+                  "_": {
+                   "fontFamily": "'IBM Plex Mono',ui-monospace,SFMono-Regular,Menlo,Consolas,monospace",
+                   "fontSize": "10px",
+                   "letterSpacing": "0.18em",
+                   "fontWeight": "400",
+                   "color": {
+                    "token": "--mk-faint"
+                   }
+                  },
+                  "_t": {
+                   "fontSize": "12px",
+                   "letterSpacing": "0.1em"
+                  }
+                 },
+                 "___tab--active___descendants": {
+                  "_": {
+                   "color": "rgba(250,250,247,.6)"
+                  }
+                 }
+                },
+                "children": [
+                 {
+                  "type": "wysiwyg-text",
+                  "data": {
+                   "text": "OPTIMIZE & MAINTAIN"
+                  }
+                 }
+                ]
+               },
+               {
+                "type": "text",
+                "data": {
+                 "tagName": "p",
+                 "attrID": "cp-tab-zh-3"
+                },
+                "style": {
+                 "&": {
+                  "_": {
+                   "fontFamily": "'Noto Sans TC','PingFang TC','Hiragino Sans TC','Microsoft JhengHei',sans-serif",
+                   "fontSize": "14px",
+                   "fontWeight": "500",
+                   "color": {
+                    "token": "--mk-ink"
+                   }
+                  }
+                 },
+                 "___tab--active___descendants": {
+                  "_": {
+                   "color": "rgb(250,250,247)"
+                  }
+                 }
+                },
+                "children": [
+                 {
+                  "type": "wysiwyg-text",
+                  "data": {
+                   "text": "優化與維運"
+                  }
+                 }
+                ]
+               }
+              ]
+             }
+            ]
+           },
+           {
+            "type": "tabs-content",
+            "data": {
+             "attrID": "cp-tabs-content"
+            },
+            "style": {
+             "&": {
+              "_": {
+               "customDeclarations": "border:1px solid rgba(22,24,28,.16);"
+              }
+             }
+            },
+            "children": [
+             {
+              "type": "tabs-tab-pane",
+              "data": {
+               "attrID": "cp-pane-0"
+              },
+              "style": {
+               "&": {
+                "_": {
+                 "paddingTop": "28px",
+                 "paddingBottom": "30px",
+                 "paddingLeft": "28px",
+                 "paddingRight": "28px",
+                 "backgroundColor": {
+                  "token": "--mk-panel"
+                 }
+                },
+                "_m": {
+                 "paddingLeft": "20px",
+                 "paddingRight": "20px"
+                }
+               }
+              },
+              "children": [
+               {
+                "type": "text",
+                "data": {
+                 "tagName": "p"
+                },
+                "text": "品牌官網、電商平台與 WordPress 開發。",
+                "style": {
+                 "&": {
+                  "_": {
+                   "fontFamily": "'Space Grotesk','Noto Sans TC','PingFang TC','Microsoft JhengHei',sans-serif",
+                   "fontWeight": "600",
+                   "fontSize": "22px",
+                   "lineHeight": "1.4",
+                   "color": {
+                    "token": "--mk-ink"
+                   },
+                   "whiteSpace": "pre-wrap"
+                  },
+                  "_m": {
+                   "fontSize": "18px"
+                  }
+                 }
+                }
+               },
+               {
+                "type": "div",
+                "data": {
+                 "attrID": "cp-pane-0-list"
+                },
+                "style": {
+                 "&": {
+                  "_": {
+                   "marginTop": "18px"
+                  }
+                 }
+                },
+                "children": [
+                 {
+                  "type": "div",
+                  "data": {
+                   "attrID": "cp-pane-0-li-0"
+                  },
+                  "style": {
+                   "&": {
+                    "_": {
+                     "display": "flex",
+                     "columnGap": "12px",
+                     "alignItems": "baseline",
+                     "paddingTop": "7px",
+                     "paddingBottom": "7px",
+                     "customDeclarations": "border-top:1px solid rgba(22,24,28,.16);"
+                    }
+                   }
+                  },
+                  "children": [
+                   {
+                    "type": "text",
+                    "data": {
+                     "tagName": "p"
+                    },
+                    "text": "01",
+                    "style": {
+                     "&": {
+                      "_": {
+                       "color": {
+                        "token": "--mk-accent-ink"
+                       },
+                       "fontSize": "10px",
+                       "letterSpacing": "0.16em",
+                       "fontFamily": "'IBM Plex Mono',ui-monospace,SFMono-Regular,Menlo,Consolas,monospace",
+                       "fontWeight": "400"
+                      },
+                      "_t": {
+                       "fontSize": "12px"
+                      }
+                     }
+                    }
+                   },
+                   {
+                    "type": "text",
+                    "data": {
+                     "tagName": "p"
+                    },
+                    "text": "定制主題與區塊開發",
+                    "style": {
+                     "&": {
+                      "_": {
+                       "fontFamily": "'Noto Sans TC','PingFang TC','Hiragino Sans TC','Microsoft JhengHei',sans-serif",
+                       "fontSize": "14px",
+                       "lineHeight": "1.7",
+                       "color": {
+                        "token": "--mk-muted"
+                       }
+                      }
+                     }
+                    }
+                   }
+                  ]
+                 },
+                 {
+                  "type": "div",
+                  "data": {
+                   "attrID": "cp-pane-0-li-1"
+                  },
+                  "style": {
+                   "&": {
+                    "_": {
+                     "display": "flex",
+                     "columnGap": "12px",
+                     "alignItems": "baseline",
+                     "paddingTop": "7px",
+                     "paddingBottom": "7px",
+                     "customDeclarations": "border-top:1px solid rgba(22,24,28,.16);"
+                    }
+                   }
+                  },
+                  "children": [
+                   {
+                    "type": "text",
+                    "data": {
+                     "tagName": "p"
+                    },
+                    "text": "02",
+                    "style": {
+                     "&": {
+                      "_": {
+                       "color": {
+                        "token": "--mk-accent-ink"
+                       },
+                       "fontSize": "10px",
+                       "letterSpacing": "0.16em",
+                       "fontFamily": "'IBM Plex Mono',ui-monospace,SFMono-Regular,Menlo,Consolas,monospace",
+                       "fontWeight": "400"
+                      },
+                      "_t": {
+                       "fontSize": "12px"
+                      }
+                     }
+                    }
+                   },
+                   {
+                    "type": "text",
+                    "data": {
+                     "tagName": "p"
+                    },
+                    "text": "WooCommerce 並接金物流與發票",
+                    "style": {
+                     "&": {
+                      "_": {
+                       "fontFamily": "'Noto Sans TC','PingFang TC','Hiragino Sans TC','Microsoft JhengHei',sans-serif",
+                       "fontSize": "14px",
+                       "lineHeight": "1.7",
+                       "color": {
+                        "token": "--mk-muted"
+                       }
+                      }
+                     }
+                    }
+                   }
+                  ]
+                 },
+                 {
+                  "type": "div",
+                  "data": {
+                   "attrID": "cp-pane-0-li-2"
+                  },
+                  "style": {
+                   "&": {
+                    "_": {
+                     "display": "flex",
+                     "columnGap": "12px",
+                     "alignItems": "baseline",
+                     "paddingTop": "7px",
+                     "paddingBottom": "7px",
+                     "customDeclarations": "border-top:1px solid rgba(22,24,28,.16);"
+                    }
+                   }
+                  },
+                  "children": [
+                   {
+                    "type": "text",
+                    "data": {
+                     "tagName": "p"
+                    },
+                    "text": "03",
+                    "style": {
+                     "&": {
+                      "_": {
+                       "color": {
+                        "token": "--mk-accent-ink"
+                       },
+                       "fontSize": "10px",
+                       "letterSpacing": "0.16em",
+                       "fontFamily": "'IBM Plex Mono',ui-monospace,SFMono-Regular,Menlo,Consolas,monospace",
+                       "fontWeight": "400"
+                      },
+                      "_t": {
+                       "fontSize": "12px"
+                      }
+                     }
+                    }
+                   },
+                   {
+                    "type": "text",
+                    "data": {
+                     "tagName": "p"
+                    },
+                    "text": "後台交給後可自己維護",
+                    "style": {
+                     "&": {
+                      "_": {
+                       "fontFamily": "'Noto Sans TC','PingFang TC','Hiragino Sans TC','Microsoft JhengHei',sans-serif",
+                       "fontSize": "14px",
+                       "lineHeight": "1.7",
+                       "color": {
+                        "token": "--mk-muted"
+                       }
+                      }
+                     }
+                    }
+                   }
+                  ]
+                 }
+                ]
+               }
+              ]
+             },
+             {
+              "type": "tabs-tab-pane",
+              "data": {
+               "attrID": "cp-pane-1"
+              },
+              "style": {
+               "&": {
+                "_": {
+                 "paddingTop": "28px",
+                 "paddingBottom": "30px",
+                 "paddingLeft": "28px",
+                 "paddingRight": "28px",
+                 "backgroundColor": {
+                  "token": "--mk-panel"
+                 }
+                },
+                "_m": {
+                 "paddingLeft": "20px",
+                 "paddingRight": "20px"
+                }
+               }
+              },
+              "children": [
+               {
+                "type": "text",
+                "data": {
+                 "tagName": "p"
+                },
+                "text": "AI 客服與自動化流程導入、客製軟體與 ERP。",
+                "style": {
+                 "&": {
+                  "_": {
+                   "fontFamily": "'Space Grotesk','Noto Sans TC','PingFang TC','Microsoft JhengHei',sans-serif",
+                   "fontWeight": "600",
+                   "fontSize": "22px",
+                   "lineHeight": "1.4",
+                   "color": {
+                    "token": "--mk-ink"
+                   },
+                   "whiteSpace": "pre-wrap"
+                  },
+                  "_m": {
+                   "fontSize": "18px"
+                  }
+                 }
+                }
+               },
+               {
+                "type": "div",
+                "data": {
+                 "attrID": "cp-pane-1-list"
+                },
+                "style": {
+                 "&": {
+                  "_": {
+                   "marginTop": "18px"
+                  }
+                 }
+                },
+                "children": [
+                 {
+                  "type": "div",
+                  "data": {
+                   "attrID": "cp-pane-1-li-0"
+                  },
+                  "style": {
+                   "&": {
+                    "_": {
+                     "display": "flex",
+                     "columnGap": "12px",
+                     "alignItems": "baseline",
+                     "paddingTop": "7px",
+                     "paddingBottom": "7px",
+                     "customDeclarations": "border-top:1px solid rgba(22,24,28,.16);"
+                    }
+                   }
+                  },
+                  "children": [
+                   {
+                    "type": "text",
+                    "data": {
+                     "tagName": "p"
+                    },
+                    "text": "01",
+                    "style": {
+                     "&": {
+                      "_": {
+                       "color": {
+                        "token": "--mk-accent-ink"
+                       },
+                       "fontSize": "10px",
+                       "letterSpacing": "0.16em",
+                       "fontFamily": "'IBM Plex Mono',ui-monospace,SFMono-Regular,Menlo,Consolas,monospace",
+                       "fontWeight": "400"
+                      },
+                      "_t": {
+                       "fontSize": "12px"
+                      }
+                     }
+                    }
+                   },
+                   {
+                    "type": "text",
+                    "data": {
+                     "tagName": "p"
+                    },
+                    "text": "n8n / 自建流程串接內部系統",
+                    "style": {
+                     "&": {
+                      "_": {
+                       "fontFamily": "'Noto Sans TC','PingFang TC','Hiragino Sans TC','Microsoft JhengHei',sans-serif",
+                       "fontSize": "14px",
+                       "lineHeight": "1.7",
+                       "color": {
+                        "token": "--mk-muted"
+                       }
+                      }
+                     }
+                    }
+                   }
+                  ]
+                 },
+                 {
+                  "type": "div",
+                  "data": {
+                   "attrID": "cp-pane-1-li-1"
+                  },
+                  "style": {
+                   "&": {
+                    "_": {
+                     "display": "flex",
+                     "columnGap": "12px",
+                     "alignItems": "baseline",
+                     "paddingTop": "7px",
+                     "paddingBottom": "7px",
+                     "customDeclarations": "border-top:1px solid rgba(22,24,28,.16);"
+                    }
+                   }
+                  },
+                  "children": [
+                   {
+                    "type": "text",
+                    "data": {
+                     "tagName": "p"
+                    },
+                    "text": "02",
+                    "style": {
+                     "&": {
+                      "_": {
+                       "color": {
+                        "token": "--mk-accent-ink"
+                       },
+                       "fontSize": "10px",
+                       "letterSpacing": "0.16em",
+                       "fontFamily": "'IBM Plex Mono',ui-monospace,SFMono-Regular,Menlo,Consolas,monospace",
+                       "fontWeight": "400"
+                      },
+                      "_t": {
+                       "fontSize": "12px"
+                      }
+                     }
+                    }
+                   },
+                   {
+                    "type": "text",
+                    "data": {
+                     "tagName": "p"
+                    },
+                    "text": "LINE、訂單與庫存通知自動化",
+                    "style": {
+                     "&": {
+                      "_": {
+                       "fontFamily": "'Noto Sans TC','PingFang TC','Hiragino Sans TC','Microsoft JhengHei',sans-serif",
+                       "fontSize": "14px",
+                       "lineHeight": "1.7",
+                       "color": {
+                        "token": "--mk-muted"
+                       }
+                      }
+                     }
+                    }
+                   }
+                  ]
+                 },
+                 {
+                  "type": "div",
+                  "data": {
+                   "attrID": "cp-pane-1-li-2"
+                  },
+                  "style": {
+                   "&": {
+                    "_": {
+                     "display": "flex",
+                     "columnGap": "12px",
+                     "alignItems": "baseline",
+                     "paddingTop": "7px",
+                     "paddingBottom": "7px",
+                     "customDeclarations": "border-top:1px solid rgba(22,24,28,.16);"
+                    }
+                   }
+                  },
+                  "children": [
+                   {
+                    "type": "text",
+                    "data": {
+                     "tagName": "p"
+                    },
+                    "text": "03",
+                    "style": {
+                     "&": {
+                      "_": {
+                       "color": {
+                        "token": "--mk-accent-ink"
+                       },
+                       "fontSize": "10px",
+                       "letterSpacing": "0.16em",
+                       "fontFamily": "'IBM Plex Mono',ui-monospace,SFMono-Regular,Menlo,Consolas,monospace",
+                       "fontWeight": "400"
+                      },
+                      "_t": {
+                       "fontSize": "12px"
+                      }
+                     }
+                    }
+                   },
+                   {
+                    "type": "text",
+                    "data": {
+                     "tagName": "p"
+                    },
+                    "text": "進銷存、訂位、排程等內部工具",
+                    "style": {
+                     "&": {
+                      "_": {
+                       "fontFamily": "'Noto Sans TC','PingFang TC','Hiragino Sans TC','Microsoft JhengHei',sans-serif",
+                       "fontSize": "14px",
+                       "lineHeight": "1.7",
+                       "color": {
+                        "token": "--mk-muted"
+                       }
+                      }
+                     }
+                    }
+                   }
+                  ]
+                 }
+                ]
+               }
+              ]
+             },
+             {
+              "type": "tabs-tab-pane",
+              "data": {
+               "attrID": "cp-pane-2"
+              },
+              "style": {
+               "&": {
+                "_": {
+                 "paddingTop": "28px",
+                 "paddingBottom": "30px",
+                 "paddingLeft": "28px",
+                 "paddingRight": "28px",
+                 "backgroundColor": {
+                  "token": "--mk-panel"
+                 }
+                },
+                "_m": {
+                 "paddingLeft": "20px",
+                 "paddingRight": "20px"
+                }
+               }
+              },
+              "children": [
+               {
+                "type": "text",
+                "data": {
+                 "tagName": "p"
+                },
+                "text": "API、金物流串接與平台無痛轉移。",
+                "style": {
+                 "&": {
+                  "_": {
+                   "fontFamily": "'Space Grotesk','Noto Sans TC','PingFang TC','Microsoft JhengHei',sans-serif",
+                   "fontWeight": "600",
+                   "fontSize": "22px",
+                   "lineHeight": "1.4",
+                   "color": {
+                    "token": "--mk-ink"
+                   },
+                   "whiteSpace": "pre-wrap"
+                  },
+                  "_m": {
+                   "fontSize": "18px"
+                  }
+                 }
+                }
+               },
+               {
+                "type": "div",
+                "data": {
+                 "attrID": "cp-pane-2-list"
+                },
+                "style": {
+                 "&": {
+                  "_": {
+                   "marginTop": "18px"
+                  }
+                 }
+                },
+                "children": [
+                 {
+                  "type": "div",
+                  "data": {
+                   "attrID": "cp-pane-2-li-0"
+                  },
+                  "style": {
+                   "&": {
+                    "_": {
+                     "display": "flex",
+                     "columnGap": "12px",
+                     "alignItems": "baseline",
+                     "paddingTop": "7px",
+                     "paddingBottom": "7px",
+                     "customDeclarations": "border-top:1px solid rgba(22,24,28,.16);"
+                    }
+                   }
+                  },
+                  "children": [
+                   {
+                    "type": "text",
+                    "data": {
+                     "tagName": "p"
+                    },
+                    "text": "01",
+                    "style": {
+                     "&": {
+                      "_": {
+                       "color": {
+                        "token": "--mk-accent-ink"
+                       },
+                       "fontSize": "10px",
+                       "letterSpacing": "0.16em",
+                       "fontFamily": "'IBM Plex Mono',ui-monospace,SFMono-Regular,Menlo,Consolas,monospace",
+                       "fontWeight": "400"
+                      },
+                      "_t": {
+                       "fontSize": "12px"
+                      }
+                     }
+                    }
+                   },
+                   {
+                    "type": "text",
+                    "data": {
+                     "tagName": "p"
+                    },
+                    "text": "Weebly / Wix / Shopify 搬到 WordPress",
+                    "style": {
+                     "&": {
+                      "_": {
+                       "fontFamily": "'Noto Sans TC','PingFang TC','Hiragino Sans TC','Microsoft JhengHei',sans-serif",
+                       "fontSize": "14px",
+                       "lineHeight": "1.7",
+                       "color": {
+                        "token": "--mk-muted"
+                       }
+                      }
+                     }
+                    }
+                   }
+                  ]
+                 },
+                 {
+                  "type": "div",
+                  "data": {
+                   "attrID": "cp-pane-2-li-1"
+                  },
+                  "style": {
+                   "&": {
+                    "_": {
+                     "display": "flex",
+                     "columnGap": "12px",
+                     "alignItems": "baseline",
+                     "paddingTop": "7px",
+                     "paddingBottom": "7px",
+                     "customDeclarations": "border-top:1px solid rgba(22,24,28,.16);"
+                    }
+                   }
+                  },
+                  "children": [
+                   {
+                    "type": "text",
+                    "data": {
+                     "tagName": "p"
+                    },
+                    "text": "02",
+                    "style": {
+                     "&": {
+                      "_": {
+                       "color": {
+                        "token": "--mk-accent-ink"
+                       },
+                       "fontSize": "10px",
+                       "letterSpacing": "0.16em",
+                       "fontFamily": "'IBM Plex Mono',ui-monospace,SFMono-Regular,Menlo,Consolas,monospace",
+                       "fontWeight": "400"
+                      },
+                      "_t": {
+                       "fontSize": "12px"
+                      }
+                     }
+                    }
+                   },
+                   {
+                    "type": "text",
+                    "data": {
+                     "tagName": "p"
+                    },
+                    "text": "不斷線切換，網址與 SEO 保留",
+                    "style": {
+                     "&": {
+                      "_": {
+                       "fontFamily": "'Noto Sans TC','PingFang TC','Hiragino Sans TC','Microsoft JhengHei',sans-serif",
+                       "fontSize": "14px",
+                       "lineHeight": "1.7",
+                       "color": {
+                        "token": "--mk-muted"
+                       }
+                      }
+                     }
+                    }
+                   }
+                  ]
+                 },
+                 {
+                  "type": "div",
+                  "data": {
+                   "attrID": "cp-pane-2-li-2"
+                  },
+                  "style": {
+                   "&": {
+                    "_": {
+                     "display": "flex",
+                     "columnGap": "12px",
+                     "alignItems": "baseline",
+                     "paddingTop": "7px",
+                     "paddingBottom": "7px",
+                     "customDeclarations": "border-top:1px solid rgba(22,24,28,.16);"
+                    }
+                   }
+                  },
+                  "children": [
+                   {
+                    "type": "text",
+                    "data": {
+                     "tagName": "p"
+                    },
+                    "text": "03",
+                    "style": {
+                     "&": {
+                      "_": {
+                       "color": {
+                        "token": "--mk-accent-ink"
+                       },
+                       "fontSize": "10px",
+                       "letterSpacing": "0.16em",
+                       "fontFamily": "'IBM Plex Mono',ui-monospace,SFMono-Regular,Menlo,Consolas,monospace",
+                       "fontWeight": "400"
+                      },
+                      "_t": {
+                       "fontSize": "12px"
+                      }
+                     }
+                    }
+                   },
+                   {
+                    "type": "text",
+                    "data": {
+                     "tagName": "p"
+                    },
+                    "text": "資料在系統之間自動流通",
+                    "style": {
+                     "&": {
+                      "_": {
+                       "fontFamily": "'Noto Sans TC','PingFang TC','Hiragino Sans TC','Microsoft JhengHei',sans-serif",
+                       "fontSize": "14px",
+                       "lineHeight": "1.7",
+                       "color": {
+                        "token": "--mk-muted"
+                       }
+                      }
+                     }
+                    }
+                   }
+                  ]
+                 }
+                ]
+               }
+              ]
+             },
+             {
+              "type": "tabs-tab-pane",
+              "data": {
+               "attrID": "cp-pane-3"
+              },
+              "style": {
+               "&": {
+                "_": {
+                 "paddingTop": "28px",
+                 "paddingBottom": "30px",
+                 "paddingLeft": "28px",
+                 "paddingRight": "28px",
+                 "backgroundColor": {
+                  "token": "--mk-panel"
+                 }
+                },
+                "_m": {
+                 "paddingLeft": "20px",
+                 "paddingRight": "20px"
+                }
+               }
+              },
+              "children": [
+               {
+                "type": "text",
+                "data": {
+                 "tagName": "p"
+                },
+                "text": "SEO 優化、主機代管與資安維護。",
+                "style": {
+                 "&": {
+                  "_": {
+                   "fontFamily": "'Space Grotesk','Noto Sans TC','PingFang TC','Microsoft JhengHei',sans-serif",
+                   "fontWeight": "600",
+                   "fontSize": "22px",
+                   "lineHeight": "1.4",
+                   "color": {
+                    "token": "--mk-ink"
+                   },
+                   "whiteSpace": "pre-wrap"
+                  },
+                  "_m": {
+                   "fontSize": "18px"
+                  }
+                 }
+                }
+               },
+               {
+                "type": "div",
+                "data": {
+                 "attrID": "cp-pane-3-list"
+                },
+                "style": {
+                 "&": {
+                  "_": {
+                   "marginTop": "18px"
+                  }
+                 }
+                },
+                "children": [
+                 {
+                  "type": "div",
+                  "data": {
+                   "attrID": "cp-pane-3-li-0"
+                  },
+                  "style": {
+                   "&": {
+                    "_": {
+                     "display": "flex",
+                     "columnGap": "12px",
+                     "alignItems": "baseline",
+                     "paddingTop": "7px",
+                     "paddingBottom": "7px",
+                     "customDeclarations": "border-top:1px solid rgba(22,24,28,.16);"
+                    }
+                   }
+                  },
+                  "children": [
+                   {
+                    "type": "text",
+                    "data": {
+                     "tagName": "p"
+                    },
+                    "text": "01",
+                    "style": {
+                     "&": {
+                      "_": {
+                       "color": {
+                        "token": "--mk-accent-ink"
+                       },
+                       "fontSize": "10px",
+                       "letterSpacing": "0.16em",
+                       "fontFamily": "'IBM Plex Mono',ui-monospace,SFMono-Regular,Menlo,Consolas,monospace",
+                       "fontWeight": "400"
+                      },
+                      "_t": {
+                       "fontSize": "12px"
+                      }
+                     }
+                    }
+                   },
+                   {
+                    "type": "text",
+                    "data": {
+                     "tagName": "p"
+                    },
+                    "text": "技術 SEO 與內容結構整理",
+                    "style": {
+                     "&": {
+                      "_": {
+                       "fontFamily": "'Noto Sans TC','PingFang TC','Hiragino Sans TC','Microsoft JhengHei',sans-serif",
+                       "fontSize": "14px",
+                       "lineHeight": "1.7",
+                       "color": {
+                        "token": "--mk-muted"
+                       }
+                      }
+                     }
+                    }
+                   }
+                  ]
+                 },
+                 {
+                  "type": "div",
+                  "data": {
+                   "attrID": "cp-pane-3-li-1"
+                  },
+                  "style": {
+                   "&": {
+                    "_": {
+                     "display": "flex",
+                     "columnGap": "12px",
+                     "alignItems": "baseline",
+                     "paddingTop": "7px",
+                     "paddingBottom": "7px",
+                     "customDeclarations": "border-top:1px solid rgba(22,24,28,.16);"
+                    }
+                   }
+                  },
+                  "children": [
+                   {
+                    "type": "text",
+                    "data": {
+                     "tagName": "p"
+                    },
+                    "text": "02",
+                    "style": {
+                     "&": {
+                      "_": {
+                       "color": {
+                        "token": "--mk-accent-ink"
+                       },
+                       "fontSize": "10px",
+                       "letterSpacing": "0.16em",
+                       "fontFamily": "'IBM Plex Mono',ui-monospace,SFMono-Regular,Menlo,Consolas,monospace",
+                       "fontWeight": "400"
+                      },
+                      "_t": {
+                       "fontSize": "12px"
+                      }
+                     }
+                    }
+                   },
+                   {
+                    "type": "text",
+                    "data": {
+                     "tagName": "p"
+                    },
+                    "text": "備份、監控與漏洞修補",
+                    "style": {
+                     "&": {
+                      "_": {
+                       "fontFamily": "'Noto Sans TC','PingFang TC','Hiragino Sans TC','Microsoft JhengHei',sans-serif",
+                       "fontSize": "14px",
+                       "lineHeight": "1.7",
+                       "color": {
+                        "token": "--mk-muted"
+                       }
+                      }
+                     }
+                    }
+                   }
+                  ]
+                 },
+                 {
+                  "type": "div",
+                  "data": {
+                   "attrID": "cp-pane-3-li-2"
+                  },
+                  "style": {
+                   "&": {
+                    "_": {
+                     "display": "flex",
+                     "columnGap": "12px",
+                     "alignItems": "baseline",
+                     "paddingTop": "7px",
+                     "paddingBottom": "7px",
+                     "customDeclarations": "border-top:1px solid rgba(22,24,28,.16);"
+                    }
+                   }
+                  },
+                  "children": [
+                   {
+                    "type": "text",
+                    "data": {
+                     "tagName": "p"
+                    },
+                    "text": "03",
+                    "style": {
+                     "&": {
+                      "_": {
+                       "color": {
+                        "token": "--mk-accent-ink"
+                       },
+                       "fontSize": "10px",
+                       "letterSpacing": "0.16em",
+                       "fontFamily": "'IBM Plex Mono',ui-monospace,SFMono-Regular,Menlo,Consolas,monospace",
+                       "fontWeight": "400"
+                      },
+                      "_t": {
+                       "fontSize": "12px"
+                      }
+                     }
+                    }
+                   },
+                   {
+                    "type": "text",
+                    "data": {
+                     "tagName": "p"
+                    },
+                    "text": "上線後的長期穩定照顧",
+                    "style": {
+                     "&": {
+                      "_": {
+                       "fontFamily": "'Noto Sans TC','PingFang TC','Hiragino Sans TC','Microsoft JhengHei',sans-serif",
+                       "fontSize": "14px",
+                       "lineHeight": "1.7",
+                       "color": {
+                        "token": "--mk-muted"
+                       }
+                      }
+                     }
+                    }
+                   }
+                  ]
+                 }
+                ]
+               }
+              ]
+             }
+            ]
+           }
+          ]
+         },
+         {
+          "type": "div",
+          "data": {
+           "attrID": "cp-tabs-s-foot"
+          },
+          "style": {
+           "&": {
+            "_": {
+             "paddingTop": "70px"
+            },
+            "_m": {
+             "paddingTop": "44px"
+            }
+           }
+          },
+          "children": []
+         }
+        ]
+       }
+      ]
+     },
+     {
+      "type": "section",
+      "data": {
+       "attrID": "cp-faq-s"
+      },
+      "style": {
+       "&": {
+        "_": {
+         "backgroundColor": {
+          "token": "--mk-panel"
+         },
+         "paddingLeft": "40px",
+         "paddingRight": "40px",
+         "fontFamily": "'Noto Sans TC','PingFang TC','Hiragino Sans TC','Microsoft JhengHei',sans-serif",
+         "paddingTop": "0px",
+         "paddingBottom": "0px"
+        },
+        "_t": {
+         "paddingLeft": "28px",
+         "paddingRight": "28px"
+        },
+        "_m": {
+         "paddingLeft": "18px",
+         "paddingRight": "18px"
+        }
+       }
+      },
+      "children": [
+       {
+        "type": "div",
+        "data": {
+         "attrID": "cp-faq-s-w"
+        },
+        "style": {
+         "&": {
+          "_": {
+           "width": "100%",
+           "maxWidth": "1240px",
+           "marginLeft": "auto",
+           "marginRight": "auto"
+          }
+         }
+        },
+        "children": [
+         {
+          "type": "div",
+          "data": {
+           "attrID": "cp-faq-s-pad"
+          },
+          "style": {
+           "&": {
+            "_": {
+             "paddingTop": "70px"
+            },
+            "_m": {
+             "paddingTop": "44px"
+            }
+           }
+          },
+          "children": []
+         },
+         {
+          "type": "div",
+          "data": {
+           "attrID": "cp-strip-accordion-/-手風琴"
+          },
+          "style": {
+           "&": {
+            "_": {
+             "display": "flex",
+             "justifyContent": "space-between",
+             "alignItems": "baseline",
+             "columnGap": "16px",
+             "flexWrap": "wrap",
+             "rowGap": "6px",
+             "paddingBottom": "14px",
+             "marginBottom": "26px",
+             "customDeclarations": "border-bottom:1px solid rgb(22,24,28);"
+            }
+           }
+          },
+          "children": [
+           {
+            "type": "text",
+            "data": {
+             "tagName": "p"
+            },
+            "text": "ACCORDION / 手風琴",
+            "style": {
+             "&": {
+              "_": {
+               "color": {
+                "token": "--mk-ink"
+               },
+               "fontSize": "11px",
+               "letterSpacing": "0.26em",
+               "fontFamily": "'IBM Plex Mono',ui-monospace,SFMono-Regular,Menlo,Consolas,monospace",
+               "fontWeight": "400"
+              },
+              "_t": {
+               "fontSize": "12px"
+              }
+             }
+            }
+           },
+           {
+            "type": "text",
+            "data": {
+             "tagName": "p"
+            },
+            "text": "accordion › accordion-item › accordion-title + accordion-content",
+            "style": {
+             "&": {
+              "_": {
+               "color": {
+                "token": "--mk-faint"
+               },
+               "fontSize": "10px",
+               "letterSpacing": "0.08em",
+               "fontFamily": "'IBM Plex Mono',ui-monospace,SFMono-Regular,Menlo,Consolas,monospace",
+               "fontWeight": "400"
+              },
+              "_t": {
+               "fontSize": "12px"
+              }
+             }
+            }
+           }
+          ]
+         },
+         {
+          "type": "accordion",
+          "data": {
+           "attrID": "cp-faq"
+          },
+          "style": {
+           "&": {
+            "_": {
+             "customDeclarations": "border-top:1px solid rgb(22,24,28);"
+            }
+           }
+          },
+          "children": [
+           {
+            "type": "accordion-item",
+            "data": {
+             "attrID": "cp-faq-0"
+            },
+            "style": {
+             "&": {
+              "_": {
+               "customDeclarations": "border-bottom:1px solid rgba(22,24,28,.16);"
+              }
+             }
+            },
+            "children": [
+             {
+              "type": "accordion-title",
+              "data": {
+               "attrID": "cp-faq-q-0"
+              },
+              "style": {
+               "&": {
+                "_": {
+                 "cursor": "pointer",
+                 "display": "flex",
+                 "justifyContent": "space-between",
+                 "alignItems": "baseline",
+                 "columnGap": "18px",
+                 "paddingTop": "20px",
+                 "paddingBottom": "20px"
+                }
+               },
+               "hover": {
+                "_": {
+                 "color": {
+                  "token": "--mk-accent-ink"
+                 }
+                }
+               },
+               "focus-visible": {
+                "_": {
+                 "customDeclarations": "outline:2px solid rgb(255,90,54);outline-offset:3px;"
+                }
+               }
+              },
+              "children": [
+               {
+                "type": "text",
+                "data": {
+                 "tagName": "p"
+                },
+                "text": "做一個站要多久？",
+                "style": {
+                 "&": {
+                  "_": {
+                   "fontFamily": "'Noto Sans TC','PingFang TC','Hiragino Sans TC','Microsoft JhengHei',sans-serif",
+                   "fontSize": "16px",
+                   "fontWeight": "500",
+                   "lineHeight": "1.5",
+                   "color": {
+                    "token": "--mk-ink"
+                   }
+                  },
+                  "_m": {
+                   "fontSize": "15px"
+                  }
+                 }
+                }
+               },
+               {
+                "type": "text",
+                "data": {
+                 "tagName": "p"
+                },
+                "text": "+",
+                "style": {
+                 "&": {
+                  "_": {
+                   "color": {
+                    "token": "--mk-faint"
+                   },
+                   "fontSize": "14px",
+                   "letterSpacing": "0",
+                   "fontFamily": "'IBM Plex Mono',ui-monospace,SFMono-Regular,Menlo,Consolas,monospace",
+                   "fontWeight": "400"
+                  }
+                 }
+                }
+               }
+              ]
+             },
+             {
+              "type": "accordion-content",
+              "data": {
+               "attrID": "cp-faq-a-0"
+              },
+              "children": [
+               {
+                "type": "text",
+                "data": {
+                 "tagName": "p"
+                },
+                "text": "形象官網大約 3–6 週，電商與串接案看範圍。第一週先把範圍、結構與里程碑寫成一份文件，後面每一步都對著那份文件走。",
+                "style": {
+                 "&": {
+                  "_": {
+                   "fontFamily": "'Noto Sans TC','PingFang TC','Hiragino Sans TC','Microsoft JhengHei',sans-serif",
+                   "fontSize": "14px",
+                   "lineHeight": "1.9",
+                   "color": {
+                    "token": "--mk-muted"
+                   },
+                   "paddingBottom": "22px",
+                   "maxWidth": "640px"
+                  }
+                 }
+                }
+               }
+              ]
+             }
+            ]
+           },
+           {
+            "type": "accordion-item",
+            "data": {
+             "attrID": "cp-faq-1"
+            },
+            "style": {
+             "&": {
+              "_": {
+               "customDeclarations": "border-bottom:1px solid rgba(22,24,28,.16);"
+              }
+             }
+            },
+            "children": [
+             {
+              "type": "accordion-title",
+              "data": {
+               "attrID": "cp-faq-q-1"
+              },
+              "style": {
+               "&": {
+                "_": {
+                 "cursor": "pointer",
+                 "display": "flex",
+                 "justifyContent": "space-between",
+                 "alignItems": "baseline",
+                 "columnGap": "18px",
+                 "paddingTop": "20px",
+                 "paddingBottom": "20px"
+                }
+               },
+               "hover": {
+                "_": {
+                 "color": {
+                  "token": "--mk-accent-ink"
+                 }
+                }
+               },
+               "focus-visible": {
+                "_": {
+                 "customDeclarations": "outline:2px solid rgb(255,90,54);outline-offset:3px;"
+                }
+               }
+              },
+              "children": [
+               {
+                "type": "text",
+                "data": {
+                 "tagName": "p"
+                },
+                "text": "上線之後我自己改得動嗎？",
+                "style": {
+                 "&": {
+                  "_": {
+                   "fontFamily": "'Noto Sans TC','PingFang TC','Hiragino Sans TC','Microsoft JhengHei',sans-serif",
+                   "fontSize": "16px",
+                   "fontWeight": "500",
+                   "lineHeight": "1.5",
+                   "color": {
+                    "token": "--mk-ink"
+                   }
+                  },
+                  "_m": {
+                   "fontSize": "15px"
+                  }
+                 }
+                }
+               },
+               {
+                "type": "text",
+                "data": {
+                 "tagName": "p"
+                },
+                "text": "+",
+                "style": {
+                 "&": {
+                  "_": {
+                   "color": {
+                    "token": "--mk-faint"
+                   },
+                   "fontSize": "14px",
+                   "letterSpacing": "0",
+                   "fontFamily": "'IBM Plex Mono',ui-monospace,SFMono-Regular,Menlo,Consolas,monospace",
+                   "fontWeight": "400"
+                  }
+                 }
+                }
+               }
+              ]
+             },
+             {
+              "type": "accordion-content",
+              "data": {
+               "attrID": "cp-faq-a-1"
+              },
+              "children": [
+               {
+                "type": "text",
+                "data": {
+                 "tagName": "p"
+                },
+                "text": "改得動。交給的時候會附一份後台操作說明，文字、圖片、文章、商品都是你自己管。結構性的調整再找我就好。",
+                "style": {
+                 "&": {
+                  "_": {
+                   "fontFamily": "'Noto Sans TC','PingFang TC','Hiragino Sans TC','Microsoft JhengHei',sans-serif",
+                   "fontSize": "14px",
+                   "lineHeight": "1.9",
+                   "color": {
+                    "token": "--mk-muted"
+                   },
+                   "paddingBottom": "22px",
+                   "maxWidth": "640px"
+                  }
+                 }
+                }
+               }
+              ]
+             }
+            ]
+           },
+           {
+            "type": "accordion-item",
+            "data": {
+             "attrID": "cp-faq-2"
+            },
+            "style": {
+             "&": {
+              "_": {
+               "customDeclarations": "border-bottom:1px solid rgba(22,24,28,.16);"
+              }
+             }
+            },
+            "children": [
+             {
+              "type": "accordion-title",
+              "data": {
+               "attrID": "cp-faq-q-2"
+              },
+              "style": {
+               "&": {
+                "_": {
+                 "cursor": "pointer",
+                 "display": "flex",
+                 "justifyContent": "space-between",
+                 "alignItems": "baseline",
+                 "columnGap": "18px",
+                 "paddingTop": "20px",
+                 "paddingBottom": "20px"
+                }
+               },
+               "hover": {
+                "_": {
+                 "color": {
+                  "token": "--mk-accent-ink"
+                 }
+                }
+               },
+               "focus-visible": {
+                "_": {
+                 "customDeclarations": "outline:2px solid rgb(255,90,54);outline-offset:3px;"
+                }
+               }
+              },
+              "children": [
+               {
+                "type": "text",
+                "data": {
+                 "tagName": "p"
+                },
+                "text": "舊站的資料與排名會不會不見？",
+                "style": {
+                 "&": {
+                  "_": {
+                   "fontFamily": "'Noto Sans TC','PingFang TC','Hiragino Sans TC','Microsoft JhengHei',sans-serif",
+                   "fontSize": "16px",
+                   "fontWeight": "500",
+                   "lineHeight": "1.5",
+                   "color": {
+                    "token": "--mk-ink"
+                   }
+                  },
+                  "_m": {
+                   "fontSize": "15px"
+                  }
+                 }
+                }
+               },
+               {
+                "type": "text",
+                "data": {
+                 "tagName": "p"
+                },
+                "text": "+",
+                "style": {
+                 "&": {
+                  "_": {
+                   "color": {
+                    "token": "--mk-faint"
+                   },
+                   "fontSize": "14px",
+                   "letterSpacing": "0",
+                   "fontFamily": "'IBM Plex Mono',ui-monospace,SFMono-Regular,Menlo,Consolas,monospace",
+                   "fontWeight": "400"
+                  }
+                 }
+                }
+               }
+              ]
+             },
+             {
+              "type": "accordion-content",
+              "data": {
+               "attrID": "cp-faq-a-2"
+              },
+              "children": [
+               {
+                "type": "text",
+                "data": {
+                 "tagName": "p"
+                },
+                "text": "不會。搬站會先把所有網址、文字、圖片與連結列成清單，轉完再逐項核對；網址有變動就做 301，不讓排名斷掉。",
+                "style": {
+                 "&": {
+                  "_": {
+                   "fontFamily": "'Noto Sans TC','PingFang TC','Hiragino Sans TC','Microsoft JhengHei',sans-serif",
+                   "fontSize": "14px",
+                   "lineHeight": "1.9",
+                   "color": {
+                    "token": "--mk-muted"
+                   },
+                   "paddingBottom": "22px",
+                   "maxWidth": "640px"
+                  }
+                 }
+                }
+               }
+              ]
+             }
+            ]
+           },
+           {
+            "type": "accordion-item",
+            "data": {
+             "attrID": "cp-faq-3"
+            },
+            "style": {
+             "&": {
+              "_": {
+               "customDeclarations": "border-bottom:1px solid rgba(22,24,28,.16);"
+              }
+             }
+            },
+            "children": [
+             {
+              "type": "accordion-title",
+              "data": {
+               "attrID": "cp-faq-q-3"
+              },
+              "style": {
+               "&": {
+                "_": {
+                 "cursor": "pointer",
+                 "display": "flex",
+                 "justifyContent": "space-between",
+                 "alignItems": "baseline",
+                 "columnGap": "18px",
+                 "paddingTop": "20px",
+                 "paddingBottom": "20px"
+                }
+               },
+               "hover": {
+                "_": {
+                 "color": {
+                  "token": "--mk-accent-ink"
+                 }
+                }
+               },
+               "focus-visible": {
+                "_": {
+                 "customDeclarations": "outline:2px solid rgb(255,90,54);outline-offset:3px;"
+                }
+               }
+              },
+              "children": [
+               {
+                "type": "text",
+                "data": {
+                 "tagName": "p"
+                },
+                "text": "可以只做自動化、不做網站嗎？",
+                "style": {
+                 "&": {
+                  "_": {
+                   "fontFamily": "'Noto Sans TC','PingFang TC','Hiragino Sans TC','Microsoft JhengHei',sans-serif",
+                   "fontSize": "16px",
+                   "fontWeight": "500",
+                   "lineHeight": "1.5",
+                   "color": {
+                    "token": "--mk-ink"
+                   }
+                  },
+                  "_m": {
+                   "fontSize": "15px"
+                  }
+                 }
+                }
+               },
+               {
+                "type": "text",
+                "data": {
+                 "tagName": "p"
+                },
+                "text": "+",
+                "style": {
+                 "&": {
+                  "_": {
+                   "color": {
+                    "token": "--mk-faint"
+                   },
+                   "fontSize": "14px",
+                   "letterSpacing": "0",
+                   "fontFamily": "'IBM Plex Mono',ui-monospace,SFMono-Regular,Menlo,Consolas,monospace",
+                   "fontWeight": "400"
+                  }
+                 }
+                }
+               }
+              ]
+             },
+             {
+              "type": "accordion-content",
+              "data": {
+               "attrID": "cp-faq-a-3"
+              },
+              "children": [
+               {
+                "type": "text",
+                "data": {
+                 "tagName": "p"
+                },
+                "text": "可以。訂單通知、庫存同步、客服機器人、內部報表這些都能單獨做，接在你現有的系統上。",
+                "style": {
+                 "&": {
+                  "_": {
+                   "fontFamily": "'Noto Sans TC','PingFang TC','Hiragino Sans TC','Microsoft JhengHei',sans-serif",
+                   "fontSize": "14px",
+                   "lineHeight": "1.9",
+                   "color": {
+                    "token": "--mk-muted"
+                   },
+                   "paddingBottom": "22px",
+                   "maxWidth": "640px"
+                  }
+                 }
+                }
+               }
+              ]
+             }
+            ]
+           }
+          ]
+         },
+         {
+          "type": "div",
+          "data": {
+           "attrID": "cp-faq-s-foot"
+          },
+          "style": {
+           "&": {
+            "_": {
+             "paddingTop": "70px"
+            },
+            "_m": {
+             "paddingTop": "44px"
+            }
+           }
+          },
+          "children": []
+         }
+        ]
+       }
+      ]
+     },
+     {
+      "type": "section",
+      "data": {
+       "attrID": "cp-form-s"
+      },
+      "style": {
+       "&": {
+        "_": {
+         "backgroundColor": {
+          "token": "--mk-paper"
+         },
+         "paddingLeft": "40px",
+         "paddingRight": "40px",
+         "fontFamily": "'Noto Sans TC','PingFang TC','Hiragino Sans TC','Microsoft JhengHei',sans-serif",
+         "paddingTop": "0px",
+         "paddingBottom": "0px"
+        },
+        "_t": {
+         "paddingLeft": "28px",
+         "paddingRight": "28px"
+        },
+        "_m": {
+         "paddingLeft": "18px",
+         "paddingRight": "18px"
+        }
+       }
+      },
+      "children": [
+       {
+        "type": "div",
+        "data": {
+         "attrID": "cp-form-s-w"
+        },
+        "style": {
+         "&": {
+          "_": {
+           "width": "100%",
+           "maxWidth": "1240px",
+           "marginLeft": "auto",
+           "marginRight": "auto"
+          }
+         }
+        },
+        "children": [
+         {
+          "type": "div",
+          "data": {
+           "attrID": "cp-form-s-pad"
+          },
+          "style": {
+           "&": {
+            "_": {
+             "paddingTop": "70px"
+            },
+            "_m": {
+             "paddingTop": "44px"
+            }
+           }
+          },
+          "children": []
+         },
+         {
+          "type": "div",
+          "data": {
+           "attrID": "cp-strip-form-/-表單"
+          },
+          "style": {
+           "&": {
+            "_": {
+             "display": "flex",
+             "justifyContent": "space-between",
+             "alignItems": "baseline",
+             "columnGap": "16px",
+             "flexWrap": "wrap",
+             "rowGap": "6px",
+             "paddingBottom": "14px",
+             "marginBottom": "26px",
+             "customDeclarations": "border-bottom:1px solid rgb(22,24,28);"
+            }
+           }
+          },
+          "children": [
+           {
+            "type": "text",
+            "data": {
+             "tagName": "p"
+            },
+            "text": "FORM / 表單",
+            "style": {
+             "&": {
+              "_": {
+               "color": {
+                "token": "--mk-ink"
+               },
+               "fontSize": "11px",
+               "letterSpacing": "0.26em",
+               "fontFamily": "'IBM Plex Mono',ui-monospace,SFMono-Regular,Menlo,Consolas,monospace",
+               "fontWeight": "400"
+              },
+              "_t": {
+               "fontSize": "12px"
+              }
+             }
+            }
+           },
+           {
+            "type": "text",
+            "data": {
+             "tagName": "p"
+            },
+            "text": "form-wrapper › form › text-input + textarea-input + submit-button / success-screen",
+            "style": {
+             "&": {
+              "_": {
+               "color": {
+                "token": "--mk-faint"
+               },
+               "fontSize": "10px",
+               "letterSpacing": "0.08em",
+               "fontFamily": "'IBM Plex Mono',ui-monospace,SFMono-Regular,Menlo,Consolas,monospace",
+               "fontWeight": "400"
+              },
+              "_t": {
+               "fontSize": "12px"
+              }
+             }
+            }
+           }
+          ]
+         },
+         {
+          "type": "form-wrapper",
+          "data": {
+           "attrID": "cp-formw"
+          },
+          "children": [
+           {
+            "type": "form",
+            "data": {
+             "attrID": "cp-form"
+            },
+            "style": {
+             "&": {
+              "_": {
+               "display": "flex",
+               "flexDirection": "column",
+               "rowGap": "16px"
+              }
+             }
+            },
+            "children": [
+             {
+              "type": "div",
+              "data": {
+               "attrID": "cp-form-top"
+              },
+              "style": {
+               "&": {
+                "_": {
+                 "display": "grid",
+                 "gridCols": "repeat(2, 1fr)",
+                 "columnGap": "16px",
+                 "rowGap": "16px"
+                },
+                "_m": {
+                 "gridCols": "repeat(1, 1fr)"
+                }
+               }
+              },
+              "children": [
+               {
+                "type": "div",
+                "data": {
+                 "attrID": "cp-f-name-row"
+                },
+                "style": {
+                 "&": {
+                  "_": {
+                   "display": "flex",
+                   "flexDirection": "column",
+                   "rowGap": "7px"
+                  }
+                 }
+                },
+                "children": [
+                 {
+                  "type": "text",
+                  "data": {
+                   "tagName": "p"
+                  },
+                  "text": "姓名 / NAME",
+                  "style": {
+                   "&": {
+                    "_": {
+                     "color": {
+                      "token": "--mk-faint"
+                     },
+                     "fontSize": "10px",
+                     "letterSpacing": "0.18em",
+                     "fontFamily": "'IBM Plex Mono',ui-monospace,SFMono-Regular,Menlo,Consolas,monospace",
+                     "fontWeight": "400"
+                    },
+                    "_t": {
+                     "fontSize": "12px"
+                    }
+                   }
+                  }
+                 },
+                 {
+                  "type": "text-input",
+                  "data": {
+                   "attrID": "cp-f-name",
+                   "nameAttribute": "name",
+                   "required": "1",
+                   "placeholderText": "王小明"
+                  },
+                  "style": {
+                   "&": {
+                    "_": {
+                     "width": "100%",
+                     "backgroundColor": {
+                      "token": "--mk-paper"
+                     },
+                     "fontFamily": "'Noto Sans TC','PingFang TC','Hiragino Sans TC','Microsoft JhengHei',sans-serif",
+                     "fontSize": "14px",
+                     "color": {
+                      "token": "--mk-ink"
+                     },
+                     "paddingTop": "12px",
+                     "paddingBottom": "12px",
+                     "paddingLeft": "14px",
+                     "paddingRight": "14px",
+                     "customDeclarations": "border:1px solid rgba(22,24,28,.3);"
+                    }
+                   },
+                   "focus-visible": {
+                    "_": {
+                     "customDeclarations": "outline:2px solid rgb(255,90,54);outline-offset:3px;"
+                    }
+                   }
+                  }
+                 }
+                ]
+               },
+               {
+                "type": "div",
+                "data": {
+                 "attrID": "cp-f-mail-row"
+                },
+                "style": {
+                 "&": {
+                  "_": {
+                   "display": "flex",
+                   "flexDirection": "column",
+                   "rowGap": "7px"
+                  }
+                 }
+                },
+                "children": [
+                 {
+                  "type": "text",
+                  "data": {
+                   "tagName": "p"
+                  },
+                  "text": "電郵 / EMAIL",
+                  "style": {
+                   "&": {
+                    "_": {
+                     "color": {
+                      "token": "--mk-faint"
+                     },
+                     "fontSize": "10px",
+                     "letterSpacing": "0.18em",
+                     "fontFamily": "'IBM Plex Mono',ui-monospace,SFMono-Regular,Menlo,Consolas,monospace",
+                     "fontWeight": "400"
+                    },
+                    "_t": {
+                     "fontSize": "12px"
+                    }
+                   }
+                  }
+                 },
+                 {
+                  "type": "text-input",
+                  "data": {
+                   "attrID": "cp-f-mail",
+                   "nameAttribute": "email",
+                   "required": "1",
+                   "type": "email",
+                   "placeholderText": "you@example.com"
+                  },
+                  "style": {
+                   "&": {
+                    "_": {
+                     "width": "100%",
+                     "backgroundColor": {
+                      "token": "--mk-paper"
+                     },
+                     "fontFamily": "'Noto Sans TC','PingFang TC','Hiragino Sans TC','Microsoft JhengHei',sans-serif",
+                     "fontSize": "14px",
+                     "color": {
+                      "token": "--mk-ink"
+                     },
+                     "paddingTop": "12px",
+                     "paddingBottom": "12px",
+                     "paddingLeft": "14px",
+                     "paddingRight": "14px",
+                     "customDeclarations": "border:1px solid rgba(22,24,28,.3);"
+                    }
+                   },
+                   "focus-visible": {
+                    "_": {
+                     "customDeclarations": "outline:2px solid rgb(255,90,54);outline-offset:3px;"
+                    }
+                   }
+                  }
+                 }
+                ]
+               }
+              ]
+             },
+             {
+              "type": "div",
+              "data": {
+               "attrID": "cp-f-msg-row"
+              },
+              "style": {
+               "&": {
+                "_": {
+                 "display": "flex",
+                 "flexDirection": "column",
+                 "rowGap": "7px"
+                }
+               }
+              },
+              "children": [
+               {
+                "type": "text",
+                "data": {
+                 "tagName": "p"
+                },
+                "text": "想做的事 / BRIEF",
+                "style": {
+                 "&": {
+                  "_": {
+                   "color": {
+                    "token": "--mk-faint"
+                   },
+                   "fontSize": "10px",
+                   "letterSpacing": "0.18em",
+                   "fontFamily": "'IBM Plex Mono',ui-monospace,SFMono-Regular,Menlo,Consolas,monospace",
+                   "fontWeight": "400"
+                  },
+                  "_t": {
+                   "fontSize": "12px"
+                  }
+                 }
+                }
+               },
+               {
+                "type": "textarea-input",
+                "data": {
+                 "attrID": "cp-f-msg",
+                 "nameAttribute": "message",
+                 "required": "1",
+                 "placeholderText": "寫三行就好：想做什麼、現在卡在哪、希望什麼時候上線"
+                },
+                "style": {
+                 "&": {
+                  "_": {
+                   "width": "100%",
+                   "backgroundColor": {
+                    "token": "--mk-paper"
+                   },
+                   "fontFamily": "'Noto Sans TC','PingFang TC','Hiragino Sans TC','Microsoft JhengHei',sans-serif",
+                   "fontSize": "14px",
+                   "color": {
+                    "token": "--mk-ink"
+                   },
+                   "paddingTop": "12px",
+                   "paddingBottom": "12px",
+                   "paddingLeft": "14px",
+                   "paddingRight": "14px",
+                   "customDeclarations": "border:1px solid rgba(22,24,28,.3);"
+                  }
+                 },
+                 "focus-visible": {
+                  "_": {
+                   "customDeclarations": "outline:2px solid rgb(255,90,54);outline-offset:3px;"
+                  }
+                 }
+                }
+               }
+              ]
+             },
+             {
+              "type": "submit-button",
+              "data": {
+               "attrID": "cp-f-send"
+              },
+              "style": {
+               "&": {
+                "_": {
+                 "backgroundColor": {
+                  "token": "--mk-accent"
+                 },
+                 "color": {
+                  "token": "--mk-ink"
+                 },
+                 "fontFamily": "'IBM Plex Mono',ui-monospace,SFMono-Regular,Menlo,Consolas,monospace",
+                 "fontSize": "11px",
+                 "letterSpacing": "0.18em",
+                 "fontWeight": "500",
+                 "cursor": "pointer",
+                 "width": "max-content",
+                 "paddingTop": "14px",
+                 "paddingBottom": "14px",
+                 "paddingLeft": "26px",
+                 "paddingRight": "26px",
+                 "customDeclarations": "border:1px solid rgb(255,90,54);"
+                }
+               },
+               "hover": {
+                "_": {
+                 "backgroundColor": {
+                  "token": "--mk-ink"
+                 },
+                 "color": {
+                  "token": "--mk-paper"
+                 }
+                }
+               },
+               "focus-visible": {
+                "_": {
+                 "customDeclarations": "outline:2px solid rgb(255,90,54);outline-offset:3px;"
+                }
+               }
+              },
+              "children": [
+               {
+                "type": "submit-label",
+                "data": {
+                 "attrID": "cp-f-send-l"
+                },
+                "children": [
+                 {
+                  "type": "wysiwyg-text",
+                  "data": {
+                   "text": "SEND"
+                  }
+                 }
+                ]
+               }
+              ]
+             }
+            ]
+           },
+           {
+            "type": "success-screen",
+            "data": {
+             "attrID": "cp-form-ok"
+            },
+            "style": {
+             "&": {
+              "_": {
+               "paddingTop": "34px",
+               "paddingBottom": "34px",
+               "paddingLeft": "28px",
+               "paddingRight": "28px",
+               "backgroundColor": {
+                "token": "--mk-ink"
+               }
+              }
+             }
+            },
+            "children": [
+             {
+              "type": "text",
+              "data": {
+               "tagName": "p"
+              },
+              "text": "收到了。",
+              "style": {
+               "&": {
+                "_": {
+                 "fontFamily": "'Space Grotesk','Noto Sans TC','PingFang TC','Microsoft JhengHei',sans-serif",
+                 "fontWeight": "600",
+                 "fontSize": "26px",
+                 "color": "rgb(250,250,247)",
+                 "whiteSpace": "pre-wrap"
+                }
+               }
+              }
+             },
+             {
+              "type": "text",
+              "data": {
+               "tagName": "p"
+              },
+              "text": "兩個工作天內會收到一份能直接討論的提案：範圍、做法、時間。",
+              "style": {
+               "&": {
+                "_": {
+                 "fontFamily": "'Noto Sans TC','PingFang TC','Hiragino Sans TC','Microsoft JhengHei',sans-serif",
+                 "fontSize": "14px",
+                 "lineHeight": "1.85",
+                 "color": "rgba(250,250,247,.78)",
+                 "marginTop": "10px"
+                }
+               }
+              }
+             }
+            ]
+           }
+          ]
+         },
+         {
+          "type": "div",
+          "data": {
+           "attrID": "cp-form-s-foot"
+          },
+          "style": {
+           "&": {
+            "_": {
+             "paddingTop": "70px"
+            },
+            "_m": {
+             "paddingTop": "44px"
+            }
+           }
+          },
+          "children": []
+         }
+        ]
+       }
+      ]
+     },
+     {
+      "type": "section",
+      "data": {
+       "attrID": "cp-map-s"
+      },
+      "style": {
+       "&": {
+        "_": {
+         "backgroundColor": {
+          "token": "--mk-panel"
+         },
+         "paddingLeft": "40px",
+         "paddingRight": "40px",
+         "fontFamily": "'Noto Sans TC','PingFang TC','Hiragino Sans TC','Microsoft JhengHei',sans-serif",
+         "paddingTop": "0px",
+         "paddingBottom": "0px"
+        },
+        "_t": {
+         "paddingLeft": "28px",
+         "paddingRight": "28px"
+        },
+        "_m": {
+         "paddingLeft": "18px",
+         "paddingRight": "18px"
+        }
+       }
+      },
+      "children": [
+       {
+        "type": "div",
+        "data": {
+         "attrID": "cp-map-s-w"
+        },
+        "style": {
+         "&": {
+          "_": {
+           "width": "100%",
+           "maxWidth": "1240px",
+           "marginLeft": "auto",
+           "marginRight": "auto"
+          }
+         }
+        },
+        "children": [
+         {
+          "type": "div",
+          "data": {
+           "attrID": "cp-map-s-pad"
+          },
+          "style": {
+           "&": {
+            "_": {
+             "paddingTop": "70px"
+            },
+            "_m": {
+             "paddingTop": "44px"
+            }
+           }
+          },
+          "children": []
+         },
+         {
+          "type": "div",
+          "data": {
+           "attrID": "cp-strip-map-/-地圖"
+          },
+          "style": {
+           "&": {
+            "_": {
+             "display": "flex",
+             "justifyContent": "space-between",
+             "alignItems": "baseline",
+             "columnGap": "16px",
+             "flexWrap": "wrap",
+             "rowGap": "6px",
+             "paddingBottom": "14px",
+             "marginBottom": "26px",
+             "customDeclarations": "border-bottom:1px solid rgb(22,24,28);"
+            }
+           }
+          },
+          "children": [
+           {
+            "type": "text",
+            "data": {
+             "tagName": "p"
+            },
+            "text": "MAP / 地圖",
+            "style": {
+             "&": {
+              "_": {
+               "color": {
+                "token": "--mk-ink"
+               },
+               "fontSize": "11px",
+               "letterSpacing": "0.26em",
+               "fontFamily": "'IBM Plex Mono',ui-monospace,SFMono-Regular,Menlo,Consolas,monospace",
+               "fontWeight": "400"
+              },
+              "_t": {
+               "fontSize": "12px"
+              }
+             }
+            }
+           },
+           {
+            "type": "text",
+            "data": {
+             "tagName": "p"
+            },
+            "text": "openstreetmap — latitude / longitude / zoom",
+            "style": {
+             "&": {
+              "_": {
+               "color": {
+                "token": "--mk-faint"
+               },
+               "fontSize": "10px",
+               "letterSpacing": "0.08em",
+               "fontFamily": "'IBM Plex Mono',ui-monospace,SFMono-Regular,Menlo,Consolas,monospace",
+               "fontWeight": "400"
+              },
+              "_t": {
+               "fontSize": "12px"
+              }
+             }
+            }
+           }
+          ]
+         },
+         {
+          "type": "openstreetmap",
+          "data": {
+           "attrID": "cp-map",
+           "latitude": {
+            "v": "24.1477"
+           },
+           "longitude": {
+            "v": "120.6736"
+           },
+           "zoom": {
+            "v": "15"
+           },
+           "layer": "mapnik"
+          },
+          "style": {
+           "&": {
+            "_": {
+             "height": "360px",
+             "width": "100%",
+             "customDeclarations": "border:1px solid rgb(22,24,28);"
+            },
+            "_m": {
+             "height": "280px"
+            }
+           }
+          }
+         },
+         {
+          "type": "div",
+          "data": {
+           "attrID": "cp-map-s-foot"
+          },
+          "style": {
+           "&": {
+            "_": {
+             "paddingTop": "70px"
+            },
+            "_m": {
+             "paddingTop": "44px"
+            }
+           }
+          },
+          "children": []
          }
         ]
        }
@@ -40764,20 +44008,20 @@
                  "interactions": [
                   {
                    "type": "click",
-                   "uuid": "fd3a6252-58ed-4d19-a313-744ab11e7ea6",
+                   "uuid": "22293cf8-31f2-437c-9d95-64c44d27e916",
                    "clickOptions": {
                     "name": "dl-open-centre",
-                    "ID": "ae57d3e4-fb70-427f-bfcc-1a63cc3281a7",
+                    "ID": "f57753b2-537e-4031-8862-336c7fc55588",
                     "actionSlots": {
                      "click": {
                       "actions": [
                        {
                         "type": "modalOpen",
-                        "uuid": "6dfb6f78-785c-4abd-9626-863889920c36",
+                        "uuid": "d385c87c-0075-4c8b-9dab-2141ca3fab60",
                         "settings": {
                          "target": {
                           "type": "element",
-                          "uuid": "a097318c-7c41-4b97-b329-29fe073e4618"
+                          "uuid": "8573930f-8e6b-4d3d-808f-7708826d1654"
                          }
                         }
                        }
@@ -41316,20 +44560,20 @@
                  "interactions": [
                   {
                    "type": "click",
-                   "uuid": "d15d4681-5d03-4cb8-b736-f870a4361b4d",
+                   "uuid": "413b587c-0128-4e66-8627-093a1c1f3f02",
                    "clickOptions": {
                     "name": "dl-open-sheet",
-                    "ID": "94cc1016-06dc-485d-823d-ec69fd8ed853",
+                    "ID": "baa85a65-92c1-4812-af1e-31b2bd0b7924",
                     "actionSlots": {
                      "click": {
                       "actions": [
                        {
                         "type": "modalOpen",
-                        "uuid": "4046c844-9ed4-4d2e-a088-cb8126b12745",
+                        "uuid": "41e35704-fc39-4fb6-aabc-5baf37eef603",
                         "settings": {
                          "target": {
                           "type": "element",
-                          "uuid": "46f4d508-ce36-4570-b13c-7f424db25d7d"
+                          "uuid": "b1091fb3-9c1d-4e08-a904-fde8240c4304"
                          }
                         }
                        }
@@ -41868,20 +45112,20 @@
                  "interactions": [
                   {
                    "type": "click",
-                   "uuid": "ee153857-4766-40da-ae9d-b6b2dfbe1c32",
+                   "uuid": "016afe3c-7d98-4949-a8a1-85007609c74d",
                    "clickOptions": {
                     "name": "dl-open-drawer",
-                    "ID": "d9519755-ed1b-4e95-bbcb-013218546832",
+                    "ID": "8a30c72e-cc31-4455-a05e-e38f19b0620a",
                     "actionSlots": {
                      "click": {
                       "actions": [
                        {
                         "type": "modalOpen",
-                        "uuid": "8a42a42b-e427-4b65-9f62-3c1dd0d6286f",
+                        "uuid": "e314569c-fadb-4a1e-9022-145d22d92f19",
                         "settings": {
                          "target": {
                           "type": "element",
-                          "uuid": "bf5f38bb-c66a-4e78-ad35-652f2ee0a13b"
+                          "uuid": "d4714f06-e71f-4ebb-a781-4b1cbfa17334"
                          }
                         }
                        }
@@ -42917,20 +46161,20 @@
                  "interactions": [
                   {
                    "type": "click",
-                   "uuid": "f674abf6-c4a6-4060-93fb-7e06c4921059",
+                   "uuid": "0dff97f8-327f-4ef9-9818-3b5795df3662",
                    "clickOptions": {
                     "name": "dl-open-takeover",
-                    "ID": "3d7411db-d574-4993-ac03-148755bb774f",
+                    "ID": "e746839c-35ed-401c-a24d-dac655ab1e3f",
                     "actionSlots": {
                      "click": {
                       "actions": [
                        {
                         "type": "modalOpen",
-                        "uuid": "c4aefdd4-6dcf-4931-b64e-8276906365b2",
+                        "uuid": "43121108-f3a0-45e4-a855-5d5254bc4c9b",
                         "settings": {
                          "target": {
                           "type": "element",
-                          "uuid": "29851ab0-5ee4-4d53-885b-9f7cbcb09aff"
+                          "uuid": "20195d24-c5a2-4694-8b65-e2f0a3d65cdb"
                          }
                         }
                        }
@@ -43469,20 +46713,20 @@
                  "interactions": [
                   {
                    "type": "click",
-                   "uuid": "7d188f85-51fc-4ef1-8e11-4f41a2ed25fd",
+                   "uuid": "55de764b-aefc-46bb-be52-e4560867b914",
                    "clickOptions": {
                     "name": "dl-open-gate",
-                    "ID": "d4dd079e-ddba-44a7-8abb-8abea3898bb9",
+                    "ID": "60dcc315-e87f-4806-891a-a61bc5946264",
                     "actionSlots": {
                      "click": {
                       "actions": [
                        {
                         "type": "modalOpen",
-                        "uuid": "41ab7367-1a62-45bd-8317-6e1a4ef85cb4",
+                        "uuid": "ec557e06-460f-429c-b08d-49f578d29f63",
                         "settings": {
                          "target": {
                           "type": "element",
-                          "uuid": "0baa61d5-6b60-422f-8334-ba0a1ecca90e"
+                          "uuid": "ca84d6c4-cb1b-464f-8bc3-5cfcbb2a17dd"
                          }
                         }
                        }
@@ -44044,20 +47288,20 @@
                  "interactions": [
                   {
                    "type": "click",
-                   "uuid": "ff8047e9-73a0-483e-9795-abf252f58c5a",
+                   "uuid": "553ca5a7-bf94-4304-bae5-ff2aad602bab",
                    "clickOptions": {
                     "name": "dl-open-exit",
-                    "ID": "31f2bccc-e3a8-40bd-ae40-65128205edbf",
+                    "ID": "69f6e254-4176-4dae-983c-a6c713642bcf",
                     "actionSlots": {
                      "click": {
                       "actions": [
                        {
                         "type": "modalOpen",
-                        "uuid": "c32c3d53-614e-4139-9251-6c0e32e1c396",
+                        "uuid": "41e92dc4-9229-4526-b68e-e6df7e9ce8df",
                         "settings": {
                          "target": {
                           "type": "element",
-                          "uuid": "87e29f3c-402f-40e9-a02a-1de12bc34315"
+                          "uuid": "489a7131-a499-4735-88a2-6ec7da4f7e5c"
                          }
                         }
                        }
@@ -45084,14 +48328,14 @@
                  "interactions": [
                   {
                    "type": "click",
-                   "uuid": "a0fe9114-6610-477f-abc1-4687c81a7ba9",
+                   "uuid": "b379f2a5-f933-4ce9-bcab-2f3b3a3de313",
                    "clickOptions": {
                     "name": "dl-ab-aba",
-                    "ID": "3fcb0b4d-859a-4eee-ad4b-2160f2ed2687",
+                    "ID": "5482bb3c-bd17-47d9-acfa-e35022952f96",
                     "runs": {
                      "rules": [
                       {
-                       "uuid": "49e2d185-d4e1-43b3-9102-f00c91908dab",
+                       "uuid": "247d7689-c8bb-4079-9644-ca7d3420ef7c",
                        "type": "pickOne",
                        "pickOneOptions": {
                         "remember": "page",
@@ -45105,11 +48349,11 @@
                       "actions": [
                        {
                         "type": "modalOpen",
-                        "uuid": "08ecfcf2-a667-4052-b7ce-7f8aea019750",
+                        "uuid": "fe5d5378-23d5-4345-84e9-454762f8b6c9",
                         "settings": {
                          "target": {
                           "type": "element",
-                          "uuid": "b2460af6-0173-4c15-91af-b7b3fe9b8b90"
+                          "uuid": "08af96af-9ac4-45e1-851a-f25d0161c639"
                          }
                         }
                        }
@@ -45172,14 +48416,14 @@
                  "interactions": [
                   {
                    "type": "click",
-                   "uuid": "36542aa9-e384-4076-869c-6672cba2088a",
+                   "uuid": "6f6d2808-e1d9-4a64-893c-2108a3a74403",
                    "clickOptions": {
                     "name": "dl-ab-abb",
-                    "ID": "b3713d4d-f110-4758-ad03-b3e35344e939",
+                    "ID": "070f7fd2-0b99-4985-800a-549cf3396c17",
                     "runs": {
                      "rules": [
                       {
-                       "uuid": "277f5adc-3155-4829-9785-9fed13130563",
+                       "uuid": "bf45c4fc-4c88-4a38-9a93-fe8a3ee7aff5",
                        "type": "pickOne",
                        "pickOneOptions": {
                         "remember": "page",
@@ -45193,11 +48437,11 @@
                       "actions": [
                        {
                         "type": "modalOpen",
-                        "uuid": "99ae96d1-7bd1-4ec0-a330-d93559b1a7e2",
+                        "uuid": "c6671d9a-fa8b-4a81-900d-f86d6e1b9215",
                         "settings": {
                          "target": {
                           "type": "element",
-                          "uuid": "675b7a4c-0a4d-4be6-a989-878a39ee12b4"
+                          "uuid": "fda19d9c-016d-4ed9-b6b5-d5d440cf7b00"
                          }
                         }
                        }
@@ -45467,14 +48711,14 @@
              "translateXOptions": {
               "value": "-50%"
              },
-             "uuid": "0c54db6b-3607-4c4a-bb9c-959d9cbb416d"
+             "uuid": "5e912c05-36d9-4b1c-b45e-070bf4210846"
             },
             {
              "type": "translateY",
              "translateYOptions": {
               "value": "-50%"
              },
-             "uuid": "46a5dda2-bcd3-436c-8ec1-c84448135abb"
+             "uuid": "07da3b9b-82b1-4af9-8e22-3447de066192"
             }
            ],
            "width": "100%",
@@ -46184,20 +49428,20 @@
              "interactions": [
               {
                "type": "click",
-               "uuid": "8b071738-c85a-415c-95bb-1144c8a41d9a",
+               "uuid": "ca0f7ad8-9f16-4f7d-8d70-c7ae9f7210a1",
                "clickOptions": {
                 "name": "dl-close-centre",
-                "ID": "c6e51a79-5699-4170-af00-d8612d5c3670",
+                "ID": "bb64a7ee-f2ee-4c2b-97b2-a9c7001b0c3d",
                 "actionSlots": {
                  "click": {
                   "actions": [
                    {
                     "type": "modalClose",
-                    "uuid": "a71b625e-743d-4dec-9e34-e2940c30d097",
+                    "uuid": "1a78691a-0aa8-4947-9532-2cf906feb39a",
                     "settings": {
                      "target": {
                       "type": "element",
-                      "uuid": "a097318c-7c41-4b97-b329-29fe073e4618"
+                      "uuid": "8573930f-8e6b-4d3d-808f-7708826d1654"
                      }
                     }
                    }
@@ -46258,7 +49502,7 @@
         ]
        }
       ],
-      "nodeID": "a097318c-7c41-4b97-b329-29fe073e4618"
+      "nodeID": "8573930f-8e6b-4d3d-808f-7708826d1654"
      },
      {
       "type": "modal",
@@ -47023,20 +50267,20 @@
              "interactions": [
               {
                "type": "click",
-               "uuid": "85ef3a7f-ee6e-4cfa-a0e5-912237a3bdc1",
+               "uuid": "00ccab47-52b7-4751-93f3-a57103ff9895",
                "clickOptions": {
                 "name": "dl-close-sheet",
-                "ID": "1c54aa58-5d1e-4c34-9250-213af6b58668",
+                "ID": "1f989af0-ef12-46be-a9f9-d52bc37d53b5",
                 "actionSlots": {
                  "click": {
                   "actions": [
                    {
                     "type": "modalClose",
-                    "uuid": "329340d9-fc04-4230-814c-71bc978bd9f9",
+                    "uuid": "7b0d4f63-a0ec-4a3c-a79b-0d976d24e9b4",
                     "settings": {
                      "target": {
                       "type": "element",
-                      "uuid": "46f4d508-ce36-4570-b13c-7f424db25d7d"
+                      "uuid": "b1091fb3-9c1d-4e08-a904-fde8240c4304"
                      }
                     }
                    }
@@ -47097,7 +50341,7 @@
         ]
        }
       ],
-      "nodeID": "46f4d508-ce36-4570-b13c-7f424db25d7d"
+      "nodeID": "b1091fb3-9c1d-4e08-a904-fde8240c4304"
      },
      {
       "type": "modal",
@@ -47861,20 +51105,20 @@
              "interactions": [
               {
                "type": "click",
-               "uuid": "225deed9-9409-415c-8be9-655176c19751",
+               "uuid": "fcf1a2b1-5270-43cd-83ae-ce07ab06cbc3",
                "clickOptions": {
                 "name": "dl-close-drawer",
-                "ID": "25c7543f-6e4d-433e-a084-6673d2413238",
+                "ID": "1ee03770-b7f9-42f9-9f42-2a46200eea78",
                 "actionSlots": {
                  "click": {
                   "actions": [
                    {
                     "type": "modalClose",
-                    "uuid": "2910b949-7ca5-45ed-8efc-d6252dd369e3",
+                    "uuid": "74745bc7-9e2a-4551-a633-bf948f13916a",
                     "settings": {
                      "target": {
                       "type": "element",
-                      "uuid": "bf5f38bb-c66a-4e78-ad35-652f2ee0a13b"
+                      "uuid": "d4714f06-e71f-4ebb-a781-4b1cbfa17334"
                      }
                     }
                    }
@@ -47935,7 +51179,7 @@
         ]
        }
       ],
-      "nodeID": "bf5f38bb-c66a-4e78-ad35-652f2ee0a13b"
+      "nodeID": "d4714f06-e71f-4ebb-a781-4b1cbfa17334"
      },
      {
       "type": "modal",
@@ -47949,7 +51193,7 @@
          "runs": {
           "rules": [
            {
-            "uuid": "eb544730-cd4a-4881-a9b5-4262b646c89e",
+            "uuid": "f75511fe-c7b3-4d8b-8efa-885471c313ae",
             "type": "cap",
             "capOptions": {
              "max": "1",
@@ -48716,20 +51960,20 @@
              "interactions": [
               {
                "type": "click",
-               "uuid": "047b91dc-7a34-4894-b55b-785643580118",
+               "uuid": "231d2605-a169-4590-aded-a05ef016db8a",
                "clickOptions": {
                 "name": "dl-close-toast",
-                "ID": "c39cb838-a7c6-4bfe-9b99-166af7ac4343",
+                "ID": "1cd4a12f-89b7-45ce-a62c-1d326840a10c",
                 "actionSlots": {
                  "click": {
                   "actions": [
                    {
                     "type": "modalClose",
-                    "uuid": "cdb481ee-e966-4f00-9ede-6770df47359f",
+                    "uuid": "07adbbdf-ecb7-4f04-9426-7afd4f726b99",
                     "settings": {
                      "target": {
                       "type": "element",
-                      "uuid": "63ba83f5-ebda-4fc5-8cf0-bbcbd474b1b8"
+                      "uuid": "ea79aaa7-ef47-4b13-9750-087f9d1ee047"
                      }
                     }
                    }
@@ -48790,7 +52034,7 @@
         ]
        }
       ],
-      "nodeID": "63ba83f5-ebda-4fc5-8cf0-bbcbd474b1b8"
+      "nodeID": "ea79aaa7-ef47-4b13-9750-087f9d1ee047"
      },
      {
       "type": "modal",
@@ -49560,20 +52804,20 @@
              "interactions": [
               {
                "type": "click",
-               "uuid": "b61c2755-ce95-4463-b1e9-56216cdd936c",
+               "uuid": "6ff896bc-964c-458d-8c3c-107256ef0d09",
                "clickOptions": {
                 "name": "dl-close-takeover",
-                "ID": "640ee475-69bd-4cd7-b3f6-1b433a644177",
+                "ID": "6635bab8-b1e9-4de8-a00f-7c4ab65a5880",
                 "actionSlots": {
                  "click": {
                   "actions": [
                    {
                     "type": "modalClose",
-                    "uuid": "d2714db5-47d9-4ee9-a8fb-68b890e4f1e4",
+                    "uuid": "0d4be86b-2397-4107-a9ab-fbca972018e2",
                     "settings": {
                      "target": {
                       "type": "element",
-                      "uuid": "29851ab0-5ee4-4d53-885b-9f7cbcb09aff"
+                      "uuid": "20195d24-c5a2-4694-8b65-e2f0a3d65cdb"
                      }
                     }
                    }
@@ -49634,7 +52878,7 @@
         ]
        }
       ],
-      "nodeID": "29851ab0-5ee4-4d53-885b-9f7cbcb09aff"
+      "nodeID": "20195d24-c5a2-4694-8b65-e2f0a3d65cdb"
      },
      {
       "type": "modal",
@@ -49696,14 +52940,14 @@
              "translateXOptions": {
               "value": "-50%"
              },
-             "uuid": "bc1e5de0-4fc1-4496-80a3-dafbf030bf40"
+             "uuid": "8101e304-79a3-48c3-86df-b488a641804b"
             },
             {
              "type": "translateY",
              "translateYOptions": {
               "value": "-50%"
              },
-             "uuid": "625d6707-f98f-45b7-b089-5cfcbca187e7"
+             "uuid": "ad983be0-f0d6-4937-8450-02b127b4298d"
             }
            ],
            "width": "100%",
@@ -50413,20 +53657,20 @@
              "interactions": [
               {
                "type": "click",
-               "uuid": "3e9bf5ed-26b4-4021-b5b4-788174db4434",
+               "uuid": "2bf72388-ef27-482b-910e-939c74b4977e",
                "clickOptions": {
                 "name": "dl-close-gate",
-                "ID": "b5dd5500-bd2f-4fb8-bdc2-1f0dcd8b700c",
+                "ID": "e4d3fa6c-b8e7-439d-a8f5-68483dfa01d9",
                 "actionSlots": {
                  "click": {
                   "actions": [
                    {
                     "type": "modalClose",
-                    "uuid": "1f8b3815-32d5-45cd-a9db-60e716e24852",
+                    "uuid": "f2e57522-4d90-4d4c-b577-44ac24c3302d",
                     "settings": {
                      "target": {
                       "type": "element",
-                      "uuid": "0baa61d5-6b60-422f-8334-ba0a1ecca90e"
+                      "uuid": "ca84d6c4-cb1b-464f-8bc3-5cfcbb2a17dd"
                      }
                     }
                    }
@@ -50487,7 +53731,7 @@
         ]
        }
       ],
-      "nodeID": "0baa61d5-6b60-422f-8334-ba0a1ecca90e"
+      "nodeID": "ca84d6c4-cb1b-464f-8bc3-5cfcbb2a17dd"
      },
      {
       "type": "modal",
@@ -50504,7 +53748,7 @@
          "runs": {
           "rules": [
            {
-            "uuid": "81666cdc-aace-4be3-a39f-b7fd0ebb084f",
+            "uuid": "9a554412-725e-454f-9fd6-60d541715d19",
             "type": "cap",
             "capOptions": {
              "max": "1",
@@ -50570,14 +53814,14 @@
              "translateXOptions": {
               "value": "-50%"
              },
-             "uuid": "7db5362d-7001-49e1-ae35-4da868b54316"
+             "uuid": "c70c3921-2986-4d98-891b-d9fa99dd8a80"
             },
             {
              "type": "translateY",
              "translateYOptions": {
               "value": "-50%"
              },
-             "uuid": "1b50d208-2c8d-40d5-a8e9-ca2e90583f2b"
+             "uuid": "3f85c329-543c-4017-90c6-596c11403faf"
             }
            ],
            "width": "100%",
@@ -51287,20 +54531,20 @@
              "interactions": [
               {
                "type": "click",
-               "uuid": "b5ef92c4-de48-47a3-9c60-ae502de05678",
+               "uuid": "6d40f329-b67d-42f3-aeb4-54f0fc459b29",
                "clickOptions": {
                 "name": "dl-close-exit",
-                "ID": "40e2afd8-4385-4d7b-972d-e190471d9358",
+                "ID": "3dafeb72-f389-4909-a979-795b160d4716",
                 "actionSlots": {
                  "click": {
                   "actions": [
                    {
                     "type": "modalClose",
-                    "uuid": "b93bdf20-0613-48f0-9b8f-7da5ecd41ea2",
+                    "uuid": "939256cc-cdc8-4d2e-b11e-71df48f8fffa",
                     "settings": {
                      "target": {
                       "type": "element",
-                      "uuid": "87e29f3c-402f-40e9-a02a-1de12bc34315"
+                      "uuid": "489a7131-a499-4735-88a2-6ec7da4f7e5c"
                      }
                     }
                    }
@@ -51361,7 +54605,7 @@
         ]
        }
       ],
-      "nodeID": "87e29f3c-402f-40e9-a02a-1de12bc34315"
+      "nodeID": "489a7131-a499-4735-88a2-6ec7da4f7e5c"
      },
      {
       "type": "modal",
@@ -51378,7 +54622,7 @@
          "runs": {
           "rules": [
            {
-            "uuid": "576f7970-43be-479d-bc04-94365e97657b",
+            "uuid": "afc3b877-b2e5-4adf-a6e6-638558801f72",
             "type": "cooldown",
             "cooldownOptions": {
              "duration": "1",
@@ -52146,20 +55390,20 @@
              "interactions": [
               {
                "type": "click",
-               "uuid": "25012283-2ea1-4c89-87ad-863eda62f69c",
+               "uuid": "4373ae1d-6849-41bd-b665-eb4bbb6da1b7",
                "clickOptions": {
                 "name": "dl-close-depth",
-                "ID": "262c9721-9ac4-41de-bad5-683bcdf2847b",
+                "ID": "8dc639d9-b9b4-47d6-af76-191c6a54aa57",
                 "actionSlots": {
                  "click": {
                   "actions": [
                    {
                     "type": "modalClose",
-                    "uuid": "435dbecb-7bde-44d8-9f9b-9c599b45ea91",
+                    "uuid": "e15dc3ee-7b10-4c00-ae20-3d9dc61aae4b",
                     "settings": {
                      "target": {
                       "type": "element",
-                      "uuid": "0a6186be-8462-439e-b953-ae74888886c4"
+                      "uuid": "0cc73bd8-e4f5-4da4-bc4f-cf4451d9668d"
                      }
                     }
                    }
@@ -52220,7 +55464,7 @@
         ]
        }
       ],
-      "nodeID": "0a6186be-8462-439e-b953-ae74888886c4"
+      "nodeID": "0cc73bd8-e4f5-4da4-bc4f-cf4451d9668d"
      },
      {
       "type": "modal",
@@ -52282,14 +55526,14 @@
              "translateXOptions": {
               "value": "-50%"
              },
-             "uuid": "feb37a68-f7c8-4402-b3ae-43a552c1cbad"
+             "uuid": "5ed0c141-4ab9-4a7a-8299-0010dd5b04bf"
             },
             {
              "type": "translateY",
              "translateYOptions": {
               "value": "-50%"
              },
-             "uuid": "03d4f91e-b09c-468f-865a-d8b9d0fe0ecf"
+             "uuid": "6d717478-57a5-4448-8aac-9c813835b781"
             }
            ],
            "width": "100%",
@@ -52999,20 +56243,20 @@
              "interactions": [
               {
                "type": "click",
-               "uuid": "47a82e8f-7834-4850-a095-a1da6ca8e042",
+               "uuid": "98b963cb-7b5f-46b2-9290-8801c52d1506",
                "clickOptions": {
                 "name": "dl-close-aba",
-                "ID": "ca86b32a-cc0d-48e3-823c-31aa1872667a",
+                "ID": "67382b5f-aac6-456c-b510-287216c30323",
                 "actionSlots": {
                  "click": {
                   "actions": [
                    {
                     "type": "modalClose",
-                    "uuid": "3b925759-8024-4ccf-998d-6208d9d4d954",
+                    "uuid": "394ef50d-2b58-4f37-9d4d-d3f51794845a",
                     "settings": {
                      "target": {
                       "type": "element",
-                      "uuid": "b2460af6-0173-4c15-91af-b7b3fe9b8b90"
+                      "uuid": "08af96af-9ac4-45e1-851a-f25d0161c639"
                      }
                     }
                    }
@@ -53073,7 +56317,7 @@
         ]
        }
       ],
-      "nodeID": "b2460af6-0173-4c15-91af-b7b3fe9b8b90"
+      "nodeID": "08af96af-9ac4-45e1-851a-f25d0161c639"
      },
      {
       "type": "modal",
@@ -53135,14 +56379,14 @@
              "translateXOptions": {
               "value": "-50%"
              },
-             "uuid": "5625f15a-eb37-4da2-9b9a-979723855870"
+             "uuid": "cb5e5cee-b507-41d5-93e2-4506a7bbc31b"
             },
             {
              "type": "translateY",
              "translateYOptions": {
               "value": "-50%"
              },
-             "uuid": "eb3bdcdf-3add-45d4-aea5-d434e42890aa"
+             "uuid": "e55db500-2bbb-451b-96f1-d6b6fd727ca1"
             }
            ],
            "width": "100%",
@@ -53852,20 +57096,20 @@
              "interactions": [
               {
                "type": "click",
-               "uuid": "e8338232-5948-4989-a8b2-a3b8e0b204e5",
+               "uuid": "d08947ac-b93f-41b7-a5cb-9337cf14a07f",
                "clickOptions": {
                 "name": "dl-close-abb",
-                "ID": "ed7557b0-8d7b-484a-b564-3a54e4a8ba60",
+                "ID": "406fdaa2-2a6b-4e21-90ab-42f50f7dc980",
                 "actionSlots": {
                  "click": {
                   "actions": [
                    {
                     "type": "modalClose",
-                    "uuid": "2fb38d0d-32d8-432b-91b9-3e7743e204f9",
+                    "uuid": "b2c63920-2ba4-4102-9c95-4239ab05b619",
                     "settings": {
                      "target": {
                       "type": "element",
-                      "uuid": "675b7a4c-0a4d-4be6-a989-878a39ee12b4"
+                      "uuid": "fda19d9c-016d-4ed9-b6b5-d5d440cf7b00"
                      }
                     }
                    }
@@ -53926,7 +57170,7 @@
         ]
        }
       ],
-      "nodeID": "675b7a4c-0a4d-4be6-a989-878a39ee12b4"
+      "nodeID": "fda19d9c-016d-4ed9-b6b5-d5d440cf7b00"
      }
     ]
    }
