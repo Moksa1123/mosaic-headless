@@ -1,20 +1,31 @@
 slider,check,result,detail
-slide+autoplay,HOST,PASS,"<mosaic-slider> animation=slide carousel=None, 3 slides"
-slide+autoplay,TRACK,PASS,<mosaic-slider-slides> aria-live=off
-slide+autoplay,HAS_CURRENT,PASS,slide 0 is current at rest
-slide+autoplay,BULLET_TEMPLATE,PASS,"3 bullets for 3 slides, all with id='sl-dot-0' - one authored bullet is repeated per slide, duplicate ids included"
-slide+autoplay,BULLET_ARIA,PASS,"role=button tabindex=0 labels=ONE / 浮世繪, TWO / 版面, THREE / 色票 - taken from each slide's own title"
-slide+autoplay,ADVANCES,PASS,reached 3 of 3 slides unaided
-slide+autoplay,AUTOPLAY_DECLARED,PASS,data-autoplay=true delay=2200
-slide+autoplay,BULLET_GOES,PASS,bullet 0 -> slide 0
-slide+autoplay,ARROW_ENDS,PASS,"on slide 0 prev hides itself (hidden=True), next does not (hidden=False)"
-slide+autoplay,ARROW_ARIA,PASS,role=button tabindex=0 label='下一張投影片'
-slide+autoplay,NEXT,PASS,slide 0 -> 1
-slide+autoplay,PREV,PASS,slide 1 -> 0
-slide+autoplay,KEYBOARD,PASS,"focus bullet 2 taken, Enter -> slide 2"
-slide+autoplay,REDUCED,PASS,under prefers-reduced-motion it holds still (slide 0 -> 0)
-crossFade+carousel,HOST,PASS,"<mosaic-slider> animation=crossFade carousel=true, 4 slides"
-crossFade+carousel,TRACK,PASS,<mosaic-slider-slides> aria-live=polite
-crossFade+carousel,HAS_CURRENT,PASS,slide 0 is current at rest
-crossFade+carousel,STAYS_PUT,PASS,autoplay off: still on slide 0 after 2.6s
-crossFade+carousel,REDUCED,PASS,under prefers-reduced-motion it holds still (slide 0 -> 0)
+"hero, 4 slides, plain",HOST,PASS,"<mosaic-slider> animation=slide carousel=None, 4 slides"
+"hero, 4 slides, plain",TRACK,PASS,<mosaic-slider-slides> aria-live=off
+"hero, 4 slides, plain",HAS_CURRENT,PASS,slide 0 is current at rest
+"hero, 4 slides, plain",BULLET_TEMPLATE,PASS,"4 bullets for 4 slides, all with id='sl-main-nav-dot' - one authored bullet is repeated per slide, duplicate ids included"
+"hero, 4 slides, plain",BULLET_ARIA,PASS,"role=button tabindex=0 labels=一、輪播不是相簿, 二、四種動畫, 三、箭頭會自己消失, 四、不想動就不動 - taken from each slide's own title"
+"hero, 4 slides, plain",ADVANCES,PASS,reached 4 of 4 slides unaided
+"hero, 4 slides, plain",AUTOPLAY_DECLARED,PASS,data-autoplay=true delay=3600
+"hero, 4 slides, plain",BULLET_GOES,PASS,bullet 0 -> slide 0
+"hero, 4 slides, plain",ARROW_ENDS,PASS,"on slide 0 prev hides itself (hidden=True), next does not (hidden=False)"
+"hero, 4 slides, plain",TRACK_LAYOUT,PASS,"grid ""slide"", every slide one track wide ([1200] vs 1200)"
+"hero, 4 slides, plain",ARROW_ARIA,PASS,role=button tabindex=0 label='下一張投影片'
+"hero, 4 slides, plain",NEXT,PASS,slide 0 -> 1
+"hero, 4 slides, plain",PREV,PASS,slide 1 -> 0
+"hero, 4 slides, plain",KEYBOARD,PASS,"focus bullet 3 taken, Enter -> slide 3"
+"hero, 4 slides, plain",REDUCED,PASS,under prefers-reduced-motion it holds still (slide 0 -> 0)
+"carousel, 6 slides, wraps",HOST,PASS,"<mosaic-slider> animation=slide carousel=true, 6 slides"
+"carousel, 6 slides, wraps",TRACK,PASS,<mosaic-slider-slides> aria-live=off
+"carousel, 6 slides, wraps",HAS_CURRENT,PASS,slide 0 is current at rest
+"carousel, 6 slides, wraps",BULLET_TEMPLATE,PASS,"6 bullets for 6 slides, all with id='sl-carousel-nav-dot' - one authored bullet is repeated per slide, duplicate ids included"
+"carousel, 6 slides, wraps",BULLET_ARIA,PASS,"role=button tabindex=0 labels=WEB, AI, ERP, SEO, SHOP, AUTOMATION - taken from each slide's own title"
+"carousel, 6 slides, wraps",ADVANCES,PASS,reached 6 of 6 slides unaided
+"carousel, 6 slides, wraps",AUTOPLAY_DECLARED,PASS,data-autoplay=true delay=2400
+"carousel, 6 slides, wraps",BULLET_GOES,PASS,bullet 0 -> slide 0
+"carousel, 6 slides, wraps",ARROW_ENDS,PASS,"carousel: it wraps, so neither arrow hides (prev hidden=False, next hidden=False)"
+"carousel, 6 slides, wraps",CAROUSEL_LAYOUT,PASS,"grid ""slide"", every slide still one track wide ([1200] vs 1200) - isCarousel wraps the ends, it does not show more than one"
+"carousel, 6 slides, wraps",ARROW_ARIA,PASS,role=button tabindex=0 label='下一張投影片'
+"carousel, 6 slides, wraps",NEXT,PASS,slide 0 -> 1
+"carousel, 6 slides, wraps",PREV,PASS,slide 1 -> 0
+"carousel, 6 slides, wraps",KEYBOARD,PASS,"focus bullet 5 taken, Enter -> slide 5"
+"carousel, 6 slides, wraps",REDUCED,PASS,under prefers-reduced-motion it holds still (slide 0 -> 0)

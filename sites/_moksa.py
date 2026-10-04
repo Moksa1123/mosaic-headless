@@ -248,7 +248,7 @@ def mask_line(attr, text, tag="h1", **st):
 
 # ── content, all of it Moksa Web's own ───────────────────────────────────────
 NAV = [("服務", "#services"), ("作品", "#works"),
-       ("產品", "#products"), ("彈窗", "/dialogs/"),
+       ("產品", "#products"), ("彈窗", "/dialogs/"), ("輪播", "/sliders/"),
        ("聯絡", "#contact")]
 
 # key / figure / caption, read as a datasheet rather than as four big numbers
@@ -3058,6 +3058,10 @@ if __name__ == "__main__":
     # `_moksa` (this copy is `__main__`), its own main block does not run, and the
     # helpers it reads are pure functions - two copies produce identical dicts.
     import _dialogs
+    import _sliders
+    SITE["pages"].append({"slug": "sliders", "post_id": 270,
+                          "title": "輪播實驗室",
+                          "tree": apply_type(_sliders.TREE, DISPLAY, CJK, "600")})
     SITE["pages"].append({"slug": "dialogs", "post_id": 268,
                           "title": "彈窗實驗室",
                           "tree": apply_type(_dialogs.TREE, DISPLAY, CJK, "600")})

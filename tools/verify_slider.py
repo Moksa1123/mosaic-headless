@@ -32,6 +32,7 @@ from __future__ import annotations
 
 import argparse
 import csv
+import os
 import sys
 import time
 
@@ -80,7 +81,14 @@ READ = """id => {
           bulletLabels: bullets.map(b => b.getAttribute('aria-label')),
           bulletRole: bullets[0] ? bullets[0].getAttribute('role') : null,
           bulletTab: bullets[0] ? bullets[0].getAttribute('tabindex') : null,
-          prev: arrow('left'), next: arrow('right')};
+          prev: arrow('left'), next: arrow('right'),
+          // what the TRACK actually is. `isCarousel` is widely assumed to mean
+          // "show several at once"; this is the measurement that settles it.
+          trackAreas: track ? getComputedStyle(track).gridTemplateAreas : null,
+          trackCols: track ? getComputedStyle(track).gridTemplateColumns : null,
+          trackW: track ? Math.round(track.getBoundingClientRect().width) : null,
+          slideW: slides.map(el => Math.round(el.getBoundingClientRect().width)),
+          slideLeft: slides.map(el => Math.round(el.getBoundingClientRect().left))};
 }"""
 
 CLICK_NTH = """([id, kind, n]) => {
@@ -110,6 +118,11 @@ def main():
     ap.add_argument("--autoplay", type=int, default=0,
                     help="declared autoplay delay in ms; 0 means autoplay is off")
     ap.add_argument("--csv")
+    ap.add_argument("--label", help="name for this slider in the CSV's first column; "
+                                    "a page usually carries more than one")
+    ap.add_argument("--append", action="store_true",
+                    help="add to the CSV instead of replacing it, so several "
+                         "sliders on one page land in one table")
     a = ap.parse_args()
 
     rows, fails = [], []
@@ -184,12 +197,46 @@ def main():
             now = pg.evaluate(READ, a.slider)
             check("BULLET_GOES", now["current"] == 0,
                   "bullet 0 -> slide %s" % now["current"])
-            check("ARROW_ENDS",
-                  bool(now["prev"]) and now["prev"]["hidden"]
-                  and bool(now["next"]) and not now["next"]["hidden"],
-                  "on slide 0 prev hides itself (hidden=%s), next does not (hidden=%s)"
-                  % (now["prev"] and now["prev"]["hidden"],
-                     now["next"] and now["next"]["hidden"]))
+            # A CAROUSEL has no end it cannot pass - it wraps - so neither arrow
+            # ever hides, and asserting the plain-slider rule against one reports a
+            # failure for correct behaviour. Branch on what the host declares.
+            is_carousel = str(now.get("carousel") or st.get("carousel")).lower() in (
+                "1", "true", "yes")
+            if is_carousel:
+                check("ARROW_ENDS",
+                      bool(now["prev"]) and not now["prev"]["hidden"]
+                      and bool(now["next"]) and not now["next"]["hidden"],
+                      "carousel: it wraps, so neither arrow hides "
+                      "(prev hidden=%s, next hidden=%s)"
+                      % (now["prev"] and now["prev"]["hidden"],
+                         now["next"] and now["next"]["hidden"]))
+            else:
+                check("ARROW_ENDS",
+                      bool(now["prev"]) and now["prev"]["hidden"]
+                      and bool(now["next"]) and not now["next"]["hidden"],
+                      "on slide 0 prev hides itself (hidden=%s), next does not (hidden=%s)"
+                      % (now["prev"] and now["prev"]["hidden"],
+                         now["next"] and now["next"]["hidden"]))
+            # `isCarousel` does NOT widen the view - every slide is one track wide
+            # in both modes. What it does is keep a slide positioned BEFORE the
+            # first one, which is the same fact as "it wraps" and as "no arrow
+            # ever hides".
+            full = (now["trackW"] and now["slideW"]
+                    and all(abs(w - now["trackW"]) <= 2 for w in now["slideW"]))
+            if is_carousel:
+                # A slide wrapped round to a NEGATIVE left is the visible sign of
+                # wrapping, but it is transient - it is only there while the
+                # rotation has carried one past an end, and on slide 0 at rest
+                # there is none. The claim that always holds, and the one being
+                # corrected, is about WIDTH: a carousel is not a wider view.
+                check("CAROUSEL_LAYOUT", bool(full),
+                      "grid %s, every slide still one track wide (%s vs %s) - "
+                      "isCarousel wraps the ends, it does not show more than one"
+                      % (now["trackAreas"], sorted(set(now["slideW"])), now["trackW"]))
+            else:
+                check("TRACK_LAYOUT", bool(full),
+                      "grid %s, every slide one track wide (%s vs %s)"
+                      % (now["trackAreas"], sorted(set(now["slideW"])), now["trackW"]))
             if now["next"]:
                 check("ARROW_ARIA",
                       now["next"]["role"] == "button" and now["next"]["tabindex"] == "0"
@@ -244,10 +291,17 @@ def main():
 
     print("\n%d of %d checks passed" % (len(rows) - len(fails), len(rows)))
     if a.csv:
+        label = a.label or a.slider
+        existing = []
+        if a.append and os.path.exists(a.csv):
+            with open(a.csv, newline="", encoding="utf-8") as fh:
+                existing = [r for r in csv.reader(fh)][1:]
+                existing = [r for r in existing if r and r[0] != label]
         with open(a.csv, "w", newline="", encoding="utf-8") as fh:
             w = csv.writer(fh)
-            w.writerow(["check", "result", "detail"])
-            w.writerows(rows)
+            w.writerow(["slider", "check", "result", "detail"])
+            w.writerows(existing)
+            w.writerows([[label] + r for r in rows])
         print("wrote %s" % a.csv)
     sys.exit(1 if fails else 0)
 

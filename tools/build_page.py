@@ -143,9 +143,27 @@ class Surface:
                           # them, and wysiwyg-variable inside a text node is verified
                           # to render (references/dynamic-content.md)
                           or (t.startswith("wysiwyg-")
-                              and any(d.startswith("wysiwyg-") for d in parent_defaults)))
+                              and any(d.startswith("wysiwyg-") for d in parent_defaults))
+                          # A family member under its own family head. The table
+                          # cannot say this when the head's rule is `any` and its
+                          # allowed_children column is therefore empty - `slider`
+                          # accepts anything, so nothing records that
+                          # `slider-slides` is exactly where it belongs.
+                          or (parent_type and t.startswith(parent_type + "-")))
+        # The comment above covers types that need their own PARENT. The other half
+        # of the same story is a family HEAD, which needs its own CHILDREN: a bare
+        # `slider` is measured COMMIT_500 because it has no `slider-slides`, not
+        # because a div cannot hold it. So a node whose type prefixes other
+        # registered types - slider/slider-slides, accordion/accordion-item,
+        # form/form-input - and which actually carries one of them is not the thing
+        # that was measured, and the verdict does not apply to it.
+        family = [x for x in self.types if x.startswith(t + "-")]
+        kids = [c.get("type") for c in (node.get("children") or []) if isinstance(c, dict)]
+        nested_as_family = bool(family) and any(k in family for k in kids)
+
         outcome = self.outcome.get(t)
-        if not declared_child and (outcome == "BROKE_PAGE" or (outcome or "").startswith("COMMIT_5")):
+        if (not declared_child and not nested_as_family
+                and (outcome == "BROKE_PAGE" or (outcome or "").startswith("COMMIT_5"))):
             problems.append("%s is measured %s under a plain container, and %s is not its declared parent"
                             % (t, outcome, parent_type or "<root>"))
         # The wysiwyg family is inline CONTENT, not a child in the placement sense, and

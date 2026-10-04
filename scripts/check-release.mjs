@@ -99,7 +99,7 @@ const counts = {
   "data/data-class-hierarchy.csv": 125,
   "data/custom-fields-verification.csv": 62,
   "data/dialog-verification.csv": 19,
-  "data/slider-verification.csv": 19,
+  "data/slider-verification.csv": 30,
   "data/navigation-verification.csv": 46,
   "data/page-modal-verification.csv": 19,
   "data/interaction-rules-verification.csv": 17,

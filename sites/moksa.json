@@ -638,6 +638,44 @@
              "type": "menu-link",
              "data": {
               "attrID": "mk-nav-4",
+              "url": "/sliders/"
+             },
+             "style": {
+              "&": {
+               "_": {
+                "color": {
+                 "token": "--mk-ink"
+                },
+                "fontSize": "13px",
+                "fontWeight": "400",
+                "letterSpacing": "0.04em",
+                "fontFamily": "'IBM Plex Mono',ui-monospace,SFMono-Regular,Menlo,Consolas,monospace",
+                "transitionAll": "160ms ease",
+                "cursor": "pointer"
+               },
+               "_m": {
+                "fontSize": "12px"
+               }
+              },
+              "hover": {
+               "_": {
+                "color": {
+                 "token": "--mk-accent"
+                }
+               }
+              },
+              "focus-visible": {
+               "_": {
+                "customDeclarations": "outline:2px solid rgb(255,90,54);outline-offset:3px;"
+               }
+              }
+             },
+             "text": "輪播"
+            },
+            {
+             "type": "menu-link",
+             "data": {
+              "attrID": "mk-nav-5",
               "url": "#contact"
              },
              "style": {
@@ -17108,7 +17146,7 @@
                       "settings": {
                        "target": {
                         "type": "element",
-                        "uuid": "f29b76d3-d9c0-44e8-8f3d-49aeb63ca969"
+                        "uuid": "f27247e0-d36a-42f2-9796-099cb30dd278"
                        }
                       }
                      }
@@ -17164,7 +17202,7 @@
           ]
          }
         ],
-        "nodeID": "f29b76d3-d9c0-44e8-8f3d-49aeb63ca969"
+        "nodeID": "f27247e0-d36a-42f2-9796-099cb30dd278"
        }
       ]
      }
@@ -23328,6 +23366,4698 @@
    }
   },
   {
+   "slug": "sliders",
+   "post_id": 270,
+   "title": "輪播實驗室",
+   "tree": {
+    "type": "div",
+    "data": {
+     "attrID": "sl-page"
+    },
+    "children": [
+     {
+      "type": "section",
+      "data": {
+       "attrID": "sl-hero"
+      },
+      "style": {
+       "&": {
+        "_": {
+         "backgroundColor": {
+          "token": "--mk-paper"
+         },
+         "paddingLeft": "40px",
+         "paddingRight": "40px",
+         "fontFamily": "'Noto Sans TC','PingFang TC','Hiragino Sans TC','Microsoft JhengHei',sans-serif"
+        },
+        "_t": {
+         "paddingLeft": "28px",
+         "paddingRight": "28px"
+        },
+        "_m": {
+         "paddingLeft": "18px",
+         "paddingRight": "18px"
+        }
+       }
+      },
+      "children": [
+       {
+        "type": "div",
+        "data": {
+         "attrID": "sl-hero-w"
+        },
+        "style": {
+         "&": {
+          "_": {
+           "width": "100%",
+           "maxWidth": "1240px",
+           "marginLeft": "auto",
+           "marginRight": "auto"
+          }
+         }
+        },
+        "children": [
+         {
+          "type": "div",
+          "data": {
+           "attrID": "sl-hero-pad"
+          },
+          "style": {
+           "&": {
+            "_": {
+             "paddingTop": "76px"
+            }
+           }
+          },
+          "children": []
+         },
+         {
+          "type": "text",
+          "data": {
+           "tagName": "p"
+          },
+          "text": "SLIDER LAB / 輪播實驗室",
+          "style": {
+           "&": {
+            "_": {
+             "color": {
+              "token": "--mk-faint"
+             },
+             "fontSize": "11px",
+             "letterSpacing": "0.26em",
+             "fontFamily": "'IBM Plex Mono',ui-monospace,SFMono-Regular,Menlo,Consolas,monospace",
+             "fontWeight": "400"
+            }
+           }
+          }
+         },
+         {
+          "type": "text",
+          "data": {
+           "tagName": "h1"
+          },
+          "text": "輪播看起來很舅，\n通常不是輪播的錯。",
+          "style": {
+           "&": {
+            "_": {
+             "fontFamily": "'Space Grotesk','Noto Sans TC','PingFang TC','Microsoft JhengHei',sans-serif",
+             "fontWeight": "600",
+             "fontSize": "54px",
+             "lineHeight": "1.08",
+             "letterSpacing": "0.005em",
+             "color": {
+              "token": "--mk-ink"
+             },
+             "marginTop": "18px",
+             "whiteSpace": "pre-wrap"
+            },
+            "_t": {
+             "fontSize": "42px"
+            },
+            "_m": {
+             "fontSize": "30px"
+            }
+           }
+          }
+         },
+         {
+          "type": "text",
+          "data": {
+           "tagName": "p"
+          },
+          "text": "一個輪播預設會被做成圖片跑馬燈，而圖片跑馬燈配上庫存照片和一排小圓點，用什麼工具做都像 2011 年。這一頁沒有任何照片：每一張投影片都是色塊上的排版。",
+          "style": {
+           "&": {
+            "_": {
+             "fontFamily": "'Noto Sans TC','PingFang TC','Hiragino Sans TC','Microsoft JhengHei',sans-serif",
+             "fontSize": "16px",
+             "lineHeight": "1.95",
+             "color": {
+              "token": "--mk-ink"
+             },
+             "marginTop": "20px",
+             "maxWidth": "660px"
+            }
+           }
+          }
+         },
+         {
+          "type": "div",
+          "data": {
+           "attrID": "sl-hero-gap"
+          },
+          "style": {
+           "&": {
+            "_": {
+             "paddingTop": "34px"
+            }
+           }
+          },
+          "children": []
+         },
+         {
+          "type": "slider",
+          "data": {
+           "attrID": "sl-main",
+           "animation": "slide",
+           "duration": "700",
+           "easing": "ease",
+           "isAutoplay": "1",
+           "autoplayDelay": "3600",
+           "autoplayLimit": "0",
+           "isCarousel": "0",
+           "defaultSlideIndex": "0",
+           "ariaLabel": "輪播示範：四張投影片"
+          },
+          "style": {
+           "&": {
+            "_": {
+             "position": "relative",
+             "height": "440px",
+             "overflow": "hidden",
+             "backgroundColor": "rgb(22,24,28)"
+            },
+            "_m": {
+             "height": "360px"
+            }
+           }
+          },
+          "children": [
+           {
+            "type": "slider-slides",
+            "data": {
+             "attrID": "sl-main-track"
+            },
+            "children": [
+             {
+              "type": "slider-slide",
+              "data": {
+               "attrID": "sl-h-0",
+               "title": "一、輪播不是相簿"
+              },
+              "style": {
+               "&": {
+                "_": {
+                 "backgroundColor": "rgb(22,24,28)",
+                 "display": "flex",
+                 "flexDirection": "column",
+                 "justifyContent": "space-between",
+                 "alignItems": "flex-start",
+                 "height": "100%",
+                 "paddingTop": "34px",
+                 "paddingBottom": "74px",
+                 "paddingLeft": "36px",
+                 "paddingRight": "36px"
+                },
+                "_m": {
+                 "paddingTop": "22px",
+                 "paddingBottom": "58px",
+                 "paddingLeft": "20px",
+                 "paddingRight": "20px"
+                }
+               }
+              },
+              "children": [
+               {
+                "type": "text",
+                "data": {
+                 "tagName": "p"
+                },
+                "text": "01 / FORM",
+                "style": {
+                 "&": {
+                  "_": {
+                   "color": "rgb(250,250,247)",
+                   "fontSize": "11px",
+                   "letterSpacing": "0.3em",
+                   "fontFamily": "'IBM Plex Mono',ui-monospace,SFMono-Regular,Menlo,Consolas,monospace",
+                   "fontWeight": "400"
+                  }
+                 }
+                }
+               },
+               {
+                "type": "div",
+                "data": {
+                 "attrID": "sl-h-0-body"
+                },
+                "style": {
+                 "&": {
+                  "_": {
+                   "marginTop": "18px"
+                  }
+                 }
+                },
+                "children": [
+                 {
+                  "type": "text",
+                  "data": {
+                   "tagName": "p"
+                  },
+                  "text": "輪播\n不是相簿。",
+                  "style": {
+                   "&": {
+                    "_": {
+                     "fontFamily": "'Space Grotesk','Noto Sans TC','PingFang TC','Microsoft JhengHei',sans-serif",
+                     "fontWeight": "600",
+                     "fontSize": "64px",
+                     "lineHeight": "1.04",
+                     "letterSpacing": "0.005em",
+                     "color": "rgb(250,250,247)",
+                     "whiteSpace": "pre-wrap"
+                    },
+                    "_m": {
+                     "fontSize": "40px"
+                    }
+                   }
+                  }
+                 },
+                 {
+                  "type": "text",
+                  "data": {
+                   "tagName": "p"
+                  },
+                  "text": "slider-slide 接任意子節點，所以一張投影片是一個版面，不是一個相框。這一頁沒有任何照片。",
+                  "style": {
+                   "&": {
+                    "_": {
+                     "fontFamily": "'Noto Sans TC','PingFang TC','Hiragino Sans TC','Microsoft JhengHei',sans-serif",
+                     "fontSize": "14px",
+                     "lineHeight": "1.8",
+                     "color": "rgb(250,250,247)",
+                     "marginTop": "14px",
+                     "maxWidth": "430px"
+                    }
+                   }
+                  }
+                 }
+                ]
+               }
+              ]
+             },
+             {
+              "type": "slider-slide",
+              "data": {
+               "attrID": "sl-h-1",
+               "title": "二、四種動畫"
+              },
+              "style": {
+               "&": {
+                "_": {
+                 "backgroundColor": "rgb(31,58,95)",
+                 "display": "flex",
+                 "flexDirection": "column",
+                 "justifyContent": "space-between",
+                 "alignItems": "flex-start",
+                 "height": "100%",
+                 "paddingTop": "34px",
+                 "paddingBottom": "74px",
+                 "paddingLeft": "36px",
+                 "paddingRight": "36px"
+                },
+                "_m": {
+                 "paddingTop": "22px",
+                 "paddingBottom": "58px",
+                 "paddingLeft": "20px",
+                 "paddingRight": "20px"
+                }
+               }
+              },
+              "children": [
+               {
+                "type": "text",
+                "data": {
+                 "tagName": "p"
+                },
+                "text": "02 / ANIMATION",
+                "style": {
+                 "&": {
+                  "_": {
+                   "color": "rgb(250,250,247)",
+                   "fontSize": "11px",
+                   "letterSpacing": "0.3em",
+                   "fontFamily": "'IBM Plex Mono',ui-monospace,SFMono-Regular,Menlo,Consolas,monospace",
+                   "fontWeight": "400"
+                  }
+                 }
+                }
+               },
+               {
+                "type": "div",
+                "data": {
+                 "attrID": "sl-h-1-body"
+                },
+                "style": {
+                 "&": {
+                  "_": {
+                   "marginTop": "18px"
+                  }
+                 }
+                },
+                "children": [
+                 {
+                  "type": "text",
+                  "data": {
+                   "tagName": "p"
+                  },
+                  "text": "四種動畫，\n一個字段。",
+                  "style": {
+                   "&": {
+                    "_": {
+                     "fontFamily": "'Space Grotesk','Noto Sans TC','PingFang TC','Microsoft JhengHei',sans-serif",
+                     "fontWeight": "600",
+                     "fontSize": "64px",
+                     "lineHeight": "1.04",
+                     "letterSpacing": "0.005em",
+                     "color": "rgb(250,250,247)",
+                     "whiteSpace": "pre-wrap"
+                    },
+                    "_m": {
+                     "fontSize": "40px"
+                    }
+                   }
+                  }
+                 },
+                 {
+                  "type": "text",
+                  "data": {
+                   "tagName": "p"
+                  },
+                  "text": "animation 接 slide、crossFade、fadeOut、fadeOver。下面四個同尺寸同速度的輪播並排，是唯一看得出差別的方式。",
+                  "style": {
+                   "&": {
+                    "_": {
+                     "fontFamily": "'Noto Sans TC','PingFang TC','Hiragino Sans TC','Microsoft JhengHei',sans-serif",
+                     "fontSize": "14px",
+                     "lineHeight": "1.8",
+                     "color": "rgb(250,250,247)",
+                     "marginTop": "14px",
+                     "maxWidth": "430px"
+                    }
+                   }
+                  }
+                 }
+                ]
+               }
+              ]
+             },
+             {
+              "type": "slider-slide",
+              "data": {
+               "attrID": "sl-h-2",
+               "title": "三、箭頭會自己消失"
+              },
+              "style": {
+               "&": {
+                "_": {
+                 "backgroundColor": "rgb(191,68,40)",
+                 "display": "flex",
+                 "flexDirection": "column",
+                 "justifyContent": "space-between",
+                 "alignItems": "flex-start",
+                 "height": "100%",
+                 "paddingTop": "34px",
+                 "paddingBottom": "74px",
+                 "paddingLeft": "36px",
+                 "paddingRight": "36px"
+                },
+                "_m": {
+                 "paddingTop": "22px",
+                 "paddingBottom": "58px",
+                 "paddingLeft": "20px",
+                 "paddingRight": "20px"
+                }
+               }
+              },
+              "children": [
+               {
+                "type": "text",
+                "data": {
+                 "tagName": "p"
+                },
+                "text": "03 / BEHAVIOUR",
+                "style": {
+                 "&": {
+                  "_": {
+                   "color": "rgb(250,250,247)",
+                   "fontSize": "11px",
+                   "letterSpacing": "0.3em",
+                   "fontFamily": "'IBM Plex Mono',ui-monospace,SFMono-Regular,Menlo,Consolas,monospace",
+                   "fontWeight": "400"
+                  }
+                 }
+                }
+               },
+               {
+                "type": "div",
+                "data": {
+                 "attrID": "sl-h-2-body"
+                },
+                "style": {
+                 "&": {
+                  "_": {
+                   "marginTop": "18px"
+                  }
+                 }
+                },
+                "children": [
+                 {
+                  "type": "text",
+                  "data": {
+                   "tagName": "p"
+                  },
+                  "text": "箭頭會在\n端點自己消失。",
+                  "style": {
+                   "&": {
+                    "_": {
+                     "fontFamily": "'Space Grotesk','Noto Sans TC','PingFang TC','Microsoft JhengHei',sans-serif",
+                     "fontWeight": "600",
+                     "fontSize": "64px",
+                     "lineHeight": "1.04",
+                     "letterSpacing": "0.005em",
+                     "color": "rgb(250,250,247)",
+                     "whiteSpace": "pre-wrap"
+                    },
+                    "_m": {
+                     "fontSize": "40px"
+                    }
+                   }
+                  }
+                 },
+                 {
+                  "type": "text",
+                  "data": {
+                   "tagName": "p"
+                  },
+                  "text": "非輪轉模式下，Slider.js 在第一張藏起向前、最後一張藏起向後。那是一個真正的樣式狀態，可以自己接手設計。",
+                  "style": {
+                   "&": {
+                    "_": {
+                     "fontFamily": "'Noto Sans TC','PingFang TC','Hiragino Sans TC','Microsoft JhengHei',sans-serif",
+                     "fontSize": "14px",
+                     "lineHeight": "1.8",
+                     "color": "rgb(250,250,247)",
+                     "marginTop": "14px",
+                     "maxWidth": "430px"
+                    }
+                   }
+                  }
+                 }
+                ]
+               }
+              ]
+             },
+             {
+              "type": "slider-slide",
+              "data": {
+               "attrID": "sl-h-3",
+               "title": "四、不想動就不動"
+              },
+              "style": {
+               "&": {
+                "_": {
+                 "backgroundColor": "rgb(90,92,97)",
+                 "display": "flex",
+                 "flexDirection": "column",
+                 "justifyContent": "space-between",
+                 "alignItems": "flex-start",
+                 "height": "100%",
+                 "paddingTop": "34px",
+                 "paddingBottom": "74px",
+                 "paddingLeft": "36px",
+                 "paddingRight": "36px"
+                },
+                "_m": {
+                 "paddingTop": "22px",
+                 "paddingBottom": "58px",
+                 "paddingLeft": "20px",
+                 "paddingRight": "20px"
+                }
+               }
+              },
+              "children": [
+               {
+                "type": "text",
+                "data": {
+                 "tagName": "p"
+                },
+                "text": "04 / MOTION",
+                "style": {
+                 "&": {
+                  "_": {
+                   "color": "rgb(250,250,247)",
+                   "fontSize": "11px",
+                   "letterSpacing": "0.3em",
+                   "fontFamily": "'IBM Plex Mono',ui-monospace,SFMono-Regular,Menlo,Consolas,monospace",
+                   "fontWeight": "400"
+                  }
+                 }
+                }
+               },
+               {
+                "type": "div",
+                "data": {
+                 "attrID": "sl-h-3-body"
+                },
+                "style": {
+                 "&": {
+                  "_": {
+                   "marginTop": "18px"
+                  }
+                 }
+                },
+                "children": [
+                 {
+                  "type": "text",
+                  "data": {
+                   "tagName": "p"
+                  },
+                  "text": "不想動的人，\n它就不動。",
+                  "style": {
+                   "&": {
+                    "_": {
+                     "fontFamily": "'Space Grotesk','Noto Sans TC','PingFang TC','Microsoft JhengHei',sans-serif",
+                     "fontWeight": "600",
+                     "fontSize": "64px",
+                     "lineHeight": "1.04",
+                     "letterSpacing": "0.005em",
+                     "color": "rgb(250,250,247)",
+                     "whiteSpace": "pre-wrap"
+                    },
+                    "_m": {
+                     "fontSize": "40px"
+                    }
+                   }
+                  }
+                 },
+                 {
+                  "type": "text",
+                  "data": {
+                   "tagName": "p"
+                  },
+                  "text": "系統設成減少動態時，Mosaic 自己停掉自動播放，作者不用寫任何東西——這是實測過的。",
+                  "style": {
+                   "&": {
+                    "_": {
+                     "fontFamily": "'Noto Sans TC','PingFang TC','Hiragino Sans TC','Microsoft JhengHei',sans-serif",
+                     "fontSize": "14px",
+                     "lineHeight": "1.8",
+                     "color": "rgb(250,250,247)",
+                     "marginTop": "14px",
+                     "maxWidth": "430px"
+                    }
+                   }
+                  }
+                 }
+                ]
+               }
+              ]
+             }
+            ]
+           },
+           {
+            "type": "div",
+            "data": {
+             "attrID": "sl-main-chrome"
+            },
+            "style": {
+             "&": {
+              "_": {
+               "position": "absolute",
+               "left": "0px",
+               "right": "0px",
+               "bottom": "0px",
+               "display": "flex",
+               "justifyContent": "space-between",
+               "alignItems": "center",
+               "columnGap": "16px",
+               "paddingLeft": "36px",
+               "paddingRight": "36px",
+               "paddingBottom": "26px"
+              },
+              "_m": {
+               "paddingLeft": "20px",
+               "paddingRight": "20px",
+               "paddingBottom": "18px"
+              }
+             }
+            },
+            "children": [
+             {
+              "type": "slider-navigation",
+              "data": {
+               "attrID": "sl-main-nav"
+              },
+              "style": {
+               "&": {
+                "_": {
+                 "display": "flex",
+                 "columnGap": "8px",
+                 "alignItems": "center"
+                }
+               }
+              },
+              "children": [
+               {
+                "type": "slider-navigation-bullet",
+                "data": {
+                 "attrID": "sl-main-nav-dot"
+                },
+                "style": {
+                 "&": {
+                  "_": {
+                   "width": "22px",
+                   "height": "3px",
+                   "cursor": "pointer",
+                   "backgroundColor": "rgba(250,250,247,.38)"
+                  }
+                 },
+                 "hover": {
+                  "_": {
+                   "backgroundColor": "rgb(250,250,247)"
+                  }
+                 },
+                 "focus-visible": {
+                  "_": {
+                   "customDeclarations": "outline:2px solid rgb(255,90,54);outline-offset:3px;"
+                  }
+                 }
+                }
+               }
+              ]
+             },
+             {
+              "type": "div",
+              "data": {
+               "attrID": "sl-main-arrows"
+              },
+              "style": {
+               "&": {
+                "_": {
+                 "display": "flex",
+                 "columnGap": "14px",
+                 "alignItems": "center"
+                }
+               }
+              },
+              "children": [
+               {
+                "type": "slider-arrow-left",
+                "data": {
+                 "attrID": "sl-left"
+                },
+                "style": {
+                 "&": {
+                  "_": {
+                   "color": "rgb(250,250,247)",
+                   "cursor": "pointer",
+                   "width": "9px",
+                   "height": "9px",
+                   "marginTop": "4px",
+                   "marginBottom": "4px",
+                   "marginLeft": "10px",
+                   "marginRight": "10px",
+                   "backgroundColor": "rgba(0,0,0,0)",
+                   "transform": [
+                    {
+                     "type": "rotateZ",
+                     "rotateZOptions": {
+                      "value": "-135deg"
+                     },
+                     "uuid": "c0e3436d-2d21-420b-8d08-b1685d1b0259"
+                    }
+                   ],
+                   "customDeclarations": "border-top:1.5px solid currentColor;border-right:1.5px solid currentColor;"
+                  }
+                 },
+                 "hover": {
+                  "_": {
+                   "color": "rgb(255,90,54)"
+                  }
+                 },
+                 "focus-visible": {
+                  "_": {
+                   "customDeclarations": "outline:2px solid rgb(255,90,54);outline-offset:3px;"
+                  }
+                 }
+                }
+               },
+               {
+                "type": "slider-arrow-right",
+                "data": {
+                 "attrID": "sl-right"
+                },
+                "style": {
+                 "&": {
+                  "_": {
+                   "color": "rgb(250,250,247)",
+                   "cursor": "pointer",
+                   "width": "9px",
+                   "height": "9px",
+                   "marginTop": "4px",
+                   "marginBottom": "4px",
+                   "marginLeft": "10px",
+                   "marginRight": "10px",
+                   "backgroundColor": "rgba(0,0,0,0)",
+                   "transform": [
+                    {
+                     "type": "rotateZ",
+                     "rotateZOptions": {
+                      "value": "45deg"
+                     },
+                     "uuid": "e6221c49-695c-4582-8a11-1ee44d8c7acd"
+                    }
+                   ],
+                   "customDeclarations": "border-top:1.5px solid currentColor;border-right:1.5px solid currentColor;"
+                  }
+                 },
+                 "hover": {
+                  "_": {
+                   "color": "rgb(255,90,54)"
+                  }
+                 },
+                 "focus-visible": {
+                  "_": {
+                   "customDeclarations": "outline:2px solid rgb(255,90,54);outline-offset:3px;"
+                  }
+                 }
+                }
+               }
+              ]
+             }
+            ]
+           }
+          ]
+         },
+         {
+          "type": "div",
+          "data": {
+           "attrID": "sl-hero-foot"
+          },
+          "style": {
+           "&": {
+            "_": {
+             "paddingTop": "60px"
+            }
+           }
+          },
+          "children": []
+         }
+        ]
+       }
+      ]
+     },
+     {
+      "type": "section",
+      "data": {
+       "attrID": "sl-four"
+      },
+      "style": {
+       "&": {
+        "_": {
+         "backgroundColor": {
+          "token": "--mk-panel"
+         },
+         "paddingLeft": "40px",
+         "paddingRight": "40px",
+         "fontFamily": "'Noto Sans TC','PingFang TC','Hiragino Sans TC','Microsoft JhengHei',sans-serif"
+        },
+        "_t": {
+         "paddingLeft": "28px",
+         "paddingRight": "28px"
+        },
+        "_m": {
+         "paddingLeft": "18px",
+         "paddingRight": "18px"
+        }
+       }
+      },
+      "children": [
+       {
+        "type": "div",
+        "data": {
+         "attrID": "sl-four-w"
+        },
+        "style": {
+         "&": {
+          "_": {
+           "width": "100%",
+           "maxWidth": "1240px",
+           "marginLeft": "auto",
+           "marginRight": "auto"
+          }
+         }
+        },
+        "children": [
+         {
+          "type": "div",
+          "data": {
+           "attrID": "sl-four-pad"
+          },
+          "style": {
+           "&": {
+            "_": {
+             "paddingTop": "60px"
+            }
+           }
+          },
+          "children": []
+         },
+         {
+          "type": "text",
+          "data": {
+           "tagName": "p"
+          },
+          "text": "ANIMATION",
+          "style": {
+           "&": {
+            "_": {
+             "color": {
+              "token": "--mk-faint"
+             },
+             "fontSize": "10px",
+             "letterSpacing": "0.26em",
+             "fontFamily": "'IBM Plex Mono',ui-monospace,SFMono-Regular,Menlo,Consolas,monospace",
+             "fontWeight": "400"
+            }
+           }
+          }
+         },
+         {
+          "type": "text",
+          "data": {
+           "tagName": "h2"
+          },
+          "text": "四種動畫，並排看。",
+          "style": {
+           "&": {
+            "_": {
+             "fontFamily": "'Space Grotesk','Noto Sans TC','PingFang TC','Microsoft JhengHei',sans-serif",
+             "fontWeight": "600",
+             "fontSize": "32px",
+             "lineHeight": "1.15",
+             "letterSpacing": "0.005em",
+             "color": {
+              "token": "--mk-ink"
+             },
+             "marginTop": "14px",
+             "whiteSpace": "pre-wrap"
+            },
+            "_m": {
+             "fontSize": "24px"
+            }
+           }
+          }
+         },
+         {
+          "type": "text",
+          "data": {
+           "tagName": "p"
+          },
+          "text": "同樣三張投影片、同樣 1800ms、同樣尺寸。分開看的時候四種動畫差不多，並排才看得出來。",
+          "style": {
+           "&": {
+            "_": {
+             "fontFamily": "'Noto Sans TC','PingFang TC','Hiragino Sans TC','Microsoft JhengHei',sans-serif",
+             "fontSize": "14px",
+             "lineHeight": "1.9",
+             "color": {
+              "token": "--mk-muted"
+             },
+             "marginTop": "10px",
+             "maxWidth": "620px"
+            }
+           }
+          }
+         },
+         {
+          "type": "div",
+          "data": {
+           "attrID": "sl-four-gap"
+          },
+          "style": {
+           "&": {
+            "_": {
+             "paddingTop": "26px"
+            }
+           }
+          },
+          "children": []
+         },
+         {
+          "type": "div",
+          "data": {
+           "attrID": "sl-four-grid"
+          },
+          "style": {
+           "&": {
+            "_": {
+             "display": "grid",
+             "gridCols": "repeat(4, 1fr)",
+             "columnGap": "20px",
+             "rowGap": "20px"
+            },
+            "_t": {
+             "gridCols": "repeat(2, 1fr)"
+            },
+            "_m": {
+             "gridCols": "repeat(1, 1fr)"
+            }
+           }
+          },
+          "children": [
+           {
+            "type": "div",
+            "data": {
+             "attrID": "sl-card-a"
+            },
+            "style": {
+             "&": {
+              "_": {
+               "display": "flex",
+               "flexDirection": "column",
+               "rowGap": "0px"
+              }
+             }
+            },
+            "children": [
+             {
+              "type": "slider",
+              "data": {
+               "attrID": "sl-a",
+               "animation": "slide",
+               "duration": "600",
+               "easing": "ease",
+               "isAutoplay": "1",
+               "autoplayDelay": "1800",
+               "autoplayLimit": "0",
+               "isCarousel": "0",
+               "defaultSlideIndex": "0",
+               "ariaLabel": "SLIDE"
+              },
+              "style": {
+               "&": {
+                "_": {
+                 "position": "relative",
+                 "height": "190px",
+                 "overflow": "hidden",
+                 "backgroundColor": "rgb(22,24,28)"
+                },
+                "_m": {
+                 "height": "170px"
+                }
+               }
+              },
+              "children": [
+               {
+                "type": "slider-slides",
+                "data": {
+                 "attrID": "sl-a-track"
+                },
+                "children": [
+                 {
+                  "type": "slider-slide",
+                  "data": {
+                   "attrID": "sl-a-0",
+                   "title": "SLIDE 1"
+                  },
+                  "style": {
+                   "&": {
+                    "_": {
+                     "backgroundColor": "rgb(22,24,28)",
+                     "display": "flex",
+                     "flexDirection": "column",
+                     "justifyContent": "space-between",
+                     "alignItems": "flex-start",
+                     "height": "100%",
+                     "paddingTop": "34px",
+                     "paddingBottom": "26px",
+                     "paddingLeft": "36px",
+                     "paddingRight": "36px"
+                    },
+                    "_m": {
+                     "paddingTop": "22px",
+                     "paddingBottom": "20px",
+                     "paddingLeft": "20px",
+                     "paddingRight": "20px"
+                    }
+                   }
+                  },
+                  "children": [
+                   {
+                    "type": "text",
+                    "data": {
+                     "tagName": "p"
+                    },
+                    "text": "01",
+                    "style": {
+                     "&": {
+                      "_": {
+                       "color": "rgb(250,250,247)",
+                       "fontSize": "11px",
+                       "letterSpacing": "0.3em",
+                       "fontFamily": "'IBM Plex Mono',ui-monospace,SFMono-Regular,Menlo,Consolas,monospace",
+                       "fontWeight": "400"
+                      }
+                     }
+                    }
+                   },
+                   {
+                    "type": "div",
+                    "data": {
+                     "attrID": "sl-a-0-body"
+                    },
+                    "style": {
+                     "&": {
+                      "_": {
+                       "marginTop": "18px"
+                      }
+                     }
+                    },
+                    "children": [
+                     {
+                      "type": "text",
+                      "data": {
+                       "tagName": "p"
+                      },
+                      "text": "ONE",
+                      "style": {
+                       "&": {
+                        "_": {
+                         "fontFamily": "'Space Grotesk','Noto Sans TC','PingFang TC','Microsoft JhengHei',sans-serif",
+                         "fontWeight": "600",
+                         "fontSize": "30px",
+                         "lineHeight": "1.04",
+                         "letterSpacing": "0.005em",
+                         "color": "rgb(250,250,247)",
+                         "whiteSpace": "pre-wrap"
+                        },
+                        "_m": {
+                         "fontSize": "24px"
+                        }
+                       }
+                      }
+                     },
+                     {
+                      "type": "text",
+                      "data": {
+                       "tagName": "p"
+                      },
+                      "text": "",
+                      "style": {
+                       "&": {
+                        "_": {
+                         "fontFamily": "'Noto Sans TC','PingFang TC','Hiragino Sans TC','Microsoft JhengHei',sans-serif",
+                         "fontSize": "14px",
+                         "lineHeight": "1.8",
+                         "color": "rgb(250,250,247)",
+                         "marginTop": "14px",
+                         "maxWidth": "430px"
+                        }
+                       }
+                      }
+                     }
+                    ]
+                   }
+                  ]
+                 },
+                 {
+                  "type": "slider-slide",
+                  "data": {
+                   "attrID": "sl-a-1",
+                   "title": "SLIDE 2"
+                  },
+                  "style": {
+                   "&": {
+                    "_": {
+                     "backgroundColor": "rgb(31,58,95)",
+                     "display": "flex",
+                     "flexDirection": "column",
+                     "justifyContent": "space-between",
+                     "alignItems": "flex-start",
+                     "height": "100%",
+                     "paddingTop": "34px",
+                     "paddingBottom": "26px",
+                     "paddingLeft": "36px",
+                     "paddingRight": "36px"
+                    },
+                    "_m": {
+                     "paddingTop": "22px",
+                     "paddingBottom": "20px",
+                     "paddingLeft": "20px",
+                     "paddingRight": "20px"
+                    }
+                   }
+                  },
+                  "children": [
+                   {
+                    "type": "text",
+                    "data": {
+                     "tagName": "p"
+                    },
+                    "text": "02",
+                    "style": {
+                     "&": {
+                      "_": {
+                       "color": "rgb(250,250,247)",
+                       "fontSize": "11px",
+                       "letterSpacing": "0.3em",
+                       "fontFamily": "'IBM Plex Mono',ui-monospace,SFMono-Regular,Menlo,Consolas,monospace",
+                       "fontWeight": "400"
+                      }
+                     }
+                    }
+                   },
+                   {
+                    "type": "div",
+                    "data": {
+                     "attrID": "sl-a-1-body"
+                    },
+                    "style": {
+                     "&": {
+                      "_": {
+                       "marginTop": "18px"
+                      }
+                     }
+                    },
+                    "children": [
+                     {
+                      "type": "text",
+                      "data": {
+                       "tagName": "p"
+                      },
+                      "text": "TWO",
+                      "style": {
+                       "&": {
+                        "_": {
+                         "fontFamily": "'Space Grotesk','Noto Sans TC','PingFang TC','Microsoft JhengHei',sans-serif",
+                         "fontWeight": "600",
+                         "fontSize": "30px",
+                         "lineHeight": "1.04",
+                         "letterSpacing": "0.005em",
+                         "color": "rgb(250,250,247)",
+                         "whiteSpace": "pre-wrap"
+                        },
+                        "_m": {
+                         "fontSize": "24px"
+                        }
+                       }
+                      }
+                     },
+                     {
+                      "type": "text",
+                      "data": {
+                       "tagName": "p"
+                      },
+                      "text": "",
+                      "style": {
+                       "&": {
+                        "_": {
+                         "fontFamily": "'Noto Sans TC','PingFang TC','Hiragino Sans TC','Microsoft JhengHei',sans-serif",
+                         "fontSize": "14px",
+                         "lineHeight": "1.8",
+                         "color": "rgb(250,250,247)",
+                         "marginTop": "14px",
+                         "maxWidth": "430px"
+                        }
+                       }
+                      }
+                     }
+                    ]
+                   }
+                  ]
+                 },
+                 {
+                  "type": "slider-slide",
+                  "data": {
+                   "attrID": "sl-a-2",
+                   "title": "SLIDE 3"
+                  },
+                  "style": {
+                   "&": {
+                    "_": {
+                     "backgroundColor": "rgb(191,68,40)",
+                     "display": "flex",
+                     "flexDirection": "column",
+                     "justifyContent": "space-between",
+                     "alignItems": "flex-start",
+                     "height": "100%",
+                     "paddingTop": "34px",
+                     "paddingBottom": "26px",
+                     "paddingLeft": "36px",
+                     "paddingRight": "36px"
+                    },
+                    "_m": {
+                     "paddingTop": "22px",
+                     "paddingBottom": "20px",
+                     "paddingLeft": "20px",
+                     "paddingRight": "20px"
+                    }
+                   }
+                  },
+                  "children": [
+                   {
+                    "type": "text",
+                    "data": {
+                     "tagName": "p"
+                    },
+                    "text": "03",
+                    "style": {
+                     "&": {
+                      "_": {
+                       "color": "rgb(250,250,247)",
+                       "fontSize": "11px",
+                       "letterSpacing": "0.3em",
+                       "fontFamily": "'IBM Plex Mono',ui-monospace,SFMono-Regular,Menlo,Consolas,monospace",
+                       "fontWeight": "400"
+                      }
+                     }
+                    }
+                   },
+                   {
+                    "type": "div",
+                    "data": {
+                     "attrID": "sl-a-2-body"
+                    },
+                    "style": {
+                     "&": {
+                      "_": {
+                       "marginTop": "18px"
+                      }
+                     }
+                    },
+                    "children": [
+                     {
+                      "type": "text",
+                      "data": {
+                       "tagName": "p"
+                      },
+                      "text": "THREE",
+                      "style": {
+                       "&": {
+                        "_": {
+                         "fontFamily": "'Space Grotesk','Noto Sans TC','PingFang TC','Microsoft JhengHei',sans-serif",
+                         "fontWeight": "600",
+                         "fontSize": "30px",
+                         "lineHeight": "1.04",
+                         "letterSpacing": "0.005em",
+                         "color": "rgb(250,250,247)",
+                         "whiteSpace": "pre-wrap"
+                        },
+                        "_m": {
+                         "fontSize": "24px"
+                        }
+                       }
+                      }
+                     },
+                     {
+                      "type": "text",
+                      "data": {
+                       "tagName": "p"
+                      },
+                      "text": "",
+                      "style": {
+                       "&": {
+                        "_": {
+                         "fontFamily": "'Noto Sans TC','PingFang TC','Hiragino Sans TC','Microsoft JhengHei',sans-serif",
+                         "fontSize": "14px",
+                         "lineHeight": "1.8",
+                         "color": "rgb(250,250,247)",
+                         "marginTop": "14px",
+                         "maxWidth": "430px"
+                        }
+                       }
+                      }
+                     }
+                    ]
+                   }
+                  ]
+                 }
+                ]
+               }
+              ]
+             },
+             {
+              "type": "div",
+              "data": {
+               "attrID": "sl-card-h-a"
+              },
+              "style": {
+               "&": {
+                "_": {
+                 "display": "flex",
+                 "justifyContent": "space-between",
+                 "alignItems": "baseline",
+                 "columnGap": "10px",
+                 "marginTop": "12px"
+                }
+               }
+              },
+              "children": [
+               {
+                "type": "text",
+                "data": {
+                 "tagName": "p"
+                },
+                "text": "slide",
+                "style": {
+                 "&": {
+                  "_": {
+                   "color": {
+                    "token": "--mk-accent-ink"
+                   },
+                   "fontSize": "10px",
+                   "letterSpacing": "0.18em",
+                   "fontFamily": "'IBM Plex Mono',ui-monospace,SFMono-Regular,Menlo,Consolas,monospace",
+                   "fontWeight": "400"
+                  }
+                 }
+                }
+               },
+               {
+                "type": "text",
+                "data": {
+                 "tagName": "p"
+                },
+                "text": "SLIDE",
+                "style": {
+                 "&": {
+                  "_": {
+                   "color": {
+                    "token": "--mk-faint"
+                   },
+                   "fontSize": "10px",
+                   "letterSpacing": "0.16em",
+                   "fontFamily": "'IBM Plex Mono',ui-monospace,SFMono-Regular,Menlo,Consolas,monospace",
+                   "fontWeight": "400"
+                  }
+                 }
+                }
+               }
+              ]
+             },
+             {
+              "type": "text",
+              "data": {
+               "tagName": "p"
+              },
+              "text": "横向推進。最像「下一張」，也最適合有前後順序的內容。",
+              "style": {
+               "&": {
+                "_": {
+                 "fontFamily": "'Noto Sans TC','PingFang TC','Hiragino Sans TC','Microsoft JhengHei',sans-serif",
+                 "fontSize": "13px",
+                 "lineHeight": "1.8",
+                 "color": {
+                  "token": "--mk-muted"
+                 },
+                 "marginTop": "8px"
+                }
+               }
+              }
+             }
+            ]
+           },
+           {
+            "type": "div",
+            "data": {
+             "attrID": "sl-card-b"
+            },
+            "style": {
+             "&": {
+              "_": {
+               "display": "flex",
+               "flexDirection": "column",
+               "rowGap": "0px"
+              }
+             }
+            },
+            "children": [
+             {
+              "type": "slider",
+              "data": {
+               "attrID": "sl-b",
+               "animation": "crossFade",
+               "duration": "600",
+               "easing": "ease",
+               "isAutoplay": "1",
+               "autoplayDelay": "1800",
+               "autoplayLimit": "0",
+               "isCarousel": "0",
+               "defaultSlideIndex": "1",
+               "ariaLabel": "CROSSFADE"
+              },
+              "style": {
+               "&": {
+                "_": {
+                 "position": "relative",
+                 "height": "190px",
+                 "overflow": "hidden",
+                 "backgroundColor": "rgb(22,24,28)"
+                },
+                "_m": {
+                 "height": "170px"
+                }
+               }
+              },
+              "children": [
+               {
+                "type": "slider-slides",
+                "data": {
+                 "attrID": "sl-b-track"
+                },
+                "children": [
+                 {
+                  "type": "slider-slide",
+                  "data": {
+                   "attrID": "sl-b-0",
+                   "title": "CROSSFADE 1"
+                  },
+                  "style": {
+                   "&": {
+                    "_": {
+                     "backgroundColor": "rgb(22,24,28)",
+                     "display": "flex",
+                     "flexDirection": "column",
+                     "justifyContent": "space-between",
+                     "alignItems": "flex-start",
+                     "height": "100%",
+                     "paddingTop": "34px",
+                     "paddingBottom": "26px",
+                     "paddingLeft": "36px",
+                     "paddingRight": "36px"
+                    },
+                    "_m": {
+                     "paddingTop": "22px",
+                     "paddingBottom": "20px",
+                     "paddingLeft": "20px",
+                     "paddingRight": "20px"
+                    }
+                   }
+                  },
+                  "children": [
+                   {
+                    "type": "text",
+                    "data": {
+                     "tagName": "p"
+                    },
+                    "text": "01",
+                    "style": {
+                     "&": {
+                      "_": {
+                       "color": "rgb(250,250,247)",
+                       "fontSize": "11px",
+                       "letterSpacing": "0.3em",
+                       "fontFamily": "'IBM Plex Mono',ui-monospace,SFMono-Regular,Menlo,Consolas,monospace",
+                       "fontWeight": "400"
+                      }
+                     }
+                    }
+                   },
+                   {
+                    "type": "div",
+                    "data": {
+                     "attrID": "sl-b-0-body"
+                    },
+                    "style": {
+                     "&": {
+                      "_": {
+                       "marginTop": "18px"
+                      }
+                     }
+                    },
+                    "children": [
+                     {
+                      "type": "text",
+                      "data": {
+                       "tagName": "p"
+                      },
+                      "text": "ONE",
+                      "style": {
+                       "&": {
+                        "_": {
+                         "fontFamily": "'Space Grotesk','Noto Sans TC','PingFang TC','Microsoft JhengHei',sans-serif",
+                         "fontWeight": "600",
+                         "fontSize": "30px",
+                         "lineHeight": "1.04",
+                         "letterSpacing": "0.005em",
+                         "color": "rgb(250,250,247)",
+                         "whiteSpace": "pre-wrap"
+                        },
+                        "_m": {
+                         "fontSize": "24px"
+                        }
+                       }
+                      }
+                     },
+                     {
+                      "type": "text",
+                      "data": {
+                       "tagName": "p"
+                      },
+                      "text": "",
+                      "style": {
+                       "&": {
+                        "_": {
+                         "fontFamily": "'Noto Sans TC','PingFang TC','Hiragino Sans TC','Microsoft JhengHei',sans-serif",
+                         "fontSize": "14px",
+                         "lineHeight": "1.8",
+                         "color": "rgb(250,250,247)",
+                         "marginTop": "14px",
+                         "maxWidth": "430px"
+                        }
+                       }
+                      }
+                     }
+                    ]
+                   }
+                  ]
+                 },
+                 {
+                  "type": "slider-slide",
+                  "data": {
+                   "attrID": "sl-b-1",
+                   "title": "CROSSFADE 2"
+                  },
+                  "style": {
+                   "&": {
+                    "_": {
+                     "backgroundColor": "rgb(31,58,95)",
+                     "display": "flex",
+                     "flexDirection": "column",
+                     "justifyContent": "space-between",
+                     "alignItems": "flex-start",
+                     "height": "100%",
+                     "paddingTop": "34px",
+                     "paddingBottom": "26px",
+                     "paddingLeft": "36px",
+                     "paddingRight": "36px"
+                    },
+                    "_m": {
+                     "paddingTop": "22px",
+                     "paddingBottom": "20px",
+                     "paddingLeft": "20px",
+                     "paddingRight": "20px"
+                    }
+                   }
+                  },
+                  "children": [
+                   {
+                    "type": "text",
+                    "data": {
+                     "tagName": "p"
+                    },
+                    "text": "02",
+                    "style": {
+                     "&": {
+                      "_": {
+                       "color": "rgb(250,250,247)",
+                       "fontSize": "11px",
+                       "letterSpacing": "0.3em",
+                       "fontFamily": "'IBM Plex Mono',ui-monospace,SFMono-Regular,Menlo,Consolas,monospace",
+                       "fontWeight": "400"
+                      }
+                     }
+                    }
+                   },
+                   {
+                    "type": "div",
+                    "data": {
+                     "attrID": "sl-b-1-body"
+                    },
+                    "style": {
+                     "&": {
+                      "_": {
+                       "marginTop": "18px"
+                      }
+                     }
+                    },
+                    "children": [
+                     {
+                      "type": "text",
+                      "data": {
+                       "tagName": "p"
+                      },
+                      "text": "TWO",
+                      "style": {
+                       "&": {
+                        "_": {
+                         "fontFamily": "'Space Grotesk','Noto Sans TC','PingFang TC','Microsoft JhengHei',sans-serif",
+                         "fontWeight": "600",
+                         "fontSize": "30px",
+                         "lineHeight": "1.04",
+                         "letterSpacing": "0.005em",
+                         "color": "rgb(250,250,247)",
+                         "whiteSpace": "pre-wrap"
+                        },
+                        "_m": {
+                         "fontSize": "24px"
+                        }
+                       }
+                      }
+                     },
+                     {
+                      "type": "text",
+                      "data": {
+                       "tagName": "p"
+                      },
+                      "text": "",
+                      "style": {
+                       "&": {
+                        "_": {
+                         "fontFamily": "'Noto Sans TC','PingFang TC','Hiragino Sans TC','Microsoft JhengHei',sans-serif",
+                         "fontSize": "14px",
+                         "lineHeight": "1.8",
+                         "color": "rgb(250,250,247)",
+                         "marginTop": "14px",
+                         "maxWidth": "430px"
+                        }
+                       }
+                      }
+                     }
+                    ]
+                   }
+                  ]
+                 },
+                 {
+                  "type": "slider-slide",
+                  "data": {
+                   "attrID": "sl-b-2",
+                   "title": "CROSSFADE 3"
+                  },
+                  "style": {
+                   "&": {
+                    "_": {
+                     "backgroundColor": "rgb(191,68,40)",
+                     "display": "flex",
+                     "flexDirection": "column",
+                     "justifyContent": "space-between",
+                     "alignItems": "flex-start",
+                     "height": "100%",
+                     "paddingTop": "34px",
+                     "paddingBottom": "26px",
+                     "paddingLeft": "36px",
+                     "paddingRight": "36px"
+                    },
+                    "_m": {
+                     "paddingTop": "22px",
+                     "paddingBottom": "20px",
+                     "paddingLeft": "20px",
+                     "paddingRight": "20px"
+                    }
+                   }
+                  },
+                  "children": [
+                   {
+                    "type": "text",
+                    "data": {
+                     "tagName": "p"
+                    },
+                    "text": "03",
+                    "style": {
+                     "&": {
+                      "_": {
+                       "color": "rgb(250,250,247)",
+                       "fontSize": "11px",
+                       "letterSpacing": "0.3em",
+                       "fontFamily": "'IBM Plex Mono',ui-monospace,SFMono-Regular,Menlo,Consolas,monospace",
+                       "fontWeight": "400"
+                      }
+                     }
+                    }
+                   },
+                   {
+                    "type": "div",
+                    "data": {
+                     "attrID": "sl-b-2-body"
+                    },
+                    "style": {
+                     "&": {
+                      "_": {
+                       "marginTop": "18px"
+                      }
+                     }
+                    },
+                    "children": [
+                     {
+                      "type": "text",
+                      "data": {
+                       "tagName": "p"
+                      },
+                      "text": "THREE",
+                      "style": {
+                       "&": {
+                        "_": {
+                         "fontFamily": "'Space Grotesk','Noto Sans TC','PingFang TC','Microsoft JhengHei',sans-serif",
+                         "fontWeight": "600",
+                         "fontSize": "30px",
+                         "lineHeight": "1.04",
+                         "letterSpacing": "0.005em",
+                         "color": "rgb(250,250,247)",
+                         "whiteSpace": "pre-wrap"
+                        },
+                        "_m": {
+                         "fontSize": "24px"
+                        }
+                       }
+                      }
+                     },
+                     {
+                      "type": "text",
+                      "data": {
+                       "tagName": "p"
+                      },
+                      "text": "",
+                      "style": {
+                       "&": {
+                        "_": {
+                         "fontFamily": "'Noto Sans TC','PingFang TC','Hiragino Sans TC','Microsoft JhengHei',sans-serif",
+                         "fontSize": "14px",
+                         "lineHeight": "1.8",
+                         "color": "rgb(250,250,247)",
+                         "marginTop": "14px",
+                         "maxWidth": "430px"
+                        }
+                       }
+                      }
+                     }
+                    ]
+                   }
+                  ]
+                 }
+                ]
+               }
+              ]
+             },
+             {
+              "type": "div",
+              "data": {
+               "attrID": "sl-card-h-b"
+              },
+              "style": {
+               "&": {
+                "_": {
+                 "display": "flex",
+                 "justifyContent": "space-between",
+                 "alignItems": "baseline",
+                 "columnGap": "10px",
+                 "marginTop": "12px"
+                }
+               }
+              },
+              "children": [
+               {
+                "type": "text",
+                "data": {
+                 "tagName": "p"
+                },
+                "text": "crossFade",
+                "style": {
+                 "&": {
+                  "_": {
+                   "color": {
+                    "token": "--mk-accent-ink"
+                   },
+                   "fontSize": "10px",
+                   "letterSpacing": "0.18em",
+                   "fontFamily": "'IBM Plex Mono',ui-monospace,SFMono-Regular,Menlo,Consolas,monospace",
+                   "fontWeight": "400"
+                  }
+                 }
+                }
+               },
+               {
+                "type": "text",
+                "data": {
+                 "tagName": "p"
+                },
+                "text": "CROSSFADE",
+                "style": {
+                 "&": {
+                  "_": {
+                   "color": {
+                    "token": "--mk-faint"
+                   },
+                   "fontSize": "10px",
+                   "letterSpacing": "0.16em",
+                   "fontFamily": "'IBM Plex Mono',ui-monospace,SFMono-Regular,Menlo,Consolas,monospace",
+                   "fontWeight": "400"
+                  }
+                 }
+                }
+               }
+              ]
+             },
+             {
+              "type": "text",
+              "data": {
+               "tagName": "p"
+              },
+              "text": "兩張同時淡入淡出。沒有方向感，適合互不相屬的張數。",
+              "style": {
+               "&": {
+                "_": {
+                 "fontFamily": "'Noto Sans TC','PingFang TC','Hiragino Sans TC','Microsoft JhengHei',sans-serif",
+                 "fontSize": "13px",
+                 "lineHeight": "1.8",
+                 "color": {
+                  "token": "--mk-muted"
+                 },
+                 "marginTop": "8px"
+                }
+               }
+              }
+             }
+            ]
+           },
+           {
+            "type": "div",
+            "data": {
+             "attrID": "sl-card-c"
+            },
+            "style": {
+             "&": {
+              "_": {
+               "display": "flex",
+               "flexDirection": "column",
+               "rowGap": "0px"
+              }
+             }
+            },
+            "children": [
+             {
+              "type": "slider",
+              "data": {
+               "attrID": "sl-c",
+               "animation": "fadeOut",
+               "duration": "600",
+               "easing": "ease",
+               "isAutoplay": "1",
+               "autoplayDelay": "1800",
+               "autoplayLimit": "0",
+               "isCarousel": "0",
+               "defaultSlideIndex": "2",
+               "ariaLabel": "FADEOUT"
+              },
+              "style": {
+               "&": {
+                "_": {
+                 "position": "relative",
+                 "height": "190px",
+                 "overflow": "hidden",
+                 "backgroundColor": "rgb(22,24,28)"
+                },
+                "_m": {
+                 "height": "170px"
+                }
+               }
+              },
+              "children": [
+               {
+                "type": "slider-slides",
+                "data": {
+                 "attrID": "sl-c-track"
+                },
+                "children": [
+                 {
+                  "type": "slider-slide",
+                  "data": {
+                   "attrID": "sl-c-0",
+                   "title": "FADEOUT 1"
+                  },
+                  "style": {
+                   "&": {
+                    "_": {
+                     "backgroundColor": "rgb(22,24,28)",
+                     "display": "flex",
+                     "flexDirection": "column",
+                     "justifyContent": "space-between",
+                     "alignItems": "flex-start",
+                     "height": "100%",
+                     "paddingTop": "34px",
+                     "paddingBottom": "26px",
+                     "paddingLeft": "36px",
+                     "paddingRight": "36px"
+                    },
+                    "_m": {
+                     "paddingTop": "22px",
+                     "paddingBottom": "20px",
+                     "paddingLeft": "20px",
+                     "paddingRight": "20px"
+                    }
+                   }
+                  },
+                  "children": [
+                   {
+                    "type": "text",
+                    "data": {
+                     "tagName": "p"
+                    },
+                    "text": "01",
+                    "style": {
+                     "&": {
+                      "_": {
+                       "color": "rgb(250,250,247)",
+                       "fontSize": "11px",
+                       "letterSpacing": "0.3em",
+                       "fontFamily": "'IBM Plex Mono',ui-monospace,SFMono-Regular,Menlo,Consolas,monospace",
+                       "fontWeight": "400"
+                      }
+                     }
+                    }
+                   },
+                   {
+                    "type": "div",
+                    "data": {
+                     "attrID": "sl-c-0-body"
+                    },
+                    "style": {
+                     "&": {
+                      "_": {
+                       "marginTop": "18px"
+                      }
+                     }
+                    },
+                    "children": [
+                     {
+                      "type": "text",
+                      "data": {
+                       "tagName": "p"
+                      },
+                      "text": "ONE",
+                      "style": {
+                       "&": {
+                        "_": {
+                         "fontFamily": "'Space Grotesk','Noto Sans TC','PingFang TC','Microsoft JhengHei',sans-serif",
+                         "fontWeight": "600",
+                         "fontSize": "30px",
+                         "lineHeight": "1.04",
+                         "letterSpacing": "0.005em",
+                         "color": "rgb(250,250,247)",
+                         "whiteSpace": "pre-wrap"
+                        },
+                        "_m": {
+                         "fontSize": "24px"
+                        }
+                       }
+                      }
+                     },
+                     {
+                      "type": "text",
+                      "data": {
+                       "tagName": "p"
+                      },
+                      "text": "",
+                      "style": {
+                       "&": {
+                        "_": {
+                         "fontFamily": "'Noto Sans TC','PingFang TC','Hiragino Sans TC','Microsoft JhengHei',sans-serif",
+                         "fontSize": "14px",
+                         "lineHeight": "1.8",
+                         "color": "rgb(250,250,247)",
+                         "marginTop": "14px",
+                         "maxWidth": "430px"
+                        }
+                       }
+                      }
+                     }
+                    ]
+                   }
+                  ]
+                 },
+                 {
+                  "type": "slider-slide",
+                  "data": {
+                   "attrID": "sl-c-1",
+                   "title": "FADEOUT 2"
+                  },
+                  "style": {
+                   "&": {
+                    "_": {
+                     "backgroundColor": "rgb(31,58,95)",
+                     "display": "flex",
+                     "flexDirection": "column",
+                     "justifyContent": "space-between",
+                     "alignItems": "flex-start",
+                     "height": "100%",
+                     "paddingTop": "34px",
+                     "paddingBottom": "26px",
+                     "paddingLeft": "36px",
+                     "paddingRight": "36px"
+                    },
+                    "_m": {
+                     "paddingTop": "22px",
+                     "paddingBottom": "20px",
+                     "paddingLeft": "20px",
+                     "paddingRight": "20px"
+                    }
+                   }
+                  },
+                  "children": [
+                   {
+                    "type": "text",
+                    "data": {
+                     "tagName": "p"
+                    },
+                    "text": "02",
+                    "style": {
+                     "&": {
+                      "_": {
+                       "color": "rgb(250,250,247)",
+                       "fontSize": "11px",
+                       "letterSpacing": "0.3em",
+                       "fontFamily": "'IBM Plex Mono',ui-monospace,SFMono-Regular,Menlo,Consolas,monospace",
+                       "fontWeight": "400"
+                      }
+                     }
+                    }
+                   },
+                   {
+                    "type": "div",
+                    "data": {
+                     "attrID": "sl-c-1-body"
+                    },
+                    "style": {
+                     "&": {
+                      "_": {
+                       "marginTop": "18px"
+                      }
+                     }
+                    },
+                    "children": [
+                     {
+                      "type": "text",
+                      "data": {
+                       "tagName": "p"
+                      },
+                      "text": "TWO",
+                      "style": {
+                       "&": {
+                        "_": {
+                         "fontFamily": "'Space Grotesk','Noto Sans TC','PingFang TC','Microsoft JhengHei',sans-serif",
+                         "fontWeight": "600",
+                         "fontSize": "30px",
+                         "lineHeight": "1.04",
+                         "letterSpacing": "0.005em",
+                         "color": "rgb(250,250,247)",
+                         "whiteSpace": "pre-wrap"
+                        },
+                        "_m": {
+                         "fontSize": "24px"
+                        }
+                       }
+                      }
+                     },
+                     {
+                      "type": "text",
+                      "data": {
+                       "tagName": "p"
+                      },
+                      "text": "",
+                      "style": {
+                       "&": {
+                        "_": {
+                         "fontFamily": "'Noto Sans TC','PingFang TC','Hiragino Sans TC','Microsoft JhengHei',sans-serif",
+                         "fontSize": "14px",
+                         "lineHeight": "1.8",
+                         "color": "rgb(250,250,247)",
+                         "marginTop": "14px",
+                         "maxWidth": "430px"
+                        }
+                       }
+                      }
+                     }
+                    ]
+                   }
+                  ]
+                 },
+                 {
+                  "type": "slider-slide",
+                  "data": {
+                   "attrID": "sl-c-2",
+                   "title": "FADEOUT 3"
+                  },
+                  "style": {
+                   "&": {
+                    "_": {
+                     "backgroundColor": "rgb(191,68,40)",
+                     "display": "flex",
+                     "flexDirection": "column",
+                     "justifyContent": "space-between",
+                     "alignItems": "flex-start",
+                     "height": "100%",
+                     "paddingTop": "34px",
+                     "paddingBottom": "26px",
+                     "paddingLeft": "36px",
+                     "paddingRight": "36px"
+                    },
+                    "_m": {
+                     "paddingTop": "22px",
+                     "paddingBottom": "20px",
+                     "paddingLeft": "20px",
+                     "paddingRight": "20px"
+                    }
+                   }
+                  },
+                  "children": [
+                   {
+                    "type": "text",
+                    "data": {
+                     "tagName": "p"
+                    },
+                    "text": "03",
+                    "style": {
+                     "&": {
+                      "_": {
+                       "color": "rgb(250,250,247)",
+                       "fontSize": "11px",
+                       "letterSpacing": "0.3em",
+                       "fontFamily": "'IBM Plex Mono',ui-monospace,SFMono-Regular,Menlo,Consolas,monospace",
+                       "fontWeight": "400"
+                      }
+                     }
+                    }
+                   },
+                   {
+                    "type": "div",
+                    "data": {
+                     "attrID": "sl-c-2-body"
+                    },
+                    "style": {
+                     "&": {
+                      "_": {
+                       "marginTop": "18px"
+                      }
+                     }
+                    },
+                    "children": [
+                     {
+                      "type": "text",
+                      "data": {
+                       "tagName": "p"
+                      },
+                      "text": "THREE",
+                      "style": {
+                       "&": {
+                        "_": {
+                         "fontFamily": "'Space Grotesk','Noto Sans TC','PingFang TC','Microsoft JhengHei',sans-serif",
+                         "fontWeight": "600",
+                         "fontSize": "30px",
+                         "lineHeight": "1.04",
+                         "letterSpacing": "0.005em",
+                         "color": "rgb(250,250,247)",
+                         "whiteSpace": "pre-wrap"
+                        },
+                        "_m": {
+                         "fontSize": "24px"
+                        }
+                       }
+                      }
+                     },
+                     {
+                      "type": "text",
+                      "data": {
+                       "tagName": "p"
+                      },
+                      "text": "",
+                      "style": {
+                       "&": {
+                        "_": {
+                         "fontFamily": "'Noto Sans TC','PingFang TC','Hiragino Sans TC','Microsoft JhengHei',sans-serif",
+                         "fontSize": "14px",
+                         "lineHeight": "1.8",
+                         "color": "rgb(250,250,247)",
+                         "marginTop": "14px",
+                         "maxWidth": "430px"
+                        }
+                       }
+                      }
+                     }
+                    ]
+                   }
+                  ]
+                 }
+                ]
+               }
+              ]
+             },
+             {
+              "type": "div",
+              "data": {
+               "attrID": "sl-card-h-c"
+              },
+              "style": {
+               "&": {
+                "_": {
+                 "display": "flex",
+                 "justifyContent": "space-between",
+                 "alignItems": "baseline",
+                 "columnGap": "10px",
+                 "marginTop": "12px"
+                }
+               }
+              },
+              "children": [
+               {
+                "type": "text",
+                "data": {
+                 "tagName": "p"
+                },
+                "text": "fadeOut",
+                "style": {
+                 "&": {
+                  "_": {
+                   "color": {
+                    "token": "--mk-accent-ink"
+                   },
+                   "fontSize": "10px",
+                   "letterSpacing": "0.18em",
+                   "fontFamily": "'IBM Plex Mono',ui-monospace,SFMono-Regular,Menlo,Consolas,monospace",
+                   "fontWeight": "400"
+                  }
+                 }
+                }
+               },
+               {
+                "type": "text",
+                "data": {
+                 "tagName": "p"
+                },
+                "text": "FADEOUT",
+                "style": {
+                 "&": {
+                  "_": {
+                   "color": {
+                    "token": "--mk-faint"
+                   },
+                   "fontSize": "10px",
+                   "letterSpacing": "0.16em",
+                   "fontFamily": "'IBM Plex Mono',ui-monospace,SFMono-Regular,Menlo,Consolas,monospace",
+                   "fontWeight": "400"
+                  }
+                 }
+                }
+               }
+              ]
+             },
+             {
+              "type": "text",
+              "data": {
+               "tagName": "p"
+              },
+              "text": "先淡出再換。中間會路出底色，節奏比 crossFade 慢半拍。",
+              "style": {
+               "&": {
+                "_": {
+                 "fontFamily": "'Noto Sans TC','PingFang TC','Hiragino Sans TC','Microsoft JhengHei',sans-serif",
+                 "fontSize": "13px",
+                 "lineHeight": "1.8",
+                 "color": {
+                  "token": "--mk-muted"
+                 },
+                 "marginTop": "8px"
+                }
+               }
+              }
+             }
+            ]
+           },
+           {
+            "type": "div",
+            "data": {
+             "attrID": "sl-card-d"
+            },
+            "style": {
+             "&": {
+              "_": {
+               "display": "flex",
+               "flexDirection": "column",
+               "rowGap": "0px"
+              }
+             }
+            },
+            "children": [
+             {
+              "type": "slider",
+              "data": {
+               "attrID": "sl-d",
+               "animation": "fadeOver",
+               "duration": "600",
+               "easing": "ease",
+               "isAutoplay": "1",
+               "autoplayDelay": "1800",
+               "autoplayLimit": "0",
+               "isCarousel": "0",
+               "defaultSlideIndex": "1",
+               "ariaLabel": "FADEOVER"
+              },
+              "style": {
+               "&": {
+                "_": {
+                 "position": "relative",
+                 "height": "190px",
+                 "overflow": "hidden",
+                 "backgroundColor": "rgb(22,24,28)"
+                },
+                "_m": {
+                 "height": "170px"
+                }
+               }
+              },
+              "children": [
+               {
+                "type": "slider-slides",
+                "data": {
+                 "attrID": "sl-d-track"
+                },
+                "children": [
+                 {
+                  "type": "slider-slide",
+                  "data": {
+                   "attrID": "sl-d-0",
+                   "title": "FADEOVER 1"
+                  },
+                  "style": {
+                   "&": {
+                    "_": {
+                     "backgroundColor": "rgb(22,24,28)",
+                     "display": "flex",
+                     "flexDirection": "column",
+                     "justifyContent": "space-between",
+                     "alignItems": "flex-start",
+                     "height": "100%",
+                     "paddingTop": "34px",
+                     "paddingBottom": "26px",
+                     "paddingLeft": "36px",
+                     "paddingRight": "36px"
+                    },
+                    "_m": {
+                     "paddingTop": "22px",
+                     "paddingBottom": "20px",
+                     "paddingLeft": "20px",
+                     "paddingRight": "20px"
+                    }
+                   }
+                  },
+                  "children": [
+                   {
+                    "type": "text",
+                    "data": {
+                     "tagName": "p"
+                    },
+                    "text": "01",
+                    "style": {
+                     "&": {
+                      "_": {
+                       "color": "rgb(250,250,247)",
+                       "fontSize": "11px",
+                       "letterSpacing": "0.3em",
+                       "fontFamily": "'IBM Plex Mono',ui-monospace,SFMono-Regular,Menlo,Consolas,monospace",
+                       "fontWeight": "400"
+                      }
+                     }
+                    }
+                   },
+                   {
+                    "type": "div",
+                    "data": {
+                     "attrID": "sl-d-0-body"
+                    },
+                    "style": {
+                     "&": {
+                      "_": {
+                       "marginTop": "18px"
+                      }
+                     }
+                    },
+                    "children": [
+                     {
+                      "type": "text",
+                      "data": {
+                       "tagName": "p"
+                      },
+                      "text": "ONE",
+                      "style": {
+                       "&": {
+                        "_": {
+                         "fontFamily": "'Space Grotesk','Noto Sans TC','PingFang TC','Microsoft JhengHei',sans-serif",
+                         "fontWeight": "600",
+                         "fontSize": "30px",
+                         "lineHeight": "1.04",
+                         "letterSpacing": "0.005em",
+                         "color": "rgb(250,250,247)",
+                         "whiteSpace": "pre-wrap"
+                        },
+                        "_m": {
+                         "fontSize": "24px"
+                        }
+                       }
+                      }
+                     },
+                     {
+                      "type": "text",
+                      "data": {
+                       "tagName": "p"
+                      },
+                      "text": "",
+                      "style": {
+                       "&": {
+                        "_": {
+                         "fontFamily": "'Noto Sans TC','PingFang TC','Hiragino Sans TC','Microsoft JhengHei',sans-serif",
+                         "fontSize": "14px",
+                         "lineHeight": "1.8",
+                         "color": "rgb(250,250,247)",
+                         "marginTop": "14px",
+                         "maxWidth": "430px"
+                        }
+                       }
+                      }
+                     }
+                    ]
+                   }
+                  ]
+                 },
+                 {
+                  "type": "slider-slide",
+                  "data": {
+                   "attrID": "sl-d-1",
+                   "title": "FADEOVER 2"
+                  },
+                  "style": {
+                   "&": {
+                    "_": {
+                     "backgroundColor": "rgb(31,58,95)",
+                     "display": "flex",
+                     "flexDirection": "column",
+                     "justifyContent": "space-between",
+                     "alignItems": "flex-start",
+                     "height": "100%",
+                     "paddingTop": "34px",
+                     "paddingBottom": "26px",
+                     "paddingLeft": "36px",
+                     "paddingRight": "36px"
+                    },
+                    "_m": {
+                     "paddingTop": "22px",
+                     "paddingBottom": "20px",
+                     "paddingLeft": "20px",
+                     "paddingRight": "20px"
+                    }
+                   }
+                  },
+                  "children": [
+                   {
+                    "type": "text",
+                    "data": {
+                     "tagName": "p"
+                    },
+                    "text": "02",
+                    "style": {
+                     "&": {
+                      "_": {
+                       "color": "rgb(250,250,247)",
+                       "fontSize": "11px",
+                       "letterSpacing": "0.3em",
+                       "fontFamily": "'IBM Plex Mono',ui-monospace,SFMono-Regular,Menlo,Consolas,monospace",
+                       "fontWeight": "400"
+                      }
+                     }
+                    }
+                   },
+                   {
+                    "type": "div",
+                    "data": {
+                     "attrID": "sl-d-1-body"
+                    },
+                    "style": {
+                     "&": {
+                      "_": {
+                       "marginTop": "18px"
+                      }
+                     }
+                    },
+                    "children": [
+                     {
+                      "type": "text",
+                      "data": {
+                       "tagName": "p"
+                      },
+                      "text": "TWO",
+                      "style": {
+                       "&": {
+                        "_": {
+                         "fontFamily": "'Space Grotesk','Noto Sans TC','PingFang TC','Microsoft JhengHei',sans-serif",
+                         "fontWeight": "600",
+                         "fontSize": "30px",
+                         "lineHeight": "1.04",
+                         "letterSpacing": "0.005em",
+                         "color": "rgb(250,250,247)",
+                         "whiteSpace": "pre-wrap"
+                        },
+                        "_m": {
+                         "fontSize": "24px"
+                        }
+                       }
+                      }
+                     },
+                     {
+                      "type": "text",
+                      "data": {
+                       "tagName": "p"
+                      },
+                      "text": "",
+                      "style": {
+                       "&": {
+                        "_": {
+                         "fontFamily": "'Noto Sans TC','PingFang TC','Hiragino Sans TC','Microsoft JhengHei',sans-serif",
+                         "fontSize": "14px",
+                         "lineHeight": "1.8",
+                         "color": "rgb(250,250,247)",
+                         "marginTop": "14px",
+                         "maxWidth": "430px"
+                        }
+                       }
+                      }
+                     }
+                    ]
+                   }
+                  ]
+                 },
+                 {
+                  "type": "slider-slide",
+                  "data": {
+                   "attrID": "sl-d-2",
+                   "title": "FADEOVER 3"
+                  },
+                  "style": {
+                   "&": {
+                    "_": {
+                     "backgroundColor": "rgb(191,68,40)",
+                     "display": "flex",
+                     "flexDirection": "column",
+                     "justifyContent": "space-between",
+                     "alignItems": "flex-start",
+                     "height": "100%",
+                     "paddingTop": "34px",
+                     "paddingBottom": "26px",
+                     "paddingLeft": "36px",
+                     "paddingRight": "36px"
+                    },
+                    "_m": {
+                     "paddingTop": "22px",
+                     "paddingBottom": "20px",
+                     "paddingLeft": "20px",
+                     "paddingRight": "20px"
+                    }
+                   }
+                  },
+                  "children": [
+                   {
+                    "type": "text",
+                    "data": {
+                     "tagName": "p"
+                    },
+                    "text": "03",
+                    "style": {
+                     "&": {
+                      "_": {
+                       "color": "rgb(250,250,247)",
+                       "fontSize": "11px",
+                       "letterSpacing": "0.3em",
+                       "fontFamily": "'IBM Plex Mono',ui-monospace,SFMono-Regular,Menlo,Consolas,monospace",
+                       "fontWeight": "400"
+                      }
+                     }
+                    }
+                   },
+                   {
+                    "type": "div",
+                    "data": {
+                     "attrID": "sl-d-2-body"
+                    },
+                    "style": {
+                     "&": {
+                      "_": {
+                       "marginTop": "18px"
+                      }
+                     }
+                    },
+                    "children": [
+                     {
+                      "type": "text",
+                      "data": {
+                       "tagName": "p"
+                      },
+                      "text": "THREE",
+                      "style": {
+                       "&": {
+                        "_": {
+                         "fontFamily": "'Space Grotesk','Noto Sans TC','PingFang TC','Microsoft JhengHei',sans-serif",
+                         "fontWeight": "600",
+                         "fontSize": "30px",
+                         "lineHeight": "1.04",
+                         "letterSpacing": "0.005em",
+                         "color": "rgb(250,250,247)",
+                         "whiteSpace": "pre-wrap"
+                        },
+                        "_m": {
+                         "fontSize": "24px"
+                        }
+                       }
+                      }
+                     },
+                     {
+                      "type": "text",
+                      "data": {
+                       "tagName": "p"
+                      },
+                      "text": "",
+                      "style": {
+                       "&": {
+                        "_": {
+                         "fontFamily": "'Noto Sans TC','PingFang TC','Hiragino Sans TC','Microsoft JhengHei',sans-serif",
+                         "fontSize": "14px",
+                         "lineHeight": "1.8",
+                         "color": "rgb(250,250,247)",
+                         "marginTop": "14px",
+                         "maxWidth": "430px"
+                        }
+                       }
+                      }
+                     }
+                    ]
+                   }
+                  ]
+                 }
+                ]
+               }
+              ]
+             },
+             {
+              "type": "div",
+              "data": {
+               "attrID": "sl-card-h-d"
+              },
+              "style": {
+               "&": {
+                "_": {
+                 "display": "flex",
+                 "justifyContent": "space-between",
+                 "alignItems": "baseline",
+                 "columnGap": "10px",
+                 "marginTop": "12px"
+                }
+               }
+              },
+              "children": [
+               {
+                "type": "text",
+                "data": {
+                 "tagName": "p"
+                },
+                "text": "fadeOver",
+                "style": {
+                 "&": {
+                  "_": {
+                   "color": {
+                    "token": "--mk-accent-ink"
+                   },
+                   "fontSize": "10px",
+                   "letterSpacing": "0.18em",
+                   "fontFamily": "'IBM Plex Mono',ui-monospace,SFMono-Regular,Menlo,Consolas,monospace",
+                   "fontWeight": "400"
+                  }
+                 }
+                }
+               },
+               {
+                "type": "text",
+                "data": {
+                 "tagName": "p"
+                },
+                "text": "FADEOVER",
+                "style": {
+                 "&": {
+                  "_": {
+                   "color": {
+                    "token": "--mk-faint"
+                   },
+                   "fontSize": "10px",
+                   "letterSpacing": "0.16em",
+                   "fontFamily": "'IBM Plex Mono',ui-monospace,SFMono-Regular,Menlo,Consolas,monospace",
+                   "fontWeight": "400"
+                  }
+                 }
+                }
+               }
+              ]
+             },
+             {
+              "type": "text",
+              "data": {
+               "tagName": "p"
+              },
+              "text": "新的那張疊上來。沒有空窗，收尾比 fadeOut 乾淨。",
+              "style": {
+               "&": {
+                "_": {
+                 "fontFamily": "'Noto Sans TC','PingFang TC','Hiragino Sans TC','Microsoft JhengHei',sans-serif",
+                 "fontSize": "13px",
+                 "lineHeight": "1.8",
+                 "color": {
+                  "token": "--mk-muted"
+                 },
+                 "marginTop": "8px"
+                }
+               }
+              }
+             }
+            ]
+           }
+          ]
+         },
+         {
+          "type": "div",
+          "data": {
+           "attrID": "sl-four-foot"
+          },
+          "style": {
+           "&": {
+            "_": {
+             "paddingTop": "64px"
+            }
+           }
+          },
+          "children": []
+         }
+        ]
+       }
+      ]
+     },
+     {
+      "type": "section",
+      "data": {
+       "attrID": "sl-car"
+      },
+      "style": {
+       "&": {
+        "_": {
+         "backgroundColor": {
+          "token": "--mk-paper"
+         },
+         "paddingLeft": "40px",
+         "paddingRight": "40px",
+         "fontFamily": "'Noto Sans TC','PingFang TC','Hiragino Sans TC','Microsoft JhengHei',sans-serif"
+        },
+        "_t": {
+         "paddingLeft": "28px",
+         "paddingRight": "28px"
+        },
+        "_m": {
+         "paddingLeft": "18px",
+         "paddingRight": "18px"
+        }
+       }
+      },
+      "children": [
+       {
+        "type": "div",
+        "data": {
+         "attrID": "sl-car-w"
+        },
+        "style": {
+         "&": {
+          "_": {
+           "width": "100%",
+           "maxWidth": "1240px",
+           "marginLeft": "auto",
+           "marginRight": "auto"
+          }
+         }
+        },
+        "children": [
+         {
+          "type": "div",
+          "data": {
+           "attrID": "sl-car-pad"
+          },
+          "style": {
+           "&": {
+            "_": {
+             "paddingTop": "60px"
+            }
+           }
+          },
+          "children": []
+         },
+         {
+          "type": "text",
+          "data": {
+           "tagName": "p"
+          },
+          "text": "CAROUSEL",
+          "style": {
+           "&": {
+            "_": {
+             "color": {
+              "token": "--mk-faint"
+             },
+             "fontSize": "10px",
+             "letterSpacing": "0.26em",
+             "fontFamily": "'IBM Plex Mono',ui-monospace,SFMono-Regular,Menlo,Consolas,monospace",
+             "fontWeight": "400"
+            }
+           }
+          }
+         },
+         {
+          "type": "text",
+          "data": {
+           "tagName": "h2"
+          },
+          "text": "輪轉模式：一次看得到好幾張。",
+          "style": {
+           "&": {
+            "_": {
+             "fontFamily": "'Space Grotesk','Noto Sans TC','PingFang TC','Microsoft JhengHei',sans-serif",
+             "fontWeight": "600",
+             "fontSize": "32px",
+             "lineHeight": "1.15",
+             "letterSpacing": "0.005em",
+             "color": {
+              "token": "--mk-ink"
+             },
+             "marginTop": "14px",
+             "whiteSpace": "pre-wrap"
+            },
+            "_m": {
+             "fontSize": "24px"
+            }
+           }
+          }
+         },
+         {
+          "type": "text",
+          "data": {
+           "tagName": "p"
+          },
+          "text": "isCarousel 做的是一件事：讓頭尾相接。實測過，它不會讓你一次看到多張——軌道是一個只有一個 slide 區域的 grid，不管是不是輪轉，每一張都占滿整個軌道寬。差別在於輪轉會在第一張前面先擺好一張（left 是負的），所以沒有「過不去的端點」，箭頭也就不會自己藏起來。",
+          "style": {
+           "&": {
+            "_": {
+             "fontFamily": "'Noto Sans TC','PingFang TC','Hiragino Sans TC','Microsoft JhengHei',sans-serif",
+             "fontSize": "14px",
+             "lineHeight": "1.9",
+             "color": {
+              "token": "--mk-muted"
+             },
+             "marginTop": "10px",
+             "maxWidth": "620px"
+            }
+           }
+          }
+         },
+         {
+          "type": "div",
+          "data": {
+           "attrID": "sl-car-gap"
+          },
+          "style": {
+           "&": {
+            "_": {
+             "paddingTop": "26px"
+            }
+           }
+          },
+          "children": []
+         },
+         {
+          "type": "slider",
+          "data": {
+           "attrID": "sl-carousel",
+           "animation": "slide",
+           "duration": "600",
+           "easing": "ease",
+           "isAutoplay": "1",
+           "autoplayDelay": "2400",
+           "autoplayLimit": "0",
+           "isCarousel": "1",
+           "defaultSlideIndex": "0",
+           "ariaLabel": "輪轉示範"
+          },
+          "style": {
+           "&": {
+            "_": {
+             "position": "relative",
+             "height": "180px",
+             "overflow": "hidden",
+             "backgroundColor": "rgb(22,24,28)"
+            },
+            "_m": {
+             "height": "150px"
+            }
+           }
+          },
+          "children": [
+           {
+            "type": "slider-slides",
+            "data": {
+             "attrID": "sl-carousel-track"
+            },
+            "children": [
+             {
+              "type": "slider-slide",
+              "data": {
+               "attrID": "sl-c-0",
+               "title": "WEB"
+              },
+              "style": {
+               "&": {
+                "_": {
+                 "backgroundColor": "rgb(22,24,28)",
+                 "display": "flex",
+                 "flexDirection": "column",
+                 "justifyContent": "space-between",
+                 "alignItems": "flex-start",
+                 "height": "100%",
+                 "paddingTop": "34px",
+                 "paddingBottom": "74px",
+                 "paddingLeft": "36px",
+                 "paddingRight": "36px"
+                },
+                "_m": {
+                 "paddingTop": "22px",
+                 "paddingBottom": "58px",
+                 "paddingLeft": "20px",
+                 "paddingRight": "20px"
+                }
+               }
+              },
+              "children": [
+               {
+                "type": "text",
+                "data": {
+                 "tagName": "p"
+                },
+                "text": "01",
+                "style": {
+                 "&": {
+                  "_": {
+                   "color": "rgb(250,250,247)",
+                   "fontSize": "11px",
+                   "letterSpacing": "0.3em",
+                   "fontFamily": "'IBM Plex Mono',ui-monospace,SFMono-Regular,Menlo,Consolas,monospace",
+                   "fontWeight": "400"
+                  }
+                 }
+                }
+               },
+               {
+                "type": "div",
+                "data": {
+                 "attrID": "sl-c-0-body"
+                },
+                "style": {
+                 "&": {
+                  "_": {
+                   "marginTop": "18px"
+                  }
+                 }
+                },
+                "children": [
+                 {
+                  "type": "text",
+                  "data": {
+                   "tagName": "p"
+                  },
+                  "text": "WEB",
+                  "style": {
+                   "&": {
+                    "_": {
+                     "fontFamily": "'Space Grotesk','Noto Sans TC','PingFang TC','Microsoft JhengHei',sans-serif",
+                     "fontWeight": "600",
+                     "fontSize": "22px",
+                     "lineHeight": "1.04",
+                     "letterSpacing": "0.005em",
+                     "color": "rgb(250,250,247)",
+                     "whiteSpace": "pre-wrap"
+                    },
+                    "_m": {
+                     "fontSize": "20px"
+                    }
+                   }
+                  }
+                 },
+                 {
+                  "type": "text",
+                  "data": {
+                   "tagName": "p"
+                  },
+                  "text": "",
+                  "style": {
+                   "&": {
+                    "_": {
+                     "fontFamily": "'Noto Sans TC','PingFang TC','Hiragino Sans TC','Microsoft JhengHei',sans-serif",
+                     "fontSize": "14px",
+                     "lineHeight": "1.8",
+                     "color": "rgb(250,250,247)",
+                     "marginTop": "14px",
+                     "maxWidth": "430px"
+                    }
+                   }
+                  }
+                 }
+                ]
+               }
+              ]
+             },
+             {
+              "type": "slider-slide",
+              "data": {
+               "attrID": "sl-c-1",
+               "title": "AI"
+              },
+              "style": {
+               "&": {
+                "_": {
+                 "backgroundColor": "rgb(31,58,95)",
+                 "display": "flex",
+                 "flexDirection": "column",
+                 "justifyContent": "space-between",
+                 "alignItems": "flex-start",
+                 "height": "100%",
+                 "paddingTop": "34px",
+                 "paddingBottom": "74px",
+                 "paddingLeft": "36px",
+                 "paddingRight": "36px"
+                },
+                "_m": {
+                 "paddingTop": "22px",
+                 "paddingBottom": "58px",
+                 "paddingLeft": "20px",
+                 "paddingRight": "20px"
+                }
+               }
+              },
+              "children": [
+               {
+                "type": "text",
+                "data": {
+                 "tagName": "p"
+                },
+                "text": "02",
+                "style": {
+                 "&": {
+                  "_": {
+                   "color": "rgb(250,250,247)",
+                   "fontSize": "11px",
+                   "letterSpacing": "0.3em",
+                   "fontFamily": "'IBM Plex Mono',ui-monospace,SFMono-Regular,Menlo,Consolas,monospace",
+                   "fontWeight": "400"
+                  }
+                 }
+                }
+               },
+               {
+                "type": "div",
+                "data": {
+                 "attrID": "sl-c-1-body"
+                },
+                "style": {
+                 "&": {
+                  "_": {
+                   "marginTop": "18px"
+                  }
+                 }
+                },
+                "children": [
+                 {
+                  "type": "text",
+                  "data": {
+                   "tagName": "p"
+                  },
+                  "text": "AI",
+                  "style": {
+                   "&": {
+                    "_": {
+                     "fontFamily": "'Space Grotesk','Noto Sans TC','PingFang TC','Microsoft JhengHei',sans-serif",
+                     "fontWeight": "600",
+                     "fontSize": "22px",
+                     "lineHeight": "1.04",
+                     "letterSpacing": "0.005em",
+                     "color": "rgb(250,250,247)",
+                     "whiteSpace": "pre-wrap"
+                    },
+                    "_m": {
+                     "fontSize": "20px"
+                    }
+                   }
+                  }
+                 },
+                 {
+                  "type": "text",
+                  "data": {
+                   "tagName": "p"
+                  },
+                  "text": "",
+                  "style": {
+                   "&": {
+                    "_": {
+                     "fontFamily": "'Noto Sans TC','PingFang TC','Hiragino Sans TC','Microsoft JhengHei',sans-serif",
+                     "fontSize": "14px",
+                     "lineHeight": "1.8",
+                     "color": "rgb(250,250,247)",
+                     "marginTop": "14px",
+                     "maxWidth": "430px"
+                    }
+                   }
+                  }
+                 }
+                ]
+               }
+              ]
+             },
+             {
+              "type": "slider-slide",
+              "data": {
+               "attrID": "sl-c-2",
+               "title": "ERP"
+              },
+              "style": {
+               "&": {
+                "_": {
+                 "backgroundColor": "rgb(191,68,40)",
+                 "display": "flex",
+                 "flexDirection": "column",
+                 "justifyContent": "space-between",
+                 "alignItems": "flex-start",
+                 "height": "100%",
+                 "paddingTop": "34px",
+                 "paddingBottom": "74px",
+                 "paddingLeft": "36px",
+                 "paddingRight": "36px"
+                },
+                "_m": {
+                 "paddingTop": "22px",
+                 "paddingBottom": "58px",
+                 "paddingLeft": "20px",
+                 "paddingRight": "20px"
+                }
+               }
+              },
+              "children": [
+               {
+                "type": "text",
+                "data": {
+                 "tagName": "p"
+                },
+                "text": "03",
+                "style": {
+                 "&": {
+                  "_": {
+                   "color": "rgb(250,250,247)",
+                   "fontSize": "11px",
+                   "letterSpacing": "0.3em",
+                   "fontFamily": "'IBM Plex Mono',ui-monospace,SFMono-Regular,Menlo,Consolas,monospace",
+                   "fontWeight": "400"
+                  }
+                 }
+                }
+               },
+               {
+                "type": "div",
+                "data": {
+                 "attrID": "sl-c-2-body"
+                },
+                "style": {
+                 "&": {
+                  "_": {
+                   "marginTop": "18px"
+                  }
+                 }
+                },
+                "children": [
+                 {
+                  "type": "text",
+                  "data": {
+                   "tagName": "p"
+                  },
+                  "text": "ERP",
+                  "style": {
+                   "&": {
+                    "_": {
+                     "fontFamily": "'Space Grotesk','Noto Sans TC','PingFang TC','Microsoft JhengHei',sans-serif",
+                     "fontWeight": "600",
+                     "fontSize": "22px",
+                     "lineHeight": "1.04",
+                     "letterSpacing": "0.005em",
+                     "color": "rgb(250,250,247)",
+                     "whiteSpace": "pre-wrap"
+                    },
+                    "_m": {
+                     "fontSize": "20px"
+                    }
+                   }
+                  }
+                 },
+                 {
+                  "type": "text",
+                  "data": {
+                   "tagName": "p"
+                  },
+                  "text": "",
+                  "style": {
+                   "&": {
+                    "_": {
+                     "fontFamily": "'Noto Sans TC','PingFang TC','Hiragino Sans TC','Microsoft JhengHei',sans-serif",
+                     "fontSize": "14px",
+                     "lineHeight": "1.8",
+                     "color": "rgb(250,250,247)",
+                     "marginTop": "14px",
+                     "maxWidth": "430px"
+                    }
+                   }
+                  }
+                 }
+                ]
+               }
+              ]
+             },
+             {
+              "type": "slider-slide",
+              "data": {
+               "attrID": "sl-c-3",
+               "title": "SEO"
+              },
+              "style": {
+               "&": {
+                "_": {
+                 "backgroundColor": "rgb(90,92,97)",
+                 "display": "flex",
+                 "flexDirection": "column",
+                 "justifyContent": "space-between",
+                 "alignItems": "flex-start",
+                 "height": "100%",
+                 "paddingTop": "34px",
+                 "paddingBottom": "74px",
+                 "paddingLeft": "36px",
+                 "paddingRight": "36px"
+                },
+                "_m": {
+                 "paddingTop": "22px",
+                 "paddingBottom": "58px",
+                 "paddingLeft": "20px",
+                 "paddingRight": "20px"
+                }
+               }
+              },
+              "children": [
+               {
+                "type": "text",
+                "data": {
+                 "tagName": "p"
+                },
+                "text": "04",
+                "style": {
+                 "&": {
+                  "_": {
+                   "color": "rgb(250,250,247)",
+                   "fontSize": "11px",
+                   "letterSpacing": "0.3em",
+                   "fontFamily": "'IBM Plex Mono',ui-monospace,SFMono-Regular,Menlo,Consolas,monospace",
+                   "fontWeight": "400"
+                  }
+                 }
+                }
+               },
+               {
+                "type": "div",
+                "data": {
+                 "attrID": "sl-c-3-body"
+                },
+                "style": {
+                 "&": {
+                  "_": {
+                   "marginTop": "18px"
+                  }
+                 }
+                },
+                "children": [
+                 {
+                  "type": "text",
+                  "data": {
+                   "tagName": "p"
+                  },
+                  "text": "SEO",
+                  "style": {
+                   "&": {
+                    "_": {
+                     "fontFamily": "'Space Grotesk','Noto Sans TC','PingFang TC','Microsoft JhengHei',sans-serif",
+                     "fontWeight": "600",
+                     "fontSize": "22px",
+                     "lineHeight": "1.04",
+                     "letterSpacing": "0.005em",
+                     "color": "rgb(250,250,247)",
+                     "whiteSpace": "pre-wrap"
+                    },
+                    "_m": {
+                     "fontSize": "20px"
+                    }
+                   }
+                  }
+                 },
+                 {
+                  "type": "text",
+                  "data": {
+                   "tagName": "p"
+                  },
+                  "text": "",
+                  "style": {
+                   "&": {
+                    "_": {
+                     "fontFamily": "'Noto Sans TC','PingFang TC','Hiragino Sans TC','Microsoft JhengHei',sans-serif",
+                     "fontSize": "14px",
+                     "lineHeight": "1.8",
+                     "color": "rgb(250,250,247)",
+                     "marginTop": "14px",
+                     "maxWidth": "430px"
+                    }
+                   }
+                  }
+                 }
+                ]
+               }
+              ]
+             },
+             {
+              "type": "slider-slide",
+              "data": {
+               "attrID": "sl-c-4",
+               "title": "SHOP"
+              },
+              "style": {
+               "&": {
+                "_": {
+                 "backgroundColor": "rgb(22,24,28)",
+                 "display": "flex",
+                 "flexDirection": "column",
+                 "justifyContent": "space-between",
+                 "alignItems": "flex-start",
+                 "height": "100%",
+                 "paddingTop": "34px",
+                 "paddingBottom": "74px",
+                 "paddingLeft": "36px",
+                 "paddingRight": "36px"
+                },
+                "_m": {
+                 "paddingTop": "22px",
+                 "paddingBottom": "58px",
+                 "paddingLeft": "20px",
+                 "paddingRight": "20px"
+                }
+               }
+              },
+              "children": [
+               {
+                "type": "text",
+                "data": {
+                 "tagName": "p"
+                },
+                "text": "05",
+                "style": {
+                 "&": {
+                  "_": {
+                   "color": "rgb(250,250,247)",
+                   "fontSize": "11px",
+                   "letterSpacing": "0.3em",
+                   "fontFamily": "'IBM Plex Mono',ui-monospace,SFMono-Regular,Menlo,Consolas,monospace",
+                   "fontWeight": "400"
+                  }
+                 }
+                }
+               },
+               {
+                "type": "div",
+                "data": {
+                 "attrID": "sl-c-4-body"
+                },
+                "style": {
+                 "&": {
+                  "_": {
+                   "marginTop": "18px"
+                  }
+                 }
+                },
+                "children": [
+                 {
+                  "type": "text",
+                  "data": {
+                   "tagName": "p"
+                  },
+                  "text": "SHOP",
+                  "style": {
+                   "&": {
+                    "_": {
+                     "fontFamily": "'Space Grotesk','Noto Sans TC','PingFang TC','Microsoft JhengHei',sans-serif",
+                     "fontWeight": "600",
+                     "fontSize": "22px",
+                     "lineHeight": "1.04",
+                     "letterSpacing": "0.005em",
+                     "color": "rgb(250,250,247)",
+                     "whiteSpace": "pre-wrap"
+                    },
+                    "_m": {
+                     "fontSize": "20px"
+                    }
+                   }
+                  }
+                 },
+                 {
+                  "type": "text",
+                  "data": {
+                   "tagName": "p"
+                  },
+                  "text": "",
+                  "style": {
+                   "&": {
+                    "_": {
+                     "fontFamily": "'Noto Sans TC','PingFang TC','Hiragino Sans TC','Microsoft JhengHei',sans-serif",
+                     "fontSize": "14px",
+                     "lineHeight": "1.8",
+                     "color": "rgb(250,250,247)",
+                     "marginTop": "14px",
+                     "maxWidth": "430px"
+                    }
+                   }
+                  }
+                 }
+                ]
+               }
+              ]
+             },
+             {
+              "type": "slider-slide",
+              "data": {
+               "attrID": "sl-c-5",
+               "title": "AUTOMATION"
+              },
+              "style": {
+               "&": {
+                "_": {
+                 "backgroundColor": "rgb(31,58,95)",
+                 "display": "flex",
+                 "flexDirection": "column",
+                 "justifyContent": "space-between",
+                 "alignItems": "flex-start",
+                 "height": "100%",
+                 "paddingTop": "34px",
+                 "paddingBottom": "74px",
+                 "paddingLeft": "36px",
+                 "paddingRight": "36px"
+                },
+                "_m": {
+                 "paddingTop": "22px",
+                 "paddingBottom": "58px",
+                 "paddingLeft": "20px",
+                 "paddingRight": "20px"
+                }
+               }
+              },
+              "children": [
+               {
+                "type": "text",
+                "data": {
+                 "tagName": "p"
+                },
+                "text": "06",
+                "style": {
+                 "&": {
+                  "_": {
+                   "color": "rgb(250,250,247)",
+                   "fontSize": "11px",
+                   "letterSpacing": "0.3em",
+                   "fontFamily": "'IBM Plex Mono',ui-monospace,SFMono-Regular,Menlo,Consolas,monospace",
+                   "fontWeight": "400"
+                  }
+                 }
+                }
+               },
+               {
+                "type": "div",
+                "data": {
+                 "attrID": "sl-c-5-body"
+                },
+                "style": {
+                 "&": {
+                  "_": {
+                   "marginTop": "18px"
+                  }
+                 }
+                },
+                "children": [
+                 {
+                  "type": "text",
+                  "data": {
+                   "tagName": "p"
+                  },
+                  "text": "AUTOMATION",
+                  "style": {
+                   "&": {
+                    "_": {
+                     "fontFamily": "'Space Grotesk','Noto Sans TC','PingFang TC','Microsoft JhengHei',sans-serif",
+                     "fontWeight": "600",
+                     "fontSize": "22px",
+                     "lineHeight": "1.04",
+                     "letterSpacing": "0.005em",
+                     "color": "rgb(250,250,247)",
+                     "whiteSpace": "pre-wrap"
+                    },
+                    "_m": {
+                     "fontSize": "20px"
+                    }
+                   }
+                  }
+                 },
+                 {
+                  "type": "text",
+                  "data": {
+                   "tagName": "p"
+                  },
+                  "text": "",
+                  "style": {
+                   "&": {
+                    "_": {
+                     "fontFamily": "'Noto Sans TC','PingFang TC','Hiragino Sans TC','Microsoft JhengHei',sans-serif",
+                     "fontSize": "14px",
+                     "lineHeight": "1.8",
+                     "color": "rgb(250,250,247)",
+                     "marginTop": "14px",
+                     "maxWidth": "430px"
+                    }
+                   }
+                  }
+                 }
+                ]
+               }
+              ]
+             }
+            ]
+           },
+           {
+            "type": "div",
+            "data": {
+             "attrID": "sl-carousel-chrome"
+            },
+            "style": {
+             "&": {
+              "_": {
+               "position": "absolute",
+               "left": "0px",
+               "right": "0px",
+               "bottom": "0px",
+               "display": "flex",
+               "justifyContent": "space-between",
+               "alignItems": "center",
+               "columnGap": "16px",
+               "paddingLeft": "36px",
+               "paddingRight": "36px",
+               "paddingBottom": "26px"
+              },
+              "_m": {
+               "paddingLeft": "20px",
+               "paddingRight": "20px",
+               "paddingBottom": "18px"
+              }
+             }
+            },
+            "children": [
+             {
+              "type": "slider-navigation",
+              "data": {
+               "attrID": "sl-carousel-nav"
+              },
+              "style": {
+               "&": {
+                "_": {
+                 "display": "flex",
+                 "columnGap": "8px",
+                 "alignItems": "center"
+                }
+               }
+              },
+              "children": [
+               {
+                "type": "slider-navigation-bullet",
+                "data": {
+                 "attrID": "sl-carousel-nav-dot"
+                },
+                "style": {
+                 "&": {
+                  "_": {
+                   "width": "22px",
+                   "height": "3px",
+                   "cursor": "pointer",
+                   "backgroundColor": "rgba(250,250,247,.38)"
+                  }
+                 },
+                 "hover": {
+                  "_": {
+                   "backgroundColor": "rgb(250,250,247)"
+                  }
+                 },
+                 "focus-visible": {
+                  "_": {
+                   "customDeclarations": "outline:2px solid rgb(255,90,54);outline-offset:3px;"
+                  }
+                 }
+                }
+               }
+              ]
+             },
+             {
+              "type": "div",
+              "data": {
+               "attrID": "sl-carousel-arrows"
+              },
+              "style": {
+               "&": {
+                "_": {
+                 "display": "flex",
+                 "columnGap": "14px",
+                 "alignItems": "center"
+                }
+               }
+              },
+              "children": [
+               {
+                "type": "slider-arrow-left",
+                "data": {
+                 "attrID": "sl-left"
+                },
+                "style": {
+                 "&": {
+                  "_": {
+                   "color": "rgb(250,250,247)",
+                   "cursor": "pointer",
+                   "width": "9px",
+                   "height": "9px",
+                   "marginTop": "4px",
+                   "marginBottom": "4px",
+                   "marginLeft": "10px",
+                   "marginRight": "10px",
+                   "backgroundColor": "rgba(0,0,0,0)",
+                   "transform": [
+                    {
+                     "type": "rotateZ",
+                     "rotateZOptions": {
+                      "value": "-135deg"
+                     },
+                     "uuid": "4793095f-1eba-4abb-88b8-889972effe9c"
+                    }
+                   ],
+                   "customDeclarations": "border-top:1.5px solid currentColor;border-right:1.5px solid currentColor;"
+                  }
+                 },
+                 "hover": {
+                  "_": {
+                   "color": "rgb(255,90,54)"
+                  }
+                 },
+                 "focus-visible": {
+                  "_": {
+                   "customDeclarations": "outline:2px solid rgb(255,90,54);outline-offset:3px;"
+                  }
+                 }
+                }
+               },
+               {
+                "type": "slider-arrow-right",
+                "data": {
+                 "attrID": "sl-right"
+                },
+                "style": {
+                 "&": {
+                  "_": {
+                   "color": "rgb(250,250,247)",
+                   "cursor": "pointer",
+                   "width": "9px",
+                   "height": "9px",
+                   "marginTop": "4px",
+                   "marginBottom": "4px",
+                   "marginLeft": "10px",
+                   "marginRight": "10px",
+                   "backgroundColor": "rgba(0,0,0,0)",
+                   "transform": [
+                    {
+                     "type": "rotateZ",
+                     "rotateZOptions": {
+                      "value": "45deg"
+                     },
+                     "uuid": "10c6d2f8-3d87-4a83-a9db-1d5ca3cea8b0"
+                    }
+                   ],
+                   "customDeclarations": "border-top:1.5px solid currentColor;border-right:1.5px solid currentColor;"
+                  }
+                 },
+                 "hover": {
+                  "_": {
+                   "color": "rgb(255,90,54)"
+                  }
+                 },
+                 "focus-visible": {
+                  "_": {
+                   "customDeclarations": "outline:2px solid rgb(255,90,54);outline-offset:3px;"
+                  }
+                 }
+                }
+               }
+              ]
+             }
+            ]
+           }
+          ]
+         },
+         {
+          "type": "div",
+          "data": {
+           "attrID": "sl-car-foot"
+          },
+          "style": {
+           "&": {
+            "_": {
+             "paddingTop": "60px"
+            }
+           }
+          },
+          "children": []
+         }
+        ]
+       }
+      ]
+     },
+     {
+      "type": "section",
+      "data": {
+       "attrID": "sl-notes"
+      },
+      "style": {
+       "&": {
+        "_": {
+         "backgroundColor": {
+          "token": "--mk-paper"
+         },
+         "paddingLeft": "40px",
+         "paddingRight": "40px",
+         "fontFamily": "'Noto Sans TC','PingFang TC','Hiragino Sans TC','Microsoft JhengHei',sans-serif"
+        },
+        "_t": {
+         "paddingLeft": "28px",
+         "paddingRight": "28px"
+        },
+        "_m": {
+         "paddingLeft": "18px",
+         "paddingRight": "18px"
+        }
+       }
+      },
+      "children": [
+       {
+        "type": "div",
+        "data": {
+         "attrID": "sl-notes-w"
+        },
+        "style": {
+         "&": {
+          "_": {
+           "width": "100%",
+           "maxWidth": "1240px",
+           "marginLeft": "auto",
+           "marginRight": "auto"
+          }
+         }
+        },
+        "children": [
+         {
+          "type": "div",
+          "data": {
+           "attrID": "sl-notes-inner"
+          },
+          "style": {
+           "&": {
+            "_": {
+             "paddingTop": "54px",
+             "paddingBottom": "84px",
+             "customDeclarations": "border-top:1px solid rgba(22,24,28,.16);"
+            }
+           }
+          },
+          "children": [
+           {
+            "type": "text",
+            "data": {
+             "tagName": "p"
+            },
+            "text": "WHAT THE MARKUP DOES NOT TELL YOU",
+            "style": {
+             "&": {
+              "_": {
+               "color": {
+                "token": "--mk-faint"
+               },
+               "fontSize": "10px",
+               "letterSpacing": "0.26em",
+               "fontFamily": "'IBM Plex Mono',ui-monospace,SFMono-Regular,Menlo,Consolas,monospace",
+               "fontWeight": "400"
+              }
+             }
+            }
+           },
+           {
+            "type": "div",
+            "data": {
+             "attrID": "sl-notes-grid-w"
+            },
+            "style": {
+             "&": {
+              "_": {
+               "marginTop": "22px"
+              }
+             }
+            },
+            "children": [
+             {
+              "type": "div",
+              "data": {
+               "attrID": "sl-notes-grid"
+              },
+              "style": {
+               "&": {
+                "_": {
+                 "display": "grid",
+                 "gridCols": "repeat(3, 1fr)",
+                 "columnGap": "22px",
+                 "rowGap": "22px"
+                },
+                "_t": {
+                 "gridCols": "repeat(2, 1fr)"
+                },
+                "_m": {
+                 "gridCols": "repeat(1, 1fr)"
+                }
+               }
+              },
+              "children": [
+               {
+                "type": "div",
+                "data": {
+                 "attrID": "sl-note-1"
+                },
+                "style": {
+                 "&": {
+                  "_": {}
+                 }
+                },
+                "children": [
+                 {
+                  "type": "text",
+                  "data": {
+                   "tagName": "h3"
+                  },
+                  "text": "小圓點是一個模板",
+                  "style": {
+                   "&": {
+                    "_": {
+                     "fontFamily": "'Space Grotesk','Noto Sans TC','PingFang TC','Microsoft JhengHei',sans-serif",
+                     "fontWeight": "600",
+                     "fontSize": "17px",
+                     "lineHeight": "1.3",
+                     "color": {
+                      "token": "--mk-ink"
+                     },
+                     "whiteSpace": "pre-wrap"
+                    }
+                   }
+                  }
+                 },
+                 {
+                  "type": "text",
+                  "data": {
+                   "tagName": "p"
+                  },
+                  "text": "你只寫一個 slider-navigation-bullet，Mosaic 會按投影片數量複製它。所有複製品共用同一個 id，差別只在 aria-label——而那個標籤是從每張投影片的 title 來的。所以別用 attrID 找小圓點，要用位置。",
+                  "style": {
+                   "&": {
+                    "_": {
+                     "fontFamily": "'Noto Sans TC','PingFang TC','Hiragino Sans TC','Microsoft JhengHei',sans-serif",
+                     "fontSize": "13px",
+                     "lineHeight": "1.85",
+                     "color": {
+                      "token": "--mk-muted"
+                     },
+                     "marginTop": "10px"
+                    }
+                   }
+                  }
+                 },
+                 {
+                  "type": "div",
+                  "data": {
+                   "attrID": "sl-note-1-s"
+                  },
+                  "style": {
+                   "&": {
+                    "_": {
+                     "marginTop": "14px"
+                    }
+                   }
+                  },
+                  "children": [
+                   {
+                    "type": "div",
+                    "data": {
+                     "attrID": "sl-spec-row"
+                    },
+                    "style": {
+                     "&": {
+                      "_": {
+                       "display": "flex",
+                       "columnGap": "12px",
+                       "alignItems": "baseline",
+                       "paddingTop": "5px",
+                       "paddingBottom": "5px",
+                       "customDeclarations": "border-top:1px solid rgba(22,24,28,.16);"
+                      }
+                     }
+                    },
+                    "children": [
+                     {
+                      "type": "div",
+                      "data": {
+                       "attrID": "sl-spec-k"
+                      },
+                      "style": {
+                       "&": {
+                        "_": {
+                         "width": "86px",
+                         "flexSizing": {
+                          "type": "none"
+                         }
+                        }
+                       }
+                      },
+                      "children": [
+                       {
+                        "type": "text",
+                        "data": {
+                         "tagName": "p"
+                        },
+                        "text": "寫了",
+                        "style": {
+                         "&": {
+                          "_": {
+                           "color": {
+                            "token": "--mk-faint"
+                           },
+                           "fontSize": "10px",
+                           "letterSpacing": "0.16em",
+                           "fontFamily": "'IBM Plex Mono',ui-monospace,SFMono-Regular,Menlo,Consolas,monospace",
+                           "fontWeight": "400"
+                          }
+                         }
+                        }
+                       }
+                      ]
+                     },
+                     {
+                      "type": "div",
+                      "data": {
+                       "attrID": "sl-spec-v"
+                      },
+                      "style": {
+                       "&": {
+                        "_": {
+                         "flexSizing": {
+                          "type": "grow"
+                         }
+                        }
+                       }
+                      },
+                      "children": [
+                       {
+                        "type": "text",
+                        "data": {
+                         "tagName": "p"
+                        },
+                        "text": "1 個 bullet",
+                        "style": {
+                         "&": {
+                          "_": {
+                           "color": {
+                            "token": "--mk-ink"
+                           },
+                           "fontSize": "10px",
+                           "letterSpacing": "0.04em",
+                           "fontFamily": "'IBM Plex Mono',ui-monospace,SFMono-Regular,Menlo,Consolas,monospace",
+                           "fontWeight": "400"
+                          }
+                         }
+                        }
+                       }
+                      ]
+                     }
+                    ]
+                   },
+                   {
+                    "type": "div",
+                    "data": {
+                     "attrID": "sl-spec-row"
+                    },
+                    "style": {
+                     "&": {
+                      "_": {
+                       "display": "flex",
+                       "columnGap": "12px",
+                       "alignItems": "baseline",
+                       "paddingTop": "5px",
+                       "paddingBottom": "5px",
+                       "customDeclarations": "border-top:1px solid rgba(22,24,28,.16);"
+                      }
+                     }
+                    },
+                    "children": [
+                     {
+                      "type": "div",
+                      "data": {
+                       "attrID": "sl-spec-k"
+                      },
+                      "style": {
+                       "&": {
+                        "_": {
+                         "width": "86px",
+                         "flexSizing": {
+                          "type": "none"
+                         }
+                        }
+                       }
+                      },
+                      "children": [
+                       {
+                        "type": "text",
+                        "data": {
+                         "tagName": "p"
+                        },
+                        "text": "得到",
+                        "style": {
+                         "&": {
+                          "_": {
+                           "color": {
+                            "token": "--mk-faint"
+                           },
+                           "fontSize": "10px",
+                           "letterSpacing": "0.16em",
+                           "fontFamily": "'IBM Plex Mono',ui-monospace,SFMono-Regular,Menlo,Consolas,monospace",
+                           "fontWeight": "400"
+                          }
+                         }
+                        }
+                       }
+                      ]
+                     },
+                     {
+                      "type": "div",
+                      "data": {
+                       "attrID": "sl-spec-v"
+                      },
+                      "style": {
+                       "&": {
+                        "_": {
+                         "flexSizing": {
+                          "type": "grow"
+                         }
+                        }
+                       }
+                      },
+                      "children": [
+                       {
+                        "type": "text",
+                        "data": {
+                         "tagName": "p"
+                        },
+                        "text": "4 個（每張一個）",
+                        "style": {
+                         "&": {
+                          "_": {
+                           "color": {
+                            "token": "--mk-ink"
+                           },
+                           "fontSize": "10px",
+                           "letterSpacing": "0.04em",
+                           "fontFamily": "'IBM Plex Mono',ui-monospace,SFMono-Regular,Menlo,Consolas,monospace",
+                           "fontWeight": "400"
+                          }
+                         }
+                        }
+                       }
+                      ]
+                     }
+                    ]
+                   }
+                  ]
+                 }
+                ]
+               },
+               {
+                "type": "div",
+                "data": {
+                 "attrID": "sl-note-2"
+                },
+                "style": {
+                 "&": {
+                  "_": {}
+                 }
+                },
+                "children": [
+                 {
+                  "type": "text",
+                  "data": {
+                   "tagName": "h3"
+                  },
+                  "text": "箭頭會自己藏起來",
+                  "style": {
+                   "&": {
+                    "_": {
+                     "fontFamily": "'Space Grotesk','Noto Sans TC','PingFang TC','Microsoft JhengHei',sans-serif",
+                     "fontWeight": "600",
+                     "fontSize": "17px",
+                     "lineHeight": "1.3",
+                     "color": {
+                      "token": "--mk-ink"
+                     },
+                     "whiteSpace": "pre-wrap"
+                    }
+                   }
+                  }
+                 },
+                 {
+                  "type": "text",
+                  "data": {
+                   "tagName": "p"
+                  },
+                  "text": "在第一張時向前箭頭會拿到 m-slider-arrow--hidden，最後一張時輪到向後箭頭，輪轉模式則兩者都不會。測試時要記得：自動播放停在最後一張之後，向後箭頭是「合法地消失」，不是壞了。",
+                  "style": {
+                   "&": {
+                    "_": {
+                     "fontFamily": "'Noto Sans TC','PingFang TC','Hiragino Sans TC','Microsoft JhengHei',sans-serif",
+                     "fontSize": "13px",
+                     "lineHeight": "1.85",
+                     "color": {
+                      "token": "--mk-muted"
+                     },
+                     "marginTop": "10px"
+                    }
+                   }
+                  }
+                 },
+                 {
+                  "type": "div",
+                  "data": {
+                   "attrID": "sl-note-2-s"
+                  },
+                  "style": {
+                   "&": {
+                    "_": {
+                     "marginTop": "14px"
+                    }
+                   }
+                  },
+                  "children": [
+                   {
+                    "type": "div",
+                    "data": {
+                     "attrID": "sl-spec-row"
+                    },
+                    "style": {
+                     "&": {
+                      "_": {
+                       "display": "flex",
+                       "columnGap": "12px",
+                       "alignItems": "baseline",
+                       "paddingTop": "5px",
+                       "paddingBottom": "5px",
+                       "customDeclarations": "border-top:1px solid rgba(22,24,28,.16);"
+                      }
+                     }
+                    },
+                    "children": [
+                     {
+                      "type": "div",
+                      "data": {
+                       "attrID": "sl-spec-k"
+                      },
+                      "style": {
+                       "&": {
+                        "_": {
+                         "width": "86px",
+                         "flexSizing": {
+                          "type": "none"
+                         }
+                        }
+                       }
+                      },
+                      "children": [
+                       {
+                        "type": "text",
+                        "data": {
+                         "tagName": "p"
+                        },
+                        "text": "狀態",
+                        "style": {
+                         "&": {
+                          "_": {
+                           "color": {
+                            "token": "--mk-faint"
+                           },
+                           "fontSize": "10px",
+                           "letterSpacing": "0.16em",
+                           "fontFamily": "'IBM Plex Mono',ui-monospace,SFMono-Regular,Menlo,Consolas,monospace",
+                           "fontWeight": "400"
+                          }
+                         }
+                        }
+                       }
+                      ]
+                     },
+                     {
+                      "type": "div",
+                      "data": {
+                       "attrID": "sl-spec-v"
+                      },
+                      "style": {
+                       "&": {
+                        "_": {
+                         "flexSizing": {
+                          "type": "grow"
+                         }
+                        }
+                       }
+                      },
+                      "children": [
+                       {
+                        "type": "text",
+                        "data": {
+                         "tagName": "p"
+                        },
+                        "text": "___arrow_hidden",
+                        "style": {
+                         "&": {
+                          "_": {
+                           "color": {
+                            "token": "--mk-ink"
+                           },
+                           "fontSize": "10px",
+                           "letterSpacing": "0.04em",
+                           "fontFamily": "'IBM Plex Mono',ui-monospace,SFMono-Regular,Menlo,Consolas,monospace",
+                           "fontWeight": "400"
+                          }
+                         }
+                        }
+                       }
+                      ]
+                     }
+                    ]
+                   },
+                   {
+                    "type": "div",
+                    "data": {
+                     "attrID": "sl-spec-row"
+                    },
+                    "style": {
+                     "&": {
+                      "_": {
+                       "display": "flex",
+                       "columnGap": "12px",
+                       "alignItems": "baseline",
+                       "paddingTop": "5px",
+                       "paddingBottom": "5px",
+                       "customDeclarations": "border-top:1px solid rgba(22,24,28,.16);"
+                      }
+                     }
+                    },
+                    "children": [
+                     {
+                      "type": "div",
+                      "data": {
+                       "attrID": "sl-spec-k"
+                      },
+                      "style": {
+                       "&": {
+                        "_": {
+                         "width": "86px",
+                         "flexSizing": {
+                          "type": "none"
+                         }
+                        }
+                       }
+                      },
+                      "children": [
+                       {
+                        "type": "text",
+                        "data": {
+                         "tagName": "p"
+                        },
+                        "text": "可設計",
+                        "style": {
+                         "&": {
+                          "_": {
+                           "color": {
+                            "token": "--mk-faint"
+                           },
+                           "fontSize": "10px",
+                           "letterSpacing": "0.16em",
+                           "fontFamily": "'IBM Plex Mono',ui-monospace,SFMono-Regular,Menlo,Consolas,monospace",
+                           "fontWeight": "400"
+                          }
+                         }
+                        }
+                       }
+                      ]
+                     },
+                     {
+                      "type": "div",
+                      "data": {
+                       "attrID": "sl-spec-v"
+                      },
+                      "style": {
+                       "&": {
+                        "_": {
+                         "flexSizing": {
+                          "type": "grow"
+                         }
+                        }
+                       }
+                      },
+                      "children": [
+                       {
+                        "type": "text",
+                        "data": {
+                         "tagName": "p"
+                        },
+                        "text": "是，是真正的樣式狀態",
+                        "style": {
+                         "&": {
+                          "_": {
+                           "color": {
+                            "token": "--mk-ink"
+                           },
+                           "fontSize": "10px",
+                           "letterSpacing": "0.04em",
+                           "fontFamily": "'IBM Plex Mono',ui-monospace,SFMono-Regular,Menlo,Consolas,monospace",
+                           "fontWeight": "400"
+                          }
+                         }
+                        }
+                       }
+                      ]
+                     }
+                    ]
+                   }
+                  ]
+                 }
+                ]
+               },
+               {
+                "type": "div",
+                "data": {
+                 "attrID": "sl-note-3"
+                },
+                "style": {
+                 "&": {
+                  "_": {}
+                 }
+                },
+                "children": [
+                 {
+                  "type": "text",
+                  "data": {
+                   "tagName": "h3"
+                  },
+                  "text": "減少動態是它自己處理的",
+                  "style": {
+                   "&": {
+                    "_": {
+                     "fontFamily": "'Space Grotesk','Noto Sans TC','PingFang TC','Microsoft JhengHei',sans-serif",
+                     "fontWeight": "600",
+                     "fontSize": "17px",
+                     "lineHeight": "1.3",
+                     "color": {
+                      "token": "--mk-ink"
+                     },
+                     "whiteSpace": "pre-wrap"
+                    }
+                   }
+                  }
+                 },
+                 {
+                  "type": "text",
+                  "data": {
+                   "tagName": "p"
+                  },
+                  "text": "作業系統設成減少動態時，Mosaic 停掉自動播放，不需要作者寫任何media query。軌道本身帶 aria-live：自動播放時是 off，停下來時變成 polite。",
+                  "style": {
+                   "&": {
+                    "_": {
+                     "fontFamily": "'Noto Sans TC','PingFang TC','Hiragino Sans TC','Microsoft JhengHei',sans-serif",
+                     "fontSize": "13px",
+                     "lineHeight": "1.85",
+                     "color": {
+                      "token": "--mk-muted"
+                     },
+                     "marginTop": "10px"
+                    }
+                   }
+                  }
+                 },
+                 {
+                  "type": "div",
+                  "data": {
+                   "attrID": "sl-note-3-s"
+                  },
+                  "style": {
+                   "&": {
+                    "_": {
+                     "marginTop": "14px"
+                    }
+                   }
+                  },
+                  "children": [
+                   {
+                    "type": "div",
+                    "data": {
+                     "attrID": "sl-spec-row"
+                    },
+                    "style": {
+                     "&": {
+                      "_": {
+                       "display": "flex",
+                       "columnGap": "12px",
+                       "alignItems": "baseline",
+                       "paddingTop": "5px",
+                       "paddingBottom": "5px",
+                       "customDeclarations": "border-top:1px solid rgba(22,24,28,.16);"
+                      }
+                     }
+                    },
+                    "children": [
+                     {
+                      "type": "div",
+                      "data": {
+                       "attrID": "sl-spec-k"
+                      },
+                      "style": {
+                       "&": {
+                        "_": {
+                         "width": "86px",
+                         "flexSizing": {
+                          "type": "none"
+                         }
+                        }
+                       }
+                      },
+                      "children": [
+                       {
+                        "type": "text",
+                        "data": {
+                         "tagName": "p"
+                        },
+                        "text": "自動播放時",
+                        "style": {
+                         "&": {
+                          "_": {
+                           "color": {
+                            "token": "--mk-faint"
+                           },
+                           "fontSize": "10px",
+                           "letterSpacing": "0.16em",
+                           "fontFamily": "'IBM Plex Mono',ui-monospace,SFMono-Regular,Menlo,Consolas,monospace",
+                           "fontWeight": "400"
+                          }
+                         }
+                        }
+                       }
+                      ]
+                     },
+                     {
+                      "type": "div",
+                      "data": {
+                       "attrID": "sl-spec-v"
+                      },
+                      "style": {
+                       "&": {
+                        "_": {
+                         "flexSizing": {
+                          "type": "grow"
+                         }
+                        }
+                       }
+                      },
+                      "children": [
+                       {
+                        "type": "text",
+                        "data": {
+                         "tagName": "p"
+                        },
+                        "text": "aria-live=off",
+                        "style": {
+                         "&": {
+                          "_": {
+                           "color": {
+                            "token": "--mk-ink"
+                           },
+                           "fontSize": "10px",
+                           "letterSpacing": "0.04em",
+                           "fontFamily": "'IBM Plex Mono',ui-monospace,SFMono-Regular,Menlo,Consolas,monospace",
+                           "fontWeight": "400"
+                          }
+                         }
+                        }
+                       }
+                      ]
+                     }
+                    ]
+                   },
+                   {
+                    "type": "div",
+                    "data": {
+                     "attrID": "sl-spec-row"
+                    },
+                    "style": {
+                     "&": {
+                      "_": {
+                       "display": "flex",
+                       "columnGap": "12px",
+                       "alignItems": "baseline",
+                       "paddingTop": "5px",
+                       "paddingBottom": "5px",
+                       "customDeclarations": "border-top:1px solid rgba(22,24,28,.16);"
+                      }
+                     }
+                    },
+                    "children": [
+                     {
+                      "type": "div",
+                      "data": {
+                       "attrID": "sl-spec-k"
+                      },
+                      "style": {
+                       "&": {
+                        "_": {
+                         "width": "86px",
+                         "flexSizing": {
+                          "type": "none"
+                         }
+                        }
+                       }
+                      },
+                      "children": [
+                       {
+                        "type": "text",
+                        "data": {
+                         "tagName": "p"
+                        },
+                        "text": "停下時",
+                        "style": {
+                         "&": {
+                          "_": {
+                           "color": {
+                            "token": "--mk-faint"
+                           },
+                           "fontSize": "10px",
+                           "letterSpacing": "0.16em",
+                           "fontFamily": "'IBM Plex Mono',ui-monospace,SFMono-Regular,Menlo,Consolas,monospace",
+                           "fontWeight": "400"
+                          }
+                         }
+                        }
+                       }
+                      ]
+                     },
+                     {
+                      "type": "div",
+                      "data": {
+                       "attrID": "sl-spec-v"
+                      },
+                      "style": {
+                       "&": {
+                        "_": {
+                         "flexSizing": {
+                          "type": "grow"
+                         }
+                        }
+                       }
+                      },
+                      "children": [
+                       {
+                        "type": "text",
+                        "data": {
+                         "tagName": "p"
+                        },
+                        "text": "aria-live=polite",
+                        "style": {
+                         "&": {
+                          "_": {
+                           "color": {
+                            "token": "--mk-ink"
+                           },
+                           "fontSize": "10px",
+                           "letterSpacing": "0.04em",
+                           "fontFamily": "'IBM Plex Mono',ui-monospace,SFMono-Regular,Menlo,Consolas,monospace",
+                           "fontWeight": "400"
+                          }
+                         }
+                        }
+                       }
+                      ]
+                     }
+                    ]
+                   }
+                  ]
+                 }
+                ]
+               }
+              ]
+             }
+            ]
+           }
+          ]
+         }
+        ]
+       }
+      ]
+     }
+    ]
+   }
+  },
+  {
    "slug": "dialogs",
    "post_id": 268,
    "title": "彈窗實驗室",
@@ -24003,20 +28733,20 @@
                  "interactions": [
                   {
                    "type": "click",
-                   "uuid": "d87ff991-009b-4947-8c09-bbcebe790e7f",
+                   "uuid": "95255794-3736-4f1b-9353-579d6c74ed3c",
                    "clickOptions": {
                     "name": "dl-open-centre",
-                    "ID": "33524581-a2d4-47b9-a47f-9fc33dfbc5df",
+                    "ID": "f1ef2622-cd54-41cc-82c2-3b5888ecd9df",
                     "actionSlots": {
                      "click": {
                       "actions": [
                        {
                         "type": "modalOpen",
-                        "uuid": "8222a3a3-7a05-46f9-aa92-47e450e44a55",
+                        "uuid": "a70283c1-822b-43a6-b781-40dbe42b8097",
                         "settings": {
                          "target": {
                           "type": "element",
-                          "uuid": "5d33da88-073a-401b-8beb-22c9456a008a"
+                          "uuid": "7d5e98c8-ac64-485f-8660-c667e2bb0ab8"
                          }
                         }
                        }
@@ -24515,20 +29245,20 @@
                  "interactions": [
                   {
                    "type": "click",
-                   "uuid": "1f880c19-84c6-4c84-a6ae-e61b250dfc1e",
+                   "uuid": "60aefe18-7382-4240-80b4-742b0ea97b6d",
                    "clickOptions": {
                     "name": "dl-open-sheet",
-                    "ID": "1f16915e-ceee-44ee-9b3c-fb6266194d42",
+                    "ID": "56177a1d-29ec-4484-9c1f-4cb6742f75fb",
                     "actionSlots": {
                      "click": {
                       "actions": [
                        {
                         "type": "modalOpen",
-                        "uuid": "00aa8e00-45a4-4887-a173-c9a50ef060d4",
+                        "uuid": "b03843da-6918-40fd-97be-6ecafd4fbb0a",
                         "settings": {
                          "target": {
                           "type": "element",
-                          "uuid": "beab43ba-3531-4cc2-bb84-68d901acf88c"
+                          "uuid": "80a12c36-a0a6-46d3-9aad-76af55d313e2"
                          }
                         }
                        }
@@ -25027,20 +29757,20 @@
                  "interactions": [
                   {
                    "type": "click",
-                   "uuid": "38cc3404-e10a-417c-947d-18342396e973",
+                   "uuid": "bf3c488e-5911-40d8-a47c-cd212e3cb248",
                    "clickOptions": {
                     "name": "dl-open-drawer",
-                    "ID": "13a87d13-691d-4eff-9427-4172d3075b09",
+                    "ID": "2d5eeb7f-986c-4de9-b35f-d7885032ac54",
                     "actionSlots": {
                      "click": {
                       "actions": [
                        {
                         "type": "modalOpen",
-                        "uuid": "8feccb8b-b3af-4ad3-9a60-fe267b4ba3a5",
+                        "uuid": "1a1315c9-1b8b-4b1c-a319-de699c6c876d",
                         "settings": {
                          "target": {
                           "type": "element",
-                          "uuid": "e67f1a60-c6e6-4d60-aff6-fee59da9ce86"
+                          "uuid": "28100f1a-294b-4ea4-9573-fa65bfdcaaa7"
                          }
                         }
                        }
@@ -25993,20 +30723,20 @@
                  "interactions": [
                   {
                    "type": "click",
-                   "uuid": "d21f4f61-a3af-4ec4-8e8a-e81731d8e91d",
+                   "uuid": "2160d9c3-9fad-4243-8e05-7e590b372dba",
                    "clickOptions": {
                     "name": "dl-open-takeover",
-                    "ID": "c7d4934b-abe4-46cb-92e9-426c2409e9c6",
+                    "ID": "1bcfc5ae-321e-403c-9baa-cf581b496f8d",
                     "actionSlots": {
                      "click": {
                       "actions": [
                        {
                         "type": "modalOpen",
-                        "uuid": "0dd8e3cf-1089-48a2-b2e9-3f344de63f8e",
+                        "uuid": "3cf29036-d8b7-476c-a4d5-9b09cf750e47",
                         "settings": {
                          "target": {
                           "type": "element",
-                          "uuid": "8c7632ce-eddd-4d0a-ba5a-7218aa7f4b72"
+                          "uuid": "a1ce75a5-2fb9-4684-b1f3-5536c35eea28"
                          }
                         }
                        }
@@ -26505,20 +31235,20 @@
                  "interactions": [
                   {
                    "type": "click",
-                   "uuid": "9d438c00-302d-4af4-bec1-480d699ec148",
+                   "uuid": "4706a176-4ec8-43fa-aa78-d781eb9d9379",
                    "clickOptions": {
                     "name": "dl-open-gate",
-                    "ID": "0c2a7514-bb30-4278-a08f-3f7e0fe73859",
+                    "ID": "700fa2cc-c75c-416e-8a33-98eef0530a07",
                     "actionSlots": {
                      "click": {
                       "actions": [
                        {
                         "type": "modalOpen",
-                        "uuid": "e56fc8f6-453a-4406-9350-14ae61ec844a",
+                        "uuid": "fd64bf00-264a-416d-a6db-089211bea25a",
                         "settings": {
                          "target": {
                           "type": "element",
-                          "uuid": "91a3d3c2-6619-44d4-aa56-ecc06f5a7d47"
+                          "uuid": "f0e8a69b-8f98-4901-ae2f-a5a0bfbaf344"
                          }
                         }
                        }
@@ -27037,20 +31767,20 @@
                  "interactions": [
                   {
                    "type": "click",
-                   "uuid": "8483e722-249f-4da2-8aa0-e960e88dab25",
+                   "uuid": "04ccee50-0d2b-42d3-aaca-3ef68dc92f8c",
                    "clickOptions": {
                     "name": "dl-open-exit",
-                    "ID": "584389c1-225f-4370-9942-b4355b20fc03",
+                    "ID": "588294f5-858f-4aee-833b-128c7277375e",
                     "actionSlots": {
                      "click": {
                       "actions": [
                        {
                         "type": "modalOpen",
-                        "uuid": "9bd18f00-f77d-4702-afdf-d309f8d858c9",
+                        "uuid": "c6691506-5727-49e2-a89c-274ffe008520",
                         "settings": {
                          "target": {
                           "type": "element",
-                          "uuid": "5cd1a916-58ac-4b6f-a707-8bc36fa5f0aa"
+                          "uuid": "15cc98a3-83ec-4117-9611-3a097b426503"
                          }
                         }
                        }
@@ -27994,14 +32724,14 @@
                  "interactions": [
                   {
                    "type": "click",
-                   "uuid": "d3745edf-42f6-4c45-a922-11be06f65981",
+                   "uuid": "d0a6e01e-810a-40e6-b0f0-6e9d064ceb50",
                    "clickOptions": {
                     "name": "dl-ab-aba",
-                    "ID": "eef8b031-ecb6-4f29-ba4a-b7c1dad7a429",
+                    "ID": "d8e4ef64-e75c-45fb-b400-f16eb689a95e",
                     "runs": {
                      "rules": [
                       {
-                       "uuid": "03b6a2cc-f979-42af-aff9-779ca7a11adf",
+                       "uuid": "15a74efd-49cc-4b33-b045-fb8a6c6d3019",
                        "type": "pickOne",
                        "pickOneOptions": {
                         "remember": "page",
@@ -28015,11 +32745,11 @@
                       "actions": [
                        {
                         "type": "modalOpen",
-                        "uuid": "0385bc10-c1c4-4986-b74d-97769362cc40",
+                        "uuid": "4db50c06-28bd-4d99-bdd2-394f4fb3611d",
                         "settings": {
                          "target": {
                           "type": "element",
-                          "uuid": "27f20d17-3a9c-496f-b056-a051167dfd4a"
+                          "uuid": "cfed7612-3324-40e3-ab04-e1d48e690eee"
                          }
                         }
                        }
@@ -28082,14 +32812,14 @@
                  "interactions": [
                   {
                    "type": "click",
-                   "uuid": "a00fdaff-bb1c-4d75-9215-173fd879784e",
+                   "uuid": "02e3d73f-8100-4ea5-a8d6-71818c5b0328",
                    "clickOptions": {
                     "name": "dl-ab-abb",
-                    "ID": "8ab397bd-10a4-42b3-9f45-a0bf00b9e1d1",
+                    "ID": "cf952ce1-cedf-43c7-8db4-792df25dfeaa",
                     "runs": {
                      "rules": [
                       {
-                       "uuid": "5b6c82d2-be94-4ff7-bc46-2cc6aed921f1",
+                       "uuid": "536260f9-9fc8-4555-bfee-993ca753d54a",
                        "type": "pickOne",
                        "pickOneOptions": {
                         "remember": "page",
@@ -28103,11 +32833,11 @@
                       "actions": [
                        {
                         "type": "modalOpen",
-                        "uuid": "a48e0e8f-2595-482b-aa70-4c544a2899c8",
+                        "uuid": "671142b2-42d8-4b77-b9fb-6f598f2b1c04",
                         "settings": {
                          "target": {
                           "type": "element",
-                          "uuid": "45ca6618-bae1-4502-bca1-31f97ff16a1f"
+                          "uuid": "7b51f7b7-b39d-4a0e-a489-e730e7b4d8d7"
                          }
                         }
                        }
@@ -28372,14 +33102,14 @@
              "translateXOptions": {
               "value": "-50%"
              },
-             "uuid": "a8dd06fe-6223-4479-9a10-e0f2b3492086"
+             "uuid": "5caeef0c-bfb8-4d1a-8bac-a42802d773c6"
             },
             {
              "type": "translateY",
              "translateYOptions": {
               "value": "-50%"
              },
-             "uuid": "b8840221-7ac9-44da-a3b4-a4b1ab658740"
+             "uuid": "219bb1aa-f758-475b-9f67-d33e18f8d4af"
             }
            ],
            "width": "100%",
@@ -29028,20 +33758,20 @@
              "interactions": [
               {
                "type": "click",
-               "uuid": "4ce52f3d-e116-4ff8-b326-e5c70127c0bf",
+               "uuid": "8f07ac91-d9f3-4218-86df-1fc2826367e8",
                "clickOptions": {
                 "name": "dl-close-centre",
-                "ID": "5782c2d8-d834-4dd8-9a02-d738234fb4b0",
+                "ID": "cec495f3-dbc9-414d-b36b-0a26a85af62a",
                 "actionSlots": {
                  "click": {
                   "actions": [
                    {
                     "type": "modalClose",
-                    "uuid": "bf54d966-086b-4d62-8c62-f9caa1a407e9",
+                    "uuid": "a05fda2a-eb17-410f-aeac-58840e9a52e6",
                     "settings": {
                      "target": {
                       "type": "element",
-                      "uuid": "5d33da88-073a-401b-8beb-22c9456a008a"
+                      "uuid": "7d5e98c8-ac64-485f-8660-c667e2bb0ab8"
                      }
                     }
                    }
@@ -29102,7 +33832,7 @@
         ]
        }
       ],
-      "nodeID": "5d33da88-073a-401b-8beb-22c9456a008a"
+      "nodeID": "7d5e98c8-ac64-485f-8660-c667e2bb0ab8"
      },
      {
       "type": "modal",
@@ -29806,20 +34536,20 @@
              "interactions": [
               {
                "type": "click",
-               "uuid": "b2ed1ad6-7438-4301-b550-907b7fa809ec",
+               "uuid": "d486a013-de0d-4208-9ac5-f114b2a9b1af",
                "clickOptions": {
                 "name": "dl-close-sheet",
-                "ID": "07d7a45d-04fc-4acb-a454-d900d71791e6",
+                "ID": "e269e847-7df5-4e5c-9eff-93d897ac4be1",
                 "actionSlots": {
                  "click": {
                   "actions": [
                    {
                     "type": "modalClose",
-                    "uuid": "e5e4a9c4-0d2b-4c6e-ba56-c4fe34a98508",
+                    "uuid": "56282f25-c206-4f29-a581-456b6947aacb",
                     "settings": {
                      "target": {
                       "type": "element",
-                      "uuid": "beab43ba-3531-4cc2-bb84-68d901acf88c"
+                      "uuid": "80a12c36-a0a6-46d3-9aad-76af55d313e2"
                      }
                     }
                    }
@@ -29880,7 +34610,7 @@
         ]
        }
       ],
-      "nodeID": "beab43ba-3531-4cc2-bb84-68d901acf88c"
+      "nodeID": "80a12c36-a0a6-46d3-9aad-76af55d313e2"
      },
      {
       "type": "modal",
@@ -30583,20 +35313,20 @@
              "interactions": [
               {
                "type": "click",
-               "uuid": "d47dd955-dafb-4d3e-b526-81b92d1e7268",
+               "uuid": "3308af43-d2b9-4055-8a17-a20b58b246b9",
                "clickOptions": {
                 "name": "dl-close-drawer",
-                "ID": "4a6f1775-e2e4-471d-8926-266818207ec8",
+                "ID": "466b07de-3199-4b31-a974-75fbaec93a75",
                 "actionSlots": {
                  "click": {
                   "actions": [
                    {
                     "type": "modalClose",
-                    "uuid": "371ac42e-31d7-48c8-ad60-1db063292a23",
+                    "uuid": "cf26e8f1-6a25-4587-85e1-ce057ae4c9a7",
                     "settings": {
                      "target": {
                       "type": "element",
-                      "uuid": "e67f1a60-c6e6-4d60-aff6-fee59da9ce86"
+                      "uuid": "28100f1a-294b-4ea4-9573-fa65bfdcaaa7"
                      }
                     }
                    }
@@ -30657,7 +35387,7 @@
         ]
        }
       ],
-      "nodeID": "e67f1a60-c6e6-4d60-aff6-fee59da9ce86"
+      "nodeID": "28100f1a-294b-4ea4-9573-fa65bfdcaaa7"
      },
      {
       "type": "modal",
@@ -30671,7 +35401,7 @@
          "runs": {
           "rules": [
            {
-            "uuid": "5b64d84a-2f5c-4fc0-86b1-72625f657f0a",
+            "uuid": "365881cc-2d38-402f-a391-423f35d8aca9",
             "type": "cap",
             "capOptions": {
              "max": "1",
@@ -31377,20 +36107,20 @@
              "interactions": [
               {
                "type": "click",
-               "uuid": "622b8891-4bdc-46fd-adc0-73d168215f97",
+               "uuid": "f104b2ed-ba68-44d2-86a7-6085381871a8",
                "clickOptions": {
                 "name": "dl-close-toast",
-                "ID": "7bb3cac2-bbc5-4e65-9ebe-46939782c9a8",
+                "ID": "0bec7294-9735-4bd3-9f02-405abee2feec",
                 "actionSlots": {
                  "click": {
                   "actions": [
                    {
                     "type": "modalClose",
-                    "uuid": "b2787211-54f5-42a7-82ec-27c872694cdc",
+                    "uuid": "aec9521b-8f66-495c-85aa-73e08564852b",
                     "settings": {
                      "target": {
                       "type": "element",
-                      "uuid": "46bb5bfa-674e-447b-9cdf-333157a8022d"
+                      "uuid": "344f52c3-fb5f-4a1e-b7c1-050c1ec2e6be"
                      }
                     }
                    }
@@ -31451,7 +36181,7 @@
         ]
        }
       ],
-      "nodeID": "46bb5bfa-674e-447b-9cdf-333157a8022d"
+      "nodeID": "344f52c3-fb5f-4a1e-b7c1-050c1ec2e6be"
      },
      {
       "type": "modal",
@@ -32160,20 +36890,20 @@
              "interactions": [
               {
                "type": "click",
-               "uuid": "eb774e94-ed95-4125-bb34-2d809e1393e0",
+               "uuid": "19de9ad2-a8a8-49c1-aae8-48d3ee3e2a35",
                "clickOptions": {
                 "name": "dl-close-takeover",
-                "ID": "b0ced3c2-f861-4b44-8d25-84fda135c7fa",
+                "ID": "2cd52906-6efd-493c-9696-bfae44ac3762",
                 "actionSlots": {
                  "click": {
                   "actions": [
                    {
                     "type": "modalClose",
-                    "uuid": "4da397c7-853e-48e3-a483-d041d29acfb5",
+                    "uuid": "e695a811-3cf8-482f-96a2-9d9a904274ad",
                     "settings": {
                      "target": {
                       "type": "element",
-                      "uuid": "8c7632ce-eddd-4d0a-ba5a-7218aa7f4b72"
+                      "uuid": "a1ce75a5-2fb9-4684-b1f3-5536c35eea28"
                      }
                     }
                    }
@@ -32234,7 +36964,7 @@
         ]
        }
       ],
-      "nodeID": "8c7632ce-eddd-4d0a-ba5a-7218aa7f4b72"
+      "nodeID": "a1ce75a5-2fb9-4684-b1f3-5536c35eea28"
      },
      {
       "type": "modal",
@@ -32296,14 +37026,14 @@
              "translateXOptions": {
               "value": "-50%"
              },
-             "uuid": "e71c44c2-d7ca-41ad-8e77-9381ffa02441"
+             "uuid": "cee34ec3-9b03-4b97-b9c9-e795f25f69d5"
             },
             {
              "type": "translateY",
              "translateYOptions": {
               "value": "-50%"
              },
-             "uuid": "ab3f4678-dd6c-47bd-b2fb-ca921113d876"
+             "uuid": "9396ae48-475c-4ff3-913e-8e990dfc98e6"
             }
            ],
            "width": "100%",
@@ -32952,20 +37682,20 @@
              "interactions": [
               {
                "type": "click",
-               "uuid": "4528025c-2187-4595-9439-75670605f578",
+               "uuid": "f03fb9aa-7faf-48a8-9d4e-b127a21e5b01",
                "clickOptions": {
                 "name": "dl-close-gate",
-                "ID": "cd0cb2a8-936e-4914-a188-8df24cd97831",
+                "ID": "b843b201-e052-4a0d-8232-34f7ecc22c83",
                 "actionSlots": {
                  "click": {
                   "actions": [
                    {
                     "type": "modalClose",
-                    "uuid": "96a1eb5d-e962-464d-8186-9d018ca6da46",
+                    "uuid": "c52134c5-4302-4ff4-90d4-71d952bb575a",
                     "settings": {
                      "target": {
                       "type": "element",
-                      "uuid": "91a3d3c2-6619-44d4-aa56-ecc06f5a7d47"
+                      "uuid": "f0e8a69b-8f98-4901-ae2f-a5a0bfbaf344"
                      }
                     }
                    }
@@ -33026,7 +37756,7 @@
         ]
        }
       ],
-      "nodeID": "91a3d3c2-6619-44d4-aa56-ecc06f5a7d47"
+      "nodeID": "f0e8a69b-8f98-4901-ae2f-a5a0bfbaf344"
      },
      {
       "type": "modal",
@@ -33043,7 +37773,7 @@
          "runs": {
           "rules": [
            {
-            "uuid": "1bed11b3-98c7-46a9-bb0a-e56f107f0175",
+            "uuid": "ccfd8a9e-9eb6-4cde-a46d-1455715ad303",
             "type": "cap",
             "capOptions": {
              "max": "1",
@@ -33109,14 +37839,14 @@
              "translateXOptions": {
               "value": "-50%"
              },
-             "uuid": "b0141b84-c612-4389-b108-05150836087b"
+             "uuid": "530a506d-5fec-4a21-bc0f-b425eeec39b0"
             },
             {
              "type": "translateY",
              "translateYOptions": {
               "value": "-50%"
              },
-             "uuid": "ed103e2c-73e0-46b6-b4b3-20f5738ca36b"
+             "uuid": "cebe3980-8307-469b-ad56-fa0bf209636e"
             }
            ],
            "width": "100%",
@@ -33765,20 +38495,20 @@
              "interactions": [
               {
                "type": "click",
-               "uuid": "ac08dd07-6285-44ec-975e-10a4e37e19bf",
+               "uuid": "7befacdd-9dbc-42dc-8b05-3aeebc730fae",
                "clickOptions": {
                 "name": "dl-close-exit",
-                "ID": "c62f2d6b-690e-45ce-8346-8772b3228351",
+                "ID": "45291148-b300-44da-82bf-2adf984998a2",
                 "actionSlots": {
                  "click": {
                   "actions": [
                    {
                     "type": "modalClose",
-                    "uuid": "03036ce1-f111-44c9-96b9-5f70bbf4ee47",
+                    "uuid": "2d770f86-8581-45f3-98f8-da4e2ed2e68b",
                     "settings": {
                      "target": {
                       "type": "element",
-                      "uuid": "5cd1a916-58ac-4b6f-a707-8bc36fa5f0aa"
+                      "uuid": "15cc98a3-83ec-4117-9611-3a097b426503"
                      }
                     }
                    }
@@ -33839,7 +38569,7 @@
         ]
        }
       ],
-      "nodeID": "5cd1a916-58ac-4b6f-a707-8bc36fa5f0aa"
+      "nodeID": "15cc98a3-83ec-4117-9611-3a097b426503"
      },
      {
       "type": "modal",
@@ -33856,7 +38586,7 @@
          "runs": {
           "rules": [
            {
-            "uuid": "3af52cf2-f281-4bb4-9e13-e1faa13b2b76",
+            "uuid": "c7e7136c-d7d9-4d5a-b902-7e0ccd28e098",
             "type": "cooldown",
             "cooldownOptions": {
              "duration": "1",
@@ -34563,20 +39293,20 @@
              "interactions": [
               {
                "type": "click",
-               "uuid": "c4b18dcf-c6cd-461d-a43d-7eb5ba337104",
+               "uuid": "a3ff3cf9-3786-4ee3-baa4-94872196450c",
                "clickOptions": {
                 "name": "dl-close-depth",
-                "ID": "714969ea-37cf-4c20-8e3c-9ffa55c9abb9",
+                "ID": "a644220e-a669-4acd-a2af-7c38ae3208d1",
                 "actionSlots": {
                  "click": {
                   "actions": [
                    {
                     "type": "modalClose",
-                    "uuid": "edf09979-5a08-401a-be44-8155e342fa2f",
+                    "uuid": "750bedf0-a90a-4eb0-8ad0-32dbce78a130",
                     "settings": {
                      "target": {
                       "type": "element",
-                      "uuid": "c0125209-ff16-46e6-ade4-1d356f27e8da"
+                      "uuid": "9f2c7971-8eff-4c8c-91aa-8ed081e098d0"
                      }
                     }
                    }
@@ -34637,7 +39367,7 @@
         ]
        }
       ],
-      "nodeID": "c0125209-ff16-46e6-ade4-1d356f27e8da"
+      "nodeID": "9f2c7971-8eff-4c8c-91aa-8ed081e098d0"
      },
      {
       "type": "modal",
@@ -34699,14 +39429,14 @@
              "translateXOptions": {
               "value": "-50%"
              },
-             "uuid": "0d926056-cd1a-416d-9e39-47c893c855f9"
+             "uuid": "6d002899-0a75-481f-93ff-1fe387dabeb4"
             },
             {
              "type": "translateY",
              "translateYOptions": {
               "value": "-50%"
              },
-             "uuid": "373617ac-2dab-4a1b-ba46-9f9c4f2ff480"
+             "uuid": "aa65565a-b49d-48ac-b9e2-96a50d199e61"
             }
            ],
            "width": "100%",
@@ -35355,20 +40085,20 @@
              "interactions": [
               {
                "type": "click",
-               "uuid": "820f58f4-ce8f-4614-9248-7dc21f919316",
+               "uuid": "a56b3652-931c-451e-b157-fb04d784a98e",
                "clickOptions": {
                 "name": "dl-close-aba",
-                "ID": "159b0c07-0aca-4dbb-bf90-2dba9a518263",
+                "ID": "62814bf1-1bf2-4be6-9396-4e98faa6ac29",
                 "actionSlots": {
                  "click": {
                   "actions": [
                    {
                     "type": "modalClose",
-                    "uuid": "68d620ea-d5a5-47a8-8e94-bec920328356",
+                    "uuid": "42233fc0-99d8-4ba5-9181-c53c53d92db1",
                     "settings": {
                      "target": {
                       "type": "element",
-                      "uuid": "27f20d17-3a9c-496f-b056-a051167dfd4a"
+                      "uuid": "cfed7612-3324-40e3-ab04-e1d48e690eee"
                      }
                     }
                    }
@@ -35429,7 +40159,7 @@
         ]
        }
       ],
-      "nodeID": "27f20d17-3a9c-496f-b056-a051167dfd4a"
+      "nodeID": "cfed7612-3324-40e3-ab04-e1d48e690eee"
      },
      {
       "type": "modal",
@@ -35491,14 +40221,14 @@
              "translateXOptions": {
               "value": "-50%"
              },
-             "uuid": "3686b47b-056c-476d-8212-e27e6bdef406"
+             "uuid": "82956432-d540-4417-bcef-548885a6be10"
             },
             {
              "type": "translateY",
              "translateYOptions": {
               "value": "-50%"
              },
-             "uuid": "e26a5016-7aea-49d4-909d-84e405950abd"
+             "uuid": "4c9f4965-5953-4114-98b2-4e45e77eeeef"
             }
            ],
            "width": "100%",
@@ -36147,20 +40877,20 @@
              "interactions": [
               {
                "type": "click",
-               "uuid": "69b252d7-574a-46b7-9b10-a65c3f9ac814",
+               "uuid": "1e2f6246-18ee-4ac5-9cde-5ff427e5d1df",
                "clickOptions": {
                 "name": "dl-close-abb",
-                "ID": "b7e36de1-8a5c-4325-b94e-6974226df096",
+                "ID": "c82858c0-e968-4da3-b486-334dd0b2cbd3",
                 "actionSlots": {
                  "click": {
                   "actions": [
                    {
                     "type": "modalClose",
-                    "uuid": "d4e7da2d-146f-4a5e-9072-1b29d8a7b04f",
+                    "uuid": "0ce47cb5-e64b-4f52-9345-83e9a5361a13",
                     "settings": {
                      "target": {
                       "type": "element",
-                      "uuid": "45ca6618-bae1-4502-bca1-31f97ff16a1f"
+                      "uuid": "7b51f7b7-b39d-4a0e-a489-e730e7b4d8d7"
                      }
                     }
                    }
@@ -36221,7 +40951,7 @@
         ]
        }
       ],
-      "nodeID": "45ca6618-bae1-4502-bca1-31f97ff16a1f"
+      "nodeID": "7b51f7b7-b39d-4a0e-a489-e730e7b4d8d7"
      }
     ]
    }
