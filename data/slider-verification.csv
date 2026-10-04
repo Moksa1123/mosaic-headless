@@ -1,19 +1,19 @@
 slider,check,result,detail
-"hero, 4 slides, plain",HOST,PASS,"<mosaic-slider> animation=slide carousel=None, 4 slides"
-"hero, 4 slides, plain",TRACK,PASS,<mosaic-slider-slides> aria-live=off
-"hero, 4 slides, plain",HAS_CURRENT,PASS,slide 0 is current at rest
-"hero, 4 slides, plain",BULLET_TEMPLATE,PASS,"4 bullets for 4 slides, all with id='sl-main-nav-dot' - one authored bullet is repeated per slide, duplicate ids included"
-"hero, 4 slides, plain",BULLET_ARIA,PASS,"role=button tabindex=0 labels=一、輪播不是相簿, 二、四種動畫, 三、箭頭會自己消失, 四、不想動就不動 - taken from each slide's own title"
-"hero, 4 slides, plain",ADVANCES,PASS,reached 4 of 4 slides unaided
-"hero, 4 slides, plain",AUTOPLAY_DECLARED,PASS,data-autoplay=true delay=3600
-"hero, 4 slides, plain",BULLET_GOES,PASS,bullet 0 -> slide 0
-"hero, 4 slides, plain",ARROW_ENDS,PASS,"on slide 0 prev hides itself (hidden=True), next does not (hidden=False)"
-"hero, 4 slides, plain",TRACK_LAYOUT,PASS,"grid ""slide"", every slide one track wide ([1200] vs 1200)"
-"hero, 4 slides, plain",ARROW_ARIA,PASS,role=button tabindex=0 label='下一張投影片'
-"hero, 4 slides, plain",NEXT,PASS,slide 0 -> 1
-"hero, 4 slides, plain",PREV,PASS,slide 1 -> 0
-"hero, 4 slides, plain",KEYBOARD,PASS,"focus bullet 3 taken, Enter -> slide 3"
-"hero, 4 slides, plain",REDUCED,PASS,under prefers-reduced-motion it holds still (slide 0 -> 0)
+"hero, 4 slides, carousel",HOST,PASS,"<mosaic-slider> animation=slide carousel=true, 4 slides"
+"hero, 4 slides, carousel",TRACK,PASS,<mosaic-slider-slides> aria-live=off
+"hero, 4 slides, carousel",HAS_CURRENT,PASS,slide 0 is current at rest
+"hero, 4 slides, carousel",BULLET_TEMPLATE,PASS,"4 bullets for 4 slides, all with id='sl-main-nav-dot' - one authored bullet is repeated per slide, duplicate ids included"
+"hero, 4 slides, carousel",BULLET_ARIA,PASS,"role=button tabindex=0 labels=一、輪播不是相簿, 二、四種動畫, 三、箭頭會自己消失, 四、不想動就不動 - taken from each slide's own title"
+"hero, 4 slides, carousel",ADVANCES,PASS,reached 4 of 4 slides unaided
+"hero, 4 slides, carousel",AUTOPLAY_DECLARED,PASS,data-autoplay=true delay=3600
+"hero, 4 slides, carousel",BULLET_GOES,PASS,bullet 0 -> slide 0
+"hero, 4 slides, carousel",ARROW_ENDS,PASS,"carousel: it wraps, so neither arrow hides (prev hidden=False, next hidden=False)"
+"hero, 4 slides, carousel",CAROUSEL_LAYOUT,PASS,"grid ""slide"", every slide still one track wide ([1200] vs 1200) - isCarousel wraps the ends, it does not show more than one"
+"hero, 4 slides, carousel",ARROW_ARIA,PASS,role=button tabindex=0 label='下一張投影片'
+"hero, 4 slides, carousel",NEXT,PASS,slide 0 -> 1
+"hero, 4 slides, carousel",PREV,PASS,slide 1 -> 0
+"hero, 4 slides, carousel",KEYBOARD,PASS,"focus bullet 3 taken, Enter -> slide 3"
+"hero, 4 slides, carousel",REDUCED,PASS,under prefers-reduced-motion it holds still (slide 0 -> 0)
 "carousel, 6 slides, wraps",HOST,PASS,"<mosaic-slider> animation=slide carousel=true, 6 slides"
 "carousel, 6 slides, wraps",TRACK,PASS,<mosaic-slider-slides> aria-live=off
 "carousel, 6 slides, wraps",HAS_CURRENT,PASS,slide 0 is current at rest

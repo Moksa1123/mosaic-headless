@@ -173,7 +173,14 @@ class Surface:
         # parent rule would refuse every piece of text on the page.
         if parent_type and not t.startswith("wysiwyg-"):
             rule = self.rules.get(parent_type, {})
-            if rule.get("rule") == "none" and t not in self.default_children.get(parent_type, []):
+            # `rule == "none"` means canBeParentFor() was never overridden, which
+            # is the editor's drop rule and not the same question as "can this
+            # hold children". `takes_children` records the factory signature, and
+            # a type whose getDefaultData takes `$children` is a container
+            # whatever the drop rule says - `dropdown-wrapper` is exactly that.
+            if (rule.get("rule") == "none"
+                    and not rule.get("takes_children")
+                    and t not in self.default_children.get(parent_type, [])):
                 problems.append("%s is a leaf and accepts no children (tried %s)" % (parent_type, t))
             elif rule.get("rule") == "allow":
                 allowed = rule["allowed_children"].split("|") + self.default_children.get(parent_type, [])

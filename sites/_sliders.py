@@ -35,66 +35,105 @@ PAPER = "rgb(250,250,247)"
 # ---------------------------------------------------------------- pieces
 
 def slide(attr, title, bg, fg, index, head, caption, big="64px", big_m="40px",
-          pad_bottom="74px", pad_bottom_m="76px"):
-    """One slide: a colour field with type on it.
+          pad_bottom="86px", pad_bottom_m="96px", ghost=None, counter=""):
+    """One slide: a colour field composed like a cover, not a captioned photo.
 
     `title` is not decoration - Mosaic reads it for the `aria-label` of the
     navigation bullet that stands for this slide, so it is the slide's accessible
     name and has to say something.
+
+    The first version pushed a label to the top and a headline to the bottom with
+    `justify-content: space-between`, which on a 440px field left a hole through
+    the middle and read as unfinished. This one hangs everything off a meta rule
+    at the top, lets the type block sit where it falls, and puts a big ghost
+    numeral in the corner so the field has something in it.
     """
+    kids = []
+    if ghost:
+        kids.append(ml("p", ghost, fontFamily=DISPLAY, fontWeight="600",
+                       fontSize="200px", lineHeight="0.78", letterSpacing="-0.02em",
+                       color=fg, position="absolute",
+                       customDeclarations="right:-10px;bottom:-34px;opacity:.09;"
+                                          "pointer-events:none;",
+                       _m={"fontSize": "120px"}))
+    kids += [
+        # the meta rule: what this slide is, and where you are in the set
+        box(attr + "-meta", {
+            "display": "flex", "justifyContent": "space-between",
+            "alignItems": "baseline", "columnGap": "16px", "width": "100%",
+            "paddingBottom": "12px",
+            "customDeclarations": "border-bottom:1px solid rgba(250,250,247,.22);"},
+            [mono(index, size="11px", color=fg, track="0.3em"),
+             mono(counter, size="11px", color=fg, track="0.2em",
+                  customDeclarations="opacity:.55;")]),
+        box(attr + "-body", {
+            "marginTop": "28px", "position": "relative", "maxWidth": "640px"},
+            [ml("p", head, fontFamily=DISPLAY, fontWeight="600",
+                fontSize=big, lineHeight="1.04", letterSpacing="0.005em",
+                color=fg, whiteSpace="pre-wrap", _m={"fontSize": big_m}),
+             T("p", caption, fontFamily=CJK, fontSize="14px",
+               lineHeight="1.85", color=fg, marginTop="16px",
+               maxWidth="430px", customDeclarations="opacity:.8;",
+               _m={"fontSize": "13px"})] if caption else
+            [ml("p", head, fontFamily=DISPLAY, fontWeight="600",
+                fontSize=big, lineHeight="1.04", letterSpacing="0.005em",
+                color=fg, whiteSpace="pre-wrap", _m={"fontSize": big_m})]),
+    ]
     return {"type": "slider-slide",
             "data": {"attrID": attr, "title": title},
-            # the attrID and this style land on the inner .m-slide-content
-            # .m-slide-content arrives as display:flex with align-items:CENTER.
-            # Left-aligned type therefore has to say so; without this every slide
-            # on the page centres itself and looks like a stock carousel again.
+            # the attrID and this style land on the inner .m-slide-content.
+            # It arrives as display:flex with align-items:CENTER, so left-aligned
+            # type has to say so or every slide centres itself and looks like the
+            # stock carousel this page exists to argue against.
             "style": bp({"backgroundColor": bg, "display": "flex",
-                         "flexDirection": "column", "justifyContent": "space-between",
+                         "flexDirection": "column", "justifyContent": "flex-start",
                          "alignItems": "flex-start", "height": "100%",
-                         "paddingTop": "34px", "paddingBottom": pad_bottom,
+                         "position": "relative", "overflow": "hidden",
+                         "paddingTop": "30px", "paddingBottom": pad_bottom,
                          "paddingLeft": "36px", "paddingRight": "36px"},
                         None,
-                        {"paddingTop": "22px", "paddingBottom": pad_bottom_m,
+                        {"paddingTop": "20px", "paddingBottom": pad_bottom_m,
                          "paddingLeft": "20px", "paddingRight": "20px"}),
-            "children": [
-                mono(index, size="11px", color=fg, track="0.3em"),
-                box(attr + "-body", {"marginTop": "18px"}, [
-                    ml("p", head, fontFamily=DISPLAY, fontWeight="600",
-                       fontSize=big, lineHeight="1.04", letterSpacing="0.005em",
-                       color=fg, whiteSpace="pre-wrap",
-                       _m={"fontSize": big_m}),
-                    T("p", caption, fontFamily=CJK, fontSize="14px",
-                      lineHeight="1.8", color=fg, marginTop="14px",
-                      maxWidth="430px"),
-                ]),
-            ]}
+            "children": kids}
 
 
 def arrow(side, fg):
     """An arrow ships with NO glyph and accepts no children.
 
     `mosaic-slider-arrow-left` renders with empty innerHTML and its placement rule
-    is `none`, so there is nowhere to put an icon - the whole appearance is the
-    author's CSS on the element itself. This draws the classic two-border chevron:
-    a small square showing only two of its sides, turned 45 degrees. Mosaic's
-    `transform` is a structured value, so the turn is a `rotateZ` entry.
+    is `none`, so the whole appearance is the author's CSS on the element itself.
+    The first version drew a two-border chevron, which looked like a stray 9px
+    hairline and was far too small to hit; this is a 38px square with the chevron
+    as a background image, which is both a control and a target.
     """
-    deg = "45deg" if side == "right" else "-135deg"
+    # Three things this URI must not contain. No quotes, because one that has to
+    # survive a Python string, a JSON commit and a stylesheet is one quote too
+    # many. No raw spaces. And no SEMICOLON - `customDeclarations` is a list of
+    # declarations separated by `;`, so `data:image/svg+xml;charset=utf-8` splits
+    # the rule in half and the whole thing is dropped, silently: the arrow came
+    # back with background-image:none and no border at all.
+    chev = ("url(data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%2024%2024'%20fill='none'%20stroke='%23FAFAF7'%20stroke-width='2'%20stroke-linecap='round'%20stroke-linejoin='round'%3E%3Cpath%20d='M9%205l7%207-7%207'/%3E%3C/svg%3E)"
+            if side == "right" else "url(data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%2024%2024'%20fill='none'%20stroke='%23FAFAF7'%20stroke-width='2'%20stroke-linecap='round'%20stroke-linejoin='round'%3E%3Cpath%20d='M15%205l-7%207%207%207'/%3E%3C/svg%3E)")
     return {"type": "slider-arrow-%s" % side,
             "data": {"attrID": "sl-%s" % side},
-            "style": {"&": {"_": {
-                "color": fg, "cursor": "pointer",
-                "width": "9px", "height": "9px",
-                "marginTop": "4px", "marginBottom": "4px",
-                "marginLeft": "10px", "marginRight": "10px",
-                "backgroundColor": "rgba(0,0,0,0)",
-                "transform": [{"type": "rotateZ", "rotateZOptions": {"value": deg},
-                               "uuid": U()}],
+            "style": bp({
+                "width": "38px", "height": "38px", "cursor": "pointer",
+                "backgroundColor": "rgba(250,250,247,0)",
                 "customDeclarations":
-                    "border-top:1.5px solid currentColor;"
-                    "border-right:1.5px solid currentColor;"}},
-                "hover": {"_": {"color": "rgb(255,90,54)"}},
-                "focus-visible": {"_": dict(FOCUS_RING)}}}
+                    "border:1px solid rgba(250,250,247,.34);"
+                    "background-image:" + chev + ";"
+                    "background-repeat:no-repeat;background-position:center;"
+                    "background-size:17px 17px;"
+                    "transition:background-color .18s ease,border-color .18s ease;"},
+                None, {"width": "42px", "height": "42px"}),
+                "hover": {"_": {
+                    "backgroundColor": "rgba(250,250,247,.14)",
+                    "customDeclarations":
+                        "border:1px solid rgba(250,250,247,.9);"
+                        "background-image:" + chev + ";"
+                        "background-repeat:no-repeat;background-position:center;"
+                        "background-size:17px 17px;"}},
+                "focus-visible": {"_": dict(FOCUS_RING)}}
 
 
 def bullets(attr, fg):
@@ -102,21 +141,27 @@ def bullets(attr, fg):
     templates, which is the mistake this comment exists to prevent."""
     return {"type": "slider-navigation",
             "data": {"attrID": attr},
-            "style": {"&": {"_": {"display": "flex", "columnGap": "8px",
+            "style": {"&": {"_": {"display": "flex", "columnGap": "10px",
                                   "alignItems": "center"}}},
             "children": [
                 {"type": "slider-navigation-bullet",
                  "data": {"attrID": attr + "-dot"},
                  "style": {"&": {"_": {
-                     "width": "22px", "height": "3px", "cursor": "pointer",
-                     "backgroundColor": "rgba(250,250,247,.38)"},
-                     # the mark stays 3px; the hit area does not. Padding plus a
-                     # content-box keeps the bar thin while the tappable region
-                     # reaches the ~24px a thumb needs.
-                     "_t": {"width": "26px", "height": "3px",
+                     "width": "30px", "height": "2px", "cursor": "pointer",
+                     "backgroundColor": "rgba(250,250,247,.34)",
+                     "customDeclarations":
+                         "transition:background-color .2s ease;"},
+                     # the mark stays a hairline; the hit area does not
+                     "_t": {"width": "34px", "height": "2px",
                             "paddingTop": "14px", "paddingBottom": "14px",
-                            "customDeclarations": "background-clip:content-box;"}},
-                     "hover": {"_": {"backgroundColor": fg}},
+                            "customDeclarations":
+                                "background-clip:content-box;"
+                                "transition:background-color .2s ease;"}},
+                     "___slider_navigation_bullet--active": {
+                         "_": {"backgroundColor": "rgb(255,90,54)",
+                               "customDeclarations": "opacity:1;"}},
+                     "___slider_navigation_bullet--hover": {
+                         "_": {"backgroundColor": "rgba(250,250,247,.75)"}},
                      "focus-visible": {"_": dict(FOCUS_RING)}}}]}
 
 
@@ -134,13 +179,19 @@ def slider(attr, slides, animation="slide", autoplay="3600", carousel="0",
                 "display": "flex", "justifyContent": "space-between",
                 "alignItems": "center", "columnGap": "16px",
                 "paddingLeft": "36px", "paddingRight": "36px",
-                "paddingBottom": "26px"},
+                "paddingTop": "16px", "paddingBottom": "22px",
+                "customDeclarations":
+                    "border-top:1px solid rgba(250,250,247,.16);"
+                    "margin-left:36px;margin-right:36px;"},
                 [bullets(attr + "-nav", fg),
                  box(attr + "-arrows", {"display": "flex", "columnGap": "14px",
                                         "alignItems": "center"},
                      [arrow("left", fg), arrow("right", fg)])],
-                _m={"paddingLeft": "20px", "paddingRight": "20px",
-                    "paddingBottom": "18px"}),
+                _m={"paddingLeft": "0px", "paddingRight": "0px",
+                    "paddingBottom": "18px",
+                    "customDeclarations":
+                        "border-top:1px solid rgba(250,250,247,.16);"
+                        "margin-left:20px;margin-right:20px;"}),
         ]
     return {"type": "slider",
             "data": {"attrID": attr, "animation": animation,
@@ -175,28 +226,32 @@ HERO_SLIDES = [
           "輪播\n不是相簿。",
           "slider-slide 接任意子節點，"
           "所以一張投影片是一個版面，"
-          "不是一個相框。這一頁沒有任何照片。"),
+          "不是一個相框。這一頁沒有任何照片。",
+          counter="01 — 04", ghost="1"),
     slide("sl-h-1", "二、四種動畫",
           "rgb(31,58,95)", PAPER, "02 / ANIMATION",
           "四種動畫，\n一個字段。",
           "animation 接 slide、crossFade、fadeOut、fadeOver。"
           "下面四個同尺寸同速度的輪播並排，"
-          "是唯一看得出差別的方式。"),
+          "是唯一看得出差別的方式。",
+          counter="02 — 04", ghost="2"),
     slide("sl-h-2", "三、箭頭會自己消失",
           "rgb(191,68,40)", PAPER, "03 / BEHAVIOUR",
           "箭頭會在\n端點自己消失。",
           "非輪轉模式下，Slider.js 在第一張藏起向前、"
           "最後一張藏起向後。那是一個真正的樣式狀態，"
-          "可以自己接手設計。"),
+          "可以自己接手設計。",
+          counter="03 — 04", ghost="3"),
     slide("sl-h-3", "四、不想動就不動",
           "rgb(90,92,97)", PAPER, "04 / MOTION",
           "不想動的人，\n它就不動。",
           "系統設成減少動態時，Mosaic 自己停掉自動播放，"
-          "作者不用寫任何東西——這是實測過的。"),
+          "作者不用寫任何東西——這是實測過的。",
+          counter="04 — 04", ghost="4"),
 ]
 
 HERO = section("sl-hero", [wrap("sl-hero-w", [
-    box("sl-hero-pad", {"paddingTop": "76px"}, [], _m={"paddingTop": "26px"}),
+    box("sl-hero-pad", {"paddingTop": "116px"}, [], _m={"paddingTop": "26px"}),
     mono("SLIDER LAB / 輪播實驗室", size="11px",
          color="--mk-faint", track="0.26em"),
     ml("h1", "輪播看起來很舅，\n通常不是輪播的錯。",
@@ -211,7 +266,11 @@ HERO = section("sl-hero", [wrap("sl-hero-w", [
       fontFamily=CJK, fontSize="16px", lineHeight="1.95",
       color={"token": "--mk-ink"}, marginTop="20px", maxWidth="660px"),
     box("sl-hero-gap", {"paddingTop": "34px"}, []),
+    # carousel="1" is not decoration here: without it autoplay runs to the last
+    # slide and STOPS, which on a hero reads as the page having frozen. It is
+    # also what keeps both arrows alive, so nothing ever dead-ends.
     slider("sl-main", HERO_SLIDES, animation="slide", autoplay="3600",
+           carousel="1",
            label="輪播示範：四張投影片",
            height_m="440px"),
     box("sl-hero-foot", {"paddingTop": "60px"}, []),
@@ -223,13 +282,15 @@ HERO = section("sl-hero", [wrap("sl-hero-w", [
 def mini(key, anim, name, blurb, start="0"):
     sl = [slide("sl-%s-%d" % (key, i), "%s %d" % (name, i + 1), c, PAPER,
                 "%02d" % (i + 1), t, "", big="30px", big_m="24px",
-                pad_bottom="26px", pad_bottom_m="20px")
+                pad_bottom="26px", pad_bottom_m="20px", ghost=str(i + 1),
+                counter="%d / 3" % (i + 1))
           for i, (c, t) in enumerate([("rgb(22,24,28)", "ONE"),
                                       ("rgb(31,58,95)", "TWO"),
                                       ("rgb(191,68,40)", "THREE")])]
     return box("sl-card-" + key, {
         "display": "flex", "flexDirection": "column", "rowGap": "0px"}, [
-        slider("sl-" + key, sl, animation=anim, autoplay="1800",
+        # likewise: three slides and then a freeze is not a comparison
+        slider("sl-" + key, sl, animation=anim, autoplay="1800", carousel="1",
                label=name, height="190px", height_m="170px", chrome=False,
                duration="600", start=start),
         box("sl-card-h-" + key, {
@@ -278,7 +339,8 @@ FOUR = section("sl-four", [wrap("sl-four-w", [
 
 CAR_SLIDES = [
     slide("sl-c-%d" % i, t, c, PAPER, "%02d" % (i + 1), t, "",
-          big="22px", big_m="20px")
+          big="22px", big_m="20px", pad_bottom="60px", pad_bottom_m="60px",
+          counter="%d / 6" % (i + 1))
     for i, (c, t) in enumerate([
         ("rgb(22,24,28)", "WEB"), ("rgb(31,58,95)", "AI"),
         ("rgb(191,68,40)", "ERP"), ("rgb(90,92,97)", "SEO"),

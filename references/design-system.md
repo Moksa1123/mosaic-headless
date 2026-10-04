@@ -128,3 +128,35 @@ this (they are gitignored - they were scaffolding, not a deliverable) — they s
 everything
 per node, because their job was to exercise the style compiler across eight visual
 languages, not to model a maintainable theme. A real site inverts that ratio.
+
+## A grouped menu, and two more places the placement table lied
+
+Nine flat links in a header is what happens when a site grows and nobody re-reads
+the nav. Mosaic's `dropdown` family is the fix and is worth knowing for its own
+sake:
+
+```
+dropdown                      horizontalAlign: left | center | right
+  dropdown-toggle             url, target, rel; takes the label as children
+  dropdown-wrapper            takes the links as children
+```
+
+Both children are inserted by `onHeal()` if you leave them out, so only the two
+need authoring. **It opens on CLICK, not hover** — the host gains
+`dropdown--opening dropdown--opened` and the wrapper goes from `display:none` to
+`display:flex`. A hover test reports a dropdown that does not work.
+
+`dropdown-wrapper` reads as a leaf in `placement-rules.csv`, because `rule` is the
+`canBeParentFor()` answer and that method is never overridden on it. But its
+factory is `getDropdownWrapperElementDefaultData($data, $children)` and the editor
+fills it. "Will the editor let me drop this here" is not the same question as "can
+this hold children", and a build guard that reads only the first refuses correct
+structures — it refused this menu. `extract_placement.py` now also records
+`takes_children` from the factory signature, and `build_page.py` reads it.
+
+That is the second table to be caught short the same way this week. The first was
+`default-children.csv`, which held only the declared `getDefaultData()` statics and
+so knew nothing about children a type HEALS into itself — modal's overlay, loop's
+`loop-items`, slider's `slider-slides`, dropdown's own two. Both fixes are the same
+move: the question the table answers was narrower than the question the table's
+name suggests, so read the other source as well and say which is which.

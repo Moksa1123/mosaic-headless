@@ -511,7 +511,7 @@ HEAD = section("dl-head", [wrap("dl-head-w", [
       "不按也讀得完。",
       fontFamily=CJK, fontSize="14px", lineHeight="1.9",
       color={"token": "--mk-muted"}, marginTop="12px", maxWidth="640px"),
-    box("dl-head-pad", {"paddingTop": "46px"}, [], _m={"paddingTop": "26px"}),
+    box("dl-head-pad", {"paddingTop": "116px"}, [], _m={"paddingTop": "26px"}),
 ])], pad_y="0px")
 
 GALLERY = section("dl-gallery", [wrap("dl-gallery-w", [

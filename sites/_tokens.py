@@ -81,7 +81,7 @@ def swatch(name, meta):
 
 
 HEAD = section("tk-head", [wrap("tk-head-w", [
-    box("tk-head-pad", {"paddingTop": "76px"}, [], _m={"paddingTop": "26px"}),
+    box("tk-head-pad", {"paddingTop": "116px"}, [], _m={"paddingTop": "26px"}),
     mono("DESIGN SYSTEM / 設計系統", size="11px",
          color="--mk-faint", track="0.26em"),
     ml("h1", "一個值，\n改一次。",

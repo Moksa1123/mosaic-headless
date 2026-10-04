@@ -75,7 +75,7 @@ def code(attr, lines, bg="--mk-ink"):
 
 
 HEAD = section("dy-head", [wrap("dy-head-w", [
-    box("dy-head-pad", {"paddingTop": "76px"}, [], _m={"paddingTop": "26px"}),
+    box("dy-head-pad", {"paddingTop": "116px"}, [], _m={"paddingTop": "26px"}),
     mono("DYNAMIC CONTENT / 動態內容", size="11px",
          color="--mk-faint", track="0.26em"),
     ml("h1", "這一頁的清單，\n沒有人打過。",

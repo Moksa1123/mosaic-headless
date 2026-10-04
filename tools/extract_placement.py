@@ -39,6 +39,15 @@ RE_CAN_BE_PARENT = re.compile(
 RE_INSTANCEOF = re.compile(r"instanceof\s+(\w+)")
 RE_CTOR = re.compile(r"parent::__construct\s*\(\s*\$\w+\s*,\s*'([^']+)'", re.S)
 
+# `canBeParentFor()` answers "will the editor let me DROP this in here", and a type
+# that never overrides it reads as a leaf. That is not the same question as "can
+# this hold children at all": `dropdown-wrapper` says no to the first and yet its
+# own factory is `getDropdownWrapperElementDefaultData($data, $children)` and the
+# editor fills it. A tool that refuses writes on the strength of the `rule` column
+# alone therefore refuses correct structures, so the signature is recorded too.
+RE_TAKES_CHILDREN = re.compile(
+    r"function\s+get\w*DefaultData\s*\([^)]*\$children", re.S)
+
 
 def read(path):
     with open(path, encoding="utf-8", errors="replace") as fh:
@@ -111,13 +120,15 @@ def extract(plugin_root, out_dir):
                 "rule": rule,
                 "allowed_children": "|".join(allowed),
                 "nested_rule": nested,
+                "takes_children": "yes" if RE_TAKES_CHILDREN.search(src) else "",
                 "declared_in": os.path.relpath(defined_in or path, plugin_root).replace(os.sep, "/"),
             }
         )
 
     os.makedirs(out_dir, exist_ok=True)
     with open(os.path.join(out_dir, "placement-rules.csv"), "w", newline="", encoding="utf-8") as fh:
-        w = csv.DictWriter(fh, fieldnames=["type", "rule", "allowed_children", "nested_rule", "declared_in"])
+        w = csv.DictWriter(fh, fieldnames=["type", "rule", "allowed_children", "nested_rule",
+                                           "takes_children", "declared_in"])
         w.writeheader()
         w.writerows(rows)
 

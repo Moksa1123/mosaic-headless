@@ -277,9 +277,40 @@ def mask_line(attr, text, tag="h1", **st):
 
 
 # ── content, all of it Moksa Web's own ───────────────────────────────────────
+# Nine flat links was the wrong answer to "the site grew". The top level is the
+# studio's own site; everything that demonstrates what Mosaic can DO is one
+# labelled group, which is also the only honest shape - those five pages are a
+# set, not five more sections of the homepage.
 NAV = [("服務", "#services"), ("作品", "#works"),
-       ("產品", "#products"), ("彈窗", "/dialogs/"), ("輪播", "/sliders/"), ("系統", "/tokens/"), ("資料", "/dynamic/"), ("轉換", "/conversion/"),
-       ("聯絡", "#contact")]
+       ("產品", "#products"), ("聯絡", "#contact")]
+
+# Read from the shipped tables rather than typed, so the menu cannot claim a
+# number the evidence no longer supports.
+def _count(table, fn):
+    import csv as _c, io as _i, os as _o
+    path = _o.path.join(_o.path.dirname(_o.path.abspath(__file__)), "..", "data", table)
+    with _i.open(path, encoding="utf-8") as fh:
+        return fn(list(_c.DictReader(fh)))
+
+
+TOKENABLE_COUNT = _count("style-properties.csv",
+                         lambda rs: sum(1 for r in rs if r["tokenable"]))
+CONVERTED_COUNT = _count("conversion-batch.csv",
+                         lambda rs: sum(int(r["converted"]) for r in rs))
+
+# label, href, one line of what it demonstrates
+CAPABILITIES = [
+    ("彈窗與觸發", "/dialogs/",
+     "九種形態、四種觸發、四種執行規則"),
+    ("輪播", "/sliders/",
+     "四種動畫並排、輪轉模式、鍵盤與減少動態"),
+    ("設計系統", "/tokens/",
+     "設計代幣、variant 層、%d 個接得住代幣的屬性" % TOKENABLE_COUNT),
+    ("動態內容", "/dynamic/",
+     "迴圈、@VAR 表達式、自訂欄位"),
+    ("Elementor 轉換", "/conversion/",
+     "19 頁、%s 個元素、每一段字都核過" % "{:,}".format(CONVERTED_COUNT)),
+]
 
 # key / figure / caption, read as a datasheet rather than as four big numbers
 SPEC = [
@@ -1322,6 +1353,76 @@ def motion_css():
 
 
 # ── the shared shell ──────────────────────────────────────────────────────────
+NAV_LINK = {"color": {"token": "--mk-ink"}, "fontSize": "13px",
+            "fontWeight": "400", "letterSpacing": "0.04em", "fontFamily": MONO,
+            "cursor": "pointer"}
+
+
+def capability_dropdown():
+    """The capability pages as one labelled group.
+
+    `dropdown` heals in its own `dropdown-toggle` and `dropdown-wrapper`, so only
+    the two are authored here and the wrapper's children are the links. The
+    wrapper reads as a leaf in `placement-rules.csv` because `canBeParentFor()`
+    is never overridden on it - but its factory is
+    `getDropdownWrapperElementDefaultData($data, $children)`, which is why that
+    table now carries a `takes_children` column and the build guard reads it.
+    """
+    return {"type": "dropdown",
+            "data": {"attrID": "mk-cap", "horizontalAlign": "left"},
+            "style": {"&": {"_": {"position": "relative"}}},
+            "children": [
+                {"type": "dropdown-toggle",
+                 "data": {"attrID": "mk-cap-toggle"},
+                 "style": {"&": {"_": dict(NAV_LINK, **{
+                     "display": "flex", "alignItems": "center", "columnGap": "6px",
+                     "customDeclarations":
+                         "white-space:nowrap;"}),
+                     "_t": {"fontSize": "12px", "paddingTop": "8px",
+                            "paddingBottom": "8px"}},
+                     "hover": {"_": {"color": {"token": "--mk-accent"}}},
+                     "focus-visible": {"_": dict(FOCUS_RING)}},
+                 "children": [
+                     T("p", "能力展示", fontFamily=MONO,
+                       fontSize="13px", letterSpacing="0.04em",
+                       color={"token": "--mk-ink"}, _t={"fontSize": "12px"}),
+                     T("p", "+", fontFamily=MONO, fontSize="11px",
+                       color={"token": "--mk-faint"}),
+                 ]},
+                {"type": "dropdown-wrapper",
+                 "data": {"attrID": "mk-cap-menu"},
+                 "style": bp({"backgroundColor": {"token": "--mk-paper"},
+                              "paddingTop": "10px", "paddingBottom": "10px",
+                              "minWidth": "272px",
+                              "customDeclarations":
+                                  "border:1px solid rgb(22,24,28);"
+                                  "box-shadow:0 20px 48px rgba(22,24,28,.14);"},
+                             None,
+                             {"minWidth": "0px", "width": "100%",
+                              "customDeclarations":
+                                  "border:1px solid " + RULE + ";box-shadow:none;"}),
+                 "children": [
+                     {"type": "menu-link",
+                      "data": {"attrID": "mk-cap-%d" % i, "url": href},
+                      "style": {"&": {"_": {
+                          "display": "block", "cursor": "pointer",
+                          "paddingTop": "9px", "paddingBottom": "9px",
+                          "paddingLeft": "16px", "paddingRight": "16px"}},
+                          "hover": {"_": {
+                              "backgroundColor": {"token": "--mk-panel"}}},
+                          "focus-visible": {"_": dict(FOCUS_RING)}},
+                      "children": [
+                          T("p", label, fontFamily=CJK, fontSize="13px",
+                            fontWeight="500", color={"token": "--mk-ink"}),
+                          T("p", blurb, fontFamily=CJK, fontSize="11px",
+                            lineHeight="1.6", color={"token": "--mk-muted"},
+                            marginTop="3px"),
+                      ]}
+                     for i, (label, href, blurb) in enumerate(CAPABILITIES)
+                 ]},
+            ]}
+
+
 HEADER = box("mk-shell-top", {}, [
     # a `code` node with insertLocation "head" is the only way to get @keyframes into
     # the document - customDeclarations is emitted inside a rule and cannot hold one
@@ -1404,7 +1505,7 @@ HEADER = box("mk-shell-top", {}, [
                                  "focus-visible": {"_": FOCUS_RING}},
                        "text": text}
                       for i, (text, href) in enumerate(NAV)
-                  ]},
+                  ] + [capability_dropdown()]},
                  # not a pill: a bracketed link, the way a document cross-references
                  {"type": "button", "data": {"attrID": "mk-header-cta",
                                              "url": "#contact"},
