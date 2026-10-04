@@ -133,6 +133,39 @@ def main():
         ok = st == 200 and len(body) > 2000
         check("PAGE %s" % slug[:21], ok, "HTTP %d, %d bytes" % (st, len(body)))
 
+    # ── a fragment link only works on the page that HAS that id ─────────────
+    #
+    # The check above fetches each menu href and is satisfied by HTTP 200 - and a
+    # bare `#services` fetches the CURRENT page, so it passes everywhere while
+    # doing nothing on seven pages out of eight. The header is shared; the
+    # sections it points at are the homepage's. A fragment that resolves to
+    # nothing is a link the visitor clicks and watches not work, which is worse
+    # than a 404 because there is no feedback at all.
+    if a.viewports or True:
+        from playwright.sync_api import sync_playwright as _sp
+        DEAD = """() => [...document.querySelectorAll('[href^=\"#\"]')]
+            .map(e => ({id: e.id || String(e.className).slice(0, 20),
+                        href: e.getAttribute('href')}))
+            .filter(x => x.href.length > 1 &&
+                         !document.getElementById(x.href.slice(1)))"""
+        with _sp() as pw:
+            br = pw.chromium.launch()
+            for page in spec["pages"]:
+                slug = page["slug"]
+                url = base + ("/" if slug == a.home_slug else "/%s/" % slug)
+                pg = br.new_page(viewport={"width": 1280, "height": 880})
+                pg.goto("%s?_f=%d" % (url, int(time.time() * 1000)),
+                        wait_until="load")
+                pg.wait_for_timeout(900)
+                dead = pg.evaluate(DEAD)
+                pg.close()
+                check("ANCHORS %s" % slug[:19], not dead,
+                      "every in-page link resolves" if not dead
+                      else "dead fragments: %s"
+                           % ", ".join("%s%s" % (d["href"], "@" + d["id"] if d["id"] else "")
+                                       for d in dead[:5]))
+            br.close()
+
     # ── does any page scroll sideways ───────────────────────────────────────
     if a.viewports:
         widths = [int(w) for w in a.viewports.split(",") if w.strip()]

@@ -281,8 +281,12 @@ def mask_line(attr, text, tag="h1", **st):
 # studio's own site; everything that demonstrates what Mosaic can DO is one
 # labelled group, which is also the only honest shape - those five pages are a
 # set, not five more sections of the homepage.
-NAV = [("服務", "#services"), ("作品", "#works"),
-       ("產品", "#products"), ("聯絡", "#contact")]
+# These are sections of the HOMEPAGE, and the header is shared by every page. A
+# bare `#services` is therefore a dead link on all seven of the others: the
+# browser looks for that id in the current document, does not find it, and does
+# nothing at all. Absolute, so they mean the same thing from anywhere.
+NAV = [("服務", "/#services"), ("作品", "/#works"),
+       ("產品", "/#products"), ("聯絡", "/#contact")]
 
 # Read from the shipped tables rather than typed, so the menu cannot claim a
 # number the evidence no longer supports.
@@ -1460,7 +1464,7 @@ HEADER = box("mk-shell-top", {}, [
              "children": [
                  # the wordmark is the only route back to the top on a one-pager, so
                  # it has to be a link. `menu-link` with a url renders a real <a>.
-                 {"type": "menu-link", "data": {"attrID": "mk-logo", "url": "#mk-home"},
+                 {"type": "menu-link", "data": {"attrID": "mk-logo", "url": "/"},
                   "style": {"&": {"_": {"display": "flex", "alignItems": "baseline",
                                         "columnGap": "9px", "cursor": "pointer"}}},
                   "children":
@@ -1514,7 +1518,7 @@ HEADER = box("mk-shell-top", {}, [
                   ] + [capability_dropdown()]},
                  # not a pill: a bracketed link, the way a document cross-references
                  {"type": "button", "data": {"attrID": "mk-header-cta",
-                                             "url": "#contact"},
+                                             "url": "/#contact"},
                   "style": {"&": {"_m": {"display": "none"},
                                   "_t": {"fontSize": "12px"},
                                   # 13px of the bright orange on the glass header is
@@ -1696,8 +1700,8 @@ MASTHEAD = section("mk-mast", [wrap("mk-mast-in", [
                                     if n == 1
                                     else {"color": {"token": "--mk-accent"}})}},
           "text": text}
-         for n, (text, href) in enumerate([("服務項目 →", "#services"),
-                                           ("精選作品 →", "#works")], start=1)
+         for n, (text, href) in enumerate([("服務項目 →", "/#services"),
+                                           ("精選作品 →", "/#works")], start=1)
      ]},
           ]),
           # the right-hand column: what a spec sheet puts in its header block

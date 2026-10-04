@@ -344,3 +344,31 @@ Two rules come out of it:
   that lesson: for anything with a visible and an invisible state, a suite that
   only exercises the visible one is testing half a component, and the half it
   skips is the one the visitor sees most of the time.
+
+## A fragment link in a SHARED header is dead on every page but one
+
+`#services` points at an id in the CURRENT document. Put it in a header that every
+page shares, and on the one page that has that section it works, while on the other
+seven the browser looks for the id, does not find it, and does nothing — no
+navigation, no error, no feedback of any kind. The visitor clicks and the page sits
+there. It is worse than a 404 for exactly that reason.
+
+This shipped. The nav verifier had a check for it and the check could not see it:
+it fetched every menu href and asserted HTTP 200, and `#services` resolves to the
+*current* URL, so it returned 200 on all eight pages while being dead on seven.
+"Every link answers 200" and "every link does something" are different claims.
+
+Two things come out of it:
+
+- **Write shared-shell links absolutely** — `/#services`, not `#services`. A link
+  in a component that appears on more than one page has to mean the same thing
+  from all of them.
+- **Assert the fragment resolves on the page that carries it.**
+  `verify_navigation.py` now opens every page and fails on any `[href^="#"]`
+  whose target id is absent from that document. It found the four in the header
+  immediately — and then a fifth and sixth in the masthead, which `/intro/` shares
+  with the homepage and which I had not thought to look at.
+
+The general form: a check that confirms a resource EXISTS is not a check that the
+control WORKS, and anything living in a shared layout needs verifying on every
+page that includes it, not on the page it was designed for.

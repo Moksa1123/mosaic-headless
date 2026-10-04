@@ -103,7 +103,7 @@ const counts = {
   "data/token-verification.csv": 15,
   "data/mobile-audit.csv": 58,
   "data/component-wall-verification.csv": 11,
-  "data/navigation-verification.csv": 24,
+  "data/navigation-verification.csv": 33,
   "data/page-modal-verification.csv": 19,
   "data/interaction-rules-verification.csv": 17,
   "data/dialog-form-verification.csv": 49,
