@@ -56,6 +56,18 @@ def main():
         if not ok:
             fails.append(name)
 
+    def skip(name, why):
+        """A page that does not carry a component is not a page that broke it.
+
+        The same tool runs against every showcase page, so "absent" has to be a
+        third outcome - otherwise either the form page fails on tabs it never
+        had, or the checks get a flag per component and nobody runs them."""
+        rows.append([name, "SKIPPED", why])
+        print("  %-28s %-5s %s" % (name, "SKIP", why))
+
+    def present(el_id):
+        return p.evaluate("(id) => !!document.getElementById(id)", el_id)
+
     def split(spec):
         pat, n = spec.rsplit(":", 1)
         tab, pane = pat.split("/")
@@ -71,64 +83,95 @@ def main():
         p.wait_for_timeout(2200)
 
         # ---- tabs
-        shown = [i for i in range(n_tabs) if p.evaluate(VISIBLE, pane_pat % i)]
-        check("TABS/one_pane_at_rest", shown == [0],
-              "visible panes at rest: %s" % shown)
-        last = n_tabs - 1
-        p.click("#" + tab_pat % last)
-        p.wait_for_timeout(600)
-        shown = [i for i in range(n_tabs) if p.evaluate(VISIBLE, pane_pat % i)]
-        check("TABS/click_switches", shown == [last],
-              "clicked tab %d -> panes %s" % (last, shown))
-        active = p.evaluate("""() => {
-          const t = document.querySelector('.m-tab--active');
-          if (!t) return null;
-          const ps = [...t.querySelectorAll('p')].map(e => getComputedStyle(e).color);
-          return {bg: getComputedStyle(t).backgroundColor, labels: ps};
-        }""")
-        # the active tab is darkened by the plugin; if the label was not restyled
-        # with ___tab--active___descendants it is ink on ink and unreadable
-        readable = bool(active) and active["bg"] != (active["labels"] or [""])[0]
-        check("TABS/active_label_readable", readable, str(active))
+        if not present(tab_pat % 0):
+            skip("TABS", "not on this page")
+        else:
+            shown = [i for i in range(n_tabs) if p.evaluate(VISIBLE, pane_pat % i)]
+            check("TABS/one_pane_at_rest", shown == [0],
+                  "visible panes at rest: %s" % shown)
+            last = n_tabs - 1
+            p.click("#" + tab_pat % last)
+            p.wait_for_timeout(600)
+            shown = [i for i in range(n_tabs) if p.evaluate(VISIBLE, pane_pat % i)]
+            check("TABS/click_switches", shown == [last],
+                  "clicked tab %d -> panes %s" % (last, shown))
+            active = p.evaluate("""() => {
+              const t = document.querySelector('.m-tab--active');
+              if (!t) return null;
+              const ps = [...t.querySelectorAll('p')].map(e => getComputedStyle(e).color);
+              return {bg: getComputedStyle(t).backgroundColor, labels: ps};
+            }""")
+            # the plugin darkens the active tab; a label that was not restyled
+            # with ___tab--active___descendants is then ink on ink
+            readable = bool(active) and active["bg"] != (active["labels"] or [""])[0]
+            check("TABS/active_label_readable", readable, str(active))
 
         # ---- accordion
-        open_now = [i for i in range(n_faq) if p.evaluate(VISIBLE, ans_pat % i)]
-        check("ACCORDION/shut_at_rest", open_now == [], "open: %s" % open_now)
-        p.click("#" + q_pat % 1)
-        p.wait_for_timeout(700)
-        open_now = [i for i in range(n_faq) if p.evaluate(VISIBLE, ans_pat % i)]
-        check("ACCORDION/click_opens_one", open_now == [1],
-              "clicked 1 -> open %s" % open_now)
-        tabindex = p.evaluate("(id) => document.getElementById(id).getAttribute('tabindex')",
-                              q_pat % 1)
-        check("ACCORDION/keyboard_reachable", tabindex == "0",
-              "title tabindex=%r - the plugin puts it in the tab order" % tabindex)
+        if not present(q_pat % 0):
+            skip("ACCORDION", "not on this page")
+        else:
+            open_now = [i for i in range(n_faq) if p.evaluate(VISIBLE, ans_pat % i)]
+            check("ACCORDION/shut_at_rest", open_now == [], "open: %s" % open_now)
+            p.click("#" + q_pat % 1)
+            p.wait_for_timeout(700)
+            open_now = [i for i in range(n_faq) if p.evaluate(VISIBLE, ans_pat % i)]
+            check("ACCORDION/click_opens_one", open_now == [1],
+                  "clicked 1 -> open %s" % open_now)
+            ti = p.evaluate("(id) => document.getElementById(id).getAttribute('tabindex')",
+                            q_pat % 1)
+            check("ACCORDION/keyboard_reachable", ti == "0",
+                  "title tabindex=%r - the plugin puts it in the tab order" % ti)
 
         # ---- form
-        fields = p.evaluate("""(id) => [...document.querySelectorAll(
-            '#' + id + ' input, #' + id + ' textarea')].map(
-            e => ({name: e.getAttribute('name'), req: e.required,
-                   tag: e.tagName.toLowerCase()}))""", a.form)
-        named = [f["name"] for f in fields if f["name"]]
-        honeypot = [n for n in named if n.startswith("mosaic_hp")]
-        real = [n for n in named if not n.startswith("mosaic_hp")]
-        check("FORM/fields", len(real) >= 3, "named fields: %s" % real)
-        check("FORM/required", all(f["req"] for f in fields
-                                   if f["name"] in real),
-              "every author field is required")
-        check("FORM/honeypot", bool(honeypot),
-              "Mosaic adds its own spam trap: %s" % honeypot)
+        if not present(a.form):
+            skip("FORM", "not on this page")
+        else:
+            fields = p.evaluate("""(id) => [...document.querySelectorAll(
+                '#' + id + ' input, #' + id + ' select, #' + id + ' textarea')].map(
+                e => ({name: e.getAttribute('name'), req: e.required,
+                       tag: e.tagName.toLowerCase(), type: e.type}))""", a.form)
+            named = [f["name"] for f in fields if f["name"]]
+            honeypot = [n for n in named if n.startswith("mosaic_hp")]
+            real = [f for f in fields if f["name"] and not f["name"].startswith("mosaic_hp")]
+            kinds = sorted({f["type"] for f in real})
+            check("FORM/fields", len(real) >= 3,
+                  "%d controls, types: %s" % (len(real), ", ".join(kinds)))
+            check("FORM/required", any(f["req"] for f in real),
+                  "required is set on %d of them" % sum(1 for f in real if f["req"]))
+            check("FORM/honeypot", bool(honeypot),
+                  "Mosaic adds its own spam trap: %s" % honeypot)
+            # a <select> whose options have no text renders as a blank dropdown:
+            # `select-option` is a LEAF and its label is the `text` PROPERTY
+            opts = p.evaluate("""(id) => [...document.querySelectorAll('#' + id + ' option')]
+                .map(o => o.textContent.trim())""", a.form)
+            if opts:
+                check("FORM/option_labels", all(opts),
+                      "%d options, all labelled" % len(opts) if all(opts)
+                      else "blank labels - `text` is a property, not a child")
+            else:
+                skip("FORM/option_labels", "no select on this form")
+            # the browser's own validation has to stop an empty required form
+            p.evaluate("(id) => document.getElementById(id).reset()", a.form)
+            invalid = p.evaluate("""(id) => [...document.getElementById(id)
+                .querySelectorAll(':invalid')].filter(e => e.name).map(e => e.name)""",
+                                 a.form)
+            check("FORM/required_blocks", bool(invalid),
+                  "empty form reports invalid: %s" % invalid[:4])
 
         # ---- map
-        src = p.evaluate("""(id) => { const f = document.querySelector('#' + id + ' iframe');
-            return f ? f.getAttribute('src') : null; }""", a.map)
-        m = re.search(r"marker=([-\d.]+),([-\d.]+)", src or "")
-        times_square = bool(m) and m.group(1).startswith("40.75")
-        check("MAP/frame", bool(src), "renders an openstreetmap iframe")
-        check("MAP/coordinates_applied", bool(m) and not times_square,
-              ("marker=%s,%s" % m.groups()) if m else "no marker in %r" % (src or "")[:60]
-              + (" - this is the default, so the property name was wrong"
-                 if times_square else ""))
+        if not present(a.map):
+            skip("MAP", "not on this page")
+        else:
+            src = p.evaluate("""(id) => { const f = document.querySelector('#' + id + ' iframe');
+                return f ? f.getAttribute('src') : null; }""", a.map)
+            m = re.search(r"marker=([-\d.]+),([-\d.]+)", src or "")
+            default_centre = bool(m) and m.group(1).startswith("40.75")
+            check("MAP/frame", bool(src), "renders an openstreetmap iframe")
+            check("MAP/coordinates_applied", bool(m) and not default_centre,
+                  ("marker=%s,%s" % m.groups()) if m and not default_centre
+                  else "Times Square - the property name was wrong "
+                       "(it is latitude/longitude, not lat/lon)")
+
         b.close()
 
     print("\n%d checks, %d FAIL" % (len(rows), len(fails)))

@@ -95,7 +95,7 @@ class Surface:
         self.default_children = {r["type"]: r["default_children"].split("|")
                                  for r in load_csv("default-children.csv")}
 
-    def check(self, parent_type, node, force):
+    def check(self, parent_type, node, force, ancestors=()):
         t = node["type"]
         problems = []
         if t not in self.types:
@@ -157,12 +157,23 @@ class Surface:
         # registered types - slider/slider-slides, accordion/accordion-item,
         # form/form-input - and which actually carries one of them is not the thing
         # that was measured, and the verdict does not apply to it.
+        rule_for_t = self.rules.get(t, {})
         family = [x for x in self.types if x.startswith(t + "-")]
         kids = [c.get("type") for c in (node.get("children") or []) if isinstance(c, dict)]
         nested_as_family = bool(family) and any(k in family for k in kids)
 
+        # `nested_under` is what `canBeNestedChildFor()` walks the parent chain
+        # looking for: `radio-input` needs a `choice` above it, `label` needs a
+        # `field`, `loop-pagination` needs a `loop`. The names often share no
+        # prefix, so this is the only way to tell a correct placement from the
+        # bare one that was measured.
+        needs = (rule_for_t.get("nested_under") or "").split("|") if rule_for_t else []
+        nested_ok = bool(needs and needs != [""] and
+                         any(x in needs for x in (ancestors + ((parent_type,)
+                                                               if parent_type else ()))))
+
         outcome = self.outcome.get(t)
-        if (not declared_child and not nested_as_family
+        if (not declared_child and not nested_as_family and not nested_ok
                 and (outcome == "BROKE_PAGE" or (outcome or "").startswith("COMMIT_5"))):
             problems.append("%s is measured %s under a plain container, and %s is not its declared parent"
                             % (t, outcome, parent_type or "<root>"))
@@ -312,12 +323,13 @@ def refresh_node_ids(tree):
     return json.loads(blob)
 
 
-def flatten(node, parent_id, master_id, surface, force, ordering="a0", parent_type=None, out=None):
+def flatten(node, parent_id, master_id, surface, force, ordering="a0",
+            parent_type=None, out=None, ancestors=()):
     """Depth-first walk producing revision records, checking placement as it goes."""
     out = out if out is not None else []
     if node.get("component"):
         node = dict(node, type="div")     # placement is checked as a plain element
-    problems = surface.check(parent_type, node, force)
+    problems = surface.check(parent_type, node, force, ancestors)
     if problems:
         raise SystemExit("refusing to build:\n  " + "\n  ".join(problems))
 
@@ -360,7 +372,8 @@ def flatten(node, parent_id, master_id, surface, force, ordering="a0", parent_ty
     if node.get("text") is not None:
         children.insert(0, {"type": "wysiwyg-text", "data": {"text": node["text"]}})
     for i, child in enumerate(children):
-        flatten(child, nid, master_id, surface, force, ordering_for(i), node["type"], out)
+        flatten(child, nid, master_id, surface, force, ordering_for(i),
+                node["type"], out, ancestors + (node["type"],))
     return out
 
 

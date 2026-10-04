@@ -1,4 +1,5 @@
 path,width,finding,element,detail
+forms/,390,GRID_NOT_COLLAPSED,mk-f-links,2 columns at 390px
 components/,390,GRID_NOT_COLLAPSED,cp-tabs-menu,2 columns at 390px
 components/,390,GRID_NOT_COLLAPSED,mk-f-links,2 columns at 390px
 dialogs/,390,GRID_NOT_COLLAPSED,mk-f-links,2 columns at 390px
@@ -16,6 +17,7 @@ sliders/,390,GRID_NOT_COLLAPSED,mk-f-links,2 columns at 390px
 tokens/,390,GRID_NOT_COLLAPSED,mk-f-links,2 columns at 390px
 dynamic/,390,GRID_NOT_COLLAPSED,mk-f-links,2 columns at 390px
 conversion/,390,GRID_NOT_COLLAPSED,mk-f-links,2 columns at 390px
+forms/,768,LONG_MEASURE,m-text,59 chars/line
 components/,768,LONG_MEASURE,m-text,44 chars/line
 components/,768,LONG_MEASURE,m-text,56 chars/line
 dialogs/,768,LONG_MEASURE,m-text,46 chars/line

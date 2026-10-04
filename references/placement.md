@@ -115,3 +115,41 @@ Reach for the measured table when you are deciding what to build with, and this 
 when you are deciding what may go inside what. `tools/check_placement_predicts.py`
 re-scores the numbers above after any re-sweep, so the claim stays honest if the
 plugin changes.
+
+## `nested_under`: what a type is looking for above it
+
+`rule` is the `canBeParentFor()` answer — "will the editor let me drop this here".
+Many types also implement `canBeNestedChildFor()`, which walks the parent chain at
+runtime looking for ONE ancestor class, and until now this table only recorded
+that such a rule existed. The `nested_under` column now names it. 54 of 128 types
+have one, and the names usually share no prefix with the type, so there is no way
+to infer it:
+
+| type | needs above it |
+|---|---|
+| `radio-input`, `checkbox-input`, `choice-label` | `choice` |
+| `choice`, | `choice-field` |
+| `label`, `fileupload-input` | `field` |
+| `choice-field`, `fieldset`, `field`, `hidden-input` | `choice-field` \| `field` \| `form` |
+| `loop-item` | `loop-items` |
+| `loop-pagination` | `loop` |
+| `list-item` | `list` \| `list-loop-items` \| `wp-menu` |
+| `accordion-item` | `accordion` \| `accordion-loop-items` |
+
+A node committed without its required ancestor is **accepted and discarded**. The
+commit returns no exception, the page renders, and the element is simply not
+there — which is how a form came back with two fieldsets and no fields.
+`build_page.py` reads this column and now carries the ancestor chain down the walk,
+so a correct placement is allowed and an incorrect one is refused before the write
+rather than silently lost after it.
+
+Two other things the table was short of, both fixed the same way — by reading the
+source the column was derived from rather than the one it was convenient to read:
+
+- **`takes_children`**, from the factory's `getDefaultData($data, $children)`
+  signature. `dropdown-wrapper` answers `none` to `canBeParentFor` and holds the
+  menu's links regardless.
+- **two missing types.** `fieldset-legend` and `fieldset-content` are declared by
+  an `*ElementMResourceFactory.php`; every extractor walked
+  `*ElementTypeFactory.php` only, so they were absent from the catalog and a
+  fieldset appeared to have no inner structure.

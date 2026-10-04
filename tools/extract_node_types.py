@@ -69,7 +69,13 @@ def extract(plugin_root, out_dir):
         sys.exit("no Mosaic/NodeTypes under %s" % plugin_root)
 
     types = []
-    for path in sorted(walk(node_root, ("TypeFactory.php",))):
+    # `*MResourceFactory.php` as well as `*TypeFactory.php`: two node types -
+    # `fieldset-legend` and `fieldset-content` - are declared only by the former,
+    # so a walk of TypeFactory alone leaves them out of the catalog entirely. A
+    # page that needs them is then refused by the placement guard as an "unknown
+    # node type", and a reader of this table is told the fieldset has no inner
+    # structure, which is how a form came back with its fields dropped.
+    for path in sorted(walk(node_root, ("TypeFactory.php", "MResourceFactory.php"))):
         src = read(path)
         cls = RE_CLASS.search(src)
         ctor = RE_CTOR.search(src)

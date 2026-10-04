@@ -372,3 +372,30 @@ Two things come out of it:
 The general form: a check that confirms a resource EXISTS is not a check that the
 control WORKS, and anything living in a shared layout needs verifying on every
 page that includes it, not on the page it was designed for.
+
+## Three ways a form comes back empty, none of them an error
+
+A form page built in one pass rendered two fieldsets, one stray label and **zero
+controls**. The commit succeeded, the response carried no exception, and the HTML
+was valid. Every field had been dropped on the way in, for three different reasons:
+
+- **`label` and the inputs need a `field` above them.** They declare
+  `canBeNestedChildFor` and walk the parent chain looking for one; committed under
+  a plain div they are refused and discarded. `placement-rules.csv` now carries a
+  `nested_under` column naming exactly what each type is looking for — 54 types
+  have one, and the names rarely share a prefix (`radio-input` wants `choice`,
+  `label` wants `field`, `loop-pagination` wants `loop`).
+- **`fieldset` does not take fields.** It renders `fieldset-legend` +
+  `fieldset-content`, and direct children are dropped. Neither type was in
+  `node-types.csv` at all, because they are declared by an
+  `*ElementMResourceFactory.php` and every extractor here walked
+  `*ElementTypeFactory.php` only. Two types were missing from the catalog; the
+  walk now covers both and the count went 126 → 128.
+- **`select-option` is a leaf and its label is the `text` PROPERTY.** Give it a
+  `wysiwyg-text` child and the option renders with an empty label: a dropdown that
+  opens onto five blank lines, which looks like a styling problem and is not.
+
+The through-line is the one this file keeps recording: Mosaic accepts a write it
+cannot use and says nothing. The defence is to read the delivered page back and
+count what arrived — `verify_components.py` now asserts the control count, the option
+labels and that an empty required form is actually refused.

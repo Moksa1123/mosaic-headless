@@ -1,22 +1,24 @@
 check,result,detail
-FRONT_PAGE,PASS,"HTTP 200, 239472 bytes"
+FRONT_PAGE,PASS,"HTTP 200, 240166 bytes"
 MENU_IS_LINKS,PASS,4 real <a href> in #mk-nav
-NAV 服務,PASS,"/#services -> HTTP 200, 239568 bytes"
-NAV 作品,PASS,"/#works -> HTTP 200, 239568 bytes"
-NAV 產品,PASS,"/#products -> HTTP 200, 239568 bytes"
-NAV 聯絡,PASS,"/#contact -> HTTP 200, 239568 bytes"
-PAGE moksa,PASS,"HTTP 200, 239471 bytes"
-PAGE my-account,PASS,"HTTP 200, 99676 bytes"
-PAGE intro,PASS,"HTTP 200, 133386 bytes"
-PAGE components,PASS,"HTTP 200, 114165 bytes"
-PAGE conversion,PASS,"HTTP 200, 101843 bytes"
-PAGE dynamic,PASS,"HTTP 200, 111263 bytes"
-PAGE tokens,PASS,"HTTP 200, 124433 bytes"
-PAGE sliders,PASS,"HTTP 200, 150450 bytes"
-PAGE dialogs,PASS,"HTTP 200, 205987 bytes"
+NAV 服務,PASS,"/#services -> HTTP 200, 240262 bytes"
+NAV 作品,PASS,"/#works -> HTTP 200, 240262 bytes"
+NAV 產品,PASS,"/#products -> HTTP 200, 240262 bytes"
+NAV 聯絡,PASS,"/#contact -> HTTP 200, 240262 bytes"
+PAGE moksa,PASS,"HTTP 200, 240166 bytes"
+PAGE my-account,PASS,"HTTP 200, 100372 bytes"
+PAGE intro,PASS,"HTTP 200, 134080 bytes"
+PAGE forms,PASS,"HTTP 200, 100299 bytes"
+PAGE components,PASS,"HTTP 200, 114860 bytes"
+PAGE conversion,PASS,"HTTP 200, 102160 bytes"
+PAGE dynamic,PASS,"HTTP 200, 112338 bytes"
+PAGE tokens,PASS,"HTTP 200, 124749 bytes"
+PAGE sliders,PASS,"HTTP 200, 151524 bytes"
+PAGE dialogs,PASS,"HTTP 200, 206683 bytes"
 ANCHORS moksa,PASS,every in-page link resolves
 ANCHORS my-account,PASS,every in-page link resolves
 ANCHORS intro,PASS,every in-page link resolves
+ANCHORS forms,PASS,every in-page link resolves
 ANCHORS components,PASS,every in-page link resolves
 ANCHORS conversion,PASS,every in-page link resolves
 ANCHORS dynamic,PASS,every in-page link resolves
@@ -26,6 +28,7 @@ ANCHORS dialogs,PASS,every in-page link resolves
 WIDTH moksa,PASS,"no sideways scroll at 390,768,1280"
 WIDTH my-account,PASS,"no sideways scroll at 390,768,1280"
 WIDTH intro,PASS,"no sideways scroll at 390,768,1280"
+WIDTH forms,PASS,"no sideways scroll at 390,768,1280"
 WIDTH components,PASS,"no sideways scroll at 390,768,1280"
 WIDTH conversion,PASS,"no sideways scroll at 390,768,1280"
 WIDTH dynamic,PASS,"no sideways scroll at 390,768,1280"

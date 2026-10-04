@@ -57,7 +57,8 @@ def read(path):
 def walk(root, suffix):
     for dirpath, _dirs, files in os.walk(root):
         for fn in sorted(files):
-            if fn.endswith(suffix):
+            if fn.endswith(suffix) if isinstance(suffix, str) else any(
+                    fn.endswith(x) for x in suffix):
                 yield os.path.join(dirpath, fn)
 
 
@@ -68,7 +69,7 @@ def extract(plugin_root, out_dir):
 
     # factory class name -> type slug, so instanceof targets can be named as types
     class_to_type, sources = {}, {}
-    for path in walk(node_root, "TypeFactory.php"):
+    for path in walk(node_root, ("TypeFactory.php", "MResourceFactory.php")):
         src = read(path)
         cls = RE_CLASS.search(src)
         if not cls:
@@ -95,6 +96,18 @@ def extract(plugin_root, out_dir):
         body, defined_in = resolve(cls_name)
         path, src, _parent = sources[cls_name]
         nested = "yes" if "function canBeNestedChildFor" in src else ""
+        # `yes` alone says a runtime ancestry rule exists and not what it wants.
+        # These methods walk the parent chain looking for one MResource class -
+        # `radio-input` wants a `ChoiceElementMResource` above it - and that is
+        # the one fact a caller needs to know whether a placement is legal.
+        nested_under = []
+        if nested:
+            mbody = re.search(
+                r"function\s+canBeNestedChildFor\s*\([^)]*\)\s*:\s*bool\s*\{(.*?)\n    \}",
+                src, re.S)
+            if mbody:
+                for cls in re.findall(r"instanceof\s+(\w+)ElementMResource\b", mbody.group(1)):
+                    nested_under.append(cls)
 
         if body is None:
             rule, allowed = "none", []          # inherited default on the abstract base
@@ -121,6 +134,12 @@ def extract(plugin_root, out_dir):
                 "allowed_children": "|".join(allowed),
                 "nested_rule": nested,
                 "takes_children": "yes" if RE_TAKES_CHILDREN.search(src) else "",
+                # `class_to_type` is keyed by the FACTORY class, and what the
+                # method names is the MResource - `ChoiceElementMResource` is
+                # declared by `ChoiceElementTypeFactory`.
+                "nested_under": "|".join(sorted(set(
+                    class_to_type.get(c + "ElementTypeFactory", "")
+                    for c in nested_under) - {""})),
                 "declared_in": os.path.relpath(defined_in or path, plugin_root).replace(os.sep, "/"),
             }
         )
@@ -128,7 +147,8 @@ def extract(plugin_root, out_dir):
     os.makedirs(out_dir, exist_ok=True)
     with open(os.path.join(out_dir, "placement-rules.csv"), "w", newline="", encoding="utf-8") as fh:
         w = csv.DictWriter(fh, fieldnames=["type", "rule", "allowed_children", "nested_rule",
-                                           "takes_children", "declared_in"])
+                                           "takes_children", "nested_under",
+                                           "declared_in"])
         w.writeheader()
         w.writerows(rows)
 

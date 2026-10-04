@@ -304,6 +304,8 @@ CONVERTED_COUNT = _count("conversion-batch.csv",
 
 # label, href, one line of what it demonstrates
 CAPABILITIES = [
+    ("表單", "/forms/",
+     "下拉、單選、複選、上傳、必填規則與錯誤訊息"),
     ("元件牆", "/components/",
      "分頁、手風琴、表單、地圖——都能直接操作"),
     ("彈窗與觸發", "/dialogs/",
@@ -3228,6 +3230,10 @@ if __name__ == "__main__":
     # helpers it reads are pure functions - two copies produce identical dicts.
     import _dialogs
     import _sliders
+    import _forms
+    SITE["pages"].append({"slug": "forms", "post_id": 282,
+                          "title": "表單",
+                          "tree": apply_type(_forms.TREE, DISPLAY, CJK, "600")})
     import _components
     SITE["pages"].append({"slug": "components", "post_id": 281,
                           "title": "元件",
