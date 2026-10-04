@@ -2,10 +2,11 @@ check,result,detail
 TABS,SKIPPED,not on this page
 ACCORDION,SKIPPED,not on this page
 FORM,SKIPPED,not on this page
+COMPONENT/instances,SKIPPED,fewer than two on this page
 LOOP/slider,PASS,6 slides from one authored slider-slide
 LOOP/tabs,PASS,4 tabs from one authored tabs-tab
 LOOP/tab_labels_intact,PASS,"no replacement characters - @substr counts bytes, so a length that is not a multiple of the encoding cuts a glyph in half"
-LOOP/pagination_links,PASS,"3 page links: ['v=5499&notes=1', 'v=5499&notes=2', 'v=5499&notes=3']"
+LOOP/pagination_links,PASS,"3 page links: ['v=16802&notes=1', 'v=16802&notes=2', 'v=16802&notes=3']"
 LOOP/pagination_key_is_safe,PASS,paginationKey does not collide with a WordPress query var
 LOOP/pagination_changes_rows,PASS,page 1 3 -> page 2 3
 MAP,SKIPPED,not on this page

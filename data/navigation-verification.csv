@@ -1,21 +1,18 @@
 check,result,detail
-FRONT_PAGE,PASS,"HTTP 200, 240862 bytes"
-MENU_IS_LINKS,PASS,4 real <a href> in #mk-nav
-NAV 服務,PASS,"/#services -> HTTP 200, 240958 bytes"
-NAV 作品,PASS,"/#works -> HTTP 200, 240958 bytes"
-NAV 產品,PASS,"/#products -> HTTP 200, 240958 bytes"
-NAV 聯絡,PASS,"/#contact -> HTTP 200, 240958 bytes"
-PAGE moksa,PASS,"HTTP 200, 240862 bytes"
-PAGE my-account,PASS,"HTTP 200, 101069 bytes"
-PAGE intro,PASS,"HTTP 200, 134776 bytes"
-PAGE content,PASS,"HTTP 200, 102296 bytes"
-PAGE forms,PASS,"HTTP 200, 101374 bytes"
-PAGE components,PASS,"HTTP 200, 115556 bytes"
-PAGE conversion,PASS,"HTTP 200, 103234 bytes"
-PAGE dynamic,PASS,"HTTP 200, 112654 bytes"
-PAGE tokens,PASS,"HTTP 200, 125824 bytes"
-PAGE sliders,PASS,"HTTP 200, 151841 bytes"
-PAGE dialogs,PASS,"HTTP 200, 207378 bytes"
+FRONT_PAGE,PASS,"HTTP 200, 240831 bytes"
+MENU_IS_LINKS,PASS,1 real <a href> in #mk-nav
+NAV 首頁,PASS,"/ -> HTTP 200, 240830 bytes"
+PAGE moksa,PASS,"HTTP 200, 240830 bytes"
+PAGE my-account,PASS,"HTTP 200, 101036 bytes"
+PAGE intro,PASS,"HTTP 200, 134744 bytes"
+PAGE content,PASS,"HTTP 200, 102378 bytes"
+PAGE forms,PASS,"HTTP 200, 101343 bytes"
+PAGE components,PASS,"HTTP 200, 115524 bytes"
+PAGE conversion,PASS,"HTTP 200, 103202 bytes"
+PAGE dynamic,PASS,"HTTP 200, 112622 bytes"
+PAGE tokens,PASS,"HTTP 200, 125792 bytes"
+PAGE sliders,PASS,"HTTP 200, 151809 bytes"
+PAGE dialogs,PASS,"HTTP 200, 207347 bytes"
 ANCHORS moksa,PASS,every in-page link resolves
 ANCHORS my-account,PASS,every in-page link resolves
 ANCHORS intro,PASS,every in-page link resolves

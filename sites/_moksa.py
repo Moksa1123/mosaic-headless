@@ -285,8 +285,11 @@ def mask_line(attr, text, tag="h1", **st):
 # bare `#services` is therefore a dead link on all seven of the others: the
 # browser looks for that id in the current document, does not find it, and does
 # nothing at all. Absolute, so they mean the same thing from anywhere.
-NAV = [("服務", "/#services"), ("作品", "/#works"),
-       ("產品", "/#products"), ("聯絡", "/#contact")]
+# The header used to be the studio site's own section anchors. On a demo whose
+# whole job is to show what Mosaic can do, those were four links that left the
+# showcase - so the menu IS the showcase now, and the one remaining top-level
+# link goes home.
+NAV = [("首頁", "/")]
 
 # Read from the shipped tables rather than typed, so the menu cannot claim a
 # number the evidence no longer supports.
@@ -302,7 +305,31 @@ TOKENABLE_COUNT = _count("style-properties.csv",
 CONVERTED_COUNT = _count("conversion-batch.csv",
                          lambda rs: sum(int(r["converted"]) for r in rs))
 
-# label, href, one line of what it demonstrates
+# Two groups, because eight flat links is the thing this menu was already fixed
+# for once. `label, href, one line of what it demonstrates`.
+CAPABILITY_GROUPS = [
+    ("介面元件", [
+        ("元件牆", "/components/",
+         "分頁、手風琴、表單、地圖——都能直接操作"),
+        ("表單", "/forms/",
+         "下拉、單選、複選、上傳、必填規則與錯誤訊息"),
+        ("輪播", "/sliders/",
+         "四種動畫並排、輪轉模式、鍵盤與減少動態"),
+        ("彈窗與觸發", "/dialogs/",
+         "九種形態、四種觸發、四種執行規則"),
+    ]),
+    ("資料與系統", [
+        ("內容驅動", "/content/",
+         "輪播、分頁、存檔——都由文章資料複製"),
+        ("動態內容", "/dynamic/",
+         "迴圈、@VAR 表達式、自訂欄位"),
+        ("設計系統", "/tokens/",
+         "設計代幣、variant 層、%d 個接得住代幣的屬性" % TOKENABLE_COUNT),
+        ("Elementor 轉換", "/conversion/",
+         "19 頁、%s 個元素、每一段字都核過" % "{:,}".format(CONVERTED_COUNT)),
+    ]),
+]
+
 CAPABILITIES = [
     ("內容驅動", "/content/",
      "輪播、分頁、存檔——都由文章資料複製"),
@@ -1368,7 +1395,7 @@ NAV_LINK = {"color": {"token": "--mk-ink"}, "fontSize": "13px",
             "cursor": "pointer"}
 
 
-def capability_dropdown():
+def capability_dropdown(key, title, entries):
     """The capability pages as one labelled group.
 
     `dropdown` heals in its own `dropdown-toggle` and `dropdown-wrapper`, so only
@@ -1379,11 +1406,11 @@ def capability_dropdown():
     table now carries a `takes_children` column and the build guard reads it.
     """
     return {"type": "dropdown",
-            "data": {"attrID": "mk-cap", "horizontalAlign": "right"},
+            "data": {"attrID": "mk-cap-" + key, "horizontalAlign": "right"},
             "style": {"&": {"_": {"position": "relative"}}},
             "children": [
                 {"type": "dropdown-toggle",
-                 "data": {"attrID": "mk-cap-toggle"},
+                 "data": {"attrID": "mk-cap-%s-toggle" % key},
                  "style": {"&": {"_": dict(NAV_LINK, **{
                      "display": "flex", "alignItems": "center", "columnGap": "6px",
                      "customDeclarations":
@@ -1393,14 +1420,14 @@ def capability_dropdown():
                      "hover": {"_": {"color": {"token": "--mk-accent"}}},
                      "focus-visible": {"_": dict(FOCUS_RING)}},
                  "children": [
-                     T("p", "能力展示", fontFamily=MONO,
+                     T("p", title, fontFamily=MONO,
                        fontSize="13px", letterSpacing="0.04em",
                        color={"token": "--mk-ink"}, _t={"fontSize": "12px"}),
                      T("p", "+", fontFamily=MONO, fontSize="11px",
                        color={"token": "--mk-faint"}),
                  ]},
                 {"type": "dropdown-wrapper",
-                 "data": {"attrID": "mk-cap-menu"},
+                 "data": {"attrID": "mk-cap-%s-menu" % key},
                  "style": bp({"backgroundColor": {"token": "--mk-paper"},
                               "paddingTop": "10px", "paddingBottom": "10px",
                               "minWidth": "272px",
@@ -1417,7 +1444,8 @@ def capability_dropdown():
                                   "box-shadow:0 18px 40px rgba(22,24,28,.16);"}),
                  "children": [
                      {"type": "menu-link",
-                      "data": {"attrID": "mk-cap-%d" % i, "url": href},
+                      "data": {"attrID": "mk-cap-%s-%d" % (key, i),
+                               "url": href},
                       "style": {"&": {"_": {
                           "display": "block", "cursor": "pointer",
                           "paddingTop": "9px", "paddingBottom": "9px",
@@ -1432,7 +1460,7 @@ def capability_dropdown():
                             lineHeight="1.6", color={"token": "--mk-muted"},
                             marginTop="3px"),
                       ]}
-                     for i, (label, href, blurb) in enumerate(CAPABILITIES)
+                     for i, (label, href, blurb) in enumerate(entries)
                  ]},
             ]}
 
@@ -1519,7 +1547,8 @@ HEADER = box("mk-shell-top", {}, [
                                  "focus-visible": {"_": FOCUS_RING}},
                        "text": text}
                       for i, (text, href) in enumerate(NAV)
-                  ] + [capability_dropdown()]},
+                  ] + [capability_dropdown("g%d" % gi, title, entries)
+                       for gi, (title, entries) in enumerate(CAPABILITY_GROUPS)]},
                  # not a pill: a bracketed link, the way a document cross-references
                  {"type": "button", "data": {"attrID": "mk-header-cta",
                                              "url": "/#contact"},
@@ -3241,6 +3270,10 @@ if __name__ == "__main__":
                           "title": "表單",
                           "tree": apply_type(_forms.TREE, DISPLAY, CJK, "600")})
     import _components
+    # the showcase page brings its own component definition; components are a
+    # theme-level record, so they have to join the site's map before build_site
+    # walks it
+    SITE["components"].update(_components.COMPONENTS)
     SITE["pages"].append({"slug": "components", "post_id": 281,
                           "title": "元件",
                           "tree": apply_type(_components.TREE, DISPLAY, CJK, "600")})

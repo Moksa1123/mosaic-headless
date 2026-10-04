@@ -196,3 +196,33 @@ is in the wrong hemisphere. The three coordinate properties take
 The element is an `<iframe>` to openstreetmap.org, not a tile layer, so "how many
 tiles loaded" is unanswerable from the parent document — assert on the frame's
 `src`, which carries `marker=lat,lon`.
+
+## Component instances: one definition, many uses
+
+A component is a theme-level record; a page writes an INSTANCE of it and supplies
+only the slots that differ:
+
+```jsonc
+// the definition, once, in the site's `components` map
+"case-card": <tree with slot() text nodes>
+
+// an instance, on a page
+{"type": "div", "component": "case-card",
+ "data": {"attrID": "cs-0"},
+ "overrides": {"cs-kind": {"text": "E-COMMERCE"},
+               "cs-name": {"text": "…"}}}
+```
+
+**An instance's ids are prefixed with the instance's own attrID.** The definition's
+`cs-card` becomes `cs-0-cs-card`, `cs-1-cs-card`, and so on, so the definition's
+attrID is a SUFFIX in the delivered page and `getElementById` on it finds nothing.
+Address instances with `[id$="-cs-card"]`.
+
+The claim worth verifying is not that three cards rendered. It is that they are the
+same definition, and the evidence is in the class: all three carry the identical
+generated token (`_fm` here) while their text differs. Three copy-pasted sections
+would carry three tokens and three rules. `verify_components.py` asserts exactly
+that — and the first version of the check passed on three `null`s, because its
+regex contained a literal backspace: `\b` inside a non-raw Python string is 0x08,
+not a word boundary. An assertion that cannot fail is worse than no assertion, so
+the check now also refuses a token it could not read.

@@ -53,6 +53,8 @@ def main():
                     help="a loop-pagination-numbers whose children are page links")
     ap.add_argument("--paged-item", default="ct-arch-title",
                     help="the repeated attrID whose text should change per page")
+    ap.add_argument("--instances", default="cs-card",
+                    help="a component's root attrID; instances are prefixed")
     a = ap.parse_args()
 
     rows, fails = [], []
@@ -164,6 +166,40 @@ def main():
                                  a.form)
             check("FORM/required_blocks", bool(invalid),
                   "empty form reports invalid: %s" % invalid[:4])
+
+        # ---- component instances
+        #
+        # An instance's ids are PREFIXED with the instance's own attrID
+        # (`cs-0-cs-card`), so the definition's attrID is a suffix, not an id.
+        # The claim worth checking is not that three cards rendered - it is that
+        # they are the SAME definition: one generated class token across all of
+        # them, while the text differs. Copy-pasted sections would each carry
+        # their own token.
+        inst = p.evaluate("""(suffix) => {
+          const els = [...document.querySelectorAll('[id$="-' + suffix + '"]')];
+          return els.map(e => ({
+            id: e.id,
+            // No regex here. `\b` inside a non-raw Python string is a BACKSPACE,
+            // so the pattern shipped with a 0x08 in it, matched nothing, and the
+            // "they all share one class" check passed on a set of three nulls.
+            token: String(e.className).split(/\s+/)
+                     .filter(c => c.startsWith('_'))[0] || null,
+            text: e.textContent.trim().slice(0, 24)}));
+        }""", a.instances)
+        if len(inst) < 2:
+            skip("COMPONENT/instances", "fewer than two on this page")
+        else:
+            tokens = {i["token"] for i in inst}
+            texts = {i["text"] for i in inst}
+            check("COMPONENT/instances", len(inst) >= 2,
+                  "%d instances: %s" % (len(inst), [i["id"] for i in inst]))
+            check("COMPONENT/one_definition",
+                  len(tokens) == 1 and None not in tokens,
+                  "all share the generated class %s - one definition, not %d copies"
+                  % (sorted(str(t) for t in tokens), len(inst)))
+            check("COMPONENT/content_differs", len(texts) == len(inst),
+                  "%d instances, %d distinct bodies - the overrides are per-instance"
+                  % (len(inst), len(texts)))
 
         # ---- components whose children come from a loop
         #

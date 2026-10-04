@@ -19,7 +19,7 @@ Mosaic document.
 import uuid
 
 from _moksa import (CJK, DISPLAY, FOCUS_RING, MONO, RULE, SERVICES, T, bp, box,
-                    grid, ml, mono, section, wrap)
+                    grid, ml, mono, section, slot, wrap)
 
 U = lambda: str(uuid.uuid4())
 
@@ -296,6 +296,75 @@ def map_block():
                         None, {"height": "280px"})}
 
 
+# ---------------------------------------------------------------- component
+
+# A component is ONE definition the whole site shares. An instance carries only
+# what differs - the overrides - so the three cards below are the same seven nodes
+# three times over, not twenty-one nodes that happen to look alike. Change the
+# definition and all three change; that is the part a page builder's "copy this
+# section" cannot do.
+CASE_CARD = box("cs-card", {
+    "display": "flex", "flexDirection": "column", "rowGap": "0px",
+    "paddingTop": "24px", "paddingBottom": "22px",
+    "paddingLeft": "22px", "paddingRight": "22px",
+    "backgroundColor": {"token": "--mk-paper"},
+    "customDeclarations": "border:1px solid " + RULE + ";"},
+    children=[
+        box("cs-head", {
+            "display": "flex", "justifyContent": "space-between",
+            "alignItems": "baseline", "columnGap": "12px",
+            "paddingBottom": "12px",
+            "customDeclarations": "border-bottom:1px solid " + RULE + ";"},
+            # slot() goes through T(), not mono(), so the mobile type floor
+            # never sees it - the breakpoint has to be written here
+            [slot("p", "cs-kind", "KIND", color={"token": "--mk-accent-ink"},
+                  fontSize="10px", fontFamily=MONO, letterSpacing="0.2em",
+                  _t={"fontSize": "12px", "letterSpacing": "0.14em"}),
+             slot("p", "cs-year", "2026", color={"token": "--mk-faint"},
+                  fontSize="10px", fontFamily=MONO, letterSpacing="0.14em",
+                  _t={"fontSize": "12px"})]),
+        slot("h3", "cs-name", "專案", color={"token": "--mk-ink"},
+             fontSize="20px", fontWeight="600", fontFamily=DISPLAY,
+             marginTop="16px", lineHeight="1.35"),
+        slot("p", "cs-body", "說明", color={"token": "--mk-muted"},
+             fontSize="13px", lineHeight="1.9", marginTop="10px"),
+        slot("p", "cs-metric", "成果", color={"token": "--mk-ink"},
+             fontSize="11px", fontFamily=MONO, letterSpacing="0.12em",
+             marginTop="16px", _t={"fontSize": "12px"}),
+    ])
+
+COMPONENTS = {"case-card": CASE_CARD}
+
+CASES = [
+    ("E-COMMERCE", "2025", "Dr.pen 電商自動化",
+     "訂單、庫存與出貨通知串成一條流程，"
+     "客服不再手抄訂單。", "→ 人工核對時間大幅下降"),
+    ("BOOKING", "2025", "覽陽洋露營區訂位",
+     "營位、期間與價格規則自己算，"
+     "假日不用再回訊息。", "→ 線上完成訂位"),
+    ("ERP", "2026", "馬術用品進銷存",
+     "進貨、店面與線上庫存同一本帳，"
+     "盤點從一天變一小時。", "→ 單一帳本"),
+]
+
+
+def case_instance(i, kind, year, name, body, metric):
+    """An instance carries only what differs from the definition."""
+    return {"type": "div", "component": "case-card",
+            "data": {"attrID": "cs-%d" % i},
+            "overrides": {"cs-kind": {"text": kind},
+                          "cs-year": {"text": year},
+                          "cs-name": {"text": name},
+                          "cs-body": {"text": body},
+                          "cs-metric": {"text": metric}}}
+
+
+def component_block():
+    return grid("cs-grid", 3, "18px",
+                [case_instance(i, *c) for i, c in enumerate(CASES)],
+                tcols=2, mcols=1)
+
+
 # ---------------------------------------------------------------- the page
 
 def band(attr, label, types, body, bg="--mk-paper"):
@@ -337,6 +406,10 @@ TREE = {"type": "div", "data": {"attrID": "cp-page"},
                  "form-wrapper › form › text-input + textarea-input + "
                  "submit-button / success-screen",
                  form_block(), bg="--mk-paper"),
+            band("cp-comp-s", "COMPONENT / 元件實例",
+                 "一個定義 × 3 個實例，"
+                 "實例只帶不一樣的那五個欄位",
+                 component_block(), bg="--mk-paper"),
             band("cp-map-s", "MAP / 地圖",
                  "openstreetmap — latitude / longitude / zoom",
                  map_block(), bg="--mk-panel"),
