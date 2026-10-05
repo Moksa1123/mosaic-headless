@@ -280,6 +280,170 @@ def full_form():
             ]}
 
 
+# ---------------------------------------------------------------- multi-step
+
+def step_tab(i, num, label):
+    """One tab in the step bar.
+
+    The step the visitor is on and the ones already answered are separate states,
+    and - exactly like the tab component - the `___descendants` variant is the one
+    that reaches the labels inside, because its selector puts `&` in the
+    descendant position.
+    """
+    return {"type": "form-multi-steps-step",
+            "data": {"attrID": "ms-tab-%d" % i},
+            "style": {"&": {"_": {
+                "display": "flex", "columnGap": "10px", "alignItems": "baseline",
+                "paddingTop": "12px", "paddingBottom": "12px",
+                "paddingLeft": "16px", "paddingRight": "16px",
+                "customDeclarations": "border:1px solid " + RULE + ";"}},
+                "___step--active": {"_": {
+                    "backgroundColor": {"token": "--mk-ink"},
+                    "customDeclarations": "border:1px solid rgb(22,24,28);"}},
+                "___step--active___descendants": {"_": {
+                    "color": "rgb(250,250,247)"}},
+                "___step--completed___descendants": {"_": {
+                    "color": {"token": "--mk-accent-ink"}}}},
+            "children": [
+                {"type": "text", "data": {"tagName": "p",
+                                          "attrID": "ms-tab-n-%d" % i},
+                 "style": {"&": {"_": {"fontFamily": MONO, "fontSize": "10px",
+                                       "letterSpacing": "0.2em",
+                                       "color": {"token": "--mk-faint"}},
+                                 "_t": {"fontSize": "12px"}}},
+                 "children": [{"type": "wysiwyg-text", "data": {"text": num}}]},
+                {"type": "text", "data": {"tagName": "p",
+                                          "attrID": "ms-tab-l-%d" % i},
+                 "style": {"&": {"_": {"fontFamily": CJK, "fontSize": "13px",
+                                       "color": {"token": "--mk-ink"}}}},
+                 "children": [{"type": "wysiwyg-text", "data": {"text": label}}]},
+            ]}
+
+
+def nav_button(kind, attr, label):
+    return {"type": kind, "data": {"attrID": attr},
+            "style": {"&": {"_": {
+                "fontFamily": MONO, "fontSize": "11px", "letterSpacing": "0.16em",
+                "cursor": "pointer", "width": "max-content",
+                "color": {"token": "--mk-ink"},
+                "paddingTop": "11px", "paddingBottom": "11px",
+                "paddingLeft": "18px", "paddingRight": "18px",
+                "customDeclarations": "border:1px solid rgba(22,24,28,.34);"}},
+                "hover": {"_": {"backgroundColor": {"token": "--mk-ink"},
+                                "color": {"token": "--mk-paper"}}},
+                "focus-visible": {"_": dict(FOCUS_RING)}},
+            "children": [{"type": "wysiwyg-text", "data": {"text": label}}]}
+
+
+def step_panel(i, children, first=False, last=False):
+    foot = []
+    if not first:
+        foot.append(nav_button("multi-steps-back-button", "ms-back-%d" % i,
+                               "\u2190 BACK"))
+    if not last:
+        foot.append(nav_button("multi-steps-next-button", "ms-next-%d" % i,
+                               "NEXT \u2192"))
+    # NO `display` on the step itself. Which step is shown is the plugin's
+    # business, and an author-level display on the element it toggles wins the
+    # cascade - the same mistake as putting display on a <dialog>. The layout
+    # goes on a plain child instead.
+    return {"type": "multi-steps-form-step",
+            "data": {"attrID": "ms-panel-%d" % i},
+            "children": [box("ms-in-%d" % i, {
+                "display": "flex", "flexDirection": "column", "rowGap": "18px"},
+                children + [
+                    box("ms-foot-%d" % i, {
+                        "display": "flex", "columnGap": "12px", "flexWrap": "wrap",
+                        "rowGap": "10px", "marginTop": "6px"}, foot)])]}
+
+
+STEP_LABELS = [("01", "\u985e\u578b"), ("02", "\u9810\u7b97"),
+               ("03", "\u806f\u7d61")]
+
+
+# Mosaic ships NO visibility CSS for a form step. The step navigation works - the
+# plugin moves `m-form-step--active` and the step tabs change state - but every
+# panel stays on screen, because hiding the inactive ones is the THEME's job: the
+# variant catalog carries a `Form step` entry (`.m-form-step`) and that is where
+# the rule is meant to live. Variants are theme-global and this install carries
+# two brands, so the rule goes in a head `code` node instead, which is the same
+# escape hatch the homepage uses for its keyframes.
+STEP_CSS = {"type": "code",
+            "data": {"attrID": "ms-css", "insertLocation": "head",
+                     "processShortcodes": "0",
+                     # a head `code` node emits its content VERBATIM - it does
+                     # not wrap anything - so the <style> tags are the author's
+                     "content": "<style>"
+                                ".m-form-step:not(.m-form-step--active)"
+                                "{display:none}"
+                                "</style>"}}
+
+
+def multi_step():
+    """Three steps, a tab bar, next and back.
+
+    `form-multi-steps` heals in all four of its parts, so only the ones carrying
+    content need authoring. `multi-steps-forms` declares `canBeParentFor` ->
+    `form-multi-steps`, which is its own PARENT - the real child is
+    `multi-steps-form-step`, and the authority for that is the healed default
+    children, not canBeParentFor. Third container family with the same
+    disagreement.
+    """
+    return {"type": "form-wrapper", "data": {"attrID": "ms-w"},
+            "children": [
+                {"type": "form", "data": {"attrID": "ms-form"},
+                 "style": {"&": {"_": {"display": "flex",
+                                       "flexDirection": "column",
+                                       "rowGap": "22px"}}},
+                 "children": [
+                     {"type": "form-multi-steps", "data": {"attrID": "ms"},
+                      "style": {"&": {"_": {"display": "flex",
+                                            "flexDirection": "column",
+                                            "rowGap": "22px"}}},
+                      "children": [
+                          {"type": "form-multi-steps-steps",
+                           "data": {"attrID": "ms-tabs"},
+                           "style": bp({"display": "flex", "columnGap": "10px",
+                                        "flexWrap": "wrap", "rowGap": "10px"},
+                                       None, {"flexDirection": "column"}),
+                           "children": [step_tab(i, n, l)
+                                        for i, (n, l) in enumerate(STEP_LABELS)]},
+                          {"type": "multi-steps-forms",
+                           "data": {"attrID": "ms-panels"},
+                           "children": [
+                               step_panel(0, [
+                                   choice_group("ms-kind",
+                                                "\u5c08\u6848\u985e\u578b",
+                                                "kind2", KINDS,
+                                                kind="radio-input", required="1"),
+                               ], first=True),
+                               step_panel(1, [
+                                   select("ms-budget", "\u9810\u7b97\u5340\u9593",
+                                          "budget2", BUDGETS, required="1"),
+                               ]),
+                               step_panel(2, [
+                                   labelled("ms-mail", "\u96fb\u90f5", "text-input",
+                                            nameAttribute="email2", required="1",
+                                            type="email",
+                                            placeholderText="you@example.com"),
+                                   submit("ms-send", "SEND"),
+                               ], last=True),
+                           ]},
+                      ]},
+                 ]},
+                {"type": "success-screen", "data": {"attrID": "ms-ok"},
+                 "style": {"&": {"_": {
+                     "paddingTop": "28px", "paddingBottom": "28px",
+                     "paddingLeft": "24px", "paddingRight": "24px",
+                     "backgroundColor": {"token": "--mk-ink"}}}},
+                 "children": [
+                     ml("p", "\u6536\u5230\u4e86\u3002", fontFamily=DISPLAY,
+                        fontWeight="600", fontSize="22px",
+                        color="rgb(250,250,247)"),
+                 ]},
+            ]}
+
+
 # ---------------------------------------------------------------- the page
 
 def band(attr, label, types, body, bg="--mk-paper"):
@@ -315,4 +479,9 @@ TREE = {"type": "div", "data": {"attrID": "fm-page"},
                  "choice-field › choice › radio-input + checkbox-input / "
                  "fileupload-input / form-error / submit-loading",
                  full_form(), bg="--mk-panel"),
+            band("fm-ms", "MULTI-STEP / \u591a\u6b65\u9a5f",
+                 "form-multi-steps \u203a form-multi-steps-steps \u203a step / "
+                 "multi-steps-forms \u203a multi-steps-form-step \u203a next + back",
+                 box("fm-ms-box", {}, [STEP_CSS, multi_step()]),
+                 bg="--mk-paper"),
         ]}

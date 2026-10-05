@@ -172,8 +172,14 @@ class Surface:
                          any(x in needs for x in (ancestors + ((parent_type,)
                                                                if parent_type else ()))))
 
+        # ...and the same question the `allow` branch asks below: is this type
+        # part of the required internal structure of something we are inside?
+        in_ancestor_structure = any(t in self.default_children.get(x, [])
+                                    for x in ancestors)
+
         outcome = self.outcome.get(t)
         if (not declared_child and not nested_as_family and not nested_ok
+                and not in_ancestor_structure
                 and (outcome == "BROKE_PAGE" or (outcome or "").startswith("COMMIT_5"))):
             problems.append("%s is measured %s under a plain container, and %s is not its declared parent"
                             % (t, outcome, parent_type or "<root>"))
@@ -205,6 +211,17 @@ class Surface:
                 # disagreement, take the rule from the grandparent, which is both
                 # types' actual authority.
                 # ancestors[-1] IS the parent; the grandparent is one further up
+                # A type that is part of the required internal structure of
+                # something we are INSIDE is legal wherever that structure puts
+                # it. `multi-steps-forms` declares `canBeParentFor` ->
+                # `form-multi-steps`, which is its own parent; the real child,
+                # `multi-steps-form-step`, is in `form-multi-steps`'s healed
+                # default children. Same disagreement as the loop containers.
+                if t not in allowed:
+                    for anc in ancestors:
+                        if t in self.default_children.get(anc, []):
+                            allowed = allowed + [t]
+                            break
                 if t not in allowed and "-loop-" in parent_type and len(ancestors) > 1:
                     gp = self.rules.get(ancestors[-2], {})
                     allowed = allowed + (gp.get("allowed_children") or "").split("|")

@@ -399,3 +399,48 @@ The through-line is the one this file keeps recording: Mosaic accepts a write it
 cannot use and says nothing. The defence is to read the delivered page back and
 count what arrived — `verify_components.py` now asserts the control count, the option
 labels and that an empty required form is actually refused.
+
+## `display` on an element whose visibility the plugin owns — twice now
+
+A `<dialog>`'s open state is its `display`, so `display:flex` on a modal host pins
+every modal open. The same mistake, in a different family: `multi-steps-form-step`
+is shown and hidden by the plugin moving `m-form-step--active`, and a `display:flex`
+on the step wins the cascade, so all three steps sit on the page at once with three
+sets of Next buttons.
+
+The rule that comes out of it: **if something other than you decides when an
+element is visible, do not set `display` on that element.** Put the layout on a
+child. The families to watch are the ones whose markup carries an `--active` /
+`--opened` class: `modal`, `multi-steps-form-step`, `tabs-tab-pane`,
+`dropdown-wrapper`, `success-screen`, `loop-no-result`.
+
+`tabs-tab-pane` is the one that does NOT bite, and the reason is instructive — the
+plugin hides it with `!important`:
+
+```css
+.m-tab-pane:not(.m-tab-pane--active){display:none !important}
+```
+
+Nothing an author writes can beat that. The two that bite are precisely the two
+where the plugin relies on the UA default or on the theme instead.
+
+## Mosaic ships no visibility CSS for a form step
+
+Measured: the step navigation works — `m-form-step--active` moves, the step tabs
+change state, Next and Back fire — and **every panel stays on screen**, because
+hiding the inactive ones was never the plugin's job. The variant catalog carries a
+`Form step` entry (`.m-form-step`), and that is where the rule is meant to live.
+A theme that never styles that variant gets a multi-step form that is one long
+page.
+
+So a multi-step form needs one rule the author supplies:
+
+```css
+.m-form-step:not(.m-form-step--active){display:none}
+```
+
+On a theme that cannot use the variant layer, a `code` node with
+`insertLocation: "head"` is the escape hatch — and **it emits its content
+verbatim**: it does not wrap anything, so the `<style>` tags are yours to write.
+Without them the rule lands in `<head>` as bare text between `</style>` and
+`</head>`, renders nothing, and reads as a CSS specificity problem.

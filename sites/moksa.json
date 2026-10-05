@@ -18468,7 +18468,7 @@
                       "settings": {
                        "target": {
                         "type": "element",
-                        "uuid": "be5ddc70-73e5-4050-bf67-d1566d5be084"
+                        "uuid": "13810386-c106-4982-9689-b3f1e9ef6de5"
                        }
                       }
                      }
@@ -18524,7 +18524,7 @@
           ]
          }
         ],
-        "nodeID": "be5ddc70-73e5-4050-bf67-d1566d5be084"
+        "nodeID": "13810386-c106-4982-9689-b3f1e9ef6de5"
        }
       ]
      }
@@ -28149,6 +28149,1546 @@
           "type": "div",
           "data": {
            "attrID": "fm-main-foot"
+          },
+          "style": {
+           "&": {
+            "_": {
+             "paddingTop": "70px"
+            },
+            "_m": {
+             "paddingTop": "44px"
+            }
+           }
+          },
+          "children": []
+         }
+        ]
+       }
+      ]
+     },
+     {
+      "type": "section",
+      "data": {
+       "attrID": "fm-ms"
+      },
+      "style": {
+       "&": {
+        "_": {
+         "backgroundColor": {
+          "token": "--mk-paper"
+         },
+         "paddingLeft": "40px",
+         "paddingRight": "40px",
+         "fontFamily": "'Noto Sans TC','PingFang TC','Hiragino Sans TC','Microsoft JhengHei',sans-serif",
+         "paddingTop": "0px",
+         "paddingBottom": "0px"
+        },
+        "_t": {
+         "paddingLeft": "28px",
+         "paddingRight": "28px"
+        },
+        "_m": {
+         "paddingLeft": "18px",
+         "paddingRight": "18px"
+        }
+       }
+      },
+      "children": [
+       {
+        "type": "div",
+        "data": {
+         "attrID": "fm-ms-w"
+        },
+        "style": {
+         "&": {
+          "_": {
+           "width": "100%",
+           "maxWidth": "1240px",
+           "marginLeft": "auto",
+           "marginRight": "auto"
+          }
+         }
+        },
+        "children": [
+         {
+          "type": "div",
+          "data": {
+           "attrID": "fm-ms-pad"
+          },
+          "style": {
+           "&": {
+            "_": {
+             "paddingTop": "70px"
+            },
+            "_m": {
+             "paddingTop": "44px"
+            }
+           }
+          },
+          "children": []
+         },
+         {
+          "type": "div",
+          "data": {
+           "attrID": "fm-strip-multi-step--多步驟"
+          },
+          "style": {
+           "&": {
+            "_": {
+             "display": "flex",
+             "justifyContent": "space-between",
+             "alignItems": "baseline",
+             "columnGap": "16px",
+             "flexWrap": "wrap",
+             "rowGap": "6px",
+             "paddingBottom": "14px",
+             "marginBottom": "26px",
+             "customDeclarations": "border-bottom:1px solid rgb(22,24,28);"
+            }
+           }
+          },
+          "children": [
+           {
+            "type": "text",
+            "data": {
+             "tagName": "p"
+            },
+            "text": "MULTI-STEP / 多步驟",
+            "style": {
+             "&": {
+              "_": {
+               "color": {
+                "token": "--mk-ink"
+               },
+               "fontSize": "11px",
+               "letterSpacing": "0.26em",
+               "fontFamily": "'IBM Plex Mono',ui-monospace,SFMono-Regular,Menlo,Consolas,monospace",
+               "fontWeight": "400"
+              },
+              "_t": {
+               "fontSize": "12px"
+              }
+             }
+            }
+           },
+           {
+            "type": "text",
+            "data": {
+             "tagName": "p"
+            },
+            "text": "form-multi-steps › form-multi-steps-steps › step / multi-steps-forms › multi-steps-form-step › next + back",
+            "style": {
+             "&": {
+              "_": {
+               "color": {
+                "token": "--mk-faint"
+               },
+               "fontSize": "10px",
+               "letterSpacing": "0.08em",
+               "fontFamily": "'IBM Plex Mono',ui-monospace,SFMono-Regular,Menlo,Consolas,monospace",
+               "fontWeight": "400"
+              },
+              "_t": {
+               "fontSize": "12px"
+              }
+             }
+            }
+           }
+          ]
+         },
+         {
+          "type": "div",
+          "data": {
+           "attrID": "fm-ms-box"
+          },
+          "style": {
+           "&": {
+            "_": {}
+           }
+          },
+          "children": [
+           {
+            "type": "code",
+            "data": {
+             "attrID": "ms-css",
+             "insertLocation": "head",
+             "processShortcodes": "0",
+             "content": "<style>.m-form-step:not(.m-form-step--active){display:none}</style>"
+            }
+           },
+           {
+            "type": "form-wrapper",
+            "data": {
+             "attrID": "ms-w"
+            },
+            "children": [
+             {
+              "type": "form",
+              "data": {
+               "attrID": "ms-form"
+              },
+              "style": {
+               "&": {
+                "_": {
+                 "display": "flex",
+                 "flexDirection": "column",
+                 "rowGap": "22px"
+                }
+               }
+              },
+              "children": [
+               {
+                "type": "form-multi-steps",
+                "data": {
+                 "attrID": "ms"
+                },
+                "style": {
+                 "&": {
+                  "_": {
+                   "display": "flex",
+                   "flexDirection": "column",
+                   "rowGap": "22px"
+                  }
+                 }
+                },
+                "children": [
+                 {
+                  "type": "form-multi-steps-steps",
+                  "data": {
+                   "attrID": "ms-tabs"
+                  },
+                  "style": {
+                   "&": {
+                    "_": {
+                     "display": "flex",
+                     "columnGap": "10px",
+                     "flexWrap": "wrap",
+                     "rowGap": "10px"
+                    },
+                    "_m": {
+                     "flexDirection": "column"
+                    }
+                   }
+                  },
+                  "children": [
+                   {
+                    "type": "form-multi-steps-step",
+                    "data": {
+                     "attrID": "ms-tab-0"
+                    },
+                    "style": {
+                     "&": {
+                      "_": {
+                       "display": "flex",
+                       "columnGap": "10px",
+                       "alignItems": "baseline",
+                       "paddingTop": "12px",
+                       "paddingBottom": "12px",
+                       "paddingLeft": "16px",
+                       "paddingRight": "16px",
+                       "customDeclarations": "border:1px solid rgba(22,24,28,.16);"
+                      }
+                     },
+                     "___step--active": {
+                      "_": {
+                       "backgroundColor": {
+                        "token": "--mk-ink"
+                       },
+                       "customDeclarations": "border:1px solid rgb(22,24,28);"
+                      }
+                     },
+                     "___step--active___descendants": {
+                      "_": {
+                       "color": "rgb(250,250,247)"
+                      }
+                     },
+                     "___step--completed___descendants": {
+                      "_": {
+                       "color": {
+                        "token": "--mk-accent-ink"
+                       }
+                      }
+                     }
+                    },
+                    "children": [
+                     {
+                      "type": "text",
+                      "data": {
+                       "tagName": "p",
+                       "attrID": "ms-tab-n-0"
+                      },
+                      "style": {
+                       "&": {
+                        "_": {
+                         "fontFamily": "'IBM Plex Mono',ui-monospace,SFMono-Regular,Menlo,Consolas,monospace",
+                         "fontSize": "10px",
+                         "letterSpacing": "0.2em",
+                         "color": {
+                          "token": "--mk-faint"
+                         }
+                        },
+                        "_t": {
+                         "fontSize": "12px"
+                        }
+                       }
+                      },
+                      "children": [
+                       {
+                        "type": "wysiwyg-text",
+                        "data": {
+                         "text": "01"
+                        }
+                       }
+                      ]
+                     },
+                     {
+                      "type": "text",
+                      "data": {
+                       "tagName": "p",
+                       "attrID": "ms-tab-l-0"
+                      },
+                      "style": {
+                       "&": {
+                        "_": {
+                         "fontFamily": "'Noto Sans TC','PingFang TC','Hiragino Sans TC','Microsoft JhengHei',sans-serif",
+                         "fontSize": "13px",
+                         "color": {
+                          "token": "--mk-ink"
+                         }
+                        }
+                       }
+                      },
+                      "children": [
+                       {
+                        "type": "wysiwyg-text",
+                        "data": {
+                         "text": "類型"
+                        }
+                       }
+                      ]
+                     }
+                    ]
+                   },
+                   {
+                    "type": "form-multi-steps-step",
+                    "data": {
+                     "attrID": "ms-tab-1"
+                    },
+                    "style": {
+                     "&": {
+                      "_": {
+                       "display": "flex",
+                       "columnGap": "10px",
+                       "alignItems": "baseline",
+                       "paddingTop": "12px",
+                       "paddingBottom": "12px",
+                       "paddingLeft": "16px",
+                       "paddingRight": "16px",
+                       "customDeclarations": "border:1px solid rgba(22,24,28,.16);"
+                      }
+                     },
+                     "___step--active": {
+                      "_": {
+                       "backgroundColor": {
+                        "token": "--mk-ink"
+                       },
+                       "customDeclarations": "border:1px solid rgb(22,24,28);"
+                      }
+                     },
+                     "___step--active___descendants": {
+                      "_": {
+                       "color": "rgb(250,250,247)"
+                      }
+                     },
+                     "___step--completed___descendants": {
+                      "_": {
+                       "color": {
+                        "token": "--mk-accent-ink"
+                       }
+                      }
+                     }
+                    },
+                    "children": [
+                     {
+                      "type": "text",
+                      "data": {
+                       "tagName": "p",
+                       "attrID": "ms-tab-n-1"
+                      },
+                      "style": {
+                       "&": {
+                        "_": {
+                         "fontFamily": "'IBM Plex Mono',ui-monospace,SFMono-Regular,Menlo,Consolas,monospace",
+                         "fontSize": "10px",
+                         "letterSpacing": "0.2em",
+                         "color": {
+                          "token": "--mk-faint"
+                         }
+                        },
+                        "_t": {
+                         "fontSize": "12px"
+                        }
+                       }
+                      },
+                      "children": [
+                       {
+                        "type": "wysiwyg-text",
+                        "data": {
+                         "text": "02"
+                        }
+                       }
+                      ]
+                     },
+                     {
+                      "type": "text",
+                      "data": {
+                       "tagName": "p",
+                       "attrID": "ms-tab-l-1"
+                      },
+                      "style": {
+                       "&": {
+                        "_": {
+                         "fontFamily": "'Noto Sans TC','PingFang TC','Hiragino Sans TC','Microsoft JhengHei',sans-serif",
+                         "fontSize": "13px",
+                         "color": {
+                          "token": "--mk-ink"
+                         }
+                        }
+                       }
+                      },
+                      "children": [
+                       {
+                        "type": "wysiwyg-text",
+                        "data": {
+                         "text": "預算"
+                        }
+                       }
+                      ]
+                     }
+                    ]
+                   },
+                   {
+                    "type": "form-multi-steps-step",
+                    "data": {
+                     "attrID": "ms-tab-2"
+                    },
+                    "style": {
+                     "&": {
+                      "_": {
+                       "display": "flex",
+                       "columnGap": "10px",
+                       "alignItems": "baseline",
+                       "paddingTop": "12px",
+                       "paddingBottom": "12px",
+                       "paddingLeft": "16px",
+                       "paddingRight": "16px",
+                       "customDeclarations": "border:1px solid rgba(22,24,28,.16);"
+                      }
+                     },
+                     "___step--active": {
+                      "_": {
+                       "backgroundColor": {
+                        "token": "--mk-ink"
+                       },
+                       "customDeclarations": "border:1px solid rgb(22,24,28);"
+                      }
+                     },
+                     "___step--active___descendants": {
+                      "_": {
+                       "color": "rgb(250,250,247)"
+                      }
+                     },
+                     "___step--completed___descendants": {
+                      "_": {
+                       "color": {
+                        "token": "--mk-accent-ink"
+                       }
+                      }
+                     }
+                    },
+                    "children": [
+                     {
+                      "type": "text",
+                      "data": {
+                       "tagName": "p",
+                       "attrID": "ms-tab-n-2"
+                      },
+                      "style": {
+                       "&": {
+                        "_": {
+                         "fontFamily": "'IBM Plex Mono',ui-monospace,SFMono-Regular,Menlo,Consolas,monospace",
+                         "fontSize": "10px",
+                         "letterSpacing": "0.2em",
+                         "color": {
+                          "token": "--mk-faint"
+                         }
+                        },
+                        "_t": {
+                         "fontSize": "12px"
+                        }
+                       }
+                      },
+                      "children": [
+                       {
+                        "type": "wysiwyg-text",
+                        "data": {
+                         "text": "03"
+                        }
+                       }
+                      ]
+                     },
+                     {
+                      "type": "text",
+                      "data": {
+                       "tagName": "p",
+                       "attrID": "ms-tab-l-2"
+                      },
+                      "style": {
+                       "&": {
+                        "_": {
+                         "fontFamily": "'Noto Sans TC','PingFang TC','Hiragino Sans TC','Microsoft JhengHei',sans-serif",
+                         "fontSize": "13px",
+                         "color": {
+                          "token": "--mk-ink"
+                         }
+                        }
+                       }
+                      },
+                      "children": [
+                       {
+                        "type": "wysiwyg-text",
+                        "data": {
+                         "text": "聯絡"
+                        }
+                       }
+                      ]
+                     }
+                    ]
+                   }
+                  ]
+                 },
+                 {
+                  "type": "multi-steps-forms",
+                  "data": {
+                   "attrID": "ms-panels"
+                  },
+                  "children": [
+                   {
+                    "type": "multi-steps-form-step",
+                    "data": {
+                     "attrID": "ms-panel-0"
+                    },
+                    "children": [
+                     {
+                      "type": "div",
+                      "data": {
+                       "attrID": "ms-in-0"
+                      },
+                      "style": {
+                       "&": {
+                        "_": {
+                         "display": "flex",
+                         "flexDirection": "column",
+                         "rowGap": "18px"
+                        }
+                       }
+                      },
+                      "children": [
+                       {
+                        "type": "choice-field",
+                        "data": {
+                         "attrID": "ms-kind",
+                         "nameAttribute": "kind2",
+                         "required": "1"
+                        },
+                        "style": {
+                         "&": {
+                          "_": {
+                           "display": "flex",
+                           "flexDirection": "column",
+                           "rowGap": "10px"
+                          }
+                         }
+                        },
+                        "children": [
+                         {
+                          "type": "choice-legend",
+                          "data": {
+                           "attrID": "ms-kind-leg"
+                          },
+                          "style": {
+                           "&": {
+                            "_": {
+                             "fontFamily": "'IBM Plex Mono',ui-monospace,SFMono-Regular,Menlo,Consolas,monospace",
+                             "fontSize": "10px",
+                             "letterSpacing": "0.18em",
+                             "color": {
+                              "token": "--mk-faint"
+                             }
+                            },
+                            "_t": {
+                             "fontSize": "12px"
+                            }
+                           }
+                          },
+                          "children": [
+                           {
+                            "type": "wysiwyg-text",
+                            "data": {
+                             "text": "專案類型"
+                            }
+                           }
+                          ]
+                         },
+                         {
+                          "type": "choice-content",
+                          "data": {
+                           "attrID": "ms-kind-rows"
+                          },
+                          "style": {
+                           "&": {
+                            "_": {
+                             "display": "grid",
+                             "gridCols": "repeat(2, 1fr)",
+                             "columnGap": "14px",
+                             "rowGap": "10px"
+                            },
+                            "_m": {
+                             "gridCols": "repeat(1, 1fr)"
+                            }
+                           }
+                          },
+                          "children": [
+                           {
+                            "type": "choice",
+                            "data": {
+                             "attrID": "ms-kind-c0"
+                            },
+                            "style": {
+                             "&": {
+                              "_": {
+                               "display": "flex",
+                               "alignItems": "center",
+                               "columnGap": "10px",
+                               "cursor": "pointer",
+                               "paddingTop": "10px",
+                               "paddingBottom": "10px",
+                               "paddingLeft": "12px",
+                               "paddingRight": "12px",
+                               "customDeclarations": "border:1px solid rgba(22,24,28,.16);"
+                              }
+                             },
+                             "hover": {
+                              "_": {
+                               "customDeclarations": "border:1px solid rgb(22,24,28);"
+                              }
+                             }
+                            },
+                            "children": [
+                             {
+                              "type": "radio-input",
+                              "data": {
+                               "attrID": "ms-kind-i0",
+                               "value": "web"
+                              },
+                              "style": {
+                               "&": {
+                                "_": {
+                                 "cursor": "pointer"
+                                }
+                               },
+                               "focus-visible": {
+                                "_": {
+                                 "customDeclarations": "outline:2px solid rgb(255,90,54);outline-offset:3px;"
+                                }
+                               }
+                              }
+                             },
+                             {
+                              "type": "choice-label",
+                              "data": {
+                               "attrID": "ms-kind-l0"
+                              },
+                              "style": {
+                               "&": {
+                                "_": {
+                                 "fontFamily": "'Noto Sans TC','PingFang TC','Hiragino Sans TC','Microsoft JhengHei',sans-serif",
+                                 "fontSize": "14px",
+                                 "cursor": "pointer",
+                                 "color": {
+                                  "token": "--mk-ink"
+                                 }
+                                }
+                               }
+                              },
+                              "children": [
+                               {
+                                "type": "wysiwyg-text",
+                                "data": {
+                                 "text": "品牌官網"
+                                }
+                               }
+                              ]
+                             }
+                            ]
+                           },
+                           {
+                            "type": "choice",
+                            "data": {
+                             "attrID": "ms-kind-c1"
+                            },
+                            "style": {
+                             "&": {
+                              "_": {
+                               "display": "flex",
+                               "alignItems": "center",
+                               "columnGap": "10px",
+                               "cursor": "pointer",
+                               "paddingTop": "10px",
+                               "paddingBottom": "10px",
+                               "paddingLeft": "12px",
+                               "paddingRight": "12px",
+                               "customDeclarations": "border:1px solid rgba(22,24,28,.16);"
+                              }
+                             },
+                             "hover": {
+                              "_": {
+                               "customDeclarations": "border:1px solid rgb(22,24,28);"
+                              }
+                             }
+                            },
+                            "children": [
+                             {
+                              "type": "radio-input",
+                              "data": {
+                               "attrID": "ms-kind-i1",
+                               "value": "shop"
+                              },
+                              "style": {
+                               "&": {
+                                "_": {
+                                 "cursor": "pointer"
+                                }
+                               },
+                               "focus-visible": {
+                                "_": {
+                                 "customDeclarations": "outline:2px solid rgb(255,90,54);outline-offset:3px;"
+                                }
+                               }
+                              }
+                             },
+                             {
+                              "type": "choice-label",
+                              "data": {
+                               "attrID": "ms-kind-l1"
+                              },
+                              "style": {
+                               "&": {
+                                "_": {
+                                 "fontFamily": "'Noto Sans TC','PingFang TC','Hiragino Sans TC','Microsoft JhengHei',sans-serif",
+                                 "fontSize": "14px",
+                                 "cursor": "pointer",
+                                 "color": {
+                                  "token": "--mk-ink"
+                                 }
+                                }
+                               }
+                              },
+                              "children": [
+                               {
+                                "type": "wysiwyg-text",
+                                "data": {
+                                 "text": "電商"
+                                }
+                               }
+                              ]
+                             }
+                            ]
+                           },
+                           {
+                            "type": "choice",
+                            "data": {
+                             "attrID": "ms-kind-c2"
+                            },
+                            "style": {
+                             "&": {
+                              "_": {
+                               "display": "flex",
+                               "alignItems": "center",
+                               "columnGap": "10px",
+                               "cursor": "pointer",
+                               "paddingTop": "10px",
+                               "paddingBottom": "10px",
+                               "paddingLeft": "12px",
+                               "paddingRight": "12px",
+                               "customDeclarations": "border:1px solid rgba(22,24,28,.16);"
+                              }
+                             },
+                             "hover": {
+                              "_": {
+                               "customDeclarations": "border:1px solid rgb(22,24,28);"
+                              }
+                             }
+                            },
+                            "children": [
+                             {
+                              "type": "radio-input",
+                              "data": {
+                               "attrID": "ms-kind-i2",
+                               "value": "erp"
+                              },
+                              "style": {
+                               "&": {
+                                "_": {
+                                 "cursor": "pointer"
+                                }
+                               },
+                               "focus-visible": {
+                                "_": {
+                                 "customDeclarations": "outline:2px solid rgb(255,90,54);outline-offset:3px;"
+                                }
+                               }
+                              }
+                             },
+                             {
+                              "type": "choice-label",
+                              "data": {
+                               "attrID": "ms-kind-l2"
+                              },
+                              "style": {
+                               "&": {
+                                "_": {
+                                 "fontFamily": "'Noto Sans TC','PingFang TC','Hiragino Sans TC','Microsoft JhengHei',sans-serif",
+                                 "fontSize": "14px",
+                                 "cursor": "pointer",
+                                 "color": {
+                                  "token": "--mk-ink"
+                                 }
+                                }
+                               }
+                              },
+                              "children": [
+                               {
+                                "type": "wysiwyg-text",
+                                "data": {
+                                 "text": "ERP / 內部工具"
+                                }
+                               }
+                              ]
+                             }
+                            ]
+                           },
+                           {
+                            "type": "choice",
+                            "data": {
+                             "attrID": "ms-kind-c3"
+                            },
+                            "style": {
+                             "&": {
+                              "_": {
+                               "display": "flex",
+                               "alignItems": "center",
+                               "columnGap": "10px",
+                               "cursor": "pointer",
+                               "paddingTop": "10px",
+                               "paddingBottom": "10px",
+                               "paddingLeft": "12px",
+                               "paddingRight": "12px",
+                               "customDeclarations": "border:1px solid rgba(22,24,28,.16);"
+                              }
+                             },
+                             "hover": {
+                              "_": {
+                               "customDeclarations": "border:1px solid rgb(22,24,28);"
+                              }
+                             }
+                            },
+                            "children": [
+                             {
+                              "type": "radio-input",
+                              "data": {
+                               "attrID": "ms-kind-i3",
+                               "value": "auto"
+                              },
+                              "style": {
+                               "&": {
+                                "_": {
+                                 "cursor": "pointer"
+                                }
+                               },
+                               "focus-visible": {
+                                "_": {
+                                 "customDeclarations": "outline:2px solid rgb(255,90,54);outline-offset:3px;"
+                                }
+                               }
+                              }
+                             },
+                             {
+                              "type": "choice-label",
+                              "data": {
+                               "attrID": "ms-kind-l3"
+                              },
+                              "style": {
+                               "&": {
+                                "_": {
+                                 "fontFamily": "'Noto Sans TC','PingFang TC','Hiragino Sans TC','Microsoft JhengHei',sans-serif",
+                                 "fontSize": "14px",
+                                 "cursor": "pointer",
+                                 "color": {
+                                  "token": "--mk-ink"
+                                 }
+                                }
+                               }
+                              },
+                              "children": [
+                               {
+                                "type": "wysiwyg-text",
+                                "data": {
+                                 "text": "流程自動化"
+                                }
+                               }
+                              ]
+                             }
+                            ]
+                           }
+                          ]
+                         }
+                        ]
+                       },
+                       {
+                        "type": "div",
+                        "data": {
+                         "attrID": "ms-foot-0"
+                        },
+                        "style": {
+                         "&": {
+                          "_": {
+                           "display": "flex",
+                           "columnGap": "12px",
+                           "flexWrap": "wrap",
+                           "rowGap": "10px",
+                           "marginTop": "6px"
+                          }
+                         }
+                        },
+                        "children": [
+                         {
+                          "type": "multi-steps-next-button",
+                          "data": {
+                           "attrID": "ms-next-0"
+                          },
+                          "style": {
+                           "&": {
+                            "_": {
+                             "fontFamily": "'IBM Plex Mono',ui-monospace,SFMono-Regular,Menlo,Consolas,monospace",
+                             "fontSize": "11px",
+                             "letterSpacing": "0.16em",
+                             "cursor": "pointer",
+                             "width": "max-content",
+                             "color": {
+                              "token": "--mk-ink"
+                             },
+                             "paddingTop": "11px",
+                             "paddingBottom": "11px",
+                             "paddingLeft": "18px",
+                             "paddingRight": "18px",
+                             "customDeclarations": "border:1px solid rgba(22,24,28,.34);"
+                            }
+                           },
+                           "hover": {
+                            "_": {
+                             "backgroundColor": {
+                              "token": "--mk-ink"
+                             },
+                             "color": {
+                              "token": "--mk-paper"
+                             }
+                            }
+                           },
+                           "focus-visible": {
+                            "_": {
+                             "customDeclarations": "outline:2px solid rgb(255,90,54);outline-offset:3px;"
+                            }
+                           }
+                          },
+                          "children": [
+                           {
+                            "type": "wysiwyg-text",
+                            "data": {
+                             "text": "NEXT →"
+                            }
+                           }
+                          ]
+                         }
+                        ]
+                       }
+                      ]
+                     }
+                    ]
+                   },
+                   {
+                    "type": "multi-steps-form-step",
+                    "data": {
+                     "attrID": "ms-panel-1"
+                    },
+                    "children": [
+                     {
+                      "type": "div",
+                      "data": {
+                       "attrID": "ms-in-1"
+                      },
+                      "style": {
+                       "&": {
+                        "_": {
+                         "display": "flex",
+                         "flexDirection": "column",
+                         "rowGap": "18px"
+                        }
+                       }
+                      },
+                      "children": [
+                       {
+                        "type": "field",
+                        "data": {
+                         "attrID": "ms-budget-f"
+                        },
+                        "style": {
+                         "&": {
+                          "_": {
+                           "display": "flex",
+                           "flexDirection": "column",
+                           "rowGap": "7px"
+                          }
+                         }
+                        },
+                        "children": [
+                         {
+                          "type": "label",
+                          "data": {
+                           "attrID": "ms-budget-lab",
+                           "forInput": "ms-budget"
+                          },
+                          "style": {
+                           "&": {
+                            "_": {
+                             "fontFamily": "'IBM Plex Mono',ui-monospace,SFMono-Regular,Menlo,Consolas,monospace",
+                             "fontSize": "10px",
+                             "letterSpacing": "0.18em",
+                             "color": {
+                              "token": "--mk-faint"
+                             }
+                            },
+                            "_t": {
+                             "fontSize": "12px"
+                            }
+                           }
+                          },
+                          "children": [
+                           {
+                            "type": "wysiwyg-text",
+                            "data": {
+                             "text": "預算區間"
+                            }
+                           }
+                          ]
+                         },
+                         {
+                          "type": "select-input",
+                          "data": {
+                           "attrID": "ms-budget",
+                           "nameAttribute": "budget2",
+                           "required": "1"
+                          },
+                          "style": {
+                           "&": {
+                            "_": {
+                             "width": "100%",
+                             "backgroundColor": {
+                              "token": "--mk-paper"
+                             },
+                             "fontFamily": "'Noto Sans TC','PingFang TC','Hiragino Sans TC','Microsoft JhengHei',sans-serif",
+                             "fontSize": "14px",
+                             "color": {
+                              "token": "--mk-ink"
+                             },
+                             "paddingTop": "12px",
+                             "paddingBottom": "12px",
+                             "paddingLeft": "14px",
+                             "paddingRight": "14px",
+                             "customDeclarations": "border:1px solid rgba(22,24,28,.3);"
+                            }
+                           },
+                           "focus-visible": {
+                            "_": {
+                             "customDeclarations": "outline:2px solid rgb(255,90,54);outline-offset:3px;"
+                            }
+                           }
+                          },
+                          "children": [
+                           {
+                            "type": "select-option",
+                            "data": {
+                             "attrID": "ms-budget-o0",
+                             "value": "",
+                             "text": "請選擇"
+                            }
+                           },
+                           {
+                            "type": "select-option",
+                            "data": {
+                             "attrID": "ms-budget-o1",
+                             "value": "10",
+                             "text": "10 萬以下"
+                            }
+                           },
+                           {
+                            "type": "select-option",
+                            "data": {
+                             "attrID": "ms-budget-o2",
+                             "value": "30",
+                             "text": "10–30 萬"
+                            }
+                           },
+                           {
+                            "type": "select-option",
+                            "data": {
+                             "attrID": "ms-budget-o3",
+                             "value": "60",
+                             "text": "30–60 萬"
+                            }
+                           },
+                           {
+                            "type": "select-option",
+                            "data": {
+                             "attrID": "ms-budget-o4",
+                             "value": "60+",
+                             "text": "60 萬以上"
+                            }
+                           }
+                          ]
+                         }
+                        ]
+                       },
+                       {
+                        "type": "div",
+                        "data": {
+                         "attrID": "ms-foot-1"
+                        },
+                        "style": {
+                         "&": {
+                          "_": {
+                           "display": "flex",
+                           "columnGap": "12px",
+                           "flexWrap": "wrap",
+                           "rowGap": "10px",
+                           "marginTop": "6px"
+                          }
+                         }
+                        },
+                        "children": [
+                         {
+                          "type": "multi-steps-back-button",
+                          "data": {
+                           "attrID": "ms-back-1"
+                          },
+                          "style": {
+                           "&": {
+                            "_": {
+                             "fontFamily": "'IBM Plex Mono',ui-monospace,SFMono-Regular,Menlo,Consolas,monospace",
+                             "fontSize": "11px",
+                             "letterSpacing": "0.16em",
+                             "cursor": "pointer",
+                             "width": "max-content",
+                             "color": {
+                              "token": "--mk-ink"
+                             },
+                             "paddingTop": "11px",
+                             "paddingBottom": "11px",
+                             "paddingLeft": "18px",
+                             "paddingRight": "18px",
+                             "customDeclarations": "border:1px solid rgba(22,24,28,.34);"
+                            }
+                           },
+                           "hover": {
+                            "_": {
+                             "backgroundColor": {
+                              "token": "--mk-ink"
+                             },
+                             "color": {
+                              "token": "--mk-paper"
+                             }
+                            }
+                           },
+                           "focus-visible": {
+                            "_": {
+                             "customDeclarations": "outline:2px solid rgb(255,90,54);outline-offset:3px;"
+                            }
+                           }
+                          },
+                          "children": [
+                           {
+                            "type": "wysiwyg-text",
+                            "data": {
+                             "text": "← BACK"
+                            }
+                           }
+                          ]
+                         },
+                         {
+                          "type": "multi-steps-next-button",
+                          "data": {
+                           "attrID": "ms-next-1"
+                          },
+                          "style": {
+                           "&": {
+                            "_": {
+                             "fontFamily": "'IBM Plex Mono',ui-monospace,SFMono-Regular,Menlo,Consolas,monospace",
+                             "fontSize": "11px",
+                             "letterSpacing": "0.16em",
+                             "cursor": "pointer",
+                             "width": "max-content",
+                             "color": {
+                              "token": "--mk-ink"
+                             },
+                             "paddingTop": "11px",
+                             "paddingBottom": "11px",
+                             "paddingLeft": "18px",
+                             "paddingRight": "18px",
+                             "customDeclarations": "border:1px solid rgba(22,24,28,.34);"
+                            }
+                           },
+                           "hover": {
+                            "_": {
+                             "backgroundColor": {
+                              "token": "--mk-ink"
+                             },
+                             "color": {
+                              "token": "--mk-paper"
+                             }
+                            }
+                           },
+                           "focus-visible": {
+                            "_": {
+                             "customDeclarations": "outline:2px solid rgb(255,90,54);outline-offset:3px;"
+                            }
+                           }
+                          },
+                          "children": [
+                           {
+                            "type": "wysiwyg-text",
+                            "data": {
+                             "text": "NEXT →"
+                            }
+                           }
+                          ]
+                         }
+                        ]
+                       }
+                      ]
+                     }
+                    ]
+                   },
+                   {
+                    "type": "multi-steps-form-step",
+                    "data": {
+                     "attrID": "ms-panel-2"
+                    },
+                    "children": [
+                     {
+                      "type": "div",
+                      "data": {
+                       "attrID": "ms-in-2"
+                      },
+                      "style": {
+                       "&": {
+                        "_": {
+                         "display": "flex",
+                         "flexDirection": "column",
+                         "rowGap": "18px"
+                        }
+                       }
+                      },
+                      "children": [
+                       {
+                        "type": "field",
+                        "data": {
+                         "attrID": "ms-mail-f"
+                        },
+                        "style": {
+                         "&": {
+                          "_": {
+                           "display": "flex",
+                           "flexDirection": "column",
+                           "rowGap": "7px"
+                          }
+                         }
+                        },
+                        "children": [
+                         {
+                          "type": "label",
+                          "data": {
+                           "attrID": "ms-mail-lab",
+                           "forInput": "ms-mail"
+                          },
+                          "style": {
+                           "&": {
+                            "_": {
+                             "fontFamily": "'IBM Plex Mono',ui-monospace,SFMono-Regular,Menlo,Consolas,monospace",
+                             "fontSize": "10px",
+                             "letterSpacing": "0.18em",
+                             "color": {
+                              "token": "--mk-faint"
+                             }
+                            },
+                            "_t": {
+                             "fontSize": "12px"
+                            }
+                           }
+                          },
+                          "children": [
+                           {
+                            "type": "wysiwyg-text",
+                            "data": {
+                             "text": "電郵"
+                            }
+                           }
+                          ]
+                         },
+                         {
+                          "type": "text-input",
+                          "data": {
+                           "attrID": "ms-mail",
+                           "nameAttribute": "email2",
+                           "required": "1",
+                           "type": "email",
+                           "placeholderText": "you@example.com"
+                          },
+                          "style": {
+                           "&": {
+                            "_": {
+                             "width": "100%",
+                             "backgroundColor": {
+                              "token": "--mk-paper"
+                             },
+                             "fontFamily": "'Noto Sans TC','PingFang TC','Hiragino Sans TC','Microsoft JhengHei',sans-serif",
+                             "fontSize": "14px",
+                             "color": {
+                              "token": "--mk-ink"
+                             },
+                             "paddingTop": "12px",
+                             "paddingBottom": "12px",
+                             "paddingLeft": "14px",
+                             "paddingRight": "14px",
+                             "customDeclarations": "border:1px solid rgba(22,24,28,.3);"
+                            }
+                           },
+                           "focus-visible": {
+                            "_": {
+                             "customDeclarations": "outline:2px solid rgb(255,90,54);outline-offset:3px;"
+                            }
+                           }
+                          }
+                         }
+                        ]
+                       },
+                       {
+                        "type": "submit-button",
+                        "data": {
+                         "attrID": "ms-send"
+                        },
+                        "style": {
+                         "&": {
+                          "_": {
+                           "backgroundColor": {
+                            "token": "--mk-accent"
+                           },
+                           "color": {
+                            "token": "--mk-ink"
+                           },
+                           "fontFamily": "'IBM Plex Mono',ui-monospace,SFMono-Regular,Menlo,Consolas,monospace",
+                           "fontSize": "11px",
+                           "letterSpacing": "0.18em",
+                           "fontWeight": "500",
+                           "cursor": "pointer",
+                           "width": "max-content",
+                           "paddingTop": "14px",
+                           "paddingBottom": "14px",
+                           "paddingLeft": "26px",
+                           "paddingRight": "26px",
+                           "customDeclarations": "border:1px solid rgb(255,90,54);"
+                          }
+                         },
+                         "hover": {
+                          "_": {
+                           "backgroundColor": {
+                            "token": "--mk-ink"
+                           },
+                           "color": {
+                            "token": "--mk-paper"
+                           }
+                          }
+                         },
+                         "focus-visible": {
+                          "_": {
+                           "customDeclarations": "outline:2px solid rgb(255,90,54);outline-offset:3px;"
+                          }
+                         }
+                        },
+                        "children": [
+                         {
+                          "type": "submit-label",
+                          "data": {
+                           "attrID": "ms-send-l"
+                          },
+                          "children": [
+                           {
+                            "type": "wysiwyg-text",
+                            "data": {
+                             "text": "SEND"
+                            }
+                           }
+                          ]
+                         },
+                         {
+                          "type": "submit-loading",
+                          "data": {
+                           "attrID": "ms-send-wait"
+                          },
+                          "children": [
+                           {
+                            "type": "wysiwyg-text",
+                            "data": {
+                             "text": "送出中…"
+                            }
+                           }
+                          ]
+                         }
+                        ]
+                       },
+                       {
+                        "type": "div",
+                        "data": {
+                         "attrID": "ms-foot-2"
+                        },
+                        "style": {
+                         "&": {
+                          "_": {
+                           "display": "flex",
+                           "columnGap": "12px",
+                           "flexWrap": "wrap",
+                           "rowGap": "10px",
+                           "marginTop": "6px"
+                          }
+                         }
+                        },
+                        "children": [
+                         {
+                          "type": "multi-steps-back-button",
+                          "data": {
+                           "attrID": "ms-back-2"
+                          },
+                          "style": {
+                           "&": {
+                            "_": {
+                             "fontFamily": "'IBM Plex Mono',ui-monospace,SFMono-Regular,Menlo,Consolas,monospace",
+                             "fontSize": "11px",
+                             "letterSpacing": "0.16em",
+                             "cursor": "pointer",
+                             "width": "max-content",
+                             "color": {
+                              "token": "--mk-ink"
+                             },
+                             "paddingTop": "11px",
+                             "paddingBottom": "11px",
+                             "paddingLeft": "18px",
+                             "paddingRight": "18px",
+                             "customDeclarations": "border:1px solid rgba(22,24,28,.34);"
+                            }
+                           },
+                           "hover": {
+                            "_": {
+                             "backgroundColor": {
+                              "token": "--mk-ink"
+                             },
+                             "color": {
+                              "token": "--mk-paper"
+                             }
+                            }
+                           },
+                           "focus-visible": {
+                            "_": {
+                             "customDeclarations": "outline:2px solid rgb(255,90,54);outline-offset:3px;"
+                            }
+                           }
+                          },
+                          "children": [
+                           {
+                            "type": "wysiwyg-text",
+                            "data": {
+                             "text": "← BACK"
+                            }
+                           }
+                          ]
+                         }
+                        ]
+                       }
+                      ]
+                     }
+                    ]
+                   }
+                  ]
+                 }
+                ]
+               }
+              ]
+             },
+             {
+              "type": "success-screen",
+              "data": {
+               "attrID": "ms-ok"
+              },
+              "style": {
+               "&": {
+                "_": {
+                 "paddingTop": "28px",
+                 "paddingBottom": "28px",
+                 "paddingLeft": "24px",
+                 "paddingRight": "24px",
+                 "backgroundColor": {
+                  "token": "--mk-ink"
+                 }
+                }
+               }
+              },
+              "children": [
+               {
+                "type": "text",
+                "data": {
+                 "tagName": "p"
+                },
+                "text": "收到了。",
+                "style": {
+                 "&": {
+                  "_": {
+                   "fontFamily": "'Space Grotesk','Noto Sans TC','PingFang TC','Microsoft JhengHei',sans-serif",
+                   "fontWeight": "600",
+                   "fontSize": "22px",
+                   "color": "rgb(250,250,247)",
+                   "whiteSpace": "pre-wrap"
+                  }
+                 }
+                }
+               }
+              ]
+             }
+            ]
+           }
+          ]
+         },
+         {
+          "type": "div",
+          "data": {
+           "attrID": "fm-ms-foot"
           },
           "style": {
            "&": {
@@ -47970,20 +49510,20 @@
                  "interactions": [
                   {
                    "type": "click",
-                   "uuid": "27faf111-f77c-4628-bcab-b81e9591598e",
+                   "uuid": "995d9790-53aa-4c72-bb8a-a08c244d532b",
                    "clickOptions": {
                     "name": "dl-open-centre",
-                    "ID": "d3a47803-d2d8-4ae2-ab4d-ed644b5cd0a5",
+                    "ID": "4a33e9f8-ca78-495c-9a2d-422adcdcf149",
                     "actionSlots": {
                      "click": {
                       "actions": [
                        {
                         "type": "modalOpen",
-                        "uuid": "cf23099f-ca15-4a68-bab0-000b2da0e871",
+                        "uuid": "cbd1ede1-b848-43ff-97c7-6c3e2483010e",
                         "settings": {
                          "target": {
                           "type": "element",
-                          "uuid": "9c4d3808-cb5b-41b0-ad75-1f2b11a1b2b6"
+                          "uuid": "88f80532-7c95-4074-97d2-9443058bd0c0"
                          }
                         }
                        }
@@ -48522,20 +50062,20 @@
                  "interactions": [
                   {
                    "type": "click",
-                   "uuid": "182a61a5-93a2-402d-bb83-2135e152eea5",
+                   "uuid": "0a6e55ab-42bd-4829-a8d4-d284df227f36",
                    "clickOptions": {
                     "name": "dl-open-sheet",
-                    "ID": "3e156a7f-31e8-4202-8f55-309b6d003c2e",
+                    "ID": "125fd315-beff-45fd-9678-d5116c4adbf6",
                     "actionSlots": {
                      "click": {
                       "actions": [
                        {
                         "type": "modalOpen",
-                        "uuid": "4aaccc71-2ccf-4a0a-94a0-28d6848bbf30",
+                        "uuid": "6c418cef-eafd-471a-919f-cc266c028b9d",
                         "settings": {
                          "target": {
                           "type": "element",
-                          "uuid": "d002c796-789f-4d93-9224-0eb7f23206b5"
+                          "uuid": "90f49c4e-36a1-4343-8f60-bd8d548d7a88"
                          }
                         }
                        }
@@ -49074,20 +50614,20 @@
                  "interactions": [
                   {
                    "type": "click",
-                   "uuid": "4d06d455-cd77-47bb-b96a-931fed4d66b8",
+                   "uuid": "ae586022-392c-4b8b-94e6-7dcd830d1b85",
                    "clickOptions": {
                     "name": "dl-open-drawer",
-                    "ID": "40baf1c1-9183-4002-91bf-fb3319312f27",
+                    "ID": "b36bf61b-deeb-4786-8830-120fe09bb0ce",
                     "actionSlots": {
                      "click": {
                       "actions": [
                        {
                         "type": "modalOpen",
-                        "uuid": "ee8e83a4-5f05-4069-9e48-e353d5ead677",
+                        "uuid": "8b3c68c7-7d81-462c-9405-8ffeadacb3f2",
                         "settings": {
                          "target": {
                           "type": "element",
-                          "uuid": "6c55bbfa-f011-4d8c-9c80-285d2ecbec05"
+                          "uuid": "24a7f652-0a53-4ad5-91a8-296840bc78a2"
                          }
                         }
                        }
@@ -50123,20 +51663,20 @@
                  "interactions": [
                   {
                    "type": "click",
-                   "uuid": "3ade4557-e40b-4e5d-9285-1c4d9e56af59",
+                   "uuid": "b9d55358-a7dd-4666-95ba-713541f0a04e",
                    "clickOptions": {
                     "name": "dl-open-takeover",
-                    "ID": "35a53f16-77f6-4fa7-bccf-f81b6ddb1178",
+                    "ID": "789b14d6-ad62-4fdb-927c-384690d1b217",
                     "actionSlots": {
                      "click": {
                       "actions": [
                        {
                         "type": "modalOpen",
-                        "uuid": "e6cf11d0-8578-47a0-afb7-55863f7af471",
+                        "uuid": "ff817dda-1a43-4b87-894f-dc3a27df27ee",
                         "settings": {
                          "target": {
                           "type": "element",
-                          "uuid": "92a9d8b0-2851-424c-af6e-b54cdc373c14"
+                          "uuid": "b07fec17-abe6-4ccb-aec4-cc0204ec9f6b"
                          }
                         }
                        }
@@ -50675,20 +52215,20 @@
                  "interactions": [
                   {
                    "type": "click",
-                   "uuid": "efef4f5d-1346-419c-a788-6736ba31446a",
+                   "uuid": "ff5b3b7d-4cd1-4d0a-90d6-28078b7b622c",
                    "clickOptions": {
                     "name": "dl-open-gate",
-                    "ID": "b0783b02-618d-4957-a7b2-9c5a4bf62f79",
+                    "ID": "937c18a5-1197-494c-9ed2-3d5ae2773f37",
                     "actionSlots": {
                      "click": {
                       "actions": [
                        {
                         "type": "modalOpen",
-                        "uuid": "3ad4ed5c-f3ff-4700-960d-6e84f8bf3c3f",
+                        "uuid": "8004335a-227b-4355-a312-90b8f21e2928",
                         "settings": {
                          "target": {
                           "type": "element",
-                          "uuid": "0b74f4cf-5a84-4953-99e0-4d98fe0accbf"
+                          "uuid": "fbba59c7-9a00-4251-9ccf-cedc7a171384"
                          }
                         }
                        }
@@ -51250,20 +52790,20 @@
                  "interactions": [
                   {
                    "type": "click",
-                   "uuid": "3fd9f722-218b-4dc7-a0ef-5cb2d1de1bff",
+                   "uuid": "90d95bb5-1187-49f7-a31b-c8cc8e353e31",
                    "clickOptions": {
                     "name": "dl-open-exit",
-                    "ID": "c0243d2a-a241-4bb3-a1c5-795a46f3c2ea",
+                    "ID": "753d40be-5124-48a7-a4a0-42f2e44f4b66",
                     "actionSlots": {
                      "click": {
                       "actions": [
                        {
                         "type": "modalOpen",
-                        "uuid": "6a559fee-9ab8-4975-a8c9-631bb5ca185e",
+                        "uuid": "650d23d5-6958-445d-b581-8d401d216838",
                         "settings": {
                          "target": {
                           "type": "element",
-                          "uuid": "d17b8993-f050-44fa-a29d-f55913b14af8"
+                          "uuid": "65f49d44-c591-4d9e-ac9b-5483a82e04bf"
                          }
                         }
                        }
@@ -52290,14 +53830,14 @@
                  "interactions": [
                   {
                    "type": "click",
-                   "uuid": "42758e7a-88c4-4212-a9fd-990f63237e2b",
+                   "uuid": "ae756e5b-eaef-4a9f-ad08-b279cc3065f0",
                    "clickOptions": {
                     "name": "dl-ab-aba",
-                    "ID": "c7c540a9-c32c-4703-b56e-c6314e2331cb",
+                    "ID": "8036f42c-b202-4eef-aa3b-755281b56978",
                     "runs": {
                      "rules": [
                       {
-                       "uuid": "81b3bbb6-e7f6-4c54-a546-c896168d0d8f",
+                       "uuid": "7c8b46d6-e09d-477f-ae3c-9e7f4b1b0839",
                        "type": "pickOne",
                        "pickOneOptions": {
                         "remember": "page",
@@ -52311,11 +53851,11 @@
                       "actions": [
                        {
                         "type": "modalOpen",
-                        "uuid": "7959875e-425a-4328-998a-d8208b13a882",
+                        "uuid": "032b1616-ed63-4a06-bbc1-45573926ad1e",
                         "settings": {
                          "target": {
                           "type": "element",
-                          "uuid": "8e7442df-3c5f-424b-aaa7-d0db2019998c"
+                          "uuid": "f2b7b9f9-072f-4938-9225-a18b6565abd9"
                          }
                         }
                        }
@@ -52378,14 +53918,14 @@
                  "interactions": [
                   {
                    "type": "click",
-                   "uuid": "494f6252-53d2-48e0-9b2a-1f5b0b438de5",
+                   "uuid": "f8078c51-3480-412c-a010-da2011937d85",
                    "clickOptions": {
                     "name": "dl-ab-abb",
-                    "ID": "e281ca39-d7e6-4faf-a524-514b19aa0ea9",
+                    "ID": "7cad732c-c6da-4ba8-ac2a-776bace05196",
                     "runs": {
                      "rules": [
                       {
-                       "uuid": "d17f7cbd-c8b5-414b-97e0-6e620daa9522",
+                       "uuid": "d3a24e29-333f-4eb5-9f1a-4363c192204a",
                        "type": "pickOne",
                        "pickOneOptions": {
                         "remember": "page",
@@ -52399,11 +53939,11 @@
                       "actions": [
                        {
                         "type": "modalOpen",
-                        "uuid": "cc970e70-7766-4e3d-8bcd-fea9283b22eb",
+                        "uuid": "04473b3d-75bb-4b40-873d-02c2e0f6a309",
                         "settings": {
                          "target": {
                           "type": "element",
-                          "uuid": "61fa4738-adab-4120-8747-d746fb631264"
+                          "uuid": "be06594f-d9f4-4c7c-870c-f80da20f3e7e"
                          }
                         }
                        }
@@ -52673,14 +54213,14 @@
              "translateXOptions": {
               "value": "-50%"
              },
-             "uuid": "c1c3714b-ecc8-43ea-85b7-fa96cf9b6902"
+             "uuid": "74ae1f32-afe1-415d-8071-7c6a05f8c177"
             },
             {
              "type": "translateY",
              "translateYOptions": {
               "value": "-50%"
              },
-             "uuid": "ff0da68c-5d47-4eed-b0f0-c06de2a0f3c4"
+             "uuid": "77ab3e4c-602f-48ad-a68e-8e9f363df634"
             }
            ],
            "width": "100%",
@@ -53390,20 +54930,20 @@
              "interactions": [
               {
                "type": "click",
-               "uuid": "7ddb1218-968e-4a9e-b1fc-af1d82fffbe6",
+               "uuid": "94de3ce6-142c-42dd-8bdb-e240c3ac75a8",
                "clickOptions": {
                 "name": "dl-close-centre",
-                "ID": "de5bb1c5-449b-44e8-8bca-7ebe38c6243e",
+                "ID": "c02a3fbc-5426-468a-a998-0d24eaa5f87f",
                 "actionSlots": {
                  "click": {
                   "actions": [
                    {
                     "type": "modalClose",
-                    "uuid": "8c7a9e7c-4c6a-431a-b4d0-674bc0b934e5",
+                    "uuid": "94d92c5a-a97e-492c-8ae2-8fa582eb4f62",
                     "settings": {
                      "target": {
                       "type": "element",
-                      "uuid": "9c4d3808-cb5b-41b0-ad75-1f2b11a1b2b6"
+                      "uuid": "88f80532-7c95-4074-97d2-9443058bd0c0"
                      }
                     }
                    }
@@ -53464,7 +55004,7 @@
         ]
        }
       ],
-      "nodeID": "9c4d3808-cb5b-41b0-ad75-1f2b11a1b2b6"
+      "nodeID": "88f80532-7c95-4074-97d2-9443058bd0c0"
      },
      {
       "type": "modal",
@@ -54229,20 +55769,20 @@
              "interactions": [
               {
                "type": "click",
-               "uuid": "ad5d0fc6-8851-479e-9a9e-858c3c18b702",
+               "uuid": "b6c23e5b-bd72-4d3c-bb2d-486abb3c930c",
                "clickOptions": {
                 "name": "dl-close-sheet",
-                "ID": "7fb017dd-6851-42e1-a117-25c7154f0455",
+                "ID": "6454910d-d6cd-42e9-98d7-12a38d441672",
                 "actionSlots": {
                  "click": {
                   "actions": [
                    {
                     "type": "modalClose",
-                    "uuid": "0c0a122e-b0e8-447f-ac42-298ff5f6876f",
+                    "uuid": "a654adcb-4082-43c0-aa2b-b262bc086e9c",
                     "settings": {
                      "target": {
                       "type": "element",
-                      "uuid": "d002c796-789f-4d93-9224-0eb7f23206b5"
+                      "uuid": "90f49c4e-36a1-4343-8f60-bd8d548d7a88"
                      }
                     }
                    }
@@ -54303,7 +55843,7 @@
         ]
        }
       ],
-      "nodeID": "d002c796-789f-4d93-9224-0eb7f23206b5"
+      "nodeID": "90f49c4e-36a1-4343-8f60-bd8d548d7a88"
      },
      {
       "type": "modal",
@@ -55067,20 +56607,20 @@
              "interactions": [
               {
                "type": "click",
-               "uuid": "8c54c6ac-3fd5-4c9e-9893-ed6cafc3d8a3",
+               "uuid": "67a3cb70-cbb4-4697-aa50-5db32e62f541",
                "clickOptions": {
                 "name": "dl-close-drawer",
-                "ID": "bf48eb30-086f-4770-b239-3206f60612c6",
+                "ID": "720748cb-7082-477f-8765-60410e314f83",
                 "actionSlots": {
                  "click": {
                   "actions": [
                    {
                     "type": "modalClose",
-                    "uuid": "0fcc121d-7fda-497a-8028-914d971162b8",
+                    "uuid": "2b8b4b56-957b-4ac2-b879-d0964bc77628",
                     "settings": {
                      "target": {
                       "type": "element",
-                      "uuid": "6c55bbfa-f011-4d8c-9c80-285d2ecbec05"
+                      "uuid": "24a7f652-0a53-4ad5-91a8-296840bc78a2"
                      }
                     }
                    }
@@ -55141,7 +56681,7 @@
         ]
        }
       ],
-      "nodeID": "6c55bbfa-f011-4d8c-9c80-285d2ecbec05"
+      "nodeID": "24a7f652-0a53-4ad5-91a8-296840bc78a2"
      },
      {
       "type": "modal",
@@ -55155,7 +56695,7 @@
          "runs": {
           "rules": [
            {
-            "uuid": "1a6ec656-4346-4953-8d35-288722ec9cb1",
+            "uuid": "4f1fd77e-f73e-4c18-a947-f837abbe093d",
             "type": "cap",
             "capOptions": {
              "max": "1",
@@ -55922,20 +57462,20 @@
              "interactions": [
               {
                "type": "click",
-               "uuid": "99a70be0-377f-4b31-a9b2-68492364fb1d",
+               "uuid": "f0900e5f-0d39-4efc-b451-f2359df9f42a",
                "clickOptions": {
                 "name": "dl-close-toast",
-                "ID": "4eceba81-41af-46ef-8097-509f7fe8452b",
+                "ID": "e7b3728e-a48c-4d2a-adeb-fec57d4cda57",
                 "actionSlots": {
                  "click": {
                   "actions": [
                    {
                     "type": "modalClose",
-                    "uuid": "6b3593ed-344e-43bf-a026-57c814d7c6aa",
+                    "uuid": "5b64ca37-2247-4494-9d4b-3e70ddd5b1f8",
                     "settings": {
                      "target": {
                       "type": "element",
-                      "uuid": "e74aa599-9502-4153-81dd-ba180a633390"
+                      "uuid": "6515f8e0-6e6f-40d7-adf8-1896477a97cf"
                      }
                     }
                    }
@@ -55996,7 +57536,7 @@
         ]
        }
       ],
-      "nodeID": "e74aa599-9502-4153-81dd-ba180a633390"
+      "nodeID": "6515f8e0-6e6f-40d7-adf8-1896477a97cf"
      },
      {
       "type": "modal",
@@ -56766,20 +58306,20 @@
              "interactions": [
               {
                "type": "click",
-               "uuid": "d383cd53-9c1e-4650-9bd2-a34ebae2cfbd",
+               "uuid": "b011b9cc-5278-4f99-b5e6-12cc0d36e9fd",
                "clickOptions": {
                 "name": "dl-close-takeover",
-                "ID": "0b1e16d9-6028-46e1-83c7-62612ff77ef6",
+                "ID": "ef56b5e5-d59d-4fe4-96f2-a716e1823517",
                 "actionSlots": {
                  "click": {
                   "actions": [
                    {
                     "type": "modalClose",
-                    "uuid": "d5cd43f3-94eb-4fe8-8a0a-2248c60a812e",
+                    "uuid": "db77ff20-66e0-4b82-bb9a-6b2aaa0c7679",
                     "settings": {
                      "target": {
                       "type": "element",
-                      "uuid": "92a9d8b0-2851-424c-af6e-b54cdc373c14"
+                      "uuid": "b07fec17-abe6-4ccb-aec4-cc0204ec9f6b"
                      }
                     }
                    }
@@ -56840,7 +58380,7 @@
         ]
        }
       ],
-      "nodeID": "92a9d8b0-2851-424c-af6e-b54cdc373c14"
+      "nodeID": "b07fec17-abe6-4ccb-aec4-cc0204ec9f6b"
      },
      {
       "type": "modal",
@@ -56902,14 +58442,14 @@
              "translateXOptions": {
               "value": "-50%"
              },
-             "uuid": "4f3658a6-cf37-4a6e-ba19-6fc88404468f"
+             "uuid": "cead2bcc-af20-4a34-a201-8721043a213c"
             },
             {
              "type": "translateY",
              "translateYOptions": {
               "value": "-50%"
              },
-             "uuid": "0477239d-6c83-4282-85c5-4a3708669a23"
+             "uuid": "cb7ce2d9-472f-4f68-9018-347b375fbc3b"
             }
            ],
            "width": "100%",
@@ -57619,20 +59159,20 @@
              "interactions": [
               {
                "type": "click",
-               "uuid": "01fc12d7-d0e4-4108-8559-64b7a6361225",
+               "uuid": "47cb57b4-4439-46b9-a562-6a50a28aa1ab",
                "clickOptions": {
                 "name": "dl-close-gate",
-                "ID": "a90e14b6-f8a5-4d76-94f5-eb8d6a40bcd7",
+                "ID": "9c6b1e41-3744-4496-af38-c1c16db1620c",
                 "actionSlots": {
                  "click": {
                   "actions": [
                    {
                     "type": "modalClose",
-                    "uuid": "15017846-ee8b-42dc-bdf7-66d372e6eea4",
+                    "uuid": "932ee425-528b-4a52-b06b-7139726152fd",
                     "settings": {
                      "target": {
                       "type": "element",
-                      "uuid": "0b74f4cf-5a84-4953-99e0-4d98fe0accbf"
+                      "uuid": "fbba59c7-9a00-4251-9ccf-cedc7a171384"
                      }
                     }
                    }
@@ -57693,7 +59233,7 @@
         ]
        }
       ],
-      "nodeID": "0b74f4cf-5a84-4953-99e0-4d98fe0accbf"
+      "nodeID": "fbba59c7-9a00-4251-9ccf-cedc7a171384"
      },
      {
       "type": "modal",
@@ -57710,7 +59250,7 @@
          "runs": {
           "rules": [
            {
-            "uuid": "9aaca277-3e73-47e4-a58d-9b199081c51f",
+            "uuid": "b848a859-1921-4554-af1f-1ba935e609b9",
             "type": "cap",
             "capOptions": {
              "max": "1",
@@ -57776,14 +59316,14 @@
              "translateXOptions": {
               "value": "-50%"
              },
-             "uuid": "0f18cee3-43e3-4615-9a48-664b15a5247a"
+             "uuid": "36e544fb-bfae-44f7-8edf-cc70ae52439a"
             },
             {
              "type": "translateY",
              "translateYOptions": {
               "value": "-50%"
              },
-             "uuid": "5f9115b3-67f5-4b36-a2cd-b3e0e35900ff"
+             "uuid": "87a28f5e-ffa1-4a38-97ec-57751504cdc8"
             }
            ],
            "width": "100%",
@@ -58493,20 +60033,20 @@
              "interactions": [
               {
                "type": "click",
-               "uuid": "1ddfe460-0236-4cf7-aafd-b2c2a7ed4ddb",
+               "uuid": "f4855977-fcf6-495c-9785-ed93d7a65c3e",
                "clickOptions": {
                 "name": "dl-close-exit",
-                "ID": "ee8fd0f9-4ae7-46d2-8498-17cdbfc9ba41",
+                "ID": "80c246f0-4ddb-4deb-b181-64b849bec51d",
                 "actionSlots": {
                  "click": {
                   "actions": [
                    {
                     "type": "modalClose",
-                    "uuid": "1dd3be1b-49d9-4ea1-aadf-404b96bbffe6",
+                    "uuid": "56281cec-1894-4303-bb7d-24378c5a2cd9",
                     "settings": {
                      "target": {
                       "type": "element",
-                      "uuid": "d17b8993-f050-44fa-a29d-f55913b14af8"
+                      "uuid": "65f49d44-c591-4d9e-ac9b-5483a82e04bf"
                      }
                     }
                    }
@@ -58567,7 +60107,7 @@
         ]
        }
       ],
-      "nodeID": "d17b8993-f050-44fa-a29d-f55913b14af8"
+      "nodeID": "65f49d44-c591-4d9e-ac9b-5483a82e04bf"
      },
      {
       "type": "modal",
@@ -58584,7 +60124,7 @@
          "runs": {
           "rules": [
            {
-            "uuid": "8cae751c-2431-4ea1-9c69-dab2cd8419f7",
+            "uuid": "e9877f4b-a67c-4732-9d67-f661a2494b35",
             "type": "cooldown",
             "cooldownOptions": {
              "duration": "1",
@@ -59352,20 +60892,20 @@
              "interactions": [
               {
                "type": "click",
-               "uuid": "ff135530-7567-40b7-b9ec-208021b0d66c",
+               "uuid": "93a06618-6611-4142-85ac-fa5a3e8242f0",
                "clickOptions": {
                 "name": "dl-close-depth",
-                "ID": "dd32f839-02b8-435f-b69f-1c4ac0a92601",
+                "ID": "b1ea5923-b92f-4b2f-9658-1784602893ff",
                 "actionSlots": {
                  "click": {
                   "actions": [
                    {
                     "type": "modalClose",
-                    "uuid": "dc1e7b41-6fc9-47a0-9ace-c56e419328b3",
+                    "uuid": "9a639f9b-e8e4-4d1c-bce9-fac64c239a23",
                     "settings": {
                      "target": {
                       "type": "element",
-                      "uuid": "b70c3e3e-eab9-4fda-8fff-373880fd82d6"
+                      "uuid": "0ddeed1a-3e6d-4ed9-808c-ac320ed2f252"
                      }
                     }
                    }
@@ -59426,7 +60966,7 @@
         ]
        }
       ],
-      "nodeID": "b70c3e3e-eab9-4fda-8fff-373880fd82d6"
+      "nodeID": "0ddeed1a-3e6d-4ed9-808c-ac320ed2f252"
      },
      {
       "type": "modal",
@@ -59488,14 +61028,14 @@
              "translateXOptions": {
               "value": "-50%"
              },
-             "uuid": "a7b9f1b0-3680-485e-a01c-e4b8499332e5"
+             "uuid": "b1f0a2dd-f85c-4005-822d-be5d10ee3e2d"
             },
             {
              "type": "translateY",
              "translateYOptions": {
               "value": "-50%"
              },
-             "uuid": "bb1128c7-2b28-4c2a-8708-cb5061fa5176"
+             "uuid": "fc7ceb27-c98b-4bfe-ae09-23bde7ee9710"
             }
            ],
            "width": "100%",
@@ -60205,20 +61745,20 @@
              "interactions": [
               {
                "type": "click",
-               "uuid": "cacf0029-079b-4f74-8d7e-7f4d26fb157e",
+               "uuid": "55127a13-8361-4451-a0d9-ef715490b3c1",
                "clickOptions": {
                 "name": "dl-close-aba",
-                "ID": "5feb17c7-9568-41c2-ae15-98239dc1fd02",
+                "ID": "a6535ee7-ba88-4a8a-a5c2-7acf7b3e74b1",
                 "actionSlots": {
                  "click": {
                   "actions": [
                    {
                     "type": "modalClose",
-                    "uuid": "33eed487-0299-43db-9666-48ac2f099c8c",
+                    "uuid": "13152f8b-17ab-4614-9e50-1fd0233527ea",
                     "settings": {
                      "target": {
                       "type": "element",
-                      "uuid": "8e7442df-3c5f-424b-aaa7-d0db2019998c"
+                      "uuid": "f2b7b9f9-072f-4938-9225-a18b6565abd9"
                      }
                     }
                    }
@@ -60279,7 +61819,7 @@
         ]
        }
       ],
-      "nodeID": "8e7442df-3c5f-424b-aaa7-d0db2019998c"
+      "nodeID": "f2b7b9f9-072f-4938-9225-a18b6565abd9"
      },
      {
       "type": "modal",
@@ -60341,14 +61881,14 @@
              "translateXOptions": {
               "value": "-50%"
              },
-             "uuid": "070c689e-d62a-459d-85d6-a088103671c3"
+             "uuid": "c8ceceef-0a46-49b8-87dd-8adfa4e9399d"
             },
             {
              "type": "translateY",
              "translateYOptions": {
               "value": "-50%"
              },
-             "uuid": "2e147acc-bed6-4746-9ea4-13c7cdb59738"
+             "uuid": "96d48a6e-0db9-419b-b899-60db038091d1"
             }
            ],
            "width": "100%",
@@ -61058,20 +62598,20 @@
              "interactions": [
               {
                "type": "click",
-               "uuid": "06e3cc9f-8279-4cd1-9a12-57f18e886b8e",
+               "uuid": "4219fab8-baaf-4052-bb4b-42b1d129eb20",
                "clickOptions": {
                 "name": "dl-close-abb",
-                "ID": "70dbc52d-9bbd-47d8-aa28-be34b15971fd",
+                "ID": "ad26e723-7c51-44e8-a602-e9cad0c659a9",
                 "actionSlots": {
                  "click": {
                   "actions": [
                    {
                     "type": "modalClose",
-                    "uuid": "d7868d5e-f7ea-4572-968f-aac8b9e5861d",
+                    "uuid": "c30e0999-2191-4d6d-ba7a-98cd10c65769",
                     "settings": {
                      "target": {
                       "type": "element",
-                      "uuid": "61fa4738-adab-4120-8747-d746fb631264"
+                      "uuid": "be06594f-d9f4-4c7c-870c-f80da20f3e7e"
                      }
                     }
                    }
@@ -61132,7 +62672,7 @@
         ]
        }
       ],
-      "nodeID": "61fa4738-adab-4120-8747-d746fb631264"
+      "nodeID": "be06594f-d9f4-4c7c-870c-f80da20f3e7e"
      }
     ]
    }

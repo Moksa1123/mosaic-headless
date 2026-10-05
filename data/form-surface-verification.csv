@@ -6,6 +6,9 @@ FORM/required,PASS,required is set on 8 of them
 FORM/honeypot,PASS,"Mosaic adds its own spam trap: ['mosaic_hp_url', 'mosaic_hp_ts']"
 FORM/option_labels,PASS,"5 options, all labelled"
 FORM/required_blocks,PASS,"empty form reports invalid: ['name', 'email', 'kind', 'kind']"
+MULTISTEP/one_at_rest,PASS,visible steps: [0]
+MULTISTEP/next,PASS,NEXT -> [1]
+MULTISTEP/back,PASS,BACK -> [0]
 COMPONENT/instances,SKIPPED,fewer than two on this page
 LOOP/slider,SKIPPED,not on this page
 LOOP/tabs,SKIPPED,not on this page

@@ -53,6 +53,8 @@ def main():
                     help="a loop-pagination-numbers whose children are page links")
     ap.add_argument("--paged-item", default="ct-arch-title",
                     help="the repeated attrID whose text should change per page")
+    ap.add_argument("--steps", default="ms-panel-%d:3",
+                    help="multi-step panel attrID pattern and how many")
     ap.add_argument("--instances", default="cs-card",
                     help="a component's root attrID; instances are prefixed")
     a = ap.parse_args()
@@ -166,6 +168,34 @@ def main():
                                  a.form)
             check("FORM/required_blocks", bool(invalid),
                   "empty form reports invalid: %s" % invalid[:4])
+
+        # ---- a multi-step form shows ONE step at a time
+        step_pat, n_steps = a.steps.rsplit(":", 1)
+        n_steps = int(n_steps)
+        if not present(step_pat % 0):
+            skip("MULTISTEP", "not on this page")
+        else:
+            def steps_shown():
+                return [i for i in range(n_steps)
+                        if p.evaluate(VISIBLE, step_pat % i)]
+            at_rest = steps_shown()
+            # Mosaic ships NO visibility CSS for a form step - the plugin moves
+            # `m-form-step--active` and leaves the hiding to the theme's variant.
+            # Without that rule every panel is on screen at once and the form
+            # looks like one long page with three sets of buttons.
+            check("MULTISTEP/one_at_rest", at_rest == [0],
+                  "visible steps: %s" % at_rest
+                  + ("" if at_rest == [0] else
+                     " - nothing hides the inactive ones; style .m-form-step"))
+            if at_rest == [0]:
+                p.click("#ms-next-0")
+                p.wait_for_timeout(900)
+                check("MULTISTEP/next", steps_shown() == [1],
+                      "NEXT -> %s" % steps_shown())
+                p.click("#ms-back-1")
+                p.wait_for_timeout(900)
+                check("MULTISTEP/back", steps_shown() == [0],
+                      "BACK -> %s" % steps_shown())
 
         # ---- component instances
         #
