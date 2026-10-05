@@ -1,18 +1,18 @@
 check,result,detail
 FRONT_PAGE,PASS,"HTTP 200, 240832 bytes"
 MENU_IS_LINKS,PASS,1 real <a href> in #mk-nav
-NAV 首頁,PASS,"/ -> HTTP 200, 240832 bytes"
-PAGE moksa,PASS,"HTTP 200, 240833 bytes"
-PAGE my-account,PASS,"HTTP 200, 101037 bytes"
+NAV 首頁,PASS,"/ -> HTTP 200, 240834 bytes"
+PAGE moksa,PASS,"HTTP 200, 240832 bytes"
+PAGE my-account,PASS,"HTTP 200, 101036 bytes"
 PAGE intro,PASS,"HTTP 200, 134746 bytes"
 PAGE content,PASS,"HTTP 200, 102378 bytes"
 PAGE forms,PASS,"HTTP 200, 126731 bytes"
-PAGE components,PASS,"HTTP 200, 119522 bytes"
-PAGE conversion,PASS,"HTTP 200, 103205 bytes"
-PAGE dynamic,PASS,"HTTP 200, 112622 bytes"
-PAGE tokens,PASS,"HTTP 200, 125794 bytes"
-PAGE sliders,PASS,"HTTP 200, 151809 bytes"
-PAGE dialogs,PASS,"HTTP 200, 207347 bytes"
+PAGE components,PASS,"HTTP 200, 135123 bytes"
+PAGE conversion,PASS,"HTTP 200, 103204 bytes"
+PAGE dynamic,PASS,"HTTP 200, 113003 bytes"
+PAGE tokens,PASS,"HTTP 200, 125413 bytes"
+PAGE sliders,PASS,"HTTP 200, 152191 bytes"
+PAGE dialogs,PASS,"HTTP 200, 207349 bytes"
 ANCHORS moksa,PASS,every in-page link resolves
 ANCHORS my-account,PASS,every in-page link resolves
 ANCHORS intro,PASS,every in-page link resolves

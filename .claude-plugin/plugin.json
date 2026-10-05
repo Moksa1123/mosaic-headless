@@ -1,7 +1,7 @@
 {
   "name": "mosaic-headless",
   "displayName": "Mosaic Headless (unofficial)",
-  "version": "1.29.1",
+  "version": "1.29.2",
   "description": "Build and modify Mosaic Pro (Nextend) WordPress sites by writing the data model directly, with every node type, style property and node property measured on a live install. Unofficial: not made by or affiliated with Nextend.",
   "author": {
     "name": "moksa",

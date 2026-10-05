@@ -53,6 +53,12 @@ def main():
                     help="a loop-pagination-numbers whose children are page links")
     ap.add_argument("--paged-item", default="ct-arch-title",
                     help="the repeated attrID whose text should change per page")
+    ap.add_argument("--navbar", default="nb",
+                    help="a navbar; its toggle is <id>-toggle and its nav <id>-nav")
+    ap.add_argument("--media", default="md-img",
+                    help="an image node; icons are looked for beside it")
+    ap.add_argument("--shortcode", default="wp-sc",
+                    help="a wpShortcode node")
     ap.add_argument("--steps", default="ms-panel-%d:3",
                     help="multi-step panel attrID pattern and how many")
     ap.add_argument("--instances", default="cs-card",
@@ -168,6 +174,83 @@ def main():
                                  a.form)
             check("FORM/required_blocks", bool(invalid),
                   "empty form reports invalid: %s" % invalid[:4])
+
+        # ---- navbar: the toggle only exists below its breakpoint
+        if not present(a.navbar):
+            skip("NAVBAR", "not on this page")
+        else:
+            wide = p.evaluate("""(id) => {
+              const t = document.getElementById(id + '-toggle');
+              const n = document.getElementById(id + '-nav');
+              const vis = e => { const r = e.getBoundingClientRect(),
+                                       s = getComputedStyle(e);
+                return r.height > 2 && s.display !== 'none'
+                       && s.visibility !== 'hidden'; };
+              return {toggle: vis(t), nav: vis(n),
+                      links: n.querySelectorAll('a').length};
+            }""", a.navbar)
+            check("NAVBAR/wide", wide["nav"] and not wide["toggle"],
+                  "at this width the links are shown and the toggle is not "
+                  "(nav=%s toggle=%s, %d links)"
+                  % (wide["nav"], wide["toggle"], wide["links"]))
+            p.set_viewport_size({"width": 900, "height": 900})
+            p.wait_for_timeout(900)
+            narrow = p.evaluate("""(id) => {
+              const t = document.getElementById(id + '-toggle');
+              const n = document.getElementById(id + '-nav');
+              const vis = e => { const r = e.getBoundingClientRect(),
+                                       s = getComputedStyle(e);
+                return r.height > 2 && s.display !== 'none'; };
+              return {toggle: vis(t), nav: vis(n),
+                      mode: String(document.getElementById(id).className)
+                              .includes('dropdown-mode')};
+            }""", a.navbar)
+            check("NAVBAR/narrow", narrow["toggle"] and not narrow["nav"]
+                  and narrow["mode"],
+                  "below buttonBreakpoint it collapses behind the toggle "
+                  "(dropdown-mode=%s)" % narrow["mode"])
+            p.click("#%s-toggle" % a.navbar)
+            p.wait_for_timeout(800)
+            opened = p.evaluate("""(id) => {
+              const n = document.getElementById(id + '-nav');
+              const r = n.getBoundingClientRect();
+              return r.height > 2 && getComputedStyle(n).display !== 'none'; }""",
+                                a.navbar)
+            check("NAVBAR/toggle_opens", opened, "clicking it reveals the links")
+            p.set_viewport_size({"width": 1280, "height": 900})
+            p.wait_for_timeout(700)
+
+        # ---- media: an attachment-protocol image and raw-SVG icons
+        if not present(a.media):
+            skip("MEDIA", "not on this page")
+        else:
+            img = p.evaluate("""(id) => {
+              const e = document.querySelector('#' + id + ' img, img#' + id);
+              if (!e) return null;
+              return {w: Math.round(e.getBoundingClientRect().width),
+                      natural: e.naturalWidth, src: (e.currentSrc || e.src || '')};
+            }""", a.media)
+            # naturalWidth > 0 is the only proof the file actually loaded; a broken
+            # src renders an <img> of the right size and no picture
+            check("MEDIA/image_loaded",
+                  bool(img) and img["natural"] > 0 and img["w"] > 0,
+                  "%dpx wide, natural %spx" % (img["w"], img["natural"]) if img
+                  else "no <img> rendered")
+            icons = p.evaluate("""() => [...document.querySelectorAll('svg')]
+                .filter(s => s.closest('[id^=md-i]')).length""")
+            check("MEDIA/icons_inline", icons > 0,
+                  "%d inline <svg> - `icon` takes RAW SVG in its `svg` property, "
+                  "not a URL or a library name" % icons)
+
+        # ---- WordPress interop
+        if not present(a.shortcode):
+            skip("WORDPRESS", "not on this page")
+        else:
+            n = p.evaluate("""(id) => document.querySelectorAll(
+                '#' + id + ' .product, #' + id + ' li').length""", a.shortcode)
+            check("WORDPRESS/shortcode_ran", n > 0,
+                  "%d items from the shortcode - this is WooCommerce's own "
+                  "output, not a reimplementation" % n)
 
         # ---- a multi-step form shows ONE step at a time
         step_pat, n_steps = a.steps.rsplit(":", 1)

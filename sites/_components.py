@@ -365,6 +365,140 @@ def component_block():
                 tcols=2, mcols=1)
 
 
+# ---------------------------------------------------------------- navbar
+
+NAV_ITEMS = [("\u5143\u4ef6\u7246", "/components/"), ("\u8868\u55ae", "/forms/"),
+             ("\u5167\u5bb9\u9a45\u52d5", "/content/"), ("\u8f2a\u64ad", "/sliders/")]
+
+
+def navbar_block():
+    """A self-contained responsive menu.
+
+    `navbar` holds a `navbar-toggle` and a `navigation`; below `buttonBreakpoint`
+    the toggle appears and the navigation collapses behind it, and `animation`
+    picks how it arrives. The site header does not use this - it wraps instead -
+    so this is the component on its own, where it can be seen at any width.
+    """
+    return {"type": "navbar",
+            "data": {"attrID": "nb", "animation": "fadeDown",
+                     "buttonBreakpoint": "_t", "disableScroll": "1"},
+            "style": {"&": {"_": {
+                "display": "flex", "alignItems": "center",
+                "justifyContent": "space-between", "columnGap": "20px",
+                "paddingTop": "16px", "paddingBottom": "16px",
+                "paddingLeft": "20px", "paddingRight": "20px",
+                "customDeclarations": "border:1px solid " + RULE + ";"}}},
+            "children": [
+                {"type": "navbar-toggle", "data": {"attrID": "nb-toggle"},
+                 "style": {"&": {"_": {
+                     "cursor": "pointer", "fontFamily": MONO, "fontSize": "11px",
+                     "letterSpacing": "0.18em", "color": {"token": "--mk-ink"},
+                     "paddingTop": "10px", "paddingBottom": "10px",
+                     "paddingLeft": "14px", "paddingRight": "14px",
+                     "customDeclarations": "border:1px solid rgba(22,24,28,.34);"}},
+                     "hover": {"_": {"backgroundColor": {"token": "--mk-ink"},
+                                     "color": {"token": "--mk-paper"}}},
+                     "focus-visible": {"_": dict(FOCUS_RING)}},
+                 "children": [{"type": "wysiwyg-text", "data": {"text": "MENU"}}]},
+                {"type": "navigation", "data": {"attrID": "nb-nav"},
+                 "style": {"&": {"_": {
+                     "display": "flex", "columnGap": "22px", "rowGap": "10px",
+                     "alignItems": "center", "flexWrap": "wrap"}}},
+                 "children": [
+                     {"type": "menu-link",
+                      "data": {"attrID": "nb-l%d" % i, "url": href},
+                      "style": {"&": {"_": {
+                          "fontFamily": CJK, "fontSize": "14px",
+                          "cursor": "pointer", "color": {"token": "--mk-ink"},
+                          "paddingTop": "8px", "paddingBottom": "8px"}},
+                          "hover": {"_": {"color": {"token": "--mk-accent-ink"}}},
+                          "focus-visible": {"_": dict(FOCUS_RING)}},
+                      "children": [{"type": "wysiwyg-text",
+                                    "data": {"text": label}}]}
+                     for i, (label, href) in enumerate(NAV_ITEMS)]},
+            ]}
+
+
+# ---------------------------------------------------------------- media
+
+# `icon` takes RAW SVG in its `svg` property - not a URL, not a library name.
+ICONS = [
+    ("\u901f\u5ea6", "<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' "
+     "fill='none' stroke='currentColor' stroke-width='1.6' stroke-linecap='round' "
+     "stroke-linejoin='round'><path d='M13 2L4.09 12.97h6.18L11 22l8.91-10.97h-6.18z'/></svg>"),
+    ("\u7d50\u69cb", "<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' "
+     "fill='none' stroke='currentColor' stroke-width='1.6' stroke-linecap='round' "
+     "stroke-linejoin='round'><rect x='3' y='3' width='7' height='7'/>"
+     "<rect x='14' y='3' width='7' height='7'/><rect x='3' y='14' width='7' height='7'/>"
+     "<rect x='14' y='14' width='7' height='7'/></svg>"),
+    ("\u6e2c\u91cf", "<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' "
+     "fill='none' stroke='currentColor' stroke-width='1.6' stroke-linecap='round' "
+     "stroke-linejoin='round'><path d='M3 3v18h18'/><path d='M7 15l4-5 3 3 5-7'/></svg>"),
+]
+
+
+def media_block():
+    return box("md-wrap", {"display": "flex", "flexDirection": "column",
+                           "rowGap": "26px"}, [
+        {"type": "image",
+         "data": {"attrID": "md-img",
+                  # the attachment protocol resolves width and height; the last
+                  # segment is UPLOADS-relative, and a full path is silently doubled
+                  "image": "wp-attachment://image/147/full/"
+                           "2026/09/moksa-richmenu-test.png",
+                  "alt": "Moksa Web rich menu",
+                  "loading": "lazy", "fetchPriority": "low"},
+         "style": {"&": {"_": {
+             "width": "100%", "height": "auto",
+             "customDeclarations": "border:1px solid " + RULE + ";"}}}},
+        box("md-icons", {"display": "flex", "columnGap": "28px", "rowGap": "18px",
+                         "flexWrap": "wrap", "alignItems": "center"},
+            [box("md-icon-%d" % i, {
+                "display": "flex", "columnGap": "10px", "alignItems": "center"},
+                [{"type": "icon",
+                  "data": {"attrID": "md-i%d" % i, "svg": svg, "autoScale": "1"},
+                  "style": {"&": {"_": {"width": "26px", "height": "26px",
+                                        "color": {"token": "--mk-accent-ink"}}}}},
+                 mono(label, size="11px", color="--mk-ink", track="0.1em")])
+             for i, (label, svg) in enumerate(ICONS)]),
+    ])
+
+
+# ---------------------------------------------------------------- wordpress
+
+def wp_block():
+    """Two nodes that hand the page back to WordPress.
+
+    `wpShortcode` runs a shortcode - the products below are WooCommerce's own
+    output, not a reimplementation - and `wpContent` drops a block of WordPress
+    content in. Between them a Mosaic page can carry anything the rest of the
+    install already produces.
+    """
+    return box("wp-wrap", {"display": "flex", "flexDirection": "column",
+                           "rowGap": "24px"}, [
+        {"type": "wpShortcode",
+         "data": {"attrID": "wp-sc", "shortcode": '[products limit="3" columns="3"]'},
+         "style": {"&": {"_": {"width": "100%"}}}},
+        {"type": "wpContent",
+         "data": {"attrID": "wp-ct",
+                  # ValidatorDynamicCodeObject, so the {"v": \u2026} form - a bare
+                  # string is dropped and the block renders empty. Its DEFAULT is
+                  # @VAR('post/content'), which is why this node usually sits
+                  # inside a loop and needs nothing written at all. The property
+                  # is also gated on the unfiltered_html capability.
+                  "content": {"v": "<p>\u9019\u6bb5\u662f wpContent\uff1a"
+                                   "WordPress \u81ea\u5df1\u7684\u5167\u5bb9\u5340\u584a\uff0c"
+                                   "\u7d93\u904e\u5b83\u81ea\u5df1\u7684"
+                                   "\u904e\u6ffe\u5668\u6e32\u67d3\u3002</p>"}},
+         "style": {"&": {"_": {
+             "fontFamily": CJK, "fontSize": "14px", "lineHeight": "1.9",
+             "color": {"token": "--mk-muted"},
+             "paddingTop": "18px", "paddingBottom": "18px",
+             "paddingLeft": "20px", "paddingRight": "20px",
+             "backgroundColor": {"token": "--mk-panel"}}}}},
+    ])
+
+
 # ---------------------------------------------------------------- the page
 
 def band(attr, label, types, body, bg="--mk-paper"):
@@ -410,7 +544,17 @@ TREE = {"type": "div", "data": {"attrID": "cp-page"},
                  "一個定義 × 3 個實例，"
                  "實例只帶不一樣的那五個欄位",
                  component_block(), bg="--mk-paper"),
-            band("cp-map-s", "MAP / 地圖",
+            band("cp-nav-s", "NAVBAR / \u884c\u52d5\u9078\u55ae",
+                 "navbar \u203a navbar-toggle + navigation \u2014 "
+                 "animation / buttonBreakpoint / disableScroll",
+                 navbar_block(), bg="--mk-paper"),
+            band("cp-md-s", "MEDIA / \u5a92\u9ad4",
+                 "image \u2014 wp-attachment:// / icon \u2014 \u539f\u59cb SVG",
+                 media_block(), bg="--mk-panel"),
+            band("cp-wp-s", "WORDPRESS / \u63a5\u56de\u539f\u751f\u5167\u5bb9",
+                 "wpShortcode \u2014 [products] / wpContent",
+                 wp_block(), bg="--mk-paper"),
+            band("cp-map-s", "MAP / \u5730\u5716",
                  "openstreetmap — latitude / longitude / zoom",
                  map_block(), bg="--mk-panel"),
         ]}

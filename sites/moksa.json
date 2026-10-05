@@ -18468,7 +18468,7 @@
                       "settings": {
                        "target": {
                         "type": "element",
-                        "uuid": "13810386-c106-4982-9689-b3f1e9ef6de5"
+                        "uuid": "c9bb9bd4-c0d5-42ce-ae96-ac274b14bae3"
                        }
                       }
                      }
@@ -18524,7 +18524,7 @@
           ]
          }
         ],
-        "nodeID": "13810386-c106-4982-9689-b3f1e9ef6de5"
+        "nodeID": "c9bb9bd4-c0d5-42ce-ae96-ac274b14bae3"
        }
       ]
      }
@@ -32929,6 +32929,1006 @@
           "type": "div",
           "data": {
            "attrID": "cp-comp-s-foot"
+          },
+          "style": {
+           "&": {
+            "_": {
+             "paddingTop": "70px"
+            },
+            "_m": {
+             "paddingTop": "44px"
+            }
+           }
+          },
+          "children": []
+         }
+        ]
+       }
+      ]
+     },
+     {
+      "type": "section",
+      "data": {
+       "attrID": "cp-nav-s"
+      },
+      "style": {
+       "&": {
+        "_": {
+         "backgroundColor": {
+          "token": "--mk-paper"
+         },
+         "paddingLeft": "40px",
+         "paddingRight": "40px",
+         "fontFamily": "'Noto Sans TC','PingFang TC','Hiragino Sans TC','Microsoft JhengHei',sans-serif",
+         "paddingTop": "0px",
+         "paddingBottom": "0px"
+        },
+        "_t": {
+         "paddingLeft": "28px",
+         "paddingRight": "28px"
+        },
+        "_m": {
+         "paddingLeft": "18px",
+         "paddingRight": "18px"
+        }
+       }
+      },
+      "children": [
+       {
+        "type": "div",
+        "data": {
+         "attrID": "cp-nav-s-w"
+        },
+        "style": {
+         "&": {
+          "_": {
+           "width": "100%",
+           "maxWidth": "1240px",
+           "marginLeft": "auto",
+           "marginRight": "auto"
+          }
+         }
+        },
+        "children": [
+         {
+          "type": "div",
+          "data": {
+           "attrID": "cp-nav-s-pad"
+          },
+          "style": {
+           "&": {
+            "_": {
+             "paddingTop": "70px"
+            },
+            "_m": {
+             "paddingTop": "44px"
+            }
+           }
+          },
+          "children": []
+         },
+         {
+          "type": "div",
+          "data": {
+           "attrID": "cp-strip-navbar-/-行動選單"
+          },
+          "style": {
+           "&": {
+            "_": {
+             "display": "flex",
+             "justifyContent": "space-between",
+             "alignItems": "baseline",
+             "columnGap": "16px",
+             "flexWrap": "wrap",
+             "rowGap": "6px",
+             "paddingBottom": "14px",
+             "marginBottom": "26px",
+             "customDeclarations": "border-bottom:1px solid rgb(22,24,28);"
+            }
+           }
+          },
+          "children": [
+           {
+            "type": "text",
+            "data": {
+             "tagName": "p"
+            },
+            "text": "NAVBAR / 行動選單",
+            "style": {
+             "&": {
+              "_": {
+               "color": {
+                "token": "--mk-ink"
+               },
+               "fontSize": "11px",
+               "letterSpacing": "0.26em",
+               "fontFamily": "'IBM Plex Mono',ui-monospace,SFMono-Regular,Menlo,Consolas,monospace",
+               "fontWeight": "400"
+              },
+              "_t": {
+               "fontSize": "12px"
+              }
+             }
+            }
+           },
+           {
+            "type": "text",
+            "data": {
+             "tagName": "p"
+            },
+            "text": "navbar › navbar-toggle + navigation — animation / buttonBreakpoint / disableScroll",
+            "style": {
+             "&": {
+              "_": {
+               "color": {
+                "token": "--mk-faint"
+               },
+               "fontSize": "10px",
+               "letterSpacing": "0.08em",
+               "fontFamily": "'IBM Plex Mono',ui-monospace,SFMono-Regular,Menlo,Consolas,monospace",
+               "fontWeight": "400"
+              },
+              "_t": {
+               "fontSize": "12px"
+              }
+             }
+            }
+           }
+          ]
+         },
+         {
+          "type": "navbar",
+          "data": {
+           "attrID": "nb",
+           "animation": "fadeDown",
+           "buttonBreakpoint": "_t",
+           "disableScroll": "1"
+          },
+          "style": {
+           "&": {
+            "_": {
+             "display": "flex",
+             "alignItems": "center",
+             "justifyContent": "space-between",
+             "columnGap": "20px",
+             "paddingTop": "16px",
+             "paddingBottom": "16px",
+             "paddingLeft": "20px",
+             "paddingRight": "20px",
+             "customDeclarations": "border:1px solid rgba(22,24,28,.16);"
+            }
+           }
+          },
+          "children": [
+           {
+            "type": "navbar-toggle",
+            "data": {
+             "attrID": "nb-toggle"
+            },
+            "style": {
+             "&": {
+              "_": {
+               "cursor": "pointer",
+               "fontFamily": "'IBM Plex Mono',ui-monospace,SFMono-Regular,Menlo,Consolas,monospace",
+               "fontSize": "11px",
+               "letterSpacing": "0.18em",
+               "color": {
+                "token": "--mk-ink"
+               },
+               "paddingTop": "10px",
+               "paddingBottom": "10px",
+               "paddingLeft": "14px",
+               "paddingRight": "14px",
+               "customDeclarations": "border:1px solid rgba(22,24,28,.34);"
+              }
+             },
+             "hover": {
+              "_": {
+               "backgroundColor": {
+                "token": "--mk-ink"
+               },
+               "color": {
+                "token": "--mk-paper"
+               }
+              }
+             },
+             "focus-visible": {
+              "_": {
+               "customDeclarations": "outline:2px solid rgb(255,90,54);outline-offset:3px;"
+              }
+             }
+            },
+            "children": [
+             {
+              "type": "wysiwyg-text",
+              "data": {
+               "text": "MENU"
+              }
+             }
+            ]
+           },
+           {
+            "type": "navigation",
+            "data": {
+             "attrID": "nb-nav"
+            },
+            "style": {
+             "&": {
+              "_": {
+               "display": "flex",
+               "columnGap": "22px",
+               "rowGap": "10px",
+               "alignItems": "center",
+               "flexWrap": "wrap"
+              }
+             }
+            },
+            "children": [
+             {
+              "type": "menu-link",
+              "data": {
+               "attrID": "nb-l0",
+               "url": "/components/"
+              },
+              "style": {
+               "&": {
+                "_": {
+                 "fontFamily": "'Noto Sans TC','PingFang TC','Hiragino Sans TC','Microsoft JhengHei',sans-serif",
+                 "fontSize": "14px",
+                 "cursor": "pointer",
+                 "color": {
+                  "token": "--mk-ink"
+                 },
+                 "paddingTop": "8px",
+                 "paddingBottom": "8px"
+                }
+               },
+               "hover": {
+                "_": {
+                 "color": {
+                  "token": "--mk-accent-ink"
+                 }
+                }
+               },
+               "focus-visible": {
+                "_": {
+                 "customDeclarations": "outline:2px solid rgb(255,90,54);outline-offset:3px;"
+                }
+               }
+              },
+              "children": [
+               {
+                "type": "wysiwyg-text",
+                "data": {
+                 "text": "元件牆"
+                }
+               }
+              ]
+             },
+             {
+              "type": "menu-link",
+              "data": {
+               "attrID": "nb-l1",
+               "url": "/forms/"
+              },
+              "style": {
+               "&": {
+                "_": {
+                 "fontFamily": "'Noto Sans TC','PingFang TC','Hiragino Sans TC','Microsoft JhengHei',sans-serif",
+                 "fontSize": "14px",
+                 "cursor": "pointer",
+                 "color": {
+                  "token": "--mk-ink"
+                 },
+                 "paddingTop": "8px",
+                 "paddingBottom": "8px"
+                }
+               },
+               "hover": {
+                "_": {
+                 "color": {
+                  "token": "--mk-accent-ink"
+                 }
+                }
+               },
+               "focus-visible": {
+                "_": {
+                 "customDeclarations": "outline:2px solid rgb(255,90,54);outline-offset:3px;"
+                }
+               }
+              },
+              "children": [
+               {
+                "type": "wysiwyg-text",
+                "data": {
+                 "text": "表單"
+                }
+               }
+              ]
+             },
+             {
+              "type": "menu-link",
+              "data": {
+               "attrID": "nb-l2",
+               "url": "/content/"
+              },
+              "style": {
+               "&": {
+                "_": {
+                 "fontFamily": "'Noto Sans TC','PingFang TC','Hiragino Sans TC','Microsoft JhengHei',sans-serif",
+                 "fontSize": "14px",
+                 "cursor": "pointer",
+                 "color": {
+                  "token": "--mk-ink"
+                 },
+                 "paddingTop": "8px",
+                 "paddingBottom": "8px"
+                }
+               },
+               "hover": {
+                "_": {
+                 "color": {
+                  "token": "--mk-accent-ink"
+                 }
+                }
+               },
+               "focus-visible": {
+                "_": {
+                 "customDeclarations": "outline:2px solid rgb(255,90,54);outline-offset:3px;"
+                }
+               }
+              },
+              "children": [
+               {
+                "type": "wysiwyg-text",
+                "data": {
+                 "text": "內容驅動"
+                }
+               }
+              ]
+             },
+             {
+              "type": "menu-link",
+              "data": {
+               "attrID": "nb-l3",
+               "url": "/sliders/"
+              },
+              "style": {
+               "&": {
+                "_": {
+                 "fontFamily": "'Noto Sans TC','PingFang TC','Hiragino Sans TC','Microsoft JhengHei',sans-serif",
+                 "fontSize": "14px",
+                 "cursor": "pointer",
+                 "color": {
+                  "token": "--mk-ink"
+                 },
+                 "paddingTop": "8px",
+                 "paddingBottom": "8px"
+                }
+               },
+               "hover": {
+                "_": {
+                 "color": {
+                  "token": "--mk-accent-ink"
+                 }
+                }
+               },
+               "focus-visible": {
+                "_": {
+                 "customDeclarations": "outline:2px solid rgb(255,90,54);outline-offset:3px;"
+                }
+               }
+              },
+              "children": [
+               {
+                "type": "wysiwyg-text",
+                "data": {
+                 "text": "輪播"
+                }
+               }
+              ]
+             }
+            ]
+           }
+          ]
+         },
+         {
+          "type": "div",
+          "data": {
+           "attrID": "cp-nav-s-foot"
+          },
+          "style": {
+           "&": {
+            "_": {
+             "paddingTop": "70px"
+            },
+            "_m": {
+             "paddingTop": "44px"
+            }
+           }
+          },
+          "children": []
+         }
+        ]
+       }
+      ]
+     },
+     {
+      "type": "section",
+      "data": {
+       "attrID": "cp-md-s"
+      },
+      "style": {
+       "&": {
+        "_": {
+         "backgroundColor": {
+          "token": "--mk-panel"
+         },
+         "paddingLeft": "40px",
+         "paddingRight": "40px",
+         "fontFamily": "'Noto Sans TC','PingFang TC','Hiragino Sans TC','Microsoft JhengHei',sans-serif",
+         "paddingTop": "0px",
+         "paddingBottom": "0px"
+        },
+        "_t": {
+         "paddingLeft": "28px",
+         "paddingRight": "28px"
+        },
+        "_m": {
+         "paddingLeft": "18px",
+         "paddingRight": "18px"
+        }
+       }
+      },
+      "children": [
+       {
+        "type": "div",
+        "data": {
+         "attrID": "cp-md-s-w"
+        },
+        "style": {
+         "&": {
+          "_": {
+           "width": "100%",
+           "maxWidth": "1240px",
+           "marginLeft": "auto",
+           "marginRight": "auto"
+          }
+         }
+        },
+        "children": [
+         {
+          "type": "div",
+          "data": {
+           "attrID": "cp-md-s-pad"
+          },
+          "style": {
+           "&": {
+            "_": {
+             "paddingTop": "70px"
+            },
+            "_m": {
+             "paddingTop": "44px"
+            }
+           }
+          },
+          "children": []
+         },
+         {
+          "type": "div",
+          "data": {
+           "attrID": "cp-strip-media-/-媒體"
+          },
+          "style": {
+           "&": {
+            "_": {
+             "display": "flex",
+             "justifyContent": "space-between",
+             "alignItems": "baseline",
+             "columnGap": "16px",
+             "flexWrap": "wrap",
+             "rowGap": "6px",
+             "paddingBottom": "14px",
+             "marginBottom": "26px",
+             "customDeclarations": "border-bottom:1px solid rgb(22,24,28);"
+            }
+           }
+          },
+          "children": [
+           {
+            "type": "text",
+            "data": {
+             "tagName": "p"
+            },
+            "text": "MEDIA / 媒體",
+            "style": {
+             "&": {
+              "_": {
+               "color": {
+                "token": "--mk-ink"
+               },
+               "fontSize": "11px",
+               "letterSpacing": "0.26em",
+               "fontFamily": "'IBM Plex Mono',ui-monospace,SFMono-Regular,Menlo,Consolas,monospace",
+               "fontWeight": "400"
+              },
+              "_t": {
+               "fontSize": "12px"
+              }
+             }
+            }
+           },
+           {
+            "type": "text",
+            "data": {
+             "tagName": "p"
+            },
+            "text": "image — wp-attachment:// / icon — 原始 SVG",
+            "style": {
+             "&": {
+              "_": {
+               "color": {
+                "token": "--mk-faint"
+               },
+               "fontSize": "10px",
+               "letterSpacing": "0.08em",
+               "fontFamily": "'IBM Plex Mono',ui-monospace,SFMono-Regular,Menlo,Consolas,monospace",
+               "fontWeight": "400"
+              },
+              "_t": {
+               "fontSize": "12px"
+              }
+             }
+            }
+           }
+          ]
+         },
+         {
+          "type": "div",
+          "data": {
+           "attrID": "md-wrap"
+          },
+          "style": {
+           "&": {
+            "_": {
+             "display": "flex",
+             "flexDirection": "column",
+             "rowGap": "26px"
+            }
+           }
+          },
+          "children": [
+           {
+            "type": "image",
+            "data": {
+             "attrID": "md-img",
+             "image": "wp-attachment://image/147/full/2026/09/moksa-richmenu-test.png",
+             "alt": "Moksa Web rich menu",
+             "loading": "lazy",
+             "fetchPriority": "low"
+            },
+            "style": {
+             "&": {
+              "_": {
+               "width": "100%",
+               "height": "auto",
+               "customDeclarations": "border:1px solid rgba(22,24,28,.16);"
+              }
+             }
+            }
+           },
+           {
+            "type": "div",
+            "data": {
+             "attrID": "md-icons"
+            },
+            "style": {
+             "&": {
+              "_": {
+               "display": "flex",
+               "columnGap": "28px",
+               "rowGap": "18px",
+               "flexWrap": "wrap",
+               "alignItems": "center"
+              }
+             }
+            },
+            "children": [
+             {
+              "type": "div",
+              "data": {
+               "attrID": "md-icon-0"
+              },
+              "style": {
+               "&": {
+                "_": {
+                 "display": "flex",
+                 "columnGap": "10px",
+                 "alignItems": "center"
+                }
+               }
+              },
+              "children": [
+               {
+                "type": "icon",
+                "data": {
+                 "attrID": "md-i0",
+                 "svg": "<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='1.6' stroke-linecap='round' stroke-linejoin='round'><path d='M13 2L4.09 12.97h6.18L11 22l8.91-10.97h-6.18z'/></svg>",
+                 "autoScale": "1"
+                },
+                "style": {
+                 "&": {
+                  "_": {
+                   "width": "26px",
+                   "height": "26px",
+                   "color": {
+                    "token": "--mk-accent-ink"
+                   }
+                  }
+                 }
+                }
+               },
+               {
+                "type": "text",
+                "data": {
+                 "tagName": "p"
+                },
+                "text": "速度",
+                "style": {
+                 "&": {
+                  "_": {
+                   "color": {
+                    "token": "--mk-ink"
+                   },
+                   "fontSize": "11px",
+                   "letterSpacing": "0.1em",
+                   "fontFamily": "'IBM Plex Mono',ui-monospace,SFMono-Regular,Menlo,Consolas,monospace",
+                   "fontWeight": "400"
+                  },
+                  "_t": {
+                   "fontSize": "12px"
+                  }
+                 }
+                }
+               }
+              ]
+             },
+             {
+              "type": "div",
+              "data": {
+               "attrID": "md-icon-1"
+              },
+              "style": {
+               "&": {
+                "_": {
+                 "display": "flex",
+                 "columnGap": "10px",
+                 "alignItems": "center"
+                }
+               }
+              },
+              "children": [
+               {
+                "type": "icon",
+                "data": {
+                 "attrID": "md-i1",
+                 "svg": "<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='1.6' stroke-linecap='round' stroke-linejoin='round'><rect x='3' y='3' width='7' height='7'/><rect x='14' y='3' width='7' height='7'/><rect x='3' y='14' width='7' height='7'/><rect x='14' y='14' width='7' height='7'/></svg>",
+                 "autoScale": "1"
+                },
+                "style": {
+                 "&": {
+                  "_": {
+                   "width": "26px",
+                   "height": "26px",
+                   "color": {
+                    "token": "--mk-accent-ink"
+                   }
+                  }
+                 }
+                }
+               },
+               {
+                "type": "text",
+                "data": {
+                 "tagName": "p"
+                },
+                "text": "結構",
+                "style": {
+                 "&": {
+                  "_": {
+                   "color": {
+                    "token": "--mk-ink"
+                   },
+                   "fontSize": "11px",
+                   "letterSpacing": "0.1em",
+                   "fontFamily": "'IBM Plex Mono',ui-monospace,SFMono-Regular,Menlo,Consolas,monospace",
+                   "fontWeight": "400"
+                  },
+                  "_t": {
+                   "fontSize": "12px"
+                  }
+                 }
+                }
+               }
+              ]
+             },
+             {
+              "type": "div",
+              "data": {
+               "attrID": "md-icon-2"
+              },
+              "style": {
+               "&": {
+                "_": {
+                 "display": "flex",
+                 "columnGap": "10px",
+                 "alignItems": "center"
+                }
+               }
+              },
+              "children": [
+               {
+                "type": "icon",
+                "data": {
+                 "attrID": "md-i2",
+                 "svg": "<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='1.6' stroke-linecap='round' stroke-linejoin='round'><path d='M3 3v18h18'/><path d='M7 15l4-5 3 3 5-7'/></svg>",
+                 "autoScale": "1"
+                },
+                "style": {
+                 "&": {
+                  "_": {
+                   "width": "26px",
+                   "height": "26px",
+                   "color": {
+                    "token": "--mk-accent-ink"
+                   }
+                  }
+                 }
+                }
+               },
+               {
+                "type": "text",
+                "data": {
+                 "tagName": "p"
+                },
+                "text": "測量",
+                "style": {
+                 "&": {
+                  "_": {
+                   "color": {
+                    "token": "--mk-ink"
+                   },
+                   "fontSize": "11px",
+                   "letterSpacing": "0.1em",
+                   "fontFamily": "'IBM Plex Mono',ui-monospace,SFMono-Regular,Menlo,Consolas,monospace",
+                   "fontWeight": "400"
+                  },
+                  "_t": {
+                   "fontSize": "12px"
+                  }
+                 }
+                }
+               }
+              ]
+             }
+            ]
+           }
+          ]
+         },
+         {
+          "type": "div",
+          "data": {
+           "attrID": "cp-md-s-foot"
+          },
+          "style": {
+           "&": {
+            "_": {
+             "paddingTop": "70px"
+            },
+            "_m": {
+             "paddingTop": "44px"
+            }
+           }
+          },
+          "children": []
+         }
+        ]
+       }
+      ]
+     },
+     {
+      "type": "section",
+      "data": {
+       "attrID": "cp-wp-s"
+      },
+      "style": {
+       "&": {
+        "_": {
+         "backgroundColor": {
+          "token": "--mk-paper"
+         },
+         "paddingLeft": "40px",
+         "paddingRight": "40px",
+         "fontFamily": "'Noto Sans TC','PingFang TC','Hiragino Sans TC','Microsoft JhengHei',sans-serif",
+         "paddingTop": "0px",
+         "paddingBottom": "0px"
+        },
+        "_t": {
+         "paddingLeft": "28px",
+         "paddingRight": "28px"
+        },
+        "_m": {
+         "paddingLeft": "18px",
+         "paddingRight": "18px"
+        }
+       }
+      },
+      "children": [
+       {
+        "type": "div",
+        "data": {
+         "attrID": "cp-wp-s-w"
+        },
+        "style": {
+         "&": {
+          "_": {
+           "width": "100%",
+           "maxWidth": "1240px",
+           "marginLeft": "auto",
+           "marginRight": "auto"
+          }
+         }
+        },
+        "children": [
+         {
+          "type": "div",
+          "data": {
+           "attrID": "cp-wp-s-pad"
+          },
+          "style": {
+           "&": {
+            "_": {
+             "paddingTop": "70px"
+            },
+            "_m": {
+             "paddingTop": "44px"
+            }
+           }
+          },
+          "children": []
+         },
+         {
+          "type": "div",
+          "data": {
+           "attrID": "cp-strip-wordpress-/-接回原生內容"
+          },
+          "style": {
+           "&": {
+            "_": {
+             "display": "flex",
+             "justifyContent": "space-between",
+             "alignItems": "baseline",
+             "columnGap": "16px",
+             "flexWrap": "wrap",
+             "rowGap": "6px",
+             "paddingBottom": "14px",
+             "marginBottom": "26px",
+             "customDeclarations": "border-bottom:1px solid rgb(22,24,28);"
+            }
+           }
+          },
+          "children": [
+           {
+            "type": "text",
+            "data": {
+             "tagName": "p"
+            },
+            "text": "WORDPRESS / 接回原生內容",
+            "style": {
+             "&": {
+              "_": {
+               "color": {
+                "token": "--mk-ink"
+               },
+               "fontSize": "11px",
+               "letterSpacing": "0.26em",
+               "fontFamily": "'IBM Plex Mono',ui-monospace,SFMono-Regular,Menlo,Consolas,monospace",
+               "fontWeight": "400"
+              },
+              "_t": {
+               "fontSize": "12px"
+              }
+             }
+            }
+           },
+           {
+            "type": "text",
+            "data": {
+             "tagName": "p"
+            },
+            "text": "wpShortcode — [products] / wpContent",
+            "style": {
+             "&": {
+              "_": {
+               "color": {
+                "token": "--mk-faint"
+               },
+               "fontSize": "10px",
+               "letterSpacing": "0.08em",
+               "fontFamily": "'IBM Plex Mono',ui-monospace,SFMono-Regular,Menlo,Consolas,monospace",
+               "fontWeight": "400"
+              },
+              "_t": {
+               "fontSize": "12px"
+              }
+             }
+            }
+           }
+          ]
+         },
+         {
+          "type": "div",
+          "data": {
+           "attrID": "wp-wrap"
+          },
+          "style": {
+           "&": {
+            "_": {
+             "display": "flex",
+             "flexDirection": "column",
+             "rowGap": "24px"
+            }
+           }
+          },
+          "children": [
+           {
+            "type": "wpShortcode",
+            "data": {
+             "attrID": "wp-sc",
+             "shortcode": "[products limit=\"3\" columns=\"3\"]"
+            },
+            "style": {
+             "&": {
+              "_": {
+               "width": "100%"
+              }
+             }
+            }
+           },
+           {
+            "type": "wpContent",
+            "data": {
+             "attrID": "wp-ct",
+             "content": {
+              "v": "<p>這段是 wpContent：WordPress 自己的內容區塊，經過它自己的過濾器渲染。</p>"
+             }
+            },
+            "style": {
+             "&": {
+              "_": {
+               "fontFamily": "'Noto Sans TC','PingFang TC','Hiragino Sans TC','Microsoft JhengHei',sans-serif",
+               "fontSize": "14px",
+               "lineHeight": "1.9",
+               "color": {
+                "token": "--mk-muted"
+               },
+               "paddingTop": "18px",
+               "paddingBottom": "18px",
+               "paddingLeft": "20px",
+               "paddingRight": "20px",
+               "backgroundColor": {
+                "token": "--mk-panel"
+               }
+              }
+             }
+            }
+           }
+          ]
+         },
+         {
+          "type": "div",
+          "data": {
+           "attrID": "cp-wp-s-foot"
           },
           "style": {
            "&": {
@@ -49510,20 +50510,20 @@
                  "interactions": [
                   {
                    "type": "click",
-                   "uuid": "995d9790-53aa-4c72-bb8a-a08c244d532b",
+                   "uuid": "f63e0588-4347-432f-805e-f44d4a58232a",
                    "clickOptions": {
                     "name": "dl-open-centre",
-                    "ID": "4a33e9f8-ca78-495c-9a2d-422adcdcf149",
+                    "ID": "fc44a07d-be4b-4596-ab51-e1877ece7cdb",
                     "actionSlots": {
                      "click": {
                       "actions": [
                        {
                         "type": "modalOpen",
-                        "uuid": "cbd1ede1-b848-43ff-97c7-6c3e2483010e",
+                        "uuid": "cf5cd189-6711-42ca-88ee-499e14e7ecbb",
                         "settings": {
                          "target": {
                           "type": "element",
-                          "uuid": "88f80532-7c95-4074-97d2-9443058bd0c0"
+                          "uuid": "b3eea367-a357-4696-be0c-af53604f59f8"
                          }
                         }
                        }
@@ -50062,20 +51062,20 @@
                  "interactions": [
                   {
                    "type": "click",
-                   "uuid": "0a6e55ab-42bd-4829-a8d4-d284df227f36",
+                   "uuid": "e1e43583-9ca8-4f76-9cb2-6f8597bd97e6",
                    "clickOptions": {
                     "name": "dl-open-sheet",
-                    "ID": "125fd315-beff-45fd-9678-d5116c4adbf6",
+                    "ID": "800ebad8-2145-4dbd-ac0e-53ee58e6a913",
                     "actionSlots": {
                      "click": {
                       "actions": [
                        {
                         "type": "modalOpen",
-                        "uuid": "6c418cef-eafd-471a-919f-cc266c028b9d",
+                        "uuid": "95f30da2-223b-4a8b-ac1b-9a50cb6eca6c",
                         "settings": {
                          "target": {
                           "type": "element",
-                          "uuid": "90f49c4e-36a1-4343-8f60-bd8d548d7a88"
+                          "uuid": "910514c7-8796-4bc7-be15-b95f10b4f15d"
                          }
                         }
                        }
@@ -50614,20 +51614,20 @@
                  "interactions": [
                   {
                    "type": "click",
-                   "uuid": "ae586022-392c-4b8b-94e6-7dcd830d1b85",
+                   "uuid": "23f43912-0ec5-42da-af57-97ae20ce9168",
                    "clickOptions": {
                     "name": "dl-open-drawer",
-                    "ID": "b36bf61b-deeb-4786-8830-120fe09bb0ce",
+                    "ID": "d5f0bc52-559c-44d4-b33c-0efd41473bf3",
                     "actionSlots": {
                      "click": {
                       "actions": [
                        {
                         "type": "modalOpen",
-                        "uuid": "8b3c68c7-7d81-462c-9405-8ffeadacb3f2",
+                        "uuid": "b6657837-8c80-4bae-bb2a-389ffaadd97e",
                         "settings": {
                          "target": {
                           "type": "element",
-                          "uuid": "24a7f652-0a53-4ad5-91a8-296840bc78a2"
+                          "uuid": "0e62d773-bd80-4f42-bc4e-fc1acd38fd70"
                          }
                         }
                        }
@@ -51663,20 +52663,20 @@
                  "interactions": [
                   {
                    "type": "click",
-                   "uuid": "b9d55358-a7dd-4666-95ba-713541f0a04e",
+                   "uuid": "e9b1e897-3683-4c16-ba09-0936332ab6dc",
                    "clickOptions": {
                     "name": "dl-open-takeover",
-                    "ID": "789b14d6-ad62-4fdb-927c-384690d1b217",
+                    "ID": "1e3b088c-55ed-40d9-b839-2ca02a249e61",
                     "actionSlots": {
                      "click": {
                       "actions": [
                        {
                         "type": "modalOpen",
-                        "uuid": "ff817dda-1a43-4b87-894f-dc3a27df27ee",
+                        "uuid": "901d9e4f-446c-4f7f-91b8-fc50db0d5a83",
                         "settings": {
                          "target": {
                           "type": "element",
-                          "uuid": "b07fec17-abe6-4ccb-aec4-cc0204ec9f6b"
+                          "uuid": "e8805bc5-e827-4feb-bdf5-b33431161b3f"
                          }
                         }
                        }
@@ -52215,20 +53215,20 @@
                  "interactions": [
                   {
                    "type": "click",
-                   "uuid": "ff5b3b7d-4cd1-4d0a-90d6-28078b7b622c",
+                   "uuid": "129dbabb-191a-4075-ab18-5cbc69fa3e7f",
                    "clickOptions": {
                     "name": "dl-open-gate",
-                    "ID": "937c18a5-1197-494c-9ed2-3d5ae2773f37",
+                    "ID": "b53dade0-c919-408c-ab06-d8553b02b783",
                     "actionSlots": {
                      "click": {
                       "actions": [
                        {
                         "type": "modalOpen",
-                        "uuid": "8004335a-227b-4355-a312-90b8f21e2928",
+                        "uuid": "680db35a-284b-4d65-8170-de234e5b6556",
                         "settings": {
                          "target": {
                           "type": "element",
-                          "uuid": "fbba59c7-9a00-4251-9ccf-cedc7a171384"
+                          "uuid": "a367602e-31d4-4308-86c0-479547602295"
                          }
                         }
                        }
@@ -52790,20 +53790,20 @@
                  "interactions": [
                   {
                    "type": "click",
-                   "uuid": "90d95bb5-1187-49f7-a31b-c8cc8e353e31",
+                   "uuid": "628ce636-61b6-40ca-9c0b-428f4db8b1d0",
                    "clickOptions": {
                     "name": "dl-open-exit",
-                    "ID": "753d40be-5124-48a7-a4a0-42f2e44f4b66",
+                    "ID": "bece52e9-3ff5-474a-8157-792d8abecf23",
                     "actionSlots": {
                      "click": {
                       "actions": [
                        {
                         "type": "modalOpen",
-                        "uuid": "650d23d5-6958-445d-b581-8d401d216838",
+                        "uuid": "9537a14f-9e6d-46a5-80f1-fe5bb19d3269",
                         "settings": {
                          "target": {
                           "type": "element",
-                          "uuid": "65f49d44-c591-4d9e-ac9b-5483a82e04bf"
+                          "uuid": "3192aaa8-04dc-41e8-b2b1-bf5ffff3e04b"
                          }
                         }
                        }
@@ -53830,14 +54830,14 @@
                  "interactions": [
                   {
                    "type": "click",
-                   "uuid": "ae756e5b-eaef-4a9f-ad08-b279cc3065f0",
+                   "uuid": "c7cb05e4-7877-4659-a0db-536710c47b97",
                    "clickOptions": {
                     "name": "dl-ab-aba",
-                    "ID": "8036f42c-b202-4eef-aa3b-755281b56978",
+                    "ID": "5d56ee8e-425b-4b14-bed8-cc6a86bf6fb7",
                     "runs": {
                      "rules": [
                       {
-                       "uuid": "7c8b46d6-e09d-477f-ae3c-9e7f4b1b0839",
+                       "uuid": "94174893-ee37-4f28-b791-850f276341d4",
                        "type": "pickOne",
                        "pickOneOptions": {
                         "remember": "page",
@@ -53851,11 +54851,11 @@
                       "actions": [
                        {
                         "type": "modalOpen",
-                        "uuid": "032b1616-ed63-4a06-bbc1-45573926ad1e",
+                        "uuid": "00cfb77f-0fa0-4f08-b5dd-ef1d4cf5cd1c",
                         "settings": {
                          "target": {
                           "type": "element",
-                          "uuid": "f2b7b9f9-072f-4938-9225-a18b6565abd9"
+                          "uuid": "5c598654-dbfc-4730-8718-2a1fb6147db4"
                          }
                         }
                        }
@@ -53918,14 +54918,14 @@
                  "interactions": [
                   {
                    "type": "click",
-                   "uuid": "f8078c51-3480-412c-a010-da2011937d85",
+                   "uuid": "5655af4e-87b1-4b6d-8c60-43d41b5d1e37",
                    "clickOptions": {
                     "name": "dl-ab-abb",
-                    "ID": "7cad732c-c6da-4ba8-ac2a-776bace05196",
+                    "ID": "0f859ec3-5ee4-49db-aa26-3ca408e4e80a",
                     "runs": {
                      "rules": [
                       {
-                       "uuid": "d3a24e29-333f-4eb5-9f1a-4363c192204a",
+                       "uuid": "d57cb6be-8ce9-4ec7-b968-7f3efb50cb81",
                        "type": "pickOne",
                        "pickOneOptions": {
                         "remember": "page",
@@ -53939,11 +54939,11 @@
                       "actions": [
                        {
                         "type": "modalOpen",
-                        "uuid": "04473b3d-75bb-4b40-873d-02c2e0f6a309",
+                        "uuid": "288efd42-cf73-4f65-844c-f55ed083338e",
                         "settings": {
                          "target": {
                           "type": "element",
-                          "uuid": "be06594f-d9f4-4c7c-870c-f80da20f3e7e"
+                          "uuid": "0ce83e8a-a8e2-4eab-8eaa-193b9eb2e2a0"
                          }
                         }
                        }
@@ -54213,14 +55213,14 @@
              "translateXOptions": {
               "value": "-50%"
              },
-             "uuid": "74ae1f32-afe1-415d-8071-7c6a05f8c177"
+             "uuid": "4c777dba-c024-49d5-921e-9b50f237740b"
             },
             {
              "type": "translateY",
              "translateYOptions": {
               "value": "-50%"
              },
-             "uuid": "77ab3e4c-602f-48ad-a68e-8e9f363df634"
+             "uuid": "cf0f159b-735b-44dd-be0b-ceec0824d64a"
             }
            ],
            "width": "100%",
@@ -54930,20 +55930,20 @@
              "interactions": [
               {
                "type": "click",
-               "uuid": "94de3ce6-142c-42dd-8bdb-e240c3ac75a8",
+               "uuid": "8f921ed7-5b5d-4bb4-8c00-bc6d060c5ffb",
                "clickOptions": {
                 "name": "dl-close-centre",
-                "ID": "c02a3fbc-5426-468a-a998-0d24eaa5f87f",
+                "ID": "ae1be14c-2d7b-4f11-ad64-c239a3914e05",
                 "actionSlots": {
                  "click": {
                   "actions": [
                    {
                     "type": "modalClose",
-                    "uuid": "94d92c5a-a97e-492c-8ae2-8fa582eb4f62",
+                    "uuid": "bfbd4502-d544-4c07-b5fb-45715525a631",
                     "settings": {
                      "target": {
                       "type": "element",
-                      "uuid": "88f80532-7c95-4074-97d2-9443058bd0c0"
+                      "uuid": "b3eea367-a357-4696-be0c-af53604f59f8"
                      }
                     }
                    }
@@ -55004,7 +56004,7 @@
         ]
        }
       ],
-      "nodeID": "88f80532-7c95-4074-97d2-9443058bd0c0"
+      "nodeID": "b3eea367-a357-4696-be0c-af53604f59f8"
      },
      {
       "type": "modal",
@@ -55769,20 +56769,20 @@
              "interactions": [
               {
                "type": "click",
-               "uuid": "b6c23e5b-bd72-4d3c-bb2d-486abb3c930c",
+               "uuid": "bcab1803-bd45-48c9-aadb-bd1cc6c4e85b",
                "clickOptions": {
                 "name": "dl-close-sheet",
-                "ID": "6454910d-d6cd-42e9-98d7-12a38d441672",
+                "ID": "041721ca-705c-4220-8a3e-136b9a222b9e",
                 "actionSlots": {
                  "click": {
                   "actions": [
                    {
                     "type": "modalClose",
-                    "uuid": "a654adcb-4082-43c0-aa2b-b262bc086e9c",
+                    "uuid": "0ff3111b-8b50-473b-b2ce-25450fa5374e",
                     "settings": {
                      "target": {
                       "type": "element",
-                      "uuid": "90f49c4e-36a1-4343-8f60-bd8d548d7a88"
+                      "uuid": "910514c7-8796-4bc7-be15-b95f10b4f15d"
                      }
                     }
                    }
@@ -55843,7 +56843,7 @@
         ]
        }
       ],
-      "nodeID": "90f49c4e-36a1-4343-8f60-bd8d548d7a88"
+      "nodeID": "910514c7-8796-4bc7-be15-b95f10b4f15d"
      },
      {
       "type": "modal",
@@ -56607,20 +57607,20 @@
              "interactions": [
               {
                "type": "click",
-               "uuid": "67a3cb70-cbb4-4697-aa50-5db32e62f541",
+               "uuid": "3a11fba0-b1eb-43b5-ba0f-f204b2040a80",
                "clickOptions": {
                 "name": "dl-close-drawer",
-                "ID": "720748cb-7082-477f-8765-60410e314f83",
+                "ID": "2f4caa92-6af0-496e-9883-9ed19031179d",
                 "actionSlots": {
                  "click": {
                   "actions": [
                    {
                     "type": "modalClose",
-                    "uuid": "2b8b4b56-957b-4ac2-b879-d0964bc77628",
+                    "uuid": "37a73eef-cd32-4b14-b343-01533b831060",
                     "settings": {
                      "target": {
                       "type": "element",
-                      "uuid": "24a7f652-0a53-4ad5-91a8-296840bc78a2"
+                      "uuid": "0e62d773-bd80-4f42-bc4e-fc1acd38fd70"
                      }
                     }
                    }
@@ -56681,7 +57681,7 @@
         ]
        }
       ],
-      "nodeID": "24a7f652-0a53-4ad5-91a8-296840bc78a2"
+      "nodeID": "0e62d773-bd80-4f42-bc4e-fc1acd38fd70"
      },
      {
       "type": "modal",
@@ -56695,7 +57695,7 @@
          "runs": {
           "rules": [
            {
-            "uuid": "4f1fd77e-f73e-4c18-a947-f837abbe093d",
+            "uuid": "6cfd8fc1-7926-4770-a993-4c0c0b4399f6",
             "type": "cap",
             "capOptions": {
              "max": "1",
@@ -57462,20 +58462,20 @@
              "interactions": [
               {
                "type": "click",
-               "uuid": "f0900e5f-0d39-4efc-b451-f2359df9f42a",
+               "uuid": "72c5ee9d-5c3d-4795-b654-1a1342732686",
                "clickOptions": {
                 "name": "dl-close-toast",
-                "ID": "e7b3728e-a48c-4d2a-adeb-fec57d4cda57",
+                "ID": "ec6a1174-bb9b-4902-ba40-d88e879aa2ee",
                 "actionSlots": {
                  "click": {
                   "actions": [
                    {
                     "type": "modalClose",
-                    "uuid": "5b64ca37-2247-4494-9d4b-3e70ddd5b1f8",
+                    "uuid": "22822419-e8e0-4d2d-b93e-ac62d4fe13be",
                     "settings": {
                      "target": {
                       "type": "element",
-                      "uuid": "6515f8e0-6e6f-40d7-adf8-1896477a97cf"
+                      "uuid": "0108c438-72fd-4ddf-aa2f-ee489903bae6"
                      }
                     }
                    }
@@ -57536,7 +58536,7 @@
         ]
        }
       ],
-      "nodeID": "6515f8e0-6e6f-40d7-adf8-1896477a97cf"
+      "nodeID": "0108c438-72fd-4ddf-aa2f-ee489903bae6"
      },
      {
       "type": "modal",
@@ -58306,20 +59306,20 @@
              "interactions": [
               {
                "type": "click",
-               "uuid": "b011b9cc-5278-4f99-b5e6-12cc0d36e9fd",
+               "uuid": "b1f6f5ad-553b-41ab-ade7-fc9c78823890",
                "clickOptions": {
                 "name": "dl-close-takeover",
-                "ID": "ef56b5e5-d59d-4fe4-96f2-a716e1823517",
+                "ID": "2d499fd2-570e-4851-9b7c-11ebf32bdf7d",
                 "actionSlots": {
                  "click": {
                   "actions": [
                    {
                     "type": "modalClose",
-                    "uuid": "db77ff20-66e0-4b82-bb9a-6b2aaa0c7679",
+                    "uuid": "f0f0b644-1fd7-4ea3-92f7-7d850633e4ec",
                     "settings": {
                      "target": {
                       "type": "element",
-                      "uuid": "b07fec17-abe6-4ccb-aec4-cc0204ec9f6b"
+                      "uuid": "e8805bc5-e827-4feb-bdf5-b33431161b3f"
                      }
                     }
                    }
@@ -58380,7 +59380,7 @@
         ]
        }
       ],
-      "nodeID": "b07fec17-abe6-4ccb-aec4-cc0204ec9f6b"
+      "nodeID": "e8805bc5-e827-4feb-bdf5-b33431161b3f"
      },
      {
       "type": "modal",
@@ -58442,14 +59442,14 @@
              "translateXOptions": {
               "value": "-50%"
              },
-             "uuid": "cead2bcc-af20-4a34-a201-8721043a213c"
+             "uuid": "1bc7c09b-a90e-4df3-8770-f9f51f173894"
             },
             {
              "type": "translateY",
              "translateYOptions": {
               "value": "-50%"
              },
-             "uuid": "cb7ce2d9-472f-4f68-9018-347b375fbc3b"
+             "uuid": "172b137a-e5b1-442f-a790-fe219e6dbb47"
             }
            ],
            "width": "100%",
@@ -59159,20 +60159,20 @@
              "interactions": [
               {
                "type": "click",
-               "uuid": "47cb57b4-4439-46b9-a562-6a50a28aa1ab",
+               "uuid": "80262f87-7f78-4438-9d9c-f975dca8db48",
                "clickOptions": {
                 "name": "dl-close-gate",
-                "ID": "9c6b1e41-3744-4496-af38-c1c16db1620c",
+                "ID": "f6ad3ebd-a717-4f53-ab6d-d308c9ed9b03",
                 "actionSlots": {
                  "click": {
                   "actions": [
                    {
                     "type": "modalClose",
-                    "uuid": "932ee425-528b-4a52-b06b-7139726152fd",
+                    "uuid": "1dd55198-1d37-460b-8176-7620d859bf9f",
                     "settings": {
                      "target": {
                       "type": "element",
-                      "uuid": "fbba59c7-9a00-4251-9ccf-cedc7a171384"
+                      "uuid": "a367602e-31d4-4308-86c0-479547602295"
                      }
                     }
                    }
@@ -59233,7 +60233,7 @@
         ]
        }
       ],
-      "nodeID": "fbba59c7-9a00-4251-9ccf-cedc7a171384"
+      "nodeID": "a367602e-31d4-4308-86c0-479547602295"
      },
      {
       "type": "modal",
@@ -59250,7 +60250,7 @@
          "runs": {
           "rules": [
            {
-            "uuid": "b848a859-1921-4554-af1f-1ba935e609b9",
+            "uuid": "a40c91fa-e20c-46a1-9705-f2c169a267f0",
             "type": "cap",
             "capOptions": {
              "max": "1",
@@ -59316,14 +60316,14 @@
              "translateXOptions": {
               "value": "-50%"
              },
-             "uuid": "36e544fb-bfae-44f7-8edf-cc70ae52439a"
+             "uuid": "d328af3d-59e9-4ac5-b975-9c8f9b8caa04"
             },
             {
              "type": "translateY",
              "translateYOptions": {
               "value": "-50%"
              },
-             "uuid": "87a28f5e-ffa1-4a38-97ec-57751504cdc8"
+             "uuid": "bcda64c0-5990-4c5f-9e0e-88b35b91d7d6"
             }
            ],
            "width": "100%",
@@ -60033,20 +61033,20 @@
              "interactions": [
               {
                "type": "click",
-               "uuid": "f4855977-fcf6-495c-9785-ed93d7a65c3e",
+               "uuid": "9697000e-0ad1-4644-8aec-a6e1a837a570",
                "clickOptions": {
                 "name": "dl-close-exit",
-                "ID": "80c246f0-4ddb-4deb-b181-64b849bec51d",
+                "ID": "94e0b846-2cfd-4956-b012-06a31332b5c6",
                 "actionSlots": {
                  "click": {
                   "actions": [
                    {
                     "type": "modalClose",
-                    "uuid": "56281cec-1894-4303-bb7d-24378c5a2cd9",
+                    "uuid": "9d3f4f3a-3316-4616-a1d8-dd452811e480",
                     "settings": {
                      "target": {
                       "type": "element",
-                      "uuid": "65f49d44-c591-4d9e-ac9b-5483a82e04bf"
+                      "uuid": "3192aaa8-04dc-41e8-b2b1-bf5ffff3e04b"
                      }
                     }
                    }
@@ -60107,7 +61107,7 @@
         ]
        }
       ],
-      "nodeID": "65f49d44-c591-4d9e-ac9b-5483a82e04bf"
+      "nodeID": "3192aaa8-04dc-41e8-b2b1-bf5ffff3e04b"
      },
      {
       "type": "modal",
@@ -60124,7 +61124,7 @@
          "runs": {
           "rules": [
            {
-            "uuid": "e9877f4b-a67c-4732-9d67-f661a2494b35",
+            "uuid": "94240071-7aee-4bc1-8acd-23b90f35e904",
             "type": "cooldown",
             "cooldownOptions": {
              "duration": "1",
@@ -60892,20 +61892,20 @@
              "interactions": [
               {
                "type": "click",
-               "uuid": "93a06618-6611-4142-85ac-fa5a3e8242f0",
+               "uuid": "965893b4-00d8-4886-88b3-8589c638e96e",
                "clickOptions": {
                 "name": "dl-close-depth",
-                "ID": "b1ea5923-b92f-4b2f-9658-1784602893ff",
+                "ID": "cbad580f-8d55-46f5-a5cf-1253f89d885c",
                 "actionSlots": {
                  "click": {
                   "actions": [
                    {
                     "type": "modalClose",
-                    "uuid": "9a639f9b-e8e4-4d1c-bce9-fac64c239a23",
+                    "uuid": "24c74f44-da53-4c9b-b72c-82b8ed10b678",
                     "settings": {
                      "target": {
                       "type": "element",
-                      "uuid": "0ddeed1a-3e6d-4ed9-808c-ac320ed2f252"
+                      "uuid": "0cbe63c2-2b50-40ed-bad2-5f6fdcf085f1"
                      }
                     }
                    }
@@ -60966,7 +61966,7 @@
         ]
        }
       ],
-      "nodeID": "0ddeed1a-3e6d-4ed9-808c-ac320ed2f252"
+      "nodeID": "0cbe63c2-2b50-40ed-bad2-5f6fdcf085f1"
      },
      {
       "type": "modal",
@@ -61028,14 +62028,14 @@
              "translateXOptions": {
               "value": "-50%"
              },
-             "uuid": "b1f0a2dd-f85c-4005-822d-be5d10ee3e2d"
+             "uuid": "35318fa6-005e-4c7b-8275-2d4d6bb744ec"
             },
             {
              "type": "translateY",
              "translateYOptions": {
               "value": "-50%"
              },
-             "uuid": "fc7ceb27-c98b-4bfe-ae09-23bde7ee9710"
+             "uuid": "65c44418-e794-4b39-96ec-c4fc0719b86a"
             }
            ],
            "width": "100%",
@@ -61745,20 +62745,20 @@
              "interactions": [
               {
                "type": "click",
-               "uuid": "55127a13-8361-4451-a0d9-ef715490b3c1",
+               "uuid": "f2e565c4-04dd-4997-bcb9-641680b67f6f",
                "clickOptions": {
                 "name": "dl-close-aba",
-                "ID": "a6535ee7-ba88-4a8a-a5c2-7acf7b3e74b1",
+                "ID": "89dc8b7c-2842-4504-bac4-0bd7f1d6930d",
                 "actionSlots": {
                  "click": {
                   "actions": [
                    {
                     "type": "modalClose",
-                    "uuid": "13152f8b-17ab-4614-9e50-1fd0233527ea",
+                    "uuid": "68da8bcb-8efa-49d7-9346-6ac659bb135d",
                     "settings": {
                      "target": {
                       "type": "element",
-                      "uuid": "f2b7b9f9-072f-4938-9225-a18b6565abd9"
+                      "uuid": "5c598654-dbfc-4730-8718-2a1fb6147db4"
                      }
                     }
                    }
@@ -61819,7 +62819,7 @@
         ]
        }
       ],
-      "nodeID": "f2b7b9f9-072f-4938-9225-a18b6565abd9"
+      "nodeID": "5c598654-dbfc-4730-8718-2a1fb6147db4"
      },
      {
       "type": "modal",
@@ -61881,14 +62881,14 @@
              "translateXOptions": {
               "value": "-50%"
              },
-             "uuid": "c8ceceef-0a46-49b8-87dd-8adfa4e9399d"
+             "uuid": "cca9cac6-d5eb-4be1-b954-fe67d981aec9"
             },
             {
              "type": "translateY",
              "translateYOptions": {
               "value": "-50%"
              },
-             "uuid": "96d48a6e-0db9-419b-b899-60db038091d1"
+             "uuid": "f152aa28-19ee-49ec-a8c8-87d5a81bfc6b"
             }
            ],
            "width": "100%",
@@ -62598,20 +63598,20 @@
              "interactions": [
               {
                "type": "click",
-               "uuid": "4219fab8-baaf-4052-bb4b-42b1d129eb20",
+               "uuid": "4a4d7d86-3a45-48ed-ace9-93a27203841e",
                "clickOptions": {
                 "name": "dl-close-abb",
-                "ID": "ad26e723-7c51-44e8-a602-e9cad0c659a9",
+                "ID": "24bac694-fabc-46d4-a35a-e876790cd4a7",
                 "actionSlots": {
                  "click": {
                   "actions": [
                    {
                     "type": "modalClose",
-                    "uuid": "c30e0999-2191-4d6d-ba7a-98cd10c65769",
+                    "uuid": "85e4e30e-1bfa-4a20-b53b-ae5001cb82c9",
                     "settings": {
                      "target": {
                       "type": "element",
-                      "uuid": "be06594f-d9f4-4c7c-870c-f80da20f3e7e"
+                      "uuid": "0ce83e8a-a8e2-4eab-8eaa-193b9eb2e2a0"
                      }
                     }
                    }
@@ -62672,7 +63672,7 @@
         ]
        }
       ],
-      "nodeID": "be06594f-d9f4-4c7c-870c-f80da20f3e7e"
+      "nodeID": "0ce83e8a-a8e2-4eab-8eaa-193b9eb2e2a0"
      }
     ]
    }

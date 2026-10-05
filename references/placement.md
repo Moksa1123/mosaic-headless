@@ -153,3 +153,34 @@ source the column was derived from rather than the one it was convenient to read
   an `*ElementMResourceFactory.php`; every extractor walked
   `*ElementTypeFactory.php` only, so they were absent from the catalog and a
   fieldset appeared to have no inner structure.
+
+## navbar, media and the two WordPress nodes
+
+```
+navbar            animation (none|fade|fadeDown|fadeUp|scaleDown|flipDown)
+                  buttonBreakpoint (a breakpoint id, or "none")
+                  disableScroll
+  navbar-toggle   the button that appears BELOW the breakpoint
+  navigation      the links, which collapse behind it
+```
+
+Measured: above `buttonBreakpoint` the links are shown and the toggle is hidden;
+below it the host gains `dropdown-mode`, the links disappear, and clicking the
+toggle adds `dropdown--opened` and reveals them. The breakpoint is named with the
+same ids the style system uses (`_t`, `_m`).
+
+**`icon` takes RAW SVG** in its `svg` property — not a URL, not an icon-library
+name. `autoScale` makes it follow the element's box, and `currentColor` inside the
+SVG picks up the node's `color`.
+
+**`image.image` takes the attachment protocol**:
+`wp-attachment://image/<id>/full/<uploads-relative path>`. The last segment is
+relative to the uploads directory and a full path is silently doubled; a plain URL
+also works and simply skips the width/height resolution.
+
+**`wpShortcode.shortcode`** runs a real shortcode — `[products limit="3"]` renders
+WooCommerce's own markup, not a reimplementation — and **`wpContent.content`** is a
+`ValidatorDynamicCodeObject`, so it takes the `{"v": "…"}` form; a bare string is
+dropped and the block renders empty. Its default is `@VAR('post/content')`, which
+is why the node usually sits inside a loop and needs nothing written at all, and
+the property is gated on the `unfiltered_html` capability.
