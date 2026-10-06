@@ -47,6 +47,7 @@ rated `error`.
 """
 from __future__ import annotations
 
+import mosaic_config
 import argparse
 import csv
 import json
@@ -605,7 +606,8 @@ def resolve_tokens(value, spec):
 
 def main():
     ap = argparse.ArgumentParser()
-    ap.add_argument("--config", required=True)
+    ap.add_argument("--config",
+                    help="JSON with base/cookie/nonce; omit it and the MOSAIC_SITE_URL / MOSAIC_REST_COOKIE / MOSAIC_REST_NONCE environment variables supply them instead")
     ap.add_argument("--site", required=True)
     ap.add_argument("--csv", help="the computed-value table")
     ap.add_argument("--audit", help="the design-audit findings")
@@ -617,7 +619,7 @@ def main():
     ap.add_argument("--page", help="only this slug")
     a = ap.parse_args()
 
-    cfg = json.load(open(a.config, encoding="utf-8"))
+    cfg = mosaic_config.load(a.config)
     spec = json.load(open(a.site, encoding="utf-8"))
 
     rows, findings, hard = [], [], 0

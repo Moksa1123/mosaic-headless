@@ -1,7 +1,7 @@
 {
   "name": "mosaic-headless",
   "displayName": "Mosaic Headless (unofficial)",
-  "version": "1.29.2",
+  "version": "1.30.0",
   "description": "Build and modify Mosaic Pro (Nextend) WordPress sites by writing the data model directly, with every node type, style property and node property measured on a live install. Unofficial: not made by or affiliated with Nextend.",
   "author": {
     "name": "moksa",
@@ -19,9 +19,32 @@
     "wp-cli",
     "elementor-migration"
   ],
+  "icon": "./.claude-plugin/icon.png",
   "documentationUrl": "https://github.com/Moksa1123/mosaic-headless#readme",
   "supportUrl": "https://github.com/Moksa1123/mosaic-headless/issues",
   "privacyPolicyUrl": "https://github.com/Moksa1123/mosaic-headless#what-this-plugin-runs-and-connects-to",
+  "userConfig": {
+    "site_url": {
+      "type": "string",
+      "title": "Mosaic site URL",
+      "description": "The WordPress site to read and write, e.g. https://example.com. Every tool in this skill contacts only this site.",
+      "required": false
+    },
+    "rest_cookie": {
+      "type": "string",
+      "title": "WordPress logged-in cookie",
+      "description": "The logged-in cookie for an administrator on that site. Run `wp eval-file tools/mint_session.php` on the server to print one; it is never read from your machine. Export it as MOSAIC_REST_COOKIE for a tool run.",
+      "sensitive": true,
+      "required": false
+    },
+    "rest_nonce": {
+      "type": "string",
+      "title": "wp_rest nonce",
+      "description": "The nonce matching that cookie, printed by the same command. Export it as MOSAIC_REST_NONCE for a tool run.",
+      "sensitive": true,
+      "required": false
+    }
+  },
   "skills": [
     "./"
   ]

@@ -67,17 +67,29 @@ below runs only when Claude follows `SKILL.md` and you approve the command:
 - **`tools/*.php`** run inside your own WordPress through `wp eval-file`. They read
   and write Mosaic's own tables and theme data on that site.
 - **`tools/mint_session.php`** creates a logged-in WordPress session and a matching
-  REST nonce for an account on *your* site. You put them in a local config file
-  (`--config sweep.json`); they are printed to your terminal and sent nowhere else.
+  REST nonce for an account on *your* site. They are printed to your terminal and
+  sent nowhere else. **Nothing here goes looking for a credential on your machine** -
+  you supply the session, one of two ways:
+  - installed as a plugin, Claude Code prompts for `Mosaic site URL`,
+    `WordPress logged-in cookie` and `wp_rest nonce`. The two credentials are
+    declared `sensitive`, so they are masked on entry and kept in your platform's
+    credential store, not in `settings.json`. Export them for a tool run as
+    `MOSAIC_SITE_URL`, `MOSAIC_REST_COOKIE` and `MOSAIC_REST_NONCE`
+  - or put them in a JSON file of your own and pass `--config <file>`, which is what
+    the examples in the skill show
+  The environment wins over the file, and with the environment set no credential
+  needs to be written to disk at all.
 - **`tools/build_site.py`, `data_upgrade.py`, `theme_zip.py`, `probe_accordion.py` and the `sweep_*.py`
   tools** call Mosaic's REST routes on the site in that config file, with that
   session, to read and write pages, components and themes. They contact only that
   site.
 - **`tools/verify_*.py`** open pages of that same site with Playwright (Chromium) or
   `urllib` and compare what was delivered with what was written.
-- **`sites/`** holds the worked example (the author's own site) as data. Its design
-  loads Google Fonts, so pages built from it make visitors' browsers fetch fonts from
-  Google, as any page using Google Fonts does.
+- **`sites/`** holds the worked example (the author's own site) as readable Python
+  modules. `python sites/_moksa.py` generates `sites/moksa.json` from them; the
+  generated file is not shipped. The design loads Google Fonts, so pages built from
+  it make visitors' browsers fetch fonts from Google, as any page using Google Fonts
+  does.
 
 The tools need Python 3 and Playwright. Nothing is downloaded at install time, and no
 data is sent to the author or any third party.

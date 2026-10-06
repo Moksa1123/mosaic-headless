@@ -28,6 +28,7 @@ a theme.
 Pages are bound to WordPress posts by slug, so the posts must already exist. The theme
 is committed once, before anything references a token.
 """
+import mosaic_config
 import argparse
 import json
 import os
@@ -374,10 +375,11 @@ def cache_check(url, _fresh_bytes=None):
 
 def main():
     ap = argparse.ArgumentParser()
-    ap.add_argument("--config", required=True)
+    ap.add_argument("--config",
+                    help="JSON with base/cookie/nonce; omit it and the MOSAIC_SITE_URL / MOSAIC_REST_COOKIE / MOSAIC_REST_NONCE environment variables supply them instead")
     ap.add_argument("--site", required=True)
     a = ap.parse_args()
-    cfg = json.load(open(a.config, encoding="utf-8"))
+    cfg = mosaic_config.load(a.config)
     site = json.load(open(a.site, encoding="utf-8"))
     client = Client(cfg)
     surface = Surface()

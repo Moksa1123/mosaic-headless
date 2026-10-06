@@ -43,6 +43,7 @@ cannot run, the overlay does not exist. The failure direction is "no intro", nev
 """
 from __future__ import annotations
 
+import mosaic_config
 import argparse
 import csv
 import json
@@ -249,7 +250,8 @@ def changed(readings, ids):
 
 def main():
     ap = argparse.ArgumentParser()
-    ap.add_argument("--config", required=True)
+    ap.add_argument("--config",
+                    help="JSON with base/cookie/nonce; omit it and the MOSAIC_SITE_URL / MOSAIC_REST_COOKIE / MOSAIC_REST_NONCE environment variables supply them instead")
     ap.add_argument("--site", required=True)
     ap.add_argument("--page")
     ap.add_argument("--veil-prefix", default="mk-boot",
@@ -262,7 +264,7 @@ def main():
     ap.add_argument("--frames")
     a = ap.parse_args()
 
-    cfg = json.load(open(a.config, encoding="utf-8"))
+    cfg = mosaic_config.load(a.config)
     spec = json.load(open(a.site, encoding="utf-8"))
     slug = a.page or spec["pages"][0]["slug"]
     url = "%s/%s/" % (cfg["base"].rstrip("/"), slug)

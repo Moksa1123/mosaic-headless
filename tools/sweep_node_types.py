@@ -27,6 +27,7 @@ tree. This costs one page load per type and is the only way the numbers mean any
     BROKE_PAGE  committed, and the page stopped rendering - the silent-failure case
     REJECTED    the commit came back with an `exceptions` body (HTTP 200)
 """
+import mosaic_config
 import argparse
 import csv
 import json
@@ -406,7 +407,8 @@ def sweep(client, cfg, types, out_path):
 
 if __name__ == "__main__":
     ap = argparse.ArgumentParser()
-    ap.add_argument("--config", required=True)
+    ap.add_argument("--config",
+                    help="JSON with base/cookie/nonce; omit it and the MOSAIC_SITE_URL / MOSAIC_REST_COOKIE / MOSAIC_REST_NONCE environment variables supply them instead")
     ap.add_argument("--setup", action="store_true")
     ap.add_argument("--sweep", action="store_true")
     ap.add_argument("--types", help="comma-separated subset; overrides --edition")
@@ -416,7 +418,7 @@ if __name__ == "__main__":
     ap.add_argument("--out", default="../data/node-verification.csv")
     a = ap.parse_args()
 
-    cfg = json.load(open(a.config, encoding="utf-8"))
+    cfg = mosaic_config.load(a.config)
     client = Client(cfg)
     if a.setup:
         setup(client, cfg, a.config)

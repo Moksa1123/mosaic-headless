@@ -42,6 +42,7 @@ as passes would be the blind-spot-scored-as-success failure this file was writte
 avoid; leaving them as SKIPPED understates the evidence by nearly seven hundred rows.
 So they get their own status, and it carries the count and the file that holds it.
 """
+import mosaic_config
 import argparse
 import csv
 import json
@@ -158,12 +159,13 @@ def judge(prop, value, tag):
 
 def main():
     ap = argparse.ArgumentParser()
-    ap.add_argument("--config", required=True)
+    ap.add_argument("--config",
+                    help="JSON with base/cookie/nonce; omit it and the MOSAIC_SITE_URL / MOSAIC_REST_COOKIE / MOSAIC_REST_NONCE environment variables supply them instead")
     ap.add_argument("--page", required=True)
     ap.add_argument("--csv")
     a = ap.parse_args()
 
-    cfg = json.load(open(a.config, encoding="utf-8"))
+    cfg = mosaic_config.load(a.config)
     here = os.path.dirname(os.path.abspath(__file__))
     props = list(csv.DictReader(
         open(os.path.join(here, "..", "data", "node-properties.csv"), encoding="utf-8")))

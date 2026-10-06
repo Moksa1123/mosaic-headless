@@ -136,6 +136,7 @@ mechanical check reads what the spec declared and what the site actually served,
 compares them key by key:
 
 ```bash
+python sites/_moksa.py          # moksa.json is generated, not shipped
 python tools/verify_rwd.py --config sweep.json --site sites/moksa.json --csv rwd.csv
 ```
 

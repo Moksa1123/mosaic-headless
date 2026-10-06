@@ -3,8 +3,10 @@ name: "mosaic-headless"
 description: |
   Build and modify Mosaic Pro (Nextend) sites by writing the underlying data model directly - no visual editor, no DOM. Query the real surface with `mo.py`, which joins every source table to the live sweeps so a lookup leads with the measured verdict rather than the declaration (128 node types, 191 properties, 98 style properties with 20 structured value shapes pinned down, 53 style states, 156 variants, 74 dynamic variables, 15 interaction triggers, 115 REST routes, 23 tables) instead of guessing, with every node type placed on a live site one at a time and asserted against the delivered HTML, the design-token and element-class layers verified against compiled CSS, the @VAR() dynamic language verified against rendered output, nine designed pages built through the tables themselves, and the delivered pages re-read in Chromium at three viewports so a rule that is present, correct and still wrong cannot pass. Drives Mosaic's own theme export/import and its plugin data upgrade from outside the editor and holds the copy against the source tree for tree. Measured on Mosaic Pro 1.0.9: the modal (`<dialog>`), OpenStreetMap, the exit-intent and scroll-depth triggers, run rules and the memory actions all built on a live page and read back, and the 1.0.7 -> 1.0.8 -> 1.0.9 migrations driven from outside wp-admin.
 license: "MIT"
-author: "moksa (https://moksaweb.com)"
-version: "1.29.2"
+metadata:
+  author: "moksa (https://moksaweb.com)"
+  version: "1.30.0"
+  homepage: "https://github.com/Moksa1123/mosaic-headless"
 ---
 
 # Headless Mosaic
@@ -822,7 +824,40 @@ post — `build_all.py` resets first for that reason.
 | `copy_styles.py` | push one node's style onto others, by attrID or prefix |
 | `bootstrap_probe_theme.php` | a licence-free scratch theme |
 | `mint_session.php` | a matching cookie + `wp_rest` nonce from WP-CLI |
+| `mosaic_config.py` | the one place a tool resolves the site URL and session - environment (`MOSAIC_SITE_URL` / `MOSAIC_REST_COOKIE` / `MOSAIC_REST_NONCE`) over `--config` file, so a credential never has to be written to disk |
 | `check_tables.py` | re-extract all eleven source-derived tables and diff them against the shipped ones - the check for a table that is not wrong but STALE, which nothing else can see |
+
+## The session, and where it comes from
+
+Every tool that writes needs a site URL, a logged-in cookie and a matching
+`wp_rest` nonce. **Never go looking for them on the user's machine** - not in a
+browser profile, not in `wp-config.php`, not in a dotfile. Ask, or have the user
+mint them:
+
+```bash
+wp eval-file tools/mint_session.php        # on the server, prints COOKIE= and NONCE=
+```
+
+Then either export them, which keeps the credential off disk entirely:
+
+```bash
+export MOSAIC_SITE_URL=https://example.com
+export MOSAIC_REST_COOKIE='wordpress_logged_in_…=…'
+export MOSAIC_REST_NONCE=0a0326da96
+python tools/build_site.py --site sites/moksa.json
+```
+
+or pass a JSON file the user wrote:
+
+```bash
+python tools/build_site.py --config sweep.json --site sites/moksa.json
+```
+
+`tools/mosaic_config.py` is the single place that resolves this, and the
+environment wins over the file. Installed as a plugin, the three values are
+`userConfig` options - the cookie and the nonce `sensitive: true`, so Claude Code
+masks them and stores them in the platform credential store rather than in
+`settings.json`.
 
 ## Regenerating everything
 
@@ -848,6 +883,10 @@ python tools/capture_live.py             data/          # from data/raw/*.json +
 python tools/sweep_node_types.py --config sweep.json --setup
 python tools/sweep_node_types.py --config sweep.json --sweep --edition all
 python tools/sweep_properties.py --config sweep.json
+# `sites/moksa.json` is GENERATED - the package ships the readable modules it
+# comes from, not 2MB of built output. Regenerate it before anything reads it:
+python sites/_moksa.py
+
 python tools/verify_rwd.py --config sweep.json --site sites/moksa.json --csv data/rwd-verification.csv
 python tools/verify_browser.py --config sweep.json --site sites/moksa.json \
     --csv data/browser-verification.csv --audit data/design-audit.csv

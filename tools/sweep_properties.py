@@ -36,6 +36,7 @@ NO_EFFECT is not a failure. It is the honest answer for a property whose effect 
 probe page cannot show, and it is reported as itself instead of being quietly counted
 as a pass.
 """
+import mosaic_config
 import argparse
 import csv
 import json
@@ -206,10 +207,11 @@ def run(client, cfg, jobs, out_path):
 
 if __name__ == "__main__":
     ap = argparse.ArgumentParser()
-    ap.add_argument("--config", required=True)
+    ap.add_argument("--config",
+                    help="JSON with base/cookie/nonce; omit it and the MOSAIC_SITE_URL / MOSAIC_REST_COOKIE / MOSAIC_REST_NONCE environment variables supply them instead")
     ap.add_argument("--carriers", default="text,button,div,section,image,icon",
                     help="types used to probe the inherited property set")
     ap.add_argument("--out", default="../data/property-verification.csv")
     a = ap.parse_args()
-    cfg = json.load(open(a.config, encoding="utf-8"))
+    cfg = mosaic_config.load(a.config)
     run(Client(cfg), cfg, load_surface(a.carriers.split(",")), a.out)

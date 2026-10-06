@@ -35,7 +35,11 @@ const pkg = JSON.parse(read("package.json"));
 const want = pkg.version;
 
 const skill = read("SKILL.md");
-const fmVersion = /^version:\s*"?([^"\n]+)"?\s*$/m.exec(skill.split("---")[1] || "");
+// `version` sits under `metadata:`, hence the leading indent. The Agent Skills
+// spec allows only allowed-tools / compatibility / description / license /
+// metadata / name at the top level, and a stray `version` there does not get
+// ignored - it fails the upload.
+const fmVersion = /^\s+version:\s*"?([^"\n]+)"?\s*$/m.exec(skill.split("---")[1] || "");
 if (!fmVersion) fail("SKILL.md frontmatter has no version:");
 else if (fmVersion[1].trim() !== want)
   fail(`SKILL.md version ${fmVersion[1].trim()} != package.json ${want}`);

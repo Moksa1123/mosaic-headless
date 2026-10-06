@@ -31,6 +31,7 @@ that "worked" can be checked against what it actually emitted rather than truste
     COMMIT_5xx  PHP fatal during commit
     BROKE_PAGE  committed, and the page stopped rendering
 """
+import mosaic_config
 import argparse
 import csv
 import json
@@ -135,10 +136,11 @@ def run(client, cfg, cases, out_path):
 
 if __name__ == "__main__":
     ap = argparse.ArgumentParser()
-    ap.add_argument("--config", required=True)
+    ap.add_argument("--config",
+                    help="JSON with base/cookie/nonce; omit it and the MOSAIC_SITE_URL / MOSAIC_REST_COOKIE / MOSAIC_REST_NONCE environment variables supply them instead")
     ap.add_argument("--cases", required=True)
     ap.add_argument("--out")
     a = ap.parse_args()
-    cfg = json.load(open(a.config, encoding="utf-8"))
+    cfg = mosaic_config.load(a.config)
     cases = json.load(open(a.cases, encoding="utf-8"))
     run(Client(cfg), cfg, cases, a.out)

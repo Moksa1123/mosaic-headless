@@ -32,6 +32,7 @@ under the same milestone, one chunk per request, `totalChunks` on each.
 """
 from __future__ import annotations
 
+import mosaic_config
 import argparse
 import email.parser
 import email.policy
@@ -202,19 +203,21 @@ def main():
     ap = argparse.ArgumentParser()
     sub = ap.add_subparsers(dest="cmd", required=True)
     e = sub.add_parser("export")
-    e.add_argument("--config", required=True)
+    e.add_argument("--config",
+                    help="JSON with base/cookie/nonce; omit it and the MOSAIC_SITE_URL / MOSAIC_REST_COOKIE / MOSAIC_REST_NONCE environment variables supply them instead")
     e.add_argument("--theme", help="themeID; default is the config's")
     e.add_argument("--out", required=True)
     e.add_argument("--simple", action="store_true", help="Mosaic's simpleExport flag")
     i = sub.add_parser("import")
-    i.add_argument("--config", required=True)
+    i.add_argument("--config",
+                    help="JSON with base/cookie/nonce; omit it and the MOSAIC_SITE_URL / MOSAIC_REST_COOKIE / MOSAIC_REST_NONCE environment variables supply them instead")
     i.add_argument("--zip", required=True)
     i.add_argument("--activate", action="store_true",
                    help="make the imported theme the live site (default: test mode)")
     i.add_argument("--replace", metavar="THEMEID",
                    help="DELETE this theme and import over it")
     a = ap.parse_args()
-    cfg = json.load(open(a.config, encoding="utf-8"))
+    cfg = mosaic_config.load(a.config)
     (export_theme if a.cmd == "export" else import_theme)(a, cfg)
 
 

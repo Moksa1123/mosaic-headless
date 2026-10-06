@@ -32,6 +32,7 @@ Statuses
 """
 from __future__ import annotations
 
+import mosaic_config
 import argparse
 import csv
 import json
@@ -127,13 +128,14 @@ def norm(text):
 
 def main():
     ap = argparse.ArgumentParser()
-    ap.add_argument("--config", required=True)
+    ap.add_argument("--config",
+                    help="JSON with base/cookie/nonce; omit it and the MOSAIC_SITE_URL / MOSAIC_REST_COOKIE / MOSAIC_REST_NONCE environment variables supply them instead")
     ap.add_argument("--post", type=int, required=True)
     ap.add_argument("--slug", required=True)
     ap.add_argument("--csv")
     a = ap.parse_args()
 
-    cfg = json.load(open(a.config, encoding="utf-8"))
+    cfg = mosaic_config.load(a.config)
     client, surface = Client(cfg), Surface()
     cases = plan()
     testable = [c for c in cases if not c["blocked"] and c["host"]]

@@ -38,12 +38,13 @@ const head = skill.slice(0, end);
 const rest = skill.slice(end);
 // "already correct" and "line missing" are different answers, and conflating them
 // made this exit 1 on a release where the version happened to match already.
-const VERSION_LINE = /^version:\s*"?[^"\n]*"?\s*$/m;
+// indented: it lives under `metadata:` (see check-release.mjs for why)
+const VERSION_LINE = /^(\s+)version:\s*"?[^"\n]*"?\s*$/m;
 if (!VERSION_LINE.test(head)) {
   console.error("SKILL.md frontmatter has no version: line to update");
   process.exit(1);
 }
-const next = head.replace(VERSION_LINE, `version: "${v}"`);
+const next = head.replace(VERSION_LINE, (_m, indent) => `${indent}version: "${v}"`);
 if (next !== head) {
   fs.writeFileSync(skillPath, next + rest);
   touched.push("SKILL.md");

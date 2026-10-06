@@ -39,6 +39,7 @@ refused outright unless --force, because committing one is how you get a 200-res
 page that serves a 54-byte error string. After committing, the page is fetched and its
 size checked - the only reliable signal that the write actually worked.
 """
+import mosaic_config
 import argparse
 import csv
 import json
@@ -559,11 +560,12 @@ def build(client, cfg, spec, force):
 
 if __name__ == "__main__":
     ap = argparse.ArgumentParser()
-    ap.add_argument("--config", required=True)
+    ap.add_argument("--config",
+                    help="JSON with base/cookie/nonce; omit it and the MOSAIC_SITE_URL / MOSAIC_REST_COOKIE / MOSAIC_REST_NONCE environment variables supply them instead")
     ap.add_argument("--spec", required=True)
     ap.add_argument("--force", action="store_true", help="skip the placement/outcome checks")
     a = ap.parse_args()
-    cfg = json.load(open(a.config, encoding="utf-8"))
+    cfg = mosaic_config.load(a.config)
     spec = json.load(open(a.spec, encoding="utf-8"))
     client = Client(cfg)
     build(client, cfg, spec, a.force)

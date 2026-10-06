@@ -26,6 +26,7 @@ Always shows the diff and asks, unless --yes. A style copy is not reversible fro
 this tool - the previous value is gone once the commit lands - so it prints the
 before and after of every target first.
 """
+import mosaic_config
 import argparse
 import json
 import os
@@ -96,7 +97,8 @@ def merge(dst, src):
 
 def main():
     ap = argparse.ArgumentParser()
-    ap.add_argument("--config", required=True)
+    ap.add_argument("--config",
+                    help="JSON with base/cookie/nonce; omit it and the MOSAIC_SITE_URL / MOSAIC_REST_COOKIE / MOSAIC_REST_NONCE environment variables supply them instead")
     ap.add_argument("--from", dest="src", required=True, help="source attrID")
     ap.add_argument("--to", help="comma-separated target attrIDs")
     ap.add_argument("--to-prefix", help="every attrID starting with this, except the source")
@@ -107,7 +109,7 @@ def main():
     ap.add_argument("--yes", action="store_true")
     a = ap.parse_args()
 
-    cfg = json.load(open(a.config, encoding="utf-8"))
+    cfg = mosaic_config.load(a.config)
     client = Client(cfg)
 
     if a.to_prefix:

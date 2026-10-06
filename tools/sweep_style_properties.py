@@ -46,6 +46,7 @@ Statuses
 `SKIPPED` and `DIFFERENT` are never folded into a pass rate. A sweep that scores its
 own blind spots as successes is the thing this skill exists to argue against.
 """
+import mosaic_config
 import argparse
 import csv
 import json
@@ -133,12 +134,13 @@ def test_value(row):
 
 def main():
     ap = argparse.ArgumentParser()
-    ap.add_argument("--config", required=True)
+    ap.add_argument("--config",
+                    help="JSON with base/cookie/nonce; omit it and the MOSAIC_SITE_URL / MOSAIC_REST_COOKIE / MOSAIC_REST_NONCE environment variables supply them instead")
     ap.add_argument("--page", required=True, help="slug of a page that renders")
     ap.add_argument("--csv")
     a = ap.parse_args()
 
-    cfg = json.load(open(a.config, encoding="utf-8"))
+    cfg = mosaic_config.load(a.config)
     here = os.path.dirname(os.path.abspath(__file__))
     props = list(csv.DictReader(
         open(os.path.join(here, "..", "data", "style-properties.csv"),

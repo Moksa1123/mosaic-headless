@@ -53,6 +53,7 @@ breakpoint declared. Writing narrow-screen `customDeclarations` that simply omit
 leaves the wide-screen border standing, drawing rules in the middle of nowhere on a
 collapsed layout. Every such omission is reported as RESET-RISK.
 """
+import mosaic_config
 import argparse
 import csv
 import json
@@ -292,12 +293,13 @@ def component_tree(spec, name, instance_attr):
 
 def main():
     ap = argparse.ArgumentParser()
-    ap.add_argument("--config", required=True)
+    ap.add_argument("--config",
+                    help="JSON with base/cookie/nonce; omit it and the MOSAIC_SITE_URL / MOSAIC_REST_COOKIE / MOSAIC_REST_NONCE environment variables supply them instead")
     ap.add_argument("--site", required=True)
     ap.add_argument("--csv")
     a = ap.parse_args()
 
-    cfg = json.load(open(a.config, encoding="utf-8"))
+    cfg = mosaic_config.load(a.config)
     site = json.load(open(a.site, encoding="utf-8"))
     base = cfg["base"].rstrip("/")
 
