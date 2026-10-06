@@ -213,7 +213,7 @@ def tidy(text):
     report every hairline on the page as overridden."""
     t = re.sub(r"\s*,\s*", ",", (text or "").strip().lower())
     t = re.sub(r"\s+", " ", t)
-    return re.sub(r"(?<![\d.])\.(\d)", r"0.", t)
+    return re.sub(r"(?<![\d.])\.(\d)", r"0.\1", t)
 
 
 # The comparison knows properties by their Mosaic key, but customDeclarations hands it raw
@@ -609,7 +609,8 @@ def main():
     ap.add_argument("--config",
                     help="JSON with base/cookie/nonce; omit it and the MOSAIC_SITE_URL / MOSAIC_REST_COOKIE / MOSAIC_REST_NONCE environment variables supply them instead")
     ap.add_argument("--site", required=True)
-    ap.add_argument("--csv", help="the computed-value table")
+    ap.add_argument("--csv", help="a DIRECTORY: the computed-value table is "
+                    "written one file per page, <dir>/<slug>.csv")
     ap.add_argument("--audit", help="the design-audit findings")
     ap.add_argument("--ack", default=os.path.join(
         os.path.dirname(os.path.abspath(__file__)), "..", "data",
@@ -754,13 +755,24 @@ def main():
     # count in the release gate - should not have to find the blank line between them.
     # The audit file is written even when it is empty: a header with no rows says
     # "this ran and found nothing", where a missing file says nothing at all.
+    #
+    # The computed-value table is one file per page, named by its slug, with no url
+    # column: a single file carried the site's address 4,000 times over and passed
+    # the plugin directory's 256 KiB per-file limit. The slug is the filename, and
+    # the address is whatever --config pointed at.
     if a.csv:
-        with open(a.csv, "w", newline="", encoding="utf-8") as fh:
-            w = csv.writer(fh)
-            w.writerow(["url", "breakpoint", "attrID", "property", "declared",
-                        "computed", "status"])
-            w.writerows(rows)
-        print("\nwrote %s (%d rows)" % (a.csv, len(rows)))
+        os.makedirs(a.csv, exist_ok=True)
+        per_page = {}
+        for r in rows:
+            per_page.setdefault(r[0].rstrip("/").rsplit("/", 1)[-1], []).append(r[1:])
+        for slug, page_rows in per_page.items():
+            out = os.path.join(a.csv, slug + ".csv")
+            with open(out, "w", newline="", encoding="utf-8") as fh:
+                w = csv.writer(fh)
+                w.writerow(["breakpoint", "attrID", "property", "declared",
+                            "computed", "status"])
+                w.writerows(page_rows)
+            print("\nwrote %s (%d rows)" % (out, len(page_rows)))
     if a.audit:
         with open(a.audit, "w", newline="", encoding="utf-8") as fh:
             w = csv.writer(fh)

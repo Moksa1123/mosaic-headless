@@ -26,8 +26,36 @@ import { fileURLToPath } from "node:url";
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
 const read = (p) => fs.readFileSync(path.join(ROOT, p), "utf8");
+// A table split one file per page (data/browser-verification/) is still one table:
+// its CSVs, in name order, each with its own header.
+const tableFiles = (p) => fs.statSync(path.join(ROOT, p)).isDirectory()
+  ? fs.readdirSync(path.join(ROOT, p)).filter((f) => f.endsWith(".csv")).sort()
+      .map((f) => `${p}/${f}`)
+  : [p];
 const problems = [];
 const fail = (m) => problems.push(m);
+
+// ---------- the plugin directory's limits -----------------------------------
+//
+// The Claude plugin directory reads the repository root, every tracked file of it,
+// and holds a submission for a reviewer when any file that is not an image or font
+// is over 256 KiB, or when there are more than 512 files. A 400 KB CSV and a 2 MB
+// generated site file did exactly that. Checked here, so it fails on this machine
+// rather than in a review queue a week later.
+try {
+  const tracked = execSync("git ls-files -z", { cwd: ROOT }).toString().split("\0").filter(Boolean);
+  if (tracked.length > 512) fail(`${tracked.length} tracked files - the plugin directory allows 512`);
+  for (const f of tracked) {
+    if (/\.(png|jpe?g|gif|webp|svg|ico|woff2?|ttf|otf)$/i.test(f)) continue;
+    const full = path.join(ROOT, f);
+    if (!fs.existsSync(full)) continue;
+    const size = fs.statSync(full).size;
+    if (size > 256 * 1024)
+      fail(`${f} is ${(size / 1024).toFixed(0)} KiB - the plugin directory holds any non-image file over 256 KiB`);
+  }
+} catch {
+  // not a git checkout (an unpacked tarball): nothing to measure against
+}
 
 // ---------- versions agree --------------------------------------------------
 
@@ -91,13 +119,14 @@ if (!fs.existsSync(path.join(ROOT, pkg.bin["mosaic-headless"])))
 
 // ---------- the numbers in the docs are counted, not trusted ----------------
 
-const rows = (p) => read(p).trim().split("\n").length - 1;   // minus the header
+const rows = (p) => tableFiles(p)
+  .reduce((n, f) => n + read(f).trim().split("\n").length - 1, 0);   // minus each header
 const counts = {
   "data/node-verification.csv": 126,
   "data/style-verification.csv": 98,
   "data/node-property-verification.csv": 191,
   "data/rwd-verification.csv": 733,
-  "data/browser-verification.csv": 4132,
+  "data/browser-verification": 4132,
   "data/style-state-verification.csv": 52,
   "data/interaction-verification.csv": 7,
   "data/data-class-hierarchy.csv": 125,
@@ -131,7 +160,7 @@ if (!style.includes("SKIPPED")) fail("style-verification.csv has no SKIPPED rows
 
 // The browser pass has the same obligation, under a different word: a declaration it
 // cannot soundly compare must say so rather than be counted as agreement.
-const browser = read("data/browser-verification.csv");
+const browser = tableFiles("data/browser-verification").map(read).join("\n");
 if (!browser.includes("not-comparable"))
   fail("browser-verification.csv has no not-comparable rows - a computed-value check "
      + "that claims to compare everything is comparing things it cannot");
@@ -190,13 +219,13 @@ if (/,FAIL,/.test(zip)) fail("data/theme-zip-verification.csv carries a failed c
 // rwd and browser counts, and must not carry the previous ones.
 {
   const fmt = (n) => n.toLocaleString("en-US");
-  const want = [rows("data/rwd-verification.csv"), rows("data/browser-verification.csv")];
+  const want = [rows("data/rwd-verification.csv"), rows("data/browser-verification")];
   for (const readme of ["README.md", "README.zh-TW.md", "README.ja.md", "README.ko.md"]) {
     const text = read(readme);
     for (const n of want)
       if (!text.includes(fmt(n)) && !text.includes(String(n)))
         fail(`${readme} does not quote ${fmt(n)} - it is quoting a stale count`);
-    if (/0 findings|指摘 0 件|지적 0건|0 項發現/.test(text))
+    if (/\b0 findings\b|指摘 0 件|지적 0건|0 項發現/.test(text))
       fail(`${readme} still claims a design audit with 0 findings`);
   }
 }

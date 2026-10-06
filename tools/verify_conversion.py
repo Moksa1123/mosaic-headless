@@ -29,6 +29,7 @@ import argparse
 import csv
 import html as htmllib
 import json
+import os
 import re
 import sys
 import time
@@ -129,7 +130,7 @@ def main():
     ap.add_argument("--report", help="the CSV from_elementor.py wrote")
     ap.add_argument("--csv")
     ap.add_argument("--width", type=int, default=1440)
-    ap.add_argument("--browser", help="browser-verification CSV from verify_browser.py")
+    ap.add_argument("--browser", help="browser-verification CSV, or the per-page directory, from verify_browser.py")
     ap.add_argument("--audit", help="design-audit CSV from verify_browser.py")
     ap.add_argument("--rwd", help="rwd-verification CSV from verify_rwd.py")
     ap.add_argument("--prefix", default="el",
@@ -230,7 +231,10 @@ def main():
               "own media query" % len(rr) if not bad else
               "%d of %d not verified" % (len(bad), len(rr)))
     if a.browser:
-        br = list(csv.DictReader(open(a.browser, encoding="utf-8")))
+        # a file, or the per-page directory verify_browser.py writes
+        files = ([os.path.join(a.browser, f) for f in sorted(os.listdir(a.browser))
+                  if f.endswith(".csv")] if os.path.isdir(a.browser) else [a.browser])
+        br = [r for f in files for r in csv.DictReader(open(f, encoding="utf-8"))]
         ok = sum(1 for r in br if r.get("status") == "ok")
         over = [r for r in br if r.get("status") == "OVERRIDDEN"]
         check("COMPUTED", bool(br) and not over,

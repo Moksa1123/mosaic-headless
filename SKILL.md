@@ -5,7 +5,7 @@ description: |
 license: "MIT"
 metadata:
   author: "moksa (https://moksaweb.com)"
-  version: "1.30.0"
+  version: "1.30.1"
   homepage: "https://github.com/Moksa1123/mosaic-headless"
 ---
 
@@ -348,7 +348,7 @@ BROWSER      4,132 computed-style readings on the delivered pages in Chromium, a
              My Account page whose UI arrives through one `code` node running a
              shortcode - which is also the measurement that shows the property
              sweep's NO_EFFECT on `processShortcodes` was the sweep, not the flag.
-             data/browser-verification.csv, data/design-audit.csv
+             data/browser-verification/ (one CSV per page), data/design-audit.csv
 
 RWD          733 responsive declarations across two sites asserted against the
              stylesheet the site actually served - each `_t`/`_m` property matched
@@ -520,7 +520,7 @@ so the pattern is in the data, not just in this paragraph.
 | `data/node-property-verification.csv` | 191 | **swept live** — each property probed with a value shaped by its own validator chain, on a type that declares it |
 | `data/style-verification.csv` | 98 | **swept live** — every style property written to a page and checked against the compiled CSS, with its group beside the result |
 | `data/rwd-verification.csv` | 733 | **checked live** - every `_t`/`_m` declaration vs the served stylesheet, with status per row |
-| `data/browser-verification.csv` | 4132 | **computed in Chromium** - declared vs `getComputedStyle` at three viewports, `not-comparable` labelled per row |
+| `data/browser-verification/` | 4132 | **computed in Chromium** - declared vs `getComputedStyle` at three viewports, `not-comparable` labelled per row. One CSV per page, named by its slug |
 | `data/design-audit-acknowledged.csv` | 3 | reviewed findings that will not be fixed, each with a written reason. An acknowledgement without a reason is a suppression wearing a better name, and the release gate refuses one |
 | `data/design-audit.csv` | 26 | **computed in Chromium** - contrast, font fallback, CJK tracking, overflow, measure. Empty means it ran and found nothing |
 | `data/data-class-hierarchy.csv` | 125 | source - every data class and its parent, so a type's inherited properties can be resolved |
@@ -889,7 +889,7 @@ python sites/_moksa.py
 
 python tools/verify_rwd.py --config sweep.json --site sites/moksa.json --csv data/rwd-verification.csv
 python tools/verify_browser.py --config sweep.json --site sites/moksa.json \
-    --csv data/browser-verification.csv --audit data/design-audit.csv
+    --csv data/browser-verification/ --audit data/design-audit.csv
 python tools/verify_intro.py --config sweep.json --site sites/moksa.json \
     --csv data/intro-verification.csv --frames shots/intro/
 python tools/sweep_style_properties.py --config sweep.json --page moksa --csv data/style-verification.csv

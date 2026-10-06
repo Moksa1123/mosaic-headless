@@ -1,0 +1,148 @@
+breakpoint,attrID,property,declared,computed,status
+_,mk-acct-body,backgroundColor,"rgb(250,250,247)","rgb(250, 250, 247)",ok
+_,mk-acct-body,paddingLeft,40px,40px,ok
+_,mk-acct-body,paddingRight,40px,40px,ok
+_,mk-acct-body,fontFamily,"'Noto Sans TC','PingFang TC','Hiragino Sans TC','Microsoft JhengHei',sans-serif","""Noto Sans TC"", ""PingFang TC"", ""Hiragino Sans TC"", ""Microsoft JhengHei"", sans-serif",ok
+_,mk-acct-body-in,width,100%,viewport- or parent-relative,not-comparable
+_,mk-acct-body-in,maxWidth,1240px,1240px,ok
+_,mk-acct-body-in,marginLeft,auto,auto resolves to a used value (60px),not-comparable
+_,mk-acct-body-in,marginRight,auto,auto resolves to a used value (60px),not-comparable
+_,mk-acct-head,display,grid,grid,ok
+_,mk-acct-head,gridCols,84px 1fr,84px 1156px,ok
+_,mk-acct-head,columnGap,0px,0px,ok
+_,mk-acct-head,alignItems,start,start,ok
+_,mk-acct-head,paddingTop,22px,22px,ok
+_,mk-acct-head,customDeclarations:border-top,"1px solid rgba(22,24,28,.16)",no computed value,not-comparable
+_,mk-acct-mast,backgroundColor,"rgb(250,250,247)","rgb(250, 250, 247)",ok
+_,mk-acct-mast,paddingLeft,40px,40px,ok
+_,mk-acct-mast,paddingRight,40px,40px,ok
+_,mk-acct-mast,fontFamily,"'Noto Sans TC','PingFang TC','Hiragino Sans TC','Microsoft JhengHei',sans-serif","""Noto Sans TC"", ""PingFang TC"", ""Hiragino Sans TC"", ""Microsoft JhengHei"", sans-serif",ok
+_,mk-acct-mast-in,width,100%,viewport- or parent-relative,not-comparable
+_,mk-acct-mast-in,maxWidth,1240px,1240px,ok
+_,mk-acct-mast-in,marginLeft,auto,auto resolves to a used value (60px),not-comparable
+_,mk-acct-mast-in,marginRight,auto,auto resolves to a used value (60px),not-comparable
+_,mk-acct-pad,paddingTop,70px,70px,ok
+_,mk-acct-pad,paddingBottom,48px,48px,ok
+_,mk-acct-r-0,display,grid,grid,ok
+_,mk-acct-r-0,gridCols,150px 1fr,150px 986px,ok
+_,mk-acct-r-0,columnGap,20px,20px,ok
+_,mk-acct-r-0,alignItems,baseline,baseline,ok
+_,mk-acct-r-0,paddingTop,13px,13px,ok
+_,mk-acct-r-0,paddingBottom,13px,13px,ok
+_,mk-acct-r-0,customDeclarations:border-top,"1px solid rgba(22,24,28,.16)",no computed value,not-comparable
+_,mk-acct-r-1,display,grid,grid,ok
+_,mk-acct-r-1,gridCols,150px 1fr,150px 986px,ok
+_,mk-acct-r-1,columnGap,20px,20px,ok
+_,mk-acct-r-1,alignItems,baseline,baseline,ok
+_,mk-acct-r-1,paddingTop,13px,13px,ok
+_,mk-acct-r-1,paddingBottom,13px,13px,ok
+_,mk-acct-r-1,customDeclarations:border-top,"1px solid rgba(22,24,28,.16)",no computed value,not-comparable
+_,mk-acct-r-2,display,grid,grid,ok
+_,mk-acct-r-2,gridCols,150px 1fr,150px 986px,ok
+_,mk-acct-r-2,columnGap,20px,20px,ok
+_,mk-acct-r-2,alignItems,baseline,baseline,ok
+_,mk-acct-r-2,paddingTop,13px,13px,ok
+_,mk-acct-r-2,paddingBottom,13px,13px,ok
+_,mk-acct-r-2,customDeclarations:border-top,"1px solid rgba(22,24,28,.16)",no computed value,not-comparable
+_,mk-acct-rows,marginTop,30px,30px,ok
+_,mk-acct-rows,display,grid,grid,ok
+_,mk-acct-rows,rowGap,0px,0px,ok
+_,mk-acct-sheet,paddingBottom,120px,120px,ok
+_t,mk-acct-body,backgroundColor,"rgb(250,250,247)","rgb(250, 250, 247)",ok
+_t,mk-acct-body,paddingLeft,28px,28px,ok
+_t,mk-acct-body,paddingRight,28px,28px,ok
+_t,mk-acct-body,fontFamily,"'Noto Sans TC','PingFang TC','Hiragino Sans TC','Microsoft JhengHei',sans-serif","""Noto Sans TC"", ""PingFang TC"", ""Hiragino Sans TC"", ""Microsoft JhengHei"", sans-serif",ok
+_t,mk-acct-body-in,width,100%,viewport- or parent-relative,not-comparable
+_t,mk-acct-body-in,maxWidth,1240px,1240px,ok
+_t,mk-acct-body-in,marginLeft,auto,auto resolves to a used value (0px),not-comparable
+_t,mk-acct-body-in,marginRight,auto,auto resolves to a used value (0px),not-comparable
+_t,mk-acct-head,display,grid,grid,ok
+_t,mk-acct-head,gridCols,84px 1fr,84px 760px,ok
+_t,mk-acct-head,columnGap,0px,0px,ok
+_t,mk-acct-head,alignItems,start,start,ok
+_t,mk-acct-head,paddingTop,22px,22px,ok
+_t,mk-acct-head,customDeclarations:border-top,"1px solid rgba(22,24,28,.16)",no computed value,not-comparable
+_t,mk-acct-mast,backgroundColor,"rgb(250,250,247)","rgb(250, 250, 247)",ok
+_t,mk-acct-mast,paddingLeft,28px,28px,ok
+_t,mk-acct-mast,paddingRight,28px,28px,ok
+_t,mk-acct-mast,fontFamily,"'Noto Sans TC','PingFang TC','Hiragino Sans TC','Microsoft JhengHei',sans-serif","""Noto Sans TC"", ""PingFang TC"", ""Hiragino Sans TC"", ""Microsoft JhengHei"", sans-serif",ok
+_t,mk-acct-mast-in,width,100%,viewport- or parent-relative,not-comparable
+_t,mk-acct-mast-in,maxWidth,1240px,1240px,ok
+_t,mk-acct-mast-in,marginLeft,auto,auto resolves to a used value (0px),not-comparable
+_t,mk-acct-mast-in,marginRight,auto,auto resolves to a used value (0px),not-comparable
+_t,mk-acct-pad,paddingTop,50px,50px,ok
+_t,mk-acct-pad,paddingBottom,48px,48px,ok
+_t,mk-acct-r-0,display,grid,grid,ok
+_t,mk-acct-r-0,gridCols,150px 1fr,150px 590px,ok
+_t,mk-acct-r-0,columnGap,20px,20px,ok
+_t,mk-acct-r-0,alignItems,baseline,baseline,ok
+_t,mk-acct-r-0,paddingTop,13px,13px,ok
+_t,mk-acct-r-0,paddingBottom,13px,13px,ok
+_t,mk-acct-r-0,customDeclarations:border-top,"1px solid rgba(22,24,28,.16)",no computed value,not-comparable
+_t,mk-acct-r-1,display,grid,grid,ok
+_t,mk-acct-r-1,gridCols,150px 1fr,150px 590px,ok
+_t,mk-acct-r-1,columnGap,20px,20px,ok
+_t,mk-acct-r-1,alignItems,baseline,baseline,ok
+_t,mk-acct-r-1,paddingTop,13px,13px,ok
+_t,mk-acct-r-1,paddingBottom,13px,13px,ok
+_t,mk-acct-r-1,customDeclarations:border-top,"1px solid rgba(22,24,28,.16)",no computed value,not-comparable
+_t,mk-acct-r-2,display,grid,grid,ok
+_t,mk-acct-r-2,gridCols,150px 1fr,150px 590px,ok
+_t,mk-acct-r-2,columnGap,20px,20px,ok
+_t,mk-acct-r-2,alignItems,baseline,baseline,ok
+_t,mk-acct-r-2,paddingTop,13px,13px,ok
+_t,mk-acct-r-2,paddingBottom,13px,13px,ok
+_t,mk-acct-r-2,customDeclarations:border-top,"1px solid rgba(22,24,28,.16)",no computed value,not-comparable
+_t,mk-acct-rows,marginTop,30px,30px,ok
+_t,mk-acct-rows,display,grid,grid,ok
+_t,mk-acct-rows,rowGap,0px,0px,ok
+_t,mk-acct-sheet,paddingBottom,120px,120px,ok
+_m,mk-acct-body,backgroundColor,"rgb(250,250,247)","rgb(250, 250, 247)",ok
+_m,mk-acct-body,paddingLeft,18px,18px,ok
+_m,mk-acct-body,paddingRight,18px,18px,ok
+_m,mk-acct-body,fontFamily,"'Noto Sans TC','PingFang TC','Hiragino Sans TC','Microsoft JhengHei',sans-serif","""Noto Sans TC"", ""PingFang TC"", ""Hiragino Sans TC"", ""Microsoft JhengHei"", sans-serif",ok
+_m,mk-acct-body-in,width,100%,viewport- or parent-relative,not-comparable
+_m,mk-acct-body-in,maxWidth,1240px,1240px,ok
+_m,mk-acct-body-in,marginLeft,auto,auto resolves to a used value (0px),not-comparable
+_m,mk-acct-body-in,marginRight,auto,auto resolves to a used value (0px),not-comparable
+_m,mk-acct-head,display,grid,grid,ok
+_m,mk-acct-head,gridCols,48px 1fr,48px 306px,ok
+_m,mk-acct-head,columnGap,0px,0px,ok
+_m,mk-acct-head,alignItems,start,start,ok
+_m,mk-acct-head,paddingTop,22px,22px,ok
+_m,mk-acct-head,customDeclarations:border-top,"1px solid rgba(22,24,28,.16)",no computed value,not-comparable
+_m,mk-acct-mast,backgroundColor,"rgb(250,250,247)","rgb(250, 250, 247)",ok
+_m,mk-acct-mast,paddingLeft,18px,18px,ok
+_m,mk-acct-mast,paddingRight,18px,18px,ok
+_m,mk-acct-mast,fontFamily,"'Noto Sans TC','PingFang TC','Hiragino Sans TC','Microsoft JhengHei',sans-serif","""Noto Sans TC"", ""PingFang TC"", ""Hiragino Sans TC"", ""Microsoft JhengHei"", sans-serif",ok
+_m,mk-acct-mast-in,width,100%,viewport- or parent-relative,not-comparable
+_m,mk-acct-mast-in,maxWidth,1240px,1240px,ok
+_m,mk-acct-mast-in,marginLeft,auto,auto resolves to a used value (0px),not-comparable
+_m,mk-acct-mast-in,marginRight,auto,auto resolves to a used value (0px),not-comparable
+_m,mk-acct-pad,paddingTop,24px,24px,ok
+_m,mk-acct-pad,paddingBottom,34px,34px,ok
+_m,mk-acct-r-0,display,grid,grid,ok
+_m,mk-acct-r-0,gridCols,84px 1fr,84px 210px,ok
+_m,mk-acct-r-0,columnGap,12px,12px,ok
+_m,mk-acct-r-0,alignItems,baseline,baseline,ok
+_m,mk-acct-r-0,paddingTop,13px,13px,ok
+_m,mk-acct-r-0,paddingBottom,13px,13px,ok
+_m,mk-acct-r-0,customDeclarations:border-top,"1px solid rgba(22,24,28,.16)",no computed value,not-comparable
+_m,mk-acct-r-1,display,grid,grid,ok
+_m,mk-acct-r-1,gridCols,84px 1fr,84px 210px,ok
+_m,mk-acct-r-1,columnGap,12px,12px,ok
+_m,mk-acct-r-1,alignItems,baseline,baseline,ok
+_m,mk-acct-r-1,paddingTop,13px,13px,ok
+_m,mk-acct-r-1,paddingBottom,13px,13px,ok
+_m,mk-acct-r-1,customDeclarations:border-top,"1px solid rgba(22,24,28,.16)",no computed value,not-comparable
+_m,mk-acct-r-2,display,grid,grid,ok
+_m,mk-acct-r-2,gridCols,84px 1fr,84px 210px,ok
+_m,mk-acct-r-2,columnGap,12px,12px,ok
+_m,mk-acct-r-2,alignItems,baseline,baseline,ok
+_m,mk-acct-r-2,paddingTop,13px,13px,ok
+_m,mk-acct-r-2,paddingBottom,13px,13px,ok
+_m,mk-acct-r-2,customDeclarations:border-top,"1px solid rgba(22,24,28,.16)",no computed value,not-comparable
+_m,mk-acct-rows,marginTop,30px,30px,ok
+_m,mk-acct-rows,display,grid,grid,ok
+_m,mk-acct-rows,rowGap,0px,0px,ok
+_m,mk-acct-sheet,paddingBottom,72px,72px,ok

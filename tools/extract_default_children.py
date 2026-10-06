@@ -100,7 +100,7 @@ def extract(plugin_root, out_dir):
     # ---- and the ones a type heals into itself
     stem_by_class = {}
     for path, src in files:
-        m = re.search(r"class\s+(\w+)ElementTypeFactory", src)
+        m = re.search(r"class\s+(\w+)ElementTypeFactory\b", src)
         if m:
             stem_by_class[m.group(1)] = stem_to_slug.get(m.group(1), "")
 

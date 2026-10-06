@@ -154,7 +154,7 @@ def extract(plugin_root, out_dir):
             accepted = []
             if acc:
                 accepted = re.findall(r"'([^']+)'", acc.group(1))
-                accepted += [c for c in re.findall(r"\w+::(\w+)", acc.group(1))]
+                accepted += [c for c in re.findall(r"\b\w+::(\w+)\b", acc.group(1))]
             props.append(
                 {
                     "owner_class": owner,
