@@ -18,7 +18,7 @@ MEDIA/icons_inline,PASS,"3 inline <svg> - `icon` takes RAW SVG in its `svg` prop
 WORDPRESS/shortcode_ran,PASS,"3 items from the shortcode - this is WooCommerce's own output, not a reimplementation"
 MULTISTEP,SKIPPED,not on this page
 COMPONENT/instances,PASS,"3 instances: ['cs-0-cs-card', 'cs-1-cs-card', 'cs-2-cs-card']"
-COMPONENT/one_definition,PASS,"all share the generated class ['_fm'] - one definition, not 3 copies"
+COMPONENT/one_definition,PASS,"all share the generated class ['_fp'] - one definition, not 3 copies"
 COMPONENT/content_differs,PASS,"3 instances, 3 distinct bodies - the overrides are per-instance"
 LOOP/slider,SKIPPED,not on this page
 LOOP/tabs,SKIPPED,not on this page

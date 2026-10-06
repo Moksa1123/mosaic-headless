@@ -1906,8 +1906,8 @@ _t,mk-pan-loop,display,flex,flex,ok
 _t,mk-pan-loop,columnGap,56px,56px,ok
 _t,mk-pan-loop,alignItems,baseline,baseline,ok
 _t,mk-pan-loop,customDeclarations:white-space,nowrap,no computed value,not-comparable
-_t,mk-pan-loop,customDeclarations:width,max-content,max-content resolves to a used value (3742.16px),not-comparable
-_t,mk-pan-track,customDeclarations:width,max-content,max-content resolves to a used value (3742.16px),not-comparable
+_t,mk-pan-loop,customDeclarations:width,max-content,max-content resolves to a used value (3764.03px),not-comparable
+_t,mk-pan-track,customDeclarations:width,max-content,max-content resolves to a used value (3764.03px),not-comparable
 _t,mk-plate-in,width,100%,viewport- or parent-relative,not-comparable
 _t,mk-plate-in,maxWidth,1240px,1240px,ok
 _t,mk-plate-in,marginLeft,auto,auto resolves to a used value (0px),not-comparable
@@ -1983,12 +1983,12 @@ _t,mk-prod-s-0,marginTop,14px,14px,ok
 _t,mk-prod-s-0,customDeclarations:border,"1px solid rgba(255,90,54,.6)",no computed value,not-comparable
 _t,mk-prod-s-0,customDeclarations:padding,5px 10px,no computed value,not-comparable
 _t,mk-prod-s-0,customDeclarations:display,inline-block,inline-block,ok
-_t,mk-prod-s-0,customDeclarations:width,max-content,max-content resolves to a used value (86.8125px),not-comparable
+_t,mk-prod-s-0,customDeclarations:width,max-content,max-content resolves to a used value (99.7656px),not-comparable
 _t,mk-prod-s-1,marginTop,14px,14px,ok
 _t,mk-prod-s-1,customDeclarations:border,"1px solid rgba(255,90,54,.6)",no computed value,not-comparable
 _t,mk-prod-s-1,customDeclarations:padding,5px 10px,no computed value,not-comparable
 _t,mk-prod-s-1,customDeclarations:display,inline-block,inline-block,ok
-_t,mk-prod-s-1,customDeclarations:width,max-content,max-content resolves to a used value (72.4062px),not-comparable
+_t,mk-prod-s-1,customDeclarations:width,max-content,max-content resolves to a used value (82.4844px),not-comparable
 _t,mk-spec,display,grid,grid,ok
 _t,mk-spec,gridCols,"repeat(2, 1fr)",422px 422px,ok
 _t,mk-spec,columnGap,0px,0px,ok
@@ -2048,28 +2048,28 @@ _t,mk-spec2-in,marginRight,auto,auto resolves to a used value (0px),not-comparab
 _t,mk-spec2-pad,paddingTop,88px,88px,ok
 _t,mk-spec2-pad,paddingBottom,88px,88px,ok
 _t,mk-spec2-r-0,display,grid,grid,ok
-_t,mk-spec2-r-0,gridCols,1fr auto,648.797px 167.203px,ok
+_t,mk-spec2-r-0,gridCols,1fr auto,615.359px 200.641px,ok
 _t,mk-spec2-r-0,columnGap,28px,28px,ok
 _t,mk-spec2-r-0,alignItems,baseline,baseline,ok
 _t,mk-spec2-r-0,paddingTop,20px,20px,ok
 _t,mk-spec2-r-0,paddingBottom,20px,20px,ok
 _t,mk-spec2-r-0,customDeclarations:border-top,"1px solid rgba(250,250,247,.18)",no computed value,not-comparable
 _t,mk-spec2-r-1,display,grid,grid,ok
-_t,mk-spec2-r-1,gridCols,1fr auto,656.391px 159.609px,ok
+_t,mk-spec2-r-1,gridCols,1fr auto,624.469px 191.531px,ok
 _t,mk-spec2-r-1,columnGap,28px,28px,ok
 _t,mk-spec2-r-1,alignItems,baseline,baseline,ok
 _t,mk-spec2-r-1,paddingTop,20px,20px,ok
 _t,mk-spec2-r-1,paddingBottom,20px,20px,ok
 _t,mk-spec2-r-1,customDeclarations:border-top,"1px solid rgba(250,250,247,.18)",no computed value,not-comparable
 _t,mk-spec2-r-2,display,grid,grid,ok
-_t,mk-spec2-r-2,gridCols,1fr auto,648.797px 167.203px,ok
+_t,mk-spec2-r-2,gridCols,1fr auto,615.359px 200.641px,ok
 _t,mk-spec2-r-2,columnGap,28px,28px,ok
 _t,mk-spec2-r-2,alignItems,baseline,baseline,ok
 _t,mk-spec2-r-2,paddingTop,20px,20px,ok
 _t,mk-spec2-r-2,paddingBottom,20px,20px,ok
 _t,mk-spec2-r-2,customDeclarations:border-top,"1px solid rgba(250,250,247,.18)",no computed value,not-comparable
 _t,mk-spec2-r-3,display,grid,grid,ok
-_t,mk-spec2-r-3,gridCols,1fr auto,648.797px 167.203px,ok
+_t,mk-spec2-r-3,gridCols,1fr auto,615.359px 200.641px,ok
 _t,mk-spec2-r-3,columnGap,28px,28px,ok
 _t,mk-spec2-r-3,alignItems,baseline,baseline,ok
 _t,mk-spec2-r-3,paddingTop,20px,20px,ok
@@ -3235,8 +3235,8 @@ _m,mk-pan-loop,display,flex,flex,ok
 _m,mk-pan-loop,columnGap,30px,30px,ok
 _m,mk-pan-loop,alignItems,baseline,baseline,ok
 _m,mk-pan-loop,customDeclarations:white-space,nowrap,no computed value,not-comparable
-_m,mk-pan-loop,customDeclarations:width,max-content,max-content resolves to a used value (2452.34px),not-comparable
-_m,mk-pan-track,customDeclarations:width,max-content,max-content resolves to a used value (2452.34px),not-comparable
+_m,mk-pan-loop,customDeclarations:width,max-content,max-content resolves to a used value (2474.22px),not-comparable
+_m,mk-pan-track,customDeclarations:width,max-content,max-content resolves to a used value (2474.22px),not-comparable
 _m,mk-plate-in,width,100%,viewport- or parent-relative,not-comparable
 _m,mk-plate-in,maxWidth,1240px,1240px,ok
 _m,mk-plate-in,marginLeft,auto,auto resolves to a used value (0px),not-comparable
@@ -3313,12 +3313,12 @@ _m,mk-prod-s-0,marginTop,14px,14px,ok
 _m,mk-prod-s-0,customDeclarations:border,"1px solid rgba(255,90,54,.6)",no computed value,not-comparable
 _m,mk-prod-s-0,customDeclarations:padding,5px 10px,no computed value,not-comparable
 _m,mk-prod-s-0,customDeclarations:display,inline-block,inline-block,ok
-_m,mk-prod-s-0,customDeclarations:width,max-content,max-content resolves to a used value (86.8125px),not-comparable
+_m,mk-prod-s-0,customDeclarations:width,max-content,max-content resolves to a used value (99.7656px),not-comparable
 _m,mk-prod-s-1,marginTop,14px,14px,ok
 _m,mk-prod-s-1,customDeclarations:border,"1px solid rgba(255,90,54,.6)",no computed value,not-comparable
 _m,mk-prod-s-1,customDeclarations:padding,5px 10px,no computed value,not-comparable
 _m,mk-prod-s-1,customDeclarations:display,inline-block,inline-block,ok
-_m,mk-prod-s-1,customDeclarations:width,max-content,max-content resolves to a used value (72.4062px),not-comparable
+_m,mk-prod-s-1,customDeclarations:width,max-content,max-content resolves to a used value (82.4844px),not-comparable
 _m,mk-spec,display,grid,grid,ok
 _m,mk-spec,gridCols,"repeat(2, 1fr)",177px 177px,ok
 _m,mk-spec,columnGap,0px,0px,ok

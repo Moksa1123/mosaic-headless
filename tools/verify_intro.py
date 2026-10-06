@@ -53,8 +53,8 @@ import time
 
 # When to read. Dense through the sequence, then two well past its end - the last
 # two are what turn "it looked right" into "it finished".
-SAMPLES_MS = [120, 700, 1400, 2200, 3000, 3800, 4600, 5400, 6200, 7000,
-              7800, 8300, 8900, 11000, 13000]
+SAMPLES_MS = [120, 400, 700, 1000, 1300, 1600, 1900, 2200, 2500, 2800,
+              3100, 3400, 3800, 5000, 7000]
 
 # What to read at each sample. Anything whose id starts with the veil prefix is
 # treated as part of the intro; everything else is content that must end up visible.
@@ -258,7 +258,9 @@ def main():
                     help="ids under this prefix are the intro, not the content")
     ap.add_argument("--min-ambient", type=int, default=3,
                     help="how many elements must still be moving once settled")
-    ap.add_argument("--deadline-ms", type=int, default=8900,
+    # 3400, not the 8900 it used to be: the entrance was compressed to a 2.15s veil
+    # plus its .9s exit, because nine seconds before the headline was the defect.
+    ap.add_argument("--deadline-ms", type=int, default=3400,
                     help="by this point the intro must be over")
     ap.add_argument("--csv")
     ap.add_argument("--frames")

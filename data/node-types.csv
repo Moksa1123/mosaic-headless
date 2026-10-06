@@ -41,6 +41,7 @@ navbar,Navbar,NavbarElementTypeFactory,ElementTypeFactoryAbstract,no,free,,,,,Na
 navbar-toggle,Mobile menu toggle,NavbarToggleElementTypeFactory,ElementTypeFactoryAbstract,no,free,,true,true,,NavbarToggleElementMResourceData,ElementMResourceDataAbstract,Mosaic/NodeTypes/Navbar/NavbarToggle/NavbarToggleElementTypeFactory.php
 navigation,Navigation,NavigationElementTypeFactory,ElementTypeFactoryAbstract,no,free,,,true,,NavigationElementMResourceData,ElementMResourceDataAbstract,Mosaic/NodeTypes/Navbar/Navigation/NavigationElementTypeFactory.php
 openstreetmap,,OpenStreetMapElementTypeFactory,ElementTypeFactoryAbstract,no,free,,,,,OpenStreetMapElementMResourceData,ElementMResourceDataAbstract,Mosaic/NodeTypes/OpenStreetMap/OpenStreetMapElementTypeFactory.php
+popover,Popover,PopoverElementTypeFactory,ElementTypeFactoryAbstract,no,free,,,true,,PopoverElementMResourceData,ElementMResourceDataAbstract,Mosaic/NodeTypes/Popover/PopoverElementTypeFactory.php
 code,Code,CodeElementTypeFactory,ElementTypeFactoryAbstract,no,pro,,,,,CodeElementMResourceData,ElementMResourceDataAbstract,Mosaic/NodeTypes/Pro/Code/CodeElementTypeFactory.php
 form-wrapper,Form,FormWrapperElementTypeFactory,ElementTypeFactoryAbstract,no,pro,,,,,FormWrapperElementMResourceData,ElementMResourceDataAbstract,Mosaic/NodeTypes/Pro/Form/FormWrapperElementTypeFactory.php
 form,Form,FormElementTypeFactory,ElementTypeFactoryAbstract,no,pro,,,true,,FormElementMResourceData,ElementMResourceDataAbstract,Mosaic/NodeTypes/Pro/Form/Form/FormElementTypeFactory.php

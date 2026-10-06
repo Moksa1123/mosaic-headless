@@ -319,7 +319,12 @@ The general shape, worth carrying beyond this repo: a derived artifact checked i
 the tree is only as fresh as the last time someone re-derived it, and if the deriving
 input is not in the tree, no amount of CI will notice.
 
-## Setting `display` on a `<dialog>` pins it open, and open-state checks cannot see it
+## Setting `display` on a `<dialog>` pins it open, and open-state checks cannot see it (1.0.9)
+
+**Fixed in 1.0.10**: the closed modal is `.m-modal:not(:popover-open){display:none !important}`,
+which no author `display` beats - measured, a flex-centred modal host hides when closed
+(`references/dialog-and-triggers.md`). Everything below is the 1.0.9 behaviour, and still
+the reason the checks it produced exist.
 
 The modal host is a `<dialog>`. Its open/closed visibility is not a class or an
 attribute Mosaic manages — it is the UA stylesheet rule
@@ -340,7 +345,8 @@ Two rules come out of it:
   edges inside the fixed, `inset:0` host), never by making the host a flex or grid
   container.
 - **Assert the closed state.** `tools/verify_dialog_lab.py` now closes everything
-  first and fails if any `dialog:not([open])` still has a box. The general form of
+  first and fails if any closed modal (not `:popover-open` and not `[open]`) still
+  has a box. The general form of
   that lesson: for anything with a visible and an invisible state, a suite that
   only exercises the visible one is testing half a component, and the half it
   skips is the one the visitor sees most of the time.
@@ -402,8 +408,9 @@ labels and that an empty required form is actually refused.
 
 ## `display` on an element whose visibility the plugin owns — twice now
 
-A `<dialog>`'s open state is its `display`, so `display:flex` on a modal host pins
-every modal open. The same mistake, in a different family: `multi-steps-form-step`
+On 1.0.9 a `<dialog>`'s open state was its `display`, so `display:flex` on a modal host
+pinned every modal open (1.0.10 made the closed state `!important`). The same mistake,
+in a family 1.0.10 did not touch: `multi-steps-form-step`
 is shown and hidden by the plugin moving `m-form-step--active`, and a `display:flex`
 on the step wins the cascade, so all three steps sit on the page at once with three
 sets of Next buttons.
@@ -444,3 +451,28 @@ On a theme that cannot use the variant layer, a `code` node with
 verbatim**: it does not wrap anything, so the `<style>` tags are yours to write.
 Without them the rule lands in `<head>` as bare text between `</style>` and
 `</head>`, renders nothing, and reads as a CSS specificity problem.
+
+## A "next" button inside a popover cannot open the next popover
+
+Measured on 1.0.10, building a three-step tour: the button in step 1 ran
+`popoverOpen` (step 2) and `popoverClose` (step 1), and nothing was open 200ms later.
+Two runtime rules combine:
+
+- a dialog opened by a trigger that sits inside another dialog becomes that dialog's
+  CHILD, and closing a parent closes its children - step 2 went down with step 1;
+- closing a popover suspends the interactions of every element inside it - with the
+  actions reversed, the `popoverOpen` after the close never ran.
+
+Advance a sequence on the step's own `afterClose` (it runs after the close, with no
+open parent left), make the button close only its own step, and remember afterClose
+also fires on Esc. The full pattern is in `references/dialog-and-triggers.md`.
+
+## A plugin folder swapped in by hand serves every asset as 406
+
+Installing 1.0.10 by unzipping it next to the old folder and renaming: the zip's
+directories came out `drwx------`, the web server could not traverse them, and every
+`public/Frontend/*.js` and the theme `style.css` answered **406**. The page still
+rendered - server-side output was fine - but with no front-end runtime every dropdown
+sat open and no modal could open. `find mosaic -type d -exec chmod 775 {} +` (files
+664), matching the other plugin folders, and purge the page cache. A REST-level check
+cannot see this; only fetching an asset can.

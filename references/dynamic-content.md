@@ -165,3 +165,22 @@ half and the output ends in U+FFFD. Lengths have to be a multiple of the encodin
 width — 18 for six three-byte characters — or the truncation has to be left to CSS.
 A count-based check cannot see this; `verify_components.py` looks for the
 replacement character directly.
+
+## Date conditions (1.0.10)
+
+The `date` comparator - element and form-action server conditions, and the post /
+user loop filters - has four operators now: `after`, `after-or-equal`, `before`,
+`before-or-equal` (1.0.9 had the first and third). The value is any text, read by
+`DateComparison` when it compares rather than validated when it is saved:
+
+- a year first: `2026-09-24`, `2026/9/24`, `2026-09`, `2026`;
+- a year last: `28/09/2026`, `9-28-2026` - a number above 12 is the day; when both
+  could be, the **site's date format** decides which comes first;
+- `Ymd` (ACF's date picker storage) and `YmdHis`; any shorter digit run is a Unix
+  timestamp in the site timezone;
+- a time after the date or on its own (`09:16`, `9:16 pm`), with an optional zone.
+
+The less precise side sets the precision: a date against a date-time compares the
+two days. Whatever cannot be read as a date matches **no** operator, so a typo is a
+condition that is never true rather than an error. Loop filters compare in SQL
+(`post_date_gmt` / `post_modified_gmt` as UTC, the others as the site's wall clock).

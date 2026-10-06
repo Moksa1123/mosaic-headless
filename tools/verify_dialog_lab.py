@@ -38,10 +38,10 @@ def row(check, result, detail=""):
     print("%-34s %-5s %s" % (check, result, detail))
 
 
-OPEN = "(id) => { const e = document.getElementById(id); return e ? !!e.open : null; }"
+OPEN = "(id) => { const e = document.getElementById(id); return e ? !!(e.open || e.matches(':popover-open') || e.getAttribute('data-mosaic-dialog-state') === 'open') : null; }"
 BOX = """(id) => {
   const e = document.getElementById(id);
-  if (!e || !e.open) return null;
+  if (!e || !(e.open || e.matches(':popover-open') || e.getAttribute('data-mosaic-dialog-state') === 'open')) return null;
   const w = e.querySelector('.m-modal-window');
   const r = w.getBoundingClientRect();
   const hr = e.getBoundingClientRect();
@@ -59,8 +59,8 @@ BOX = """(id) => {
 
 def shut_all(p):
     p.evaluate("""() => document.querySelectorAll('dialog.m-modal').forEach(d => {
-        if (d.open) { try { d.mosaicDialog ? d.mosaicDialog.close() : d.close(); }
-                      catch(e) { d.close(); } } })""")
+        if ((d.open || d.matches(':popover-open') || d.getAttribute('data-mosaic-dialog-state') === 'open')) { try { (d.mosaicDialog ? (d.mosaicDialog.requestClose || d.mosaicDialog.close).call(d.mosaicDialog) : d.matches(':popover-open') ? d.hidePopover() : d.close()); }
+                      catch(e) {} } })""")
     p.wait_for_timeout(250)
 
 
@@ -122,10 +122,10 @@ def main():
         # version of this verifier passed 36/36 on a page where all ten were
         # permanently on screen.
         p.evaluate("""() => document.querySelectorAll('dialog.m-modal')
-            .forEach(d => { if (d.open) { try { d.close(); } catch (e) {} } })""")
+            .forEach(d => { if ((d.open || d.matches(':popover-open') || d.getAttribute('data-mosaic-dialog-state') === 'open')) { try { (d.mosaicDialog ? (d.mosaicDialog.requestClose || d.mosaicDialog.close).call(d.mosaicDialog) : d.matches(':popover-open') ? d.hidePopover() : d.close()); } catch (e) {} } })""")
         p.wait_for_timeout(400)
         shown = p.evaluate("""() => [...document.querySelectorAll('dialog.m-modal')]
-            .filter(d => !d.open)
+            .filter(d => !(d.open || d.matches(':popover-open') || d.getAttribute('data-mosaic-dialog-state') === 'open'))
             .filter(d => { const r = d.getBoundingClientRect();
                            return r.width > 0 && r.height > 0; })
             .map(d => d.id + ' (display:' + getComputedStyle(d).display + ')')""")
@@ -241,7 +241,7 @@ def main():
                 p2.goto(URL + "?v=%s%d" % (order[0], i), wait_until="load")
                 p2.wait_for_timeout(2200)
                 p2.evaluate("""() => document.querySelectorAll('dialog.m-modal')
-                    .forEach(d => { if (d.open) d.close(); })""")
+                    .forEach(d => { if ((d.open || d.matches(':popover-open') || d.getAttribute('data-mosaic-dialog-state') === 'open')) (d.mosaicDialog ? (d.mosaicDialog.requestClose || d.mosaicDialog.close).call(d.mosaicDialog) : d.matches(':popover-open') ? d.hidePopover() : d.close()); })""")
                 steps = []
                 for which in order:
                     p2.click("#dl-open-%s" % which)
@@ -249,7 +249,7 @@ def main():
                     opened = [k for k in ("aba", "abb") if p2.evaluate(OPEN, "dl-" + k)]
                     steps.append("%s>%s" % (which, "+".join(opened) or "none"))
                     p2.evaluate("""() => document.querySelectorAll('dialog.m-modal')
-                        .forEach(d => { if (d.open) d.close(); })""")
+                        .forEach(d => { if ((d.open || d.matches(':popover-open') || d.getAttribute('data-mosaic-dialog-state') === 'open')) (d.mosaicDialog ? (d.mosaicDialog.requestClose || d.mosaicDialog.close).call(d.mosaicDialog) : d.matches(':popover-open') ? d.hidePopover() : d.close()); })""")
                     p2.wait_for_timeout(200)
                 seen[",".join(steps)] += 1
                 if i == 0:
@@ -289,7 +289,7 @@ def main():
         # document underneath measures clean.
         FIT = """(id) => {
           const e = document.getElementById(id);
-          if (!e || !e.open) return null;
+          if (!e || !(e.open || e.matches(':popover-open') || e.getAttribute('data-mosaic-dialog-state') === 'open')) return null;
           const w = e.querySelector('.m-modal-window');
           const r = w.getBoundingClientRect(), h = e.getBoundingClientRect();
           let over = 0, worst = null;
@@ -309,7 +309,7 @@ def main():
             pm.goto(URL, wait_until="load")
             pm.wait_for_timeout(2000)
             pm.evaluate("() => document.querySelectorAll('dialog')"
-                        ".forEach(d => d.open && d.close())")
+                        ".forEach(d => (d.open || d.matches(':popover-open') || d.getAttribute('data-mosaic-dialog-state') === 'open') && (d.mosaicDialog ? (d.mosaicDialog.requestClose || d.mosaicDialog.close).call(d.mosaicDialog) : d.matches(':popover-open') ? d.hidePopover() : d.close()))")
             for key in ("centre", "sheet", "drawer", "takeover", "gate", "aba"):
                 try:
                     pm.click("#dl-open-%s" % key, timeout=5000)
@@ -328,7 +328,7 @@ def main():
                         % (f["scrollW"], f["clientW"], f["over"],
                            (" <%s>" % f["worst"]) if f["over"] > 1 else "", f["doc"]))
                 pm.evaluate("() => document.querySelectorAll('dialog')"
-                            ".forEach(d => d.open && d.close())")
+                            ".forEach(d => (d.open || d.matches(':popover-open') || d.getAttribute('data-mosaic-dialog-state') === 'open') && (d.mosaicDialog ? (d.mosaicDialog.requestClose || d.mosaicDialog.close).call(d.mosaicDialog) : d.matches(':popover-open') ? d.hidePopover() : d.close()))")
                 pm.wait_for_timeout(200)
             cm.close()
 

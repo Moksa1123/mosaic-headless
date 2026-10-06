@@ -122,26 +122,27 @@ if (!fs.existsSync(path.join(ROOT, pkg.bin["mosaic-headless"])))
 const rows = (p) => tableFiles(p)
   .reduce((n, f) => n + read(f).trim().split("\n").length - 1, 0);   // minus each header
 const counts = {
-  "data/node-verification.csv": 126,
+  "data/node-verification.csv": 129,
   "data/style-verification.csv": 98,
   "data/node-property-verification.csv": 191,
   "data/rwd-verification.csv": 733,
   "data/browser-verification": 4132,
   "data/style-state-verification.csv": 52,
   "data/interaction-verification.csv": 7,
-  "data/data-class-hierarchy.csv": 125,
+  "data/data-class-hierarchy.csv": 126,
   "data/custom-fields-verification.csv": 62,
   "data/dialog-verification.csv": 19,
   "data/slider-verification.csv": 30,
   "data/token-verification.csv": 15,
-  "data/mobile-audit.csv": 65,
+  "data/mobile-audit.csv": 68,
   "data/component-wall-verification.csv": 26,
-  "data/form-surface-verification.csv": 15,
-  "data/content-loop-verification.csv": 12,
-  "data/navigation-verification.csv": 36,
+  "data/form-surface-verification.csv": 18,
+  "data/content-loop-verification.csv": 15,
+  "data/navigation-verification.csv": 39,
   "data/page-modal-verification.csv": 19,
   "data/interaction-rules-verification.csv": 17,
   "data/dialog-form-verification.csv": 49,
+  "data/popover-verification.csv": 37,
   "data/value-coercion-verification.csv": 12,
 };
 for (const [file, expected] of Object.entries(counts)) {

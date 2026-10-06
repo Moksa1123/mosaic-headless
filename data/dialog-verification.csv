@@ -3,7 +3,7 @@ HOST,PASS,renders <dialog>
 STRUCTURE,PASS,overlay and window children present
 ARIA,PASS,aria-modal=true aria-label='Feature probe dialog' role=dialog
 CLOSED_AT_REST,PASS,dialog.open=False display=none
-OPENS,PASS,dialog.open=True display=grid top-layer=False
+OPENS,PASS,dialog.open=True display=grid top-layer=True
 CLOSES,PASS,dialog.open=False
 CLOSEDBY_ESC,PASS,"closedby=everything, Esc closed it"
 KEYBOARD,PASS,the opening control takes focus

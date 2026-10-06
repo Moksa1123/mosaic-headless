@@ -68,14 +68,15 @@ DIALOG_STATE = """id => {
   const el = document.getElementById(id);
   if (!el) return null;
   const cs = getComputedStyle(el);
-  return {tag: el.tagName.toLowerCase(), open: !!el.open,
+  return {tag: el.tagName.toLowerCase(), open: !!(el.open || el.matches(':popover-open') || el.getAttribute('data-mosaic-dialog-state') === 'open'),
           display: cs.display, visible: cs.display !== 'none',
           role: el.getAttribute('role'), ariaModal: el.getAttribute('aria-modal'),
           ariaLabel: el.getAttribute('aria-label'),
           closedby: el.getAttribute('data-mosaic-modal-closedby'),
           hasOverlay: !!el.querySelector('.m-modal-overlay'),
           hasWindow: !!el.querySelector('.m-modal-window'),
-          inTopLayer: typeof el.matches === 'function' && el.matches(':modal')};
+          inTopLayer: typeof el.matches === 'function'
+              && (el.matches(':modal') || el.matches(':popover-open'))};
 }"""
 
 # An exit-intent trigger listens for the pointer leaving through the top of the

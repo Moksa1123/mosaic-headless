@@ -125,3 +125,6 @@ wysiwyg-span,RENDERED,span,m-span,,27396,
 wysiwyg-text,COMMITTED,,,,27344,
 wysiwyg-variable,BROKE_PAGE,,,,54,NodeMResourceFilterFunctionInterface parent is missing
 youtube,RENDERED,mosaic-youtube,m-youtube,,27993,
+popover,RENDERED,div,m-popover M_Dialog M_IJ,,28043,
+fieldset-legend,RENDERED,div,m-fieldset-legend m-wysiwyg,,27401,
+fieldset-content,RENDERED,div,m-fieldset-content,,27357,

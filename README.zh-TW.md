@@ -159,12 +159,12 @@ commit 成功不代表頁面能用，樣式表正確也不代表。這裡每個�
 
 ## 驗證了什麼，怎麼驗的
 
-全部在真實站台上跑——WordPress 7.1、WooCommerce 11.1、Mosaic Pro 1.0.9，**未授權**：
+全部在真實站台上跑——WordPress 7.1、WooCommerce 11.1、Mosaic Pro 1.0.10，**未授權**：
 授權鎖的是主題庫和更新，不是節點工廠，所以 Pro 型別照樣註冊、照樣渲染。
 
 | 項目 | 結果 |
 |---|---|
-| **節點型別** | 122 / 122 逐一放進獨立文件，寫入 → 渲染 → 斷言 → 刪除：74 RENDERED、25 COMMITTED、15 COMMIT_5xx、12 BROKE_PAGE。在 1.0.8 上重掃：五個以前默默寫入的型別，沒放對父節點現在會直接弄死頁面。未渲染的當中有三個是「沒給父層」的掃描方法產物，註記就在列旁 |
+| **節點型別** | 129 / 129 逐一放進獨立文件，寫入 → 渲染 → 斷言 → 刪除：77 RENDERED、25 COMMITTED、15 COMMIT_5xx、12 BROKE_PAGE。在 1.0.8 上重掃：五個以前默默寫入的型別，沒放對父節點現在會直接弄死頁面。未渲染的當中有三個是「沒給父層」的掃描方法產物，註記就在列旁 |
 | **樣式屬性** | 98 / 98 寫進真實頁面、對照編譯出的 CSS：58 COMPILED、18 ABSENT、21 SKIPPED |
 | **節點屬性** | 191 / 191 用各自驗證鏈推出的值重新探測：35 APPLIED、43 NO_EFFECT、55 NO_HOST、47 SKIPPED |
 | **響應式** | 兩個站共 733 條 `_t`/`_m` 宣告，對照網站實際送出的樣式表逐條斷言——全數通過 |
@@ -181,6 +181,7 @@ commit 成功不代表頁面能用，樣式表正確也不代表。這裡每個�
 | **技能本身** | `claude plugin eval .`——五個使用者真的會問的問題，各跑三次，有載技能和沒載各一臂，每次三個 LLM 裁判。**有：五題全 1.00。沒有：五題全 0.00。** 基準線最好的回答是拒答 |
 | **線上量測** | 115 條 REST 路由、156 個 variant、59 個條件主體、23 張表 / 210 個欄位 |
 | **1.0.9 新功能** | modal（`<dialog>`）、OpenStreetMap、exit-intent 與 scroll-depth 觸發、run rules、memory action 與 modal shorthand，全部建在真實頁面上並用瀏覽器實際操作：19 之 19。「離開意圖彈窗、每個 session 只出現一次」只需要一個物件，不用接線 |
+| **1.0.10 新功能** | popover——Mosaic 第一個不阻擋頁面的浮動層——在實驗頁上做了八種，用 Chromium 實際操作：37 / 37。頁面載入時出現的通知不擋捲動也不擋點擊、錨定選單與資訊卡、螢幕九宮格、keepInView 翻面與它的樣式狀態、用 `afterClose` 串起來的三步導覽。另外是 modal 改用 Popover API：進入 top layer、改用 `requestClose()`、host 上寫 `display` 不再讓它關不起來 |
 | **slider** | 整組照工廠要求嵌套後在瀏覽器裡實際操作，19 之 19：會自己按宣告的間隔前進、箭頭與圓點與鍵盤都能驅動、`prefers-reduced-motion` 下會自己停。圓點其實是樣板，依 slide 數複製，每個複製品 id 相同 |
 | **真正的網站** | 19 個轉換頁組成一個站：真實選單、每頁一個彈窗。導覽 46 之 46、彈窗 19 之 19，六種不同的觸發／規則／記憶／關閉設定 |
 | **自訂欄位** | ACF 與 Meta Box，一頁四十個欄位，透過 `@VAR` / `@LOOP` 從送達的 HTML 讀回：62 個裡 59 個解析正確、3 個空值有解釋；多值欄位的迴圈剛好渲染出欄位的列數。`tools/list_fields.php` 列出 Mosaic 真正註冊的名字 |
@@ -258,6 +259,7 @@ button / html / icon-list / divider / image 佔了全部元素的 99.6%。長尾
 | `theme_zip.py` / `theme_zip_compare.php` / `theme_delete.php` | 在編輯器外驅動 Mosaic 自己的 ZIP 匯出匯入、副本對來源逐樹比對、以及拒絕刪 live 主題的乾淨刪除 |
 | `list_fields.php` | 一篇文章的自訂欄位註冊了哪些 `@VAR` / `@LOOP` 名字，連值一起列出 |
 | `verify_dialog.py` | 在瀏覽器裡實際操作 1.0.9 的 modal、觸發、run rules 與 memory |
+| `verify_popovers.py` | 在瀏覽器裡實際操作 1.0.10 的 popover：位置、是否阻擋、closedby、翻面、串接 |
 | `verify_slider.py` / `verify_navigation.py` | slider 真的會動嗎；選單每一項是不是真連結、每頁是不是都到得了 |
 | `data_upgrade.py` | 外掛更新後，走 Mosaic 自己的 milestone 路由跑資料遷移——沒跑完之前編輯器 API 是不存在的 |
 | `sweep_*.py` / `probe_*.py` | 那些表格是用這些儀器量出來的 |

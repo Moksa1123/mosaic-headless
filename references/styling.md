@@ -227,3 +227,12 @@ Both of these are refused at build time by `build_page.py` rather than silently
 dropped, which is the only reason they cost minutes instead of a debugging session
 — a property that is not in the registry cannot be set at all, and Mosaic's own
 API accepts the write and discards it.
+
+## Gradient stops take units (1.0.10)
+
+A gradient's `dots[].position` - background and mask alike - used to be a bare float
+0-100. 1.0.10 validates it as a length-percentage: `"50%"`, `"120px"`, a `calc()`, or a
+collection variable, with `%` as the fallback unit and 0-100 enforced only on
+percentages. A bare number still validates (it is read as a percentage), but the
+values Mosaic itself now writes are strings with a unit - the built-in background
+collection's stops changed from `10` / `50` to `"10%"` / `"50%"`.

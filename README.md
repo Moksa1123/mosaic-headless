@@ -167,7 +167,7 @@ the HTTP status code:
 
 ```
 clean validator rejection   HTTP 200  + an `exceptions` array in the body
-PHP fatal during commit     HTTP 500  (15 of 122 types do this from a plain div)
+PHP fatal during commit     HTTP 500  (15 of 129 types do this from a plain div)
 structurally invalid node   HTTP 200, committed, row in the DB, and the whole
                             public page becomes a 54-byte error string
 wrong value SHAPE           HTTP 200, stored, and the CSS rule is simply absent
@@ -194,12 +194,12 @@ than any naive healthy-page floor.
 ## What was verified, and how
 
 Everything ran against a live install — WordPress 7.1, WooCommerce 11.1, Mosaic Pro
-1.0.9, **unlicensed**: the licence gates the theme library and updates, not the node
+1.0.10, **unlicensed**: the licence gates the theme library and updates, not the node
 factories, so Pro types register and render regardless.
 
 | pass | result |
 |---|---|
-| **node types** | 122 / 122 swept one per document, committed → rendered → asserted → deleted: 74 RENDERED, 25 COMMITTED, 15 COMMIT_5xx, 12 BROKE_PAGE. Re-swept on 1.0.8: five types that used to commit silently now kill the page unparented. The non-rendering rows that are artefacts of committing without the required parent say so beside the row |
+| **node types** | 129 / 129 swept one per document, committed → rendered → asserted → deleted: 77 RENDERED, 25 COMMITTED, 15 COMMIT_5xx, 12 BROKE_PAGE. Re-swept on 1.0.8: five types that used to commit silently now kill the page unparented. The non-rendering rows that are artefacts of committing without the required parent say so beside the row |
 | **style properties** | 98 / 98 written to a live page and checked against the compiled CSS: 58 COMPILED, 18 ABSENT, 21 SKIPPED |
 | **node properties** | 191 / 191 re-probed with a value shaped by each property's own validator chain: 35 APPLIED, 43 NO_EFFECT, 55 NO_HOST, 47 SKIPPED |
 | **responsive** | 733 `_t`/`_m` declarations across two sites asserted against the stylesheet the site actually served — all verified |
@@ -216,6 +216,7 @@ factories, so Pro types register and render regardless.
 | **the skill itself** | `claude plugin eval .` — five cases a user would ask, three runs each, with and without the skill loaded, three LLM judges a run. **With: 1.00 on all five. Without: 0.00 on all five.** The baseline's best answer was to refuse |
 | **measured live** | 115 REST routes, 156 variants, 59 condition subjects, 23 tables / 210 columns |
 | **1.0.9 features** | the modal (`<dialog>`), OpenStreetMap, the exit-intent and scroll-depth triggers, run rules, memory actions and the modal shorthand, each built on a live page and exercised in a real browser: 19 of 19. An exit-intent popup that fires once a session is one object, no wiring |
+| **1.0.10 features** | the popover - Mosaic's first non-blocking dialog - built eight ways on a lab page and driven in Chromium: 37 of 37. A page-load notice that leaves the page scrollable and clickable, anchored menus and cards, the nine screen cells, the keepInView flip and its style state, a three-step tour on `afterClose`. Plus the modal's move onto the Popover API: top layer, `requestClose()`, and `display` on its host no longer pinning it open |
 | **slider** | the whole family nested as its factories require and driven in a browser, 19 of 19: advances on its own delay, arrows and bullets and the keyboard move it, holds still under `prefers-reduced-motion`. The bullet turns out to be a template repeated per slide - same id on every copy |
 | **a real site** | the nineteen converted Elementor pages assembled into one site with a real menu and a modal per page: 46 of 46 navigation checks, 19 of 19 modals, six distinct trigger / run-rule / memory / dismissal configurations |
 | **custom fields** | ACF and Meta Box, forty fields on a page, read back through `@VAR` / `@LOOP` off the delivered HTML: 59 of 62 resolve, 3 empties explained; loops over multi-value fields rendered exactly the field's rows. `tools/list_fields.php` prints the names Mosaic actually registers |
@@ -303,6 +304,7 @@ and heading level — and it earned its place at once: it caught the converter l
 | `theme_zip.py` / `theme_zip_compare.php` / `theme_delete.php` | Mosaic's own ZIP export/import from outside the editor, the copy held against the source, and a clean delete that refuses the live theme |
 | `list_fields.php` | every `@VAR` / `@LOOP` name a post's custom fields register, with values |
 | `verify_dialog.py` | the 1.0.9 modal, triggers, run rules and memory, driven in a browser |
+| `verify_popovers.py` | the 1.0.10 popover: placement, blocking, closedby, flip, chaining, driven in a browser |
 | `verify_slider.py` / `verify_navigation.py` | does the slider actually move; is every menu item a real link and every page reachable |
 | `data_upgrade.py` | after a plugin update, Mosaic's data migration over its own milestone route - the editor API is gone until it runs |
 | `sweep_*.py` / `probe_*.py` | the instruments the tables were made with |

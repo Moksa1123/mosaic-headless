@@ -10,6 +10,7 @@ formSubmit,timed,Element events,Runs when the form reaches a submission outcome.
 hover,timed,Mouse,Animate when the cursor hovers the element.,Mosaic/Plugins/InteractionTypes/timed/hover/InteractionTypeHover.php
 modal,timed,Element events,Animates the modal as it opens and closes.,Mosaic/Plugins/InteractionTypes/timed/modal/InteractionTypeModal.php
 pageLoad,timed,Page & scroll,Activates when the page finishes loading.,Mosaic/Plugins/InteractionTypes/timed/pageload/InteractionTypePageLoad.php
+popover,timed,Element events,Animates the popover as it opens and closes.,Mosaic/Plugins/InteractionTypes/timed/popover/InteractionTypePopover.php
 scrollDepth,timed,Page & scroll,Activates when the visitor scrolls this far down the page.,Mosaic/Plugins/InteractionTypes/timed/scrolldepth/InteractionTypeScrollDepth.php
 scrollDirectionChange,timed,Page & scroll,Animate when the scroll direction changes.,Mosaic/Plugins/InteractionTypes/timed/scrolldirectionchange/InteractionTypeScrollDirectionChange.php
 slideChange,timed,Element events,Animate when the slide slides in or out.,Mosaic/Plugins/InteractionTypes/timed/slidechange/InteractionTypeSlideChange.php

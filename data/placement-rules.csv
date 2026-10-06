@@ -67,6 +67,7 @@ navbar,none,,yes,yes,navbar,Mosaic/NodeTypes/Navbar/NavbarElementTypeFactory.php
 navbar-toggle,any,,yes,yes,navbar|navbar-toggle|navigation,Mosaic/NodeTypes/Navbar/NavbarToggle/NavbarToggleElementTypeFactory.php
 navigation,any,,yes,yes,navbar|navbar-toggle|navigation,Mosaic/NodeTypes/Navbar/Navigation/NavigationElementTypeFactory.php
 openstreetmap,none,,,,,Mosaic/NodeTypes/OpenStreetMap/OpenStreetMapElementTypeFactory.php
+popover,any,,,,,Mosaic/NodeTypes/Popover/PopoverElementTypeFactory.php
 radio-input,none,,yes,,choice,Mosaic/NodeTypes/Pro/Form/Form/MElements/Radio/RadioInput/RadioInputElementTypeFactory.php
 recaptcha,none,,yes,,choice-field|field|form,Mosaic/NodeTypes/Pro/Form/Form/MElements/Recaptcha/RecaptchaElementTypeFactory.php
 section,any,,yes,,section,Mosaic/NodeTypes/Section/SectionElementTypeFactory.php

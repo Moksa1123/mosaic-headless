@@ -120,7 +120,7 @@ def main():
               p = c.new_page()
               p.goto(url_base + slug, wait_until="load")
               p.wait_for_timeout(2200)
-              p.evaluate("()=>document.querySelectorAll('dialog').forEach(d=>d.open&&d.close())")
+              p.evaluate("()=>document.querySelectorAll('dialog').forEach(d=>(d.open || d.matches(':popover-open') || d.getAttribute('data-mosaic-dialog-state') === 'open')&&(d.mosaicDialog ? (d.mosaicDialog.requestClose || d.mosaicDialog.close).call(d.mosaicDialog) : d.matches(':popover-open') ? d.hidePopover() : d.close()))")
               p.wait_for_timeout(300)
               agg = {}
               for kind, who, detail in p.evaluate(AUDIT):

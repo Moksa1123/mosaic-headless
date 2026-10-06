@@ -1,12 +1,64 @@
-# Modal, OpenStreetMap, the new triggers and run rules (1.0.9), measured
+# Modal, popover, OpenStreetMap, the triggers and run rules (1.0.9, 1.0.10), measured
 
 1.0.9 is the first release since this skill began that adds *features* rather than
 renaming things: four node types, three interaction triggers, a rule engine that
 decides whether a trigger is allowed to run, two memory actions, and a shorthand
 that collapses "open this modal when …" into one object.
 
+1.0.10 adds the other half: `popover`, a dialog surface that does not block the
+page, and it moves the modal onto the same browser API. Both are measured below -
+the 1.0.10 changes to the modal first, because they overturn three things this page
+used to say, then the popover in full.
+
 Everything below was built on the live site and read back out of the delivered page
-or out of the browser. `data/dialog-verification.csv`, 19 checks, all passing.
+or out of the browser. `data/dialog-verification.csv`, 19 checks, and
+`data/popover-verification.csv`, 37 checks, all passing on 1.0.10.
+
+## 1.0.10: the modal moved onto the Popover API
+
+The host is still a `<dialog>`, but it now carries `popover="manual"` and the
+controller opens it with `showPopover()`, so an open modal is in the browser's
+**top layer**. Measured with the same probe page on both versions:
+
+| | 1.0.9 | 1.0.10 |
+|---|---|---|
+| open modal in the top layer | no | **yes** |
+| `dialog.open` while showing | `true` | **`false`**, always |
+| visible state | `[open]` attribute | `:popover-open`, plus `data-mosaic-dialog-state="open"` |
+| closed state | `dialog:not([open]){display:none}` (UA) | `.m-modal:not(:popover-open){display:none !important}` |
+| controller | `el.mosaicDialog.close()` | **no `close()`** - `open()`, `requestClose()` (a Promise), `toggle()` |
+
+What each row costs you:
+
+- **Top layer means `z-index` no longer decides anything.** A 1.0.10 modal paints
+  above a fixed header, a sticky bar, anything - whatever z-index those carry.
+- **Anything that tested `dialog.open` now reads every modal as closed.** Read
+  `el.matches(':popover-open')`. The dialog lab's verifier had exactly this bug on
+  the upgrade: it decided the page-load notice was shut, never dismissed it, and
+  18 of 33 checks failed behind its overlay. `tools/verify_dialog*.py` read either
+  signal now, so they hold on both versions.
+- **To close one from script, `el.mosaicDialog.requestClose()`.** `close()` throws
+  on 1.0.10 ("is not a function"); `hidePopover()` bypasses the controller.
+- **`display` on the host is safe now.** The closed state is `!important`, so an
+  author's `display:flex` can no longer pin a modal open - the trap the "five forms"
+  section below was built around. Measured: a modal whose host sets
+  `display:flex; align-items:center; justify-content:center` computes `display:none`
+  and 0x0 while closed, and `display:flex` with a centred window when open
+  (`FLEXMODAL/*` in `data/popover-verification.csv`). Positioning the window, as
+  the forms below do, still works on both versions.
+- **The window keeps Mosaic's default card look** - `border-radius:8px` and a
+  three-layer shadow on `:where(.m-modal-window)`. Zero-specificity, so any author
+  value wins, but a square-edged site that restyles the border and forgets the
+  radius gets rounded corners on a full-screen takeover and an edge-docked sheet.
+  Set `border-radius:0` with the border.
+
+**`scrollDepth` renamed its action slot.** It used to have one generated slot named
+after the type, `scrollDepth`; 1.0.10 declares two, **`reached`** and **`returned`**
+(scrolled back above the threshold). The data upgrade moves stored actions from
+`scrollDepth` to `reached`, and `completedAfter: "scrollDepth"` with them. Write
+`actionSlots.reached` - a key the type no longer declares is never exported, so an
+action left under `scrollDepth` is stored and silently never runs. The
+`interactionShorthand` form is unaffected: it fills the slot at render.
 
 ## Modal — a real `<dialog>`
 
@@ -47,12 +99,13 @@ delivers
   Measured on a modal authored with no overlay: the delivered HTML contains
   `<div class="m-modal-overlay" tabindex="-1">`, the host carries
   `aria-modal="true"`, and a real wheel event over the page moves it 0px while the
-  same page scrolls 700px with nothing open. **There is no non-blocking modal in
-  1.0.9.** A corner notice that must not trap the reader has to be built from
-  ordinary nodes, not from `modal`.
+  same page scrolls 700px with nothing open. **There is no non-blocking modal.**
+  On 1.0.9 a corner notice that must not trap the reader had to be built from
+  ordinary nodes; on 1.0.10 it is a `popover` (below).
 - **`closedby` is `everything` | `clickOutside` | `esc` | `nothing`**, and it is
   emitted as `data-mosaic-modal-closedby`, NOT as the native `closedby` attribute —
-  Mosaic opens the host with `show()`, where the native light-dismiss does not
+  Mosaic opens the host itself (`show()` on 1.0.9, `showPopover()` on a
+  `popover="manual"` host on 1.0.10), where the native light-dismiss does not
   apply, so its own controller reads the attribute. Measured: with `everything`,
   Esc closes it. `nothing` is the cookie-gate case, where the only way out is a
   `modalClose` action you place yourself.
@@ -281,6 +334,143 @@ anywhere. That is the skill's existing rule (`ValidatorDynamicCode` = bare strin
 `ValidatorDynamicCodeObject` = `{"v": …}`) applying to a new element, and it is also
 why those three can hold `@VAR('post/meta_lat')` and a custom field can drive the map.
 
+## Popover (1.0.10)
+
+A dialog surface that does **not** block the page: a menu, an info card, a tip, a
+notice, a tour step. It appears next to whatever opened it, next to an element you
+name, or in a fixed cell of the viewport, and the visitor can keep using everything
+else while it is open. `data/popover-verification.csv` (37 checks, all passing) is
+the popover lab, `/popovers/` on the demo site, built from `sites/_popovers.py`.
+
+```json
+{"type": "popover", "nodeID": "<uuid you mint>",
+ "data": {"accessibleLabel": "服務項目", "role": "menu", "closedby": "everything",
+          "positioning": {"type": "element",
+                          "elementOptions": {"side": "block-end", "align": "start",
+                                             "keepInView": "1"}}},
+ "children": [ … anything … ]}
+```
+
+delivers
+
+```html
+<div class="m-popover M_Dialog M_IJ _x" id="pp-menu" popover="manual" role="menu"
+     aria-label="服務項目" data-mosaic-popover-closedby="everything"
+     data-mosaic-popover-placement="block-end start"
+     data-mosaic-popover-keep-in-view="1"> … </div>
+```
+
+- **It has no required children.** Unlike `modal` there is no window and no
+  overlay - and that is the point: no overlay, nothing blocking, no `aria-modal`.
+  Measured with a page-load popover showing: the centre of the viewport hit-tests to
+  the page, a wheel event scrolls it 600px, and a button elsewhere on the page opens
+  a second popover while the first stays up. It may sit anywhere (`placement-rules`
+  says `any`), and dialogs may nest inside each other.
+- **`closedby` defaults to `nothing`.** A popover expects an explicit close: a
+  `popoverClose` / `popoverToggle` action, usually a button inside it. Measured:
+  `nothing` ignores Esc; `clickOutside` ignores Esc and closes on an outside click;
+  `everything` closes on both.
+- **`role` has no default** (dialog / menu / listbox / tooltip are the suggested
+  values); **`ariaLive`** is `off` | `polite` | `assertive` and is emitted only when
+  it announces; **`accessibleLabel`** always emits `aria-label`, as on the modal.
+- **The default look is a card**: white, `border-radius:8px`, shadow, `padding:24px`,
+  `max-width:384px`, `display:flex; flex-direction:column; row-gap:8px` while open -
+  all on `:where()`, so any style you set wins. The closed state is
+  `display:none !important`, so `display` on a popover is safe too.
+
+### Where it sits: `positioning`
+
+One group, `type` plus that type's options. Both option groups always exist in the
+schema; only the chosen one is read.
+
+| `type` | options | what it does |
+|---|---|---|
+| `screen` (default) | `screenOptions.position`: `top-left` … `bottom-right`, nine cells; default `bottom-right` | pure CSS, right in the first painted frame, no JavaScript. Physical directions: a viewport corner stays that corner in RTL |
+| `element` | `elementOptions.side`: `block-start` / `block-end` / `inline-start` / `inline-end` (default `block-end`); `align`: `start` / `center` / `end` (default `center`); `keepInView`: `"1"` / `"0"` (default `"0"`); `anchor`: a target (`{"type": "element", "uuid": "<node id>"}`, or a class / variant) plus optional `anchorModifiers` | positioned with native CSS anchor positioning. Logical directions, so RTL mirrors them. **No anchor means "whatever opened it"** |
+
+Measured, in Chromium at 1280x900:
+
+- an unanchored menu sits on its trigger's block-end edge, start-aligned, to the
+  pixel - and with `keepInView` it flips above when the 404px menu would not fit
+  below;
+- an anchor set to another element's node id puts the popover on THAT element
+  (bottom edge on the card's top edge, centres within 1px), whatever opened it;
+- all nine screen cells dock where their names say.
+
+**`keepInView` is the flip, and `___popover--flipped` is how it looks flipped.**
+With `keepInView: "1"` and no room on the requested side, the popover moves to the
+opposite side and carries `data-mosaic-popover-flipped`; the style state
+`___popover--flipped` (selector
+`&:where(.m-popover[data-mosaic-popover-flipped],.m-popover[data-mosaic-popover-flipped] &)`)
+applies to it and everything inside it. Two measured surprises:
+
+- **`keepInView: "0"` does not overflow.** Asked for `inline-end` with no room on
+  the right, the popover did not run off-screen - the browser shifted it back inside
+  the viewport, **on top of its own trigger** (popover 1020-1280px, trigger
+  1080-1231px). If covering the trigger is wrong, keepInView is not optional.
+- **On a phone, neither side may fit, and then nothing flips.** At 390px both
+  `inline-*` sides are too narrow for a 260px card: `flip` is armed, `flipped` never
+  set, and the card covers the trigger. Anchor to `block-start` / `block-end` for
+  anything that has to work at phone width.
+
+**A screen popover is glued to the viewport edge.** Mosaic places it with `inset:0`
+plus auto margins, zeroing the margin on the docked side, so `bottom-left` touches
+the bottom-left corner exactly. `top/right/bottom/left: 12px` on the popover moves
+every edge in at once and keeps the cell.
+
+### Opening and closing: three actions, one trigger
+
+Actions, aimed at the popover's **node id** like the modal's:
+`popoverOpen`, `popoverClose`, `popoverToggle`. The popover's
+`interactionShorthand` action is `popoverOpen`, so `{"type": "pageLoad", …}` on the
+popover itself is a self-opening notice (with run rules, exactly as on a modal).
+
+A new trigger, **`popover`** ("Popover visibility change", group Element events),
+goes ON the popover and has three slots: **`show`**, **`beforeClose`** (the native
+hide waits for it to finish), **`afterClose`** (the popover is already hidden):
+
+```json
+"interactions": [{"type": "popover", "uuid": "<uuid>",
+                  "popoverOptions": {"name": "tour-1", "ID": "<uuid>",
+                                     "actionSlots": {"afterClose": {"actions": [
+                                         {"type": "popoverOpen", "uuid": "<uuid>",
+                                          "settings": {"target": {"type": "element",
+                                                                  "uuid": "<next step>"}}}]}}}}]
+```
+
+### Two runtime rules that decide how a sequence has to be built
+
+Found by building a three-step tour whose "next" button did nothing:
+
+1. **A dialog opened by a trigger inside another dialog becomes its child, and a
+   parent closing closes its children.** The controller takes the dialog the
+   trigger sits in as the parent. So a "next" button inside step 1 that runs
+   `popoverOpen step 2` + `popoverClose step 1` opens step 2 as step 1's child and
+   closes both: measured, nothing open 200ms later.
+2. **Closing a popover suspends the interactions of every element inside it.** So
+   with the order reversed - close first, then open - the open never runs at all.
+
+The sequence therefore has to be advanced by **`afterClose`**: it runs once the step
+is already closed, so the step it opens has no open parent to be taken down with.
+The "next" button only closes its own step. And because afterClose fires on EVERY
+close, Esc included, a step that should be leavable must not take Esc
+(`closedby: "nothing"`); leaving is a button that runs `interactionSuspend` on the
+step first (its own afterClose then does not run) and then `popoverClose`. The
+start button runs `interactionResume` on each step before opening the first, so a
+tour ended halfway can be started again. Measured: start > next > next > done walks
+step 1 > 2 > 3 > the closing card; "end" on step 2 leaves nothing open; a restart
+advances normally; Esc on a step leaves it open.
+
+`interactionSuspend` / `interactionResume` take a `target` and an optional
+`settings.interactionID`; with none, every interaction on the target.
+
+### The modal, flex-centred
+
+The lab's last demo is the 1.0.10 modal change made visible: a modal whose host is
+`display:flex` + centred, which on 1.0.9 would have pinned it open. It hides when
+closed and centres its window when open, and it sits in the top layer above the
+fixed header.
+
 ## The rest of 1.0.9, briefly
 
 Not everything in the release is a node you place. Four things that change how the
@@ -387,7 +577,7 @@ own `interactionShorthand`, a page's popup policy is one object in that page's d
 Nothing else on the page changes, no trigger element is placed, and two pages of the
 same site can behave completely differently without sharing anything.
 
-## Five forms out of three nodes — and the one property you must not set
+## Five forms out of three nodes — and, on 1.0.9, the one property you must not set
 
 "A modal" in most builders means one centred card, because the builder owns the
 chrome. Mosaic owns none of it: `.m-modal` is a `position:fixed; inset:0` layer
@@ -395,7 +585,8 @@ with `pointer-events:none`, `.m-modal-overlay` is a second fixed layer that take
 pointer events back, and `.m-modal-window` is an ordinary child of the first. The
 form is decided by where the window is pinned inside that layer.
 
-**Never set `display` on the `modal` host.** A `<dialog>`'s open/closed visibility
+**On 1.0.9, never set `display` on the `modal` host** (1.0.10 made it safe - see
+the top of this page). A `<dialog>`'s open/closed visibility
 *is* its display property — the UA stylesheet hides it with
 `dialog:not([open]) { display: none }` — so an author-level `display:flex` on the
 host wins the cascade and every modal on the page is permanently on screen. It is

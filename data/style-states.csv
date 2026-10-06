@@ -37,6 +37,7 @@ ___navbar--dropdown-mode,"&:where(.m-navbar.dropdown-mode,.m-navbar.dropdown-mod
 ___navbar--opened,.dropdown-mode:where(.m-navbar.dropdown--opened) &,600,node-type,Mosaic/NodeTypes/Navbar/NavbarElementTypeFactory.php
 ___navbar--opening,.dropdown-mode:where(.m-navbar.dropdown--opening) &,600,node-type,Mosaic/NodeTypes/Navbar/NavbarElementTypeFactory.php
 ___nested_dropdown_mode,"&:where(.dropdown-mode .m-navbar-navigation .m-dropdown &, .m-dropdown .m-dropdown &):not(x)",600,node-type,Mosaic/NodeTypes/Menu/Dropdown/DropdownElementTypeFactoryAbstract.php
+___popover--flipped,"&:where(.m-popover[data-mosaic-popover-flipped],.m-popover[data-mosaic-popover-flipped] &)",600,node-type,Mosaic/NodeTypes/Popover/PopoverElementTypeFactory.php
 ___radio-input--checked,&:checked,500,node-type,Mosaic/NodeTypes/Pro/Form/Form/MElements/Radio/RadioInput/RadioInputElementTypeFactory.php
 ___radio-input--checkmark,&:checked::before,500,node-type,Mosaic/NodeTypes/Pro/Form/Form/MElements/Radio/RadioInput/RadioInputElementTypeFactory.php
 ___select-input-option,"&.m-select:where(:has(option:not(:disabled):checked)), &.m-select :where(option)",500,node-type,Mosaic/NodeTypes/Pro/Form/Form/MElements/Select/SelectElementTypeFactory.php

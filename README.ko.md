@@ -133,13 +133,13 @@ commit 성공은 페이지가 동작한다는 증거가 아니고, 올바른 스
 
 ## 무엇을, 어떻게 검증했나
 
-전부 실제 설치에서 실행 — WordPress 7.1, WooCommerce 11.1, Mosaic Pro 1.0.9, **라이선스 없음**:
+전부 실제 설치에서 실행 — WordPress 7.1, WooCommerce 11.1, Mosaic Pro 1.0.10, **라이선스 없음**:
 라이선스가 막는 것은 테마 라이브러리와 업데이트지 노드 팩토리가 아니라서 Pro 타입도 등록되고
 렌더링된다.
 
 | 항목 | 결과 |
 |---|---|
-| **노드 타입** | 122 / 122를 문서당 하나씩 스윕, commit → 렌더 → 단언 → 삭제: 74 RENDERED, 25 COMMITTED, 15 COMMIT_5xx, 12 BROKE_PAGE. 1.0.8에서 재스윕: 전에는 조용히 commit되던 5개 타입이 부모 없이는 페이지를 죽인다. 렌더되지 않은 행 중 셋은 "필요한 부모 없이 commit"한 스윕 방식의 산물이며, 그 사실이 행 옆에 적혀 있다 |
+| **노드 타입** | 129 / 129를 문서당 하나씩 스윕, commit → 렌더 → 단언 → 삭제: 77 RENDERED, 25 COMMITTED, 15 COMMIT_5xx, 12 BROKE_PAGE. 1.0.8에서 재스윕: 전에는 조용히 commit되던 5개 타입이 부모 없이는 페이지를 죽인다. 렌더되지 않은 행 중 셋은 "필요한 부모 없이 commit"한 스윕 방식의 산물이며, 그 사실이 행 옆에 적혀 있다 |
 | **스타일 프로퍼티** | 98 / 98을 실제 페이지에 쓰고 컴파일된 CSS와 대조: 58 COMPILED, 18 ABSENT, 21 SKIPPED |
 | **노드 프로퍼티** | 191 / 191을 각 프로퍼티 자신의 검증기 체인에서 도출한 값으로 재탐사: 35 APPLIED, 43 NO_EFFECT, 55 NO_HOST, 47 SKIPPED |
 | **반응형** | 두 사이트 합쳐 733개의 `_t`/`_m` 선언을, 사이트가 실제로 내보낸 스타일시트에 대해 하나씩 단언 — 전부 검증됨 |
@@ -156,6 +156,7 @@ commit 성공은 페이지가 동작한다는 증거가 아니고, 올바른 스
 | **스킬 자체** | `claude plugin eval .` — 사용자가 실제로 묻는 5문항을 각 3회, 스킬 있음/없음 두 팔로, 매회 LLM 심사 3명. **있음: 5문항 모두 1.00. 없음: 5문항 모두 0.00.** 베이스라인의 최선은 답변 거부였다 |
 | **라이브 측정** | REST 라우트 115, variant 156, 조건 subject 59, 23 테이블 / 210 컬럼 |
 | **1.0.9 신기능** | modal(`<dialog>`), OpenStreetMap, exit-intent·scroll-depth 트리거, run rules, memory 액션, modal 숏핸드를 실제 페이지에 만들고 브라우저에서 직접 조작: 19/19. "이탈 의도 팝업, 세션당 한 번"이 배선 없이 객체 하나 |
+| **1.0.10 신기능** | popover — Mosaic 최초의 페이지를 막지 않는 다이얼로그 — 를 실험 페이지에 8가지로 만들고 Chromium에서 직접 조작: 37 / 37. 스크롤도 클릭도 막지 않는 페이지 로드 알림, 앵커 메뉴와 카드, 화면 9칸, keepInView 반전과 그 스타일 상태, `afterClose`로 이은 3단계 투어. 그리고 modal의 Popover API 이전: top layer, `requestClose()`, host의 `display`가 더 이상 닫히지 않게 만들지 않음 |
 | **slider** | 팩토리가 요구하는 중첩으로 브라우저에서 실제 조작, 19/19: 선언한 간격으로 자동 전진, 화살표·불릿·키보드로 구동, `prefers-reduced-motion`에서 스스로 멈춤. 불릿은 사실 템플릿이라 슬라이드 수만큼 복제되고 id가 전부 같다 |
 | **진짜 사이트** | 변환된 19개 페이지를 하나의 사이트로: 실제 메뉴와 페이지별 모달. 내비 46/46, 모달 19/19, 트리거·규칙·기억·닫기 조합 6종 |
 | **커스텀 필드** | ACF와 Meta Box, 한 페이지에 40개 필드, `@VAR` / `@LOOP`로 전달된 HTML에서 읽어냄: 62개 중 59개 해석, 빈 3개는 이유 있음; 다중값 필드 루프는 필드의 행 수 그대로 렌더링. `tools/list_fields.php`가 Mosaic이 실제 등록하는 이름을 출력 |
@@ -237,6 +238,7 @@ loop grid, 폼, 카운트다운, 서드파티 addon — 은 동적이라 될 노
 | `theme_zip.py` / `theme_zip_compare.php` / `theme_delete.php` | Mosaic 자체 ZIP 내보내기/가져오기를 에디터 밖에서 구동, 사본을 원본과 트리 단위로 대조, 라이브 테마를 거부하는 깨끗한 삭제 |
 | `list_fields.php` | 한 글의 커스텀 필드가 등록하는 모든 `@VAR` / `@LOOP` 이름을 값과 함께 |
 | `verify_dialog.py` | 1.0.9의 modal·트리거·run rules·memory를 브라우저에서 실제 조작 |
+| `verify_popovers.py` | 1.0.10 popover의 배치·차단·closedby·반전·연쇄를 브라우저에서 직접 조작 |
 | `data_upgrade.py` | 플러그인 업데이트 후 Mosaic의 데이터 이관을 자체 milestone 라우트로 실행 — 끝나기 전까지 에디터 API는 존재하지 않는다 |
 | `sweep_*.py` / `probe_*.py` | 표를 만든 계측기 그 자체 |
 | `bootstrap_probe_theme.php` / `mint_session.php` | 라이선스 없는 실험용 테마와 WP-CLI에서 만드는 REST 세션 |

@@ -1,4 +1,4 @@
-# Upgrading the plugin: what 1.0.7 → 1.0.8 did to the data, measured
+# Upgrading the plugin: what 1.0.7 → 1.0.8 → 1.0.10 did to the data, measured
 
 A Mosaic plugin update is two events, not one. The files change when WordPress
 installs the package; the DATA changes only when Mosaic's own upgrade flow has
@@ -180,3 +180,48 @@ The order that worked, and why each step is there:
    five-minute upstream limit during `createTemplates`; at 25 masters and 8,608
    nodes it finished in under two minutes and `theme_zip_compare.php` passed
    22 of 22, the four renamed tables included.
+
+## 1.0.9 → 1.0.10
+
+**Getting the package.** The update shows in wp-admin, but its package is
+`private-mosaic-pro://releases/stable/Mosaic-pro-plugin-stable-1.0.10.zip`, which
+`wp plugin update mosaic` could not fetch on an unlicensed install ("No plugins
+updated (1 failed)", and a second run claiming "already updated" while the version
+still read 1.0.9). Two downloads labelled as the new release were 1.0.9 byte for
+byte - one only the inner `Mosaic/` namespace folder. **Check `Version:` in
+`mosaic.php` before installing anything**, and diff the tree against the old one: a
+real 1.0.10 has `Mosaic/NodeTypes/Popover/`. The real package unpacked to a folder
+named `mosaic-next/`; it is installed by renaming it to `mosaic` in place of the old
+folder, then **chmod** (directories 775, files 664 - the zip's `drwx------` served
+every asset as 406), then `tools/data_upgrade.py`, whose six milestones took about
+seven minutes on this theme.
+
+**What the migration rewrote.** One thing: scroll-depth interactions. The type
+used to have a single generated action slot named after itself, `scrollDepth`; it
+now declares `reached` and `returned`, and the migration moves stored actions (and
+a `completedAfter: "scrollDepth"`) to `reached` across `mosaic_nodes` and the four
+class tables. No table changed shape (`Schema-1.0.10.php` lists the same tables).
+
+**What changed in the delivered page.** The modal host gained `popover="manual"`
+and opens into the top layer; `dialog.open` is always false and the controller has
+`requestClose()` instead of `close()`. Every tool that decided "is it open?" from
+`dialog.open` read every modal as closed afterwards - the dialog lab reported 18 of
+33 failures that were all the verifier's. `references/dialog-and-triggers.md` has
+the measured table.
+
+**Re-extracted from the 1.0.10 source and diffed against 1.0.9:** one node type
+(`popover`, 129), five node properties (196), one data class (126), one placement
+rule (129), one style state (`___popover--flipped`, 54), one interaction trigger
+(`popover`, 16), twelve pluggable IDs (261 - the three popover actions and their
+groups, the trigger and its slots, scroll depth's two new slots), the date
+comparator's operators (`after-or-equal`, `before-or-equal`) and gradient stop
+positions accepting units (`references/styling.md`). The 115 editor routes are the
+same 115. Every demo verifier was re-run on the result and passes; the full node
+sweep was run for the types 1.0.10 added or that had never been swept
+(`popover`, `fieldset-legend`, `fieldset-content`, all RENDERED), the other rows
+are the 1.0.9 sweep.
+
+**The sweep had stopped measuring anything, and nothing said so.** It read `/`,
+which stopped being the post archive when the site got a static front page; every
+type, a plain `div` included, came back COMMITTED. It now reads `sweepPath`
+(default `?post_type=post`) and refuses to run unless a plain div renders there.

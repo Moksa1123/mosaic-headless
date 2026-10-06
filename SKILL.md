@@ -1,11 +1,11 @@
 ---
 name: "mosaic-headless"
 description: |
-  Build and modify Mosaic Pro (Nextend) sites by writing the underlying data model directly - no visual editor, no DOM. Query the real surface with `mo.py`, which joins every source table to the live sweeps so a lookup leads with the measured verdict rather than the declaration (128 node types, 191 properties, 98 style properties with 20 structured value shapes pinned down, 53 style states, 156 variants, 74 dynamic variables, 15 interaction triggers, 115 REST routes, 23 tables) instead of guessing, with every node type placed on a live site one at a time and asserted against the delivered HTML, the design-token and element-class layers verified against compiled CSS, the @VAR() dynamic language verified against rendered output, nine designed pages built through the tables themselves, and the delivered pages re-read in Chromium at three viewports so a rule that is present, correct and still wrong cannot pass. Drives Mosaic's own theme export/import and its plugin data upgrade from outside the editor and holds the copy against the source tree for tree. Measured on Mosaic Pro 1.0.9: the modal (`<dialog>`), OpenStreetMap, the exit-intent and scroll-depth triggers, run rules and the memory actions all built on a live page and read back, and the 1.0.7 -> 1.0.8 -> 1.0.9 migrations driven from outside wp-admin.
+  Build and modify Mosaic Pro (Nextend) WordPress sites by writing the data model directly - no visual editor, no DOM. Query the real surface with `mo.py` (129 node types, 196 node properties, 98 style properties, 54 style states, 156 variants, 74 dynamic variables, 16 interaction triggers, 115 REST routes) where every lookup leads with the measured verdict, not the declaration: each node type placed on a live site one at a time, each style and node property swept against compiled CSS and markup, the delivered pages re-read in Chromium at three viewports. Measured on Mosaic Pro 1.0.10: the popover (anchored or screen-placed, the flip state, afterClose-chained tours), the modal on the Popover API, OpenStreetMap, exit-intent and scroll-depth triggers, run rules and memory. Drives theme export/import and the 1.0.7 -> 1.0.10 data upgrades from outside wp-admin.
 license: "MIT"
 metadata:
   author: "moksa (https://moksaweb.com)"
-  version: "1.30.1"
+  version: "1.31.0"
   homepage: "https://github.com/Moksa1123/mosaic-headless"
 ---
 
@@ -58,14 +58,14 @@ python tools/mo.py skeleton                 # a minimal valid page spec
 
 `--json` on any of them for machine-readable output. Every answer leads with the
 measured verdict rather than the declaration, because on this platform the two
-disagree for 52 of the 122 types.
+disagree for 52 of the 122 types they were first counted on.
 
 Then check the page. Mosaic has eight failure modes and **only three of them change the
 HTTP status code**:
 
 ```
 clean validator rejection   HTTP 200  + an `exceptions` array in the body
-PHP fatal during commit     HTTP 500  (15 of 122 types do this from a plain div)
+PHP fatal during commit     HTTP 500  (15 of 129 types do this from a plain div)
 structurally invalid node   HTTP 200, committed, row in the DB, and the whole
                             public page becomes a 54-byte error string
 wrong value SHAPE           HTTP 200, stored, and the CSS rule is simply absent -
@@ -133,24 +133,28 @@ measured.
 ## What was verified, and how
 
 Everything ran against a live install: WordPress 7.1, WooCommerce 11.1,
-Mosaic Pro 1.0.9, **unlicensed** — the licence gates the theme library and updates,
+Mosaic Pro 1.0.10, **unlicensed** — the licence gates the theme library and updates,
 not the node factories, so the Pro types register and render regardless. The
-site was built on 1.0.7 and upgraded in place twice: both data migrations
-(`tools/data_upgrade.py`) ran over the real theme, and every sweep below was
-re-run on the result, so the tables describe 1.0.9 as delivered, not as declared.
+site was built on 1.0.7 and upgraded in place three times: every data migration
+(`tools/data_upgrade.py`) ran over the real theme, and the source tables were
+re-extracted from 1.0.10 and every demo verifier re-run on the result, so the
+tables describe 1.0.10 as delivered, not as declared. Where a row is still a 1.0.9
+measurement - the full node sweep, the property sweeps - the section says so.
 
 ```
 WRITE PATH   verified end to end over REST
              theme -> master -> healed node tree -> template -> nodes -> public HTML
 
-NODE SWEEP   122 of 122 node types, ONE PER DOCUMENT, committed then rendered then
+NODE SWEEP   129 of 129 node types, ONE PER DOCUMENT, committed then rendered then
              deleted, asserting each type's attrID against the delivered HTML:
-                 RENDERED    74   id found; tag and classes recorded
+                 RENDERED    77   id found; tag and classes recorded
                  COMMITTED   25   row exists, nothing reached the page
                  COMMIT_5xx  15   PHP fatal on commit
                  BROKE_PAGE  12   committed, then the whole page died
              data/node-verification.csv. 1.0.9's four new types - modal,
-             modal-window, modal-overlay, openstreetmap - all render.
+             modal-window, modal-overlay, openstreetmap - all render, and so
+             does 1.0.10's one, popover (<div popover=manual>, swept on 1.0.10;
+             the other rows are the 1.0.9 sweep).
              Re-swept on 1.0.8: five types that used to commit and render
              nothing (accordion-title, loop-pagination and its two buttons,
              multi-steps-form-step) now kill the page instead - the render
@@ -206,7 +210,23 @@ DIALOG       1.0.9's features built on a live page and read back out of the
              runs once a session and again in a new one, which is the cap rule
              holding. The OpenStreetMap element carries the coordinates only in
              the {"v": ...} object form. data/dialog-verification.csv,
-             references/dialog-and-triggers.md
+             references/dialog-and-triggers.md. Re-run on 1.0.10, 19 of 19, with
+             one row changed: the open modal is now in the top layer (1.0.10
+             moved it onto the Popover API - `dialog.open` is always false, read
+             `:popover-open`; close from script with `mosaicDialog.requestClose()`)
+
+POPOVER      1.0.10's non-blocking surface on a lab page, 37 of 37 in Chromium:
+             a page-load notice leaves the page scrollable and clickable;
+             closedby nothing / clickOutside / everything each honoured; an
+             unanchored menu on its trigger to the pixel, an anchored card on
+             the element it names, the nine screen cells where they say;
+             keepInView flips and ___popover--flipped styles the flipped one -
+             and without it the popover does not overflow but slides back over
+             its own trigger. A three-step tour taught the two rules that decide
+             how any sequence is built: a dialog opened from inside another is
+             its child and closes with it, and closing a popover suspends the
+             interactions inside it - so steps advance on afterClose, never on a
+             button that opens the next one. data/popover-verification.csv
 
 FIELDS       ACF 6.8 and Meta Box 5.15, forty fields registered in code on a page,
              read back off the delivered HTML: 59 of 62 expressions resolve to the
@@ -383,9 +403,10 @@ UPGRADE      1.0.7 -> 1.0.8 driven over the plugin's own milestone route from
              one selector on the worked example that named an emitted class
              stopped matching until it was rewritten. references/upgrading.md
 
-FROM SOURCE  128 node types, 191 properties (61 with enums), 249 pluggable IDs,
-             126 placement rules, 10 composite default structures, 98 style
-             properties, 53 style states, 15 interaction triggers.
+FROM SOURCE  129 node types, 196 properties (68 with enums), 261 pluggable IDs,
+             129 placement rules, 25 composite default structures (10 declared,
+             15 healed in), 98 style properties, 54 style states, 16 interaction
+             triggers - re-extracted from the 1.0.10 tree.
 ```
 
 **Coverage, stated as a fraction rather than as a headline.** The verification
@@ -393,11 +414,15 @@ counts above are real, but they are not the same as "the surface is verified", a
 the difference is worth being exact about:
 
 ```
-node types        122 / 122   swept live, one per document
-node properties   191 / 191   re-probed with a value shaped by each property's
+node types        129 / 129   swept live, one per document
+node properties   191 / 196   re-probed with a value shaped by each property's
                               own validator chain: 38 APPLIED, 45 NO_EFFECT,
                               2 EDITOR_ONLY, 55 NO_HOST (no rendering type
                               declares them), 2 INSTRUMENT, 45 SKIPPED
+                              (the five missing are 1.0.10's popover -
+                              role, ariaLive, accessibleLabel, closedby,
+                              positioning - measured on the popover lab
+                              instead: data/popover-verification.csv)
 style properties   98 /  98   swept live; 58 COMPILED, 18 ABSENT, 1 NO_ELEMENT,
                               21 SKIPPED (no test value could be synthesised, and
                               SKIPPED is never counted as a pass)
@@ -498,8 +523,9 @@ so the pattern is in the data, not just in this paragraph.
 13. `references/custom-fields.md` — ACF and Meta Box fields as `@VAR` / `@LOOP`:
    the names, what each field type resolves to, and the loop element that walks
    a multi-value field. Measured, 62 rows.
-14. `references/dialog-and-triggers.md` — 1.0.9's modal, OpenStreetMap, the
-   exit-intent / scroll-depth triggers, run rules, memory and the shorthand.
+14. `references/dialog-and-triggers.md` — the modal (and what 1.0.10's Popover API
+   move changed), the 1.0.10 popover, OpenStreetMap, the exit-intent / scroll-depth
+   triggers, run rules, memory and the shorthand.
 15. `references/upgrading.md` — what a plugin update does to the data and to the
    delivered page, measured on 1.0.7 -> 1.0.8; how to drive the migration and what
    to re-verify afterwards.
@@ -508,14 +534,14 @@ so the pattern is in the data, not just in this paragraph.
 
 | file | rows | source |
 |---|---|---|
-| `data/node-verification.csv` | 122 | **swept live** — outcome, rendered tag and classes, page bytes, failure detail |
-| `data/node-types.csv` | 122 | source — slug, label, edition, aliases, data class |
-| `data/node-properties.csv` | 191 | source — property, validator chain, **accepted enum values**, `supportsInherit` |
-| `data/placement-rules.csv` | 122 | source — which children each type accepts |
-| `data/default-children.csv` | 10 | source — what a composite type needs **inside** it |
+| `data/node-verification.csv` | 129 | **swept live** — outcome, rendered tag and classes, page bytes, failure detail |
+| `data/node-types.csv` | 129 | source — slug, label, edition, aliases, data class |
+| `data/node-properties.csv` | 196 | source — property, validator chain, **accepted enum values**, `supportsInherit` |
+| `data/placement-rules.csv` | 129 | source — which children each type accepts |
+| `data/default-children.csv` | 25 | source — what a composite type needs **inside** it |
 | `data/style-properties.csv` | 98 | source — every settable CSS property and its value shape |
 | `data/style-value-shapes.csv` | 22 | **probed live** — the exact JSON shape for each structured value, and what it compiled to |
-| `data/style-states.csv` | 53 | source — state IDs with their exact CSS selector templates |
+| `data/style-states.csv` | 54 | source — state IDs with their exact CSS selector templates |
 | `data/property-verification.csv` | 170 | **probed live** — per-property effect on markup vs CSS, with unprovable enums marked INCONCLUSIVE |
 | `data/node-property-verification.csv` | 191 | **swept live** — each property probed with a value shaped by its own validator chain, on a type that declares it |
 | `data/style-verification.csv` | 98 | **swept live** — every style property written to a page and checked against the compiled CSS, with its group beside the result |
@@ -523,7 +549,7 @@ so the pattern is in the data, not just in this paragraph.
 | `data/browser-verification/` | 4132 | **computed in Chromium** - declared vs `getComputedStyle` at three viewports, `not-comparable` labelled per row. One CSV per page, named by its slug |
 | `data/design-audit-acknowledged.csv` | 3 | reviewed findings that will not be fixed, each with a written reason. An acknowledgement without a reason is a suppression wearing a better name, and the release gate refuses one |
 | `data/design-audit.csv` | 26 | **computed in Chromium** - contrast, font fallback, CJK tracking, overflow, measure. Empty means it ran and found nothing |
-| `data/data-class-hierarchy.csv` | 125 | source - every data class and its parent, so a type's inherited properties can be resolved |
+| `data/data-class-hierarchy.csv` | 126 | source - every data class and its parent, so a type's inherited properties can be resolved |
 | `data/style-state-verification.csv` | 52 | **swept live** - each state written on a host of its own type and matched against its promised selector |
 | `data/component-verification.csv` | 8 | **driven live** - the component lifecycle, each step asserted against the row or the delivered HTML |
 | `data/loop-verification.csv` | 28 | **measured live** - a perpetual animation: periodicity by scrubbing a paused timeline, per-element occlusion of both text and controls at five widths, and the enlarged view opened by pointer and by keyboard |
@@ -532,15 +558,16 @@ so the pattern is in the data, not just in this paragraph.
 | `data/conversion-batch.csv` | 19 | **converted, built and checked live, one page after another** - every Elementor page of a production site through the converter, with per-page element and content counts |
 | `data/token-benchmark.csv` | 6 | **measured with tiktoken** - the same six lookups priced three ways: reading the plugin source, loading every table, querying `mo.py`. 71-99.5% fewer tokens than the source and 99.6%+ fewer than the tables, which total 259,539 - never load them, query them |
 | `data/slider-verification.csv` | 30 | **driven live** - two sliders, one autoplaying and one a carousel: advance, arrows, bullets, keyboard, reduced motion |
-| `data/navigation-verification.csv` | 36 | **fetched and opened live** - every menu item is a real `<a href>`, every page of the nineteen answers 200, and no page scrolls sideways at 390 / 768 / 1280 |
+| `data/navigation-verification.csv` | 39 | **fetched and opened live** - every menu item is a real `<a href>`, each of the demo's twelve pages answers 200, every in-page anchor it links to exists, and no page scrolls sideways at 390 / 768 / 1280 |
 | `data/page-modal-verification.csv` | 19 | **read live** - one modal per page, and what each one's trigger, run rule, memory scope and dismissal policy actually came out as |
-| `data/dialog-verification.csv` | 19 | **driven live** - the 1.0.9 modal, its triggers, its run rules and the memory actions, each exercised in a real browser |
+| `data/dialog-verification.csv` | 19 | **driven live** - the modal (re-run on 1.0.10), its triggers, its run rules and the memory actions, each exercised in a real browser |
 | `data/dialog-form-verification.csv` | 49 | **driven live** - the same three nodes made into five FORMS (sheet, drawer, corner, takeover, gate), each re-opened at 390px and 768px; also where `pickOne` on a click turned out to be a latch rather than a lottery |
+| `data/popover-verification.csv` | 37 | **driven live** - 1.0.10's popover: every host a `<div popover=manual>`, a pageLoad notice that leaves the page scrollable and clickable, closedby honoured per policy, anchored placement against the trigger and against another element, the nine screen cells, keepInView flipping and the `___popover--flipped` state applying, a three-step tour advanced by afterClose and ended by interactionSuspend, and a modal whose host sets `display:flex` and still hides when closed |
 | `data/token-verification.csv` | 15 | **driven live** - every `:root` custom property declared once, non-empty, and resolved by something on the page; a token nothing points at is a token that is not working |
-| `data/mobile-audit.csv` | 65 | **driven live** - what a sideways-scroll check cannot see: type under the legible floor, controls too small to hit, a grid that never collapsed, content escaping its box |
+| `data/mobile-audit.csv` | 68 | **driven live** - what a sideways-scroll check cannot see: type under the legible floor, controls too small to hit, a grid that never collapsed, content escaping its box |
 | `data/component-wall-verification.csv` | 26 | **driven live** - tabs switched, an accordion opened, a form's fields and Mosaic's own honeypot, and an OpenStreetMap asserted on the coordinates it was GIVEN rather than the default it falls back to |
-| `data/form-surface-verification.csv` | 15 | **driven live** - every field type Mosaic ships in one form: select with labelled options, radio and checkbox groups, file upload, and the browser's own validation refusing an empty submit |
-| `data/content-loop-verification.csv` | 12 | **driven live** - a slider, a tab bar, a list and a paginated archive whose children all come from one authored template repeated per post; the pagination is clicked and the rows asserted to CHANGE |
+| `data/form-surface-verification.csv` | 18  | **driven live** - every field type Mosaic ships in one form: select with labelled options, radio and checkbox groups, file upload, and the browser's own validation refusing an empty submit |
+| `data/content-loop-verification.csv` | 15  | **driven live** - a slider, a tab bar, a list and a paginated archive whose children all come from one authored template repeated per post; the pagination is clicked and the rows asserted to CHANGE |
 | `data/custom-fields-verification.csv` | 62 | **rendered live** - ACF and Meta Box fields of every common type read back through `@VAR` / `@LOOP` off the delivered page, loops included |
 | `data/theme-zip-verification.csv` | 22 | **round-tripped live** - Mosaic's own ZIP export imported in test mode and compared to its source, table by table and tree by tree |
 | `data/node-type-notes.csv` | 8 | where a sweep outcome is true but misleading on its own, why. Surfaced by `mo.py type` |
@@ -549,11 +576,11 @@ so the pattern is in the data, not just in this paragraph.
 | `data/variants.csv` | 156 | **live** — the variant catalog (Mosaic's built-in element classes); their IDs are what a `variant` record must use, and `class_name` is what the element emits |
 | `data/dynamic-variables.csv` | 74 | source — every `@VAR('ns/name')` expression, by namespace |
 | `data/evaluator-functions.csv` | 19 | source — the `@` functions with their arity |
-| `data/interaction-types.csv` | 15 | source — trigger types, `timed` vs `progress`; 1.0.9 adds exitIntent, scrollDepth and modal |
+| `data/interaction-types.csv` | 16 | source — trigger types, `timed` vs `progress`; 1.0.9 added exitIntent, scrollDepth and modal, 1.0.10 adds popover (Popover visibility change: show / beforeClose / afterClose) |
 | `data/animatable-properties.csv` | 22 | source — what a keyframe can drive (**not** the same set as the style properties) |
 | `data/condition-subjects.csv` | 59 | **live** — condition subjects per context |
-| `data/condition-comparators.csv` | 12 | **live** — comparators and their operator sets |
-| `data/pluggables.csv` | 249 | source — every `setID()` by registry |
+| `data/condition-comparators.csv` | 12 | **live** — comparators and their operator sets, captured on 1.0.9; the two date rows carry 1.0.10's four operators (after, after-or-equal, before, before-or-equal) from its source |
+| `data/pluggables.csv` | 261 | source — every `setID()` by registry |
 | `data/rest-routes.csv` | 115 | **live** — method, path, args |
 | `data/db-columns.csv` | 210 | **live** — every column of all 23 tables |
 
@@ -644,7 +671,7 @@ post — `build_all.py` resets first for that reason.
 
 ## Facts worth knowing before you look anything up
 
-- **The REST namespace contains the plugin version** (`/wp-json/mosaic/v1.0.9`). Read
+- **The REST namespace contains the plugin version** (`/wp-json/mosaic/v1.0.10`). Read
   it from `mosaicOptions.rest_api_url`, never hardcode. After a plugin update the
   editor namespace is GONE until the data upgrade has run; only
   `mosaic/<dataVersion>/<version>/upgrade` answers. `tools/data_upgrade.py`.
@@ -745,6 +772,22 @@ post — `build_all.py` resets first for that reason.
   `@media` blocks together; the old `mosaic-theme-block-editor-styles_<bp>-inline-css`
   ids are gone. And an element whose styles compile to nothing is emitted with
   no generated class at all, so "no `_token`" no longer means "did not render".
+- **Since 1.0.10 the modal is a Popover-API host in the top layer.** `<dialog
+  popover="manual">`; `dialog.open` is always false (read `:popover-open` or
+  `data-mosaic-dialog-state`), the controller has `requestClose()` and no `close()`,
+  and the closed state is `display:none !important` - so `display` on a modal host,
+  a pin-it-open bug on 1.0.9, is safe now. z-index cannot put anything above it.
+- **`popover` is the non-blocking dialog (1.0.10)**: no overlay, no children
+  required, `closedby` defaults to `nothing`, `positioning` is `screen` (nine cells)
+  or `element` (side / align / keepInView / anchor - no anchor = its trigger).
+  Actions `popoverOpen` / `popoverClose` / `popoverToggle`; trigger `popover` with
+  slots `show` / `beforeClose` / `afterClose`; style state `___popover--flipped`.
+  **A dialog opened from inside another dialog is its child and closes with it, and
+  closing a popover suspends the interactions inside it** - so a sequence advances
+  on the step's own `afterClose`, never on a button that opens the next step.
+  references/dialog-and-triggers.md
+- **`scrollDepth`'s action slot is `reached` since 1.0.10** (plus `returned`). An
+  action stored under the old slot name `scrollDepth` is kept and never runs.
 - **A custom field is `@VAR('post/meta_<key>')`, and a multi-value one is a LOOP.**
   ACF and Meta Box both, plus bare post meta. Derived properties hang off the
   name with two underscores (`meta_k__label`, `__url`, `__id`); an ACF group is
@@ -814,7 +857,8 @@ post — `build_all.py` resets first for that reason.
 | `theme_delete.php` | remove a theme completely through the plugin's own routine; refuses the live one |
 | `verify_slider.py` | the slider in a real browser: does it advance, do the arrows and bullets drive it, does the keyboard, does it stop when motion is not wanted - `--label`/`--append` put several sliders in one table, which is where a carousel and a plain slider can be held against each other |
 | `verify_navigation.py` | a multi-page site: is every menu item a real `<a href>`, does every page answer 200 (a template that was never bound answers 406 with an empty body, which only a logged-out visitor sees), and with `--viewports` does any page scroll SIDEWAYS - the one question no per-page checker asks - and whether every in-page `#fragment` resolves ON THE PAGE THAT CARRIES IT, which an HTTP check cannot see: a bare `#services` in a SHARED header fetches the current page, answers 200 everywhere, and does nothing on every page but the one that has that section |
-| `verify_dialog.py` | the 1.0.9 modal in a real browser: does it open, close, answer Esc, remember, cap - and does an OpenStreetMap carry the coordinates it was given |
+| `verify_dialog.py` | the modal in a real browser (1.0.9 and 1.0.10 alike: open is read as `:popover-open` or `dialog.open`): does it open, close, answer Esc, remember, cap - and does an OpenStreetMap carry the coordinates it was given |
+| `verify_popovers.py` | 1.0.10's popover in a real browser: opens, lands where its positioning says, blocks nothing, closes the way closedby says, flips, chains, and ends - every check reads `:popover-open`, never an attribute |
 | `verify_dialog_lab.py` | the question after "does the modal work": can three nodes be made into a bottom sheet, a side drawer, a corner notice, a full takeover and a gate with no way out - and does each one still fit at phone width, which the page's own width check cannot see |
 | `verify_tokens.py` | the design tokens as the BROWSER resolved them: every `:root` property declared once (a changed value does not retire the old one), non-empty, and actually pointed at by something - a wrong `skinsData` shape still emits the declaration and serves white |
 | `verify_components.py` | presses the interactive components on a page and asserts the RESULT - a pane actually swapped, an accordion item actually opened, the map carries the coordinates it was given - because "these all work" is worth what the last press proved |

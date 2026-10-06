@@ -317,6 +317,8 @@ CAPABILITY_GROUPS = [
          "四種動畫並排、輪轉模式、鍵盤與減少動態"),
         ("彈窗與觸發", "/dialogs/",
          "九種形態、四種觸發、四種執行規則"),
+        ("浮動層 Popover", "/popovers/",
+         "選單、資訊卡、導覽——1.0.10 不擋頁面的浮動層"),
     ]),
     ("資料與系統", [
         ("內容驅動", "/content/",
@@ -339,6 +341,8 @@ CAPABILITIES = [
      "分頁、手風琴、表單、地圖——都能直接操作"),
     ("彈窗與觸發", "/dialogs/",
      "九種形態、四種觸發、四種執行規則"),
+    ("浮動層 Popover", "/popovers/",
+     "選單、資訊卡、導覽——1.0.10 不擋頁面的浮動層"),
     ("輪播", "/sliders/",
      "四種動畫並排、輪轉模式、鍵盤與減少動態"),
     ("設計系統", "/tokens/",
@@ -610,10 +614,10 @@ def motion_css():
     # the boot sequence, phase by phase: the clauses report in, the log writes
     # itself out a line at a time, and the ruler ticks up the left margin
     boot_stagger = "\n".join(
-        "  #mk-boot-c%d{animation-delay:%dms}" % (i, 1150 + i * 520)
+        "  #mk-boot-c%d{animation-delay:%dms}" % (i, 345 + i * 156)
         for i in range(len(CLAUSES)))
     log_stagger = "\n".join(
-        "  #mk-boot-l%d{animation-delay:%dms}" % (i, 1000 + i * 950)
+        "  #mk-boot-l%d{animation-delay:%dms}" % (i, 300 + i * 285)
         for i in range(len(BOOT_LOG)))
     # a named view timeline per section, declared on the section and consumed by its
     # index entry - `timeline-scope` on #mk-doc is what lets the name cross between
@@ -716,7 +720,14 @@ def motion_css():
         # when it was one line. A fixed element whose height depends on its
         # content cannot be cleared by a constant, so below 768px it simply joins
         # the flow and the problem cannot come back.
-        "@media (max-width:767px){#mk-header{position:static;"
+        #
+        # RELATIVE, not static. Static joined the flow but also switched off the
+        # header's z-index:100, and its `contain:layout` still made it a stacking
+        # context of its own - so it painted at the page's level, the first section
+        # below painted over it, and an opened capability dropdown showed nothing
+        # but its top border. Relative keeps the same place in the flow and lets
+        # the z-index work again.
+        "@media (max-width:767px){#mk-header{position:relative;"
         "background:rgb(250,250,247);"
         "-webkit-backdrop-filter:none;backdrop-filter:none;"
         "border-bottom:1px solid " + RULE + "}}",
@@ -1069,11 +1080,16 @@ def motion_css():
         "55%{opacity:1;transform:scale(.97)}100%{opacity:1;transform:scale(1)}}",
 
         # ── motion, all of it opt-out-able ───────────────────────────────────
+        # The whole entrance runs in about 2.6s. It used to take 8.9: the veil held
+        # until 7.15s and the headline arrived at 7.44s, so a first visit was nine
+        # seconds of waiting for the one thing the visitor came to read. Every
+        # one-shot delay and duration was scaled by the same 0.3, so the order and
+        # the overlaps are what they were - only the waiting went.
         "@media (prefers-reduced-motion:no-preference){",
         "  #mk-boot{display:grid;position:fixed;inset:0;z-index:999;"
         "background:rgb(250,250,247);align-content:center;justify-items:center;"
         "row-gap:20px;overflow:hidden;will-change:transform;contain:layout;"
-        "animation:mk-boot-out .9s cubic-bezier(.76,0,.24,1) 7.15s forwards}",
+        "animation:mk-boot-out .9s cubic-bezier(.76,0,.24,1) 2.15s forwards}",
         # ── the sheet, and the blocks carved for it ──────────────────────────
         "  #mk-uki{position:relative;width:min(430px,64vw);aspect-ratio:3/2;"
         "background:rgb(250,250,247);overflow:hidden;contain:layout paint}",
@@ -1082,35 +1098,35 @@ def motion_css():
         # one <g> per block: each lands out of register and snaps true
         "  #uk-sun,#uk-fuji,#uk-mist,#uk-sea,#uk-crest,#uk-boat,#uk-wave,"
         "#uk-claw,#uk-swell,#uk-key{"
-        "animation:mk-ink 1.4s cubic-bezier(.2,.7,.3,1) both;"
+        "animation:mk-ink .6s cubic-bezier(.2,.7,.3,1) both;"
         "transform-box:fill-box;transform-origin:50% 50%}",
         # the sheet on the bed is blank until the press starts. Washing the sky in
         # at .45s, while the rest of the plate is still a held still frame,
         # read as a half-loaded image rather than as paper.
-        "  #uk-sky{animation:mk-bokashi 1.7s cubic-bezier(.3,0,.2,1) .95s both}",
-        "  #uk-sun{animation-delay:1.45s}",
-        "  #uk-fuji{animation-delay:1.85s}",
-        "  #uk-mist{animation-delay:2.25s}",
-        "  #uk-sea{animation-delay:2.65s}",
-        "  #uk-crest{animation-delay:3.05s}",
-        "  #uk-boat{animation-delay:3.45s}",
-        "  #uk-swell{animation-delay:4.6s}",
-        "  #uk-wave{animation-delay:3.85s}",
-        "  #uk-claw{animation-delay:4.25s}",
-        "  #uk-key{animation-delay:4.95s}",
+        "  #uk-sky{animation:mk-bokashi .6s cubic-bezier(.3,0,.2,1) .28s both}",
+        "  #uk-sun{animation-delay:.43s}",
+        "  #uk-fuji{animation-delay:.56s}",
+        "  #uk-mist{animation-delay:.67s}",
+        "  #uk-sea{animation-delay:.79s}",
+        "  #uk-crest{animation-delay:.91s}",
+        "  #uk-boat{animation-delay:1.03s}",
+        "  #uk-swell{animation-delay:1.38s}",
+        "  #uk-wave{animation-delay:1.16s}",
+        "  #uk-claw{animation-delay:1.27s}",
+        "  #uk-key{animation-delay:1.49s}",
         # once the impression has landed, the sea keeps moving
-        "  #uk-wave,#uk-claw{animation:mk-ink 1.4s cubic-bezier(.2,.7,.3,1) both,"
+        "  #uk-wave,#uk-claw{animation:mk-ink .6s cubic-bezier(.2,.7,.3,1) both,"
         "mk-swell 6s ease-in-out 2.7s infinite}",
-        "  #uk-swell{animation:mk-ink 1.4s cubic-bezier(.2,.7,.3,1) both,"
+        "  #uk-swell{animation:mk-ink .6s cubic-bezier(.2,.7,.3,1) both,"
         "mk-swell2 8s ease-in-out 2.9s infinite}",
-        "  #uk-wave{animation-delay:3.85s,6.4s}",
-        "  #uk-claw{animation-delay:4.25s,6.5s}",
-        "  #uk-swell{animation-delay:4.6s,6.6s}",
+        "  #uk-wave{animation-delay:1.16s,1.92s}",
+        "  #uk-claw{animation-delay:1.27s,1.95s}",
+        "  #uk-swell{animation-delay:1.38s,1.98s}",
 
         # 落款 the seal, pressed once the run is finished
         "  #mk-uki-seal{position:absolute;inset:auto 16px 14px auto;"
         "width:34px;height:34px;background:rgb(191,68,40);opacity:0;"
-        "animation:mk-seal .6s cubic-bezier(.16,1,.3,1) 5.6s both}",
+        "animation:mk-seal .6s cubic-bezier(.16,1,.3,1) 1.68s both}",
         '  #mk-uki-seal::after{content:"摺";position:absolute;inset:0;'
         "display:grid;place-items:center;color:rgb(250,250,247);"
         "font-family:" + CJK + ";font-size:19px;line-height:1}",
@@ -1210,7 +1226,7 @@ def motion_css():
         "line-height:1;letter-spacing:-.04em;color:rgb(22,24,28);"
         "font-variant-numeric:tabular-nums;width:3ch;text-align:right;"
         "contain:layout;"
-        "animation:mk-count 5.6s cubic-bezier(.32,.72,.28,1) .9s both}",
+        "animation:mk-count 1.68s cubic-bezier(.32,.72,.28,1) .27s both}",
         '  #mk-boot-num::after{counter-reset:n var(--mk-n);content:counter(n)}',
         "  #mk-boot-row{display:flex;align-items:flex-end;column-gap:8px;"
         "line-height:1}",
@@ -1223,7 +1239,7 @@ def motion_css():
         "background:rgba(22,24,28,.14);position:relative}",
         "  #mk-boot-fill{position:absolute;inset:0;background:rgb(255,90,54);"
         "transform-origin:0 50%;"
-        "animation:mk-boot-fill 5.6s cubic-bezier(.32,.72,.28,1) .9s both}",
+        "animation:mk-boot-fill 1.68s cubic-bezier(.32,.72,.28,1) .27s both}",
         # ticks along the rule, so the bar reads as a measure rather than a bar
         '  #mk-boot-track::after{content:"";position:absolute;left:0;right:0;'
         "top:-3px;height:3px;background:repeating-linear-gradient(90deg,"
@@ -1243,7 +1259,7 @@ def motion_css():
         "  #mk-boot-scan{position:absolute;left:0;right:0;top:0;height:1px;"
         "background:linear-gradient(90deg,rgba(255,90,54,0),rgba(255,90,54,.55),"
         "rgba(255,90,54,0));"
-        "animation:mk-boot-scan 2.9s linear .95s 2 both}",
+        "animation:mk-boot-scan .87s linear .28s 2 both}",
 
         # corner crosshairs: the veil is a plate, and a plate has trim marks
         "  #mk-boot .mk-x,#mk-boot-x0,#mk-boot-x1,#mk-boot-x2,#mk-boot-x3{"
@@ -1276,18 +1292,28 @@ def motion_css():
         "  #mk-boot-ready{border:1px solid rgb(191,68,40);padding:5px 12px;"
         "font-family:" + MONO + ";font-size:10px;letter-spacing:.24em;"
         "color:rgb(191,68,40);opacity:0;"
-        "animation:mk-boot-stamp .5s cubic-bezier(.16,1,.3,1) 6.55s both}",
+        "animation:mk-boot-stamp .5s cubic-bezier(.16,1,.3,1) 1.96s both}",
         "  @media (max-width:767px){#mk-boot-num{font-size:40px}"
         "#mk-boot-head,#mk-boot-foot{left:18px;right:18px}}",
         "  #mk-hl1-mask>*,#mk-hl2-mask>*{transform:translateY(112%);"
         "animation:mk-linein .95s cubic-bezier(.16,1,.3,1) forwards}",
-        "  #mk-hl1-mask>*{animation-delay:7.44s}",
-        "  #mk-hl2-mask>*{animation-delay:7.56s}",
+        # The masthead waits for the veil ONLY where there is a veil. The intro
+        # moved to its own page and the homepage kept the timing that assumed it,
+        # so the homepage hero sat blank for 7.3s waiting on an overlay it no
+        # longer has. Without #mk-boot it starts at once; with it, the delays
+        # are the veil's (2.15s + its exit).
+        "  #mk-hl1-mask>*{animation-delay:.1s}",
+        "  #mk-hl2-mask>*{animation-delay:.16s}",
         "  #mk-mast-meta,#mk-mast-lede,#mk-mast-cta{opacity:0;"
         "animation:mk-softin .8s cubic-bezier(.16,1,.3,1) forwards}",
-        "  #mk-mast-meta{animation-delay:7.34s}",
-        "  #mk-mast-lede{animation-delay:7.82s}",
-        "  #mk-mast-cta{animation-delay:7.94s}",
+        "  #mk-mast-meta{animation-delay:.05s}",
+        "  #mk-mast-lede{animation-delay:.3s}",
+        "  #mk-mast-cta{animation-delay:.38s}",
+        "  body:has(#mk-boot) #mk-hl1-mask>*{animation-delay:2.23s}",
+        "  body:has(#mk-boot) #mk-hl2-mask>*{animation-delay:2.27s}",
+        "  body:has(#mk-boot) #mk-mast-meta{animation-delay:2.2s}",
+        "  body:has(#mk-boot) #mk-mast-lede{animation-delay:2.35s}",
+        "  body:has(#mk-boot) #mk-mast-cta{animation-delay:2.38s}",
         "  " + flow_arrows + "{animation:mk-flow 1.9s ease-in-out infinite}",
         "  #mk-clock-s{animation:mk-secs 60s steps(60,end) infinite}",
         "  #mk-clock-m{animation:mk-mins 3600s steps(60,end) infinite}",
@@ -1311,21 +1337,21 @@ def motion_css():
         "animation:mk-railrun 9s linear infinite}",
         flow_stagger,
         "  #mk-caret{animation:mk-caret 1.15s steps(1,end) infinite;"
-        "animation-delay:3.84s}",
+        "animation-delay:1.15s}",
         "  #mk-mast-rule{animation:mk-drawx .9s cubic-bezier(.2,.7,.3,1) forwards;"
-        "animation-delay:3.40s}",
+        "animation-delay:1.02s}",
         "  #mk-spec-rule{animation:mk-drawx .9s cubic-bezier(.2,.7,.3,1) forwards;"
-        "animation-delay:.9s}",
+        "animation-delay:.27s}",
         "  #mk-cue{opacity:0;animation:mk-softin .8s ease forwards;"
-        "animation-delay:1.1s}",
+        "animation-delay:.33s}",
         "  #mk-cue-rail::after{animation:mk-cuearrow 1.9s cubic-bezier(.4,0,.5,1) "
         "infinite}",
         "  #mk-ticker-track{animation:mk-ticker 40s linear infinite}",
         "  " + marks + "{animation:mk-markin .5s cubic-bezier(.16,1,.3,1) forwards}",
-        "  #mk-mark-0{animation-delay:1.15s}",
-        "  #mk-mark-1{animation-delay:1.24s}",
-        "  #mk-mark-2{animation-delay:1.33s}",
-        "  #mk-mark-3{animation-delay:1.42s}",
+        "  #mk-mark-0{animation-delay:.34s}",
+        "  #mk-mark-1{animation-delay:.37s}",
+        "  #mk-mark-2{animation-delay:.4s}",
+        "  #mk-mark-3{animation-delay:.43s}",
         "  @supports (animation-timeline:view()){",
         "    " + reveal_targets + "{animation:mk-rise .01s linear both;"
         "animation-timeline:view();animation-range:entry 2% cover 36%}",
@@ -3292,6 +3318,10 @@ if __name__ == "__main__":
     SITE["pages"].append({"slug": "sliders", "post_id": 270,
                           "title": "輪播實驗室",
                           "tree": apply_type(_sliders.TREE, DISPLAY, CJK, "600")})
+    import _popovers
+    SITE["pages"].append({"slug": "popovers", "post_id": 284,
+                          "title": "浮動層",
+                          "tree": apply_type(_popovers.TREE, DISPLAY, CJK, "600")})
     SITE["pages"].append({"slug": "dialogs", "post_id": 268,
                           "title": "彈窗實驗室",
                           "tree": apply_type(_dialogs.TREE, DISPLAY, CJK, "600")})

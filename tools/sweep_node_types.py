@@ -7,6 +7,20 @@
 sweep.json needs: base, version, cookie, nonce, themeID. --setup fills in masterID,
 templateID and parentNodeID and writes them back.
 
+## Which page it reads
+
+The template --setup creates is assigned to `archive-post.php` - the post archive -
+so the probes render wherever WordPress serves that archive. That used to be `/`,
+and the sweep read `/`. Then the site got a static front page (`show_on_front=page`),
+`/` became an ordinary page with its own template, and the sweep went on committing
+probes into a master nothing rendered: every type, a plain `div` included, came
+back COMMITTED. Nothing failed; it simply measured the wrong page.
+
+So the page is named rather than assumed: `sweepPath` in the config, default
+`?post_type=post`, which serves the post archive whatever the front page is set to.
+Before a sweep, a plain `div` is committed and looked for on that page; if it does
+not render, the run stops instead of recording a column of false COMMITTEDs.
+
 ## Why one at a time
 
 A batch sweep is worthless here. Mosaic accepts structurally impossible placements at
@@ -79,9 +93,14 @@ class Client:
         )
 
     def page(self, path=""):
-        """Fetch a public page, cache-busted. `path` picks a page other than the home page."""
-        req = urllib.request.Request("%s/%s?sweep=%s" % (self.base, path.strip("/") + "/" if path else "",
-                                                         uuid.uuid4().hex[:8]))
+        """Fetch a public page, cache-busted. `path` picks a page other than the home page:
+        a slug (`my-page`) or a query (`?post_type=post`)."""
+        bust = uuid.uuid4().hex[:8]
+        if path.startswith("?"):
+            url = "%s/%s&sweep=%s" % (self.base, path, bust)
+        else:
+            url = "%s/%s?sweep=%s" % (self.base, path.strip("/") + "/" if path else "", bust)
+        req = urllib.request.Request(url)
         try:
             with urllib.request.urlopen(req, timeout=120) as r:
                 return r.read().decode("utf-8", "replace")
@@ -223,6 +242,34 @@ def unwrap(resp, what):
     return resp["response"]
 
 
+def sweep_path(cfg):
+    """The public URL the sweep master renders on. See "Which page it reads"."""
+    return cfg.get("sweepPath", "?post_type=post")
+
+
+def assert_probe_renders(client, cfg):
+    """Commit a plain div and require it on the sweep page, then remove it.
+
+    A div renders on any healthy page. If it does not show up, the page being read is
+    not the one the sweep master renders on, and every row this run would write is
+    a false COMMITTED - so stop before writing any."""
+    master_id = cfg["masterID"]
+    key = "node/master/%s" % master_id
+    doc = unwrap(client.get("masterDocumentInstance/%s" % master_id), "masterDocumentInstance")
+    baseline_ids = {n["ID"] for n in doc[key]}
+    attr, _nid, recs = probe_records("div", cfg["parentNodeID"], master_id)
+    client.commit("masterDocumentInstance/%s" % master_id, envelopes(doc), {key: recs})
+    try:
+        html = client.page(sweep_path(cfg))
+        if ('id="%s"' % attr) not in html:
+            sys.exit("a plain div committed to the sweep master does not render on /%s - "
+                     "that page is not the one the master renders on, so every row would "
+                     "read COMMITTED. Set sweepPath in the config to a URL served by the "
+                     "post archive (the default is ?post_type=post)." % sweep_path(cfg))
+    finally:
+        delete_subtree(client, master_id, baseline_ids, cfg["parentNodeID"])
+
+
 def setup(client, cfg, config_path):
     """Create the master (which heals into a default node tree) and the template."""
     tei = unwrap(client.get("adminMasterEditorInstance"), "adminMasterEditorInstance")
@@ -282,7 +329,7 @@ def setup(client, cfg, config_path):
         json.dump(cfg, fh, indent=1)
     print("masterID=%s\ntemplateID=%s\nparentNodeID=%s" % (master_id, template_id, parent))
 
-    html = client.page()
+    html = client.page(sweep_path(cfg))
     print("baseline page: %d bytes%s" % (len(html), "" if len(html) >= MIN_HEALTHY_BYTES else "  <-- ALREADY BROKEN"))
 
 
@@ -347,12 +394,14 @@ def delete_subtree(client, master_id, keep_ids, parent_id=None):
 
 
 def sweep(client, cfg, types, out_path):
+    assert_probe_renders(client, cfg)
     master_id = cfg["masterID"]
     doc = unwrap(client.get("masterDocumentInstance/%s" % master_id), "masterDocumentInstance")
     key = "node/master/%s" % master_id
     baseline_ids = {n["ID"] for n in doc[key]}
 
-    baseline_html = client.page()
+    path = sweep_path(cfg)
+    baseline_html = client.page(path)
     if len(baseline_html) < MIN_HEALTHY_BYTES:
         sys.exit("baseline page is already broken (%d bytes); reset the theme first" % len(baseline_html))
     print("baseline: %d bytes, %d nodes\n" % (len(baseline_html), len(baseline_ids)))
@@ -373,7 +422,7 @@ def sweep(client, cfg, types, out_path):
                 err = "PHP fatal / gateway error during commit"
             tag, classes, echoed, size = "", "", "", ""
         else:
-            html = client.page()
+            html = client.page(path)
             size = len(html)
             if size < MIN_HEALTHY_BYTES:
                 outcome, tag, classes, echoed = "BROKE_PAGE", "", "", ""

@@ -1,0 +1,38 @@
+check,result,detail
+FOUND,PASS,19 popovers on the page
+HOST,PASS,"every one is <div popover=manual>, none carries `open`"
+NOTICE/pageLoad,PASS,open after load
+NOTICE/aria,PASS,role=status aria-live=polite aria-modal=None
+NOTICE/non_blocking,PASS,centre hit-tests to the page; wheel scrolled 0 -> 600
+NOTICE/page_usable,PASS,"open while the notice shows: ['pp-menu', 'pp-notice']"
+NOTICE/closedby_nothing,PASS,Esc left it open
+NOTICE/close_button,PASS,popoverClose closed it
+CLOSED_IS_HIDDEN,PASS,every closed popover measures 0x0
+MENU/placement,PASS,"flipped above: menu 224..627 high, trigger 627..671, left edges 685 / 685"
+MENU/toggle,PASS,the same button closed it
+MENU/esc,PASS,closedby=everything: Esc closed it
+INFO/placement,PASS,"inline-end: card 949..1209, trigger 905..949; centres 449 / 449"
+INFO/esc_ignored,PASS,closedby=clickOutside: Esc left it open
+INFO/click_outside,PASS,a click outside closed it
+POINTER/anchor,PASS,popover bottom 300 vs card top 300; centres 950 / 949
+GRID/top-left,PASS,"box 12,12 240x112 in 1280x900"
+GRID/top-center,PASS,"box 520,12 240x112 in 1280x900"
+GRID/top-right,PASS,"box 1028,12 240x112 in 1280x900"
+GRID/center-left,PASS,"box 12,393 240x112 in 1280x900"
+GRID/center-center,PASS,"box 520,393 240x112 in 1280x900"
+GRID/center-right,PASS,"box 1028,393 240x112 in 1280x900"
+GRID/bottom-left,PASS,"box 12,775 240x112 in 1280x900"
+GRID/bottom-center,PASS,"box 520,775 240x112 in 1280x900"
+GRID/bottom-right,PASS,"box 1028,775 240x112 in 1280x900"
+TOUR/steps,PASS,pp-tour-brief > pp-tour-quote > pp-tour-launch > pp-tour-done
+TOUR/anchored,PASS,3 of 3 steps sit beside the box they explain
+TOUR/esc_ignored,PASS,open after Esc on step 2: pp-tour-quote
+TOUR/quit_ends,PASS,open after 結束導覽 on step 2: none
+TOUR/restart_resumes,PASS,"restarted, two steps on: pp-tour-launch"
+SNAP/flips,PASS,flipped=True; popover right 1069 vs trigger left 1069
+SNAP/flipped_state,PASS,"background while flipped: rgb(22, 24, 28)"
+SNAP/off_shifted,PASS,"keepInView=0, not flipped: popover 1020..1280 inside a 1280 viewport, over its trigger 1069..1231"
+FLEXMODAL/closed,PASS,"authored display:flex, closed it computes display:none 0x0"
+FLEXMODAL/open,PASS,"display:flex top-layer=True window centre 633,450 in 1280x900"
+NO_JS_ERRORS,PASS,none
+PHONE/menu_fits,PASS,menu 43..318 in a 390 viewport

@@ -139,6 +139,8 @@ def make_modal(key, num, title, lead, body, specs, host, window,
                  "paddingLeft": "30px", "paddingRight": "30px",
                  "customDeclarations": "border:1px solid rgb(22,24,28);"}
     win_style.update(window)
+    win_style["customDeclarations"] = (win_style.get("customDeclarations", "")
+                                       + "border-radius:0;")
 
     children = []
     if overlay:
@@ -210,9 +212,10 @@ def M(key, num, title, lead, body, specs, host, window, **kw):
 CENTRE_MODAL = M(
     "centre", 1, "置中對話框",
     "最直接的一種，也是其他八種的基準。",
-    "Mosaic 的 modal 是真正的 &lt;dialog&gt;，由外掛自己的控制器用 show() 開啟。"
-    "因為是 show() 而不是 showModal()，瀏覽器原生的 light-dismiss 不會生效，"
-    "所以關閉方式寫在 data-mosaic-modal-closedby 屬性上，由控制器讀取。"
+    "Mosaic 的 modal 是真正的 &lt;dialog&gt;，1.0.10 起帶 popover=\"manual\"，"
+    "由外掛自己的控制器用 showPopover() 開啟，進入瀏覽器的 top layer——"
+    "所以它一定蓋在固定 header 之上，z-index 管不到它。manual 代表瀏覽器不會自己關它，"
+    "關閉方式寫在 data-mosaic-modal-closedby 屬性上，由控制器讀取。"
     "另外 aria-modal=\"true\" 不是你寫的——它在 modal 帶有 overlay 子節點時才出現，"
     "因為真正擋住頁面的是 overlay。",
     [("觸發", "click → modalOpen"), ("執行規則", "無"), ("記憶", "無"),
@@ -225,8 +228,8 @@ SHEET_MODAL = M(
     "modal 這層是 position:fixed; inset:0 的全視窗圖層，pointer-events:none；"
     "modal-window 只是它的一個 flex 子元素。所以「抽屜」不是另一種元件，"
     "只是把 window 絕對定位到 left:0; right:0; bottom:0——沒有新的節點型別，也沒有自訂 CSS。"
-    "特別不能把 host 做成 flex 容器：&lt;dialog&gt; 是靠 display 決定開關的，"
-    "在 host 上寫 display 會讓所有彈窗永遠關不起來。"
+    "1.0.9 時 host 上不能寫 display——那會讓彈窗永遠關不起來；"
+    "1.0.10 把關閉狀態改成 display:none !important，這條限制消失了。"
     "手機上這是比置中卡片更合手的形態，拇指搆得到。",
     [("觸發", "click → modalOpen"), ("執行規則", "無"), ("記憶", "無"),
      ("關閉", "clickOutside（只有點遮罩）"), ("排版", "window: left/right/bottom = 0")],
@@ -261,7 +264,8 @@ TOAST_MODAL = M(
     "所以 aria-modal=\"true\" 實際上是拿不掉的，"
     "實測也確認：這個彈窗開著時，滑鼠滾輪同樣捲不動頁面。"
     "角落通知是一種排版，不是一種「不阻擋」的 modal——"
-    "1.0.9 沒有不阻擋的 modal。真正不擋人的通知要用普通節點做。",
+    "modal 沒有不阻擋的版本。1.0.10 起，真正不擋人的通知用 Popover 做——"
+    "浮動層頁的第五個示範就是同一張通知，換成 popover 之後頁面照樣能用。",
     [("觸發", "pageLoad（interactionShorthand）"), ("執行規則", "cap max 1"),
      ("記憶", "session（sessionStorage，每個分頁各自計算）"),
      ("關閉", "everything"),
@@ -272,6 +276,8 @@ TOAST_MODAL = M(
      "paddingLeft": "20px", "paddingRight": "20px",
      "customDeclarations": "border:1px solid rgb(22,24,28);"
                            "box-shadow:0 18px 44px rgba(22,24,28,.18);"},
+    window_m={"top": "72px", "left": "0px", "right": "0px", "width": "auto",
+              "maxWidth": "none", "maxHeight": "calc(100% - 72px)"},
     shorthand={"type": "pageLoad",
                "pageLoadOptions": {"runs": {"rules": [
                    {"uuid": U(), "type": "cap",
@@ -350,6 +356,8 @@ DEPTH_MODAL = M(
      ("關閉", "clickOutside"), ("紀錄", "mos:v1:r:dl-depth")],
     {},
     {"left": "24px", "bottom": "24px", "maxWidth": "380px", "width": "100%"},
+    window_m={"left": "0px", "right": "0px", "bottom": "0px", "width": "auto",
+              "maxWidth": "none"},
     closedby="clickOutside",
     shorthand={"type": "scrollDepth",
                "scrollDepthOptions": {
@@ -559,8 +567,10 @@ NOTE = section("dl-note", [wrap("dl-note-w", [
               "Mosaic 沒有那層外殼——modal、modal-overlay、modal-window "
               "是三個可以自由排版的節點，所以上面九種形態全部來自同一組資料，"
               "差別只在 window 被釘在哪裡。順帶一個踩過的坑："
-              "host 不能設 display——&lt;dialog&gt; 是靠 display 決定開關的，"
-              "寫了 display:flex 就等於把每一個彈窗永遠打開。",
+              "在 1.0.9，host 不能設 display——&lt;dialog&gt; 是靠 display 決定開關的，"
+              "寫了 display:flex 就等於把每一個彈窗永遠打開。"
+              "1.0.10 把關閉狀態改成 display:none !important，這個坑填平了；"
+              "這裡的九種形態仍然用定位排版，好讓同一份資料在兩個版本都對。",
               fontFamily=CJK, fontSize="15px", lineHeight="1.95",
               color={"token": "--mk-ink"}, marginTop="16px", maxWidth="680px"),
             T("p",

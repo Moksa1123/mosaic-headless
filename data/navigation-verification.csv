@@ -1,18 +1,19 @@
 check,result,detail
-FRONT_PAGE,PASS,"HTTP 200, 240832 bytes"
+FRONT_PAGE,PASS,"HTTP 200, 241886 bytes"
 MENU_IS_LINKS,PASS,1 real <a href> in #mk-nav
-NAV 首頁,PASS,"/ -> HTTP 200, 240834 bytes"
-PAGE moksa,PASS,"HTTP 200, 240832 bytes"
-PAGE my-account,PASS,"HTTP 200, 101036 bytes"
-PAGE intro,PASS,"HTTP 200, 134746 bytes"
-PAGE content,PASS,"HTTP 200, 102378 bytes"
-PAGE forms,PASS,"HTTP 200, 126731 bytes"
-PAGE components,PASS,"HTTP 200, 135123 bytes"
-PAGE conversion,PASS,"HTTP 200, 103204 bytes"
-PAGE dynamic,PASS,"HTTP 200, 113003 bytes"
-PAGE tokens,PASS,"HTTP 200, 125413 bytes"
-PAGE sliders,PASS,"HTTP 200, 152191 bytes"
-PAGE dialogs,PASS,"HTTP 200, 207349 bytes"
+NAV 首頁,PASS,"/ -> HTTP 200, 241885 bytes"
+PAGE moksa,PASS,"HTTP 200, 241885 bytes"
+PAGE my-account,PASS,"HTTP 200, 102024 bytes"
+PAGE intro,PASS,"HTTP 200, 135353 bytes"
+PAGE content,PASS,"HTTP 200, 103366 bytes"
+PAGE forms,PASS,"HTTP 200, 127717 bytes"
+PAGE components,PASS,"HTTP 200, 136111 bytes"
+PAGE conversion,PASS,"HTTP 200, 104190 bytes"
+PAGE dynamic,PASS,"HTTP 200, 113610 bytes"
+PAGE tokens,PASS,"HTTP 200, 126780 bytes"
+PAGE sliders,PASS,"HTTP 200, 152797 bytes"
+PAGE popovers,PASS,"HTTP 200, 191166 bytes"
+PAGE dialogs,PASS,"HTTP 200, 208778 bytes"
 ANCHORS moksa,PASS,every in-page link resolves
 ANCHORS my-account,PASS,every in-page link resolves
 ANCHORS intro,PASS,every in-page link resolves
@@ -23,6 +24,7 @@ ANCHORS conversion,PASS,every in-page link resolves
 ANCHORS dynamic,PASS,every in-page link resolves
 ANCHORS tokens,PASS,every in-page link resolves
 ANCHORS sliders,PASS,every in-page link resolves
+ANCHORS popovers,PASS,every in-page link resolves
 ANCHORS dialogs,PASS,every in-page link resolves
 WIDTH moksa,PASS,"no sideways scroll at 390,768,1280"
 WIDTH my-account,PASS,"no sideways scroll at 390,768,1280"
@@ -34,4 +36,5 @@ WIDTH conversion,PASS,"no sideways scroll at 390,768,1280"
 WIDTH dynamic,PASS,"no sideways scroll at 390,768,1280"
 WIDTH tokens,PASS,"no sideways scroll at 390,768,1280"
 WIDTH sliders,PASS,"no sideways scroll at 390,768,1280"
+WIDTH popovers,PASS,"no sideways scroll at 390,768,1280"
 WIDTH dialogs,PASS,"no sideways scroll at 390,768,1280"
