@@ -788,6 +788,10 @@ post — `build_all.py` resets first for that reason.
   references/dialog-and-triggers.md
 - **`scrollDepth`'s action slot is `reached` since 1.0.10** (plus `returned`). An
   action stored under the old slot name `scrollDepth` is kept and never runs.
+- **A local-context loop's `loopSource` is `@VAR('post/<loop>')`, never `@LOOP()`.**
+  Both render on the front end; `@LOOP` there throws in the editor
+  (`_loopEvaluatorFunction is not a function`) and the canvas never finishes.
+  `build_page.py` refuses it. `@LOOP(…)` inside text is fine.
 - **A custom field is `@VAR('post/meta_<key>')`, and a multi-value one is a LOOP.**
   ACF and Meta Box both, plus bare post meta. Derived properties hang off the
   name with two underscores (`meta_k__label`, `__url`, `__id`); an ACF group is

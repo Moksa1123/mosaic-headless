@@ -81,12 +81,32 @@ the source on the loop node:
 ```json
 {"type": "loop",
  "data": {"loopType": "localContext",
-          "localContextOptions": {"loopSource": {"v": "@LOOP('post/loopacf_rel')"}}},
+          "localContextOptions": {"loopSource": {"v": "@VAR('post/loopacf_rel')"}}},
  "children": [{"type": "loop-items", "children": [{"type": "loop-item", "children": [
    {"type": "text", "data": {"tagName": "p"},
     "children": [{"type": "wysiwyg-variable", "data": {"dynamicCode": "@VAR('item/value__label')"}}]}
  ]}]}]}
 ```
+
+**The `loopSource` is `@VAR('<namespace>/<loop>')`, never `@LOOP(…)`.** This page
+used to show `@LOOP('post/loopacf_rel')` here, and that form breaks the editor while
+the front end renders it fine - the worst kind of split, because the page looks done:
+
+- the front end (`LoopEvaluator.php`) takes the first string argument of whatever
+  function call it is given and ignores the function's name, so `@LOOP('post/x')`
+  and `@VAR('post/x')` resolve to the same loop;
+- the editor (`evaluateLoop` in `AppMosaicEditor-bundle.js`, 1.0.10) builds its
+  expression evaluator with the loop lookup as the VARIABLE evaluator and `null` as
+  the loop evaluator, so `@VAR` resolves the loop and `@LOOP` calls `null`:
+  `TypeError: this._loopEvaluatorFunction is not a function`, the canvas renders
+  for a long time and never finishes. Mosaic's own callers write
+  `evaluateLoop("@VAR('<menu>/loop')")`.
+
+Reported from a client build (a Meta Box `image_advanced` gallery as the source):
+changing the source to `@VAR('post/loopwork_gallery')` cleared the editor error and
+the front end still rendered all 35 images. `@LOOP(…)` *inside text* - an `alt`, a
+`dynamicCode` in a loop item - is a different evaluator that has both functions and
+was not the cause; the table above stays valid there.
 
 `loopType:"localContext"` is the built-in source that evaluates an expression in the
 page's context; the sweep's `loop` COMMIT_500 is what happens without it. The loop

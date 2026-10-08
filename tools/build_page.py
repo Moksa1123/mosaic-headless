@@ -131,6 +131,19 @@ class Surface:
                 problems.append("code content contains `%s` - Mosaic's template parser reads "
                                 "it as a function call and the page renders as HTTP 500; "
                                 "write `%s (`" % (hit.group(0), hit.group(0)[:-1]))
+        # A local-context loop's source written as `@LOOP('post/x')` renders on the
+        # front end - LoopEvaluator.php reads the loop name out of any function call -
+        # and throws in the editor, whose evaluateLoop only resolves `@VAR`
+        # ("this._loopEvaluatorFunction is not a function", canvas never finishes).
+        # The page is 200 and complete, so nothing downstream of this can see it.
+        if not force:
+            opts = (node.get("data") or {}).get("localContextOptions") or {}
+            src = opts.get("loopSource")
+            code = src.get("v") if isinstance(src, dict) else src
+            if isinstance(code, str) and code.lstrip().upper().startswith("@LOOP("):
+                problems.append("loopSource %r breaks the Mosaic editor (front end renders, "
+                                "editor throws _loopEvaluatorFunction is not a function); "
+                                "write it as %r" % (code, "@VAR(" + code.lstrip()[6:]))
         # node-verification.csv measured every type UNDER A PLAIN DIV. A type that broke
         # there is not broken in general - most of them are family members that simply
         # need their own parent. So the measured verdict only applies when the parent is

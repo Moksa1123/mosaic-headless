@@ -476,3 +476,14 @@ rendered - server-side output was fine - but with no front-end runtime every dro
 sat open and no modal could open. `find mosaic -type d -exec chmod 775 {} +` (files
 664), matching the other plugin folders, and purge the page cache. A REST-level check
 cannot see this; only fetching an asset can.
+
+## A loop source written as `@LOOP()` renders on the front end and kills the editor
+
+`loopType: "localContext"` with `loopSource: {"v": "@LOOP('post/<loop>')"}` renders
+every row on the delivered page, and opening the page in the Mosaic editor throws
+`TypeError: this._loopEvaluatorFunction is not a function` from
+`evaluateLoop` / `createLoopContextFactory`, leaving the canvas loading. The front
+end reads the loop name out of any function call; the editor only out of `@VAR`.
+Write `@VAR('post/<loop>')`. No server-side check can see this - the page is 200 and
+complete - so it is only caught by opening the editor. Details in
+`references/custom-fields.md`.
