@@ -104,9 +104,12 @@ the front end renders it fine - the worst kind of split, because the page looks 
 
 Reported from a client build (a Meta Box `image_advanced` gallery as the source):
 changing the source to `@VAR('post/loopwork_gallery')` cleared the editor error and
-the front end still rendered all 35 images. `@LOOP(…)` *inside text* - an `alt`, a
-`dynamicCode` in a loop item - is a different evaluator that has both functions and
-was not the cause; the table above stays valid there.
+the front end still rendered all 35 images. `@LOOP(…)` *inside text* goes through a
+different evaluator that is given both functions, and is fine in the editor too -
+measured on the same build: a loop item's image `alt` of
+`@concat(@VAR('post/title'), '｜', @LOOP('post/work_category', 1, 'term_name'), '作品照片 ', @VAR('item/index'))`
+opens with zero console errors and delivers `墨竹｜住宅設計作品照片 1`. The table
+above stays valid there.
 
 `loopType:"localContext"` is the built-in source that evaluates an expression in the
 page's context; the sweep's `loop` COMMIT_500 is what happens without it. The loop
