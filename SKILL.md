@@ -817,6 +817,12 @@ post — `build_all.py` resets first for that reason.
   default - it is a `<span>`, a label rather than a control. Measured all three.
   `menu-link` and `wysiwyg-link` still render `<span>` without a `url`.
 - **`text` renders as `<div>` by default** — set `tagName` for `<h1>`, `<p>` and so on.
+- **`youtube` renders `<mosaic-youtube><iframe>` with no `title`** - the iframe gets
+  only `loading`, `src`, `allow` and an id, so an accessible name has to be added
+  some other way. `youtubeUrl` is `{"v": "https://www.youtube.com/watch?v=…"}`;
+  `lazyLoad` adds `loading="lazy"` and there is no click-to-load facade. Sized by
+  `width`/`height: 100%` inside an `aspect-ratio: 16/9` box. `privacy` alone still
+  emits nothing (NO_OUTPUT).
 - **Eight types emit custom elements**: `<mosaic-dropdown>`, `<mosaic-navbar>`,
   `<mosaic-tabs>`, `<mosaic-accordion>`, `<mosaic-vimeo>`, `<mosaic-youtube>` and
   friends. A selector written against `div`/`nav` misses all of them.

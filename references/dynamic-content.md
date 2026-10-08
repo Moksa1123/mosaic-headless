@@ -66,6 +66,14 @@ Two different shapes for the same language, and which one applies is decided by 
 property's validator chain in `data/node-properties.csv`: **`ValidatorDynamicCode`
 means a bare string, `ValidatorDynamicCodeObject` means `{"v": "…"}`**.
 
+Getting it wrong on a URL is silent and looks like a broken link rather than a broken
+expression. `menu-link`'s `url` chain is `ValidatorDynamicCodeObject → ValidatorURL →
+ValidatorUrlObject`; given a bare `"@concat('/contact/?ref=', @VAR('post/title'), '#consult')"`
+it commits without complaint and delivers
+`href="http://concat('/contact/?ref=%27…"` - the leading `@` dropped and the rest taken
+as a URL (measured on a client build on 1.0.10). As `{"v": "@concat(…)"}` it delivers the evaluated link.
+
+
 ## The variable namespace
 
 `data/dynamic-variables.csv` — 74 variables across 11 namespaces, each row carrying
@@ -139,6 +147,42 @@ a COUNT: a template that failed to loop renders exactly once and looks correct.
 one. `build_page.py` resolves it by treating a loop container as standing in for
 its parent's children: what `slider-loop-slides` accepts is what `slider-slides`
 accepts.
+
+## Filtering and ordering a post loop
+
+A `wpPostType<Type>` loop takes `filters` (the condition structure of
+`references/templates-and-conditions.md`: units in one `evaluationUnits` group are
+AND-ed, groups are OR-ed) and `orderByClauses`. The filters are evaluated in the
+context the loop sits in, so inside a single-post template `@VAR('post/…')` is the
+post being viewed. Subject IDs are built from WordPress names, camel-cased after
+every `-`, `_` or space (source: `FilterSubjectPostTypes.php`):
+
+| subject | id | operators | value |
+|---|---|---|---|
+| the posts themselves | `postType<Type>` (`postTypeWork`) | `includes` / `excludes` | a list of post ids; dynamic |
+| a taxonomy | `taxonomy<Taxonomy>` (`taxonomyWorkCategory`) | `includes` / `excludes` | term ids; dynamic |
+| a meta key | `postType<Type>PostMeta`, `settings.key` | the comparator you pick: `text`, `number`, `date` | per comparator |
+
+A dynamic filter value is `{"v": …}` - the field declares `SupportDynamic`, which the
+reader validates with `ValidatorDynamicCodeObject`. "More work in the same category,
+not this one", measured on a client build on 1.0.10:
+
+```json
+{"uuid": "<uuid>", "type": "filter", "filterOptions": {"subject": {
+  "type": "postTypeWork", "postTypeWorkOptions": {"settings": {}, "comparator": {
+    "type": "postTypeWork", "postTypeWorkOptions": {
+      "operator": "excludes", "settings": {"value": {"v": "@VAR('post/id')"}}}}}}}}
+```
+
+with a second unit in the same group on `taxonomyWorkCategory`, operator `includes`,
+value `{"v": "@LOOP('post/work_category', 1, 'term_id')"}`. A Meta Box checkbox
+(stored `"1"`) filters as subject `postTypeWorkPostMeta` with
+`settings: {"key": "work_featured"}` and a `text` comparator
+`{"operator": "equals", "settings": {"value": "1"}}` - six posts back, in order.
+
+`orderByClauses` accepts `random`: `{"type": "random", "uuid": "<uuid>",
+"randomOptions": {"settings": {}}}`, a different order on every uncached render. Under
+a page cache that is one order per cache lifetime, not per visitor.
 
 ## `loop-pagination`, and the key you must not use
 
