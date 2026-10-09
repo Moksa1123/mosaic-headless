@@ -228,3 +228,38 @@ The less precise side sets the precision: a date against a date-time compares th
 two days. Whatever cannot be read as a date matches **no** operator, so a typo is a
 condition that is never true rather than an error. Loop filters compare in SQL
 (`post_date_gmt` / `post_modified_gmt` as UTC, the others as the site's wall clock).
+
+## The search results page
+
+A `search.php` auto template (`references/templates-and-conditions.md`) has a
+`wordpress_search` namespace. Measured on 1.0.10, searching a term with four matches
+and one with none:
+
+| expression | 4 results | none |
+|---|---|---|
+| `@VAR('wordpress_search/resultCount')` | `4` | `0` |
+| `@VAR('wordpress_search/searchQuery')` | the term | the term |
+| `@fallback(@VAR('wordpress_search/resultCount'), 'none')` | `4` | `none` |
+| `@fallback(@VAR('wordpress_search/resultCount'), '0')` | `4` | `0` |
+
+`resultCount` is `number_format_i18n(found_posts)` - a formatted string, so `1,234`
+past a thousand, and `0` (not empty) when nothing matched. `@fallback` treats `''`,
+`'0'` and `'NaN'` as empty, and returns its second argument only if THAT is truthy in
+PHP, so a fallback of `'0'` can never be chosen; any other text can.
+
+The results are a loop: `loopType: "localContext"`, `loopSource:
+{"v": "@VAR('wordpress_search/results')"}` (a `@VAR`, as every loop source must be).
+**Inside it each result is `item`, unless you rename it**:
+
+| per-result expression | result |
+|---|---|
+| `@VAR('item/title')`, default namespace | the title |
+| `@VAR('post/title')`, default namespace | empty - `post` is the page's own context, and a search page has none |
+| `@VAR('post/title')` with `loopNamespace: "post"` on the loop | the title |
+
+With `loopNamespace: "post"` every per-post expression works per result - meta,
+`@LOOP('post/<taxonomy>', 1, 'term_name')`, the permalink. WordPress's own query
+arguments narrow the search (`/?s=…&post_type=work&work_category=<slug>`), so a
+filter bar is a set of `menu-link`s whose `url` is
+`{"v": "@concat('/?post_type=work&work_category=<slug>&s=', @VAR('wordpress_search/searchQuery'))"}`
+- the term survives the switch.

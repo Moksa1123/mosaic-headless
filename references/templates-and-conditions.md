@@ -31,11 +31,31 @@ post; `X-Mosaic-Paths` on a 406 names the paths Mosaic looked for, and `index.ph
 in all of them. Measured A/B: a URL with no template returned 406, was handled once
 the row existed, and returned to 406 when it was deleted.
 
-Two limits, both measured: `adminTemplateEditorInstance` does not list auto templates,
-and their document has no `template-internal` root - `heal()` builds that only for
-templates created through `createManualTemplate`, and committing one directly answers
-HTTP 500. So the row stops the 406 but there is no verified route to putting content
-in it.
+**On 1.0.10 an auto template is an ordinary, writable template.** Earlier releases
+measured two limits here - `adminTemplateEditorInstance` did not list auto templates,
+and their document had no `template-internal` root, so there was no route to putting
+content in one. Re-measured on 1.0.10, both are gone:
+
+```
+POST theme/<themeID>/adminTemplateEditorInstance/commit
+revisionEnvelopes.template = [{"newRevisionRecord": {
+    "ID": "<uuid you mint>", "parentType": "", "parentID": "", "ordering": "a0",
+    "status": "publish", "revision": "", "version": "", "name": "Search",
+    "masterID": "<master>", "assign": "auto", "path": "search.php",
+    "conditions": []}, "originalRevisionRecord": null}]
+```
+
+answers 200; the template's document already holds one node, the
+`template-internal` root the server created; `build_site.build_page_document()`
+writes a tree under it like any page's; and `/?s=…` renders it. The template is
+listed by `adminTemplateEditorInstance` and is deleted the same way, with
+`status: "delete"`. This is the commit the editor's own "add template" dialog sends -
+`createAutoTemplate` is the post-type case only. Any path from the hierarchy works the
+same way: `search.php`, `404.php`, `archive-<type>.php`, `taxonomy-<tax>.php`.
+
+An auto template is not in `template_assigns` - it binds by path - so a clean-up that
+deletes "templates nothing is assigned to" deletes it. Recreate it after any such
+prune.
 
 **`post/<id>` is the only resourceQuery `createManualTemplate` accepts.** The grammar in
 `ResourceQuery::create()` is just `explode('/', $s, 2)`, so anything parses - but the
