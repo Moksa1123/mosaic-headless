@@ -116,7 +116,18 @@ fallback(…)                                                     defaulting
 attachment(2)  find_image(2)  find_link(2)  find_video(2)       media
 ```
 
-`sum`, `avg`, `concat` and `fallback` are variadic. `date()`'s timestamp argument is a
+`sum`, `avg`, `concat` and `fallback` are variadic.
+
+**`@concat` drops any argument that evaluates to `'0'`** (and `''`). Each argument is
+`strval()`-ed and appended only `if ($item)` (`EvaluatorFunctionConcat.php`), and
+`'0'` is the one non-empty string PHP calls false. So a number that can be zero must
+not be built into a sentence with `@concat`:
+`@concat('SEARCH · ', @VAR('wordpress_search/resultCount'), ' 件作品')` delivers
+`SEARCH ·  件作品` on an empty search - the count vanishes, the spaces stay. Put the
+number in its own `wysiwyg-variable` between two text runs instead; a bare
+`@VAR(…)` prints `0`. The same goes for a price, a stock count or a loop index that
+can be 0. `@fallback` has the mirror-image rule: it treats `'0'` as empty, and returns
+its fallback only if that is truthy, so `'0'` can never be the fallback. `date()`'s timestamp argument is a
 true GMT Unix timestamp — pair it with `post/publish_timestamp_gmt`, not
 `publish_timestamp`, unless you want the local-time value re-interpreted as UTC.
 
@@ -243,7 +254,9 @@ and one with none:
 | `@fallback(@VAR('wordpress_search/resultCount'), '0')` | `4` | `0` |
 
 `resultCount` is `number_format_i18n(found_posts)` - a formatted string, so `1,234`
-past a thousand, and `0` (not empty) when nothing matched. `@fallback` treats `''`,
+past a thousand, and `0` (not empty) when nothing matched. Do not wrap it in
+`@concat`: a `0` there is dropped (above), which is exactly how "the count is empty
+on a search with no results" was first reported from a client build. `@fallback` treats `''`,
 `'0'` and `'NaN'` as empty, and returns its second argument only if THAT is truthy in
 PHP, so a fallback of `'0'` can never be chosen; any other text can.
 
