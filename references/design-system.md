@@ -213,18 +213,34 @@ only the slots that differ:
                "cs-name": {"text": "…"}}}
 ```
 
-**An instance's ids are prefixed with the instance's own attrID.** The definition's
-`cs-card` becomes `cs-0-cs-card`, `cs-1-cs-card`, and so on, so the definition's
-attrID is a SUFFIX in the delivered page and `getElementById` on it finds nothing.
-Address instances with `[id$="-cs-card"]`.
+**Mosaic copies the definition's ids into every instance verbatim; `build_site.py`
+is what makes them unique.** Mosaic has no id-prefixing of its own - an element's
+id is its `attrID` (`ElementAttrID.php`), and every instance renders the
+definition's nodes with the definition's attrIDs, so two instances put every id
+into the document twice. `build_site.py`'s override pass writes an `attrID` of
+`<instance attrID>-<definition attrID>` into each instance's override node: the
+definition's `cs-card` becomes `cs-0-cs-card`, `cs-1-cs-card`, and so on, so the
+definition's attrID is a SUFFIX in the delivered page and `getElementById` on it
+finds nothing. Address instances with `[id$="-cs-card"]`.
+
+Until 1.32.1 that pass ran only for instances that HAD overrides, so an instance
+written with none - a contact block placed as-is in a footer and in a page body -
+kept the definition's ids, and a client build found every one of them twice. It runs
+for every instance now; measured on the demo, two override-less instances gave
+`ft-a-cs-card` and `ft-b-cs-card` and no duplicates. A tool other than
+`build_site.py` that writes instances has to do the same, or accept duplicate ids.
 
 Four more things a build that leans on components runs into:
 
-- **The instance element itself carries no id.** Its `attrID` exists only as that
-  prefix, so a selector aimed at the instance's own attrID finds nothing - aim at
-  `<instance>-<definition id>`. Two instances given the SAME attrID (or none) get
-  the same prefix and so duplicate every id inside; give each a distinct attrID. A
-  page with two `case-card` instances, `cs-0` and `cs-1`, measured zero duplicates.
+- **The instance element itself carries no id.** Its `attrID` exists only as the
+  prefix `build_site.py` writes, so a selector aimed at the instance's own attrID
+  finds nothing - aim at `<instance>-<definition id>`. Two instances given the SAME
+  attrID (or none) get the same prefix and so duplicate every id inside; give each a
+  distinct attrID.
+- **A loop repeats ids too, and that one is Mosaic's.** Every `loop-item` renders
+  the same attrIDs, so a list of six cards carries six of each id (reported from a
+  client build). `ElementAttrID.php` evaluates an attrID per loop item, which is the
+  hook for making them unique; that has not been measured here.
 - **A component's id is its name.** `build_site.py` derives it with
   `uuid5(COMPONENT_NAMESPACE, name)` so rebuilds update the same row; renaming the
   key in `site["components"]` therefore creates a new component and leaves the old

@@ -262,7 +262,11 @@ def apply_overrides(client, instance, key, uses, comps, envelope="templateDocume
     `strpos($type, 'component-instance')`, and strpos returns 0 for a needle at
     offset 0, so the condition is false for every instance there will ever be.
     """
-    wanted = [u for u in uses if u.get("overrides")]
+    # EVERY instance, not only the ones with overrides: this pass is also what gives
+    # each instance's inner nodes their own ids (below). Filtering on overrides left
+    # an instance without any as a verbatim copy of the definition's ids - a client
+    # build put the same component in a footer and a page body and got every id twice.
+    wanted = list(uses)
     if not wanted:
         return 0
     doc = unwrap(client.get(instance), envelope)
