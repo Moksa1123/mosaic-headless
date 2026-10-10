@@ -218,6 +218,33 @@ only the slots that differ:
 attrID is a SUFFIX in the delivered page and `getElementById` on it finds nothing.
 Address instances with `[id$="-cs-card"]`.
 
+Four more things a build that leans on components runs into:
+
+- **The instance element itself carries no id.** Its `attrID` exists only as that
+  prefix, so a selector aimed at the instance's own attrID finds nothing - aim at
+  `<instance>-<definition id>`. Two instances given the SAME attrID (or none) get
+  the same prefix and so duplicate every id inside; give each a distinct attrID. A
+  page with two `case-card` instances, `cs-0` and `cs-1`, measured zero duplicates.
+- **A component's id is its name.** `build_site.py` derives it with
+  `uuid5(COMPONENT_NAMESPACE, name)` so rebuilds update the same row; renaming the
+  key in `site["components"]` therefore creates a new component and leaves the old
+  one behind.
+- **An expression inside a definition is evaluated where the instance is.** A link
+  `{"v": "@concat('/contact/?ref=', @VAR('post/title'), '#consult')"}` inside a
+  component, placed in a single-post template, carries THAT post's title (reported
+  from a client build on 1.0.10).
+- **The header and footer can hold instances.** `build_site.py` commits the theme's
+  design tokens first, builds the components, and only then writes the shell's
+  header and footer - with components resolved and overrides applied in the master,
+  as on a page. Measured: a footer instance with one override rendered with its
+  prefixed ids and the overridden text. (Before this order, a component in the shell
+  was impossible: its styles name tokens the shell commit had not made yet.)
+
+What this is good for on a client site: anything repeated in several places that
+the client should be able to change themselves - an office address block, a contact
+bar, opening hours. Make it a component and it is edited once, in Mosaic's
+Components panel, and every page follows, with no "site settings" plugin page.
+
 The claim worth verifying is not that three cards rendered. It is that they are the
 same definition, and the evidence is in the class: all three carry the identical
 generated token (`_fm` here) while their text differs. Three copy-pasted sections

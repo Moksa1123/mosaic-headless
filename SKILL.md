@@ -529,6 +529,10 @@ so the pattern is in the data, not just in this paragraph.
 15. `references/upgrading.md` — what a plugin update does to the data and to the
    delivered page, measured on 1.0.7 -> 1.0.8; how to drive the migration and what
    to re-verify afterwards.
+16. `references/server-thumbnails.md` — Mosaic's headless-Chrome thumbnails on a host
+   without root: where Mosaic looks for the binary, a no-root install, and the two
+   things (PHP-FPM's disabled functions, a setting decided once) that make a working
+   install look broken.
 
 ## The data files
 

@@ -109,19 +109,46 @@ def build_shell(client, cfg, site, surface):
 
     VAR_IDS.clear()
     payload = theme_records(site, doc, surface)
+    if payload:
+        commit(client, instance, doc, payload, "theme")
+    print("shell master=%s  theme=%s" % (master_id[:8], ", ".join(sorted(payload)) or "-"))
+    return master_id, header_div["ID"], footer_div["ID"]
 
-    records = []
+
+def fill_shell(client, cfg, site, surface, master_id, header_id, footer_id, comps):
+    """Write the header and footer into the master - AFTER the components exist.
+
+    The shell used to be one commit with the theme, which made a component in the
+    header or footer impossible: a component's styles name design tokens, the tokens
+    are committed by the shell, so components had to be built after it, and by then
+    the shell was already written. The theme now goes first (build_shell), the
+    components next, and the regions last, with components resolved and their
+    overrides written into the master exactly as a page's are into its template.
+    The workaround this replaces - commit an empty shell, then a second real one -
+    leaves an extra master behind on every build."""
+    instance = "masterDocumentInstance/%s" % master_id
+    key = "node/master/%s" % master_id
     shell = site.get("shell") or {}
-    if shell.get("header"):
-        records += flatten(shell["header"], header_div["ID"], master_id, surface, False, parent_type="div")
-    if shell.get("footer"):
-        records += flatten(shell["footer"], footer_div["ID"], master_id, surface, False, parent_type="div")
-    if records:
-        payload[key] = [{"newRevisionRecord": r, "originalRevisionRecord": None} for r in records]
-    commit(client, instance, doc, payload, "shell")
-    print("shell master=%s  header+footer nodes=%d  theme=%s" % (
-        master_id[:8], len(records), ", ".join(sorted(payload)) or "-"))
-    return master_id
+    COMPONENT_USES.clear()
+    records = []
+    for region, parent in (("header", header_id), ("footer", footer_id)):
+        tree = shell.get(region)
+        if not tree:
+            continue
+        if comps:
+            tree = resolve_components(tree, comps)
+        records += flatten(tree, parent, master_id, surface, False, parent_type="div")
+    if not records:
+        return 0
+    uses = list(COMPONENT_USES)
+    doc = unwrap(client.get(instance), "masterDocumentInstance")
+    commit(client, instance, doc, {key: [{"newRevisionRecord": r, "originalRevisionRecord": None}
+                                         for r in records]}, "shell regions")
+    done = apply_overrides(client, instance, key, uses, comps,
+                           envelope="masterDocumentInstance") if (comps and uses) else 0
+    print("shell header+footer nodes=%d  component instances=%d  overrides=%d"
+          % (len(records), len(uses), done))
+    return len(records)
 
 
 # A component's row id is derived from its NAME, for the same reason a design
@@ -224,7 +251,7 @@ def ensure_components(client, cfg, site, surface):
     return out
 
 
-def apply_overrides(client, instance, key, uses, comps):
+def apply_overrides(client, instance, key, uses, comps, envelope="templateDocumentInstance"):
     """Second pass: write each instance's own content into the override nodes.
 
     Mosaic materialises one override node per component node per instance - node,
@@ -238,7 +265,7 @@ def apply_overrides(client, instance, key, uses, comps):
     wanted = [u for u in uses if u.get("overrides")]
     if not wanted:
         return 0
-    doc = unwrap(client.get(instance), "templateDocumentInstance")
+    doc = unwrap(client.get(instance), envelope)
     by_attr = {(n.get("data") or {}).get("attrID"): n for n in doc[key]}
     revisions = []
     for use in wanted:
@@ -387,8 +414,9 @@ def main():
     # AFTER the shell, not before: build_shell is what commits the theme's design
     # tokens and fills VAR_IDS, and a component that uses one cannot be flattened
     # until the token it names exists.
-    master_id = build_shell(client, cfg, site, surface)
+    master_id, header_id, footer_id = build_shell(client, cfg, site, surface)
     comps = ensure_components(client, cfg, site, surface)
+    fill_shell(client, cfg, site, surface, master_id, header_id, footer_id, comps)
 
     for page in site["pages"]:
         template_id = bind_page(client, cfg, master_id, page["slug"], page["post_id"])
