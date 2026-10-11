@@ -604,6 +604,11 @@ document. Lay the forms out by positioning the WINDOW instead, which leaves
 | corner notice | no padding | `top:90px; right:24px`, a small `max-width` |
 | full takeover | no padding | `top:0; right:0; bottom:0; left:0`, `max-width:none` |
 
+"No padding" has to be written: the host starts with the browser's own
+`dialog { padding: 1em }`, because Mosaic's `.m-modal` rule resets inset, margin and
+border but not padding. A client build measured a drawer's host at `padding:
+14.408px` - 1em of its fluid body size - with no modal variant on the page.
+
 `transform` is a structured value, so the centring pull-back is two entries
 (`translateX`, `translateY`), not a string — `references/styling.md` has the shape.
 
