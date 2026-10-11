@@ -191,7 +191,21 @@ value `{"v": "@LOOP('post/work_category', 1, 'term_id')"}`. A Meta Box checkbox
 `settings: {"key": "work_featured"}` and a `text` comparator
 `{"operator": "equals", "settings": {"value": "1"}}` - six posts back, in order.
 
-`orderByClauses` accepts `random`: `{"type": "random", "uuid": "<uuid>",
+`orderByClauses` is a flat list of clauses, each `{uuid, type, <type>Options:
+{settings}}` (`ValidatorOrderBy.php`), under `wpPostType<Type>Options`. Sorting by a
+post column:
+
+```json
+[{"type": "postVariable", "uuid": "<uuid>", "postVariableOptions": {"settings": {
+  "key": "post_date", "cast": "auto", "direction": "ASC"}}}]
+```
+
+**Every settings field is required, `cast` included.** The validator runs each of the
+type's fields and rejects the clause on the first missing one, and a rejected clause
+is stored as `[]` - no error, and the loop falls back to the default newest-first
+order. Reported from a client build on 1.0.10; the validator read from source.
+
+`orderByClauses` also accepts `random`: `{"type": "random", "uuid": "<uuid>",
 "randomOptions": {"settings": {}}}`, a different order on every uncached render. Under
 a page cache that is one order per cache lifetime, not per visitor.
 

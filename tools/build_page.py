@@ -492,17 +492,25 @@ def theme_records(spec, doc, surface):
 
     classes = theme.get("variants") or theme.get("elementClasses") or {}
     if classes:
-        by_name = {}
-        for row in load_csv("variants.csv"):
-            by_name.setdefault(row["name"], []).append(row)
+        catalog = load_csv("variants.csv")
         recs = []
         for name, states in classes.items():
-            matches = by_name.get(name) or []
+            # a catalog id, a class_name (m-loop-item) or a name. Names repeat -
+            # `Item` is the accordion, loop AND list item, all three with a parent -
+            # so a name only resolves when it is the sole row, or the sole
+            # parent-less one, carrying it
+            matches = ([m for m in catalog if m["id"] == name]
+                       or [m for m in catalog if m["class_name"] == name]
+                       or [m for m in catalog if m["name"] == name])
             if not matches:
-                sys.exit("no variant named %r; see data/variants.csv" % name)
+                sys.exit("no variant %r; see data/variants.csv" % name)
+            roots = [m for m in matches if not m["parent"]]
+            if len(matches) > 1 and len(roots) != 1:
+                sys.exit("variant name %r is ambiguous; use one of: %s" % (
+                    name, ", ".join(m["class_name"] for m in matches)))
             # a fresh UUID here is accepted and then silently dropped, so the meta ID
-            # is the only thing that works - take the top-level (parent-less) one
-            top = next((m for m in matches if not m["parent"]), matches[0])
+            # is the only thing that works
+            top = roots[0] if len(matches) > 1 else matches[0]
             recs.append({"newRevisionRecord": {
                 "ID": top["id"], "parentType": "", "parentID": "", "ordering": "a0",
                 "status": "publish", "revision": "", "version": "",

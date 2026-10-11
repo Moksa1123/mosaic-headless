@@ -88,11 +88,12 @@ interaction gating and form actions — four contexts, one grammar.
         "uuid": "<uuid>",
         "type": "serverCondition",
         "serverConditionOptions": {
-          "subject":    {"type": "httpGet",
-                         "httpGetOptions": {"settings": {"name": "show"}}},
-          "comparator": {"type": "text",
-                         "textOptions": {"operator": "equals",
-                                         "settings": {"value": "yes"}}}
+          "subject": {"type": "httpGet",
+                      "httpGetOptions": {
+                        "settings":   {"name": "show"},
+                        "comparator": {"type": "text",          // INSIDE <type>Options
+                                       "textOptions": {"operator": "equals",
+                                                       "settings": {"value": "yes"}}}}}
         }
       }
     ]
@@ -102,6 +103,41 @@ interaction gating and form actions — four contexts, one grammar.
 
 The `<id>Options` suffix is the same convention as everywhere else in Mosaic
 (`RuleTypeAbstract::getOptionsDataName()` returns `getID() . 'Options'`).
+
+**The comparator lives inside the subject's options**, beside `settings`, not beside
+`subject`. The validator reads it as `subject.<type>Options.comparator`
+(`ValidatorEvaluator.php`) and so does the evaluator (`RuleTypeAbstract.php`:
+`$subjectData->{$subjectType . 'Options'}->comparator`). Put it one level up and the
+evaluator finds no comparator and calls
+`SubjectMeta::getLocalOrGlobalComparatorMetaByID(null)`, which is a PHP fatal
+(`Undefined property $comparator`) that takes the WHOLE page down, not just the
+element. Reported from a client build on 1.0.10 and confirmed in the source; the post
+loop filters in `references/dynamic-content.md` use the same nesting.
+
+"Show only when a field has a value", as it ran on a client site on 1.0.10:
+
+```json
+{"uuid": "<uuid>", "type": "serverCondition", "serverConditionOptions": {"subject": {
+  "type": "variable", "variableOptions": {
+    "settings": {"dynamicCode": "@VAR('post/meta_x')"},
+    "comparator": {"type": "text", "textOptions": {
+      "operator": "regexp", "settings": {"value": "/./"}}}}}}}
+```
+
+- **`dynamicCode` is a plain string.** The `variable` subject hands its setting
+  straight to the evaluator; `{"v": "@VAR(…)"}` there reaches
+  `LocalContext::evaluateDynamicCodeToStringOrArray()` as a `stdClass` and is a
+  page-wide fatal. (A post loop FILTER value is the opposite: it is `{"v": …}`.)
+- **`regexp` needs its delimiters here.** `ServerConditionComparatorText` passes the
+  value to `preg_match()` as the whole pattern, so it is `/./`, not `.`. A pattern
+  without delimiters makes `preg_match` return false, which is read as "no match":
+  the element disappears on every page and nothing is reported. A post loop filter's
+  `regexp` is the opposite again - it becomes SQL `REGEXP` and takes NO delimiters
+  (`FilterSubjectPostTypes.php`).
+- Units in one group AND: `regexp /./` plus `not-contains` on the same variable is
+  "has a value and is not X".
+- Inside a `wpPostType` loop, `@VAR('<loopNamespace>/meta_x')` evaluates per item, so
+  each row shows or hides on its own field.
 
 **An empty or absent `conditions` matches.** `matchConditions()` returns `true` when
 the evaluation yields null, so a template with no conditions always applies and an
@@ -134,9 +170,9 @@ can be an `@` expression rather than a literal — see `references/dynamic-conte
 ## Verification status
 
 The routing rules and the condition grammar above are read from source and from the
-live metas endpoints. **Committing a condition has not been driven end to end** — the
-property sweep's naive string probe on `conditions` returns HTTP 500, which is
-consistent with the nested shape being required but is not proof the shape above is
-accepted. Build one, then read the row back and diff it against what you sent; on this
-data model that diff is the only error message you get
-(`references/interactions.md` explains why).
+live metas endpoints. Element conditions (`node.data.conditions`) have been driven end
+to end on a client build on 1.0.10 with the shape above - the `variable` subject, the
+`text` comparator's `regexp` and `not-contains`, inside and outside a post loop. Other
+subjects are read from source only; build one, then read the row back and diff it
+against what you sent. A wrong shape is either silently dropped or a fatal on render,
+so load the page after every condition you commit.

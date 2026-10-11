@@ -60,7 +60,40 @@ Three things learned the hard way:
   goes away.
 - Look up the ID in `data/variants.csv` by `name`. Several rows share a
   name (`Button` appears four times) because sub-components have their own metas — the
-  `selectors` and `parent` columns tell them apart.
+  `selectors` and `parent` columns tell them apart. `Item` is the trap: the accordion,
+  loop and list items are all `Item` and all have a parent, so "the parent-less one"
+  finds none. `build_page.py` takes a theme variant key as the catalog id, the
+  `class_name` (`m-loop-item`) or a name, and refuses a name that matches more than
+  one row.
+
+More from a client build on 1.0.10:
+
+- **`HTML` and `Body` emit `html{…}` and `body{…}`**, and `customDeclarations` works
+  on them - the place for page-wide settings that have no node.
+- **The loop pagination states work on the variants**:
+  `____loop_pagination_number--active` on `Number`,
+  `___loop_pagination_button--disabled` on `Pagination button`.
+- **Variant CSS is printed early in `<head>`.** At equal specificity, a plugin's
+  `<link>` stylesheet and a page's own `<style>` both come later and win. Moving a
+  rule from a plugin stylesheet into a variant can therefore bring back a page rule
+  the plugin had been overriding.
+- **The Gutenberg variants are scoped to block markup.** They match
+  `:is(.entry-content, .wp-block-post-content) X`, and `List` matches only
+  `ul.wp-block-list` - a list written by Rank Math's FAQ block or in raw HTML has no
+  such class and is not styled. A `wpContent` node renders
+  `.m-post-content > .wp-site-blocks > .entry-content`.
+
+## Universal classes
+
+A universal class is the theme-global class a user names (the editor's "classes"),
+committed on the master document under the key `universalClass` with
+`data: {name, label, states}` - `states` is the same structure as a variant's. A node
+takes it through `style.universalClasses`, a map `{<classID>: <classID>}` (a map to a
+universal SUB class ID applies that sub class instead; `ElementMResourceStyle.php`).
+The emitted class is the `name` (sanitized, any `m-` prefix dropped - the
+class-name grammar is in SKILL.md), and its CSS is printed only
+on a page where some node uses it. `status: "delete"` removes one - unlike a variant,
+a universal class is not catalog-backed.
 
 ## Collection variables: the design tokens
 

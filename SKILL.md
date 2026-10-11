@@ -490,10 +490,12 @@ so the pattern is in the data, not just in this paragraph.
   properties whose descriptor exists, and those are created during sync on a
   `DataMeta` that starts empty. Animate with the CSS state path, which is fully
   verified: 36 of 37 probed states compile to exactly the promised selector.
-- Committing a **condition** has not been driven end to end. The grammar in
-  `references/templates-and-conditions.md` is read from source and from the live
-  metas; an element carrying one rendered as hidden, which is consistent with the
-  condition evaluating false but is not proof the shape was understood.
+- An element **condition** puts its comparator INSIDE the subject's options
+  (`subject.<type>Options.comparator`). One level up is a PHP fatal that blanks the
+  whole page; so is `{"v": …}` as a `variable` subject's `dynamicCode` (a plain
+  string there). A server-condition `regexp` needs delimiters (`/./`) - `.` never
+  matches and the element silently disappears. Driven end to end on a client build;
+  references/templates-and-conditions.md
 
 ## Orient yourself in this order
 
@@ -826,7 +828,14 @@ post — `build_all.py` resets first for that reason.
   a phone contact bar on `2fr 1fr 1fr` - its background hugs the text and the cell
   stays empty around it, whatever `display` or `justify-content` you give it. Set
   `width: 100%` on it (reported from a client build; the rule read from 1.0.10's
-  `style.css`).
+  `style.css`). The same rule's `align-items:center` matters when a `menu-link`
+  wraps a whole card: set `alignItems: stretch` and `textAlign: left` on it.
+- **`customDeclarations` is all or nothing, and its unit list is short.** The
+  validator parses every declaration and drops the WHOLE block if one value fails.
+  `!important` fails, and so does any unit outside `ValidatorCustomDeclarations`'s
+  list - `dvh`, `svh`, `lvh`, `dvw`, container units: `height: 100dvh` takes every
+  other line in the block with it, silently. The structured `height` / `maxHeight`
+  fields do accept `dvh`.
 - **`youtube` renders `<mosaic-youtube><iframe>` with no `title`** - the iframe gets
   only `loading`, `src`, `allow` and an id, so an accessible name has to be added
   some other way. `youtubeUrl` is `{"v": "https://www.youtube.com/watch?v=…"}`;

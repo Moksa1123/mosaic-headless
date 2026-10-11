@@ -179,7 +179,9 @@ which are `SingleTransformTypeFactory` and do take `{"value": …}`.
 rewrites stored rows, and `build_page.py` still accepts the old spelling in a spec)
 accepts raw CSS text and emits it verbatim into the rule:
 `"customDeclarations": "outline: 2px dashed rgb(7,8,9);"` compiled through
-unchanged. It is the fallback for anything whose structured shape you have not pinned
+unchanged. Every value is still validated, and one bad value - `!important`, a `dvh`
+or other unit outside the validator's list - drops the whole block silently. It is the
+fallback for anything whose structured shape you have not pinned
 down — at the cost of bypassing the collection-variable layer entirely.
 
 `tools/build_page.py` wraps the five shapes above as `radius`, `shadow`,
