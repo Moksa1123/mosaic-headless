@@ -821,6 +821,12 @@ post — `build_all.py` resets first for that reason.
   default - it is a `<span>`, a label rather than a control. Measured all three.
   `menu-link` and `wysiwyg-link` still render `<span>` without a `url`.
 - **`text` renders as `<div>` by default** — set `tagName` for `<h1>`, `<p>` and so on.
+- **`menu-link` is `width: fit-content` by default** (`.m-menu-link{display:flex;gap:4px;
+  padding:4px 8px;width:fit-content;…}`). Used as a cell of a button row or a grid -
+  a phone contact bar on `2fr 1fr 1fr` - its background hugs the text and the cell
+  stays empty around it, whatever `display` or `justify-content` you give it. Set
+  `width: 100%` on it (reported from a client build; the rule read from 1.0.10's
+  `style.css`).
 - **`youtube` renders `<mosaic-youtube><iframe>` with no `title`** - the iframe gets
   only `loading`, `src`, `allow` and an id, so an accessible name has to be added
   some other way. `youtubeUrl` is `{"v": "https://www.youtube.com/watch?v=…"}`;
