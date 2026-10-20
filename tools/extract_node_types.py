@@ -22,9 +22,10 @@ import sys
 
 # parent::__construct($nodeFactoryManager, 'slug', <label expr>)  -- may span lines
 RE_CTOR = re.compile(
-    r"parent::__construct\s*\(\s*\$\w+\s*,\s*'([^']+)'\s*,\s*(.*?)\)\s*;",
+    r"parent::__construct\s*\(\s*\$\w+\s*,\s*('[^']+'|self::\w+|static::\w+)\s*,\s*(.*?)\)\s*;",
     re.S,
 )
+RE_CONST = re.compile(r"const\s+(\w+)\s*=\s*'([^']+)'\s*;")
 RE_CLASS = re.compile(r"^\s*(?:final\s+)?(abstract\s+)?class\s+(\w+)\s+extends\s+(\w+)", re.M)
 RE_METHOD_BOOL = re.compile(r"function\s+(\w+)\s*\([^)]*\)\s*:\s*bool\s*\{\s*return\s+(true|false)\s*;", re.S)
 RE_ALIAS = re.compile(r"function\s+getAliasTypes\s*\([^)]*\)\s*:\s*array\s*\{\s*return\s*\[(.*?)\]", re.S)
@@ -51,6 +52,47 @@ def rel(path, root):
     return os.path.relpath(path, root).replace(os.sep, "/")
 
 
+def ctor_of(src):
+    """(slug, label expr) of a factory's own constructor, or None.
+
+    Since 1.0.11 the slug of a Pro-only element (modal, popover, code) is a class
+    constant on a shared `*TypeFactoryAbstract` - the Free build registers a locked
+    stand-in from the same abstract - so `self::TYPE` is resolved here."""
+    m = RE_CTOR.search(src)
+    if not m:
+        return None
+    slug = m.group(1)
+    if slug.startswith("'"):
+        return slug.strip("'"), m.group(2)
+    consts = dict(RE_CONST.findall(src))
+    name = slug.split("::", 1)[1]
+    return (consts[name], m.group(2)) if name in consts else None
+
+
+def factory_slugs(node_root, suffixes=("TypeFactory.php", "MResourceFactory.php")):
+    """Concrete factory class name -> type slug, a slug inherited from the abstract
+    when the factory has no constructor of its own. The other extractors share this
+    so the three tables cannot disagree about which types exist."""
+    inherited = {}
+    for path in walk(node_root, ("TypeFactoryAbstract.php",)):
+        src = read(path)
+        cls = RE_CLASS.search(src)
+        c = ctor_of(src)
+        if cls and c:
+            inherited[cls.group(2)] = c[0]
+    out = {}
+    for path in walk(node_root, suffixes):
+        src = read(path)
+        cls = RE_CLASS.search(src)
+        if not cls:
+            continue
+        c = ctor_of(src)
+        slug = c[0] if c else inherited.get(cls.group(3))
+        if slug:
+            out[cls.group(2)] = slug
+    return out
+
+
 def walk(root, suffixes):
     for dirpath, _dirs, files in os.walk(root):
         for fn in files:
@@ -68,6 +110,18 @@ def extract(plugin_root, out_dir):
     if not os.path.isdir(node_root):
         sys.exit("no Mosaic/NodeTypes under %s" % plugin_root)
 
+    # A concrete factory with no constructor of its own takes its slug from the
+    # abstract it extends (1.0.11 split modal / popover / code this way).
+    inherited_ctor = {}
+    abstract_src = {}
+    for path in walk(node_root, ("TypeFactoryAbstract.php",)):
+        src = read(path)
+        cls = RE_CLASS.search(src)
+        c = ctor_of(src)
+        if cls and c:
+            inherited_ctor[cls.group(2)] = c
+            abstract_src[cls.group(2)] = src
+
     types = []
     # `*MResourceFactory.php` as well as `*TypeFactory.php`: two node types -
     # `fieldset-legend` and `fieldset-content` - are declared only by the former,
@@ -78,7 +132,7 @@ def extract(plugin_root, out_dir):
     for path in sorted(walk(node_root, ("TypeFactory.php", "MResourceFactory.php"))):
         src = read(path)
         cls = RE_CLASS.search(src)
-        ctor = RE_CTOR.search(src)
+        ctor = ctor_of(src) or (inherited_ctor.get(cls.group(3)) if cls else None)
         if not ctor:
             continue  # abstract factory with no own slug
         relpath = rel(path, plugin_root)
@@ -100,14 +154,17 @@ def extract(plugin_root, out_dir):
                                                          sibling)))
                 data_extends = dcls.group(3) if dcls else ""
                 break
-        bools = dict(RE_METHOD_BOOL.findall(src))
-        alias = RE_ALIAS.search(src)
+        # isLink / canBeParentFor / aliases / default variant may sit on that abstract too
+        base = abstract_src.get(cls.group(3), "") if cls else ""
+        bools = dict(RE_METHOD_BOOL.findall(base))
+        bools.update(RE_METHOD_BOOL.findall(src))
+        alias = RE_ALIAS.search(src) or RE_ALIAS.search(base)
         aliases = re.findall(r"'([^']+)'", alias.group(1)) if alias else []
-        dflt = RE_DEFAULT_CLASS.search(src)
+        dflt = RE_DEFAULT_CLASS.search(src) or RE_DEFAULT_CLASS.search(base)
         types.append(
             {
-                "type": ctor.group(1),
-                "label": php_label(ctor.group(2)),
+                "type": ctor[0],
+                "label": php_label(ctor[1]),
                 "class": cls.group(2) if cls else "",
                 "extends": cls.group(3) if cls else "",
                 "abstract": "yes" if (cls and cls.group(1)) else "no",

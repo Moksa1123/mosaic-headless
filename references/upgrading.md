@@ -1,4 +1,4 @@
-# Upgrading the plugin: what 1.0.7 → 1.0.8 → 1.0.10 did to the data, measured
+# Upgrading the plugin: what 1.0.7 → 1.0.8 → 1.0.10 → 1.0.11 did to the data, measured
 
 A Mosaic plugin update is two events, not one. The files change when WordPress
 installs the package; the DATA changes only when Mosaic's own upgrade flow has
@@ -225,3 +225,76 @@ are the 1.0.9 sweep.
 which stopped being the post archive when the site got a static front page; every
 type, a plain `div` included, came back COMMITTED. It now reads `sweepPath`
 (default `?post_type=post`) and refuses to run unless a plain div renders there.
+
+## 1.0.10 → 1.0.11
+
+**Getting the package.** This time `wp plugin update mosaic` fetched
+`private-mosaic-pro://…/Mosaic-pro-plugin-stable-1.0.11.zip` and installed it:
+"Mosaic 資料版本與目前安裝的版本相同。正在取代外掛..." / "Updated 1 of 1". The
+folder came out with the right permissions, so no chmod was needed. Back up first
+anyway: `wp db export ~/private_html/pre-1011.sql` and a copy of the old plugin
+folder.
+
+**No data migration.** The header reads `Version: 1.0.11` but `Data Version: 1.0.10`,
+`MOSAIC_SITE.dataVersion` stays `1.0.10`, and the editor namespace answered as
+`/wp-json/mosaic/v1.0.11` straight after the swap. No table changed shape (the same
+23 tables / 210 columns), and the 115 editor routes are the same 115.
+
+**The Free/Pro split was turned round.** Read off the directory layout, as the
+`edition` column always has been:
+
+- the form system (forms, fields, steps, captchas), the slider and tabs, 49 types
+  in all, moved OUT of `Mosaic/NodeTypes/Pro/`;
+- `modal`, `modal-overlay`, `modal-window` and `popover` moved IN; `code` stays.
+
+So 1.0.11 has 5 Pro-only types instead of 48. A Pro-only type now keeps its slug,
+`canBeParentFor` and `canBeNestedChildFor` on a shared `*TypeFactoryAbstract`
+outside `Pro/`, the Pro factory adds the behaviour, and the Free build registers a
+locked stand-in from the same abstract (`LockedNodeTypes`, stripped from the Pro
+package).
+
+**That split hid four types from every extractor.** The slug is now `self::TYPE`
+on the abstract, not a string literal in the concrete factory's constructor, so
+`modal`, `modal-overlay`, `modal-window` and `popover` vanished from
+`node-types.csv`, and `code` with them (124 rows instead of 129). Nothing errored.
+`extract_node_types.py` now resolves `self::TYPE` and inherits a slug from the
+abstract, and `extract_placement.py` / `extract_default_children.py` share that
+lookup (`factory_slugs()`). Reading the abstracts also corrected four rows that
+had been wrong since they were first extracted: `dropdown-wrapper`,
+`dropdown-wrapper-wide` and the two slider arrows say `return true` in
+`canBeParentFor` on their abstract, so they are `any`, not `none`. The arrows'
+`canBeNestedChildFor` (inside a slider or its navigation) is now recorded too.
+Every extractor run against the 1.0.10 tree reproduces the committed 1.0.10
+tables, apart from those four corrected rows.
+
+**Re-extracted and diffed against 1.0.10:** `@VAR('slider/count')` (75 variables);
+`textAlign` accepts `inherit`; the `exitIntent` trigger moved from the "Page &
+scroll" group to "Mouse"; a `Popover` variant (`m-popover`, 157 variants, live);
+pluggables 261 → 285: the `scrollTo` interaction action (with its `px` / `%` / `vh`
+offset units), the `kit` form action and its `kit_fields` endpoint, a
+`configurableMetaBoxModel` dynamic source, a `term_variable` endpoint, and the
+Mailchimp / MailerLite endpoints moved under `Endpoints\Pro`. Node properties
+are the same 196 (the rows moved edition with their types).
+
+**SEO plugins read the render.** `Compatibility/WordPress/Integrations/Seo/`. On
+the post edit screen, the template body's HTML is handed to Yoast's and Rank Math's
+analysis (`rank_math_content`), with the Content element's slot replaced by a live
+marker so the text being typed is analysed in place. Rank Math's link counter
+(`rank_math/links/content`) gets the render instead of the empty `post_content`.
+SEOPress and Slim SEO have their own adapters. A Mosaic page no longer scores as
+empty.
+
+**Re-verified on the live site:** `popovers` 37/37, `component-wall` 26/26,
+`form-surface`, `content-loop` 15/15, both sliders, `tokens`, `navigation` 27/27
+and `mobile-audit` 68 findings. Every one came out byte-identical to the 1.0.10
+CSV, except the navigation page sizes, which moved by a few bytes.
+
+**The node sweep can wreck its own master.** The `document` probe (COMMIT_502 on
+1.0.10 as well) left a nested `document` in the sweep master, and from then on
+every `masterDocumentInstance` GET reset the PHP worker (nginx: "recv() failed
+(104: Connection reset by peer)"), so the run stopped after twelve types. Earlier
+runs had left `master-root`, `styleguide-root`, `component-root` and
+`template-internal` probes under the parent div as well. Delete everything under
+`parentNodeID` (the master is back to its 7 baseline nodes), and sweep `document`
+on its own, or not at all. Also, the parent is the FIRST div by `ordering` (what
+`--setup` picks); a config rebuilt by hand with another div sends the probes there.

@@ -32,6 +32,8 @@ import os
 import re
 import sys
 
+from extract_node_types import factory_slugs
+
 RE_CLASS = re.compile(r"^\s*(?:final\s+)?(?:abstract\s+)?class\s+(\w+)\s+extends\s+(\w+)", re.M)
 RE_CAN_BE_PARENT = re.compile(
     r"function\s+canBeParentFor\s*\([^)]*\)\s*:\s*bool\s*\{(.*?)\n    \}", re.S
@@ -68,16 +70,16 @@ def extract(plugin_root, out_dir):
         sys.exit("no Mosaic/NodeTypes under %s" % plugin_root)
 
     # factory class name -> type slug, so instanceof targets can be named as types
-    class_to_type, sources = {}, {}
-    for path in walk(node_root, ("TypeFactory.php", "MResourceFactory.php")):
+    # Abstracts are read as sources too: since 1.0.11 a Pro-only type (modal,
+    # popover, code) keeps its canBeParentFor on a shared `*TypeFactoryAbstract`.
+    class_to_type, sources = factory_slugs(node_root), {}
+    for path in walk(node_root, ("TypeFactory.php", "MResourceFactory.php",
+                                 "TypeFactoryAbstract.php")):
         src = read(path)
         cls = RE_CLASS.search(src)
         if not cls:
             continue
         sources[cls.group(1)] = (path, src, cls.group(2))
-        ctor = RE_CTOR.search(src)
-        if ctor:
-            class_to_type[cls.group(1)] = ctor.group(1)
 
     def resolve(cls_name):
         """A factory may inherit canBeParentFor from an abstract ancestor."""
@@ -95,7 +97,12 @@ def extract(plugin_root, out_dir):
     for cls_name, slug in sorted(class_to_type.items(), key=lambda kv: kv[1]):
         body, defined_in = resolve(cls_name)
         path, src, _parent = sources[cls_name]
-        nested = "yes" if "function canBeNestedChildFor" in src else ""
+        # canBeNestedChildFor may sit on the abstract as well (modal-overlay, 1.0.11)
+        nsrc, c = src, cls_name
+        while "function canBeNestedChildFor" not in nsrc and sources.get(c, (0, 0, ""))[2] in sources:
+            c = sources[c][2]
+            nsrc = sources[c][1]
+        nested = "yes" if "function canBeNestedChildFor" in nsrc else ""
         # `yes` alone says a runtime ancestry rule exists and not what it wants.
         # These methods walk the parent chain looking for one MResource class -
         # `radio-input` wants a `ChoiceElementMResource` above it - and that is
@@ -104,10 +111,14 @@ def extract(plugin_root, out_dir):
         if nested:
             mbody = re.search(
                 r"function\s+canBeNestedChildFor\s*\([^)]*\)\s*:\s*bool\s*\{(.*?)\n    \}",
-                src, re.S)
+                nsrc, re.S)
             if mbody:
                 for cls in re.findall(r"instanceof\s+(\w+)ElementMResource\b", mbody.group(1)):
                     nested_under.append(cls)
+                # 1.0.11 also compares type slugs: `getType() === ModalElementTypeFactoryAbstract::TYPE`
+                for cls in re.findall(r"getType\(\)\s*===\s*(\w+)ElementTypeFactory(?:Abstract)?::TYPE", mbody.group(1)):
+                    if cls not in nested_under:
+                        nested_under.append(cls)
 
         if body is None:
             rule, allowed = "none", []          # inherited default on the abstract base

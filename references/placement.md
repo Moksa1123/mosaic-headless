@@ -147,8 +147,15 @@ Two other things the table was short of, both fixed the same way — by reading 
 source the column was derived from rather than the one it was convenient to read:
 
 - **`takes_children`**, from the factory's `getDefaultData($data, $children)`
-  signature. `dropdown-wrapper` answers `none` to `canBeParentFor` and holds the
-  menu's links regardless.
+  signature. A type can hold children even when `rule` does not say so.
+- **inherited rules.** `canBeParentFor` and `canBeNestedChildFor` can be declared on
+  a `*TypeFactoryAbstract`, and the abstracts were not read. So `dropdown-wrapper`
+  and the slider arrows read `none` when the source says `true`, and from 1.0.11
+  `modal`, `popover` and `code` dropped out of the catalog entirely. In 1.0.11 their
+  slug is `self::TYPE` on the abstract, shared with the Free build's locked
+  stand-in. The extractors now resolve both, and `modal-overlay`'s
+  `getType() === ModalElementTypeFactoryAbstract::TYPE` check is read as
+  "nested under modal".
 - **two missing types.** `fieldset-legend` and `fieldset-content` are declared by
   an `*ElementMResourceFactory.php`; every extractor walked
   `*ElementTypeFactory.php` only, so they were absent from the catalog and a

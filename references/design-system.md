@@ -179,13 +179,15 @@ need authoring. **It opens on CLICK, not hover** — the host gains
 `dropdown--opening dropdown--opened` and the wrapper goes from `display:none` to
 `display:flex`. A hover test reports a dropdown that does not work.
 
-`dropdown-wrapper` reads as a leaf in `placement-rules.csv`, because `rule` is the
-`canBeParentFor()` answer and that method is never overridden on it. But its
-factory is `getDropdownWrapperElementDefaultData($data, $children)` and the editor
-fills it. "Will the editor let me drop this here" is not the same question as "can
-this hold children", and a build guard that reads only the first refuses correct
-structures — it refused this menu. `extract_placement.py` now also records
-`takes_children` from the factory signature, and `build_page.py` reads it.
+`dropdown-wrapper` used to read as a leaf in `placement-rules.csv`. Its
+`canBeParentFor()` returns `true`, but on `DropdownWrapperElementTypeFactoryAbstract`,
+and the extractor never read the abstract files, so it saw no override and wrote
+`none`. The two slider arrows had the same problem. Since v1.33 the abstracts are read
+and all four say `any`. The guard had already been fixed another way, and that fix
+still holds. Its factory is `getDropdownWrapperElementDefaultData($data, $children)`,
+and a build guard that reads only `rule` refuses correct structures; it refused this
+menu. So `extract_placement.py` also records `takes_children` from the factory
+signature, and `build_page.py` reads it.
 
 That is the second table to be caught short the same way this week. The first was
 `default-children.csv`, which held only the declared `getDefaultData()` statics and

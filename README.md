@@ -194,7 +194,7 @@ than any naive healthy-page floor.
 ## What was verified, and how
 
 Everything ran against a live install — WordPress 7.1, WooCommerce 11.1, Mosaic Pro
-1.0.10, **unlicensed**: the licence gates the theme library and updates, not the node
+1.0.11, **unlicensed**: the licence gates the theme library and updates, not the node
 factories, so Pro types register and render regardless.
 
 | pass | result |
@@ -214,7 +214,7 @@ factories, so Pro types register and render regardless.
 | **Elementor conversion** | every Elementor page of a production site — 19 pages, 3,292 elements — converted, built and checked against its source: **19 of 19**, 3,281 elements carried, 11 declared. Then the converted page through rwd, browser and the audit, with every finding classified inherited-or-introduced: **0 introduced** |
 | **theme export/import** | two paths, both round-tripped. `theme_export.php` moves rows as JSON over WP-CLI, ids intact. `theme_zip.py` drives Mosaic's **own** ZIP export/import — import lands in test mode unless told `--activate`, because the default is to switch the live site — and **22 checks** hold the copy against the source tree for tree |
 | **the skill itself** | `claude plugin eval .` — five cases a user would ask, three runs each, with and without the skill loaded, three LLM judges a run. **With: 1.00 on all five. Without: 0.00 on all five.** The baseline's best answer was to refuse |
-| **measured live** | 115 REST routes, 156 variants, 59 condition subjects, 23 tables / 210 columns |
+| **measured live** | 115 REST routes, 157 variants, 59 condition subjects, 23 tables / 210 columns |
 | **1.0.9 features** | the modal (`<dialog>`), OpenStreetMap, the exit-intent and scroll-depth triggers, run rules, memory actions and the modal shorthand, each built on a live page and exercised in a real browser: 19 of 19. An exit-intent popup that fires once a session is one object, no wiring |
 | **1.0.10 features** | the popover - Mosaic's first non-blocking dialog - built eight ways on a lab page and driven in Chromium: 37 of 37. A page-load notice that leaves the page scrollable and clickable, anchored menus and cards, the nine screen cells, the keepInView flip and its style state, a three-step tour on `afterClose`. Plus the modal's move onto the Popover API: top layer, `requestClose()`, and `display` on its host no longer pinning it open |
 | **slider** | the whole family nested as its factories require and driven in a browser, 19 of 19: advances on its own delay, arrows and bullets and the keyboard move it, holds still under `prefers-reduced-motion`. The bullet turns out to be a template repeated per slide - same id on every copy |

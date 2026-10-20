@@ -49,10 +49,11 @@ expression,namespace,name,label,declared_in
 @VAR('site/timestamp'),site,timestamp,Timestamp,Mosaic/Compatibility/Common/VariableProviderSite.php
 @VAR('site/url'),site,url,Home URL,Mosaic/Compatibility/Common/VariableProviderSite.php
 @VAR('site/wpurl'),site,wpurl,Site URL,Mosaic/Compatibility/Common/VariableProviderSite.php
-@VAR('slider/index'),slider,index,Index,Mosaic/NodeTypes/Pro/Slider/SliderSlides/SliderSlidesElementMResource.php
-@VAR('slider/thumbnail'),slider,thumbnail,Thumbnail,Mosaic/NodeTypes/Pro/Slider/SliderSlides/SliderSlidesElementMResource.php
-@VAR('slider/thumbnailAlt'),slider,thumbnailAlt,Thumbnail alt,Mosaic/NodeTypes/Pro/Slider/SliderSlides/SliderSlidesElementMResource.php
-@VAR('slider/title'),slider,title,Title,Mosaic/NodeTypes/Pro/Slider/SliderSlides/SliderSlidesElementMResource.php
+@VAR('slider/count'),slider,count,Count,Mosaic/NodeTypes/Slider/SliderSlides/SliderSlidesElementMResource.php
+@VAR('slider/index'),slider,index,Index,Mosaic/NodeTypes/Slider/SliderSlides/SliderSlidesElementMResource.php
+@VAR('slider/thumbnail'),slider,thumbnail,Thumbnail,Mosaic/NodeTypes/Slider/SliderSlides/SliderSlidesElementMResource.php
+@VAR('slider/thumbnailAlt'),slider,thumbnailAlt,Thumbnail alt,Mosaic/NodeTypes/Slider/SliderSlides/SliderSlidesElementMResource.php
+@VAR('slider/title'),slider,title,Title,Mosaic/NodeTypes/Slider/SliderSlides/SliderSlidesElementMResource.php
 @VAR('user/description'),user,description,Biographical info,Mosaic/Compatibility/Common/VariableProviderCurrentUser.php
 @VAR('user/displayName'),user,displayName,Display name,Mosaic/Compatibility/Common/VariableProviderCurrentUser.php
 @VAR('user/email'),user,email,Email,Mosaic/Compatibility/Common/VariableProviderCurrentUser.php

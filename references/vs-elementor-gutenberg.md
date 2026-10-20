@@ -23,10 +23,12 @@ rule is the same: never write a property name, enum value, or Free/Pro claim fro
 memory — look it up in `data/`.
 
 **The Free/Pro split is a real axis in both Elementor and Mosaic.** In Mosaic it is
-cleaner: 48 of 122 node types live under `NodeTypes/Pro/` and simply have no factory
-on a Free install (`edition` column in `data/node-types.csv`). There is no
-"partially available" state to reason about the way there is with Elementor Pro
-controls on Free widgets.
+cleaner: whole node types are Pro or not (`edition` column in
+`data/node-types.csv`). In 1.0.11 only 5 of 129 are Pro (modal, its overlay and
+window, popover, code) and a Free install shows a locked stand-in for them; forms,
+slider and tabs, Pro through 1.0.10, are Free now. There is no "partially
+available" state to reason about the way there is with Elementor Pro controls on
+Free widgets.
 
 **Dynamic values exist in all three**, under three names. Elementor calls them
 dynamic tags; Gutenberg has bindings; Mosaic has **evaluator functions** — 19 of

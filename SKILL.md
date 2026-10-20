@@ -1,11 +1,11 @@
 ---
 name: "mosaic-headless"
 description: |
-  Build and modify Mosaic Pro (Nextend) WordPress sites by writing the data model directly - no visual editor, no DOM. Query the real surface with `mo.py` (129 node types, 196 node properties, 98 style properties, 54 style states, 156 variants, 74 dynamic variables, 16 interaction triggers, 115 REST routes) where every lookup leads with the measured verdict, not the declaration: each node type placed on a live site one at a time, each style and node property swept against compiled CSS and markup, the delivered pages re-read in Chromium at three viewports. Measured on Mosaic Pro 1.0.10: the popover (anchored or screen-placed, the flip state, afterClose-chained tours), the modal on the Popover API, OpenStreetMap, exit-intent and scroll-depth triggers, run rules and memory. Drives theme export/import and the 1.0.7 -> 1.0.10 data upgrades from outside wp-admin.
+  Build and modify Mosaic Pro (Nextend) WordPress sites by writing the data model directly - no visual editor, no DOM. Query the real surface with `mo.py` (129 node types, 196 node properties, 98 style properties, 54 style states, 157 variants, 75 dynamic variables, 16 interaction triggers, 115 REST routes) where every lookup leads with the measured verdict, not the declaration: each node type placed on a live site one at a time, each style and node property swept against compiled CSS and markup, the delivered pages re-read in Chromium at three viewports. Measured on Mosaic Pro 1.0.10: the popover (anchored or screen-placed, the flip state, afterClose-chained tours), the modal on the Popover API, OpenStreetMap, exit-intent and scroll-depth triggers, run rules and memory. Drives theme export/import and the 1.0.7 -> 1.0.10 data upgrades from outside wp-admin; re-extracted and re-verified on 1.0.11.
 license: "MIT"
 metadata:
   author: "moksa (https://moksaweb.com)"
-  version: "1.32.2"
+  version: "1.33.0"
   homepage: "https://github.com/Moksa1123/mosaic-headless"
 ---
 
@@ -133,13 +133,15 @@ measured.
 ## What was verified, and how
 
 Everything ran against a live install: WordPress 7.1, WooCommerce 11.1,
-Mosaic Pro 1.0.10, **unlicensed** — the licence gates the theme library and updates,
+Mosaic Pro 1.0.11, **unlicensed** — the licence gates the theme library and updates,
 not the node factories, so the Pro types register and render regardless. The
-site was built on 1.0.7 and upgraded in place three times: every data migration
-(`tools/data_upgrade.py`) ran over the real theme, and the source tables were
-re-extracted from 1.0.10 and every demo verifier re-run on the result, so the
-tables describe 1.0.10 as delivered, not as declared. Where a row is still a 1.0.9
-measurement - the full node sweep, the property sweeps - the section says so.
+site was built on 1.0.7 and upgraded in place four times: every data migration
+(`tools/data_upgrade.py`) ran over the real theme (1.0.11 has none), the source
+tables were re-extracted from 1.0.11, and every demo verifier and the full node
+sweep (128 of 129 types, `document` excluded because its probe wrecks the master)
+were re-run on the result, so the tables describe 1.0.11 as delivered, not as
+declared. Where a row is still an older measurement - the property sweeps - the
+section says so. 1.0.11 swapped the Free/Pro split (`references/upgrading.md`).
 
 ```
 WRITE PATH   verified end to end over REST
@@ -393,7 +395,7 @@ EVAL         the skill itself, put in front of the model with and without it loa
              don't have reliable knowledge of Mosaic Pro's spec format"), which is
              the right thing for a model with no data to do. evals/
 
-MEASURED     115 REST routes, 156 variants, 59 condition subjects,
+MEASURED     115 REST routes, 157 variants, 59 condition subjects,
              23 tables / 210 columns - read off the running site.
 
 UPGRADE      1.0.7 -> 1.0.8 driven over the plugin's own milestone route from
@@ -403,10 +405,10 @@ UPGRADE      1.0.7 -> 1.0.8 driven over the plugin's own milestone route from
              one selector on the worked example that named an emitted class
              stopped matching until it was rewritten. references/upgrading.md
 
-FROM SOURCE  129 node types, 196 properties (68 with enums), 261 pluggable IDs,
+FROM SOURCE  129 node types, 196 properties (68 with enums), 285 pluggable IDs,
              129 placement rules, 25 composite default structures (10 declared,
              15 healed in), 98 style properties, 54 style states, 16 interaction
-             triggers - re-extracted from the 1.0.10 tree.
+             triggers - re-extracted from the 1.0.11 tree.
 ```
 
 **Coverage, stated as a fraction rather than as a headline.** The verification
@@ -579,14 +581,14 @@ so the pattern is in the data, not just in this paragraph.
 | `data/node-type-notes.csv` | 8 | where a sweep outcome is true but misleading on its own, why. Surfaced by `mo.py type` |
 | `data/interaction-verification.csv` | 7 | **probed live** - interaction animation shapes, with negative controls and the stored row beside the payload |
 | `data/intro-verification.csv` | 8 + 15 | **sampled live** - the entrance sequence over fifteen timestamps on a monotonic clock, plus the eight assertions about it |
-| `data/variants.csv` | 156 | **live** — the variant catalog (Mosaic's built-in element classes); their IDs are what a `variant` record must use, and `class_name` is what the element emits |
-| `data/dynamic-variables.csv` | 74 | source — every `@VAR('ns/name')` expression, by namespace |
+| `data/variants.csv` | 157 | **live** — the variant catalog (Mosaic's built-in element classes); their IDs are what a `variant` record must use, and `class_name` is what the element emits |
+| `data/dynamic-variables.csv` | 75 | source — every `@VAR('ns/name')` expression, by namespace |
 | `data/evaluator-functions.csv` | 19 | source — the `@` functions with their arity |
 | `data/interaction-types.csv` | 16 | source — trigger types, `timed` vs `progress`; 1.0.9 added exitIntent, scrollDepth and modal, 1.0.10 adds popover (Popover visibility change: show / beforeClose / afterClose) |
 | `data/animatable-properties.csv` | 22 | source — what a keyframe can drive (**not** the same set as the style properties) |
 | `data/condition-subjects.csv` | 59 | **live** — condition subjects per context |
 | `data/condition-comparators.csv` | 12 | **live** — comparators and their operator sets, captured on 1.0.9; the two date rows carry 1.0.10's four operators (after, after-or-equal, before, before-or-equal) from its source |
-| `data/pluggables.csv` | 261 | source — every `setID()` by registry |
+| `data/pluggables.csv` | 285 | source — every `setID()` by registry |
 | `data/rest-routes.csv` | 115 | **live** — method, path, args |
 | `data/db-columns.csv` | 210 | **live** — every column of all 23 tables |
 
@@ -677,7 +679,7 @@ post — `build_all.py` resets first for that reason.
 
 ## Facts worth knowing before you look anything up
 
-- **The REST namespace contains the plugin version** (`/wp-json/mosaic/v1.0.10`). Read
+- **The REST namespace contains the plugin version** (`/wp-json/mosaic/v1.0.11`). Read
   it from `mosaicOptions.rest_api_url`, never hardcode. After a plugin update the
   editor namespace is GONE until the data upgrade has run; only
   `mosaic/<dataVersion>/<version>/upgrade` answers. `tools/data_upgrade.py`.

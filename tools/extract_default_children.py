@@ -40,6 +40,8 @@ import os
 import re
 import sys
 
+from extract_node_types import factory_slugs
+
 RE_DEFAULT = re.compile(
     r"function\s+get\w*DefaultData\s*\([^)]*\)\s*:\s*object\s*\{(.*?)\n    \}", re.S
 )
@@ -73,10 +75,9 @@ def extract(plugin_root, out_dir):
                 path = os.path.join(dirpath, fn)
                 src = read(path)
                 files.append((path, src))
-                ctor = re.search(r"parent::__construct\s*\(\s*\$\w+\s*,\s*'([^']+)'", src)
-                stem = fn.replace("ElementTypeFactory.php", "").replace("NodeTypeFactory.php", "")
-                if ctor:
-                    stem_to_slug[stem] = ctor.group(1)
+
+    for cls_name, slug in factory_slugs(node_root, ("TypeFactory.php",)).items():
+        stem_to_slug[re.sub(r"(Element|Node)TypeFactory$", "", cls_name)] = slug
 
     rows = []
     for path, src in files:

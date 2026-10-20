@@ -76,7 +76,7 @@ as a URL (measured on a client build on 1.0.10). As `{"v": "@concat(…)"}` it d
 
 ## The variable namespace
 
-`data/dynamic-variables.csv` — 74 variables across 11 namespaces, each row carrying
+`data/dynamic-variables.csv` — 75 variables across 11 namespaces, each row carrying
 the exact `@VAR('…')` expression to paste:
 
 | namespace | n | what it needs to resolve |

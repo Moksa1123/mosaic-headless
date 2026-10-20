@@ -62,11 +62,17 @@ does not touch the subtree's rows.
 
 ## Node types and properties
 
-122 node types are registered (`data/node-types.csv`), **48 of them Pro-only** —
-the split is structural, not a flag: Pro types live under `Mosaic/NodeTypes/Pro/`
-and cover the whole form system, slider, tabs and code element. If a type's
-`edition` column says `pro`, a Free install has no factory for it and the node
-falls back to the `__unknown` type rather than erroring.
+129 node types are registered (`data/node-types.csv`), **5 of them Pro-only** as
+of 1.0.11: `modal`, `modal-overlay`, `modal-window`, `popover` and `code`. The
+split is structural, not a flag: Pro types live under `Mosaic/NodeTypes/Pro/`.
+1.0.11 turned it round. Through 1.0.10 the form system, slider and tabs (48
+types) were the Pro ones and modal / popover were Free; 1.0.11 moved the forms,
+slider and tabs out of `Pro/` and moved modal, popover and code in. A Pro-only
+type now keeps its slug and placement rules on a shared
+`*TypeFactoryAbstract` outside `Pro/`, so a Free install registers a locked
+stand-in under the same slug (`LockedNodeTypes`) instead of having no factory
+at all. Read the `edition` column for the version you target and never carry a
+Free/Pro claim across an upgrade.
 
 Each type declares its own data properties (`data/node-properties.csv`, 181
 properties across 49 classes). Properties are declared by `createDataSimple` (175),
