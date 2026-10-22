@@ -5,7 +5,7 @@ description: |
 license: "MIT"
 metadata:
   author: "moksa (https://moksaweb.com)"
-  version: "1.33.0"
+  version: "1.33.1"
   homepage: "https://github.com/Moksa1123/mosaic-headless"
 ---
 
@@ -825,6 +825,15 @@ post — `build_all.py` resets first for that reason.
   default - it is a `<span>`, a label rather than a control. Measured all three.
   `menu-link` and `wysiwyg-link` still render `<span>` without a `url`.
 - **`text` renders as `<div>` by default** — set `tagName` for `<h1>`, `<p>` and so on.
+- **A `wysiwyg-text` run prints no markup since 1.0.11.** Its `<` and `>` are escaped
+  on output, so `A<strong>B</strong>C<br>D` reaches the page as those literal
+  characters (measured: `A&lt;strong&gt;B&lt;/strong&gt;C&lt;br&gt;D`). Inline
+  formatting is a node: `wysiwyg-span` → `<span class="m-span">` (style it),
+  `wysiwyg-linebreak` → `<br>`, `wysiwyg-link` with `url` →
+  `<a class="m-inline-link">`, each holding its own `wysiwyg-text` child. Entities
+  still print as their character (`&lt;dialog&gt;` → `<dialog>`, `&amp;` → `&`).
+  Through 1.0.10 the run was raw HTML instead, where a tag name in prose swallowed
+  the rest of the paragraph; `build_page.py` refuses any tag in a run either way.
 - **`menu-link` is `width: fit-content` by default** (`.m-menu-link{display:flex;gap:4px;
   padding:4px 8px;width:fit-content;…}`). Used as a cell of a button row or a grid -
   a phone contact bar on `2fr 1fr 1fr` - its background hugs the text and the cell
@@ -875,6 +884,7 @@ post — `build_all.py` resets first for that reason.
 | `verify_loop.py` | a decoration that runs forever: does it loop (paused-timeline scrub), does it bury text or controls anywhere a reader can rest, does it open by pointer and by keyboard, is it still under reduced motion? |
 | `probe_accordion.py` | the accordion family nested as its factory requires, plus the guard's refusal of the bare node - the probe that corrected two rows of this skill's own tables |
 | `from_elementor.py` | an Elementor `_elementor_data` tree -> a Mosaic page spec, with every element it cannot convert reported by name and reason (`--strict` to refuse a lossy spec) |
+| `inline_html.py` | an HTML fragment -> `text` / `list` nodes with `wysiwyg-span` / `-link` / `-linebreak` inside, for content that arrives as HTML (a 1.0.11 text run prints tags literally); `from_elementor.py` uses it |
 | `verify_conversion.py` | did the conversion carry the page? every source string, image, link and heading level looked for on the delivered Mosaic page |
 | `sweep_node_types.py` | commit every node type one per document and assert the delivered HTML |
 | `sweep_style_properties.py` | write every style property and check the compiled CSS |

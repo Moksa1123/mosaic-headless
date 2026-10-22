@@ -276,6 +276,24 @@ offset units), the `kit` form action and its `kit_fields` endpoint, a
 Mailchimp / MailerLite endpoints moved under `Endpoints\Pro`. Node properties
 are the same 196 (the rows moved edition with their types).
 
+**Text runs stopped printing HTML.** `WysiwygTextNodeMResource` now escapes `<` and
+`>` in a `wysiwyg-text` run on output (`getEscapedText()`, NEXT-5875; `&` is left
+alone so entities still work). A run carrying `<strong>` or `<br>` - a natural thing
+for a conversion script to emit - prints the tags as text. Measured on the demo site:
+`A<strong>B</strong>C<br>D` delivered as `A&lt;strong&gt;B&lt;/strong&gt;C&lt;br&gt;D`,
+while sibling `wysiwyg-span`, `wysiwyg-linebreak` and `wysiwyg-link` nodes delivered
+`<span class="m-span">`, `<br>` and `<a class="m-inline-link" href>`. None of the
+demo pages used inline tags, so every verifier above still matched; it was a client
+migration from Elementor that hit it, and fixed it by emitting the inline nodes.
+`build_page.py` used to let `b|i|em|strong|br|span|a|code|sup|sub` through; it now
+refuses every tag in a run. `from_elementor.py` was the worst case: it put a text-editor
+widget's whole HTML into one run, so every converted paragraph came out as
+`&lt;p&gt;…&lt;/p&gt;` on 1.0.11 - the demo site's old conversions show 57 to 88 literal
+tags per page. It now parses the HTML with `tools/inline_html.py` into `text` / `list`
+nodes with span, link and line-break nodes inside; pages converted before the fix
+have to be converted again. `wysiwyg-link`'s `url` also gained `ValidatorURLAllowed`
+and is printed through `Filter::escURL`.
+
 **SEO plugins read the render.** `Compatibility/WordPress/Integrations/Seo/`. On
 the post edit screen, the template body's HTML is handed to Yoast's and Rank Math's
 analysis (`rank_math_content`), with the Content element's slot replaced by a live

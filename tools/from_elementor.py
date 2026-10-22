@@ -68,6 +68,8 @@ import os
 import re
 import sys
 
+from inline_html import blocks_from_html, inline_children
+
 # Elementor's responsive suffix -> Mosaic's breakpoint key. Elementor also has
 # `_widescreen`/`_laptop` etc. on some installs; anything not in this map is
 # reported rather than folded into the desktop value.
@@ -248,7 +250,7 @@ def as_heading(el, ctx):
     if tag not in ("h1", "h2", "h3", "h4", "h5", "h6", "p", "div", "span"):
         tag = "h2"
     node = {"type": "text", "data": {"tagName": tag, "attrID": ctx.attr(el)},
-            "text": s.get("title") or ""}
+            "children": inline_children(s.get("title") or "")}
     node = styled(node, s)
     return ctx.maybe_link(node, s.get("link"), el)
 
@@ -256,11 +258,16 @@ def as_heading(el, ctx):
 @handler("text-editor", "e-paragraph")
 def as_text(el, ctx):
     s = el.get("settings") or {}
-    # Elementor's editor content is HTML. It goes into the wysiwyg child, which
-    # is what that child is for - the same path every text node on the worked
-    # example uses.
-    node = {"type": "text", "data": {"tagName": "div", "attrID": ctx.attr(el)},
-            "text": s.get("editor") or ""}
+    # Elementor's editor content is HTML. Through 1.0.10 it could go into one
+    # wysiwyg-text run as-is; since 1.0.11 a run escapes `<` and `>`, so the
+    # paragraphs, bold, links and breaks arrive as literal tags. It is parsed
+    # into text / list nodes with wysiwyg-span / -link / -linebreak inside.
+    blocks = blocks_from_html(s.get("editor") or "")
+    if len(blocks) == 1 and blocks[0]["type"] == "text":
+        node = blocks[0]
+        node["data"]["attrID"] = ctx.attr(el)
+    else:
+        node = {"type": "div", "data": {"attrID": ctx.attr(el)}, "children": blocks}
     return styled(node, s)
 
 
@@ -279,7 +286,7 @@ def as_button(el, ctx):
         if link.get("nofollow"):
             data["rel"] = "nofollow"
     node = {"type": "button", "data": data,
-            "text": s.get("text") or s.get("button_text") or ""}
+            "children": inline_children(s.get("text") or s.get("button_text") or "")}
     extra = {}
     if colour(s.get("button_text_color")):
         extra["color"] = s["button_text_color"]
@@ -366,7 +373,7 @@ def as_icon_list(el, ctx):
                    {"type": "text",
                     "data": {"tagName": "span",
                              "attrID": "%s-i%dt" % (ctx.attr(el, bump=False), i)},
-                    "text": it.get("text") or ""}, it.get("link"), el)]}
+                    "children": inline_children(it.get("text") or "")}, it.get("link"), el)]}
         rows.append(row)
         # The icon itself is an Elementor icon-library reference (`selected_icon`
         # -> {value: "fas fa-check", library: "fa-solid"}). Mosaic's `icon` type
