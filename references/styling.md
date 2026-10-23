@@ -230,6 +230,20 @@ dropped, which is the only reason they cost minutes instead of a debugging sessi
 — a property that is not in the registry cannot be set at all, and Mosaic's own
 API accepts the write and discards it.
 
+## `fontFamily` takes a plain family list, nothing else
+
+`ValidatorStyleFontFamily` (NEXT-5841) accepts quoted names and unquoted identifier
+runs joined by commas — `"Noto Sans TC", sans-serif`, `system-ui, -apple-system` — or
+a font variable `{"var": id}`. `var(--x)`, any function, or a tab / newline between
+names is not a family list. The commit accepts it, stored data loads without
+validation, and `CSSFontFamilyPropertyFactory` then drops it: no rule, no error, the
+element just inherits. A CSS custom property for the font goes in
+`customDeclarations` (`font-family: var(--x);`). `build_page.py` refuses the bad
+string.
+
+`fontWeight` is the enum `100`…`900` only — no `bold`, `bolder`, `normal`; the
+builder refuses those like any other enum miss.
+
 ## Gradient stops take units (1.0.10)
 
 A gradient's `dots[].position` - background and mask alike - used to be a bare float

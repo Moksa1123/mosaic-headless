@@ -86,6 +86,11 @@ class Client:
     def get(self, tail):
         return self._call(self.theme_url(tail))
 
+    def api_get(self, tail):
+        """A route outside the theme, e.g. `settingsEditorInstance` (Mosaic → Settings),
+        which lives at /mosaic/v<version>/ and 404s under /theme/<id>/."""
+        return self._call("%s/%s" % (self.api, tail))
+
     def commit(self, tail, sync, revisions):
         return self._call(
             self.theme_url(tail + "/commit"),

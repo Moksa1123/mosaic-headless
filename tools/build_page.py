@@ -251,6 +251,12 @@ class Surface:
                 for p, value in props.items():
                     if p not in self.style_props and p not in shorthands:
                         problems.append("%r is not a supported style property (on %s)" % (p, t))
+                    if (p == "fontFamily" and isinstance(value, str)
+                            and not FONT_FAMILY_LIST.match(value.strip(" \t\n\r\f"))):
+                        problems.append("fontFamily=%r is not a plain family list - Mosaic "
+                                        "drops it without a rule (NEXT-5841); use a font "
+                                        "variable {\"var\": id}, or customDeclarations for "
+                                        "var(--x) (on %s)" % (value, t))
                     allowed = self.style_enums.get(p)
                     if allowed and isinstance(value, str) and value not in allowed:
                         problems.append("%s=%r is not one of %s (on %s)"
@@ -265,6 +271,14 @@ class Surface:
 
 # A fixed namespace, so a design token's row ID is a function of its name alone and
 # a rebuild rebinds the same row instead of adding a second one.
+# ValidatorStyleFontFamily.php (NEXT-5841): quoted names and unquoted identifier
+# runs, joined by commas with spaces only. Anything else - var(), a function, a tab
+# or newline between names - is dropped at compile time with no error.
+_FF_UNQUOTED = r"[\w-]+(?: +[\w-]+)*"
+_FF_NAME = (r"(?:\"[^\"\\<;{}\x00-\x1f\x7f]+\"|'[^'\\<;{}\x00-\x1f\x7f]+'|"
+            + _FF_UNQUOTED + ")")
+FONT_FAMILY_LIST = re.compile(r"^" + _FF_NAME + r"(?: *, *" + _FF_NAME + r")*$")
+
 VAR_NAMESPACE = uuid.UUID("6d6f7361-6963-4865-6164-6c657373ff01")
 VAR_IDS = {}
 

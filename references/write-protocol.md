@@ -20,6 +20,15 @@ All 114 routes are in `data/rest-routes.csv`; the namespace is
 the base URL changes on every Mosaic update. Read it from `mosaicOptions.rest_api_url`
 on any Mosaic admin page rather than composing it yourself.
 
+**Mosaic → Settings is the one instance outside the theme:**
+`/mosaic/v<version>/settingsEditorInstance` (+ `/checkout`, `/check`, `/commit`), with
+no `theme/<themeID>/` in the path. `Client.get()` and `Client.commit()` always prefix
+the theme, so they 404 on it; read it with `Client.api_get("settingsEditorInstance")`
+and commit to the same un-prefixed path. Its `scriptsInline` switch inlines only the
+component scripts (accordion, dropdown, navbar, form, slider, dialog — each
+`*ElementMResource` asks `MosaicSettings::isScriptsInlineAllowed()`); `Frontend.js`
+still loads as a file.
+
 ## The envelopes
 
 Both `checkout` and `check` take one required string parameter, `syncCheckEnvelopes`
