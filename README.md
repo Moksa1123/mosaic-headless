@@ -301,6 +301,7 @@ and heading level — and it earned its place at once: it caught the converter l
 | `verify_rwd.py` | does every `_t`/`_m` declaration reach the served stylesheet |
 | `verify_intro.py` / `verify_loop.py` | a page-load sequence that ENDS; a perpetual one that loops, hides nothing, and opens |
 | `theme_export.php` / `theme_import.php` | a whole theme as JSON rows over WP-CLI, ids intact |
+| `prune_unbound.php` | clears the templates and masters that page rebuilds leave bound to nothing, with their nodes; dry run unless `--apply` |
 | `theme_zip.py` / `theme_zip_compare.php` / `theme_delete.php` | Mosaic's own ZIP export/import from outside the editor, the copy held against the source, and a clean delete that refuses the live theme |
 | `list_fields.php` | every `@VAR` / `@LOOP` name a post's custom fields register, with values |
 | `verify_dialog.py` | the 1.0.9 modal, triggers, run rules and memory, driven in a browser |

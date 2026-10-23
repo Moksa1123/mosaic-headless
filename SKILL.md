@@ -5,7 +5,7 @@ description: |
 license: "MIT"
 metadata:
   author: "moksa (https://moksaweb.com)"
-  version: "1.33.2"
+  version: "1.33.3"
   homepage: "https://github.com/Moksa1123/mosaic-headless"
 ---
 
@@ -675,7 +675,9 @@ python tools/build_all.py --config sweep.json    # reset + build every design
 ```
 
 Rebuilding a single page without a reset leaves an orphan template bound to the same
-post — `build_all.py` resets first for that reason.
+post — `build_all.py` resets first for that reason. `build_site.py` re-binds the post
+to a fresh master and template and leaves the old pair bound to nothing; clear them
+with `tools/prune_unbound.php` (dry run by default) after a batch of rebuilds.
 
 ## Facts worth knowing before you look anything up
 
@@ -736,7 +738,7 @@ post — `build_all.py` resets first for that reason.
   in templates when nginx closed the upstream at five minutes. Pruned to the bound
   set (masters not reached from a bound template, their templates, their nodes)
   the same import took under two minutes and compared 22 of 22. Prune before you
-  export; `wp_mosaic_template_assigns.parentID` -> template -> `masterID` is the
+  export - `wp eval-file tools/prune_unbound.php <themeID>` counts, `--apply` deletes; `wp_mosaic_template_assigns.parentID` -> template -> `masterID` is the
   bound set, plus any `assign="auto"` template. Then sweep ORPHANS: a probe run
   that half-failed, or a prune that removed a parent, leaves nodes whose parent id
   points at nothing. The export skips them, so the copy is short by exactly those
@@ -895,6 +897,7 @@ post — `build_all.py` resets first for that reason.
 | `theme_export.php` / `theme_import.php` | move a whole theme across installs, ids intact |
 | `theme_zip.py` | drive Mosaic's OWN export/import - the ZIP the editor makes, attachments included, over the milestone protocol; import lands in test mode unless told `--activate` |
 | `theme_zip_compare.php` | hold an imported copy against its source, tree for tree - every scoped table, the (parentType, type) shape, which ids survive, and orphans named rather than counted |
+| `prune_unbound.php` | delete the templates no post is bound to, the masters no kept template uses, their nodes, then orphan nodes pass after pass - one theme, dry run unless `--apply`, `assign="auto"` templates kept |
 | `theme_delete.php` | remove a theme completely through the plugin's own routine; refuses the live one |
 | `verify_slider.py` | the slider in a real browser: does it advance, do the arrows and bullets drive it, does the keyboard, does it stop when motion is not wanted - `--label`/`--append` put several sliders in one table, which is where a carousel and a plain slider can be held against each other |
 | `verify_navigation.py` | a multi-page site: is every menu item a real `<a href>`, does every page answer 200 (a template that was never bound answers 406 with an empty body, which only a logged-out visitor sees), and with `--viewports` does any page scroll SIDEWAYS - the one question no per-page checker asks - and whether every in-page `#fragment` resolves ON THE PAGE THAT CARRIES IT, which an HTTP check cannot see: a bare `#services` in a SHARED header fetches the current page, answers 200 everywhere, and does nothing on every page but the one that has that section |
