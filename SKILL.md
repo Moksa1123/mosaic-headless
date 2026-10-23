@@ -5,7 +5,7 @@ description: |
 license: "MIT"
 metadata:
   author: "moksa (https://moksaweb.com)"
-  version: "1.33.3"
+  version: "1.33.4"
   homepage: "https://github.com/Moksa1123/mosaic-headless"
 ---
 
@@ -703,7 +703,10 @@ with `tools/prune_unbound.php` (dry run by default) after a batch of rebuilds.
   with them (`m-accordion-item--opened`, `m-menu-link--current`, `m-tab--active`).
   Any CSS you write against an emitted class is coupled to the plugin version.
 - **`body{opacity:0}`** — the theme reveals itself from JavaScript. Screenshot tooling
-  must let scripts run or it captures a blank page.
+  must let scripts run or it captures a blank page. The reveal waits for
+  `DOMContentLoaded`, i.e. for every `defer` script, so deferring scripts blanks the
+  page longer; `html body{opacity:1!important}` is safe and was worth 72 → 86 mobile
+  (`references/styling.md`).
 - **Two themes can carry the same name, and only the ACTIVE one is bound to
   anything.** Every write to `theme/<themeID>/...` succeeds against an inactive
   theme - master, nodes, components, tokens, all of it - and then

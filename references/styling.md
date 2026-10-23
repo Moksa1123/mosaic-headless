@@ -102,6 +102,22 @@ Also note `body{opacity:0}` in the base block — the theme reveals itself from
 JavaScript. A page fetched without running scripts is fully styled but invisible;
 screenshot tooling must let the JS run before capturing.
 
+The reveal is an inline script in `Builder/Header.php`: on `DOMContentLoaded`, one
+`requestAnimationFrame` later, `body.style.opacity = "1"`. `DOMContentLoaded` waits for
+every `defer` script, so deferring jQuery or Mosaic's own frontend - the usual
+render-blocking fix - keeps the whole page blank until they have run. On a slow phone
+that is the FCP and LCP. Overriding it is safe: the stylesheet is in the document
+before the body, so nothing paints unstyled.
+
+```css
+html body { opacity: 1 !important; }
+```
+
+Measured on a migrated clinic site, Lighthouse 13.5 mobile, median of 3, same day:
+performance 72 → 86, LCP 4.8 s → 3.2 s, CLS still 0, and a frame-by-frame check found
+no unstyled frame. TBT rose (42 → 154 ms) only because the scripts now run inside the
+measured window.
+
 ## Setting values
 
 The `factory` column in `data/style-properties.csv` tells you the value shape:
