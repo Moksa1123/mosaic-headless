@@ -85,7 +85,7 @@ class Surface:
         self.outcome = {r["type"]: r["outcome"] for r in load_csv("node-verification.csv")}
         style_rows = load_csv("style-properties.csv")
         self.style_props = {r["property"] for r in style_rows}
-        # 24 of the 98 style properties are restricted to an enum. A value outside it
+        # 24 of the 101 style properties are restricted to an enum. A value outside it
         # is accepted by the API, stored, and silently never compiled - white-space
         # takes pre-wrap but not pre-line, and the difference is invisible until you
         # look at the delivered CSS. Refuse it here instead.

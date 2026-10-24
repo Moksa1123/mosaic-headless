@@ -4,13 +4,13 @@ Responsive in Mosaic is the **second axis of the style object**, not a separate 
 structure and not a naming convention:
 
 ```jsonc
-"style": {
+"style": {"states": {
   "&": {                                  // state
     "_":  {"paddingLeft": "48px"},        // base breakpoint
     "_t": {"paddingLeft": "32px"},        // <=1079px
     "_m": {"paddingLeft": "20px"}         // <=767px
   }
-}
+}}
 ```
 
 `state → breakpoint → property`. Get the two middle levels the wrong way round and
@@ -31,6 +31,14 @@ Both are `direction: down`, so both match on a phone, and **`_m` is ordered afte
 `_t`** — which is the only reason a mobile value overrides a tablet one rather than
 losing to it. Custom breakpoints get UUIDs instead of `_t`/`_m`; do not hardcode the
 pair, read the table.
+
+A row is not always `down`. `BreakpointMResourceData` declares `type` (`simple` |
+`custom`, default simple), `width` (integer ≥ 1), `direction` (`up` | `down`,
+default down), `query` (a custom row's media query, written without `@media`) and
+`previewWidth` / `previewHeight`. An `up` row is a min-width breakpoint, so the
+"later row overrides" reasoning above only holds among `down` rows - read
+`direction` before assuming the cascade. Only the two healed `down` rows have been
+measured here.
 
 ## What it compiles to
 
@@ -73,16 +81,24 @@ Measured twice on the same page: a 3×2 hairline list that kept a column rule an
 cell opened a row while still carrying the four-up rule. `tools/verify_rwd.py`
 reports every one of these as `RESET-RISK`.
 
-## `gridColumnStart` is in the surface and emits nothing
+## Place a grid child with `gridChildPosition`, never its legs
 
-`gridColumnStart`, `gridColumnEnd`, `gridRowStart` and `gridRowEnd` are all in
-`data/style-properties.csv` — they are real entries in the plugin's own property
-list, under the `gridChildPosition` group. They compile to nothing.
+`gridColumnStart`, `gridColumnEnd`, `gridRowStart` and `gridRowEnd` are in
+`data/style-properties.csv` as members of the `gridChildPosition` group. Written as
+loose keys they compile to nothing - 16 `gridColumnStart` declarations in a committed
+spec, **zero** `grid-column` in the delivered CSS, no exception anywhere.
 
-Measured: 16 `gridColumnStart` declarations in a committed spec, **zero** occurrences
-of `grid-column` anywhere in the delivered CSS. No exception, no console warning, no
-change to the commit response. If you need a child in a particular column, change the
-template — do not try to place the child.
+Written as the group they work. Measured on 1.0.11:
+
+```jsonc
+"gridChildPosition": {"gridColumnStart": "2", "gridColumnEnd": "4",
+                      "gridRowStart": "1", "gridRowEnd": "3"}
+// -> grid-column-start:2; grid-column-end:4; grid-row-start:1; grid-row-end:3
+```
+
+All four keys are required non-empty strings (`ValidatorStyleGridChildPosition`) -
+`"auto"` and `"span 2"` are strings too. This is the editor's Grid child →
+Position → Manual.
 
 ## A row with more children than columns fills the gutter, not the width
 

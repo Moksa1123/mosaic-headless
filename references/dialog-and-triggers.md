@@ -512,9 +512,10 @@ blocks inside it. Any tool that read a breakpoint by block id reads nothing now 
 the twenty inert grouped properties are now visible in the markup as well as absent
 from the CSS, and a checker must not read "no token" as "the node did not render".
 
-**`youtube`'s `privacy` property suppresses the element.** Set on its own it emits
-nothing at all, where 1.0.8 rendered the element and recorded NO_EFFECT. One row of
-`data/node-property-verification.csv`, the only `NO_OUTPUT` in the table.
+**`youtube`'s `privacy` property does not suppress the element.** An earlier sweep
+recorded it as `NO_OUTPUT`; re-measured on 1.0.11 with a real `youtubeUrl`, the
+element renders and `data-host` becomes `www.youtube-nocookie.com`
+(`YouTubeElementMResource`). The old row was a probe without a usable URL.
 
 ## The worked example's own modal
 

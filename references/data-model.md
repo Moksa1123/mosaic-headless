@@ -22,7 +22,7 @@ Measured on a real install (`data/db-columns.csv`, 23 tables / 210 columns, Mosa
 | `mosaic_universal_classes`, `mosaic_universal_sub_classes` | user-defined classes that apply to any element. `mosaic_utility_classes` / `mosaic_utility_sub_classes` before 1.0.8 |
 | `mosaic_collections`, `mosaic_collection_modes`, `mosaic_collection_skins`, `mosaic_collection_groups`, `mosaic_collection_variables` | the design-token system (a collection has modes and skins; variables resolve per mode) |
 | `mosaic_breakpoints` | responsive breakpoints, per theme — not global |
-| `mosaic_settings` | theme-scoped settings |
+| `mosaic_settings` | Mosaic → Settings, one row for the whole site (no `themeID` column) - including the Google Maps key, CAPTCHA and mailing-list API keys, so a theme ZIP never carries them |
 | `mosaic_submissions`, `mosaic_submission_actions` | form submissions (Pro) |
 | `mosaic_locks` | editing locks; the only table created at plugin activation |
 
@@ -137,4 +137,11 @@ Verified on a live page: two instances of one component, both rendered, the
 component's own text present twice from a single definition. Edit the component and
 every instance changes - which is the whole point, and the reason a real site should
 use these rather than repeating a tree.
+
+From the official docs and the schema: a component's "Context" - which `@VAR`
+namespaces its nodes may use - is the `path` column of `wp_mosaic_components`, the
+same template-path ids templates use. A component in use is not deleted. Resetting an
+override resets that one node, not its children. Pasting a component or class from
+another theme adds a resource even when one of that name exists, so `name` can
+repeat within a theme; only the emitted class name is made unique.
 

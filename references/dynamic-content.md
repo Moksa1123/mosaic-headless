@@ -103,6 +103,16 @@ rather than a message in a log.
 The name separator is `/` (`TemplatingContextVariable::VARIABLE_SEPARATOR`), and the
 namespace is everything before the first one.
 
+**A container can bring its own post into scope.** `div` (and its Grid / Rows /
+Columns / Container variants) carries `dynamicSources`, the editor's "Dynamic
+sources": it resolves a post or term and gives that context to the children, so a
+previous/next-post card is a div whose source is a Post variable filtered on the
+current post's date. Those filters compare raw `wp_posts` values - "published date
+GMT" against `@date('Y-m-d H:i:s', @VAR('post/publish_timestamp'))`, not a formatted
+date. Read from source and the official docs, not measured here; read a row the
+editor wrote before hand-building one. Custom metadata keys starting with `_` are not
+offered as variables.
+
 ## The functions
 
 `data/evaluator-functions.csv` — 19 of them with their arity:
@@ -117,6 +127,13 @@ attachment(2)  find_image(2)  find_link(2)  find_video(2)       media
 ```
 
 `sum`, `avg`, `concat` and `fallback` are variadic.
+
+**Write the ids with their underscores.** The official docs spell them `@FINDIMAGE(…)`
+and `@REMOVEHTML(…)`; the evaluator only lowercases the name, so those look up
+`findimage` / `removehtml`, which do not exist, and an unknown function evaluates to
+`''` with no error (`EvaluatorFunctions.php`, `Evaluator.php`). `@find_image(…)`,
+`@remove_html(…)`, `@find_link(…)` work. `VAR`, `VAR_RAW` and `LOOP` themselves are
+matched case-sensitively.
 
 **`@concat` drops any argument that evaluates to `'0'`** (and `''`). Each argument is
 `strval()`-ed and appended only `if ($item)` (`EvaluatorFunctionConcat.php`), and

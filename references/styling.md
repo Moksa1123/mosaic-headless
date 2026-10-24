@@ -16,8 +16,9 @@ The commit is accepted, the row is stored, and the stylesheet simply has no such
 declaration. Meanwhile every one of the 58 testable ungrouped properties compiled.
 
 Use the grouped shape — `border` takes `{"width": "3px", "style": "dashed", "color":
-"rgb(...)"}` and does compile — or drop to `customDeclarations`. If you need a child in a
-particular grid column, change the template rather than trying to place the child.
+"rgb(...)"}` and does compile, and so does `gridChildPosition` with all four of its
+keys (measured on 1.0.11; see `references/responsive.md`) — or drop to
+`customDeclarations`.
 
 `data/style-verification.csv` is per-property, with the group beside the result.
 
@@ -52,7 +53,9 @@ A node's `data.style` is addressed by three axes — **state, breakpoint, proper
 `type` is `variant` | `variantSubClass` | `universalClass` | `universalSubClass` |
 `local`; before 1.0.8 these keys were `elementClass`, `utilityClasses`,
 `defaultClass` with type `custom`, and the upgrade rewrites stored rows) and
-`localStates` alongside `states` — those are the class/token layer, not per-node values.
+`localStates` alongside `states`. The first three are the class layer; `localStates`
+is the node's own custom states (SCSS selector with `&` for the element) - see
+`references/design-system.md` → "Which class wins".
 
 ## What comes out
 
@@ -117,6 +120,24 @@ Measured on a migrated clinic site, Lighthouse 13.5 mobile, median of 3, same da
 performance 72 → 86, LCP 4.8 s → 3.2 s, CLS still 0, and a frame-by-frame check found
 no unstyled frame. TBT rose (42 → 154 ms) only because the scripts now run inside the
 measured window.
+
+**Mosaic shields that reveal script from optimizers it can detect.** `Html::script`
+marks the reveal script, and enqueued handles flagged `mosaicCritical`, with an
+opt-out attribute chosen by which optimizer's constant is defined
+(`Helpers/Html.php`):
+
+| constant defined | attribute added |
+|---|---|
+| `LSCWP_V`, `WP_ROCKET_VERSION`, `FLYING_PRESS_VERSION`, `PERFMATTERS_VERSION` | `data-no-defer="1"` |
+| `AUTOPTIMIZE_VERSION` | `data-no-optimize="1"` |
+| `NITROPACK_VERSION` | `data-nitro-exclude="1"` |
+| `MOSAIC_CLOUDFLARE_ROCKET_LOADER` (set it yourself in `wp-config.php`) | `data-cfasync="false"` |
+
+Cloudflare Rocket Loader cannot be detected, so without that constant it delays the
+reveal too. The official troubleshooting page also lists `data-no-delay`,
+`data-no-async` and WP Rocket's `rocket_exclude_js` filter; none of them is in the
+1.0.11 source. None of this helps a hand-added `defer` on other scripts, which still
+holds `DOMContentLoaded` back - the override above is the fix for that.
 
 ## Setting values
 
@@ -191,6 +212,17 @@ other type-switched groups too.
 `ScaleTransformTypeFactory`, which takes separate axes. Use `scaleX`/`scaleY` instead,
 which are `SingleTransformTypeFactory` and do take `{"value": …}`.
 
+The standalone `scale` PROPERTY is a different thing and does compile:
+`"scale": {"type": "scale", "scaleOptions": {"value": "1.37"}}` →
+`--mosaic-scale:1.37; scale:1.37` (a `scale3D` type also exists, not measured). `perspective` takes a
+plain length (`"731px"` → `perspective:731px`). Both measured on 1.0.11. The
+`transform` list and the individual `translate` / `scale` / `rotate` properties
+STACK - CSS applies both - in static styles as well as in interactions.
+
+Two layout rules the official docs state: `position: sticky` does nothing without a
+`top`, and a transform on the element or any ancestor breaks
+`background-attachment: fixed`.
+
 **The escape hatch.** `customDeclarations` (`customStyles` before 1.0.8; the upgrade
 rewrites stored rows, and `build_page.py` still accepts the old spelling in a spec)
 accepts raw CSS text and emits it verbatim into the rule:
@@ -205,8 +237,10 @@ down — at the cost of bypassing the collection-variable layer entirely.
 
 ## Properties that exist in CSS but not in Mosaic
 
-`data/style-properties.csv` is the whole registry, and the fastest way to lose an
-hour is to assume a property is in it because CSS has it. Two that catch people,
+`data/style-properties.csv` is the whole registry (101 rows since v1.34 - the
+extractor used to miss single-quoted registrations, which hid `scale`, `perspective`
+and `collectionModesData`), and the fastest way to lose an hour is to assume a
+property is in it because CSS has it. Two that catch people,
 both found by writing a page rather than by reading the table:
 
 **`flexGrow` and `flexShrink` do not exist.** Mosaic models both as one

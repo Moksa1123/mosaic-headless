@@ -178,15 +178,37 @@ All eight shapes above were committed and read back from the delivered page;
 
 ## The surface, extracted
 
-`data/interaction-types.csv` — 12 trigger types in two families:
+`data/interaction-types.csv` — 16 trigger types in two families:
 
 | family | how it runs | types |
 |---|---|---|
-| `timed` | its own clock, fired by an event | `pageLoad`, `click`, `hover`, `formSubmit`, `tabChange`, `slideChange`, `dropdownChange`, `accordionItemChange`, `elementScrollIntoView`, `scrollDirectionChange` |
+| `timed` | its own clock, fired by an event | `pageLoad`, `click`, `hover`, `formSubmit`, `tabChange`, `slideChange`, `dropdownChange`, `accordionItemChange`, `elementScrollIntoView`, `scrollDirectionChange`, `exitIntent`, `scrollDepth`, `modal`, `popover` |
 | `progress` | driven by a scalar, scrubbable both ways | `scrollIntoView`, `pointerMove` |
 
+**The editor's names are swapped against the ids.** The editor's "Scroll into view"
+(fire once when the element enters) is `elementScrollIntoView`; its "While scrolling"
+(scrub with scroll position) is `scrollIntoView`. In `elementScrollIntoView`,
+`scrollIntoView` and `pointerMove`, the trigger must not be the target or inside it.
+
+Trigger settings the official docs describe, with their keys
+(`InteractionTypeData`, `TimedInteractionTypeOptionsDataSub`):
+
+- `triggerOnce` `"0"|"1"` with `completedAfter` - only on types that support it;
+  `pageLoad` has none. `exitIntent` fires once and stops listening by itself.
+- `outOfView` `"0"` keep running / `"1"` suspend / `"2"` reset, with
+  `outOfViewOffset` in vh.
+- Timed types only: `isLoop` `"0"|"1"`, `startDelay` and `iterations` (integers ≥ 0).
+- Slots: `click` has click / `odd` / `even`; `scrollDirectionChange` has `down` /
+  `up` (offsets in px); `elementScrollIntoView` has `in` / `out`; `modal` and
+  `popover` have show / `beforeClose` / `afterClose`, and a close waits for
+  `beforeClose` to finish. `scrollDepth`'s % is of the full scrollable height, and
+  `returned` only follows a `reached`.
+- Targeting a component instance animates its children, not the instance itself.
+- Tweens: the "initial value" applies only to the first tween; later ones are a
+  from → to pair, and one tween cannot hold the same property twice.
+
 `data/animatable-properties.csv` — the 22 properties a keyframe can drive. **This is
-not the same set as the 98 style properties**, and ten of them animate through a CSS
+not the same set as the 101 style properties**, and ten of them animate through a CSS
 custom property rather than the property itself:
 
 ```
@@ -199,6 +221,12 @@ Animating through `--mosaic-translate-y` rather than `translate` is why a Mosaic
 interaction can move an element that already has a CSS `translate` set: the two
 compose instead of one clobbering the other.
 
-`data/pluggables.csv` lists the 11 non-animation action types an interaction can run —
-`link`, `script`, `setCookie`, `player*`, `interaction*` — for triggering behaviour
-rather than motion.
+`data/pluggables.csv` lists the non-animation action types an interaction can run —
+`link`, `script`, `setCookie`, `player*`, `interaction*` (suspend / resume / reset by
+interaction ID), `remember` / `forget`, `modalOpen` / `modalClose`, `popoverOpen` /
+`popoverClose` / `popoverToggle`, and `scrollTo` (Pro) - for triggering behaviour
+rather than motion. A modal has no toggle. `modalClose` / `popoverClose` placed
+inside the dialog they close need no target - the action resolves its own dialog.
+`setCookie` writes a session cookie, gone when the browser closes. With a class as the
+trigger and an empty target, the action hits the element that fired; a class used as
+the TARGET hits every element carrying it on the page.

@@ -22,6 +22,7 @@ borderTopWidth,borderStyle,border-top-width,"""37px""",,ABSENT
 bottom,,bottom,"""37px""",37px,COMPILED
 boxShadow,,box-shadow,,,SKIPPED
 boxSizing,,box-sizing,"""content-box""",content-box,COMPILED
+collectionModesData,,(custom properties),"{""<collectionID>"": ""<modeID>""}",every variable of that collection re-declared on the element (18 declarations),COMPILED
 color,,color,"""rgb(9, 99, 199)""","rgb(9, 99, 199)",COMPILED
 columnGap,,column-gap,"""37px""",37px,COMPILED
 cursor,,cursor,"""unset""",unset,COMPILED
@@ -77,11 +78,13 @@ paddingBottom,,padding-bottom,"""37px""",37px,COMPILED
 paddingLeft,,padding-left,"""37px""",37px,COMPILED
 paddingRight,,padding-right,"""37px""",37px,COMPILED
 paddingTop,,padding-top,"""37px""",37px,COMPILED
+perspective,,perspective,"""731px""",731px,COMPILED
 perspectiveOrigin,,perspective-origin,,,SKIPPED
 position,,position,"""sticky""",sticky,COMPILED
 right,,right,"""37px""",37px,COMPILED
 rotate,,rotate,,,SKIPPED
 rowGap,,row-gap,"""37px""",37px,COMPILED
+scale,,scale,"{""type"": ""scale"", ""scaleOptions"": {""value"": ""1.37""}}",1.37,COMPILED
 textAlign,,text-align,"""right""",right,COMPILED
 textDecorationLine,,text-decoration-line,"""line-through""",line-through,COMPILED
 textShadow,,text-shadow,,,SKIPPED

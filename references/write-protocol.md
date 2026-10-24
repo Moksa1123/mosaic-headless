@@ -29,6 +29,17 @@ component scripts (accordion, dropdown, navbar, form, slider, dialog — each
 `*ElementMResource` asks `MosaicSettings::isScriptsInlineAllowed()`); `Frontend.js`
 still loads as a file.
 
+The keys it holds (`MosaicSettingsMResource`): `smallNudge`, `bigNudge`,
+`previewTargetBlank`, `keepAddPanelOpen`, `manualAssignEnabledForPostTypes` (which
+post types get the "assign template" control), `historyLimit`, `fontDisplay`
+(default `block`), `saveGoogleFontsLocally`, `googleFontsCacheExpirationTime`,
+`allowTrackingUsageData`, `scriptsInline`, `criticalPreload` (sends HTTP
+`Link: rel=preload` for the critical scripts), `wpEmoji`, `serverSideThumbnailRender`,
+the `turnstile*` / `recaptcha*` CAPTCHA keys, `googleMapsApiKey`,
+`mailerliteApiToken`, `mailchimpApiKey`, `kitApiKey`. They are site-wide, not per
+theme, and the theme ZIP does not carry them: moving a site by ZIP needs these
+re-entered, and a `googlemaps` element prints nothing until `googleMapsApiKey` is set.
+
 ## The envelopes
 
 Both `checkout` and `check` take one required string parameter, `syncCheckEnvelopes`

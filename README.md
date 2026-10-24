@@ -200,8 +200,8 @@ factories, so Pro types register and render regardless.
 | pass | result |
 |---|---|
 | **node types** | 129 / 129 swept one per document, committed → rendered → asserted → deleted: 77 RENDERED, 25 COMMITTED, 15 COMMIT_5xx, 12 BROKE_PAGE. Re-swept on 1.0.8: five types that used to commit silently now kill the page unparented. The non-rendering rows that are artefacts of committing without the required parent say so beside the row |
-| **style properties** | 98 / 98 written to a live page and checked against the compiled CSS: 58 COMPILED, 18 ABSENT, 21 SKIPPED |
-| **node properties** | 191 / 191 re-probed with a value shaped by each property's own validator chain: 35 APPLIED, 43 NO_EFFECT, 55 NO_HOST, 47 SKIPPED |
+| **style properties** | 101 / 101 written to a live page and checked against the compiled CSS: 61 COMPILED, 18 ABSENT, 21 SKIPPED |
+| **node properties** | 191 / 191 re-probed with a value shaped by each property's own validator chain: 39 APPLIED, 45 NO_EFFECT, 55 NO_HOST, 48 SKIPPED |
 | **responsive** | 733 `_t`/`_m` declarations across two sites asserted against the stylesheet the site actually served — all verified |
 | **browser** | 4,132 computed-style readings on two delivered pages in Chromium at three viewports: 2,929 compared and agreed, 912 not-comparable and labelled, **0 overridden** |
 | **design audit** | contrast, font fallback, CJK tracking, overflow, clipped text, line measure — run in the browser, **26 findings, every one ruled on in writing** — an acknowledgement without a reason is refused by the release gate |

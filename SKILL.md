@@ -1,11 +1,11 @@
 ---
 name: "mosaic-headless"
 description: |
-  Build and modify Mosaic Pro (Nextend) WordPress sites by writing the data model directly - no visual editor, no DOM. Query the real surface with `mo.py` (129 node types, 196 node properties, 98 style properties, 54 style states, 157 variants, 75 dynamic variables, 16 interaction triggers, 115 REST routes) where every lookup leads with the measured verdict, not the declaration: each node type placed on a live site one at a time, each style and node property swept against compiled CSS and markup, the delivered pages re-read in Chromium at three viewports. Measured on Mosaic Pro 1.0.10: the popover (anchored or screen-placed, the flip state, afterClose-chained tours), the modal on the Popover API, OpenStreetMap, exit-intent and scroll-depth triggers, run rules and memory. Drives theme export/import and the 1.0.7 -> 1.0.10 data upgrades from outside wp-admin; re-extracted and re-verified on 1.0.11.
+  Build and modify Mosaic Pro (Nextend) WordPress sites by writing the data model directly - no visual editor, no DOM. Query the real surface with `mo.py` (129 node types, 196 node properties, 101 style properties, 57 style states, 157 variants, 75 dynamic variables, 16 interaction triggers, 115 REST routes) where every lookup leads with the measured verdict, not the declaration: each node type placed on a live site one at a time, each style and node property swept against compiled CSS and markup, the delivered pages re-read in Chromium at three viewports. Measured on Mosaic Pro 1.0.10: the popover (anchored or screen-placed, the flip state, afterClose-chained tours), the modal on the Popover API, OpenStreetMap, exit-intent and scroll-depth triggers, run rules and memory. Drives theme export/import and the 1.0.7 -> 1.0.10 data upgrades from outside wp-admin; re-extracted and re-verified on 1.0.11.
 license: "MIT"
 metadata:
   author: "moksa (https://moksaweb.com)"
-  version: "1.33.4"
+  version: "1.34.0"
   homepage: "https://github.com/Moksa1123/mosaic-headless"
 ---
 
@@ -109,14 +109,13 @@ that looks like a server problem. Two things make it easy to hit:
   after deleting it. `X-Mosaic-Paths` on any 406 names the paths Mosaic looked for,
   and `index.php` is in every list.
 
-  **Two limits, both measured.** `adminTemplateEditorInstance` does not return auto
-  templates at all - it listed only the three manual ones - so the admin surface
-  hides them. And an auto template's document has a `node/template/<id>` key but no
-  `template-internal` root: `heal()` builds that skeleton only for templates made
-  through `createManualTemplate`, and committing one directly answers HTTP 500. So
-  the row removes the 406 and I could not then put content in it. Not deployed on
-  the demo site for that reason - a 200 with an empty body is worse signal than a
-  406.
+  This `index.php` row is the editor's **Fallback → Empty** template: priority
+  `PHP_INT_MAX`, matching every request (`Plugins/Paths/PathIndex.php`). Since 1.0.10
+  an auto template is an ordinary writable one - it is listed by
+  `adminTemplateEditorInstance` and its document carries a `template-internal`
+  root, so content goes in like any page's (the commit shape is in
+  `references/templates-and-conditions.md`). Before 1.0.10 both were missing and a
+  direct commit answered HTTP 500.
 
   For `/` specifically the WordPress-side fix is the sound one: point the front page
   at a post that has a template (`show_on_front=page`, `page_on_front=<id>`).
@@ -256,6 +255,10 @@ STATES       52 of the 53 style states written to a live page and matched agains
              now refuses to commit alone, so it is NO_HOST). All seven globally usable states verified - and the
              pseudo-classes are emitted UPPERCASE (`._j:HOVER`), so grepping a
              stylesheet for `:hover` finds nothing. data/style-state-verification.csv
+             The table now lists 57: v1.34's extractor also reads selector lists
+             spelt `implode(',', array(…))`, which adds
+             ___accordion-item--opened/--opening and ___dropdown--opened - read
+             from source, not yet swept.
 
 COMPONENTS   used on the example page: the service row is committed ONCE to the
              theme and the page places four instances of it, each carrying only the
@@ -407,7 +410,7 @@ UPGRADE      1.0.7 -> 1.0.8 driven over the plugin's own milestone route from
 
 FROM SOURCE  129 node types, 196 properties (68 with enums), 285 pluggable IDs,
              129 placement rules, 25 composite default structures (10 declared,
-             15 healed in), 98 style properties, 54 style states, 16 interaction
+             15 healed in), 101 style properties, 57 style states, 16 interaction
              triggers - re-extracted from the 1.0.11 tree.
 ```
 
@@ -418,14 +421,14 @@ the difference is worth being exact about:
 ```
 node types        129 / 129   swept live, one per document
 node properties   191 / 196   re-probed with a value shaped by each property's
-                              own validator chain: 38 APPLIED, 45 NO_EFFECT,
+                              own validator chain: 39 APPLIED, 45 NO_EFFECT,
                               2 EDITOR_ONLY, 55 NO_HOST (no rendering type
-                              declares them), 2 INSTRUMENT, 45 SKIPPED
+                              declares them), 2 INSTRUMENT, 48 SKIPPED
                               (the five missing are 1.0.10's popover -
                               role, ariaLive, accessibleLabel, closedby,
                               positioning - measured on the popover lab
                               instead: data/popover-verification.csv)
-style properties   98 /  98   swept live; 58 COMPILED, 18 ABSENT, 1 NO_ELEMENT,
+style properties  101 / 101   swept live; 61 COMPILED, 18 ABSENT, 1 NO_ELEMENT,
                               21 SKIPPED (no test value could be synthesised, and
                               SKIPPED is never counted as a pass)
 ```
@@ -499,6 +502,20 @@ so the pattern is in the data, not just in this paragraph.
   matches and the element silently disappears. Driven end to end on a client build;
   references/templates-and-conditions.md
 
+**Cross-checked against the official docs.** All 72 pages of Mosaic's own
+documentation (Oct 2026) were compared with this skill, and every disagreement was
+settled in the 1.0.11 source or on the live site. Where the docs are wrong for
+1.0.11, the skill follows the source and says so at the spot: the system
+requirement is WordPress 6.9, not 6.5; evaluator functions are `find_image` /
+`remove_html`, and `@FINDIMAGE` prints nothing; a slider's `duration` is the
+transition, not the dwell; the Google Maps Language and Region settings do not
+exist; the optimizer opt-out attributes are the four the source adds, not the
+docs' longer list. Where the docs corrected the skill, re-measured on 1.0.11:
+`gridChildPosition` compiles as a group, `scale` / `perspective` /
+`collectionModesData` exist and compile, `youtube` `privacy` renders on
+youtube-nocookie.com, "Wrap in link" is a `button` with the Link variant, and a
+variable's `customProperty` is optional.
+
 ## Orient yourself in this order
 
 1. `references/data-model.md` — where a page actually lives. Read this first even if
@@ -549,10 +566,10 @@ so the pattern is in the data, not just in this paragraph.
 | `data/default-children.csv` | 25 | source — what a composite type needs **inside** it |
 | `data/style-properties.csv` | 98 | source — every settable CSS property and its value shape |
 | `data/style-value-shapes.csv` | 22 | **probed live** — the exact JSON shape for each structured value, and what it compiled to |
-| `data/style-states.csv` | 54 | source — state IDs with their exact CSS selector templates |
+| `data/style-states.csv` | 57 | source — state IDs with their exact CSS selector templates |
 | `data/property-verification.csv` | 170 | **probed live** — per-property effect on markup vs CSS, with unprovable enums marked INCONCLUSIVE |
 | `data/node-property-verification.csv` | 191 | **swept live** — each property probed with a value shaped by its own validator chain, on a type that declares it |
-| `data/style-verification.csv` | 98 | **swept live** — every style property written to a page and checked against the compiled CSS, with its group beside the result |
+| `data/style-verification.csv` | 101 | **swept live** — every style property written to a page and checked against the compiled CSS, with its group beside the result |
 | `data/rwd-verification.csv` | 733 | **checked live** - every `_t`/`_m` declaration vs the served stylesheet, with status per row |
 | `data/browser-verification/` | 4132 | **computed in Chromium** - declared vs `getComputedStyle` at three viewports, `not-comparable` labelled per row. One CSV per page, named by its slug |
 | `data/design-audit-acknowledged.csv` | 3 | reviewed findings that will not be fixed, each with a written reason. An acknowledgement without a reason is a suppression wearing a better name, and the release gate refuses one |
@@ -648,7 +665,10 @@ it is gated on admin capability only, not on a licence. It moves a whole theme, 
 a single page. `tools/theme_zip.py` drives both directions from outside the editor.
 Two things about the import that the route list does not tell you: with no
 `themeActivateMode` it defaults to `live` and switches every visitor to the imported
-theme (the tool sends `test`, Mosaic's admin-only preview, unless `--activate`); and a
+theme (the tool sends `test` unless `--activate`). Test mode is per USER, not per
+admin role: it is user meta `mosaic_<blogID>_test_mode_theme`, so the account whose
+cookie made the import sees the imported theme on every later fetch while visitors
+keep the live one - read a page logged out to see what visitors see; and a
 milestone must be called until it answers `isCompleted:true` - stop one call early,
 as the first version of the tool did after its last upload chunk, and that
 milestone's batch bookkeeping is left in the lock for the NEXT milestone to read as
@@ -837,6 +857,11 @@ with `tools/prune_unbound.php` (dry run by default) after a batch of rebuilds.
   `wysiwyg-linebreak` → `<br>`, `wysiwyg-link` with `url` →
   `<a class="m-inline-link">`, each holding its own `wysiwyg-text` child. Entities
   still print as their character (`&lt;dialog&gt;` → `<dialog>`, `&amp;` → `&`).
+  Bold and italic are NOT nodes but a property of the run: `wysiwyg-text` (and
+  `wysiwyg-variable`) take `format: ["bold"]`, `["italic"]` or both, printed as
+  `<strong>` / `<em>`. Both at once comes out misnested on 1.0.11 -
+  `<strong><em> BI</strong></em>` (measured); browsers repair it, validators do not.
+  `inline_html.py` maps `<strong>`/`<em>` to styled `wysiwyg-span`s instead.
   Through 1.0.10 the run was raw HTML instead, where a tag name in prose swallowed
   the rest of the paragraph; `build_page.py` refuses any tag in a run either way.
 - **`menu-link` is `width: fit-content` by default** (`.m-menu-link{display:flex;gap:4px;
@@ -852,12 +877,15 @@ with `tools/prune_unbound.php` (dry run by default) after a batch of rebuilds.
   list - `dvh`, `svh`, `lvh`, `dvw`, container units: `height: 100dvh` takes every
   other line in the block with it, silently. The structured `height` / `maxHeight`
   fields do accept `dvh`.
-- **`youtube` renders `<mosaic-youtube><iframe>` with no `title`** - the iframe gets
-  only `loading`, `src`, `allow` and an id, so an accessible name has to be added
-  some other way. `youtubeUrl` is `{"v": "https://www.youtube.com/watch?v=…"}`;
-  `lazyLoad` adds `loading="lazy"` and there is no click-to-load facade. Sized by
-  `width`/`height: 100%` inside an `aspect-ratio: 16/9` box. `privacy` alone still
-  emits nothing (NO_OUTPUT).
+- **`youtube` renders `<mosaic-youtube>` carrying `data-video-id`, `data-params`,
+  `data-host`**, with the server's iframe inside `<noscript>`; the custom element
+  builds the real iframe once it has a size. The iframe has no `title`, so an
+  accessible name has to be added some other way. `youtubeUrl` is
+  `{"v": "https://www.youtube.com/watch?v=…"}`; `lazyLoad` defers it and there is
+  no click-to-load facade (same for `vimeo`). Sized by `width`/`height: 100%` inside
+  an `aspect-ratio: 16/9` box. `privacy:"1"` switches the host to
+  `www.youtube-nocookie.com` - measured on 1.0.11; the old NO_OUTPUT row was a probe
+  artefact. `suggestedVideos` maps to `rel`. `vimeo`'s `privacy` is `dnt=1`.
 - **Eight types emit custom elements**: `<mosaic-dropdown>`, `<mosaic-navbar>`,
   `<mosaic-tabs>`, `<mosaic-accordion>`, `<mosaic-vimeo>`, `<mosaic-youtube>` and
   friends. A selector written against `div`/`nav` misses all of them.
@@ -865,8 +893,12 @@ with `tools/prune_unbound.php` (dry run by default) after a batch of rebuilds.
 - **Only four types take a `url`**: `button`, `menu-link`, `wysiwyg-link`,
   `dropdown-toggle`. Put one on a `text` or an `image` and it is accepted, stored,
   and emits no anchor whatsoever. To make anything else clickable, WRAP it in a
-  `menu-link` - that type takes `children: rule=any` and becomes a real `<a href>`
-  as soon as it has a `url` (`target="_blank"` included; both probed).
+  `button` whose `style.variant` is the Link variant (`f671bc01-…`, `m-link`) - that
+  is what the editor's "Wrap in link" writes, `button` takes children, and with a
+  `url` it renders `<a class="m-link" href>` around them (measured on 1.0.11). A
+  `menu-link` wrapper works the same way (`target="_blank"` included; probed) but
+  carries menu styling. A `button` with `inactive` on keeps its `url`/`target`/`rel`
+  stored and emits none of them.
 - **An image's attachment-protocol path is relative to the UPLOADS directory.**
   `wp-attachment://image/<id>/<size>/2026/09/pic.png` resolves, and carries the
   attachment's `width`/`height` onto the tag. Give it the full

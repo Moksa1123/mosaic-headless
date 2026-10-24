@@ -123,7 +123,7 @@ const rows = (p) => tableFiles(p)
   .reduce((n, f) => n + read(f).trim().split("\n").length - 1, 0);   // minus each header
 const counts = {
   "data/node-verification.csv": 129,
-  "data/style-verification.csv": 98,
+  "data/style-verification.csv": 101,
   "data/node-property-verification.csv": 191,
   "data/rwd-verification.csv": 733,
   "data/browser-verification": 4132,

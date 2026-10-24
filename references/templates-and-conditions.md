@@ -62,8 +62,26 @@ prune.
 only resource type any template path registers is `post`
 (`setResourceType('post')` in PathPostTypePage, PathPostTypePost and PathPostTypes).
 `path/single-page.php` and `path/index.php` were both tried against the live
-endpoint and both returned HTTP 500. There is no catch-all: a URL with no template
-of its own gets `status_header(406)` and an empty body.
+endpoint and both returned HTTP 500. So this endpoint has no catch-all; the catch-all
+is the `assign:"auto"`, `path:"index.php"` row above (the editor's **Fallback → Empty**
+template). Without one, a URL with no template of its own gets `status_header(406)`
+and an empty body.
+
+**Which auto template wins.** Candidates are ordered first by how specific the path
+is, then by the row's `ordering` string (`ORDER BY FIELD(path, …) ASC, BINARY
+ordering ASC`, `TemplatesRevisionModel`), and the first one whose conditions match is
+used (`LocatedTemplateRenderMResourceManager`). Two auto templates on the same path -
+say a conditioned single-post layout and the plain one - need the conditioned one to
+carry the LOWER `ordering`, or the unconditioned one always wins. This is the
+editor's drag-to-reorder. The editor's fallback types map to paths as Single →
+`single.php`, Archive → `archive.php`, Homepage → `front-page.php`, Empty →
+`index.php`. Masters order the same way: the first master by `ordering` is the one
+a new template is offered by default.
+
+**A template_assigns row with empty `parentID` and `parentType` binds nothing.** It is
+what the editor writes for "Auto template" (`TemplateAssign` treats it as
+auto-assigned and `Post::getAssignedTemplateID` skips it), so do not count it as a
+manual binding.
 
 **Manual assignment is a REST call, not a commit.** `POST /templateAssign/createManualTemplate`
 with `resourceQuery=post/<postID>` and `masterID=<masterID>` creates the template row
@@ -166,6 +184,37 @@ necessarily work as an interaction gate.
 
 Most subject settings fields carry `supportDynamic: true`, meaning the value itself
 can be an `@` expression rather than a literal — see `references/dynamic-content.md`.
+
+## Multilingual sites
+
+Mosaic has no front-end translation of its own, and no condition subject for the
+current language: the taxonomy subjects list only `public` taxonomies
+(`ServerConditionSubjectTaxonomies`), Polylang's `language` taxonomy is not public,
+and WPML does not use a taxonomy at all. There is no WPML or Polylang code anywhere in
+the 1.0.11 plugin. What the official docs (Translation page) describe, and what the
+data model supports:
+
+- **Per-language copies of manual templates.** Each translation is its own post, so
+  bind it to its own template (`createManualTemplate`) holding the translated text.
+  Header and footer live on the master, so a translated header means a translated
+  master, used by that language's templates. Text inside templates does not reach
+  WPML String Translation.
+- **Auto templates are shared by every language** - archive, search, 404, the
+  fallbacks. Keep their text in `@VAR` output or the post content, not literals.
+- **Post content translates for free.** `wpContent` prints the editor content of the
+  current post, which the translation plugin already swapped, so a page whose words
+  live in the WordPress editor needs one template for all languages.
+- **Loops follow the language.** WPML filters the query, so a `loop` lists only the
+  current language's posts; untranslated posts show only with WPML's "fallback to
+  default language" per post type.
+- **Language switcher** goes in a `wpShortcode` (`[wpml_language_switcher]`); Polylang
+  ships no shortcode.
+- TranslatePress (which translates the rendered page) is the plugin the Mosaic team
+  recommends; it needs none of the above.
+
+`<html lang>` comes from `get_locale()` (`Common/SiteLanguage.php`), which the
+translation plugins filter per request - not measured here. Bidi: RTL sites are
+supported, but Tabs' arrow keys and Slider swiping are not mirrored on the front end.
 
 ## Verification status
 

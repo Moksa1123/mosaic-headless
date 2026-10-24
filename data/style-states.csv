@@ -9,6 +9,8 @@ hover-tab,&:where(.m-tab:not(.m-tab--active)):HOVER,100,global,Mosaic/NodeTypes/
 hover-when-link,"&:where([tabindex]:not([tabindex=""-1""]),a[href]:not([disabled]),button:not([disabled])):HOVER",100,global,Mosaic/Builder/Style/StatesMeta.php
 ____loop_pagination_number--active,&.m-loop-pagination-number--active,500,node-type,Mosaic/NodeTypes/Loop/LoopPagination/Numbers/Number/LoopPaginationNumberElementTypeFactory.php
 ____loop_pagination_number_ellipsis,&.m-loop-pagination-number-ellipsis,0,node-type,Mosaic/NodeTypes/Loop/LoopPagination/Numbers/Number/LoopPaginationNumberElementTypeFactory.php
+___accordion-item--opened,"&.m-accordion-item--opened,.m-accordion-item:where(.m-accordion-item--opened) > &,.m-accordion-item:where(.m-accordion-item--opened) > .m-accordion-title &",600,node-type,Mosaic/NodeTypes/Accordion/AccordionItem/AccordionItemElementTypeFactory.php
+___accordion-item--opening,"&.m-accordion-item--opening,.m-accordion-item:where(.m-accordion-item--opening) > &,.m-accordion-item:where(.m-accordion-item--opening) > .m-accordion-title &",600,node-type,Mosaic/NodeTypes/Accordion/AccordionItem/AccordionItemElementTypeFactory.php
 ___arrow_hidden,&:where(.m-slider-arrow--hidden),800,node-type,Mosaic/NodeTypes/Slider/SliderArrow/SliderArrowElementTypeFactoryAbstract.php
 ___checkbox-input--checked,&:checked,500,node-type,Mosaic/NodeTypes/Form/Form/MElements/Checkbox/CheckboxInput/CheckboxInputElementTypeFactory.php
 ___checkbox-input--checkmark,&:checked::before,500,node-type,Mosaic/NodeTypes/Form/Form/MElements/Checkbox/CheckboxInput/CheckboxInputElementTypeFactory.php
@@ -17,6 +19,7 @@ ___choice--checked-within,.m-choice:where(:has(input:checked)) &,500,node-type,M
 ___choice--focus-visible,&:has(:where(input):focus-visible),760,node-type,Mosaic/NodeTypes/Form/Form/MElements/Choice/ChoiceElementTypeFactory.php
 ___choice-field--invalid,&:has(:user-invalid),700,node-type,Mosaic/NodeTypes/Form/Form/MElements/ChoiceField/ChoiceFieldElementTypeFactory.php
 ___choice-field--invalid-within,.m-choice-field:where(:has(:user-invalid)) &,700,node-type,Mosaic/NodeTypes/Form/Form/MElements/ChoiceField/ChoiceFieldElementTypeFactory.php
+___dropdown--opened,"&.m-dropdown:where(.dropdown--opened),.m-dropdown:where(.dropdown--opened) > &,.m-dropdown:where(.dropdown--opened) > :where( .m-dropdown-toggle) &",600,node-type,Mosaic/NodeTypes/Menu/Dropdown/DropdownElementTypeFactoryAbstract.php
 ___dropdown--opening,.m-dropdown:where(.dropdown--opening) &,600,node-type,Mosaic/NodeTypes/Menu/Dropdown/DropdownElementTypeFactoryAbstract.php
 ___dropdown-toggle--current,&.m-dropdown-toggle--current,500,node-type,Mosaic/NodeTypes/Menu/Dropdown/DropdownToggle/DropdownToggleElementTypeFactory.php
 ___dropdown-toggle--current-within,".m-dropdown:where(:has(.m-menu-link--current,.m-dropdown-toggle--current)) > &",500,node-type,Mosaic/NodeTypes/Menu/Dropdown/DropdownToggle/DropdownToggleElementTypeFactory.php

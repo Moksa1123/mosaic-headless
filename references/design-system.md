@@ -88,8 +88,12 @@ More from a client build on 1.0.10:
 A universal class is the theme-global class a user names (the editor's "classes"),
 committed on the master document under the key `universalClass` with
 `data: {name, label, states}` - `states` is the same structure as a variant's. A node
-takes it through `style.universalClasses`, a map `{<classID>: <classID>}` (a map to a
-universal SUB class ID applies that sub class instead; `ElementMResourceStyle.php`).
+takes it through `style.universalClasses`, a map `{<classID>: <classID>}`. Mapping a
+class to one of its SUB class IDs applies the root class AND the sub-class chain down
+to it - the parent comes along, it is not replaced (`ElementMResourceStyle.php`
+adds the root's names and data first, then each level). A sub class's emitted name
+joins every level with `--` (`card--wide--dark`), so only a root class renders under
+exactly the name you gave it.
 The emitted class is the `name` (sanitized, any `m-` prefix dropped - the
 class-name grammar is in SKILL.md), and its CSS is printed only
 on a page where some node uses it. `status: "delete"` removes one - unlike a variant,
@@ -100,7 +104,12 @@ a universal class is not catalog-backed.
 A collection variable compiles to a real CSS custom property on `:root`, and any
 token-referencable style property can point at it.
 
-The theme's healed default gives you one collection, one mode and one skin. A variable
+A theme that `heal()` creates from nothing gets one collection, one mode and one skin
+("Default collection / Default mode / Default skin"). A theme started from Mosaic's
+shipped data instead has nine collections - Color (with Light and Dark modes), Font
+family, Typography, Spacing, Size, Position, Border radius, Shadow, Image & gradient -
+so read `collection` / `collectionMode` / `collectionSkin` off the document rather
+than assuming either. The skin listed first is the one in use. A variable
 hangs off the collection, and its value is stored per **skin → mode**:
 
 ```json
@@ -117,7 +126,7 @@ hangs off the collection, and its value is stored per **skin → mode**:
 }
 ```
 
-Reference it from any of the 34 token-referencable properties in
+Reference it from any of the 39 token-referencable properties in
 `data/style-properties.csv` with a one-key object:
 
 ```json
@@ -136,9 +145,13 @@ Details that cost time to find:
 - **`skinsData[skinID]` is keyed by mode ID directly.** There is no `modesData`
   wrapper — `CollectionVariableSkinDataDataSub::getSubData($modeID)` goes straight to
   the mode, whose only property is `value`.
-- **`customProperty` is emitted verbatim**, so it must include the leading `--`.
-  Writing `"brand"` produces `background-color:var(brand)` and a `:root{brand: …}`
-  declaration, neither of which is valid CSS.
+- **`customProperty` is optional, and its dashes are too.** Omitted, the name is
+  derived from the path, `--<collection>--<group>--<name>` slugged
+  (`--default-collection--probe-derived`); pinned without dashes, `probe-bare-cp`
+  is emitted as `--probe-bare-cp` (both measured on 1.0.11;
+  `CollectionVariableNameHelper`). A clash with another variable is made unique per
+  theme. Before 1.0.11 a dash-less value was emitted verbatim as invalid CSS, so
+  writing the full `--name` is still the portable choice.
 - **A wrong `skinsData` shape does not fail.** The variable is created, `:root` gets
   the declaration, and the value is the sub-factory's default (`#FFF` for colours).
   If your token renders white, the value never arrived.
@@ -148,6 +161,30 @@ Details that cost time to find:
 - Deleting probe variables needs an explicit `status: "delete"` commit on the
   `collectionVariable` manager — clearing nodes does not remove them, and orphans
   accumulate as duplicate `:root` declarations.
+
+### Modes on an element: dark sections, dark mode
+
+A collection with more than one mode (Light / Dark) is switched per element with the
+style property `collectionModesData`, `{<collectionID>: <modeID>}`, in any state and
+breakpoint like every other style key. It compiles to a re-declaration of every
+variable of that collection, at that mode's value, on the element's own rule - so the
+element and everything under it see the other mode through ordinary custom-property
+inheritance (measured on 1.0.11: 18 declarations on one div). A dark band is one
+`collectionModesData` on the band; a site-wide switch is an interaction whose action
+targets the `html` element with a `collectionMode` property, since interactions can
+set it too. The mode listed first in a collection is the default.
+
+### Which class wins
+
+From lowest to highest: **Variant < Variant sub class < Universal class < Universal
+sub class < Local styles**, and within each slot except local styles a later class
+beats an earlier one - `ElementMResourceStyle.php` builds the class list in exactly
+that order. Variant sub classes nest, and the whole chain applies.
+
+`style.localStates` are not part of that layer: each entry is a per-node custom
+state, `{label, selector, state: {<breakpoint>: {…props}}}`, where `selector` is SCSS
+with `&` standing for the element (`&:hover a`, `&::after`; `LocalStatesMeta`). Use
+one when the 57 built-in states do not name the selector you need.
 
 ## How to actually build a theme
 
@@ -175,9 +212,14 @@ dropdown                      horizontalAlign: left | center | right
 ```
 
 Both children are inserted by `onHeal()` if you leave them out, so only the two
-need authoring. **It opens on CLICK, not hover** — the host gains
+need authoring. **It opens on CLICK by default** — `openOn` is `click` | `hover`,
+emitted as `data-open-on` with `click` when unset
+(`DropdownElementMResourceAbstract`). On open the host gains
 `dropdown--opening dropdown--opened` and the wrapper goes from `display:none` to
-`display:flex`. A hover test reports a dropdown that does not work.
+`display:flex`. A hover test against a default dropdown reports one that does not
+work; set `openOn:"hover"` if hover is what you want. Style the open look through
+the `___dropdown--opened` state. Menus support one submenu level only - no
+sub-submenus.
 
 `dropdown-wrapper` used to read as a leaf in `placement-rules.csv`. Its
 `canBeParentFor()` returns `true`, but on `DropdownWrapperElementTypeFactoryAbstract`,

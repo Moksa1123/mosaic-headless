@@ -49,10 +49,12 @@ as a number scrambles the page; renumbering siblings the way you would an array 
 both unnecessary and destructive of other clients' inserts.
 
 **"The post is the unit."** In Elementor and Gutenberg, one post = one page's data.
-In Mosaic a post is a *target*: templates are assigned to types via
-`mosaic_template_assigns`, and the same template serves many posts. Editing "the
+In Mosaic a post is a *target*: an auto template binds by template path (a post
+type's singles, an archive, search) and serves every post that path covers, while a
+manual template is bound to one post through `mosaic_template_assigns`. Editing "the
 page" usually means editing a template, and the blast radius is every post that
-template is assigned to. Check `mosaic_template_assigns` before you edit.
+template serves. Check the template's `assign` and `path`, and
+`mosaic_template_assigns`, before you edit.
 
 **"Style the element."** Elementor puts controls on the widget. Mosaic puts styling
 in a **class system** (152 built-in variants - element classes) layered over a **token system**
@@ -71,8 +73,8 @@ revision is rejected, and the rejection arrives as HTTP 200. See
 
 - Post content authored as blocks, on a normal WP theme → `gutenberg-headless`.
 - An Elementor site, page-level construction → `elementor-headless`.
-- A Mosaic site → here. The write path and all 74 free node types are measured; the
-  48 Pro-only types are extracted from source but not render-verified.
+- A Mosaic site → here. The write path and all 129 node types are measured (5 of
+  them Pro-only on 1.0.11 - see `references/data-model.md`).
 
 ## One thing the converter has to add, not copy
 

@@ -42,9 +42,12 @@ RE_STYLE_PROP = re.compile(
     re.S)
 RE_ACCEPTED = re.compile(r"createValidatorAcceptedValues\(\s*\[(.*?)\]", re.S)
 
+# Either quote style: `new CSSScaleStylePropertyFactory('scale')` is single-quoted,
+# and a double-quote-only pattern silently dropped scale, perspective and
+# collectionModesData - all three compile (measured on 1.0.11).
 RE_ADD = re.compile(
-    r'addCSSProperty\(\s*new\s+(\w+)\s*\(\s*"([^"]+)"'      # factory, first arg
-    r'(?:\s*,\s*"([^"]+)")?'                                 # optional member name
+    r'addCSSProperty\(\s*new\s+(\w+)\s*\(\s*[\'"]([^\'"]+)[\'"]'      # factory, first arg
+    r'(?:\s*,\s*[\'"]([^\'"]+)[\'"])?'                                 # optional member name
     r'(?:\s*,\s*([\w\\]+)::class)?',                         # optional value class
     re.S,
 )
@@ -54,6 +57,14 @@ RE_ADD = re.compile(
 # own selector, so the template is exactly what the compiled CSS rule will look like
 RE_STATE = re.compile(
     r"createMeta\(\s*'([^']*)'\s*,\s*'((?:[^'\\]|\\.)*)'\s*(?:,\s*(\d+))?\s*\)", re.S
+)
+# createMeta('<stateID>', implode(',', array('<sel>', '<sel>', ...)) [, order]) - the
+# accordion item and the dropdown spell their selector lists this way, and the
+# single-string pattern above never saw ___accordion-item--opened/--opening or
+# ___dropdown--opened.
+RE_STATE_IMPLODE = re.compile(
+    r"createMeta\(\s*'([^']*)'\s*,\s*implode\(\s*'([^']*)'\s*,\s*(?:array\(|\[)(.*?)(?:\)|\])\s*\)\s*(?:,\s*(\d+))?\s*\)",
+    re.S,
 )
 
 
@@ -66,7 +77,11 @@ def extract_states(plugin_root, out_dir):
             path = os.path.join(dirpath, fn)
             with open(path, encoding="utf-8", errors="replace") as fh:
                 src = fh.read()
-            for state_id, selector, order in RE_STATE.findall(src):
+            found = list(RE_STATE.findall(src))
+            for state_id, glue, items, order in RE_STATE_IMPLODE.findall(src):
+                parts = re.findall(r"'((?:[^'\\]|\\.)*)'", items)
+                found.append((state_id, glue.join(parts), order))
+            for state_id, selector, order in found:
                 if state_id in seen:
                     continue
                 seen.add(state_id)

@@ -122,7 +122,7 @@ positionY,,,SKIPPED,
 poster,,,SKIPPED,
 preload,video,"""none""",APPLIED,"<video class=""m-video"" id=""np-160"" controls=""1"" preload=""none"">"
 privacy,vimeo,"""1""",NO_EFFECT,"<mosaic-vimeo class=""m-vimeo"" id=""np-168"" data-autoplay=""0"" data-mute=""0"" data-playsinline=""0"">"
-privacy,youtube,"""1""",NO_OUTPUT,the element emitted nothing with this property set
+privacy,youtube,"""1"" + youtubeUrl {""v"": ""https://www.youtube.com/watch?v=dQw4w9WgXcQ""}",APPLIED,"data-host=""www.youtube-nocookie.com"" (re-measured 1.0.11; the earlier NO_OUTPUT probe had no usable youtubeUrl)"
 processShortcodes,code,"""1""",NO_EFFECT,"<div class=""m-code"" id=""np-070"">"
 query,,,NO_HOST,
 readonly,text-input,371337,NO_EFFECT,"<input class=""m-input"" id=""np-093"" type=""text"">"

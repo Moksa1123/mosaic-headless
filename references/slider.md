@@ -27,6 +27,10 @@ the way its factories require, every piece commits and renders.
    {"type": "slider-arrow-right"}]}
 ```
 
+`duration` is the TRANSITION in ms (default 1000, emitted as `data-duration` and
+handed to the slide animation); `autoplayDelay` is how long a slide stays (default
+2000). The official docs describe `duration` as the dwell time - it is not.
+
 `animation` is `slide` | `crossFade` | `fadeOut` | `fadeOver`. `autoplayLimit` is how
 many rounds autoplay runs before it stops, `0` meaning no limit.
 
@@ -78,6 +82,14 @@ A slide's own `attrID` lands on the inner `.m-slide-content`, not on the
 | track | `<mosaic-slider-slides>` with `aria-live` — `off` while autoplaying, `polite` when it is not |
 | reduced motion | **it holds still on its own.** Mosaic stops the autoplay; the author does not have to |
 
+**Deep links work.** Give a slide - or anything inside one - an id and link to
+`#that-id`: `Slider.js` listens to `hashchange`, jumps there without a transition,
+scrolls it into view and lets autoplay continue from it. Tabs do the same
+(`Tabs.js`), nested tabs open every level, and a slider in a tab or a tab in a slide
+both resolve. A slider holds one slide at a time - several cards side by side live
+inside one slide and stack rather than spread on a phone - so a responsive
+multi-card carousel or a centred "showcase" slider is not buildable with it.
+
 The carousel (`crossFade`, `isCarousel: "1"`, autoplay off) stayed on slide 0 for
 2.6s unaided, which is the other half of the same claim: autoplay is the only thing
 that moves a slider by itself.
@@ -97,9 +109,11 @@ both agree on.
 
 ## Two things the component does not draw for you
 
-**An arrow has no glyph.** `<mosaic-slider-arrow-left>` renders with empty
-`innerHTML`, and its placement rule is `none`, so there is nowhere to put an icon
-either. The entire appearance is the author's CSS on the element itself. The
+**An arrow has no glyph unless you give it one.** `<mosaic-slider-arrow-left>`
+written with no children renders with empty `innerHTML` - its default children are
+`[]`. It does take children (`canBeParentFor` returns `true`; placement `any` since
+v1.33), so an `icon` node with an arrow SVG inside it is what the editor itself
+inserts. Without one, the appearance is the author's CSS on the element. The
 two-border chevron works and needs nothing else: a ~9px box showing only
 `border-top` and `border-right`, turned with a `rotateZ` transform entry (`45deg`
 for next, `-135deg` for prev).

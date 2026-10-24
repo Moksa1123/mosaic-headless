@@ -11,6 +11,27 @@ Everything below was done to the test site this skill was built on - a real
 the nineteen Elementor conversions and every probe master on it - and then
 every sweep was re-run against the result.
 
+## What the server must have, and moving a site
+
+`SystemRequirements.php` refuses to run without PHP ≥ 8.2, WordPress ≥ 6.9 (the
+official docs page still says 6.5; `defines.php` says 6.9), the `zip`, `dom` and
+`curl` extensions, `gd` built WITH WebP, and a MySQL-family database - `DB_ENGINE`
+sqlite is refused. The docs add fileinfo, MySQL 8 / MariaDB 10.6 and a 256M
+`memory_limit`, which the plugin does not check itself. The folder must be
+`wp-content/plugins/mosaic/`.
+
+Mosaic writes to `uploads/mosaic/` - `tmp/` for imports and thumbnails, falling back
+to `get_temp_dir()/mosaic/` (so `WP_TEMP_DIR`) only when uploads is not writable, and
+`submissions/<id>/` for form uploads - each behind a deny `.htaccess`. Copy that
+folder when moving a site. Uninstalling drops the tables and deletes it.
+
+Moving to a new domain with a search-and-replace: node `data` is stored with
+`json_encode` and no `JSON_UNESCAPED_SLASHES`, so an absolute URL sits in the table as
+`https:\/\/old.example`, and a replace for `https://old.example` misses it (read from
+source, not measured). `wp-attachment://` image paths carry no domain and need
+nothing. The licence is bound to the domain, and Mosaic → Settings (API keys) lives
+in `wp_mosaic_settings`, which a theme ZIP does not carry.
+
 ## Driving the upgrade from outside wp-admin
 
 ```
@@ -300,7 +321,10 @@ analysis (`rank_math_content`), with the Content element's slot replaced by a li
 marker so the text being typed is analysed in place. Rank Math's link counter
 (`rank_math/links/content`) gets the render instead of the empty `post_content`.
 SEOPress and Slim SEO have their own adapters. A Mosaic page no longer scores as
-empty.
+empty. Limits the official docs state: SEOPress needs 10.1 or later; All in One SEO
+is not supported, and neither is Yoast's link counting; the master (header and
+footer) is left out of what is analysed; and XML sitemaps do not list images placed
+in Mosaic content.
 
 **Re-verified on the live site:** `popovers` 37/37, `component-wall` 26/26,
 `form-surface`, `content-loop` 15/15, both sliders, `tokens`, `navigation` 27/27

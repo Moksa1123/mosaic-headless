@@ -174,11 +174,15 @@ navbar            animation (none|fade|fadeDown|fadeUp|scaleDown|flipDown)
 Measured: above `buttonBreakpoint` the links are shown and the toggle is hidden;
 below it the host gains `dropdown-mode`, the links disappear, and clicking the
 toggle adds `dropdown--opened` and reveals them. The breakpoint is named with the
-same ids the style system uses (`_t`, `_m`).
+same ids the style system uses (`_t`, `_m`). Unset, `buttonBreakpoint` is `_m` and
+`animation` is `fade` (`NavbarElementMResource`). A navbar cannot sit inside a navbar.
 
 **`icon` takes RAW SVG** in its `svg` property — not a URL, not an icon-library
-name. `autoScale` makes it follow the element's box, and `currentColor` inside the
-SVG picks up the node's `color`.
+name. `autoScale` strips the SVG's own `width`/`height` attributes so it follows the
+element's box - an SVG without them shows no difference. `currentColor` inside the
+SVG picks up the node's `color`, but an SVG with no `fill`, `stroke` or colour
+attribute anywhere gets `fill="black"` injected (`IconElementMResource`), so write
+`fill="currentColor"` on a bare path yourself.
 
 **`image.image` takes the attachment protocol**:
 `wp-attachment://image/<id>/full/<uploads-relative path>`. The last segment is
@@ -191,3 +195,60 @@ WooCommerce's own markup, not a reimplementation — and **`wpContent.content`**
 dropped and the block renders empty. Its default is `@VAR('post/content')`, which
 is why the node usually sits inside a loop and needs nothing written at all, and
 the property is gated on the `unfiltered_html` capability.
+
+`code.content` is gated on `unfiltered_html` exactly like `wpContent`, and so is
+`wpShortcode.shortcode` - a REST writer without the capability has the value dropped
+without an error. An unset `code.content` renders "Hello World, Hello Mosaic".
+
+## Per-element facts the official docs add (1.0.11)
+
+Read from the Mosaic docs and confirmed in source unless marked; none of these is in
+the sweep tables.
+
+- **Default children the editor inserts** (headless builds get none of them unless
+  heal adds them): `accordion` - two `accordion-item`s, each a title (an H6 `text`
+  plus Plus and Minus `icon`s shown and hidden by `___accordion-item--opened`) and a
+  content paragraph; `menu` - two `menu-link`s; `tabs` - a `tabs-menu` with two tabs
+  ("Tab 1", "Tab 2") and a `tabs-content` with two panes, and heal re-pairs a
+  missing tab or pane; `navbar` - `navbar-toggle` plus `navigation`; `slider` - one
+  slide. A `section` inserted in the editor arrives with a Container `div` inside;
+  `section` itself does not need one.
+- **accordion**: `openMode` `single` (default) | `multiple` | `alwaysOpen` - the last
+  renders a bare `<dl>` with no `<mosaic-accordion>` and no script. `animation`
+  `none` (default when absent; the editor inserts `slide`) | `slide`, and Firefox
+  shows `slide` as none. `firstOpened:"1"` opens the first item, `requireOneOpen`
+  keeps one open.
+- **form**: `submitType` is `action` (default) or `native`; the options sit in
+  `actionOptions {actions[], formName, entryName}` or `nativeOptions {url, target,
+  method get|post, encoding}`, and switching type deletes the other group. A native
+  submit skips server validation, the honeypot and CAPTCHA. The success screen
+  shows only for `action` with no redirect. With no error-message element, errors
+  appear in the browser's own bubble. Every label and legend is required; hide one
+  with the `screen-reader-only` class.
+- **googlemaps**: prints NOTHING until Mosaic → Settings has a `googleMapsApiKey`, or
+  when `query` is empty. Properties are `query`, `zoom` (0-21, default 15),
+  `maptype`, `lazyLoad` (default on) - the docs' Language and Region settings are
+  not in 1.0.11. `query` and `zoom` take `{"v": …}`.
+- **openstreetmap**: `lazyLoad` defaults on; one marker only; the
+  "© OpenStreetMap contributors" credit must stay visible.
+- **list**: `<ol>` only with the Ordered variant, `<ul>` otherwise, and
+  `listType` / `listStart` are emitted only for Ordered. An empty list prints nothing.
+- **loop**: records per page is `maxItems`, offset is `offset`; an empty
+  `paginationKey` defaults to the loop's own id. `loop-item` / `list-item` /
+  `accordion-item` `mode`: `item` (normal), `beforeMatch` / `afterMatch` (a static
+  item inserted before / after a matching one), `separator` (a fixed divider between
+  items). Pagination does not show when there is only one page.
+- **modal**: `closedby` defaults to `everything`. There is no toggle action. Opening
+  a dialog nested in a closed modal or popover opens the outer one first. Focus is
+  trapped in the window, starts on its first field and returns to where it was on
+  close; the page behind becomes usable the moment closing starts. Several windows in
+  one modal overlap.
+- **popover**: one that opens by itself (page load, exit intent, scroll depth) with
+  no anchor appears centred - give it an explicit anchor. Clicks on its opener, or
+  inside a popover opened from it, do not count as "outside".
+- **video / vimeo / youtube**: `threshold` is the "into view offset" - the share
+  that must be visible; scrolled out, a playing video pauses and resumes on return.
+  Vimeo unlisted videos need the full link with its privacy hash; `startTime` is
+  mm:ss.
+- **button**: Badge defaults to `inactive`; `attributes` with `on*`, `srcdoc` or
+  `formaction` names are refused for a writer without `unfiltered_html`.

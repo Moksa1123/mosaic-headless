@@ -281,7 +281,7 @@ def cmd_params(a):
     the placement rule - because the answer is not in any one of them.
 
     Mosaic differs from a widget-based builder here in a way worth stating: the
-    STYLE surface is universal. Every element takes the same 98 style properties;
+    STYLE surface is universal. Every element takes the same 101 style properties;
     what varies per type is the DATA properties and which node-type-scoped states
     apply. So the style half of this output is the same for every type, and that
     is a fact about the platform rather than a shortcut taken here."""
@@ -777,7 +777,7 @@ def main():
             "EVERYTHING settable on one type: data, style, states, placement")
     p.add_argument("name")
     p.add_argument("--style", action="store_true",
-                   help="list all 98 style properties too, not just count them")
+                   help="list all 101 style properties too, not just count them")
 
     p = add("check", cmd_check, "exit 1 if any named type is unsafe or unknown")
     p.add_argument("names", nargs="+")
