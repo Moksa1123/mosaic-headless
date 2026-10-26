@@ -40,6 +40,7 @@ import uuid
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 from build_page import (refresh_node_ids,   # noqa: E402
     COMPONENT_USES,
+    INHERITED_TEXT_VARIANT,
     VAR_IDS,
     Surface,
     flatten,
@@ -240,9 +241,22 @@ def ensure_components(client, cfg, site, surface):
         by_parent = {}
         for node in doc2[key]:
             by_parent.setdefault(node.get("parentID"), []).append(node)
+        def text_child(nid):
+            kids = by_parent.get(nid, [])
+            run = next((c for c in kids if c["type"].startswith("wysiwyg-")), None)
+            if run:
+                return run
+            # a button's runs sit one level down, in the Inherited text `text`
+            # node build_page wraps them in (wrap_text_runs)
+            wrap = next((c for c in kids if c["type"] == "text" and not
+                         (c.get("data") or {}).get("attrID") and
+                         ((c.get("data") or {}).get("style") or {}).get("variant")
+                         == INHERITED_TEXT_VARIANT), None)
+            return wrap and next((c for c in by_parent.get(wrap["ID"], [])
+                                  if c["type"].startswith("wysiwyg-")), None)
+
         for attr, nid in nodes.items():
-            child = next((c for c in by_parent.get(nid, [])
-                          if c["type"].startswith("wysiwyg-")), None)
+            child = text_child(nid)
             if child:
                 texts[attr] = child["ID"]
         out[name] = {"id": cid, "nodes": nodes, "texts": texts}

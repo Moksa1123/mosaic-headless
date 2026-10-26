@@ -5,7 +5,7 @@ description: |
 license: "MIT"
 metadata:
   author: "moksa (https://moksaweb.com)"
-  version: "1.34.1"
+  version: "1.34.2"
   homepage: "https://github.com/Moksa1123/mosaic-headless"
 ---
 
@@ -857,8 +857,13 @@ with `tools/prune_unbound.php` (dry run by default) after a batch of rebuilds.
   Only `text`, `label`, `choice-label`, `choice-legend`, `fieldset-legend` and the
   inline `wysiwyg-span` / `wysiwyg-link` hold runs directly. `build_page.py` wraps
   runs under any other type itself (`wrap_text_runs`), so the `"text"` shorthand is
-  safe on a button. Output: `<a class="m-button"><div class="m-inherited-text
+  safe on a button, and a component's `text` override on a button follows the run
+  down into that wrapper (`build_site.py`). Output: `<a class="m-button"><div class="m-inherited-text
   m-wysiwyg">…</div></a>` - the editor's own button carries the same `<div>`.
+  A site built before v1.34.1 is fixed in place by `tools/fix_text_runs.py`
+  (dry run, then `--apply`): measured on the test theme, 428 runs wrapped
+  across its masters and templates, every page unchanged in text, a component instance's
+  override still shown, and a second run finding nothing.
 - **`text` renders as `<div>` by default** — set `tagName` for `<h1>`, `<p>` and so on.
 - **A `wysiwyg-text` run prints no markup since 1.0.11.** Its `<` and `>` are escaped
   on output, so `A<strong>B</strong>C<br>D` reaches the page as those literal
@@ -944,6 +949,7 @@ with `tools/prune_unbound.php` (dry run by default) after a batch of rebuilds.
 | `theme_zip_compare.php` | hold an imported copy against its source, tree for tree - every scoped table, the (parentType, type) shape, which ids survive, and orphans named rather than counted |
 | `prune_unbound.php` | delete the templates no post is bound to, the masters no kept template uses, their nodes, then orphan nodes pass after pass - one theme, dry run unless `--apply`, `assign="auto"` templates kept |
 | `theme_delete.php` | remove a theme completely through the plugin's own routine; refuses the live one |
+| `fix_text_runs.py` | wrap text runs that sit directly under a button, menu-link or other non-text element (built before v1.34.1) in an Inherited text `text` node, so the editor can edit them - every master, template and component, through each document's own commit; dry run unless `--apply`, idempotent, component overrides kept |
 | `verify_slider.py` | the slider in a real browser: does it advance, do the arrows and bullets drive it, does the keyboard, does it stop when motion is not wanted - `--label`/`--append` put several sliders in one table, which is where a carousel and a plain slider can be held against each other |
 | `verify_navigation.py` | a multi-page site: is every menu item a real `<a href>`, does every page answer 200 (a template that was never bound answers 406 with an empty body, which only a logged-out visitor sees), and with `--viewports` does any page scroll SIDEWAYS - the one question no per-page checker asks - and whether every in-page `#fragment` resolves ON THE PAGE THAT CARRIES IT, which an HTTP check cannot see: a bare `#services` in a SHARED header fetches the current page, answers 200 everywhere, and does nothing on every page but the one that has that section |
 | `verify_dialog.py` | the modal in a real browser (1.0.9 and 1.0.10 alike: open is read as `:popover-open` or `dialog.open`): does it open, close, answer Esc, remember, cap - and does an OpenStreetMap carry the coordinates it was given |
