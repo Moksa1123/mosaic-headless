@@ -21,7 +21,9 @@ style-states.csv, and the commit sequence is the one in references/write-protoco
 A node is:
 
     {"type": "div",
-     "text": "hello",                  shorthand: adds a wysiwyg-text child
+     "text": "hello",                  shorthand: adds a wysiwyg-text child (inside an
+                                       Inherited text `text` node unless the type
+                                       holds runs itself - see wrap_text_runs)
      "data": {"tagName": "h1"},        merged into the node's data
      "style": {"_": {...}, "_m": {...}},          base state, per breakpoint
      "hover": {"_": {...}},                       any state name works as a key
@@ -430,9 +432,42 @@ def flatten(node, parent_id, master_id, surface, force, ordering="a0",
     children = list(node.get("children") or [])
     if node.get("text") is not None:
         children.insert(0, {"type": "wysiwyg-text", "data": {"text": node["text"]}})
+    children = wrap_text_runs(node["type"], children)
     for i, child in enumerate(children):
         flatten(child, nid, master_id, surface, force, ordering_for(i),
                 node["type"], out, ancestors + (node["type"],))
+    return out
+
+
+# Types the editor lets hold text runs directly (its own defaults put
+# wysiwyg-text straight under these). Everything else - button, menu-link,
+# dropdown-toggle, tab, submit-label... - gets its runs inside a `text` node on
+# the Inherited text variant, and a run placed directly under one renders fine
+# but cannot be edited in the editor: the navigator shows no child and a
+# double-click opens only the link settings.
+DIRECT_TEXT_HOSTS = {"text", "label", "choice-label", "choice-legend", "fieldset-legend",
+                     "wysiwyg-span", "wysiwyg-link"}
+INHERITED_TEXT_VARIANT = "6381b2f3-7a23-05db-87b9-c808a98a292b"
+
+
+def wrap_text_runs(node_type, children):
+    """Group consecutive wysiwyg-* children of a non-text host into one
+    `text` node on the Inherited text variant, the shape the editor builds."""
+    if node_type in DIRECT_TEXT_HOSTS:
+        return children
+    out, run = [], []
+    for child in children:
+        if str(child.get("type", "")).startswith("wysiwyg-"):
+            run.append(child)
+            continue
+        if run:
+            out.append({"type": "text", "data": {"style": {"variant": INHERITED_TEXT_VARIANT}},
+                        "children": run})
+            run = []
+        out.append(child)
+    if run:
+        out.append({"type": "text", "data": {"style": {"variant": INHERITED_TEXT_VARIANT}},
+                    "children": run})
     return out
 
 

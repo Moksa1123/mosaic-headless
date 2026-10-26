@@ -5,7 +5,7 @@ description: |
 license: "MIT"
 metadata:
   author: "moksa (https://moksaweb.com)"
-  version: "1.34.0"
+  version: "1.34.1"
   homepage: "https://github.com/Moksa1123/mosaic-headless"
 ---
 
@@ -849,6 +849,16 @@ with `tools/prune_unbound.php` (dry run by default) after a batch of rebuilds.
   with `inactive:"1"` - the new integer-as-string property, the Badge variant's
   default - it is a `<span>`, a label rather than a control. Measured all three.
   `menu-link` and `wysiwyg-link` still render `<span>` without a `url`.
+- **A button's words go in a `text` node, not straight under it.** The editor builds
+  `button > text (Inherited text variant, 6381b2f3…) > wysiwyg-text`, and the same
+  for menu-link, dropdown-toggle, tabs and submit labels. A `wysiwyg-text` placed
+  directly under a button renders identically but cannot be edited in the editor:
+  the navigator shows no child, and a double-click opens only the link settings.
+  Only `text`, `label`, `choice-label`, `choice-legend`, `fieldset-legend` and the
+  inline `wysiwyg-span` / `wysiwyg-link` hold runs directly. `build_page.py` wraps
+  runs under any other type itself (`wrap_text_runs`), so the `"text"` shorthand is
+  safe on a button. Output: `<a class="m-button"><div class="m-inherited-text
+  m-wysiwyg">…</div></a>` - the editor's own button carries the same `<div>`.
 - **`text` renders as `<div>` by default** — set `tagName` for `<h1>`, `<p>` and so on.
 - **A `wysiwyg-text` run prints no markup since 1.0.11.** Its `<` and `>` are escaped
   on output, so `A<strong>B</strong>C<br>D` reaches the page as those literal
