@@ -5,7 +5,7 @@ description: |
 license: "MIT"
 metadata:
   author: "moksa (https://moksaweb.com)"
-  version: "1.34.2"
+  version: "1.34.3"
   homepage: "https://github.com/Moksa1123/mosaic-headless"
 ---
 
@@ -879,6 +879,13 @@ with `tools/prune_unbound.php` (dry run by default) after a batch of rebuilds.
   `inline_html.py` maps `<strong>`/`<em>` to styled `wysiwyg-span`s instead.
   Through 1.0.10 the run was raw HTML instead, where a tag name in prose swallowed
   the rest of the paragraph; `build_page.py` refuses any tag in a run either way.
+  **So a site built on 1.0.10 or earlier can start showing tags overnight**: the
+  plugin updates itself, the data does not change, and every `<p>`, `<br>` or
+  `<span>` written into a run now prints. Run `tools/scan_inline_tags.py` (read only)
+  before or after the update, on any site not built by `build_page.py` (another
+  converter, hand edits, an older helper). On the test theme it listed 179 runs on
+  the Elementor-converted `el-*` pages, and each listed page printed `&lt;p&gt;` while
+  the rest printed none.
 - **`menu-link` is `width: fit-content` by default** (`.m-menu-link{display:flex;gap:4px;
   padding:4px 8px;width:fit-content;…}`). Used as a cell of a button row or a grid -
   a phone contact bar on `2fr 1fr 1fr` - its background hugs the text and the cell
@@ -950,6 +957,7 @@ with `tools/prune_unbound.php` (dry run by default) after a batch of rebuilds.
 | `prune_unbound.php` | delete the templates no post is bound to, the masters no kept template uses, their nodes, then orphan nodes pass after pass - one theme, dry run unless `--apply`, `assign="auto"` templates kept |
 | `theme_delete.php` | remove a theme completely through the plugin's own routine; refuses the live one |
 | `fix_text_runs.py` | wrap text runs that sit directly under a button, menu-link or other non-text element (built before v1.34.1) in an Inherited text `text` node, so the editor can edit them - every master, template and component, through each document's own commit; dry run unless `--apply`, idempotent, component overrides kept |
+| `scan_inline_tags.py` | read only: list every `wysiwyg-text` run whose text holds HTML tags (printed literally on 1.0.11+), with the nearest attrID above it, across every master, template and component - run it before or after a site updates from 1.0.10 |
 | `verify_slider.py` | the slider in a real browser: does it advance, do the arrows and bullets drive it, does the keyboard, does it stop when motion is not wanted - `--label`/`--append` put several sliders in one table, which is where a carousel and a plain slider can be held against each other |
 | `verify_navigation.py` | a multi-page site: is every menu item a real `<a href>`, does every page answer 200 (a template that was never bound answers 406 with an empty body, which only a logged-out visitor sees), and with `--viewports` does any page scroll SIDEWAYS - the one question no per-page checker asks - and whether every in-page `#fragment` resolves ON THE PAGE THAT CARRIES IT, which an HTTP check cannot see: a bare `#services` in a SHARED header fetches the current page, answers 200 everywhere, and does nothing on every page but the one that has that section |
 | `verify_dialog.py` | the modal in a real browser (1.0.9 and 1.0.10 alike: open is read as `:popover-open` or `dialog.open`): does it open, close, answer Esc, remember, cap - and does an OpenStreetMap carry the coordinates it was given |
