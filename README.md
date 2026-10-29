@@ -304,6 +304,7 @@ and heading level — and it earned its place at once: it caught the converter l
 | `prune_unbound.php` | clears the templates and masters that page rebuilds leave bound to nothing, with their nodes; dry run unless `--apply` |
 | `fix_text_runs.py` | makes buttons built before v1.34.1 editable in the Mosaic editor by wrapping their text the way the editor does; dry run unless `--apply` |
 | `scan_inline_tags.py` | read only: finds text that holds HTML tags, which Mosaic 1.0.11+ prints as visible `<p>` / `<br>` on the page |
+| `fix_inline_tags.py` | fixes what `scan_inline_tags.py` finds, turning the tags into real inline nodes; dry run unless `--apply` |
 | `theme_zip.py` / `theme_zip_compare.php` / `theme_delete.php` | Mosaic's own ZIP export/import from outside the editor, the copy held against the source, and a clean delete that refuses the live theme |
 | `list_fields.php` | every `@VAR` / `@LOOP` name a post's custom fields register, with values |
 | `verify_dialog.py` | the 1.0.9 modal, triggers, run rules and memory, driven in a browser |

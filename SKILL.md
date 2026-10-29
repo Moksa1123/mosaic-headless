@@ -5,7 +5,7 @@ description: |
 license: "MIT"
 metadata:
   author: "moksa (https://moksaweb.com)"
-  version: "1.34.3"
+  version: "1.34.4"
   homepage: "https://github.com/Moksa1123/mosaic-headless"
 ---
 
@@ -885,7 +885,15 @@ with `tools/prune_unbound.php` (dry run by default) after a batch of rebuilds.
   before or after the update, on any site not built by `build_page.py` (another
   converter, hand edits, an older helper). On the test theme it listed 179 runs on
   the Elementor-converted `el-*` pages, and each listed page printed `&lt;p&gt;` while
-  the rest printed none.
+  the rest printed none. `tools/fix_inline_tags.py` then rewrites them in place
+  (dry run, then `--apply`): 179 fixed, 0 skipped, a second run found nothing, no
+  page printed a tag afterwards, and every page's visible text was identical.
+  One layout change to expect: a run that was `<p>…</p>` used to put a real `<p>`
+  inside the text node, and that `<p>` picked up the WordPress theme's own `p` rule
+  (here `margin:24px 0 0; font-size:16px; line-height:24px`), overriding the node's
+  own font size and line height. After the fix the node's own style applies, so
+  each such block lost 8-49px of height. Giving the node `tagName: p` does not
+  bring it back: Mosaic zeroes the margin on its own `p.m-text`.
 - **`menu-link` is `width: fit-content` by default** (`.m-menu-link{display:flex;gap:4px;
   padding:4px 8px;width:fit-content;…}`). Used as a cell of a button row or a grid -
   a phone contact bar on `2fr 1fr 1fr` - its background hugs the text and the cell
@@ -958,6 +966,7 @@ with `tools/prune_unbound.php` (dry run by default) after a batch of rebuilds.
 | `theme_delete.php` | remove a theme completely through the plugin's own routine; refuses the live one |
 | `fix_text_runs.py` | wrap text runs that sit directly under a button, menu-link or other non-text element (built before v1.34.1) in an Inherited text `text` node, so the editor can edit them - every master, template and component, through each document's own commit; dry run unless `--apply`, idempotent, component overrides kept |
 | `scan_inline_tags.py` | read only: list every `wysiwyg-text` run whose text holds HTML tags (printed literally on 1.0.11+), with the nearest attrID above it, across every master, template and component - run it before or after a site updates from 1.0.10 |
+| `fix_inline_tags.py` | rewrite those runs in place as `wysiwyg-span` / `-link` / `-linebreak` nodes (inline_html.py's mapping); a run that is one `<p>`/`<hN>` gives its tag to a text node that has none; lists, tables, images and mixed block/inline runs are skipped and listed; dry run unless `--apply`, idempotent |
 | `verify_slider.py` | the slider in a real browser: does it advance, do the arrows and bullets drive it, does the keyboard, does it stop when motion is not wanted - `--label`/`--append` put several sliders in one table, which is where a carousel and a plain slider can be held against each other |
 | `verify_navigation.py` | a multi-page site: is every menu item a real `<a href>`, does every page answer 200 (a template that was never bound answers 406 with an empty body, which only a logged-out visitor sees), and with `--viewports` does any page scroll SIDEWAYS - the one question no per-page checker asks - and whether every in-page `#fragment` resolves ON THE PAGE THAT CARRIES IT, which an HTTP check cannot see: a bare `#services` in a SHARED header fetches the current page, answers 200 everywhere, and does nothing on every page but the one that has that section |
 | `verify_dialog.py` | the modal in a real browser (1.0.9 and 1.0.10 alike: open is read as `:popover-open` or `dialog.open`): does it open, close, answer Esc, remember, cap - and does an OpenStreetMap carry the coordinates it was given |
