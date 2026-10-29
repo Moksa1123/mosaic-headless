@@ -73,6 +73,26 @@ def load_csv(name):
 # `<br>` prints as those characters on the page. Inline formatting is written as
 # nodes instead: wysiwyg-span, wysiwyg-linebreak, wysiwyg-link.
 PROSE_TAG = re.compile(r"</?[a-zA-Z][a-zA-Z0-9-]*\s*[^>]*>")
+DYNAMIC_CALL = re.compile(r"@[A-Za-z_][A-Za-z0-9_]*\s*\(")
+# types whose own content is parsed as code from a plain string
+RAW_CODE_TYPES = {"code", "wpShortcode", "wysiwyg-variable", "wysiwyg-text"}
+# data keys whose plain string is evaluated (loop source; form action settings;
+# a condition's variable subject)
+RAW_CODE_KEYS = {"localContextOptions", "actions", "dynamicCode"}
+
+
+def plain_code_paths(value, path="data"):
+    """Paths of plain strings holding @fn( code where only {"v": ...} is computed."""
+    if isinstance(value, str):
+        return [path] if DYNAMIC_CALL.search(value) else []
+    if isinstance(value, dict):
+        if isinstance(value.get("v"), str):
+            return []
+        return [p for k, v in value.items() if k not in RAW_CODE_KEYS
+                for p in plain_code_paths(v, "%s.%s" % (path, k))]
+    if isinstance(value, list):
+        return [p for i, v in enumerate(value) for p in plain_code_paths(v, "%s[%d]" % (path, i))]
+    return []
 AT_RULE_GLUED = re.compile(
     r"@(media|supports|container|layer|scope|import|page|starting-style|"
     r"font-feature-values|counter-style|property|document)\(")
@@ -134,6 +154,16 @@ class Surface:
                 problems.append("code content contains `%s` - Mosaic's template parser reads "
                                 "it as a function call and the page renders as HTTP 500; "
                                 "write `%s (`" % (hit.group(0), hit.group(0)[:-1]))
+        # Node data is computed only in the {"v": "..."} object form
+        # (DynamicCodeHelper::isDynamicCode); evaluateText hands a plain string back
+        # verbatim. So `"entryName": "@VAR('form/field_name')"` stores and shows the
+        # code itself - measured on a live form's submission list. Raw strings that ARE
+        # evaluated: code content, wpShortcode, wysiwyg-variable dynamicCode, a loop
+        # source, and form action settings (getSetting takes either form).
+        if not force and t not in RAW_CODE_TYPES:
+            for path in plain_code_paths(node.get("data") or {}):
+                problems.append("%s holds dynamic code as a plain string - it is stored "
+                                "and shown literally; write it as {\"v\": \"...\"}" % path)
         # A local-context loop's source written as `@LOOP('post/x')` renders on the
         # front end - LoopEvaluator.php reads the loop name out of any function call -
         # and throws in the editor, whose evaluateLoop only resolves `@VAR`

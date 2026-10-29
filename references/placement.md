@@ -220,7 +220,10 @@ the sweep tables.
   keeps one open.
 - **form**: `submitType` is `action` (default) or `native`; the options sit in
   `actionOptions {actions[], formName, entryName}` or `nativeOptions {url, target,
-  method get|post, encoding}`, and switching type deletes the other group. A native
+  method get|post, encoding}`, and switching type deletes the other group.
+  `formName` and `entryName` take dynamic code only as `{"v": "@VAR('form/…')"}`;
+  a plain string is not computed, and a plain `entryName` is what the submissions
+  list shows. A native
   submit skips server validation, the honeypot and CAPTCHA. The success screen
   shows only for `action` with no redirect. With no error-message element, errors
   appear in the browser's own bubble. Every label and legend is required; hide one

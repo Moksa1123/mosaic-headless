@@ -73,6 +73,19 @@ it commits without complaint and delivers
 `href="http://concat('/contact/?ref=%27…"` - the leading `@` dropped and the rest taken
 as a URL (measured on a client build on 1.0.10). As `{"v": "@concat(…)"}` it delivers the evaluated link.
 
+The same holds for a field that is not in the sweep tables. A form's
+`actionOptions.entryName` and `formName` go through `LocalContext::evaluateText`,
+which computes only `{"v": …}` and returns a plain string as it is. A plain
+`"entryName": "@VAR('form/field_name')"` stores that text as every submission's
+`entryLabel`, so the admin's Form Submissions list shows the raw code (measured on a
+live form on 1.0.11). The label is stored per submission, so fixing the setting
+does not change submissions already saved. The action settings inside
+`actionOptions.actions[]` (email subject, replyTo, webhook body) accept either form.
+`build_page.py` refuses `@fn(` code in a plain data string, except where a plain
+string is evaluated: `code` content, `wpShortcode`, `wysiwyg-variable`'s
+`dynamicCode` (and a condition's variable subject), a loop source, and form
+action settings.
+
 
 ## The variable namespace
 
