@@ -5,7 +5,7 @@ description: |
 license: "MIT"
 metadata:
   author: "moksa (https://moksaweb.com)"
-  version: "1.34.6"
+  version: "1.34.7"
   homepage: "https://github.com/Moksa1123/mosaic-headless"
 ---
 
@@ -716,18 +716,24 @@ with `tools/prune_unbound.php` (dry run by default) after a batch of rebuilds.
   collections and child nodes you never sent. Take every revision in the response.
 - **One root per document, or the document renders empty.** A second, empty
   `component-internal` (or master/template root) ordered first makes Mosaic render
-  from it: every instance of that component prints nothing, and the next master
-  commit drops the overrides that point into the real tree (90 lost on a live
-  1.0.11 site; restoring them alone changed nothing until the empty roots were
-  deleted). Health check, which must return no rows (group by `themeID` too: the
+  from it: every instance of that component prints nothing, and within a day the
+  overrides that point into the real tree were gone with no master commit in
+  between (90 on a live 1.0.11 site; restoring them alone changed nothing until the
+  empty roots were deleted). Heal syncs an instance's overrides by walking the
+  component from that first root (`keepOverrideNodesInSync`), and heal runs on
+  front-end renders too. Health check, which must return no rows (group by `themeID` too: the
   same component ID in two themes is not a duplicate):
   `SELECT themeID, documentType, documentID, parentType, COUNT(*) n FROM wp_mosaic_nodes WHERE parentType IN ('master','template','component','componentDocument') GROUP BY themeID, documentType, documentID, parentType HAVING n > 1`.
   A node's `revision` is a time-based UUID (v1), so it dates when that root was
   written. Match that time against the access log. `build_site.py` stops and the
   fix tools skip a document with more than one root; `scan_inline_tags.py` warns.
   Reading every document over REST does not create roots (135 before and after a
-  full scan on the demo site). The one creation traced to a cause so far was a
-  MySQL restart mid-render: heal read the failed SELECT as "no root".
+  full scan on the demo site). Both creations traced so far came from the
+  database failing under load: a MySQL restart on one site, a crawler driving a
+  burst of fast HTTP 500s on another. Each time a front-end render's heal read the
+  failed query as "no root" and wrote a new empty one, with no REST write in the
+  log. A site that sees this needs the load handled (bot rate limits, MySQL
+  capacity) as much as the roots repaired.
 - **`modified_gmt` is server-assigned.**
 - **Styling hangs on the generated `._<token>` class, not your `attrID`**, and the
   token (`_a`, `_b`, ... `_ba`: a base-38 per-document counter) is not stable. The
