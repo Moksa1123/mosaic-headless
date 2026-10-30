@@ -35,7 +35,7 @@ import sys
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 import inline_html  # noqa: E402
 from build_page import Surface, flatten  # noqa: E402
-from fix_text_runs import documents  # noqa: E402
+from fix_text_runs import documents, extra_roots  # noqa: E402
 from scan_inline_tags import scan  # noqa: E402
 from sweep_node_types import Client, envelopes, exceptions_of  # noqa: E402
 
@@ -133,6 +133,10 @@ def main():
             print("  skip %-40s (could not read)" % label)
             continue
         doc = resp["response"]
+        dup = extra_roots(doc.get(key) or [])
+        if dup:
+            print("  SKIP %-40s %d roots - fix the duplicate root first" % (label, len(dup)))
+            continue
         records, fixed, skipped = plan(doc.get(key) or [], surface)
         if not fixed and not skipped:
             continue

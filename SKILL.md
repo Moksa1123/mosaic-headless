@@ -5,7 +5,7 @@ description: |
 license: "MIT"
 metadata:
   author: "moksa (https://moksaweb.com)"
-  version: "1.34.5"
+  version: "1.34.6"
   homepage: "https://github.com/Moksa1123/mosaic-headless"
 ---
 
@@ -714,6 +714,20 @@ with `tools/prune_unbound.php` (dry run by default) after a batch of rebuilds.
   tables appear when an admin loads `/wp-admin/admin.php?page=mosaic`.
 - **Commit has side effects.** `heal()` runs inside it and creates breakpoints,
   collections and child nodes you never sent. Take every revision in the response.
+- **One root per document, or the document renders empty.** A second, empty
+  `component-internal` (or master/template root) ordered first makes Mosaic render
+  from it: every instance of that component prints nothing, and the next master
+  commit drops the overrides that point into the real tree (90 lost on a live
+  1.0.11 site; restoring them alone changed nothing until the empty roots were
+  deleted). Health check, which must return no rows (group by `themeID` too: the
+  same component ID in two themes is not a duplicate):
+  `SELECT themeID, documentType, documentID, parentType, COUNT(*) n FROM wp_mosaic_nodes WHERE parentType IN ('master','template','component','componentDocument') GROUP BY themeID, documentType, documentID, parentType HAVING n > 1`.
+  A node's `revision` is a time-based UUID (v1), so it dates when that root was
+  written. Match that time against the access log. `build_site.py` stops and the
+  fix tools skip a document with more than one root; `scan_inline_tags.py` warns.
+  Reading every document over REST does not create roots (135 before and after a
+  full scan on the demo site). The one creation traced to a cause so far was a
+  MySQL restart mid-render: heal read the failed SELECT as "no root".
 - **`modified_gmt` is server-assigned.**
 - **Styling hangs on the generated `._<token>` class, not your `attrID`**, and the
   token (`_a`, `_b`, ... `_ba`: a base-38 per-document counter) is not stable. The
@@ -965,7 +979,7 @@ with `tools/prune_unbound.php` (dry run by default) after a batch of rebuilds.
 | `prune_unbound.php` | delete the templates no post is bound to, the masters no kept template uses, their nodes, then orphan nodes pass after pass - one theme, dry run unless `--apply`, `assign="auto"` templates kept |
 | `theme_delete.php` | remove a theme completely through the plugin's own routine; refuses the live one |
 | `fix_text_runs.py` | wrap text runs that sit directly under a button, menu-link or other non-text element (built before v1.34.1) in an Inherited text `text` node, so the editor can edit them - every master, template and component, through each document's own commit; dry run unless `--apply`, idempotent, component overrides kept |
-| `scan_inline_tags.py` | read only: list every `wysiwyg-text` run whose text holds HTML tags (printed literally on 1.0.11+), with the nearest attrID above it, across every master, template and component - run it before or after a site updates from 1.0.10 |
+| `scan_inline_tags.py` | read only: list every `wysiwyg-text` run whose text holds HTML tags (printed literally on 1.0.11+), with the nearest attrID above it, across every master, template and component - run it before or after a site updates from 1.0.10; also warns on a document with more than one root |
 | `fix_inline_tags.py` | rewrite those runs in place as `wysiwyg-span` / `-link` / `-linebreak` nodes (inline_html.py's mapping); a run that is one `<p>`/`<hN>` gives its tag to a text node that has none; lists, tables, images and mixed block/inline runs are skipped and listed; dry run unless `--apply`, idempotent |
 | `verify_slider.py` | the slider in a real browser: does it advance, do the arrows and bullets drive it, does the keyboard, does it stop when motion is not wanted - `--label`/`--append` put several sliders in one table, which is where a carousel and a plain slider can be held against each other |
 | `verify_navigation.py` | a multi-page site: is every menu item a real `<a href>`, does every page answer 200 (a template that was never bound answers 406 with an empty body, which only a logged-out visitor sees), and with `--viewports` does any page scroll SIDEWAYS - the one question no per-page checker asks - and whether every in-page `#fragment` resolves ON THE PAGE THAT CARRIES IT, which an HTTP check cannot see: a bare `#services` in a SHARED header fetches the current page, answers 200 everywhere, and does nothing on every page but the one that has that section |

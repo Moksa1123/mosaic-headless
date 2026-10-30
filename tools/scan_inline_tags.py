@@ -25,7 +25,7 @@ import sys
 
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 from build_page import PROSE_TAG  # noqa: E402
-from fix_text_runs import documents  # noqa: E402
+from fix_text_runs import documents, extra_roots  # noqa: E402
 from sweep_node_types import Client  # noqa: E402
 
 
@@ -66,6 +66,10 @@ def main():
         if "_httperror" in resp or "response" not in resp:
             print("  skip %-40s (could not read)" % label)
             continue
+        dup = extra_roots(resp["response"].get(key) or [])
+        if dup:
+            print("WARNING %s has %d roots: %s" % (label, len(dup), ", ".join(
+                "%s(%s)" % (n["ID"][:8], n.get("ordering")) for n in dup)))
         hits = scan(resp["response"].get(key) or [])
         if not hits:
             continue

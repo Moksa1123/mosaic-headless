@@ -57,6 +57,24 @@ def documents(client):
     return out
 
 
+ROOT_PARENTS = ("master", "template", "component", "componentDocument")
+
+
+def extra_roots(nodes):
+    """Root nodes beyond the first in one document; empty when the document is sound.
+
+    A document has one root (`parentType` master / template / component). A second,
+    empty one makes Mosaic render from it, so every instance of a component prints
+    nothing, and the next master commit drops the overrides pointing at the real
+    tree. Measured on a live site on 1.0.11. Never write to such a document.
+    """
+    by = {}
+    for n in nodes:
+        if n.get("status") != "delete" and n.get("parentType") in ROOT_PARENTS:
+            by.setdefault(n["parentType"], []).append(n)
+    return [n for roots in by.values() if len(roots) > 1 for n in roots]
+
+
 def plan(nodes):
     """Revision records that wrap every misplaced run, and a count per parent type."""
     live = [n for n in nodes if n.get("status") != "delete"]
@@ -114,6 +132,10 @@ def main():
             print("  skip %-40s (could not read)" % label)
             continue
         doc = resp["response"]
+        dup = extra_roots(doc.get(key) or [])
+        if dup:
+            print("  SKIP %-40s %d roots - fix the duplicate root first" % (label, len(dup)))
+            continue
         records, counts = plan(doc.get(key) or [])
         if not counts:
             continue

@@ -46,6 +46,7 @@ from build_page import (refresh_node_ids,   # noqa: E402
     flatten,
     theme_records,
 )
+from fix_text_runs import extra_roots  # noqa: E402
 from sweep_node_types import (  # noqa: E402
     MIN_HEALTHY_BYTES,
     Client,
@@ -198,6 +199,12 @@ def ensure_components(client, cfg, site, surface):
         client.get(instance)                     # the first GET heals the document
         doc = unwrap(client.get(instance), "componentDocumentInstance")
         key = "node/component/%s" % cid
+        dup = extra_roots(doc[key])
+        if dup:
+            sys.exit("component %s has %d component-internal roots (%s); Mosaic renders "
+                     "the first one, so writing under any of them is a guess. Remove the "
+                     "empty extra root first." % (name, len(dup), ", ".join(
+                         "%s ordering %s" % (n["ID"][:8], n.get("ordering")) for n in dup)))
         internal = next(n for n in doc[key] if n["type"] == "component-internal")
 
         # refill: drop whatever the last build put there, deepest first
