@@ -322,6 +322,18 @@ Four more things a build that leans on components runs into:
   `uuid5(COMPONENT_NAMESPACE, name)` so rebuilds update the same row; renaming the
   key in `site["components"]` therefore creates a new component and leaves the old
   one behind.
+- **Refilling a definition re-keys its inner nodes, so update only what uses it.**
+  `ensure_components` deletes the old inner nodes and flattens the tree again, which
+  gives every inner node a new id; an instance's override nodes still point
+  `override.originalID` at the old ids, and their text falls back to the definition's
+  (reported from a client build). An incremental updater does not need to rewrite the
+  whole site to cover this: a NEW component has no overrides anywhere yet, so write the
+  definition plus the documents that place it; a CHANGED one needs the documents that
+  place it re-committed with their overrides - the master if the header or footer
+  holds an instance, and each template whose tree does - and nothing else. Keep the
+  spec deterministic while deciding what changed: a fresh `uuid4` inside a definition
+  (an interaction item's `uuid`, say) makes every spec hash differ and every component
+  look changed; derive such ids with `uuid5` (reported from the same build).
 - **An expression inside a definition is evaluated where the instance is.** A link
   `{"v": "@concat('/contact/?ref=', @VAR('post/title'), '#consult')"}` inside a
   component, placed in a single-post template, carries THAT post's title (reported

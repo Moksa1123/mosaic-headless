@@ -5,7 +5,7 @@ description: |
 license: "MIT"
 metadata:
   author: "moksa (https://moksaweb.com)"
-  version: "1.34.7"
+  version: "1.34.8"
   homepage: "https://github.com/Moksa1123/mosaic-headless"
 ---
 
