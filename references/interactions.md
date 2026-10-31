@@ -227,6 +227,10 @@ interaction ID), `remember` / `forget`, `modalOpen` / `modalClose`, `popoverOpen
 `popoverClose` / `popoverToggle`, and `scrollTo` (Pro) - for triggering behaviour
 rather than motion. A modal has no toggle. `modalClose` / `popoverClose` placed
 inside the dialog they close need no target - the action resolves its own dialog.
+That holds when the modal is a component's root and the buttons sit inside the
+definition: `"settings": {}` on each close button's `modalClose` closed every
+instance on a client site (1.0.11, measured on a phone width), Esc closed it too, and
+a `pageLoad` cooldown kept it shut on reload.
 `setCookie` writes a session cookie, gone when the browser closes. With a class as the
 trigger and an empty target, the action hits the element that fired; a class used as
 the TARGET hits every element carrying it on the page.
