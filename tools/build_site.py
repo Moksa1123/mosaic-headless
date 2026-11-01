@@ -158,6 +158,15 @@ def fill_shell(client, cfg, site, surface, master_id, header_id, footer_id, comp
 # uuid accumulates. See references/failure-modes.md.
 COMPONENT_NAMESPACE = uuid.UUID("6d6f7361-6963-4865-6164-6c657373ff02")
 
+# The template a component is previewed in - the editor's own default for a new
+# component. An empty path is not "no preference": 1.0.11's
+# ComponentRenderEditorInstance::createComponentContext tests `empty($paths)` (a
+# misspelt variable, always empty), so the component's own path always wins, and ""
+# recurses through getTemplatePathContext until PHP runs out of stack. The preview
+# and the thumbnail screenshot then return 200 with 0 bytes (reported from a client
+# build; the typo read from source).
+COMPONENT_PATH = "front-page.php"
+
 
 def ensure_components(client, cfg, site, surface):
     """Create or refill every component the spec declares, and map its inner nodes.
@@ -187,7 +196,11 @@ def ensure_components(client, cfg, site, surface):
             records.append({"newRevisionRecord": {
                 "ID": cid, "parentType": "componentCategory", "parentID": cat,
                 "ordering": "a0", "status": "publish", "revision": "", "version": "",
-                "name": name, "path": ""}, "originalRevisionRecord": None})
+                "name": name, "path": COMPONENT_PATH}, "originalRevisionRecord": None})
+        elif not existing[cid].get("path"):
+            # built by an earlier version with path "" - repair it, see COMPONENT_PATH
+            records.append({"newRevisionRecord": dict(existing[cid], path=COMPONENT_PATH),
+                            "originalRevisionRecord": existing[cid]})
     if records:
         commit(client, "adminComponentsEditorInstance", inst,
                {"component": records}, "components")

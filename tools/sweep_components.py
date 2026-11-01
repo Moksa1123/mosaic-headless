@@ -125,7 +125,7 @@ def main():
                              "ID": cid, "parentType": "componentCategory",
                              "parentID": cats[0]["ID"], "ordering": "a0",
                              "status": "publish", "revision": "", "version": "",
-                             "name": "Probe Card", "path": ""},
+                             "name": "Probe Card", "path": "front-page.php"},
                              "originalRevisionRecord": None}]})
     err = exceptions_of(resp)
     inst2 = unwrap(client.get("adminComponentsEditorInstance"),

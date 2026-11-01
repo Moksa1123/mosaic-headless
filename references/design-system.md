@@ -322,6 +322,15 @@ Four more things a build that leans on components runs into:
   `uuid5(COMPONENT_NAMESPACE, name)` so rebuilds update the same row; renaming the
   key in `site["components"]` therefore creates a new component and leaves the old
   one behind.
+- **A component needs a `path`, or its preview and thumbnail are blank.** The
+  component row's `path` is the template it is previewed in; the editor gives a new
+  one `front-page.php`. With `path: ""`, 1.0.11 recurses until PHP runs out of stack
+  (`ComponentRenderEditorInstance::createComponentContext` tests a misspelt
+  `$paths`, so the empty path is never replaced), and the editor's preview and
+  thumbnail screenshot come back as 200 with 0 bytes (reported from a client build).
+  `build_site.py` wrote `""` until 1.34.9; it now writes `front-page.php` and repairs
+  an existing component with an empty path. A headless build does not regenerate the
+  thumbnail; a stored one (a captured error page, say) stays until something replaces it.
 - **Refilling a definition re-keys its inner nodes, so update only what uses it.**
   `ensure_components` deletes the old inner nodes and flattens the tree again, which
   gives every inner node a new id; an instance's override nodes still point
