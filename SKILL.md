@@ -5,7 +5,7 @@ description: |
 license: "MIT"
 metadata:
   author: "moksa (https://moksaweb.com)"
-  version: "1.34.9"
+  version: "1.35.0"
   homepage: "https://github.com/Moksa1123/mosaic-headless"
 ---
 
@@ -128,6 +128,33 @@ A successful commit is not evidence of a working page, and neither is a correct
 stylesheet. Fetch the page and check its size; then run `verify_browser.py` and let
 the element say what it actually got. `references/failure-modes.md` has all of them,
 measured.
+
+## Native first: what the client can open in the editor
+
+The second rule, and the one an agent breaks most often: **build with Mosaic's own
+features, not with code.** A `code` node, a `script` action, or a pile of
+`customDeclarations` renders fine and is a dead end for the client - the editor
+shows a box of text they cannot change, the Navigator shows nothing of its
+structure, and the next agent has to reverse-engineer it. Mosaic's tutorials build
+every one of the effects below with no custom code; this skill can now write all of
+them headlessly, measured.
+
+| the job | the native way | how, headlessly |
+|---|---|---|
+| dark / light mode, themed sections | a second mode on the colour collection; `collectionModesData` on a band, or the Variable modes action on `document` for the whole site | references/design-system.md (modes), the switcher recipe in references/interactions.md |
+| any animation: reveal, fade, slide, loop, parallax | an interaction (`pageLoad`, `click`, `hover`, `elementScrollIntoView`, `scrollIntoView`...) | `tools/interactions.py`; never `@keyframes` in a code node |
+| the same animation on many elements | a universal class as the interaction's trigger, empty target | `trigger=class_target(...)`, recipe in references/interactions.md |
+| a hover / focus look with no motion sequence | a style state (`hover`, `focus`...) with a `transition` | references/styling.md |
+| a loading screen, a cookie bar | a fixed div + `pageLoad` + `hide_at_end`, `data.hidden: true` so it does not block editing | recipe in references/interactions.md |
+| a block repeated on several pages | a component, one definition, overrides per instance | references/design-system.md (components) |
+| a popup, a drawer, a tour | the `modal` / `popover` nodes and their actions | references/dialog-and-triggers.md |
+| remembering a visitor's choice | `setCookie`, `remember` / `forget`, cookie conditions | references/interactions.md |
+| text that comes from the post, the user, a field | a dynamic `{"v": "@VAR(...)"}` value | references/dynamic-content.md |
+| a colour, a size used twice | a collection variable | references/design-system.md |
+
+Reach for custom code only when no row above fits and `mo.py` finds no node,
+property or action for the job - and then say in the spec, next to the code, which
+native path was checked and why it falls short.
 
 ## What was verified, and how
 
@@ -272,13 +299,20 @@ COMPONENTS   used on the example page: the service row is committed ONCE to the
              negative control, and two instances placed on a page rendering the one
              definition twice. data/component-verification.csv
 
-INTERACTION  the JS animation path, probed with negative controls and the row read
-             back: `propertyMetas` IS accepted and stored (the earlier claim that it
-             never survived was wrong), `uuid` per item is optional on create and
-             required on update, and the property VALUES still do not bind - not on
-             a second commit, not on one that changes `propertyMetas/order`, and not
-             written straight into the table with caches flushed.
-             data/interaction-verification.csv
+INTERACTION  the JS animation path, values included, since v1.35: one tween
+             authored in the editor and read back showed the shape - values keyed
+             by the property META's uuid, written as CSS strings with units, and
+             `duration` on the keyframe for timed triggers. Written headlessly it
+             binds on the first commit; bare numbers and name keys, one field
+             apart, store nothing. data/interaction-verification.csv
+
+TUTORIALS    Mosaic's four docs tutorials built from tools/interactions.py and
+             driven in Chromium, 16 of 16: a dark/light switcher (variable-mode
+             action on `document`, session cookie, cookie-gated page load), a
+             loading overlay that ends display:none and stops catching clicks, a
+             class-triggered scroll reveal that fires per element, and a loop a
+             hover suspends and resumes by Interaction ID.
+             data/tutorial-recipes-verification.csv
 
 INTRO        the page-load sequence - an ukiyo-e sheet printing itself eleven
              carved blocks at a time, each impression landing out of register and
@@ -484,17 +518,14 @@ so the pattern is in the data, not just in this paragraph.
   All four are real entries in `data/style-properties.csv`, under `gridChildPosition`.
   Measured: 16 `gridColumnStart` declarations committed, zero occurrences of
   `grid-column` in the delivered CSS. Change the template; you cannot place a child.
-- **Interaction property binding is unsolved, but the boundary is now exact.** The
-  trigger, action slot, keyframe timing **and `propertyMetas`** all reach the
-  browser - the earlier claim that `propertyMetas` never survived was wrong, and the
-  missing field was the per-item `uuid` a `DataArray` needs. What still does not bind
-  is `initial` and the keyframes' `properties`, and not for want of the right shape:
-  they are absent after a second commit, after one that changes `propertyMetas/order`,
-  and after writing them **straight into `wp_mosaic_nodes` with every cache flushed**.
-  The gate is `KeyframePropertiesDataSub::exportForInteraction()`, which emits only
-  properties whose descriptor exists, and those are created during sync on a
-  `DataMeta` that starts empty. Animate with the CSS state path, which is fully
-  verified: 36 of 37 probed states compile to exactly the promised selector.
+- **Interaction values bind in the editor's shape - build them with
+  `tools/interactions.py`.** `initial` and each keyframe's `properties` are keyed by
+  the property META's `uuid`, values are CSS strings with units (`"0%"`, `"40px"`),
+  and a timed trigger's keyframe carries `duration`/`delay` in ms (only
+  `scrollIntoView`/`pointerMove` use `progressData`). A simple action's fields go
+  under `<type>Options.settings` - under the opt-group's name they are dropped, and a
+  suspend without its ID suspends everything on the element, itself included. The
+  full table of stored shapes is in references/interactions.md.
 - An element **condition** puts its comparator INSIDE the subject's options
   (`subject.<type>Options.comparator`). One level up is a PHP fatal that blanks the
   whole page; so is `{"v": …}` as a `variable` subject's `dynamicCode` (a plain
@@ -536,8 +567,10 @@ variable's `customProperty` is optional.
    guessable, and a wrong guess renders as literal text rather than an error.
 9. `references/templates-and-conditions.md` — how Mosaic picks a template, and the
    condition grammar shared by templates, elements, interactions and form actions.
-10. `references/interactions.md` — the JavaScript animation system, and how far it is
-   verified.
+10. `references/interactions.md` — the JavaScript animation system in the shape the
+   editor stores, values included, and the measured tutorial recipes.
+    `references/tutorials.md` — all 24 official tutorials mapped to headless builds:
+   which are measured, which are built from measured parts, which are still open.
 11. `references/vs-elementor-gutenberg.md` — which builder habits transfer.
 12. `references/slider.md` — the slider nested as its factories require, and the
    two things about it the markup does not announce.
@@ -596,7 +629,8 @@ variable's `customProperty` is optional.
 | `data/custom-fields-verification.csv` | 62 | **rendered live** - ACF and Meta Box fields of every common type read back through `@VAR` / `@LOOP` off the delivered page, loops included |
 | `data/theme-zip-verification.csv` | 22 | **round-tripped live** - Mosaic's own ZIP export imported in test mode and compared to its source, table by table and tree by tree |
 | `data/node-type-notes.csv` | 8 | where a sweep outcome is true but misleading on its own, why. Surfaced by `mo.py type` |
-| `data/interaction-verification.csv` | 7 | **probed live** - interaction animation shapes, with negative controls and the stored row beside the payload |
+| `data/interaction-verification.csv` | 11 | **probed live** - interaction animation shapes, with negative controls and the stored row beside the payload; the editor's shape binds, the six older candidates and two one-field-apart controls do not |
+| `data/tutorial-recipes-verification.csv` | 16 | **driven live** - Mosaic's four docs tutorials (dark/light switcher, loading overlay, class-driven reveal, loop with hover pause) plus the off-canvas toggle and the reading progress bar, built from `tools/interactions.py` and checked in Chromium |
 | `data/intro-verification.csv` | 8 + 15 | **sampled live** - the entrance sequence over fifteen timestamps on a monotonic clock, plus the eight assertions about it |
 | `data/variants.csv` | 157 | **live** — the variant catalog (Mosaic's built-in element classes); their IDs are what a `variant` record must use, and `class_name` is what the element emits |
 | `data/dynamic-variables.csv` | 75 | source — every `@VAR('ns/name')` expression, by namespace |
@@ -979,6 +1013,8 @@ with `tools/prune_unbound.php` (dry run by default) after a batch of rebuilds.
 | `sweep_style_states.py` | write every style state and check the selector it compiled to |
 | `sweep_components.py` | build a component, instance it twice, and prove one definition served both |
 | `sweep_interactions.py` | which interaction animation shapes survive to the frontend payload |
+| `interactions.py` | a library, not a command: `tween`, `on`, `mode_switch`, `set_cookie`, `cookie_is`, `hide_at_end`, `suspend` / `resume`, `class_target` - every interaction shape in the form the editor stores |
+| `verify_recipes.py` | builds Mosaic's four docs tutorials on one page and drives each in Chromium |
 | `theme_export.php` / `theme_import.php` | move a whole theme across installs, ids intact |
 | `theme_zip.py` | drive Mosaic's OWN export/import - the ZIP the editor makes, attachments included, over the milestone protocol; import lands in test mode unless told `--activate` |
 | `theme_zip_compare.php` | hold an imported copy against its source, tree for tree - every scoped table, the (parentType, type) shape, which ids survive, and orphans named rather than counted |
@@ -1072,6 +1108,7 @@ python tools/sweep_style_properties.py --config sweep.json --page moksa --csv da
 python tools/sweep_node_properties.py  --config sweep.json --page moksa --csv data/node-property-verification.csv
 python tools/sweep_style_states.py --config sweep.json --post 20 --slug probe-lab     --csv data/style-state-verification.csv
 python tools/sweep_interactions.py --config sweep.json --post 20 --slug probe-lab     --csv data/interaction-verification.csv
+python tools/verify_recipes.py --config sweep.json --post 21 --slug probe-recipes    --csv data/tutorial-recipes-verification.csv
 python tools/verify_loop.py --url https://site/ --window mk-loop --toggle mk-plate-title --panel mk-plate-item \
     --parts ukw-sky,ukw-sun,ukw-fuji,ukw-mist,ukw-sea,ukw-crest,ukw-boat,ukw-wave,ukw-claw,ukw-swell,ukw-key,mk-loop-seal \
     --period 14000 --csv data/loop-verification.csv

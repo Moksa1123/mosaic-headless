@@ -174,6 +174,20 @@ inheritance (measured on 1.0.11: 18 declarations on one div). A dark band is one
 targets the `html` element with a `collectionMode` property, since interactions can
 set it too. The mode listed first in a collection is the default.
 
+A theme `heal()` made has one mode; a second one is a record on any document
+instance's commit, under the key `collectionMode` (measured on 1.0.11):
+
+```json
+{"ID": "<uuid>", "parentType": "collection", "parentID": "<collectionID>",
+ "ordering": "a5", "status": "publish", "revision": "", "version": "",
+ "data": {"name": "Dark", "icon": ""}}
+```
+
+Each variable then carries a value per mode - `skinsData: {<skin>: {<lightMode>:
+{"value": …}, <darkMode>: {"value": …}}}` - and a variable with no value for the new
+mode shows the sub-factory default there. The site-wide switcher (buttons, cookie,
+page-load re-apply) is a recipe in references/interactions.md, measured end to end.
+
 ### Which class wins
 
 From lowest to highest: **Variant < Variant sub class < Universal class < Universal

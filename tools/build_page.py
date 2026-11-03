@@ -436,7 +436,9 @@ def flatten(node, parent_id, master_id, surface, force, ordering="a0",
     data = dict(node.get("data") or {})
     style = to_style(node.get("style"))
     if style:
-        data["style"] = style
+        # merge, not replace: data.style may already carry universalClasses or a
+        # variant, which the states from node["style"] must not wipe out
+        data["style"] = dict(data.get("style") or {}, **style)
     # A node that names a component becomes an INSTANCE of it, and an instance's
     # type carries the component's id after a slash - the factory splits on it, and
     # a bare `component-instance` has no id to read and fatals. `overrides` is not

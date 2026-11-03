@@ -5,4 +5,8 @@ properties-keyed-by-meta-uuid,"NEGATIVE CONTROL - properties keyed by the meta's
 no-initial,does the initial block have to be there?,TIMING_ONLY,"1 keyframes, no properties","stored: 1 metas, 0 property values"
 two-properties,"more than one meta, and a transform among them",TIMING_ONLY,"1 keyframes, no properties","stored: 2 metas, 0 property values"
 two-keyframes,a real timeline rather than a single step,TIMING_ONLY,"2 keyframes, no properties","stored: 1 metas, 0 property values"
+editor-shape-pageload,"as the editor stores it: uuid keys, '0%'/'80%', duration on the keyframe",BOUND,1 keyframes driving opacity,"stored: 1 metas, 2 property values"
+editor-shape-numbers,NEGATIVE CONTROL - editor shape but bare numbers 0 / 0.8,TIMING_ONLY,"1 keyframes, no properties","stored: 1 metas, 0 property values"
+editor-shape-name-keys,NEGATIVE CONTROL - editor shape but keyed by 'opacity',TIMING_ONLY,"1 keyframes, no properties","stored: 1 metas, 0 property values"
+editor-shape-scroll,uuid keys and '%' strings on the progress family (scrollIntoView),BOUND,1 keyframes driving opacity,"stored: 1 metas, 2 property values"
 timed-trigger,the timed family rather than the progress family,NO_PAYLOAD,no entry for this trigger selector,"stored: 0 metas, 0 property values"

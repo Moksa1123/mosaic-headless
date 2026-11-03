@@ -8,8 +8,10 @@ every node-type state in `data/style-states.csv`. Reach for it first;
 `references/styling.md` has the shapes.
 
 **The interaction path** is this document: scroll-driven and event-driven animation
-with keyframes, run by Mosaic's own JavaScript. It is **partially verified**, and this
-page is explicit about where the verified part ends.
+with keyframes, run by Mosaic's own JavaScript. Since v1.35 it is verified end to end
+- values included - in the shape the editor stores; `tools/interactions.py` writes it.
+Prefer it over custom code for anything the editor can express: a client can open
+and change an interaction, but not a script.
 
 ## What is confirmed
 
@@ -68,61 +70,102 @@ Confirmed from it:
   it is a percentage of the scroll range, not milliseconds.
 - **`easing` is defaulted to `ease`** by the server.
 
-## What is NOT solved - and exactly how far it now goes
+## Animation values: solved, in the editor's own shape
 
-`tools/sweep_interactions.py` commits candidate shapes to a live page and judges each
-against `var mosaicInteractions` in the delivered HTML **and** against the row read
-back out of the database, with negative controls. Results in
-`data/interaction-verification.csv`.
-
-**`propertyMetas` is NOT the problem, and the previous claim here was wrong.** It is
-accepted, stored, and keeps its order:
+Until v1.35 this section said the property VALUES could not be written headlessly:
+every attempt stored the timing and the `propertyMetas` and lost `initial` and the
+keyframes' `properties`. The experiment that settled it was the one this page kept
+recommending - author one tween in the 1.0.11 editor and read the row back - and the
+editor's shape differs from every candidate tried in three ways:
 
 ```json
-"propertyMetas": [{"uuid": "<uuid>", "type": "predefined", "timelineKey": "_",
-                   "predefinedOptions": {"name": "opacity"}}]
+"animationOptions": {
+  "propertyMetas": [{"type": "predefined", "timelineKey": "_",
+                     "predefinedOptions": {"name": "opacity"}, "uuid": "M"}],
+  "initial":   {"M": "0%"},
+  "keyframes": [{"uuid": "K", "duration": 1000, "properties": {"M": "80%"}}]
+}
 ```
 
-`type` is one of `predefined | custom | static | collectionMode | collectionVariable
-| display`; the options key is that type plus `Options`
-(`KeyframePropertyMetaTypeFactoryAbstract::getPropertyMetaOptionsDataName()`), and
-for `predefined` the `name` is the property itself - the full list is
-`data/animatable-properties.csv`.
+1. **`initial` and `properties` are keyed by the META's uuid**, never by the property
+   name. (The old reading - "for a predefined meta the name is the property" - was
+   wrong: a meta is a data-array item, and an item's name is its id.)
+2. **Values are CSS strings with their unit** - `"0%"`, `"40px"`, `"0px"` - not
+   bare numbers.
+3. **On a timed trigger the keyframe carries `duration` / `delay` in ms**; only the
+   progress family (`scrollIntoView`, `pointerMove`) uses `progressData` 0-100.
 
-**`uuid` is optional on create and REQUIRED on update.** `DataArray::initValues`
-mints one when it is missing, but `DataArray::applyCommitData` matches existing items
-by uuid and rebuilds `order` from `array_column($new, 'uuid')` - so on any later
-commit an item without a uuid is not matched, not carried into the new order, and
-disappears. Measured both ways: the same shape stored 1 meta on create and 0 after an
-update.
+`tools/sweep_interactions.py` holds the proof: the editor shape BOUND on `pageLoad`
+and on `scrollIntoView` on the FIRST commit, while the same shape with bare numbers,
+and the same shape keyed by `"opacity"`, both stored zero values - one field apart
+each (data/interaction-verification.csv; the six older candidates are kept as the
+record of what does not work). Don't hand-write these: `tools/interactions.py`
+builds every shape on this page.
 
-**What still does not bind is `initial` and the keyframes' `properties`.** Four
-attempts, each with the row read back:
+The rest of what the editor stores, each read back from a hand-authored interaction:
 
-| attempt | result |
+| what | where it lives |
 |---|---|
-| one commit carrying metas + values | metas stored, 0 property values |
-| second commit adding the values | metas stored, 0 property values |
-| second commit that also REORDERS the metas, so `propertyMetas/order` genuinely changes | reorder took effect in storage, still 0 property values |
-| the values written **straight into `wp_mosaic_nodes`**, all caches flushed | still absent from the payload |
+| Interaction ID (what suspend/resume name) | `<type>Options.ID`, `[a-z0-9_]+` |
+| Out of view: keep / suspend / reset | `<type>Options.outOfView` `"0"` / `"1"` / `"2"` |
+| Loop | `<type>Options.actionSlots.<slot>.options.isLoop = "1"` - on the SLOT, not the interaction |
+| Trigger other than the element itself | `<type>Options.trigger` = `{"type": "element" \| "variant" \| "universalClass", "uuid": id}` (`"<id>/<subID>"` for a sub class) |
+| Conditions | `<type>Options.conditions` - see the cookie shape below |
+| Display at the end of the timeline | a meta `{"type": "display", "displayOptions": {"endDisplay": "none"}}`, no keyframe value |
+| Variable mode (Variables > Variable modes) | a meta `{"type": "collectionMode", "collectionModeOptions": {"id": <collectionID>}}`, keyframe value = the mode ID |
+| Set cookie | `{"type": "setCookie", "setCookieOptions": {"settings": {"name", "value"}}}` |
+| Suspend / resume by ID | `{"type": "interactionSuspend", "interactionSuspendOptions": {"settings": {"interactionID": "loop_id"}}}`, `interactionResume` alike |
+| Hide in editor (Navigator) | the node's `data.hidden: true` - the live page still renders it |
 
-That last row is the informative one: it rules out the trust model, the commit
-validators and the cache. The gate is in the export itself -
-`KeyframePropertiesDataSub::exportForInteraction()` will only emit a property for
-which `$this->hasSubData($name)` is true, and those descriptors exist only where
-`AnimationActionOptionsDataSubAbstract::syncAttachedPropertyMetas()` has created
-them, on a shared `DataMeta` that starts empty every time the object is constructed.
+Two traps in that table, both measured:
 
-So the honest position is: **the envelope, the trigger, the timeline and the property
-metas can all be written headlessly; the property VALUES have not been.** Use the CSS
-path, which is fully verified - see `data/style-state-verification.csv`, where 36 of
-37 probed states compiled to exactly the selector the table promises.
+- **A simple action's fields go under `settings`, not under its opt-group's name.**
+  The suspend fields are declared in a group called `suspend`; written there they are
+  accepted and dropped, the interaction ID falls back to `all`, and a hover that
+  suspends "all" on its element suspends ITSELF - its `out` slot never fires, so the
+  resume never runs. The runtime looked broken; the payload showed
+  `interactionSuspendOptions: {timelines: {_: null}}`.
+- **A `collectionMode` tween exports as every variable of the collection at that
+  mode's value**, so the switch is one keyframe of `duration: 0` on the `document`
+  node (the editor's "HTML" element) and the whole page follows.
 
-The one experiment left, and it is cheap: author a single interaction in the editor,
-then `SELECT data FROM wp_mosaic_nodes` for that node. One look settles it.
+The cookie condition, exactly as the editor stores it:
 
-**`pointerEnter` produced no `mosaicInteractions` entry at all**, so the timed family
-needs something the progress family does not - also unfinished.
+```json
+"conditions": [{"uuid": "…", "evaluationUnits": [{"uuid": "…",
+  "type": "browserCondition",
+  "browserConditionOptions": {"subject": {"type": "httpCookie", "httpCookieOptions": {
+    "settings": {"name": "color-mode"},
+    "comparator": {"type": "text", "textOptions": {
+      "operator": "equals", "settings": {"value": "dark"}}}}}}}]}]
+```
+
+## Mosaic's tutorials, built headlessly
+
+https://mosaicbuilder.com/docs/tutorials/ builds four things without custom code.
+`tools/verify_recipes.py` builds all four from `tools/interactions.py` on one page and
+drives them in Chromium - 16 of 16 checks (data/tutorial-recipes-verification.csv):
+
+- **Dark/light switcher.** A second mode on the colour collection (a `collectionMode`
+  record parented to the collection, values per mode in each variable's
+  `skinsData[skin][mode]` - see design-system.md); Dark and Light buttons whose click
+  runs `mode_switch` on the `document` node plus `set_cookie`; and a `pageLoad` on
+  `document` gated by `cookie_is("color-mode", "dark")`. Measured: background
+  switches, the cookie is set, a reload keeps Dark, Light switches back. The cookie
+  is a session cookie, so a closed browser starts Light again - as the tutorial says.
+- **Loading overlay.** A fixed full-page div with `data.hidden: true`, a `pageLoad`
+  fading opacity to `0%` and `hide_at_end`. Measured: `display:none` after load, and
+  the button under it takes a real click.
+- **Reusable animation.** One `elementScrollIntoView` interaction on the FIRST
+  section, `trigger` = the section's universal class, no target, a `children`
+  modifier naming the child class. Measured: the second section, which has no
+  interaction of its own, stays at opacity 0 until scrolled to, then reveals - each
+  element fires on its own. (Naming the trigger class as the TARGET would animate
+  every section at once.)
+- **Loop with hover pause.** A looping `pageLoad` tween with an Interaction ID and
+  `outOfView: "1"`, plus one `hover` whose `in` suspends and `out` resumes that ID.
+  Measured: it moves alone, holds still while hovered, moves on leaving, and keeps
+  looping past one cycle.
 
 ## The failure mode that makes this hard
 

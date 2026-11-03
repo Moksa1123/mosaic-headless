@@ -153,6 +153,33 @@ def candidates():
                            "progressData": {"delay": 50, "duration": 50},
                            "properties": {OPACITY: 0.35}}]})))
 
+    # The shape the editor itself stores (1.0.11, an opacity tween authored by hand and
+    # read back from wp_mosaic_nodes): values keyed by the META's uuid, written as CSS
+    # strings with their unit, and on a timed trigger the timing sits on the keyframe
+    # as `duration` rather than in `progressData`.
+    def editor_like(values, keyed_by_uuid=True, trigger="pageLoad", progress=False):
+        mid = str(uuid.uuid4())
+        key = mid if keyed_by_uuid else OPACITY
+        kf = {"uuid": str(uuid.uuid4()), "properties": {key: values[1]}}
+        kf.update({"progressData": {"delay": 0, "duration": 100}} if progress
+                  else {"duration": 1000})
+        return interaction({"propertyMetas": [meta(OPACITY, mid)],
+                            "initial": {key: values[0]}, "keyframes": [kf]},
+                           trigger=trigger)
+
+    cases.append(("editor-shape-pageload",
+                  "as the editor stores it: uuid keys, '0%'/'80%', duration on the keyframe",
+                  editor_like(("0%", "80%"))))
+    cases.append(("editor-shape-numbers",
+                  "NEGATIVE CONTROL - editor shape but bare numbers 0 / 0.8",
+                  editor_like((0, 0.8))))
+    cases.append(("editor-shape-name-keys",
+                  "NEGATIVE CONTROL - editor shape but keyed by 'opacity'",
+                  editor_like(("0%", "80%"), keyed_by_uuid=False)))
+    cases.append(("editor-shape-scroll",
+                  "uuid keys and '%' strings on the progress family (scrollIntoView)",
+                  editor_like(("0%", "80%"), trigger="scrollIntoView", progress=True)))
+
     cases.append(("timed-trigger",
                   "the timed family rather than the progress family",
                   interaction({
@@ -294,7 +321,7 @@ def main():
     cases = candidates()
 
     site = {"pages": [], "shell": {}}
-    master = build_shell(client, cfg, site, surface)
+    master, _header, _footer = build_shell(client, cfg, site, surface)
     template = bind_page(client, cfg, master, a.slug, a.post)
     n, _uses = build_page_document(client, cfg, master, template, probe_tree(cases), surface)
 
