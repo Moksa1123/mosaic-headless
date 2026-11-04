@@ -235,6 +235,45 @@ work; set `openOn:"hover"` if hover is what you want. Style the open look throug
 the `___dropdown--opened` state. Menus support one submenu level only - no
 sub-submenus.
 
+### Site menus: what each way of building one does, measured
+
+There is **no off-canvas node** - not in 1.0.11, not in 1.0.12 (134 types; the
+1.0.12 package searched for offcanvas / off-canvas / drawer), and not on the roadmap.
+Mosaic's "off-canvas menu" is a tutorial (a div and click interactions). The menu
+lab, `tools/verify_menus.py` (`data/menu-verification.csv`, 34 checks on 1.0.12),
+builds every option on one page under a z-index 1000 sticky header and drives it
+with a mouse, the keyboard, a touch tablet and a 390px touch phone:
+
+| | desktop `dropdown` / `dropdown-wide`, `openOn: hover` |
+|---|---|
+| hover | opens in ~65 ms (fadeDown), closes ~150 ms after leaving - moving down into the panel does not drop it |
+| keyboard | Space / ArrowDown open it; ArrowDown does NOT move into the links, Tab does; Escape closes and leaves focus on the toggle |
+| toggle with a `url` | renders as `<a href>`; Enter navigates |
+| touch | first tap on a linked toggle opens without navigating; the second tap closes it, still without navigating - so the parent page must be a link INSIDE the panel ("overview" as the first item); a tap outside closes |
+| SEO | every panel link is an `<a href>` in the server HTML, before any script |
+| mega | `dropdown-wide`'s panel spans the viewport (x 0, full width); one submenu level only |
+
+| phone menu | Esc | focus | aria | close button vs sticky header |
+|---|---|---|---|---|
+| **(b) Pro `modal` as a drawer** | closes | moves in, Tab is trapped, returns to the opener | `<dialog aria-modal="true" aria-label>` from `accessibleLabel` | top layer: never covered; html/body `overflow: clip` while open |
+| (a) `navbar` below `buttonBreakpoint` | closes | stays on the toggle, no trap | `aria-expanded`, no `aria-controls` | in flow inside the header |
+| (c) div + click odd/even (the tutorial) | **does nothing** | never moves | none | **covered** when its z-index is under the header's |
+
+The drawer the lab measures, and the recommendation:
+
+```
+modal            closedby: everything, accessibleLabel, padding 0 (the browser's dialog padding)
+  modal-overlay  backgroundColor with alpha
+  modal-window   position absolute, top 0, right 0, height 100dvh (the NATIVE field), width 86%,
+                 maxWidth 360px, overflow auto; first child: a button with modalClose
+opener           a button with click -> modalOpen, target = the modal's nodeID (a uuid5, so a
+                 rebuild keeps it)
+```
+
+A notch inset: `paddingTop: "max(16px, env(safe-area-inset-top))"` and the `calc()`
+form are dropped by the native field; the same in `customDeclarations` survives. Mosaic's
+viewport meta has no `viewport-fit=cover`, so `env()` is 0 unless a site adds it.
+
 `dropdown-wrapper` used to read as a leaf in `placement-rules.csv`. Its
 `canBeParentFor()` returns `true`, but on `DropdownWrapperElementTypeFactoryAbstract`,
 and the extractor never read the abstract files, so it saw no override and wrote

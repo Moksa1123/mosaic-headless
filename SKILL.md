@@ -5,7 +5,7 @@ description: |
 license: "MIT"
 metadata:
   author: "moksa (https://moksaweb.com)"
-  version: "1.36.0"
+  version: "1.36.1"
   homepage: "https://github.com/Moksa1123/mosaic-headless"
 ---
 
@@ -148,6 +148,7 @@ them headlessly, measured.
 | a loading screen, a cookie bar | a fixed div + `pageLoad` + `hide_at_end`, `data.hidden: true` so it does not block editing | recipe in references/interactions.md |
 | a block repeated on several pages | a component, one definition, overrides per instance | references/design-system.md (components) |
 | a popup, a drawer, a tour | the `modal` / `popover` nodes and their actions | references/dialog-and-triggers.md |
+| a site menu: desktop hover dropdown + phone drawer | `dropdown` / `dropdown-wide` with `openOn: hover`; a `modal` drawer opened by `modalOpen` (there is no off-canvas node) | references/design-system.md (site menus), `tools/verify_menus.py` |
 | remembering a visitor's choice | `setCookie`, `remember` / `forget`, cookie conditions | references/interactions.md |
 | text that comes from the post, the user, a field | a dynamic `{"v": "@VAR(...)"}` value | references/dynamic-content.md |
 | a colour, a size used twice | a collection variable | references/design-system.md |
@@ -632,6 +633,7 @@ variable's `customProperty` is optional.
 | `data/node-type-notes.csv` | 8 | where a sweep outcome is true but misleading on its own, why. Surfaced by `mo.py type` |
 | `data/interaction-verification.csv` | 11 | **probed live** - interaction animation shapes, with negative controls and the stored row beside the payload; the editor's shape binds, the six older candidates and two one-field-apart controls do not |
 | `data/tutorial-recipes-verification.csv` | 16 | **driven live** - Mosaic's four docs tutorials (dark/light switcher, loading overlay, class-driven reveal, loop with hover pause) plus the off-canvas toggle and the reading progress bar, built from `tools/interactions.py` and checked in Chromium |
+| `data/menu-verification.csv` | 34 | **driven live** - every way to build a site menu on one page: hover dropdown and mega panel (mouse, keyboard, touch tablet), and three phone menus (modal drawer, navbar, the tutorial's click panel) on a 390px touch phone - Esc, focus trap and return, aria, scroll lock, a sticky header over the close button |
 | `data/intro-verification.csv` | 8 + 15 | **sampled live** - the entrance sequence over fifteen timestamps on a monotonic clock, plus the eight assertions about it |
 | `data/variants.csv` | 157 | **live** — the variant catalog (Mosaic's built-in element classes); their IDs are what a `variant` record must use, and `class_name` is what the element emits |
 | `data/dynamic-variables.csv` | 75 | source — every `@VAR('ns/name')` expression, by namespace |
@@ -1003,6 +1005,7 @@ with `tools/prune_unbound.php` (dry run by default) after a batch of rebuilds.
 | `verify_rwd.py` | does every `_t`/`_m` declaration reach the served stylesheet? |
 | `verify_browser.py` | does the **browser** compute what the stylesheet promised - and does the result pass a design audit? |
 | `verify_intro.py` | does the page-load animation play, and - the part that matters - does it END and hand the page back? |
+| `verify_menus.py` | build and drive every site-menu option: does hover hold, do the keyboard and a touch tablet work, does the phone drawer trap focus, close on Esc and stay above a sticky header? |
 | `verify_loop.py` | a decoration that runs forever: does it loop (paused-timeline scrub), does it bury text or controls anywhere a reader can rest, does it open by pointer and by keyboard, is it still under reduced motion? |
 | `probe_accordion.py` | the accordion family nested as its factory requires, plus the guard's refusal of the bare node - the probe that corrected two rows of this skill's own tables |
 | `from_elementor.py` | an Elementor `_elementor_data` tree -> a Mosaic page spec, with every element it cannot convert reported by name and reason (`--strict` to refuse a lossy spec) |
@@ -1109,7 +1112,9 @@ python tools/sweep_style_properties.py --config sweep.json --page moksa --csv da
 python tools/sweep_node_properties.py  --config sweep.json --page moksa --csv data/node-property-verification.csv
 python tools/sweep_style_states.py --config sweep.json --post 20 --slug probe-lab     --csv data/style-state-verification.csv
 python tools/sweep_interactions.py --config sweep.json --post 20 --slug probe-lab     --csv data/interaction-verification.csv
-python tools/verify_recipes.py --config sweep.json --post <ID of the probe-recipes page> --slug probe-recipes \n    --csv data/tutorial-recipes-verification.csv   # --post REBINDS that post's template: check the ID first
+python tools/verify_recipes.py --config sweep.json --post <ID of the probe-recipes page> --slug probe-recipes \
+    --csv data/tutorial-recipes-verification.csv   # --post REBINDS that post's template: check the ID first
+python tools/verify_menus.py --config sweep.json --post <ID of the menu-lab page> --slug menu-lab --csv data/menu-verification.csv
 python tools/verify_loop.py --url https://site/ --window mk-loop --toggle mk-plate-title --panel mk-plate-item \
     --parts ukw-sky,ukw-sun,ukw-fuji,ukw-mist,ukw-sea,ukw-crest,ukw-boat,ukw-wave,ukw-claw,ukw-swell,ukw-key,mk-loop-seal \
     --period 14000 --csv data/loop-verification.csv

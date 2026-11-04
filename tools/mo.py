@@ -652,10 +652,22 @@ def cmd_placement(a):
     emit(payload, lambda: (
         head("placement: %s" % a.name),
         print("rule            : %s" % payload["rule"]),
-        print("accepts children: %s" % (", ".join(payload["allowed_children"])
-                                        or "none")),
+        # canBeParentFor() is checked only on the editor's drop / paste path
+        # (PlacementValidatorRaw), never on a REST commit - so "none" with heal
+        # children (navbar, dropdown) means: its own children exist, and the
+        # client cannot drag anything else into it in the editor.
+        print("editor drop-in  : %s" % (", ".join(payload["allowed_children"])
+                                        or ("any type" if payload["rule"] == "any"
+                                            else "refused - nothing can be dragged in"))),
         print("heal() inserts  : %s" % (", ".join(payload["default_children"])
                                         or "nothing")),
+        payload["rule"] == "none" and print(
+            "                  (editor-only: a REST commit does not check this rule, so\n"
+            "                   children written over REST still render - but a client\n"
+            "                   cannot drag anything into it in the editor. navbar is\n"
+            "                   navbar > navbar-toggle + navigation and dropdown is\n"
+            "                   dropdown > toggle + wrapper by their factories; put\n"
+            "                   anything else INSIDE navigation / the wrapper)"),
         print("named parents   : %s" % (", ".join(payload["named_parents"])
                                         or "none - no type asks for it by name")),
         print("also accepted by: %d permissive containers (rule=any / deny-list)"

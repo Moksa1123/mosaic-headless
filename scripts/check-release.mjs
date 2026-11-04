@@ -130,6 +130,7 @@ const counts = {
   "data/style-state-verification.csv": 59,
   "data/interaction-verification.csv": 11,
   "data/tutorial-recipes-verification.csv": 16,
+  "data/menu-verification.csv": 34,
   "data/data-class-hierarchy.csv": 131,
   "data/custom-fields-verification.csv": 62,
   "data/dialog-verification.csv": 19,

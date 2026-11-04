@@ -1,0 +1,35 @@
+group,check,result,evidence
+SEO,panel links are <a href> in the server HTML,PASS,"18 links: ml-d1, ml-d2, ml-d3, ml-d4, ml-dd-l1, ml-dd-l2, ml-dd-l3, ml-mega-l1, ml-mega-l2, ml-mega-l3, ml-mega-l4, ml-mega-l5, ml-mega-l6, ml-nb-l1, ml-nb-l2, ml-nb-l3, ml-oc-l1, ml-oc-l2"
+SEO,a dropdown-toggle with a url renders as,INFO,"<a class=""m-dropdown-toggle _l"" id=""ml-dd-toggle"" href=""/components/"" aria-haspopup=""true"" aria-expanded=""false"">"
+DESKTOP,panels closed at rest,PASS,"dd False, mega False"
+DESKTOP,hover opens the dropdown,PASS,"visible after 58 ms, aria-expanded=true"
+DESKTOP,moving down into the panel keeps it open,PASS,still shown 500 ms after entering the panel
+DESKTOP,leaving closes it,PASS,hidden after 159 ms
+DESKTOP,mega panel opens on hover,PASS,x=0 w=1280 (viewport 1280)
+KEYS,Enter on a toggle that has a url,INFO,navigated to https://mosaic.moksaweb.com/components/
+KEYS,ArrowDown opens it,PASS,"shown=True, focus on ml-dd-toggle"
+KEYS,ArrowDown moves into the links,INFO,focus on ml-dd-toggle
+KEYS,Escape closes it and returns focus,PASS,"shown=False, focus on ml-dd-toggle"
+KEYS,Space opens the mega panel (toggle without url),PASS,shown=True aria-expanded=true
+KEYS,Tab from the open toggle goes to,INFO,ml-mega-l1
+TOUCH,first tap on a linked toggle,PASS,"url stays=True, panel shown=True"
+TOUCH,second tap on the same toggle,INFO,stayed; shown=False
+TOUCH,tap opens the mega panel,PASS,
+TOUCH,tap outside closes it,PASS,
+PHONE,"desktop menu hidden, burger shown",PASS,
+DRAWER,burger opens the modal drawer,PASS,"{'open': True, 'role': None, 'label': '主選單', 'modal': 'true', 'tag': 'dialog', 'scroll': 'clip/clip'}"
+DRAWER,focus moves into the drawer,PASS,focus on ml-drawer-win
+DRAWER,close button inside the viewport,PASS,x=314 y=16 w=60 h=40
+DRAWER,close button not covered by the z-1000 sticky header,PASS,element at its centre: self
+DRAWER,Tab stays inside the drawer,PASS,"focus visited ['ml-close', 'ml-d1', 'ml-d2', 'ml-d3', 'ml-d4']"
+DRAWER,Escape closes it,PASS,
+DRAWER,focus returns to the burger,PASS,focus on ml-burger
+DRAWER,the close button closes it,PASS,
+DRAWER,a tap on the overlay closes it,PASS,
+NAVBAR,collapsed below _t,PASS,"{'mode': True, 'tag': 'mosaic-navbar-toggle', 'expanded': 'false', 'controls': None}"
+NAVBAR,toggle opens the links,PASS,"aria-expanded=true, focus on ml-nb-toggle"
+NAVBAR,Escape closes it,PASS,shown=False
+PANEL,click interaction opens the panel,PASS,
+PANEL,its close control is covered by the sticky header,INFO,element at its centre: ml-burger
+PANEL,Escape closes it,FAIL,shown=True
+PANEL,focus moved into it,FAIL,focus on None
