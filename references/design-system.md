@@ -266,8 +266,10 @@ modal            closedby: everything, accessibleLabel, padding 0 (the browser's
   modal-overlay  backgroundColor with alpha
   modal-window   position absolute, top 0, right 0, height 100dvh (the NATIVE field), width 86%,
                  maxWidth 360px, overflow auto; first child: a button with modalClose
-opener           a button with click -> modalOpen, target = the modal's nodeID (a uuid5, so a
-                 rebuild keeps it)
+opener           a button with click -> modalOpen, target = the modal's pinned nodeID. The pin
+                 only makes the two agree within one build: build_page and fill_shell re-key
+                 it every run (refresh_node_ids), since (ID, themeID) is the primary key and
+                 the previous master keeps its rows until pruned. Any uuid will do.
 ```
 
 A notch inset: `paddingTop: "max(16px, env(safe-area-inset-top))"` and the `calc()`

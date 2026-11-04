@@ -5,7 +5,7 @@ description: |
 license: "MIT"
 metadata:
   author: "moksa (https://moksaweb.com)"
-  version: "1.36.1"
+  version: "1.36.2"
   homepage: "https://github.com/Moksa1123/mosaic-headless"
 ---
 
@@ -149,6 +149,7 @@ them headlessly, measured.
 | a block repeated on several pages | a component, one definition, overrides per instance | references/design-system.md (components) |
 | a popup, a drawer, a tour | the `modal` / `popover` nodes and their actions | references/dialog-and-triggers.md |
 | a site menu: desktop hover dropdown + phone drawer | `dropdown` / `dropdown-wide` with `openOn: hover`; a `modal` drawer opened by `modalOpen` (there is no off-canvas node) | references/design-system.md (site menus), `tools/verify_menus.py` |
+| a typeface, site-wide | a `fontFamily` collection variable, `{"var": id}` in styles; Settings: `saveGoogleFontsLocally` on and `fontDisplay: swap` (unset is `block`) | references/styling.md (fonts) - saving Google fonts locally took a CJK page from 68 to 96 on mobile |
 | remembering a visitor's choice | `setCookie`, `remember` / `forget`, cookie conditions | references/interactions.md |
 | text that comes from the post, the user, a field | a dynamic `{"v": "@VAR(...)"}` value | references/dynamic-content.md |
 | a colour, a size used twice | a collection variable | references/design-system.md |

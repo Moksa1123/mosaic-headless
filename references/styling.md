@@ -280,6 +280,52 @@ dropped, which is the only reason they cost minutes instead of a debugging sessi
 — a property that is not in the registry cannot be set at all, and Mosaic's own
 API accepts the write and discards it.
 
+## Fonts: what Mosaic loads, and what makes a CJK site slow (measured, 1.0.12)
+
+A font is a collection variable of type `fontFamily` (not `font` - an unknown type
+is a PHP fatal on commit), referenced from a style as `fontFamily: {"var": id}`. Its
+value per mode is one of two providers:
+
+```
+{"provider": "google", "fallbacks": "sans-serif",
+ "googleOptions": {"fontFamily": "Noto Sans TC", "fontVariants": ["400", "700"]}}
+{"provider": "custom", "fallbacks": "sans-serif",
+ "customOptions": {"fontFamily": "\"PingFang TC\", \"Microsoft JhengHei\", sans-serif",
+                   "fontFaces": "@font-face { ... }"}}        # fontFaces may be ""
+```
+
+- `google` loads only the ticked weights, one css2 URL for every Google font.
+- `custom` inlines its `@font-face` rules in the page (no extra request). The
+  validator keeps `font-family`, `src` (url / local + format), `font-weight`,
+  `font-style`, `font-stretch`, `unicode-range` and `font-display`, and drops the
+  rest (`size-adjust`, the overrides). There is no upload UI: the woff2 is yours to
+  host. An empty `fontFaces` makes a system-font variable the client can still swap.
+- **Every published font variable is loaded on every page**, used or not
+  (`FontRenderingManager::enqueueFontFamilies`). Delete the ones nothing uses.
+- Site settings (Mosaic -> Settings, `settingsEditorInstance`): `fontDisplay`
+  (auto | block | swap | fallback | optional; **unset means `block`**, so text is
+  invisible until the font arrives), `saveGoogleFontsLocally` (CSS and woff2
+  copied to `wp-content/cache/mosaic/web/googlefonts/`), `criticalPreload` (an HTTP
+  preload of the font CSS, not of font files). There is no font-file preload.
+
+Lighthouse mobile, median of three, a Chinese page (h1 700, body 400 + 500, a
+Poppins 600 label) on the demo site:
+
+| set-up | score | FCP | LCP | font bytes |
+|---|---|---|---|---|
+| Google Noto Sans TC 400/500/700 + Poppins, `fontDisplay` unset | 68-69 | 3.7-4.0 s | 6.2 s | 649 KB |
+| the same, `fontDisplay: swap` only | 63-72 | 4.6-6.0 s | 4.7-6.1 s | 649 KB |
+| the same + `saveGoogleFontsLocally` | 96 | 2.1 s | 2.1 s | 666 KB |
+| 400/700 only + swap + local | 97 | 1.9 s | 1.9 s | 627 KB |
+| CJK on a system stack (custom, no @font-face), Poppins from Google | 93 | 2.5 s | 2.5 s | 17 KB |
+| the same, Poppins saved locally | 99 | 1.4 s | 1.5 s | 17 KB |
+
+What costs the time is the render-blocking stylesheet on fonts.googleapis.com, not
+the size of the CJK files - Google already slices them by `unicode-range` and the
+browser fetches only the slices the page uses. `swap` alone does not help; saving
+locally does. Hand-subsetting a CJK font is not worth it: the slices already do
+that, and text a client adds later falls outside a hand-made subset.
+
 ## `fontFamily` takes a plain family list, nothing else
 
 `ValidatorStyleFontFamily` (NEXT-5841) accepts quoted names and unquoted identifier

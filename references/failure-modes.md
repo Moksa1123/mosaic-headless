@@ -495,3 +495,33 @@ end reads the loop name out of any function call; the editor only out of `@VAR`.
 Write `@VAR('post/<loop>')`. No server-side check can see this - the page is 200 and
 complete - so it is only caught by opening the editor. Details in
 `references/custom-fields.md`.
+
+## The editor canvas does not load a plugin's front-end CSS
+
+The canvas is a srcdoc iframe whose `<head>` comes from
+`ThemeMResource::getHead()`: a fresh `WP_Styles`, `do_action('enqueue_block_assets')`,
+Mosaic's own `style.css` and `AppWebPageEditorPreview.css`. `wp_enqueue_scripts`
+never runs there. Measured with a probe mu-plugin on 1.0.12: a style enqueued on
+`wp_enqueue_scripts` reached the front end and not the canvas; the same style on
+`enqueue_block_assets` reached both. A code node whose decoration is styled by a
+companion plugin therefore shows unstyled in the editor - on sharho a full-width
+black disc over the whole canvas. Enqueue that CSS on `enqueue_block_assets` (it
+also fires in the block editor, so scope the selectors), or ship an editor-only
+sheet there that gives the element a static look; front-end scripts do not run in
+the canvas either.
+
+## Inline editing re-serialises a text's runs (client report, 1.0.11)
+
+On sharho, a heading built as `text > wysiwyg-span > wysiwyg-span` (a visually-hidden
+and a no-wrap span nested inside another) came back from double-click -> Done -
+with no character typed - as two flat spans, and the undo button lit. The front end
+renders the nested structure fine (measured: `<span><span>` delivered), so the loss
+is the editor's serialiser. The editor's own bold and italic are not spans: they are
+`wysiwyg-text` `format: ["bold"]` / `["italic"]`, delivered as `<strong>` / `<em>`
+(`<strong><em>` for both, measured). Keep runs in shapes the editor itself writes,
+and tell a client not to edit a heading that needs nesting.
+
+Mosaic also keeps unsaved edits in the browser: reopening that template offered
+"a backup of this post stored in the browser differs from the version below" with
+Restore / Cancel. Restore brings the flattened version back, and the next save
+writes it. When reproducing an editor problem, press Cancel.

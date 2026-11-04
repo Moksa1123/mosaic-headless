@@ -186,6 +186,15 @@ def tree():
                                                 "paddingLeft": "20px", "paddingRight": "20px"}}},
                           "children": [{"type": "text", "data": {"attrID": "ml-copy", "tagName": "p"},
                                         "text": "選單實驗頁：桌機 hover 下拉、mega 下拉、modal 抽屜、navbar 收合、互動面板。"},
+                                       # probe: native run formats vs nested spans (sharho report)
+                                       {"type": "text", "data": {"attrID": "ml-fmt", "tagName": "p"}, "children": [
+                                           {"type": "wysiwyg-text", "data": {"text": "B", "format": ["bold"]}},
+                                           {"type": "wysiwyg-text", "data": {"text": "I", "format": ["italic"]}},
+                                           {"type": "wysiwyg-text", "data": {"text": "BI", "format": ["italic", "bold"]}},
+                                           {"type": "wysiwyg-span", "data": {"attrID": "ml-sp-out"}, "children": [
+                                               {"type": "wysiwyg-text", "data": {"text": "outer "}},
+                                               {"type": "wysiwyg-span", "data": {"attrID": "ml-sp-in"}, "children": [
+                                                   {"type": "wysiwyg-text", "data": {"text": "inner"}}]}]}]},
                                        # which spelling of a notch inset survives the style validator
                                        {"type": "div", "data": {"attrID": "ml-safe-native"},
                                         "style": {"&": {"_": {"paddingTop": "max(16px, env(safe-area-inset-top))"}}}},

@@ -130,7 +130,12 @@ def fill_shell(client, cfg, site, surface, master_id, header_id, footer_id, comp
     leaves an extra master behind on every build."""
     instance = "masterDocumentInstance/%s" % master_id
     key = "node/master/%s" % master_id
-    shell = site.get("shell") or {}
+    # Re-key pinned nodeIDs here too, as build_page_document does: an old master
+    # keeps its rows until it is pruned and the key is (ID, themeID), so a pinned
+    # id is single-use. Both regions in one pass, so a header button whose
+    # modalOpen names a modal in the footer keeps pointing at it.
+    shell = refresh_node_ids({k: v for k, v in (site.get("shell") or {}).items()
+                              if k in ("header", "footer")})
     COMPONENT_USES.clear()
     records = []
     for region, parent in (("header", header_id), ("footer", footer_id)):
