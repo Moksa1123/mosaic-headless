@@ -44,6 +44,8 @@ label,none,,yes,yes,field,Mosaic/NodeTypes/Form/Form/MElements/Label/LabelElemen
 list,allow,list-item|list-loop-items,,,,Mosaic/NodeTypes/ListElement/ListElementTypeFactory.php
 list-item,any,,yes,,list|list-loop-items|wp-menu,Mosaic/NodeTypes/ListElement/ListItem/ListItemElementTypeFactory.php
 list-loop-items,allow,list-item,yes,,list,Mosaic/NodeTypes/ListElement/ListLoopItems/ListLoopItemsElementTypeFactory.php
+listbox,complex,,yes,,field,Mosaic/NodeTypes/Form/Form/MElements/ListBox/ListBoxElementTypeFactory.php
+listbox-option,none,,yes,,listbox,Mosaic/NodeTypes/Form/Form/MElements/ListBox/Option/ListBoxOptionElementTypeFactory.php
 loop,allow,loop-pagination,,,,Mosaic/NodeTypes/Loop/LoopElementTypeFactory.php
 loop-item,any,,yes,,loop-items,Mosaic/NodeTypes/Loop/LoopItems/LoopItem/LoopItemElementTypeFactory.php
 loop-items,allow,loop-item,yes,yes,,Mosaic/NodeTypes/Loop/LoopItems/LoopItemsElementTypeFactory.php
@@ -71,8 +73,11 @@ popover,any,,,,,Mosaic/NodeTypes/Popover/PopoverElementTypeFactoryAbstract.php
 radio-input,none,,yes,,choice,Mosaic/NodeTypes/Form/Form/MElements/Radio/RadioInput/RadioInputElementTypeFactory.php
 recaptcha,none,,yes,,choice-field|field|form,Mosaic/NodeTypes/Form/Form/MElements/Recaptcha/RecaptchaElementTypeFactory.php
 section,any,,yes,,section,Mosaic/NodeTypes/Section/SectionElementTypeFactory.php
-select-input,complex,,yes,,field,Mosaic/NodeTypes/Form/Form/MElements/Select/SelectElementTypeFactory.php
-select-option,none,,yes,,select-input,Mosaic/NodeTypes/Form/Form/MElements/Select/Option/OptionElementTypeFactory.php
+select,allow,select-options|select-toggle,yes,yes,field,Mosaic/NodeTypes/Form/Form/MElements/Select/SelectElementTypeFactory.php
+select-option,any,,yes,yes,select-option|select-options,Mosaic/NodeTypes/Form/Form/MElements/Select/Options/Option/SelectOptionElementTypeFactory.php
+select-options,allow,select-option,,yes,,Mosaic/NodeTypes/Form/Form/MElements/Select/Options/SelectOptionsElementTypeFactory.php
+select-placeholder,any,,yes,yes,select-placeholder|select-toggle,Mosaic/NodeTypes/Form/Form/MElements/Select/Toggle/Placeholder/SelectPlaceholderElementTypeFactory.php
+select-toggle,any,,,yes,,Mosaic/NodeTypes/Form/Form/MElements/Select/Toggle/SelectToggleElementTypeFactory.php
 slider,any,,,,,Mosaic/NodeTypes/Slider/SliderElementTypeFactory.php
 slider-arrow-left,any,,yes,yes,slider|slider-navigation,Mosaic/NodeTypes/Slider/SliderArrow/SliderArrowElementTypeFactoryAbstract.php
 slider-arrow-right,any,,yes,yes,slider|slider-navigation,Mosaic/NodeTypes/Slider/SliderArrow/SliderArrowElementTypeFactoryAbstract.php

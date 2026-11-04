@@ -157,8 +157,8 @@ def main():
                   "required is set on %d of them" % sum(1 for f in real if f["req"]))
             check("FORM/honeypot", bool(honeypot),
                   "Mosaic adds its own spam trap: %s" % honeypot)
-            # a <select> whose options have no text renders as a blank dropdown:
-            # `select-option` is a LEAF and its label is the `text` PROPERTY
+            # a native <select> (1.0.12: `listbox`) whose options have no text renders blank:
+            # `listbox-option` is a LEAF and its label is the `text` PROPERTY
             opts = p.evaluate("""(id) => [...document.querySelectorAll('#' + id + ' option')]
                 .map(o => o.textContent.trim())""", a.form)
             if opts:
@@ -167,6 +167,61 @@ def main():
                       else "blank labels - `text` is a property, not a child")
             else:
                 skip("FORM/option_labels", "no select on this form")
+            # 1.0.12's Select is not a <select>: <mosaic-select> holds a combobox
+            # button, a role=listbox of buildable options and a hidden input that
+            # carries the value. Drive it the way a visitor does.
+            sel = p.evaluate("""(id) => { const s = document.querySelector('#' + id + ' mosaic-select');
+                return s ? s.querySelector('.m-select-toggle').id : null; }""", a.form)
+            if not sel:
+                skip("FORM/select", "no custom select on this form")
+            else:
+                st = lambda: p.evaluate("""(t) => { const b = document.getElementById(t),
+                      s = b.closest('mosaic-select'), l = s.querySelector('[role=listbox]'),
+                      i = s.querySelector('input.m-select-input'), r = l.getBoundingClientRect();
+                    return {exp: b.getAttribute('aria-expanded'), shown: r.height > 2
+                              && getComputedStyle(l).visibility !== 'hidden'
+                              && getComputedStyle(l).display !== 'none',
+                            value: i.value, name: i.name, label: b.innerText.trim(),
+                            opts: [...l.querySelectorAll('[role=option]')].map(o =>
+                              [o.dataset.value ?? '', o.textContent.trim()])}; }""", sel)
+                closed = st()
+                # the hidden input is not what fails validation: a submit with
+                # nothing picked marks the TOGGLE aria-invalid, which is what the
+                # field's invalid state selectors key on in 1.0.12
+                p.click("#%s [type=submit]" % a.form)
+                p.wait_for_timeout(600)
+                inv = p.evaluate("(t) => document.getElementById(t).getAttribute('aria-invalid')", sel)
+                check("FORM/select_required", inv == "true",
+                      "submit with nothing picked: toggle aria-invalid=%r" % inv)
+                check("FORM/select_labels", closed["opts"] and all(t for _v, t in closed["opts"]),
+                      "%d options, labels are child text nodes: %s"
+                      % (len(closed["opts"]), [t for _v, t in closed["opts"]][:4]))
+                p.click("#" + sel)
+                p.wait_for_timeout(400)
+                opened = st()
+                check("FORM/select_opens", opened["exp"] == "true" and opened["shown"]
+                      and not closed["shown"],
+                      "toggle click: aria-expanded %s -> %s, list shown %s -> %s"
+                      % (closed["exp"], opened["exp"], closed["shown"], opened["shown"]))
+                want_v, want_t = closed["opts"][1]
+                p.click("#%s ~ [role=listbox] [role=option] >> nth=1" % sel)
+                p.wait_for_timeout(400)
+                picked = st()
+                check("FORM/select_picks", picked["value"] == want_v
+                      and want_t in picked["label"] and picked["exp"] == "false",
+                      "picked %r: input %s=%r, toggle shows %r, closed=%s"
+                      % (want_t, picked["name"], picked["value"], picked["label"],
+                         picked["exp"] == "false"))
+                # keyboard: open, one row down, Enter picks the next option
+                p.focus("#" + sel)
+                p.keyboard.press("ArrowDown")
+                p.keyboard.press("ArrowDown")
+                p.keyboard.press("Enter")
+                p.wait_for_timeout(400)
+                keyed = st()
+                check("FORM/select_keyboard", keyed["value"] not in ("", picked["value"])
+                      and keyed["exp"] == "false",
+                      "ArrowDown, ArrowDown, Enter: %r -> %r" % (picked["value"], keyed["value"]))
             # the browser's own validation has to stop an empty required form
             p.evaluate("(id) => document.getElementById(id).reset()", a.form)
             invalid = p.evaluate("""(id) => [...document.getElementById(id)

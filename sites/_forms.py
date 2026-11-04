@@ -15,8 +15,14 @@ Shapes, read out of the source rather than guessed:
           choice-label    its text
           radio-input     or checkbox-input, carrying `value`
 
-    select-input          nameAttribute, required, multiple, size
-      select-option       value + its text
+    select                nameAttribute, required, defaultValue   (1.0.12)
+      select-toggle       the visible box
+        select-placeholder  > text, shown until something is picked
+        icon              the chevron
+      select-options      the list
+        select-option     value, selected; its label is a CHILD (text)
+    listbox               the native <select>: multiple, size >= 2
+      listbox-option      value + its `text` property (a leaf)
 
     form-multi-steps
       form-multi-steps-steps  > form-multi-steps-step   the tab bar
@@ -82,9 +88,18 @@ def labelled(attr, text, node_type, **data):
     ])
 
 
+# the toggle's default chevron, verbatim from SelectToggleElementTypeFactory
+CHEVRON = ('<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" '
+           'fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" '
+           'stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>')
+
+
 def select(attr, label, name, options, **extra):
     d = {"attrID": attr, "nameAttribute": name}
     d.update(extra)
+    prompt = "請選擇"
+    if options and options[0][0] == "":
+        prompt, options = options[0][1], options[1:]
     return _field(attr, [
         {"type": "label", "data": {"attrID": attr + "-lab", "forInput": attr},
          "style": {"&": {"_": {"fontFamily": MONO, "fontSize": "10px",
@@ -92,15 +107,42 @@ def select(attr, label, name, options, **extra):
                                "color": {"token": "--mk-faint"}},
                          "_t": {"fontSize": "12px"}}},
          "children": [{"type": "wysiwyg-text", "data": {"text": label}}]},
-        {"type": "select-input", "data": d, "style": FIELD_STYLE,
+        # 1.0.12 replaced the native <select> (`select-input`, whose options were
+        # leaves carrying a `text` property) with a buildable one, rendered as
+        # <mosaic-select>: a combobox button plus a listbox, and a hidden input
+        # that carries the value into the submission. The shape is the factory
+        # defaults (SelectElementTypeFactory), the same one the 1.0.12 data
+        # upgrade wrote over the old select on this page:
+        #   select > select-toggle > (select-placeholder > text, icon chevron)
+        #          > select-options > select-option > text   (any children)
+        # The visible box is the TOGGLE, so the field chrome goes there; the root
+        # keeps the width and the font the options inherit. An empty-valued first
+        # option is what a native select used as its prompt - here that is the
+        # placeholder's job. The native control survives as `listbox`
+        # (multiple / size > 1), whose `listbox-option` is still a leaf with `text`.
+        {"type": "select", "data": d,
+         "style": {"&": {"_": {"width": "100%", "fontFamily": CJK, "fontSize": "14px"}}},
          "children": [
-             # `select-option` is a LEAF. Its label is the `text` property, not
-             # a child - commit a wysiwyg-text under it and the option renders
-             # with an empty label and the dropdown looks blank. Its other
-             # properties are `value`, `selected` and `disabled`.
-             {"type": "select-option",
-              "data": {"attrID": "%s-o%d" % (attr, i), "value": v, "text": t}}
-             for i, (v, t) in enumerate(options)]},
+             {"type": "select-toggle", "data": {},  # the root's attrID lands here as the id
+              "style": {"&": {"_": dict(FIELD_STYLE["&"]["_"], **{
+                  "display": "flex", "justifyContent": "space-between",
+                  "alignItems": "center", "columnGap": "10px"})},
+                  "focus-visible": FIELD_STYLE["focus-visible"]},
+              "children": [
+                  {"type": "select-placeholder", "data": {},
+                   "children": [{"type": "wysiwyg-text", "data": {"text": prompt}}]},
+                  {"type": "icon", "data": {"svg": CHEVRON}}]},
+             {"type": "select-options", "data": {"attrID": attr + "-list"},
+              "style": {"&": {"_": {"backgroundColor": {"token": "--mk-paper"},
+                                    "customDeclarations": "border:1px solid rgba(22,24,28,.3);"}}},
+              "children": [
+                  {"type": "select-option",
+                   "data": {"attrID": "%s-o%d" % (attr, i), "value": v},
+                   "style": {"&": {"_": {"paddingTop": "10px", "paddingBottom": "10px",
+                                         "paddingLeft": "14px", "paddingRight": "14px"}}},
+                   "children": [{"type": "wysiwyg-text", "data": {"text": t}}]}
+                  for i, (v, t) in enumerate(options, 1)]},
+         ]},
     ])
 
 
@@ -475,7 +517,7 @@ TREE = {"type": "div", "data": {"attrID": "fm-page"},
         "children": [
             HEAD,
             band("fm-main", "ENQUIRY / 專案洽詢",
-                 "fieldset › label + text-input / select-input › select-option / "
+                 "fieldset › label + text-input / select › toggle + options › option / "
                  "choice-field › choice › radio-input + checkbox-input / "
                  "fileupload-input / form-error / submit-loading",
                  full_form(), bg="--mk-panel"),

@@ -5,13 +5,13 @@ DARK,Dark switches the page,PASS,"rgb(250, 250, 245) -> rgb(20, 22, 28)"
 DARK,Dark sets the cookie,PASS,rx-mode=dark
 DARK,a reload keeps Dark,PASS,"rgb(20, 22, 28)"
 DARK,Light switches back,PASS,"rgb(250, 250, 245), rx-mode=light"
-LOOP,moves on its own,PASS,154.357px -> 183.185px
-LOOP,hover suspends it by Interaction ID,PASS,184.09px = 184.09px
-LOOP,leaving resumes it,PASS,184.09px -> 196.866px
-LOOP,still moving past one 4s cycle,PASS,198.658px -> 1.153px
+LOOP,moves on its own,PASS,153.434px -> 182.25px
+LOOP,hover suspends it by Interaction ID,PASS,183.644px = 183.644px
+LOOP,leaving resumes it,PASS,183.644px -> 196.695px
+LOOP,still moving past one 4s cycle,PASS,198.316px -> 0.350098px
 OFFCANV,"odd click opens: display flex, slid in",PASS,"{'bg': 'rgb(240, 240, 240)', 'op': '1', 'd': 'flex', 'tr': '0%'}"
 OFFCANV,even click closes: display none at the end,PASS,"{'bg': 'rgb(240, 240, 240)', 'op': '1', 'd': 'none', 'tr': '100%'}"
-PROGRESS,bar fills as the article scrolls,PASS,-100% -> -55.0498% -> -0.968498%
+PROGRESS,bar fills as the article scrolls,PASS,-100% -> -55.1729% -> -0.968059%
 REVEAL,first section reveals on scroll,PASS,"{'bg': 'rgb(9, 99, 199)', 'op': '1', 'd': 'block', 'tr': '0px'}"
 REVEAL,second stays hidden until reached,PASS,"{'bg': 'rgb(9, 99, 199)', 'op': '0', 'd': 'block', 'tr': '0px 40px'}"
 REVEAL,second reveals by class alone,PASS,"{'bg': 'rgb(9, 99, 199)', 'op': '1', 'd': 'block', 'tr': '0px'}"

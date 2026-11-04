@@ -1,11 +1,11 @@
 ---
 name: "mosaic-headless"
 description: |
-  Build and modify Mosaic Pro (Nextend) WordPress sites by writing the data model directly - no visual editor, no DOM. Query the real surface with `mo.py` (129 node types, 196 node properties, 101 style properties, 57 style states, 157 variants, 75 dynamic variables, 16 interaction triggers, 115 REST routes) where every lookup leads with the measured verdict, not the declaration: each node type placed on a live site one at a time, each style and node property swept against compiled CSS and markup, the delivered pages re-read in Chromium at three viewports. Measured on Mosaic Pro 1.0.10: the popover (anchored or screen-placed, the flip state, afterClose-chained tours), the modal on the Popover API, OpenStreetMap, exit-intent and scroll-depth triggers, run rules and memory. Drives theme export/import and the 1.0.7 -> 1.0.10 data upgrades from outside wp-admin; re-extracted and re-verified on 1.0.11.
+  Build and modify Mosaic Pro (Nextend) WordPress sites by writing the data model directly - no visual editor, no DOM. Query the real surface with `mo.py` (134 node types, 201 node properties, 101 style properties, 60 style states, 157 variants, 75 dynamic variables, 16 interaction triggers, 115 REST routes) where every lookup leads with the measured verdict, not the declaration: each node type placed on a live site one at a time, each style and node property swept against compiled CSS and markup, the delivered pages re-read in Chromium at three viewports. Measured on Mosaic Pro 1.0.10: the popover (anchored or screen-placed, the flip state, afterClose-chained tours), the modal on the Popover API, OpenStreetMap, exit-intent and scroll-depth triggers, run rules and memory. Drives theme export/import and the 1.0.7 -> 1.0.10 data upgrades from outside wp-admin; re-extracted and re-verified on 1.0.11 and 1.0.12 (the buildable Select).
 license: "MIT"
 metadata:
   author: "moksa (https://moksaweb.com)"
-  version: "1.35.0"
+  version: "1.36.0"
   homepage: "https://github.com/Moksa1123/mosaic-headless"
 ---
 
@@ -159,23 +159,25 @@ native path was checked and why it falls short.
 ## What was verified, and how
 
 Everything ran against a live install: WordPress 7.1, WooCommerce 11.1,
-Mosaic Pro 1.0.11, **unlicensed** — the licence gates the theme library and updates,
+Mosaic Pro 1.0.12, **unlicensed** — the licence gates the theme library and updates,
 not the node factories, so the Pro types register and render regardless. The
-site was built on 1.0.7 and upgraded in place four times: every data migration
-(`tools/data_upgrade.py`) ran over the real theme (1.0.11 has none), the source
-tables were re-extracted from 1.0.11, and every demo verifier and the full node
-sweep (128 of 129 types, `document` excluded because its probe wrecks the master)
-were re-run on the result, so the tables describe 1.0.11 as delivered, not as
-declared. Where a row is still an older measurement - the property sweeps - the
-section says so. 1.0.11 swapped the Free/Pro split (`references/upgrading.md`).
+site was built on 1.0.7 and upgraded in place five times: every data migration
+ran over the real theme (1.0.11 has none; 1.0.12's Select split ran by itself in
+the background), the source tables were re-extracted from 1.0.12, every demo
+verifier was re-run on the result, and the node sweep covers 133 of 134 types
+(`document` excluded because its probe wrecks the master; the seven Select and
+List box types swept on 1.0.12, the rest on 1.0.11), so the tables describe 1.0.12
+as delivered, not as declared. Where a row is still an older measurement - the property sweeps - the
+section says so. 1.0.11 swapped the Free/Pro split and 1.0.12 replaced the native
+select (`references/upgrading.md`).
 
 ```
 WRITE PATH   verified end to end over REST
              theme -> master -> healed node tree -> template -> nodes -> public HTML
 
-NODE SWEEP   129 of 129 node types, ONE PER DOCUMENT, committed then rendered then
+NODE SWEEP   134 of 134 node types, ONE PER DOCUMENT, committed then rendered then
              deleted, asserting each type's attrID against the delivered HTML:
-                 RENDERED    77   id found; tag and classes recorded
+                 RENDERED    82   id found; tag and classes recorded
                  COMMITTED   25   row exists, nothing reached the page
                  COMMIT_5xx  15   PHP fatal on commit
                  BROKE_PAGE  12   committed, then the whole page died
@@ -275,17 +277,16 @@ PROPERTIES   170 probes over the declared property surface, each value asserted
              against the delivered markup and the compiled CSS separately.
              data/property-verification.csv
 
-STATES       52 of the 53 style states written to a live page and matched against
-             the selector `data/style-states.csv` promises: 36 COMPILED exactly,
-             13 NO_HOST (their node type cannot be committed safely), 3 SKIPPED,
-             0 BROKE_PAGE on 1.0.8 (the one host that broke the page on 1.0.7
-             now refuses to commit alone, so it is NO_HOST). All seven globally usable states verified - and the
-             pseudo-classes are emitted UPPERCASE (`._j:HOVER`), so grepping a
-             stylesheet for `:hover` finds nothing. data/style-state-verification.csv
-             The table now lists 57: v1.34's extractor also reads selector lists
-             spelt `implode(',', array(…))`, which adds
-             ___accordion-item--opened/--opening and ___dropdown--opened - read
-             from source, not yet swept.
+STATES       59 of the 60 style states written to a live page on 1.0.12 and
+             matched against the selector `data/style-states.csv` promises:
+             39 COMPILED exactly, 15 NO_HOST (their node type cannot be committed
+             safely), 4 SKIPPED, 1 ABSENT (`___select--opened`: a `select` only
+             renders inside a `field`, and the probe host is a bare div). The new
+             Select's option states (--active, --selected, --in-toggle) and
+             ___listbox-option compiled. All seven globally usable states verified
+             - and the pseudo-classes are emitted UPPERCASE (`._j:HOVER`), so
+             grepping a stylesheet for `:hover` finds nothing.
+             data/style-state-verification.csv
 
 COMPONENTS   used on the example page: the service row is committed ONCE to the
              theme and the page places four instances of it, each carrying only the
@@ -442,10 +443,10 @@ UPGRADE      1.0.7 -> 1.0.8 driven over the plugin's own milestone route from
              one selector on the worked example that named an emitted class
              stopped matching until it was rewritten. references/upgrading.md
 
-FROM SOURCE  129 node types, 196 properties (68 with enums), 285 pluggable IDs,
-             129 placement rules, 25 composite default structures (10 declared,
-             15 healed in), 101 style properties, 57 style states, 16 interaction
-             triggers - re-extracted from the 1.0.11 tree.
+FROM SOURCE  134 node types, 201 properties (68 with enums), 285 pluggable IDs,
+             134 placement rules, 27 composite default structures (10 declared,
+             17 healed in), 101 style properties, 60 style states, 16 interaction
+             triggers - re-extracted from the 1.0.12 tree.
 ```
 
 **Coverage, stated as a fraction rather than as a headline.** The verification
@@ -453,7 +454,7 @@ counts above are real, but they are not the same as "the surface is verified", a
 the difference is worth being exact about:
 
 ```
-node types        129 / 129   swept live, one per document
+node types        134 / 134   swept live, one per document
 node properties   191 / 196   re-probed with a value shaped by each property's
                               own validator chain: 39 APPLIED, 45 NO_EFFECT,
                               2 EDITOR_ONLY, 55 NO_HOST (no rendering type
@@ -592,14 +593,14 @@ variable's `customProperty` is optional.
 
 | file | rows | source |
 |---|---|---|
-| `data/node-verification.csv` | 129 | **swept live** — outcome, rendered tag and classes, page bytes, failure detail |
-| `data/node-types.csv` | 129 | source — slug, label, edition, aliases, data class |
-| `data/node-properties.csv` | 196 | source — property, validator chain, **accepted enum values**, `supportsInherit` |
-| `data/placement-rules.csv` | 129 | source — which children each type accepts |
+| `data/node-verification.csv` | 134 | **swept live** — outcome, rendered tag and classes, page bytes, failure detail |
+| `data/node-types.csv` | 134 | source — slug, label, edition, aliases, data class |
+| `data/node-properties.csv` | 201 | source — property, validator chain, **accepted enum values**, `supportsInherit` |
+| `data/placement-rules.csv` | 134 | source — which children each type accepts |
 | `data/default-children.csv` | 25 | source — what a composite type needs **inside** it |
 | `data/style-properties.csv` | 98 | source — every settable CSS property and its value shape |
 | `data/style-value-shapes.csv` | 22 | **probed live** — the exact JSON shape for each structured value, and what it compiled to |
-| `data/style-states.csv` | 57 | source — state IDs with their exact CSS selector templates |
+| `data/style-states.csv` | 60 | source — state IDs with their exact CSS selector templates |
 | `data/property-verification.csv` | 170 | **probed live** — per-property effect on markup vs CSS, with unprovable enums marked INCONCLUSIVE |
 | `data/node-property-verification.csv` | 191 | **swept live** — each property probed with a value shaped by its own validator chain, on a type that declares it |
 | `data/style-verification.csv` | 101 | **swept live** — every style property written to a page and checked against the compiled CSS, with its group beside the result |
@@ -607,8 +608,8 @@ variable's `customProperty` is optional.
 | `data/browser-verification/` | 4132 | **computed in Chromium** - declared vs `getComputedStyle` at three viewports, `not-comparable` labelled per row. One CSV per page, named by its slug |
 | `data/design-audit-acknowledged.csv` | 3 | reviewed findings that will not be fixed, each with a written reason. An acknowledgement without a reason is a suppression wearing a better name, and the release gate refuses one |
 | `data/design-audit.csv` | 26 | **computed in Chromium** - contrast, font fallback, CJK tracking, overflow, measure. Empty means it ran and found nothing |
-| `data/data-class-hierarchy.csv` | 126 | source - every data class and its parent, so a type's inherited properties can be resolved |
-| `data/style-state-verification.csv` | 52 | **swept live** - each state written on a host of its own type and matched against its promised selector |
+| `data/data-class-hierarchy.csv` | 131 | source - every data class and its parent, so a type's inherited properties can be resolved |
+| `data/style-state-verification.csv` | 59 | **swept live** - each state written on a host of its own type and matched against its promised selector |
 | `data/component-verification.csv` | 8 | **driven live** - the component lifecycle, each step asserted against the row or the delivered HTML |
 | `data/loop-verification.csv` | 28 | **measured live** - a perpetual animation: periodicity by scrubbing a paused timeline, per-element occlusion of both text and controls at five widths, and the enlarged view opened by pointer and by keyboard |
 | `data/accordion-verification.csv` | 7 | **driven live** - the accordion family nested the way its factory requires, against the guard that refuses it unparented. Resolves two BROKE_PAGE rows |
@@ -623,8 +624,8 @@ variable's `customProperty` is optional.
 | `data/popover-verification.csv` | 37 | **driven live** - 1.0.10's popover: every host a `<div popover=manual>`, a pageLoad notice that leaves the page scrollable and clickable, closedby honoured per policy, anchored placement against the trigger and against another element, the nine screen cells, keepInView flipping and the `___popover--flipped` state applying, a three-step tour advanced by afterClose and ended by interactionSuspend, and a modal whose host sets `display:flex` and still hides when closed |
 | `data/token-verification.csv` | 15 | **driven live** - every `:root` custom property declared once, non-empty, and resolved by something on the page; a token nothing points at is a token that is not working |
 | `data/mobile-audit.csv` | 68 | **driven live** - what a sideways-scroll check cannot see: type under the legible floor, controls too small to hit, a grid that never collapsed, content escaping its box |
-| `data/component-wall-verification.csv` | 26 | **driven live** - tabs switched, an accordion opened, a form's fields and Mosaic's own honeypot, and an OpenStreetMap asserted on the coordinates it was GIVEN rather than the default it falls back to |
-| `data/form-surface-verification.csv` | 18  | **driven live** - every field type Mosaic ships in one form: select with labelled options, radio and checkbox groups, file upload, and the browser's own validation refusing an empty submit |
+| `data/component-wall-verification.csv` | 27 | **driven live** - tabs switched, an accordion opened, a form's fields and Mosaic's own honeypot, and an OpenStreetMap asserted on the coordinates it was GIVEN rather than the default it falls back to |
+| `data/form-surface-verification.csv` | 23  | **driven live** - every field type Mosaic ships in one form: 1.0.12's buildable select opened, picked by click and by keyboard, its hidden input's value and its required state, radio and checkbox groups, file upload, and the browser's own validation refusing an empty submit |
 | `data/content-loop-verification.csv` | 15  | **driven live** - a slider, a tab bar, a list and a paginated archive whose children all come from one authored template repeated per post; the pagination is clicked and the rows asserted to CHANGE |
 | `data/custom-fields-verification.csv` | 62 | **rendered live** - ACF and Meta Box fields of every common type read back through `@VAR` / `@LOOP` off the delivered page, loops included |
 | `data/theme-zip-verification.csv` | 22 | **round-tripped live** - Mosaic's own ZIP export imported in test mode and compared to its source, table by table and tree by tree |
@@ -1108,7 +1109,7 @@ python tools/sweep_style_properties.py --config sweep.json --page moksa --csv da
 python tools/sweep_node_properties.py  --config sweep.json --page moksa --csv data/node-property-verification.csv
 python tools/sweep_style_states.py --config sweep.json --post 20 --slug probe-lab     --csv data/style-state-verification.csv
 python tools/sweep_interactions.py --config sweep.json --post 20 --slug probe-lab     --csv data/interaction-verification.csv
-python tools/verify_recipes.py --config sweep.json --post 21 --slug probe-recipes    --csv data/tutorial-recipes-verification.csv
+python tools/verify_recipes.py --config sweep.json --post <ID of the probe-recipes page> --slug probe-recipes \n    --csv data/tutorial-recipes-verification.csv   # --post REBINDS that post's template: check the ID first
 python tools/verify_loop.py --url https://site/ --window mk-loop --toggle mk-plate-title --panel mk-plate-item \
     --parts ukw-sky,ukw-sun,ukw-fuji,ukw-mist,ukw-sea,ukw-crest,ukw-boat,ukw-wave,ukw-claw,ukw-swell,ukw-key,mk-loop-seal \
     --period 14000 --csv data/loop-verification.csv

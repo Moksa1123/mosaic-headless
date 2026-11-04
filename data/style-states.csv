@@ -23,16 +23,17 @@ ___dropdown--opened,"&.m-dropdown:where(.dropdown--opened),.m-dropdown:where(.dr
 ___dropdown--opening,.m-dropdown:where(.dropdown--opening) &,600,node-type,Mosaic/NodeTypes/Menu/Dropdown/DropdownElementTypeFactoryAbstract.php
 ___dropdown-toggle--current,&.m-dropdown-toggle--current,500,node-type,Mosaic/NodeTypes/Menu/Dropdown/DropdownToggle/DropdownToggleElementTypeFactory.php
 ___dropdown-toggle--current-within,".m-dropdown:where(:has(.m-menu-link--current,.m-dropdown-toggle--current)) > &",500,node-type,Mosaic/NodeTypes/Menu/Dropdown/DropdownToggle/DropdownToggleElementTypeFactory.php
-___field--focus-visible,"&:has(:where(input, textarea, select):focus-visible)",760,node-type,Mosaic/NodeTypes/Form/Form/MElements/Field/FieldElementTypeFactory.php
-___field--invalid,&:has(:user-invalid),700,node-type,Mosaic/NodeTypes/Form/Form/MElements/Field/FieldElementTypeFactory.php
-___field--invalid-focus-visible,&:has(:user-invalid:focus-visible),770,node-type,Mosaic/NodeTypes/Form/Form/MElements/Field/FieldElementTypeFactory.php
-___field--invalid-within,.m-field:where(:has(:user-invalid)) &,700,node-type,Mosaic/NodeTypes/Form/Form/MElements/Field/FieldElementTypeFactory.php
-___field-set--invalid,&:has(:user-invalid),700,node-type,Mosaic/NodeTypes/Form/Form/MElements/FieldSet/FieldSetElementTypeFactory.php
+___field--focus-visible,"&:has(:where(input, textarea, select, .m-select-toggle):focus-visible)",760,node-type,Mosaic/NodeTypes/Form/Form/MElements/Field/FieldElementTypeFactory.php
+___field--invalid,"&:has(:user-invalid, :where(.m-select-toggle[aria-invalid=""true""]))",700,node-type,Mosaic/NodeTypes/Form/Form/MElements/Field/FieldElementTypeFactory.php
+___field--invalid-focus-visible,"&:has(:user-invalid:focus-visible, :where(.m-select-toggle:focus-visible ~ :user-invalid, .m-select-toggle[aria-invalid=""true""]:focus-visible))",770,node-type,Mosaic/NodeTypes/Form/Form/MElements/Field/FieldElementTypeFactory.php
+___field--invalid-within,".m-field:where(:has(:user-invalid, .m-select-toggle[aria-invalid=""true""])) &",700,node-type,Mosaic/NodeTypes/Form/Form/MElements/Field/FieldElementTypeFactory.php
+___field-set--invalid,"&:has(:user-invalid, :where(.m-select-toggle[aria-invalid=""true""]))",700,node-type,Mosaic/NodeTypes/Form/Form/MElements/FieldSet/FieldSetElementTypeFactory.php
 ___fileupload-input--selector-button,&::file-selector-button,0,node-type,Mosaic/NodeTypes/Form/Form/MElements/FileUpload/FileUploadElementTypeFactory.php
 ___fileupload-input--selector-button-hover,&::file-selector-button:hover,100,node-type,Mosaic/NodeTypes/Form/Form/MElements/FileUpload/FileUploadElementTypeFactory.php
 ___form--error,"&[data-form-state=""error""]",700,node-type,Mosaic/NodeTypes/Form/FormWrapperElementTypeFactory.php
-___form--invalid-within,.m-form-wrapper:where(:has(:user-invalid)) &,700,node-type,Mosaic/NodeTypes/Form/FormWrapperElementTypeFactory.php
+___form--invalid-within,".m-form-wrapper:where(:has(:user-invalid, .m-select-toggle[aria-invalid=""true""])) &",700,node-type,Mosaic/NodeTypes/Form/FormWrapperElementTypeFactory.php
 ___input--placeholder,&.m-input::placeholder,0,node-type,Mosaic/NodeTypes/Form/Form/MElements/InputText/InputTextElementTypeFactory.php
+___listbox-option,&.m-listbox :where(option),500,node-type,Mosaic/NodeTypes/Form/Form/MElements/ListBox/ListBoxElementTypeFactory.php
 ___loop_element_no_result,&.m-loop--no-result,600,node-type,Mosaic/NodeTypes/Loop/LoopElementTypeFactory.php
 ___loop_pagination_button--disabled,&.m-loop-pagination-button--disabled,800,node-type,Mosaic/NodeTypes/Loop/LoopPagination/Button/ButtonNext/LoopPaginationButtonNextElementTypeFactory.php
 ___menu-link--current,&.m-menu-link--current,500,node-type,Mosaic/NodeTypes/Menu/MenuLink/MenuLinkElementTypeFactory.php
@@ -43,8 +44,10 @@ ___nested_dropdown_mode,"&:where(.dropdown-mode .m-navbar-navigation .m-dropdown
 ___popover--flipped,"&:where(.m-popover[data-mosaic-popover-flipped],.m-popover[data-mosaic-popover-flipped] &)",600,node-type,Mosaic/NodeTypes/Pro/Popover/PopoverElementTypeFactory.php
 ___radio-input--checked,&:checked,500,node-type,Mosaic/NodeTypes/Form/Form/MElements/Radio/RadioInput/RadioInputElementTypeFactory.php
 ___radio-input--checkmark,&:checked::before,500,node-type,Mosaic/NodeTypes/Form/Form/MElements/Radio/RadioInput/RadioInputElementTypeFactory.php
-___select-input-option,"&.m-select:where(:has(option:not(:disabled):checked)), &.m-select :where(option)",500,node-type,Mosaic/NodeTypes/Form/Form/MElements/Select/SelectElementTypeFactory.php
-___select-input-option--disabled,"&.m-select:where(:has(option:disabled:checked)), &.m-select :where(option:disabled)",800,node-type,Mosaic/NodeTypes/Form/Form/MElements/Select/SelectElementTypeFactory.php
+___select--opened,"&.m-select:where(.m-select--opened),.m-select:where(.m-select--opened) > &,.m-select:where(.m-select--opened) > .m-select-toggle &,.m-select:where(.m-select--opened) > .m-select-options &",600,node-type,Mosaic/NodeTypes/Form/Form/MElements/Select/SelectElementTypeFactory.php
+___select-option--active,"&.m-select-option--active,.m-select-option--active &",500,node-type,Mosaic/NodeTypes/Form/Form/MElements/Select/Options/Option/SelectOptionElementTypeFactory.php
+___select-option--in-toggle,"&.m-select-current-option,.m-select-current-option &",600,node-type,Mosaic/NodeTypes/Form/Form/MElements/Select/Options/Option/SelectOptionElementTypeFactory.php
+___select-option--selected,"&[aria-selected=""true""],&.m-select-option--selected,[aria-selected=""true""] &,.m-select-option--selected &",400,node-type,Mosaic/NodeTypes/Form/Form/MElements/Select/Options/Option/SelectOptionElementTypeFactory.php
 ___slide--active,.m-slide--active > &,500,node-type,Mosaic/NodeTypes/Slider/SliderSlides/SliderSlide/SliderSlideElementTypeFactory.php
 ___slider_navigation_bullet--active,&.m-slider-bullet--active,500,node-type,Mosaic/NodeTypes/Slider/SliderNavigation/SliderNavigationBullet/SliderNavigationBulletElementTypeFactory.php
 ___slider_navigation_bullet--hover,&:not(.m-slider-bullet--active):HOVER,100,node-type,Mosaic/NodeTypes/Slider/SliderNavigation/SliderNavigationBullet/SliderNavigationBulletElementTypeFactory.php

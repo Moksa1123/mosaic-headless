@@ -1,5 +1,5 @@
 id,family,label,description,declared_in
-pointerMove,progress,Mouse,Animate as the mouse moves over the element.,Mosaic/Plugins/InteractionTypes/progress/pointermove/InteractionTypePointerMoveAbstract.php
+pointerMove,progress,Mouse,"Animate as the mouse moves over the element, or as a finger drags across it with Touch on.",Mosaic/Plugins/InteractionTypes/progress/pointermove/InteractionTypePointerMoveAbstract.php
 scrollIntoView,progress,Page & scroll,Tracks the visibility of an element as it enters and exits the viewport.,Mosaic/Plugins/InteractionTypes/progress/scrollIntoView/InteractionTypeScrollIntoViewAbstract.php
 accordionItemChange,timed,Element events,Animate when the accordion item opens or closes.,Mosaic/Plugins/InteractionTypes/timed/accordionitemchange/InteractionTypeAccordionItemChangeAbstract.php
 click,timed,Mouse,Animate on the first/second click.,Mosaic/Plugins/InteractionTypes/timed/click/InteractionTypeClickAbstract.php

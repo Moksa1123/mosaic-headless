@@ -155,7 +155,7 @@ def main():
     site = {"pages": [], "shell": {}}
     cls_of, rules_of, page_ok = {}, {}, {}
     for host in order:
-        master = build_shell(client, cfg, site, surface)
+        master, _header, _footer = build_shell(client, cfg, site, surface)
         template = bind_page(client, cfg, master, a.slug, a.post)
         build_page_document(client, cfg, master, template,
                             tree_for(batches[host]), surface)

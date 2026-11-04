@@ -19,14 +19,14 @@ component that checks placement, because nothing downstream will.
 
 ## The parent side: `data/placement-rules.csv`
 
-One row per node type, extracted from every `canBeParentFor` in the source (122 types):
+One row per node type, extracted from every `canBeParentFor` in the source (134 types, 1.0.12):
 
 | rule | count | meaning |
 |---|---|---|
-| `none` | 59 | leaf. Refuses every child — the default on `NodeTypeFactoryAbstract`. |
-| `any` | 34 | takes anything. `div`, `body`, `section`, `button`, `menu`, `slider-slide`, `tabs-tab-pane`, … |
-| `allow` | 26 | takes only the types in `allowed_children`. |
-| `complex` | 3 | the body is not a plain `instanceof` chain — `fieldset`, `select-input`, `styleguide-entry-content-text-quote`. Read the file named in `declared_in`. |
+| `none` | 57 | leaf. Refuses every child — the default on `NodeTypeFactoryAbstract`. |
+| `any` | 46 | takes anything. `div`, `body`, `section`, `button`, `menu`, `slider-slide`, `tabs-tab-pane`, … |
+| `allow` | 29 | takes only the types in `allowed_children`. |
+| `complex` | 2 | the body is not a plain `instanceof` chain — `listbox`, `styleguide-entry-content-text-quote`. Read the file named in `declared_in`. |
 
 The `allow` rows are the component families, and they are strict. A few worth knowing
 by heart because they are the ones people get wrong:

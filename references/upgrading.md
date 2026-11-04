@@ -1,4 +1,4 @@
-# Upgrading the plugin: what 1.0.7 → 1.0.8 → 1.0.10 → 1.0.11 did to the data, measured
+# Upgrading the plugin: what 1.0.7 → 1.0.8 → 1.0.10 → 1.0.11 → 1.0.12 did to the data, measured
 
 A Mosaic plugin update is two events, not one. The files change when WordPress
 installs the package; the DATA changes only when Mosaic's own upgrade flow has
@@ -340,3 +340,69 @@ runs had left `master-root`, `styleguide-root`, `component-root` and
 `parentNodeID` (the master is back to its 7 baseline nodes), and sweep `document`
 on its own, or not at all. Also, the parent is the FIRST div by `ordering` (what
 `--setup` picks); a config rebuilt by hand with another div sends the probes there.
+
+## 1.0.11 → 1.0.12
+
+**Getting the package.** `wp plugin update mosaic` again: "Updated 1 of 1", the
+right permissions, and `MOSAIC_GLOBAL.dataVersion` / `MOSAIC_SITE.dataVersion` read
+`1.0.12` on the first look afterwards. **The data upgrade now runs on its own, in
+the background** (`MosaicUpgradeLayer/BackgroundUpgrade`); nothing had to be driven.
+`wp plugin list` printed `1.0.11` once, straight after the update, before the
+header read back as 1.0.12 - check `Version:` in `mosaic.php`, not the first list.
+Backups: `wp db export ~/private_html/pre-1012.sql` and a copy of the old folder.
+No duplicate roots afterwards (the health SQL in SKILL.md: 0 groups, 155 roots).
+
+**What the migration rewrote: the Select split** (`Upgrade-1.0.12.php`, NEXT-4757,
+written for 1.0.8 and carried forward). The native `select-input` / `select-option`
+pair is gone. Every stored `select-input` became one of two things:
+
+- `multiple`, or `size` > 1 → **`listbox`** > `listbox-option` - the native
+  `<select class="m-listbox">`, whose option is still a leaf with a `text` property;
+- anything else → the new **`select`**, written out as the factory defaults:
+
+```
+select                      nameAttribute, required, defaultValue; the root keeps width + font
+  select-toggle             <button role=combobox> - the visible box, the field chrome moved here
+    select-placeholder      > text (Inherited text) > wysiwyg-text   "Please choose an option"
+    icon                    the chevron SVG
+  select-options            <div role=listbox>
+    select-option           value, selected; label is a CHILD: text > wysiwyg-text
+```
+
+Delivered as `<mosaic-select class="m-select">`, plus a hidden
+`<input class="m-select-input" name=…>` that carries the value into the
+submission. The field's invalid / focus-visible state selectors grew a
+`.m-select-toggle[aria-invalid="true"]` arm, because the hidden input is never
+`:user-invalid` - a submit with nothing picked marks the TOGGLE instead. Old
+`___select-input-option*` states became `___listbox-option` on the List box path and
+`___select-option--active` (from a hover) on the Select path; the rest were dropped.
+An empty-valued first option survived the migration as an ordinary option; the
+skill's form builder (`sites/_forms.py`) now turns it into the placeholder instead.
+
+**Re-extracted and diffed against 1.0.11:** 134 node types (+7 Select / List box,
+-2), 201 node properties, 131 data classes, 134 placement rules, 27 default
+structures (`select` and `select-toggle` heal their children in), 60 style states
+(`___select--opened`, three option states, `___listbox-option`),
+`gridRow/ColumnStart/End` moved under a `CSSGridChildPositionPropertyFactory`, and
+the `pointerMove` trigger's description gained touch. Pluggables are the same 285.
+`check_tables.py`: every source table matches a fresh extraction.
+
+**Re-verified on the live site:** `form-surface` 23/23 (the select opened, picked by
+click and by keyboard, required refused), `component-wall` 27, `content-loop` 15/15,
+`popovers` 37/37, `tokens` 15/15, `dialog-form` 49/49, both sliders 15/15,
+`tutorial-recipes` 16/16, the interaction sweep unchanged (the editor-shape
+candidates still BIND), style states 39 COMPILED of 40 probed, and the seven new
+node types all RENDERED. The 406s some posts return are older than the upgrade:
+those posts have no Mosaic template (`TemplateNotFoundException`).
+
+**Two traps hit while doing it, both ours:**
+
+- Rebuilding ONE page with `build_site.py` re-fills every component, which re-keys
+  their inner nodes (`references/design-system.md`); the other pages that place a
+  component keep overrides keyed to the old IDs and fall back to the defaults -
+  three identical "專案" cards. Build every page that places a component in the
+  same run as the page you changed.
+- `verify_recipes.py --post` binds the recipes template to THAT post. The example
+  command said `--post 21`, which on this site is an unrelated probe page; its
+  content was replaced and `/probe-recipes/` kept serving an older build. Look the
+  ID up first.

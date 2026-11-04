@@ -71,7 +71,7 @@ def fetch(url):
 
 def place(client, cfg, surface, slug, post, node, label):
     """Build a page carrying exactly one tree, and hand back its HTML."""
-    master = build_shell(client, cfg, {"pages": [], "shell": {}}, surface)
+    master, _header, _footer = build_shell(client, cfg, {"pages": [], "shell": {}}, surface)
     template = bind_page(client, cfg, master, slug, post)
     inst = "templateDocumentInstance/%s/%s" % (master, template)
     doc = unwrap(client.get(inst), "templateDocumentInstance")

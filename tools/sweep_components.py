@@ -176,7 +176,7 @@ def main():
          if refused else "it ACCEPTED a write it documents as not allowed")
 
     # ── 6. two instances on a real page, and the page must show both ─────────
-    master = build_shell(client, cfg, {"pages": [], "shell": {}}, surface)
+    master, _header, _footer = build_shell(client, cfg, {"pages": [], "shell": {}}, surface)
     template = bind_page(client, cfg, master, a.slug, a.post)
     tinst = "templateDocumentInstance/%s/%s" % (master, template)
     tdoc = unwrap(client.get(tinst), "templateDocumentInstance")

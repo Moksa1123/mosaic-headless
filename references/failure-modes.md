@@ -397,14 +397,22 @@ was valid. Every field had been dropped on the way in, for three different reaso
   `*ElementMResourceFactory.php` and every extractor here walked
   `*ElementTypeFactory.php` only. Two types were missing from the catalog; the
   walk now covers both and the count went 126 → 128.
-- **`select-option` is a leaf and its label is the `text` PROPERTY.** Give it a
-  `wysiwyg-text` child and the option renders with an empty label: a dropdown that
-  opens onto five blank lines, which looks like a styling problem and is not.
+- **Up to 1.0.11, `select-option` was a leaf and its label the `text` PROPERTY.**
+  A `wysiwyg-text` child rendered an empty label: a dropdown that opened onto five
+  blank lines. **1.0.12 reversed it.** `select-input` is gone; the dropdown is now
+  `select > select-toggle (select-placeholder, icon) + select-options > select-option`,
+  and a `select-option`'s label is a CHILD (`text` > `wysiwyg-text`, or anything
+  else) - a `text` property on it is not a declared property any more. The native
+  control lives on as `listbox` / `listbox-option`, and THAT option is still the
+  leaf with `text`. Writing a 1.0.11 tree to 1.0.12 is the new way to get blank
+  options; see `references/upgrading.md` for what the data upgrade rewrote.
 
 The through-line is the one this file keeps recording: Mosaic accepts a write it
 cannot use and says nothing. The defence is to read the delivered page back and
 count what arrived — `verify_components.py` now asserts the control count, the option
-labels and that an empty required form is actually refused.
+labels and that an empty required form is actually refused, and on 1.0.12 drives the
+custom select: it opens, a click and the keyboard both pick, the hidden input carries
+the value, and a submit with nothing picked marks the toggle `aria-invalid`.
 
 ## `display` on an element whose visibility the plugin owns — twice now
 

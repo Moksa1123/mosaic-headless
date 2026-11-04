@@ -9,6 +9,8 @@ form-wrapper,form|success-screen,2,heal,Mosaic/NodeTypes/Form/FormWrapperElement
 loop,loop-items|loop-no-result,2,heal,Mosaic/NodeTypes/Loop/LoopElementMResource.php
 loop-pagination-numbers,loop-pagination-number,1,heal,Mosaic/NodeTypes/Loop/LoopPagination/Numbers/LoopPaginationNumbersElementMResource.php
 modal,modal-overlay,1,heal,Mosaic/NodeTypes/Pro/Dialog/Modal/ModalElementMResource.php
+select,select-toggle|select-options,2,heal,Mosaic/NodeTypes/Form/Form/MElements/Select/SelectElementMResource.php
+select-toggle,select-placeholder,1,heal,Mosaic/NodeTypes/Form/Form/MElements/Select/Toggle/SelectToggleElementMResource.php
 slider,slider-slides,1,heal,Mosaic/NodeTypes/Slider/SliderElementMResource.php
 slider-navigation,slider-navigation-bullet,1,default,Mosaic/NodeTypes/Slider/SliderNavigation/SliderNavigationElementTypeFactory.php
 slider-navigation,slider-navigation-bullet,1,heal,Mosaic/NodeTypes/Slider/SliderNavigation/SliderNavigationElementMResource.php
