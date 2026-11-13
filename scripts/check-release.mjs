@@ -75,8 +75,11 @@ else if (fmVersion[1].trim() !== want)
 const platDir = path.join(ROOT, "assets", "templates", "platforms");
 for (const f of fs.readdirSync(platDir).filter((x) => x.endsWith(".json"))) {
   const cfg = JSON.parse(fs.readFileSync(path.join(platDir, f), "utf8"));
-  const v = cfg.frontmatter?.version;
-  if (v !== undefined && v !== want) fail(`${f} frontmatter version ${v} != ${want}`);
+  const fm = cfg.frontmatter || {};
+  for (const k of ["version", "author"])
+    if (k in fm) fail(`${f} frontmatter has a top-level ${k} - it belongs under metadata`);
+  const v = fm.metadata?.version;
+  if (v !== undefined && v !== want) fail(`${f} frontmatter metadata.version ${v} != ${want}`);
   if (JSON.stringify(cfg).includes("gutenberg-headless"))
     fail(`${f} still names another skill`);
 }

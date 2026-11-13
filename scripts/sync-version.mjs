@@ -11,7 +11,7 @@
  *
  * Targets:
  *   SKILL.md                              frontmatter `version:`
- *   assets/templates/platforms/*.json     frontmatter.version, where present
+ *   assets/templates/platforms/*.json     frontmatter.metadata.version, where present
  *   .claude-plugin/plugin.json            version (the Claude plugin directory reads it)
  *
  * check-release.mjs asserts afterwards that this worked, so a silent miss here
@@ -55,8 +55,10 @@ const platDir = path.join(ROOT, "assets", "templates", "platforms");
 for (const f of fs.readdirSync(platDir).filter((x) => x.endsWith(".json"))) {
   const p = path.join(platDir, f);
   const cfg = JSON.parse(fs.readFileSync(p, "utf8"));
-  if (cfg.frontmatter && "version" in cfg.frontmatter && cfg.frontmatter.version !== v) {
-    cfg.frontmatter.version = v;
+  // under metadata:, like SKILL.md - a top-level version fails the Agent Skills upload
+  const meta = cfg.frontmatter?.metadata;
+  if (meta && "version" in meta && meta.version !== v) {
+    meta.version = v;
     fs.writeFileSync(p, JSON.stringify(cfg, null, 2) + "\n");
     touched.push(`assets/templates/platforms/${f}`);
   }

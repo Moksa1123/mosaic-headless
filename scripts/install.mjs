@@ -172,18 +172,37 @@ function detectPlatforms() {
 
 // ---------- content assembly ------------------------------------------------
 
+// SKILL.md's own `description: |` block is the one source of truth. The platform
+// templates only say *whether* a description goes in their frontmatter; their copy
+// of the text used to be pasted in by hand and went stale (installs kept announcing
+// the 1.0.10-era counts while the repo said 1.0.12).
+function readSkillDescription() {
+  const raw = fs.readFileSync(path.join(ROOT, "SKILL.md"), "utf8");
+  const end = raw.indexOf("\n---", 3);
+  const head = raw.startsWith("---") && end !== -1 ? raw.slice(0, end) : "";
+  const m = /^description:\s*\|\s*\n((?:[ \t]+.*(?:\n|$))+)/m.exec(head);
+  if (!m) die("SKILL.md frontmatter has no `description: |` block");
+  return m[1].split("\n").map((l) => l.replace(/^ {2}/, "")).join("\n").trim();
+}
+
 function buildFrontmatter(fm) {
   if (!fm) return "";
+  if ("description" in fm) fm = { ...fm, description: readSkillDescription() };
   const lines = ["---"];
-  for (const [k, v] of Object.entries(fm)) {
-    if (v === null || v === undefined) continue;
-    if (Array.isArray(v)) lines.push(`${k}: [${v.map((x) => JSON.stringify(x)).join(", ")}]`);
-    else if (typeof v === "boolean") lines.push(`${k}: ${v}`);
-    else if (typeof v === "string" && (v.includes("\n") || v.length > 100)) {
-      lines.push(`${k}: |`);
-      for (const sub of v.split("\n")) lines.push(`  ${sub}`);
-    } else lines.push(`${k}: ${JSON.stringify(v)}`);
-  }
+  const emit = (k, v, ind) => {
+    if (v === null || v === undefined) return;
+    if (Array.isArray(v)) lines.push(`${ind}${k}: [${v.map((x) => JSON.stringify(x)).join(", ")}]`);
+    else if (typeof v === "boolean") lines.push(`${ind}${k}: ${v}`);
+    else if (typeof v === "object") {
+      // `metadata:` - the Agent Skills spec rejects a top-level author/version
+      lines.push(`${ind}${k}:`);
+      for (const [k2, v2] of Object.entries(v)) emit(k2, v2, ind + "  ");
+    } else if (typeof v === "string" && (v.includes("\n") || v.length > 100)) {
+      lines.push(`${ind}${k}: |`);
+      for (const sub of v.split("\n")) lines.push(`${ind}  ${sub}`);
+    } else lines.push(`${ind}${k}: ${JSON.stringify(v)}`);
+  };
+  for (const [k, v] of Object.entries(fm)) emit(k, v, "");
   lines.push("---");
   return lines.join("\n") + "\n\n";
 }
