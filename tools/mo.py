@@ -190,6 +190,31 @@ def cmd_terms(a):
         sys.exit(1)
 
 
+def cmd_facts(a):
+    """Search the measured facts (references/facts.md, references/core-rules.md)
+    bullet by bullet: the front-end behaviour no table row can hold."""
+    refs = os.path.join(os.path.dirname(DATA), "references")
+    needles = [n.lower() for w in a.words for n in expand(w)]
+    out = []
+    for name in ("facts.md", "core-rules.md"):
+        with open(os.path.join(refs, name), encoding="utf-8") as fh:
+            text = fh.read()
+        for block in re.split(r"\n(?=- \*\*|\*\*)", text):
+            low = block.lower()
+            if all(n in low for n in needles):
+                out.append({"file": "references/" + name, "text": block.strip()})
+
+    def render():
+        for r in out:
+            print("[%s]\n%s\n" % (r["file"], r["text"]))
+        print("%d fact(s)%s" % (len(out), "" if out else
+              " - nothing measured on this; say so and record it in data/pending.csv (待補)"))
+
+    emit(out, render)
+    if not out:
+        sys.exit(1)
+
+
 def resolve_type(name: str) -> str:
     """A node type name, or the single type a Chinese word maps to."""
     if not has_cjk(name):
@@ -931,6 +956,9 @@ def main():
     p = add("terms", cmd_terms, "Chinese / colloquial word -> Mosaic's English name")
     p.add_argument("word", nargs="?")
     p.add_argument("--kind", choices=["css", "type", "state", "concept"])
+
+    p = add("facts", cmd_facts, "search the measured front-end facts (all words must match)")
+    p.add_argument("words", nargs="+")
 
     global ARGS
     ARGS = ap.parse_args()

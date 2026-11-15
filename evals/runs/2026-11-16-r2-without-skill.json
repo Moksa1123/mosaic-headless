@@ -1,0 +1,9 @@
+{
+  "meta": {"date": "2026-11-16", "model": "claude-opus-5-5", "how": "subagent 不用任何工具，憑記憶作答"},
+  "answers": {
+    "no-template-status": "不確定，猜測：Mosaic 找不到對應範本時會退回佈景主題（或 WordPress 預設）的版型輸出，訪客多半拿到 HTTP 200 加上一般的佈景主題頁面；若網址本身不存在則是 WordPress 的 404。我沒有實測過，無法確定 Mosaic 是否會回傳空白頁或特定狀態碼。",
+    "unprobed-node-props": "不知道。這是 mosaic-headless skill 內部的實測資料，憑記憶無法得知是哪兩個 property 名稱尚未探測；猜測可能是較少用的屬性（例如與無障礙或 SEO 相關的 property），但這只是猜的。",
+    "image-attachment-path": "猜測：wp-attachment:// 後面的路徑應該相對於 WordPress 的上傳目錄（wp-content/uploads），例如 wp-attachment://2026/11/photo.jpg。如果寫成完整的 wp-content/uploads/... 會變成重複路徑（uploads/wp-content/uploads/...），圖片找不到、前台顯示破圖或空白。不確定，未實測。",
+    "variant-delete": "猜測：送 status:\"delete\" 可能不會真的刪除（被忽略、或只是標記，或 REST 驗證失敗回錯誤），variant 仍存在。正確做法推測是呼叫對應 REST 路由的 DELETE 方法（或把 status 設為 trash／從 variants 清單中移除後整份存回），並確認引用該 variant 的節點改掉。不確定，未實測。"
+  }
+}

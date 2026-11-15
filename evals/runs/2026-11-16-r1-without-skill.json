@@ -1,0 +1,19 @@
+{"meta": {"date": "2026-11-16", "model": "claude-opus-5-5", "how": "subagent 不用任何工具，憑記憶作答"},
+"answers": {
+"select-split-1012": "猜測：改成父容器 select（或 form-select）底下放多個 option（select-option）子節點，由使用者自己組選項；舊的單一 type「select-field」（選項寫在屬性陣列裡的那種）已移除。實際 type 名稱我不確定，這是猜的。",
+"scrolldepth-slot-1010": "猜測：動作改放在「onReach」（或 reached）slot 底下；舊的 slot 名稱（推測是 actions / onScroll）不會再被讀取，觸發器不報錯但動作不會執行。名稱為猜測。",
+"popover-trigger-slots": "猜測：三個 slot 是 onOpen（開啟時）、onClose（關閉時）、onToggle；做三步驟導覽時，下一步應掛在 onClose（第一步關閉後再開第二個 popover）。名稱為猜測。",
+"popover-flipped-state": "猜測：用 style state「flipped」（例如 :flipped／state id 'flipped'）來設定翻轉後的樣式。不確定確切 ID。",
+"shorthand-interaction-types": "猜測：只有 click、hover、pageLoad（載入）這類簡單觸發可以當 shorthand；其他種（如 scroll、exitIntent）用 shorthand 會被忽略或驗證失敗，需改用完整的 interaction 物件。為猜測。",
+"interaction-value-shape": "猜測：initial 與 properties 的 key 用 CSS 屬性名稱（如 opacity、transform、translateY），值寫成數字（例如 opacity: 0、translateY: 20）。不確定。",
+"wysiwyg-text-escape-1011": "猜測：1.0.11 會把 HTML 跳脫，前台會直接顯示字面文字「A<strong>B</strong>」。要做行內粗體或換行，應該用富文字結構（例如 text 子節點的 marks/格式陣列，或段落內的 inline 節點），換行用 line break 節點，而不是寫原始 HTML 字串。具體結構不確定。",
+"pro-only-types-1011": "猜測：popover、modal、tabs、accordion、slider/carousel、form 相關（form、input、select）、map、loop/query-loop、lottie 等需要 Pro。不確定 1.0.11 實際調整後的清單。",
+"url-capable-types": "猜測：只有 link（連結區塊）與 button 的 url 會輸出 <a href>；把 url 放在 image 或 text 上會被忽略，前台不會產生連結（不報錯）。",
+"section-default-padding": "猜測：上下各約 80px（也可能是 64px）內距。為猜測。",
+"unsafe-type-count": "不知道；猜測約 5 個。",
+"modal-open-1010": "改用 Popover API 後元素不再是 <dialog> 的 modal 開啟狀態，dialog.open 不能可靠判斷；應該用 element.matches(':popover-open') 判斷是否開啟。",
+"custom-declarations-dvh": "猜測：dvh 單位可能被 Mosaic 的 CSS 解析器視為無效，導致整段 customDeclarations（同一區塊的其他宣告）一起被丟掉、不輸出。為猜測。",
+"accordion-content-bare": "猜測：accordion-content 必須放在 accordion-item（在 accordion 底下，與 accordion-header/trigger 同層）裡；直接放在一般 div 底下會提交失敗或前台不渲染／編輯器顯示壞掉。",
+"local-loop-source": "猜測：loopSource 應寫成指向本地資料的路徑或陣列（例如 {\"type\":\"local\",\"items\":[...]} 或直接是資料陣列的 JSON），@LOOP() 是在 loop 內讀取目前項目欄位用的動態變數，不是用來指定資料來源，所以放在 loopSource 會解析不出資料。為猜測。",
+"button-text-editable": "猜測：按鈕文字要放在 button 底下的一個 text（文字）子節點裡，而不是寫在 button 的屬性（label）上，客戶才能在編輯器雙擊直接編輯。"
+}}

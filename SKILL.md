@@ -95,6 +95,8 @@ exits 1 and says to record it.
 |---|---|---|
 | 「做一頁」「給我一個起手架構」 | page spec | `mo.py skeleton` → look up every type → `build_page.py --spec` |
 | 「有哪些元件可以用」「有沒有表單／輪播」 | node types + sweep verdict | `mo.py types --safe` · `mo.py type 輪播` |
+| 「哪些不能用」「哪些會讓頁面壞掉」 | sweep verdict | `mo.py types --unsafe` · `mo.py check <types>` |
+| 「免費版能用嗎」「哪些要 Pro」 | edition | `mo.py types --edition pro` |
 | 「這個節點能設什麼」 | everything settable on one type | `mo.py params text` |
 | 「什麼可以放在什麼裡面」 | placement + default children | `mo.py placement accordion-item` |
 | 「內距／外距／圓角／字級怎麼設」 | CSS → style key | `mo.py css 內距` · `mo.py style --grep radius` |
@@ -109,7 +111,7 @@ exits 1 and says to record it.
 | 「搬佈景」「匯出匯入」 | theme export / import | [building.md](references/building.md) · `theme_zip.py` |
 | 「Mosaic 升級了」 | data upgrade + re-verify | [upgrading.md](references/upgrading.md) · `data_upgrade.py` |
 | 「REST 端點」「資料表欄位」 | routes, columns | `mo.py routes --grep template` · `mo.py tables wp_mosaic_nodes` |
-| 「為什麼會這樣」 | measured facts | [facts.md](references/facts.md) · [failure-modes.md](references/failure-modes.md) |
+| 「為什麼會這樣」「前台實際會怎樣」 | measured facts | `mo.py facts section padding` (all words must match) · [failure-modes.md](references/failure-modes.md) |
 | a word that matches nothing | - | retry in English; still nothing → `data/pending.csv` |
 
 `--json` goes before the subcommand (`mo.py --json type text`). `--grep` is a

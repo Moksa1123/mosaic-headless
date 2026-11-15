@@ -288,8 +288,16 @@ class PublicInterface(unittest.TestCase):
             for name, sig in funcs.items():
                 self.assertTrue(hasattr(m, name), "%s.%s is gone" % (mod, name))
                 self.assertEqual(str(inspect.signature(getattr(m, name))), sig, "%s.%s" % (mod, name))
+        # every name em925's deploy tool imports (em925_update.py, fill_templates.py,
+        # component_categories.py), as em925-總機 listed them on 2026-11-16
         import build_page
-        self.assertTrue(hasattr(build_page, "Surface"))
+        import build_site
+        for name in ("Surface", "flatten", "refresh_node_ids", "theme_records",
+                     "COMPONENT_USES", "unwrap"):
+            self.assertTrue(hasattr(build_page, name), "build_page." + name)
+        for name in ("commit", "ensure_components", "resolve_components", "apply_overrides",
+                     "COMPONENT_NAMESPACE", "build_page_document"):
+            self.assertTrue(hasattr(build_site, name), "build_site." + name)
 
 
 class SkillDoc(unittest.TestCase):

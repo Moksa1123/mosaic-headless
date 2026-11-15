@@ -92,3 +92,6 @@ RWD,responsive,concept,_t / _m style keys; verify with verify_rwd.py and audit_m
 動態內容,dynamic,concept,@VAR() values: mo.py vars (references/dynamic-content.md),colloquial; no Mosaic string,inferred
 自訂欄位,custom field,concept,@VAR('post/meta_<key>'); run tools/list_fields.php (references/custom-fields.md),colloquial; no Mosaic string,inferred
 深色模式,mode,concept,dark/light = a second mode on the colour collection (references/design-system.md),colloquial; no Mosaic string,inferred
+下拉選單,select|dropdown,type,a form field = select (1.0.12); a menu that drops down = dropdown,colloquial; no Mosaic string,inferred
+不安全,unsafe,concept,mo.py types --unsafe; mo.py check <types> exits 1 on one,colloquial; no Mosaic string,inferred
+付費版,pro,concept,mo.py types --edition pro,colloquial; no Mosaic string,inferred
