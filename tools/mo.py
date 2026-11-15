@@ -120,7 +120,84 @@ def wrap(text: str, width: int) -> list[str]:
 
 
 def matches(text: str, needle: str | None) -> bool:
-    return needle is None or needle.lower() in (text or "").lower()
+    if needle is None:
+        return True
+    hay = (text or "").lower()
+    return any(n.lower() in hay for n in expand(needle))
+
+
+# ── Chinese and colloquial terms ─────────────────────────────────────────────
+#
+# data/terms-zh.csv maps the words a designer types (內距, 懸停, 彈窗) to Mosaic's
+# English names. Every query that takes a word goes through expand(), so
+# `mo.py css 內距` and `mo.py style --grep 內距` both mean padding. A word that
+# maps to nothing is reported, never guessed: the caller is told to record it
+# in data/pending.csv.
+
+def has_cjk(text: str) -> bool:
+    return any(ord(ch) > 0x2E7F for ch in text or "")
+
+
+def terms() -> list[dict]:
+    return rows("terms-zh")
+
+
+def term_rows(word: str) -> list[dict]:
+    w = (word or "").strip().lower()
+    return [r for r in terms() if r["zh"].lower() == w]
+
+
+def expand(word: str, kinds: tuple[str, ...] = ()) -> list[str]:
+    """English names for `word`. ASCII words pass through unchanged; a mapped
+    Chinese word becomes its English names; an unmapped one exits 1 naming it."""
+    if not has_cjk(word):
+        return [word]
+    hits = [r for r in term_rows(word) if not kinds or r["kind"] in kinds]
+    if not hits:
+        known = term_rows(word)
+        if known:
+            sys.exit("%s is a %s term (%s), not one this command looks up - try "
+                     "`mo.py terms %s`" % (word, known[0]["kind"], known[0]["en"], word))
+        sys.exit("no English term for %s in data/terms-zh.csv. Retry in English; "
+                 "still nothing -> say so and record it in data/pending.csv (待補)." % word)
+    out: list[str] = []
+    for r in hits:
+        for en in split(r["en"]):
+            if en not in out:
+                out.append(en)
+    return out
+
+
+def cmd_terms(a):
+    out = term_rows(a.word) if a.word else terms()
+    if a.word and not out:
+        near = [r for r in terms() if a.word in r["zh"] or a.word.lower() in r["en"].lower()]
+        out = near
+    if a.kind:
+        out = [r for r in out if r["kind"] == a.kind]
+
+    def render():
+        table(["zh", "en", "kind", "trust", "note"],
+              [[r["zh"], r["en"], r["kind"], r["trust"], r["note"][:70]] for r in out])
+        if a.word and not out:
+            print("\nnot mapped: record it in data/pending.csv (待補)")
+        else:
+            print("\nkind -> command: css = `mo.py css <en>`, type = `mo.py type <en>`, "
+                  "state = `mo.py states --grep <en>`, concept = see the note")
+
+    emit(out, render)
+    if a.word and not out:
+        sys.exit(1)
+
+
+def resolve_type(name: str) -> str:
+    """A node type name, or the single type a Chinese word maps to."""
+    if not has_cjk(name):
+        return name
+    names = expand(name, ("type",))
+    if len(names) > 1:
+        sys.exit("%s maps to several types: %s - pick one" % (name, ", ".join(names)))
+    return names[0]
 
 
 # ── node types ────────────────────────────────────────────────────────────────
@@ -513,11 +590,11 @@ def cmd_css(a):
     """Reverse lookup: which Mosaic style property drives this CSS property.
 
     The names mostly transliterate, but not always, and `radius` -> `border-radius`
-    is not something to guess at 2am."""
-    want = a.property.lower()
+    is not something to guess at 2am. A Chinese word (`內距`) is expanded first."""
+    wants = [w.lower() for w in expand(a.property, ("css",))]
     out = [r for r in rows("style-verification")
-           if want in (r["css_property"] or "").lower()
-           or want in r["property"].lower()]
+           if any(w in (r["css_property"] or "").lower() or w in r["property"].lower()
+                  for w in wants)]
     props = index("style-properties", "property")
     emit([dict(r, group=props.get(r["property"], {}).get("group", "")) for r in out],
          lambda: table(["css property", "set in Mosaic as", "group", "swept"],
@@ -724,6 +801,9 @@ def cmd_stats(a):
         "node_type_outcomes": counts,
         "unsafe_types": sorted(r["type"] for r in ver if r["outcome"] in UNSAFE),
         "node_properties": len(rows("node-property-verification")),
+        "node_property_declarations": len(rows("node-properties")),
+        "node_property_names": len({r["property"] for r in rows("node-properties")}),
+        "node_property_names_probed": len({r["property"] for r in rows("node-property-verification")}),
         "node_property_outcomes": np,
         "style_properties": len(rows("style-properties")),
         "style_outcomes": sv,
@@ -744,6 +824,11 @@ def cmd_stats(a):
         print("node properties   %3d   %s" % (
             payload["node_properties"],
             "  ".join("%s %d" % (k, v) for k, v in sorted(np.items()))))
+        print("  = %d probe rows (one per property x host type) covering %d of the %d "
+              "declared names; node-properties.csv has %d rows because a name is "
+              "declared once per owning data class" % (
+                  payload["node_properties"], payload["node_property_names_probed"],
+                  payload["node_property_names"], payload["node_property_declarations"]))
         print("style properties  %3d   %s" % (
             payload["style_properties"],
             "  ".join("%s %d" % (k, v) for k, v in sorted(sv.items()))))
@@ -842,10 +927,21 @@ def main():
 
     add("skeleton", cmd_skeleton, "a minimal valid page spec")
 
+    p = add("terms", cmd_terms, "Chinese / colloquial word -> Mosaic's English name")
+    p.add_argument("word", nargs="?")
+    p.add_argument("--kind", choices=["css", "type", "state", "concept"])
+
     global ARGS
     ARGS = ap.parse_args()
+    if ARGS.cmd in ("type", "params", "placement"):
+        ARGS.name = resolve_type(ARGS.name)
+    if ARGS.cmd == "check":
+        ARGS.names = [resolve_type(n) for n in ARGS.names]
     ARGS.fn(ARGS)
 
 
 if __name__ == "__main__":
+    for _s in (sys.stdout, sys.stderr):
+        if hasattr(_s, "reconfigure"):
+            _s.reconfigure(encoding="utf-8", errors="replace")
     main()

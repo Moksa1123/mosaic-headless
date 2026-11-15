@@ -1,0 +1,94 @@
+zh,en,kind,note,source,trust
+內距,padding,css,paddingTop/Right/Bottom/Left; designer term (Mosaic 1.0.12 ships 邊框間距),zh_TW designer glossary 2026-11-05,house-style
+邊框間距,padding,css,Mosaic's shipped zh_TW for Padding,mosaic 1.0.12 Languages/dist/mosaic-zh_TW-AppMosaicEditor.json,documented
+外距,margin,css,marginTop/Right/Bottom/Left; designer term (Mosaic 1.0.12 ships 邊界),zh_TW designer glossary 2026-11-05,house-style
+邊界,margin,css,Mosaic's shipped zh_TW for Margin,mosaic 1.0.12 Languages/dist/mosaic-zh_TW-AppMosaicEditor.json,documented
+邊框,border,css,border*Width/Style/Color per side; designer term (Mosaic 1.0.12 ships 框線),zh_TW designer glossary 2026-11-05,house-style
+框線,border,css,Mosaic's shipped zh_TW for Border,mosaic 1.0.12 Languages/dist/mosaic-zh_TW-AppMosaicEditor.json,documented
+圓角,border-radius,css,borderRadius; designer term,zh_TW designer glossary 2026-11-05,house-style
+半徑,border-radius,css,Mosaic's shipped zh_TW for Radius,mosaic 1.0.12 Languages/dist/mosaic-zh_TW-AppMosaicEditor.json,documented
+寬度,width,css,also min-width / max-width,mosaic 1.0.12 Languages/dist/mosaic-zh_TW-AppMosaicEditor.json,documented
+高度,height,css,also min-height / max-height,mosaic 1.0.12 Languages/dist/mosaic-zh_TW-AppMosaicEditor.json,documented
+背景,background,css,backgroundColor / backgroundStyle,mosaic 1.0.12 Languages/dist/mosaic-zh_TW-AppMosaicEditor.json,documented
+背景色,background-color,css,,colloquial; no Mosaic string,inferred
+色彩,color,css,matches every *-color property,mosaic 1.0.12 Languages/dist/mosaic-zh_TW-AppMosaicEditor.json,documented
+顏色,color,css,matches every *-color property,colloquial; no Mosaic string,inferred
+字型,font-family,css,a site-wide typeface is a fontFamily collection variable (references/styling.md),mosaic 1.0.12 Languages/dist/mosaic-zh_TW-AppMosaicEditor.json,documented
+字級,font-size,css,,colloquial; no Mosaic string,inferred
+字體大小,font-size,css,,colloquial; no Mosaic string,inferred
+行高,line-height,css,,colloquial; no Mosaic string,inferred
+字距,letter-spacing,css,,colloquial; no Mosaic string,inferred
+字重,font-weight,css,,colloquial; no Mosaic string,inferred
+粗細,font-weight,css,,colloquial; no Mosaic string,inferred
+不透明度,opacity,css,,mosaic 1.0.12 Languages/dist/mosaic-zh_TW-AppMosaicEditor.json,documented
+透明度,opacity,css,,colloquial; no Mosaic string,inferred
+陰影,shadow,css,box-shadow and text-shadow,colloquial; no Mosaic string,inferred
+間隙,gap,css,columnGap / rowGap,colloquial; no Mosaic string,inferred
+對齊,align,css,align-items / align-self / align-content / text-align,mosaic 1.0.12 Languages/dist/mosaic-zh_TW-AppMosaicEditor.json,documented
+顯示,display,css,,mosaic 1.0.12 Languages/dist/mosaic-zh_TW-AppMosaicEditor.json,documented
+位置,position,css,,mosaic 1.0.12 Languages/dist/mosaic-zh_TW-AppMosaicEditor.json,documented
+黏性定位,position,css,position: sticky,mosaic 1.0.12 Languages/dist/mosaic-zh_TW-AppMosaicEditor.json,documented
+溢出,overflow,css,,mosaic 1.0.12 Languages/dist/mosaic-zh_TW-AppMosaicEditor.json,documented
+轉場,transition,css,,mosaic 1.0.12 Languages/dist/mosaic-zh_TW-AppMosaicEditor.json,documented
+變形,transform,css,,mosaic 1.0.12 Languages/dist/mosaic-zh_TW-AppMosaicEditor.json,documented
+網格,grid,css,grid-template-* / grid-auto-*; child placement emits nothing (references/facts.md),mosaic 1.0.12 Languages/dist/mosaic-zh_TW-AppMosaicEditor.json,documented
+濾鏡,filter,css,filter and backdrop-filter,colloquial; no Mosaic string,inferred
+層級,z-index,css,,colloquial; no Mosaic string,inferred
+按鈕,button,type,url -> <a>; none -> <button>; inactive -> <span>,mosaic 1.0.12 Languages/dist/mosaic-zh_TW-AppMosaicEditor.json,documented
+文字,text,type,renders <div>; set tagName for h1-h6 / p,mosaic 1.0.12 Languages/dist/mosaic-zh_TW-AppMosaicEditor.json,documented
+標題,text,type,a heading is a text node with tagName h1-h6,mosaic 1.0.12 Languages/dist/mosaic-zh_TW-AppMosaicEditor.json,documented
+圖片,image,type,,mosaic 1.0.12 Languages/dist/mosaic-zh_TW-AppMosaicEditor.json,documented
+圖示,icon,type,renders inline <svg>,mosaic 1.0.12 Languages/dist/mosaic-zh_TW-AppMosaicEditor.json,documented
+連結,button|menu-link|wysiwyg-link|dropdown-toggle,type,only these four take a url; wrap anything else in a Link-variant button,mosaic 1.0.12 Languages/dist/mosaic-zh_TW-AppMosaicEditor.json,documented
+摺疊面板,accordion,type,nest accordion > accordion-item > accordion-title / accordion-content; designer term,zh_TW designer glossary 2026-11-05,house-style
+手風琴,accordion,type,Mosaic's shipped zh_TW for Accordion,mosaic 1.0.12 Languages/dist/mosaic-zh_TW-AppMosaicEditor.json,documented
+頁籤,tabs,type,the tab element (a browser tab stays 分頁); designer term,zh_TW designer glossary 2026-11-05,house-style
+索引標籤,tabs,type,Mosaic's shipped zh_TW for Tabs / Tab,mosaic 1.0.12 Languages/dist/mosaic-zh_TW-AppMosaicEditor.json,documented
+彈出視窗,modal,type,blocking dialog; Popover-API host since 1.0.10,mosaic 1.0.12 Languages/dist/mosaic-zh_TW-AppMosaicEditor.json,documented
+浮動框,popover,type,non-blocking dialog (1.0.10),mosaic 1.0.12 Languages/dist/mosaic-zh_TW-AppMosaicEditor.json,documented
+彈窗,modal|popover,type,modal blocks the page; popover does not (references/dialog-and-triggers.md),colloquial; no Mosaic string,inferred
+燈箱,modal,type,,colloquial; no Mosaic string,inferred
+下拉式選單,dropdown|dropdown-wide,type,openOn hover for a desktop menu,mosaic 1.0.12 Languages/dist/mosaic-zh_TW-AppMosaicEditor.json,documented
+導覽列,navbar,type,,mosaic 1.0.12 Languages/dist/mosaic-zh_TW-AppMosaicEditor.json,documented
+選單,menu|menu-link|wp-menu,type,site menus: references/design-system.md,colloquial; no Mosaic string,inferred
+漢堡選單,navbar|modal,type,phone menu = navbar or a modal drawer; there is no off-canvas node,colloquial; no Mosaic string,inferred
+輪播,slider,type,nest as default-children requires; bare slider is unsafe,mosaic 1.0.12 Languages/dist/mosaic-zh_TW-AppMosaicEditor.json,documented
+表單,form|form-wrapper,type,,mosaic 1.0.12 Languages/dist/mosaic-zh_TW-AppMosaicEditor.json,documented
+選取,select,type,1.0.12 Select: select > select-toggle + select-options > select-option; the .po uses 選取 for the shared msgid Select,mosaic 1.0.12 Languages/dist/mosaic-zh_TW-AppMosaicEditor.json,documented
+下拉欄位,select,type,1.0.12 Select (select-input is gone),colloquial; no Mosaic string,inferred
+影片,video|youtube|vimeo,type,,mosaic 1.0.12 Languages/dist/mosaic-zh_TW-AppMosaicEditor.json,documented
+地圖,googlemaps|openstreetmap,type,,mosaic 1.0.12 Languages/dist/mosaic-zh_TW-AppMosaicEditor.json,documented
+容器,div|section,type,section arrives with 80px top and bottom padding,mosaic 1.0.12 Languages/dist/mosaic-zh_TW-AppMosaicEditor.json,documented
+區段,section,type,,mosaic 1.0.12 Languages/dist/mosaic-zh_TW-AppMosaicEditor.json,documented
+清單,list|list-item,type,,colloquial; no Mosaic string,inferred
+元件,component-internal|component-instance,type,a spec node with "component" becomes an instance (references/design-system.md),mosaic 1.0.12 Languages/dist/mosaic-zh_TW-AppMosaicEditor.json,documented
+迴圈,loop,type,local-context loopSource is @VAR('post/<loop>'),mosaic 1.0.12 Languages/dist/mosaic-zh_TW-AppMosaicEditor.json,documented
+程式碼,code,type,last resort; a code node's content is a template (@media( kills the page),colloquial; no Mosaic string,inferred
+懸停,hover,state,designer term (Mosaic 1.0.12 ships 游標暫留),zh_TW designer glossary 2026-11-05,house-style
+游標暫留,hover,state,Mosaic's shipped zh_TW for Hover,mosaic 1.0.12 Languages/dist/mosaic-zh_TW-AppMosaicEditor.json,documented
+滑鼠移入,hover,state,,colloquial; no Mosaic string,inferred
+聚焦,focus,state,,mosaic 1.0.12 Languages/dist/mosaic-zh_TW-AppMosaicEditor.json,documented
+作用中,active,state,state ids like ___tab--active / ___slide--active,mosaic 1.0.12 Languages/dist/mosaic-zh_TW-AppMosaicEditor.json,documented
+展開,opened,state,___accordion-item--opened / ___dropdown--opened,colloquial; no Mosaic string,inferred
+斷點,breakpoint,concept,style keys _ (desktop) / _t (tablet) / _m (mobile): references/responsive.md; designer term,zh_TW designer glossary 2026-11-05,house-style
+中斷點,breakpoint,concept,Mosaic's shipped zh_TW for Breakpoint: references/responsive.md,mosaic 1.0.12 Languages/dist/mosaic-zh_TW-AppMosaicEditor.json,documented
+響應式,responsive,concept,_t / _m style keys; verify with verify_rwd.py and audit_mobile.py (references/responsive.md),colloquial; no Mosaic string,inferred
+RWD,responsive,concept,_t / _m style keys; verify with verify_rwd.py and audit_mobile.py (references/responsive.md),colloquial; no Mosaic string,inferred
+手機版,mobile,concept,the _m style key (references/responsive.md),colloquial; no Mosaic string,inferred
+平板,tablet,concept,the _t style key (references/responsive.md),colloquial; no Mosaic string,inferred
+母版,master,concept,header/footer shell; build_site.py makes one per site,mosaic 1.0.12 Languages/dist/mosaic-zh_TW-AppMosaicEditor.json,documented
+範本,template,concept,mo.py routes --grep template; references/templates-and-conditions.md,mosaic 1.0.12 Languages/dist/mosaic-zh_TW-AppMosaicEditor.json,documented
+變體,variant,concept,mo.py classes; theme-global element classes (references/design-system.md),mosaic 1.0.12 Languages/dist/mosaic-zh_TW-AppMosaicEditor.json,documented
+類別,class,concept,variants and universal classes: mo.py classes,mosaic 1.0.12 Languages/dist/mosaic-zh_TW-AppMosaicEditor.json,documented
+變數,variable,concept,collection variables = design tokens; {"token": "--x"} in a spec (references/design-system.md),mosaic 1.0.12 Languages/dist/mosaic-zh_TW-AppMosaicEditor.json,documented
+集合,collection,concept,collection of variables; modes for dark/light (references/design-system.md),mosaic 1.0.12 Languages/dist/mosaic-zh_TW-AppMosaicEditor.json,documented
+模式,mode,concept,a second mode on the colour collection = dark/light (references/design-system.md),mosaic 1.0.12 Languages/dist/mosaic-zh_TW-AppMosaicEditor.json,documented
+互動,interaction,concept,mo.py interactions; build with tools/interactions.py (references/interactions.md),mosaic 1.0.12 Languages/dist/mosaic-zh_TW-AppMosaicEditor.json,documented
+動畫,interaction,concept,animations are interactions (tools/interactions.py); never @keyframes in a code node,colloquial; no Mosaic string,inferred
+條件,condition,concept,mo.py conditions; references/templates-and-conditions.md,mosaic 1.0.12 Languages/dist/mosaic-zh_TW-AppMosaicEditor.json,documented
+覆寫,override,concept,component instance overrides (references/design-system.md),zh_TW designer glossary 2026-11-05,house-style
+佈景,theme,concept,move a theme: theme_zip.py (Mosaic's ZIP) or theme_export.php / theme_import.php (references/building.md),colloquial; no Mosaic string,inferred
+主題,theme,concept,move a theme: theme_zip.py (Mosaic's ZIP) or theme_export.php / theme_import.php (references/building.md),colloquial; no Mosaic string,inferred
+動態內容,dynamic,concept,@VAR() values: mo.py vars (references/dynamic-content.md),colloquial; no Mosaic string,inferred
+自訂欄位,custom field,concept,@VAR('post/meta_<key>'); run tools/list_fields.php (references/custom-fields.md),colloquial; no Mosaic string,inferred
+深色模式,mode,concept,dark/light = a second mode on the colour collection (references/design-system.md),colloquial; no Mosaic string,inferred
