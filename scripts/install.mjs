@@ -242,7 +242,7 @@ function walkFiles(dir) {
   return out;
 }
 
-function copySection(sec, dstRoot, force) {
+function copySection(sec, dstRoot, force, prune = true) {
   // Upgrades MUST delete what the previous version left behind: a stale, wrong
   // dataset sitting next to the right one is worse than no installer.
   const srcPath = path.join(ROOT, sec);
@@ -260,7 +260,7 @@ function copySection(sec, dstRoot, force) {
   }
   let pruned = 0;
   const secDir = path.join(dstRoot, sec);
-  if (fs.existsSync(secDir)) {
+  if (prune && fs.existsSync(secDir)) {
     for (const f of walkFiles(secDir)) {
       if (!keep.has(path.resolve(f))) { fs.unlinkSync(f); pruned++; }
     }
@@ -277,7 +277,7 @@ async function installFull(cfg, root, force, dry) {
   const content = buildFrontmatter(cfg.frontmatter) + readSkillBody();
   const plan = { file, size: content.length, sections: [] };
   if (dry) {
-    for (const s of ["references", "tools", "data", "sites"]) if (cfg.sections?.[s]) plan.sections.push(s);
+    for (const s of ["references", "tools", "data", "sites", "evals", "scripts"]) if (cfg.sections?.[s]) plan.sections.push(s);
     return plan;
   }
   await step("寫入 SKILL.md", () => {
@@ -285,10 +285,12 @@ async function installFull(cfg, root, force, dry) {
     if (fs.existsSync(file) && !force) die(`Refusing to overwrite ${file} - pass --force.`);
     fs.writeFileSync(file, content);
   });
-  for (const s of ["references", "tools", "data", "sites"]) {
+  for (const s of ["references", "tools", "data", "sites", "evals", "scripts"]) {
     if (!cfg.sections?.[s]) continue;
     await step(`複製 ${s}/`, () => {
-      const [n, pruned] = copySection(s, dir, force);
+      // evals/ is copied without pruning: an installed copy may hold eval cases
+      // of its own, and the skill's behaviour does not depend on stale ones.
+      const [n, pruned] = copySection(s, dir, force, s !== "evals");
       plan.sections.push(`${s} (${n} files${pruned ? `, ${pruned} stale removed` : ""})`);
     });
   }
