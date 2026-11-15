@@ -1,0 +1,365 @@
+#!/usr/bin/env python3
+"""test_mosaic.py - offline self-test for the skill (skill SOP item 8).
+
+    python tools/test_mosaic.py          # exit 1 on any failure
+
+No network, no site, no third-party packages. Covers:
+  - mo.py: the front door answers, exits 1 on unsafe / unknown, Chinese terms resolve
+  - data/terms-zh.csv: every row sourced, every English target exists in the data
+  - build_page: a spec flattens to the editor's shape and unsafe input is refused
+  - build_page / build_site: the public signatures em925 imports are unchanged
+  - SKILL.md: size, fixed headings, every number claimed (check_numbers), links resolve
+  - references/data-files.md: every row count matches its CSV
+  - data/pending.csv exists with its columns
+
+The browser verifiers (tools/verify_*.py) need a live site and playwright and are
+not run here; see SKILL.md ## Verify.
+"""
+from __future__ import annotations
+
+import csv
+import inspect
+import json
+import os
+import re
+import subprocess
+import sys
+import unittest
+
+HERE = os.path.dirname(os.path.abspath(__file__))
+ROOT = os.path.dirname(HERE)
+DATA = os.path.join(ROOT, "data")
+sys.path.insert(0, HERE)
+
+for _s in (sys.stdout, sys.stderr):
+    if hasattr(_s, "reconfigure"):
+        _s.reconfigure(encoding="utf-8", errors="replace")
+
+
+def mo(*args):
+    r = subprocess.run([sys.executable, os.path.join(HERE, "mo.py"), *args],
+                       capture_output=True, text=True, encoding="utf-8")
+    return r.returncode, r.stdout + r.stderr
+
+
+def rows(name):
+    with open(os.path.join(DATA, name), encoding="utf-8", newline="") as fh:
+        return list(csv.DictReader(fh))
+
+
+def read(rel):
+    with open(os.path.join(ROOT, rel), encoding="utf-8") as fh:
+        return fh.read()
+
+
+class MoQueries(unittest.TestCase):
+    def test_stats(self):
+        code, out = mo("--json", "stats")
+        self.assertEqual(code, 0, out)
+        s = json.loads(out)
+        self.assertEqual(s["node_types"], len(rows("node-types.csv")))
+        self.assertEqual(s["node_property_declarations"], len(rows("node-properties.csv")))
+        self.assertEqual(s["node_properties"], len(rows("node-property-verification.csv")))
+        self.assertIn("accordion-content", s["unsafe_types"])
+
+    def test_stats_explains_declared_vs_probed(self):
+        code, out = mo("stats")
+        self.assertEqual(code, 0)
+        self.assertIn("declared once per owning data class", out)
+
+    def test_type_leads_with_verdict(self):
+        code, out = mo("--json", "type", "accordion-content")
+        self.assertEqual(code, 0, out)
+        rec = json.loads(out)
+        self.assertEqual(rec["outcome"], "BROKE_PAGE")
+        self.assertFalse(rec["safe_to_commit"])
+
+    def test_check_exit_codes(self):
+        self.assertEqual(mo("check", "div", "text", "button")[0], 0)
+        self.assertEqual(mo("check", "accordion-content")[0], 1)
+        self.assertNotEqual(mo("check", "no-such-type")[0], 0)
+
+    def test_select_split_1012(self):
+        code, out = mo("--json", "placement", "select")
+        self.assertEqual(code, 0, out)
+        self.assertNotIn("select-input", {r["type"] for r in rows("node-types.csv")})
+
+    def test_css_reverse_lookup(self):
+        code, out = mo("css", "border-radius")
+        self.assertEqual(code, 0)
+        self.assertIn("borderRadius", out)
+
+    def test_params(self):
+        code, out = mo("--json", "params", "text")
+        self.assertEqual(code, 0, out)
+        self.assertEqual(json.loads(out)["type"], "text")
+
+
+class ChineseTerms(unittest.TestCase):
+    def test_css_padding_in_chinese(self):
+        code, out = mo("css", "內距")
+        self.assertEqual(code, 0, out)
+        for p in ("paddingTop", "paddingRight", "paddingBottom", "paddingLeft"):
+            self.assertIn(p, out)
+
+    def test_shipped_and_designer_terms_agree(self):
+        self.assertEqual(mo("css", "內距")[1], mo("css", "邊框間距")[1])
+        self.assertEqual(mo("css", "外距")[1], mo("css", "邊界")[1])
+
+    def test_state_hover(self):
+        code, out = mo("states", "--grep", "懸停")
+        self.assertEqual(code, 0)
+        self.assertIn("hover", out)
+
+    def test_type_by_chinese_name(self):
+        code, out = mo("--json", "type", "摺疊面板")
+        self.assertEqual(code, 0, out)
+        self.assertEqual(json.loads(out)["type"], "accordion")
+
+    def test_ambiguous_type_refused(self):
+        code, out = mo("type", "彈窗")
+        self.assertNotEqual(code, 0)
+        self.assertIn("modal", out)
+
+    def test_unmapped_word_points_at_pending(self):
+        code, out = mo("css", "完全沒有這個詞")
+        self.assertEqual(code, 1)
+        self.assertIn("pending.csv", out)
+
+    def test_wrong_kind_says_so(self):
+        code, out = mo("css", "按鈕")
+        self.assertEqual(code, 1)
+        self.assertIn("type term", out)
+
+    def test_terms_command(self):
+        code, out = mo("--json", "terms", "斷點")
+        self.assertEqual(code, 0, out)
+        self.assertEqual(json.loads(out)[0]["en"], "breakpoint")
+
+
+class TermsTable(unittest.TestCase):
+    TRUST = {"measured", "documented", "inferred", "house-style"}
+
+    @classmethod
+    def setUpClass(cls):
+        cls.terms = rows("terms-zh.csv")
+        cls.types = {r["type"] for r in rows("node-types.csv")}
+        cls.states = [r["state"] for r in rows("style-states.csv")]
+        cls.css = [(r["css_property"] + " " + r["property"]).lower()
+                   for r in rows("style-verification.csv")]
+
+    def test_columns_and_provenance(self):
+        for r in self.terms:
+            self.assertEqual(set(r), {"zh", "en", "kind", "note", "source", "trust"}, r)
+            self.assertTrue(r["zh"] and r["en"] and r["source"], r)
+            self.assertIn(r["trust"], self.TRUST, r)
+            self.assertIn(r["kind"], {"css", "type", "state", "concept"}, r)
+
+    def test_no_duplicate_words(self):
+        zh = [r["zh"] for r in self.terms]
+        self.assertEqual(len(zh), len(set(zh)))
+
+    def test_every_target_exists(self):
+        for r in self.terms:
+            for en in r["en"].split("|"):
+                if r["kind"] == "type":
+                    self.assertIn(en, self.types, r["zh"])
+                elif r["kind"] == "state":
+                    self.assertTrue(any(en in s for s in self.states), r["zh"])
+                elif r["kind"] == "css":
+                    self.assertTrue(any(en in c for c in self.css), r["zh"])
+
+    def test_designer_glossary_present(self):
+        by = {r["zh"]: r for r in self.terms}
+        for zh, en in (("內距", "padding"), ("外距", "margin"), ("懸停", "hover"), ("斷點", "breakpoint")):
+            self.assertEqual(by[zh]["en"], en)
+            self.assertEqual(by[zh]["trust"], "house-style")
+
+
+class BuildPageOffline(unittest.TestCase):
+    @classmethod
+    def setUpClass(cls):
+        import build_page
+        cls.bp = build_page
+        cls.surface = build_page.Surface()
+        build_page.VAR_IDS["--ink"] = "11111111-1111-1111-1111-111111111111"
+
+    def flat(self, tree):
+        return self.bp.flatten(self.bp.refresh_node_ids(tree), "BODY", "MASTER",
+                               self.surface, False, parent_type="body")
+
+    def skeleton_tree(self):
+        code, out = mo("skeleton")
+        self.assertEqual(code, 0)
+        return json.loads(out)["pages"][0]["tree"]
+
+    def test_skeleton_flattens(self):
+        recs = self.flat(self.skeleton_tree())
+        self.assertEqual([r["type"] for r in recs], ["div", "text", "wysiwyg-text"])
+        for r in recs:
+            self.assertEqual(r["documentType"], "master")
+            self.assertEqual(r["documentID"], "MASTER")
+            self.assertIsInstance(r["ordering"], str)       # fractional index, never a number
+        self.assertEqual(recs[0]["parentID"], "BODY")
+        self.assertEqual(recs[1]["parentID"], recs[0]["ID"])
+        style = recs[1]["data"]["style"]["states"]["&"]
+        self.assertEqual(style["_"]["color"], {"var": "11111111-1111-1111-1111-111111111111"})
+        self.assertIn("_m", style)
+
+    def test_button_text_wrapped_like_the_editor(self):
+        recs = self.flat({"type": "div", "children": [
+            {"type": "button", "data": {"url": {"v": "/contact/"}}, "text": "Go"}]})
+        types = [r["type"] for r in recs]
+        self.assertEqual(types, ["div", "button", "text", "wysiwyg-text"])
+        self.assertEqual(recs[2]["data"]["style"]["variant"], self.bp.INHERITED_TEXT_VARIANT)
+        self.assertEqual(recs[3]["parentID"], recs[2]["ID"])
+
+    def test_sibling_ordering(self):
+        recs = self.flat({"type": "div", "children": [{"type": "div"}, {"type": "div"}, {"type": "div"}]})
+        self.assertEqual([r["ordering"] for r in recs[1:]], ["a0", "a1", "a2"])
+
+    def test_pinned_ids_are_refreshed(self):
+        tree = {"type": "div", "nodeID": "pin-a", "children": [{"type": "div", "nodeID": "pin-b"}]}
+        a = self.flat(json.loads(json.dumps(tree)))
+        b = self.flat(json.loads(json.dumps(tree)))
+        self.assertNotEqual(a[0]["ID"], "pin-a")
+        self.assertNotEqual(a[0]["ID"], b[0]["ID"])
+
+    def assertRefused(self, tree, needle):
+        with self.assertRaises(SystemExit) as cm:
+            self.flat(tree)
+        self.assertIn(needle, str(cm.exception))
+
+    def test_refuses_unsafe_placement(self):
+        self.assertRefused({"type": "div", "children": [{"type": "accordion-content"}]}, "BROKE_PAGE")
+
+    def test_refuses_unknown_type(self):
+        self.assertRefused({"type": "nosuch"}, "unknown node type")
+
+    def test_refuses_unknown_style_key(self):
+        self.assertRefused({"type": "div", "style": {"&": {"_": {"noSuchProp": "1"}}}}, "not a supported style property")
+
+    def test_refuses_out_of_enum(self):
+        self.assertRefused({"type": "div", "style": {"&": {"_": {"whiteSpace": "pre-line"}}}}, "pre-line")
+
+    def test_refuses_media_without_space(self):
+        self.assertRefused({"type": "code", "data": {"content": "@media(max-width:1px){}"}}, "@media(")
+
+    def test_refuses_tags_in_text_run(self):
+        self.assertRefused({"type": "text", "text": "a<b>c</b>"}, "<b>")
+
+
+class PublicInterface(unittest.TestCase):
+    """em925's deploy tool imports build_page and build_site from the global
+    install. Their names and parameters are a contract: change one and this fails."""
+
+    EXPECTED = {
+        "build_page": {
+            "build": "(client, cfg, spec, force)",
+            "flatten": "(node, parent_id, master_id, surface, force, ordering='a0', parent_type=None, out=None, ancestors=())",
+            "refresh_node_ids": "(tree)",
+            "wrap_text_runs": "(node_type, children)",
+            "to_style": "(spec_style)",
+            "expand_shorthands": "(props)",
+            "theme_records": "(spec, doc, surface)",
+            "create_master": "(client, name)",
+            "bind_template": "(client, cfg, master_id, page_id)",
+            "ordering_for": "(index)",
+            "load_csv": "(name)",
+        },
+        "build_site": {
+            "main": "()",
+            "build_shell": "(client, cfg, site, surface)",
+            "fill_shell": "(client, cfg, site, surface, master_id, header_id, footer_id, comps)",
+            "ensure_components": "(client, cfg, site, surface)",
+            "apply_overrides": "(client, instance, key, uses, comps, envelope='templateDocumentInstance')",
+            "bind_page": "(client, cfg, master_id, slug, post_id)",
+            "build_page_document": "(client, cfg, master_id, template_id, tree, surface)",
+            "resolve_components": "(node, comps)",
+            "cache_check": "(url, _fresh_bytes=None)",
+            "commit": "(client, instance, doc, payload, what)",
+        },
+    }
+
+    def test_signatures_unchanged(self):
+        import importlib
+        for mod, funcs in self.EXPECTED.items():
+            m = importlib.import_module(mod)
+            for name, sig in funcs.items():
+                self.assertTrue(hasattr(m, name), "%s.%s is gone" % (mod, name))
+                self.assertEqual(str(inspect.signature(getattr(m, name))), sig, "%s.%s" % (mod, name))
+        import build_page
+        self.assertTrue(hasattr(build_page, "Surface"))
+
+
+class SkillDoc(unittest.TestCase):
+    HEADINGS = ["## Sources", "## Usage", "## Routing", "## Tasks", "## Verify", "## Maintenance"]
+
+    def test_size(self):
+        self.assertLessEqual(os.path.getsize(os.path.join(ROOT, "SKILL.md")), 20 * 1024)
+
+    def test_headings_in_order(self):
+        text = read("SKILL.md")
+        pos = [text.find("\n" + h + "\n") for h in self.HEADINGS]
+        self.assertTrue(all(p > 0 for p in pos), pos)
+        self.assertEqual(pos, sorted(pos))
+
+    def test_iron_rule_heads_routing(self):
+        text = read("SKILL.md")
+        routing = text[text.index("## Routing"):]
+        first = routing.split("\n\n")[1]
+        self.assertIn("never answer from memory", first)
+        self.assertIn("data/pending.csv", first)
+
+    def test_frontmatter(self):
+        fm = read("SKILL.md").split("---", 2)[1]
+        self.assertRegex(fm, r"(?m)^user-invocable: true$")
+        self.assertRegex(fm, r"(?m)^description: \|$")       # install.mjs needs the block form
+        self.assertRegex(fm, r"(?m)^  version: ")             # under metadata (check-release)
+
+    def test_numbers_claimed(self):
+        import check_numbers
+        problems, _ = check_numbers.check()
+        self.assertEqual(problems, [])
+
+    def test_links_resolve(self):
+        text = read("SKILL.md")
+        for target in re.findall(r"\]\(([^)#]+)\)", text):
+            if target.startswith("http"):
+                continue
+            self.assertTrue(os.path.exists(os.path.join(ROOT, target)), target)
+
+    def test_referenced_tools_exist(self):
+        text = read("SKILL.md")
+        for name in set(re.findall(r"\b([a-z_]+\.(?:py|php))\b", text)):
+            hits = [os.path.join(d, name) for d in ("tools", "sites", "evals")
+                    if os.path.exists(os.path.join(ROOT, d, name))]
+            self.assertTrue(hits, name)
+
+
+class DataFiles(unittest.TestCase):
+    def test_row_counts_match(self):
+        text = read("references/data-files.md")
+        checked = 0
+        for path, n in re.findall(r"^\| `(data/[^`]+)` \| (\d+) +\|", text, re.M):
+            full = os.path.join(ROOT, path)
+            if os.path.isdir(full):
+                got = sum(len(rows(os.path.join(path[5:], f))) for f in os.listdir(full) if f.endswith(".csv"))
+            else:
+                got = len(rows(path[5:]))
+            self.assertEqual(got, int(n), path)
+            checked += 1
+        self.assertGreater(checked, 40)
+
+    def test_pending_columns(self):
+        r = rows("pending.csv")
+        self.assertTrue(r)
+        self.assertEqual(set(r[0]), {"date", "question", "why_not_found", "asked_by", "status"})
+
+
+if __name__ == "__main__":
+    result = unittest.main(exit=False, verbosity=1).result
+    n = result.testsRun
+    bad = len(result.failures) + len(result.errors)
+    print("\n%d/%d passed" % (n - bad, n))
+    sys.exit(1 if bad else 0)
