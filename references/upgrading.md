@@ -167,7 +167,7 @@ upgrade the migration had rewritten every row it owns, the page served with HTTP
 enlarge, because the class the selector named no longer exists. Nothing in the
 plugin reports that; `verify_loop.py` OPENS (186x161 → 1920x900) is what saw it.
 The selector now reads `m-accordion-item--opened`, and the lesson is in
-`SKILL.md`: any CSS that names an emitted class is coupled to the plugin version.
+`references/facts.md`: any CSS that names an emitted class is coupled to the plugin version.
 
 ## What did not change
 
@@ -350,7 +350,7 @@ the background** (`MosaicUpgradeLayer/BackgroundUpgrade`); nothing had to be dri
 `wp plugin list` printed `1.0.11` once, straight after the update, before the
 header read back as 1.0.12 - check `Version:` in `mosaic.php`, not the first list.
 Backups: `wp db export ~/private_html/pre-1012.sql` and a copy of the old folder.
-No duplicate roots afterwards (the health SQL in SKILL.md: 0 groups, 155 roots).
+No duplicate roots afterwards (the health SQL in references/facts.md: 0 groups, 155 roots).
 
 **What the migration rewrote: the Select split** (`Upgrade-1.0.12.php`, NEXT-4757,
 written for 1.0.8 and carried forward). The native `select-input` / `select-option`

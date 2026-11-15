@@ -1,0 +1,4 @@
+# Maintainer and browser-verifier dependencies only. The user path (mo.py,
+# build_page.py, build_site.py, test_mosaic.py) is Python standard library.
+playwright      # tools/verify_*.py, audit_mobile.py, capture tools (then: playwright install chromium)
+tiktoken        # tools/benchmark_tokens.py

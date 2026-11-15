@@ -95,7 +95,7 @@ adds the root's names and data first, then each level). A sub class's emitted na
 joins every level with `--` (`card--wide--dark`), so only a root class renders under
 exactly the name you gave it.
 The emitted class is the `name` (sanitized, any `m-` prefix dropped - the
-class-name grammar is in SKILL.md), and its CSS is printed only
+class-name grammar is in references/facts.md), and its CSS is printed only
 on a page where some node uses it. `status: "delete"` removes one - unlike a variant,
 a universal class is not catalog-backed.
 

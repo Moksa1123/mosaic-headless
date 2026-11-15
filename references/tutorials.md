@@ -6,7 +6,7 @@ integrations - all of them listed in the site's `tutorial-sitemap.xml`; the inde
 pages load the list with JavaScript, so a plain fetch of them finds only four).
 **None of the 24 uses custom code.** Several say so outright ("without writing any
 JavaScript", "no code required"). That is the bar for this skill too - see "Native
-first" in SKILL.md.
+first" in references/core-rules.md (and the Tasks table in SKILL.md).
 
 Status, per tutorial:
 

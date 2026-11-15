@@ -240,7 +240,7 @@ silently in favour of whichever happens to be last.
 
 ## A declaration can be present, correct, and still wrong
 
-The fourth failure mode in SKILL.md - "wrong value SHAPE, HTTP 200, and the CSS rule
+The fourth failure mode in references/core-rules.md - "wrong value SHAPE, HTTP 200, and the CSS rule
 is simply absent" - has a quieter sibling: the rule is *present*, the value is what
 you asked for, and what the browser does with it is not what you meant.
 

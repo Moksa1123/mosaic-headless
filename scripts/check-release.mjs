@@ -150,12 +150,17 @@ const counts = {
   "data/popover-verification.csv": 37,
   "data/value-coercion-verification.csv": 12,
 };
+// The per-file table moved from SKILL.md to references/data-files.md (skill SOP:
+// SKILL.md holds routing, not data). The claim is now the row in that table.
+const dataFiles = read("references/data-files.md");
 for (const [file, expected] of Object.entries(counts)) {
   if (!fs.existsSync(path.join(ROOT, file))) { fail(`${file} missing`); continue; }
   const n = rows(file);
-  if (n !== expected) fail(`${file} has ${n} rows, SKILL.md claims ${expected}`);
-  if (!skill.includes(String(expected)))
-    fail(`SKILL.md never mentions ${expected}, but ${file} has that many rows`);
+  if (n !== expected) fail(`${file} has ${n} rows, references/data-files.md claims ${expected}`);
+  const shown = file + (fs.statSync(path.join(ROOT, file)).isDirectory() ? "/" : "");
+  if (!dataFiles.includes("| `" + shown + "` | " + expected + " ")
+      && !skill.includes(String(expected)))
+    fail(`neither references/data-files.md nor SKILL.md states ${expected} for ${file}`);
 }
 
 // a sweep whose own blind spots were folded into a pass rate is the failure this
@@ -264,8 +269,8 @@ if ((batch.match(/,PASS,/g) || []).length < 10)
 // claim in SKILL.md go stale.
 {
   const cases = fs.readdirSync(path.join(ROOT, "evals"), { withFileTypes: true })
-    .filter(d => d.isDirectory() && d.name !== "results").map(d => d.name);
-  if (cases.length < 5) fail(`evals/ has ${cases.length} cases, SKILL.md claims five`);
+    .filter(d => d.isDirectory() && !["results", "runs"].includes(d.name)).map(d => d.name);
+  if (cases.length < 5) fail(`evals/ has ${cases.length} plugin-eval cases, the floor is five`);
   for (const c of cases)
     if (!fs.existsSync(path.join(ROOT, "evals", c, "graders", "criteria.md")))
       fail(`evals/${c} has no graders/criteria.md`);
