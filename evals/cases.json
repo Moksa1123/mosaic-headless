@@ -1,0 +1,117 @@
+{
+  "about": "mosaic-headless 真題。考模型記不住的東西：Mosaic 1.0.10-1.0.12 的新結構與改名、量測出來的失敗方式、只有實測才知道的值的形狀。評分：must 每一組都要命中（組內任一正規式命中即可），全部命中才算對。沒 skill 也答對的題沒有鑑別度（SOP 6-4），標 retired 換題。答案出處都是 mo.py 查詢或 references/ 的實測紀錄（Mosaic Pro 1.0.12 測試站）。",
+  "cases": [
+    {
+      "id": "select-split-1012",
+      "question": "Mosaic Pro 1.0.12 把表單的下拉選單改成可以自己組的 Select。要用哪些 node type、怎麼巢狀？舊的哪個 type 已經不存在？",
+      "must": [["select-toggle"], ["select-options"], ["select-option(?!s)"], ["select-input"]],
+      "source": "python tools/mo.py placement select; references/upgrading.md (1.0.11 -> 1.0.12)",
+      "trust": "measured"
+    },
+    {
+      "id": "scrolldepth-slot-1010",
+      "question": "Mosaic 1.0.10 起，scrollDepth 觸發器的動作要放在哪個 slot 名稱底下？如果還放在舊的 slot 名稱會怎樣？",
+      "must": [["\\breached\\b"], ["never runs|不會執行|不會跑|永遠不|沒有作用|不執行|stored|kept|保留"]],
+      "source": "references/facts.md (scrollDepth's action slot)",
+      "trust": "measured"
+    },
+    {
+      "id": "popover-trigger-slots",
+      "question": "Mosaic 1.0.10 的 popover（浮動框）作為互動觸發器時，有哪三個 slot？做三步驟導覽時，下一步應該掛在哪個 slot？",
+      "must": [["\\bshow\\b"], ["beforeClose"], ["afterClose"]],
+      "source": "references/facts.md; data/popover-verification.csv",
+      "trust": "measured"
+    },
+    {
+      "id": "popover-flipped-state",
+      "question": "Mosaic popover 設了 keepInView，空間不夠被翻到另一側時，要用哪個 style state ID 才能幫翻轉後的樣子另外設樣式？",
+      "must": [["_{2,3}popover--flipped"]],
+      "source": "python tools/mo.py states --grep popover",
+      "trust": "measured"
+    },
+    {
+      "id": "shorthand-interaction-types",
+      "question": "Mosaic 的 modal 可以用 interactionShorthand 直接掛觸發器。哪幾種 interaction type 可以當 shorthand？用其他種會怎樣？",
+      "must": [["pageLoad"], ["exitIntent"], ["scrollDepth"]],
+      "source": "references/facts.md (InteractionTypesManager::getShorthandInteractionTypes)",
+      "trust": "documented"
+    },
+    {
+      "id": "interaction-value-shape",
+      "question": "用 headless 方式寫 Mosaic interaction 動畫的 keyframe 值時，initial 和 properties 的 key 要用什麼？值要寫成什麼型別？",
+      "must": [["uuid"], ["meta"], ["string|字串|\"80%\"|單位"]],
+      "source": "references/interactions.md; tools/interactions.py",
+      "trust": "measured"
+    },
+    {
+      "id": "wysiwyg-text-escape-1011",
+      "question": "在 Mosaic 1.0.11 的 wysiwyg-text 文字段落裡寫 A<strong>B</strong>，前台會顯示什麼？要做行內粗體或換行，正確做法是什麼？",
+      "must": [["literal|escap|&lt;|跳脫|原樣|字面|直接顯示|印出"], ["wysiwyg-span|format"]],
+      "source": "references/facts.md (A wysiwyg-text run prints no markup since 1.0.11)",
+      "trust": "measured"
+    },
+    {
+      "id": "pro-only-types-1011",
+      "question": "Mosaic 1.0.11 調整了 Free/Pro 分界之後，哪些 node type 需要 Pro？（列出 type 名稱）",
+      "must": [["\\bcode\\b"], ["\\bmodal\\b"], ["popover"], ["modal-overlay"], ["modal-window"]],
+      "source": "python tools/mo.py types --edition pro",
+      "trust": "documented"
+    },
+    {
+      "id": "url-capable-types",
+      "question": "Mosaic 裡只有哪幾種 node type 的 url 屬性真的會輸出 <a href>？把 url 放在 image 或 text 上會怎樣？",
+      "must": [["\\bbutton\\b"], ["menu-link"], ["wysiwyg-link"], ["dropdown-toggle"]],
+      "source": "references/facts.md (Only four types take a url)",
+      "trust": "measured"
+    },
+    {
+      "id": "section-default-padding",
+      "question": "Mosaic 的 section node 如果完全不設 padding，前台量到上下各有多少內距？",
+      "must": [["(?<!\\d)80 ?px"]],
+      "source": "references/facts.md (section arrives with 80px)",
+      "trust": "measured"
+    },
+    {
+      "id": "unsafe-type-count",
+      "question": "在 mosaic-headless 的實測裡（Mosaic 1.0.11/1.0.12），單獨提交會讓請求失敗或讓整頁壞掉、被列為不安全（unsafe to commit）的 node type 有幾個？",
+      "must": [["(?<!\\d)27(?!\\d)"]],
+      "source": "python tools/mo.py stats",
+      "trust": "measured"
+    },
+    {
+      "id": "modal-open-1010",
+      "question": "Mosaic 1.0.10 把 modal 改成 Popover API 之後，用 JavaScript 要怎麼判斷 modal 目前是開著的？dialog.open 還能用嗎？",
+      "must": [[":popover-open|data-mosaic-dialog-state"], ["false|不能|不可|沒用|無效|永遠"]],
+      "source": "references/facts.md (Since 1.0.10 the modal is a Popover-API host)",
+      "trust": "measured"
+    },
+    {
+      "id": "custom-declarations-dvh",
+      "question": "在 Mosaic 的 customDeclarations 裡寫 height: 100dvh，同一個區塊其他宣告會怎樣？",
+      "must": [["whole|entire|整個|全部|all|其他.{0,8}(也|一起|都)"], ["drop|丟|消失|不見|失效|無效|捨棄|移除|不會輸出"]],
+      "source": "references/facts.md (customDeclarations is all or nothing)",
+      "trust": "measured"
+    },
+    {
+      "id": "accordion-content-bare",
+      "question": "把 Mosaic 的 accordion-content 直接放在一般 div 底下提交，會發生什麼事？正確要放在哪裡？",
+      "must": [["54"], ["accordion-item"]],
+      "source": "python tools/mo.py type accordion-content",
+      "trust": "measured"
+    },
+    {
+      "id": "local-loop-source",
+      "question": "Mosaic 的 local-context loop，loopSource 應該怎麼寫？為什麼不能用 @LOOP()？",
+      "must": [["@VAR\\(\\s*'post/"], ["editor|編輯器"]],
+      "source": "references/facts.md (A local-context loop's loopSource)",
+      "trust": "measured"
+    },
+    {
+      "id": "button-text-editable",
+      "question": "headless 建 Mosaic 按鈕時，按鈕文字要放在什麼結構裡，客戶在編輯器才能雙擊編輯文字？",
+      "must": [["\\btext\\b"], ["Inherited text|6381b2f3"]],
+      "source": "references/facts.md (A button's words go in a text node); tools/build_page.py wrap_text_runs",
+      "trust": "measured"
+    }
+  ]
+}

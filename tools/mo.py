@@ -676,8 +676,9 @@ def cmd_interactions(a):
     emit(out, lambda: (
         table(["id", "family", "label"],
               [[r["id"], r["family"], r["label"]] for r in out]),
-        print("\nTrigger and timing reach the browser; per-keyframe property binding "
-              "is UNSOLVED - see references/interactions.md.")))
+        print("\nValues bind only in the editor's stored shape (meta-uuid keys, CSS-string "
+              "values): build them with tools/interactions.py, never by hand - "
+              "references/interactions.md.")))
 
 
 def cmd_conditions(a):
