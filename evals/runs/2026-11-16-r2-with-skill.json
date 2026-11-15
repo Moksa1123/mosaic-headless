@@ -1,0 +1,9 @@
+{
+  "meta": {"date": "2026-11-16", "model": "claude-opus-5-5", "how": "subagent 讀 SKILL.md、用 mo.py 與 references 查"},
+  "answers": {
+    "no-template-status": "HTTP 406。406 是 Mosaic 的「沒有範本對應」：FrontendRenderer 接到 TemplateNotFoundException 時呼叫 status_header(406)，說明文字只印給管理員看，所以未登入訪客拿到的是一個空白頁加上 406 狀態碼，看起來像伺服器出問題。最常踩到的情況：剛 wp theme activate 一個新佈景、還沒建好範本（或建置失敗）時，整站都會是 406。所以驗證要用登出狀態讀頁面。（來源：`mo.py facts visitor` → references/core-rules.md「406 is Mosaic's \"no template matched\"」）",
+    "unprobed-node-props": "`ariaLive` 和 `positioning`。這兩個都只宣告在 `popover` 上，`mo.py prop` 查出來的 verified 都是「not probed」（ariaLive 的值是 off / polite / assertive）。`mo.py stats` 也列出：191 筆探測紀錄涵蓋了 120 個宣告名稱中的 118 個。（來源：SKILL.md Sources 表、`mo.py stats`、`mo.py prop ariaLive`、`mo.py prop positioning`）",
+    "variant-delete": "Variant 不能刪除，只能清空。對 variant 送 `status:\"delete\"`，伺服器會接受但直接忽略，因為 variant 那一列有 catalog 撐著。正確做法是把那一列 commit 回去，內容設成 `{\"states\": {\"&\": {\"_\": {}}}}`，這樣它的 CSS 規則就會消失（在 Heading 2 上實測過）。對照組：universal class 沒有 catalog 撐著，用 `status:\"delete\"` 就真的會刪掉。ID 要用 `name` 去 data/variants.csv 查（用 `mo.py classes --grep Heading`）。（來源：`mo.py facts status` → references/facts.md、references/design-system.md）",
+    "class-name-grammar": "每一段最多 60 個字元。名稱會被整理成 `[a-z0-9_-]` 的段落，段落之間用 `--` 串起來（例如 `m-button--primary--sm`）。保留前綴是 `m-`；段落也不能以 `_` 或數字開頭（`m-` 會被拿掉）。名稱撞到時，系統會自動在後面加 `-2`、`-3` 去重複；emitted name 在同一個佈景內是唯一的（四張表的 `emittedName` 欄位有 unique index），所以兩個 class 不可能是同一個拼法。整理完變成空字串的名稱，會退回成 `class`。整理規則還包括：轉寫成拉丁字母、轉小寫、連續的 `-` 合併，尺寸級距也會統一（`s`→`sm`、`m`→`md`、`l`→`lg`、`xxs`→`2xs`）。（來源：`mo.py facts reserved` → references/facts.md「User class names have a grammar」、references/upgrading.md ClassNameHelper 段落、references/design-system.md）"
+  }
+}

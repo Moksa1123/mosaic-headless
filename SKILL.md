@@ -106,6 +106,7 @@ exits 1 and says to record it.
 | 「動畫」「互動」「捲動到這裡淡入」 | interaction triggers | `mo.py interactions` · `tools/interactions.py` · [interactions.md](references/interactions.md) |
 | 「全站顏色／字型」「深色模式」 | variables, modes, variants | `mo.py classes --grep Heading` · [design-system.md](references/design-system.md) |
 | 「同一塊放好幾頁」 | components | [design-system.md](references/design-system.md) (components) |
+| 「class 命名規則」「刪掉一個變體」 | class grammar, variant rows | `mo.py facts class names` · `mo.py facts variant deleted` · [design-system.md](references/design-system.md) |
 | 「顯示文章標題／自訂欄位」 | `@VAR()` | `mo.py vars --namespace post` · `tools/list_fields.php` |
 | 「只在某些頁顯示」「範本套用規則」 | conditions | `mo.py conditions --grep` · [templates-and-conditions.md](references/templates-and-conditions.md) |
 | 「搬佈景」「匯出匯入」 | theme export / import | [building.md](references/building.md) · `theme_zip.py` |
@@ -115,7 +116,9 @@ exits 1 and says to record it.
 | a word that matches nothing | - | retry in English; still nothing → `data/pending.csv` |
 
 `--json` goes before the subcommand (`mo.py --json type text`). `--grep` is a
-substring match. **Never load `data/*.csv` into context** - query them.
+substring match. `mo.py facts` matches English words in the measured-facts
+text; turn a Chinese word into one with `mo.py terms` first, and try a second
+wording (`visitor`, `status`, `reserved`) before concluding nothing was measured. **Never load `data/*.csv` into context** - query them.
 
 ## Tasks
 
