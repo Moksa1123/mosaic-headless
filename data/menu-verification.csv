@@ -6,7 +6,7 @@ DESKTOP,hover opens the dropdown,PASS,"visible after 58 ms, aria-expanded=true"
 DESKTOP,moving down into the panel keeps it open,PASS,still shown 500 ms after entering the panel
 DESKTOP,leaving closes it,PASS,hidden after 159 ms
 DESKTOP,mega panel opens on hover,PASS,x=0 w=1280 (viewport 1280)
-KEYS,Enter on a toggle that has a url,INFO,navigated to https://mosaic.moksaweb.com/components/
+KEYS,Enter on a toggle that has a url,INFO,navigated to https://example.com/components/
 KEYS,ArrowDown opens it,PASS,"shown=True, focus on ml-dd-toggle"
 KEYS,ArrowDown moves into the links,INFO,focus on ml-dd-toggle
 KEYS,Escape closes it and returns focus,PASS,"shown=False, focus on ml-dd-toggle"

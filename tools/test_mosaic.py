@@ -364,6 +364,22 @@ class DataFiles(unittest.TestCase):
             checked += 1
         self.assertGreater(checked, 40)
 
+    def test_no_demo_host_or_server_ids(self):
+        # the demo site's host and its hosting ids must not ship (Claude directory
+        # review; skill README rules). Built from parts so this file does not match.
+        bad = ["mosaic." + "moksaweb.com", "1469" + "814", "6656" + "199", "159.65." + "134.149"]
+        tracked = subprocess.run(["git", "ls-files", "-z"], cwd=ROOT, capture_output=True,
+                                 text=True).stdout.split("\0")
+        hits = []
+        for rel in filter(None, tracked):
+            path = os.path.join(ROOT, rel)
+            if not os.path.isfile(path) or rel.endswith((".png", ".jpg", ".ico")):
+                continue
+            with open(path, encoding="utf-8", errors="ignore") as fh:
+                text = fh.read()
+            hits += ["%s: %s" % (rel, b) for b in bad if b in text]
+        self.assertEqual(hits, [])
+
     def test_pending_columns(self):
         r = rows("pending.csv")
         self.assertTrue(r)
