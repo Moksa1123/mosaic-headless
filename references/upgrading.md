@@ -407,10 +407,17 @@ those posts have no Mosaic template (`TemplateNotFoundException`).
   content was replaced and `/probe-recipes/` kept serving an older build. Look the
   ID up first.
 
-## 1.0.12 → 1.0.13 (source only, not yet on the live site)
+## 1.0.12 → 1.0.13
 
-Released 2026-11-17. Read from the Pro package and diffed against 1.0.12; nothing
-below has been measured on a live install yet.
+Released 2026-11-17. Read from the Pro package and diffed against 1.0.12.
+
+**On the live site (2026-11-17):** `wp plugin update mosaic` -> "Updated 1 of 1",
+directory permissions normal, `dataVersion` still 1.0.12. Health check over every
+published page, throttled to 1.5 s a page because the host was loaded: 90 of 90
+answered as before (88 × 200, the front page's own permalink 301, checkout 302),
+no page's size moved more than 1.25%, Mosaic markup present on the same pages.
+No duplicate roots before or after (0 groups, 238 roots). The demo verifiers and
+sweeps have not been re-run on 1.0.13 yet.
 
 **No data migration.** `defines.php` says `version 1.0.13`, `dataVersion 1.0.12`.
 Minimums in `defines.json`: PHP 8.2, WordPress 6.9.
