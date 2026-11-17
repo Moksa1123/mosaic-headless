@@ -1,302 +1,123 @@
 # mosaic-headless
 
-[![npm downloads](https://img.shields.io/npm/dt/mosaic-headless?label=npm%20downloads&color=cb3837)](https://www.npmjs.com/package/mosaic-headless)
+直接寫入資料模型來建置和修改 Mosaic Pro（Nextend）WordPress 網站：不開視覺編輯器、不操作 DOM，每個查詢都用正式網站上的實測結果回答。
 
-直接寫入資料模型來建置與修改 [Mosaic Pro](https://mosaicbuilder.com)（Nextend）網站——
-不開視覺編輯器，不碰 DOM。把 Elementor 頁面轉進來。把整個主題搬到另一個站。
-每一項宣稱都在真實站台上量過。
+[![npm](https://img.shields.io/npm/v/mosaic-headless?style=flat-square)](https://www.npmjs.com/package/mosaic-headless)
+[![License: MIT](https://img.shields.io/github/license/Moksa1123/mosaic-headless?style=flat-square)](LICENSE)
 
-*其他語言：[English](README.md) · [日本語](README.ja.md) · [한국어](README.ko.md)*
+[English](README.md) · [日本語](README.ja.md) · [한국어](README.ko.md)
 
----
+> 這是非官方的社群專案，不是 Mosaic Pro 的開發商 Nextend 製作或背書，也和 Nextend 沒有關係。Mosaic Pro 是需授權的第三方軟體，本專案不包含它。
+
+## 功能
+
+Mosaic 把頁面存在自己的資料表裡，一個元素一列，不在 `post_content`。這個 skill 是那套資料模型的實測地圖，加上透過它寫入的工具。
+
+- **查了再寫，不用猜**：`tools/mo.py` 回答 node type、屬性、樣式鍵、狀態叫什麼、值要寫成什麼形狀、能放在哪裡、安不安全。資料涵蓋 134 種 node type、120 個 node 屬性、101 個樣式屬性、60 個樣式狀態，從 Mosaic Pro 1.0.13 抽出，並在正式網站上逐一實測。
+- **中文和口語也查得到**：`mo.py css 內距` 會找到 padding；用語以 Mosaic 自己的正體中文介面為準。
+- **建頁面和整站**：`build_page.py`、`build_site.py` 透過 Mosaic 的 REST 寫入流程提交頁面規格，實測會弄壞頁面的寫法直接拒絕。
+- **檢查實際送出的頁面**：驗證器用 Chromium 讀公開頁面（RWD 規則、計算後樣式、選單、彈出視窗、輪播、表單），不只相信提交成功。
+- **搬移與轉換**：匯出匯入整個佈景、執行 Mosaic 的資料升級、把 Elementor 頁面轉成 Mosaic。
+
+## 適用情境
+
+網站用的是 Mosaic Pro，想不開編輯器就建立或修改頁面、範本、元件、設計變數、彈出視窗、選單或互動，或想確切知道某個 Mosaic 設定的效果時使用。
+
+其他頁面建構器不適用：Elementor 頁面交給 `elementor-headless`，區塊編輯器頁面交給 `gutenberg-headless`，SEO 文章交給 `rankmath-seo-wp`。不處理 WordPress 網站健康檢查、外掛更新或資安。
 
 ## 安裝
 
-```bash
-npx mosaic-headless                          # 互動式：選平台
-npx mosaic-headless claude-code --global     # Claude Code，裝到 ~/.claude/skills/
-npx mosaic-headless cursor --to ./my-project
-npx mosaic-headless --list                   # 全部八個平台
+Claude plugin（Claude Code；上架 Claude 官方目錄後也可以從目錄安裝）：
+
+```
+/plugin install mosaic-headless --marketplace Moksa1123/mosaic-headless
 ```
 
-| 平台 | 裝什麼 | 裝到哪 |
-|---|---|---|
-| Claude Code | 完整技能：SKILL.md + references/ + tools/ + data/ + sites/ | `~/.claude/skills/` 或 `./.claude/skills/` |
-| Codex CLI | 完整技能 | `~/.codex/` |
-| Gemini CLI | 完整技能 | `~/.gemini/` |
-| GitHub Copilot | 完整技能，外加一段附到 `copilot-instructions.md` | `./.github/` |
-| Cursor | 一個內嵌 references 的 `.mdc` 規則檔 | `~/.cursor/rules/` |
-| Windsurf | 一個內嵌 references 的規則檔 | `./.devin/` |
-| Continue | 一個內嵌 references 的規則檔 | `~/.continue/` |
-| Claude.ai | 一個 zip，上傳為專案技能 | 你存的地方 |
-
-每個平台的安裝都由發布閘門對照其模板驗證。工具要跑需要 Python 3 和 Playwright；規則檔類的
-平台拿到的是知識，沒有工具。
-
-**更新不會自己發生。** npm 上有新版，不代表你的 agent 載入的那個資料夾有變；要重跑安裝器並加
-`--force`（不加的話它會拒絕覆蓋你可能改過的 SKILL.md）：
+npx，適用 Claude Code 和其他 AI 開發工具（Cursor、Codex CLI、Gemini CLI、Copilot、Continue、Windsurf、Claude.ai 上傳用的 zip）：
 
 ```bash
 npx mosaic-headless@latest claude-code --global --force
+npx mosaic-headless --list
 ```
 
-
-## 以 Claude plugin 安裝
-
-這個 repo 同時也是一個 Claude plugin：根目錄有 `.claude-plugin/plugin.json`，根目錄的
-`SKILL.md` 就是它唯一的技能。上架到 Claude 目錄之後可以直接從目錄安裝；在那之前，Claude
-Code 可以直接載入 clone 下來的資料夾：
+手動複製：
 
 ```bash
-git clone https://github.com/Moksa1123/mosaic-headless
-claude --plugin-dir ./mosaic-headless
+git clone https://github.com/Moksa1123/mosaic-headless.git
+cp -r mosaic-headless ~/.claude/skills/mosaic-headless
 ```
 
-這是獨立專案，不是 Mosaic Pro 開發商 Nextend 的產品，也沒有得到 Nextend 背書或與其合作。
+系統需求：Python 3（查詢、建頁、自我測試只用標準函式庫）；瀏覽器驗證器需要 Playwright（見 `requirements.txt`）；`.php` 工具要在伺服器上有 WP-CLI；Node.js 只有 npx 安裝程式需要。Windows、macOS、Linux 都能用。npm 出新版後，要用 `--force` 重跑安裝程式才會更新。
 
-## 這個 plugin 會執行什麼、連到哪裡
+## 快速開始
 
-這個 plugin 沒有 hook、沒有 MCP 伺服器、沒有背景程序。下面這些都只在 Claude 依照
-`SKILL.md` 執行、而且你核准指令時才會跑：
+可以這樣跟 Claude 說：
 
-- **`tools/mo.py`**：讀 `data/` 裡的 CSV 表並印出答案，不寫入任何東西，也不連線。
-- **`tools/*.php`**：透過 `wp eval-file` 在你自己的 WordPress 裡執行，讀寫該網站上 Mosaic
-  自己的資料表和主題資料。
-- **`tools/mint_session.php`**：替*你自己網站*上的帳號建立登入 session 和對應的 REST
-  nonce。你把它們放進本機的設定檔（`--config sweep.json`）；它們只印在你的終端機，不會送到別處。
-- **`tools/build_site.py`、`data_upgrade.py`、`theme_zip.py`、`probe_accordion.py` 和 `sweep_*.py`**：用那份
-  session 呼叫設定檔裡那個網站的 Mosaic REST 路由，讀寫頁面、元件和主題。只連到那個網站。
-- **`tools/verify_*.py`**：用 Playwright（Chromium）或 `urllib` 開同一個網站的頁面，比對實際
-  輸出和寫入的內容。
-- **`sites/`**：工作範例（作者自己的網站）的資料。它的設計有載入 Google Fonts，所以用它建出來的
-  頁面，訪客的瀏覽器會向 Google 抓字型，跟任何使用 Google Fonts 的網頁一樣。
+- 「在我的 Mosaic 網站做一個首屏區塊：一個 H1、一段文字、一個連到 /contact/ 的按鈕。」
+- 「Mosaic 的 accordion-content 可以直接放在 div 裡嗎？」
+- 「加一個三步驟的浮動框導覽，每一步關閉時進到下一步。」
 
-工具需要 Python 3 和 Playwright。安裝時不會下載任何東西，也不會把資料送給作者或第三方。
-
-## 這是什麼
-
-Mosaic 把一個頁面放在 **23 張自訂資料表**裡，不在 `post_content`，也不在 `postmeta`。
-一個元素一列，樹狀結構靠 `parentID` 欄位，同層順序是一個 fractional-index 字串。
-編輯器只是這個模型的其中一個客戶端。它不是格式本身，而且你不需要它。
-
-這個技能就是那個模型的地圖——對照真實站台量出來的，不是讀原始碼讀出來的——外加一組
-工具：透過模型寫入、檢查寫出來的東西、把 Elementor 的頁面搬進來。
-
-## 各部分怎麼接起來
-
-```mermaid
-flowchart LR
-    subgraph measure["量一次，對著真實站台"]
-        SRC[外掛原始碼] -->|extract_*.py| D[(data/*.csv)]
-        SW[sweep_*.py / probe_*.py] -->|寫入、渲染、斷言| D
-    end
-
-    subgraph write["你建的每一頁"]
-        Q[mo.py] -->|一個答案，量測結論在前| SPEC[頁面 spec]
-        EL[Elementor _elementor_data] -->|from_elementor.py| SPEC
-        SPEC -->|build_page.py 拒絕量到會壞的| REST[Mosaic REST：checkout、check、commit]
-        REST --> DB[(23 張表)]
-        DB --> PAGE[送出的頁面]
-    end
-
-    subgraph verify["永遠不信任 commit"]
-        PAGE --> V1[verify_rwd.py]
-        PAGE --> V2[verify_browser.py + 設計稽核]
-        PAGE --> V3[verify_intro.py / verify_loop.py]
-        PAGE --> V4[verify_conversion.py]
-        V1 & V2 & V3 & V4 --> CSV[(驗證表)]
-        CSV --> GATE[check-release.mjs]
-    end
-
-    D --> Q
-    D --> SPEC
-```
-
-由左到右：表格量一次、隨套件出貨；每一頁都透過表格寫入、表格說不行就拒絕；在送出的頁面被
-讀回來、結果記進發布閘門會檢查的表之前，什麼都不信。
-
-## 唯一的規則
-
-**絕對不要憑記憶寫任何節點型別、屬性名稱、列舉值、樣式鍵或 Free/Pro 的判斷。去 `data/` 查。**
-
-而且要用 `mo.py` 查，不要用 grep。grep 回答你打出來的問題，不回答你真正的問題。問它
-`accordion-content`，它確認這個型別存在；掃描表則說 BROKE_PAGE——放一個下去，整個公開頁面
-會變成一段 54 bytes 的錯誤字串。兩個都是真的，也都是錯的答案：列旁邊的註記說那段字串
-指名的是「缺少父層」，而照 `accordion > accordion-item` 嵌套後它能寫入、能渲染，還免費送你
-一個鍵盤可操作的展開元件。`mo.py type` 一次把三者都給你。
+或自己查資料：
 
 ```bash
-python tools/mo.py type accordion-content   # 一個型別，接上所有線上掃描結果
-python tools/mo.py check div text button    # 遇到不安全或不存在的型別就以 1 退出
-python tools/mo.py params text              # 一個型別上所有能設的東西
-python tools/mo.py style --grouped          # 單獨設定就無效的那 20 個
-python tools/mo.py states --verified        # 實測會編譯的狀態
-python tools/mo.py css grid-column          # 哪個 Mosaic 鍵驅動這條 CSS
+python tools/mo.py check div text accordion-content
 ```
 
-然後去看頁面。Mosaic 有**八種**失敗模式，只有三種會改變 HTTP 狀態碼：
-
 ```
-驗證器乾淨拒絕            HTTP 200 + 內文帶 `exceptions` 陣列
-commit 時 PHP fatal       HTTP 500（122 個型別裡有 15 個放在一般 div 下會這樣）
-結構無效的節點            HTTP 200、已寫入、資料庫有那一列，然後整個公開頁面
-                          變成 54 bytes 的錯誤字串
-值的「形狀」錯了          HTTP 200、存進去了，CSS 規則就是不出現
-規則對、結果錯            HTTP 200、樣式表裡有、寫得對，瀏覽器算出另一個值
-該網址沒有模板            HTTP 406，未登入者拿到空白內文
-內容造成渲染時 fatal      HTTP 500——commit 通過了，Mosaic 解析頁面時死掉。`code` 節點
-                          的內容是模板：壓縮 CSS 慣用的 `@media(` 會被讀成函式呼叫。
-                          `@media (` 就正常。build_page 會拒絕前者。
-外掛升級改了頁面輸出      HTTP 200、頁面完好、資料列都遷移了——但你針對輸出 class 寫的 CSS
-                          再也對不上。1.0.8 把 `M_EL4 M_EL_Div` 改成 `m-div _e`、狀態 class
-                          跟著改、`customStyles` 改成 `customDeclarations`。範例站的點擊放大
-                          就此打不開，是 verify_loop.py 說出來的。
+type               outcome     why
+-----------------  ----------  -----------------------------------------------
+accordion-content  BROKE_PAGE  AccordionItemElementMResource instance required
 ```
 
-commit 成功不代表頁面能用，樣式表正確也不代表。這裡每個工具都會在寫入後把頁面抓回來——
-而且把 5xx 當成空頁面，因為 WordPress 的「嚴重錯誤」畫面有 2,697 bytes，比任何天真的
-「健康頁面」門檻都大。
+它會以 exit code 1 結束：這個 type 單獨放進去，提交會成功，但整個公開頁面會變成一行錯誤字串。`python tools/mo.py type accordion-content` 會告訴你它該放在哪裡。
 
-## 驗證了什麼，怎麼驗的
+## 觸發詞
 
-全部在真實站台上跑——WordPress 7.1、WooCommerce 11.1、Mosaic Pro 1.0.10，**未授權**：
-授權鎖的是主題庫和更新，不是節點工廠，所以 Pro 型別照樣註冊、照樣渲染。
+English: Mosaic Pro, Nextend, build a Mosaic page without the editor, Mosaic padding / hover / breakpoint, Mosaic popup, popover, modal, Mosaic interaction, move a Mosaic theme, Mosaic upgrade, Elementor to Mosaic.
 
-| 項目 | 結果 |
-|---|---|
-| **節點型別** | 129 / 129 逐一放進獨立文件，寫入 → 渲染 → 斷言 → 刪除：77 RENDERED、25 COMMITTED、15 COMMIT_5xx、12 BROKE_PAGE。在 1.0.8 上重掃：五個以前默默寫入的型別，沒放對父節點現在會直接弄死頁面。未渲染的當中有三個是「沒給父層」的掃描方法產物，註記就在列旁 |
-| **樣式屬性** | 101 / 101 寫進真實頁面、對照編譯出的 CSS：61 COMPILED、18 ABSENT、21 SKIPPED |
-| **節點屬性** | 191 / 191 用各自驗證鏈推出的值重新探測：39 APPLIED、45 NO_EFFECT、55 NO_HOST、48 SKIPPED |
-| **響應式** | 兩個站共 733 條 `_t`/`_m` 宣告，對照網站實際送出的樣式表逐條斷言——全數通過 |
-| **瀏覽器** | 在 Chromium 三個視窗寬度上對兩個交付頁面做 4,132 次計算樣式讀取：2,929 條比對相符、912 條標為無法比對、**0 條被覆蓋** |
-| **設計稽核** | 對比度、字體回退、CJK 字距、水平溢出、文字裁切、每行字數——在瀏覽器裡跑，**26 項發現，每一項都有書面裁定**——沒寫理由的 acknowledge 會被發布閘門拒絕 |
-| **元件** | 元件系統從頭驅動到尾，**8 之 8**：在分類下建立、文件自癒、透過可寫實例填入樹、唯讀實例拒絕同一筆寫入作為負控制、頁面上兩個實例渲染同一個定義 |
-| **樣式狀態** | 53 個狀態中的 52 個寫進真實頁面，對照表格承諾的選擇器：**36 個完全吻合**、13 NO_HOST、3 SKIPPED、0 BROKE_PAGE。偽類是大寫輸出的（`.M_EL9:HOVER`） |
-| **互動** | JS 動畫路徑以負控制探測並讀回資料列：`propertyMetas` **會**被接受並儲存；屬性值仍然綁不上，但邊界現在是精確的 |
-| **accordion** | `accordion-item` 與 `accordion-content` 在掃描表裡是 BROKE_PAGE；照工廠要求嵌套後能寫入、能渲染，**7 之 7** |
-| **入口動畫** | 以單調時鐘在十五個時間點取樣、做八項斷言。相較於完全沒有動畫的同一頁只多掉一幀，因為它會等文件第一次排版做完才開始 |
-| **永續動畫** | 右下角一塊不斷自我印刷、點了會放大的版子，**28 項檢查**：暫停時間軸逐格比對證明週期性、五個寬度、二十五個捲動停點量文字*與*控制項的遮擋、以「永遠讀不到」為失敗條件、指標和 Enter 都能打開、reduced motion 下靜止 |
-| **Elementor 轉換** | 一個正式站的全部 Elementor 頁面——19 頁、3,292 個元素——轉換、建置、對照來源檢查：**19 之 19**，3,281 個元素搬過去、11 個書面宣告。再把轉出的頁面跑過響應式、瀏覽器和稽核，每一項發現都分類為「繼承」或「引入」：**引入 0 個** |
-| **主題匯出／匯入** | 兩條路徑，都來回驗證過。`theme_export.php` 用 WP-CLI 把資料列搬成 JSON、ID 不變。`theme_zip.py` 驅動 Mosaic **自己**的 ZIP 匯出匯入——匯入預設進 test mode，要 `--activate` 才上線，因為它的預設是直接切換 live 站——**22 項檢查**逐表、逐樹比對副本與來源 |
-| **技能本身** | `claude plugin eval .`——五個使用者真的會問的問題，各跑三次，有載技能和沒載各一臂，每次三個 LLM 裁判。**有：五題全 1.00。沒有：五題全 0.00。** 基準線最好的回答是拒答 |
-| **線上量測** | 115 條 REST 路由、156 個 variant、59 個條件主體、23 張表 / 210 個欄位 |
-| **1.0.9 新功能** | modal（`<dialog>`）、OpenStreetMap、exit-intent 與 scroll-depth 觸發、run rules、memory action 與 modal shorthand，全部建在真實頁面上並用瀏覽器實際操作：19 之 19。「離開意圖彈窗、每個 session 只出現一次」只需要一個物件，不用接線 |
-| **1.0.10 新功能** | popover——Mosaic 第一個不阻擋頁面的浮動層——在實驗頁上做了八種，用 Chromium 實際操作：37 / 37。頁面載入時出現的通知不擋捲動也不擋點擊、錨定選單與資訊卡、螢幕九宮格、keepInView 翻面與它的樣式狀態、用 `afterClose` 串起來的三步導覽。另外是 modal 改用 Popover API：進入 top layer、改用 `requestClose()`、host 上寫 `display` 不再讓它關不起來 |
-| **slider** | 整組照工廠要求嵌套後在瀏覽器裡實際操作，19 之 19：會自己按宣告的間隔前進、箭頭與圓點與鍵盤都能驅動、`prefers-reduced-motion` 下會自己停。圓點其實是樣板，依 slide 數複製，每個複製品 id 相同 |
-| **真正的網站** | 19 個轉換頁組成一個站：真實選單、每頁一個彈窗。導覽 46 之 46、彈窗 19 之 19，六種不同的觸發／規則／記憶／關閉設定 |
-| **自訂欄位** | ACF 與 Meta Box，一頁四十個欄位，透過 `@VAR` / `@LOOP` 從送達的 HTML 讀回：62 個裡 59 個解析正確、3 個空值有解釋；多值欄位的迴圈剛好渲染出欄位的列數。`tools/list_fields.php` 列出 Mosaic 真正註冊的名字 |
-| **線上升級** | 1.0.7 → 1.0.8 走外掛自己的 milestone 路由、在 wp-admin 之外驅動：6 個 milestone、四張表改名、每個輸出 class 名稱都變、每個 `customStyles` 都重寫——然後上面每一項掃描在結果上重跑 |
+中文：Mosaic、Nextend、不開編輯器做頁面、內距、外距、圓角、懸停、斷點、RWD、彈出視窗、浮動框、摺疊面板、頁籤、輪播、互動、動畫、搬佈景、Mosaic 升級、Elementor 轉 Mosaic。
 
-`SKIPPED`、`NO_HOST`、`INCONCLUSIVE` 從不折算進通過率。把自己的盲點算成成功的掃描，
-正是這個技能反對的東西。
+## 會執行與連線的內容
 
-## 查一次要花多少
+- **不會自己執行任何東西。** 沒有 hook、沒有 MCP server、沒有背景程序。只有 Claude 依照 `SKILL.md` 提出指令、你同意之後才會執行。
+- **只在本機、不連網**：`tools/mo.py` 讀 `data/` 裡的 CSV 並印出答案；`tools/test_mosaic.py`、`tools/check_numbers.py` 讀這個 repo。都不寫入、不連線。
+- **透過 REST API 連你的 WordPress 網站**：`build_page.py`、`build_site.py`、`data_upgrade.py`、`theme_zip.py`，以及 `sweep_*.py`、`probe*.py`，會呼叫你設定的那一個網站的 Mosaic REST 路由，讀寫頁面、元件、範本和佈景。只連那個網站。
+- **透過 WP-CLI 在你的網站上執行**：`tools/*.php` 用 `wp eval-file` 在伺服器上（通常是你自己的 SSH）跑在你的 WordPress 裡，讀寫該網站的 Mosaic 資料表和佈景資料。`theme_delete.php`、`prune_unbound.php` 會刪資料，沒加 `--apply` 時只做試跑。
+- **讀你的公開頁面**：`tools/verify_*.py`、`audit_mobile.py` 用 Playwright（Chromium）或 `urllib` 開同一個網站的頁面，比對送出的結果和寫入的內容。
+- **帳密**：網站網址、WordPress 登入 cookie 和對應的 `wp_rest` nonce，必須是你自己網站的管理員。`tools/mint_session.php` 在伺服器上印出這三個值。以 plugin 安裝時，Claude Code 會用 `userConfig` 詢問；cookie 和 nonce 標為敏感資料，存在系統的憑證儲存區。也可以用環境變數（`MOSAIC_SITE_URL`、`MOSAIC_REST_COOKIE`、`MOSAIC_REST_NONCE`），或用 `--config` 傳入你自己的 JSON 檔。**任何工具都不會在你的電腦上找帳密。**
+- **第三方**：`sites/` 裡的示範範例會載入 Google Fonts，所以用它建出來的頁面，訪客的瀏覽器會向 Google 取字型。
+- 安裝時不下載任何東西，也不會把資料傳給作者或任何人。
 
-agent 要知道一個 Mosaic 節點型別或樣式鍵到底吃什麼，有三條路。同樣六個任務，用 tiktoken
-算（`tools/benchmark_tokens.py`，可以自己跑）：
+## 驗證方式
 
-| 任務 | 讀原始碼 | 整包表格載入 | `mo.py` 查詢 |
-|---|---:|---:|---:|
-| 放一個標題、一段文字、一顆帶連結的按鈕 | 10,005 | 259,539 | **961** |
-| 設定 padding、邊框、圓角，含響應式 | 3,490 | 259,539 | **396** |
-| 判斷 accordion 能不能用、怎麼嵌套 | 15,615 | 259,539 | **397** |
-| 找出哪些 hover/focus 狀態真的會編譯 | 3,619 | 259,539 | **1,054** |
-| 找出哪個 Mosaic 鍵驅動某條 CSS | 1,862 | 259,539 | **51** |
-| commit 之前知道什麼不安全 | 63,172 | 259,539 | **288** |
+- node type、node 屬性、樣式屬性、樣式狀態從外掛原始碼抽出（`tools/check_tables.py` 會重新抽取並比對），再逐一寫進正式網站，檢查實際送出的 HTML 和編譯後的 CSS。
+- 示範頁面用 Chromium 重讀：733 條 RWD 宣告對照網站實際送出的樣式表，4,132 筆三種寬度的計算後樣式。細節見 [verification-record.md](references/verification-record.md)。
+- 自我測試：`python tools/test_mosaic.py`，42 項離線測試（查詢、中文用語、建頁產出的結構與拒收規則、對外的建頁介面、本 repo 的數字與隱私）。
+- evals：16 題 Mosaic 1.0.10 到 1.0.12 的行為題；有 skill 16/16，沒有 skill 0/16。結果見 [evals/RESULTS.md](evals/RESULTS.md)。
+- `SKILL.md` 和這幾份 README 裡的數字，都由 `tools/check_numbers.py` 對照資料核對。
 
-**比讀原始碼省 71–99.5% 的 token，比整包載入省 99.6% 以上**——而且六題裡有四題原始碼根本
-答不了：「有宣告」和「會編譯」是兩個問題，只有掃描問了第二個。表格總共 259,539 tokens；
-永遠不要整包載入，`mo.py` 才是查詢。
+## 限制
 
-### 動手前值得知道的結果
+- 實測到 Mosaic Pro 1.0.13。只存在於 1.0.13 編輯器裡的功能（新的樣式變數類型、List 的 class、pageLoad 延遲等）還沒實測，工具也不會寫。
+- 用 headless 方式寫入格線子項位置的屬性不會有輸出；部分互動形狀還沒實測。
+- 瀏覽器驗證器需要 Playwright 和一個可以寫入的網站，不在離線自我測試裡。
+- 待補問題：[data/pending.csv](data/pending.csv)。完整說明（失敗模式、token 成本、Elementor 轉換器、示範範例）：[docs/guide.md](docs/guide.md)（英文）。
 
-**屬於某個 `group` 的屬性單獨設定時無效。** 兩個方向都精確：78 個未分組屬性給出 58 COMPILED、
-0 ABSENT；20 個分組屬性全部 0 COMPILED。所以 `borderLeftWidth`、`outlineColor`、`gridColumnStart`
-是同一條規則的三個實例。用分組形狀——`border` 吃 `{width, style, color}`——或 `customDeclarations`。
+## 目錄結構
 
-**斷點覆寫可以「改」一個屬性，永遠不能「拿掉」一個。** 窄螢幕的 `customDeclarations` 只是不提邊框，
-寬螢幕的邊框就繼續站在那裡。把 `border-left:0` 說出口。
-
-**只有四個型別吃 `url`**：`button`、`menu-link`、`wysiwyg-link`、`dropdown-toggle`。放在 `text`
-或 `image` 上會被接受、被存下、然後不產生任何錨點。改用 `menu-link` 包起來——它接受任意子節點，
-一有 `url` 就變成真正的 `<a href>`。
-
-**圖片的 attachment protocol 路徑是相對 uploads 目錄的。**
-`wp-attachment://image/<id>/full/2026/09/pic.png` 能解析，還會帶出附件的寬高。給它完整的
-`wp-content/uploads/...` 路徑——最直覺的猜法——Mosaic 會把 uploads 前綴再接一次，而且不報錯。
-
-## Elementor → Mosaic
-
-```bash
-wp post meta get 2360 _elementor_data > page.json
-python tools/from_elementor.py --data page.json --out spec.json --report conv.csv \
-    --uploads-base https://site/wp-content/uploads --slug works --post 208
-python tools/build_site.py --config c.json --site spec.json
-python tools/verify_conversion.py --data page.json --url https://site/works/ --report conv.csv
+```
+SKILL.md          Claude 載入的內容：資料出處、路由、任務、驗證
+data/             實測資料表（CSV）、中文用語、待補清單
+references/       主題說明：資料模型、樣式、彈出視窗、升級⋯
+tools/            mo.py、建頁與驗證工具、WP-CLI 腳本、自我測試
+sites/            示範範例（可讀的 Python 模組）
+evals/            評分題目與結果
+scripts/          安裝程式與發版檢查
+assets/           各平台的安裝範本
+docs/             完整說明
+.claude-plugin/   plugin 與 marketplace 設定
 ```
 
-範圍是數出來的，不是憑喜好定的：一個真實站的 19 頁裡，container / heading / text-editor /
-button / html / icon-list / divider / image 佔了全部元素的 99.6%。長尾——loop grid、表單、倒數、
-第三方 addon——是動態的，沒有節點可以變成；每一個都按名稱和原因列進報告、絕不默默丟掉，
-`--strict` 則拒絕產出有損的 spec。
+## 授權與作者
 
-版面、字體、顏色、邊框、連結、圖片都會過去，三個斷點都帶（`_tablet`/`_mobile` → `_t`/`_m`）。
-不會過去的：進場動畫（Mosaic 的互動綁定未解）、shape divider、漸層疊加。驗證器接著拿建好的
-頁面對照來源——每個字串、圖片、連結、標題層級——它馬上就證明了自己的價值：抓到轉換器把
-`url` 寫在不理它的節點上，漏了 21 個連結中的 19 個。
-
-## 工具
-
-| 工具 | 用途 |
-|---|---|
-| `mo.py` | 查詢量測過的表面——**正門** |
-| `build_page.py` / `build_site.py` | 透過有守門的寫入路徑 commit 一份 spec；量到會壞的一律拒絕 |
-| `from_elementor.py` / `verify_conversion.py` | Elementor → Mosaic，以及內容確實到達的證明 |
-| `verify_browser.py` | 瀏覽器算出來的是不是樣式表承諾的，以及有沒有通過設計稽核 |
-| `verify_rwd.py` | 每條 `_t`/`_m` 宣告有沒有進到送出的樣式表 |
-| `verify_intro.py` / `verify_loop.py` | 會「結束」的載入動畫；會循環、不遮東西、能打開的永續動畫 |
-| `theme_export.php` / `theme_import.php` | 整個主題以 JSON 資料列透過 WP-CLI 搬移，ID 不變 |
-| `theme_zip.py` / `theme_zip_compare.php` / `theme_delete.php` | 在編輯器外驅動 Mosaic 自己的 ZIP 匯出匯入、副本對來源逐樹比對、以及拒絕刪 live 主題的乾淨刪除 |
-| `list_fields.php` | 一篇文章的自訂欄位註冊了哪些 `@VAR` / `@LOOP` 名字，連值一起列出 |
-| `verify_dialog.py` | 在瀏覽器裡實際操作 1.0.9 的 modal、觸發、run rules 與 memory |
-| `verify_popovers.py` | 在瀏覽器裡實際操作 1.0.10 的 popover：位置、是否阻擋、closedby、翻面、串接 |
-| `verify_slider.py` / `verify_navigation.py` | slider 真的會動嗎；選單每一項是不是真連結、每頁是不是都到得了 |
-| `data_upgrade.py` | 外掛更新後，走 Mosaic 自己的 milestone 路由跑資料遷移——沒跑完之前編輯器 API 是不存在的 |
-| `sweep_*.py` / `probe_*.py` | 那些表格是用這些儀器量出來的 |
-| `bootstrap_probe_theme.php` / `mint_session.php` | 免授權的實驗主題，以及從 WP-CLI 鑄出 REST session |
-
-## 工作範例
-
-`sites/_moksa.py` 只透過資料表建出一個真實的工作室網站，隨套件出貨作為參考：1,286 個節點的
-首頁，用具名 view timeline 做捲動追蹤的條款索引；一段一次印一塊版、把浮世繪印出來的入口動畫；
-一塊在角落永遠印下去、點了會放大的版子；還有一個 WooCommerce My Account 頁，它的 UI 全部透過
-一個跑 shortcode 的 `code` 節點進來。全程沒有自己寫任何 JavaScript。`data/` 裡每一張驗證表
-都是對著它量出來的。
-
-## 從哪裡開始
-
-1. `references/data-model.md`——頁面實際住在哪裡。
-2. `references/write-protocol.md`——checkout / check / commit。
-3. `references/failure-modes.md`——Mosaic 怎麼失敗，量測版。**動手前先讀。**
-4. `references/responsive.md`——狀態／斷點／屬性三軸。
-5. `references/styling.md`——樣式值怎麼變成 CSS。
-6. `references/design-system.md`——variant（element class）與設計 token。
-
-## 發版
-
-```bash
-npm version minor      # 更新 package.json、SKILL.md 和八個平台模板的版號，
-                       # commit、打 tag、push；tag 觸發 release.yml
-```
-
-`scripts/check-release.mjs` 把關每一次發版，檢查的是容易出錯而不是容易檢查的事：版號一致、
-`files` 的每個 glob 都對到東西、每張驗證表的列數仍然等於 SKILL.md 和四份 README 引用的數字、
-沒有未裁定的設計稽核發現、eval 套件在場，以及**直接檢查 tarball 本身**——npm 的 `files` 白名單
-會蓋過 `.gitignore`，曾經把一個真實客戶的網站放進即將發布的套件裡。
-
-發布走 npm trusted publishing（OIDC）：哪裡都沒有 token。npmjs.com 套件設定的 Trusted Publisher：
-GitHub Actions、`Moksa1123` / `mosaic-headless`、workflow `release.yml`、environment **留空**。
-
-## 授權
-
-MIT。Mosaic Pro 本身是授權的第三方軟體，**不**包含在此。
+MIT License。作者 Moksa（[moksaweb.com](https://moksaweb.com)）。問題回報：[GitHub](https://github.com/Moksa1123/mosaic-headless/issues)。

@@ -1,0 +1,18 @@
+{
+  "$schema": "https://anthropic.com/claude-code/marketplace.schema.json",
+  "name": "mosaic-headless",
+  "description": "Build and modify Mosaic Pro (Nextend) WordPress sites by writing the data model directly. Unofficial.",
+  "owner": {
+    "name": "Moksa",
+    "url": "https://moksaweb.com"
+  },
+  "plugins": [
+    {
+      "name": "mosaic-headless",
+      "description": "Build and modify Mosaic Pro (Nextend) WordPress sites by writing the data model directly, every surface measured on a live install. Unofficial: not made by or affiliated with Nextend.",
+      "source": "./",
+      "category": "development",
+      "homepage": "https://github.com/Moksa1123/mosaic-headless"
+    }
+  ]
+}

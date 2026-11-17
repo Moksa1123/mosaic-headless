@@ -120,6 +120,55 @@ RULES: list[tuple[str, str, str]] = [
 
 
 # ---------------------------------------------------------------------------
+# The four READMEs (en / zh-TW / ja / ko): same facts, each language's wording
+# ---------------------------------------------------------------------------
+READMES = ["README.md", "README.zh-TW.md", "README.ja.md", "README.ko.md"]
+
+
+def _readme_facts() -> dict:
+    f = _facts()
+    bv = ROOT / "data" / "browser-verification"
+    browser = sum(len(_rows_path(p)) for p in sorted(bv.glob("*.csv")))
+    tests = len(re.findall(r"^\s+def test_", (HERE / "test_mosaic.py").read_text(encoding="utf-8"), re.M))
+    res = (ROOT / "evals" / "RESULTS.md").read_text(encoding="utf-8")
+    m = re.search(r"計分題答對率（(\d+) 題） \| \*\*(\d+)/\d+（[^|]*\| (\d+)/\d+", res)
+    f.update({
+        "rwd": str(len(_rows("rwd-verification"))),
+        "browser": f"{browser:,}",
+        "tests": str(tests),
+        "eval_n": m.group(1), "eval_with": m.group(2), "eval_without": m.group(3),
+    })
+    return f
+
+
+def _rows_path(p) -> list[dict]:
+    with open(p, encoding="utf-8", newline="") as fh:
+        return list(csv.DictReader(fh))
+
+
+README_RULES: list[tuple[str, str, str]] = [
+    (r"(\d+) ?(?:node types|種 node type|個の node type|개 node type)", "fact", "node_types"),
+    (r"(\d+) ?(?:node properties|個 node 屬性|個の node プロパティ|개 node 속성)", "fact", "prop_names"),
+    (r"(\d+) ?(?:style properties|個樣式屬性|個のスタイルプロパティ|개 스타일 속성)", "fact", "style_props"),
+    (r"(\d+) ?(?:style states|個樣式狀態|個のスタイル状態|개 스타일 상태)", "fact", "states"),
+    (r"(\d+) ?(?:responsive declarations|條 RWD 宣告|件のレスポンシブ宣言|개 반응형 선언)", "fact", "rwd"),
+    (r"(\d{1,3}(?:,\d{3})+|\d+) ?(?:computed-style readings|筆三種寬度|件の計算後スタイル|개의 계산된 스타일)", "fact", "browser"),
+    (r"(?:`, (\d+) offline tests|，(\d+) 項離線測試|オフラインの (\d+) 項目|오프라인 테스트 (\d+)개)", "fact", "tests"),
+    (r"(\d+) ?(?:questions about|題 Mosaic|問。|문항)", "fact", "eval_n"),
+    (r"(?:with the skill|(?<!沒)有 skill|skill ありで|skill 사용 시) (\d+)/\d+", "fact", "eval_with"),
+    (r"(?:with the skill|(?<!沒)有 skill|skill ありで|skill 사용 시) \d+/(\d+)", "fact", "eval_n"),
+    (r"(?:without it|沒有 skill|なしで|미사용 시) (\d+)/\d+", "fact", "eval_without"),
+    (r"(?:without it|沒有 skill|なしで|미사용 시) \d+/(\d+)", "fact", "eval_n"),
+    (r"Mosaic Pro (?:up to )?1\.0\.13|1\.0\.13 ?(?:editor|編輯器|のエディター|에디터)", "fixed", "plugin version the data was last extracted from / measured to (upgrading.md)"),
+    (r"Mosaic 1\.0\.10 ?(?:to|到|〜|~) ?1\.0\.12", "fixed", "version range the eval questions cover (evals/cases.json)"),
+    (r"Python 3", "fixed", "runtime requirement"),
+    (r"\bH1\b", "fixed", "an HTML heading level in an example prompt"),
+    (r"exits 1|exit code 1|終了コードは 1|종료 코드는 1", "fixed", "mo.py check's exit code (shown by running it)"),
+    (r"3 ステップ|3단계|1 つずつ|1 つにつき 1 行|1 つのサイト|3 つの画面幅|제3자", "fixed", "wording, not a measurement"),
+]
+
+
+# ---------------------------------------------------------------------------
 # Engine (copied from line-api / elementor-headless)
 # ---------------------------------------------------------------------------
 NUM = re.compile(r"\d+(?:[.,]\d+)*")
@@ -140,28 +189,33 @@ def _masked(text: str, keep_inline: bool = False) -> str:
     return text
 
 
-def check(path: Path = SKILL_MD, fix: bool = False) -> tuple[list[str], int]:
+def check(path: Path = SKILL_MD, fix: bool = False, rules=None, facts=None,
+          allow_unused: bool = False) -> tuple[list[str], int]:
     """(problems, numbers checked). fix=True rewrites drifted facts in place."""
+    rules = RULES if rules is None else rules
     text = path.read_text(encoding="utf-8")
     scan = _masked(text)
     match_view = _masked(text, keep_inline=True)
-    facts = _facts()
+    facts = _facts() if facts is None else facts
     problems: list[str] = []
     covered: set[int] = set()
     edits: list[tuple[int, int, str]] = []
 
-    for pattern, kind, arg in RULES:
+    for pattern, kind, arg in rules:
         found = list(re.finditer(pattern, match_view, re.M))
         if not found:
-            problems.append(f"rule unused (SKILL.md wording changed?): {pattern}")
+            if not allow_unused:
+                problems.append(f"rule unused ({path.name} wording changed?): {pattern}")
             continue
         for m in found:
-            span = m.span(1) if m.re.groups else m.span()
+            # the claimed number is the first group that matched (alternatives per language)
+            gi = next((i for i in range(1, (m.re.groups or 0) + 1) if m.group(i) is not None), 0)
+            span = m.span(gi) if gi else m.span()
             covered.update(range(*m.span()))
             if kind == "fact":
                 got, want = text[span[0]:span[1]], facts[arg]
                 if got != want:
-                    problems.append(f"fact {arg}: SKILL.md says {got}, data says {want}")
+                    problems.append(f"fact {arg}: {path.name} says {got}, data says {want}")
                     edits.append((span[0], span[1], want))
 
     line_of = lambda pos: text.count("\n", 0, pos) + 1  # noqa: E731
@@ -180,16 +234,25 @@ def main() -> int:
     ap = argparse.ArgumentParser(description=__doc__.split("\n")[1])
     ap.add_argument("--fix", action="store_true", help="rewrite drifted facts in SKILL.md")
     args = ap.parse_args()
+    bad = 0
     problems, n = check(fix=args.fix)
-    if not problems:
-        print(f"all {n} numbers in SKILL.md are claimed and match the data.")
-        return 0
-    print(f"SKILL.md has {len(problems)} number problem(s):")
-    for p in problems:
-        print("  x", p)
-    if args.fix:
+    report = [("SKILL.md", problems, n)]
+    rf = _readme_facts()
+    for name in READMES:
+        # each README uses its own language's alternatives, so a rule may be unused in one file
+        p, k = check(ROOT / name, fix=args.fix, rules=README_RULES, facts=rf, allow_unused=True)
+        report.append((name, p, k))
+    for name, p, k in report:
+        if not p:
+            print(f"{name}: all {k} numbers are claimed and match the data.")
+            continue
+        bad += 1
+        print(f"{name} has {len(p)} number problem(s):")
+        for x in p:
+            print("  x", x)
+    if bad and args.fix:
         print("(facts rewritten; the rest needs a human)")
-    return 1
+    return 1 if bad else 0
 
 
 if __name__ == "__main__":

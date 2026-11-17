@@ -335,6 +335,37 @@ class SkillDoc(unittest.TestCase):
         problems, _ = check_numbers.check()
         self.assertEqual(problems, [])
 
+    def test_readme_numbers_claimed(self):
+        import check_numbers
+        from pathlib import Path
+        facts = check_numbers._readme_facts()
+        for name in check_numbers.READMES:
+            problems, _ = check_numbers.check(Path(ROOT) / name, rules=check_numbers.README_RULES,
+                                              facts=facts, allow_unused=True)
+            self.assertEqual(problems, [], name)
+            text = read(name)
+            # every README states the headline facts, not just the ones it happens to mention
+            for key in ("node_types", "rwd", "browser", "tests", "eval_with", "eval_without"):
+                self.assertIn(facts[key], text, "%s lacks %s" % (name, key))
+
+    def test_readme_sections(self):
+        # README style (總機/README風格.md): the same 10 sections, in order, in every language
+        heads = {
+            "README.md": ["What it does", "When to use", "Install", "Quick start", "Trigger phrases",
+                          "What it runs and connects to", "How it's verified", "Limits",
+                          "Repo layout", "License & author"],
+            "README.zh-TW.md": ["功能", "適用情境", "安裝", "快速開始", "觸發詞", "會執行與連線的內容",
+                                "驗證方式", "限制", "目錄結構", "授權與作者"],
+        }
+        for name in ("README.md", "README.zh-TW.md", "README.ja.md", "README.ko.md"):
+            text = read(name)
+            found = re.findall(r"^## (.+)$", text, re.M)
+            self.assertEqual(len(found), 10, name)
+            if name in heads:
+                self.assertEqual(found, heads[name], name)
+            self.assertLessEqual(text.count("\n"), 250, name)
+            self.assertIn("Nextend", text, name)
+
     def test_links_resolve(self):
         text = read("SKILL.md")
         for target in re.findall(r"\]\(([^)#]+)\)", text):

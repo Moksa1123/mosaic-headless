@@ -1,356 +1,123 @@
 # mosaic-headless
 
-[![npm downloads](https://img.shields.io/npm/dt/mosaic-headless?label=npm%20downloads&color=cb3837)](https://www.npmjs.com/package/mosaic-headless)
+Build and modify Mosaic Pro (Nextend) WordPress sites by writing the data model directly: no visual editor, no DOM, every lookup answered from measurements on a live install.
 
-Build and modify [Mosaic Pro](https://mosaicbuilder.com) (Nextend) sites by writing
-the data model directly — no visual editor, no DOM. Convert Elementor pages into it.
-Move whole themes between installs. Every claim measured on a live site.
+[![npm](https://img.shields.io/npm/v/mosaic-headless?style=flat-square)](https://www.npmjs.com/package/mosaic-headless)
+[![License: MIT](https://img.shields.io/github/license/Moksa1123/mosaic-headless?style=flat-square)](LICENSE)
 
-*Read this in [繁體中文](README.zh-TW.md) · [日本語](README.ja.md) · [한국어](README.ko.md)*
+[正體中文](README.zh-TW.md) · [日本語](README.ja.md) · [한국어](README.ko.md)
 
----
+> This is an unofficial community project. It is not made by, endorsed by, or affiliated with Nextend, the maker of Mosaic Pro. Mosaic Pro is licensed third-party software and is not included here.
+
+## What it does
+
+Mosaic keeps a page in its own database tables, one row per element, not in `post_content`. This skill is a measured map of that model plus the tools to write through it.
+
+- **Look it up instead of guessing**: `tools/mo.py` answers what a node type, property, style key or state is called, what value shape it takes, where it may go, and whether it is safe. The data covers 134 node types, 120 node properties, 101 style properties and 60 style states, extracted from Mosaic Pro 1.0.13 and swept on a live site.
+- **Chinese and colloquial words work**: `mo.py css 內距` finds padding; the terms follow Mosaic's own zh_TW strings.
+- **Build pages and sites**: `build_page.py` and `build_site.py` commit a page spec through Mosaic's REST write path and refuse what is measured to break the page.
+- **Check the delivered page**: verifiers read the public page in Chromium (responsive rules, computed styles, menus, dialogs, sliders, forms) instead of trusting the commit.
+- **Move and convert**: export and import whole themes, drive Mosaic's data upgrades, and convert Elementor pages into Mosaic.
+
+## When to use
+
+Use it when the site runs Mosaic Pro and you want to build or change pages, templates, components, design tokens, popups, menus or interactions without opening the editor, or need to know exactly what a Mosaic setting does.
+
+Do not use it for other builders: Elementor pages go to `elementor-headless`, block-editor pages to `gutenberg-headless`, SEO articles to `rankmath-seo-wp`. It does not do WordPress site health checks, plugin updates or security work.
 
 ## Install
 
-```bash
-npx mosaic-headless                          # interactive: pick a platform
-npx mosaic-headless claude-code --global     # Claude Code, into ~/.claude/skills/
-npx mosaic-headless cursor --to ./my-project
-npx mosaic-headless --list                   # all eight platforms
+Claude plugin (Claude Code; also from the Claude directory once listed):
+
+```
+/plugin install mosaic-headless --marketplace Moksa1123/mosaic-headless
 ```
 
-| platform | what is installed | where |
-|---|---|---|
-| Claude Code | full skill: SKILL.md + references/ + tools/ + data/ + sites/ | `~/.claude/skills/` or `./.claude/skills/` |
-| Codex CLI | full skill | `~/.codex/` |
-| Gemini CLI | full skill | `~/.gemini/` |
-| GitHub Copilot | full skill, plus a section appended to `copilot-instructions.md` | `./.github/` |
-| Cursor | one `.mdc` rule with the references embedded | `~/.cursor/rules/` |
-| Windsurf | one rule file with the references embedded | `./.devin/` |
-| Continue | one rule file with the references embedded | `~/.continue/` |
-| Claude.ai | a zip to upload as a project skill | wherever you save it |
-
-Every platform install is verified by the release gate against its template. The
-tools need Python 3 and Playwright to run; the rule-file platforms get the knowledge
-without the tools.
-
-**Updating does not happen on its own.** A new version on npm changes nothing in
-the folder your agent loads; re-run the installer with `--force` (without it, it
-refuses to overwrite a SKILL.md you may have edited):
+npx, for Claude Code and other AI coding tools (Cursor, Codex CLI, Gemini CLI, Copilot, Continue, Windsurf, a Claude.ai upload zip):
 
 ```bash
 npx mosaic-headless@latest claude-code --global --force
+npx mosaic-headless --list
 ```
 
-
-## Install as a Claude plugin
-
-The repository is also a Claude plugin: `.claude-plugin/plugin.json` at the root, and
-the root `SKILL.md` loads as its one skill. Once the plugin is listed in the Claude
-directory, install it from there. Until then, Claude Code can load a clone directly:
+Manual copy:
 
 ```bash
-git clone https://github.com/Moksa1123/mosaic-headless
-claude --plugin-dir ./mosaic-headless
+git clone https://github.com/Moksa1123/mosaic-headless.git
+cp -r mosaic-headless ~/.claude/skills/mosaic-headless
 ```
 
-This is an independent project. It is not made by, endorsed by, or affiliated with
-Nextend, the maker of Mosaic Pro.
+Requirements: Python 3 (the lookup, build and self-test tools use the standard library only); Playwright for the browser verifiers (`requirements.txt`); WP-CLI on the server for the `.php` tools; Node.js only for the npx installer. Works on Windows, macOS and Linux. A new npm version changes nothing until you re-run the installer with `--force`.
 
-## What this plugin runs and connects to
+## Quick start
 
-The plugin has no hooks, no MCP servers and no background processes. Everything
-below runs only when Claude follows `SKILL.md` and you approve the command:
+Ask the assistant, for example:
 
-- **`tools/mo.py`** reads the CSV tables in `data/` and prints answers. It writes
-  nothing and contacts nothing.
-- **`tools/*.php`** run inside your own WordPress through `wp eval-file`. They read
-  and write Mosaic's own tables and theme data on that site.
-- **`tools/mint_session.php`** creates a logged-in WordPress session and a matching
-  REST nonce for an account on *your* site. They are printed to your terminal and
-  sent nowhere else. **Nothing here goes looking for a credential on your machine** -
-  you supply the session, one of two ways:
-  - installed as a plugin, Claude Code prompts for `Mosaic site URL`,
-    `WordPress logged-in cookie` and `wp_rest nonce`. The two credentials are
-    declared `sensitive`, so they are masked on entry and kept in your platform's
-    credential store, not in `settings.json`. Export them for a tool run as
-    `MOSAIC_SITE_URL`, `MOSAIC_REST_COOKIE` and `MOSAIC_REST_NONCE`
-  - or put them in a JSON file of your own and pass `--config <file>`, which is what
-    the examples in the skill show
-  The environment wins over the file, and with the environment set no credential
-  needs to be written to disk at all.
-- **`tools/build_site.py`, `data_upgrade.py`, `theme_zip.py`, `probe_accordion.py` and the `sweep_*.py`
-  tools** call Mosaic's REST routes on the site in that config file, with that
-  session, to read and write pages, components and themes. They contact only that
-  site.
-- **`tools/verify_*.py`** open pages of that same site with Playwright (Chromium) or
-  `urllib` and compare what was delivered with what was written.
-- **`sites/`** holds the worked example (the author's own site) as readable Python
-  modules. `python sites/_moksa.py` generates `sites/moksa.json` from them; the
-  generated file is not shipped. The design loads Google Fonts, so pages built from
-  it make visitors' browsers fetch fonts from Google, as any page using Google Fonts
-  does.
+- "Build a landing section on my Mosaic site: an H1, a paragraph and a button to /contact/."
+- "Can I put an accordion-content directly inside a div in Mosaic?"
+- "Add a popover tour with three steps that advances when each step closes."
 
-The tools need Python 3 and Playwright. Nothing is downloaded at install time, and no
-data is sent to the author or any third party.
-
-## What this is
-
-Mosaic keeps a page in **23 custom database tables**, not in `post_content` and not
-in `postmeta`. One row per element, the tree carried by a `parentID` column, sibling
-order by a fractional-index string. The editor is one client of that model. It is not
-the format, and you do not need it.
-
-This skill is the map of that model — measured against a live install rather than
-read off the source — plus the tools to write through it, check what came out, and
-bring pages in from Elementor.
-
-## How the pieces fit
-
-```mermaid
-flowchart LR
-    subgraph measure["measured once, against a live install"]
-        SRC[plugin source] -->|extract_*.py| D[(data/*.csv)]
-        SW[sweep_*.py / probe_*.py] -->|commit, render, assert| D
-    end
-
-    subgraph write["every page you build"]
-        Q[mo.py] -->|one answer, verdict first| SPEC[page spec]
-        EL[Elementor _elementor_data] -->|from_elementor.py| SPEC
-        SPEC -->|build_page.py refuses what breaks| REST[Mosaic REST: checkout, check, commit]
-        REST --> DB[(23 tables)]
-        DB --> PAGE[served page]
-    end
-
-    subgraph verify["never trust the commit"]
-        PAGE --> V1[verify_rwd.py]
-        PAGE --> V2[verify_browser.py + design audit]
-        PAGE --> V3[verify_intro.py / verify_loop.py]
-        PAGE --> V4[verify_conversion.py]
-        V1 & V2 & V3 & V4 --> CSV[(verification CSVs)]
-        CSV --> GATE[check-release.mjs]
-    end
-
-    D --> Q
-    D --> SPEC
-```
-
-Left to right: the tables are measured once and shipped; every page is written
-through them and refused when they say no; and nothing is believed until the
-delivered page has been read back and the result recorded in a table that the
-release gate checks.
-
-## The one rule
-
-**Never write a node type, property name, enum value, style key or Free/Pro claim
-from memory. Look it up in `data/`.**
-
-And look it up with `mo.py`, not grep. Grep answers the question you typed; it does
-not answer the question you have. Ask grep about `accordion-content` and it confirms
-the type exists. The sweep says BROKE_PAGE: place one and the whole public page
-becomes a 54-byte error string. Both true, both the wrong answer — the note beside
-the row says that string names a missing parent, and that nested under
-`accordion > accordion-item` the type commits, renders, and hands you a
-keyboard-operable disclosure. `mo.py type` shows all three at once.
+Or query the data yourself:
 
 ```bash
-python tools/mo.py type accordion-content   # one type, joined to every live sweep
-python tools/mo.py check div text button    # exits 1 on an unsafe or unknown type
-python tools/mo.py params text              # everything settable on one type
-python tools/mo.py style --grouped          # the 20 that are inert set on their own
-python tools/mo.py states --verified        # the states measured to compile
-python tools/mo.py css grid-column          # which Mosaic key drives this CSS
+python tools/mo.py check div text accordion-content
 ```
 
-Then check the page. Mosaic has **eight** failure modes and only three of them change
-the HTTP status code:
-
 ```
-clean validator rejection   HTTP 200  + an `exceptions` array in the body
-PHP fatal during commit     HTTP 500  (15 of 129 types do this from a plain div)
-structurally invalid node   HTTP 200, committed, row in the DB, and the whole
-                            public page becomes a 54-byte error string
-wrong value SHAPE           HTTP 200, stored, and the CSS rule is simply absent
-right rule, wrong result    HTTP 200, in the stylesheet, correct, and the BROWSER
-                            computes something else
-no template for the URL     HTTP 406 with an EMPTY BODY for anyone not logged in
-render-time fatal from      HTTP 500 - the commit went through, the page dies when
-CONTENT                     Mosaic parses it. A `code` node's content is a template:
-                            `@media(` as every minifier writes it is read as a
-                            function call. `@media (` renders. build_page refuses
-                            the former.
-plugin upgrade renamed      HTTP 200, page intact, rows migrated - and CSS you wrote
-what the page emits         against an emitted class matches nothing. 1.0.8 turned
-                            `M_EL4 M_EL_Div` into `m-div _e`, state classes with it,
-                            `customStyles` into `customDeclarations`. The example's
-                            tap-to-enlarge stopped opening; verify_loop.py said so.
+type               outcome     why
+-----------------  ----------  -----------------------------------------------
+accordion-content  BROKE_PAGE  AccordionItemElementMResource instance required
 ```
 
-A successful commit is not evidence of a working page, and neither is a correct
-stylesheet. Every tool here fetches the page afterwards — and treats a 5xx as an
-empty page, because WordPress's "critical error" screen is 2,697 bytes and larger
-than any naive healthy-page floor.
+It exits 1: placed bare, that type commits and then turns the whole public page into an error string. `python tools/mo.py type accordion-content` says where it has to go instead.
 
-## What was verified, and how
+## Trigger phrases
 
-Everything ran against a live install — WordPress 7.1, WooCommerce 11.1, Mosaic Pro
-1.0.11, **unlicensed**: the licence gates the theme library and updates, not the node
-factories, so Pro types register and render regardless.
+English: Mosaic Pro, Nextend, build a Mosaic page without the editor, Mosaic padding / hover / breakpoint, Mosaic popup, popover, modal, Mosaic interaction, move a Mosaic theme, Mosaic upgrade, Elementor to Mosaic.
 
-| pass | result |
-|---|---|
-| **node types** | 129 / 129 swept one per document, committed → rendered → asserted → deleted: 77 RENDERED, 25 COMMITTED, 15 COMMIT_5xx, 12 BROKE_PAGE. Re-swept on 1.0.8: five types that used to commit silently now kill the page unparented. The non-rendering rows that are artefacts of committing without the required parent say so beside the row |
-| **style properties** | 101 / 101 written to a live page and checked against the compiled CSS: 61 COMPILED, 18 ABSENT, 21 SKIPPED |
-| **node properties** | 191 / 191 re-probed with a value shaped by each property's own validator chain: 39 APPLIED, 45 NO_EFFECT, 55 NO_HOST, 48 SKIPPED |
-| **responsive** | 733 `_t`/`_m` declarations across two sites asserted against the stylesheet the site actually served — all verified |
-| **browser** | 4,132 computed-style readings on two delivered pages in Chromium at three viewports: 2,929 compared and agreed, 912 not-comparable and labelled, **0 overridden** |
-| **design audit** | contrast, font fallback, CJK tracking, overflow, clipped text, line measure — run in the browser, **26 findings, every one ruled on in writing** — an acknowledgement without a reason is refused by the release gate |
-| **components** | the component system driven end to end, **8 of 8**: created under a category, document healed, tree filled through the writable instance, the read-only one refused the same write as a negative control, two instances on a page rendering one definition twice |
-| **style states** | 52 of the 53 states written to a live page and matched against the selector the table promises: **36 compiled exactly**, 13 NO_HOST, 3 SKIPPED, 0 BROKE_PAGE. Pseudo-classes are emitted UPPERCASE (`.M_EL9:HOVER`) |
-| **interactions** | the JS animation path probed with negative controls and the row read back: `propertyMetas` **is** accepted and stored; the property values still do not bind, and the boundary is now exact |
-| **accordion** | `accordion-item` and `accordion-content` sit in the sweep table as BROKE_PAGE; nested as their factory requires they commit and render, **7 of 7** |
-| **entrance animation** | the page-load sequence sampled at fifteen timestamps on a monotonic clock and asserted on eight counts. Costs one late frame over a page with no animation at all, because it waits for the document's first layout |
-| **perpetual animation** | a corner plate that keeps printing itself and opens to full size when tapped, **28 checks**: periodicity by scrubbing a paused timeline, occlusion of text *and* controls at five widths and twenty-five scroll stops with "never readable" as the failing condition, opened by pointer and by Enter, still under reduced motion |
-| **Elementor conversion** | every Elementor page of a production site — 19 pages, 3,292 elements — converted, built and checked against its source: **19 of 19**, 3,281 elements carried, 11 declared. Then the converted page through rwd, browser and the audit, with every finding classified inherited-or-introduced: **0 introduced** |
-| **theme export/import** | two paths, both round-tripped. `theme_export.php` moves rows as JSON over WP-CLI, ids intact. `theme_zip.py` drives Mosaic's **own** ZIP export/import — import lands in test mode unless told `--activate`, because the default is to switch the live site — and **22 checks** hold the copy against the source tree for tree |
-| **the skill itself** | `claude plugin eval .` — five cases a user would ask, three runs each, with and without the skill loaded, three LLM judges a run. **With: 1.00 on all five. Without: 0.00 on all five.** The baseline's best answer was to refuse |
-| **measured live** | 115 REST routes, 157 variants, 59 condition subjects, 23 tables / 210 columns |
-| **1.0.9 features** | the modal (`<dialog>`), OpenStreetMap, the exit-intent and scroll-depth triggers, run rules, memory actions and the modal shorthand, each built on a live page and exercised in a real browser: 19 of 19. An exit-intent popup that fires once a session is one object, no wiring |
-| **1.0.10 features** | the popover - Mosaic's first non-blocking dialog - built eight ways on a lab page and driven in Chromium: 37 of 37. A page-load notice that leaves the page scrollable and clickable, anchored menus and cards, the nine screen cells, the keepInView flip and its style state, a three-step tour on `afterClose`. Plus the modal's move onto the Popover API: top layer, `requestClose()`, and `display` on its host no longer pinning it open |
-| **slider** | the whole family nested as its factories require and driven in a browser, 19 of 19: advances on its own delay, arrows and bullets and the keyboard move it, holds still under `prefers-reduced-motion`. The bullet turns out to be a template repeated per slide - same id on every copy |
-| **a real site** | the nineteen converted Elementor pages assembled into one site with a real menu and a modal per page: 46 of 46 navigation checks, 19 of 19 modals, six distinct trigger / run-rule / memory / dismissal configurations |
-| **custom fields** | ACF and Meta Box, forty fields on a page, read back through `@VAR` / `@LOOP` off the delivered HTML: 59 of 62 resolve, 3 empties explained; loops over multi-value fields rendered exactly the field's rows. `tools/list_fields.php` prints the names Mosaic actually registers |
-| **upgraded live** | 1.0.7 -> 1.0.8 over the plugin's own milestone route, from outside wp-admin: 6 milestones, four tables renamed, every emitted class name changed, every `customStyles` rewritten - then every sweep above re-run on the result |
+中文：Mosaic、Nextend、不開編輯器做頁面、內距、外距、圓角、懸停、斷點、RWD、彈出視窗、浮動框、摺疊面板、頁籤、輪播、互動、動畫、搬佈景、Mosaic 升級、Elementor 轉 Mosaic。
 
-`SKIPPED`, `NO_HOST` and `INCONCLUSIVE` are never folded into a pass rate. A sweep
-that scores its own blind spots as successes is the thing this skill argues against.
+## What it runs and connects to
 
-## What it costs to consult
+- **Nothing runs on its own.** The plugin has no hooks, no MCP servers and no background processes. Tools run only when Claude follows `SKILL.md` and you approve the command.
+- **Offline, local only**: `tools/mo.py` reads the CSV files in `data/` and prints answers. `tools/test_mosaic.py` and `tools/check_numbers.py` read the repository. They write nothing and contact nothing.
+- **Your WordPress site, over its REST API**: `build_page.py`, `build_site.py`, `data_upgrade.py`, `theme_zip.py`, the `sweep_*.py` and `probe*.py` tools call Mosaic's REST routes on the one site you configure, to read and write pages, components, templates and themes. They contact only that site.
+- **Your WordPress site, through WP-CLI**: the `tools/*.php` scripts run inside your WordPress with `wp eval-file`, on the server (usually over your own SSH). They read and write Mosaic's tables and theme data on that site. `theme_delete.php` and `prune_unbound.php` delete data and run as a dry run unless told `--apply`.
+- **Reading your public pages**: `tools/verify_*.py` and `audit_mobile.py` open pages of that same site with Playwright (Chromium) or `urllib` and compare what was delivered with what was written.
+- **Credentials**: a site URL, a WordPress logged-in cookie and the matching `wp_rest` nonce, for an administrator on your own site. `tools/mint_session.php` prints them on the server. Installed as a plugin, Claude Code asks for them as `userConfig` values; the cookie and nonce are marked sensitive and kept in the platform's credential store. They can also come from environment variables (`MOSAIC_SITE_URL`, `MOSAIC_REST_COOKIE`, `MOSAIC_REST_NONCE`) or a JSON file you pass with `--config`. **No tool looks for credentials on your machine.**
+- **Third parties**: the worked example in `sites/` loads Google Fonts, so pages built from it make visitors' browsers fetch fonts from Google.
+- Nothing is downloaded at install time, and no data is sent to the author or anyone else.
 
-Three ways an agent can learn what a Mosaic node type or style key actually takes,
-priced on the same six tasks with tiktoken (`tools/benchmark_tokens.py`; run it
-yourself):
+## How it's verified
 
-| task | read the source | load every table | `mo.py` query |
-|---|---:|---:|---:|
-| place a heading, a paragraph and a linked button | 10,005 | 259,539 | **961** |
-| set padding, a border and a radius, responsively | 3,490 | 259,539 | **396** |
-| decide whether the accordion is usable, and how to nest it | 15,615 | 259,539 | **397** |
-| find which hover/focus states actually compile | 3,619 | 259,539 | **1,054** |
-| find which Mosaic key drives one CSS property | 1,862 | 259,539 | **51** |
-| know what is unsafe before committing anything | 63,172 | 259,539 | **288** |
+- Node types, node properties, style properties and style states are extracted from the plugin source (`tools/check_tables.py` re-extracts and diffs them), then written one at a time to a live install and asserted on the delivered HTML and compiled CSS.
+- The demo pages are re-read in Chromium: 733 responsive declarations checked against the served stylesheet and 4,132 computed-style readings at three viewports. Details: [verification-record.md](references/verification-record.md).
+- Self-test: `python tools/test_mosaic.py`, 42 offline tests (lookups, Chinese terms, the build output's shape and refusals, the public build interface, this repository's numbers and privacy).
+- Evals: 16 questions about Mosaic 1.0.10 to 1.0.12 behaviour; with the skill 16/16, without it 0/16. Results: [evals/RESULTS.md](evals/RESULTS.md).
+- Every number in `SKILL.md` and these READMEs is checked against the data by `tools/check_numbers.py`.
 
-**71–99.5% fewer tokens than reading the source, 99.6%+ fewer than loading the
-tables** — and the source could not have answered four of the six at all, because
-"declared" and "compiles" are different questions and only the sweeps asked the
-second one. The tables total 259,539 tokens; never load them. `mo.py` is the query.
+## Limits
 
-### Results worth knowing before you write anything
+- Measured against Mosaic Pro up to 1.0.13. Features that live only in the 1.0.13 editor (new style-variable types, List classes, pageLoad delay and others) are not measured yet and are not written by the tools.
+- Grid child placement properties emit nothing when written headlessly; some interaction shapes are still unmeasured.
+- The browser verifiers need Playwright and a site you can write to; they are not part of the offline self-test.
+- Open questions: [data/pending.csv](data/pending.csv). The long guide (failure modes, token costs, the Elementor converter, the worked example): [docs/guide.md](docs/guide.md).
 
-**A property that belongs to a `group` is inert when set on its own.** Exact in both
-directions: 78 ungrouped properties gave 58 COMPILED and 0 ABSENT; all 20 grouped
-ones gave 0 COMPILED. So `borderLeftWidth`, `outlineColor` and `gridColumnStart` are
-three instances of one rule, not three oddities. Use the grouped shape — `border`
-takes `{width, style, color}` — or `customDeclarations`.
+## Repo layout
 
-**A breakpoint override can CHANGE a property but never REMOVE one.** Narrow-screen
-`customDeclarations` that merely omits a border leaves the wide-screen border standing.
-Say `border-left:0` out loud.
-
-**Only four types take a `url`**: `button`, `menu-link`, `wysiwyg-link`,
-`dropdown-toggle`. On a `text` or an `image` it is accepted, stored, and emits no
-anchor. Wrap the thing in a `menu-link` instead — it takes any children and becomes
-a real `<a href>`.
-
-**An image's attachment-protocol path is relative to the uploads directory.**
-`wp-attachment://image/<id>/full/2026/09/pic.png` resolves and carries the
-attachment's width and height. Give it the full `wp-content/uploads/...` path — the
-obvious guess — and Mosaic prefixes the uploads base a second time, silently.
-
-## Elementor → Mosaic
-
-```bash
-wp post meta get 2360 _elementor_data > page.json
-python tools/from_elementor.py --data page.json --out spec.json --report conv.csv \
-    --uploads-base https://site/wp-content/uploads --slug works --post 208
-python tools/build_site.py --config c.json --site spec.json
-python tools/verify_conversion.py --data page.json --url https://site/works/ --report conv.csv
+```
+SKILL.md          what the assistant loads: sources, routing, tasks, verify
+data/             measured tables (CSV), Chinese terms, pending list
+references/       topic guides: data model, styling, dialogs, upgrades ...
+tools/            mo.py, build and verify tools, WP-CLI scripts, self-test
+sites/            the worked example as readable Python modules
+evals/            graded questions and results
+scripts/          installer and release gate
+assets/           per-platform install templates
+docs/             the long guide
+.claude-plugin/   plugin and marketplace manifests
 ```
 
-Scope was decided by counting, not by taste: across a real site's 19 pages,
-container / heading / text-editor / button / html / icon-list / divider / image are
-99.6% of every element present. The long tail — loop grids, forms, countdowns,
-third-party addons — is dynamic and has no node to become; each is reported by
-name and reason, never dropped, and `--strict` refuses to write a lossy spec.
+## License & author
 
-Layout, typography, colour, borders, links and images cross over, at all three
-breakpoints (`_tablet`/`_mobile` → `_t`/`_m`). What does not: entrance animations
-(Mosaic's interaction binding is unsolved), shape dividers, gradient overlays. The
-verifier then holds the built page against the source — every string, image, link
-and heading level — and it earned its place at once: it caught the converter losing
-19 of 21 links by writing `url` onto nodes that ignore it.
-
-## Tools
-
-| tool | does |
-|---|---|
-| `mo.py` | query the measured surface — **the front door** |
-| `build_page.py` / `build_site.py` | commit a spec through the guarded write path; refuses what is measured to break |
-| `from_elementor.py` / `verify_conversion.py` | Elementor → Mosaic, and proof the content arrived |
-| `verify_browser.py` | does the browser compute what the stylesheet promised, and does it pass a design audit |
-| `verify_rwd.py` | does every `_t`/`_m` declaration reach the served stylesheet |
-| `verify_intro.py` / `verify_loop.py` | a page-load sequence that ENDS; a perpetual one that loops, hides nothing, and opens |
-| `theme_export.php` / `theme_import.php` | a whole theme as JSON rows over WP-CLI, ids intact |
-| `prune_unbound.php` | clears the templates and masters that page rebuilds leave bound to nothing, with their nodes; dry run unless `--apply` |
-| `fix_text_runs.py` | makes buttons built before v1.34.1 editable in the Mosaic editor by wrapping their text the way the editor does; dry run unless `--apply` |
-| `scan_inline_tags.py` | read only: finds text that holds HTML tags, which Mosaic 1.0.11+ prints as visible `<p>` / `<br>` on the page, and warns on a document with a duplicate root |
-| `fix_inline_tags.py` | fixes what `scan_inline_tags.py` finds, turning the tags into real inline nodes; dry run unless `--apply` |
-| `theme_zip.py` / `theme_zip_compare.php` / `theme_delete.php` | Mosaic's own ZIP export/import from outside the editor, the copy held against the source, and a clean delete that refuses the live theme |
-| `list_fields.php` | every `@VAR` / `@LOOP` name a post's custom fields register, with values |
-| `verify_dialog.py` | the 1.0.9 modal, triggers, run rules and memory, driven in a browser |
-| `verify_popovers.py` | the 1.0.10 popover: placement, blocking, closedby, flip, chaining, driven in a browser |
-| `verify_slider.py` / `verify_navigation.py` | does the slider actually move; is every menu item a real link and every page reachable |
-| `data_upgrade.py` | after a plugin update, Mosaic's data migration over its own milestone route - the editor API is gone until it runs |
-| `sweep_*.py` / `probe_*.py` | the instruments the tables were made with |
-| `bootstrap_probe_theme.php` / `mint_session.php` | a licence-free scratch theme and a REST session from WP-CLI |
-
-## The worked example
-
-`sites/_moksa.py` builds a real studio site through the tables alone and ships as
-the reference: a homepage of 1,286 nodes with a scroll-tracking clause index on named
-view timelines, an entrance sequence that prints an ukiyo-e sheet one carved block
-at a time, a corner plate that keeps printing forever and opens when tapped, and a
-WooCommerce My Account page whose UI arrives through one `code` node running a
-shortcode. No JavaScript of its own anywhere. Every verification table in `data/`
-was produced against it.
-
-## Where to start
-
-1. `references/data-model.md` — where a page actually lives.
-2. `references/write-protocol.md` — checkout / check / commit.
-3. `references/failure-modes.md` — how Mosaic fails, measured. **Read before writing.**
-4. `references/responsive.md` — the state/breakpoint/property axis.
-5. `references/styling.md` — how a style value becomes CSS.
-6. `references/design-system.md` — variants (element classes) and design tokens.
-
-## Releasing
-
-```bash
-npm version minor      # bumps package.json, SKILL.md and eight platform templates,
-                       # commits, tags, pushes; the tag triggers release.yml
-```
-
-`scripts/check-release.mjs` gates every release on the things that are easy to get
-wrong: the version numbers agree, every `files` glob matches, every verification
-CSV still has the row count SKILL.md and the four READMEs quote, no design-audit
-finding is unreviewed, the eval suite is present, and **the tarball itself is
-inspected** — npm's `files` allowlist overrides `.gitignore`, and once put a real
-client's site into a package that was about to publish.
-
-Publishing runs on npm trusted publishing (OIDC): no token anywhere. Setup on
-npmjs.com under the package's Trusted Publisher: GitHub Actions, `Moksa1123` /
-`mosaic-headless`, workflow `release.yml`, environment **empty**.
-
-## Licence
-
-MIT. Mosaic Pro itself is licensed third-party software and is **not** included here.
+MIT License. Made by Moksa ([moksaweb.com](https://moksaweb.com)). Issues: [GitHub](https://github.com/Moksa1123/mosaic-headless/issues).
