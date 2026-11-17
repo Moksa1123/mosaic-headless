@@ -46,7 +46,8 @@ expression,namespace,name,label,declared_in
 @VAR('site/description'),site,description,Tagline,Mosaic/Compatibility/Common/VariableProviderSite.php
 @VAR('site/logouturl'),site,logouturl,Log out URL,Mosaic/Compatibility/Common/VariableProviderSite.php
 @VAR('site/name'),site,name,Title,Mosaic/Compatibility/Common/VariableProviderSite.php
-@VAR('site/timestamp'),site,timestamp,Timestamp,Mosaic/Compatibility/Common/VariableProviderSite.php
+@VAR('site/timestamp'),site,timestamp,Local timestamp,Mosaic/Compatibility/Common/VariableProviderSite.php
+@VAR('site/timestamp_gmt'),site,timestamp_gmt,Timestamp GMT,Mosaic/Compatibility/Common/VariableProviderSite.php
 @VAR('site/url'),site,url,Home URL,Mosaic/Compatibility/Common/VariableProviderSite.php
 @VAR('site/wpurl'),site,wpurl,Site URL,Mosaic/Compatibility/Common/VariableProviderSite.php
 @VAR('slider/count'),slider,count,Count,Mosaic/NodeTypes/Slider/SliderSlides/SliderSlidesElementMResource.php
@@ -62,7 +63,7 @@ expression,namespace,name,label,declared_in
 @VAR('user/lastName'),user,lastName,Last name,Mosaic/Compatibility/Common/VariableProviderCurrentUser.php
 @VAR('user/loggedin'),user,loggedin,Is logged in,Mosaic/Compatibility/Common/VariableProviderCurrentUser.php
 @VAR('user/url'),user,url,Website,Mosaic/Compatibility/Common/VariableProviderCurrentUser.php
-@VAR('user/user_registered'),user,user_registered,Register datetime,Mosaic/Compatibility/Common/VariableProviderCurrentUser.php
+@VAR('user/user_registered'),user,user_registered,Register datetime GMT,Mosaic/Compatibility/Common/VariableProviderCurrentUser.php
 @VAR('user/user_registered_date'),user,user_registered_date,Register date,Mosaic/Compatibility/Common/VariableProviderCurrentUser.php
 @VAR('user/user_registered_time'),user,user_registered_time,Register time,Mosaic/Compatibility/Common/VariableProviderCurrentUser.php
 @VAR('user/user_registered_timestamp'),user,user_registered_timestamp,Register timestamp,Mosaic/Compatibility/Common/VariableProviderCurrentUser.php

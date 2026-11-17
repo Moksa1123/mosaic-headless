@@ -406,3 +406,41 @@ those posts have no Mosaic template (`TemplateNotFoundException`).
   command said `--post 21`, which on this site is an unrelated probe page; its
   content was replaced and `/probe-recipes/` kept serving an older build. Look the
   ID up first.
+
+## 1.0.12 → 1.0.13 (source only, not yet on the live site)
+
+Released 2026-11-17. Read from the Pro package and diffed against 1.0.12; nothing
+below has been measured on a live install yet.
+
+**No data migration.** `defines.php` says `version 1.0.13`, `dataVersion 1.0.12`.
+Minimums in `defines.json`: PHP 8.2, WordPress 6.9.
+
+**Re-extracted** (`check_tables.py`: every source table matches):
+
+| table | change |
+|---|---|
+| node types, properties, placement, default children, style properties, states, interactions | unchanged |
+| `dynamic-variables.csv` | `@VAR('site/timestamp_gmt')` added; `site/timestamp` is now labelled "Local timestamp", `user/user_registered` "Register datetime GMT" |
+| `pluggables.csv` | +20: the ACPT integration (option pages, tables as a dynamic source, its filter subjects and `random` order) and `date` / `time` meta comparators |
+| node type labels | `Select` and `Toggle` are now `esc_html_x()` with a context; `extract_node_types.py` reads the `_x` form |
+
+**Translation.** The zh_TW strings now carry the designer glossary (內距, 外距,
+邊框, 圓角, 懸停, 斷點, 摺疊面板, 頁籤), and Fixed / Select / Snap / Toggle /
+Scale down each have a msgctxt (the form element Select is 下拉式方塊).
+`data/terms-zh.csv` maps both the 1.0.13 and the 1.0.9-1.0.12 wording.
+
+**Changed in PHP, not yet measured:** interaction and action uuids are re-mapped
+when a document is copied (`InteractionDataSub`, `ActionDataSub`), which matters to
+`theme_zip.py` and duplicate; ACF date / time values and ACPT tables in loops and
+conditions; length-validation messages.
+
+**Changelog items that live in the editor (JS) and need a live measurement before
+the skill can write them:** new collection-variable types (background / gradient,
+box shadow, text shadow, nested variables; font size and line height take a
+variable); the List element's Vertical / Horizontal / Ordered / Unordered classes;
+pageLoad delay; the scroll-direction offset; Slider / Tabs / Dropdown / Accordion
+interactions (the trigger ids were already in 1.0.12's source); Hide / Show in
+Editor actions; the accordion "all open" option; Style Guides renamed External
+Styles, with Gutenberg Styles. The dynamic-data function "renames" (`@FIND_IMAGE`
+...) change the docs, not the evaluator: the ids already had underscores in 1.0.12
+(`references/dynamic-content.md`).

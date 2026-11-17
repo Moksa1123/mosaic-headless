@@ -1,7 +1,7 @@
 ---
 name: "mosaic-headless"
 description: |
-  Build and modify Mosaic Pro (Nextend) WordPress sites by writing the data model directly - no visual editor, no DOM. Query the real surface with `mo.py` (134 node types, 120 node properties, 101 style properties, 60 style states, 157 variants, 75 dynamic variables, 16 interaction triggers, 115 REST routes) where every lookup leads with the measured verdict, not the declaration: each node type placed on a live site one at a time, each style and node property swept against compiled CSS and markup, the delivered pages re-read in Chromium at three viewports. Measured on Mosaic Pro 1.0.10: the popover (anchored or screen-placed, the flip state, afterClose-chained tours), the modal on the Popover API, OpenStreetMap, exit-intent and scroll-depth triggers, run rules and memory. Drives theme export/import and the 1.0.7 -> 1.0.10 data upgrades from outside wp-admin; re-extracted and re-verified on 1.0.11 and 1.0.12 (the buildable Select). 中文觸發：Mosaic、Nextend、不開編輯器做頁面、做一頁、整站、母版、範本、元件、變體、內距、外距、圓角、懸停、斷點、RWD、手機版、彈出視窗、浮動框、彈窗、摺疊面板、頁籤、輪播、表單、互動、動畫、深色模式、搬佈景、匯出匯入佈景、Mosaic 升級、Elementor 轉 Mosaic、自訂欄位。
+  Build and modify Mosaic Pro (Nextend) WordPress sites by writing the data model directly - no visual editor, no DOM. Query the real surface with `mo.py` (134 node types, 120 node properties, 101 style properties, 60 style states, 157 variants, 76 dynamic variables, 16 interaction triggers, 115 REST routes) where every lookup leads with the measured verdict, not the declaration: each node type placed on a live site one at a time, each style and node property swept against compiled CSS and markup, the delivered pages re-read in Chromium at three viewports. Measured on Mosaic Pro 1.0.10: the popover (anchored or screen-placed, the flip state, afterClose-chained tours), the modal on the Popover API, OpenStreetMap, exit-intent and scroll-depth triggers, run rules and memory. Drives theme export/import and the 1.0.7 -> 1.0.10 data upgrades from outside wp-admin; re-extracted and re-verified on 1.0.11 and 1.0.12 (the buildable Select). 中文觸發：Mosaic、Nextend、不開編輯器做頁面、做一頁、整站、母版、範本、元件、變體、內距、外距、圓角、懸停、斷點、RWD、手機版、彈出視窗、浮動框、彈窗、摺疊面板、頁籤、輪播、表單、互動、動畫、深色模式、搬佈景、匯出匯入佈景、Mosaic 升級、Elementor 轉 Mosaic、自訂欄位。
 license: "MIT"
 user-invocable: true
 metadata:
@@ -22,13 +22,13 @@ health, not plugin audits.
 
 | | |
 |---|---|
-| Surface | Extracted from the Mosaic Pro plugin source and re-extracted on **Mosaic Pro 1.0.12** (unlicensed: the licence gates the theme library, not the node factories). `tools/check_tables.py` re-extracts every source table and diffs it against `data/` |
+| Surface | Extracted from the Mosaic Pro plugin source, last re-extracted on **Mosaic Pro 1.0.13** (unlicensed: the licence gates the theme library, not the node factories). `tools/check_tables.py` re-extracts every source table and diffs it against `data/`. 1.0.13's editor-side features are not measured yet: [upgrading.md](references/upgrading.md) |
 | Measured on | A live WordPress 7.1 + WooCommerce 11.1 install, upgraded in place from 1.0.7 to 1.0.12. Node sweep: 133 of 134 types on 1.0.11 / 1.0.12 (`document` excluded: its probe wrecks the master). Older rows say which version they ran on. Detail: [verification-record.md](references/verification-record.md) |
-| Size | 134 node types, 120 node property names declared in 201 rows (one row per owning data class), 191 node-property probe rows covering 118 of those names (`ariaLive` and `positioning` not yet probed), 101 style properties, 60 style states, 157 variants, 75 dynamic variables, 16 interaction triggers, 115 REST routes, 23 tables. Current counts: `python tools/mo.py stats` - do not quote numbers from memory |
+| Size | 134 node types, 120 node property names declared in 201 rows (one row per owning data class), 191 node-property probe rows covering 118 of those names (`ariaLive` and `positioning` not yet probed), 101 style properties, 60 style states, 157 variants, 76 dynamic variables, 16 interaction triggers, 115 REST routes, 23 tables. Current counts: `python tools/mo.py stats` - do not quote numbers from memory |
 | Provenance | Each table says where it came from: **source** (read out of the plugin code), **live** (captured from the running site), **swept / probed / driven** (written to a page and asserted on the delivered HTML, CSS or browser). Per-file list: [data-files.md](references/data-files.md) |
 | Chinese terms | `data/terms-zh.csv`: every row has `source` + `trust` |
-| Trust levels | `measured` (swept, probed, driven) > `documented` (plugin source, Mosaic's shipped zh_TW strings, Mosaic's docs) > `inferred` / `house-style` (the 2026-11-05 designer glossary, colloquial words). Never present the last two as Mosaic's own |
-| Last checked | 2026-11-16: offline self-test and SKILL.md number check pass; open gaps in `data/pending.csv` |
+| Trust levels | `measured` (swept, probed, driven) > `documented` (plugin source, Mosaic's shipped zh_TW strings, Mosaic's docs) > `inferred` / `house-style` (colloquial words, site conventions). Never present the last two as Mosaic's own |
+| Last checked | 2026-11-17: offline self-test and SKILL.md number check pass; open gaps in `data/pending.csv` |
 
 ## Usage
 

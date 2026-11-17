@@ -6,6 +6,8 @@ DynamicSources,configurableUser,,,Mosaic/Plugins/DynamicSources/DynamicSourceUse
 DynamicSources,wpMenuNavMenu,,,Mosaic/Plugins/DynamicSources/DynamicSourceWPMenu.php
 DynamicSources,configurableMenu,,,Mosaic/Plugins/DynamicSources/DynamicSourceWPMenu.php
 DynamicSources,configurableACFOptionsPage,,,Mosaic/Plugins/DynamicSources/Integrations/ACF/DynamicSourceACFOptionsPages.php
+DynamicSources,configurableACPTOptionPage,,,Mosaic/Plugins/DynamicSources/Integrations/ACPT/DynamicSourceACPTOptionPages.php
+DynamicSources,configurableACPTTable,,,Mosaic/Plugins/DynamicSources/Integrations/ACPT/DynamicSourceACPTTables.php
 DynamicSources,configurableMetaBoxModel,,,Mosaic/Plugins/DynamicSources/Integrations/MetaBox/DynamicSourceMetaBoxModels.php
 DynamicSources,configurableMetaBoxSettingsPage,,,Mosaic/Plugins/DynamicSources/Integrations/MetaBox/DynamicSourceMetaBoxSettingsPages.php
 Endpoints,post_variable,,,Mosaic/Plugins/Endpoints/PostVariable.php
@@ -28,6 +30,21 @@ EvaluatorEngine,breakpoint,,Mosaic\Plugins\EvaluatorEngine\BrowserConditions\Sub
 EvaluatorEngine,httpCookie,,Mosaic\Plugins\EvaluatorEngine\BrowserConditions\Subjects,Mosaic/Plugins/EvaluatorEngine/BrowserConditions/Subjects/BrowserConditionSubjectHttpCookie.php
 EvaluatorEngine,localStorage,,Mosaic\Plugins\EvaluatorEngine\BrowserConditions\Subjects,Mosaic/Plugins/EvaluatorEngine/BrowserConditions/Subjects/BrowserConditionSubjectLocalStorage.php
 EvaluatorEngine,reducedMotion,,Mosaic\Plugins\EvaluatorEngine\BrowserConditions\Subjects,Mosaic/Plugins/EvaluatorEngine/BrowserConditions/Subjects/BrowserConditionSubjectReducedMotion.php
+EvaluatorEngine,includes,,Mosaic\Plugins\EvaluatorEngine\Filters\Subject,Mosaic/Plugins/EvaluatorEngine/Filters/Subject/FilterSubjectACPTTables.php
+EvaluatorEngine,excludes,,Mosaic\Plugins\EvaluatorEngine\Filters\Subject,Mosaic/Plugins/EvaluatorEngine/Filters/Subject/FilterSubjectACPTTables.php
+EvaluatorEngine,text,,Mosaic\Plugins\EvaluatorEngine\Filters\Subject,Mosaic/Plugins/EvaluatorEngine/Filters/Subject/FilterSubjectACPTTables.php
+EvaluatorEngine,equals,,Mosaic\Plugins\EvaluatorEngine\Filters\Subject,Mosaic/Plugins/EvaluatorEngine/Filters/Subject/FilterSubjectACPTTables.php
+EvaluatorEngine,not-equals,,Mosaic\Plugins\EvaluatorEngine\Filters\Subject,Mosaic/Plugins/EvaluatorEngine/Filters/Subject/FilterSubjectACPTTables.php
+EvaluatorEngine,contains,,Mosaic\Plugins\EvaluatorEngine\Filters\Subject,Mosaic/Plugins/EvaluatorEngine/Filters/Subject/FilterSubjectACPTTables.php
+EvaluatorEngine,not-contains,,Mosaic\Plugins\EvaluatorEngine\Filters\Subject,Mosaic/Plugins/EvaluatorEngine/Filters/Subject/FilterSubjectACPTTables.php
+EvaluatorEngine,starts-with,,Mosaic\Plugins\EvaluatorEngine\Filters\Subject,Mosaic/Plugins/EvaluatorEngine/Filters/Subject/FilterSubjectACPTTables.php
+EvaluatorEngine,regexp,,Mosaic\Plugins\EvaluatorEngine\Filters\Subject,Mosaic/Plugins/EvaluatorEngine/Filters/Subject/FilterSubjectACPTTables.php
+EvaluatorEngine,number,,Mosaic\Plugins\EvaluatorEngine\Filters\Subject,Mosaic/Plugins/EvaluatorEngine/Filters/Subject/FilterSubjectACPTTables.php
+EvaluatorEngine,greater-than,,Mosaic\Plugins\EvaluatorEngine\Filters\Subject,Mosaic/Plugins/EvaluatorEngine/Filters/Subject/FilterSubjectACPTTables.php
+EvaluatorEngine,greater-than-or-equal,,Mosaic\Plugins\EvaluatorEngine\Filters\Subject,Mosaic/Plugins/EvaluatorEngine/Filters/Subject/FilterSubjectACPTTables.php
+EvaluatorEngine,less-than,,Mosaic\Plugins\EvaluatorEngine\Filters\Subject,Mosaic/Plugins/EvaluatorEngine/Filters/Subject/FilterSubjectACPTTables.php
+EvaluatorEngine,less-than-or-equal,,Mosaic\Plugins\EvaluatorEngine\Filters\Subject,Mosaic/Plugins/EvaluatorEngine/Filters/Subject/FilterSubjectACPTTables.php
+EvaluatorEngine,date,,Mosaic\Plugins\EvaluatorEngine\Filters\Subject,Mosaic/Plugins/EvaluatorEngine/Filters/Subject/FilterSubjectACPTTables.php
 EvaluatorEngine,includes,,Mosaic\Plugins\EvaluatorEngine\Filters\Subject,Mosaic/Plugins/EvaluatorEngine/Filters/Subject/FilterSubjectMetaBoxModels.php
 EvaluatorEngine,excludes,,Mosaic\Plugins\EvaluatorEngine\Filters\Subject,Mosaic/Plugins/EvaluatorEngine/Filters/Subject/FilterSubjectMetaBoxModels.php
 EvaluatorEngine,text,,Mosaic\Plugins\EvaluatorEngine\Filters\Subject,Mosaic/Plugins/EvaluatorEngine/Filters/Subject/FilterSubjectMetaBoxModels.php
@@ -100,6 +117,8 @@ EvaluatorEngine,greater-than,,Mosaic\Plugins\EvaluatorEngine\Filters\Subject,Mos
 EvaluatorEngine,greater-than-or-equal,,Mosaic\Plugins\EvaluatorEngine\Filters\Subject,Mosaic/Plugins/EvaluatorEngine/Filters/Subject/FilterSubjectWPMenu.php
 EvaluatorEngine,less-than,,Mosaic\Plugins\EvaluatorEngine\Filters\Subject,Mosaic/Plugins/EvaluatorEngine/Filters/Subject/FilterSubjectWPMenu.php
 EvaluatorEngine,less-than-or-equal,,Mosaic\Plugins\EvaluatorEngine\Filters\Subject,Mosaic/Plugins/EvaluatorEngine/Filters/Subject/FilterSubjectWPMenu.php
+EvaluatorEngine,date,,Mosaic\Plugins\EvaluatorEngine\Filters\Subject,Mosaic/Plugins/EvaluatorEngine/Filters/Subject/MetaDateComparators.php
+EvaluatorEngine,time,,Mosaic\Plugins\EvaluatorEngine\Filters\Subject,Mosaic/Plugins/EvaluatorEngine/Filters/Subject/MetaDateComparators.php
 EvaluatorEngine,httpCookie,,Mosaic\Plugins\EvaluatorEngine\ServerConditions\Subjects,Mosaic/Plugins/EvaluatorEngine/ServerConditions/Subjects/ServerConditionSubjectCookie.php
 EvaluatorEngine,httpGet,,Mosaic\Plugins\EvaluatorEngine\ServerConditions\Subjects,Mosaic/Plugins/EvaluatorEngine/ServerConditions/Subjects/ServerConditionSubjectHttpGet.php
 EvaluatorEngine,userCapability,,Mosaic\Plugins\EvaluatorEngine\ServerConditions\Subjects,Mosaic/Plugins/EvaluatorEngine/ServerConditions/Subjects/ServerConditionSubjectUserCapability.php
@@ -250,6 +269,7 @@ InteractionTypes,inactive,,Mosaic\Plugins\InteractionTypes\timed\tabchange,Mosai
 Links,author,,,Mosaic/Plugins/Links/Author.php
 Links,attachment,,,Mosaic/Plugins/Links/Media.php
 Links,posts_archive,,,Mosaic/Plugins/Links/PostArchives.php
+OrderBy,random,,Mosaic\Plugins\OrderBy\Type,Mosaic/Plugins/OrderBy/Type/OrderByTypeACPTTables.php
 OrderBy,random,,Mosaic\Plugins\OrderBy\Type,Mosaic/Plugins/OrderBy/Type/OrderByTypeMetaBoxModels.php
 OrderBy,postVariable,,Mosaic\Plugins\OrderBy\Type,Mosaic/Plugins/OrderBy/Type/OrderByTypePostTypes.php
 OrderBy,postMeta,,Mosaic\Plugins\OrderBy\Type,Mosaic/Plugins/OrderBy/Type/OrderByTypePostTypes.php

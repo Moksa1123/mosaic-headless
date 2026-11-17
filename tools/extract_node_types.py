@@ -39,7 +39,9 @@ RE_OPTS = re.compile(r"'(supportsInherit|isResponsive|supportsState|allowDuplica
 # createValidatorAcceptedValues([...]) is Mosaic's enum; the list is the only place
 # the legal values for a property are written down
 RE_ACCEPTED = re.compile(r"createValidatorAcceptedValues\s*\(\s*\[(.*?)\]", re.S)
-RE_LABEL_TEXT = re.compile(r"__\(\s*'([^']*)'")
+# __('X') / esc_html__('X'), and since 1.0.13 the context forms _x('X', 'ctx') /
+# esc_html_x('X', 'ctx') - the label is the first argument either way
+RE_LABEL_TEXT = re.compile(r"(?:__|_x)\(\s*'([^']*)'")
 RE_RESERVED = re.compile(r"setReservedAttributes\s*\(\s*\[(.*?)\]", re.S)
 
 

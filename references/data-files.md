@@ -91,12 +91,12 @@ Moved out of SKILL.md on 2026-11-16 (skill SOP pass). `scripts/check-release.mjs
 | `data/menu-verification.csv` | 34 | **driven live** - every way to build a site menu on one page: hover dropdown and mega panel (mouse, keyboard, touch tablet), and three phone menus (modal drawer, navbar, the tutorial's click panel) on a 390px touch phone - Esc, focus trap and return, aria, scroll lock, a sticky header over the close button |
 | `data/intro-verification.csv` | 8 + 15 | **sampled live** - the entrance sequence over fifteen timestamps on a monotonic clock, plus the eight assertions about it |
 | `data/variants.csv` | 157 | **live** — the variant catalog (Mosaic's built-in element classes); their IDs are what a `variant` record must use, and `class_name` is what the element emits |
-| `data/dynamic-variables.csv` | 75 | source — every `@VAR('ns/name')` expression, by namespace |
+| `data/dynamic-variables.csv` | 76 | source — every `@VAR('ns/name')` expression, by namespace |
 | `data/evaluator-functions.csv` | 19 | source — the `@` functions with their arity |
 | `data/interaction-types.csv` | 16 | source — trigger types, `timed` vs `progress`; 1.0.9 added exitIntent, scrollDepth and modal, 1.0.10 adds popover (Popover visibility change: show / beforeClose / afterClose) |
 | `data/animatable-properties.csv` | 22 | source — what a keyframe can drive (**not** the same set as the style properties) |
 | `data/condition-subjects.csv` | 59 | **live** — condition subjects per context |
 | `data/condition-comparators.csv` | 12 | **live** — comparators and their operator sets, captured on 1.0.9; the two date rows carry 1.0.10's four operators (after, after-or-equal, before, before-or-equal) from its source |
-| `data/pluggables.csv` | 285 | source — every `setID()` by registry |
+| `data/pluggables.csv` | 305 | source — every `setID()` by registry |
 | `data/rest-routes.csv` | 115 | **live** — method, path, args |
 | `data/db-columns.csv` | 210 | **live** — every column of all 23 tables |

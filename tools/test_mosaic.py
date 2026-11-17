@@ -171,9 +171,14 @@ class TermsTable(unittest.TestCase):
 
     def test_designer_glossary_present(self):
         by = {r["zh"]: r for r in self.terms}
+        # the 2026-11-05 designer glossary, shipped by Mosaic from 1.0.13
         for zh, en in (("內距", "padding"), ("外距", "margin"), ("懸停", "hover"), ("斷點", "breakpoint")):
             self.assertEqual(by[zh]["en"], en)
-            self.assertEqual(by[zh]["trust"], "house-style")
+            self.assertEqual(by[zh]["trust"], "documented")
+            self.assertIn("1.0.13", by[zh]["source"])
+        # the wording it replaced still resolves, for sites on 1.0.12 and earlier
+        for zh in ("邊框間距", "邊界", "游標暫留", "中斷點"):
+            self.assertIn("replaced in 1.0.13", by[zh]["source"])
 
 
 class BuildPageOffline(unittest.TestCase):
