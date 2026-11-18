@@ -37,6 +37,37 @@ Platform and rendered-tag facts, each measured. Moved out of SKILL.md on 2026-11
   failed query as "no root" and wrote a new empty one, with no REST write in the
   log. A site that sees this needs the load handled (bot rate limits, MySQL
   capacity) as much as the roots repaired.
+
+  **Why a lost connection becomes an empty root.** Found by the em925 site's
+  session reading Mosaic 1.0.12 and WordPress (2026-11-18), re-read here against
+  Mosaic 1.0.13 and WordPress 7.1.4:
+  - every front-end render builds its document with `load()` then `heal()`, and heal
+    may write (`Mosaic/Builder/AbstractDocument.php`, `createEditorInstance()` at line
+    376, `load()` / `heal()` at 380-381 in 1.0.13 - the file is byte-identical to 1.0.12);
+  - when the connection has gone away (errno 2006) and `check_connection()` cannot
+    reconnect, `wpdb::query()` returns `false` WITHOUT setting `last_error`
+    (`wp-includes/class-wpdb.php` lines 2282-2288 on 7.1.4), so `get_results()` hands
+    back the empty `last_result` that `flush()` left (lines 1921-1927);
+  - `MosaicDB::get_results()` treats an empty array with an empty `last_error` as
+    success (`Mosaic/Database/MosaicDB.php` line 25; identical in 1.0.12 and 1.0.13),
+    so "the database was unreachable" reads as "this document has no root", and heal
+    writes a new empty one - with empty instance overrides beside it.
+  The more nodes a page has, the more queries a render makes, and the more uncached
+  bot traffic a site gets, the likelier it is. A small site is less likely to hit it,
+  not immune.
+
+  **Prevention, measured on one live site (2026-11-18):** block front-end writes to
+  `wp_mosaic_nodes`. A `query` filter refuses `INSERT` / `REPLACE` / `DELETE` on that
+  table during an ordinary front-end request, while `UPDATE` passes and wp-admin,
+  admin-ajax, REST (the editor and these tools), WP-CLI and cron are untouched; form
+  submissions live in another table and are untouched too. When it blocks, the page
+  is marked uncacheable, logged and reported. Before switching it on, the site ran it
+  log-only over 34 pages: a normal render made 0 writes to `wp_mosaic_nodes`, so
+  blocking costs nothing. It is the lightest safe fix found so far and applies to any
+  Mosaic site; whether a site installs it is that site's owner's decision. The
+  implementation belongs to that site and is not shipped here - the description above
+  is enough to write one (a must-use plugin with a `query` filter and a log-only
+  switch).
 - **Changing a component's roots or its node ids empties its instances' overrides
   everywhere else.** An instance in another document (a template, the master) keeps
   one override node per component node, and heal re-syncs those nodes to the

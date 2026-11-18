@@ -154,7 +154,7 @@ Five facts that cause most broken pages (the rest: [facts.md](references/facts.m
 
 - A `button`'s words go in a `text` node (`build_page.py` wraps them); only four types take a `url`.
 - A `wysiwyg-text` run prints tags literally since 1.0.11: inline formatting is `wysiwyg-span` / `-link` / `-linebreak`.
-- One root per document, or every instance renders empty; `build_site.py` stops on a duplicate root. But deleting a root (or re-keying a component) makes heal empty that component's overrides in every other document: export them first.
+- One root per document, or every instance renders empty; `build_site.py` stops on a duplicate root. But deleting a root (or re-keying a component) makes heal empty that component's overrides in every other document: export them first. Empty roots come from a front-end render's heal reading a lost database connection as "no root"; blocking front-end writes to `wp_mosaic_nodes` prevents it ([facts.md](references/facts.md)).
 - `@media(` in a `code` node is a function call and returns HTTP 500 after a clean commit; write `@media (`.
 - `scrollDepth`'s action slot is `reached` since 1.0.10; the old slot name is stored and never runs.
 
