@@ -47,6 +47,7 @@
     "sites/_tokens.py",
     "tools/*.py",
     "tools/*.php",
+    "tools/*.sql",
     "SKILL.md",
     "README.md",
     "README.zh-TW.md",

@@ -49,6 +49,7 @@ Every tool in `tools/`, and where the REST session comes from. Moved out of SKIL
 | `bootstrap_probe_theme.php` | a licence-free scratch theme |
 | `mint_session.php` | a matching cookie + `wp_rest` nonce from WP-CLI |
 | `mosaic_config.py` | the one place a tool resolves the site URL and session - environment (`MOSAIC_SITE_URL` / `MOSAIC_REST_COOKIE` / `MOSAIC_REST_NONCE`) over `--config` file, so a credential never has to be written to disk |
+| `override_health.sql` | read only, `wp db query < tools/override_health.sql`: component instances whose override nodes heal emptied into `{"override":{"originalID":…}}` shells, and duplicate override nodes. Run it before and after deleting a root or changing a component (references/facts.md) |
 | `check_tables.py` | re-extract all eleven source-derived tables and diff them against the shipped ones - the check for a table that is not wrong but STALE, which nothing else can see |
 
 ## The session, and where it comes from

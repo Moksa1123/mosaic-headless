@@ -388,7 +388,11 @@ class SkillDoc(unittest.TestCase):
 
     def test_referenced_tools_exist(self):
         text = read("SKILL.md")
-        for name in set(re.findall(r"\b([a-z_]+\.(?:py|php))\b", text)):
+        # the override check is documented as read only: keep it that way
+        sql = read("tools/override_health.sql")
+        body = "\n".join(l for l in sql.splitlines() if not l.lstrip().startswith("--"))
+        self.assertIsNone(re.search(r"\b(DELETE|UPDATE|INSERT|REPLACE|DROP|ALTER|TRUNCATE)\b", body, re.I))
+        for name in set(re.findall(r"\b([a-z_]+\.(?:py|php|sql))\b", text)):
             hits = [os.path.join(d, name) for d in ("tools", "sites", "evals")
                     if os.path.exists(os.path.join(ROOT, d, name))]
             self.assertTrue(hits, name)

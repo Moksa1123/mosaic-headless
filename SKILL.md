@@ -138,6 +138,7 @@ fits, and say in the spec which native path was checked.
 | **Site menu** | `dropdown` with `openOn: hover`; phone drawer = `modal` opened by `modalOpen` | `verify_menus.py` exit 0 |
 | **Animation / interaction** | `tools/interactions.py` (meta-uuid keys, CSS-string values); never `@keyframes` in a code node | `verify_recipes.py` exit 0 (or `verify_intro.py` / `verify_loop.py` for that shape) |
 | **Form with a Select** | 1.0.12: `select > select-toggle + select-options > select-option`; `select-input` no longer exists | `verify_components.py` exit 0 |
+| **Delete a root, or change a component, on a site with content** | back up `wp_mosaic_nodes`; export every instance of the component with its override nodes; make the change; render the pages; run `tools/override_health.sql` ([facts.md](references/facts.md)) | no instance newly `all_shells = 1`; any that is, written back from the export |
 | **Move a theme** | `theme_zip.py export` / `import` (test mode unless `--activate`), or `theme_export.php` / `theme_import.php`; prune unbound masters first | `theme_zip_compare.php` all PASS |
 | **Plugin upgrade** | `data_upgrade.py`; re-extract (`extract_*.py`, `check_tables.py`); re-run the verifiers | [upgrading.md](references/upgrading.md) checklist; `scan_inline_tags.py` finds nothing |
 | **Elementor → Mosaic** | `from_elementor.py --strict`; build; check | `verify_conversion.py` exit 0 |
@@ -153,7 +154,7 @@ Five facts that cause most broken pages (the rest: [facts.md](references/facts.m
 
 - A `button`'s words go in a `text` node (`build_page.py` wraps them); only four types take a `url`.
 - A `wysiwyg-text` run prints tags literally since 1.0.11: inline formatting is `wysiwyg-span` / `-link` / `-linebreak`.
-- One root per document, or every instance renders empty; `build_site.py` stops on a duplicate root.
+- One root per document, or every instance renders empty; `build_site.py` stops on a duplicate root. But deleting a root (or re-keying a component) makes heal empty that component's overrides in every other document: export them first.
 - `@media(` in a `code` node is a function call and returns HTTP 500 after a clean commit; write `@media (`.
 - `scrollDepth`'s action slot is `reached` since 1.0.10; the old slot name is stored and never runs.
 
@@ -177,6 +178,7 @@ Every validator below exits 1 on any FAIL.
 | slider, tabs, accordion, forms, map | `verify_slider.py`, `verify_components.py` | exit 0 |
 | Elementor conversion | `verify_conversion.py` | exit 0: every string, image, link and heading level found |
 | theme move | `wp eval-file tools/theme_zip_compare.php <src> <copy> out.csv` | no FAIL row |
+| component instances | `wp db query < tools/override_health.sql` (read only) | no instance newly all shells, no duplicate override nodes |
 | this skill | `python tools/test_mosaic.py` | all pass (offline) |
 
 Read the page **logged out** (an admin sees a test-mode theme and 406

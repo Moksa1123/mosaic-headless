@@ -37,6 +37,34 @@ Platform and rendered-tag facts, each measured. Moved out of SKILL.md on 2026-11
   failed query as "no root" and wrote a new empty one, with no REST write in the
   log. A site that sees this needs the load handled (bot rate limits, MySQL
   capacity) as much as the roots repaired.
+- **Changing a component's roots or its node ids empties its instances' overrides
+  everywhere else.** An instance in another document (a template, the master) keeps
+  one override node per component node, and heal re-syncs those nodes to the
+  component on the next render that touches them. When the component's root or
+  internal ids changed, heal rebuilds each override as a shell -
+  `{"override":{"originalID":"<new id>"}}` - and the instance's text, links and
+  images fall back to the definition's. Measured twice:
+  - 2026-11-17, a live site: two components' extra empty roots were deleted by hand;
+    the first front-end requests afterwards turned every override of their instances
+    in the master into shells, and the footer's links and the header's cards lost all
+    their text and URLs until the overrides were rewritten.
+  - 2026-11-04, the demo site: rebuilding a component (which re-keys its internals)
+    turned all 70 override nodes of 7 instances in two older, unbound templates into
+    shells, every one pointing at the component's new ids; the bound templates were
+    rebuilt in the same run and kept theirs (which is why `build_site.py` rebuilds
+    every page that uses a component together).
+
+  So before deleting any root-type node (`master-root`, `component-internal`,
+  `template-internal`) or rebuilding a component on a site with content:
+  1. back up the whole node table: `wp db export pre-change.sql --tables=wp_mosaic_nodes`;
+  2. export every instance of that component and its override nodes:
+     `SELECT * FROM wp_mosaic_nodes WHERE parentType='override' AND parentID IN
+     (SELECT ID FROM wp_mosaic_nodes WHERE type='component-instance/<componentID>')`;
+  3. make the change, render the affected pages once, then run
+     `wp db query < tools/override_health.sql`: an instance with `all_shells = 1` that
+     was not all shells in the export lost its content - write it back from the
+     export (`build_site.py`'s override pass, or the saved rows).
+  `tools/override_health.sql` also lists duplicate override nodes. It is read only.
 - **`modified_gmt` is server-assigned.**
 - **Styling hangs on the generated `._<token>` class, not your `attrID`**, and the
   token (`_a`, `_b`, ... `_ba`: a base-38 per-document counter) is not stable. The
