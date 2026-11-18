@@ -141,6 +141,35 @@ def _readme_facts() -> dict:
     return f
 
 
+def _table_rows(rel: str) -> int:
+    """Row count of a data table; a directory counts every CSV in it."""
+    p = ROOT / rel
+    files = sorted(p.glob("*.csv")) if p.is_dir() else [p]
+    return sum(len(_rows_path(x)) for x in files)
+
+
+def _benchmark() -> dict:
+    """data/token-benchmark.csv keyed by its commands with the `mo.py ` prefixes dropped."""
+    out = {}
+    for r in _rows_path(ROOT / "data" / "token-benchmark.csv"):
+        out[r["commands"].replace("mo.py ", "").strip()] = r
+    return out
+
+
+def _special(kind: str, m: re.Match) -> list[tuple[tuple[int, int], str]]:
+    """(span, wanted) pairs for the table rules, which check several cells per match."""
+    if kind == "csvrows":
+        return [(m.span("num"), f"{_table_rows(m.group('key')):,}")]
+    if kind == "tokens":
+        row = _benchmark().get(m.group("key"))
+        if row is None:
+            return [(m.span("key"), "<no such row in data/token-benchmark.csv>")]
+        return [(m.span("src"), f"{int(row['tokens_read_source']):,}"),
+                (m.span("tab"), f"{int(row['tokens_load_tables']):,}"),
+                (m.span("q"), f"{int(row['tokens_query']):,}")]
+    raise ValueError(kind)
+
+
 def _rows_path(p) -> list[dict]:
     with open(p, encoding="utf-8", newline="") as fh:
         return list(csv.DictReader(fh))
@@ -164,7 +193,26 @@ README_RULES: list[tuple[str, str, str]] = [
     (r"Python 3", "fixed", "runtime requirement"),
     (r"\bH1\b", "fixed", "an HTML heading level in an example prompt"),
     (r"exits 1|exit code 1|終了コードは 1|종료 코드는 1", "fixed", "mo.py check's exit code (shown by running it)"),
-    (r"3 ステップ|3단계|1 つずつ|1 つにつき 1 行|1 つのサイト|3 つの画面幅|제3자", "fixed", "wording, not a measurement"),
+    (r"3 ステップ|3단계|1 つずつ|1 つにつき 1 行|1 つのサイト|3 つの画面幅|제3자|ルール 1 つ|ルールファイル 1 つ|1 回の検索|규칙 파일 1개|규칙 1개|조회 1회",
+     "fixed", "wording, not a measurement"),
+    # ---- badges (shields /badge/ URLs are not masked, so their numbers are checked) ----
+    (r"/badge/node_types-(\d+)-", "fact", "node_types"),
+    (r"/badge/node_properties-(\d+)-", "fact", "prop_names"),
+    (r"/badge/style_properties-(\d+)-", "fact", "style_props"),
+    (r"/badge/responsive_checks-(\d+)-", "fact", "rwd"),
+    (r"(\d+) ?(?:responsive checks|條 RWD 檢查|件のレスポンシブ検査|개 반응형 검사)", "fact", "rwd"),
+    (r"/badge/self--tests-(\d+)-", "fact", "tests"),
+    (r"(\d+) ?(?:self-tests|項自我測試|項目のセルフテスト|개 자체 테스트)", "fact", "tests"),
+    (r"/badge/python-3-|/badge/node-18_or_later-|Node\.js 18 (?:or later|以上|이상)", "fixed",
+     "runtime requirements (package.json engines: node >=18)"),
+    (r"</?h[13]\b", "fixed", "HTML heading tags of the centred title block"),
+    (r"Step [123]\b", "fixed", "step numbering in Install / Quick start"),
+    (r"1\.0\.11\+", "fixed", "version that escapes text-run markup (facts.md)"),
+    # ---- the restored tables ----
+    (r"\| `(?P<key>data/[^`]+)` \| (?P<num>\d{1,3}(?:,\d{3})*) \|", "csvrows", ""),
+    (r"\| `(?P<key>[^`]+)` \| (?P<src>[\d,]+) \| (?P<tab>[\d,]+) \| \*\*(?P<q>[\d,]+)\*\* \|", "tokens", ""),
+    (r"(?:six tasks|6 項任務|6 つのタスク|6가지 작업)", "fixed", "number of rows in data/token-benchmark.csv's task list"),
+    (r"(?:three viewports|三種寬度|3 つの画面幅|세 가지 화면 폭)", "fixed", "the verifier's viewport count"),
 ]
 
 
@@ -176,7 +224,8 @@ _MASKS = [
     re.compile(r"^```.*?^```", re.S | re.M),   # code blocks
     re.compile(r"`[^`\n]+`"),                  # inline code
     re.compile(r"\]\([^)\n]*\)"),              # markdown link targets
-    re.compile(r"https?://[^\s)）（，、|\"]+"),  # URLs
+    # URLs, except shields /badge/ ones: a badge's number must be claimed like any other
+    re.compile(r"https?://(?!img\.shields\.io/badge/)[^\s)）（，、|\"]+"),
 ]
 
 
@@ -208,6 +257,14 @@ def check(path: Path = SKILL_MD, fix: bool = False, rules=None, facts=None,
                 problems.append(f"rule unused ({path.name} wording changed?): {pattern}")
             continue
         for m in found:
+            if kind in ("csvrows", "tokens"):
+                covered.update(range(*m.span()))
+                for (a, b), want in _special(kind, m):
+                    got = text[a:b]
+                    if got != want:
+                        problems.append(f"{kind} {m.group('key')}: {path.name} says {got}, data says {want}")
+                        edits.append((a, b, want))
+                continue
             # the claimed number is the first group that matched (alternatives per language)
             gi = next((i for i in range(1, (m.re.groups or 0) + 1) if m.group(i) is not None), 0)
             span = m.span(gi) if gi else m.span()

@@ -1,31 +1,84 @@
-# mosaic-headless
+<h1 align="center">Mosaic Headless</h1>
 
-Build and modify Mosaic Pro (Nextend) WordPress sites by writing the data model directly: no visual editor, no DOM, every lookup answered from measurements on a live install.
+<h3 align="center">Mosaic Pro 無編輯器建站工具</h3>
 
-[![npm](https://img.shields.io/npm/v/mosaic-headless?style=flat-square)](https://www.npmjs.com/package/mosaic-headless)
-[![License: MIT](https://img.shields.io/github/license/Moksa1123/mosaic-headless?style=flat-square)](LICENSE)
+<p align="center">
+  <strong>Measured data model · Guarded page builder · Delivered-page verifiers</strong>
+</p>
 
-[正體中文](README.zh-TW.md) · [日本語](README.ja.md) · [한국어](README.ko.md)
+<p align="center">
+  <img src="https://img.shields.io/badge/python-3-blue?style=flat-square&logo=python&logoColor=white" alt="Python 3">
+  <img src="https://img.shields.io/badge/node-18_or_later-green?style=flat-square&logo=node.js&logoColor=white" alt="Node.js 18 or later">
+  <img src="https://img.shields.io/badge/playwright-browser_verifiers-blueviolet?style=flat-square" alt="Playwright for the browser verifiers">
+  <img src="https://img.shields.io/badge/WP--CLI-server_scripts-blue?style=flat-square&logo=wordpress&logoColor=white" alt="WP-CLI for the server scripts">
+</p>
+
+<p align="center">
+  <img src="https://img.shields.io/badge/node_types-134-success?style=flat-square" alt="134 node types">
+  <img src="https://img.shields.io/badge/node_properties-120-success?style=flat-square" alt="120 node properties">
+  <img src="https://img.shields.io/badge/style_properties-101-success?style=flat-square" alt="101 style properties">
+  <img src="https://img.shields.io/badge/responsive_checks-733-blueviolet?style=flat-square" alt="733 responsive checks">
+  <img src="https://img.shields.io/badge/self--tests-42-blueviolet?style=flat-square" alt="42 self-tests">
+</p>
+
+<p align="center">
+  <a href="https://www.npmjs.com/package/mosaic-headless"><img src="https://img.shields.io/npm/v/mosaic-headless?style=flat-square&logo=npm" alt="npm version"></a>
+  <a href="https://www.npmjs.com/package/mosaic-headless"><img src="https://img.shields.io/npm/dt/mosaic-headless?style=flat-square&label=downloads&color=cb3837" alt="npm downloads"></a>
+  <a href="LICENSE"><img src="https://img.shields.io/github/license/Moksa1123/mosaic-headless?style=flat-square" alt="License"></a>
+</p>
+
+<p align="center"><strong>English</strong> · <a href="README.zh-TW.md">正體中文</a> · <a href="README.ja.md">日本語</a> · <a href="README.ko.md">한국어</a></p>
 
 > This is an unofficial community project. It is not made by, endorsed by, or affiliated with Nextend, the maker of Mosaic Pro. Mosaic Pro is licensed third-party software and is not included here.
 
 ## What it does
 
-Mosaic keeps a page in its own database tables, one row per element, not in `post_content`. This skill is a measured map of that model plus the tools to write through it.
+Mosaic keeps a page in its own database tables, one row per element, not in `post_content`. This skill is a measured map of that model plus the tools to write through it, extracted from Mosaic Pro 1.0.13 and swept on a live site.
 
-- **Look it up instead of guessing**: `tools/mo.py` answers what a node type, property, style key or state is called, what value shape it takes, where it may go, and whether it is safe. The data covers 134 node types, 120 node properties, 101 style properties and 60 style states, extracted from Mosaic Pro 1.0.13 and swept on a live site.
-- **Chinese and colloquial words work**: `mo.py css 內距` finds padding; the terms follow Mosaic's own zh_TW strings.
-- **Build pages and sites**: `build_page.py` and `build_site.py` commit a page spec through Mosaic's REST write path and refuse what is measured to break the page.
-- **Check the delivered page**: verifiers read the public page in Chromium (responsive rules, computed styles, menus, dialogs, sliders, forms) instead of trusting the commit.
-- **Move and convert**: export and import whole themes, drive Mosaic's data upgrades, and convert Elementor pages into Mosaic.
+| Area | What you get |
+|---|---|
+| Lookup | `tools/mo.py`: 134 node types, 120 node properties, 101 style properties and 60 style states, each answered with its measured verdict; Chinese and colloquial words work (`mo.py css 內距`) |
+| Build | `build_page.py` / `build_site.py` commit a page spec through Mosaic's REST write path and refuse what is measured to break the page |
+| Verify | Chromium reads the delivered page: responsive rules, computed styles, menus, dialogs, sliders, forms |
+| Move | whole themes exported and imported, Mosaic's data upgrades driven from outside wp-admin |
+| Convert | Elementor pages turned into Mosaic specs, every unconverted element named |
+
+### Look it up before writing
+
+```bash
+python tools/mo.py type accordion-content   # one type, joined to every live sweep
+python tools/mo.py css 內距                  # Chinese works: padding-top/right/bottom/left
+python tools/mo.py facts section padding     # measured front-end behaviour
+```
+
+### Build through the guard
+
+```bash
+python tools/mo.py skeleton > page.json
+python tools/build_page.py --spec page.json   # refuses unsafe types, bad placement, out-of-enum values
+```
+
+### Check what visitors get
+
+```bash
+python tools/verify_rwd.py --site page.json       # every _t/_m declaration in the served stylesheet
+python tools/verify_browser.py --site page.json   # what Chromium computes, plus a design audit
+```
 
 ## When to use
 
 Use it when the site runs Mosaic Pro and you want to build or change pages, templates, components, design tokens, popups, menus or interactions without opening the editor, or need to know exactly what a Mosaic setting does.
 
-Do not use it for other builders: Elementor pages go to `elementor-headless`, block-editor pages to `gutenberg-headless`, SEO articles to `rankmath-seo-wp`. It does not do WordPress site health checks, plugin updates or security work.
+| Request | Go to |
+|---|---|
+| Elementor pages | `elementor-headless` |
+| Block-editor (Gutenberg) pages | `gutenberg-headless` |
+| SEO articles, Rank Math scores | `rankmath-seo-wp` |
+| Site health checks, plugin updates, security | out of scope |
 
 ## Install
+
+### Step 1: Pick an install method
 
 Claude plugin (Claude Code; also from the Claude directory once listed):
 
@@ -33,7 +86,7 @@ Claude plugin (Claude Code; also from the Claude directory once listed):
 /plugin install mosaic-headless --marketplace Moksa1123/mosaic-headless
 ```
 
-npx, for Claude Code and other AI coding tools (Cursor, Codex CLI, Gemini CLI, Copilot, Continue, Windsurf, a Claude.ai upload zip):
+npx, for Claude Code and other AI coding tools:
 
 ```bash
 npx mosaic-headless@latest claude-code --global --force
@@ -47,17 +100,22 @@ git clone https://github.com/Moksa1123/mosaic-headless.git
 cp -r mosaic-headless ~/.claude/skills/mosaic-headless
 ```
 
-Requirements: Python 3 (the lookup, build and self-test tools use the standard library only); Playwright for the browser verifiers (`requirements.txt`); WP-CLI on the server for the `.php` tools; Node.js only for the npx installer. Works on Windows, macOS and Linux. A new npm version changes nothing until you re-run the installer with `--force`.
+| Platform | What is installed | Where |
+|---|---|---|
+| Claude Code | full skill: SKILL.md, references, tools, data, sites, evals, scripts | `~/.claude/skills/` or `./.claude/skills/` |
+| Codex CLI | full skill | `~/.codex/skills/` |
+| Gemini CLI | full skill | `~/.gemini/skills/` |
+| GitHub Copilot | full skill | `./.github/skills/` |
+| Cursor | one `.mdc` rule with the references embedded | `~/.cursor/rules/` |
+| Windsurf | one rule file with the references embedded | `./.devin/rules/` |
+| Continue | one rule file with the references embedded | `~/.continue/rules/` |
+| Claude.ai | a zip to upload (SKILL.md, references, data, sites; no tools) | wherever you save it |
+
+Requirements: Python 3 (lookup, build and self-test use the standard library only); Playwright for the browser verifiers (`requirements.txt`); WP-CLI on the server for the `.php` tools; Node.js 18 or later only for the npx installer. Works on Windows, macOS and Linux. A new npm version changes nothing until you re-run the installer with `--force`.
 
 ## Quick start
 
-Ask the assistant, for example:
-
-- "Build a landing section on my Mosaic site: an H1, a paragraph and a button to /contact/."
-- "Can I put an accordion-content directly inside a div in Mosaic?"
-- "Add a popover tour with three steps that advances when each step closes."
-
-Or query the data yourself:
+### Step 2: Query the data
 
 ```bash
 python tools/mo.py check div text accordion-content
@@ -70,6 +128,12 @@ accordion-content  BROKE_PAGE  AccordionItemElementMResource instance required
 ```
 
 It exits 1: placed bare, that type commits and then turns the whole public page into an error string. `python tools/mo.py type accordion-content` says where it has to go instead.
+
+### Step 3: Ask the assistant
+
+- "Build a landing section on my Mosaic site: an H1, a paragraph and a button to /contact/."
+- "Can I put an accordion-content directly inside a div in Mosaic?"
+- "Add a popover tour with three steps that advances when each step closes."
 
 ## Trigger phrases
 
@@ -88,20 +152,57 @@ English: Mosaic Pro, Nextend, build a Mosaic page without the editor, Mosaic pad
 - **Third parties**: the worked example in `sites/` loads Google Fonts, so pages built from it make visitors' browsers fetch fonts from Google.
 - Nothing is downloaded at install time, and no data is sent to the author or anyone else.
 
+| Tool | Does | Touches |
+|---|---|---|
+| `mo.py` | query the measured surface, the front door | local `data/` only |
+| `build_page.py` / `build_site.py` | commit a spec through the guarded write path | your site (REST) |
+| `from_elementor.py` / `verify_conversion.py` | Elementor to Mosaic, and proof the content arrived | local file / your site |
+| `verify_rwd.py`, `verify_browser.py`, `verify_*.py` | read the delivered page in Chromium | your site (read) |
+| `theme_zip.py`, `theme_export.php` / `theme_import.php` | move a whole theme | your site (REST / WP-CLI) |
+| `data_upgrade.py` | run Mosaic's data migration after a plugin update | your site (REST) |
+| `scan_inline_tags.py` / `fix_inline_tags.py` | find and fix text that prints HTML tags on 1.0.11+ | your site (REST) |
+| `test_mosaic.py`, `check_numbers.py` | self-test and number check | this repository |
+
 ## How it's verified
 
-- Node types, node properties, style properties and style states are extracted from the plugin source (`tools/check_tables.py` re-extracts and diffs them), then written one at a time to a live install and asserted on the delivered HTML and compiled CSS.
-- The demo pages are re-read in Chromium: 733 responsive declarations checked against the served stylesheet and 4,132 computed-style readings at three viewports. Details: [verification-record.md](references/verification-record.md).
+Node types, node properties, style properties and style states are extracted from the plugin source (`tools/check_tables.py` re-extracts and diffs them), then written one at a time to a live install and asserted on the delivered HTML and compiled CSS. Each table below is in `data/`; the row count is checked by `tools/check_numbers.py`.
+
+| Table | Rows | What was checked |
+|---|---:|---|
+| `data/node-verification.csv` | 134 | every node type committed alone and read back from the public page |
+| `data/style-verification.csv` | 101 | every style property against the compiled CSS |
+| `data/node-property-verification.csv` | 191 | each node property probed with a value its own validator accepts |
+| `data/style-state-verification.csv` | 59 | each state matched against the selector it promises |
+| `data/rwd-verification.csv` | 733 | every `_t` / `_m` declaration against the served stylesheet |
+| `data/browser-verification/` | 4,132 | computed styles in Chromium at three viewports |
+| `data/popover-verification.csv` | 37 | the popover: placement, closing, flip, chained tours |
+| `data/menu-verification.csv` | 34 | hover dropdowns and phone menus with mouse, keyboard and touch |
+| `data/form-surface-verification.csv` | 23 | every form field, including the buildable Select |
+| `data/custom-fields-verification.csv` | 62 | ACF and Meta Box fields read through `@VAR` / `@LOOP` |
+| `data/theme-zip-verification.csv` | 22 | Mosaic's own theme ZIP round-tripped and compared |
+| `data/conversion-batch.csv` | 19 | every Elementor page of a site converted, built and checked |
+
 - Self-test: `python tools/test_mosaic.py`, 42 offline tests (lookups, Chinese terms, the build output's shape and refusals, the public build interface, this repository's numbers and privacy).
 - Evals: 16 questions about Mosaic 1.0.10 to 1.0.12 behaviour; with the skill 16/16, without it 0/16. Results: [evals/RESULTS.md](evals/RESULTS.md).
-- Every number in `SKILL.md` and these READMEs is checked against the data by `tools/check_numbers.py`.
+- Every number in `SKILL.md`, these READMEs and their badges is checked against the data by `tools/check_numbers.py`. Detail: [verification-record.md](references/verification-record.md).
+
+What a lookup costs, priced with tiktoken on the same six tasks (`data/token-benchmark.csv`, measured when the tables were built; `tools/benchmark_tokens.py` reproduces it). Never load the tables; query them.
+
+| `mo.py` commands | Read the source | Load every table | Query |
+|---|---:|---:|---:|
+| `params text ; params button ; prop url` | 10,005 | 259,539 | **961** |
+| `style --grouped ; css border-left-width ; css border-radius` | 3,490 | 259,539 | **396** |
+| `type accordion-content ; placement accordion-item` | 15,615 | 259,539 | **397** |
+| `states --verified` | 3,619 | 259,539 | **1,054** |
+| `css grid-column` | 1,862 | 259,539 | **51** |
+| `stats ; check div text button accordion-content` | 63,172 | 259,539 | **288** |
 
 ## Limits
 
 - Measured against Mosaic Pro up to 1.0.13. Features that live only in the 1.0.13 editor (new style-variable types, List classes, pageLoad delay and others) are not measured yet and are not written by the tools.
 - Grid child placement properties emit nothing when written headlessly; some interaction shapes are still unmeasured.
 - The browser verifiers need Playwright and a site you can write to; they are not part of the offline self-test.
-- Open questions: [data/pending.csv](data/pending.csv). The long guide (failure modes, token costs, the Elementor converter, the worked example): [docs/guide.md](docs/guide.md).
+- Open questions: [data/pending.csv](data/pending.csv). The long guide (failure modes, the Elementor converter, the worked example): [docs/guide.md](docs/guide.md).
 
 ## Repo layout
 

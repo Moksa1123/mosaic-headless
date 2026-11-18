@@ -365,6 +365,19 @@ class SkillDoc(unittest.TestCase):
                 self.assertEqual(found, heads[name], name)
             self.assertLessEqual(text.count("\n"), 250, name)
             self.assertIn("Nextend", text, name)
+            # the visual template (總機/README範本-taiwan原版.md): centred h1 + h3, three badge
+            # rows, and the tables restored from the pre-v1.38 README
+            self.assertTrue(text.startswith('<h1 align="center">'), name)
+            self.assertIn('<h3 align="center">', text, name)
+            self.assertGreaterEqual(text.count("img.shields.io"), 12, name)
+            for badge in ("/badge/node_types-", "/badge/style_properties-", "/badge/self--tests-",
+                          "/npm/v/mosaic-headless", "/npm/dt/mosaic-headless"):
+                self.assertIn(badge, text, name)
+            tables = len(re.findall(r"^\|[-:| ]+\|$", text, re.M))
+            self.assertGreaterEqual(tables, 6, "%s has %d tables" % (name, tables))
+            for row in ("| Claude.ai |", "`data/rwd-verification.csv`", "`css grid-column`",
+                        "`theme_zip.py`"):
+                self.assertIn(row, text, name)
 
     def test_links_resolve(self):
         text = read("SKILL.md")
