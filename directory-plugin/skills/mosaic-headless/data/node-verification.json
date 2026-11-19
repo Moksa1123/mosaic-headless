@@ -1,0 +1,1220 @@
+{
+ "source_file": "data/node-verification.csv",
+ "columns": [
+  "type",
+  "outcome",
+  "rendered_tag",
+  "rendered_classes",
+  "text_echoed",
+  "page_bytes",
+  "detail"
+ ],
+ "rows": [
+  {
+   "type": "accordion",
+   "outcome": "COMMITTED",
+   "rendered_tag": "",
+   "rendered_classes": "",
+   "text_echoed": "",
+   "page_bytes": "27919",
+   "detail": ""
+  },
+  {
+   "type": "accordion-content",
+   "outcome": "BROKE_PAGE",
+   "rendered_tag": "",
+   "rendered_classes": "",
+   "text_echoed": "",
+   "page_bytes": "47",
+   "detail": "AccordionItemElementMResource instance required"
+  },
+  {
+   "type": "accordion-item",
+   "outcome": "BROKE_PAGE",
+   "rendered_tag": "",
+   "rendered_classes": "",
+   "text_echoed": "",
+   "page_bytes": "43",
+   "detail": "AccordionElementMResource instance required"
+  },
+  {
+   "type": "accordion-title",
+   "outcome": "BROKE_PAGE",
+   "rendered_tag": "",
+   "rendered_classes": "",
+   "text_echoed": "",
+   "page_bytes": "0",
+   "detail": ""
+  },
+  {
+   "type": "accordion-loop-items",
+   "outcome": "COMMITTED",
+   "rendered_tag": "",
+   "rendered_classes": "",
+   "text_echoed": "",
+   "page_bytes": "27344",
+   "detail": ""
+  },
+  {
+   "type": "button",
+   "outcome": "RENDERED",
+   "rendered_tag": "button",
+   "rendered_classes": "m-button",
+   "text_echoed": "yes",
+   "page_bytes": "27807",
+   "detail": ""
+  },
+  {
+   "type": "component-instance",
+   "outcome": "COMMIT_500",
+   "rendered_tag": "",
+   "rendered_classes": "",
+   "text_echoed": "",
+   "page_bytes": "",
+   "detail": "PHP fatal / gateway error during commit"
+  },
+  {
+   "type": "component-external",
+   "outcome": "COMMITTED",
+   "rendered_tag": "",
+   "rendered_classes": "",
+   "text_echoed": "",
+   "page_bytes": "27722",
+   "detail": ""
+  },
+  {
+   "type": "component-internal",
+   "outcome": "COMMITTED",
+   "rendered_tag": "",
+   "rendered_classes": "",
+   "text_echoed": "",
+   "page_bytes": "27723",
+   "detail": ""
+  },
+  {
+   "type": "modal",
+   "outcome": "RENDERED",
+   "rendered_tag": "dialog",
+   "rendered_classes": "m-modal M_Dialog M_IJ",
+   "text_echoed": "",
+   "page_bytes": "27674",
+   "detail": ""
+  },
+  {
+   "type": "modal-overlay",
+   "outcome": "RENDERED",
+   "rendered_tag": "div",
+   "rendered_classes": "m-modal-overlay",
+   "text_echoed": "",
+   "page_bytes": "27796",
+   "detail": ""
+  },
+  {
+   "type": "modal-window",
+   "outcome": "RENDERED",
+   "rendered_tag": "div",
+   "rendered_classes": "m-modal-window",
+   "text_echoed": "",
+   "page_bytes": "27794",
+   "detail": ""
+  },
+  {
+   "type": "div",
+   "outcome": "RENDERED",
+   "rendered_tag": "div",
+   "rendered_classes": "m-div",
+   "text_echoed": "",
+   "page_bytes": "27762",
+   "detail": ""
+  },
+  {
+   "type": "body",
+   "outcome": "COMMITTED",
+   "rendered_tag": "",
+   "rendered_classes": "",
+   "text_echoed": "",
+   "page_bytes": "27344",
+   "detail": ""
+  },
+  {
+   "type": "document",
+   "outcome": "COMMIT_502",
+   "rendered_tag": "",
+   "rendered_classes": "",
+   "text_echoed": "",
+   "page_bytes": "",
+   "detail": "PHP fatal / gateway error during commit"
+  },
+  {
+   "type": "googlemaps",
+   "outcome": "COMMITTED",
+   "rendered_tag": "",
+   "rendered_classes": "",
+   "text_echoed": "",
+   "page_bytes": "27344",
+   "detail": ""
+  },
+  {
+   "type": "icon",
+   "outcome": "RENDERED",
+   "rendered_tag": "svg",
+   "rendered_classes": "m-icon",
+   "text_echoed": "",
+   "page_bytes": "28248",
+   "detail": ""
+  },
+  {
+   "type": "image",
+   "outcome": "COMMITTED",
+   "rendered_tag": "",
+   "rendered_classes": "",
+   "text_echoed": "",
+   "page_bytes": "27344",
+   "detail": ""
+  },
+  {
+   "type": "list",
+   "outcome": "COMMITTED",
+   "rendered_tag": "",
+   "rendered_classes": "",
+   "text_echoed": "",
+   "page_bytes": "27344",
+   "detail": ""
+  },
+  {
+   "type": "list-item",
+   "outcome": "RENDERED",
+   "rendered_tag": "li",
+   "rendered_classes": "m-list-item",
+   "text_echoed": "",
+   "page_bytes": "27773",
+   "detail": ""
+  },
+  {
+   "type": "list-loop-items",
+   "outcome": "COMMITTED",
+   "rendered_tag": "",
+   "rendered_classes": "",
+   "text_echoed": "",
+   "page_bytes": "27344",
+   "detail": ""
+  },
+  {
+   "type": "loop",
+   "outcome": "COMMIT_500",
+   "rendered_tag": "",
+   "rendered_classes": "",
+   "text_echoed": "",
+   "page_bytes": "",
+   "detail": "PHP fatal / gateway error during commit"
+  },
+  {
+   "type": "loop-item",
+   "outcome": "RENDERED",
+   "rendered_tag": "div",
+   "rendered_classes": "m-loop-item M_IJ",
+   "text_echoed": "",
+   "page_bytes": "27401",
+   "detail": ""
+  },
+  {
+   "type": "loop-items",
+   "outcome": "COMMIT_500",
+   "rendered_tag": "",
+   "rendered_classes": "",
+   "text_echoed": "",
+   "page_bytes": "",
+   "detail": "PHP fatal / gateway error during commit"
+  },
+  {
+   "type": "loop-no-result",
+   "outcome": "RENDERED",
+   "rendered_tag": "div",
+   "rendered_classes": "m-loop-no-result",
+   "text_echoed": "",
+   "page_bytes": "27785",
+   "detail": ""
+  },
+  {
+   "type": "loop-pagination-button-next",
+   "outcome": "BROKE_PAGE",
+   "rendered_tag": "",
+   "rendered_classes": "",
+   "text_echoed": "",
+   "page_bytes": "0",
+   "detail": ""
+  },
+  {
+   "type": "loop-pagination-button-previous",
+   "outcome": "BROKE_PAGE",
+   "rendered_tag": "",
+   "rendered_classes": "",
+   "text_echoed": "",
+   "page_bytes": "0",
+   "detail": ""
+  },
+  {
+   "type": "loop-pagination",
+   "outcome": "BROKE_PAGE",
+   "rendered_tag": "",
+   "rendered_classes": "",
+   "text_echoed": "",
+   "page_bytes": "0",
+   "detail": ""
+  },
+  {
+   "type": "loop-pagination-numbers",
+   "outcome": "COMMIT_500",
+   "rendered_tag": "",
+   "rendered_classes": "",
+   "text_echoed": "",
+   "page_bytes": "",
+   "detail": "PHP fatal / gateway error during commit"
+  },
+  {
+   "type": "loop-pagination-number",
+   "outcome": "COMMIT_500",
+   "rendered_tag": "",
+   "rendered_classes": "",
+   "text_echoed": "",
+   "page_bytes": "",
+   "detail": "PHP fatal / gateway error during commit"
+  },
+  {
+   "type": "dropdown-toggle",
+   "outcome": "RENDERED",
+   "rendered_tag": "div",
+   "rendered_classes": "m-dropdown-toggle",
+   "text_echoed": "",
+   "page_bytes": "27478",
+   "detail": ""
+  },
+  {
+   "type": "dropdown-wide",
+   "outcome": "RENDERED",
+   "rendered_tag": "mosaic-dropdown",
+   "rendered_classes": "m-dropdown-wide m-dropdown dropdown-mode",
+   "text_echoed": "",
+   "page_bytes": "27899",
+   "detail": ""
+  },
+  {
+   "type": "dropdown-wrapper-wide",
+   "outcome": "RENDERED",
+   "rendered_tag": "mosaic-dropdown-wrapper",
+   "rendered_classes": "m-dropdown-wrapper-wide m-dropdown-wrapper",
+   "text_echoed": "",
+   "page_bytes": "27857",
+   "detail": ""
+  },
+  {
+   "type": "dropdown",
+   "outcome": "RENDERED",
+   "rendered_tag": "mosaic-dropdown",
+   "rendered_classes": "m-dropdown-narrow m-dropdown dropdown-mode",
+   "text_echoed": "",
+   "page_bytes": "27929",
+   "detail": ""
+  },
+  {
+   "type": "dropdown-wrapper",
+   "outcome": "RENDERED",
+   "rendered_tag": "mosaic-dropdown-wrapper",
+   "rendered_classes": "m-dropdown-wrapper-narrow m-dropdown-wrapper",
+   "text_echoed": "",
+   "page_bytes": "27854",
+   "detail": ""
+  },
+  {
+   "type": "menu",
+   "outcome": "RENDERED",
+   "rendered_tag": "nav",
+   "rendered_classes": "m-menu",
+   "text_echoed": "",
+   "page_bytes": "27764",
+   "detail": ""
+  },
+  {
+   "type": "menu-link",
+   "outcome": "RENDERED",
+   "rendered_tag": "span",
+   "rendered_classes": "m-menu-link",
+   "text_echoed": "yes",
+   "page_bytes": "27419",
+   "detail": ""
+  },
+  {
+   "type": "wp-menu",
+   "outcome": "COMMITTED",
+   "rendered_tag": "",
+   "rendered_classes": "",
+   "text_echoed": "",
+   "page_bytes": "27343",
+   "detail": ""
+  },
+  {
+   "type": "navbar",
+   "outcome": "RENDERED",
+   "rendered_tag": "mosaic-navbar",
+   "rendered_classes": "m-navbar",
+   "text_echoed": "",
+   "page_bytes": "27653",
+   "detail": ""
+  },
+  {
+   "type": "navbar-toggle",
+   "outcome": "RENDERED",
+   "rendered_tag": "mosaic-navbar-toggle",
+   "rendered_classes": "m-navbar-toggle",
+   "text_echoed": "",
+   "page_bytes": "27905",
+   "detail": ""
+  },
+  {
+   "type": "navigation",
+   "outcome": "RENDERED",
+   "rendered_tag": "nav",
+   "rendered_classes": "m-navbar-navigation",
+   "text_echoed": "",
+   "page_bytes": "27784",
+   "detail": ""
+  },
+  {
+   "type": "openstreetmap",
+   "outcome": "RENDERED",
+   "rendered_tag": "mosaic-openstreetmap",
+   "rendered_classes": "m-osm",
+   "text_echoed": "",
+   "page_bytes": "27741",
+   "detail": ""
+  },
+  {
+   "type": "code",
+   "outcome": "RENDERED",
+   "rendered_tag": "div",
+   "rendered_classes": "m-code",
+   "text_echoed": "",
+   "page_bytes": "27791",
+   "detail": ""
+  },
+  {
+   "type": "form-wrapper",
+   "outcome": "RENDERED",
+   "rendered_tag": "mosaic-form-wrapper",
+   "rendered_classes": "m-form-wrapper",
+   "text_echoed": "",
+   "page_bytes": "28558",
+   "detail": ""
+  },
+  {
+   "type": "form",
+   "outcome": "RENDERED",
+   "rendered_tag": "form",
+   "rendered_classes": "m-form",
+   "text_echoed": "",
+   "page_bytes": "28194",
+   "detail": ""
+  },
+  {
+   "type": "checkbox-input",
+   "outcome": "BROKE_PAGE",
+   "rendered_tag": "",
+   "rendered_classes": "",
+   "text_echoed": "",
+   "page_bytes": "51",
+   "detail": "A choice input must be placed inside a ChoiceField."
+  },
+  {
+   "type": "choice-field",
+   "outcome": "RENDERED",
+   "rendered_tag": "fieldset",
+   "rendered_classes": "m-choice-field",
+   "text_echoed": "",
+   "page_bytes": "27908",
+   "detail": ""
+  },
+  {
+   "type": "choice-content",
+   "outcome": "RENDERED",
+   "rendered_tag": "div",
+   "rendered_classes": "m-choice-content",
+   "text_echoed": "",
+   "page_bytes": "27406",
+   "detail": ""
+  },
+  {
+   "type": "choice-legend",
+   "outcome": "RENDERED",
+   "rendered_tag": "div",
+   "rendered_classes": "m-choice-legend m-wysiwyg",
+   "text_echoed": "",
+   "page_bytes": "27829",
+   "detail": ""
+  },
+  {
+   "type": "choice",
+   "outcome": "RENDERED",
+   "rendered_tag": "label",
+   "rendered_classes": "m-choice",
+   "text_echoed": "",
+   "page_bytes": "27394",
+   "detail": ""
+  },
+  {
+   "type": "choice-label",
+   "outcome": "RENDERED",
+   "rendered_tag": "span",
+   "rendered_classes": "m-choice-label m-wysiwyg",
+   "text_echoed": "",
+   "page_bytes": "27414",
+   "detail": ""
+  },
+  {
+   "type": "fieldset",
+   "outcome": "RENDERED",
+   "rendered_tag": "fieldset",
+   "rendered_classes": "m-fieldset",
+   "text_echoed": "",
+   "page_bytes": "27525",
+   "detail": ""
+  },
+  {
+   "type": "field",
+   "outcome": "RENDERED",
+   "rendered_tag": "div",
+   "rendered_classes": "m-field",
+   "text_echoed": "",
+   "page_bytes": "27388",
+   "detail": ""
+  },
+  {
+   "type": "fileupload-input",
+   "outcome": "RENDERED",
+   "rendered_tag": "input",
+   "rendered_classes": "m-file-upload",
+   "text_echoed": "",
+   "page_bytes": "27834",
+   "detail": ""
+  },
+  {
+   "type": "form-error",
+   "outcome": "RENDERED",
+   "rendered_tag": "div",
+   "rendered_classes": "m-form-error",
+   "text_echoed": "",
+   "page_bytes": "27440",
+   "detail": ""
+  },
+  {
+   "type": "hidden-input",
+   "outcome": "COMMITTED",
+   "rendered_tag": "",
+   "rendered_classes": "",
+   "text_echoed": "",
+   "page_bytes": "27724",
+   "detail": ""
+  },
+  {
+   "type": "text-input",
+   "outcome": "RENDERED",
+   "rendered_tag": "input",
+   "rendered_classes": "m-input",
+   "text_echoed": "",
+   "page_bytes": "27409",
+   "detail": ""
+  },
+  {
+   "type": "label",
+   "outcome": "RENDERED",
+   "rendered_tag": "label",
+   "rendered_classes": "m-label m-wysiwyg",
+   "text_echoed": "yes",
+   "page_bytes": "27419",
+   "detail": ""
+  },
+  {
+   "type": "multi-steps-back-button",
+   "outcome": "RENDERED",
+   "rendered_tag": "a",
+   "rendered_classes": "m-form-step-button m-form-step-button-back",
+   "text_echoed": "",
+   "page_bytes": "29295",
+   "detail": ""
+  },
+  {
+   "type": "multi-steps-next-button",
+   "outcome": "RENDERED",
+   "rendered_tag": "a",
+   "rendered_classes": "m-form-step-button m-form-step-button-next",
+   "text_echoed": "",
+   "page_bytes": "29315",
+   "detail": ""
+  },
+  {
+   "type": "multi-steps-form-step",
+   "outcome": "BROKE_PAGE",
+   "rendered_tag": "",
+   "rendered_classes": "",
+   "text_echoed": "",
+   "page_bytes": "0",
+   "detail": ""
+  },
+  {
+   "type": "multi-steps-forms",
+   "outcome": "COMMIT_500",
+   "rendered_tag": "",
+   "rendered_classes": "",
+   "text_echoed": "",
+   "page_bytes": "",
+   "detail": "PHP fatal / gateway error during commit"
+  },
+  {
+   "type": "form-multi-steps",
+   "outcome": "RENDERED",
+   "rendered_tag": "div",
+   "rendered_classes": "m-multi-steps",
+   "text_echoed": "",
+   "page_bytes": "29252",
+   "detail": ""
+  },
+  {
+   "type": "form-multi-steps-step",
+   "outcome": "RENDERED",
+   "rendered_tag": "div",
+   "rendered_classes": "m-multi-steps-step-tab",
+   "text_echoed": "",
+   "page_bytes": "28963",
+   "detail": ""
+  },
+  {
+   "type": "form-multi-steps-steps",
+   "outcome": "COMMIT_500",
+   "rendered_tag": "",
+   "rendered_classes": "",
+   "text_echoed": "",
+   "page_bytes": "",
+   "detail": "PHP fatal / gateway error during commit"
+  },
+  {
+   "type": "radio-input",
+   "outcome": "BROKE_PAGE",
+   "rendered_tag": "",
+   "rendered_classes": "",
+   "text_echoed": "",
+   "page_bytes": "51",
+   "detail": "A choice input must be placed inside a ChoiceField."
+  },
+  {
+   "type": "recaptcha",
+   "outcome": "COMMITTED",
+   "rendered_tag": "",
+   "rendered_classes": "",
+   "text_echoed": "",
+   "page_bytes": "27722",
+   "detail": ""
+  },
+  {
+   "type": "select-option",
+   "outcome": "RENDERED",
+   "rendered_tag": "div",
+   "rendered_classes": "m-select-option",
+   "text_echoed": "",
+   "page_bytes": "28177",
+   "detail": ""
+  },
+  {
+   "type": "submit-label",
+   "outcome": "RENDERED",
+   "rendered_tag": "span",
+   "rendered_classes": "m-submit-label",
+   "text_echoed": "yes",
+   "page_bytes": "27807",
+   "detail": ""
+  },
+  {
+   "type": "submit-loading",
+   "outcome": "COMMITTED",
+   "rendered_tag": "",
+   "rendered_classes": "",
+   "text_echoed": "",
+   "page_bytes": "27722",
+   "detail": ""
+  },
+  {
+   "type": "submit-button",
+   "outcome": "RENDERED",
+   "rendered_tag": "button",
+   "rendered_classes": "m-submit-button",
+   "text_echoed": "",
+   "page_bytes": "27460",
+   "detail": ""
+  },
+  {
+   "type": "textarea-input",
+   "outcome": "RENDERED",
+   "rendered_tag": "textarea",
+   "rendered_classes": "m-textarea",
+   "text_echoed": "",
+   "page_bytes": "27410",
+   "detail": ""
+  },
+  {
+   "type": "turnstile",
+   "outcome": "COMMITTED",
+   "rendered_tag": "",
+   "rendered_classes": "",
+   "text_echoed": "",
+   "page_bytes": "27345",
+   "detail": ""
+  },
+  {
+   "type": "success-screen",
+   "outcome": "RENDERED",
+   "rendered_tag": "div",
+   "rendered_classes": "m-success-screen",
+   "text_echoed": "",
+   "page_bytes": "27838",
+   "detail": ""
+  },
+  {
+   "type": "slider-arrow-left",
+   "outcome": "RENDERED",
+   "rendered_tag": "mosaic-slider-arrow-left",
+   "rendered_classes": "m-slider-arrow m-slider-arrow-left",
+   "text_echoed": "",
+   "page_bytes": "27516",
+   "detail": ""
+  },
+  {
+   "type": "slider-arrow-right",
+   "outcome": "RENDERED",
+   "rendered_tag": "mosaic-slider-arrow-right",
+   "rendered_classes": "m-slider-arrow m-slider-arrow-right",
+   "text_echoed": "",
+   "page_bytes": "27898",
+   "detail": ""
+  },
+  {
+   "type": "slider",
+   "outcome": "COMMIT_500",
+   "rendered_tag": "",
+   "rendered_classes": "",
+   "text_echoed": "",
+   "page_bytes": "",
+   "detail": "PHP fatal / gateway error during commit"
+  },
+  {
+   "type": "slider-loop-slides",
+   "outcome": "COMMITTED",
+   "rendered_tag": "",
+   "rendered_classes": "",
+   "text_echoed": "",
+   "page_bytes": "27344",
+   "detail": ""
+  },
+  {
+   "type": "slider-navigation-bullet",
+   "outcome": "COMMIT_500",
+   "rendered_tag": "",
+   "rendered_classes": "",
+   "text_echoed": "",
+   "page_bytes": "",
+   "detail": "PHP fatal / gateway error during commit"
+  },
+  {
+   "type": "slider-navigation",
+   "outcome": "COMMIT_500",
+   "rendered_tag": "",
+   "rendered_classes": "",
+   "text_echoed": "",
+   "page_bytes": "",
+   "detail": "PHP fatal / gateway error during commit"
+  },
+  {
+   "type": "slider-slide",
+   "outcome": "BROKE_PAGE",
+   "rendered_tag": "",
+   "rendered_classes": "",
+   "text_echoed": "",
+   "page_bytes": "46",
+   "detail": "SliderSlidesElementMResource instance required"
+  },
+  {
+   "type": "slider-slides",
+   "outcome": "COMMIT_500",
+   "rendered_tag": "",
+   "rendered_classes": "",
+   "text_echoed": "",
+   "page_bytes": "",
+   "detail": "PHP fatal / gateway error during commit"
+  },
+  {
+   "type": "tabs-loop-tab-panes",
+   "outcome": "COMMITTED",
+   "rendered_tag": "",
+   "rendered_classes": "",
+   "text_echoed": "",
+   "page_bytes": "27345",
+   "detail": ""
+  },
+  {
+   "type": "tabs-tab-pane",
+   "outcome": "COMMITTED",
+   "rendered_tag": "",
+   "rendered_classes": "",
+   "text_echoed": "",
+   "page_bytes": "27723",
+   "detail": ""
+  },
+  {
+   "type": "tabs-content",
+   "outcome": "COMMIT_500",
+   "rendered_tag": "",
+   "rendered_classes": "",
+   "text_echoed": "",
+   "page_bytes": "",
+   "detail": "PHP fatal / gateway error during commit"
+  },
+  {
+   "type": "tabs",
+   "outcome": "RENDERED",
+   "rendered_tag": "mosaic-tabs",
+   "rendered_classes": "m-tabs",
+   "text_echoed": "",
+   "page_bytes": "28771",
+   "detail": ""
+  },
+  {
+   "type": "tabs-loop-tabs",
+   "outcome": "COMMIT_500",
+   "rendered_tag": "",
+   "rendered_classes": "",
+   "text_echoed": "",
+   "page_bytes": "",
+   "detail": "PHP fatal / gateway error during commit"
+  },
+  {
+   "type": "tabs-tab",
+   "outcome": "BROKE_PAGE",
+   "rendered_tag": "",
+   "rendered_classes": "",
+   "text_echoed": "",
+   "page_bytes": "74",
+   "detail": "TabsMenuElementMResource or TabLoopTabsElementMResource  instance required"
+  },
+  {
+   "type": "tabs-menu",
+   "outcome": "COMMIT_500",
+   "rendered_tag": "",
+   "rendered_classes": "",
+   "text_echoed": "",
+   "page_bytes": "",
+   "detail": "PHP fatal / gateway error during commit"
+  },
+  {
+   "type": "component-root",
+   "outcome": "COMMITTED",
+   "rendered_tag": "",
+   "rendered_classes": "",
+   "text_echoed": "",
+   "page_bytes": "27724",
+   "detail": ""
+  },
+  {
+   "type": "master-root",
+   "outcome": "COMMITTED",
+   "rendered_tag": "",
+   "rendered_classes": "",
+   "text_echoed": "",
+   "page_bytes": "27722",
+   "detail": ""
+  },
+  {
+   "type": "styleguide-root",
+   "outcome": "COMMITTED",
+   "rendered_tag": "",
+   "rendered_classes": "",
+   "text_echoed": "",
+   "page_bytes": "27344",
+   "detail": ""
+  },
+  {
+   "type": "styleguide-a",
+   "outcome": "RENDERED",
+   "rendered_tag": "a",
+   "rendered_classes": "m-styleguide-a",
+   "text_echoed": "",
+   "page_bytes": "27789",
+   "detail": ""
+  },
+  {
+   "type": "styleguide-entry-content-button",
+   "outcome": "RENDERED",
+   "rendered_tag": "a",
+   "rendered_classes": "wp-block-button__link wp-element-button",
+   "text_echoed": "",
+   "page_bytes": "27488",
+   "detail": ""
+  },
+  {
+   "type": "styleguide-entry-content-code",
+   "outcome": "RENDERED",
+   "rendered_tag": "pre",
+   "rendered_classes": "wp-block-code",
+   "text_echoed": "",
+   "page_bytes": "27907",
+   "detail": ""
+  },
+  {
+   "type": "styleguide-entry-content",
+   "outcome": "RENDERED",
+   "rendered_tag": "div",
+   "rendered_classes": "m-post-content",
+   "text_echoed": "",
+   "page_bytes": "112918",
+   "detail": ""
+  },
+  {
+   "type": "styleguide-entry-content-image-caption",
+   "outcome": "RENDERED",
+   "rendered_tag": "figcaption",
+   "rendered_classes": "wp-element-caption",
+   "text_echoed": "",
+   "page_bytes": "27830",
+   "detail": ""
+  },
+  {
+   "type": "styleguide-entry-content-image",
+   "outcome": "RENDERED",
+   "rendered_tag": "figure",
+   "rendered_classes": "wp-block-image",
+   "text_echoed": "",
+   "page_bytes": "29381",
+   "detail": ""
+  },
+  {
+   "type": "styleguide-entry-content-image-img",
+   "outcome": "RENDERED",
+   "rendered_tag": "img",
+   "rendered_classes": "",
+   "text_echoed": "",
+   "page_bytes": "29667",
+   "detail": ""
+  },
+  {
+   "type": "styleguide-entry-content-list",
+   "outcome": "RENDERED",
+   "rendered_tag": "ul",
+   "rendered_classes": "wp-block-list",
+   "text_echoed": "",
+   "page_bytes": "27853",
+   "detail": ""
+  },
+  {
+   "type": "styleguide-entry-content-list-item",
+   "outcome": "RENDERED",
+   "rendered_tag": "li",
+   "rendered_classes": "",
+   "text_echoed": "",
+   "page_bytes": "27448",
+   "detail": ""
+  },
+  {
+   "type": "styleguide-entry-content-preformatted",
+   "outcome": "RENDERED",
+   "rendered_tag": "pre",
+   "rendered_classes": "wp-block-preformatted",
+   "text_echoed": "",
+   "page_bytes": "27618",
+   "detail": ""
+  },
+  {
+   "type": "styleguide-entry-content-pullquote-cite",
+   "outcome": "RENDERED",
+   "rendered_tag": "cite",
+   "rendered_classes": "",
+   "text_echoed": "",
+   "page_bytes": "27806",
+   "detail": ""
+  },
+  {
+   "type": "styleguide-entry-content-pullquote",
+   "outcome": "RENDERED",
+   "rendered_tag": "figure",
+   "rendered_classes": "wp-block-pullquote",
+   "text_echoed": "",
+   "page_bytes": "27974",
+   "detail": ""
+  },
+  {
+   "type": "styleguide-entry-content-pullquote-paragraph",
+   "outcome": "RENDERED",
+   "rendered_tag": "p",
+   "rendered_classes": "",
+   "text_echoed": "",
+   "page_bytes": "27884",
+   "detail": ""
+  },
+  {
+   "type": "styleguide-entry-content-quote-cite",
+   "outcome": "RENDERED",
+   "rendered_tag": "cite",
+   "rendered_classes": "",
+   "text_echoed": "",
+   "page_bytes": "27801",
+   "detail": ""
+  },
+  {
+   "type": "styleguide-entry-content-text-quote",
+   "outcome": "RENDERED",
+   "rendered_tag": "blockquote",
+   "rendered_classes": "wp-block-quote",
+   "text_echoed": "",
+   "page_bytes": "27849",
+   "detail": ""
+  },
+  {
+   "type": "styleguide-entry-content-separator",
+   "outcome": "RENDERED",
+   "rendered_tag": "hr",
+   "rendered_classes": "wp-block-separator is-style-default",
+   "text_echoed": "",
+   "page_bytes": "27823",
+   "detail": ""
+  },
+  {
+   "type": "styleguide-entry-content-text",
+   "outcome": "RENDERED",
+   "rendered_tag": "h1",
+   "rendered_classes": "",
+   "text_echoed": "",
+   "page_bytes": "27408",
+   "detail": ""
+  },
+  {
+   "type": "styleguide-entry-content-verse",
+   "outcome": "RENDERED",
+   "rendered_tag": "pre",
+   "rendered_classes": "wp-block-verse",
+   "text_echoed": "",
+   "page_bytes": "27644",
+   "detail": ""
+  },
+  {
+   "type": "section",
+   "outcome": "RENDERED",
+   "rendered_tag": "section",
+   "rendered_classes": "m-section",
+   "text_echoed": "",
+   "page_bytes": "27402",
+   "detail": ""
+  },
+  {
+   "type": "template-external",
+   "outcome": "COMMITTED",
+   "rendered_tag": "",
+   "rendered_classes": "",
+   "text_echoed": "",
+   "page_bytes": "27343",
+   "detail": ""
+  },
+  {
+   "type": "template-internal",
+   "outcome": "COMMITTED",
+   "rendered_tag": "",
+   "rendered_classes": "",
+   "text_echoed": "",
+   "page_bytes": "27344",
+   "detail": ""
+  },
+  {
+   "type": "text",
+   "outcome": "RENDERED",
+   "rendered_tag": "div",
+   "rendered_classes": "m-text m-wysiwyg",
+   "text_echoed": "yes",
+   "page_bytes": "27790",
+   "detail": ""
+  },
+  {
+   "type": "__unknown",
+   "outcome": "COMMITTED",
+   "rendered_tag": "",
+   "rendered_classes": "",
+   "text_echoed": "",
+   "page_bytes": "27722",
+   "detail": ""
+  },
+  {
+   "type": "video",
+   "outcome": "RENDERED",
+   "rendered_tag": "video",
+   "rendered_classes": "m-video",
+   "text_echoed": "",
+   "page_bytes": "27612",
+   "detail": ""
+  },
+  {
+   "type": "vimeo",
+   "outcome": "RENDERED",
+   "rendered_tag": "mosaic-vimeo",
+   "rendered_classes": "m-vimeo",
+   "text_echoed": "",
+   "page_bytes": "28279",
+   "detail": ""
+  },
+  {
+   "type": "wpContent",
+   "outcome": "RENDERED",
+   "rendered_tag": "div",
+   "rendered_classes": "m-post-content",
+   "text_echoed": "",
+   "page_bytes": "27399",
+   "detail": ""
+  },
+  {
+   "type": "wpShortcode",
+   "outcome": "RENDERED",
+   "rendered_tag": "div",
+   "rendered_classes": "m-shortcode",
+   "text_echoed": "",
+   "page_bytes": "27409",
+   "detail": ""
+  },
+  {
+   "type": "wysiwyg-linebreak",
+   "outcome": "COMMITTED",
+   "rendered_tag": "",
+   "rendered_classes": "",
+   "text_echoed": "",
+   "page_bytes": "27348",
+   "detail": ""
+  },
+  {
+   "type": "wysiwyg-link",
+   "outcome": "RENDERED",
+   "rendered_tag": "span",
+   "rendered_classes": "m-inline-link",
+   "text_echoed": "",
+   "page_bytes": "27782",
+   "detail": ""
+  },
+  {
+   "type": "wysiwyg-span",
+   "outcome": "RENDERED",
+   "rendered_tag": "span",
+   "rendered_classes": "m-span",
+   "text_echoed": "",
+   "page_bytes": "27396",
+   "detail": ""
+  },
+  {
+   "type": "wysiwyg-text",
+   "outcome": "COMMITTED",
+   "rendered_tag": "",
+   "rendered_classes": "",
+   "text_echoed": "",
+   "page_bytes": "27344",
+   "detail": ""
+  },
+  {
+   "type": "wysiwyg-variable",
+   "outcome": "BROKE_PAGE",
+   "rendered_tag": "",
+   "rendered_classes": "",
+   "text_echoed": "",
+   "page_bytes": "54",
+   "detail": "NodeMResourceFilterFunctionInterface parent is missing"
+  },
+  {
+   "type": "youtube",
+   "outcome": "RENDERED",
+   "rendered_tag": "mosaic-youtube",
+   "rendered_classes": "m-youtube",
+   "text_echoed": "",
+   "page_bytes": "27993",
+   "detail": ""
+  },
+  {
+   "type": "popover",
+   "outcome": "RENDERED",
+   "rendered_tag": "div",
+   "rendered_classes": "m-popover M_Dialog M_IJ",
+   "text_echoed": "",
+   "page_bytes": "28043",
+   "detail": ""
+  },
+  {
+   "type": "fieldset-legend",
+   "outcome": "RENDERED",
+   "rendered_tag": "div",
+   "rendered_classes": "m-fieldset-legend m-wysiwyg",
+   "text_echoed": "",
+   "page_bytes": "27401",
+   "detail": ""
+  },
+  {
+   "type": "fieldset-content",
+   "outcome": "RENDERED",
+   "rendered_tag": "div",
+   "rendered_classes": "m-fieldset-content",
+   "text_echoed": "",
+   "page_bytes": "27357",
+   "detail": ""
+  },
+  {
+   "type": "select",
+   "outcome": "RENDERED",
+   "rendered_tag": "button",
+   "rendered_classes": "m-select-toggle",
+   "text_echoed": "",
+   "page_bytes": "28732",
+   "detail": ""
+  },
+  {
+   "type": "select-toggle",
+   "outcome": "RENDERED",
+   "rendered_tag": "button",
+   "rendered_classes": "m-select-toggle",
+   "text_echoed": "",
+   "page_bytes": "27999",
+   "detail": ""
+  },
+  {
+   "type": "select-placeholder",
+   "outcome": "RENDERED",
+   "rendered_tag": "span",
+   "rendered_classes": "m-select-placeholder-inner",
+   "text_echoed": "",
+   "page_bytes": "27834",
+   "detail": ""
+  },
+  {
+   "type": "select-options",
+   "outcome": "RENDERED",
+   "rendered_tag": "div",
+   "rendered_classes": "m-select-options",
+   "text_echoed": "",
+   "page_bytes": "27791",
+   "detail": ""
+  },
+  {
+   "type": "listbox",
+   "outcome": "RENDERED",
+   "rendered_tag": "select",
+   "rendered_classes": "m-listbox",
+   "text_echoed": "",
+   "page_bytes": "27777",
+   "detail": ""
+  },
+  {
+   "type": "listbox-option",
+   "outcome": "RENDERED",
+   "rendered_tag": "option",
+   "rendered_classes": "m-listbox-option",
+   "text_echoed": "",
+   "page_bytes": "27788",
+   "detail": ""
+  }
+ ]
+}

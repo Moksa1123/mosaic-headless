@@ -1,0 +1,2147 @@
+{
+ "source_file": "data/pluggables.csv",
+ "columns": [
+  "registry",
+  "id",
+  "label",
+  "namespace",
+  "file"
+ ],
+ "rows": [
+  {
+   "registry": "DynamicSources",
+   "id": "configurablePostType",
+   "label": "",
+   "namespace": "",
+   "file": "Mosaic/Plugins/DynamicSources/DynamicSourcePostTypes.php"
+  },
+  {
+   "registry": "DynamicSources",
+   "id": "configurableTaxonomy",
+   "label": "",
+   "namespace": "",
+   "file": "Mosaic/Plugins/DynamicSources/DynamicSourceTaxonomies.php"
+  },
+  {
+   "registry": "DynamicSources",
+   "id": "wpUser",
+   "label": "",
+   "namespace": "",
+   "file": "Mosaic/Plugins/DynamicSources/DynamicSourceUsers.php"
+  },
+  {
+   "registry": "DynamicSources",
+   "id": "configurableUser",
+   "label": "",
+   "namespace": "",
+   "file": "Mosaic/Plugins/DynamicSources/DynamicSourceUsers.php"
+  },
+  {
+   "registry": "DynamicSources",
+   "id": "wpMenuNavMenu",
+   "label": "",
+   "namespace": "",
+   "file": "Mosaic/Plugins/DynamicSources/DynamicSourceWPMenu.php"
+  },
+  {
+   "registry": "DynamicSources",
+   "id": "configurableMenu",
+   "label": "",
+   "namespace": "",
+   "file": "Mosaic/Plugins/DynamicSources/DynamicSourceWPMenu.php"
+  },
+  {
+   "registry": "DynamicSources",
+   "id": "configurableACFOptionsPage",
+   "label": "",
+   "namespace": "",
+   "file": "Mosaic/Plugins/DynamicSources/Integrations/ACF/DynamicSourceACFOptionsPages.php"
+  },
+  {
+   "registry": "DynamicSources",
+   "id": "configurableACPTOptionPage",
+   "label": "",
+   "namespace": "",
+   "file": "Mosaic/Plugins/DynamicSources/Integrations/ACPT/DynamicSourceACPTOptionPages.php"
+  },
+  {
+   "registry": "DynamicSources",
+   "id": "configurableACPTTable",
+   "label": "",
+   "namespace": "",
+   "file": "Mosaic/Plugins/DynamicSources/Integrations/ACPT/DynamicSourceACPTTables.php"
+  },
+  {
+   "registry": "DynamicSources",
+   "id": "configurableMetaBoxModel",
+   "label": "",
+   "namespace": "",
+   "file": "Mosaic/Plugins/DynamicSources/Integrations/MetaBox/DynamicSourceMetaBoxModels.php"
+  },
+  {
+   "registry": "DynamicSources",
+   "id": "configurableMetaBoxSettingsPage",
+   "label": "",
+   "namespace": "",
+   "file": "Mosaic/Plugins/DynamicSources/Integrations/MetaBox/DynamicSourceMetaBoxSettingsPages.php"
+  },
+  {
+   "registry": "Endpoints",
+   "id": "post_variable",
+   "label": "",
+   "namespace": "",
+   "file": "Mosaic/Plugins/Endpoints/PostVariable.php"
+  },
+  {
+   "registry": "Endpoints",
+   "id": "term_variable",
+   "label": "",
+   "namespace": "",
+   "file": "Mosaic/Plugins/Endpoints/TermVariable.php"
+  },
+  {
+   "registry": "Endpoints",
+   "id": "user_fields",
+   "label": "",
+   "namespace": "Mosaic\\Plugins\\Endpoints",
+   "file": "Mosaic/Plugins/Endpoints/UserFields.php"
+  },
+  {
+   "registry": "Endpoints",
+   "id": "users_meta",
+   "label": "",
+   "namespace": "Mosaic\\Plugins\\Endpoints",
+   "file": "Mosaic/Plugins/Endpoints/UserMeta.php"
+  },
+  {
+   "registry": "Endpoints",
+   "id": "user_variable",
+   "label": "",
+   "namespace": "",
+   "file": "Mosaic/Plugins/Endpoints/UserVariable.php"
+  },
+  {
+   "registry": "Endpoints",
+   "id": "users_list",
+   "label": "",
+   "namespace": "Mosaic\\Plugins\\Endpoints",
+   "file": "Mosaic/Plugins/Endpoints/Users.php"
+  },
+  {
+   "registry": "Endpoints",
+   "id": "wp_menus",
+   "label": "",
+   "namespace": "Mosaic\\Plugins\\Endpoints",
+   "file": "Mosaic/Plugins/Endpoints/WPMenus.php"
+  },
+  {
+   "registry": "Endpoints",
+   "id": "wp_menus_meta",
+   "label": "",
+   "namespace": "Mosaic\\Plugins\\Endpoints",
+   "file": "Mosaic/Plugins/Endpoints/WPMenus.php"
+  },
+  {
+   "registry": "Endpoints",
+   "id": "kit_fields",
+   "label": "",
+   "namespace": "Mosaic\\Plugins\\Endpoints\\Pro",
+   "file": "Mosaic/Plugins/Endpoints/Pro/Kit.php"
+  },
+  {
+   "registry": "Endpoints",
+   "id": "mailchimp_audiences",
+   "label": "",
+   "namespace": "Mosaic\\Plugins\\Endpoints\\Pro",
+   "file": "Mosaic/Plugins/Endpoints/Pro/Mailchimp.php"
+  },
+  {
+   "registry": "Endpoints",
+   "id": "mailchimp_fields",
+   "label": "",
+   "namespace": "Mosaic\\Plugins\\Endpoints\\Pro",
+   "file": "Mosaic/Plugins/Endpoints/Pro/Mailchimp.php"
+  },
+  {
+   "registry": "Endpoints",
+   "id": "mailchimp_interest_categories",
+   "label": "",
+   "namespace": "Mosaic\\Plugins\\Endpoints\\Pro",
+   "file": "Mosaic/Plugins/Endpoints/Pro/Mailchimp.php"
+  },
+  {
+   "registry": "Endpoints",
+   "id": "mailchimp_interests",
+   "label": "",
+   "namespace": "Mosaic\\Plugins\\Endpoints\\Pro",
+   "file": "Mosaic/Plugins/Endpoints/Pro/Mailchimp.php"
+  },
+  {
+   "registry": "Endpoints",
+   "id": "mailchimp_tags",
+   "label": "",
+   "namespace": "Mosaic\\Plugins\\Endpoints\\Pro",
+   "file": "Mosaic/Plugins/Endpoints/Pro/Mailchimp.php"
+  },
+  {
+   "registry": "Endpoints",
+   "id": "mailerlite_groups",
+   "label": "",
+   "namespace": "Mosaic\\Plugins\\Endpoints\\Pro",
+   "file": "Mosaic/Plugins/Endpoints/Pro/MailerLite.php"
+  },
+  {
+   "registry": "Endpoints",
+   "id": "mailerlite_fields",
+   "label": "",
+   "namespace": "Mosaic\\Plugins\\Endpoints\\Pro",
+   "file": "Mosaic/Plugins/Endpoints/Pro/MailerLite.php"
+  },
+  {
+   "registry": "EvaluatorEngine",
+   "id": "breakpoint",
+   "label": "",
+   "namespace": "Mosaic\\Plugins\\EvaluatorEngine\\BrowserConditions\\Subjects",
+   "file": "Mosaic/Plugins/EvaluatorEngine/BrowserConditions/Subjects/BrowserConditionSubjectBreakpoint.php"
+  },
+  {
+   "registry": "EvaluatorEngine",
+   "id": "httpCookie",
+   "label": "",
+   "namespace": "Mosaic\\Plugins\\EvaluatorEngine\\BrowserConditions\\Subjects",
+   "file": "Mosaic/Plugins/EvaluatorEngine/BrowserConditions/Subjects/BrowserConditionSubjectHttpCookie.php"
+  },
+  {
+   "registry": "EvaluatorEngine",
+   "id": "localStorage",
+   "label": "",
+   "namespace": "Mosaic\\Plugins\\EvaluatorEngine\\BrowserConditions\\Subjects",
+   "file": "Mosaic/Plugins/EvaluatorEngine/BrowserConditions/Subjects/BrowserConditionSubjectLocalStorage.php"
+  },
+  {
+   "registry": "EvaluatorEngine",
+   "id": "reducedMotion",
+   "label": "",
+   "namespace": "Mosaic\\Plugins\\EvaluatorEngine\\BrowserConditions\\Subjects",
+   "file": "Mosaic/Plugins/EvaluatorEngine/BrowserConditions/Subjects/BrowserConditionSubjectReducedMotion.php"
+  },
+  {
+   "registry": "EvaluatorEngine",
+   "id": "includes",
+   "label": "",
+   "namespace": "Mosaic\\Plugins\\EvaluatorEngine\\Filters\\Subject",
+   "file": "Mosaic/Plugins/EvaluatorEngine/Filters/Subject/FilterSubjectACPTTables.php"
+  },
+  {
+   "registry": "EvaluatorEngine",
+   "id": "excludes",
+   "label": "",
+   "namespace": "Mosaic\\Plugins\\EvaluatorEngine\\Filters\\Subject",
+   "file": "Mosaic/Plugins/EvaluatorEngine/Filters/Subject/FilterSubjectACPTTables.php"
+  },
+  {
+   "registry": "EvaluatorEngine",
+   "id": "text",
+   "label": "",
+   "namespace": "Mosaic\\Plugins\\EvaluatorEngine\\Filters\\Subject",
+   "file": "Mosaic/Plugins/EvaluatorEngine/Filters/Subject/FilterSubjectACPTTables.php"
+  },
+  {
+   "registry": "EvaluatorEngine",
+   "id": "equals",
+   "label": "",
+   "namespace": "Mosaic\\Plugins\\EvaluatorEngine\\Filters\\Subject",
+   "file": "Mosaic/Plugins/EvaluatorEngine/Filters/Subject/FilterSubjectACPTTables.php"
+  },
+  {
+   "registry": "EvaluatorEngine",
+   "id": "not-equals",
+   "label": "",
+   "namespace": "Mosaic\\Plugins\\EvaluatorEngine\\Filters\\Subject",
+   "file": "Mosaic/Plugins/EvaluatorEngine/Filters/Subject/FilterSubjectACPTTables.php"
+  },
+  {
+   "registry": "EvaluatorEngine",
+   "id": "contains",
+   "label": "",
+   "namespace": "Mosaic\\Plugins\\EvaluatorEngine\\Filters\\Subject",
+   "file": "Mosaic/Plugins/EvaluatorEngine/Filters/Subject/FilterSubjectACPTTables.php"
+  },
+  {
+   "registry": "EvaluatorEngine",
+   "id": "not-contains",
+   "label": "",
+   "namespace": "Mosaic\\Plugins\\EvaluatorEngine\\Filters\\Subject",
+   "file": "Mosaic/Plugins/EvaluatorEngine/Filters/Subject/FilterSubjectACPTTables.php"
+  },
+  {
+   "registry": "EvaluatorEngine",
+   "id": "starts-with",
+   "label": "",
+   "namespace": "Mosaic\\Plugins\\EvaluatorEngine\\Filters\\Subject",
+   "file": "Mosaic/Plugins/EvaluatorEngine/Filters/Subject/FilterSubjectACPTTables.php"
+  },
+  {
+   "registry": "EvaluatorEngine",
+   "id": "regexp",
+   "label": "",
+   "namespace": "Mosaic\\Plugins\\EvaluatorEngine\\Filters\\Subject",
+   "file": "Mosaic/Plugins/EvaluatorEngine/Filters/Subject/FilterSubjectACPTTables.php"
+  },
+  {
+   "registry": "EvaluatorEngine",
+   "id": "number",
+   "label": "",
+   "namespace": "Mosaic\\Plugins\\EvaluatorEngine\\Filters\\Subject",
+   "file": "Mosaic/Plugins/EvaluatorEngine/Filters/Subject/FilterSubjectACPTTables.php"
+  },
+  {
+   "registry": "EvaluatorEngine",
+   "id": "greater-than",
+   "label": "",
+   "namespace": "Mosaic\\Plugins\\EvaluatorEngine\\Filters\\Subject",
+   "file": "Mosaic/Plugins/EvaluatorEngine/Filters/Subject/FilterSubjectACPTTables.php"
+  },
+  {
+   "registry": "EvaluatorEngine",
+   "id": "greater-than-or-equal",
+   "label": "",
+   "namespace": "Mosaic\\Plugins\\EvaluatorEngine\\Filters\\Subject",
+   "file": "Mosaic/Plugins/EvaluatorEngine/Filters/Subject/FilterSubjectACPTTables.php"
+  },
+  {
+   "registry": "EvaluatorEngine",
+   "id": "less-than",
+   "label": "",
+   "namespace": "Mosaic\\Plugins\\EvaluatorEngine\\Filters\\Subject",
+   "file": "Mosaic/Plugins/EvaluatorEngine/Filters/Subject/FilterSubjectACPTTables.php"
+  },
+  {
+   "registry": "EvaluatorEngine",
+   "id": "less-than-or-equal",
+   "label": "",
+   "namespace": "Mosaic\\Plugins\\EvaluatorEngine\\Filters\\Subject",
+   "file": "Mosaic/Plugins/EvaluatorEngine/Filters/Subject/FilterSubjectACPTTables.php"
+  },
+  {
+   "registry": "EvaluatorEngine",
+   "id": "date",
+   "label": "",
+   "namespace": "Mosaic\\Plugins\\EvaluatorEngine\\Filters\\Subject",
+   "file": "Mosaic/Plugins/EvaluatorEngine/Filters/Subject/FilterSubjectACPTTables.php"
+  },
+  {
+   "registry": "EvaluatorEngine",
+   "id": "includes",
+   "label": "",
+   "namespace": "Mosaic\\Plugins\\EvaluatorEngine\\Filters\\Subject",
+   "file": "Mosaic/Plugins/EvaluatorEngine/Filters/Subject/FilterSubjectMetaBoxModels.php"
+  },
+  {
+   "registry": "EvaluatorEngine",
+   "id": "excludes",
+   "label": "",
+   "namespace": "Mosaic\\Plugins\\EvaluatorEngine\\Filters\\Subject",
+   "file": "Mosaic/Plugins/EvaluatorEngine/Filters/Subject/FilterSubjectMetaBoxModels.php"
+  },
+  {
+   "registry": "EvaluatorEngine",
+   "id": "text",
+   "label": "",
+   "namespace": "Mosaic\\Plugins\\EvaluatorEngine\\Filters\\Subject",
+   "file": "Mosaic/Plugins/EvaluatorEngine/Filters/Subject/FilterSubjectMetaBoxModels.php"
+  },
+  {
+   "registry": "EvaluatorEngine",
+   "id": "equals",
+   "label": "",
+   "namespace": "Mosaic\\Plugins\\EvaluatorEngine\\Filters\\Subject",
+   "file": "Mosaic/Plugins/EvaluatorEngine/Filters/Subject/FilterSubjectMetaBoxModels.php"
+  },
+  {
+   "registry": "EvaluatorEngine",
+   "id": "not-equals",
+   "label": "",
+   "namespace": "Mosaic\\Plugins\\EvaluatorEngine\\Filters\\Subject",
+   "file": "Mosaic/Plugins/EvaluatorEngine/Filters/Subject/FilterSubjectMetaBoxModels.php"
+  },
+  {
+   "registry": "EvaluatorEngine",
+   "id": "contains",
+   "label": "",
+   "namespace": "Mosaic\\Plugins\\EvaluatorEngine\\Filters\\Subject",
+   "file": "Mosaic/Plugins/EvaluatorEngine/Filters/Subject/FilterSubjectMetaBoxModels.php"
+  },
+  {
+   "registry": "EvaluatorEngine",
+   "id": "not-contains",
+   "label": "",
+   "namespace": "Mosaic\\Plugins\\EvaluatorEngine\\Filters\\Subject",
+   "file": "Mosaic/Plugins/EvaluatorEngine/Filters/Subject/FilterSubjectMetaBoxModels.php"
+  },
+  {
+   "registry": "EvaluatorEngine",
+   "id": "starts-with",
+   "label": "",
+   "namespace": "Mosaic\\Plugins\\EvaluatorEngine\\Filters\\Subject",
+   "file": "Mosaic/Plugins/EvaluatorEngine/Filters/Subject/FilterSubjectMetaBoxModels.php"
+  },
+  {
+   "registry": "EvaluatorEngine",
+   "id": "regexp",
+   "label": "",
+   "namespace": "Mosaic\\Plugins\\EvaluatorEngine\\Filters\\Subject",
+   "file": "Mosaic/Plugins/EvaluatorEngine/Filters/Subject/FilterSubjectMetaBoxModels.php"
+  },
+  {
+   "registry": "EvaluatorEngine",
+   "id": "number",
+   "label": "",
+   "namespace": "Mosaic\\Plugins\\EvaluatorEngine\\Filters\\Subject",
+   "file": "Mosaic/Plugins/EvaluatorEngine/Filters/Subject/FilterSubjectMetaBoxModels.php"
+  },
+  {
+   "registry": "EvaluatorEngine",
+   "id": "greater-than",
+   "label": "",
+   "namespace": "Mosaic\\Plugins\\EvaluatorEngine\\Filters\\Subject",
+   "file": "Mosaic/Plugins/EvaluatorEngine/Filters/Subject/FilterSubjectMetaBoxModels.php"
+  },
+  {
+   "registry": "EvaluatorEngine",
+   "id": "greater-than-or-equal",
+   "label": "",
+   "namespace": "Mosaic\\Plugins\\EvaluatorEngine\\Filters\\Subject",
+   "file": "Mosaic/Plugins/EvaluatorEngine/Filters/Subject/FilterSubjectMetaBoxModels.php"
+  },
+  {
+   "registry": "EvaluatorEngine",
+   "id": "less-than",
+   "label": "",
+   "namespace": "Mosaic\\Plugins\\EvaluatorEngine\\Filters\\Subject",
+   "file": "Mosaic/Plugins/EvaluatorEngine/Filters/Subject/FilterSubjectMetaBoxModels.php"
+  },
+  {
+   "registry": "EvaluatorEngine",
+   "id": "less-than-or-equal",
+   "label": "",
+   "namespace": "Mosaic\\Plugins\\EvaluatorEngine\\Filters\\Subject",
+   "file": "Mosaic/Plugins/EvaluatorEngine/Filters/Subject/FilterSubjectMetaBoxModels.php"
+  },
+  {
+   "registry": "EvaluatorEngine",
+   "id": "date",
+   "label": "",
+   "namespace": "Mosaic\\Plugins\\EvaluatorEngine\\Filters\\Subject",
+   "file": "Mosaic/Plugins/EvaluatorEngine/Filters/Subject/FilterSubjectMetaBoxModels.php"
+  },
+  {
+   "registry": "EvaluatorEngine",
+   "id": "text",
+   "label": "",
+   "namespace": "Mosaic\\Plugins\\EvaluatorEngine\\Filters\\Subject",
+   "file": "Mosaic/Plugins/EvaluatorEngine/Filters/Subject/FilterSubjectPostTypes.php"
+  },
+  {
+   "registry": "EvaluatorEngine",
+   "id": "equals",
+   "label": "",
+   "namespace": "Mosaic\\Plugins\\EvaluatorEngine\\Filters\\Subject",
+   "file": "Mosaic/Plugins/EvaluatorEngine/Filters/Subject/FilterSubjectPostTypes.php"
+  },
+  {
+   "registry": "EvaluatorEngine",
+   "id": "not-equals",
+   "label": "",
+   "namespace": "Mosaic\\Plugins\\EvaluatorEngine\\Filters\\Subject",
+   "file": "Mosaic/Plugins/EvaluatorEngine/Filters/Subject/FilterSubjectPostTypes.php"
+  },
+  {
+   "registry": "EvaluatorEngine",
+   "id": "contains",
+   "label": "",
+   "namespace": "Mosaic\\Plugins\\EvaluatorEngine\\Filters\\Subject",
+   "file": "Mosaic/Plugins/EvaluatorEngine/Filters/Subject/FilterSubjectPostTypes.php"
+  },
+  {
+   "registry": "EvaluatorEngine",
+   "id": "not-contains",
+   "label": "",
+   "namespace": "Mosaic\\Plugins\\EvaluatorEngine\\Filters\\Subject",
+   "file": "Mosaic/Plugins/EvaluatorEngine/Filters/Subject/FilterSubjectPostTypes.php"
+  },
+  {
+   "registry": "EvaluatorEngine",
+   "id": "starts-with",
+   "label": "",
+   "namespace": "Mosaic\\Plugins\\EvaluatorEngine\\Filters\\Subject",
+   "file": "Mosaic/Plugins/EvaluatorEngine/Filters/Subject/FilterSubjectPostTypes.php"
+  },
+  {
+   "registry": "EvaluatorEngine",
+   "id": "regexp",
+   "label": "",
+   "namespace": "Mosaic\\Plugins\\EvaluatorEngine\\Filters\\Subject",
+   "file": "Mosaic/Plugins/EvaluatorEngine/Filters/Subject/FilterSubjectPostTypes.php"
+  },
+  {
+   "registry": "EvaluatorEngine",
+   "id": "number",
+   "label": "",
+   "namespace": "Mosaic\\Plugins\\EvaluatorEngine\\Filters\\Subject",
+   "file": "Mosaic/Plugins/EvaluatorEngine/Filters/Subject/FilterSubjectPostTypes.php"
+  },
+  {
+   "registry": "EvaluatorEngine",
+   "id": "date",
+   "label": "",
+   "namespace": "Mosaic\\Plugins\\EvaluatorEngine\\Filters\\Subject",
+   "file": "Mosaic/Plugins/EvaluatorEngine/Filters/Subject/FilterSubjectPostTypes.php"
+  },
+  {
+   "registry": "EvaluatorEngine",
+   "id": "includes",
+   "label": "",
+   "namespace": "Mosaic\\Plugins\\EvaluatorEngine\\Filters\\Subject",
+   "file": "Mosaic/Plugins/EvaluatorEngine/Filters/Subject/FilterSubjectTaxonomies.php"
+  },
+  {
+   "registry": "EvaluatorEngine",
+   "id": "excludes",
+   "label": "",
+   "namespace": "Mosaic\\Plugins\\EvaluatorEngine\\Filters\\Subject",
+   "file": "Mosaic/Plugins/EvaluatorEngine/Filters/Subject/FilterSubjectTaxonomies.php"
+  },
+  {
+   "registry": "EvaluatorEngine",
+   "id": "text",
+   "label": "",
+   "namespace": "Mosaic\\Plugins\\EvaluatorEngine\\Filters\\Subject",
+   "file": "Mosaic/Plugins/EvaluatorEngine/Filters/Subject/FilterSubjectTaxonomies.php"
+  },
+  {
+   "registry": "EvaluatorEngine",
+   "id": "equals",
+   "label": "",
+   "namespace": "Mosaic\\Plugins\\EvaluatorEngine\\Filters\\Subject",
+   "file": "Mosaic/Plugins/EvaluatorEngine/Filters/Subject/FilterSubjectTaxonomies.php"
+  },
+  {
+   "registry": "EvaluatorEngine",
+   "id": "not-equals",
+   "label": "",
+   "namespace": "Mosaic\\Plugins\\EvaluatorEngine\\Filters\\Subject",
+   "file": "Mosaic/Plugins/EvaluatorEngine/Filters/Subject/FilterSubjectTaxonomies.php"
+  },
+  {
+   "registry": "EvaluatorEngine",
+   "id": "contains",
+   "label": "",
+   "namespace": "Mosaic\\Plugins\\EvaluatorEngine\\Filters\\Subject",
+   "file": "Mosaic/Plugins/EvaluatorEngine/Filters/Subject/FilterSubjectTaxonomies.php"
+  },
+  {
+   "registry": "EvaluatorEngine",
+   "id": "not-contains",
+   "label": "",
+   "namespace": "Mosaic\\Plugins\\EvaluatorEngine\\Filters\\Subject",
+   "file": "Mosaic/Plugins/EvaluatorEngine/Filters/Subject/FilterSubjectTaxonomies.php"
+  },
+  {
+   "registry": "EvaluatorEngine",
+   "id": "starts-with",
+   "label": "",
+   "namespace": "Mosaic\\Plugins\\EvaluatorEngine\\Filters\\Subject",
+   "file": "Mosaic/Plugins/EvaluatorEngine/Filters/Subject/FilterSubjectTaxonomies.php"
+  },
+  {
+   "registry": "EvaluatorEngine",
+   "id": "regexp",
+   "label": "",
+   "namespace": "Mosaic\\Plugins\\EvaluatorEngine\\Filters\\Subject",
+   "file": "Mosaic/Plugins/EvaluatorEngine/Filters/Subject/FilterSubjectTaxonomies.php"
+  },
+  {
+   "registry": "EvaluatorEngine",
+   "id": "number",
+   "label": "",
+   "namespace": "Mosaic\\Plugins\\EvaluatorEngine\\Filters\\Subject",
+   "file": "Mosaic/Plugins/EvaluatorEngine/Filters/Subject/FilterSubjectTaxonomies.php"
+  },
+  {
+   "registry": "EvaluatorEngine",
+   "id": "greater-than",
+   "label": "",
+   "namespace": "Mosaic\\Plugins\\EvaluatorEngine\\Filters\\Subject",
+   "file": "Mosaic/Plugins/EvaluatorEngine/Filters/Subject/FilterSubjectTaxonomies.php"
+  },
+  {
+   "registry": "EvaluatorEngine",
+   "id": "greater-than-or-equal",
+   "label": "",
+   "namespace": "Mosaic\\Plugins\\EvaluatorEngine\\Filters\\Subject",
+   "file": "Mosaic/Plugins/EvaluatorEngine/Filters/Subject/FilterSubjectTaxonomies.php"
+  },
+  {
+   "registry": "EvaluatorEngine",
+   "id": "less-than",
+   "label": "",
+   "namespace": "Mosaic\\Plugins\\EvaluatorEngine\\Filters\\Subject",
+   "file": "Mosaic/Plugins/EvaluatorEngine/Filters/Subject/FilterSubjectTaxonomies.php"
+  },
+  {
+   "registry": "EvaluatorEngine",
+   "id": "less-than-or-equal",
+   "label": "",
+   "namespace": "Mosaic\\Plugins\\EvaluatorEngine\\Filters\\Subject",
+   "file": "Mosaic/Plugins/EvaluatorEngine/Filters/Subject/FilterSubjectTaxonomies.php"
+  },
+  {
+   "registry": "EvaluatorEngine",
+   "id": "wpUsersUser",
+   "label": "",
+   "namespace": "Mosaic\\Plugins\\EvaluatorEngine\\Filters\\Subject",
+   "file": "Mosaic/Plugins/EvaluatorEngine/Filters/Subject/FilterSubjectUsers.php"
+  },
+  {
+   "registry": "EvaluatorEngine",
+   "id": "includes",
+   "label": "",
+   "namespace": "Mosaic\\Plugins\\EvaluatorEngine\\Filters\\Subject",
+   "file": "Mosaic/Plugins/EvaluatorEngine/Filters/Subject/FilterSubjectUsers.php"
+  },
+  {
+   "registry": "EvaluatorEngine",
+   "id": "excludes",
+   "label": "",
+   "namespace": "Mosaic\\Plugins\\EvaluatorEngine\\Filters\\Subject",
+   "file": "Mosaic/Plugins/EvaluatorEngine/Filters/Subject/FilterSubjectUsers.php"
+  },
+  {
+   "registry": "EvaluatorEngine",
+   "id": "wpUsersUserVariable",
+   "label": "",
+   "namespace": "Mosaic\\Plugins\\EvaluatorEngine\\Filters\\Subject",
+   "file": "Mosaic/Plugins/EvaluatorEngine/Filters/Subject/FilterSubjectUsers.php"
+  },
+  {
+   "registry": "EvaluatorEngine",
+   "id": "text",
+   "label": "",
+   "namespace": "Mosaic\\Plugins\\EvaluatorEngine\\Filters\\Subject",
+   "file": "Mosaic/Plugins/EvaluatorEngine/Filters/Subject/FilterSubjectUsers.php"
+  },
+  {
+   "registry": "EvaluatorEngine",
+   "id": "equals",
+   "label": "",
+   "namespace": "Mosaic\\Plugins\\EvaluatorEngine\\Filters\\Subject",
+   "file": "Mosaic/Plugins/EvaluatorEngine/Filters/Subject/FilterSubjectUsers.php"
+  },
+  {
+   "registry": "EvaluatorEngine",
+   "id": "not-equals",
+   "label": "",
+   "namespace": "Mosaic\\Plugins\\EvaluatorEngine\\Filters\\Subject",
+   "file": "Mosaic/Plugins/EvaluatorEngine/Filters/Subject/FilterSubjectUsers.php"
+  },
+  {
+   "registry": "EvaluatorEngine",
+   "id": "contains",
+   "label": "",
+   "namespace": "Mosaic\\Plugins\\EvaluatorEngine\\Filters\\Subject",
+   "file": "Mosaic/Plugins/EvaluatorEngine/Filters/Subject/FilterSubjectUsers.php"
+  },
+  {
+   "registry": "EvaluatorEngine",
+   "id": "not-contains",
+   "label": "",
+   "namespace": "Mosaic\\Plugins\\EvaluatorEngine\\Filters\\Subject",
+   "file": "Mosaic/Plugins/EvaluatorEngine/Filters/Subject/FilterSubjectUsers.php"
+  },
+  {
+   "registry": "EvaluatorEngine",
+   "id": "starts-with",
+   "label": "",
+   "namespace": "Mosaic\\Plugins\\EvaluatorEngine\\Filters\\Subject",
+   "file": "Mosaic/Plugins/EvaluatorEngine/Filters/Subject/FilterSubjectUsers.php"
+  },
+  {
+   "registry": "EvaluatorEngine",
+   "id": "regexp",
+   "label": "",
+   "namespace": "Mosaic\\Plugins\\EvaluatorEngine\\Filters\\Subject",
+   "file": "Mosaic/Plugins/EvaluatorEngine/Filters/Subject/FilterSubjectUsers.php"
+  },
+  {
+   "registry": "EvaluatorEngine",
+   "id": "number",
+   "label": "",
+   "namespace": "Mosaic\\Plugins\\EvaluatorEngine\\Filters\\Subject",
+   "file": "Mosaic/Plugins/EvaluatorEngine/Filters/Subject/FilterSubjectUsers.php"
+  },
+  {
+   "registry": "EvaluatorEngine",
+   "id": "greater-than",
+   "label": "",
+   "namespace": "Mosaic\\Plugins\\EvaluatorEngine\\Filters\\Subject",
+   "file": "Mosaic/Plugins/EvaluatorEngine/Filters/Subject/FilterSubjectUsers.php"
+  },
+  {
+   "registry": "EvaluatorEngine",
+   "id": "greater-than-or-equal",
+   "label": "",
+   "namespace": "Mosaic\\Plugins\\EvaluatorEngine\\Filters\\Subject",
+   "file": "Mosaic/Plugins/EvaluatorEngine/Filters/Subject/FilterSubjectUsers.php"
+  },
+  {
+   "registry": "EvaluatorEngine",
+   "id": "less-than",
+   "label": "",
+   "namespace": "Mosaic\\Plugins\\EvaluatorEngine\\Filters\\Subject",
+   "file": "Mosaic/Plugins/EvaluatorEngine/Filters/Subject/FilterSubjectUsers.php"
+  },
+  {
+   "registry": "EvaluatorEngine",
+   "id": "less-than-or-equal",
+   "label": "",
+   "namespace": "Mosaic\\Plugins\\EvaluatorEngine\\Filters\\Subject",
+   "file": "Mosaic/Plugins/EvaluatorEngine/Filters/Subject/FilterSubjectUsers.php"
+  },
+  {
+   "registry": "EvaluatorEngine",
+   "id": "date",
+   "label": "",
+   "namespace": "Mosaic\\Plugins\\EvaluatorEngine\\Filters\\Subject",
+   "file": "Mosaic/Plugins/EvaluatorEngine/Filters/Subject/FilterSubjectUsers.php"
+  },
+  {
+   "registry": "EvaluatorEngine",
+   "id": "wpUsersUserMeta",
+   "label": "",
+   "namespace": "Mosaic\\Plugins\\EvaluatorEngine\\Filters\\Subject",
+   "file": "Mosaic/Plugins/EvaluatorEngine/Filters/Subject/FilterSubjectUsers.php"
+  },
+  {
+   "registry": "EvaluatorEngine",
+   "id": "wpMenu",
+   "label": "",
+   "namespace": "Mosaic\\Plugins\\EvaluatorEngine\\Filters\\Subject",
+   "file": "Mosaic/Plugins/EvaluatorEngine/Filters/Subject/FilterSubjectWPMenu.php"
+  },
+  {
+   "registry": "EvaluatorEngine",
+   "id": "includes",
+   "label": "",
+   "namespace": "Mosaic\\Plugins\\EvaluatorEngine\\Filters\\Subject",
+   "file": "Mosaic/Plugins/EvaluatorEngine/Filters/Subject/FilterSubjectWPMenu.php"
+  },
+  {
+   "registry": "EvaluatorEngine",
+   "id": "excludes",
+   "label": "",
+   "namespace": "Mosaic\\Plugins\\EvaluatorEngine\\Filters\\Subject",
+   "file": "Mosaic/Plugins/EvaluatorEngine/Filters/Subject/FilterSubjectWPMenu.php"
+  },
+  {
+   "registry": "EvaluatorEngine",
+   "id": "wpMenuMeta",
+   "label": "",
+   "namespace": "Mosaic\\Plugins\\EvaluatorEngine\\Filters\\Subject",
+   "file": "Mosaic/Plugins/EvaluatorEngine/Filters/Subject/FilterSubjectWPMenu.php"
+  },
+  {
+   "registry": "EvaluatorEngine",
+   "id": "text",
+   "label": "",
+   "namespace": "Mosaic\\Plugins\\EvaluatorEngine\\Filters\\Subject",
+   "file": "Mosaic/Plugins/EvaluatorEngine/Filters/Subject/FilterSubjectWPMenu.php"
+  },
+  {
+   "registry": "EvaluatorEngine",
+   "id": "equals",
+   "label": "",
+   "namespace": "Mosaic\\Plugins\\EvaluatorEngine\\Filters\\Subject",
+   "file": "Mosaic/Plugins/EvaluatorEngine/Filters/Subject/FilterSubjectWPMenu.php"
+  },
+  {
+   "registry": "EvaluatorEngine",
+   "id": "not-equals",
+   "label": "",
+   "namespace": "Mosaic\\Plugins\\EvaluatorEngine\\Filters\\Subject",
+   "file": "Mosaic/Plugins/EvaluatorEngine/Filters/Subject/FilterSubjectWPMenu.php"
+  },
+  {
+   "registry": "EvaluatorEngine",
+   "id": "contains",
+   "label": "",
+   "namespace": "Mosaic\\Plugins\\EvaluatorEngine\\Filters\\Subject",
+   "file": "Mosaic/Plugins/EvaluatorEngine/Filters/Subject/FilterSubjectWPMenu.php"
+  },
+  {
+   "registry": "EvaluatorEngine",
+   "id": "not-contains",
+   "label": "",
+   "namespace": "Mosaic\\Plugins\\EvaluatorEngine\\Filters\\Subject",
+   "file": "Mosaic/Plugins/EvaluatorEngine/Filters/Subject/FilterSubjectWPMenu.php"
+  },
+  {
+   "registry": "EvaluatorEngine",
+   "id": "starts-with",
+   "label": "",
+   "namespace": "Mosaic\\Plugins\\EvaluatorEngine\\Filters\\Subject",
+   "file": "Mosaic/Plugins/EvaluatorEngine/Filters/Subject/FilterSubjectWPMenu.php"
+  },
+  {
+   "registry": "EvaluatorEngine",
+   "id": "regexp",
+   "label": "",
+   "namespace": "Mosaic\\Plugins\\EvaluatorEngine\\Filters\\Subject",
+   "file": "Mosaic/Plugins/EvaluatorEngine/Filters/Subject/FilterSubjectWPMenu.php"
+  },
+  {
+   "registry": "EvaluatorEngine",
+   "id": "number",
+   "label": "",
+   "namespace": "Mosaic\\Plugins\\EvaluatorEngine\\Filters\\Subject",
+   "file": "Mosaic/Plugins/EvaluatorEngine/Filters/Subject/FilterSubjectWPMenu.php"
+  },
+  {
+   "registry": "EvaluatorEngine",
+   "id": "greater-than",
+   "label": "",
+   "namespace": "Mosaic\\Plugins\\EvaluatorEngine\\Filters\\Subject",
+   "file": "Mosaic/Plugins/EvaluatorEngine/Filters/Subject/FilterSubjectWPMenu.php"
+  },
+  {
+   "registry": "EvaluatorEngine",
+   "id": "greater-than-or-equal",
+   "label": "",
+   "namespace": "Mosaic\\Plugins\\EvaluatorEngine\\Filters\\Subject",
+   "file": "Mosaic/Plugins/EvaluatorEngine/Filters/Subject/FilterSubjectWPMenu.php"
+  },
+  {
+   "registry": "EvaluatorEngine",
+   "id": "less-than",
+   "label": "",
+   "namespace": "Mosaic\\Plugins\\EvaluatorEngine\\Filters\\Subject",
+   "file": "Mosaic/Plugins/EvaluatorEngine/Filters/Subject/FilterSubjectWPMenu.php"
+  },
+  {
+   "registry": "EvaluatorEngine",
+   "id": "less-than-or-equal",
+   "label": "",
+   "namespace": "Mosaic\\Plugins\\EvaluatorEngine\\Filters\\Subject",
+   "file": "Mosaic/Plugins/EvaluatorEngine/Filters/Subject/FilterSubjectWPMenu.php"
+  },
+  {
+   "registry": "EvaluatorEngine",
+   "id": "date",
+   "label": "",
+   "namespace": "Mosaic\\Plugins\\EvaluatorEngine\\Filters\\Subject",
+   "file": "Mosaic/Plugins/EvaluatorEngine/Filters/Subject/MetaDateComparators.php"
+  },
+  {
+   "registry": "EvaluatorEngine",
+   "id": "time",
+   "label": "",
+   "namespace": "Mosaic\\Plugins\\EvaluatorEngine\\Filters\\Subject",
+   "file": "Mosaic/Plugins/EvaluatorEngine/Filters/Subject/MetaDateComparators.php"
+  },
+  {
+   "registry": "EvaluatorEngine",
+   "id": "httpCookie",
+   "label": "",
+   "namespace": "Mosaic\\Plugins\\EvaluatorEngine\\ServerConditions\\Subjects",
+   "file": "Mosaic/Plugins/EvaluatorEngine/ServerConditions/Subjects/ServerConditionSubjectCookie.php"
+  },
+  {
+   "registry": "EvaluatorEngine",
+   "id": "httpGet",
+   "label": "",
+   "namespace": "Mosaic\\Plugins\\EvaluatorEngine\\ServerConditions\\Subjects",
+   "file": "Mosaic/Plugins/EvaluatorEngine/ServerConditions/Subjects/ServerConditionSubjectHttpGet.php"
+  },
+  {
+   "registry": "EvaluatorEngine",
+   "id": "userCapability",
+   "label": "",
+   "namespace": "Mosaic\\Plugins\\EvaluatorEngine\\ServerConditions\\Subjects",
+   "file": "Mosaic/Plugins/EvaluatorEngine/ServerConditions/Subjects/ServerConditionSubjectUserCapability.php"
+  },
+  {
+   "registry": "EvaluatorEngine",
+   "id": "capability",
+   "label": "",
+   "namespace": "Mosaic\\Plugins\\EvaluatorEngine\\ServerConditions\\Subjects",
+   "file": "Mosaic/Plugins/EvaluatorEngine/ServerConditions/Subjects/ServerConditionSubjectUserCapability.php"
+  },
+  {
+   "registry": "EvaluatorEngine",
+   "id": "userFields",
+   "label": "",
+   "namespace": "Mosaic\\Plugins\\EvaluatorEngine\\ServerConditions\\Subjects",
+   "file": "Mosaic/Plugins/EvaluatorEngine/ServerConditions/Subjects/ServerConditionSubjectUserFields.php"
+  },
+  {
+   "registry": "EvaluatorEngine",
+   "id": "userLoggedIn",
+   "label": "",
+   "namespace": "Mosaic\\Plugins\\EvaluatorEngine\\ServerConditions\\Subjects",
+   "file": "Mosaic/Plugins/EvaluatorEngine/ServerConditions/Subjects/ServerConditionSubjectUserLoggedIn.php"
+  },
+  {
+   "registry": "EvaluatorEngine",
+   "id": "is",
+   "label": "",
+   "namespace": "Mosaic\\Plugins\\EvaluatorEngine\\ServerConditions\\Subjects",
+   "file": "Mosaic/Plugins/EvaluatorEngine/ServerConditions/Subjects/ServerConditionSubjectUserLoggedIn.php"
+  },
+  {
+   "registry": "EvaluatorEngine",
+   "id": "userMeta",
+   "label": "",
+   "namespace": "Mosaic\\Plugins\\EvaluatorEngine\\ServerConditions\\Subjects",
+   "file": "Mosaic/Plugins/EvaluatorEngine/ServerConditions/Subjects/ServerConditionSubjectUserMeta.php"
+  },
+  {
+   "registry": "EvaluatorEngine",
+   "id": "userRole",
+   "label": "",
+   "namespace": "Mosaic\\Plugins\\EvaluatorEngine\\ServerConditions\\Subjects",
+   "file": "Mosaic/Plugins/EvaluatorEngine/ServerConditions/Subjects/ServerConditionSubjectUserRole.php"
+  },
+  {
+   "registry": "EvaluatorEngine",
+   "id": "variable",
+   "label": "",
+   "namespace": "Mosaic\\Plugins\\EvaluatorEngine\\ServerConditions\\Subjects",
+   "file": "Mosaic/Plugins/EvaluatorEngine/ServerConditions/Subjects/ServerConditionSubjectVariable.php"
+  },
+  {
+   "registry": "EvaluatorFunctions",
+   "id": "abs",
+   "label": "",
+   "namespace": "Mosaic\\Plugins\\EvaluatorFunctions\\Abs",
+   "file": "Mosaic/Plugins/EvaluatorFunctions/Abs/EvaluatorFunctionAbs.php"
+  },
+  {
+   "registry": "EvaluatorFunctions",
+   "id": "attachment",
+   "label": "",
+   "namespace": "Mosaic\\Plugins\\EvaluatorFunctions\\Attachment",
+   "file": "Mosaic/Plugins/EvaluatorFunctions/Attachment/EvaluatorFunctionAttachment.php"
+  },
+  {
+   "registry": "EvaluatorFunctions",
+   "id": "avg",
+   "label": "",
+   "namespace": "Mosaic\\Plugins\\EvaluatorFunctions\\Avg",
+   "file": "Mosaic/Plugins/EvaluatorFunctions/Avg/EvaluatorFunctionAvg.php"
+  },
+  {
+   "registry": "EvaluatorFunctions",
+   "id": "calc",
+   "label": "",
+   "namespace": "Mosaic\\Plugins\\EvaluatorFunctions\\Calc",
+   "file": "Mosaic/Plugins/EvaluatorFunctions/Calc/EvaluatorFunctionCalc.php"
+  },
+  {
+   "registry": "EvaluatorFunctions",
+   "id": "concat",
+   "label": "",
+   "namespace": "Mosaic\\Plugins\\EvaluatorFunctions\\Concat",
+   "file": "Mosaic/Plugins/EvaluatorFunctions/Concat/EvaluatorFunctionConcat.php"
+  },
+  {
+   "registry": "EvaluatorFunctions",
+   "id": "date",
+   "label": "",
+   "namespace": "Mosaic\\Plugins\\EvaluatorFunctions\\Date",
+   "file": "Mosaic/Plugins/EvaluatorFunctions/Date/EvaluatorFunctionDate.php"
+  },
+  {
+   "registry": "EvaluatorFunctions",
+   "id": "esc_attr",
+   "label": "",
+   "namespace": "Mosaic\\Plugins\\EvaluatorFunctions\\EscAttr",
+   "file": "Mosaic/Plugins/EvaluatorFunctions/EscAttr/EvaluatorFunctionEscAttr.php"
+  },
+  {
+   "registry": "EvaluatorFunctions",
+   "id": "esc_html",
+   "label": "",
+   "namespace": "Mosaic\\Plugins\\EvaluatorFunctions\\EscHtml",
+   "file": "Mosaic/Plugins/EvaluatorFunctions/EscHtml/EvaluatorFunctionEscHtml.php"
+  },
+  {
+   "registry": "EvaluatorFunctions",
+   "id": "excerpt",
+   "label": "",
+   "namespace": "Mosaic\\Plugins\\EvaluatorFunctions\\Excerpt",
+   "file": "Mosaic/Plugins/EvaluatorFunctions/Excerpt/EvaluatorFunctionExcerpt.php"
+  },
+  {
+   "registry": "EvaluatorFunctions",
+   "id": "fallback",
+   "label": "",
+   "namespace": "Mosaic\\Plugins\\EvaluatorFunctions\\Fallback",
+   "file": "Mosaic/Plugins/EvaluatorFunctions/Fallback/EvaluatorFunctionFallback.php"
+  },
+  {
+   "registry": "EvaluatorFunctions",
+   "id": "find_image",
+   "label": "",
+   "namespace": "Mosaic\\Plugins\\EvaluatorFunctions\\FindImage",
+   "file": "Mosaic/Plugins/EvaluatorFunctions/FindImage/EvaluatorFunctionFindImage.php"
+  },
+  {
+   "registry": "EvaluatorFunctions",
+   "id": "find_link",
+   "label": "",
+   "namespace": "Mosaic\\Plugins\\EvaluatorFunctions\\FindLink",
+   "file": "Mosaic/Plugins/EvaluatorFunctions/FindLink/EvaluatorFunctionFindLink.php"
+  },
+  {
+   "registry": "EvaluatorFunctions",
+   "id": "find_video",
+   "label": "",
+   "namespace": "Mosaic\\Plugins\\EvaluatorFunctions\\FindVideo",
+   "file": "Mosaic/Plugins/EvaluatorFunctions/FindVideo/EvaluatorFunctionFindVideo.php"
+  },
+  {
+   "registry": "EvaluatorFunctions",
+   "id": "json_encode",
+   "label": "",
+   "namespace": "Mosaic\\Plugins\\EvaluatorFunctions\\JsonEncode",
+   "file": "Mosaic/Plugins/EvaluatorFunctions/JsonEncode/EvaluatorFunctionJsonEncode.php"
+  },
+  {
+   "registry": "EvaluatorFunctions",
+   "id": "remove_html",
+   "label": "",
+   "namespace": "Mosaic\\Plugins\\EvaluatorFunctions\\RemoveHTML",
+   "file": "Mosaic/Plugins/EvaluatorFunctions/RemoveHTML/EvaluatorFunctionRemoveHTML.php"
+  },
+  {
+   "registry": "EvaluatorFunctions",
+   "id": "round",
+   "label": "",
+   "namespace": "Mosaic\\Plugins\\EvaluatorFunctions\\Round",
+   "file": "Mosaic/Plugins/EvaluatorFunctions/Round/EvaluatorFunctionRound.php"
+  },
+  {
+   "registry": "EvaluatorFunctions",
+   "id": "round_up",
+   "label": "",
+   "namespace": "Mosaic\\Plugins\\EvaluatorFunctions\\RoundUp",
+   "file": "Mosaic/Plugins/EvaluatorFunctions/RoundUp/EvaluatorFunctionRoundUp.php"
+  },
+  {
+   "registry": "EvaluatorFunctions",
+   "id": "substr",
+   "label": "",
+   "namespace": "Mosaic\\Plugins\\EvaluatorFunctions\\Substr",
+   "file": "Mosaic/Plugins/EvaluatorFunctions/Substr/EvaluatorFunctionSubstr.php"
+  },
+  {
+   "registry": "EvaluatorFunctions",
+   "id": "sum",
+   "label": "",
+   "namespace": "Mosaic\\Plugins\\EvaluatorFunctions\\Sum",
+   "file": "Mosaic/Plugins/EvaluatorFunctions/Sum/EvaluatorFunctionSum.php"
+  },
+  {
+   "registry": "FormActions",
+   "id": "email",
+   "label": "",
+   "namespace": "Mosaic\\Plugins\\FormActions\\Email",
+   "file": "Mosaic/Plugins/FormActions/Email/FormActionEmail.php"
+  },
+  {
+   "registry": "FormActions",
+   "id": "kit",
+   "label": "",
+   "namespace": "Mosaic\\Plugins\\FormActions\\Kit",
+   "file": "Mosaic/Plugins/FormActions/Kit/FormActionKitAbstract.php"
+  },
+  {
+   "registry": "FormActions",
+   "id": "mailchimp",
+   "label": "",
+   "namespace": "Mosaic\\Plugins\\FormActions\\Mailchimp",
+   "file": "Mosaic/Plugins/FormActions/Mailchimp/FormActionMailchimpAbstract.php"
+  },
+  {
+   "registry": "FormActions",
+   "id": "mailerlite",
+   "label": "",
+   "namespace": "Mosaic\\Plugins\\FormActions\\MailerLite",
+   "file": "Mosaic/Plugins/FormActions/MailerLite/FormActionMailerLiteAbstract.php"
+  },
+  {
+   "registry": "FormActions",
+   "id": "redirect",
+   "label": "",
+   "namespace": "Mosaic\\Plugins\\FormActions\\Redirect",
+   "file": "Mosaic/Plugins/FormActions/Redirect/FormActionRedirect.php"
+  },
+  {
+   "registry": "FormActions",
+   "id": "search",
+   "label": "",
+   "namespace": "Mosaic\\Plugins\\FormActions\\Search",
+   "file": "Mosaic/Plugins/FormActions/Search/FormActionSearch.php"
+  },
+  {
+   "registry": "FormActions",
+   "id": "webhook",
+   "label": "",
+   "namespace": "Mosaic\\Plugins\\FormActions\\Webhook",
+   "file": "Mosaic/Plugins/FormActions/Webhook/FormActionWebhookAbstract.php"
+  },
+  {
+   "registry": "InteractionActions",
+   "id": "elementAction",
+   "label": "",
+   "namespace": "Mosaic\\Plugins\\InteractionActions\\Continuous\\Player\\Seek",
+   "file": "Mosaic/Plugins/InteractionActions/Continuous/Player/Seek/InteractionSimpleActionPlayerSeekAbstract.php"
+  },
+  {
+   "registry": "InteractionActions",
+   "id": "player",
+   "label": "",
+   "namespace": "Mosaic\\Plugins\\InteractionActions\\Continuous\\Player\\Seek",
+   "file": "Mosaic/Plugins/InteractionActions/Continuous/Player/Seek/InteractionSimpleActionPlayerSeekAbstract.php"
+  },
+  {
+   "registry": "InteractionActions",
+   "id": "playerSeek",
+   "label": "",
+   "namespace": "Mosaic\\Plugins\\InteractionActions\\Continuous\\Player\\Seek",
+   "file": "Mosaic/Plugins/InteractionActions/Continuous/Player/Seek/InteractionSimpleActionPlayerSeekAbstract.php"
+  },
+  {
+   "registry": "InteractionActions",
+   "id": "interaction",
+   "label": "",
+   "namespace": "Mosaic\\Plugins\\InteractionActions\\Simple\\Interaction\\Reset",
+   "file": "Mosaic/Plugins/InteractionActions/Simple/Interaction/Reset/InteractionSimpleActionInteractionResetAbstract.php"
+  },
+  {
+   "registry": "InteractionActions",
+   "id": "interactionReset",
+   "label": "",
+   "namespace": "Mosaic\\Plugins\\InteractionActions\\Simple\\Interaction\\Reset",
+   "file": "Mosaic/Plugins/InteractionActions/Simple/Interaction/Reset/InteractionSimpleActionInteractionResetAbstract.php"
+  },
+  {
+   "registry": "InteractionActions",
+   "id": "interaction",
+   "label": "",
+   "namespace": "Mosaic\\Plugins\\InteractionActions\\Simple\\Interaction\\Resume",
+   "file": "Mosaic/Plugins/InteractionActions/Simple/Interaction/Resume/InteractionSimpleActionInteractionResumeAbstract.php"
+  },
+  {
+   "registry": "InteractionActions",
+   "id": "interactionResume",
+   "label": "",
+   "namespace": "Mosaic\\Plugins\\InteractionActions\\Simple\\Interaction\\Resume",
+   "file": "Mosaic/Plugins/InteractionActions/Simple/Interaction/Resume/InteractionSimpleActionInteractionResumeAbstract.php"
+  },
+  {
+   "registry": "InteractionActions",
+   "id": "interaction",
+   "label": "",
+   "namespace": "Mosaic\\Plugins\\InteractionActions\\Simple\\Interaction\\Suspend",
+   "file": "Mosaic/Plugins/InteractionActions/Simple/Interaction/Suspend/InteractionSimpleActionPlayerSuspendAbstract.php"
+  },
+  {
+   "registry": "InteractionActions",
+   "id": "interactionSuspend",
+   "label": "",
+   "namespace": "Mosaic\\Plugins\\InteractionActions\\Simple\\Interaction\\Suspend",
+   "file": "Mosaic/Plugins/InteractionActions/Simple/Interaction/Suspend/InteractionSimpleActionPlayerSuspendAbstract.php"
+  },
+  {
+   "registry": "InteractionActions",
+   "id": "memory",
+   "label": "",
+   "namespace": "Mosaic\\Plugins\\InteractionActions\\Simple\\Memory\\Forget",
+   "file": "Mosaic/Plugins/InteractionActions/Simple/Memory/Forget/InteractionSimpleActionForgetAbstract.php"
+  },
+  {
+   "registry": "InteractionActions",
+   "id": "forget",
+   "label": "",
+   "namespace": "Mosaic\\Plugins\\InteractionActions\\Simple\\Memory\\Forget",
+   "file": "Mosaic/Plugins/InteractionActions/Simple/Memory/Forget/InteractionSimpleActionForgetAbstract.php"
+  },
+  {
+   "registry": "InteractionActions",
+   "id": "memory",
+   "label": "",
+   "namespace": "Mosaic\\Plugins\\InteractionActions\\Simple\\Memory\\Remember",
+   "file": "Mosaic/Plugins/InteractionActions/Simple/Memory/Remember/InteractionSimpleActionRememberAbstract.php"
+  },
+  {
+   "registry": "InteractionActions",
+   "id": "remember",
+   "label": "",
+   "namespace": "Mosaic\\Plugins\\InteractionActions\\Simple\\Memory\\Remember",
+   "file": "Mosaic/Plugins/InteractionActions/Simple/Memory/Remember/InteractionSimpleActionRememberAbstract.php"
+  },
+  {
+   "registry": "InteractionActions",
+   "id": "elementAction",
+   "label": "",
+   "namespace": "Mosaic\\Plugins\\InteractionActions\\Simple\\Modal\\ModalClose",
+   "file": "Mosaic/Plugins/InteractionActions/Simple/Modal/ModalClose/InteractionSimpleActionModalCloseAbstract.php"
+  },
+  {
+   "registry": "InteractionActions",
+   "id": "modal",
+   "label": "",
+   "namespace": "Mosaic\\Plugins\\InteractionActions\\Simple\\Modal\\ModalClose",
+   "file": "Mosaic/Plugins/InteractionActions/Simple/Modal/ModalClose/InteractionSimpleActionModalCloseAbstract.php"
+  },
+  {
+   "registry": "InteractionActions",
+   "id": "modalClose",
+   "label": "",
+   "namespace": "Mosaic\\Plugins\\InteractionActions\\Simple\\Modal\\ModalClose",
+   "file": "Mosaic/Plugins/InteractionActions/Simple/Modal/ModalClose/InteractionSimpleActionModalCloseAbstract.php"
+  },
+  {
+   "registry": "InteractionActions",
+   "id": "elementAction",
+   "label": "",
+   "namespace": "Mosaic\\Plugins\\InteractionActions\\Simple\\Modal\\ModalOpen",
+   "file": "Mosaic/Plugins/InteractionActions/Simple/Modal/ModalOpen/InteractionSimpleActionModalOpenAbstract.php"
+  },
+  {
+   "registry": "InteractionActions",
+   "id": "modal",
+   "label": "",
+   "namespace": "Mosaic\\Plugins\\InteractionActions\\Simple\\Modal\\ModalOpen",
+   "file": "Mosaic/Plugins/InteractionActions/Simple/Modal/ModalOpen/InteractionSimpleActionModalOpenAbstract.php"
+  },
+  {
+   "registry": "InteractionActions",
+   "id": "modalOpen",
+   "label": "",
+   "namespace": "Mosaic\\Plugins\\InteractionActions\\Simple\\Modal\\ModalOpen",
+   "file": "Mosaic/Plugins/InteractionActions/Simple/Modal/ModalOpen/InteractionSimpleActionModalOpenAbstract.php"
+  },
+  {
+   "registry": "InteractionActions",
+   "id": "link",
+   "label": "",
+   "namespace": "Mosaic\\Plugins\\InteractionActions\\Simple\\OpenLink",
+   "file": "Mosaic/Plugins/InteractionActions/Simple/OpenLink/InteractionSimpleActionLink.php"
+  },
+  {
+   "registry": "InteractionActions",
+   "id": "elementAction",
+   "label": "",
+   "namespace": "Mosaic\\Plugins\\InteractionActions\\Simple\\Player\\Pause",
+   "file": "Mosaic/Plugins/InteractionActions/Simple/Player/Pause/InteractionSimpleActionPlayerPauseAbstract.php"
+  },
+  {
+   "registry": "InteractionActions",
+   "id": "player",
+   "label": "",
+   "namespace": "Mosaic\\Plugins\\InteractionActions\\Simple\\Player\\Pause",
+   "file": "Mosaic/Plugins/InteractionActions/Simple/Player/Pause/InteractionSimpleActionPlayerPauseAbstract.php"
+  },
+  {
+   "registry": "InteractionActions",
+   "id": "playerPause",
+   "label": "",
+   "namespace": "Mosaic\\Plugins\\InteractionActions\\Simple\\Player\\Pause",
+   "file": "Mosaic/Plugins/InteractionActions/Simple/Player/Pause/InteractionSimpleActionPlayerPauseAbstract.php"
+  },
+  {
+   "registry": "InteractionActions",
+   "id": "elementAction",
+   "label": "",
+   "namespace": "Mosaic\\Plugins\\InteractionActions\\Simple\\Player\\Play",
+   "file": "Mosaic/Plugins/InteractionActions/Simple/Player/Play/InteractionSimpleActionPlayerPlayAbstract.php"
+  },
+  {
+   "registry": "InteractionActions",
+   "id": "player",
+   "label": "",
+   "namespace": "Mosaic\\Plugins\\InteractionActions\\Simple\\Player\\Play",
+   "file": "Mosaic/Plugins/InteractionActions/Simple/Player/Play/InteractionSimpleActionPlayerPlayAbstract.php"
+  },
+  {
+   "registry": "InteractionActions",
+   "id": "playerPlay",
+   "label": "",
+   "namespace": "Mosaic\\Plugins\\InteractionActions\\Simple\\Player\\Play",
+   "file": "Mosaic/Plugins/InteractionActions/Simple/Player/Play/InteractionSimpleActionPlayerPlayAbstract.php"
+  },
+  {
+   "registry": "InteractionActions",
+   "id": "elementAction",
+   "label": "",
+   "namespace": "Mosaic\\Plugins\\InteractionActions\\Simple\\Popover\\PopoverClose",
+   "file": "Mosaic/Plugins/InteractionActions/Simple/Popover/PopoverClose/InteractionSimpleActionPopoverCloseAbstract.php"
+  },
+  {
+   "registry": "InteractionActions",
+   "id": "popover",
+   "label": "",
+   "namespace": "Mosaic\\Plugins\\InteractionActions\\Simple\\Popover\\PopoverClose",
+   "file": "Mosaic/Plugins/InteractionActions/Simple/Popover/PopoverClose/InteractionSimpleActionPopoverCloseAbstract.php"
+  },
+  {
+   "registry": "InteractionActions",
+   "id": "popoverClose",
+   "label": "",
+   "namespace": "Mosaic\\Plugins\\InteractionActions\\Simple\\Popover\\PopoverClose",
+   "file": "Mosaic/Plugins/InteractionActions/Simple/Popover/PopoverClose/InteractionSimpleActionPopoverCloseAbstract.php"
+  },
+  {
+   "registry": "InteractionActions",
+   "id": "elementAction",
+   "label": "",
+   "namespace": "Mosaic\\Plugins\\InteractionActions\\Simple\\Popover\\PopoverOpen",
+   "file": "Mosaic/Plugins/InteractionActions/Simple/Popover/PopoverOpen/InteractionSimpleActionPopoverOpenAbstract.php"
+  },
+  {
+   "registry": "InteractionActions",
+   "id": "popover",
+   "label": "",
+   "namespace": "Mosaic\\Plugins\\InteractionActions\\Simple\\Popover\\PopoverOpen",
+   "file": "Mosaic/Plugins/InteractionActions/Simple/Popover/PopoverOpen/InteractionSimpleActionPopoverOpenAbstract.php"
+  },
+  {
+   "registry": "InteractionActions",
+   "id": "popoverOpen",
+   "label": "",
+   "namespace": "Mosaic\\Plugins\\InteractionActions\\Simple\\Popover\\PopoverOpen",
+   "file": "Mosaic/Plugins/InteractionActions/Simple/Popover/PopoverOpen/InteractionSimpleActionPopoverOpenAbstract.php"
+  },
+  {
+   "registry": "InteractionActions",
+   "id": "elementAction",
+   "label": "",
+   "namespace": "Mosaic\\Plugins\\InteractionActions\\Simple\\Popover\\PopoverToggle",
+   "file": "Mosaic/Plugins/InteractionActions/Simple/Popover/PopoverToggle/InteractionSimpleActionPopoverToggleAbstract.php"
+  },
+  {
+   "registry": "InteractionActions",
+   "id": "popover",
+   "label": "",
+   "namespace": "Mosaic\\Plugins\\InteractionActions\\Simple\\Popover\\PopoverToggle",
+   "file": "Mosaic/Plugins/InteractionActions/Simple/Popover/PopoverToggle/InteractionSimpleActionPopoverToggleAbstract.php"
+  },
+  {
+   "registry": "InteractionActions",
+   "id": "popoverToggle",
+   "label": "",
+   "namespace": "Mosaic\\Plugins\\InteractionActions\\Simple\\Popover\\PopoverToggle",
+   "file": "Mosaic/Plugins/InteractionActions/Simple/Popover/PopoverToggle/InteractionSimpleActionPopoverToggleAbstract.php"
+  },
+  {
+   "registry": "InteractionActions",
+   "id": "script",
+   "label": "",
+   "namespace": "Mosaic\\Plugins\\InteractionActions\\Simple\\RunScript",
+   "file": "Mosaic/Plugins/InteractionActions/Simple/RunScript/InteractionSimpleActionScriptAbstract.php"
+  },
+  {
+   "registry": "InteractionActions",
+   "id": "scrollTo",
+   "label": "",
+   "namespace": "Mosaic\\Plugins\\InteractionActions\\Simple\\ScrollTo",
+   "file": "Mosaic/Plugins/InteractionActions/Simple/ScrollTo/InteractionSimpleActionScrollToAbstract.php"
+  },
+  {
+   "registry": "InteractionActions",
+   "id": "%",
+   "label": "",
+   "namespace": "Mosaic\\Plugins\\InteractionActions\\Simple\\ScrollTo",
+   "file": "Mosaic/Plugins/InteractionActions/Simple/ScrollTo/InteractionSimpleActionScrollToAbstract.php"
+  },
+  {
+   "registry": "InteractionActions",
+   "id": "px",
+   "label": "",
+   "namespace": "Mosaic\\Plugins\\InteractionActions\\Simple\\ScrollTo",
+   "file": "Mosaic/Plugins/InteractionActions/Simple/ScrollTo/InteractionSimpleActionScrollToAbstract.php"
+  },
+  {
+   "registry": "InteractionActions",
+   "id": "vh",
+   "label": "",
+   "namespace": "Mosaic\\Plugins\\InteractionActions\\Simple\\ScrollTo",
+   "file": "Mosaic/Plugins/InteractionActions/Simple/ScrollTo/InteractionSimpleActionScrollToAbstract.php"
+  },
+  {
+   "registry": "InteractionActions",
+   "id": "setCookie",
+   "label": "",
+   "namespace": "Mosaic\\Plugins\\InteractionActions\\Simple\\SetCookie",
+   "file": "Mosaic/Plugins/InteractionActions/Simple/SetCookie/InteractionSimpleActionSetCookieAbstract.php"
+  },
+  {
+   "registry": "InteractionTypes",
+   "id": "pointerMove",
+   "label": "",
+   "namespace": "Mosaic\\Plugins\\InteractionTypes\\progress\\pointermove",
+   "file": "Mosaic/Plugins/InteractionTypes/progress/pointermove/InteractionTypePointerMoveAbstract.php"
+  },
+  {
+   "registry": "InteractionTypes",
+   "id": "mouse",
+   "label": "",
+   "namespace": "Mosaic\\Plugins\\InteractionTypes\\progress\\pointermove",
+   "file": "Mosaic/Plugins/InteractionTypes/progress/pointermove/InteractionTypePointerMoveAbstract.php"
+  },
+  {
+   "registry": "InteractionTypes",
+   "id": "x",
+   "label": "",
+   "namespace": "Mosaic\\Plugins\\InteractionTypes\\progress\\pointermove",
+   "file": "Mosaic/Plugins/InteractionTypes/progress/pointermove/InteractionTypePointerMoveAbstract.php"
+  },
+  {
+   "registry": "InteractionTypes",
+   "id": "y",
+   "label": "",
+   "namespace": "Mosaic\\Plugins\\InteractionTypes\\progress\\pointermove",
+   "file": "Mosaic/Plugins/InteractionTypes/progress/pointermove/InteractionTypePointerMoveAbstract.php"
+  },
+  {
+   "registry": "InteractionTypes",
+   "id": "scrollIntoView",
+   "label": "",
+   "namespace": "Mosaic\\Plugins\\InteractionTypes\\progress\\scrollIntoView",
+   "file": "Mosaic/Plugins/InteractionTypes/progress/scrollIntoView/InteractionTypeScrollIntoViewAbstract.php"
+  },
+  {
+   "registry": "InteractionTypes",
+   "id": "pageScroll",
+   "label": "",
+   "namespace": "Mosaic\\Plugins\\InteractionTypes\\progress\\scrollIntoView",
+   "file": "Mosaic/Plugins/InteractionTypes/progress/scrollIntoView/InteractionTypeScrollIntoViewAbstract.php"
+  },
+  {
+   "registry": "InteractionTypes",
+   "id": "px",
+   "label": "",
+   "namespace": "Mosaic\\Plugins\\InteractionTypes\\progress\\scrollIntoView",
+   "file": "Mosaic/Plugins/InteractionTypes/progress/scrollIntoView/InteractionTypeScrollIntoViewAbstract.php"
+  },
+  {
+   "registry": "InteractionTypes",
+   "id": "%",
+   "label": "",
+   "namespace": "Mosaic\\Plugins\\InteractionTypes\\progress\\scrollIntoView",
+   "file": "Mosaic/Plugins/InteractionTypes/progress/scrollIntoView/InteractionTypeScrollIntoViewAbstract.php"
+  },
+  {
+   "registry": "InteractionTypes",
+   "id": "accordionItemChange",
+   "label": "",
+   "namespace": "Mosaic\\Plugins\\InteractionTypes\\timed\\accordionitemchange",
+   "file": "Mosaic/Plugins/InteractionTypes/timed/accordionitemchange/InteractionTypeAccordionItemChangeAbstract.php"
+  },
+  {
+   "registry": "InteractionTypes",
+   "id": "elementEvent",
+   "label": "",
+   "namespace": "Mosaic\\Plugins\\InteractionTypes\\timed\\accordionitemchange",
+   "file": "Mosaic/Plugins/InteractionTypes/timed/accordionitemchange/InteractionTypeAccordionItemChangeAbstract.php"
+  },
+  {
+   "registry": "InteractionTypes",
+   "id": "open",
+   "label": "",
+   "namespace": "Mosaic\\Plugins\\InteractionTypes\\timed\\accordionitemchange",
+   "file": "Mosaic/Plugins/InteractionTypes/timed/accordionitemchange/InteractionTypeAccordionItemChangeAbstract.php"
+  },
+  {
+   "registry": "InteractionTypes",
+   "id": "close",
+   "label": "",
+   "namespace": "Mosaic\\Plugins\\InteractionTypes\\timed\\accordionitemchange",
+   "file": "Mosaic/Plugins/InteractionTypes/timed/accordionitemchange/InteractionTypeAccordionItemChangeAbstract.php"
+  },
+  {
+   "registry": "InteractionTypes",
+   "id": "click",
+   "label": "",
+   "namespace": "Mosaic\\Plugins\\InteractionTypes\\timed\\click",
+   "file": "Mosaic/Plugins/InteractionTypes/timed/click/InteractionTypeClickAbstract.php"
+  },
+  {
+   "registry": "InteractionTypes",
+   "id": "mouse",
+   "label": "",
+   "namespace": "Mosaic\\Plugins\\InteractionTypes\\timed\\click",
+   "file": "Mosaic/Plugins/InteractionTypes/timed/click/InteractionTypeClickAbstract.php"
+  },
+  {
+   "registry": "InteractionTypes",
+   "id": "odd",
+   "label": "",
+   "namespace": "Mosaic\\Plugins\\InteractionTypes\\timed\\click",
+   "file": "Mosaic/Plugins/InteractionTypes/timed/click/InteractionTypeClickAbstract.php"
+  },
+  {
+   "registry": "InteractionTypes",
+   "id": "even",
+   "label": "",
+   "namespace": "Mosaic\\Plugins\\InteractionTypes\\timed\\click",
+   "file": "Mosaic/Plugins/InteractionTypes/timed/click/InteractionTypeClickAbstract.php"
+  },
+  {
+   "registry": "InteractionTypes",
+   "id": "dropdownChange",
+   "label": "",
+   "namespace": "Mosaic\\Plugins\\InteractionTypes\\timed\\dropdownchange",
+   "file": "Mosaic/Plugins/InteractionTypes/timed/dropdownchange/InteractionTypeDropdownChangeAbstract.php"
+  },
+  {
+   "registry": "InteractionTypes",
+   "id": "elementEvent",
+   "label": "",
+   "namespace": "Mosaic\\Plugins\\InteractionTypes\\timed\\dropdownchange",
+   "file": "Mosaic/Plugins/InteractionTypes/timed/dropdownchange/InteractionTypeDropdownChangeAbstract.php"
+  },
+  {
+   "registry": "InteractionTypes",
+   "id": "open",
+   "label": "",
+   "namespace": "Mosaic\\Plugins\\InteractionTypes\\timed\\dropdownchange",
+   "file": "Mosaic/Plugins/InteractionTypes/timed/dropdownchange/InteractionTypeDropdownChangeAbstract.php"
+  },
+  {
+   "registry": "InteractionTypes",
+   "id": "close",
+   "label": "",
+   "namespace": "Mosaic\\Plugins\\InteractionTypes\\timed\\dropdownchange",
+   "file": "Mosaic/Plugins/InteractionTypes/timed/dropdownchange/InteractionTypeDropdownChangeAbstract.php"
+  },
+  {
+   "registry": "InteractionTypes",
+   "id": "elementScrollIntoView",
+   "label": "",
+   "namespace": "Mosaic\\Plugins\\InteractionTypes\\timed\\elementscrollintoview",
+   "file": "Mosaic/Plugins/InteractionTypes/timed/elementscrollintoview/InteractionTypeElementScrollIntoView.php"
+  },
+  {
+   "registry": "InteractionTypes",
+   "id": "pageScroll",
+   "label": "",
+   "namespace": "Mosaic\\Plugins\\InteractionTypes\\timed\\elementscrollintoview",
+   "file": "Mosaic/Plugins/InteractionTypes/timed/elementscrollintoview/InteractionTypeElementScrollIntoView.php"
+  },
+  {
+   "registry": "InteractionTypes",
+   "id": "px",
+   "label": "",
+   "namespace": "Mosaic\\Plugins\\InteractionTypes\\timed\\elementscrollintoview",
+   "file": "Mosaic/Plugins/InteractionTypes/timed/elementscrollintoview/InteractionTypeElementScrollIntoView.php"
+  },
+  {
+   "registry": "InteractionTypes",
+   "id": "%",
+   "label": "",
+   "namespace": "Mosaic\\Plugins\\InteractionTypes\\timed\\elementscrollintoview",
+   "file": "Mosaic/Plugins/InteractionTypes/timed/elementscrollintoview/InteractionTypeElementScrollIntoView.php"
+  },
+  {
+   "registry": "InteractionTypes",
+   "id": "in",
+   "label": "",
+   "namespace": "Mosaic\\Plugins\\InteractionTypes\\timed\\elementscrollintoview",
+   "file": "Mosaic/Plugins/InteractionTypes/timed/elementscrollintoview/InteractionTypeElementScrollIntoView.php"
+  },
+  {
+   "registry": "InteractionTypes",
+   "id": "out",
+   "label": "",
+   "namespace": "Mosaic\\Plugins\\InteractionTypes\\timed\\elementscrollintoview",
+   "file": "Mosaic/Plugins/InteractionTypes/timed/elementscrollintoview/InteractionTypeElementScrollIntoView.php"
+  },
+  {
+   "registry": "InteractionTypes",
+   "id": "exitIntent",
+   "label": "",
+   "namespace": "Mosaic\\Plugins\\InteractionTypes\\timed\\exitintent",
+   "file": "Mosaic/Plugins/InteractionTypes/timed/exitintent/InteractionTypeExitIntentAbstract.php"
+  },
+  {
+   "registry": "InteractionTypes",
+   "id": "mouse",
+   "label": "",
+   "namespace": "Mosaic\\Plugins\\InteractionTypes\\timed\\exitintent",
+   "file": "Mosaic/Plugins/InteractionTypes/timed/exitintent/InteractionTypeExitIntentAbstract.php"
+  },
+  {
+   "registry": "InteractionTypes",
+   "id": "ms",
+   "label": "",
+   "namespace": "Mosaic\\Plugins\\InteractionTypes\\timed\\exitintent",
+   "file": "Mosaic/Plugins/InteractionTypes/timed/exitintent/InteractionTypeExitIntentAbstract.php"
+  },
+  {
+   "registry": "InteractionTypes",
+   "id": "s",
+   "label": "",
+   "namespace": "Mosaic\\Plugins\\InteractionTypes\\timed\\exitintent",
+   "file": "Mosaic/Plugins/InteractionTypes/timed/exitintent/InteractionTypeExitIntentAbstract.php"
+  },
+  {
+   "registry": "InteractionTypes",
+   "id": "formSubmit",
+   "label": "",
+   "namespace": "Mosaic\\Plugins\\InteractionTypes\\timed\\formsubmit",
+   "file": "Mosaic/Plugins/InteractionTypes/timed/formsubmit/InteractionTypeFormSubmitAbstract.php"
+  },
+  {
+   "registry": "InteractionTypes",
+   "id": "elementEvent",
+   "label": "",
+   "namespace": "Mosaic\\Plugins\\InteractionTypes\\timed\\formsubmit",
+   "file": "Mosaic/Plugins/InteractionTypes/timed/formsubmit/InteractionTypeFormSubmitAbstract.php"
+  },
+  {
+   "registry": "InteractionTypes",
+   "id": "success",
+   "label": "",
+   "namespace": "Mosaic\\Plugins\\InteractionTypes\\timed\\formsubmit",
+   "file": "Mosaic/Plugins/InteractionTypes/timed/formsubmit/InteractionTypeFormSubmitAbstract.php"
+  },
+  {
+   "registry": "InteractionTypes",
+   "id": "hover",
+   "label": "",
+   "namespace": "Mosaic\\Plugins\\InteractionTypes\\timed\\hover",
+   "file": "Mosaic/Plugins/InteractionTypes/timed/hover/InteractionTypeHoverAbstract.php"
+  },
+  {
+   "registry": "InteractionTypes",
+   "id": "mouse",
+   "label": "",
+   "namespace": "Mosaic\\Plugins\\InteractionTypes\\timed\\hover",
+   "file": "Mosaic/Plugins/InteractionTypes/timed/hover/InteractionTypeHoverAbstract.php"
+  },
+  {
+   "registry": "InteractionTypes",
+   "id": "in",
+   "label": "",
+   "namespace": "Mosaic\\Plugins\\InteractionTypes\\timed\\hover",
+   "file": "Mosaic/Plugins/InteractionTypes/timed/hover/InteractionTypeHoverAbstract.php"
+  },
+  {
+   "registry": "InteractionTypes",
+   "id": "out",
+   "label": "",
+   "namespace": "Mosaic\\Plugins\\InteractionTypes\\timed\\hover",
+   "file": "Mosaic/Plugins/InteractionTypes/timed/hover/InteractionTypeHoverAbstract.php"
+  },
+  {
+   "registry": "InteractionTypes",
+   "id": "modal",
+   "label": "",
+   "namespace": "Mosaic\\Plugins\\InteractionTypes\\timed\\modal",
+   "file": "Mosaic/Plugins/InteractionTypes/timed/modal/InteractionTypeModalAbstract.php"
+  },
+  {
+   "registry": "InteractionTypes",
+   "id": "elementEvent",
+   "label": "",
+   "namespace": "Mosaic\\Plugins\\InteractionTypes\\timed\\modal",
+   "file": "Mosaic/Plugins/InteractionTypes/timed/modal/InteractionTypeModalAbstract.php"
+  },
+  {
+   "registry": "InteractionTypes",
+   "id": "show",
+   "label": "",
+   "namespace": "Mosaic\\Plugins\\InteractionTypes\\timed\\modal",
+   "file": "Mosaic/Plugins/InteractionTypes/timed/modal/InteractionTypeModalAbstract.php"
+  },
+  {
+   "registry": "InteractionTypes",
+   "id": "beforeClose",
+   "label": "",
+   "namespace": "Mosaic\\Plugins\\InteractionTypes\\timed\\modal",
+   "file": "Mosaic/Plugins/InteractionTypes/timed/modal/InteractionTypeModalAbstract.php"
+  },
+  {
+   "registry": "InteractionTypes",
+   "id": "afterClose",
+   "label": "",
+   "namespace": "Mosaic\\Plugins\\InteractionTypes\\timed\\modal",
+   "file": "Mosaic/Plugins/InteractionTypes/timed/modal/InteractionTypeModalAbstract.php"
+  },
+  {
+   "registry": "InteractionTypes",
+   "id": "pageLoad",
+   "label": "",
+   "namespace": "Mosaic\\Plugins\\InteractionTypes\\timed\\pageload",
+   "file": "Mosaic/Plugins/InteractionTypes/timed/pageload/InteractionTypePageLoad.php"
+  },
+  {
+   "registry": "InteractionTypes",
+   "id": "pageScroll",
+   "label": "",
+   "namespace": "Mosaic\\Plugins\\InteractionTypes\\timed\\pageload",
+   "file": "Mosaic/Plugins/InteractionTypes/timed/pageload/InteractionTypePageLoad.php"
+  },
+  {
+   "registry": "InteractionTypes",
+   "id": "s",
+   "label": "",
+   "namespace": "Mosaic\\Plugins\\InteractionTypes\\timed\\pageload",
+   "file": "Mosaic/Plugins/InteractionTypes/timed/pageload/InteractionTypePageLoad.php"
+  },
+  {
+   "registry": "InteractionTypes",
+   "id": "ms",
+   "label": "",
+   "namespace": "Mosaic\\Plugins\\InteractionTypes\\timed\\pageload",
+   "file": "Mosaic/Plugins/InteractionTypes/timed/pageload/InteractionTypePageLoad.php"
+  },
+  {
+   "registry": "InteractionTypes",
+   "id": "popover",
+   "label": "",
+   "namespace": "Mosaic\\Plugins\\InteractionTypes\\timed\\popover",
+   "file": "Mosaic/Plugins/InteractionTypes/timed/popover/InteractionTypePopoverAbstract.php"
+  },
+  {
+   "registry": "InteractionTypes",
+   "id": "elementEvent",
+   "label": "",
+   "namespace": "Mosaic\\Plugins\\InteractionTypes\\timed\\popover",
+   "file": "Mosaic/Plugins/InteractionTypes/timed/popover/InteractionTypePopoverAbstract.php"
+  },
+  {
+   "registry": "InteractionTypes",
+   "id": "show",
+   "label": "",
+   "namespace": "Mosaic\\Plugins\\InteractionTypes\\timed\\popover",
+   "file": "Mosaic/Plugins/InteractionTypes/timed/popover/InteractionTypePopoverAbstract.php"
+  },
+  {
+   "registry": "InteractionTypes",
+   "id": "beforeClose",
+   "label": "",
+   "namespace": "Mosaic\\Plugins\\InteractionTypes\\timed\\popover",
+   "file": "Mosaic/Plugins/InteractionTypes/timed/popover/InteractionTypePopoverAbstract.php"
+  },
+  {
+   "registry": "InteractionTypes",
+   "id": "afterClose",
+   "label": "",
+   "namespace": "Mosaic\\Plugins\\InteractionTypes\\timed\\popover",
+   "file": "Mosaic/Plugins/InteractionTypes/timed/popover/InteractionTypePopoverAbstract.php"
+  },
+  {
+   "registry": "InteractionTypes",
+   "id": "scrollDepth",
+   "label": "",
+   "namespace": "Mosaic\\Plugins\\InteractionTypes\\timed\\scrolldepth",
+   "file": "Mosaic/Plugins/InteractionTypes/timed/scrolldepth/InteractionTypeScrollDepthAbstract.php"
+  },
+  {
+   "registry": "InteractionTypes",
+   "id": "pageScroll",
+   "label": "",
+   "namespace": "Mosaic\\Plugins\\InteractionTypes\\timed\\scrolldepth",
+   "file": "Mosaic/Plugins/InteractionTypes/timed/scrolldepth/InteractionTypeScrollDepthAbstract.php"
+  },
+  {
+   "registry": "InteractionTypes",
+   "id": "reached",
+   "label": "",
+   "namespace": "Mosaic\\Plugins\\InteractionTypes\\timed\\scrolldepth",
+   "file": "Mosaic/Plugins/InteractionTypes/timed/scrolldepth/InteractionTypeScrollDepthAbstract.php"
+  },
+  {
+   "registry": "InteractionTypes",
+   "id": "returned",
+   "label": "",
+   "namespace": "Mosaic\\Plugins\\InteractionTypes\\timed\\scrolldepth",
+   "file": "Mosaic/Plugins/InteractionTypes/timed/scrolldepth/InteractionTypeScrollDepthAbstract.php"
+  },
+  {
+   "registry": "InteractionTypes",
+   "id": "%",
+   "label": "",
+   "namespace": "Mosaic\\Plugins\\InteractionTypes\\timed\\scrolldepth",
+   "file": "Mosaic/Plugins/InteractionTypes/timed/scrolldepth/InteractionTypeScrollDepthAbstract.php"
+  },
+  {
+   "registry": "InteractionTypes",
+   "id": "px",
+   "label": "",
+   "namespace": "Mosaic\\Plugins\\InteractionTypes\\timed\\scrolldepth",
+   "file": "Mosaic/Plugins/InteractionTypes/timed/scrolldepth/InteractionTypeScrollDepthAbstract.php"
+  },
+  {
+   "registry": "InteractionTypes",
+   "id": "vh",
+   "label": "",
+   "namespace": "Mosaic\\Plugins\\InteractionTypes\\timed\\scrolldepth",
+   "file": "Mosaic/Plugins/InteractionTypes/timed/scrolldepth/InteractionTypeScrollDepthAbstract.php"
+  },
+  {
+   "registry": "InteractionTypes",
+   "id": "scrollDirectionChange",
+   "label": "",
+   "namespace": "Mosaic\\Plugins\\InteractionTypes\\timed\\scrolldirectionchange",
+   "file": "Mosaic/Plugins/InteractionTypes/timed/scrolldirectionchange/InteractionTypeScrollDirectionChangeAbstract.php"
+  },
+  {
+   "registry": "InteractionTypes",
+   "id": "pageScroll",
+   "label": "",
+   "namespace": "Mosaic\\Plugins\\InteractionTypes\\timed\\scrolldirectionchange",
+   "file": "Mosaic/Plugins/InteractionTypes/timed/scrolldirectionchange/InteractionTypeScrollDirectionChangeAbstract.php"
+  },
+  {
+   "registry": "InteractionTypes",
+   "id": "down",
+   "label": "",
+   "namespace": "Mosaic\\Plugins\\InteractionTypes\\timed\\scrolldirectionchange",
+   "file": "Mosaic/Plugins/InteractionTypes/timed/scrolldirectionchange/InteractionTypeScrollDirectionChangeAbstract.php"
+  },
+  {
+   "registry": "InteractionTypes",
+   "id": "up",
+   "label": "",
+   "namespace": "Mosaic\\Plugins\\InteractionTypes\\timed\\scrolldirectionchange",
+   "file": "Mosaic/Plugins/InteractionTypes/timed/scrolldirectionchange/InteractionTypeScrollDirectionChangeAbstract.php"
+  },
+  {
+   "registry": "InteractionTypes",
+   "id": "slideChange",
+   "label": "",
+   "namespace": "Mosaic\\Plugins\\InteractionTypes\\timed\\slidechange",
+   "file": "Mosaic/Plugins/InteractionTypes/timed/slidechange/InteractionTypeSlideChangeAbstract.php"
+  },
+  {
+   "registry": "InteractionTypes",
+   "id": "elementEvent",
+   "label": "",
+   "namespace": "Mosaic\\Plugins\\InteractionTypes\\timed\\slidechange",
+   "file": "Mosaic/Plugins/InteractionTypes/timed/slidechange/InteractionTypeSlideChangeAbstract.php"
+  },
+  {
+   "registry": "InteractionTypes",
+   "id": "in",
+   "label": "",
+   "namespace": "Mosaic\\Plugins\\InteractionTypes\\timed\\slidechange",
+   "file": "Mosaic/Plugins/InteractionTypes/timed/slidechange/InteractionTypeSlideChangeAbstract.php"
+  },
+  {
+   "registry": "InteractionTypes",
+   "id": "out",
+   "label": "",
+   "namespace": "Mosaic\\Plugins\\InteractionTypes\\timed\\slidechange",
+   "file": "Mosaic/Plugins/InteractionTypes/timed/slidechange/InteractionTypeSlideChangeAbstract.php"
+  },
+  {
+   "registry": "InteractionTypes",
+   "id": "tabChange",
+   "label": "",
+   "namespace": "Mosaic\\Plugins\\InteractionTypes\\timed\\tabchange",
+   "file": "Mosaic/Plugins/InteractionTypes/timed/tabchange/InteractionTypeTabChangeAbstract.php"
+  },
+  {
+   "registry": "InteractionTypes",
+   "id": "elementEvent",
+   "label": "",
+   "namespace": "Mosaic\\Plugins\\InteractionTypes\\timed\\tabchange",
+   "file": "Mosaic/Plugins/InteractionTypes/timed/tabchange/InteractionTypeTabChangeAbstract.php"
+  },
+  {
+   "registry": "InteractionTypes",
+   "id": "active",
+   "label": "",
+   "namespace": "Mosaic\\Plugins\\InteractionTypes\\timed\\tabchange",
+   "file": "Mosaic/Plugins/InteractionTypes/timed/tabchange/InteractionTypeTabChangeAbstract.php"
+  },
+  {
+   "registry": "InteractionTypes",
+   "id": "inactive",
+   "label": "",
+   "namespace": "Mosaic\\Plugins\\InteractionTypes\\timed\\tabchange",
+   "file": "Mosaic/Plugins/InteractionTypes/timed/tabchange/InteractionTypeTabChangeAbstract.php"
+  },
+  {
+   "registry": "Links",
+   "id": "author",
+   "label": "",
+   "namespace": "",
+   "file": "Mosaic/Plugins/Links/Author.php"
+  },
+  {
+   "registry": "Links",
+   "id": "attachment",
+   "label": "",
+   "namespace": "",
+   "file": "Mosaic/Plugins/Links/Media.php"
+  },
+  {
+   "registry": "Links",
+   "id": "posts_archive",
+   "label": "",
+   "namespace": "",
+   "file": "Mosaic/Plugins/Links/PostArchives.php"
+  },
+  {
+   "registry": "OrderBy",
+   "id": "random",
+   "label": "",
+   "namespace": "Mosaic\\Plugins\\OrderBy\\Type",
+   "file": "Mosaic/Plugins/OrderBy/Type/OrderByTypeACPTTables.php"
+  },
+  {
+   "registry": "OrderBy",
+   "id": "random",
+   "label": "",
+   "namespace": "Mosaic\\Plugins\\OrderBy\\Type",
+   "file": "Mosaic/Plugins/OrderBy/Type/OrderByTypeMetaBoxModels.php"
+  },
+  {
+   "registry": "OrderBy",
+   "id": "postVariable",
+   "label": "",
+   "namespace": "Mosaic\\Plugins\\OrderBy\\Type",
+   "file": "Mosaic/Plugins/OrderBy/Type/OrderByTypePostTypes.php"
+  },
+  {
+   "registry": "OrderBy",
+   "id": "postMeta",
+   "label": "",
+   "namespace": "Mosaic\\Plugins\\OrderBy\\Type",
+   "file": "Mosaic/Plugins/OrderBy/Type/OrderByTypePostTypes.php"
+  },
+  {
+   "registry": "OrderBy",
+   "id": "random",
+   "label": "",
+   "namespace": "Mosaic\\Plugins\\OrderBy\\Type",
+   "file": "Mosaic/Plugins/OrderBy/Type/OrderByTypePostTypes.php"
+  },
+  {
+   "registry": "OrderBy",
+   "id": "termVariable",
+   "label": "",
+   "namespace": "Mosaic\\Plugins\\OrderBy\\Type",
+   "file": "Mosaic/Plugins/OrderBy/Type/OrderByTypeTaxonomies.php"
+  },
+  {
+   "registry": "OrderBy",
+   "id": "termMeta",
+   "label": "",
+   "namespace": "Mosaic\\Plugins\\OrderBy\\Type",
+   "file": "Mosaic/Plugins/OrderBy/Type/OrderByTypeTaxonomies.php"
+  },
+  {
+   "registry": "OrderBy",
+   "id": "random",
+   "label": "",
+   "namespace": "Mosaic\\Plugins\\OrderBy\\Type",
+   "file": "Mosaic/Plugins/OrderBy/Type/OrderByTypeTaxonomies.php"
+  },
+  {
+   "registry": "OrderBy",
+   "id": "userVariable",
+   "label": "",
+   "namespace": "Mosaic\\Plugins\\OrderBy\\Type",
+   "file": "Mosaic/Plugins/OrderBy/Type/OrderByTypeUsers.php"
+  },
+  {
+   "registry": "OrderBy",
+   "id": "userMeta",
+   "label": "",
+   "namespace": "Mosaic\\Plugins\\OrderBy\\Type",
+   "file": "Mosaic/Plugins/OrderBy/Type/OrderByTypeUsers.php"
+  },
+  {
+   "registry": "OrderBy",
+   "id": "random",
+   "label": "",
+   "namespace": "Mosaic\\Plugins\\OrderBy\\Type",
+   "file": "Mosaic/Plugins/OrderBy/Type/OrderByTypeUsers.php"
+  },
+  {
+   "registry": "OrderBy",
+   "id": "wpMenuVariable",
+   "label": "",
+   "namespace": "Mosaic\\Plugins\\OrderBy\\Type",
+   "file": "Mosaic/Plugins/OrderBy/Type/OrderByTypeWPMenu.php"
+  },
+  {
+   "registry": "OrderBy",
+   "id": "wpMenuMeta",
+   "label": "",
+   "namespace": "Mosaic\\Plugins\\OrderBy\\Type",
+   "file": "Mosaic/Plugins/OrderBy/Type/OrderByTypeWPMenu.php"
+  },
+  {
+   "registry": "OrderBy",
+   "id": "random",
+   "label": "",
+   "namespace": "Mosaic\\Plugins\\OrderBy\\Type",
+   "file": "Mosaic/Plugins/OrderBy/Type/OrderByTypeWPMenu.php"
+  },
+  {
+   "registry": "Paths",
+   "id": "other",
+   "label": "",
+   "namespace": "",
+   "file": "Mosaic/Plugins/Paths/Path404.php"
+  },
+  {
+   "registry": "Paths",
+   "id": "404.php",
+   "label": "",
+   "namespace": "",
+   "file": "Mosaic/Plugins/Paths/Path404.php"
+  },
+  {
+   "registry": "Paths",
+   "id": "fallback",
+   "label": "",
+   "namespace": "",
+   "file": "Mosaic/Plugins/Paths/PathArchive.php"
+  },
+  {
+   "registry": "Paths",
+   "id": "archive.php",
+   "label": "",
+   "namespace": "",
+   "file": "Mosaic/Plugins/Paths/PathArchive.php"
+  },
+  {
+   "registry": "Paths",
+   "id": "fallback",
+   "label": "",
+   "namespace": "",
+   "file": "Mosaic/Plugins/Paths/PathFrontPage.php"
+  },
+  {
+   "registry": "Paths",
+   "id": "front-page.php",
+   "label": "",
+   "namespace": "",
+   "file": "Mosaic/Plugins/Paths/PathFrontPage.php"
+  },
+  {
+   "registry": "Paths",
+   "id": "fallback",
+   "label": "",
+   "namespace": "",
+   "file": "Mosaic/Plugins/Paths/PathIndex.php"
+  },
+  {
+   "registry": "Paths",
+   "id": "index.php",
+   "label": "",
+   "namespace": "",
+   "file": "Mosaic/Plugins/Paths/PathIndex.php"
+  },
+  {
+   "registry": "Paths",
+   "id": "page",
+   "label": "",
+   "namespace": "",
+   "file": "Mosaic/Plugins/Paths/PathPostTypePage.php"
+  },
+  {
+   "registry": "Paths",
+   "id": "single-page.php",
+   "label": "",
+   "namespace": "",
+   "file": "Mosaic/Plugins/Paths/PathPostTypePage.php"
+  },
+  {
+   "registry": "Paths",
+   "id": "post",
+   "label": "",
+   "namespace": "",
+   "file": "Mosaic/Plugins/Paths/PathPostTypePost.php"
+  },
+  {
+   "registry": "Paths",
+   "id": "single-post.php",
+   "label": "",
+   "namespace": "",
+   "file": "Mosaic/Plugins/Paths/PathPostTypePost.php"
+  },
+  {
+   "registry": "Paths",
+   "id": "archive-post.php",
+   "label": "",
+   "namespace": "",
+   "file": "Mosaic/Plugins/Paths/PathPostTypePost.php"
+  },
+  {
+   "registry": "Paths",
+   "id": "author.php",
+   "label": "",
+   "namespace": "",
+   "file": "Mosaic/Plugins/Paths/PathPostTypePost.php"
+  },
+  {
+   "registry": "Paths",
+   "id": "other",
+   "label": "",
+   "namespace": "",
+   "file": "Mosaic/Plugins/Paths/PathSearch.php"
+  },
+  {
+   "registry": "Paths",
+   "id": "search.php",
+   "label": "",
+   "namespace": "",
+   "file": "Mosaic/Plugins/Paths/PathSearch.php"
+  },
+  {
+   "registry": "Paths",
+   "id": "fallback",
+   "label": "",
+   "namespace": "",
+   "file": "Mosaic/Plugins/Paths/PathSingle.php"
+  },
+  {
+   "registry": "Paths",
+   "id": "single.php",
+   "label": "",
+   "namespace": "",
+   "file": "Mosaic/Plugins/Paths/PathSingle.php"
+  },
+  {
+   "registry": "Paths",
+   "id": "taxonomy",
+   "label": "",
+   "namespace": "",
+   "file": "Mosaic/Plugins/Paths/PathTaxonomies.php"
+  },
+  {
+   "registry": "Paths",
+   "id": "page",
+   "label": "",
+   "namespace": "",
+   "file": "Mosaic/Plugins/Paths/PathTaxonomiesSingle.php"
+  },
+  {
+   "registry": "Paths",
+   "id": "post",
+   "label": "",
+   "namespace": "",
+   "file": "Mosaic/Plugins/Paths/PathTaxonomiesSingle.php"
+  }
+ ]
+}

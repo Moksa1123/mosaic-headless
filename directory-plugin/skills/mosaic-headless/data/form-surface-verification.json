@@ -1,0 +1,125 @@
+{
+ "source_file": "data/form-surface-verification.csv",
+ "columns": [
+  "check",
+  "result",
+  "detail"
+ ],
+ "rows": [
+  {
+   "check": "TABS",
+   "result": "SKIPPED",
+   "detail": "not on this page"
+  },
+  {
+   "check": "ACCORDION",
+   "result": "SKIPPED",
+   "detail": "not on this page"
+  },
+  {
+   "check": "FORM/fields",
+   "result": "PASS",
+   "detail": "13 controls, types: checkbox, email, file, radio, text, textarea"
+  },
+  {
+   "check": "FORM/required",
+   "result": "PASS",
+   "detail": "required is set on 7 of them"
+  },
+  {
+   "check": "FORM/honeypot",
+   "result": "PASS",
+   "detail": "Mosaic adds its own spam trap: ['mosaic_hp_url', 'mosaic_hp_ts']"
+  },
+  {
+   "check": "FORM/option_labels",
+   "result": "SKIPPED",
+   "detail": "no select on this form"
+  },
+  {
+   "check": "FORM/select_required",
+   "result": "PASS",
+   "detail": "submit with nothing picked: toggle aria-invalid='true'"
+  },
+  {
+   "check": "FORM/select_labels",
+   "result": "PASS",
+   "detail": "4 options, labels are child text nodes: ['10 萬以下', '10–30 萬', '30–60 萬', '60 萬以上']"
+  },
+  {
+   "check": "FORM/select_opens",
+   "result": "PASS",
+   "detail": "toggle click: aria-expanded false -> true, list shown False -> True"
+  },
+  {
+   "check": "FORM/select_picks",
+   "result": "PASS",
+   "detail": "picked '10–30 萬': input budget='30', toggle shows '10–30 萬', closed=True"
+  },
+  {
+   "check": "FORM/select_keyboard",
+   "result": "PASS",
+   "detail": "ArrowDown, ArrowDown, Enter: '30' -> '60'"
+  },
+  {
+   "check": "FORM/required_blocks",
+   "result": "PASS",
+   "detail": "empty form reports invalid: ['name', 'email', 'kind', 'kind']"
+  },
+  {
+   "check": "NAVBAR",
+   "result": "SKIPPED",
+   "detail": "not on this page"
+  },
+  {
+   "check": "MEDIA",
+   "result": "SKIPPED",
+   "detail": "not on this page"
+  },
+  {
+   "check": "WORDPRESS",
+   "result": "SKIPPED",
+   "detail": "not on this page"
+  },
+  {
+   "check": "MULTISTEP/one_at_rest",
+   "result": "PASS",
+   "detail": "visible steps: [0]"
+  },
+  {
+   "check": "MULTISTEP/next",
+   "result": "PASS",
+   "detail": "NEXT -> [1]"
+  },
+  {
+   "check": "MULTISTEP/back",
+   "result": "PASS",
+   "detail": "BACK -> [0]"
+  },
+  {
+   "check": "COMPONENT/instances",
+   "result": "SKIPPED",
+   "detail": "fewer than two on this page"
+  },
+  {
+   "check": "LOOP/slider",
+   "result": "SKIPPED",
+   "detail": "not on this page"
+  },
+  {
+   "check": "LOOP/tabs",
+   "result": "SKIPPED",
+   "detail": "not on this page"
+  },
+  {
+   "check": "LOOP/pagination",
+   "result": "SKIPPED",
+   "detail": "not on this page"
+  },
+  {
+   "check": "MAP",
+   "result": "SKIPPED",
+   "detail": "not on this page"
+  }
+ ]
+}

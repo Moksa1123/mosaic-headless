@@ -1,0 +1,426 @@
+# The design-system layer: variants (element classes) and collection variables
+
+> Directory edition: commands that mention `tools/` need the full edition (`npm` package `mosaic-headless`); this folder ships reference files only. The `wp` commands run on your WordPress host; how you reach it is up to you.
+
+Everything in `references/styling.md` is about styling **one node**. That is the lowest
+layer and the wrong place to build a site. Mosaic has two layers above it, and both
+were measured on a live install.
+
+## Variants: style every element of a kind, once
+
+The 152 rows in `data/variants.csv` are the **variant catalog** — Mosaic's built-in
+taxonomy of what an element *is* (Heading 2, Button, Section, Div, Body …), each
+carrying the CSS selectors that identify it and, since 1.0.8, the class name the
+element emits (`class_name`: `m-heading-2`, `m-button`) and whether that name is
+rendered onto the tag at all (`renders_class`; `Body`, `HTML` and the Gutenberg
+entries are matched by selector only). Mosaic called these element classes and
+the catalog `elementClassMeta` through 1.0.7; the editor's Style Guide now says
+Variants, and so does the REST vocabulary.
+
+You do not create variants. You **commit a style for one that already exists**,
+using its catalog ID as the record ID:
+
+```json
+POST …/masterDocumentInstance/<masterID>/commit
+{
+  "variant": [{
+    "newRevisionRecord": {
+      "ID": "d1642e3d-12cc-0379-ac2a-33f5292aa0dd",       // the Heading 2 meta ID
+      "parentType": "", "parentID": "", "ordering": "a0",
+      "status": "publish", "revision": "", "version": "",
+      "data": {"states": {"&": {"_": {"color": "rgb(3,33,133)", "fontSize": "47px"}}}}
+    },
+    "originalRevisionRecord": null
+  }]
+}
+```
+
+The `data.states` structure is **identical to a node's `style.states`** — same states,
+same breakpoints, same property names and value shapes.
+
+What comes out is a global rule built from that meta's own selectors:
+
+```css
+h2,.m-heading-2{color:rgb(3, 33, 133);font-size:47px;letter-spacing:-1px}
+```
+
+One row restyles every `h2` on the site. This is the theme layer, and it is where
+typography, spacing rhythm and component defaults belong.
+
+(Measured twice: on 1.0.7 the same commit under the key `elementClass` emitted
+`h2,.M_EL_Text__Heading2{...}`; on 1.0.8, after the data upgrade, the key is
+`variant` and the rule above is what came out.)
+
+Three things learned the hard way:
+
+- **Only catalog entries are valid IDs.** Committing a `variant` with a fresh
+  UUID is accepted with HTTP 200 and then silently dropped — the response's
+  `syncResponseEnvelopes` simply does not mention it. Check the response for a
+  `create variant` entry; its absence is the only signal.
+- **A variant cannot be deleted, only emptied.** `status:"delete"` is accepted and
+  ignored; commit the row back with `{"states": {"&": {"_": {}}}}` and the rule
+  goes away.
+- Look up the ID in `data/variants.csv` by `name`. Several rows share a
+  name (`Button` appears four times) because sub-components have their own metas — the
+  `selectors` and `parent` columns tell them apart. `Item` is the trap: the accordion,
+  loop and list items are all `Item` and all have a parent, so "the parent-less one"
+  finds none. `build_page.py` takes a theme variant key as the catalog id, the
+  `class_name` (`m-loop-item`) or a name, and refuses a name that matches more than
+  one row.
+
+More from a client build on 1.0.10:
+
+- **`HTML` and `Body` emit `html{…}` and `body{…}`**, and `customDeclarations` works
+  on them - the place for page-wide settings that have no node.
+- **The loop pagination states work on the variants**:
+  `____loop_pagination_number--active` on `Number`,
+  `___loop_pagination_button--disabled` on `Pagination button`.
+- **Variant CSS is printed early in `<head>`.** At equal specificity, a plugin's
+  `<link>` stylesheet and a page's own `<style>` both come later and win. Moving a
+  rule from a plugin stylesheet into a variant can therefore bring back a page rule
+  the plugin had been overriding.
+- **The Gutenberg variants are scoped to block markup.** They match
+  `:is(.entry-content, .wp-block-post-content) X`, and `List` matches only
+  `ul.wp-block-list` - a list written by Rank Math's FAQ block or in raw HTML has no
+  such class and is not styled. A `wpContent` node renders
+  `.m-post-content > .wp-site-blocks > .entry-content`.
+
+## Universal classes
+
+A universal class is the theme-global class a user names (the editor's "classes"),
+committed on the master document under the key `universalClass` with
+`data: {name, label, states}` - `states` is the same structure as a variant's. A node
+takes it through `style.universalClasses`, a map `{<classID>: <classID>}`. Mapping a
+class to one of its SUB class IDs applies the root class AND the sub-class chain down
+to it - the parent comes along, it is not replaced (`ElementMResourceStyle.php`
+adds the root's names and data first, then each level). A sub class's emitted name
+joins every level with `--` (`card--wide--dark`), so only a root class renders under
+exactly the name you gave it.
+The emitted class is the `name` (sanitized, any `m-` prefix dropped - the
+class-name grammar is in references/facts.md), and its CSS is printed only
+on a page where some node uses it. `status: "delete"` removes one - unlike a variant,
+a universal class is not catalog-backed.
+
+## Collection variables: the design tokens
+
+A collection variable compiles to a real CSS custom property on `:root`, and any
+token-referencable style property can point at it.
+
+A theme that `heal()` creates from nothing gets one collection, one mode and one skin
+("Default collection / Default mode / Default skin"). A theme started from Mosaic's
+shipped data instead has nine collections - Color (with Light and Dark modes), Font
+family, Typography, Spacing, Size, Position, Border radius, Shadow, Image & gradient -
+so read `collection` / `collectionMode` / `collectionSkin` off the document rather
+than assuming either. The skin listed first is the one in use. A variable
+hangs off the collection, and its value is stored per **skin → mode**:
+
+```json
+{
+  "ID": "<variable uuid>",
+  "parentType": "collection", "parentID": "<collectionID>",
+  "ordering": "a0", "status": "publish", "revision": "", "version": "",
+  "data": {
+    "name": "Brand",
+    "type": "color",
+    "customProperty": "--brand",
+    "skinsData": { "<skinID>": { "<modeID>": { "value": "rgb(9,99,199)" } } }
+  }
+}
+```
+
+Reference it from any of the 39 token-referencable properties in
+`data/style-properties.csv` with a one-key object:
+
+```json
+"backgroundColor": {"var": "<variable uuid>"}
+```
+
+Measured output:
+
+```css
+:root{--brand: rgb(9, 99, 199)}
+._d{padding-top:31px;background-color:var(--brand)}
+```
+
+Details that cost time to find:
+
+- **`skinsData[skinID]` is keyed by mode ID directly.** There is no `modesData`
+  wrapper — `CollectionVariableSkinDataDataSub::getSubData($modeID)` goes straight to
+  the mode, whose only property is `value`.
+- **`customProperty` is optional, and its dashes are too.** Omitted, the name is
+  derived from the path, `--<collection>--<group>--<name>` slugged
+  (`--default-collection--probe-derived`); pinned without dashes, `probe-bare-cp`
+  is emitted as `--probe-bare-cp` (both measured on 1.0.11;
+  `CollectionVariableNameHelper`). A clash with another variable is made unique per
+  theme. Before 1.0.11 a dash-less value was emitted verbatim as invalid CSS, so
+  writing the full `--name` is still the portable choice.
+- **A wrong `skinsData` shape does not fail.** The variable is created, `:root` gets
+  the declaration, and the value is the sub-factory's default (`#FFF` for colours).
+  If your token renders white, the value never arrived.
+- Variable types are `color`, `imageGradient`, `lengthPercentage`,
+  `numberLengthPercentage`, `boxShadow`, `textShadow`, `fontFamily`
+  (`CollectionTypesConst::COLLECTION_VARIABLE_TYPES`).
+- Deleting probe variables needs an explicit `status: "delete"` commit on the
+  `collectionVariable` manager — clearing nodes does not remove them, and orphans
+  accumulate as duplicate `:root` declarations.
+
+### Modes on an element: dark sections, dark mode
+
+A collection with more than one mode (Light / Dark) is switched per element with the
+style property `collectionModesData`, `{<collectionID>: <modeID>}`, in any state and
+breakpoint like every other style key. It compiles to a re-declaration of every
+variable of that collection, at that mode's value, on the element's own rule - so the
+element and everything under it see the other mode through ordinary custom-property
+inheritance (measured on 1.0.11: 18 declarations on one div). A dark band is one
+`collectionModesData` on the band; a site-wide switch is an interaction whose action
+targets the `html` element with a `collectionMode` property, since interactions can
+set it too. The mode listed first in a collection is the default.
+
+A theme `heal()` made has one mode; a second one is a record on any document
+instance's commit, under the key `collectionMode` (measured on 1.0.11):
+
+```json
+{"ID": "<uuid>", "parentType": "collection", "parentID": "<collectionID>",
+ "ordering": "a5", "status": "publish", "revision": "", "version": "",
+ "data": {"name": "Dark", "icon": ""}}
+```
+
+Each variable then carries a value per mode - `skinsData: {<skin>: {<lightMode>:
+{"value": …}, <darkMode>: {"value": …}}}` - and a variable with no value for the new
+mode shows the sub-factory default there. The site-wide switcher (buttons, cookie,
+page-load re-apply) is a recipe in references/interactions.md, measured end to end.
+
+### Which class wins
+
+From lowest to highest: **Variant < Variant sub class < Universal class < Universal
+sub class < Local styles**, and within each slot except local styles a later class
+beats an earlier one - `ElementMResourceStyle.php` builds the class list in exactly
+that order. Variant sub classes nest, and the whole chain applies.
+
+`style.localStates` are not part of that layer: each entry is a per-node custom
+state, `{label, selector, state: {<breakpoint>: {…props}}}`, where `selector` is SCSS
+with `&` standing for the element (`&:hover a`, `&::after`; `LocalStatesMeta`). Use
+one when the 57 built-in states do not name the selector you need.
+
+## How to actually build a theme
+
+1. Define collection variables for the palette, the type scale and the spacing scale.
+2. Commit variant styles for the structural entries — Body, Text and its heading
+   children, Button, Section — referencing those variables rather than literals.
+3. Only then write per-node `style` for the things that genuinely differ.
+
+The nine probe pages built while verifying this skill deliberately do **not** do
+this (they are gitignored - they were scaffolding, not a deliverable) — they set
+everything
+per node, because their job was to exercise the style compiler across eight visual
+languages, not to model a maintainable theme. A real site inverts that ratio.
+
+## A grouped menu, and two more places the placement table lied
+
+Nine flat links in a header is what happens when a site grows and nobody re-reads
+the nav. Mosaic's `dropdown` family is the fix and is worth knowing for its own
+sake:
+
+```
+dropdown                      horizontalAlign: left | center | right
+  dropdown-toggle             url, target, rel; takes the label as children
+  dropdown-wrapper            takes the links as children
+```
+
+Both children are inserted by `onHeal()` if you leave them out, so only the two
+need authoring. **It opens on CLICK by default** — `openOn` is `click` | `hover`,
+emitted as `data-open-on` with `click` when unset
+(`DropdownElementMResourceAbstract`). On open the host gains
+`dropdown--opening dropdown--opened` and the wrapper goes from `display:none` to
+`display:flex`. A hover test against a default dropdown reports one that does not
+work; set `openOn:"hover"` if hover is what you want. Style the open look through
+the `___dropdown--opened` state. Menus support one submenu level only - no
+sub-submenus.
+
+### Site menus: what each way of building one does, measured
+
+There is **no off-canvas node** - not in 1.0.11, not in 1.0.12 (134 types; the
+1.0.12 package searched for offcanvas / off-canvas / drawer), and not on the roadmap.
+Mosaic's "off-canvas menu" is a tutorial (a div and click interactions). The menu
+lab, `tools/verify_menus.py` (`data/menu-verification.csv`, 34 checks on 1.0.12),
+builds every option on one page under a z-index 1000 sticky header and drives it
+with a mouse, the keyboard, a touch tablet and a 390px touch phone:
+
+| | desktop `dropdown` / `dropdown-wide`, `openOn: hover` |
+|---|---|
+| hover | opens in ~65 ms (fadeDown), closes ~150 ms after leaving - moving down into the panel does not drop it |
+| keyboard | Space / ArrowDown open it; ArrowDown does NOT move into the links, Tab does; Escape closes and leaves focus on the toggle |
+| toggle with a `url` | renders as `<a href>`; Enter navigates |
+| touch | first tap on a linked toggle opens without navigating; the second tap closes it, still without navigating - so the parent page must be a link INSIDE the panel ("overview" as the first item); a tap outside closes |
+| SEO | every panel link is an `<a href>` in the server HTML, before any script |
+| mega | `dropdown-wide`'s panel spans the viewport (x 0, full width); one submenu level only |
+
+| phone menu | Esc | focus | aria | close button vs sticky header |
+|---|---|---|---|---|
+| **(b) Pro `modal` as a drawer** | closes | moves in, Tab is trapped, returns to the opener | `<dialog aria-modal="true" aria-label>` from `accessibleLabel` | top layer: never covered; html/body `overflow: clip` while open |
+| (a) `navbar` below `buttonBreakpoint` | closes | stays on the toggle, no trap | `aria-expanded`, no `aria-controls` | in flow inside the header |
+| (c) div + click odd/even (the tutorial) | **does nothing** | never moves | none | **covered** when its z-index is under the header's |
+
+The drawer the lab measures, and the recommendation:
+
+```
+modal            closedby: everything, accessibleLabel, padding 0 (the browser's dialog padding)
+  modal-overlay  backgroundColor with alpha
+  modal-window   position absolute, top 0, right 0, height 100dvh (the NATIVE field), width 86%,
+                 maxWidth 360px, overflow auto; first child: a button with modalClose
+opener           a button with click -> modalOpen, target = the modal's pinned nodeID. The pin
+                 only makes the two agree within one build: build_page and fill_shell re-key
+                 it every run (refresh_node_ids), since (ID, themeID) is the primary key and
+                 the previous master keeps its rows until pruned. Any uuid will do.
+```
+
+A notch inset: `paddingTop: "max(16px, env(safe-area-inset-top))"` and the `calc()`
+form are dropped by the native field; the same in `customDeclarations` survives. Mosaic's
+viewport meta has no `viewport-fit=cover`, so `env()` is 0 unless a site adds it.
+
+`dropdown-wrapper` used to read as a leaf in `placement-rules.csv`. Its
+`canBeParentFor()` returns `true`, but on `DropdownWrapperElementTypeFactoryAbstract`,
+and the extractor never read the abstract files, so it saw no override and wrote
+`none`. The two slider arrows had the same problem. Since v1.33 the abstracts are read
+and all four say `any`. The guard had already been fixed another way, and that fix
+still holds. Its factory is `getDropdownWrapperElementDefaultData($data, $children)`,
+and a build guard that reads only `rule` refuses correct structures; it refused this
+menu. So `extract_placement.py` also records `takes_children` from the factory
+signature, and `build_page.py` reads it.
+
+That is the second table to be caught short the same way this week. The first was
+`default-children.csv`, which held only the declared `getDefaultData()` statics and
+so knew nothing about children a type HEALS into itself — modal's overlay, loop's
+`loop-items`, slider's `slider-slides`, dropdown's own two. Both fixes are the same
+move: the question the table answers was narrower than the question the table's
+name suggests, so read the other source as well and say which is which.
+
+## Component states live on the element the selector names
+
+Two of Mosaic's component states read as a parent/child pair and only one of them
+is about the component itself:
+
+```
+___tab--active                &.m-tab--active          the tab
+___tab--active___descendants  .m-tab--active &         anything inside it
+___slider_navigation_bullet--active   &.m-slider-bullet--active
+___slide--active                      .m-slide--active > &
+___arrow_hidden                       &:where(.m-slider-arrow--hidden)
+```
+
+`___tab--active___descendants` compiles with `&` in the DESCENDANT position, so it
+must be committed on the child node. Put it on the tab and it reads "a descendant
+of an active tab that is also that tab", which matches nothing — the plugin
+darkens the active tab, the label keeps the colour you gave it, and the current
+tab is ink on ink. Measured both ways; the fix is to style the label node, not
+the tab.
+
+The same shape governs `___slide--active` (`.m-slide--active > &`, so it goes on
+the slide's content) and the slider bullet's own `--active`, which is what turns a
+row of identical hairlines into a position indicator.
+
+## What `openstreetmap` is called
+
+`latitude`, `longitude`, `zoom`, `layer`, `lazyLoad` — not `lat` / `lon`. An
+unknown property name is dropped without a word and the element falls back to its
+default centre, which is Times Square: a map that renders, looks deliberate, and
+is in the wrong hemisphere. The three coordinate properties take
+`ValidatorDynamicCodeObject`, so the `{"v": "…"}` object form.
+
+The element is an `<iframe>` to openstreetmap.org, not a tile layer, so "how many
+tiles loaded" is unanswerable from the parent document — assert on the frame's
+`src`, which carries `marker=lat,lon`.
+
+## Component instances: one definition, many uses
+
+A component is a theme-level record; a page writes an INSTANCE of it and supplies
+only the slots that differ:
+
+```jsonc
+// the definition, once, in the site's `components` map
+"case-card": <tree with slot() text nodes>
+
+// an instance, on a page
+{"type": "div", "component": "case-card",
+ "data": {"attrID": "cs-0"},
+ "overrides": {"cs-kind": {"text": "E-COMMERCE"},
+               "cs-name": {"text": "…"}}}
+```
+
+**Mosaic copies the definition's ids into every instance verbatim; `build_site.py`
+is what makes them unique.** Mosaic has no id-prefixing of its own - an element's
+id is its `attrID` (`ElementAttrID.php`), and every instance renders the
+definition's nodes with the definition's attrIDs, so two instances put every id
+into the document twice. `build_site.py`'s override pass writes an `attrID` of
+`<instance attrID>-<definition attrID>` into each instance's override node: the
+definition's `cs-card` becomes `cs-0-cs-card`, `cs-1-cs-card`, and so on, so the
+definition's attrID is a SUFFIX in the delivered page and `getElementById` on it
+finds nothing. Address instances with `[id$="-cs-card"]`.
+
+Until 1.32.1 that pass ran only for instances that HAD overrides, so an instance
+written with none - a contact block placed as-is in a footer and in a page body -
+kept the definition's ids, and a client build found every one of them twice. It runs
+for every instance now; measured on the demo, two override-less instances gave
+`ft-a-cs-card` and `ft-b-cs-card` and no duplicates. A tool other than
+`build_site.py` that writes instances has to do the same, or accept duplicate ids.
+
+Four more things a build that leans on components runs into:
+
+- **The instance element itself carries no id.** Its `attrID` exists only as the
+  prefix `build_site.py` writes, so a selector aimed at the instance's own attrID
+  finds nothing - aim at `<instance>-<definition id>`. Two instances given the SAME
+  attrID (or none) get the same prefix and so duplicate every id inside; give each a
+  distinct attrID.
+- **A loop repeats ids too, and that one is Mosaic's.** Every `loop-item` renders
+  the same attrIDs, so a list of six cards carries six of each id (reported from a
+  client build). `ElementAttrID.php` evaluates an attrID per loop item, which is the
+  hook for making them unique; that has not been measured here.
+- **A component's id is its name.** `build_site.py` derives it with
+  `uuid5(COMPONENT_NAMESPACE, name)` so rebuilds update the same row; renaming the
+  key in `site["components"]` therefore creates a new component and leaves the old
+  one behind.
+- **A component needs a `path`, or its preview and thumbnail are blank.** The
+  component row's `path` is the template it is previewed in; the editor gives a new
+  one `front-page.php`. With `path: ""`, 1.0.11 recurses until PHP runs out of stack
+  (`ComponentRenderEditorInstance::createComponentContext` tests a misspelt
+  `$paths`, so the empty path is never replaced), and the editor's preview and
+  thumbnail screenshot come back as 200 with 0 bytes (reported from a client build).
+  `build_site.py` wrote `""` until 1.34.9; it now writes `front-page.php` and repairs
+  an existing component with an empty path. A headless build does not regenerate the
+  thumbnail; a stored one (a captured error page, say) stays until something replaces it.
+- **Refilling a definition re-keys its inner nodes, so update only what uses it.**
+  `ensure_components` deletes the old inner nodes and flattens the tree again, which
+  gives every inner node a new id; an instance's override nodes still point
+  `override.originalID` at the old ids, and their text falls back to the definition's
+  (reported from a client build). An incremental updater does not need to rewrite the
+  whole site to cover this: a NEW component has no overrides anywhere yet, so write the
+  definition plus the documents that place it; a CHANGED one needs the documents that
+  place it re-committed with their overrides - the master if the header or footer
+  holds an instance, and each template whose tree does - and nothing else. Keep the
+  spec deterministic while deciding what changed: a fresh `uuid4` inside a definition
+  (an interaction item's `uuid`, say) makes every spec hash differ and every component
+  look changed; derive such ids with `uuid5` (reported from the same build).
+- **An expression inside a definition is evaluated where the instance is.** A link
+  `{"v": "@concat('/contact/?ref=', @VAR('post/title'), '#consult')"}` inside a
+  component, placed in a single-post template, carries THAT post's title (reported
+  from a client build on 1.0.10).
+- **The header and footer can hold instances.** `build_site.py` commits the theme's
+  design tokens first, builds the components, and only then writes the shell's
+  header and footer - with components resolved and overrides applied in the master,
+  as on a page. Measured: a footer instance with one override rendered with its
+  prefixed ids and the overridden text. (Before this order, a component in the shell
+  was impossible: its styles name tokens the shell commit had not made yet.)
+
+What this is good for on a client site: anything repeated in several places that
+the client should be able to change themselves - an office address block, a contact
+bar, opening hours. Make it a component and it is edited once, in Mosaic's
+Components panel, and every page follows, with no "site settings" plugin page.
+
+The claim worth verifying is not that three cards rendered. It is that they are the
+same definition, and the evidence is in the class: all three carry the identical
+generated token (`_fm` here) while their text differs. Three copy-pasted sections
+would carry three tokens and three rules. `verify_components.py` asserts exactly
+that — and the first version of the check passed on three `null`s, because its
+regex contained a literal backspace: `\b` inside a non-raw Python string is 0x08,
+not a word boundary. An assertion that cannot fail is worse than no assertion, so
+the check now also refuses a token it could not read.

@@ -1,0 +1,1189 @@
+{
+ "source_file": "data/browser-verification/my-account.csv",
+ "columns": [
+  "breakpoint",
+  "attrID",
+  "property",
+  "declared",
+  "computed",
+  "status"
+ ],
+ "rows": [
+  {
+   "breakpoint": "_",
+   "attrID": "mk-acct-body",
+   "property": "backgroundColor",
+   "declared": "rgb(250,250,247)",
+   "computed": "rgb(250, 250, 247)",
+   "status": "ok"
+  },
+  {
+   "breakpoint": "_",
+   "attrID": "mk-acct-body",
+   "property": "paddingLeft",
+   "declared": "40px",
+   "computed": "40px",
+   "status": "ok"
+  },
+  {
+   "breakpoint": "_",
+   "attrID": "mk-acct-body",
+   "property": "paddingRight",
+   "declared": "40px",
+   "computed": "40px",
+   "status": "ok"
+  },
+  {
+   "breakpoint": "_",
+   "attrID": "mk-acct-body",
+   "property": "fontFamily",
+   "declared": "'Noto Sans TC','PingFang TC','Hiragino Sans TC','Microsoft JhengHei',sans-serif",
+   "computed": "\"Noto Sans TC\", \"PingFang TC\", \"Hiragino Sans TC\", \"Microsoft JhengHei\", sans-serif",
+   "status": "ok"
+  },
+  {
+   "breakpoint": "_",
+   "attrID": "mk-acct-body-in",
+   "property": "width",
+   "declared": "100%",
+   "computed": "viewport- or parent-relative",
+   "status": "not-comparable"
+  },
+  {
+   "breakpoint": "_",
+   "attrID": "mk-acct-body-in",
+   "property": "maxWidth",
+   "declared": "1240px",
+   "computed": "1240px",
+   "status": "ok"
+  },
+  {
+   "breakpoint": "_",
+   "attrID": "mk-acct-body-in",
+   "property": "marginLeft",
+   "declared": "auto",
+   "computed": "auto resolves to a used value (60px)",
+   "status": "not-comparable"
+  },
+  {
+   "breakpoint": "_",
+   "attrID": "mk-acct-body-in",
+   "property": "marginRight",
+   "declared": "auto",
+   "computed": "auto resolves to a used value (60px)",
+   "status": "not-comparable"
+  },
+  {
+   "breakpoint": "_",
+   "attrID": "mk-acct-head",
+   "property": "display",
+   "declared": "grid",
+   "computed": "grid",
+   "status": "ok"
+  },
+  {
+   "breakpoint": "_",
+   "attrID": "mk-acct-head",
+   "property": "gridCols",
+   "declared": "84px 1fr",
+   "computed": "84px 1156px",
+   "status": "ok"
+  },
+  {
+   "breakpoint": "_",
+   "attrID": "mk-acct-head",
+   "property": "columnGap",
+   "declared": "0px",
+   "computed": "0px",
+   "status": "ok"
+  },
+  {
+   "breakpoint": "_",
+   "attrID": "mk-acct-head",
+   "property": "alignItems",
+   "declared": "start",
+   "computed": "start",
+   "status": "ok"
+  },
+  {
+   "breakpoint": "_",
+   "attrID": "mk-acct-head",
+   "property": "paddingTop",
+   "declared": "22px",
+   "computed": "22px",
+   "status": "ok"
+  },
+  {
+   "breakpoint": "_",
+   "attrID": "mk-acct-head",
+   "property": "customDeclarations:border-top",
+   "declared": "1px solid rgba(22,24,28,.16)",
+   "computed": "no computed value",
+   "status": "not-comparable"
+  },
+  {
+   "breakpoint": "_",
+   "attrID": "mk-acct-mast",
+   "property": "backgroundColor",
+   "declared": "rgb(250,250,247)",
+   "computed": "rgb(250, 250, 247)",
+   "status": "ok"
+  },
+  {
+   "breakpoint": "_",
+   "attrID": "mk-acct-mast",
+   "property": "paddingLeft",
+   "declared": "40px",
+   "computed": "40px",
+   "status": "ok"
+  },
+  {
+   "breakpoint": "_",
+   "attrID": "mk-acct-mast",
+   "property": "paddingRight",
+   "declared": "40px",
+   "computed": "40px",
+   "status": "ok"
+  },
+  {
+   "breakpoint": "_",
+   "attrID": "mk-acct-mast",
+   "property": "fontFamily",
+   "declared": "'Noto Sans TC','PingFang TC','Hiragino Sans TC','Microsoft JhengHei',sans-serif",
+   "computed": "\"Noto Sans TC\", \"PingFang TC\", \"Hiragino Sans TC\", \"Microsoft JhengHei\", sans-serif",
+   "status": "ok"
+  },
+  {
+   "breakpoint": "_",
+   "attrID": "mk-acct-mast-in",
+   "property": "width",
+   "declared": "100%",
+   "computed": "viewport- or parent-relative",
+   "status": "not-comparable"
+  },
+  {
+   "breakpoint": "_",
+   "attrID": "mk-acct-mast-in",
+   "property": "maxWidth",
+   "declared": "1240px",
+   "computed": "1240px",
+   "status": "ok"
+  },
+  {
+   "breakpoint": "_",
+   "attrID": "mk-acct-mast-in",
+   "property": "marginLeft",
+   "declared": "auto",
+   "computed": "auto resolves to a used value (60px)",
+   "status": "not-comparable"
+  },
+  {
+   "breakpoint": "_",
+   "attrID": "mk-acct-mast-in",
+   "property": "marginRight",
+   "declared": "auto",
+   "computed": "auto resolves to a used value (60px)",
+   "status": "not-comparable"
+  },
+  {
+   "breakpoint": "_",
+   "attrID": "mk-acct-pad",
+   "property": "paddingTop",
+   "declared": "70px",
+   "computed": "70px",
+   "status": "ok"
+  },
+  {
+   "breakpoint": "_",
+   "attrID": "mk-acct-pad",
+   "property": "paddingBottom",
+   "declared": "48px",
+   "computed": "48px",
+   "status": "ok"
+  },
+  {
+   "breakpoint": "_",
+   "attrID": "mk-acct-r-0",
+   "property": "display",
+   "declared": "grid",
+   "computed": "grid",
+   "status": "ok"
+  },
+  {
+   "breakpoint": "_",
+   "attrID": "mk-acct-r-0",
+   "property": "gridCols",
+   "declared": "150px 1fr",
+   "computed": "150px 986px",
+   "status": "ok"
+  },
+  {
+   "breakpoint": "_",
+   "attrID": "mk-acct-r-0",
+   "property": "columnGap",
+   "declared": "20px",
+   "computed": "20px",
+   "status": "ok"
+  },
+  {
+   "breakpoint": "_",
+   "attrID": "mk-acct-r-0",
+   "property": "alignItems",
+   "declared": "baseline",
+   "computed": "baseline",
+   "status": "ok"
+  },
+  {
+   "breakpoint": "_",
+   "attrID": "mk-acct-r-0",
+   "property": "paddingTop",
+   "declared": "13px",
+   "computed": "13px",
+   "status": "ok"
+  },
+  {
+   "breakpoint": "_",
+   "attrID": "mk-acct-r-0",
+   "property": "paddingBottom",
+   "declared": "13px",
+   "computed": "13px",
+   "status": "ok"
+  },
+  {
+   "breakpoint": "_",
+   "attrID": "mk-acct-r-0",
+   "property": "customDeclarations:border-top",
+   "declared": "1px solid rgba(22,24,28,.16)",
+   "computed": "no computed value",
+   "status": "not-comparable"
+  },
+  {
+   "breakpoint": "_",
+   "attrID": "mk-acct-r-1",
+   "property": "display",
+   "declared": "grid",
+   "computed": "grid",
+   "status": "ok"
+  },
+  {
+   "breakpoint": "_",
+   "attrID": "mk-acct-r-1",
+   "property": "gridCols",
+   "declared": "150px 1fr",
+   "computed": "150px 986px",
+   "status": "ok"
+  },
+  {
+   "breakpoint": "_",
+   "attrID": "mk-acct-r-1",
+   "property": "columnGap",
+   "declared": "20px",
+   "computed": "20px",
+   "status": "ok"
+  },
+  {
+   "breakpoint": "_",
+   "attrID": "mk-acct-r-1",
+   "property": "alignItems",
+   "declared": "baseline",
+   "computed": "baseline",
+   "status": "ok"
+  },
+  {
+   "breakpoint": "_",
+   "attrID": "mk-acct-r-1",
+   "property": "paddingTop",
+   "declared": "13px",
+   "computed": "13px",
+   "status": "ok"
+  },
+  {
+   "breakpoint": "_",
+   "attrID": "mk-acct-r-1",
+   "property": "paddingBottom",
+   "declared": "13px",
+   "computed": "13px",
+   "status": "ok"
+  },
+  {
+   "breakpoint": "_",
+   "attrID": "mk-acct-r-1",
+   "property": "customDeclarations:border-top",
+   "declared": "1px solid rgba(22,24,28,.16)",
+   "computed": "no computed value",
+   "status": "not-comparable"
+  },
+  {
+   "breakpoint": "_",
+   "attrID": "mk-acct-r-2",
+   "property": "display",
+   "declared": "grid",
+   "computed": "grid",
+   "status": "ok"
+  },
+  {
+   "breakpoint": "_",
+   "attrID": "mk-acct-r-2",
+   "property": "gridCols",
+   "declared": "150px 1fr",
+   "computed": "150px 986px",
+   "status": "ok"
+  },
+  {
+   "breakpoint": "_",
+   "attrID": "mk-acct-r-2",
+   "property": "columnGap",
+   "declared": "20px",
+   "computed": "20px",
+   "status": "ok"
+  },
+  {
+   "breakpoint": "_",
+   "attrID": "mk-acct-r-2",
+   "property": "alignItems",
+   "declared": "baseline",
+   "computed": "baseline",
+   "status": "ok"
+  },
+  {
+   "breakpoint": "_",
+   "attrID": "mk-acct-r-2",
+   "property": "paddingTop",
+   "declared": "13px",
+   "computed": "13px",
+   "status": "ok"
+  },
+  {
+   "breakpoint": "_",
+   "attrID": "mk-acct-r-2",
+   "property": "paddingBottom",
+   "declared": "13px",
+   "computed": "13px",
+   "status": "ok"
+  },
+  {
+   "breakpoint": "_",
+   "attrID": "mk-acct-r-2",
+   "property": "customDeclarations:border-top",
+   "declared": "1px solid rgba(22,24,28,.16)",
+   "computed": "no computed value",
+   "status": "not-comparable"
+  },
+  {
+   "breakpoint": "_",
+   "attrID": "mk-acct-rows",
+   "property": "marginTop",
+   "declared": "30px",
+   "computed": "30px",
+   "status": "ok"
+  },
+  {
+   "breakpoint": "_",
+   "attrID": "mk-acct-rows",
+   "property": "display",
+   "declared": "grid",
+   "computed": "grid",
+   "status": "ok"
+  },
+  {
+   "breakpoint": "_",
+   "attrID": "mk-acct-rows",
+   "property": "rowGap",
+   "declared": "0px",
+   "computed": "0px",
+   "status": "ok"
+  },
+  {
+   "breakpoint": "_",
+   "attrID": "mk-acct-sheet",
+   "property": "paddingBottom",
+   "declared": "120px",
+   "computed": "120px",
+   "status": "ok"
+  },
+  {
+   "breakpoint": "_t",
+   "attrID": "mk-acct-body",
+   "property": "backgroundColor",
+   "declared": "rgb(250,250,247)",
+   "computed": "rgb(250, 250, 247)",
+   "status": "ok"
+  },
+  {
+   "breakpoint": "_t",
+   "attrID": "mk-acct-body",
+   "property": "paddingLeft",
+   "declared": "28px",
+   "computed": "28px",
+   "status": "ok"
+  },
+  {
+   "breakpoint": "_t",
+   "attrID": "mk-acct-body",
+   "property": "paddingRight",
+   "declared": "28px",
+   "computed": "28px",
+   "status": "ok"
+  },
+  {
+   "breakpoint": "_t",
+   "attrID": "mk-acct-body",
+   "property": "fontFamily",
+   "declared": "'Noto Sans TC','PingFang TC','Hiragino Sans TC','Microsoft JhengHei',sans-serif",
+   "computed": "\"Noto Sans TC\", \"PingFang TC\", \"Hiragino Sans TC\", \"Microsoft JhengHei\", sans-serif",
+   "status": "ok"
+  },
+  {
+   "breakpoint": "_t",
+   "attrID": "mk-acct-body-in",
+   "property": "width",
+   "declared": "100%",
+   "computed": "viewport- or parent-relative",
+   "status": "not-comparable"
+  },
+  {
+   "breakpoint": "_t",
+   "attrID": "mk-acct-body-in",
+   "property": "maxWidth",
+   "declared": "1240px",
+   "computed": "1240px",
+   "status": "ok"
+  },
+  {
+   "breakpoint": "_t",
+   "attrID": "mk-acct-body-in",
+   "property": "marginLeft",
+   "declared": "auto",
+   "computed": "auto resolves to a used value (0px)",
+   "status": "not-comparable"
+  },
+  {
+   "breakpoint": "_t",
+   "attrID": "mk-acct-body-in",
+   "property": "marginRight",
+   "declared": "auto",
+   "computed": "auto resolves to a used value (0px)",
+   "status": "not-comparable"
+  },
+  {
+   "breakpoint": "_t",
+   "attrID": "mk-acct-head",
+   "property": "display",
+   "declared": "grid",
+   "computed": "grid",
+   "status": "ok"
+  },
+  {
+   "breakpoint": "_t",
+   "attrID": "mk-acct-head",
+   "property": "gridCols",
+   "declared": "84px 1fr",
+   "computed": "84px 760px",
+   "status": "ok"
+  },
+  {
+   "breakpoint": "_t",
+   "attrID": "mk-acct-head",
+   "property": "columnGap",
+   "declared": "0px",
+   "computed": "0px",
+   "status": "ok"
+  },
+  {
+   "breakpoint": "_t",
+   "attrID": "mk-acct-head",
+   "property": "alignItems",
+   "declared": "start",
+   "computed": "start",
+   "status": "ok"
+  },
+  {
+   "breakpoint": "_t",
+   "attrID": "mk-acct-head",
+   "property": "paddingTop",
+   "declared": "22px",
+   "computed": "22px",
+   "status": "ok"
+  },
+  {
+   "breakpoint": "_t",
+   "attrID": "mk-acct-head",
+   "property": "customDeclarations:border-top",
+   "declared": "1px solid rgba(22,24,28,.16)",
+   "computed": "no computed value",
+   "status": "not-comparable"
+  },
+  {
+   "breakpoint": "_t",
+   "attrID": "mk-acct-mast",
+   "property": "backgroundColor",
+   "declared": "rgb(250,250,247)",
+   "computed": "rgb(250, 250, 247)",
+   "status": "ok"
+  },
+  {
+   "breakpoint": "_t",
+   "attrID": "mk-acct-mast",
+   "property": "paddingLeft",
+   "declared": "28px",
+   "computed": "28px",
+   "status": "ok"
+  },
+  {
+   "breakpoint": "_t",
+   "attrID": "mk-acct-mast",
+   "property": "paddingRight",
+   "declared": "28px",
+   "computed": "28px",
+   "status": "ok"
+  },
+  {
+   "breakpoint": "_t",
+   "attrID": "mk-acct-mast",
+   "property": "fontFamily",
+   "declared": "'Noto Sans TC','PingFang TC','Hiragino Sans TC','Microsoft JhengHei',sans-serif",
+   "computed": "\"Noto Sans TC\", \"PingFang TC\", \"Hiragino Sans TC\", \"Microsoft JhengHei\", sans-serif",
+   "status": "ok"
+  },
+  {
+   "breakpoint": "_t",
+   "attrID": "mk-acct-mast-in",
+   "property": "width",
+   "declared": "100%",
+   "computed": "viewport- or parent-relative",
+   "status": "not-comparable"
+  },
+  {
+   "breakpoint": "_t",
+   "attrID": "mk-acct-mast-in",
+   "property": "maxWidth",
+   "declared": "1240px",
+   "computed": "1240px",
+   "status": "ok"
+  },
+  {
+   "breakpoint": "_t",
+   "attrID": "mk-acct-mast-in",
+   "property": "marginLeft",
+   "declared": "auto",
+   "computed": "auto resolves to a used value (0px)",
+   "status": "not-comparable"
+  },
+  {
+   "breakpoint": "_t",
+   "attrID": "mk-acct-mast-in",
+   "property": "marginRight",
+   "declared": "auto",
+   "computed": "auto resolves to a used value (0px)",
+   "status": "not-comparable"
+  },
+  {
+   "breakpoint": "_t",
+   "attrID": "mk-acct-pad",
+   "property": "paddingTop",
+   "declared": "50px",
+   "computed": "50px",
+   "status": "ok"
+  },
+  {
+   "breakpoint": "_t",
+   "attrID": "mk-acct-pad",
+   "property": "paddingBottom",
+   "declared": "48px",
+   "computed": "48px",
+   "status": "ok"
+  },
+  {
+   "breakpoint": "_t",
+   "attrID": "mk-acct-r-0",
+   "property": "display",
+   "declared": "grid",
+   "computed": "grid",
+   "status": "ok"
+  },
+  {
+   "breakpoint": "_t",
+   "attrID": "mk-acct-r-0",
+   "property": "gridCols",
+   "declared": "150px 1fr",
+   "computed": "150px 590px",
+   "status": "ok"
+  },
+  {
+   "breakpoint": "_t",
+   "attrID": "mk-acct-r-0",
+   "property": "columnGap",
+   "declared": "20px",
+   "computed": "20px",
+   "status": "ok"
+  },
+  {
+   "breakpoint": "_t",
+   "attrID": "mk-acct-r-0",
+   "property": "alignItems",
+   "declared": "baseline",
+   "computed": "baseline",
+   "status": "ok"
+  },
+  {
+   "breakpoint": "_t",
+   "attrID": "mk-acct-r-0",
+   "property": "paddingTop",
+   "declared": "13px",
+   "computed": "13px",
+   "status": "ok"
+  },
+  {
+   "breakpoint": "_t",
+   "attrID": "mk-acct-r-0",
+   "property": "paddingBottom",
+   "declared": "13px",
+   "computed": "13px",
+   "status": "ok"
+  },
+  {
+   "breakpoint": "_t",
+   "attrID": "mk-acct-r-0",
+   "property": "customDeclarations:border-top",
+   "declared": "1px solid rgba(22,24,28,.16)",
+   "computed": "no computed value",
+   "status": "not-comparable"
+  },
+  {
+   "breakpoint": "_t",
+   "attrID": "mk-acct-r-1",
+   "property": "display",
+   "declared": "grid",
+   "computed": "grid",
+   "status": "ok"
+  },
+  {
+   "breakpoint": "_t",
+   "attrID": "mk-acct-r-1",
+   "property": "gridCols",
+   "declared": "150px 1fr",
+   "computed": "150px 590px",
+   "status": "ok"
+  },
+  {
+   "breakpoint": "_t",
+   "attrID": "mk-acct-r-1",
+   "property": "columnGap",
+   "declared": "20px",
+   "computed": "20px",
+   "status": "ok"
+  },
+  {
+   "breakpoint": "_t",
+   "attrID": "mk-acct-r-1",
+   "property": "alignItems",
+   "declared": "baseline",
+   "computed": "baseline",
+   "status": "ok"
+  },
+  {
+   "breakpoint": "_t",
+   "attrID": "mk-acct-r-1",
+   "property": "paddingTop",
+   "declared": "13px",
+   "computed": "13px",
+   "status": "ok"
+  },
+  {
+   "breakpoint": "_t",
+   "attrID": "mk-acct-r-1",
+   "property": "paddingBottom",
+   "declared": "13px",
+   "computed": "13px",
+   "status": "ok"
+  },
+  {
+   "breakpoint": "_t",
+   "attrID": "mk-acct-r-1",
+   "property": "customDeclarations:border-top",
+   "declared": "1px solid rgba(22,24,28,.16)",
+   "computed": "no computed value",
+   "status": "not-comparable"
+  },
+  {
+   "breakpoint": "_t",
+   "attrID": "mk-acct-r-2",
+   "property": "display",
+   "declared": "grid",
+   "computed": "grid",
+   "status": "ok"
+  },
+  {
+   "breakpoint": "_t",
+   "attrID": "mk-acct-r-2",
+   "property": "gridCols",
+   "declared": "150px 1fr",
+   "computed": "150px 590px",
+   "status": "ok"
+  },
+  {
+   "breakpoint": "_t",
+   "attrID": "mk-acct-r-2",
+   "property": "columnGap",
+   "declared": "20px",
+   "computed": "20px",
+   "status": "ok"
+  },
+  {
+   "breakpoint": "_t",
+   "attrID": "mk-acct-r-2",
+   "property": "alignItems",
+   "declared": "baseline",
+   "computed": "baseline",
+   "status": "ok"
+  },
+  {
+   "breakpoint": "_t",
+   "attrID": "mk-acct-r-2",
+   "property": "paddingTop",
+   "declared": "13px",
+   "computed": "13px",
+   "status": "ok"
+  },
+  {
+   "breakpoint": "_t",
+   "attrID": "mk-acct-r-2",
+   "property": "paddingBottom",
+   "declared": "13px",
+   "computed": "13px",
+   "status": "ok"
+  },
+  {
+   "breakpoint": "_t",
+   "attrID": "mk-acct-r-2",
+   "property": "customDeclarations:border-top",
+   "declared": "1px solid rgba(22,24,28,.16)",
+   "computed": "no computed value",
+   "status": "not-comparable"
+  },
+  {
+   "breakpoint": "_t",
+   "attrID": "mk-acct-rows",
+   "property": "marginTop",
+   "declared": "30px",
+   "computed": "30px",
+   "status": "ok"
+  },
+  {
+   "breakpoint": "_t",
+   "attrID": "mk-acct-rows",
+   "property": "display",
+   "declared": "grid",
+   "computed": "grid",
+   "status": "ok"
+  },
+  {
+   "breakpoint": "_t",
+   "attrID": "mk-acct-rows",
+   "property": "rowGap",
+   "declared": "0px",
+   "computed": "0px",
+   "status": "ok"
+  },
+  {
+   "breakpoint": "_t",
+   "attrID": "mk-acct-sheet",
+   "property": "paddingBottom",
+   "declared": "120px",
+   "computed": "120px",
+   "status": "ok"
+  },
+  {
+   "breakpoint": "_m",
+   "attrID": "mk-acct-body",
+   "property": "backgroundColor",
+   "declared": "rgb(250,250,247)",
+   "computed": "rgb(250, 250, 247)",
+   "status": "ok"
+  },
+  {
+   "breakpoint": "_m",
+   "attrID": "mk-acct-body",
+   "property": "paddingLeft",
+   "declared": "18px",
+   "computed": "18px",
+   "status": "ok"
+  },
+  {
+   "breakpoint": "_m",
+   "attrID": "mk-acct-body",
+   "property": "paddingRight",
+   "declared": "18px",
+   "computed": "18px",
+   "status": "ok"
+  },
+  {
+   "breakpoint": "_m",
+   "attrID": "mk-acct-body",
+   "property": "fontFamily",
+   "declared": "'Noto Sans TC','PingFang TC','Hiragino Sans TC','Microsoft JhengHei',sans-serif",
+   "computed": "\"Noto Sans TC\", \"PingFang TC\", \"Hiragino Sans TC\", \"Microsoft JhengHei\", sans-serif",
+   "status": "ok"
+  },
+  {
+   "breakpoint": "_m",
+   "attrID": "mk-acct-body-in",
+   "property": "width",
+   "declared": "100%",
+   "computed": "viewport- or parent-relative",
+   "status": "not-comparable"
+  },
+  {
+   "breakpoint": "_m",
+   "attrID": "mk-acct-body-in",
+   "property": "maxWidth",
+   "declared": "1240px",
+   "computed": "1240px",
+   "status": "ok"
+  },
+  {
+   "breakpoint": "_m",
+   "attrID": "mk-acct-body-in",
+   "property": "marginLeft",
+   "declared": "auto",
+   "computed": "auto resolves to a used value (0px)",
+   "status": "not-comparable"
+  },
+  {
+   "breakpoint": "_m",
+   "attrID": "mk-acct-body-in",
+   "property": "marginRight",
+   "declared": "auto",
+   "computed": "auto resolves to a used value (0px)",
+   "status": "not-comparable"
+  },
+  {
+   "breakpoint": "_m",
+   "attrID": "mk-acct-head",
+   "property": "display",
+   "declared": "grid",
+   "computed": "grid",
+   "status": "ok"
+  },
+  {
+   "breakpoint": "_m",
+   "attrID": "mk-acct-head",
+   "property": "gridCols",
+   "declared": "48px 1fr",
+   "computed": "48px 306px",
+   "status": "ok"
+  },
+  {
+   "breakpoint": "_m",
+   "attrID": "mk-acct-head",
+   "property": "columnGap",
+   "declared": "0px",
+   "computed": "0px",
+   "status": "ok"
+  },
+  {
+   "breakpoint": "_m",
+   "attrID": "mk-acct-head",
+   "property": "alignItems",
+   "declared": "start",
+   "computed": "start",
+   "status": "ok"
+  },
+  {
+   "breakpoint": "_m",
+   "attrID": "mk-acct-head",
+   "property": "paddingTop",
+   "declared": "22px",
+   "computed": "22px",
+   "status": "ok"
+  },
+  {
+   "breakpoint": "_m",
+   "attrID": "mk-acct-head",
+   "property": "customDeclarations:border-top",
+   "declared": "1px solid rgba(22,24,28,.16)",
+   "computed": "no computed value",
+   "status": "not-comparable"
+  },
+  {
+   "breakpoint": "_m",
+   "attrID": "mk-acct-mast",
+   "property": "backgroundColor",
+   "declared": "rgb(250,250,247)",
+   "computed": "rgb(250, 250, 247)",
+   "status": "ok"
+  },
+  {
+   "breakpoint": "_m",
+   "attrID": "mk-acct-mast",
+   "property": "paddingLeft",
+   "declared": "18px",
+   "computed": "18px",
+   "status": "ok"
+  },
+  {
+   "breakpoint": "_m",
+   "attrID": "mk-acct-mast",
+   "property": "paddingRight",
+   "declared": "18px",
+   "computed": "18px",
+   "status": "ok"
+  },
+  {
+   "breakpoint": "_m",
+   "attrID": "mk-acct-mast",
+   "property": "fontFamily",
+   "declared": "'Noto Sans TC','PingFang TC','Hiragino Sans TC','Microsoft JhengHei',sans-serif",
+   "computed": "\"Noto Sans TC\", \"PingFang TC\", \"Hiragino Sans TC\", \"Microsoft JhengHei\", sans-serif",
+   "status": "ok"
+  },
+  {
+   "breakpoint": "_m",
+   "attrID": "mk-acct-mast-in",
+   "property": "width",
+   "declared": "100%",
+   "computed": "viewport- or parent-relative",
+   "status": "not-comparable"
+  },
+  {
+   "breakpoint": "_m",
+   "attrID": "mk-acct-mast-in",
+   "property": "maxWidth",
+   "declared": "1240px",
+   "computed": "1240px",
+   "status": "ok"
+  },
+  {
+   "breakpoint": "_m",
+   "attrID": "mk-acct-mast-in",
+   "property": "marginLeft",
+   "declared": "auto",
+   "computed": "auto resolves to a used value (0px)",
+   "status": "not-comparable"
+  },
+  {
+   "breakpoint": "_m",
+   "attrID": "mk-acct-mast-in",
+   "property": "marginRight",
+   "declared": "auto",
+   "computed": "auto resolves to a used value (0px)",
+   "status": "not-comparable"
+  },
+  {
+   "breakpoint": "_m",
+   "attrID": "mk-acct-pad",
+   "property": "paddingTop",
+   "declared": "24px",
+   "computed": "24px",
+   "status": "ok"
+  },
+  {
+   "breakpoint": "_m",
+   "attrID": "mk-acct-pad",
+   "property": "paddingBottom",
+   "declared": "34px",
+   "computed": "34px",
+   "status": "ok"
+  },
+  {
+   "breakpoint": "_m",
+   "attrID": "mk-acct-r-0",
+   "property": "display",
+   "declared": "grid",
+   "computed": "grid",
+   "status": "ok"
+  },
+  {
+   "breakpoint": "_m",
+   "attrID": "mk-acct-r-0",
+   "property": "gridCols",
+   "declared": "84px 1fr",
+   "computed": "84px 210px",
+   "status": "ok"
+  },
+  {
+   "breakpoint": "_m",
+   "attrID": "mk-acct-r-0",
+   "property": "columnGap",
+   "declared": "12px",
+   "computed": "12px",
+   "status": "ok"
+  },
+  {
+   "breakpoint": "_m",
+   "attrID": "mk-acct-r-0",
+   "property": "alignItems",
+   "declared": "baseline",
+   "computed": "baseline",
+   "status": "ok"
+  },
+  {
+   "breakpoint": "_m",
+   "attrID": "mk-acct-r-0",
+   "property": "paddingTop",
+   "declared": "13px",
+   "computed": "13px",
+   "status": "ok"
+  },
+  {
+   "breakpoint": "_m",
+   "attrID": "mk-acct-r-0",
+   "property": "paddingBottom",
+   "declared": "13px",
+   "computed": "13px",
+   "status": "ok"
+  },
+  {
+   "breakpoint": "_m",
+   "attrID": "mk-acct-r-0",
+   "property": "customDeclarations:border-top",
+   "declared": "1px solid rgba(22,24,28,.16)",
+   "computed": "no computed value",
+   "status": "not-comparable"
+  },
+  {
+   "breakpoint": "_m",
+   "attrID": "mk-acct-r-1",
+   "property": "display",
+   "declared": "grid",
+   "computed": "grid",
+   "status": "ok"
+  },
+  {
+   "breakpoint": "_m",
+   "attrID": "mk-acct-r-1",
+   "property": "gridCols",
+   "declared": "84px 1fr",
+   "computed": "84px 210px",
+   "status": "ok"
+  },
+  {
+   "breakpoint": "_m",
+   "attrID": "mk-acct-r-1",
+   "property": "columnGap",
+   "declared": "12px",
+   "computed": "12px",
+   "status": "ok"
+  },
+  {
+   "breakpoint": "_m",
+   "attrID": "mk-acct-r-1",
+   "property": "alignItems",
+   "declared": "baseline",
+   "computed": "baseline",
+   "status": "ok"
+  },
+  {
+   "breakpoint": "_m",
+   "attrID": "mk-acct-r-1",
+   "property": "paddingTop",
+   "declared": "13px",
+   "computed": "13px",
+   "status": "ok"
+  },
+  {
+   "breakpoint": "_m",
+   "attrID": "mk-acct-r-1",
+   "property": "paddingBottom",
+   "declared": "13px",
+   "computed": "13px",
+   "status": "ok"
+  },
+  {
+   "breakpoint": "_m",
+   "attrID": "mk-acct-r-1",
+   "property": "customDeclarations:border-top",
+   "declared": "1px solid rgba(22,24,28,.16)",
+   "computed": "no computed value",
+   "status": "not-comparable"
+  },
+  {
+   "breakpoint": "_m",
+   "attrID": "mk-acct-r-2",
+   "property": "display",
+   "declared": "grid",
+   "computed": "grid",
+   "status": "ok"
+  },
+  {
+   "breakpoint": "_m",
+   "attrID": "mk-acct-r-2",
+   "property": "gridCols",
+   "declared": "84px 1fr",
+   "computed": "84px 210px",
+   "status": "ok"
+  },
+  {
+   "breakpoint": "_m",
+   "attrID": "mk-acct-r-2",
+   "property": "columnGap",
+   "declared": "12px",
+   "computed": "12px",
+   "status": "ok"
+  },
+  {
+   "breakpoint": "_m",
+   "attrID": "mk-acct-r-2",
+   "property": "alignItems",
+   "declared": "baseline",
+   "computed": "baseline",
+   "status": "ok"
+  },
+  {
+   "breakpoint": "_m",
+   "attrID": "mk-acct-r-2",
+   "property": "paddingTop",
+   "declared": "13px",
+   "computed": "13px",
+   "status": "ok"
+  },
+  {
+   "breakpoint": "_m",
+   "attrID": "mk-acct-r-2",
+   "property": "paddingBottom",
+   "declared": "13px",
+   "computed": "13px",
+   "status": "ok"
+  },
+  {
+   "breakpoint": "_m",
+   "attrID": "mk-acct-r-2",
+   "property": "customDeclarations:border-top",
+   "declared": "1px solid rgba(22,24,28,.16)",
+   "computed": "no computed value",
+   "status": "not-comparable"
+  },
+  {
+   "breakpoint": "_m",
+   "attrID": "mk-acct-rows",
+   "property": "marginTop",
+   "declared": "30px",
+   "computed": "30px",
+   "status": "ok"
+  },
+  {
+   "breakpoint": "_m",
+   "attrID": "mk-acct-rows",
+   "property": "display",
+   "declared": "grid",
+   "computed": "grid",
+   "status": "ok"
+  },
+  {
+   "breakpoint": "_m",
+   "attrID": "mk-acct-rows",
+   "property": "rowGap",
+   "declared": "0px",
+   "computed": "0px",
+   "status": "ok"
+  },
+  {
+   "breakpoint": "_m",
+   "attrID": "mk-acct-sheet",
+   "property": "paddingBottom",
+   "declared": "72px",
+   "computed": "72px",
+   "status": "ok"
+  }
+ ]
+}

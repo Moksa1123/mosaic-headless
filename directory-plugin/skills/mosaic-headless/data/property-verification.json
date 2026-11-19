@@ -1,0 +1,1715 @@
+{
+ "source_file": "data/property-verification.csv",
+ "columns": [
+  "type",
+  "property",
+  "owner_class",
+  "creator",
+  "probe_value",
+  "is_enum",
+  "outcome",
+  "detail"
+ ],
+ "rows": [
+  {
+   "type": "text",
+   "property": "name",
+   "owner_class": "ElementMResourceDataAbstract",
+   "creator": "createDataSimple",
+   "probe_value": "MPROP0000X",
+   "is_enum": "",
+   "outcome": "NO_EFFECT",
+   "detail": ""
+  },
+  {
+   "type": "text",
+   "property": "locked",
+   "owner_class": "ElementMResourceDataAbstract",
+   "creator": "createDataSimple",
+   "probe_value": "MPROP0001X",
+   "is_enum": "",
+   "outcome": "NO_EFFECT",
+   "detail": ""
+  },
+  {
+   "type": "text",
+   "property": "hidden",
+   "owner_class": "ElementMResourceDataAbstract",
+   "creator": "createDataSimple",
+   "probe_value": "MPROP0002X",
+   "is_enum": "",
+   "outcome": "NO_EFFECT",
+   "detail": ""
+  },
+  {
+   "type": "text",
+   "property": "conditions",
+   "owner_class": "ElementMResourceDataAbstract",
+   "creator": "createDataArray",
+   "probe_value": "MPROP0003X",
+   "is_enum": "",
+   "outcome": "COMMIT_500",
+   "detail": "PHP fatal during commit"
+  },
+  {
+   "type": "text",
+   "property": "attributes",
+   "owner_class": "ElementMResourceDataAbstract",
+   "creator": "createDataSimple",
+   "probe_value": "MPROP0004X",
+   "is_enum": "",
+   "outcome": "NO_EFFECT",
+   "detail": ""
+  },
+  {
+   "type": "text",
+   "property": "cssClasses",
+   "owner_class": "ElementMResourceDataAbstract",
+   "creator": "createDataSimple",
+   "probe_value": "MPROP0005X",
+   "is_enum": "",
+   "outcome": "NO_EFFECT",
+   "detail": ""
+  },
+  {
+   "type": "text",
+   "property": "attrID",
+   "owner_class": "ElementMResourceDataAbstract",
+   "creator": "createDataSimple",
+   "probe_value": "MPROP0006X",
+   "is_enum": "",
+   "outcome": "HTML",
+   "detail": ""
+  },
+  {
+   "type": "text",
+   "property": "style",
+   "owner_class": "ElementMResourceDataAbstract",
+   "creator": "createDataGroup",
+   "probe_value": "MPROP0007X",
+   "is_enum": "",
+   "outcome": "NO_EFFECT",
+   "detail": ""
+  },
+  {
+   "type": "text",
+   "property": "interactions",
+   "owner_class": "ElementMResourceDataAbstract",
+   "creator": "createDataArray",
+   "probe_value": "MPROP0008X",
+   "is_enum": "",
+   "outcome": "COMMIT_500",
+   "detail": "PHP fatal during commit"
+  },
+  {
+   "type": "text",
+   "property": "currentStatus",
+   "owner_class": "NodeMResourceDataAbstract",
+   "creator": "createDataSimple",
+   "probe_value": "MPROP0009X",
+   "is_enum": "",
+   "outcome": "NO_EFFECT",
+   "detail": ""
+  },
+  {
+   "type": "text",
+   "property": "override",
+   "owner_class": "NodeMResourceDataAbstract",
+   "creator": "createDataGroup",
+   "probe_value": "MPROP0010X",
+   "is_enum": "",
+   "outcome": "NO_EFFECT",
+   "detail": ""
+  },
+  {
+   "type": "button",
+   "property": "name",
+   "owner_class": "ElementMResourceDataAbstract",
+   "creator": "createDataSimple",
+   "probe_value": "MPROP0011X",
+   "is_enum": "",
+   "outcome": "NO_EFFECT",
+   "detail": ""
+  },
+  {
+   "type": "button",
+   "property": "locked",
+   "owner_class": "ElementMResourceDataAbstract",
+   "creator": "createDataSimple",
+   "probe_value": "MPROP0012X",
+   "is_enum": "",
+   "outcome": "NO_EFFECT",
+   "detail": ""
+  },
+  {
+   "type": "button",
+   "property": "hidden",
+   "owner_class": "ElementMResourceDataAbstract",
+   "creator": "createDataSimple",
+   "probe_value": "MPROP0013X",
+   "is_enum": "",
+   "outcome": "NO_EFFECT",
+   "detail": ""
+  },
+  {
+   "type": "button",
+   "property": "conditions",
+   "owner_class": "ElementMResourceDataAbstract",
+   "creator": "createDataArray",
+   "probe_value": "MPROP0014X",
+   "is_enum": "",
+   "outcome": "COMMIT_500",
+   "detail": "PHP fatal during commit"
+  },
+  {
+   "type": "button",
+   "property": "attributes",
+   "owner_class": "ElementMResourceDataAbstract",
+   "creator": "createDataSimple",
+   "probe_value": "MPROP0015X",
+   "is_enum": "",
+   "outcome": "NO_EFFECT",
+   "detail": ""
+  },
+  {
+   "type": "button",
+   "property": "cssClasses",
+   "owner_class": "ElementMResourceDataAbstract",
+   "creator": "createDataSimple",
+   "probe_value": "MPROP0016X",
+   "is_enum": "",
+   "outcome": "NO_EFFECT",
+   "detail": ""
+  },
+  {
+   "type": "button",
+   "property": "attrID",
+   "owner_class": "ElementMResourceDataAbstract",
+   "creator": "createDataSimple",
+   "probe_value": "MPROP0017X",
+   "is_enum": "",
+   "outcome": "HTML",
+   "detail": ""
+  },
+  {
+   "type": "button",
+   "property": "style",
+   "owner_class": "ElementMResourceDataAbstract",
+   "creator": "createDataGroup",
+   "probe_value": "MPROP0018X",
+   "is_enum": "",
+   "outcome": "NO_EFFECT",
+   "detail": ""
+  },
+  {
+   "type": "button",
+   "property": "interactions",
+   "owner_class": "ElementMResourceDataAbstract",
+   "creator": "createDataArray",
+   "probe_value": "MPROP0019X",
+   "is_enum": "",
+   "outcome": "COMMIT_500",
+   "detail": "PHP fatal during commit"
+  },
+  {
+   "type": "button",
+   "property": "currentStatus",
+   "owner_class": "NodeMResourceDataAbstract",
+   "creator": "createDataSimple",
+   "probe_value": "MPROP0020X",
+   "is_enum": "",
+   "outcome": "NO_EFFECT",
+   "detail": ""
+  },
+  {
+   "type": "button",
+   "property": "override",
+   "owner_class": "NodeMResourceDataAbstract",
+   "creator": "createDataGroup",
+   "probe_value": "MPROP0021X",
+   "is_enum": "",
+   "outcome": "NO_EFFECT",
+   "detail": ""
+  },
+  {
+   "type": "div",
+   "property": "name",
+   "owner_class": "ElementMResourceDataAbstract",
+   "creator": "createDataSimple",
+   "probe_value": "MPROP0022X",
+   "is_enum": "",
+   "outcome": "NO_EFFECT",
+   "detail": ""
+  },
+  {
+   "type": "div",
+   "property": "locked",
+   "owner_class": "ElementMResourceDataAbstract",
+   "creator": "createDataSimple",
+   "probe_value": "MPROP0023X",
+   "is_enum": "",
+   "outcome": "NO_EFFECT",
+   "detail": ""
+  },
+  {
+   "type": "div",
+   "property": "hidden",
+   "owner_class": "ElementMResourceDataAbstract",
+   "creator": "createDataSimple",
+   "probe_value": "MPROP0024X",
+   "is_enum": "",
+   "outcome": "NO_EFFECT",
+   "detail": ""
+  },
+  {
+   "type": "div",
+   "property": "conditions",
+   "owner_class": "ElementMResourceDataAbstract",
+   "creator": "createDataArray",
+   "probe_value": "MPROP0025X",
+   "is_enum": "",
+   "outcome": "COMMIT_500",
+   "detail": "PHP fatal during commit"
+  },
+  {
+   "type": "div",
+   "property": "attributes",
+   "owner_class": "ElementMResourceDataAbstract",
+   "creator": "createDataSimple",
+   "probe_value": "MPROP0026X",
+   "is_enum": "",
+   "outcome": "NO_EFFECT",
+   "detail": ""
+  },
+  {
+   "type": "div",
+   "property": "cssClasses",
+   "owner_class": "ElementMResourceDataAbstract",
+   "creator": "createDataSimple",
+   "probe_value": "MPROP0027X",
+   "is_enum": "",
+   "outcome": "NO_EFFECT",
+   "detail": ""
+  },
+  {
+   "type": "div",
+   "property": "attrID",
+   "owner_class": "ElementMResourceDataAbstract",
+   "creator": "createDataSimple",
+   "probe_value": "MPROP0028X",
+   "is_enum": "",
+   "outcome": "HTML",
+   "detail": ""
+  },
+  {
+   "type": "div",
+   "property": "style",
+   "owner_class": "ElementMResourceDataAbstract",
+   "creator": "createDataGroup",
+   "probe_value": "MPROP0029X",
+   "is_enum": "",
+   "outcome": "NO_EFFECT",
+   "detail": ""
+  },
+  {
+   "type": "div",
+   "property": "interactions",
+   "owner_class": "ElementMResourceDataAbstract",
+   "creator": "createDataArray",
+   "probe_value": "MPROP0030X",
+   "is_enum": "",
+   "outcome": "COMMIT_500",
+   "detail": "PHP fatal during commit"
+  },
+  {
+   "type": "div",
+   "property": "currentStatus",
+   "owner_class": "NodeMResourceDataAbstract",
+   "creator": "createDataSimple",
+   "probe_value": "MPROP0031X",
+   "is_enum": "",
+   "outcome": "NO_EFFECT",
+   "detail": ""
+  },
+  {
+   "type": "div",
+   "property": "override",
+   "owner_class": "NodeMResourceDataAbstract",
+   "creator": "createDataGroup",
+   "probe_value": "MPROP0032X",
+   "is_enum": "",
+   "outcome": "NO_EFFECT",
+   "detail": ""
+  },
+  {
+   "type": "section",
+   "property": "name",
+   "owner_class": "ElementMResourceDataAbstract",
+   "creator": "createDataSimple",
+   "probe_value": "MPROP0033X",
+   "is_enum": "",
+   "outcome": "NO_EFFECT",
+   "detail": ""
+  },
+  {
+   "type": "section",
+   "property": "locked",
+   "owner_class": "ElementMResourceDataAbstract",
+   "creator": "createDataSimple",
+   "probe_value": "MPROP0034X",
+   "is_enum": "",
+   "outcome": "NO_EFFECT",
+   "detail": ""
+  },
+  {
+   "type": "section",
+   "property": "hidden",
+   "owner_class": "ElementMResourceDataAbstract",
+   "creator": "createDataSimple",
+   "probe_value": "MPROP0035X",
+   "is_enum": "",
+   "outcome": "NO_EFFECT",
+   "detail": ""
+  },
+  {
+   "type": "section",
+   "property": "conditions",
+   "owner_class": "ElementMResourceDataAbstract",
+   "creator": "createDataArray",
+   "probe_value": "MPROP0036X",
+   "is_enum": "",
+   "outcome": "COMMIT_500",
+   "detail": "PHP fatal during commit"
+  },
+  {
+   "type": "section",
+   "property": "attributes",
+   "owner_class": "ElementMResourceDataAbstract",
+   "creator": "createDataSimple",
+   "probe_value": "MPROP0037X",
+   "is_enum": "",
+   "outcome": "NO_EFFECT",
+   "detail": ""
+  },
+  {
+   "type": "section",
+   "property": "cssClasses",
+   "owner_class": "ElementMResourceDataAbstract",
+   "creator": "createDataSimple",
+   "probe_value": "MPROP0038X",
+   "is_enum": "",
+   "outcome": "NO_EFFECT",
+   "detail": ""
+  },
+  {
+   "type": "section",
+   "property": "attrID",
+   "owner_class": "ElementMResourceDataAbstract",
+   "creator": "createDataSimple",
+   "probe_value": "MPROP0039X",
+   "is_enum": "",
+   "outcome": "HTML",
+   "detail": ""
+  },
+  {
+   "type": "section",
+   "property": "style",
+   "owner_class": "ElementMResourceDataAbstract",
+   "creator": "createDataGroup",
+   "probe_value": "MPROP0040X",
+   "is_enum": "",
+   "outcome": "NO_EFFECT",
+   "detail": ""
+  },
+  {
+   "type": "section",
+   "property": "interactions",
+   "owner_class": "ElementMResourceDataAbstract",
+   "creator": "createDataArray",
+   "probe_value": "MPROP0041X",
+   "is_enum": "",
+   "outcome": "COMMIT_500",
+   "detail": "PHP fatal during commit"
+  },
+  {
+   "type": "section",
+   "property": "currentStatus",
+   "owner_class": "NodeMResourceDataAbstract",
+   "creator": "createDataSimple",
+   "probe_value": "MPROP0042X",
+   "is_enum": "",
+   "outcome": "NO_EFFECT",
+   "detail": ""
+  },
+  {
+   "type": "section",
+   "property": "override",
+   "owner_class": "NodeMResourceDataAbstract",
+   "creator": "createDataGroup",
+   "probe_value": "MPROP0043X",
+   "is_enum": "",
+   "outcome": "NO_EFFECT",
+   "detail": ""
+  },
+  {
+   "type": "image",
+   "property": "name",
+   "owner_class": "ElementMResourceDataAbstract",
+   "creator": "createDataSimple",
+   "probe_value": "MPROP0044X",
+   "is_enum": "",
+   "outcome": "NO_EFFECT",
+   "detail": ""
+  },
+  {
+   "type": "image",
+   "property": "locked",
+   "owner_class": "ElementMResourceDataAbstract",
+   "creator": "createDataSimple",
+   "probe_value": "MPROP0045X",
+   "is_enum": "",
+   "outcome": "NO_EFFECT",
+   "detail": ""
+  },
+  {
+   "type": "image",
+   "property": "hidden",
+   "owner_class": "ElementMResourceDataAbstract",
+   "creator": "createDataSimple",
+   "probe_value": "MPROP0046X",
+   "is_enum": "",
+   "outcome": "NO_EFFECT",
+   "detail": ""
+  },
+  {
+   "type": "image",
+   "property": "conditions",
+   "owner_class": "ElementMResourceDataAbstract",
+   "creator": "createDataArray",
+   "probe_value": "MPROP0047X",
+   "is_enum": "",
+   "outcome": "COMMIT_500",
+   "detail": "PHP fatal during commit"
+  },
+  {
+   "type": "image",
+   "property": "attributes",
+   "owner_class": "ElementMResourceDataAbstract",
+   "creator": "createDataSimple",
+   "probe_value": "MPROP0048X",
+   "is_enum": "",
+   "outcome": "NO_EFFECT",
+   "detail": ""
+  },
+  {
+   "type": "image",
+   "property": "cssClasses",
+   "owner_class": "ElementMResourceDataAbstract",
+   "creator": "createDataSimple",
+   "probe_value": "MPROP0049X",
+   "is_enum": "",
+   "outcome": "NO_EFFECT",
+   "detail": ""
+  },
+  {
+   "type": "image",
+   "property": "attrID",
+   "owner_class": "ElementMResourceDataAbstract",
+   "creator": "createDataSimple",
+   "probe_value": "MPROP0050X",
+   "is_enum": "",
+   "outcome": "NO_EFFECT",
+   "detail": ""
+  },
+  {
+   "type": "image",
+   "property": "style",
+   "owner_class": "ElementMResourceDataAbstract",
+   "creator": "createDataGroup",
+   "probe_value": "MPROP0051X",
+   "is_enum": "",
+   "outcome": "NO_EFFECT",
+   "detail": ""
+  },
+  {
+   "type": "image",
+   "property": "interactions",
+   "owner_class": "ElementMResourceDataAbstract",
+   "creator": "createDataArray",
+   "probe_value": "MPROP0052X",
+   "is_enum": "",
+   "outcome": "COMMIT_500",
+   "detail": "PHP fatal during commit"
+  },
+  {
+   "type": "image",
+   "property": "currentStatus",
+   "owner_class": "NodeMResourceDataAbstract",
+   "creator": "createDataSimple",
+   "probe_value": "MPROP0053X",
+   "is_enum": "",
+   "outcome": "NO_EFFECT",
+   "detail": ""
+  },
+  {
+   "type": "image",
+   "property": "override",
+   "owner_class": "NodeMResourceDataAbstract",
+   "creator": "createDataGroup",
+   "probe_value": "MPROP0054X",
+   "is_enum": "",
+   "outcome": "NO_EFFECT",
+   "detail": ""
+  },
+  {
+   "type": "icon",
+   "property": "name",
+   "owner_class": "ElementMResourceDataAbstract",
+   "creator": "createDataSimple",
+   "probe_value": "MPROP0055X",
+   "is_enum": "",
+   "outcome": "NO_EFFECT",
+   "detail": ""
+  },
+  {
+   "type": "icon",
+   "property": "locked",
+   "owner_class": "ElementMResourceDataAbstract",
+   "creator": "createDataSimple",
+   "probe_value": "MPROP0056X",
+   "is_enum": "",
+   "outcome": "NO_EFFECT",
+   "detail": ""
+  },
+  {
+   "type": "icon",
+   "property": "hidden",
+   "owner_class": "ElementMResourceDataAbstract",
+   "creator": "createDataSimple",
+   "probe_value": "MPROP0057X",
+   "is_enum": "",
+   "outcome": "NO_EFFECT",
+   "detail": ""
+  },
+  {
+   "type": "icon",
+   "property": "conditions",
+   "owner_class": "ElementMResourceDataAbstract",
+   "creator": "createDataArray",
+   "probe_value": "MPROP0058X",
+   "is_enum": "",
+   "outcome": "COMMIT_500",
+   "detail": "PHP fatal during commit"
+  },
+  {
+   "type": "icon",
+   "property": "attributes",
+   "owner_class": "ElementMResourceDataAbstract",
+   "creator": "createDataSimple",
+   "probe_value": "MPROP0059X",
+   "is_enum": "",
+   "outcome": "NO_EFFECT",
+   "detail": ""
+  },
+  {
+   "type": "icon",
+   "property": "cssClasses",
+   "owner_class": "ElementMResourceDataAbstract",
+   "creator": "createDataSimple",
+   "probe_value": "MPROP0060X",
+   "is_enum": "",
+   "outcome": "NO_EFFECT",
+   "detail": ""
+  },
+  {
+   "type": "icon",
+   "property": "attrID",
+   "owner_class": "ElementMResourceDataAbstract",
+   "creator": "createDataSimple",
+   "probe_value": "MPROP0061X",
+   "is_enum": "",
+   "outcome": "HTML",
+   "detail": ""
+  },
+  {
+   "type": "icon",
+   "property": "style",
+   "owner_class": "ElementMResourceDataAbstract",
+   "creator": "createDataGroup",
+   "probe_value": "MPROP0062X",
+   "is_enum": "",
+   "outcome": "NO_EFFECT",
+   "detail": ""
+  },
+  {
+   "type": "icon",
+   "property": "interactions",
+   "owner_class": "ElementMResourceDataAbstract",
+   "creator": "createDataArray",
+   "probe_value": "MPROP0063X",
+   "is_enum": "",
+   "outcome": "COMMIT_500",
+   "detail": "PHP fatal during commit"
+  },
+  {
+   "type": "icon",
+   "property": "currentStatus",
+   "owner_class": "NodeMResourceDataAbstract",
+   "creator": "createDataSimple",
+   "probe_value": "MPROP0064X",
+   "is_enum": "",
+   "outcome": "NO_EFFECT",
+   "detail": ""
+  },
+  {
+   "type": "icon",
+   "property": "override",
+   "owner_class": "NodeMResourceDataAbstract",
+   "creator": "createDataGroup",
+   "probe_value": "MPROP0065X",
+   "is_enum": "",
+   "outcome": "NO_EFFECT",
+   "detail": ""
+  },
+  {
+   "type": "button",
+   "property": "url",
+   "owner_class": "ButtonElementMResourceData",
+   "creator": "createDataSimple",
+   "probe_value": "https://example.com/MPROP0066X",
+   "is_enum": "",
+   "outcome": "HTML",
+   "detail": ""
+  },
+  {
+   "type": "button",
+   "property": "target",
+   "owner_class": "ButtonElementMResourceData",
+   "creator": "createDataSimple",
+   "probe_value": "_self",
+   "is_enum": "yes",
+   "outcome": "NO_EFFECT",
+   "detail": ""
+  },
+  {
+   "type": "button",
+   "property": "rel",
+   "owner_class": "ButtonElementMResourceData",
+   "creator": "createDataSimple",
+   "probe_value": "MPROP0068X",
+   "is_enum": "",
+   "outcome": "NO_EFFECT",
+   "detail": ""
+  },
+  {
+   "type": "choice-field",
+   "property": "nameAttribute",
+   "owner_class": "ChoiceFieldElementMResourceData",
+   "creator": "createDataSimple",
+   "probe_value": "MPROP0069X",
+   "is_enum": "",
+   "outcome": "NO_EFFECT",
+   "detail": ""
+  },
+  {
+   "type": "choice-field",
+   "property": "defaultValue",
+   "owner_class": "ChoiceFieldElementMResourceData",
+   "creator": "createDataSimple",
+   "probe_value": "MPROP0070X",
+   "is_enum": "",
+   "outcome": "NO_EFFECT",
+   "detail": ""
+  },
+  {
+   "type": "choice-field",
+   "property": "required",
+   "owner_class": "ChoiceFieldElementMResourceData",
+   "creator": "createDataSimple",
+   "probe_value": "7",
+   "is_enum": "",
+   "outcome": "HTML",
+   "detail": ""
+  },
+  {
+   "type": "choice-field",
+   "property": "requiredMin",
+   "owner_class": "ChoiceFieldElementMResourceData",
+   "creator": "createDataSimple",
+   "probe_value": "7",
+   "is_enum": "",
+   "outcome": "HTML",
+   "detail": ""
+  },
+  {
+   "type": "choice-field",
+   "property": "logging",
+   "owner_class": "ChoiceFieldElementMResourceData",
+   "creator": "createDataSimple",
+   "probe_value": "store",
+   "is_enum": "yes",
+   "outcome": "INCONCLUSIVE",
+   "detail": ""
+  },
+  {
+   "type": "code",
+   "property": "insertLocation",
+   "owner_class": "CodeElementMResourceData",
+   "creator": "createDataSimple",
+   "probe_value": "inPlace",
+   "is_enum": "yes",
+   "outcome": "NO_EFFECT",
+   "detail": ""
+  },
+  {
+   "type": "code",
+   "property": "content",
+   "owner_class": "CodeElementMResourceData",
+   "creator": "createDataSimple",
+   "probe_value": "MPROP0075X",
+   "is_enum": "",
+   "outcome": "HTML",
+   "detail": ""
+  },
+  {
+   "type": "code",
+   "property": "processShortcodes",
+   "owner_class": "CodeElementMResourceData",
+   "creator": "createDataSimple",
+   "probe_value": "0",
+   "is_enum": "yes",
+   "outcome": "ENUM_APPLIED",
+   "detail": ""
+  },
+  {
+   "type": "div",
+   "property": "tagName",
+   "owner_class": "DivElementMResourceData",
+   "creator": "createDataSimple",
+   "probe_value": "MPROP0077X",
+   "is_enum": "",
+   "outcome": "NO_EFFECT",
+   "detail": ""
+  },
+  {
+   "type": "div",
+   "property": "dynamicSources",
+   "owner_class": "DivElementMResourceData",
+   "creator": "createDataArray",
+   "probe_value": "MPROP0078X",
+   "is_enum": "",
+   "outcome": "COMMIT_500",
+   "detail": "PHP fatal during commit"
+  },
+  {
+   "type": "dropdown",
+   "property": "horizontalAlign",
+   "owner_class": "DropdownElementMResourceData",
+   "creator": "createDataSimple",
+   "probe_value": "left",
+   "is_enum": "yes",
+   "outcome": "ENUM_APPLIED",
+   "detail": ""
+  },
+  {
+   "type": "dropdown-toggle",
+   "property": "url",
+   "owner_class": "DropdownToggleElementMResourceData",
+   "creator": "createDataSimple",
+   "probe_value": "https://example.com/MPROP0080X",
+   "is_enum": "",
+   "outcome": "HTML",
+   "detail": ""
+  },
+  {
+   "type": "dropdown-toggle",
+   "property": "target",
+   "owner_class": "DropdownToggleElementMResourceData",
+   "creator": "createDataSimple",
+   "probe_value": "_self",
+   "is_enum": "yes",
+   "outcome": "NO_EFFECT",
+   "detail": ""
+  },
+  {
+   "type": "dropdown-toggle",
+   "property": "rel",
+   "owner_class": "DropdownToggleElementMResourceData",
+   "creator": "createDataSimple",
+   "probe_value": "MPROP0082X",
+   "is_enum": "",
+   "outcome": "NO_EFFECT",
+   "detail": ""
+  },
+  {
+   "type": "fileupload-input",
+   "property": "nameAttribute",
+   "owner_class": "FileUploadElementMResourceData",
+   "creator": "createDataSimple",
+   "probe_value": "MPROP0083X",
+   "is_enum": "",
+   "outcome": "HTML",
+   "detail": ""
+  },
+  {
+   "type": "fileupload-input",
+   "property": "accept",
+   "owner_class": "FileUploadElementMResourceData",
+   "creator": "createDataSimple",
+   "probe_value": "MPROP0084X",
+   "is_enum": "",
+   "outcome": "NO_EFFECT",
+   "detail": ""
+  },
+  {
+   "type": "fileupload-input",
+   "property": "multiple",
+   "owner_class": "FileUploadElementMResourceData",
+   "creator": "createDataSimple",
+   "probe_value": "7",
+   "is_enum": "",
+   "outcome": "HTML",
+   "detail": ""
+  },
+  {
+   "type": "fileupload-input",
+   "property": "required",
+   "owner_class": "FileUploadElementMResourceData",
+   "creator": "createDataSimple",
+   "probe_value": "7",
+   "is_enum": "",
+   "outcome": "NO_EFFECT",
+   "detail": ""
+  },
+  {
+   "type": "fileupload-input",
+   "property": "logging",
+   "owner_class": "FileUploadElementMResourceData",
+   "creator": "createDataSimple",
+   "probe_value": "store",
+   "is_enum": "yes",
+   "outcome": "INCONCLUSIVE",
+   "detail": ""
+  },
+  {
+   "type": "fileupload-input",
+   "property": "mediaLibrary",
+   "owner_class": "FileUploadElementMResourceData",
+   "creator": "createDataSimple",
+   "probe_value": "7",
+   "is_enum": "",
+   "outcome": "HTML",
+   "detail": ""
+  },
+  {
+   "type": "form",
+   "property": "submitType",
+   "owner_class": "FormElementMResourceData",
+   "creator": "createDataSimple",
+   "probe_value": "MPROP0089X",
+   "is_enum": "",
+   "outcome": "NO_EFFECT",
+   "detail": ""
+  },
+  {
+   "type": "form-multi-steps-step",
+   "property": "stepIndex",
+   "owner_class": "StepElementMResourceData",
+   "creator": "createDataSimple",
+   "probe_value": "7",
+   "is_enum": "",
+   "outcome": "NO_EFFECT",
+   "detail": ""
+  },
+  {
+   "type": "form-multi-steps-step",
+   "property": "stepActive",
+   "owner_class": "StepElementMResourceData",
+   "creator": "createDataSimple",
+   "probe_value": "MPROP0091X",
+   "is_enum": "",
+   "outcome": "NO_EFFECT",
+   "detail": ""
+  },
+  {
+   "type": "icon",
+   "property": "svg",
+   "owner_class": "IconElementMResourceData",
+   "creator": "createDataSimple",
+   "probe_value": "MPROP0092X",
+   "is_enum": "",
+   "outcome": "NO_EFFECT",
+   "detail": ""
+  },
+  {
+   "type": "icon",
+   "property": "colors",
+   "owner_class": "IconElementMResourceData",
+   "creator": "createDataGroup",
+   "probe_value": "MPROP0093X",
+   "is_enum": "",
+   "outcome": "NO_EFFECT",
+   "detail": ""
+  },
+  {
+   "type": "icon",
+   "property": "autoScale",
+   "owner_class": "IconElementMResourceData",
+   "creator": "createDataSimple",
+   "probe_value": "7",
+   "is_enum": "",
+   "outcome": "HTML",
+   "detail": ""
+  },
+  {
+   "type": "list-item",
+   "property": "mode",
+   "owner_class": "ListItemElementMResourceData",
+   "creator": "createDataSimple",
+   "probe_value": "item",
+   "is_enum": "yes",
+   "outcome": "INCONCLUSIVE",
+   "detail": ""
+  },
+  {
+   "type": "loop-item",
+   "property": "mode",
+   "owner_class": "LoopItemElementMResourceData",
+   "creator": "createDataSimple",
+   "probe_value": "item",
+   "is_enum": "yes",
+   "outcome": "INCONCLUSIVE",
+   "detail": ""
+  },
+  {
+   "type": "menu-link",
+   "property": "url",
+   "owner_class": "MenuLinkElementMResourceData",
+   "creator": "createDataSimple",
+   "probe_value": "https://example.com/MPROP0097X",
+   "is_enum": "",
+   "outcome": "HTML",
+   "detail": ""
+  },
+  {
+   "type": "menu-link",
+   "property": "target",
+   "owner_class": "MenuLinkElementMResourceData",
+   "creator": "createDataSimple",
+   "probe_value": "_self",
+   "is_enum": "yes",
+   "outcome": "NO_EFFECT",
+   "detail": ""
+  },
+  {
+   "type": "menu-link",
+   "property": "rel",
+   "owner_class": "MenuLinkElementMResourceData",
+   "creator": "createDataSimple",
+   "probe_value": "MPROP0099X",
+   "is_enum": "",
+   "outcome": "NO_EFFECT",
+   "detail": ""
+  },
+  {
+   "type": "navbar",
+   "property": "buttonBreakpoint",
+   "owner_class": "NavbarElementMResourceData",
+   "creator": "createDataSimple",
+   "probe_value": "none",
+   "is_enum": "yes",
+   "outcome": "ENUM_APPLIED",
+   "detail": ""
+  },
+  {
+   "type": "navbar",
+   "property": "animation",
+   "owner_class": "NavbarElementMResourceData",
+   "creator": "createDataSimple",
+   "probe_value": "none",
+   "is_enum": "yes",
+   "outcome": "ENUM_APPLIED",
+   "detail": ""
+  },
+  {
+   "type": "navbar",
+   "property": "disableScroll",
+   "owner_class": "NavbarElementMResourceData",
+   "creator": "createDataSimple",
+   "probe_value": "0",
+   "is_enum": "yes",
+   "outcome": "INCONCLUSIVE",
+   "detail": ""
+  },
+  {
+   "type": "section",
+   "property": "tagName",
+   "owner_class": "SectionElementMResourceData",
+   "creator": "createDataSimple",
+   "probe_value": "MPROP0103X",
+   "is_enum": "",
+   "outcome": "NO_EFFECT",
+   "detail": ""
+  },
+  {
+   "type": "select-input",
+   "property": "nameAttribute",
+   "owner_class": "SelectElementMResourceData",
+   "creator": "createDataSimple",
+   "probe_value": "MPROP0104X",
+   "is_enum": "",
+   "outcome": "HTML",
+   "detail": ""
+  },
+  {
+   "type": "select-input",
+   "property": "defaultValue",
+   "owner_class": "SelectElementMResourceData",
+   "creator": "createDataSimple",
+   "probe_value": "MPROP0105X",
+   "is_enum": "",
+   "outcome": "NO_EFFECT",
+   "detail": ""
+  },
+  {
+   "type": "select-input",
+   "property": "multiple",
+   "owner_class": "SelectElementMResourceData",
+   "creator": "createDataSimple",
+   "probe_value": "7",
+   "is_enum": "",
+   "outcome": "NO_EFFECT",
+   "detail": ""
+  },
+  {
+   "type": "select-input",
+   "property": "required",
+   "owner_class": "SelectElementMResourceData",
+   "creator": "createDataSimple",
+   "probe_value": "7",
+   "is_enum": "",
+   "outcome": "HTML",
+   "detail": ""
+  },
+  {
+   "type": "select-input",
+   "property": "size",
+   "owner_class": "SelectElementMResourceData",
+   "creator": "createDataSimple",
+   "probe_value": "7",
+   "is_enum": "",
+   "outcome": "NO_EFFECT",
+   "detail": ""
+  },
+  {
+   "type": "select-input",
+   "property": "logging",
+   "owner_class": "SelectElementMResourceData",
+   "creator": "createDataSimple",
+   "probe_value": "store",
+   "is_enum": "yes",
+   "outcome": "INCONCLUSIVE",
+   "detail": ""
+  },
+  {
+   "type": "select-option",
+   "property": "value",
+   "owner_class": "OptionElementMResourceData",
+   "creator": "createDataSimple",
+   "probe_value": "MPROP0110X",
+   "is_enum": "",
+   "outcome": "HTML",
+   "detail": ""
+  },
+  {
+   "type": "select-option",
+   "property": "text",
+   "owner_class": "OptionElementMResourceData",
+   "creator": "createDataSimple",
+   "probe_value": "MPROP0111X",
+   "is_enum": "",
+   "outcome": "HTML",
+   "detail": ""
+  },
+  {
+   "type": "select-option",
+   "property": "selected",
+   "owner_class": "OptionElementMResourceData",
+   "creator": "createDataSimple",
+   "probe_value": "7",
+   "is_enum": "",
+   "outcome": "HTML",
+   "detail": ""
+  },
+  {
+   "type": "select-option",
+   "property": "disabled",
+   "owner_class": "OptionElementMResourceData",
+   "creator": "createDataSimple",
+   "probe_value": "7",
+   "is_enum": "",
+   "outcome": "NO_EFFECT",
+   "detail": ""
+  },
+  {
+   "type": "styleguide-entry-content-image-img",
+   "property": "image",
+   "owner_class": "SGEntryContentImageImgElementMResourceData",
+   "creator": "createDataSimple",
+   "probe_value": "https://example.com/MPROP0114X",
+   "is_enum": "",
+   "outcome": "HTML",
+   "detail": ""
+  },
+  {
+   "type": "tabs",
+   "property": "defaultTabIndex",
+   "owner_class": "TabsElementMResourceData",
+   "creator": "createDataSimple",
+   "probe_value": "7",
+   "is_enum": "",
+   "outcome": "NO_EFFECT",
+   "detail": ""
+  },
+  {
+   "type": "text",
+   "property": "tagName",
+   "owner_class": "TextElementMResourceData",
+   "creator": "createDataSimple",
+   "probe_value": "MPROP0116X",
+   "is_enum": "",
+   "outcome": "NO_EFFECT",
+   "detail": ""
+  },
+  {
+   "type": "text-input",
+   "property": "type",
+   "owner_class": "InputTextElementMResourceData",
+   "creator": "createDataSimple",
+   "probe_value": "MPROP0117X",
+   "is_enum": "",
+   "outcome": "NO_EFFECT",
+   "detail": ""
+  },
+  {
+   "type": "text-input",
+   "property": "nameAttribute",
+   "owner_class": "InputTextElementMResourceData",
+   "creator": "createDataSimple",
+   "probe_value": "MPROP0118X",
+   "is_enum": "",
+   "outcome": "HTML",
+   "detail": ""
+  },
+  {
+   "type": "text-input",
+   "property": "defaultValue",
+   "owner_class": "InputTextElementMResourceData",
+   "creator": "createDataSimple",
+   "probe_value": "MPROP0119X",
+   "is_enum": "",
+   "outcome": "NO_EFFECT",
+   "detail": ""
+  },
+  {
+   "type": "text-input",
+   "property": "required",
+   "owner_class": "InputTextElementMResourceData",
+   "creator": "createDataSimple",
+   "probe_value": "7",
+   "is_enum": "",
+   "outcome": "NO_EFFECT",
+   "detail": ""
+  },
+  {
+   "type": "text-input",
+   "property": "readonly",
+   "owner_class": "InputTextElementMResourceData",
+   "creator": "createDataSimple",
+   "probe_value": "7",
+   "is_enum": "",
+   "outcome": "NO_EFFECT",
+   "detail": ""
+  },
+  {
+   "type": "text-input",
+   "property": "disabled",
+   "owner_class": "InputTextElementMResourceData",
+   "creator": "createDataSimple",
+   "probe_value": "7",
+   "is_enum": "",
+   "outcome": "HTML",
+   "detail": ""
+  },
+  {
+   "type": "text-input",
+   "property": "placeholderText",
+   "owner_class": "InputTextElementMResourceData",
+   "creator": "createDataSimple",
+   "probe_value": "MPROP0123X",
+   "is_enum": "",
+   "outcome": "HTML",
+   "detail": ""
+  },
+  {
+   "type": "text-input",
+   "property": "autocomplete",
+   "owner_class": "InputTextElementMResourceData",
+   "creator": "createDataSimple",
+   "probe_value": "MPROP0124X",
+   "is_enum": "",
+   "outcome": "NO_EFFECT",
+   "detail": ""
+  },
+  {
+   "type": "text-input",
+   "property": "logging",
+   "owner_class": "InputTextElementMResourceData",
+   "creator": "createDataSimple",
+   "probe_value": "store",
+   "is_enum": "yes",
+   "outcome": "INCONCLUSIVE",
+   "detail": ""
+  },
+  {
+   "type": "textarea-input",
+   "property": "nameAttribute",
+   "owner_class": "TextAreaElementMResourceData",
+   "creator": "createDataSimple",
+   "probe_value": "MPROP0126X",
+   "is_enum": "",
+   "outcome": "HTML",
+   "detail": ""
+  },
+  {
+   "type": "textarea-input",
+   "property": "defaultValue",
+   "owner_class": "TextAreaElementMResourceData",
+   "creator": "createDataSimple",
+   "probe_value": "MPROP0127X",
+   "is_enum": "",
+   "outcome": "NO_EFFECT",
+   "detail": ""
+  },
+  {
+   "type": "textarea-input",
+   "property": "placeholderText",
+   "owner_class": "TextAreaElementMResourceData",
+   "creator": "createDataSimple",
+   "probe_value": "MPROP0128X",
+   "is_enum": "",
+   "outcome": "HTML",
+   "detail": ""
+  },
+  {
+   "type": "textarea-input",
+   "property": "minlength",
+   "owner_class": "TextAreaElementMResourceData",
+   "creator": "createDataSimple",
+   "probe_value": "7",
+   "is_enum": "",
+   "outcome": "HTML",
+   "detail": ""
+  },
+  {
+   "type": "textarea-input",
+   "property": "maxlength",
+   "owner_class": "TextAreaElementMResourceData",
+   "creator": "createDataSimple",
+   "probe_value": "7",
+   "is_enum": "",
+   "outcome": "HTML",
+   "detail": ""
+  },
+  {
+   "type": "textarea-input",
+   "property": "autocomplete",
+   "owner_class": "TextAreaElementMResourceData",
+   "creator": "createDataSimple",
+   "probe_value": "MPROP0131X",
+   "is_enum": "",
+   "outcome": "NO_EFFECT",
+   "detail": ""
+  },
+  {
+   "type": "textarea-input",
+   "property": "required",
+   "owner_class": "TextAreaElementMResourceData",
+   "creator": "createDataSimple",
+   "probe_value": "7",
+   "is_enum": "",
+   "outcome": "NO_EFFECT",
+   "detail": ""
+  },
+  {
+   "type": "textarea-input",
+   "property": "logging",
+   "owner_class": "TextAreaElementMResourceData",
+   "creator": "createDataSimple",
+   "probe_value": "store",
+   "is_enum": "yes",
+   "outcome": "INCONCLUSIVE",
+   "detail": ""
+  },
+  {
+   "type": "video",
+   "property": "video",
+   "owner_class": "VideoElementMResourceData",
+   "creator": "createDataSimple",
+   "probe_value": "https://example.com/MPROP0134X",
+   "is_enum": "",
+   "outcome": "HTML",
+   "detail": ""
+  },
+  {
+   "type": "video",
+   "property": "sources",
+   "owner_class": "VideoElementMResourceData",
+   "creator": "createDataSimple",
+   "probe_value": "MPROP0135X",
+   "is_enum": "",
+   "outcome": "NO_EFFECT",
+   "detail": ""
+  },
+  {
+   "type": "video",
+   "property": "autoplay",
+   "owner_class": "VideoElementMResourceData",
+   "creator": "createDataSimple",
+   "probe_value": "0",
+   "is_enum": "yes",
+   "outcome": "INCONCLUSIVE",
+   "detail": ""
+  },
+  {
+   "type": "video",
+   "property": "muted",
+   "owner_class": "VideoElementMResourceData",
+   "creator": "createDataSimple",
+   "probe_value": "0",
+   "is_enum": "yes",
+   "outcome": "ENUM_APPLIED",
+   "detail": ""
+  },
+  {
+   "type": "video",
+   "property": "loop",
+   "owner_class": "VideoElementMResourceData",
+   "creator": "createDataSimple",
+   "probe_value": "0",
+   "is_enum": "yes",
+   "outcome": "INCONCLUSIVE",
+   "detail": ""
+  },
+  {
+   "type": "video",
+   "property": "controls",
+   "owner_class": "VideoElementMResourceData",
+   "creator": "createDataSimple",
+   "probe_value": "0",
+   "is_enum": "yes",
+   "outcome": "INCONCLUSIVE",
+   "detail": ""
+  },
+  {
+   "type": "video",
+   "property": "playsinline",
+   "owner_class": "VideoElementMResourceData",
+   "creator": "createDataSimple",
+   "probe_value": "0",
+   "is_enum": "yes",
+   "outcome": "INCONCLUSIVE",
+   "detail": ""
+  },
+  {
+   "type": "video",
+   "property": "width",
+   "owner_class": "VideoElementMResourceData",
+   "creator": "createDataSimple",
+   "probe_value": "7",
+   "is_enum": "",
+   "outcome": "HTML",
+   "detail": ""
+  },
+  {
+   "type": "video",
+   "property": "height",
+   "owner_class": "VideoElementMResourceData",
+   "creator": "createDataSimple",
+   "probe_value": "7",
+   "is_enum": "",
+   "outcome": "NO_EFFECT",
+   "detail": ""
+  },
+  {
+   "type": "video",
+   "property": "preload",
+   "owner_class": "VideoElementMResourceData",
+   "creator": "createDataSimple",
+   "probe_value": "auto",
+   "is_enum": "yes",
+   "outcome": "ENUM_APPLIED",
+   "detail": ""
+  },
+  {
+   "type": "video",
+   "property": "poster",
+   "owner_class": "VideoElementMResourceData",
+   "creator": "createDataSimple",
+   "probe_value": "https://example.com/MPROP0144X",
+   "is_enum": "",
+   "outcome": "HTML",
+   "detail": ""
+  },
+  {
+   "type": "video",
+   "property": "threshold",
+   "owner_class": "VideoElementMResourceData",
+   "creator": "createDataSimple",
+   "probe_value": "7",
+   "is_enum": "",
+   "outcome": "NO_EFFECT",
+   "detail": ""
+  },
+  {
+   "type": "vimeo",
+   "property": "vimeoUrl",
+   "owner_class": "VimeoElementMResourceData",
+   "creator": "createDataSimple",
+   "probe_value": "MPROP0146X",
+   "is_enum": "",
+   "outcome": "NO_EFFECT",
+   "detail": ""
+  },
+  {
+   "type": "vimeo",
+   "property": "autoplay",
+   "owner_class": "VimeoElementMResourceData",
+   "creator": "createDataSimple",
+   "probe_value": "0",
+   "is_enum": "yes",
+   "outcome": "ENUM_APPLIED",
+   "detail": ""
+  },
+  {
+   "type": "vimeo",
+   "property": "muted",
+   "owner_class": "VimeoElementMResourceData",
+   "creator": "createDataSimple",
+   "probe_value": "0",
+   "is_enum": "yes",
+   "outcome": "ENUM_APPLIED",
+   "detail": ""
+  },
+  {
+   "type": "vimeo",
+   "property": "controls",
+   "owner_class": "VimeoElementMResourceData",
+   "creator": "createDataSimple",
+   "probe_value": "0",
+   "is_enum": "yes",
+   "outcome": "ENUM_APPLIED",
+   "detail": ""
+  },
+  {
+   "type": "vimeo",
+   "property": "playsinline",
+   "owner_class": "VimeoElementMResourceData",
+   "creator": "createDataSimple",
+   "probe_value": "0",
+   "is_enum": "yes",
+   "outcome": "ENUM_APPLIED",
+   "detail": ""
+  },
+  {
+   "type": "vimeo",
+   "property": "privacy",
+   "owner_class": "VimeoElementMResourceData",
+   "creator": "createDataSimple",
+   "probe_value": "0",
+   "is_enum": "yes",
+   "outcome": "ENUM_APPLIED",
+   "detail": ""
+  },
+  {
+   "type": "vimeo",
+   "property": "lazyLoad",
+   "owner_class": "VimeoElementMResourceData",
+   "creator": "createDataSimple",
+   "probe_value": "0",
+   "is_enum": "yes",
+   "outcome": "ENUM_APPLIED",
+   "detail": ""
+  },
+  {
+   "type": "vimeo",
+   "property": "startTime",
+   "owner_class": "VimeoElementMResourceData",
+   "creator": "createDataSimple",
+   "probe_value": "MPROP0153X",
+   "is_enum": "",
+   "outcome": "NO_EFFECT",
+   "detail": ""
+  },
+  {
+   "type": "vimeo",
+   "property": "threshold",
+   "owner_class": "VimeoElementMResourceData",
+   "creator": "createDataSimple",
+   "probe_value": "7",
+   "is_enum": "",
+   "outcome": "HTML",
+   "detail": ""
+  },
+  {
+   "type": "wpContent",
+   "property": "content",
+   "owner_class": "WPContentElementMResourceData",
+   "creator": "createDataSimple",
+   "probe_value": "MPROP0155X",
+   "is_enum": "",
+   "outcome": "NO_EFFECT",
+   "detail": ""
+  },
+  {
+   "type": "wpShortcode",
+   "property": "shortcode",
+   "owner_class": "WPShortcodeElementMResourceData",
+   "creator": "createDataSimple",
+   "probe_value": "MPROP0156X",
+   "is_enum": "",
+   "outcome": "HTML",
+   "detail": ""
+  },
+  {
+   "type": "wysiwyg-link",
+   "property": "url",
+   "owner_class": "WysiwygLinkElementMResourceData",
+   "creator": "createDataSimple",
+   "probe_value": "https://example.com/MPROP0157X",
+   "is_enum": "",
+   "outcome": "HTML",
+   "detail": ""
+  },
+  {
+   "type": "wysiwyg-link",
+   "property": "target",
+   "owner_class": "WysiwygLinkElementMResourceData",
+   "creator": "createDataSimple",
+   "probe_value": "_self",
+   "is_enum": "yes",
+   "outcome": "NO_EFFECT",
+   "detail": ""
+  },
+  {
+   "type": "wysiwyg-link",
+   "property": "rel",
+   "owner_class": "WysiwygLinkElementMResourceData",
+   "creator": "createDataSimple",
+   "probe_value": "MPROP0159X",
+   "is_enum": "",
+   "outcome": "NO_EFFECT",
+   "detail": ""
+  },
+  {
+   "type": "youtube",
+   "property": "youtubeUrl",
+   "owner_class": "YouTubeElementMResourceData",
+   "creator": "createDataSimple",
+   "probe_value": "MPROP0160X",
+   "is_enum": "",
+   "outcome": "NO_EFFECT",
+   "detail": ""
+  },
+  {
+   "type": "youtube",
+   "property": "autoplay",
+   "owner_class": "YouTubeElementMResourceData",
+   "creator": "createDataSimple",
+   "probe_value": "0",
+   "is_enum": "yes",
+   "outcome": "ENUM_APPLIED",
+   "detail": ""
+  },
+  {
+   "type": "youtube",
+   "property": "muted",
+   "owner_class": "YouTubeElementMResourceData",
+   "creator": "createDataSimple",
+   "probe_value": "0",
+   "is_enum": "yes",
+   "outcome": "ENUM_APPLIED",
+   "detail": ""
+  },
+  {
+   "type": "youtube",
+   "property": "controls",
+   "owner_class": "YouTubeElementMResourceData",
+   "creator": "createDataSimple",
+   "probe_value": "0",
+   "is_enum": "yes",
+   "outcome": "ENUM_APPLIED",
+   "detail": ""
+  },
+  {
+   "type": "youtube",
+   "property": "playsinline",
+   "owner_class": "YouTubeElementMResourceData",
+   "creator": "createDataSimple",
+   "probe_value": "0",
+   "is_enum": "yes",
+   "outcome": "ENUM_APPLIED",
+   "detail": ""
+  },
+  {
+   "type": "youtube",
+   "property": "privacy",
+   "owner_class": "YouTubeElementMResourceData",
+   "creator": "createDataSimple",
+   "probe_value": "0",
+   "is_enum": "yes",
+   "outcome": "ENUM_APPLIED",
+   "detail": ""
+  },
+  {
+   "type": "youtube",
+   "property": "lazyLoad",
+   "owner_class": "YouTubeElementMResourceData",
+   "creator": "createDataSimple",
+   "probe_value": "0",
+   "is_enum": "yes",
+   "outcome": "ENUM_APPLIED",
+   "detail": ""
+  },
+  {
+   "type": "youtube",
+   "property": "startTime",
+   "owner_class": "YouTubeElementMResourceData",
+   "creator": "createDataSimple",
+   "probe_value": "MPROP0167X",
+   "is_enum": "",
+   "outcome": "NO_EFFECT",
+   "detail": ""
+  },
+  {
+   "type": "youtube",
+   "property": "suggestedVideos",
+   "owner_class": "YouTubeElementMResourceData",
+   "creator": "createDataSimple",
+   "probe_value": "0",
+   "is_enum": "yes",
+   "outcome": "ENUM_APPLIED",
+   "detail": ""
+  },
+  {
+   "type": "youtube",
+   "property": "threshold",
+   "owner_class": "YouTubeElementMResourceData",
+   "creator": "createDataSimple",
+   "probe_value": "7",
+   "is_enum": "",
+   "outcome": "HTML",
+   "detail": ""
+  }
+ ]
+}

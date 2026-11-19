@@ -1,0 +1,1220 @@
+{
+ "source_file": "data/placement-rules.csv",
+ "columns": [
+  "type",
+  "rule",
+  "allowed_children",
+  "nested_rule",
+  "takes_children",
+  "nested_under",
+  "declared_in"
+ ],
+ "rows": [
+  {
+   "type": "__unknown",
+   "rule": "none",
+   "allowed_children": "",
+   "nested_rule": "",
+   "takes_children": "",
+   "nested_under": "",
+   "declared_in": "Mosaic/NodeTypes/Unknown/UnknownElementTypeFactory.php"
+  },
+  {
+   "type": "accordion",
+   "rule": "allow",
+   "allowed_children": "accordion-item|accordion-loop-items",
+   "nested_rule": "yes",
+   "takes_children": "yes",
+   "nested_under": "accordion-title",
+   "declared_in": "Mosaic/NodeTypes/Accordion/AccordionElementTypeFactory.php"
+  },
+  {
+   "type": "accordion-content",
+   "rule": "any",
+   "allowed_children": "",
+   "nested_rule": "",
+   "takes_children": "yes",
+   "nested_under": "",
+   "declared_in": "Mosaic/NodeTypes/Accordion/AccordionItem/AccordionContent/AccordionContentElementTypeFactory.php"
+  },
+  {
+   "type": "accordion-item",
+   "rule": "allow",
+   "allowed_children": "accordion-item|accordion-loop-items",
+   "nested_rule": "yes",
+   "takes_children": "yes",
+   "nested_under": "accordion|accordion-loop-items",
+   "declared_in": "Mosaic/NodeTypes/Accordion/AccordionItem/AccordionItemElementTypeFactory.php"
+  },
+  {
+   "type": "accordion-loop-items",
+   "rule": "allow",
+   "allowed_children": "accordion",
+   "nested_rule": "yes",
+   "takes_children": "yes",
+   "nested_under": "accordion",
+   "declared_in": "Mosaic/NodeTypes/Accordion/AccordionLoopItems/AccordionLoopItemsElementTypeFactory.php"
+  },
+  {
+   "type": "accordion-title",
+   "rule": "any",
+   "allowed_children": "",
+   "nested_rule": "",
+   "takes_children": "yes",
+   "nested_under": "",
+   "declared_in": "Mosaic/NodeTypes/Accordion/AccordionItem/AccordionTitle/AccordionTitleElementTypeFactory.php"
+  },
+  {
+   "type": "body",
+   "rule": "any",
+   "allowed_children": "",
+   "nested_rule": "",
+   "takes_children": "",
+   "nested_under": "",
+   "declared_in": "Mosaic/NodeTypes/Document/Body/BodyElementTypeFactory.php"
+  },
+  {
+   "type": "button",
+   "rule": "any",
+   "allowed_children": "",
+   "nested_rule": "",
+   "takes_children": "",
+   "nested_under": "",
+   "declared_in": "Mosaic/NodeTypes/Button/ButtonElementTypeFactory.php"
+  },
+  {
+   "type": "checkbox-input",
+   "rule": "none",
+   "allowed_children": "",
+   "nested_rule": "yes",
+   "takes_children": "",
+   "nested_under": "choice",
+   "declared_in": "Mosaic/NodeTypes/Form/Form/MElements/Checkbox/CheckboxInput/CheckboxInputElementTypeFactory.php"
+  },
+  {
+   "type": "choice",
+   "rule": "any",
+   "allowed_children": "",
+   "nested_rule": "yes",
+   "takes_children": "",
+   "nested_under": "choice-field",
+   "declared_in": "Mosaic/NodeTypes/Form/Form/MElements/Choice/ChoiceElementTypeFactory.php"
+  },
+  {
+   "type": "choice-content",
+   "rule": "any",
+   "allowed_children": "",
+   "nested_rule": "",
+   "takes_children": "yes",
+   "nested_under": "",
+   "declared_in": "Mosaic/NodeTypes/Form/Form/MElements/ChoiceField/Content/ChoiceContentElementTypeFactory.php"
+  },
+  {
+   "type": "choice-field",
+   "rule": "allow",
+   "allowed_children": "choice-content|choice-legend",
+   "nested_rule": "yes",
+   "takes_children": "",
+   "nested_under": "choice-field|field|form",
+   "declared_in": "Mosaic/NodeTypes/Form/Form/MElements/ChoiceField/ChoiceFieldElementTypeFactory.php"
+  },
+  {
+   "type": "choice-label",
+   "rule": "none",
+   "allowed_children": "",
+   "nested_rule": "yes",
+   "takes_children": "yes",
+   "nested_under": "choice",
+   "declared_in": "Mosaic/NodeTypes/Form/Form/MElements/Choice/ChoiceLabel/ChoiceLabelElementTypeFactory.php"
+  },
+  {
+   "type": "choice-legend",
+   "rule": "none",
+   "allowed_children": "",
+   "nested_rule": "",
+   "takes_children": "yes",
+   "nested_under": "",
+   "declared_in": "Mosaic/NodeTypes/Form/Form/MElements/ChoiceField/Legend/ChoiceLegendElementTypeFactory.php"
+  },
+  {
+   "type": "code",
+   "rule": "none",
+   "allowed_children": "",
+   "nested_rule": "",
+   "takes_children": "",
+   "nested_under": "",
+   "declared_in": "Mosaic/NodeTypes/Pro/Code/CodeElementTypeFactory.php"
+  },
+  {
+   "type": "component-external",
+   "rule": "none",
+   "allowed_children": "",
+   "nested_rule": "",
+   "takes_children": "",
+   "nested_under": "",
+   "declared_in": "Mosaic/NodeTypes/Component/Component/ComponentExternal/ComponentExternalElementTypeFactory.php"
+  },
+  {
+   "type": "component-instance",
+   "rule": "any",
+   "allowed_children": "",
+   "nested_rule": "",
+   "takes_children": "",
+   "nested_under": "",
+   "declared_in": "Mosaic/NodeTypes/Component/ComponentInstance/ComponentInstanceElementTypeFactory.php"
+  },
+  {
+   "type": "component-internal",
+   "rule": "any",
+   "allowed_children": "",
+   "nested_rule": "",
+   "takes_children": "",
+   "nested_under": "",
+   "declared_in": "Mosaic/NodeTypes/Component/Component/ComponentInternal/ComponentInternalElementTypeFactory.php"
+  },
+  {
+   "type": "component-root",
+   "rule": "none",
+   "allowed_children": "",
+   "nested_rule": "",
+   "takes_children": "",
+   "nested_under": "",
+   "declared_in": "Mosaic/NodeTypes/Root/Component/ComponentRootElementTypeFactory.php"
+  },
+  {
+   "type": "div",
+   "rule": "any",
+   "allowed_children": "",
+   "nested_rule": "",
+   "takes_children": "",
+   "nested_under": "",
+   "declared_in": "Mosaic/NodeTypes/Div/DivElementTypeFactory.php"
+  },
+  {
+   "type": "document",
+   "rule": "none",
+   "allowed_children": "",
+   "nested_rule": "",
+   "takes_children": "",
+   "nested_under": "",
+   "declared_in": "Mosaic/NodeTypes/Document/DocumentElementTypeFactory.php"
+  },
+  {
+   "type": "dropdown",
+   "rule": "none",
+   "allowed_children": "",
+   "nested_rule": "",
+   "takes_children": "",
+   "nested_under": "",
+   "declared_in": "Mosaic/NodeTypes/Menu/Dropdown/Dropdown/DropdownElementTypeFactory.php"
+  },
+  {
+   "type": "dropdown-toggle",
+   "rule": "any",
+   "allowed_children": "",
+   "nested_rule": "",
+   "takes_children": "yes",
+   "nested_under": "",
+   "declared_in": "Mosaic/NodeTypes/Menu/Dropdown/DropdownToggle/DropdownToggleElementTypeFactory.php"
+  },
+  {
+   "type": "dropdown-wide",
+   "rule": "none",
+   "allowed_children": "",
+   "nested_rule": "",
+   "takes_children": "",
+   "nested_under": "",
+   "declared_in": "Mosaic/NodeTypes/Menu/Dropdown/DropdownWide/DropdownWideElementTypeFactory.php"
+  },
+  {
+   "type": "dropdown-wrapper",
+   "rule": "any",
+   "allowed_children": "",
+   "nested_rule": "",
+   "takes_children": "yes",
+   "nested_under": "",
+   "declared_in": "Mosaic/NodeTypes/Menu/Dropdown/DropdownWrapper/DropdownWrapperElementTypeFactoryAbstract.php"
+  },
+  {
+   "type": "dropdown-wrapper-wide",
+   "rule": "any",
+   "allowed_children": "",
+   "nested_rule": "",
+   "takes_children": "yes",
+   "nested_under": "",
+   "declared_in": "Mosaic/NodeTypes/Menu/Dropdown/DropdownWrapper/DropdownWrapperElementTypeFactoryAbstract.php"
+  },
+  {
+   "type": "field",
+   "rule": "any",
+   "allowed_children": "",
+   "nested_rule": "yes",
+   "takes_children": "yes",
+   "nested_under": "choice-field|field|form",
+   "declared_in": "Mosaic/NodeTypes/Form/Form/MElements/Field/FieldElementTypeFactory.php"
+  },
+  {
+   "type": "fieldset",
+   "rule": "allow",
+   "allowed_children": "fieldset-content|fieldset-legend",
+   "nested_rule": "yes",
+   "takes_children": "",
+   "nested_under": "choice-field|field|form",
+   "declared_in": "Mosaic/NodeTypes/Form/Form/MElements/FieldSet/FieldSetElementTypeFactory.php"
+  },
+  {
+   "type": "fieldset-content",
+   "rule": "any",
+   "allowed_children": "",
+   "nested_rule": "",
+   "takes_children": "yes",
+   "nested_under": "",
+   "declared_in": "Mosaic/NodeTypes/Form/Form/MElements/FieldSet/Content/FieldSetContentElementMResourceFactory.php"
+  },
+  {
+   "type": "fieldset-legend",
+   "rule": "none",
+   "allowed_children": "",
+   "nested_rule": "",
+   "takes_children": "yes",
+   "nested_under": "",
+   "declared_in": "Mosaic/NodeTypes/Form/Form/MElements/FieldSet/Legend/FieldSetLegendElementMResourceFactory.php"
+  },
+  {
+   "type": "fileupload-input",
+   "rule": "none",
+   "allowed_children": "",
+   "nested_rule": "yes",
+   "takes_children": "",
+   "nested_under": "field",
+   "declared_in": "Mosaic/NodeTypes/Form/Form/MElements/FileUpload/FileUploadElementTypeFactory.php"
+  },
+  {
+   "type": "form",
+   "rule": "any",
+   "allowed_children": "",
+   "nested_rule": "",
+   "takes_children": "yes",
+   "nested_under": "",
+   "declared_in": "Mosaic/NodeTypes/Form/Form/FormElementTypeFactory.php"
+  },
+  {
+   "type": "form-error",
+   "rule": "none",
+   "allowed_children": "",
+   "nested_rule": "yes",
+   "takes_children": "",
+   "nested_under": "form",
+   "declared_in": "Mosaic/NodeTypes/Form/Form/MElements/FormError/FormErrorElementTypeFactory.php"
+  },
+  {
+   "type": "form-multi-steps",
+   "rule": "allow",
+   "allowed_children": "form-multi-steps-steps|multi-steps-forms",
+   "nested_rule": "yes",
+   "takes_children": "",
+   "nested_under": "field|form|form-multi-steps",
+   "declared_in": "Mosaic/NodeTypes/Form/Form/MElements/MultiSteps/MultiStepsElementTypeFactory.php"
+  },
+  {
+   "type": "form-multi-steps-step",
+   "rule": "any",
+   "allowed_children": "",
+   "nested_rule": "",
+   "takes_children": "yes",
+   "nested_under": "",
+   "declared_in": "Mosaic/NodeTypes/Form/Form/MElements/MultiSteps/Steps/Step/StepElementTypeFactory.php"
+  },
+  {
+   "type": "form-multi-steps-steps",
+   "rule": "allow",
+   "allowed_children": "form-multi-steps-step",
+   "nested_rule": "",
+   "takes_children": "yes",
+   "nested_under": "",
+   "declared_in": "Mosaic/NodeTypes/Form/Form/MElements/MultiSteps/Steps/StepsElementTypeFactory.php"
+  },
+  {
+   "type": "form-wrapper",
+   "rule": "allow",
+   "allowed_children": "form|success-screen",
+   "nested_rule": "yes",
+   "takes_children": "",
+   "nested_under": "form-wrapper",
+   "declared_in": "Mosaic/NodeTypes/Form/FormWrapperElementTypeFactory.php"
+  },
+  {
+   "type": "googlemaps",
+   "rule": "none",
+   "allowed_children": "",
+   "nested_rule": "",
+   "takes_children": "",
+   "nested_under": "",
+   "declared_in": "Mosaic/NodeTypes/GoogleMaps/GoogleMapsElementTypeFactory.php"
+  },
+  {
+   "type": "hidden-input",
+   "rule": "none",
+   "allowed_children": "",
+   "nested_rule": "yes",
+   "takes_children": "",
+   "nested_under": "choice-field|field|form",
+   "declared_in": "Mosaic/NodeTypes/Form/Form/MElements/HiddenInput/HiddenInputElementTypeFactory.php"
+  },
+  {
+   "type": "icon",
+   "rule": "none",
+   "allowed_children": "",
+   "nested_rule": "",
+   "takes_children": "",
+   "nested_under": "",
+   "declared_in": "Mosaic/NodeTypes/Icon/IconElementTypeFactory.php"
+  },
+  {
+   "type": "image",
+   "rule": "none",
+   "allowed_children": "",
+   "nested_rule": "",
+   "takes_children": "",
+   "nested_under": "",
+   "declared_in": "Mosaic/NodeTypes/Image/ImageElementTypeFactory.php"
+  },
+  {
+   "type": "label",
+   "rule": "none",
+   "allowed_children": "",
+   "nested_rule": "yes",
+   "takes_children": "yes",
+   "nested_under": "field",
+   "declared_in": "Mosaic/NodeTypes/Form/Form/MElements/Label/LabelElementTypeFactory.php"
+  },
+  {
+   "type": "list",
+   "rule": "allow",
+   "allowed_children": "list-item|list-loop-items",
+   "nested_rule": "",
+   "takes_children": "",
+   "nested_under": "",
+   "declared_in": "Mosaic/NodeTypes/ListElement/ListElementTypeFactory.php"
+  },
+  {
+   "type": "list-item",
+   "rule": "any",
+   "allowed_children": "",
+   "nested_rule": "yes",
+   "takes_children": "",
+   "nested_under": "list|list-loop-items|wp-menu",
+   "declared_in": "Mosaic/NodeTypes/ListElement/ListItem/ListItemElementTypeFactory.php"
+  },
+  {
+   "type": "list-loop-items",
+   "rule": "allow",
+   "allowed_children": "list-item",
+   "nested_rule": "yes",
+   "takes_children": "",
+   "nested_under": "list",
+   "declared_in": "Mosaic/NodeTypes/ListElement/ListLoopItems/ListLoopItemsElementTypeFactory.php"
+  },
+  {
+   "type": "listbox",
+   "rule": "complex",
+   "allowed_children": "",
+   "nested_rule": "yes",
+   "takes_children": "",
+   "nested_under": "field",
+   "declared_in": "Mosaic/NodeTypes/Form/Form/MElements/ListBox/ListBoxElementTypeFactory.php"
+  },
+  {
+   "type": "listbox-option",
+   "rule": "none",
+   "allowed_children": "",
+   "nested_rule": "yes",
+   "takes_children": "",
+   "nested_under": "listbox",
+   "declared_in": "Mosaic/NodeTypes/Form/Form/MElements/ListBox/Option/ListBoxOptionElementTypeFactory.php"
+  },
+  {
+   "type": "loop",
+   "rule": "allow",
+   "allowed_children": "loop-pagination",
+   "nested_rule": "",
+   "takes_children": "",
+   "nested_under": "",
+   "declared_in": "Mosaic/NodeTypes/Loop/LoopElementTypeFactory.php"
+  },
+  {
+   "type": "loop-item",
+   "rule": "any",
+   "allowed_children": "",
+   "nested_rule": "yes",
+   "takes_children": "",
+   "nested_under": "loop-items",
+   "declared_in": "Mosaic/NodeTypes/Loop/LoopItems/LoopItem/LoopItemElementTypeFactory.php"
+  },
+  {
+   "type": "loop-items",
+   "rule": "allow",
+   "allowed_children": "loop-item",
+   "nested_rule": "yes",
+   "takes_children": "yes",
+   "nested_under": "",
+   "declared_in": "Mosaic/NodeTypes/Loop/LoopItems/LoopItemsElementTypeFactory.php"
+  },
+  {
+   "type": "loop-no-result",
+   "rule": "any",
+   "allowed_children": "",
+   "nested_rule": "",
+   "takes_children": "yes",
+   "nested_under": "",
+   "declared_in": "Mosaic/NodeTypes/Loop/LoopNoResult/LoopNoResultElementTypeFactory.php"
+  },
+  {
+   "type": "loop-pagination",
+   "rule": "any",
+   "allowed_children": "",
+   "nested_rule": "yes",
+   "takes_children": "",
+   "nested_under": "loop",
+   "declared_in": "Mosaic/NodeTypes/Loop/LoopPagination/LoopPaginationElementTypeFactory.php"
+  },
+  {
+   "type": "loop-pagination-button-next",
+   "rule": "any",
+   "allowed_children": "",
+   "nested_rule": "yes",
+   "takes_children": "",
+   "nested_under": "loop-pagination",
+   "declared_in": "Mosaic/NodeTypes/Loop/LoopPagination/Button/ButtonNext/LoopPaginationButtonNextElementTypeFactory.php"
+  },
+  {
+   "type": "loop-pagination-button-previous",
+   "rule": "any",
+   "allowed_children": "",
+   "nested_rule": "yes",
+   "takes_children": "",
+   "nested_under": "loop-pagination",
+   "declared_in": "Mosaic/NodeTypes/Loop/LoopPagination/Button/ButtonPrevious/LoopPaginationButtonPreviousElementTypeFactory.php"
+  },
+  {
+   "type": "loop-pagination-number",
+   "rule": "none",
+   "allowed_children": "",
+   "nested_rule": "",
+   "takes_children": "",
+   "nested_under": "",
+   "declared_in": "Mosaic/NodeTypes/Loop/LoopPagination/Numbers/Number/LoopPaginationNumberElementTypeFactory.php"
+  },
+  {
+   "type": "loop-pagination-numbers",
+   "rule": "allow",
+   "allowed_children": "loop-pagination-number",
+   "nested_rule": "yes",
+   "takes_children": "yes",
+   "nested_under": "loop-pagination",
+   "declared_in": "Mosaic/NodeTypes/Loop/LoopPagination/Numbers/LoopPaginationNumbersElementTypeFactory.php"
+  },
+  {
+   "type": "master-root",
+   "rule": "none",
+   "allowed_children": "",
+   "nested_rule": "",
+   "takes_children": "",
+   "nested_under": "",
+   "declared_in": "Mosaic/NodeTypes/Root/Master/MasterRootElementTypeFactory.php"
+  },
+  {
+   "type": "menu",
+   "rule": "any",
+   "allowed_children": "",
+   "nested_rule": "",
+   "takes_children": "",
+   "nested_under": "",
+   "declared_in": "Mosaic/NodeTypes/Menu/MenuElementTypeFactory.php"
+  },
+  {
+   "type": "menu-link",
+   "rule": "any",
+   "allowed_children": "",
+   "nested_rule": "",
+   "takes_children": "",
+   "nested_under": "",
+   "declared_in": "Mosaic/NodeTypes/Menu/MenuLink/MenuLinkElementTypeFactory.php"
+  },
+  {
+   "type": "modal",
+   "rule": "any",
+   "allowed_children": "",
+   "nested_rule": "",
+   "takes_children": "",
+   "nested_under": "",
+   "declared_in": "Mosaic/NodeTypes/Dialog/Modal/ModalElementTypeFactoryAbstract.php"
+  },
+  {
+   "type": "modal-overlay",
+   "rule": "any",
+   "allowed_children": "",
+   "nested_rule": "yes",
+   "takes_children": "",
+   "nested_under": "modal",
+   "declared_in": "Mosaic/NodeTypes/Dialog/Modal/ModalOverlay/ModalOverlayElementTypeFactoryAbstract.php"
+  },
+  {
+   "type": "modal-window",
+   "rule": "any",
+   "allowed_children": "",
+   "nested_rule": "",
+   "takes_children": "",
+   "nested_under": "",
+   "declared_in": "Mosaic/NodeTypes/Dialog/Modal/ModalWindow/ModalWindowElementTypeFactoryAbstract.php"
+  },
+  {
+   "type": "multi-steps-back-button",
+   "rule": "any",
+   "allowed_children": "",
+   "nested_rule": "yes",
+   "takes_children": "yes",
+   "nested_under": "multi-steps-form-step",
+   "declared_in": "Mosaic/NodeTypes/Form/Form/MElements/MultiSteps/Forms/FormStep/Button/ButtonStepBack/FormStepButtonBackElementTypeFactory.php"
+  },
+  {
+   "type": "multi-steps-form-step",
+   "rule": "any",
+   "allowed_children": "",
+   "nested_rule": "",
+   "takes_children": "yes",
+   "nested_under": "",
+   "declared_in": "Mosaic/NodeTypes/Form/Form/MElements/MultiSteps/Forms/FormStep/FormStepElementTypeFactory.php"
+  },
+  {
+   "type": "multi-steps-forms",
+   "rule": "allow",
+   "allowed_children": "form-multi-steps",
+   "nested_rule": "",
+   "takes_children": "yes",
+   "nested_under": "",
+   "declared_in": "Mosaic/NodeTypes/Form/Form/MElements/MultiSteps/Forms/FormsElementTypeFactory.php"
+  },
+  {
+   "type": "multi-steps-next-button",
+   "rule": "any",
+   "allowed_children": "",
+   "nested_rule": "yes",
+   "takes_children": "yes",
+   "nested_under": "multi-steps-form-step",
+   "declared_in": "Mosaic/NodeTypes/Form/Form/MElements/MultiSteps/Forms/FormStep/Button/ButtonStepNext/FormStepButtonNextElementTypeFactory.php"
+  },
+  {
+   "type": "navbar",
+   "rule": "none",
+   "allowed_children": "",
+   "nested_rule": "yes",
+   "takes_children": "yes",
+   "nested_under": "navbar",
+   "declared_in": "Mosaic/NodeTypes/Navbar/NavbarElementTypeFactory.php"
+  },
+  {
+   "type": "navbar-toggle",
+   "rule": "any",
+   "allowed_children": "",
+   "nested_rule": "yes",
+   "takes_children": "yes",
+   "nested_under": "navbar|navbar-toggle|navigation",
+   "declared_in": "Mosaic/NodeTypes/Navbar/NavbarToggle/NavbarToggleElementTypeFactory.php"
+  },
+  {
+   "type": "navigation",
+   "rule": "any",
+   "allowed_children": "",
+   "nested_rule": "yes",
+   "takes_children": "yes",
+   "nested_under": "navbar|navbar-toggle|navigation",
+   "declared_in": "Mosaic/NodeTypes/Navbar/Navigation/NavigationElementTypeFactory.php"
+  },
+  {
+   "type": "openstreetmap",
+   "rule": "none",
+   "allowed_children": "",
+   "nested_rule": "",
+   "takes_children": "",
+   "nested_under": "",
+   "declared_in": "Mosaic/NodeTypes/OpenStreetMap/OpenStreetMapElementTypeFactory.php"
+  },
+  {
+   "type": "popover",
+   "rule": "any",
+   "allowed_children": "",
+   "nested_rule": "",
+   "takes_children": "",
+   "nested_under": "",
+   "declared_in": "Mosaic/NodeTypes/Popover/PopoverElementTypeFactoryAbstract.php"
+  },
+  {
+   "type": "radio-input",
+   "rule": "none",
+   "allowed_children": "",
+   "nested_rule": "yes",
+   "takes_children": "",
+   "nested_under": "choice",
+   "declared_in": "Mosaic/NodeTypes/Form/Form/MElements/Radio/RadioInput/RadioInputElementTypeFactory.php"
+  },
+  {
+   "type": "recaptcha",
+   "rule": "none",
+   "allowed_children": "",
+   "nested_rule": "yes",
+   "takes_children": "",
+   "nested_under": "choice-field|field|form",
+   "declared_in": "Mosaic/NodeTypes/Form/Form/MElements/Recaptcha/RecaptchaElementTypeFactory.php"
+  },
+  {
+   "type": "section",
+   "rule": "any",
+   "allowed_children": "",
+   "nested_rule": "yes",
+   "takes_children": "",
+   "nested_under": "section",
+   "declared_in": "Mosaic/NodeTypes/Section/SectionElementTypeFactory.php"
+  },
+  {
+   "type": "select",
+   "rule": "allow",
+   "allowed_children": "select-options|select-toggle",
+   "nested_rule": "yes",
+   "takes_children": "yes",
+   "nested_under": "field",
+   "declared_in": "Mosaic/NodeTypes/Form/Form/MElements/Select/SelectElementTypeFactory.php"
+  },
+  {
+   "type": "select-option",
+   "rule": "any",
+   "allowed_children": "",
+   "nested_rule": "yes",
+   "takes_children": "yes",
+   "nested_under": "select-option|select-options",
+   "declared_in": "Mosaic/NodeTypes/Form/Form/MElements/Select/Options/Option/SelectOptionElementTypeFactory.php"
+  },
+  {
+   "type": "select-options",
+   "rule": "allow",
+   "allowed_children": "select-option",
+   "nested_rule": "",
+   "takes_children": "yes",
+   "nested_under": "",
+   "declared_in": "Mosaic/NodeTypes/Form/Form/MElements/Select/Options/SelectOptionsElementTypeFactory.php"
+  },
+  {
+   "type": "select-placeholder",
+   "rule": "any",
+   "allowed_children": "",
+   "nested_rule": "yes",
+   "takes_children": "yes",
+   "nested_under": "select-placeholder|select-toggle",
+   "declared_in": "Mosaic/NodeTypes/Form/Form/MElements/Select/Toggle/Placeholder/SelectPlaceholderElementTypeFactory.php"
+  },
+  {
+   "type": "select-toggle",
+   "rule": "any",
+   "allowed_children": "",
+   "nested_rule": "",
+   "takes_children": "yes",
+   "nested_under": "",
+   "declared_in": "Mosaic/NodeTypes/Form/Form/MElements/Select/Toggle/SelectToggleElementTypeFactory.php"
+  },
+  {
+   "type": "slider",
+   "rule": "any",
+   "allowed_children": "",
+   "nested_rule": "",
+   "takes_children": "",
+   "nested_under": "",
+   "declared_in": "Mosaic/NodeTypes/Slider/SliderElementTypeFactory.php"
+  },
+  {
+   "type": "slider-arrow-left",
+   "rule": "any",
+   "allowed_children": "",
+   "nested_rule": "yes",
+   "takes_children": "yes",
+   "nested_under": "slider|slider-navigation",
+   "declared_in": "Mosaic/NodeTypes/Slider/SliderArrow/SliderArrowElementTypeFactoryAbstract.php"
+  },
+  {
+   "type": "slider-arrow-right",
+   "rule": "any",
+   "allowed_children": "",
+   "nested_rule": "yes",
+   "takes_children": "yes",
+   "nested_under": "slider|slider-navigation",
+   "declared_in": "Mosaic/NodeTypes/Slider/SliderArrow/SliderArrowElementTypeFactoryAbstract.php"
+  },
+  {
+   "type": "slider-loop-slides",
+   "rule": "allow",
+   "allowed_children": "slider-slides",
+   "nested_rule": "yes",
+   "takes_children": "yes",
+   "nested_under": "slider-slides",
+   "declared_in": "Mosaic/NodeTypes/Slider/SliderLoopSlides/SliderLoopSlidesElementTypeFactory.php"
+  },
+  {
+   "type": "slider-navigation",
+   "rule": "allow",
+   "allowed_children": "slider-navigation-bullet",
+   "nested_rule": "yes",
+   "takes_children": "yes",
+   "nested_under": "slider|slider-navigation",
+   "declared_in": "Mosaic/NodeTypes/Slider/SliderNavigation/SliderNavigationElementTypeFactory.php"
+  },
+  {
+   "type": "slider-navigation-bullet",
+   "rule": "none",
+   "allowed_children": "",
+   "nested_rule": "",
+   "takes_children": "",
+   "nested_under": "",
+   "declared_in": "Mosaic/NodeTypes/Slider/SliderNavigation/SliderNavigationBullet/SliderNavigationBulletElementTypeFactory.php"
+  },
+  {
+   "type": "slider-slide",
+   "rule": "any",
+   "allowed_children": "",
+   "nested_rule": "yes",
+   "takes_children": "",
+   "nested_under": "slider-loop-slides|slider-slides",
+   "declared_in": "Mosaic/NodeTypes/Slider/SliderSlides/SliderSlide/SliderSlideElementTypeFactory.php"
+  },
+  {
+   "type": "slider-slides",
+   "rule": "allow",
+   "allowed_children": "slider-loop-slides|slider-slide",
+   "nested_rule": "",
+   "takes_children": "yes",
+   "nested_under": "",
+   "declared_in": "Mosaic/NodeTypes/Slider/SliderSlides/SliderSlidesElementTypeFactory.php"
+  },
+  {
+   "type": "styleguide-a",
+   "rule": "none",
+   "allowed_children": "",
+   "nested_rule": "",
+   "takes_children": "",
+   "nested_under": "",
+   "declared_in": "Mosaic/NodeTypes/SG/SGA/SGAElementTypeFactory.php"
+  },
+  {
+   "type": "styleguide-entry-content",
+   "rule": "any",
+   "allowed_children": "",
+   "nested_rule": "yes",
+   "takes_children": "",
+   "nested_under": "styleguide-entry-content",
+   "declared_in": "Mosaic/NodeTypes/SG/SGEntryContent/SGEntryContentElementTypeFactory.php"
+  },
+  {
+   "type": "styleguide-entry-content-button",
+   "rule": "none",
+   "allowed_children": "",
+   "nested_rule": "yes",
+   "takes_children": "",
+   "nested_under": "styleguide-entry-content",
+   "declared_in": "Mosaic/NodeTypes/SG/SGEntryContent/SGEntryContentButton/SGEntryContentButtonElementTypeFactory.php"
+  },
+  {
+   "type": "styleguide-entry-content-code",
+   "rule": "none",
+   "allowed_children": "",
+   "nested_rule": "yes",
+   "takes_children": "",
+   "nested_under": "styleguide-entry-content",
+   "declared_in": "Mosaic/NodeTypes/SG/SGEntryContent/SGEntryContentCode/SGEntryContentCodeElementTypeFactory.php"
+  },
+  {
+   "type": "styleguide-entry-content-image",
+   "rule": "allow",
+   "allowed_children": "styleguide-entry-content-image-caption|styleguide-entry-content-image-img",
+   "nested_rule": "yes",
+   "takes_children": "",
+   "nested_under": "styleguide-entry-content",
+   "declared_in": "Mosaic/NodeTypes/SG/SGEntryContent/SGEntryContentImage/SGEntryContentImageElementTypeFactory.php"
+  },
+  {
+   "type": "styleguide-entry-content-image-caption",
+   "rule": "none",
+   "allowed_children": "",
+   "nested_rule": "",
+   "takes_children": "",
+   "nested_under": "",
+   "declared_in": "Mosaic/NodeTypes/SG/SGEntryContent/SGEntryContentImage/SGEntryContentImageCaption/SGEntryContentImageCaptionElementTypeFactory.php"
+  },
+  {
+   "type": "styleguide-entry-content-image-img",
+   "rule": "none",
+   "allowed_children": "",
+   "nested_rule": "",
+   "takes_children": "",
+   "nested_under": "",
+   "declared_in": "Mosaic/NodeTypes/SG/SGEntryContent/SGEntryContentImage/SGEntryContentImageImg/SGEntryContentImageImgElementTypeFactory.php"
+  },
+  {
+   "type": "styleguide-entry-content-list",
+   "rule": "allow",
+   "allowed_children": "styleguide-entry-content-list-item",
+   "nested_rule": "yes",
+   "takes_children": "",
+   "nested_under": "styleguide-entry-content",
+   "declared_in": "Mosaic/NodeTypes/SG/SGEntryContent/SGEntryContentList/SGEntryContentListElementTypeFactory.php"
+  },
+  {
+   "type": "styleguide-entry-content-list-item",
+   "rule": "none",
+   "allowed_children": "",
+   "nested_rule": "",
+   "takes_children": "",
+   "nested_under": "",
+   "declared_in": "Mosaic/NodeTypes/SG/SGEntryContent/SGEntryContentList/SGEntryContentListItem/SGEntryContentListItemElementTypeFactory.php"
+  },
+  {
+   "type": "styleguide-entry-content-preformatted",
+   "rule": "none",
+   "allowed_children": "",
+   "nested_rule": "yes",
+   "takes_children": "",
+   "nested_under": "styleguide-entry-content",
+   "declared_in": "Mosaic/NodeTypes/SG/SGEntryContent/SGEntryContentPreformatted/SGEntryContentPreformattedElementTypeFactory.php"
+  },
+  {
+   "type": "styleguide-entry-content-pullquote",
+   "rule": "allow",
+   "allowed_children": "styleguide-entry-content-pullquote-cite|styleguide-entry-content-pullquote-paragraph",
+   "nested_rule": "yes",
+   "takes_children": "",
+   "nested_under": "styleguide-entry-content",
+   "declared_in": "Mosaic/NodeTypes/SG/SGEntryContent/SGEntryContentPullQuote/SGEntryContentPullQuoteElementTypeFactory.php"
+  },
+  {
+   "type": "styleguide-entry-content-pullquote-cite",
+   "rule": "none",
+   "allowed_children": "",
+   "nested_rule": "",
+   "takes_children": "",
+   "nested_under": "",
+   "declared_in": "Mosaic/NodeTypes/SG/SGEntryContent/SGEntryContentPullQuote/SGEntryContentPullQuoteCite/SGEntryContentPullQuoteCiteElementTypeFactory.php"
+  },
+  {
+   "type": "styleguide-entry-content-pullquote-paragraph",
+   "rule": "none",
+   "allowed_children": "",
+   "nested_rule": "",
+   "takes_children": "",
+   "nested_under": "",
+   "declared_in": "Mosaic/NodeTypes/SG/SGEntryContent/SGEntryContentPullQuote/SGEntryContentPullQuoteParagraph/SGEntryContentPullQuoteParagraphElementTypeFactory.php"
+  },
+  {
+   "type": "styleguide-entry-content-quote-cite",
+   "rule": "none",
+   "allowed_children": "",
+   "nested_rule": "",
+   "takes_children": "",
+   "nested_under": "",
+   "declared_in": "Mosaic/NodeTypes/SG/SGEntryContent/SGEntryContentQuote/SGEntryContentQuoteCite/SGEntryContentQuoteCiteElementTypeFactory.php"
+  },
+  {
+   "type": "styleguide-entry-content-separator",
+   "rule": "none",
+   "allowed_children": "",
+   "nested_rule": "yes",
+   "takes_children": "",
+   "nested_under": "styleguide-entry-content",
+   "declared_in": "Mosaic/NodeTypes/SG/SGEntryContent/SGEntryContentSeparator/SGEntryContentSeparatorElementTypeFactory.php"
+  },
+  {
+   "type": "styleguide-entry-content-text",
+   "rule": "none",
+   "allowed_children": "",
+   "nested_rule": "yes",
+   "takes_children": "",
+   "nested_under": "styleguide-entry-content",
+   "declared_in": "Mosaic/NodeTypes/SG/SGEntryContent/SGEntryContentText/SGEntryContentTextElementTypeFactory.php"
+  },
+  {
+   "type": "styleguide-entry-content-text-quote",
+   "rule": "complex",
+   "allowed_children": "",
+   "nested_rule": "yes",
+   "takes_children": "",
+   "nested_under": "styleguide-entry-content",
+   "declared_in": "Mosaic/NodeTypes/SG/SGEntryContent/SGEntryContentQuote/SGEntryContentQuoteElementTypeFactory.php"
+  },
+  {
+   "type": "styleguide-entry-content-verse",
+   "rule": "none",
+   "allowed_children": "",
+   "nested_rule": "yes",
+   "takes_children": "",
+   "nested_under": "styleguide-entry-content",
+   "declared_in": "Mosaic/NodeTypes/SG/SGEntryContent/SGEntryContentVerse/SGEntryContentVerseElementTypeFactory.php"
+  },
+  {
+   "type": "styleguide-root",
+   "rule": "none",
+   "allowed_children": "",
+   "nested_rule": "",
+   "takes_children": "",
+   "nested_under": "",
+   "declared_in": "Mosaic/NodeTypes/Root/StyleGuide/StyleGuideRootElementTypeFactory.php"
+  },
+  {
+   "type": "submit-button",
+   "rule": "allow",
+   "allowed_children": "submit-label|submit-loading",
+   "nested_rule": "yes",
+   "takes_children": "yes",
+   "nested_under": "form",
+   "declared_in": "Mosaic/NodeTypes/Form/Form/MElements/SubmitButton/SubmitButtonElementTypeFactory.php"
+  },
+  {
+   "type": "submit-label",
+   "rule": "none",
+   "allowed_children": "",
+   "nested_rule": "",
+   "takes_children": "yes",
+   "nested_under": "",
+   "declared_in": "Mosaic/NodeTypes/Form/Form/MElements/SubmitButton/Label/SubmitLabelElementTypeFactory.php"
+  },
+  {
+   "type": "submit-loading",
+   "rule": "none",
+   "allowed_children": "",
+   "nested_rule": "",
+   "takes_children": "yes",
+   "nested_under": "",
+   "declared_in": "Mosaic/NodeTypes/Form/Form/MElements/SubmitButton/Loading/SubmitLoadingElementTypeFactory.php"
+  },
+  {
+   "type": "success-screen",
+   "rule": "any",
+   "allowed_children": "",
+   "nested_rule": "",
+   "takes_children": "yes",
+   "nested_under": "",
+   "declared_in": "Mosaic/NodeTypes/Form/SuccessScreen/SuccessScreenElementTypeFactory.php"
+  },
+  {
+   "type": "tabs",
+   "rule": "allow",
+   "allowed_children": "tabs-content|tabs-menu",
+   "nested_rule": "",
+   "takes_children": "yes",
+   "nested_under": "",
+   "declared_in": "Mosaic/NodeTypes/Tabs/TabsElementTypeFactory.php"
+  },
+  {
+   "type": "tabs-content",
+   "rule": "allow",
+   "allowed_children": "tabs-loop-tab-panes|tabs-tab-pane",
+   "nested_rule": "",
+   "takes_children": "yes",
+   "nested_under": "",
+   "declared_in": "Mosaic/NodeTypes/Tabs/TabsContent/TabsContentElementTypeFactory.php"
+  },
+  {
+   "type": "tabs-loop-tab-panes",
+   "rule": "allow",
+   "allowed_children": "tabs-tab-pane",
+   "nested_rule": "",
+   "takes_children": "yes",
+   "nested_under": "",
+   "declared_in": "Mosaic/NodeTypes/Tabs/TabsContent/LoopTabPanes/TabLoopTabPanesElementTypeFactory.php"
+  },
+  {
+   "type": "tabs-loop-tabs",
+   "rule": "allow",
+   "allowed_children": "tabs-tab",
+   "nested_rule": "yes",
+   "takes_children": "yes",
+   "nested_under": "tabs-menu",
+   "declared_in": "Mosaic/NodeTypes/Tabs/TabsMenu/LoopTabs/TabLoopTabsElementTypeFactory.php"
+  },
+  {
+   "type": "tabs-menu",
+   "rule": "allow",
+   "allowed_children": "tabs-loop-tabs|tabs-tab",
+   "nested_rule": "",
+   "takes_children": "yes",
+   "nested_under": "",
+   "declared_in": "Mosaic/NodeTypes/Tabs/TabsMenu/TabsMenuElementTypeFactory.php"
+  },
+  {
+   "type": "tabs-tab",
+   "rule": "any",
+   "allowed_children": "",
+   "nested_rule": "yes",
+   "takes_children": "yes",
+   "nested_under": "tabs-loop-tabs|tabs-menu",
+   "declared_in": "Mosaic/NodeTypes/Tabs/TabsMenu/Tab/TabElementTypeFactory.php"
+  },
+  {
+   "type": "tabs-tab-pane",
+   "rule": "any",
+   "allowed_children": "",
+   "nested_rule": "",
+   "takes_children": "yes",
+   "nested_under": "",
+   "declared_in": "Mosaic/NodeTypes/Tabs/TabsContent/TabPane/TabPaneElementTypeFactory.php"
+  },
+  {
+   "type": "template-external",
+   "rule": "none",
+   "allowed_children": "",
+   "nested_rule": "yes",
+   "takes_children": "",
+   "nested_under": "",
+   "declared_in": "Mosaic/NodeTypes/Template/TemplateExternal/TemplateExternalElementTypeFactory.php"
+  },
+  {
+   "type": "template-internal",
+   "rule": "any",
+   "allowed_children": "",
+   "nested_rule": "",
+   "takes_children": "yes",
+   "nested_under": "",
+   "declared_in": "Mosaic/NodeTypes/Template/TemplateInternal/TemplateInternalElementTypeFactory.php"
+  },
+  {
+   "type": "text",
+   "rule": "none",
+   "allowed_children": "",
+   "nested_rule": "",
+   "takes_children": "yes",
+   "nested_under": "",
+   "declared_in": "Mosaic/NodeTypes/Text/TextElementTypeFactory.php"
+  },
+  {
+   "type": "text-input",
+   "rule": "none",
+   "allowed_children": "",
+   "nested_rule": "yes",
+   "takes_children": "",
+   "nested_under": "field",
+   "declared_in": "Mosaic/NodeTypes/Form/Form/MElements/InputText/InputTextElementTypeFactory.php"
+  },
+  {
+   "type": "textarea-input",
+   "rule": "none",
+   "allowed_children": "",
+   "nested_rule": "yes",
+   "takes_children": "",
+   "nested_under": "field",
+   "declared_in": "Mosaic/NodeTypes/Form/Form/MElements/TextArea/TextAreaElementTypeFactory.php"
+  },
+  {
+   "type": "turnstile",
+   "rule": "none",
+   "allowed_children": "",
+   "nested_rule": "yes",
+   "takes_children": "",
+   "nested_under": "choice-field|field|form",
+   "declared_in": "Mosaic/NodeTypes/Form/Form/MElements/Turnstile/TurnstileElementTypeFactory.php"
+  },
+  {
+   "type": "video",
+   "rule": "none",
+   "allowed_children": "",
+   "nested_rule": "",
+   "takes_children": "",
+   "nested_under": "",
+   "declared_in": "Mosaic/NodeTypes/Video/VideoElementTypeFactory.php"
+  },
+  {
+   "type": "vimeo",
+   "rule": "none",
+   "allowed_children": "",
+   "nested_rule": "",
+   "takes_children": "",
+   "nested_under": "",
+   "declared_in": "Mosaic/NodeTypes/Vimeo/VimeoElementTypeFactory.php"
+  },
+  {
+   "type": "wp-menu",
+   "rule": "allow",
+   "allowed_children": "list-item",
+   "nested_rule": "yes",
+   "takes_children": "",
+   "nested_under": "list",
+   "declared_in": "Mosaic/NodeTypes/Menu/WPMenu/WPMenuElementTypeFactory.php"
+  },
+  {
+   "type": "wpContent",
+   "rule": "none",
+   "allowed_children": "",
+   "nested_rule": "",
+   "takes_children": "",
+   "nested_under": "",
+   "declared_in": "Mosaic/NodeTypes/WPContent/WPContentElementTypeFactory.php"
+  },
+  {
+   "type": "wpShortcode",
+   "rule": "none",
+   "allowed_children": "",
+   "nested_rule": "",
+   "takes_children": "",
+   "nested_under": "",
+   "declared_in": "Mosaic/NodeTypes/WPShortcode/WPShortcodeElementTypeFactory.php"
+  },
+  {
+   "type": "wysiwyg-linebreak",
+   "rule": "none",
+   "allowed_children": "",
+   "nested_rule": "",
+   "takes_children": "",
+   "nested_under": "",
+   "declared_in": "Mosaic/NodeTypes/Wysiwyg/WysiwygLineBreak/WysiwygLineBreakNodeTypeFactory.php"
+  },
+  {
+   "type": "wysiwyg-link",
+   "rule": "none",
+   "allowed_children": "",
+   "nested_rule": "",
+   "takes_children": "",
+   "nested_under": "",
+   "declared_in": "Mosaic/NodeTypes/Wysiwyg/WysiwygLink/WysiwygLinkElementTypeFactory.php"
+  },
+  {
+   "type": "wysiwyg-span",
+   "rule": "none",
+   "allowed_children": "",
+   "nested_rule": "",
+   "takes_children": "",
+   "nested_under": "",
+   "declared_in": "Mosaic/NodeTypes/Wysiwyg/WysiwygSpan/WysiwygSpanElementTypeFactory.php"
+  },
+  {
+   "type": "wysiwyg-text",
+   "rule": "none",
+   "allowed_children": "",
+   "nested_rule": "",
+   "takes_children": "",
+   "nested_under": "",
+   "declared_in": "Mosaic/NodeTypes/Wysiwyg/WysiwygText/WysiwygTextNodeTypeFactory.php"
+  },
+  {
+   "type": "wysiwyg-variable",
+   "rule": "none",
+   "allowed_children": "",
+   "nested_rule": "",
+   "takes_children": "",
+   "nested_under": "",
+   "declared_in": "Mosaic/NodeTypes/Wysiwyg/WysiwygVariable/WysiwygVariableNodeTypeFactory.php"
+  },
+  {
+   "type": "youtube",
+   "rule": "none",
+   "allowed_children": "",
+   "nested_rule": "",
+   "takes_children": "",
+   "nested_under": "",
+   "declared_in": "Mosaic/NodeTypes/YouTube/YouTubeElementTypeFactory.php"
+  }
+ ]
+}

@@ -1,0 +1,1060 @@
+{
+ "source_file": "data/db-columns.csv",
+ "columns": [
+  "table",
+  "column",
+  "type"
+ ],
+ "rows": [
+  {
+   "table": "wp_mosaic_breakpoints",
+   "column": "themeID",
+   "type": "varchar(36)"
+  },
+  {
+   "table": "wp_mosaic_breakpoints",
+   "column": "ID",
+   "type": "varchar(36)"
+  },
+  {
+   "table": "wp_mosaic_breakpoints",
+   "column": "ordering",
+   "type": "varchar(400)"
+  },
+  {
+   "table": "wp_mosaic_breakpoints",
+   "column": "status",
+   "type": "varchar(36)"
+  },
+  {
+   "table": "wp_mosaic_breakpoints",
+   "column": "data",
+   "type": "longtext"
+  },
+  {
+   "table": "wp_mosaic_breakpoints",
+   "column": "revision",
+   "type": "varchar(36)"
+  },
+  {
+   "table": "wp_mosaic_breakpoints",
+   "column": "version",
+   "type": "varchar(128)"
+  },
+  {
+   "table": "wp_mosaic_collection_groups",
+   "column": "themeID",
+   "type": "varchar(36)"
+  },
+  {
+   "table": "wp_mosaic_collection_groups",
+   "column": "ID",
+   "type": "varchar(36)"
+  },
+  {
+   "table": "wp_mosaic_collection_groups",
+   "column": "parentType",
+   "type": "varchar(36)"
+  },
+  {
+   "table": "wp_mosaic_collection_groups",
+   "column": "parentID",
+   "type": "varchar(36)"
+  },
+  {
+   "table": "wp_mosaic_collection_groups",
+   "column": "ordering",
+   "type": "varchar(400)"
+  },
+  {
+   "table": "wp_mosaic_collection_groups",
+   "column": "status",
+   "type": "varchar(36)"
+  },
+  {
+   "table": "wp_mosaic_collection_groups",
+   "column": "data",
+   "type": "longtext"
+  },
+  {
+   "table": "wp_mosaic_collection_groups",
+   "column": "revision",
+   "type": "varchar(36)"
+  },
+  {
+   "table": "wp_mosaic_collection_groups",
+   "column": "version",
+   "type": "varchar(128)"
+  },
+  {
+   "table": "wp_mosaic_collection_modes",
+   "column": "themeID",
+   "type": "varchar(36)"
+  },
+  {
+   "table": "wp_mosaic_collection_modes",
+   "column": "ID",
+   "type": "varchar(36)"
+  },
+  {
+   "table": "wp_mosaic_collection_modes",
+   "column": "parentType",
+   "type": "varchar(36)"
+  },
+  {
+   "table": "wp_mosaic_collection_modes",
+   "column": "parentID",
+   "type": "varchar(36)"
+  },
+  {
+   "table": "wp_mosaic_collection_modes",
+   "column": "ordering",
+   "type": "varchar(400)"
+  },
+  {
+   "table": "wp_mosaic_collection_modes",
+   "column": "status",
+   "type": "varchar(36)"
+  },
+  {
+   "table": "wp_mosaic_collection_modes",
+   "column": "data",
+   "type": "longtext"
+  },
+  {
+   "table": "wp_mosaic_collection_modes",
+   "column": "revision",
+   "type": "varchar(36)"
+  },
+  {
+   "table": "wp_mosaic_collection_modes",
+   "column": "version",
+   "type": "varchar(128)"
+  },
+  {
+   "table": "wp_mosaic_collection_skins",
+   "column": "themeID",
+   "type": "varchar(36)"
+  },
+  {
+   "table": "wp_mosaic_collection_skins",
+   "column": "ID",
+   "type": "varchar(36)"
+  },
+  {
+   "table": "wp_mosaic_collection_skins",
+   "column": "parentType",
+   "type": "varchar(36)"
+  },
+  {
+   "table": "wp_mosaic_collection_skins",
+   "column": "parentID",
+   "type": "varchar(36)"
+  },
+  {
+   "table": "wp_mosaic_collection_skins",
+   "column": "ordering",
+   "type": "varchar(400)"
+  },
+  {
+   "table": "wp_mosaic_collection_skins",
+   "column": "status",
+   "type": "varchar(36)"
+  },
+  {
+   "table": "wp_mosaic_collection_skins",
+   "column": "data",
+   "type": "longtext"
+  },
+  {
+   "table": "wp_mosaic_collection_skins",
+   "column": "revision",
+   "type": "varchar(36)"
+  },
+  {
+   "table": "wp_mosaic_collection_skins",
+   "column": "version",
+   "type": "varchar(128)"
+  },
+  {
+   "table": "wp_mosaic_collection_variables",
+   "column": "themeID",
+   "type": "varchar(36)"
+  },
+  {
+   "table": "wp_mosaic_collection_variables",
+   "column": "ID",
+   "type": "varchar(36)"
+  },
+  {
+   "table": "wp_mosaic_collection_variables",
+   "column": "parentType",
+   "type": "varchar(36)"
+  },
+  {
+   "table": "wp_mosaic_collection_variables",
+   "column": "parentID",
+   "type": "varchar(36)"
+  },
+  {
+   "table": "wp_mosaic_collection_variables",
+   "column": "ordering",
+   "type": "varchar(400)"
+  },
+  {
+   "table": "wp_mosaic_collection_variables",
+   "column": "status",
+   "type": "varchar(36)"
+  },
+  {
+   "table": "wp_mosaic_collection_variables",
+   "column": "data",
+   "type": "longtext"
+  },
+  {
+   "table": "wp_mosaic_collection_variables",
+   "column": "revision",
+   "type": "varchar(36)"
+  },
+  {
+   "table": "wp_mosaic_collection_variables",
+   "column": "version",
+   "type": "varchar(128)"
+  },
+  {
+   "table": "wp_mosaic_collection_variables",
+   "column": "emittedName",
+   "type": "varchar(191)"
+  },
+  {
+   "table": "wp_mosaic_collections",
+   "column": "themeID",
+   "type": "varchar(36)"
+  },
+  {
+   "table": "wp_mosaic_collections",
+   "column": "ID",
+   "type": "varchar(36)"
+  },
+  {
+   "table": "wp_mosaic_collections",
+   "column": "parentType",
+   "type": "varchar(36)"
+  },
+  {
+   "table": "wp_mosaic_collections",
+   "column": "parentID",
+   "type": "varchar(36)"
+  },
+  {
+   "table": "wp_mosaic_collections",
+   "column": "ordering",
+   "type": "varchar(400)"
+  },
+  {
+   "table": "wp_mosaic_collections",
+   "column": "status",
+   "type": "varchar(36)"
+  },
+  {
+   "table": "wp_mosaic_collections",
+   "column": "data",
+   "type": "longtext"
+  },
+  {
+   "table": "wp_mosaic_collections",
+   "column": "revision",
+   "type": "varchar(36)"
+  },
+  {
+   "table": "wp_mosaic_collections",
+   "column": "version",
+   "type": "varchar(128)"
+  },
+  {
+   "table": "wp_mosaic_component_categories",
+   "column": "themeID",
+   "type": "varchar(36)"
+  },
+  {
+   "table": "wp_mosaic_component_categories",
+   "column": "ID",
+   "type": "varchar(36)"
+  },
+  {
+   "table": "wp_mosaic_component_categories",
+   "column": "parentType",
+   "type": "varchar(36)"
+  },
+  {
+   "table": "wp_mosaic_component_categories",
+   "column": "parentID",
+   "type": "varchar(36)"
+  },
+  {
+   "table": "wp_mosaic_component_categories",
+   "column": "ordering",
+   "type": "varchar(400)"
+  },
+  {
+   "table": "wp_mosaic_component_categories",
+   "column": "status",
+   "type": "varchar(36)"
+  },
+  {
+   "table": "wp_mosaic_component_categories",
+   "column": "data",
+   "type": "longtext"
+  },
+  {
+   "table": "wp_mosaic_component_categories",
+   "column": "revision",
+   "type": "varchar(36)"
+  },
+  {
+   "table": "wp_mosaic_component_categories",
+   "column": "version",
+   "type": "varchar(128)"
+  },
+  {
+   "table": "wp_mosaic_component_documents",
+   "column": "themeID",
+   "type": "varchar(36)"
+  },
+  {
+   "table": "wp_mosaic_component_documents",
+   "column": "ID",
+   "type": "varchar(36)"
+  },
+  {
+   "table": "wp_mosaic_component_documents",
+   "column": "parentType",
+   "type": "varchar(36)"
+  },
+  {
+   "table": "wp_mosaic_component_documents",
+   "column": "parentID",
+   "type": "varchar(36)"
+  },
+  {
+   "table": "wp_mosaic_component_documents",
+   "column": "ordering",
+   "type": "varchar(400)"
+  },
+  {
+   "table": "wp_mosaic_component_documents",
+   "column": "status",
+   "type": "varchar(36)"
+  },
+  {
+   "table": "wp_mosaic_component_documents",
+   "column": "revision",
+   "type": "varchar(36)"
+  },
+  {
+   "table": "wp_mosaic_component_documents",
+   "column": "version",
+   "type": "varchar(128)"
+  },
+  {
+   "table": "wp_mosaic_components",
+   "column": "themeID",
+   "type": "varchar(36)"
+  },
+  {
+   "table": "wp_mosaic_components",
+   "column": "ID",
+   "type": "varchar(36)"
+  },
+  {
+   "table": "wp_mosaic_components",
+   "column": "parentType",
+   "type": "varchar(36)"
+  },
+  {
+   "table": "wp_mosaic_components",
+   "column": "parentID",
+   "type": "varchar(36)"
+  },
+  {
+   "table": "wp_mosaic_components",
+   "column": "ordering",
+   "type": "varchar(400)"
+  },
+  {
+   "table": "wp_mosaic_components",
+   "column": "status",
+   "type": "varchar(36)"
+  },
+  {
+   "table": "wp_mosaic_components",
+   "column": "revision",
+   "type": "varchar(36)"
+  },
+  {
+   "table": "wp_mosaic_components",
+   "column": "version",
+   "type": "varchar(128)"
+  },
+  {
+   "table": "wp_mosaic_components",
+   "column": "name",
+   "type": "varchar(191)"
+  },
+  {
+   "table": "wp_mosaic_components",
+   "column": "path",
+   "type": "varchar(191)"
+  },
+  {
+   "table": "wp_mosaic_locks",
+   "column": "ID",
+   "type": "char(64)"
+  },
+  {
+   "table": "wp_mosaic_locks",
+   "column": "group",
+   "type": "varchar(191)"
+  },
+  {
+   "table": "wp_mosaic_locks",
+   "column": "data",
+   "type": "longtext"
+  },
+  {
+   "table": "wp_mosaic_locks",
+   "column": "expiration",
+   "type": "int(11)"
+  },
+  {
+   "table": "wp_mosaic_masters",
+   "column": "themeID",
+   "type": "varchar(36)"
+  },
+  {
+   "table": "wp_mosaic_masters",
+   "column": "ID",
+   "type": "varchar(36)"
+  },
+  {
+   "table": "wp_mosaic_masters",
+   "column": "ordering",
+   "type": "varchar(400)"
+  },
+  {
+   "table": "wp_mosaic_masters",
+   "column": "status",
+   "type": "varchar(36)"
+  },
+  {
+   "table": "wp_mosaic_masters",
+   "column": "revision",
+   "type": "varchar(36)"
+  },
+  {
+   "table": "wp_mosaic_masters",
+   "column": "version",
+   "type": "varchar(128)"
+  },
+  {
+   "table": "wp_mosaic_masters",
+   "column": "name",
+   "type": "varchar(191)"
+  },
+  {
+   "table": "wp_mosaic_masters",
+   "column": "modified_gmt",
+   "type": "datetime"
+  },
+  {
+   "table": "wp_mosaic_nodes",
+   "column": "themeID",
+   "type": "varchar(36)"
+  },
+  {
+   "table": "wp_mosaic_nodes",
+   "column": "documentType",
+   "type": "varchar(36)"
+  },
+  {
+   "table": "wp_mosaic_nodes",
+   "column": "documentID",
+   "type": "varchar(36)"
+  },
+  {
+   "table": "wp_mosaic_nodes",
+   "column": "ID",
+   "type": "varchar(36)"
+  },
+  {
+   "table": "wp_mosaic_nodes",
+   "column": "parentType",
+   "type": "varchar(36)"
+  },
+  {
+   "table": "wp_mosaic_nodes",
+   "column": "parentID",
+   "type": "varchar(36)"
+  },
+  {
+   "table": "wp_mosaic_nodes",
+   "column": "ordering",
+   "type": "varchar(400)"
+  },
+  {
+   "table": "wp_mosaic_nodes",
+   "column": "status",
+   "type": "varchar(36)"
+  },
+  {
+   "table": "wp_mosaic_nodes",
+   "column": "type",
+   "type": "varchar(128)"
+  },
+  {
+   "table": "wp_mosaic_nodes",
+   "column": "data",
+   "type": "longtext"
+  },
+  {
+   "table": "wp_mosaic_nodes",
+   "column": "revision",
+   "type": "varchar(36)"
+  },
+  {
+   "table": "wp_mosaic_nodes",
+   "column": "version",
+   "type": "varchar(128)"
+  },
+  {
+   "table": "wp_mosaic_settings",
+   "column": "ID",
+   "type": "varchar(36)"
+  },
+  {
+   "table": "wp_mosaic_settings",
+   "column": "status",
+   "type": "varchar(36)"
+  },
+  {
+   "table": "wp_mosaic_settings",
+   "column": "revision",
+   "type": "varchar(36)"
+  },
+  {
+   "table": "wp_mosaic_settings",
+   "column": "version",
+   "type": "varchar(128)"
+  },
+  {
+   "table": "wp_mosaic_settings",
+   "column": "data",
+   "type": "longtext"
+  },
+  {
+   "table": "wp_mosaic_settings",
+   "column": "modified_gmt",
+   "type": "datetime"
+  },
+  {
+   "table": "wp_mosaic_styleguides",
+   "column": "themeID",
+   "type": "varchar(36)"
+  },
+  {
+   "table": "wp_mosaic_styleguides",
+   "column": "ID",
+   "type": "varchar(36)"
+  },
+  {
+   "table": "wp_mosaic_styleguides",
+   "column": "ordering",
+   "type": "varchar(400)"
+  },
+  {
+   "table": "wp_mosaic_styleguides",
+   "column": "status",
+   "type": "varchar(36)"
+  },
+  {
+   "table": "wp_mosaic_styleguides",
+   "column": "revision",
+   "type": "varchar(36)"
+  },
+  {
+   "table": "wp_mosaic_styleguides",
+   "column": "version",
+   "type": "varchar(128)"
+  },
+  {
+   "table": "wp_mosaic_styleguides",
+   "column": "name",
+   "type": "varchar(191)"
+  },
+  {
+   "table": "wp_mosaic_styleguides",
+   "column": "modified_gmt",
+   "type": "datetime"
+  },
+  {
+   "table": "wp_mosaic_submission_actions",
+   "column": "ID",
+   "type": "bigint(20) unsigned"
+  },
+  {
+   "table": "wp_mosaic_submission_actions",
+   "column": "submissionID",
+   "type": "bigint(20) unsigned"
+  },
+  {
+   "table": "wp_mosaic_submission_actions",
+   "column": "actionKey",
+   "type": "varchar(36)"
+  },
+  {
+   "table": "wp_mosaic_submission_actions",
+   "column": "type",
+   "type": "varchar(128)"
+  },
+  {
+   "table": "wp_mosaic_submission_actions",
+   "column": "configJSON",
+   "type": "longtext"
+  },
+  {
+   "table": "wp_mosaic_submission_actions",
+   "column": "submissionActionStatus",
+   "type": "varchar(36)"
+  },
+  {
+   "table": "wp_mosaic_submission_actions",
+   "column": "attempts",
+   "type": "int(10) unsigned"
+  },
+  {
+   "table": "wp_mosaic_submission_actions",
+   "column": "lastError",
+   "type": "longtext"
+  },
+  {
+   "table": "wp_mosaic_submission_actions",
+   "column": "lastAttemptAt",
+   "type": "datetime"
+  },
+  {
+   "table": "wp_mosaic_submission_actions",
+   "column": "createdAt",
+   "type": "datetime"
+  },
+  {
+   "table": "wp_mosaic_submission_actions",
+   "column": "updatedAt",
+   "type": "datetime"
+  },
+  {
+   "table": "wp_mosaic_submissions",
+   "column": "ID",
+   "type": "bigint(20) unsigned"
+  },
+  {
+   "table": "wp_mosaic_submissions",
+   "column": "userID",
+   "type": "bigint(20) unsigned"
+  },
+  {
+   "table": "wp_mosaic_submissions",
+   "column": "themeID",
+   "type": "varchar(36)"
+  },
+  {
+   "table": "wp_mosaic_submissions",
+   "column": "masterID",
+   "type": "varchar(36)"
+  },
+  {
+   "table": "wp_mosaic_submissions",
+   "column": "templateID",
+   "type": "varchar(36)"
+  },
+  {
+   "table": "wp_mosaic_submissions",
+   "column": "formID",
+   "type": "varchar(36)"
+  },
+  {
+   "table": "wp_mosaic_submissions",
+   "column": "formName",
+   "type": "varchar(191)"
+  },
+  {
+   "table": "wp_mosaic_submissions",
+   "column": "entryLabel",
+   "type": "varchar(191)"
+  },
+  {
+   "table": "wp_mosaic_submissions",
+   "column": "instanceID",
+   "type": "varchar(191)"
+  },
+  {
+   "table": "wp_mosaic_submissions",
+   "column": "submissionStatus",
+   "type": "varchar(36)"
+  },
+  {
+   "table": "wp_mosaic_submissions",
+   "column": "lastError",
+   "type": "longtext"
+  },
+  {
+   "table": "wp_mosaic_submissions",
+   "column": "pageURL",
+   "type": "varchar(191)"
+  },
+  {
+   "table": "wp_mosaic_submissions",
+   "column": "pageTitle",
+   "type": "varchar(191)"
+  },
+  {
+   "table": "wp_mosaic_submissions",
+   "column": "clientIP",
+   "type": "varbinary(16)"
+  },
+  {
+   "table": "wp_mosaic_submissions",
+   "column": "userAgent",
+   "type": "varchar(191)"
+  },
+  {
+   "table": "wp_mosaic_submissions",
+   "column": "schemaJSON",
+   "type": "longtext"
+  },
+  {
+   "table": "wp_mosaic_submissions",
+   "column": "rawValuesJSON",
+   "type": "longtext"
+  },
+  {
+   "table": "wp_mosaic_submissions",
+   "column": "valuesJSON",
+   "type": "longtext"
+  },
+  {
+   "table": "wp_mosaic_submissions",
+   "column": "spamProtectionJSON",
+   "type": "longtext"
+  },
+  {
+   "table": "wp_mosaic_submissions",
+   "column": "createdAt",
+   "type": "datetime"
+  },
+  {
+   "table": "wp_mosaic_submissions",
+   "column": "updatedAt",
+   "type": "datetime"
+  },
+  {
+   "table": "wp_mosaic_template_assigns",
+   "column": "ID",
+   "type": "varchar(36)"
+  },
+  {
+   "table": "wp_mosaic_template_assigns",
+   "column": "themeID",
+   "type": "varchar(36)"
+  },
+  {
+   "table": "wp_mosaic_template_assigns",
+   "column": "parentType",
+   "type": "varchar(36)"
+  },
+  {
+   "table": "wp_mosaic_template_assigns",
+   "column": "parentID",
+   "type": "varchar(36)"
+  },
+  {
+   "table": "wp_mosaic_template_assigns",
+   "column": "type",
+   "type": "varchar(36)"
+  },
+  {
+   "table": "wp_mosaic_template_assigns",
+   "column": "typeIdentifier",
+   "type": "varchar(100)"
+  },
+  {
+   "table": "wp_mosaic_templates",
+   "column": "modified_gmt",
+   "type": "datetime"
+  },
+  {
+   "table": "wp_mosaic_templates",
+   "column": "themeID",
+   "type": "varchar(36)"
+  },
+  {
+   "table": "wp_mosaic_templates",
+   "column": "masterID",
+   "type": "varchar(36)"
+  },
+  {
+   "table": "wp_mosaic_templates",
+   "column": "ID",
+   "type": "varchar(36)"
+  },
+  {
+   "table": "wp_mosaic_templates",
+   "column": "name",
+   "type": "varchar(191)"
+  },
+  {
+   "table": "wp_mosaic_templates",
+   "column": "assign",
+   "type": "varchar(50)"
+  },
+  {
+   "table": "wp_mosaic_templates",
+   "column": "path",
+   "type": "varchar(191)"
+  },
+  {
+   "table": "wp_mosaic_templates",
+   "column": "conditions",
+   "type": "longtext"
+  },
+  {
+   "table": "wp_mosaic_templates",
+   "column": "ordering",
+   "type": "varchar(400)"
+  },
+  {
+   "table": "wp_mosaic_templates",
+   "column": "status",
+   "type": "varchar(36)"
+  },
+  {
+   "table": "wp_mosaic_templates",
+   "column": "revision",
+   "type": "varchar(36)"
+  },
+  {
+   "table": "wp_mosaic_templates",
+   "column": "version",
+   "type": "varchar(128)"
+  },
+  {
+   "table": "wp_mosaic_themes",
+   "column": "ID",
+   "type": "varchar(36)"
+  },
+  {
+   "table": "wp_mosaic_themes",
+   "column": "ordering",
+   "type": "varchar(400)"
+  },
+  {
+   "table": "wp_mosaic_themes",
+   "column": "status",
+   "type": "varchar(36)"
+  },
+  {
+   "table": "wp_mosaic_themes",
+   "column": "revision",
+   "type": "varchar(36)"
+  },
+  {
+   "table": "wp_mosaic_themes",
+   "column": "version",
+   "type": "varchar(128)"
+  },
+  {
+   "table": "wp_mosaic_themes",
+   "column": "name",
+   "type": "varchar(191)"
+  },
+  {
+   "table": "wp_mosaic_themes",
+   "column": "data",
+   "type": "longtext"
+  },
+  {
+   "table": "wp_mosaic_themes",
+   "column": "modified_gmt",
+   "type": "datetime"
+  },
+  {
+   "table": "wp_mosaic_universal_classes",
+   "column": "themeID",
+   "type": "varchar(36)"
+  },
+  {
+   "table": "wp_mosaic_universal_classes",
+   "column": "ID",
+   "type": "varchar(36)"
+  },
+  {
+   "table": "wp_mosaic_universal_classes",
+   "column": "ordering",
+   "type": "varchar(400)"
+  },
+  {
+   "table": "wp_mosaic_universal_classes",
+   "column": "status",
+   "type": "varchar(36)"
+  },
+  {
+   "table": "wp_mosaic_universal_classes",
+   "column": "data",
+   "type": "longtext"
+  },
+  {
+   "table": "wp_mosaic_universal_classes",
+   "column": "revision",
+   "type": "varchar(36)"
+  },
+  {
+   "table": "wp_mosaic_universal_classes",
+   "column": "version",
+   "type": "varchar(128)"
+  },
+  {
+   "table": "wp_mosaic_universal_classes",
+   "column": "emittedName",
+   "type": "varchar(191)"
+  },
+  {
+   "table": "wp_mosaic_universal_sub_classes",
+   "column": "themeID",
+   "type": "varchar(36)"
+  },
+  {
+   "table": "wp_mosaic_universal_sub_classes",
+   "column": "ID",
+   "type": "varchar(36)"
+  },
+  {
+   "table": "wp_mosaic_universal_sub_classes",
+   "column": "parentType",
+   "type": "varchar(36)"
+  },
+  {
+   "table": "wp_mosaic_universal_sub_classes",
+   "column": "parentID",
+   "type": "varchar(36)"
+  },
+  {
+   "table": "wp_mosaic_universal_sub_classes",
+   "column": "ordering",
+   "type": "varchar(400)"
+  },
+  {
+   "table": "wp_mosaic_universal_sub_classes",
+   "column": "status",
+   "type": "varchar(36)"
+  },
+  {
+   "table": "wp_mosaic_universal_sub_classes",
+   "column": "data",
+   "type": "longtext"
+  },
+  {
+   "table": "wp_mosaic_universal_sub_classes",
+   "column": "revision",
+   "type": "varchar(36)"
+  },
+  {
+   "table": "wp_mosaic_universal_sub_classes",
+   "column": "version",
+   "type": "varchar(128)"
+  },
+  {
+   "table": "wp_mosaic_universal_sub_classes",
+   "column": "emittedName",
+   "type": "varchar(191)"
+  },
+  {
+   "table": "wp_mosaic_variant_sub_classes",
+   "column": "themeID",
+   "type": "varchar(36)"
+  },
+  {
+   "table": "wp_mosaic_variant_sub_classes",
+   "column": "ID",
+   "type": "varchar(36)"
+  },
+  {
+   "table": "wp_mosaic_variant_sub_classes",
+   "column": "parentType",
+   "type": "varchar(36)"
+  },
+  {
+   "table": "wp_mosaic_variant_sub_classes",
+   "column": "parentID",
+   "type": "varchar(36)"
+  },
+  {
+   "table": "wp_mosaic_variant_sub_classes",
+   "column": "ordering",
+   "type": "varchar(400)"
+  },
+  {
+   "table": "wp_mosaic_variant_sub_classes",
+   "column": "status",
+   "type": "varchar(36)"
+  },
+  {
+   "table": "wp_mosaic_variant_sub_classes",
+   "column": "data",
+   "type": "longtext"
+  },
+  {
+   "table": "wp_mosaic_variant_sub_classes",
+   "column": "revision",
+   "type": "varchar(36)"
+  },
+  {
+   "table": "wp_mosaic_variant_sub_classes",
+   "column": "version",
+   "type": "varchar(128)"
+  },
+  {
+   "table": "wp_mosaic_variant_sub_classes",
+   "column": "emittedName",
+   "type": "varchar(191)"
+  },
+  {
+   "table": "wp_mosaic_variants",
+   "column": "themeID",
+   "type": "varchar(36)"
+  },
+  {
+   "table": "wp_mosaic_variants",
+   "column": "ID",
+   "type": "varchar(36)"
+  },
+  {
+   "table": "wp_mosaic_variants",
+   "column": "status",
+   "type": "varchar(36)"
+  },
+  {
+   "table": "wp_mosaic_variants",
+   "column": "data",
+   "type": "longtext"
+  },
+  {
+   "table": "wp_mosaic_variants",
+   "column": "revision",
+   "type": "varchar(36)"
+  },
+  {
+   "table": "wp_mosaic_variants",
+   "column": "version",
+   "type": "varchar(128)"
+  }
+ ]
+}

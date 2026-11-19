@@ -1,0 +1,205 @@
+{
+ "source_file": "data/navigation-verification.csv",
+ "columns": [
+  "check",
+  "result",
+  "detail"
+ ],
+ "rows": [
+  {
+   "check": "FRONT_PAGE",
+   "result": "PASS",
+   "detail": "HTTP 200, 241886 bytes"
+  },
+  {
+   "check": "MENU_IS_LINKS",
+   "result": "PASS",
+   "detail": "1 real <a href> in #mk-nav"
+  },
+  {
+   "check": "NAV 首頁",
+   "result": "PASS",
+   "detail": "/ -> HTTP 200, 241885 bytes"
+  },
+  {
+   "check": "PAGE moksa",
+   "result": "PASS",
+   "detail": "HTTP 200, 241885 bytes"
+  },
+  {
+   "check": "PAGE my-account",
+   "result": "PASS",
+   "detail": "HTTP 200, 102024 bytes"
+  },
+  {
+   "check": "PAGE intro",
+   "result": "PASS",
+   "detail": "HTTP 200, 135353 bytes"
+  },
+  {
+   "check": "PAGE content",
+   "result": "PASS",
+   "detail": "HTTP 200, 103366 bytes"
+  },
+  {
+   "check": "PAGE forms",
+   "result": "PASS",
+   "detail": "HTTP 200, 127717 bytes"
+  },
+  {
+   "check": "PAGE components",
+   "result": "PASS",
+   "detail": "HTTP 200, 136111 bytes"
+  },
+  {
+   "check": "PAGE conversion",
+   "result": "PASS",
+   "detail": "HTTP 200, 104190 bytes"
+  },
+  {
+   "check": "PAGE dynamic",
+   "result": "PASS",
+   "detail": "HTTP 200, 113610 bytes"
+  },
+  {
+   "check": "PAGE tokens",
+   "result": "PASS",
+   "detail": "HTTP 200, 126780 bytes"
+  },
+  {
+   "check": "PAGE sliders",
+   "result": "PASS",
+   "detail": "HTTP 200, 152797 bytes"
+  },
+  {
+   "check": "PAGE popovers",
+   "result": "PASS",
+   "detail": "HTTP 200, 191166 bytes"
+  },
+  {
+   "check": "PAGE dialogs",
+   "result": "PASS",
+   "detail": "HTTP 200, 208778 bytes"
+  },
+  {
+   "check": "ANCHORS moksa",
+   "result": "PASS",
+   "detail": "every in-page link resolves"
+  },
+  {
+   "check": "ANCHORS my-account",
+   "result": "PASS",
+   "detail": "every in-page link resolves"
+  },
+  {
+   "check": "ANCHORS intro",
+   "result": "PASS",
+   "detail": "every in-page link resolves"
+  },
+  {
+   "check": "ANCHORS content",
+   "result": "PASS",
+   "detail": "every in-page link resolves"
+  },
+  {
+   "check": "ANCHORS forms",
+   "result": "PASS",
+   "detail": "every in-page link resolves"
+  },
+  {
+   "check": "ANCHORS components",
+   "result": "PASS",
+   "detail": "every in-page link resolves"
+  },
+  {
+   "check": "ANCHORS conversion",
+   "result": "PASS",
+   "detail": "every in-page link resolves"
+  },
+  {
+   "check": "ANCHORS dynamic",
+   "result": "PASS",
+   "detail": "every in-page link resolves"
+  },
+  {
+   "check": "ANCHORS tokens",
+   "result": "PASS",
+   "detail": "every in-page link resolves"
+  },
+  {
+   "check": "ANCHORS sliders",
+   "result": "PASS",
+   "detail": "every in-page link resolves"
+  },
+  {
+   "check": "ANCHORS popovers",
+   "result": "PASS",
+   "detail": "every in-page link resolves"
+  },
+  {
+   "check": "ANCHORS dialogs",
+   "result": "PASS",
+   "detail": "every in-page link resolves"
+  },
+  {
+   "check": "WIDTH moksa",
+   "result": "PASS",
+   "detail": "no sideways scroll at 390,768,1280"
+  },
+  {
+   "check": "WIDTH my-account",
+   "result": "PASS",
+   "detail": "no sideways scroll at 390,768,1280"
+  },
+  {
+   "check": "WIDTH intro",
+   "result": "PASS",
+   "detail": "no sideways scroll at 390,768,1280"
+  },
+  {
+   "check": "WIDTH content",
+   "result": "PASS",
+   "detail": "no sideways scroll at 390,768,1280"
+  },
+  {
+   "check": "WIDTH forms",
+   "result": "PASS",
+   "detail": "no sideways scroll at 390,768,1280"
+  },
+  {
+   "check": "WIDTH components",
+   "result": "PASS",
+   "detail": "no sideways scroll at 390,768,1280"
+  },
+  {
+   "check": "WIDTH conversion",
+   "result": "PASS",
+   "detail": "no sideways scroll at 390,768,1280"
+  },
+  {
+   "check": "WIDTH dynamic",
+   "result": "PASS",
+   "detail": "no sideways scroll at 390,768,1280"
+  },
+  {
+   "check": "WIDTH tokens",
+   "result": "PASS",
+   "detail": "no sideways scroll at 390,768,1280"
+  },
+  {
+   "check": "WIDTH sliders",
+   "result": "PASS",
+   "detail": "no sideways scroll at 390,768,1280"
+  },
+  {
+   "check": "WIDTH popovers",
+   "result": "PASS",
+   "detail": "no sideways scroll at 390,768,1280"
+  },
+  {
+   "check": "WIDTH dialogs",
+   "result": "PASS",
+   "detail": "no sideways scroll at 390,768,1280"
+  }
+ ]
+}

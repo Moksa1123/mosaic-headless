@@ -1,0 +1,255 @@
+{
+ "source_file": "data/dialog-form-verification.csv",
+ "columns": [
+  "check",
+  "result",
+  "detail"
+ ],
+ "rows": [
+  {
+   "check": "HOST/centre",
+   "result": "PASS",
+   "detail": "['dialog', 'everything']"
+  },
+  {
+   "check": "HOST/sheet",
+   "result": "PASS",
+   "detail": "['dialog', 'clickOutside']"
+  },
+  {
+   "check": "HOST/drawer",
+   "result": "PASS",
+   "detail": "['dialog', 'esc']"
+  },
+  {
+   "check": "HOST/toast",
+   "result": "PASS",
+   "detail": "['dialog', 'everything']"
+  },
+  {
+   "check": "HOST/takeover",
+   "result": "PASS",
+   "detail": "['dialog', 'everything']"
+  },
+  {
+   "check": "HOST/gate",
+   "result": "PASS",
+   "detail": "['dialog', 'nothing']"
+  },
+  {
+   "check": "HOST/exit",
+   "result": "PASS",
+   "detail": "['dialog', 'everything']"
+  },
+  {
+   "check": "HOST/depth",
+   "result": "PASS",
+   "detail": "['dialog', 'clickOutside']"
+  },
+  {
+   "check": "HOST/aba",
+   "result": "PASS",
+   "detail": "['dialog', 'everything']"
+  },
+  {
+   "check": "HOST/abb",
+   "result": "PASS",
+   "detail": "['dialog', 'everything']"
+  },
+  {
+   "check": "TOAST/pageLoad",
+   "result": "PASS",
+   "detail": "opened on load"
+  },
+  {
+   "check": "TOAST/overlay-synthesised",
+   "result": "PASS",
+   "detail": "authored none; heal inserted one"
+  },
+  {
+   "check": "TOAST/aria-modal-unavoidable",
+   "result": "PASS",
+   "detail": "aria-modal='true' despite no authored overlay"
+  },
+  {
+   "check": "TOAST/top-right",
+   "result": "PASS",
+   "detail": "x=911 y=114 w=330 vw=1280"
+  },
+  {
+   "check": "TOAST/wheel-blocked",
+   "result": "PASS",
+   "detail": "a corner toast is a LAYOUT, not a non-blocking modal"
+  },
+  {
+   "check": "CLOSED_IS_HIDDEN",
+   "result": "PASS",
+   "detail": "every closed modal is display:none"
+  },
+  {
+   "check": "CENTRE/centred",
+   "result": "PASS",
+   "detail": "x=385 w=520 vw=1280"
+  },
+  {
+   "check": "CENTRE/aria-modal",
+   "result": "PASS",
+   "detail": "aria-modal='true' (overlay=True)"
+  },
+  {
+   "check": "CENTRE/esc-closes",
+   "result": "PASS",
+   "detail": "closedby=everything"
+  },
+  {
+   "check": "SHEET/at-bottom",
+   "result": "PASS",
+   "detail": "y+h=900 vh=900"
+  },
+  {
+   "check": "SHEET/wide",
+   "result": "PASS",
+   "detail": "w=720"
+  },
+  {
+   "check": "SHEET/esc-does-nothing",
+   "result": "PASS",
+   "detail": "closedby=clickOutside, so Esc must not close it"
+  },
+  {
+   "check": "DRAWER/right-edge",
+   "result": "PASS",
+   "detail": "x+w=1265  layer right=1265"
+  },
+  {
+   "check": "DRAWER/full-height",
+   "result": "PASS",
+   "detail": "h=900 vh=900"
+  },
+  {
+   "check": "DRAWER/esc-closes",
+   "result": "PASS",
+   "detail": "closedby=esc"
+  },
+  {
+   "check": "TAKEOVER/fills-viewport",
+   "result": "PASS",
+   "detail": "1265x900 vs layer 1265x900"
+  },
+  {
+   "check": "GATE/esc-refused",
+   "result": "PASS",
+   "detail": "closedby=nothing"
+  },
+  {
+   "check": "GATE/outside-refused",
+   "result": "PASS",
+   "detail": "clicking the overlay must not close it"
+  },
+  {
+   "check": "GATE/button-closes",
+   "result": "PASS",
+   "detail": "the modalClose inside is the only exit"
+  },
+  {
+   "check": "DEPTH/shut-at-rest",
+   "result": "PASS",
+   "detail": ""
+  },
+  {
+   "check": "DEPTH/opens-past-75",
+   "result": "PASS",
+   "detail": "scrollDepth threshold 75%"
+  },
+  {
+   "check": "EXIT/opens",
+   "result": "PASS",
+   "detail": "exitIntent is desktop-only and synthetic leave is approximate"
+  },
+  {
+   "check": "LATCH/record-abb",
+   "result": "PASS",
+   "detail": "{\"counter\":1,\"firstAt\":1791303948906,\"lastAt\":1791303948906,\"lastID\":\"403cc438-0"
+  },
+  {
+   "check": "LATCH/B-first-wins",
+   "result": "PASS",
+   "detail": "6/6 as predicted, 0 lost clicks  {'abb>abb,aba>none': 6}"
+  },
+  {
+   "check": "LATCH/record-aba",
+   "result": "PASS",
+   "detail": "{\"counter\":1,\"firstAt\":1791303994070,\"lastAt\":1791303994070,\"lastID\":\"7ddba850-2"
+  },
+  {
+   "check": "LATCH/A-first-wins",
+   "result": "PASS",
+   "detail": "6/6 as predicted, 0 lost clicks  {'aba>aba,abb>none': 6}"
+  },
+  {
+   "check": "LATCH/order-decides",
+   "result": "PASS",
+   "detail": "the winner flips with click order, so it is the first EVALUATED, not the first authored"
+  },
+  {
+   "check": "FIT390/centre",
+   "result": "PASS",
+   "detail": "scrollW=349/349 childOverflow=0 pageScrollsSideways=False"
+  },
+  {
+   "check": "FIT390/sheet",
+   "result": "PASS",
+   "detail": "scrollW=373/373 childOverflow=0 pageScrollsSideways=False"
+  },
+  {
+   "check": "FIT390/drawer",
+   "result": "PASS",
+   "detail": "scrollW=350/350 childOverflow=0 pageScrollsSideways=False"
+  },
+  {
+   "check": "FIT390/takeover",
+   "result": "PASS",
+   "detail": "scrollW=375/375 childOverflow=0 pageScrollsSideways=False"
+  },
+  {
+   "check": "FIT390/gate",
+   "result": "PASS",
+   "detail": "scrollW=349/349 childOverflow=0 pageScrollsSideways=False"
+  },
+  {
+   "check": "FIT390/aba",
+   "result": "PASS",
+   "detail": "scrollW=349/349 childOverflow=0 pageScrollsSideways=False"
+  },
+  {
+   "check": "FIT768/centre",
+   "result": "PASS",
+   "detail": "scrollW=518/518 childOverflow=0 pageScrollsSideways=False"
+  },
+  {
+   "check": "FIT768/sheet",
+   "result": "PASS",
+   "detail": "scrollW=718/718 childOverflow=0 pageScrollsSideways=False"
+  },
+  {
+   "check": "FIT768/drawer",
+   "result": "PASS",
+   "detail": "scrollW=399/399 childOverflow=0 pageScrollsSideways=False"
+  },
+  {
+   "check": "FIT768/takeover",
+   "result": "PASS",
+   "detail": "scrollW=753/753 childOverflow=0 pageScrollsSideways=False"
+  },
+  {
+   "check": "FIT768/gate",
+   "result": "PASS",
+   "detail": "scrollW=458/458 childOverflow=0 pageScrollsSideways=False"
+  },
+  {
+   "check": "FIT768/aba",
+   "result": "PASS",
+   "detail": "scrollW=438/438 childOverflow=0 pageScrollsSideways=False"
+  }
+ ]
+}

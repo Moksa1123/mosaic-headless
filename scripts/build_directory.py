@@ -248,6 +248,19 @@ def existing() -> dict[str, bytes]:
     return {p.relative_to(OUT).as_posix(): p.read_bytes() for p in OUT.rglob("*") if p.is_file()}
 
 
+def untracked(want: dict[str, bytes]) -> list[str]:
+    """Generated files git does not track. The directory reads GitHub, not this disk: a
+    file a .gitignore rule swallows is missing there (`mosaic-*/` once hid all of skills/)."""
+    import subprocess
+    try:
+        out = subprocess.run(["git", "ls-files", "-z", "--", "directory-plugin"], cwd=ROOT,
+                             capture_output=True, text=True, check=True).stdout
+    except (OSError, subprocess.CalledProcessError):
+        return ["git ls-files failed: cannot tell whether directory-plugin/ is committed"]
+    tracked = {p[len("directory-plugin/"):] for p in out.split("\0") if p}
+    return [f"not tracked by git (ignored or never added): {k}" for k in sorted(set(want) - tracked)]
+
+
 def differences(want: dict[str, bytes], have: dict[str, bytes]) -> list[str]:
     # a Windows checkout may turn LF into CRLF; that is not drift
     def same(k):
@@ -269,6 +282,7 @@ def main() -> int:
     want = build()
     diff = differences(want, existing())
     if args.check:
+        diff += untracked(want)
         if diff:
             print("directory-plugin/ is out of step with its sources (run scripts/build_directory.py):")
             for d in diff:

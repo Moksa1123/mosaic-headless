@@ -1,0 +1,6611 @@
+{
+ "source_file": "data/rwd-verification.csv",
+ "columns": [
+  "url",
+  "attrID",
+  "breakpoint",
+  "property",
+  "declared",
+  "compiled",
+  "status"
+ ],
+ "rows": [
+  {
+   "url": "https://example.com/moksa/",
+   "attrID": "mk-mast",
+   "breakpoint": "_t",
+   "property": "padding-left",
+   "declared": "28px",
+   "compiled": "28px",
+   "status": "verified"
+  },
+  {
+   "url": "https://example.com/moksa/",
+   "attrID": "mk-mast",
+   "breakpoint": "_t",
+   "property": "padding-right",
+   "declared": "28px",
+   "compiled": "28px",
+   "status": "verified"
+  },
+  {
+   "url": "https://example.com/moksa/",
+   "attrID": "mk-mast",
+   "breakpoint": "_m",
+   "property": "padding-left",
+   "declared": "18px",
+   "compiled": "18px",
+   "status": "verified"
+  },
+  {
+   "url": "https://example.com/moksa/",
+   "attrID": "mk-mast",
+   "breakpoint": "_m",
+   "property": "padding-right",
+   "declared": "18px",
+   "compiled": "18px",
+   "status": "verified"
+  },
+  {
+   "url": "https://example.com/moksa/",
+   "attrID": "mk-mast-lines",
+   "breakpoint": "_m",
+   "property": "margin-top",
+   "declared": "30px",
+   "compiled": "30px",
+   "status": "verified"
+  },
+  {
+   "url": "https://example.com/moksa/",
+   "attrID": "mk-mast-body",
+   "breakpoint": "_t",
+   "property": "grid-template-columns",
+   "declared": "1.2fr .8fr",
+   "compiled": "1.2fr .8fr",
+   "status": "verified"
+  },
+  {
+   "url": "https://example.com/moksa/",
+   "attrID": "mk-mast-body",
+   "breakpoint": "_t",
+   "property": "column-gap",
+   "declared": "36px",
+   "compiled": "36px",
+   "status": "verified"
+  },
+  {
+   "url": "https://example.com/moksa/",
+   "attrID": "mk-mast-body",
+   "breakpoint": "_m",
+   "property": "grid-template-columns",
+   "declared": "repeat(1, 1fr)",
+   "compiled": "repeat(1, 1fr)",
+   "status": "verified"
+  },
+  {
+   "url": "https://example.com/moksa/",
+   "attrID": "mk-mast-body",
+   "breakpoint": "_m",
+   "property": "column-gap",
+   "declared": "0px",
+   "compiled": "0px",
+   "status": "verified"
+  },
+  {
+   "url": "https://example.com/moksa/",
+   "attrID": "mk-mast-body",
+   "breakpoint": "_m",
+   "property": "row-gap",
+   "declared": "26px",
+   "compiled": "26px",
+   "status": "verified"
+  },
+  {
+   "url": "https://example.com/moksa/",
+   "attrID": "mk-mast-body",
+   "breakpoint": "_m",
+   "property": "margin-top",
+   "declared": "20px",
+   "compiled": "20px",
+   "status": "verified"
+  },
+  {
+   "url": "https://example.com/moksa/",
+   "attrID": "mk-mast-lede",
+   "breakpoint": "_m",
+   "property": "font-size",
+   "declared": "14px",
+   "compiled": "14px",
+   "status": "verified"
+  },
+  {
+   "url": "https://example.com/moksa/",
+   "attrID": "mk-mast-lede",
+   "breakpoint": "_m",
+   "property": "line-height",
+   "declared": "1.95",
+   "compiled": "1.95",
+   "status": "verified"
+  },
+  {
+   "url": "https://example.com/moksa/",
+   "attrID": "mk-mast-lede",
+   "breakpoint": "_m",
+   "property": "margin-top",
+   "declared": "0px",
+   "compiled": "0px",
+   "status": "verified"
+  },
+  {
+   "url": "https://example.com/moksa/",
+   "attrID": "mk-mast-cta",
+   "breakpoint": "_m",
+   "property": "margin-top",
+   "declared": "26px",
+   "compiled": "26px",
+   "status": "verified"
+  },
+  {
+   "url": "https://example.com/moksa/",
+   "attrID": "mk-mast-cta",
+   "breakpoint": "_m",
+   "property": "column-gap",
+   "declared": "18px",
+   "compiled": "18px",
+   "status": "verified"
+  },
+  {
+   "url": "https://example.com/moksa/",
+   "attrID": "mk-mast-side",
+   "breakpoint": "_m",
+   "property": "border-top",
+   "declared": "1px solid rgba(22,24,28,.16)",
+   "compiled": "1px solid rgba(22, 24, 28, .16)",
+   "status": "verified"
+  },
+  {
+   "url": "https://example.com/moksa/",
+   "attrID": "mk-spec-rule",
+   "breakpoint": "_m",
+   "property": "margin-top",
+   "declared": "40px",
+   "compiled": "40px",
+   "status": "verified"
+  },
+  {
+   "url": "https://example.com/moksa/",
+   "attrID": "mk-spec",
+   "breakpoint": "_t",
+   "property": "grid-template-columns",
+   "declared": "repeat(2, 1fr)",
+   "compiled": "repeat(2, 1fr)",
+   "status": "verified"
+  },
+  {
+   "url": "https://example.com/moksa/",
+   "attrID": "mk-spec",
+   "breakpoint": "_m",
+   "property": "grid-template-columns",
+   "declared": "repeat(2, 1fr)",
+   "compiled": "repeat(2, 1fr)",
+   "status": "verified"
+  },
+  {
+   "url": "https://example.com/moksa/",
+   "attrID": "mk-spec-0",
+   "breakpoint": "_t",
+   "property": "padding-top",
+   "declared": "18px",
+   "compiled": "18px",
+   "status": "verified"
+  },
+  {
+   "url": "https://example.com/moksa/",
+   "attrID": "mk-spec-0",
+   "breakpoint": "_t",
+   "property": "padding-bottom",
+   "declared": "18px",
+   "compiled": "18px",
+   "status": "verified"
+  },
+  {
+   "url": "https://example.com/moksa/",
+   "attrID": "mk-spec-0",
+   "breakpoint": "_t",
+   "property": "padding-left",
+   "declared": "0px",
+   "compiled": "0px",
+   "status": "verified"
+  },
+  {
+   "url": "https://example.com/moksa/",
+   "attrID": "mk-spec-0",
+   "breakpoint": "_t",
+   "property": "border-left",
+   "declared": "0",
+   "compiled": "0",
+   "status": "verified"
+  },
+  {
+   "url": "https://example.com/moksa/",
+   "attrID": "mk-spec-0",
+   "breakpoint": "_t",
+   "property": "border-top",
+   "declared": "0",
+   "compiled": "0",
+   "status": "verified"
+  },
+  {
+   "url": "https://example.com/moksa/",
+   "attrID": "mk-spec-0",
+   "breakpoint": "_m",
+   "property": "padding-right",
+   "declared": "12px",
+   "compiled": "12px",
+   "status": "verified"
+  },
+  {
+   "url": "https://example.com/moksa/",
+   "attrID": "mk-spec-0",
+   "breakpoint": "_m",
+   "property": "padding-left",
+   "declared": "0px",
+   "compiled": "0px",
+   "status": "verified"
+  },
+  {
+   "url": "https://example.com/moksa/",
+   "attrID": "mk-spec-1",
+   "breakpoint": "_t",
+   "property": "padding-top",
+   "declared": "18px",
+   "compiled": "18px",
+   "status": "verified"
+  },
+  {
+   "url": "https://example.com/moksa/",
+   "attrID": "mk-spec-1",
+   "breakpoint": "_t",
+   "property": "padding-bottom",
+   "declared": "18px",
+   "compiled": "18px",
+   "status": "verified"
+  },
+  {
+   "url": "https://example.com/moksa/",
+   "attrID": "mk-spec-1",
+   "breakpoint": "_t",
+   "property": "padding-left",
+   "declared": "18px",
+   "compiled": "18px",
+   "status": "verified"
+  },
+  {
+   "url": "https://example.com/moksa/",
+   "attrID": "mk-spec-1",
+   "breakpoint": "_t",
+   "property": "border-left",
+   "declared": "1px solid rgba(22,24,28,.16)",
+   "compiled": "1px solid rgba(22, 24, 28, .16)",
+   "status": "verified"
+  },
+  {
+   "url": "https://example.com/moksa/",
+   "attrID": "mk-spec-1",
+   "breakpoint": "_t",
+   "property": "border-top",
+   "declared": "0",
+   "compiled": "0",
+   "status": "verified"
+  },
+  {
+   "url": "https://example.com/moksa/",
+   "attrID": "mk-spec-1",
+   "breakpoint": "_m",
+   "property": "padding-right",
+   "declared": "12px",
+   "compiled": "12px",
+   "status": "verified"
+  },
+  {
+   "url": "https://example.com/moksa/",
+   "attrID": "mk-spec-1",
+   "breakpoint": "_m",
+   "property": "padding-left",
+   "declared": "14px",
+   "compiled": "14px",
+   "status": "verified"
+  },
+  {
+   "url": "https://example.com/moksa/",
+   "attrID": "mk-spec-2",
+   "breakpoint": "_t",
+   "property": "padding-top",
+   "declared": "18px",
+   "compiled": "18px",
+   "status": "verified"
+  },
+  {
+   "url": "https://example.com/moksa/",
+   "attrID": "mk-spec-2",
+   "breakpoint": "_t",
+   "property": "padding-bottom",
+   "declared": "18px",
+   "compiled": "18px",
+   "status": "verified"
+  },
+  {
+   "url": "https://example.com/moksa/",
+   "attrID": "mk-spec-2",
+   "breakpoint": "_t",
+   "property": "padding-left",
+   "declared": "0px",
+   "compiled": "0px",
+   "status": "verified"
+  },
+  {
+   "url": "https://example.com/moksa/",
+   "attrID": "mk-spec-2",
+   "breakpoint": "_t",
+   "property": "border-left",
+   "declared": "0",
+   "compiled": "0",
+   "status": "verified"
+  },
+  {
+   "url": "https://example.com/moksa/",
+   "attrID": "mk-spec-2",
+   "breakpoint": "_t",
+   "property": "border-top",
+   "declared": "1px solid rgba(22,24,28,.16)",
+   "compiled": "1px solid rgba(22, 24, 28, .16)",
+   "status": "verified"
+  },
+  {
+   "url": "https://example.com/moksa/",
+   "attrID": "mk-spec-2",
+   "breakpoint": "_m",
+   "property": "padding-right",
+   "declared": "12px",
+   "compiled": "12px",
+   "status": "verified"
+  },
+  {
+   "url": "https://example.com/moksa/",
+   "attrID": "mk-spec-2",
+   "breakpoint": "_m",
+   "property": "padding-left",
+   "declared": "0px",
+   "compiled": "0px",
+   "status": "verified"
+  },
+  {
+   "url": "https://example.com/moksa/",
+   "attrID": "mk-spec-3",
+   "breakpoint": "_t",
+   "property": "padding-top",
+   "declared": "18px",
+   "compiled": "18px",
+   "status": "verified"
+  },
+  {
+   "url": "https://example.com/moksa/",
+   "attrID": "mk-spec-3",
+   "breakpoint": "_t",
+   "property": "padding-bottom",
+   "declared": "18px",
+   "compiled": "18px",
+   "status": "verified"
+  },
+  {
+   "url": "https://example.com/moksa/",
+   "attrID": "mk-spec-3",
+   "breakpoint": "_t",
+   "property": "padding-left",
+   "declared": "18px",
+   "compiled": "18px",
+   "status": "verified"
+  },
+  {
+   "url": "https://example.com/moksa/",
+   "attrID": "mk-spec-3",
+   "breakpoint": "_t",
+   "property": "border-left",
+   "declared": "1px solid rgba(22,24,28,.16)",
+   "compiled": "1px solid rgba(22, 24, 28, .16)",
+   "status": "verified"
+  },
+  {
+   "url": "https://example.com/moksa/",
+   "attrID": "mk-spec-3",
+   "breakpoint": "_t",
+   "property": "border-top",
+   "declared": "1px solid rgba(22,24,28,.16)",
+   "compiled": "1px solid rgba(22, 24, 28, .16)",
+   "status": "verified"
+  },
+  {
+   "url": "https://example.com/moksa/",
+   "attrID": "mk-spec-3",
+   "breakpoint": "_m",
+   "property": "padding-right",
+   "declared": "12px",
+   "compiled": "12px",
+   "status": "verified"
+  },
+  {
+   "url": "https://example.com/moksa/",
+   "attrID": "mk-spec-3",
+   "breakpoint": "_m",
+   "property": "padding-left",
+   "declared": "14px",
+   "compiled": "14px",
+   "status": "verified"
+  },
+  {
+   "url": "https://example.com/moksa/",
+   "attrID": "plate",
+   "breakpoint": "_t",
+   "property": "padding-left",
+   "declared": "28px",
+   "compiled": "28px",
+   "status": "verified"
+  },
+  {
+   "url": "https://example.com/moksa/",
+   "attrID": "plate",
+   "breakpoint": "_t",
+   "property": "padding-right",
+   "declared": "28px",
+   "compiled": "28px",
+   "status": "verified"
+  },
+  {
+   "url": "https://example.com/moksa/",
+   "attrID": "plate",
+   "breakpoint": "_m",
+   "property": "padding-left",
+   "declared": "18px",
+   "compiled": "18px",
+   "status": "verified"
+  },
+  {
+   "url": "https://example.com/moksa/",
+   "attrID": "plate",
+   "breakpoint": "_m",
+   "property": "padding-right",
+   "declared": "18px",
+   "compiled": "18px",
+   "status": "verified"
+  },
+  {
+   "url": "https://example.com/moksa/",
+   "attrID": "mk-plate-pad",
+   "breakpoint": "_t",
+   "property": "column-gap",
+   "declared": "36px",
+   "compiled": "36px",
+   "status": "verified"
+  },
+  {
+   "url": "https://example.com/moksa/",
+   "attrID": "mk-plate-pad",
+   "breakpoint": "_m",
+   "property": "grid-template-columns",
+   "declared": "repeat(1, 1fr)",
+   "compiled": "repeat(1, 1fr)",
+   "status": "verified"
+  },
+  {
+   "url": "https://example.com/moksa/",
+   "attrID": "mk-plate-pad",
+   "breakpoint": "_m",
+   "property": "row-gap",
+   "declared": "22px",
+   "compiled": "22px",
+   "status": "verified"
+  },
+  {
+   "url": "https://example.com/moksa/",
+   "attrID": "mk-plate-pad",
+   "breakpoint": "_m",
+   "property": "padding-top",
+   "declared": "62px",
+   "compiled": "62px",
+   "status": "verified"
+  },
+  {
+   "url": "https://example.com/moksa/",
+   "attrID": "mk-plate-pad",
+   "breakpoint": "_m",
+   "property": "padding-bottom",
+   "declared": "62px",
+   "compiled": "62px",
+   "status": "verified"
+  },
+  {
+   "url": "https://example.com/moksa/",
+   "attrID": "services",
+   "breakpoint": "_t",
+   "property": "padding-left",
+   "declared": "28px",
+   "compiled": "28px",
+   "status": "verified"
+  },
+  {
+   "url": "https://example.com/moksa/",
+   "attrID": "services",
+   "breakpoint": "_t",
+   "property": "padding-right",
+   "declared": "28px",
+   "compiled": "28px",
+   "status": "verified"
+  },
+  {
+   "url": "https://example.com/moksa/",
+   "attrID": "services",
+   "breakpoint": "_m",
+   "property": "padding-left",
+   "declared": "18px",
+   "compiled": "18px",
+   "status": "verified"
+  },
+  {
+   "url": "https://example.com/moksa/",
+   "attrID": "services",
+   "breakpoint": "_m",
+   "property": "padding-right",
+   "declared": "18px",
+   "compiled": "18px",
+   "status": "verified"
+  },
+  {
+   "url": "https://example.com/moksa/",
+   "attrID": "mk-svc-pad",
+   "breakpoint": "_m",
+   "property": "padding-top",
+   "declared": "56px",
+   "compiled": "56px",
+   "status": "verified"
+  },
+  {
+   "url": "https://example.com/moksa/",
+   "attrID": "mk-svc-head",
+   "breakpoint": "_m",
+   "property": "grid-template-columns",
+   "declared": "48px 1fr",
+   "compiled": "48px 1fr",
+   "status": "verified"
+  },
+  {
+   "url": "https://example.com/moksa/",
+   "attrID": "mk-svc-list",
+   "breakpoint": "_m",
+   "property": "margin-top",
+   "declared": "32px",
+   "compiled": "32px",
+   "status": "verified"
+  },
+  {
+   "url": "https://example.com/moksa/",
+   "attrID": "matrix",
+   "breakpoint": "_t",
+   "property": "padding-left",
+   "declared": "28px",
+   "compiled": "28px",
+   "status": "verified"
+  },
+  {
+   "url": "https://example.com/moksa/",
+   "attrID": "matrix",
+   "breakpoint": "_t",
+   "property": "padding-right",
+   "declared": "28px",
+   "compiled": "28px",
+   "status": "verified"
+  },
+  {
+   "url": "https://example.com/moksa/",
+   "attrID": "matrix",
+   "breakpoint": "_m",
+   "property": "padding-left",
+   "declared": "18px",
+   "compiled": "18px",
+   "status": "verified"
+  },
+  {
+   "url": "https://example.com/moksa/",
+   "attrID": "matrix",
+   "breakpoint": "_m",
+   "property": "padding-right",
+   "declared": "18px",
+   "compiled": "18px",
+   "status": "verified"
+  },
+  {
+   "url": "https://example.com/moksa/",
+   "attrID": "mk-mx-pad",
+   "breakpoint": "_m",
+   "property": "padding-top",
+   "declared": "52px",
+   "compiled": "52px",
+   "status": "verified"
+  },
+  {
+   "url": "https://example.com/moksa/",
+   "attrID": "mk-mx-pad",
+   "breakpoint": "_m",
+   "property": "padding-bottom",
+   "declared": "52px",
+   "compiled": "52px",
+   "status": "verified"
+  },
+  {
+   "url": "https://example.com/moksa/",
+   "attrID": "mk-mx-cols",
+   "breakpoint": "_m",
+   "property": "grid-template-columns",
+   "declared": "1fr repeat(3, 46px)",
+   "compiled": "1fr repeat(3, 46px)",
+   "status": "verified"
+  },
+  {
+   "url": "https://example.com/moksa/",
+   "attrID": "mk-mx-cols",
+   "breakpoint": "_m",
+   "property": "column-gap",
+   "declared": "6px",
+   "compiled": "6px",
+   "status": "verified"
+  },
+  {
+   "url": "https://example.com/moksa/",
+   "attrID": "mk-mx-r-0",
+   "breakpoint": "_m",
+   "property": "grid-template-columns",
+   "declared": "1fr repeat(3, 46px)",
+   "compiled": "1fr repeat(3, 46px)",
+   "status": "verified"
+  },
+  {
+   "url": "https://example.com/moksa/",
+   "attrID": "mk-mx-r-0",
+   "breakpoint": "_m",
+   "property": "column-gap",
+   "declared": "6px",
+   "compiled": "6px",
+   "status": "verified"
+  },
+  {
+   "url": "https://example.com/moksa/",
+   "attrID": "mk-mx-r-0",
+   "breakpoint": "_m",
+   "property": "padding-top",
+   "declared": "11px",
+   "compiled": "11px",
+   "status": "verified"
+  },
+  {
+   "url": "https://example.com/moksa/",
+   "attrID": "mk-mx-r-0",
+   "breakpoint": "_m",
+   "property": "padding-bottom",
+   "declared": "11px",
+   "compiled": "11px",
+   "status": "verified"
+  },
+  {
+   "url": "https://example.com/moksa/",
+   "attrID": "mk-mx-r-1",
+   "breakpoint": "_m",
+   "property": "grid-template-columns",
+   "declared": "1fr repeat(3, 46px)",
+   "compiled": "1fr repeat(3, 46px)",
+   "status": "verified"
+  },
+  {
+   "url": "https://example.com/moksa/",
+   "attrID": "mk-mx-r-1",
+   "breakpoint": "_m",
+   "property": "column-gap",
+   "declared": "6px",
+   "compiled": "6px",
+   "status": "verified"
+  },
+  {
+   "url": "https://example.com/moksa/",
+   "attrID": "mk-mx-r-1",
+   "breakpoint": "_m",
+   "property": "padding-top",
+   "declared": "11px",
+   "compiled": "11px",
+   "status": "verified"
+  },
+  {
+   "url": "https://example.com/moksa/",
+   "attrID": "mk-mx-r-1",
+   "breakpoint": "_m",
+   "property": "padding-bottom",
+   "declared": "11px",
+   "compiled": "11px",
+   "status": "verified"
+  },
+  {
+   "url": "https://example.com/moksa/",
+   "attrID": "mk-mx-r-2",
+   "breakpoint": "_m",
+   "property": "grid-template-columns",
+   "declared": "1fr repeat(3, 46px)",
+   "compiled": "1fr repeat(3, 46px)",
+   "status": "verified"
+  },
+  {
+   "url": "https://example.com/moksa/",
+   "attrID": "mk-mx-r-2",
+   "breakpoint": "_m",
+   "property": "column-gap",
+   "declared": "6px",
+   "compiled": "6px",
+   "status": "verified"
+  },
+  {
+   "url": "https://example.com/moksa/",
+   "attrID": "mk-mx-r-2",
+   "breakpoint": "_m",
+   "property": "padding-top",
+   "declared": "11px",
+   "compiled": "11px",
+   "status": "verified"
+  },
+  {
+   "url": "https://example.com/moksa/",
+   "attrID": "mk-mx-r-2",
+   "breakpoint": "_m",
+   "property": "padding-bottom",
+   "declared": "11px",
+   "compiled": "11px",
+   "status": "verified"
+  },
+  {
+   "url": "https://example.com/moksa/",
+   "attrID": "mk-mx-r-3",
+   "breakpoint": "_m",
+   "property": "grid-template-columns",
+   "declared": "1fr repeat(3, 46px)",
+   "compiled": "1fr repeat(3, 46px)",
+   "status": "verified"
+  },
+  {
+   "url": "https://example.com/moksa/",
+   "attrID": "mk-mx-r-3",
+   "breakpoint": "_m",
+   "property": "column-gap",
+   "declared": "6px",
+   "compiled": "6px",
+   "status": "verified"
+  },
+  {
+   "url": "https://example.com/moksa/",
+   "attrID": "mk-mx-r-3",
+   "breakpoint": "_m",
+   "property": "padding-top",
+   "declared": "11px",
+   "compiled": "11px",
+   "status": "verified"
+  },
+  {
+   "url": "https://example.com/moksa/",
+   "attrID": "mk-mx-r-3",
+   "breakpoint": "_m",
+   "property": "padding-bottom",
+   "declared": "11px",
+   "compiled": "11px",
+   "status": "verified"
+  },
+  {
+   "url": "https://example.com/moksa/",
+   "attrID": "mk-mx-r-4",
+   "breakpoint": "_m",
+   "property": "grid-template-columns",
+   "declared": "1fr repeat(3, 46px)",
+   "compiled": "1fr repeat(3, 46px)",
+   "status": "verified"
+  },
+  {
+   "url": "https://example.com/moksa/",
+   "attrID": "mk-mx-r-4",
+   "breakpoint": "_m",
+   "property": "column-gap",
+   "declared": "6px",
+   "compiled": "6px",
+   "status": "verified"
+  },
+  {
+   "url": "https://example.com/moksa/",
+   "attrID": "mk-mx-r-4",
+   "breakpoint": "_m",
+   "property": "padding-top",
+   "declared": "11px",
+   "compiled": "11px",
+   "status": "verified"
+  },
+  {
+   "url": "https://example.com/moksa/",
+   "attrID": "mk-mx-r-4",
+   "breakpoint": "_m",
+   "property": "padding-bottom",
+   "declared": "11px",
+   "compiled": "11px",
+   "status": "verified"
+  },
+  {
+   "url": "https://example.com/moksa/",
+   "attrID": "mk-mx-r-5",
+   "breakpoint": "_m",
+   "property": "grid-template-columns",
+   "declared": "1fr repeat(3, 46px)",
+   "compiled": "1fr repeat(3, 46px)",
+   "status": "verified"
+  },
+  {
+   "url": "https://example.com/moksa/",
+   "attrID": "mk-mx-r-5",
+   "breakpoint": "_m",
+   "property": "column-gap",
+   "declared": "6px",
+   "compiled": "6px",
+   "status": "verified"
+  },
+  {
+   "url": "https://example.com/moksa/",
+   "attrID": "mk-mx-r-5",
+   "breakpoint": "_m",
+   "property": "padding-top",
+   "declared": "11px",
+   "compiled": "11px",
+   "status": "verified"
+  },
+  {
+   "url": "https://example.com/moksa/",
+   "attrID": "mk-mx-r-5",
+   "breakpoint": "_m",
+   "property": "padding-bottom",
+   "declared": "11px",
+   "compiled": "11px",
+   "status": "verified"
+  },
+  {
+   "url": "https://example.com/moksa/",
+   "attrID": "mk-mx-r-6",
+   "breakpoint": "_m",
+   "property": "grid-template-columns",
+   "declared": "1fr repeat(3, 46px)",
+   "compiled": "1fr repeat(3, 46px)",
+   "status": "verified"
+  },
+  {
+   "url": "https://example.com/moksa/",
+   "attrID": "mk-mx-r-6",
+   "breakpoint": "_m",
+   "property": "column-gap",
+   "declared": "6px",
+   "compiled": "6px",
+   "status": "verified"
+  },
+  {
+   "url": "https://example.com/moksa/",
+   "attrID": "mk-mx-r-6",
+   "breakpoint": "_m",
+   "property": "padding-top",
+   "declared": "11px",
+   "compiled": "11px",
+   "status": "verified"
+  },
+  {
+   "url": "https://example.com/moksa/",
+   "attrID": "mk-mx-r-6",
+   "breakpoint": "_m",
+   "property": "padding-bottom",
+   "declared": "11px",
+   "compiled": "11px",
+   "status": "verified"
+  },
+  {
+   "url": "https://example.com/moksa/",
+   "attrID": "mk-mx-r-7",
+   "breakpoint": "_m",
+   "property": "grid-template-columns",
+   "declared": "1fr repeat(3, 46px)",
+   "compiled": "1fr repeat(3, 46px)",
+   "status": "verified"
+  },
+  {
+   "url": "https://example.com/moksa/",
+   "attrID": "mk-mx-r-7",
+   "breakpoint": "_m",
+   "property": "column-gap",
+   "declared": "6px",
+   "compiled": "6px",
+   "status": "verified"
+  },
+  {
+   "url": "https://example.com/moksa/",
+   "attrID": "mk-mx-r-7",
+   "breakpoint": "_m",
+   "property": "padding-top",
+   "declared": "11px",
+   "compiled": "11px",
+   "status": "verified"
+  },
+  {
+   "url": "https://example.com/moksa/",
+   "attrID": "mk-mx-r-7",
+   "breakpoint": "_m",
+   "property": "padding-bottom",
+   "declared": "11px",
+   "compiled": "11px",
+   "status": "verified"
+  },
+  {
+   "url": "https://example.com/moksa/",
+   "attrID": "process",
+   "breakpoint": "_t",
+   "property": "padding-left",
+   "declared": "28px",
+   "compiled": "28px",
+   "status": "verified"
+  },
+  {
+   "url": "https://example.com/moksa/",
+   "attrID": "process",
+   "breakpoint": "_t",
+   "property": "padding-right",
+   "declared": "28px",
+   "compiled": "28px",
+   "status": "verified"
+  },
+  {
+   "url": "https://example.com/moksa/",
+   "attrID": "process",
+   "breakpoint": "_m",
+   "property": "padding-left",
+   "declared": "18px",
+   "compiled": "18px",
+   "status": "verified"
+  },
+  {
+   "url": "https://example.com/moksa/",
+   "attrID": "process",
+   "breakpoint": "_m",
+   "property": "padding-right",
+   "declared": "18px",
+   "compiled": "18px",
+   "status": "verified"
+  },
+  {
+   "url": "https://example.com/moksa/",
+   "attrID": "mk-proc-pad",
+   "breakpoint": "_m",
+   "property": "padding-top",
+   "declared": "56px",
+   "compiled": "56px",
+   "status": "verified"
+  },
+  {
+   "url": "https://example.com/moksa/",
+   "attrID": "mk-proc-head",
+   "breakpoint": "_m",
+   "property": "grid-template-columns",
+   "declared": "48px 1fr",
+   "compiled": "48px 1fr",
+   "status": "verified"
+  },
+  {
+   "url": "https://example.com/moksa/",
+   "attrID": "mk-proc-track",
+   "breakpoint": "_m",
+   "property": "margin-top",
+   "declared": "34px",
+   "compiled": "34px",
+   "status": "verified"
+  },
+  {
+   "url": "https://example.com/moksa/",
+   "attrID": "mk-proc-grid",
+   "breakpoint": "_t",
+   "property": "grid-template-columns",
+   "declared": "repeat(2, 1fr)",
+   "compiled": "repeat(2, 1fr)",
+   "status": "verified"
+  },
+  {
+   "url": "https://example.com/moksa/",
+   "attrID": "mk-proc-grid",
+   "breakpoint": "_m",
+   "property": "grid-template-columns",
+   "declared": "repeat(1, 1fr)",
+   "compiled": "repeat(1, 1fr)",
+   "status": "verified"
+  },
+  {
+   "url": "https://example.com/moksa/",
+   "attrID": "mk-proc-0",
+   "breakpoint": "_m",
+   "property": "padding-top",
+   "declared": "20px",
+   "compiled": "20px",
+   "status": "verified"
+  },
+  {
+   "url": "https://example.com/moksa/",
+   "attrID": "mk-proc-0",
+   "breakpoint": "_m",
+   "property": "padding-right",
+   "declared": "0px",
+   "compiled": "0px",
+   "status": "verified"
+  },
+  {
+   "url": "https://example.com/moksa/",
+   "attrID": "mk-proc-1",
+   "breakpoint": "_m",
+   "property": "padding-top",
+   "declared": "20px",
+   "compiled": "20px",
+   "status": "verified"
+  },
+  {
+   "url": "https://example.com/moksa/",
+   "attrID": "mk-proc-1",
+   "breakpoint": "_m",
+   "property": "padding-right",
+   "declared": "0px",
+   "compiled": "0px",
+   "status": "verified"
+  },
+  {
+   "url": "https://example.com/moksa/",
+   "attrID": "mk-proc-2",
+   "breakpoint": "_m",
+   "property": "padding-top",
+   "declared": "20px",
+   "compiled": "20px",
+   "status": "verified"
+  },
+  {
+   "url": "https://example.com/moksa/",
+   "attrID": "mk-proc-2",
+   "breakpoint": "_m",
+   "property": "padding-right",
+   "declared": "0px",
+   "compiled": "0px",
+   "status": "verified"
+  },
+  {
+   "url": "https://example.com/moksa/",
+   "attrID": "mk-proc-3",
+   "breakpoint": "_m",
+   "property": "padding-top",
+   "declared": "20px",
+   "compiled": "20px",
+   "status": "verified"
+  },
+  {
+   "url": "https://example.com/moksa/",
+   "attrID": "mk-proc-3",
+   "breakpoint": "_m",
+   "property": "padding-right",
+   "declared": "0px",
+   "compiled": "0px",
+   "status": "verified"
+  },
+  {
+   "url": "https://example.com/moksa/",
+   "attrID": "figure",
+   "breakpoint": "_t",
+   "property": "padding-left",
+   "declared": "28px",
+   "compiled": "28px",
+   "status": "verified"
+  },
+  {
+   "url": "https://example.com/moksa/",
+   "attrID": "figure",
+   "breakpoint": "_t",
+   "property": "padding-right",
+   "declared": "28px",
+   "compiled": "28px",
+   "status": "verified"
+  },
+  {
+   "url": "https://example.com/moksa/",
+   "attrID": "figure",
+   "breakpoint": "_m",
+   "property": "padding-left",
+   "declared": "18px",
+   "compiled": "18px",
+   "status": "verified"
+  },
+  {
+   "url": "https://example.com/moksa/",
+   "attrID": "figure",
+   "breakpoint": "_m",
+   "property": "padding-right",
+   "declared": "18px",
+   "compiled": "18px",
+   "status": "verified"
+  },
+  {
+   "url": "https://example.com/moksa/",
+   "attrID": "mk-fig2-pad",
+   "breakpoint": "_m",
+   "property": "padding-top",
+   "declared": "54px",
+   "compiled": "54px",
+   "status": "verified"
+  },
+  {
+   "url": "https://example.com/moksa/",
+   "attrID": "mk-fig2-pad",
+   "breakpoint": "_m",
+   "property": "padding-bottom",
+   "declared": "54px",
+   "compiled": "54px",
+   "status": "verified"
+  },
+  {
+   "url": "https://example.com/moksa/",
+   "attrID": "mk-fig2-grid",
+   "breakpoint": "_t",
+   "property": "grid-template-columns",
+   "declared": "1fr 34px 1fr 34px 1fr",
+   "compiled": "1fr 34px 1fr 34px 1fr",
+   "status": "verified"
+  },
+  {
+   "url": "https://example.com/moksa/",
+   "attrID": "mk-fig2-grid",
+   "breakpoint": "_m",
+   "property": "grid-template-columns",
+   "declared": "repeat(1, 1fr)",
+   "compiled": "repeat(1, 1fr)",
+   "status": "verified"
+  },
+  {
+   "url": "https://example.com/moksa/",
+   "attrID": "mk-fig2-grid",
+   "breakpoint": "_m",
+   "property": "row-gap",
+   "declared": "8px",
+   "compiled": "8px",
+   "status": "verified"
+  },
+  {
+   "url": "https://example.com/moksa/",
+   "attrID": "mk-fig2-grid",
+   "breakpoint": "_m",
+   "property": "margin-top",
+   "declared": "24px",
+   "compiled": "24px",
+   "status": "verified"
+  },
+  {
+   "url": "https://example.com/moksa/",
+   "attrID": "mk-ar-a-0",
+   "breakpoint": "_m",
+   "property": "transform",
+   "declared": "rotate(90deg)",
+   "compiled": "rotate(90deg)",
+   "status": "verified"
+  },
+  {
+   "url": "https://example.com/moksa/",
+   "attrID": "mk-ar-b-0",
+   "breakpoint": "_m",
+   "property": "transform",
+   "declared": "rotate(90deg)",
+   "compiled": "rotate(90deg)",
+   "status": "verified"
+  },
+  {
+   "url": "https://example.com/moksa/",
+   "attrID": "mk-ar-a-1",
+   "breakpoint": "_m",
+   "property": "transform",
+   "declared": "rotate(90deg)",
+   "compiled": "rotate(90deg)",
+   "status": "verified"
+  },
+  {
+   "url": "https://example.com/moksa/",
+   "attrID": "mk-ar-b-1",
+   "breakpoint": "_m",
+   "property": "transform",
+   "declared": "rotate(90deg)",
+   "compiled": "rotate(90deg)",
+   "status": "verified"
+  },
+  {
+   "url": "https://example.com/moksa/",
+   "attrID": "mk-ar-a-2",
+   "breakpoint": "_m",
+   "property": "transform",
+   "declared": "rotate(90deg)",
+   "compiled": "rotate(90deg)",
+   "status": "verified"
+  },
+  {
+   "url": "https://example.com/moksa/",
+   "attrID": "mk-ar-b-2",
+   "breakpoint": "_m",
+   "property": "transform",
+   "declared": "rotate(90deg)",
+   "compiled": "rotate(90deg)",
+   "status": "verified"
+  },
+  {
+   "url": "https://example.com/moksa/",
+   "attrID": "works",
+   "breakpoint": "_t",
+   "property": "padding-left",
+   "declared": "28px",
+   "compiled": "28px",
+   "status": "verified"
+  },
+  {
+   "url": "https://example.com/moksa/",
+   "attrID": "works",
+   "breakpoint": "_t",
+   "property": "padding-right",
+   "declared": "28px",
+   "compiled": "28px",
+   "status": "verified"
+  },
+  {
+   "url": "https://example.com/moksa/",
+   "attrID": "works",
+   "breakpoint": "_m",
+   "property": "padding-left",
+   "declared": "18px",
+   "compiled": "18px",
+   "status": "verified"
+  },
+  {
+   "url": "https://example.com/moksa/",
+   "attrID": "works",
+   "breakpoint": "_m",
+   "property": "padding-right",
+   "declared": "18px",
+   "compiled": "18px",
+   "status": "verified"
+  },
+  {
+   "url": "https://example.com/moksa/",
+   "attrID": "mk-works-pad",
+   "breakpoint": "_m",
+   "property": "padding-top",
+   "declared": "56px",
+   "compiled": "56px",
+   "status": "verified"
+  },
+  {
+   "url": "https://example.com/moksa/",
+   "attrID": "mk-works-head",
+   "breakpoint": "_m",
+   "property": "grid-template-columns",
+   "declared": "48px 1fr",
+   "compiled": "48px 1fr",
+   "status": "verified"
+  },
+  {
+   "url": "https://example.com/moksa/",
+   "attrID": "mk-works-table",
+   "breakpoint": "_m",
+   "property": "margin-top",
+   "declared": "32px",
+   "compiled": "32px",
+   "status": "verified"
+  },
+  {
+   "url": "https://example.com/moksa/",
+   "attrID": "mk-works-thead",
+   "breakpoint": "_m",
+   "property": "display",
+   "declared": "none",
+   "compiled": "none",
+   "status": "verified"
+  },
+  {
+   "url": "https://example.com/moksa/",
+   "attrID": "mk-work-0",
+   "breakpoint": "_m",
+   "property": "grid-template-columns",
+   "declared": "1fr",
+   "compiled": "1fr",
+   "status": "verified"
+  },
+  {
+   "url": "https://example.com/moksa/",
+   "attrID": "mk-work-0",
+   "breakpoint": "_m",
+   "property": "row-gap",
+   "declared": "5px",
+   "compiled": "5px",
+   "status": "verified"
+  },
+  {
+   "url": "https://example.com/moksa/",
+   "attrID": "mk-work-0",
+   "breakpoint": "_m",
+   "property": "padding-top",
+   "declared": "15px",
+   "compiled": "15px",
+   "status": "verified"
+  },
+  {
+   "url": "https://example.com/moksa/",
+   "attrID": "mk-work-0",
+   "breakpoint": "_m",
+   "property": "padding-bottom",
+   "declared": "15px",
+   "compiled": "15px",
+   "status": "verified"
+  },
+  {
+   "url": "https://example.com/moksa/",
+   "attrID": "mk-work-1",
+   "breakpoint": "_m",
+   "property": "grid-template-columns",
+   "declared": "1fr",
+   "compiled": "1fr",
+   "status": "verified"
+  },
+  {
+   "url": "https://example.com/moksa/",
+   "attrID": "mk-work-1",
+   "breakpoint": "_m",
+   "property": "row-gap",
+   "declared": "5px",
+   "compiled": "5px",
+   "status": "verified"
+  },
+  {
+   "url": "https://example.com/moksa/",
+   "attrID": "mk-work-1",
+   "breakpoint": "_m",
+   "property": "padding-top",
+   "declared": "15px",
+   "compiled": "15px",
+   "status": "verified"
+  },
+  {
+   "url": "https://example.com/moksa/",
+   "attrID": "mk-work-1",
+   "breakpoint": "_m",
+   "property": "padding-bottom",
+   "declared": "15px",
+   "compiled": "15px",
+   "status": "verified"
+  },
+  {
+   "url": "https://example.com/moksa/",
+   "attrID": "mk-work-2",
+   "breakpoint": "_m",
+   "property": "grid-template-columns",
+   "declared": "1fr",
+   "compiled": "1fr",
+   "status": "verified"
+  },
+  {
+   "url": "https://example.com/moksa/",
+   "attrID": "mk-work-2",
+   "breakpoint": "_m",
+   "property": "row-gap",
+   "declared": "5px",
+   "compiled": "5px",
+   "status": "verified"
+  },
+  {
+   "url": "https://example.com/moksa/",
+   "attrID": "mk-work-2",
+   "breakpoint": "_m",
+   "property": "padding-top",
+   "declared": "15px",
+   "compiled": "15px",
+   "status": "verified"
+  },
+  {
+   "url": "https://example.com/moksa/",
+   "attrID": "mk-work-2",
+   "breakpoint": "_m",
+   "property": "padding-bottom",
+   "declared": "15px",
+   "compiled": "15px",
+   "status": "verified"
+  },
+  {
+   "url": "https://example.com/moksa/",
+   "attrID": "mk-work-3",
+   "breakpoint": "_m",
+   "property": "grid-template-columns",
+   "declared": "1fr",
+   "compiled": "1fr",
+   "status": "verified"
+  },
+  {
+   "url": "https://example.com/moksa/",
+   "attrID": "mk-work-3",
+   "breakpoint": "_m",
+   "property": "row-gap",
+   "declared": "5px",
+   "compiled": "5px",
+   "status": "verified"
+  },
+  {
+   "url": "https://example.com/moksa/",
+   "attrID": "mk-work-3",
+   "breakpoint": "_m",
+   "property": "padding-top",
+   "declared": "15px",
+   "compiled": "15px",
+   "status": "verified"
+  },
+  {
+   "url": "https://example.com/moksa/",
+   "attrID": "mk-work-3",
+   "breakpoint": "_m",
+   "property": "padding-bottom",
+   "declared": "15px",
+   "compiled": "15px",
+   "status": "verified"
+  },
+  {
+   "url": "https://example.com/moksa/",
+   "attrID": "mk-work-4",
+   "breakpoint": "_m",
+   "property": "grid-template-columns",
+   "declared": "1fr",
+   "compiled": "1fr",
+   "status": "verified"
+  },
+  {
+   "url": "https://example.com/moksa/",
+   "attrID": "mk-work-4",
+   "breakpoint": "_m",
+   "property": "row-gap",
+   "declared": "5px",
+   "compiled": "5px",
+   "status": "verified"
+  },
+  {
+   "url": "https://example.com/moksa/",
+   "attrID": "mk-work-4",
+   "breakpoint": "_m",
+   "property": "padding-top",
+   "declared": "15px",
+   "compiled": "15px",
+   "status": "verified"
+  },
+  {
+   "url": "https://example.com/moksa/",
+   "attrID": "mk-work-4",
+   "breakpoint": "_m",
+   "property": "padding-bottom",
+   "declared": "15px",
+   "compiled": "15px",
+   "status": "verified"
+  },
+  {
+   "url": "https://example.com/moksa/",
+   "attrID": "mk-work-5",
+   "breakpoint": "_m",
+   "property": "grid-template-columns",
+   "declared": "1fr",
+   "compiled": "1fr",
+   "status": "verified"
+  },
+  {
+   "url": "https://example.com/moksa/",
+   "attrID": "mk-work-5",
+   "breakpoint": "_m",
+   "property": "row-gap",
+   "declared": "5px",
+   "compiled": "5px",
+   "status": "verified"
+  },
+  {
+   "url": "https://example.com/moksa/",
+   "attrID": "mk-work-5",
+   "breakpoint": "_m",
+   "property": "padding-top",
+   "declared": "15px",
+   "compiled": "15px",
+   "status": "verified"
+  },
+  {
+   "url": "https://example.com/moksa/",
+   "attrID": "mk-work-5",
+   "breakpoint": "_m",
+   "property": "padding-bottom",
+   "declared": "15px",
+   "compiled": "15px",
+   "status": "verified"
+  },
+  {
+   "url": "https://example.com/moksa/",
+   "attrID": "mk-work-6",
+   "breakpoint": "_m",
+   "property": "grid-template-columns",
+   "declared": "1fr",
+   "compiled": "1fr",
+   "status": "verified"
+  },
+  {
+   "url": "https://example.com/moksa/",
+   "attrID": "mk-work-6",
+   "breakpoint": "_m",
+   "property": "row-gap",
+   "declared": "5px",
+   "compiled": "5px",
+   "status": "verified"
+  },
+  {
+   "url": "https://example.com/moksa/",
+   "attrID": "mk-work-6",
+   "breakpoint": "_m",
+   "property": "padding-top",
+   "declared": "15px",
+   "compiled": "15px",
+   "status": "verified"
+  },
+  {
+   "url": "https://example.com/moksa/",
+   "attrID": "mk-work-6",
+   "breakpoint": "_m",
+   "property": "padding-bottom",
+   "declared": "15px",
+   "compiled": "15px",
+   "status": "verified"
+  },
+  {
+   "url": "https://example.com/moksa/",
+   "attrID": "mk-work-7",
+   "breakpoint": "_m",
+   "property": "grid-template-columns",
+   "declared": "1fr",
+   "compiled": "1fr",
+   "status": "verified"
+  },
+  {
+   "url": "https://example.com/moksa/",
+   "attrID": "mk-work-7",
+   "breakpoint": "_m",
+   "property": "row-gap",
+   "declared": "5px",
+   "compiled": "5px",
+   "status": "verified"
+  },
+  {
+   "url": "https://example.com/moksa/",
+   "attrID": "mk-work-7",
+   "breakpoint": "_m",
+   "property": "padding-top",
+   "declared": "15px",
+   "compiled": "15px",
+   "status": "verified"
+  },
+  {
+   "url": "https://example.com/moksa/",
+   "attrID": "mk-work-7",
+   "breakpoint": "_m",
+   "property": "padding-bottom",
+   "declared": "15px",
+   "compiled": "15px",
+   "status": "verified"
+  },
+  {
+   "url": "https://example.com/moksa/",
+   "attrID": "mk-work-8",
+   "breakpoint": "_m",
+   "property": "grid-template-columns",
+   "declared": "1fr",
+   "compiled": "1fr",
+   "status": "verified"
+  },
+  {
+   "url": "https://example.com/moksa/",
+   "attrID": "mk-work-8",
+   "breakpoint": "_m",
+   "property": "row-gap",
+   "declared": "5px",
+   "compiled": "5px",
+   "status": "verified"
+  },
+  {
+   "url": "https://example.com/moksa/",
+   "attrID": "mk-work-8",
+   "breakpoint": "_m",
+   "property": "padding-top",
+   "declared": "15px",
+   "compiled": "15px",
+   "status": "verified"
+  },
+  {
+   "url": "https://example.com/moksa/",
+   "attrID": "mk-work-8",
+   "breakpoint": "_m",
+   "property": "padding-bottom",
+   "declared": "15px",
+   "compiled": "15px",
+   "status": "verified"
+  },
+  {
+   "url": "https://example.com/moksa/",
+   "attrID": "mk-pan",
+   "breakpoint": "_m",
+   "property": "padding-top",
+   "declared": "22px",
+   "compiled": "22px",
+   "status": "verified"
+  },
+  {
+   "url": "https://example.com/moksa/",
+   "attrID": "mk-pan",
+   "breakpoint": "_m",
+   "property": "padding-bottom",
+   "declared": "22px",
+   "compiled": "22px",
+   "status": "verified"
+  },
+  {
+   "url": "https://example.com/moksa/",
+   "attrID": "mk-pan-loop",
+   "breakpoint": "_m",
+   "property": "column-gap",
+   "declared": "30px",
+   "compiled": "30px",
+   "status": "verified"
+  },
+  {
+   "url": "https://example.com/moksa/",
+   "attrID": "specimen",
+   "breakpoint": "_t",
+   "property": "padding-left",
+   "declared": "28px",
+   "compiled": "28px",
+   "status": "verified"
+  },
+  {
+   "url": "https://example.com/moksa/",
+   "attrID": "specimen",
+   "breakpoint": "_t",
+   "property": "padding-right",
+   "declared": "28px",
+   "compiled": "28px",
+   "status": "verified"
+  },
+  {
+   "url": "https://example.com/moksa/",
+   "attrID": "specimen",
+   "breakpoint": "_m",
+   "property": "padding-left",
+   "declared": "18px",
+   "compiled": "18px",
+   "status": "verified"
+  },
+  {
+   "url": "https://example.com/moksa/",
+   "attrID": "specimen",
+   "breakpoint": "_m",
+   "property": "padding-right",
+   "declared": "18px",
+   "compiled": "18px",
+   "status": "verified"
+  },
+  {
+   "url": "https://example.com/moksa/",
+   "attrID": "mk-spec2-pad",
+   "breakpoint": "_m",
+   "property": "padding-top",
+   "declared": "58px",
+   "compiled": "58px",
+   "status": "verified"
+  },
+  {
+   "url": "https://example.com/moksa/",
+   "attrID": "mk-spec2-pad",
+   "breakpoint": "_m",
+   "property": "padding-bottom",
+   "declared": "58px",
+   "compiled": "58px",
+   "status": "verified"
+  },
+  {
+   "url": "https://example.com/moksa/",
+   "attrID": "mk-spec2-rows",
+   "breakpoint": "_m",
+   "property": "margin-top",
+   "declared": "26px",
+   "compiled": "26px",
+   "status": "verified"
+  },
+  {
+   "url": "https://example.com/moksa/",
+   "attrID": "mk-spec2-r-0",
+   "breakpoint": "_m",
+   "property": "grid-template-columns",
+   "declared": "1fr",
+   "compiled": "1fr",
+   "status": "verified"
+  },
+  {
+   "url": "https://example.com/moksa/",
+   "attrID": "mk-spec2-r-0",
+   "breakpoint": "_m",
+   "property": "row-gap",
+   "declared": "6px",
+   "compiled": "6px",
+   "status": "verified"
+  },
+  {
+   "url": "https://example.com/moksa/",
+   "attrID": "mk-spec2-r-0",
+   "breakpoint": "_m",
+   "property": "padding-top",
+   "declared": "14px",
+   "compiled": "14px",
+   "status": "verified"
+  },
+  {
+   "url": "https://example.com/moksa/",
+   "attrID": "mk-spec2-r-0",
+   "breakpoint": "_m",
+   "property": "padding-bottom",
+   "declared": "14px",
+   "compiled": "14px",
+   "status": "verified"
+  },
+  {
+   "url": "https://example.com/moksa/",
+   "attrID": "mk-spec2-r-1",
+   "breakpoint": "_m",
+   "property": "grid-template-columns",
+   "declared": "1fr",
+   "compiled": "1fr",
+   "status": "verified"
+  },
+  {
+   "url": "https://example.com/moksa/",
+   "attrID": "mk-spec2-r-1",
+   "breakpoint": "_m",
+   "property": "row-gap",
+   "declared": "6px",
+   "compiled": "6px",
+   "status": "verified"
+  },
+  {
+   "url": "https://example.com/moksa/",
+   "attrID": "mk-spec2-r-1",
+   "breakpoint": "_m",
+   "property": "padding-top",
+   "declared": "14px",
+   "compiled": "14px",
+   "status": "verified"
+  },
+  {
+   "url": "https://example.com/moksa/",
+   "attrID": "mk-spec2-r-1",
+   "breakpoint": "_m",
+   "property": "padding-bottom",
+   "declared": "14px",
+   "compiled": "14px",
+   "status": "verified"
+  },
+  {
+   "url": "https://example.com/moksa/",
+   "attrID": "mk-spec2-r-2",
+   "breakpoint": "_m",
+   "property": "grid-template-columns",
+   "declared": "1fr",
+   "compiled": "1fr",
+   "status": "verified"
+  },
+  {
+   "url": "https://example.com/moksa/",
+   "attrID": "mk-spec2-r-2",
+   "breakpoint": "_m",
+   "property": "row-gap",
+   "declared": "6px",
+   "compiled": "6px",
+   "status": "verified"
+  },
+  {
+   "url": "https://example.com/moksa/",
+   "attrID": "mk-spec2-r-2",
+   "breakpoint": "_m",
+   "property": "padding-top",
+   "declared": "14px",
+   "compiled": "14px",
+   "status": "verified"
+  },
+  {
+   "url": "https://example.com/moksa/",
+   "attrID": "mk-spec2-r-2",
+   "breakpoint": "_m",
+   "property": "padding-bottom",
+   "declared": "14px",
+   "compiled": "14px",
+   "status": "verified"
+  },
+  {
+   "url": "https://example.com/moksa/",
+   "attrID": "mk-spec2-r-3",
+   "breakpoint": "_m",
+   "property": "grid-template-columns",
+   "declared": "1fr",
+   "compiled": "1fr",
+   "status": "verified"
+  },
+  {
+   "url": "https://example.com/moksa/",
+   "attrID": "mk-spec2-r-3",
+   "breakpoint": "_m",
+   "property": "row-gap",
+   "declared": "6px",
+   "compiled": "6px",
+   "status": "verified"
+  },
+  {
+   "url": "https://example.com/moksa/",
+   "attrID": "mk-spec2-r-3",
+   "breakpoint": "_m",
+   "property": "padding-top",
+   "declared": "14px",
+   "compiled": "14px",
+   "status": "verified"
+  },
+  {
+   "url": "https://example.com/moksa/",
+   "attrID": "mk-spec2-r-3",
+   "breakpoint": "_m",
+   "property": "padding-bottom",
+   "declared": "14px",
+   "compiled": "14px",
+   "status": "verified"
+  },
+  {
+   "url": "https://example.com/moksa/",
+   "attrID": "stack",
+   "breakpoint": "_t",
+   "property": "padding-left",
+   "declared": "28px",
+   "compiled": "28px",
+   "status": "verified"
+  },
+  {
+   "url": "https://example.com/moksa/",
+   "attrID": "stack",
+   "breakpoint": "_t",
+   "property": "padding-right",
+   "declared": "28px",
+   "compiled": "28px",
+   "status": "verified"
+  },
+  {
+   "url": "https://example.com/moksa/",
+   "attrID": "stack",
+   "breakpoint": "_m",
+   "property": "padding-left",
+   "declared": "18px",
+   "compiled": "18px",
+   "status": "verified"
+  },
+  {
+   "url": "https://example.com/moksa/",
+   "attrID": "stack",
+   "breakpoint": "_m",
+   "property": "padding-right",
+   "declared": "18px",
+   "compiled": "18px",
+   "status": "verified"
+  },
+  {
+   "url": "https://example.com/moksa/",
+   "attrID": "mk-stack-pad",
+   "breakpoint": "_m",
+   "property": "padding-top",
+   "declared": "56px",
+   "compiled": "56px",
+   "status": "verified"
+  },
+  {
+   "url": "https://example.com/moksa/",
+   "attrID": "mk-stack-head",
+   "breakpoint": "_m",
+   "property": "grid-template-columns",
+   "declared": "48px 1fr",
+   "compiled": "48px 1fr",
+   "status": "verified"
+  },
+  {
+   "url": "https://example.com/moksa/",
+   "attrID": "mk-stack-list",
+   "breakpoint": "_m",
+   "property": "margin-top",
+   "declared": "32px",
+   "compiled": "32px",
+   "status": "verified"
+  },
+  {
+   "url": "https://example.com/moksa/",
+   "attrID": "mk-stack-0",
+   "breakpoint": "_m",
+   "property": "grid-template-columns",
+   "declared": "1fr",
+   "compiled": "1fr",
+   "status": "verified"
+  },
+  {
+   "url": "https://example.com/moksa/",
+   "attrID": "mk-stack-0",
+   "breakpoint": "_m",
+   "property": "row-gap",
+   "declared": "10px",
+   "compiled": "10px",
+   "status": "verified"
+  },
+  {
+   "url": "https://example.com/moksa/",
+   "attrID": "mk-stack-0",
+   "breakpoint": "_m",
+   "property": "padding-top",
+   "declared": "16px",
+   "compiled": "16px",
+   "status": "verified"
+  },
+  {
+   "url": "https://example.com/moksa/",
+   "attrID": "mk-stack-0",
+   "breakpoint": "_m",
+   "property": "padding-bottom",
+   "declared": "16px",
+   "compiled": "16px",
+   "status": "verified"
+  },
+  {
+   "url": "https://example.com/moksa/",
+   "attrID": "mk-stack-1",
+   "breakpoint": "_m",
+   "property": "grid-template-columns",
+   "declared": "1fr",
+   "compiled": "1fr",
+   "status": "verified"
+  },
+  {
+   "url": "https://example.com/moksa/",
+   "attrID": "mk-stack-1",
+   "breakpoint": "_m",
+   "property": "row-gap",
+   "declared": "10px",
+   "compiled": "10px",
+   "status": "verified"
+  },
+  {
+   "url": "https://example.com/moksa/",
+   "attrID": "mk-stack-1",
+   "breakpoint": "_m",
+   "property": "padding-top",
+   "declared": "16px",
+   "compiled": "16px",
+   "status": "verified"
+  },
+  {
+   "url": "https://example.com/moksa/",
+   "attrID": "mk-stack-1",
+   "breakpoint": "_m",
+   "property": "padding-bottom",
+   "declared": "16px",
+   "compiled": "16px",
+   "status": "verified"
+  },
+  {
+   "url": "https://example.com/moksa/",
+   "attrID": "mk-stack-2",
+   "breakpoint": "_m",
+   "property": "grid-template-columns",
+   "declared": "1fr",
+   "compiled": "1fr",
+   "status": "verified"
+  },
+  {
+   "url": "https://example.com/moksa/",
+   "attrID": "mk-stack-2",
+   "breakpoint": "_m",
+   "property": "row-gap",
+   "declared": "10px",
+   "compiled": "10px",
+   "status": "verified"
+  },
+  {
+   "url": "https://example.com/moksa/",
+   "attrID": "mk-stack-2",
+   "breakpoint": "_m",
+   "property": "padding-top",
+   "declared": "16px",
+   "compiled": "16px",
+   "status": "verified"
+  },
+  {
+   "url": "https://example.com/moksa/",
+   "attrID": "mk-stack-2",
+   "breakpoint": "_m",
+   "property": "padding-bottom",
+   "declared": "16px",
+   "compiled": "16px",
+   "status": "verified"
+  },
+  {
+   "url": "https://example.com/moksa/",
+   "attrID": "mk-stack-3",
+   "breakpoint": "_m",
+   "property": "grid-template-columns",
+   "declared": "1fr",
+   "compiled": "1fr",
+   "status": "verified"
+  },
+  {
+   "url": "https://example.com/moksa/",
+   "attrID": "mk-stack-3",
+   "breakpoint": "_m",
+   "property": "row-gap",
+   "declared": "10px",
+   "compiled": "10px",
+   "status": "verified"
+  },
+  {
+   "url": "https://example.com/moksa/",
+   "attrID": "mk-stack-3",
+   "breakpoint": "_m",
+   "property": "padding-top",
+   "declared": "16px",
+   "compiled": "16px",
+   "status": "verified"
+  },
+  {
+   "url": "https://example.com/moksa/",
+   "attrID": "mk-stack-3",
+   "breakpoint": "_m",
+   "property": "padding-bottom",
+   "declared": "16px",
+   "compiled": "16px",
+   "status": "verified"
+  },
+  {
+   "url": "https://example.com/moksa/",
+   "attrID": "mk-stack-4",
+   "breakpoint": "_m",
+   "property": "grid-template-columns",
+   "declared": "1fr",
+   "compiled": "1fr",
+   "status": "verified"
+  },
+  {
+   "url": "https://example.com/moksa/",
+   "attrID": "mk-stack-4",
+   "breakpoint": "_m",
+   "property": "row-gap",
+   "declared": "10px",
+   "compiled": "10px",
+   "status": "verified"
+  },
+  {
+   "url": "https://example.com/moksa/",
+   "attrID": "mk-stack-4",
+   "breakpoint": "_m",
+   "property": "padding-top",
+   "declared": "16px",
+   "compiled": "16px",
+   "status": "verified"
+  },
+  {
+   "url": "https://example.com/moksa/",
+   "attrID": "mk-stack-4",
+   "breakpoint": "_m",
+   "property": "padding-bottom",
+   "declared": "16px",
+   "compiled": "16px",
+   "status": "verified"
+  },
+  {
+   "url": "https://example.com/moksa/",
+   "attrID": "mk-stack-5",
+   "breakpoint": "_m",
+   "property": "grid-template-columns",
+   "declared": "1fr",
+   "compiled": "1fr",
+   "status": "verified"
+  },
+  {
+   "url": "https://example.com/moksa/",
+   "attrID": "mk-stack-5",
+   "breakpoint": "_m",
+   "property": "row-gap",
+   "declared": "10px",
+   "compiled": "10px",
+   "status": "verified"
+  },
+  {
+   "url": "https://example.com/moksa/",
+   "attrID": "mk-stack-5",
+   "breakpoint": "_m",
+   "property": "padding-top",
+   "declared": "16px",
+   "compiled": "16px",
+   "status": "verified"
+  },
+  {
+   "url": "https://example.com/moksa/",
+   "attrID": "mk-stack-5",
+   "breakpoint": "_m",
+   "property": "padding-bottom",
+   "declared": "16px",
+   "compiled": "16px",
+   "status": "verified"
+  },
+  {
+   "url": "https://example.com/moksa/",
+   "attrID": "mk-stack-6",
+   "breakpoint": "_m",
+   "property": "grid-template-columns",
+   "declared": "1fr",
+   "compiled": "1fr",
+   "status": "verified"
+  },
+  {
+   "url": "https://example.com/moksa/",
+   "attrID": "mk-stack-6",
+   "breakpoint": "_m",
+   "property": "row-gap",
+   "declared": "10px",
+   "compiled": "10px",
+   "status": "verified"
+  },
+  {
+   "url": "https://example.com/moksa/",
+   "attrID": "mk-stack-6",
+   "breakpoint": "_m",
+   "property": "padding-top",
+   "declared": "16px",
+   "compiled": "16px",
+   "status": "verified"
+  },
+  {
+   "url": "https://example.com/moksa/",
+   "attrID": "mk-stack-6",
+   "breakpoint": "_m",
+   "property": "padding-bottom",
+   "declared": "16px",
+   "compiled": "16px",
+   "status": "verified"
+  },
+  {
+   "url": "https://example.com/moksa/",
+   "attrID": "mk-stack-7",
+   "breakpoint": "_m",
+   "property": "grid-template-columns",
+   "declared": "1fr",
+   "compiled": "1fr",
+   "status": "verified"
+  },
+  {
+   "url": "https://example.com/moksa/",
+   "attrID": "mk-stack-7",
+   "breakpoint": "_m",
+   "property": "row-gap",
+   "declared": "10px",
+   "compiled": "10px",
+   "status": "verified"
+  },
+  {
+   "url": "https://example.com/moksa/",
+   "attrID": "mk-stack-7",
+   "breakpoint": "_m",
+   "property": "padding-top",
+   "declared": "16px",
+   "compiled": "16px",
+   "status": "verified"
+  },
+  {
+   "url": "https://example.com/moksa/",
+   "attrID": "mk-stack-7",
+   "breakpoint": "_m",
+   "property": "padding-bottom",
+   "declared": "16px",
+   "compiled": "16px",
+   "status": "verified"
+  },
+  {
+   "url": "https://example.com/moksa/",
+   "attrID": "board",
+   "breakpoint": "_t",
+   "property": "padding-left",
+   "declared": "28px",
+   "compiled": "28px",
+   "status": "verified"
+  },
+  {
+   "url": "https://example.com/moksa/",
+   "attrID": "board",
+   "breakpoint": "_t",
+   "property": "padding-right",
+   "declared": "28px",
+   "compiled": "28px",
+   "status": "verified"
+  },
+  {
+   "url": "https://example.com/moksa/",
+   "attrID": "board",
+   "breakpoint": "_m",
+   "property": "padding-left",
+   "declared": "18px",
+   "compiled": "18px",
+   "status": "verified"
+  },
+  {
+   "url": "https://example.com/moksa/",
+   "attrID": "board",
+   "breakpoint": "_m",
+   "property": "padding-right",
+   "declared": "18px",
+   "compiled": "18px",
+   "status": "verified"
+  },
+  {
+   "url": "https://example.com/moksa/",
+   "attrID": "mk-board-pad",
+   "breakpoint": "_m",
+   "property": "padding-top",
+   "declared": "48px",
+   "compiled": "48px",
+   "status": "verified"
+  },
+  {
+   "url": "https://example.com/moksa/",
+   "attrID": "mk-board-pad",
+   "breakpoint": "_m",
+   "property": "padding-bottom",
+   "declared": "48px",
+   "compiled": "48px",
+   "status": "verified"
+  },
+  {
+   "url": "https://example.com/moksa/",
+   "attrID": "mk-board-row",
+   "breakpoint": "_m",
+   "property": "column-gap",
+   "declared": "14px",
+   "compiled": "14px",
+   "status": "verified"
+  },
+  {
+   "url": "https://example.com/moksa/",
+   "attrID": "mk-board-row",
+   "breakpoint": "_m",
+   "property": "margin-top",
+   "declared": "24px",
+   "compiled": "24px",
+   "status": "verified"
+  },
+  {
+   "url": "https://example.com/moksa/",
+   "attrID": "mk-board-code",
+   "breakpoint": "_m",
+   "property": "column-gap",
+   "declared": "5px",
+   "compiled": "5px",
+   "status": "verified"
+  },
+  {
+   "url": "https://example.com/moksa/",
+   "attrID": "products",
+   "breakpoint": "_t",
+   "property": "padding-left",
+   "declared": "28px",
+   "compiled": "28px",
+   "status": "verified"
+  },
+  {
+   "url": "https://example.com/moksa/",
+   "attrID": "products",
+   "breakpoint": "_t",
+   "property": "padding-right",
+   "declared": "28px",
+   "compiled": "28px",
+   "status": "verified"
+  },
+  {
+   "url": "https://example.com/moksa/",
+   "attrID": "products",
+   "breakpoint": "_m",
+   "property": "padding-left",
+   "declared": "18px",
+   "compiled": "18px",
+   "status": "verified"
+  },
+  {
+   "url": "https://example.com/moksa/",
+   "attrID": "products",
+   "breakpoint": "_m",
+   "property": "padding-right",
+   "declared": "18px",
+   "compiled": "18px",
+   "status": "verified"
+  },
+  {
+   "url": "https://example.com/moksa/",
+   "attrID": "mk-prod-pad",
+   "breakpoint": "_m",
+   "property": "padding-top",
+   "declared": "54px",
+   "compiled": "54px",
+   "status": "verified"
+  },
+  {
+   "url": "https://example.com/moksa/",
+   "attrID": "mk-prod-pad",
+   "breakpoint": "_m",
+   "property": "padding-bottom",
+   "declared": "54px",
+   "compiled": "54px",
+   "status": "verified"
+  },
+  {
+   "url": "https://example.com/moksa/",
+   "attrID": "mk-prod-head",
+   "breakpoint": "_m",
+   "property": "grid-template-columns",
+   "declared": "48px 1fr",
+   "compiled": "48px 1fr",
+   "status": "verified"
+  },
+  {
+   "url": "https://example.com/moksa/",
+   "attrID": "mk-prod-list",
+   "breakpoint": "_m",
+   "property": "margin-top",
+   "declared": "28px",
+   "compiled": "28px",
+   "status": "verified"
+  },
+  {
+   "url": "https://example.com/moksa/",
+   "attrID": "mk-prod-0",
+   "breakpoint": "_t",
+   "property": "grid-template-columns",
+   "declared": "72px 1fr 1.2fr",
+   "compiled": "72px 1fr 1.2fr",
+   "status": "verified"
+  },
+  {
+   "url": "https://example.com/moksa/",
+   "attrID": "mk-prod-0",
+   "breakpoint": "_t",
+   "property": "column-gap",
+   "declared": "18px",
+   "compiled": "18px",
+   "status": "verified"
+  },
+  {
+   "url": "https://example.com/moksa/",
+   "attrID": "mk-prod-0",
+   "breakpoint": "_t",
+   "property": "row-gap",
+   "declared": "14px",
+   "compiled": "14px",
+   "status": "verified"
+  },
+  {
+   "url": "https://example.com/moksa/",
+   "attrID": "mk-prod-0",
+   "breakpoint": "_m",
+   "property": "grid-template-columns",
+   "declared": "repeat(1, 1fr)",
+   "compiled": "repeat(1, 1fr)",
+   "status": "verified"
+  },
+  {
+   "url": "https://example.com/moksa/",
+   "attrID": "mk-prod-0",
+   "breakpoint": "_m",
+   "property": "row-gap",
+   "declared": "12px",
+   "compiled": "12px",
+   "status": "verified"
+  },
+  {
+   "url": "https://example.com/moksa/",
+   "attrID": "mk-prod-0",
+   "breakpoint": "_m",
+   "property": "padding-top",
+   "declared": "20px",
+   "compiled": "20px",
+   "status": "verified"
+  },
+  {
+   "url": "https://example.com/moksa/",
+   "attrID": "mk-prod-0",
+   "breakpoint": "_m",
+   "property": "padding-bottom",
+   "declared": "20px",
+   "compiled": "20px",
+   "status": "verified"
+  },
+  {
+   "url": "https://example.com/moksa/",
+   "attrID": "mk-prod-1",
+   "breakpoint": "_t",
+   "property": "grid-template-columns",
+   "declared": "72px 1fr 1.2fr",
+   "compiled": "72px 1fr 1.2fr",
+   "status": "verified"
+  },
+  {
+   "url": "https://example.com/moksa/",
+   "attrID": "mk-prod-1",
+   "breakpoint": "_t",
+   "property": "column-gap",
+   "declared": "18px",
+   "compiled": "18px",
+   "status": "verified"
+  },
+  {
+   "url": "https://example.com/moksa/",
+   "attrID": "mk-prod-1",
+   "breakpoint": "_t",
+   "property": "row-gap",
+   "declared": "14px",
+   "compiled": "14px",
+   "status": "verified"
+  },
+  {
+   "url": "https://example.com/moksa/",
+   "attrID": "mk-prod-1",
+   "breakpoint": "_m",
+   "property": "grid-template-columns",
+   "declared": "repeat(1, 1fr)",
+   "compiled": "repeat(1, 1fr)",
+   "status": "verified"
+  },
+  {
+   "url": "https://example.com/moksa/",
+   "attrID": "mk-prod-1",
+   "breakpoint": "_m",
+   "property": "row-gap",
+   "declared": "12px",
+   "compiled": "12px",
+   "status": "verified"
+  },
+  {
+   "url": "https://example.com/moksa/",
+   "attrID": "mk-prod-1",
+   "breakpoint": "_m",
+   "property": "padding-top",
+   "declared": "20px",
+   "compiled": "20px",
+   "status": "verified"
+  },
+  {
+   "url": "https://example.com/moksa/",
+   "attrID": "mk-prod-1",
+   "breakpoint": "_m",
+   "property": "padding-bottom",
+   "declared": "20px",
+   "compiled": "20px",
+   "status": "verified"
+  },
+  {
+   "url": "https://example.com/moksa/",
+   "attrID": "mk-voices",
+   "breakpoint": "_t",
+   "property": "padding-left",
+   "declared": "28px",
+   "compiled": "28px",
+   "status": "verified"
+  },
+  {
+   "url": "https://example.com/moksa/",
+   "attrID": "mk-voices",
+   "breakpoint": "_t",
+   "property": "padding-right",
+   "declared": "28px",
+   "compiled": "28px",
+   "status": "verified"
+  },
+  {
+   "url": "https://example.com/moksa/",
+   "attrID": "mk-voices",
+   "breakpoint": "_m",
+   "property": "padding-left",
+   "declared": "18px",
+   "compiled": "18px",
+   "status": "verified"
+  },
+  {
+   "url": "https://example.com/moksa/",
+   "attrID": "mk-voices",
+   "breakpoint": "_m",
+   "property": "padding-right",
+   "declared": "18px",
+   "compiled": "18px",
+   "status": "verified"
+  },
+  {
+   "url": "https://example.com/moksa/",
+   "attrID": "mk-voice-pad",
+   "breakpoint": "_m",
+   "property": "padding-top",
+   "declared": "56px",
+   "compiled": "56px",
+   "status": "verified"
+  },
+  {
+   "url": "https://example.com/moksa/",
+   "attrID": "mk-voice-head",
+   "breakpoint": "_m",
+   "property": "grid-template-columns",
+   "declared": "48px 1fr",
+   "compiled": "48px 1fr",
+   "status": "verified"
+  },
+  {
+   "url": "https://example.com/moksa/",
+   "attrID": "mk-voice-grid",
+   "breakpoint": "_t",
+   "property": "grid-template-columns",
+   "declared": "repeat(1, 1fr)",
+   "compiled": "repeat(1, 1fr)",
+   "status": "verified"
+  },
+  {
+   "url": "https://example.com/moksa/",
+   "attrID": "mk-voice-grid",
+   "breakpoint": "_m",
+   "property": "grid-template-columns",
+   "declared": "repeat(1, 1fr)",
+   "compiled": "repeat(1, 1fr)",
+   "status": "verified"
+  },
+  {
+   "url": "https://example.com/moksa/",
+   "attrID": "mk-voice-0",
+   "breakpoint": "_t",
+   "property": "padding-left",
+   "declared": "0px",
+   "compiled": "0px",
+   "status": "verified"
+  },
+  {
+   "url": "https://example.com/moksa/",
+   "attrID": "mk-voice-0",
+   "breakpoint": "_t",
+   "property": "padding-right",
+   "declared": "0px",
+   "compiled": "0px",
+   "status": "verified"
+  },
+  {
+   "url": "https://example.com/moksa/",
+   "attrID": "mk-voice-0",
+   "breakpoint": "_t",
+   "property": "border-top",
+   "declared": "1px solid rgba(22,24,28,.16)",
+   "compiled": "1px solid rgba(22, 24, 28, .16)",
+   "status": "verified"
+  },
+  {
+   "url": "https://example.com/moksa/",
+   "attrID": "mk-voice-0",
+   "breakpoint": "_t",
+   "property": "border-left",
+   "declared": "0",
+   "compiled": "0",
+   "status": "verified"
+  },
+  {
+   "url": "https://example.com/moksa/",
+   "attrID": "mk-voice-0",
+   "breakpoint": "_m",
+   "property": "padding-left",
+   "declared": "0px",
+   "compiled": "0px",
+   "status": "verified"
+  },
+  {
+   "url": "https://example.com/moksa/",
+   "attrID": "mk-voice-0",
+   "breakpoint": "_m",
+   "property": "padding-right",
+   "declared": "0px",
+   "compiled": "0px",
+   "status": "verified"
+  },
+  {
+   "url": "https://example.com/moksa/",
+   "attrID": "mk-voice-0",
+   "breakpoint": "_m",
+   "property": "border-top",
+   "declared": "1px solid rgba(22,24,28,.16)",
+   "compiled": "1px solid rgba(22, 24, 28, .16)",
+   "status": "verified"
+  },
+  {
+   "url": "https://example.com/moksa/",
+   "attrID": "mk-voice-0",
+   "breakpoint": "_m",
+   "property": "border-left",
+   "declared": "0",
+   "compiled": "0",
+   "status": "verified"
+  },
+  {
+   "url": "https://example.com/moksa/",
+   "attrID": "mk-voice-1",
+   "breakpoint": "_t",
+   "property": "padding-left",
+   "declared": "0px",
+   "compiled": "0px",
+   "status": "verified"
+  },
+  {
+   "url": "https://example.com/moksa/",
+   "attrID": "mk-voice-1",
+   "breakpoint": "_t",
+   "property": "padding-right",
+   "declared": "0px",
+   "compiled": "0px",
+   "status": "verified"
+  },
+  {
+   "url": "https://example.com/moksa/",
+   "attrID": "mk-voice-1",
+   "breakpoint": "_t",
+   "property": "border-top",
+   "declared": "1px solid rgba(22,24,28,.16)",
+   "compiled": "1px solid rgba(22, 24, 28, .16)",
+   "status": "verified"
+  },
+  {
+   "url": "https://example.com/moksa/",
+   "attrID": "mk-voice-1",
+   "breakpoint": "_t",
+   "property": "border-left",
+   "declared": "0",
+   "compiled": "0",
+   "status": "verified"
+  },
+  {
+   "url": "https://example.com/moksa/",
+   "attrID": "mk-voice-1",
+   "breakpoint": "_m",
+   "property": "padding-left",
+   "declared": "0px",
+   "compiled": "0px",
+   "status": "verified"
+  },
+  {
+   "url": "https://example.com/moksa/",
+   "attrID": "mk-voice-1",
+   "breakpoint": "_m",
+   "property": "padding-right",
+   "declared": "0px",
+   "compiled": "0px",
+   "status": "verified"
+  },
+  {
+   "url": "https://example.com/moksa/",
+   "attrID": "mk-voice-1",
+   "breakpoint": "_m",
+   "property": "border-top",
+   "declared": "1px solid rgba(22,24,28,.16)",
+   "compiled": "1px solid rgba(22, 24, 28, .16)",
+   "status": "verified"
+  },
+  {
+   "url": "https://example.com/moksa/",
+   "attrID": "mk-voice-1",
+   "breakpoint": "_m",
+   "property": "border-left",
+   "declared": "0",
+   "compiled": "0",
+   "status": "verified"
+  },
+  {
+   "url": "https://example.com/moksa/",
+   "attrID": "mk-voice-2",
+   "breakpoint": "_t",
+   "property": "padding-left",
+   "declared": "0px",
+   "compiled": "0px",
+   "status": "verified"
+  },
+  {
+   "url": "https://example.com/moksa/",
+   "attrID": "mk-voice-2",
+   "breakpoint": "_t",
+   "property": "padding-right",
+   "declared": "0px",
+   "compiled": "0px",
+   "status": "verified"
+  },
+  {
+   "url": "https://example.com/moksa/",
+   "attrID": "mk-voice-2",
+   "breakpoint": "_t",
+   "property": "border-top",
+   "declared": "1px solid rgba(22,24,28,.16)",
+   "compiled": "1px solid rgba(22, 24, 28, .16)",
+   "status": "verified"
+  },
+  {
+   "url": "https://example.com/moksa/",
+   "attrID": "mk-voice-2",
+   "breakpoint": "_t",
+   "property": "border-left",
+   "declared": "0",
+   "compiled": "0",
+   "status": "verified"
+  },
+  {
+   "url": "https://example.com/moksa/",
+   "attrID": "mk-voice-2",
+   "breakpoint": "_m",
+   "property": "padding-left",
+   "declared": "0px",
+   "compiled": "0px",
+   "status": "verified"
+  },
+  {
+   "url": "https://example.com/moksa/",
+   "attrID": "mk-voice-2",
+   "breakpoint": "_m",
+   "property": "padding-right",
+   "declared": "0px",
+   "compiled": "0px",
+   "status": "verified"
+  },
+  {
+   "url": "https://example.com/moksa/",
+   "attrID": "mk-voice-2",
+   "breakpoint": "_m",
+   "property": "border-top",
+   "declared": "1px solid rgba(22,24,28,.16)",
+   "compiled": "1px solid rgba(22, 24, 28, .16)",
+   "status": "verified"
+  },
+  {
+   "url": "https://example.com/moksa/",
+   "attrID": "mk-voice-2",
+   "breakpoint": "_m",
+   "property": "border-left",
+   "declared": "0",
+   "compiled": "0",
+   "status": "verified"
+  },
+  {
+   "url": "https://example.com/moksa/",
+   "attrID": "contact",
+   "breakpoint": "_t",
+   "property": "padding-left",
+   "declared": "28px",
+   "compiled": "28px",
+   "status": "verified"
+  },
+  {
+   "url": "https://example.com/moksa/",
+   "attrID": "contact",
+   "breakpoint": "_t",
+   "property": "padding-right",
+   "declared": "28px",
+   "compiled": "28px",
+   "status": "verified"
+  },
+  {
+   "url": "https://example.com/moksa/",
+   "attrID": "contact",
+   "breakpoint": "_m",
+   "property": "padding-left",
+   "declared": "18px",
+   "compiled": "18px",
+   "status": "verified"
+  },
+  {
+   "url": "https://example.com/moksa/",
+   "attrID": "contact",
+   "breakpoint": "_m",
+   "property": "padding-right",
+   "declared": "18px",
+   "compiled": "18px",
+   "status": "verified"
+  },
+  {
+   "url": "https://example.com/moksa/",
+   "attrID": "mk-contact-pad",
+   "breakpoint": "_m",
+   "property": "padding-top",
+   "declared": "56px",
+   "compiled": "56px",
+   "status": "verified"
+  },
+  {
+   "url": "https://example.com/moksa/",
+   "attrID": "mk-contact-pad",
+   "breakpoint": "_m",
+   "property": "padding-bottom",
+   "declared": "64px",
+   "compiled": "64px",
+   "status": "verified"
+  },
+  {
+   "url": "https://example.com/moksa/",
+   "attrID": "mk-contact-head",
+   "breakpoint": "_m",
+   "property": "grid-template-columns",
+   "declared": "48px 1fr",
+   "compiled": "48px 1fr",
+   "status": "verified"
+  },
+  {
+   "url": "https://example.com/moksa/",
+   "attrID": "mk-contact-r-0",
+   "breakpoint": "_m",
+   "property": "grid-template-columns",
+   "declared": "84px 1fr",
+   "compiled": "84px 1fr",
+   "status": "verified"
+  },
+  {
+   "url": "https://example.com/moksa/",
+   "attrID": "mk-contact-r-0",
+   "breakpoint": "_m",
+   "property": "column-gap",
+   "declared": "12px",
+   "compiled": "12px",
+   "status": "verified"
+  },
+  {
+   "url": "https://example.com/moksa/",
+   "attrID": "mk-contact-r-1",
+   "breakpoint": "_m",
+   "property": "grid-template-columns",
+   "declared": "84px 1fr",
+   "compiled": "84px 1fr",
+   "status": "verified"
+  },
+  {
+   "url": "https://example.com/moksa/",
+   "attrID": "mk-contact-r-1",
+   "breakpoint": "_m",
+   "property": "column-gap",
+   "declared": "12px",
+   "compiled": "12px",
+   "status": "verified"
+  },
+  {
+   "url": "https://example.com/moksa/",
+   "attrID": "mk-contact-r-2",
+   "breakpoint": "_m",
+   "property": "grid-template-columns",
+   "declared": "84px 1fr",
+   "compiled": "84px 1fr",
+   "status": "verified"
+  },
+  {
+   "url": "https://example.com/moksa/",
+   "attrID": "mk-contact-r-2",
+   "breakpoint": "_m",
+   "property": "column-gap",
+   "declared": "12px",
+   "compiled": "12px",
+   "status": "verified"
+  },
+  {
+   "url": "https://example.com/moksa/",
+   "attrID": "mk-contact-r-3",
+   "breakpoint": "_m",
+   "property": "grid-template-columns",
+   "declared": "84px 1fr",
+   "compiled": "84px 1fr",
+   "status": "verified"
+  },
+  {
+   "url": "https://example.com/moksa/",
+   "attrID": "mk-contact-r-3",
+   "breakpoint": "_m",
+   "property": "column-gap",
+   "declared": "12px",
+   "compiled": "12px",
+   "status": "verified"
+  },
+  {
+   "url": "https://example.com/moksa/",
+   "attrID": "mk-colophon",
+   "breakpoint": "_m",
+   "property": "padding-left",
+   "declared": "18px",
+   "compiled": "18px",
+   "status": "verified"
+  },
+  {
+   "url": "https://example.com/moksa/",
+   "attrID": "mk-colophon",
+   "breakpoint": "_m",
+   "property": "padding-right",
+   "declared": "18px",
+   "compiled": "18px",
+   "status": "verified"
+  },
+  {
+   "url": "https://example.com/moksa/",
+   "attrID": "mk-header",
+   "breakpoint": "_t",
+   "property": "padding-left",
+   "declared": "28px",
+   "compiled": "28px",
+   "status": "verified"
+  },
+  {
+   "url": "https://example.com/moksa/",
+   "attrID": "mk-header",
+   "breakpoint": "_t",
+   "property": "padding-right",
+   "declared": "28px",
+   "compiled": "28px",
+   "status": "verified"
+  },
+  {
+   "url": "https://example.com/moksa/",
+   "attrID": "mk-header",
+   "breakpoint": "_m",
+   "property": "padding-left",
+   "declared": "18px",
+   "compiled": "18px",
+   "status": "verified"
+  },
+  {
+   "url": "https://example.com/moksa/",
+   "attrID": "mk-header",
+   "breakpoint": "_m",
+   "property": "padding-right",
+   "declared": "18px",
+   "compiled": "18px",
+   "status": "verified"
+  },
+  {
+   "url": "https://example.com/moksa/",
+   "attrID": "mk-header",
+   "breakpoint": "_m",
+   "property": "padding-top",
+   "declared": "13px",
+   "compiled": "13px",
+   "status": "verified"
+  },
+  {
+   "url": "https://example.com/moksa/",
+   "attrID": "mk-header",
+   "breakpoint": "_m",
+   "property": "padding-bottom",
+   "declared": "13px",
+   "compiled": "13px",
+   "status": "verified"
+  },
+  {
+   "url": "https://example.com/moksa/",
+   "attrID": "mk-header-row",
+   "breakpoint": "_t",
+   "property": "column-gap",
+   "declared": "24px",
+   "compiled": "24px",
+   "status": "verified"
+  },
+  {
+   "url": "https://example.com/moksa/",
+   "attrID": "mk-header-row",
+   "breakpoint": "_m",
+   "property": "column-gap",
+   "declared": "12px",
+   "compiled": "12px",
+   "status": "verified"
+  },
+  {
+   "url": "https://example.com/moksa/",
+   "attrID": "mk-nav",
+   "breakpoint": "_t",
+   "property": "column-gap",
+   "declared": "20px",
+   "compiled": "20px",
+   "status": "verified"
+  },
+  {
+   "url": "https://example.com/moksa/",
+   "attrID": "mk-nav",
+   "breakpoint": "_m",
+   "property": "column-gap",
+   "declared": "15px",
+   "compiled": "15px",
+   "status": "verified"
+  },
+  {
+   "url": "https://example.com/moksa/",
+   "attrID": "mk-nav-0",
+   "breakpoint": "_m",
+   "property": "font-size",
+   "declared": "12px",
+   "compiled": "12px",
+   "status": "verified"
+  },
+  {
+   "url": "https://example.com/moksa/",
+   "attrID": "mk-nav-1",
+   "breakpoint": "_m",
+   "property": "font-size",
+   "declared": "12px",
+   "compiled": "12px",
+   "status": "verified"
+  },
+  {
+   "url": "https://example.com/moksa/",
+   "attrID": "mk-nav-2",
+   "breakpoint": "_m",
+   "property": "font-size",
+   "declared": "12px",
+   "compiled": "12px",
+   "status": "verified"
+  },
+  {
+   "url": "https://example.com/moksa/",
+   "attrID": "mk-nav-3",
+   "breakpoint": "_m",
+   "property": "font-size",
+   "declared": "12px",
+   "compiled": "12px",
+   "status": "verified"
+  },
+  {
+   "url": "https://example.com/moksa/",
+   "attrID": "mk-header-cta",
+   "breakpoint": "_m",
+   "property": "display",
+   "declared": "none",
+   "compiled": "none",
+   "status": "verified"
+  },
+  {
+   "url": "https://example.com/moksa/",
+   "attrID": "mk-header-cta",
+   "breakpoint": "_t",
+   "property": "font-size",
+   "declared": "12px",
+   "compiled": "12px",
+   "status": "verified"
+  },
+  {
+   "url": "https://example.com/moksa/",
+   "attrID": "mk-footer",
+   "breakpoint": "_t",
+   "property": "padding-left",
+   "declared": "28px",
+   "compiled": "28px",
+   "status": "verified"
+  },
+  {
+   "url": "https://example.com/moksa/",
+   "attrID": "mk-footer",
+   "breakpoint": "_t",
+   "property": "padding-right",
+   "declared": "28px",
+   "compiled": "28px",
+   "status": "verified"
+  },
+  {
+   "url": "https://example.com/moksa/",
+   "attrID": "mk-footer",
+   "breakpoint": "_m",
+   "property": "padding-left",
+   "declared": "18px",
+   "compiled": "18px",
+   "status": "verified"
+  },
+  {
+   "url": "https://example.com/moksa/",
+   "attrID": "mk-footer",
+   "breakpoint": "_m",
+   "property": "padding-right",
+   "declared": "18px",
+   "compiled": "18px",
+   "status": "verified"
+  },
+  {
+   "url": "https://example.com/moksa/",
+   "attrID": "mk-f-top",
+   "breakpoint": "_m",
+   "property": "grid-template-columns",
+   "declared": "repeat(1, 1fr)",
+   "compiled": "repeat(1, 1fr)",
+   "status": "verified"
+  },
+  {
+   "url": "https://example.com/moksa/",
+   "attrID": "mk-f-top",
+   "breakpoint": "_m",
+   "property": "padding-top",
+   "declared": "42px",
+   "compiled": "42px",
+   "status": "verified"
+  },
+  {
+   "url": "https://example.com/moksa/",
+   "attrID": "mk-f-top",
+   "breakpoint": "_m",
+   "property": "padding-bottom",
+   "declared": "34px",
+   "compiled": "34px",
+   "status": "verified"
+  },
+  {
+   "url": "https://example.com/moksa/",
+   "attrID": "mk-f-links",
+   "breakpoint": "_m",
+   "property": "grid-template-columns",
+   "declared": "repeat(2, 1fr)",
+   "compiled": "repeat(2, 1fr)",
+   "status": "verified"
+  },
+  {
+   "url": "https://example.com/moksa/",
+   "attrID": "mk-svc-0-svc-row",
+   "breakpoint": "_t",
+   "property": "grid-template-columns",
+   "declared": "72px 1fr 1.2fr",
+   "compiled": "72px 1fr 1.2fr",
+   "status": "verified"
+  },
+  {
+   "url": "https://example.com/moksa/",
+   "attrID": "mk-svc-0-svc-row",
+   "breakpoint": "_t",
+   "property": "column-gap",
+   "declared": "18px",
+   "compiled": "18px",
+   "status": "verified"
+  },
+  {
+   "url": "https://example.com/moksa/",
+   "attrID": "mk-svc-0-svc-row",
+   "breakpoint": "_m",
+   "property": "grid-template-columns",
+   "declared": "repeat(1, 1fr)",
+   "compiled": "repeat(1, 1fr)",
+   "status": "verified"
+  },
+  {
+   "url": "https://example.com/moksa/",
+   "attrID": "mk-svc-0-svc-row",
+   "breakpoint": "_m",
+   "property": "row-gap",
+   "declared": "10px",
+   "compiled": "10px",
+   "status": "verified"
+  },
+  {
+   "url": "https://example.com/moksa/",
+   "attrID": "mk-svc-0-svc-row",
+   "breakpoint": "_m",
+   "property": "padding-top",
+   "declared": "20px",
+   "compiled": "20px",
+   "status": "verified"
+  },
+  {
+   "url": "https://example.com/moksa/",
+   "attrID": "mk-svc-0-svc-row",
+   "breakpoint": "_m",
+   "property": "padding-bottom",
+   "declared": "20px",
+   "compiled": "20px",
+   "status": "verified"
+  },
+  {
+   "url": "https://example.com/moksa/",
+   "attrID": "mk-svc-1-svc-row",
+   "breakpoint": "_t",
+   "property": "grid-template-columns",
+   "declared": "72px 1fr 1.2fr",
+   "compiled": "72px 1fr 1.2fr",
+   "status": "verified"
+  },
+  {
+   "url": "https://example.com/moksa/",
+   "attrID": "mk-svc-1-svc-row",
+   "breakpoint": "_t",
+   "property": "column-gap",
+   "declared": "18px",
+   "compiled": "18px",
+   "status": "verified"
+  },
+  {
+   "url": "https://example.com/moksa/",
+   "attrID": "mk-svc-1-svc-row",
+   "breakpoint": "_m",
+   "property": "grid-template-columns",
+   "declared": "repeat(1, 1fr)",
+   "compiled": "repeat(1, 1fr)",
+   "status": "verified"
+  },
+  {
+   "url": "https://example.com/moksa/",
+   "attrID": "mk-svc-1-svc-row",
+   "breakpoint": "_m",
+   "property": "row-gap",
+   "declared": "10px",
+   "compiled": "10px",
+   "status": "verified"
+  },
+  {
+   "url": "https://example.com/moksa/",
+   "attrID": "mk-svc-1-svc-row",
+   "breakpoint": "_m",
+   "property": "padding-top",
+   "declared": "20px",
+   "compiled": "20px",
+   "status": "verified"
+  },
+  {
+   "url": "https://example.com/moksa/",
+   "attrID": "mk-svc-1-svc-row",
+   "breakpoint": "_m",
+   "property": "padding-bottom",
+   "declared": "20px",
+   "compiled": "20px",
+   "status": "verified"
+  },
+  {
+   "url": "https://example.com/moksa/",
+   "attrID": "mk-svc-2-svc-row",
+   "breakpoint": "_t",
+   "property": "grid-template-columns",
+   "declared": "72px 1fr 1.2fr",
+   "compiled": "72px 1fr 1.2fr",
+   "status": "verified"
+  },
+  {
+   "url": "https://example.com/moksa/",
+   "attrID": "mk-svc-2-svc-row",
+   "breakpoint": "_t",
+   "property": "column-gap",
+   "declared": "18px",
+   "compiled": "18px",
+   "status": "verified"
+  },
+  {
+   "url": "https://example.com/moksa/",
+   "attrID": "mk-svc-2-svc-row",
+   "breakpoint": "_m",
+   "property": "grid-template-columns",
+   "declared": "repeat(1, 1fr)",
+   "compiled": "repeat(1, 1fr)",
+   "status": "verified"
+  },
+  {
+   "url": "https://example.com/moksa/",
+   "attrID": "mk-svc-2-svc-row",
+   "breakpoint": "_m",
+   "property": "row-gap",
+   "declared": "10px",
+   "compiled": "10px",
+   "status": "verified"
+  },
+  {
+   "url": "https://example.com/moksa/",
+   "attrID": "mk-svc-2-svc-row",
+   "breakpoint": "_m",
+   "property": "padding-top",
+   "declared": "20px",
+   "compiled": "20px",
+   "status": "verified"
+  },
+  {
+   "url": "https://example.com/moksa/",
+   "attrID": "mk-svc-2-svc-row",
+   "breakpoint": "_m",
+   "property": "padding-bottom",
+   "declared": "20px",
+   "compiled": "20px",
+   "status": "verified"
+  },
+  {
+   "url": "https://example.com/moksa/",
+   "attrID": "mk-svc-3-svc-row",
+   "breakpoint": "_t",
+   "property": "grid-template-columns",
+   "declared": "72px 1fr 1.2fr",
+   "compiled": "72px 1fr 1.2fr",
+   "status": "verified"
+  },
+  {
+   "url": "https://example.com/moksa/",
+   "attrID": "mk-svc-3-svc-row",
+   "breakpoint": "_t",
+   "property": "column-gap",
+   "declared": "18px",
+   "compiled": "18px",
+   "status": "verified"
+  },
+  {
+   "url": "https://example.com/moksa/",
+   "attrID": "mk-svc-3-svc-row",
+   "breakpoint": "_m",
+   "property": "grid-template-columns",
+   "declared": "repeat(1, 1fr)",
+   "compiled": "repeat(1, 1fr)",
+   "status": "verified"
+  },
+  {
+   "url": "https://example.com/moksa/",
+   "attrID": "mk-svc-3-svc-row",
+   "breakpoint": "_m",
+   "property": "row-gap",
+   "declared": "10px",
+   "compiled": "10px",
+   "status": "verified"
+  },
+  {
+   "url": "https://example.com/moksa/",
+   "attrID": "mk-svc-3-svc-row",
+   "breakpoint": "_m",
+   "property": "padding-top",
+   "declared": "20px",
+   "compiled": "20px",
+   "status": "verified"
+  },
+  {
+   "url": "https://example.com/moksa/",
+   "attrID": "mk-svc-3-svc-row",
+   "breakpoint": "_m",
+   "property": "padding-bottom",
+   "declared": "20px",
+   "compiled": "20px",
+   "status": "verified"
+  },
+  {
+   "url": "https://example.com/my-account/",
+   "attrID": "mk-acct-mast",
+   "breakpoint": "_t",
+   "property": "padding-left",
+   "declared": "28px",
+   "compiled": "28px",
+   "status": "verified"
+  },
+  {
+   "url": "https://example.com/my-account/",
+   "attrID": "mk-acct-mast",
+   "breakpoint": "_t",
+   "property": "padding-right",
+   "declared": "28px",
+   "compiled": "28px",
+   "status": "verified"
+  },
+  {
+   "url": "https://example.com/my-account/",
+   "attrID": "mk-acct-mast",
+   "breakpoint": "_m",
+   "property": "padding-left",
+   "declared": "18px",
+   "compiled": "18px",
+   "status": "verified"
+  },
+  {
+   "url": "https://example.com/my-account/",
+   "attrID": "mk-acct-mast",
+   "breakpoint": "_m",
+   "property": "padding-right",
+   "declared": "18px",
+   "compiled": "18px",
+   "status": "verified"
+  },
+  {
+   "url": "https://example.com/my-account/",
+   "attrID": "mk-acct-pad",
+   "breakpoint": "_t",
+   "property": "padding-top",
+   "declared": "50px",
+   "compiled": "50px",
+   "status": "verified"
+  },
+  {
+   "url": "https://example.com/my-account/",
+   "attrID": "mk-acct-pad",
+   "breakpoint": "_m",
+   "property": "padding-top",
+   "declared": "24px",
+   "compiled": "24px",
+   "status": "verified"
+  },
+  {
+   "url": "https://example.com/my-account/",
+   "attrID": "mk-acct-pad",
+   "breakpoint": "_m",
+   "property": "padding-bottom",
+   "declared": "34px",
+   "compiled": "34px",
+   "status": "verified"
+  },
+  {
+   "url": "https://example.com/my-account/",
+   "attrID": "mk-acct-head",
+   "breakpoint": "_m",
+   "property": "grid-template-columns",
+   "declared": "48px 1fr",
+   "compiled": "48px 1fr",
+   "status": "verified"
+  },
+  {
+   "url": "https://example.com/my-account/",
+   "attrID": "mk-acct-r-0",
+   "breakpoint": "_m",
+   "property": "grid-template-columns",
+   "declared": "84px 1fr",
+   "compiled": "84px 1fr",
+   "status": "verified"
+  },
+  {
+   "url": "https://example.com/my-account/",
+   "attrID": "mk-acct-r-0",
+   "breakpoint": "_m",
+   "property": "column-gap",
+   "declared": "12px",
+   "compiled": "12px",
+   "status": "verified"
+  },
+  {
+   "url": "https://example.com/my-account/",
+   "attrID": "mk-acct-r-1",
+   "breakpoint": "_m",
+   "property": "grid-template-columns",
+   "declared": "84px 1fr",
+   "compiled": "84px 1fr",
+   "status": "verified"
+  },
+  {
+   "url": "https://example.com/my-account/",
+   "attrID": "mk-acct-r-1",
+   "breakpoint": "_m",
+   "property": "column-gap",
+   "declared": "12px",
+   "compiled": "12px",
+   "status": "verified"
+  },
+  {
+   "url": "https://example.com/my-account/",
+   "attrID": "mk-acct-r-2",
+   "breakpoint": "_m",
+   "property": "grid-template-columns",
+   "declared": "84px 1fr",
+   "compiled": "84px 1fr",
+   "status": "verified"
+  },
+  {
+   "url": "https://example.com/my-account/",
+   "attrID": "mk-acct-r-2",
+   "breakpoint": "_m",
+   "property": "column-gap",
+   "declared": "12px",
+   "compiled": "12px",
+   "status": "verified"
+  },
+  {
+   "url": "https://example.com/my-account/",
+   "attrID": "mk-acct-body",
+   "breakpoint": "_t",
+   "property": "padding-left",
+   "declared": "28px",
+   "compiled": "28px",
+   "status": "verified"
+  },
+  {
+   "url": "https://example.com/my-account/",
+   "attrID": "mk-acct-body",
+   "breakpoint": "_t",
+   "property": "padding-right",
+   "declared": "28px",
+   "compiled": "28px",
+   "status": "verified"
+  },
+  {
+   "url": "https://example.com/my-account/",
+   "attrID": "mk-acct-body",
+   "breakpoint": "_m",
+   "property": "padding-left",
+   "declared": "18px",
+   "compiled": "18px",
+   "status": "verified"
+  },
+  {
+   "url": "https://example.com/my-account/",
+   "attrID": "mk-acct-body",
+   "breakpoint": "_m",
+   "property": "padding-right",
+   "declared": "18px",
+   "compiled": "18px",
+   "status": "verified"
+  },
+  {
+   "url": "https://example.com/my-account/",
+   "attrID": "mk-acct-sheet",
+   "breakpoint": "_m",
+   "property": "padding-bottom",
+   "declared": "72px",
+   "compiled": "72px",
+   "status": "verified"
+  },
+  {
+   "url": "https://example.com/my-account/",
+   "attrID": "mk-header",
+   "breakpoint": "_t",
+   "property": "padding-left",
+   "declared": "28px",
+   "compiled": "28px",
+   "status": "verified"
+  },
+  {
+   "url": "https://example.com/my-account/",
+   "attrID": "mk-header",
+   "breakpoint": "_t",
+   "property": "padding-right",
+   "declared": "28px",
+   "compiled": "28px",
+   "status": "verified"
+  },
+  {
+   "url": "https://example.com/my-account/",
+   "attrID": "mk-header",
+   "breakpoint": "_m",
+   "property": "padding-left",
+   "declared": "18px",
+   "compiled": "18px",
+   "status": "verified"
+  },
+  {
+   "url": "https://example.com/my-account/",
+   "attrID": "mk-header",
+   "breakpoint": "_m",
+   "property": "padding-right",
+   "declared": "18px",
+   "compiled": "18px",
+   "status": "verified"
+  },
+  {
+   "url": "https://example.com/my-account/",
+   "attrID": "mk-header",
+   "breakpoint": "_m",
+   "property": "padding-top",
+   "declared": "13px",
+   "compiled": "13px",
+   "status": "verified"
+  },
+  {
+   "url": "https://example.com/my-account/",
+   "attrID": "mk-header",
+   "breakpoint": "_m",
+   "property": "padding-bottom",
+   "declared": "13px",
+   "compiled": "13px",
+   "status": "verified"
+  },
+  {
+   "url": "https://example.com/my-account/",
+   "attrID": "mk-header-row",
+   "breakpoint": "_t",
+   "property": "column-gap",
+   "declared": "24px",
+   "compiled": "24px",
+   "status": "verified"
+  },
+  {
+   "url": "https://example.com/my-account/",
+   "attrID": "mk-header-row",
+   "breakpoint": "_m",
+   "property": "column-gap",
+   "declared": "12px",
+   "compiled": "12px",
+   "status": "verified"
+  },
+  {
+   "url": "https://example.com/my-account/",
+   "attrID": "mk-nav",
+   "breakpoint": "_t",
+   "property": "column-gap",
+   "declared": "20px",
+   "compiled": "20px",
+   "status": "verified"
+  },
+  {
+   "url": "https://example.com/my-account/",
+   "attrID": "mk-nav",
+   "breakpoint": "_m",
+   "property": "column-gap",
+   "declared": "15px",
+   "compiled": "15px",
+   "status": "verified"
+  },
+  {
+   "url": "https://example.com/my-account/",
+   "attrID": "mk-nav-0",
+   "breakpoint": "_m",
+   "property": "font-size",
+   "declared": "12px",
+   "compiled": "12px",
+   "status": "verified"
+  },
+  {
+   "url": "https://example.com/my-account/",
+   "attrID": "mk-nav-1",
+   "breakpoint": "_m",
+   "property": "font-size",
+   "declared": "12px",
+   "compiled": "12px",
+   "status": "verified"
+  },
+  {
+   "url": "https://example.com/my-account/",
+   "attrID": "mk-nav-2",
+   "breakpoint": "_m",
+   "property": "font-size",
+   "declared": "12px",
+   "compiled": "12px",
+   "status": "verified"
+  },
+  {
+   "url": "https://example.com/my-account/",
+   "attrID": "mk-nav-3",
+   "breakpoint": "_m",
+   "property": "font-size",
+   "declared": "12px",
+   "compiled": "12px",
+   "status": "verified"
+  },
+  {
+   "url": "https://example.com/my-account/",
+   "attrID": "mk-header-cta",
+   "breakpoint": "_m",
+   "property": "display",
+   "declared": "none",
+   "compiled": "none",
+   "status": "verified"
+  },
+  {
+   "url": "https://example.com/my-account/",
+   "attrID": "mk-header-cta",
+   "breakpoint": "_t",
+   "property": "font-size",
+   "declared": "12px",
+   "compiled": "12px",
+   "status": "verified"
+  },
+  {
+   "url": "https://example.com/my-account/",
+   "attrID": "mk-footer",
+   "breakpoint": "_t",
+   "property": "padding-left",
+   "declared": "28px",
+   "compiled": "28px",
+   "status": "verified"
+  },
+  {
+   "url": "https://example.com/my-account/",
+   "attrID": "mk-footer",
+   "breakpoint": "_t",
+   "property": "padding-right",
+   "declared": "28px",
+   "compiled": "28px",
+   "status": "verified"
+  },
+  {
+   "url": "https://example.com/my-account/",
+   "attrID": "mk-footer",
+   "breakpoint": "_m",
+   "property": "padding-left",
+   "declared": "18px",
+   "compiled": "18px",
+   "status": "verified"
+  },
+  {
+   "url": "https://example.com/my-account/",
+   "attrID": "mk-footer",
+   "breakpoint": "_m",
+   "property": "padding-right",
+   "declared": "18px",
+   "compiled": "18px",
+   "status": "verified"
+  },
+  {
+   "url": "https://example.com/my-account/",
+   "attrID": "mk-f-top",
+   "breakpoint": "_m",
+   "property": "grid-template-columns",
+   "declared": "repeat(1, 1fr)",
+   "compiled": "repeat(1, 1fr)",
+   "status": "verified"
+  },
+  {
+   "url": "https://example.com/my-account/",
+   "attrID": "mk-f-top",
+   "breakpoint": "_m",
+   "property": "padding-top",
+   "declared": "42px",
+   "compiled": "42px",
+   "status": "verified"
+  },
+  {
+   "url": "https://example.com/my-account/",
+   "attrID": "mk-f-top",
+   "breakpoint": "_m",
+   "property": "padding-bottom",
+   "declared": "34px",
+   "compiled": "34px",
+   "status": "verified"
+  },
+  {
+   "url": "https://example.com/my-account/",
+   "attrID": "mk-f-links",
+   "breakpoint": "_m",
+   "property": "grid-template-columns",
+   "declared": "repeat(2, 1fr)",
+   "compiled": "repeat(2, 1fr)",
+   "status": "verified"
+  },
+  {
+   "url": "https://example.com/zidanna/",
+   "attrID": "zd-hero",
+   "breakpoint": "_t",
+   "property": "padding-left",
+   "declared": "32px",
+   "compiled": "32px",
+   "status": "verified"
+  },
+  {
+   "url": "https://example.com/zidanna/",
+   "attrID": "zd-hero",
+   "breakpoint": "_t",
+   "property": "padding-right",
+   "declared": "32px",
+   "compiled": "32px",
+   "status": "verified"
+  },
+  {
+   "url": "https://example.com/zidanna/",
+   "attrID": "zd-hero",
+   "breakpoint": "_t",
+   "property": "padding-top",
+   "declared": "0px",
+   "compiled": "0px",
+   "status": "verified"
+  },
+  {
+   "url": "https://example.com/zidanna/",
+   "attrID": "zd-hero",
+   "breakpoint": "_t",
+   "property": "padding-bottom",
+   "declared": "0px",
+   "compiled": "0px",
+   "status": "verified"
+  },
+  {
+   "url": "https://example.com/zidanna/",
+   "attrID": "zd-hero",
+   "breakpoint": "_m",
+   "property": "padding-left",
+   "declared": "20px",
+   "compiled": "20px",
+   "status": "verified"
+  },
+  {
+   "url": "https://example.com/zidanna/",
+   "attrID": "zd-hero",
+   "breakpoint": "_m",
+   "property": "padding-right",
+   "declared": "20px",
+   "compiled": "20px",
+   "status": "verified"
+  },
+  {
+   "url": "https://example.com/zidanna/",
+   "attrID": "zd-hero",
+   "breakpoint": "_m",
+   "property": "padding-top",
+   "declared": "0px",
+   "compiled": "0px",
+   "status": "verified"
+  },
+  {
+   "url": "https://example.com/zidanna/",
+   "attrID": "zd-hero",
+   "breakpoint": "_m",
+   "property": "padding-bottom",
+   "declared": "0px",
+   "compiled": "0px",
+   "status": "verified"
+  },
+  {
+   "url": "https://example.com/zidanna/",
+   "attrID": "zd-hero-eyebrow",
+   "breakpoint": "_m",
+   "property": "font-size",
+   "declared": "9px",
+   "compiled": "9px",
+   "status": "verified"
+  },
+  {
+   "url": "https://example.com/zidanna/",
+   "attrID": "zd-hero-eyebrow",
+   "breakpoint": "_m",
+   "property": "letter-spacing",
+   "declared": "0.26em",
+   "compiled": "0.26em",
+   "status": "verified"
+  },
+  {
+   "url": "https://example.com/zidanna/",
+   "attrID": "zd-hero-cta",
+   "breakpoint": "_m",
+   "property": "margin-top",
+   "declared": "30px",
+   "compiled": "30px",
+   "status": "verified"
+  },
+  {
+   "url": "https://example.com/zidanna/",
+   "attrID": "zd-stats",
+   "breakpoint": "_t",
+   "property": "padding-left",
+   "declared": "32px",
+   "compiled": "32px",
+   "status": "verified"
+  },
+  {
+   "url": "https://example.com/zidanna/",
+   "attrID": "zd-stats",
+   "breakpoint": "_t",
+   "property": "padding-right",
+   "declared": "32px",
+   "compiled": "32px",
+   "status": "verified"
+  },
+  {
+   "url": "https://example.com/zidanna/",
+   "attrID": "zd-stats",
+   "breakpoint": "_t",
+   "property": "padding-top",
+   "declared": "0px",
+   "compiled": "0px",
+   "status": "verified"
+  },
+  {
+   "url": "https://example.com/zidanna/",
+   "attrID": "zd-stats",
+   "breakpoint": "_t",
+   "property": "padding-bottom",
+   "declared": "0px",
+   "compiled": "0px",
+   "status": "verified"
+  },
+  {
+   "url": "https://example.com/zidanna/",
+   "attrID": "zd-stats",
+   "breakpoint": "_m",
+   "property": "padding-left",
+   "declared": "20px",
+   "compiled": "20px",
+   "status": "verified"
+  },
+  {
+   "url": "https://example.com/zidanna/",
+   "attrID": "zd-stats",
+   "breakpoint": "_m",
+   "property": "padding-right",
+   "declared": "20px",
+   "compiled": "20px",
+   "status": "verified"
+  },
+  {
+   "url": "https://example.com/zidanna/",
+   "attrID": "zd-stats",
+   "breakpoint": "_m",
+   "property": "padding-top",
+   "declared": "0px",
+   "compiled": "0px",
+   "status": "verified"
+  },
+  {
+   "url": "https://example.com/zidanna/",
+   "attrID": "zd-stats",
+   "breakpoint": "_m",
+   "property": "padding-bottom",
+   "declared": "0px",
+   "compiled": "0px",
+   "status": "verified"
+  },
+  {
+   "url": "https://example.com/zidanna/",
+   "attrID": "zd-stats-grid",
+   "breakpoint": "_t",
+   "property": "grid-template-columns",
+   "declared": "repeat(2, 1fr)",
+   "compiled": "repeat(2, 1fr)",
+   "status": "verified"
+  },
+  {
+   "url": "https://example.com/zidanna/",
+   "attrID": "zd-stats-grid",
+   "breakpoint": "_m",
+   "property": "grid-template-columns",
+   "declared": "repeat(2, 1fr)",
+   "compiled": "repeat(2, 1fr)",
+   "status": "verified"
+  },
+  {
+   "url": "https://example.com/zidanna/",
+   "attrID": "zd-stat-0",
+   "breakpoint": "_t",
+   "property": "padding-top",
+   "declared": "40px",
+   "compiled": "40px",
+   "status": "verified"
+  },
+  {
+   "url": "https://example.com/zidanna/",
+   "attrID": "zd-stat-0",
+   "breakpoint": "_t",
+   "property": "padding-bottom",
+   "declared": "40px",
+   "compiled": "40px",
+   "status": "verified"
+  },
+  {
+   "url": "https://example.com/zidanna/",
+   "attrID": "zd-stat-0",
+   "breakpoint": "_t",
+   "property": "padding-left",
+   "declared": "26px",
+   "compiled": "26px",
+   "status": "verified"
+  },
+  {
+   "url": "https://example.com/zidanna/",
+   "attrID": "zd-stat-0",
+   "breakpoint": "_t",
+   "property": "border-left",
+   "declared": "0",
+   "compiled": "0",
+   "status": "verified"
+  },
+  {
+   "url": "https://example.com/zidanna/",
+   "attrID": "zd-stat-0",
+   "breakpoint": "_t",
+   "property": "border-top",
+   "declared": "0",
+   "compiled": "0",
+   "status": "verified"
+  },
+  {
+   "url": "https://example.com/zidanna/",
+   "attrID": "zd-stat-0",
+   "breakpoint": "_m",
+   "property": "padding-top",
+   "declared": "30px",
+   "compiled": "30px",
+   "status": "verified"
+  },
+  {
+   "url": "https://example.com/zidanna/",
+   "attrID": "zd-stat-0",
+   "breakpoint": "_m",
+   "property": "padding-bottom",
+   "declared": "30px",
+   "compiled": "30px",
+   "status": "verified"
+  },
+  {
+   "url": "https://example.com/zidanna/",
+   "attrID": "zd-stat-0",
+   "breakpoint": "_m",
+   "property": "padding-left",
+   "declared": "18px",
+   "compiled": "18px",
+   "status": "verified"
+  },
+  {
+   "url": "https://example.com/zidanna/",
+   "attrID": "zd-stat-0",
+   "breakpoint": "_m",
+   "property": "padding-right",
+   "declared": "14px",
+   "compiled": "14px",
+   "status": "verified"
+  },
+  {
+   "url": "https://example.com/zidanna/",
+   "attrID": "zd-stat-1",
+   "breakpoint": "_t",
+   "property": "padding-top",
+   "declared": "40px",
+   "compiled": "40px",
+   "status": "verified"
+  },
+  {
+   "url": "https://example.com/zidanna/",
+   "attrID": "zd-stat-1",
+   "breakpoint": "_t",
+   "property": "padding-bottom",
+   "declared": "40px",
+   "compiled": "40px",
+   "status": "verified"
+  },
+  {
+   "url": "https://example.com/zidanna/",
+   "attrID": "zd-stat-1",
+   "breakpoint": "_t",
+   "property": "padding-left",
+   "declared": "26px",
+   "compiled": "26px",
+   "status": "verified"
+  },
+  {
+   "url": "https://example.com/zidanna/",
+   "attrID": "zd-stat-1",
+   "breakpoint": "_t",
+   "property": "border-left",
+   "declared": "1px solid rgba(24,21,18,.14)",
+   "compiled": "1px solid rgba(24, 21, 18, .14)",
+   "status": "verified"
+  },
+  {
+   "url": "https://example.com/zidanna/",
+   "attrID": "zd-stat-1",
+   "breakpoint": "_t",
+   "property": "border-top",
+   "declared": "0",
+   "compiled": "0",
+   "status": "verified"
+  },
+  {
+   "url": "https://example.com/zidanna/",
+   "attrID": "zd-stat-1",
+   "breakpoint": "_m",
+   "property": "padding-top",
+   "declared": "30px",
+   "compiled": "30px",
+   "status": "verified"
+  },
+  {
+   "url": "https://example.com/zidanna/",
+   "attrID": "zd-stat-1",
+   "breakpoint": "_m",
+   "property": "padding-bottom",
+   "declared": "30px",
+   "compiled": "30px",
+   "status": "verified"
+  },
+  {
+   "url": "https://example.com/zidanna/",
+   "attrID": "zd-stat-1",
+   "breakpoint": "_m",
+   "property": "padding-left",
+   "declared": "18px",
+   "compiled": "18px",
+   "status": "verified"
+  },
+  {
+   "url": "https://example.com/zidanna/",
+   "attrID": "zd-stat-1",
+   "breakpoint": "_m",
+   "property": "padding-right",
+   "declared": "14px",
+   "compiled": "14px",
+   "status": "verified"
+  },
+  {
+   "url": "https://example.com/zidanna/",
+   "attrID": "zd-stat-2",
+   "breakpoint": "_t",
+   "property": "padding-top",
+   "declared": "40px",
+   "compiled": "40px",
+   "status": "verified"
+  },
+  {
+   "url": "https://example.com/zidanna/",
+   "attrID": "zd-stat-2",
+   "breakpoint": "_t",
+   "property": "padding-bottom",
+   "declared": "40px",
+   "compiled": "40px",
+   "status": "verified"
+  },
+  {
+   "url": "https://example.com/zidanna/",
+   "attrID": "zd-stat-2",
+   "breakpoint": "_t",
+   "property": "padding-left",
+   "declared": "26px",
+   "compiled": "26px",
+   "status": "verified"
+  },
+  {
+   "url": "https://example.com/zidanna/",
+   "attrID": "zd-stat-2",
+   "breakpoint": "_t",
+   "property": "border-left",
+   "declared": "0",
+   "compiled": "0",
+   "status": "verified"
+  },
+  {
+   "url": "https://example.com/zidanna/",
+   "attrID": "zd-stat-2",
+   "breakpoint": "_t",
+   "property": "border-top",
+   "declared": "1px solid rgba(24,21,18,.14)",
+   "compiled": "1px solid rgba(24, 21, 18, .14)",
+   "status": "verified"
+  },
+  {
+   "url": "https://example.com/zidanna/",
+   "attrID": "zd-stat-2",
+   "breakpoint": "_m",
+   "property": "padding-top",
+   "declared": "30px",
+   "compiled": "30px",
+   "status": "verified"
+  },
+  {
+   "url": "https://example.com/zidanna/",
+   "attrID": "zd-stat-2",
+   "breakpoint": "_m",
+   "property": "padding-bottom",
+   "declared": "30px",
+   "compiled": "30px",
+   "status": "verified"
+  },
+  {
+   "url": "https://example.com/zidanna/",
+   "attrID": "zd-stat-2",
+   "breakpoint": "_m",
+   "property": "padding-left",
+   "declared": "18px",
+   "compiled": "18px",
+   "status": "verified"
+  },
+  {
+   "url": "https://example.com/zidanna/",
+   "attrID": "zd-stat-2",
+   "breakpoint": "_m",
+   "property": "padding-right",
+   "declared": "14px",
+   "compiled": "14px",
+   "status": "verified"
+  },
+  {
+   "url": "https://example.com/zidanna/",
+   "attrID": "zd-stat-3",
+   "breakpoint": "_t",
+   "property": "padding-top",
+   "declared": "40px",
+   "compiled": "40px",
+   "status": "verified"
+  },
+  {
+   "url": "https://example.com/zidanna/",
+   "attrID": "zd-stat-3",
+   "breakpoint": "_t",
+   "property": "padding-bottom",
+   "declared": "40px",
+   "compiled": "40px",
+   "status": "verified"
+  },
+  {
+   "url": "https://example.com/zidanna/",
+   "attrID": "zd-stat-3",
+   "breakpoint": "_t",
+   "property": "padding-left",
+   "declared": "26px",
+   "compiled": "26px",
+   "status": "verified"
+  },
+  {
+   "url": "https://example.com/zidanna/",
+   "attrID": "zd-stat-3",
+   "breakpoint": "_t",
+   "property": "border-left",
+   "declared": "1px solid rgba(24,21,18,.14)",
+   "compiled": "1px solid rgba(24, 21, 18, .14)",
+   "status": "verified"
+  },
+  {
+   "url": "https://example.com/zidanna/",
+   "attrID": "zd-stat-3",
+   "breakpoint": "_t",
+   "property": "border-top",
+   "declared": "1px solid rgba(24,21,18,.14)",
+   "compiled": "1px solid rgba(24, 21, 18, .14)",
+   "status": "verified"
+  },
+  {
+   "url": "https://example.com/zidanna/",
+   "attrID": "zd-stat-3",
+   "breakpoint": "_m",
+   "property": "padding-top",
+   "declared": "30px",
+   "compiled": "30px",
+   "status": "verified"
+  },
+  {
+   "url": "https://example.com/zidanna/",
+   "attrID": "zd-stat-3",
+   "breakpoint": "_m",
+   "property": "padding-bottom",
+   "declared": "30px",
+   "compiled": "30px",
+   "status": "verified"
+  },
+  {
+   "url": "https://example.com/zidanna/",
+   "attrID": "zd-stat-3",
+   "breakpoint": "_m",
+   "property": "padding-left",
+   "declared": "18px",
+   "compiled": "18px",
+   "status": "verified"
+  },
+  {
+   "url": "https://example.com/zidanna/",
+   "attrID": "zd-stat-3",
+   "breakpoint": "_m",
+   "property": "padding-right",
+   "declared": "14px",
+   "compiled": "14px",
+   "status": "verified"
+  },
+  {
+   "url": "https://example.com/zidanna/",
+   "attrID": "about",
+   "breakpoint": "_t",
+   "property": "padding-left",
+   "declared": "32px",
+   "compiled": "32px",
+   "status": "verified"
+  },
+  {
+   "url": "https://example.com/zidanna/",
+   "attrID": "about",
+   "breakpoint": "_t",
+   "property": "padding-right",
+   "declared": "32px",
+   "compiled": "32px",
+   "status": "verified"
+  },
+  {
+   "url": "https://example.com/zidanna/",
+   "attrID": "about",
+   "breakpoint": "_t",
+   "property": "padding-top",
+   "declared": "84px",
+   "compiled": "84px",
+   "status": "verified"
+  },
+  {
+   "url": "https://example.com/zidanna/",
+   "attrID": "about",
+   "breakpoint": "_t",
+   "property": "padding-bottom",
+   "declared": "84px",
+   "compiled": "84px",
+   "status": "verified"
+  },
+  {
+   "url": "https://example.com/zidanna/",
+   "attrID": "about",
+   "breakpoint": "_m",
+   "property": "padding-left",
+   "declared": "20px",
+   "compiled": "20px",
+   "status": "verified"
+  },
+  {
+   "url": "https://example.com/zidanna/",
+   "attrID": "about",
+   "breakpoint": "_m",
+   "property": "padding-right",
+   "declared": "20px",
+   "compiled": "20px",
+   "status": "verified"
+  },
+  {
+   "url": "https://example.com/zidanna/",
+   "attrID": "about",
+   "breakpoint": "_m",
+   "property": "padding-top",
+   "declared": "60px",
+   "compiled": "60px",
+   "status": "verified"
+  },
+  {
+   "url": "https://example.com/zidanna/",
+   "attrID": "about",
+   "breakpoint": "_m",
+   "property": "padding-bottom",
+   "declared": "60px",
+   "compiled": "60px",
+   "status": "verified"
+  },
+  {
+   "url": "https://example.com/zidanna/",
+   "attrID": "zd-about-row",
+   "breakpoint": "_m",
+   "property": "grid-template-columns",
+   "declared": "repeat(1, 1fr)",
+   "compiled": "repeat(1, 1fr)",
+   "status": "verified"
+  },
+  {
+   "url": "https://example.com/zidanna/",
+   "attrID": "zd-about-eyebrow",
+   "breakpoint": "_m",
+   "property": "font-size",
+   "declared": "9px",
+   "compiled": "9px",
+   "status": "verified"
+  },
+  {
+   "url": "https://example.com/zidanna/",
+   "attrID": "zd-about-eyebrow",
+   "breakpoint": "_m",
+   "property": "letter-spacing",
+   "declared": "0.26em",
+   "compiled": "0.26em",
+   "status": "verified"
+  },
+  {
+   "url": "https://example.com/zidanna/",
+   "attrID": "zd-statement",
+   "breakpoint": "_t",
+   "property": "padding-left",
+   "declared": "32px",
+   "compiled": "32px",
+   "status": "verified"
+  },
+  {
+   "url": "https://example.com/zidanna/",
+   "attrID": "zd-statement",
+   "breakpoint": "_t",
+   "property": "padding-right",
+   "declared": "32px",
+   "compiled": "32px",
+   "status": "verified"
+  },
+  {
+   "url": "https://example.com/zidanna/",
+   "attrID": "zd-statement",
+   "breakpoint": "_t",
+   "property": "padding-top",
+   "declared": "84px",
+   "compiled": "84px",
+   "status": "verified"
+  },
+  {
+   "url": "https://example.com/zidanna/",
+   "attrID": "zd-statement",
+   "breakpoint": "_t",
+   "property": "padding-bottom",
+   "declared": "84px",
+   "compiled": "84px",
+   "status": "verified"
+  },
+  {
+   "url": "https://example.com/zidanna/",
+   "attrID": "zd-statement",
+   "breakpoint": "_m",
+   "property": "padding-left",
+   "declared": "20px",
+   "compiled": "20px",
+   "status": "verified"
+  },
+  {
+   "url": "https://example.com/zidanna/",
+   "attrID": "zd-statement",
+   "breakpoint": "_m",
+   "property": "padding-right",
+   "declared": "20px",
+   "compiled": "20px",
+   "status": "verified"
+  },
+  {
+   "url": "https://example.com/zidanna/",
+   "attrID": "zd-statement",
+   "breakpoint": "_m",
+   "property": "padding-top",
+   "declared": "60px",
+   "compiled": "60px",
+   "status": "verified"
+  },
+  {
+   "url": "https://example.com/zidanna/",
+   "attrID": "zd-statement",
+   "breakpoint": "_m",
+   "property": "padding-bottom",
+   "declared": "60px",
+   "compiled": "60px",
+   "status": "verified"
+  },
+  {
+   "url": "https://example.com/zidanna/",
+   "attrID": "zd-process",
+   "breakpoint": "_t",
+   "property": "padding-left",
+   "declared": "32px",
+   "compiled": "32px",
+   "status": "verified"
+  },
+  {
+   "url": "https://example.com/zidanna/",
+   "attrID": "zd-process",
+   "breakpoint": "_t",
+   "property": "padding-right",
+   "declared": "32px",
+   "compiled": "32px",
+   "status": "verified"
+  },
+  {
+   "url": "https://example.com/zidanna/",
+   "attrID": "zd-process",
+   "breakpoint": "_t",
+   "property": "padding-top",
+   "declared": "84px",
+   "compiled": "84px",
+   "status": "verified"
+  },
+  {
+   "url": "https://example.com/zidanna/",
+   "attrID": "zd-process",
+   "breakpoint": "_t",
+   "property": "padding-bottom",
+   "declared": "84px",
+   "compiled": "84px",
+   "status": "verified"
+  },
+  {
+   "url": "https://example.com/zidanna/",
+   "attrID": "zd-process",
+   "breakpoint": "_m",
+   "property": "padding-left",
+   "declared": "20px",
+   "compiled": "20px",
+   "status": "verified"
+  },
+  {
+   "url": "https://example.com/zidanna/",
+   "attrID": "zd-process",
+   "breakpoint": "_m",
+   "property": "padding-right",
+   "declared": "20px",
+   "compiled": "20px",
+   "status": "verified"
+  },
+  {
+   "url": "https://example.com/zidanna/",
+   "attrID": "zd-process",
+   "breakpoint": "_m",
+   "property": "padding-top",
+   "declared": "60px",
+   "compiled": "60px",
+   "status": "verified"
+  },
+  {
+   "url": "https://example.com/zidanna/",
+   "attrID": "zd-process",
+   "breakpoint": "_m",
+   "property": "padding-bottom",
+   "declared": "60px",
+   "compiled": "60px",
+   "status": "verified"
+  },
+  {
+   "url": "https://example.com/zidanna/",
+   "attrID": "zd-process-eyebrow",
+   "breakpoint": "_m",
+   "property": "font-size",
+   "declared": "9px",
+   "compiled": "9px",
+   "status": "verified"
+  },
+  {
+   "url": "https://example.com/zidanna/",
+   "attrID": "zd-process-eyebrow",
+   "breakpoint": "_m",
+   "property": "letter-spacing",
+   "declared": "0.26em",
+   "compiled": "0.26em",
+   "status": "verified"
+  },
+  {
+   "url": "https://example.com/zidanna/",
+   "attrID": "zd-process-grid",
+   "breakpoint": "_t",
+   "property": "grid-template-columns",
+   "declared": "repeat(2, 1fr)",
+   "compiled": "repeat(2, 1fr)",
+   "status": "verified"
+  },
+  {
+   "url": "https://example.com/zidanna/",
+   "attrID": "zd-process-grid",
+   "breakpoint": "_m",
+   "property": "grid-template-columns",
+   "declared": "repeat(1, 1fr)",
+   "compiled": "repeat(1, 1fr)",
+   "status": "verified"
+  },
+  {
+   "url": "https://example.com/zidanna/",
+   "attrID": "zd-step-01",
+   "breakpoint": "_t",
+   "property": "margin-top",
+   "declared": "0px",
+   "compiled": "0px",
+   "status": "verified"
+  },
+  {
+   "url": "https://example.com/zidanna/",
+   "attrID": "zd-step-01",
+   "breakpoint": "_m",
+   "property": "margin-top",
+   "declared": "0px",
+   "compiled": "0px",
+   "status": "verified"
+  },
+  {
+   "url": "https://example.com/zidanna/",
+   "attrID": "zd-step-02",
+   "breakpoint": "_t",
+   "property": "margin-top",
+   "declared": "28px",
+   "compiled": "28px",
+   "status": "verified"
+  },
+  {
+   "url": "https://example.com/zidanna/",
+   "attrID": "zd-step-02",
+   "breakpoint": "_m",
+   "property": "margin-top",
+   "declared": "0px",
+   "compiled": "0px",
+   "status": "verified"
+  },
+  {
+   "url": "https://example.com/zidanna/",
+   "attrID": "zd-step-03",
+   "breakpoint": "_t",
+   "property": "margin-top",
+   "declared": "0px",
+   "compiled": "0px",
+   "status": "verified"
+  },
+  {
+   "url": "https://example.com/zidanna/",
+   "attrID": "zd-step-03",
+   "breakpoint": "_m",
+   "property": "margin-top",
+   "declared": "0px",
+   "compiled": "0px",
+   "status": "verified"
+  },
+  {
+   "url": "https://example.com/zidanna/",
+   "attrID": "zd-step-04",
+   "breakpoint": "_t",
+   "property": "margin-top",
+   "declared": "28px",
+   "compiled": "28px",
+   "status": "verified"
+  },
+  {
+   "url": "https://example.com/zidanna/",
+   "attrID": "zd-step-04",
+   "breakpoint": "_m",
+   "property": "margin-top",
+   "declared": "0px",
+   "compiled": "0px",
+   "status": "verified"
+  },
+  {
+   "url": "https://example.com/zidanna/",
+   "attrID": "zd-cat",
+   "breakpoint": "_t",
+   "property": "padding-left",
+   "declared": "32px",
+   "compiled": "32px",
+   "status": "verified"
+  },
+  {
+   "url": "https://example.com/zidanna/",
+   "attrID": "zd-cat",
+   "breakpoint": "_t",
+   "property": "padding-right",
+   "declared": "32px",
+   "compiled": "32px",
+   "status": "verified"
+  },
+  {
+   "url": "https://example.com/zidanna/",
+   "attrID": "zd-cat",
+   "breakpoint": "_t",
+   "property": "padding-top",
+   "declared": "84px",
+   "compiled": "84px",
+   "status": "verified"
+  },
+  {
+   "url": "https://example.com/zidanna/",
+   "attrID": "zd-cat",
+   "breakpoint": "_t",
+   "property": "padding-bottom",
+   "declared": "84px",
+   "compiled": "84px",
+   "status": "verified"
+  },
+  {
+   "url": "https://example.com/zidanna/",
+   "attrID": "zd-cat",
+   "breakpoint": "_m",
+   "property": "padding-left",
+   "declared": "20px",
+   "compiled": "20px",
+   "status": "verified"
+  },
+  {
+   "url": "https://example.com/zidanna/",
+   "attrID": "zd-cat",
+   "breakpoint": "_m",
+   "property": "padding-right",
+   "declared": "20px",
+   "compiled": "20px",
+   "status": "verified"
+  },
+  {
+   "url": "https://example.com/zidanna/",
+   "attrID": "zd-cat",
+   "breakpoint": "_m",
+   "property": "padding-top",
+   "declared": "60px",
+   "compiled": "60px",
+   "status": "verified"
+  },
+  {
+   "url": "https://example.com/zidanna/",
+   "attrID": "zd-cat",
+   "breakpoint": "_m",
+   "property": "padding-bottom",
+   "declared": "60px",
+   "compiled": "60px",
+   "status": "verified"
+  },
+  {
+   "url": "https://example.com/zidanna/",
+   "attrID": "zd-cat-eyebrow",
+   "breakpoint": "_m",
+   "property": "font-size",
+   "declared": "9px",
+   "compiled": "9px",
+   "status": "verified"
+  },
+  {
+   "url": "https://example.com/zidanna/",
+   "attrID": "zd-cat-eyebrow",
+   "breakpoint": "_m",
+   "property": "letter-spacing",
+   "declared": "0.26em",
+   "compiled": "0.26em",
+   "status": "verified"
+  },
+  {
+   "url": "https://example.com/zidanna/",
+   "attrID": "zd-cat-grid",
+   "breakpoint": "_t",
+   "property": "grid-template-columns",
+   "declared": "repeat(2, 1fr)",
+   "compiled": "repeat(2, 1fr)",
+   "status": "verified"
+  },
+  {
+   "url": "https://example.com/zidanna/",
+   "attrID": "zd-cat-grid",
+   "breakpoint": "_m",
+   "property": "grid-template-columns",
+   "declared": "repeat(1, 1fr)",
+   "compiled": "repeat(1, 1fr)",
+   "status": "verified"
+  },
+  {
+   "url": "https://example.com/zidanna/",
+   "attrID": "zd-cat-0",
+   "breakpoint": "_t",
+   "property": "margin-top",
+   "declared": "0px",
+   "compiled": "0px",
+   "status": "verified"
+  },
+  {
+   "url": "https://example.com/zidanna/",
+   "attrID": "zd-cat-0",
+   "breakpoint": "_m",
+   "property": "margin-top",
+   "declared": "0px",
+   "compiled": "0px",
+   "status": "verified"
+  },
+  {
+   "url": "https://example.com/zidanna/",
+   "attrID": "zd-cat-1",
+   "breakpoint": "_t",
+   "property": "margin-top",
+   "declared": "34px",
+   "compiled": "34px",
+   "status": "verified"
+  },
+  {
+   "url": "https://example.com/zidanna/",
+   "attrID": "zd-cat-1",
+   "breakpoint": "_m",
+   "property": "margin-top",
+   "declared": "0px",
+   "compiled": "0px",
+   "status": "verified"
+  },
+  {
+   "url": "https://example.com/zidanna/",
+   "attrID": "zd-cat-2",
+   "breakpoint": "_t",
+   "property": "margin-top",
+   "declared": "0px",
+   "compiled": "0px",
+   "status": "verified"
+  },
+  {
+   "url": "https://example.com/zidanna/",
+   "attrID": "zd-cat-2",
+   "breakpoint": "_m",
+   "property": "margin-top",
+   "declared": "0px",
+   "compiled": "0px",
+   "status": "verified"
+  },
+  {
+   "url": "https://example.com/zidanna/",
+   "attrID": "zd-cat-3",
+   "breakpoint": "_t",
+   "property": "margin-top",
+   "declared": "34px",
+   "compiled": "34px",
+   "status": "verified"
+  },
+  {
+   "url": "https://example.com/zidanna/",
+   "attrID": "zd-cat-3",
+   "breakpoint": "_m",
+   "property": "margin-top",
+   "declared": "0px",
+   "compiled": "0px",
+   "status": "verified"
+  },
+  {
+   "url": "https://example.com/zidanna/",
+   "attrID": "zd-why",
+   "breakpoint": "_t",
+   "property": "padding-left",
+   "declared": "32px",
+   "compiled": "32px",
+   "status": "verified"
+  },
+  {
+   "url": "https://example.com/zidanna/",
+   "attrID": "zd-why",
+   "breakpoint": "_t",
+   "property": "padding-right",
+   "declared": "32px",
+   "compiled": "32px",
+   "status": "verified"
+  },
+  {
+   "url": "https://example.com/zidanna/",
+   "attrID": "zd-why",
+   "breakpoint": "_t",
+   "property": "padding-top",
+   "declared": "84px",
+   "compiled": "84px",
+   "status": "verified"
+  },
+  {
+   "url": "https://example.com/zidanna/",
+   "attrID": "zd-why",
+   "breakpoint": "_t",
+   "property": "padding-bottom",
+   "declared": "84px",
+   "compiled": "84px",
+   "status": "verified"
+  },
+  {
+   "url": "https://example.com/zidanna/",
+   "attrID": "zd-why",
+   "breakpoint": "_m",
+   "property": "padding-left",
+   "declared": "20px",
+   "compiled": "20px",
+   "status": "verified"
+  },
+  {
+   "url": "https://example.com/zidanna/",
+   "attrID": "zd-why",
+   "breakpoint": "_m",
+   "property": "padding-right",
+   "declared": "20px",
+   "compiled": "20px",
+   "status": "verified"
+  },
+  {
+   "url": "https://example.com/zidanna/",
+   "attrID": "zd-why",
+   "breakpoint": "_m",
+   "property": "padding-top",
+   "declared": "60px",
+   "compiled": "60px",
+   "status": "verified"
+  },
+  {
+   "url": "https://example.com/zidanna/",
+   "attrID": "zd-why",
+   "breakpoint": "_m",
+   "property": "padding-bottom",
+   "declared": "60px",
+   "compiled": "60px",
+   "status": "verified"
+  },
+  {
+   "url": "https://example.com/zidanna/",
+   "attrID": "zd-why-head",
+   "breakpoint": "_m",
+   "property": "grid-template-columns",
+   "declared": "repeat(1, 1fr)",
+   "compiled": "repeat(1, 1fr)",
+   "status": "verified"
+  },
+  {
+   "url": "https://example.com/zidanna/",
+   "attrID": "zd-why-eyebrow",
+   "breakpoint": "_m",
+   "property": "font-size",
+   "declared": "9px",
+   "compiled": "9px",
+   "status": "verified"
+  },
+  {
+   "url": "https://example.com/zidanna/",
+   "attrID": "zd-why-eyebrow",
+   "breakpoint": "_m",
+   "property": "letter-spacing",
+   "declared": "0.26em",
+   "compiled": "0.26em",
+   "status": "verified"
+  },
+  {
+   "url": "https://example.com/zidanna/",
+   "attrID": "zd-why-grid",
+   "breakpoint": "_m",
+   "property": "grid-template-columns",
+   "declared": "repeat(1, 1fr)",
+   "compiled": "repeat(1, 1fr)",
+   "status": "verified"
+  },
+  {
+   "url": "https://example.com/zidanna/",
+   "attrID": "zd-why-0",
+   "breakpoint": "_m",
+   "property": "padding-left",
+   "declared": "0px",
+   "compiled": "0px",
+   "status": "verified"
+  },
+  {
+   "url": "https://example.com/zidanna/",
+   "attrID": "zd-why-0",
+   "breakpoint": "_m",
+   "property": "padding-right",
+   "declared": "0px",
+   "compiled": "0px",
+   "status": "verified"
+  },
+  {
+   "url": "https://example.com/zidanna/",
+   "attrID": "zd-why-0",
+   "breakpoint": "_m",
+   "property": "padding-top",
+   "declared": "24px",
+   "compiled": "24px",
+   "status": "verified"
+  },
+  {
+   "url": "https://example.com/zidanna/",
+   "attrID": "zd-why-0",
+   "breakpoint": "_m",
+   "property": "padding-bottom",
+   "declared": "24px",
+   "compiled": "24px",
+   "status": "verified"
+  },
+  {
+   "url": "https://example.com/zidanna/",
+   "attrID": "zd-why-0",
+   "breakpoint": "_m",
+   "property": "border-top",
+   "declared": "1px solid rgba(24,21,18,.14)",
+   "compiled": "1px solid rgba(24, 21, 18, .14)",
+   "status": "verified"
+  },
+  {
+   "url": "https://example.com/zidanna/",
+   "attrID": "zd-why-0",
+   "breakpoint": "_m",
+   "property": "border-left",
+   "declared": "0",
+   "compiled": "0",
+   "status": "verified"
+  },
+  {
+   "url": "https://example.com/zidanna/",
+   "attrID": "zd-why-1",
+   "breakpoint": "_m",
+   "property": "padding-left",
+   "declared": "0px",
+   "compiled": "0px",
+   "status": "verified"
+  },
+  {
+   "url": "https://example.com/zidanna/",
+   "attrID": "zd-why-1",
+   "breakpoint": "_m",
+   "property": "padding-right",
+   "declared": "0px",
+   "compiled": "0px",
+   "status": "verified"
+  },
+  {
+   "url": "https://example.com/zidanna/",
+   "attrID": "zd-why-1",
+   "breakpoint": "_m",
+   "property": "padding-top",
+   "declared": "24px",
+   "compiled": "24px",
+   "status": "verified"
+  },
+  {
+   "url": "https://example.com/zidanna/",
+   "attrID": "zd-why-1",
+   "breakpoint": "_m",
+   "property": "padding-bottom",
+   "declared": "24px",
+   "compiled": "24px",
+   "status": "verified"
+  },
+  {
+   "url": "https://example.com/zidanna/",
+   "attrID": "zd-why-1",
+   "breakpoint": "_m",
+   "property": "border-top",
+   "declared": "1px solid rgba(24,21,18,.14)",
+   "compiled": "1px solid rgba(24, 21, 18, .14)",
+   "status": "verified"
+  },
+  {
+   "url": "https://example.com/zidanna/",
+   "attrID": "zd-why-1",
+   "breakpoint": "_m",
+   "property": "border-left",
+   "declared": "0",
+   "compiled": "0",
+   "status": "verified"
+  },
+  {
+   "url": "https://example.com/zidanna/",
+   "attrID": "zd-why-2",
+   "breakpoint": "_m",
+   "property": "padding-left",
+   "declared": "0px",
+   "compiled": "0px",
+   "status": "verified"
+  },
+  {
+   "url": "https://example.com/zidanna/",
+   "attrID": "zd-why-2",
+   "breakpoint": "_m",
+   "property": "padding-right",
+   "declared": "0px",
+   "compiled": "0px",
+   "status": "verified"
+  },
+  {
+   "url": "https://example.com/zidanna/",
+   "attrID": "zd-why-2",
+   "breakpoint": "_m",
+   "property": "padding-top",
+   "declared": "24px",
+   "compiled": "24px",
+   "status": "verified"
+  },
+  {
+   "url": "https://example.com/zidanna/",
+   "attrID": "zd-why-2",
+   "breakpoint": "_m",
+   "property": "padding-bottom",
+   "declared": "24px",
+   "compiled": "24px",
+   "status": "verified"
+  },
+  {
+   "url": "https://example.com/zidanna/",
+   "attrID": "zd-why-2",
+   "breakpoint": "_m",
+   "property": "border-top",
+   "declared": "1px solid rgba(24,21,18,.14)",
+   "compiled": "1px solid rgba(24, 21, 18, .14)",
+   "status": "verified"
+  },
+  {
+   "url": "https://example.com/zidanna/",
+   "attrID": "zd-why-2",
+   "breakpoint": "_m",
+   "property": "border-left",
+   "declared": "0",
+   "compiled": "0",
+   "status": "verified"
+  },
+  {
+   "url": "https://example.com/zidanna/",
+   "attrID": "zd-why-3",
+   "breakpoint": "_m",
+   "property": "padding-left",
+   "declared": "0px",
+   "compiled": "0px",
+   "status": "verified"
+  },
+  {
+   "url": "https://example.com/zidanna/",
+   "attrID": "zd-why-3",
+   "breakpoint": "_m",
+   "property": "padding-right",
+   "declared": "0px",
+   "compiled": "0px",
+   "status": "verified"
+  },
+  {
+   "url": "https://example.com/zidanna/",
+   "attrID": "zd-why-3",
+   "breakpoint": "_m",
+   "property": "padding-top",
+   "declared": "24px",
+   "compiled": "24px",
+   "status": "verified"
+  },
+  {
+   "url": "https://example.com/zidanna/",
+   "attrID": "zd-why-3",
+   "breakpoint": "_m",
+   "property": "padding-bottom",
+   "declared": "24px",
+   "compiled": "24px",
+   "status": "verified"
+  },
+  {
+   "url": "https://example.com/zidanna/",
+   "attrID": "zd-why-3",
+   "breakpoint": "_m",
+   "property": "border-top",
+   "declared": "1px solid rgba(24,21,18,.14)",
+   "compiled": "1px solid rgba(24, 21, 18, .14)",
+   "status": "verified"
+  },
+  {
+   "url": "https://example.com/zidanna/",
+   "attrID": "zd-why-3",
+   "breakpoint": "_m",
+   "property": "border-left",
+   "declared": "0",
+   "compiled": "0",
+   "status": "verified"
+  },
+  {
+   "url": "https://example.com/zidanna/",
+   "attrID": "zd-why-4",
+   "breakpoint": "_m",
+   "property": "padding-left",
+   "declared": "0px",
+   "compiled": "0px",
+   "status": "verified"
+  },
+  {
+   "url": "https://example.com/zidanna/",
+   "attrID": "zd-why-4",
+   "breakpoint": "_m",
+   "property": "padding-right",
+   "declared": "0px",
+   "compiled": "0px",
+   "status": "verified"
+  },
+  {
+   "url": "https://example.com/zidanna/",
+   "attrID": "zd-why-4",
+   "breakpoint": "_m",
+   "property": "padding-top",
+   "declared": "24px",
+   "compiled": "24px",
+   "status": "verified"
+  },
+  {
+   "url": "https://example.com/zidanna/",
+   "attrID": "zd-why-4",
+   "breakpoint": "_m",
+   "property": "padding-bottom",
+   "declared": "24px",
+   "compiled": "24px",
+   "status": "verified"
+  },
+  {
+   "url": "https://example.com/zidanna/",
+   "attrID": "zd-why-4",
+   "breakpoint": "_m",
+   "property": "border-top",
+   "declared": "1px solid rgba(24,21,18,.14)",
+   "compiled": "1px solid rgba(24, 21, 18, .14)",
+   "status": "verified"
+  },
+  {
+   "url": "https://example.com/zidanna/",
+   "attrID": "zd-why-4",
+   "breakpoint": "_m",
+   "property": "border-left",
+   "declared": "0",
+   "compiled": "0",
+   "status": "verified"
+  },
+  {
+   "url": "https://example.com/zidanna/",
+   "attrID": "zd-why-5",
+   "breakpoint": "_m",
+   "property": "padding-left",
+   "declared": "0px",
+   "compiled": "0px",
+   "status": "verified"
+  },
+  {
+   "url": "https://example.com/zidanna/",
+   "attrID": "zd-why-5",
+   "breakpoint": "_m",
+   "property": "padding-right",
+   "declared": "0px",
+   "compiled": "0px",
+   "status": "verified"
+  },
+  {
+   "url": "https://example.com/zidanna/",
+   "attrID": "zd-why-5",
+   "breakpoint": "_m",
+   "property": "padding-top",
+   "declared": "24px",
+   "compiled": "24px",
+   "status": "verified"
+  },
+  {
+   "url": "https://example.com/zidanna/",
+   "attrID": "zd-why-5",
+   "breakpoint": "_m",
+   "property": "padding-bottom",
+   "declared": "24px",
+   "compiled": "24px",
+   "status": "verified"
+  },
+  {
+   "url": "https://example.com/zidanna/",
+   "attrID": "zd-why-5",
+   "breakpoint": "_m",
+   "property": "border-top",
+   "declared": "1px solid rgba(24,21,18,.14)",
+   "compiled": "1px solid rgba(24, 21, 18, .14)",
+   "status": "verified"
+  },
+  {
+   "url": "https://example.com/zidanna/",
+   "attrID": "zd-why-5",
+   "breakpoint": "_m",
+   "property": "border-left",
+   "declared": "0",
+   "compiled": "0",
+   "status": "verified"
+  },
+  {
+   "url": "https://example.com/zidanna/",
+   "attrID": "zd-cta",
+   "breakpoint": "_t",
+   "property": "padding-left",
+   "declared": "32px",
+   "compiled": "32px",
+   "status": "verified"
+  },
+  {
+   "url": "https://example.com/zidanna/",
+   "attrID": "zd-cta",
+   "breakpoint": "_t",
+   "property": "padding-right",
+   "declared": "32px",
+   "compiled": "32px",
+   "status": "verified"
+  },
+  {
+   "url": "https://example.com/zidanna/",
+   "attrID": "zd-cta",
+   "breakpoint": "_t",
+   "property": "padding-top",
+   "declared": "84px",
+   "compiled": "84px",
+   "status": "verified"
+  },
+  {
+   "url": "https://example.com/zidanna/",
+   "attrID": "zd-cta",
+   "breakpoint": "_t",
+   "property": "padding-bottom",
+   "declared": "84px",
+   "compiled": "84px",
+   "status": "verified"
+  },
+  {
+   "url": "https://example.com/zidanna/",
+   "attrID": "zd-cta",
+   "breakpoint": "_m",
+   "property": "padding-left",
+   "declared": "20px",
+   "compiled": "20px",
+   "status": "verified"
+  },
+  {
+   "url": "https://example.com/zidanna/",
+   "attrID": "zd-cta",
+   "breakpoint": "_m",
+   "property": "padding-right",
+   "declared": "20px",
+   "compiled": "20px",
+   "status": "verified"
+  },
+  {
+   "url": "https://example.com/zidanna/",
+   "attrID": "zd-cta",
+   "breakpoint": "_m",
+   "property": "padding-top",
+   "declared": "60px",
+   "compiled": "60px",
+   "status": "verified"
+  },
+  {
+   "url": "https://example.com/zidanna/",
+   "attrID": "zd-cta",
+   "breakpoint": "_m",
+   "property": "padding-bottom",
+   "declared": "60px",
+   "compiled": "60px",
+   "status": "verified"
+  },
+  {
+   "url": "https://example.com/zidanna/",
+   "attrID": "zd-cta-row",
+   "breakpoint": "_m",
+   "property": "grid-template-columns",
+   "declared": "repeat(1, 1fr)",
+   "compiled": "repeat(1, 1fr)",
+   "status": "verified"
+  },
+  {
+   "url": "https://example.com/zidanna/",
+   "attrID": "zd-cta-eyebrow",
+   "breakpoint": "_m",
+   "property": "font-size",
+   "declared": "9px",
+   "compiled": "9px",
+   "status": "verified"
+  },
+  {
+   "url": "https://example.com/zidanna/",
+   "attrID": "zd-cta-eyebrow",
+   "breakpoint": "_m",
+   "property": "letter-spacing",
+   "declared": "0.26em",
+   "compiled": "0.26em",
+   "status": "verified"
+  },
+  {
+   "url": "https://example.com/zidanna/",
+   "attrID": "zd-header",
+   "breakpoint": "_t",
+   "property": "padding-left",
+   "declared": "24px",
+   "compiled": "24px",
+   "status": "verified"
+  },
+  {
+   "url": "https://example.com/zidanna/",
+   "attrID": "zd-header",
+   "breakpoint": "_t",
+   "property": "padding-right",
+   "declared": "14px",
+   "compiled": "14px",
+   "status": "verified"
+  },
+  {
+   "url": "https://example.com/zidanna/",
+   "attrID": "zd-header",
+   "breakpoint": "_m",
+   "property": "padding-left",
+   "declared": "18px",
+   "compiled": "18px",
+   "status": "verified"
+  },
+  {
+   "url": "https://example.com/zidanna/",
+   "attrID": "zd-header",
+   "breakpoint": "_m",
+   "property": "padding-right",
+   "declared": "18px",
+   "compiled": "18px",
+   "status": "verified"
+  },
+  {
+   "url": "https://example.com/zidanna/",
+   "attrID": "zd-header",
+   "breakpoint": "_m",
+   "property": "padding-top",
+   "declared": "11px",
+   "compiled": "11px",
+   "status": "verified"
+  },
+  {
+   "url": "https://example.com/zidanna/",
+   "attrID": "zd-header",
+   "breakpoint": "_m",
+   "property": "padding-bottom",
+   "declared": "12px",
+   "compiled": "12px",
+   "status": "verified"
+  },
+  {
+   "url": "https://example.com/zidanna/",
+   "attrID": "zd-header-row",
+   "breakpoint": "_t",
+   "property": "column-gap",
+   "declared": "24px",
+   "compiled": "24px",
+   "status": "verified"
+  },
+  {
+   "url": "https://example.com/zidanna/",
+   "attrID": "zd-header-row",
+   "breakpoint": "_m",
+   "property": "column-gap",
+   "declared": "14px",
+   "compiled": "14px",
+   "status": "verified"
+  },
+  {
+   "url": "https://example.com/zidanna/",
+   "attrID": "zd-nav",
+   "breakpoint": "_t",
+   "property": "column-gap",
+   "declared": "22px",
+   "compiled": "22px",
+   "status": "verified"
+  },
+  {
+   "url": "https://example.com/zidanna/",
+   "attrID": "zd-nav",
+   "breakpoint": "_m",
+   "property": "display",
+   "declared": "none",
+   "compiled": "none",
+   "status": "verified"
+  },
+  {
+   "url": "https://example.com/zidanna/",
+   "attrID": "zd-nav-0",
+   "breakpoint": "_t",
+   "property": "font-size",
+   "declared": "13px",
+   "compiled": "13px",
+   "status": "verified"
+  },
+  {
+   "url": "https://example.com/zidanna/",
+   "attrID": "zd-nav-0",
+   "breakpoint": "_m",
+   "property": "font-size",
+   "declared": "13px",
+   "compiled": "13px",
+   "status": "verified"
+  },
+  {
+   "url": "https://example.com/zidanna/",
+   "attrID": "zd-nav-0",
+   "breakpoint": "_m",
+   "property": "letter-spacing",
+   "declared": "0.04em",
+   "compiled": "0.04em",
+   "status": "verified"
+  },
+  {
+   "url": "https://example.com/zidanna/",
+   "attrID": "zd-nav-1",
+   "breakpoint": "_t",
+   "property": "font-size",
+   "declared": "13px",
+   "compiled": "13px",
+   "status": "verified"
+  },
+  {
+   "url": "https://example.com/zidanna/",
+   "attrID": "zd-nav-1",
+   "breakpoint": "_m",
+   "property": "font-size",
+   "declared": "13px",
+   "compiled": "13px",
+   "status": "verified"
+  },
+  {
+   "url": "https://example.com/zidanna/",
+   "attrID": "zd-nav-1",
+   "breakpoint": "_m",
+   "property": "letter-spacing",
+   "declared": "0.04em",
+   "compiled": "0.04em",
+   "status": "verified"
+  },
+  {
+   "url": "https://example.com/zidanna/",
+   "attrID": "zd-nav-2",
+   "breakpoint": "_t",
+   "property": "font-size",
+   "declared": "13px",
+   "compiled": "13px",
+   "status": "verified"
+  },
+  {
+   "url": "https://example.com/zidanna/",
+   "attrID": "zd-nav-2",
+   "breakpoint": "_m",
+   "property": "font-size",
+   "declared": "13px",
+   "compiled": "13px",
+   "status": "verified"
+  },
+  {
+   "url": "https://example.com/zidanna/",
+   "attrID": "zd-nav-2",
+   "breakpoint": "_m",
+   "property": "letter-spacing",
+   "declared": "0.04em",
+   "compiled": "0.04em",
+   "status": "verified"
+  },
+  {
+   "url": "https://example.com/zidanna/",
+   "attrID": "zd-nav-3",
+   "breakpoint": "_t",
+   "property": "font-size",
+   "declared": "13px",
+   "compiled": "13px",
+   "status": "verified"
+  },
+  {
+   "url": "https://example.com/zidanna/",
+   "attrID": "zd-nav-3",
+   "breakpoint": "_m",
+   "property": "font-size",
+   "declared": "13px",
+   "compiled": "13px",
+   "status": "verified"
+  },
+  {
+   "url": "https://example.com/zidanna/",
+   "attrID": "zd-nav-3",
+   "breakpoint": "_m",
+   "property": "letter-spacing",
+   "declared": "0.04em",
+   "compiled": "0.04em",
+   "status": "verified"
+  },
+  {
+   "url": "https://example.com/zidanna/",
+   "attrID": "zd-navm",
+   "breakpoint": "_m",
+   "property": "display",
+   "declared": "flex",
+   "compiled": "flex",
+   "status": "verified"
+  },
+  {
+   "url": "https://example.com/zidanna/",
+   "attrID": "zd-navm",
+   "breakpoint": "_m",
+   "property": "column-gap",
+   "declared": "20px",
+   "compiled": "20px",
+   "status": "verified"
+  },
+  {
+   "url": "https://example.com/zidanna/",
+   "attrID": "zd-navm",
+   "breakpoint": "_m",
+   "property": "align-items",
+   "declared": "center",
+   "compiled": "center",
+   "status": "verified"
+  },
+  {
+   "url": "https://example.com/zidanna/",
+   "attrID": "zd-navm-0",
+   "breakpoint": "_t",
+   "property": "font-size",
+   "declared": "13px",
+   "compiled": "13px",
+   "status": "verified"
+  },
+  {
+   "url": "https://example.com/zidanna/",
+   "attrID": "zd-navm-0",
+   "breakpoint": "_m",
+   "property": "font-size",
+   "declared": "13px",
+   "compiled": "13px",
+   "status": "verified"
+  },
+  {
+   "url": "https://example.com/zidanna/",
+   "attrID": "zd-navm-0",
+   "breakpoint": "_m",
+   "property": "letter-spacing",
+   "declared": "0.04em",
+   "compiled": "0.04em",
+   "status": "verified"
+  },
+  {
+   "url": "https://example.com/zidanna/",
+   "attrID": "zd-navm-1",
+   "breakpoint": "_t",
+   "property": "font-size",
+   "declared": "13px",
+   "compiled": "13px",
+   "status": "verified"
+  },
+  {
+   "url": "https://example.com/zidanna/",
+   "attrID": "zd-navm-1",
+   "breakpoint": "_m",
+   "property": "font-size",
+   "declared": "13px",
+   "compiled": "13px",
+   "status": "verified"
+  },
+  {
+   "url": "https://example.com/zidanna/",
+   "attrID": "zd-navm-1",
+   "breakpoint": "_m",
+   "property": "letter-spacing",
+   "declared": "0.04em",
+   "compiled": "0.04em",
+   "status": "verified"
+  },
+  {
+   "url": "https://example.com/zidanna/",
+   "attrID": "zd-navm-2",
+   "breakpoint": "_t",
+   "property": "font-size",
+   "declared": "13px",
+   "compiled": "13px",
+   "status": "verified"
+  },
+  {
+   "url": "https://example.com/zidanna/",
+   "attrID": "zd-navm-2",
+   "breakpoint": "_m",
+   "property": "font-size",
+   "declared": "13px",
+   "compiled": "13px",
+   "status": "verified"
+  },
+  {
+   "url": "https://example.com/zidanna/",
+   "attrID": "zd-navm-2",
+   "breakpoint": "_m",
+   "property": "letter-spacing",
+   "declared": "0.04em",
+   "compiled": "0.04em",
+   "status": "verified"
+  },
+  {
+   "url": "https://example.com/zidanna/",
+   "attrID": "zd-navm-3",
+   "breakpoint": "_t",
+   "property": "font-size",
+   "declared": "13px",
+   "compiled": "13px",
+   "status": "verified"
+  },
+  {
+   "url": "https://example.com/zidanna/",
+   "attrID": "zd-navm-3",
+   "breakpoint": "_m",
+   "property": "font-size",
+   "declared": "13px",
+   "compiled": "13px",
+   "status": "verified"
+  },
+  {
+   "url": "https://example.com/zidanna/",
+   "attrID": "zd-navm-3",
+   "breakpoint": "_m",
+   "property": "letter-spacing",
+   "declared": "0.04em",
+   "compiled": "0.04em",
+   "status": "verified"
+  },
+  {
+   "url": "https://example.com/zidanna/",
+   "attrID": "zd-header-cta",
+   "breakpoint": "_m",
+   "property": "display",
+   "declared": "none",
+   "compiled": "none",
+   "status": "verified"
+  },
+  {
+   "url": "https://example.com/zidanna/",
+   "attrID": "zd-header-cta",
+   "breakpoint": "_t",
+   "property": "font-size",
+   "declared": "12px",
+   "compiled": "12px",
+   "status": "verified"
+  },
+  {
+   "url": "https://example.com/zidanna/",
+   "attrID": "zd-header-cta",
+   "breakpoint": "_t",
+   "property": "padding-left",
+   "declared": "15px",
+   "compiled": "15px",
+   "status": "verified"
+  },
+  {
+   "url": "https://example.com/zidanna/",
+   "attrID": "zd-header-cta",
+   "breakpoint": "_t",
+   "property": "padding-right",
+   "declared": "15px",
+   "compiled": "15px",
+   "status": "verified"
+  },
+  {
+   "url": "https://example.com/zidanna/",
+   "attrID": "zd-footer",
+   "breakpoint": "_t",
+   "property": "padding-left",
+   "declared": "32px",
+   "compiled": "32px",
+   "status": "verified"
+  },
+  {
+   "url": "https://example.com/zidanna/",
+   "attrID": "zd-footer",
+   "breakpoint": "_t",
+   "property": "padding-right",
+   "declared": "32px",
+   "compiled": "32px",
+   "status": "verified"
+  },
+  {
+   "url": "https://example.com/zidanna/",
+   "attrID": "zd-footer",
+   "breakpoint": "_t",
+   "property": "padding-top",
+   "declared": "64px",
+   "compiled": "64px",
+   "status": "verified"
+  },
+  {
+   "url": "https://example.com/zidanna/",
+   "attrID": "zd-footer",
+   "breakpoint": "_m",
+   "property": "padding-left",
+   "declared": "20px",
+   "compiled": "20px",
+   "status": "verified"
+  },
+  {
+   "url": "https://example.com/zidanna/",
+   "attrID": "zd-footer",
+   "breakpoint": "_m",
+   "property": "padding-right",
+   "declared": "20px",
+   "compiled": "20px",
+   "status": "verified"
+  },
+  {
+   "url": "https://example.com/zidanna/",
+   "attrID": "zd-footer",
+   "breakpoint": "_m",
+   "property": "padding-top",
+   "declared": "48px",
+   "compiled": "48px",
+   "status": "verified"
+  },
+  {
+   "url": "https://example.com/zidanna/",
+   "attrID": "zd-footer-mark",
+   "breakpoint": "_m",
+   "property": "margin-bottom",
+   "declared": "34px",
+   "compiled": "34px",
+   "status": "verified"
+  },
+  {
+   "url": "https://example.com/zidanna/",
+   "attrID": "zd-footer-grid",
+   "breakpoint": "_m",
+   "property": "grid-template-columns",
+   "declared": "repeat(1, 1fr)",
+   "compiled": "repeat(1, 1fr)",
+   "status": "verified"
+  },
+  {
+   "url": "https://example.com/zidanna-oem/",
+   "attrID": "zd-oem-hero",
+   "breakpoint": "_t",
+   "property": "padding-left",
+   "declared": "32px",
+   "compiled": "32px",
+   "status": "verified"
+  },
+  {
+   "url": "https://example.com/zidanna-oem/",
+   "attrID": "zd-oem-hero",
+   "breakpoint": "_t",
+   "property": "padding-right",
+   "declared": "32px",
+   "compiled": "32px",
+   "status": "verified"
+  },
+  {
+   "url": "https://example.com/zidanna-oem/",
+   "attrID": "zd-oem-hero",
+   "breakpoint": "_t",
+   "property": "padding-top",
+   "declared": "84px",
+   "compiled": "84px",
+   "status": "verified"
+  },
+  {
+   "url": "https://example.com/zidanna-oem/",
+   "attrID": "zd-oem-hero",
+   "breakpoint": "_t",
+   "property": "padding-bottom",
+   "declared": "84px",
+   "compiled": "84px",
+   "status": "verified"
+  },
+  {
+   "url": "https://example.com/zidanna-oem/",
+   "attrID": "zd-oem-hero",
+   "breakpoint": "_m",
+   "property": "padding-left",
+   "declared": "20px",
+   "compiled": "20px",
+   "status": "verified"
+  },
+  {
+   "url": "https://example.com/zidanna-oem/",
+   "attrID": "zd-oem-hero",
+   "breakpoint": "_m",
+   "property": "padding-right",
+   "declared": "20px",
+   "compiled": "20px",
+   "status": "verified"
+  },
+  {
+   "url": "https://example.com/zidanna-oem/",
+   "attrID": "zd-oem-hero",
+   "breakpoint": "_m",
+   "property": "padding-top",
+   "declared": "60px",
+   "compiled": "60px",
+   "status": "verified"
+  },
+  {
+   "url": "https://example.com/zidanna-oem/",
+   "attrID": "zd-oem-hero",
+   "breakpoint": "_m",
+   "property": "padding-bottom",
+   "declared": "60px",
+   "compiled": "60px",
+   "status": "verified"
+  },
+  {
+   "url": "https://example.com/zidanna-oem/",
+   "attrID": "zd-oem-eyebrow",
+   "breakpoint": "_m",
+   "property": "font-size",
+   "declared": "9px",
+   "compiled": "9px",
+   "status": "verified"
+  },
+  {
+   "url": "https://example.com/zidanna-oem/",
+   "attrID": "zd-oem-eyebrow",
+   "breakpoint": "_m",
+   "property": "letter-spacing",
+   "declared": "0.26em",
+   "compiled": "0.26em",
+   "status": "verified"
+  },
+  {
+   "url": "https://example.com/zidanna-oem/",
+   "attrID": "zd-lines",
+   "breakpoint": "_t",
+   "property": "padding-left",
+   "declared": "32px",
+   "compiled": "32px",
+   "status": "verified"
+  },
+  {
+   "url": "https://example.com/zidanna-oem/",
+   "attrID": "zd-lines",
+   "breakpoint": "_t",
+   "property": "padding-right",
+   "declared": "32px",
+   "compiled": "32px",
+   "status": "verified"
+  },
+  {
+   "url": "https://example.com/zidanna-oem/",
+   "attrID": "zd-lines",
+   "breakpoint": "_t",
+   "property": "padding-top",
+   "declared": "84px",
+   "compiled": "84px",
+   "status": "verified"
+  },
+  {
+   "url": "https://example.com/zidanna-oem/",
+   "attrID": "zd-lines",
+   "breakpoint": "_t",
+   "property": "padding-bottom",
+   "declared": "84px",
+   "compiled": "84px",
+   "status": "verified"
+  },
+  {
+   "url": "https://example.com/zidanna-oem/",
+   "attrID": "zd-lines",
+   "breakpoint": "_m",
+   "property": "padding-left",
+   "declared": "20px",
+   "compiled": "20px",
+   "status": "verified"
+  },
+  {
+   "url": "https://example.com/zidanna-oem/",
+   "attrID": "zd-lines",
+   "breakpoint": "_m",
+   "property": "padding-right",
+   "declared": "20px",
+   "compiled": "20px",
+   "status": "verified"
+  },
+  {
+   "url": "https://example.com/zidanna-oem/",
+   "attrID": "zd-lines",
+   "breakpoint": "_m",
+   "property": "padding-top",
+   "declared": "60px",
+   "compiled": "60px",
+   "status": "verified"
+  },
+  {
+   "url": "https://example.com/zidanna-oem/",
+   "attrID": "zd-lines",
+   "breakpoint": "_m",
+   "property": "padding-bottom",
+   "declared": "60px",
+   "compiled": "60px",
+   "status": "verified"
+  },
+  {
+   "url": "https://example.com/zidanna-oem/",
+   "attrID": "zd-lines-eyebrow",
+   "breakpoint": "_m",
+   "property": "font-size",
+   "declared": "9px",
+   "compiled": "9px",
+   "status": "verified"
+  },
+  {
+   "url": "https://example.com/zidanna-oem/",
+   "attrID": "zd-lines-eyebrow",
+   "breakpoint": "_m",
+   "property": "letter-spacing",
+   "declared": "0.26em",
+   "compiled": "0.26em",
+   "status": "verified"
+  },
+  {
+   "url": "https://example.com/zidanna-oem/",
+   "attrID": "zd-oem-process",
+   "breakpoint": "_t",
+   "property": "padding-left",
+   "declared": "32px",
+   "compiled": "32px",
+   "status": "verified"
+  },
+  {
+   "url": "https://example.com/zidanna-oem/",
+   "attrID": "zd-oem-process",
+   "breakpoint": "_t",
+   "property": "padding-right",
+   "declared": "32px",
+   "compiled": "32px",
+   "status": "verified"
+  },
+  {
+   "url": "https://example.com/zidanna-oem/",
+   "attrID": "zd-oem-process",
+   "breakpoint": "_t",
+   "property": "padding-top",
+   "declared": "84px",
+   "compiled": "84px",
+   "status": "verified"
+  },
+  {
+   "url": "https://example.com/zidanna-oem/",
+   "attrID": "zd-oem-process",
+   "breakpoint": "_t",
+   "property": "padding-bottom",
+   "declared": "84px",
+   "compiled": "84px",
+   "status": "verified"
+  },
+  {
+   "url": "https://example.com/zidanna-oem/",
+   "attrID": "zd-oem-process",
+   "breakpoint": "_m",
+   "property": "padding-left",
+   "declared": "20px",
+   "compiled": "20px",
+   "status": "verified"
+  },
+  {
+   "url": "https://example.com/zidanna-oem/",
+   "attrID": "zd-oem-process",
+   "breakpoint": "_m",
+   "property": "padding-right",
+   "declared": "20px",
+   "compiled": "20px",
+   "status": "verified"
+  },
+  {
+   "url": "https://example.com/zidanna-oem/",
+   "attrID": "zd-oem-process",
+   "breakpoint": "_m",
+   "property": "padding-top",
+   "declared": "60px",
+   "compiled": "60px",
+   "status": "verified"
+  },
+  {
+   "url": "https://example.com/zidanna-oem/",
+   "attrID": "zd-oem-process",
+   "breakpoint": "_m",
+   "property": "padding-bottom",
+   "declared": "60px",
+   "compiled": "60px",
+   "status": "verified"
+  },
+  {
+   "url": "https://example.com/zidanna-oem/",
+   "attrID": "zd-oem-p-eyebrow",
+   "breakpoint": "_m",
+   "property": "font-size",
+   "declared": "9px",
+   "compiled": "9px",
+   "status": "verified"
+  },
+  {
+   "url": "https://example.com/zidanna-oem/",
+   "attrID": "zd-oem-p-eyebrow",
+   "breakpoint": "_m",
+   "property": "letter-spacing",
+   "declared": "0.26em",
+   "compiled": "0.26em",
+   "status": "verified"
+  },
+  {
+   "url": "https://example.com/zidanna-oem/",
+   "attrID": "zd-oem-grid",
+   "breakpoint": "_t",
+   "property": "grid-template-columns",
+   "declared": "repeat(2, 1fr)",
+   "compiled": "repeat(2, 1fr)",
+   "status": "verified"
+  },
+  {
+   "url": "https://example.com/zidanna-oem/",
+   "attrID": "zd-oem-grid",
+   "breakpoint": "_m",
+   "property": "grid-template-columns",
+   "declared": "repeat(1, 1fr)",
+   "compiled": "repeat(1, 1fr)",
+   "status": "verified"
+  },
+  {
+   "url": "https://example.com/zidanna-oem/",
+   "attrID": "zd-cta",
+   "breakpoint": "_t",
+   "property": "padding-left",
+   "declared": "32px",
+   "compiled": "32px",
+   "status": "verified"
+  },
+  {
+   "url": "https://example.com/zidanna-oem/",
+   "attrID": "zd-cta",
+   "breakpoint": "_t",
+   "property": "padding-right",
+   "declared": "32px",
+   "compiled": "32px",
+   "status": "verified"
+  },
+  {
+   "url": "https://example.com/zidanna-oem/",
+   "attrID": "zd-cta",
+   "breakpoint": "_t",
+   "property": "padding-top",
+   "declared": "84px",
+   "compiled": "84px",
+   "status": "verified"
+  },
+  {
+   "url": "https://example.com/zidanna-oem/",
+   "attrID": "zd-cta",
+   "breakpoint": "_t",
+   "property": "padding-bottom",
+   "declared": "84px",
+   "compiled": "84px",
+   "status": "verified"
+  },
+  {
+   "url": "https://example.com/zidanna-oem/",
+   "attrID": "zd-cta",
+   "breakpoint": "_m",
+   "property": "padding-left",
+   "declared": "20px",
+   "compiled": "20px",
+   "status": "verified"
+  },
+  {
+   "url": "https://example.com/zidanna-oem/",
+   "attrID": "zd-cta",
+   "breakpoint": "_m",
+   "property": "padding-right",
+   "declared": "20px",
+   "compiled": "20px",
+   "status": "verified"
+  },
+  {
+   "url": "https://example.com/zidanna-oem/",
+   "attrID": "zd-cta",
+   "breakpoint": "_m",
+   "property": "padding-top",
+   "declared": "60px",
+   "compiled": "60px",
+   "status": "verified"
+  },
+  {
+   "url": "https://example.com/zidanna-oem/",
+   "attrID": "zd-cta",
+   "breakpoint": "_m",
+   "property": "padding-bottom",
+   "declared": "60px",
+   "compiled": "60px",
+   "status": "verified"
+  },
+  {
+   "url": "https://example.com/zidanna-oem/",
+   "attrID": "zd-cta-row",
+   "breakpoint": "_m",
+   "property": "grid-template-columns",
+   "declared": "repeat(1, 1fr)",
+   "compiled": "repeat(1, 1fr)",
+   "status": "verified"
+  },
+  {
+   "url": "https://example.com/zidanna-oem/",
+   "attrID": "zd-cta-eyebrow",
+   "breakpoint": "_m",
+   "property": "font-size",
+   "declared": "9px",
+   "compiled": "9px",
+   "status": "verified"
+  },
+  {
+   "url": "https://example.com/zidanna-oem/",
+   "attrID": "zd-cta-eyebrow",
+   "breakpoint": "_m",
+   "property": "letter-spacing",
+   "declared": "0.26em",
+   "compiled": "0.26em",
+   "status": "verified"
+  },
+  {
+   "url": "https://example.com/zidanna-oem/",
+   "attrID": "zd-header",
+   "breakpoint": "_t",
+   "property": "padding-left",
+   "declared": "24px",
+   "compiled": "24px",
+   "status": "verified"
+  },
+  {
+   "url": "https://example.com/zidanna-oem/",
+   "attrID": "zd-header",
+   "breakpoint": "_t",
+   "property": "padding-right",
+   "declared": "14px",
+   "compiled": "14px",
+   "status": "verified"
+  },
+  {
+   "url": "https://example.com/zidanna-oem/",
+   "attrID": "zd-header",
+   "breakpoint": "_m",
+   "property": "padding-left",
+   "declared": "18px",
+   "compiled": "18px",
+   "status": "verified"
+  },
+  {
+   "url": "https://example.com/zidanna-oem/",
+   "attrID": "zd-header",
+   "breakpoint": "_m",
+   "property": "padding-right",
+   "declared": "18px",
+   "compiled": "18px",
+   "status": "verified"
+  },
+  {
+   "url": "https://example.com/zidanna-oem/",
+   "attrID": "zd-header",
+   "breakpoint": "_m",
+   "property": "padding-top",
+   "declared": "11px",
+   "compiled": "11px",
+   "status": "verified"
+  },
+  {
+   "url": "https://example.com/zidanna-oem/",
+   "attrID": "zd-header",
+   "breakpoint": "_m",
+   "property": "padding-bottom",
+   "declared": "12px",
+   "compiled": "12px",
+   "status": "verified"
+  },
+  {
+   "url": "https://example.com/zidanna-oem/",
+   "attrID": "zd-header-row",
+   "breakpoint": "_t",
+   "property": "column-gap",
+   "declared": "24px",
+   "compiled": "24px",
+   "status": "verified"
+  },
+  {
+   "url": "https://example.com/zidanna-oem/",
+   "attrID": "zd-header-row",
+   "breakpoint": "_m",
+   "property": "column-gap",
+   "declared": "14px",
+   "compiled": "14px",
+   "status": "verified"
+  },
+  {
+   "url": "https://example.com/zidanna-oem/",
+   "attrID": "zd-nav",
+   "breakpoint": "_t",
+   "property": "column-gap",
+   "declared": "22px",
+   "compiled": "22px",
+   "status": "verified"
+  },
+  {
+   "url": "https://example.com/zidanna-oem/",
+   "attrID": "zd-nav",
+   "breakpoint": "_m",
+   "property": "display",
+   "declared": "none",
+   "compiled": "none",
+   "status": "verified"
+  },
+  {
+   "url": "https://example.com/zidanna-oem/",
+   "attrID": "zd-nav-0",
+   "breakpoint": "_t",
+   "property": "font-size",
+   "declared": "13px",
+   "compiled": "13px",
+   "status": "verified"
+  },
+  {
+   "url": "https://example.com/zidanna-oem/",
+   "attrID": "zd-nav-0",
+   "breakpoint": "_m",
+   "property": "font-size",
+   "declared": "13px",
+   "compiled": "13px",
+   "status": "verified"
+  },
+  {
+   "url": "https://example.com/zidanna-oem/",
+   "attrID": "zd-nav-0",
+   "breakpoint": "_m",
+   "property": "letter-spacing",
+   "declared": "0.04em",
+   "compiled": "0.04em",
+   "status": "verified"
+  },
+  {
+   "url": "https://example.com/zidanna-oem/",
+   "attrID": "zd-nav-1",
+   "breakpoint": "_t",
+   "property": "font-size",
+   "declared": "13px",
+   "compiled": "13px",
+   "status": "verified"
+  },
+  {
+   "url": "https://example.com/zidanna-oem/",
+   "attrID": "zd-nav-1",
+   "breakpoint": "_m",
+   "property": "font-size",
+   "declared": "13px",
+   "compiled": "13px",
+   "status": "verified"
+  },
+  {
+   "url": "https://example.com/zidanna-oem/",
+   "attrID": "zd-nav-1",
+   "breakpoint": "_m",
+   "property": "letter-spacing",
+   "declared": "0.04em",
+   "compiled": "0.04em",
+   "status": "verified"
+  },
+  {
+   "url": "https://example.com/zidanna-oem/",
+   "attrID": "zd-nav-2",
+   "breakpoint": "_t",
+   "property": "font-size",
+   "declared": "13px",
+   "compiled": "13px",
+   "status": "verified"
+  },
+  {
+   "url": "https://example.com/zidanna-oem/",
+   "attrID": "zd-nav-2",
+   "breakpoint": "_m",
+   "property": "font-size",
+   "declared": "13px",
+   "compiled": "13px",
+   "status": "verified"
+  },
+  {
+   "url": "https://example.com/zidanna-oem/",
+   "attrID": "zd-nav-2",
+   "breakpoint": "_m",
+   "property": "letter-spacing",
+   "declared": "0.04em",
+   "compiled": "0.04em",
+   "status": "verified"
+  },
+  {
+   "url": "https://example.com/zidanna-oem/",
+   "attrID": "zd-nav-3",
+   "breakpoint": "_t",
+   "property": "font-size",
+   "declared": "13px",
+   "compiled": "13px",
+   "status": "verified"
+  },
+  {
+   "url": "https://example.com/zidanna-oem/",
+   "attrID": "zd-nav-3",
+   "breakpoint": "_m",
+   "property": "font-size",
+   "declared": "13px",
+   "compiled": "13px",
+   "status": "verified"
+  },
+  {
+   "url": "https://example.com/zidanna-oem/",
+   "attrID": "zd-nav-3",
+   "breakpoint": "_m",
+   "property": "letter-spacing",
+   "declared": "0.04em",
+   "compiled": "0.04em",
+   "status": "verified"
+  },
+  {
+   "url": "https://example.com/zidanna-oem/",
+   "attrID": "zd-navm",
+   "breakpoint": "_m",
+   "property": "display",
+   "declared": "flex",
+   "compiled": "flex",
+   "status": "verified"
+  },
+  {
+   "url": "https://example.com/zidanna-oem/",
+   "attrID": "zd-navm",
+   "breakpoint": "_m",
+   "property": "column-gap",
+   "declared": "20px",
+   "compiled": "20px",
+   "status": "verified"
+  },
+  {
+   "url": "https://example.com/zidanna-oem/",
+   "attrID": "zd-navm",
+   "breakpoint": "_m",
+   "property": "align-items",
+   "declared": "center",
+   "compiled": "center",
+   "status": "verified"
+  },
+  {
+   "url": "https://example.com/zidanna-oem/",
+   "attrID": "zd-navm-0",
+   "breakpoint": "_t",
+   "property": "font-size",
+   "declared": "13px",
+   "compiled": "13px",
+   "status": "verified"
+  },
+  {
+   "url": "https://example.com/zidanna-oem/",
+   "attrID": "zd-navm-0",
+   "breakpoint": "_m",
+   "property": "font-size",
+   "declared": "13px",
+   "compiled": "13px",
+   "status": "verified"
+  },
+  {
+   "url": "https://example.com/zidanna-oem/",
+   "attrID": "zd-navm-0",
+   "breakpoint": "_m",
+   "property": "letter-spacing",
+   "declared": "0.04em",
+   "compiled": "0.04em",
+   "status": "verified"
+  },
+  {
+   "url": "https://example.com/zidanna-oem/",
+   "attrID": "zd-navm-1",
+   "breakpoint": "_t",
+   "property": "font-size",
+   "declared": "13px",
+   "compiled": "13px",
+   "status": "verified"
+  },
+  {
+   "url": "https://example.com/zidanna-oem/",
+   "attrID": "zd-navm-1",
+   "breakpoint": "_m",
+   "property": "font-size",
+   "declared": "13px",
+   "compiled": "13px",
+   "status": "verified"
+  },
+  {
+   "url": "https://example.com/zidanna-oem/",
+   "attrID": "zd-navm-1",
+   "breakpoint": "_m",
+   "property": "letter-spacing",
+   "declared": "0.04em",
+   "compiled": "0.04em",
+   "status": "verified"
+  },
+  {
+   "url": "https://example.com/zidanna-oem/",
+   "attrID": "zd-navm-2",
+   "breakpoint": "_t",
+   "property": "font-size",
+   "declared": "13px",
+   "compiled": "13px",
+   "status": "verified"
+  },
+  {
+   "url": "https://example.com/zidanna-oem/",
+   "attrID": "zd-navm-2",
+   "breakpoint": "_m",
+   "property": "font-size",
+   "declared": "13px",
+   "compiled": "13px",
+   "status": "verified"
+  },
+  {
+   "url": "https://example.com/zidanna-oem/",
+   "attrID": "zd-navm-2",
+   "breakpoint": "_m",
+   "property": "letter-spacing",
+   "declared": "0.04em",
+   "compiled": "0.04em",
+   "status": "verified"
+  },
+  {
+   "url": "https://example.com/zidanna-oem/",
+   "attrID": "zd-navm-3",
+   "breakpoint": "_t",
+   "property": "font-size",
+   "declared": "13px",
+   "compiled": "13px",
+   "status": "verified"
+  },
+  {
+   "url": "https://example.com/zidanna-oem/",
+   "attrID": "zd-navm-3",
+   "breakpoint": "_m",
+   "property": "font-size",
+   "declared": "13px",
+   "compiled": "13px",
+   "status": "verified"
+  },
+  {
+   "url": "https://example.com/zidanna-oem/",
+   "attrID": "zd-navm-3",
+   "breakpoint": "_m",
+   "property": "letter-spacing",
+   "declared": "0.04em",
+   "compiled": "0.04em",
+   "status": "verified"
+  },
+  {
+   "url": "https://example.com/zidanna-oem/",
+   "attrID": "zd-header-cta",
+   "breakpoint": "_m",
+   "property": "display",
+   "declared": "none",
+   "compiled": "none",
+   "status": "verified"
+  },
+  {
+   "url": "https://example.com/zidanna-oem/",
+   "attrID": "zd-header-cta",
+   "breakpoint": "_t",
+   "property": "font-size",
+   "declared": "12px",
+   "compiled": "12px",
+   "status": "verified"
+  },
+  {
+   "url": "https://example.com/zidanna-oem/",
+   "attrID": "zd-header-cta",
+   "breakpoint": "_t",
+   "property": "padding-left",
+   "declared": "15px",
+   "compiled": "15px",
+   "status": "verified"
+  },
+  {
+   "url": "https://example.com/zidanna-oem/",
+   "attrID": "zd-header-cta",
+   "breakpoint": "_t",
+   "property": "padding-right",
+   "declared": "15px",
+   "compiled": "15px",
+   "status": "verified"
+  },
+  {
+   "url": "https://example.com/zidanna-oem/",
+   "attrID": "zd-footer",
+   "breakpoint": "_t",
+   "property": "padding-left",
+   "declared": "32px",
+   "compiled": "32px",
+   "status": "verified"
+  },
+  {
+   "url": "https://example.com/zidanna-oem/",
+   "attrID": "zd-footer",
+   "breakpoint": "_t",
+   "property": "padding-right",
+   "declared": "32px",
+   "compiled": "32px",
+   "status": "verified"
+  },
+  {
+   "url": "https://example.com/zidanna-oem/",
+   "attrID": "zd-footer",
+   "breakpoint": "_t",
+   "property": "padding-top",
+   "declared": "64px",
+   "compiled": "64px",
+   "status": "verified"
+  },
+  {
+   "url": "https://example.com/zidanna-oem/",
+   "attrID": "zd-footer",
+   "breakpoint": "_m",
+   "property": "padding-left",
+   "declared": "20px",
+   "compiled": "20px",
+   "status": "verified"
+  },
+  {
+   "url": "https://example.com/zidanna-oem/",
+   "attrID": "zd-footer",
+   "breakpoint": "_m",
+   "property": "padding-right",
+   "declared": "20px",
+   "compiled": "20px",
+   "status": "verified"
+  },
+  {
+   "url": "https://example.com/zidanna-oem/",
+   "attrID": "zd-footer",
+   "breakpoint": "_m",
+   "property": "padding-top",
+   "declared": "48px",
+   "compiled": "48px",
+   "status": "verified"
+  },
+  {
+   "url": "https://example.com/zidanna-oem/",
+   "attrID": "zd-footer-mark",
+   "breakpoint": "_m",
+   "property": "margin-bottom",
+   "declared": "34px",
+   "compiled": "34px",
+   "status": "verified"
+  },
+  {
+   "url": "https://example.com/zidanna-oem/",
+   "attrID": "zd-footer-grid",
+   "breakpoint": "_m",
+   "property": "grid-template-columns",
+   "declared": "repeat(1, 1fr)",
+   "compiled": "repeat(1, 1fr)",
+   "status": "verified"
+  }
+ ]
+}

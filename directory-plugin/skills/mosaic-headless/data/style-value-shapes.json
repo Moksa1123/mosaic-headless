@@ -1,0 +1,187 @@
+{
+ "source_file": "data/style-value-shapes.csv",
+ "columns": [
+  "property",
+  "kind",
+  "shape",
+  "compiles_to",
+  "status"
+ ],
+ "rows": [
+  {
+   "property": "borderRadius",
+   "kind": "object",
+   "shape": "{\"type\":\"all\",\"allOptions\":{\"borderRadiusValue\":\"18px\"}}",
+   "compiles_to": "border-radius:18px",
+   "status": "OK"
+  },
+  {
+   "property": "borderStyle",
+   "kind": "object",
+   "shape": "{\"borderTopWidth\":\"5px\",\"borderTopStyle\":\"solid\",\"borderTopColor\":\"rgb(..)\", ...12 keys}",
+   "compiles_to": "border-top-width:5px; ...",
+   "status": "OK"
+  },
+  {
+   "property": "outlineStyle",
+   "kind": "object",
+   "shape": "{\"outlineWidth\":\"3px\",\"outlineStyle\":\"dotted\",\"outlineColor\":\"rgb(..)\",\"outlineOffset\":\"4px\"}",
+   "compiles_to": "outline-width:3px;outline-style:dotted;...",
+   "status": "OK"
+  },
+  {
+   "property": "boxShadow",
+   "kind": "array",
+   "shape": "[{\"x\":\"8px\",\"y\":\"8px\",\"blur\":\"0px\",\"spread\":\"0px\",\"color\":\"rgb(..)\",\"type\":\"outside\",\"uuid\":\"<uuid>\"}]",
+   "compiles_to": "box-shadow:rgb(..) 8px 8px 0px 0px",
+   "status": "OK - type is \"outside\"/\"inside\", NOT outset/inset"
+  },
+  {
+   "property": "textShadow",
+   "kind": "array",
+   "shape": "[{\"x\":\"0px\",\"y\":\"2px\",\"blur\":\"8px\",\"color\":\"rgb(..)\",\"uuid\":\"<uuid>\"}]",
+   "compiles_to": "text-shadow:rgb(..) 0px 2px 8px",
+   "status": "OK"
+  },
+  {
+   "property": "transition",
+   "kind": "array",
+   "shape": "[{\"transitionProperty\":\"all\",\"transitionDuration\":\"350ms\",\"transitionDelay\":\"0ms\",\"transitionTimingFunction\":\"ease\",\"uuid\":\"<uuid>\"}]",
+   "compiles_to": "transition-property:all;transition-duration:350ms;...",
+   "status": "OK - easing maps to var(--mosaic-easing-<name>)"
+  },
+  {
+   "property": "transform",
+   "kind": "array",
+   "shape": "[{\"type\":\"translateY\",\"translateYOptions\":{\"value\":\"-8px\"},\"uuid\":\"<uuid>\"}]",
+   "compiles_to": "transform:translateY(-8px)",
+   "status": "OK - types: translateX/Y/Z, rotateX/Y/Z, skewX/Y, scale, scaleX/Y/Z"
+  },
+  {
+   "property": "transform (scale)",
+   "kind": "array",
+   "shape": "[{\"type\":\"scale\",\"scaleOptions\":{\"value\":\"1.05\"},\"uuid\":\"<uuid>\"}]",
+   "compiles_to": "transform:scale(1.05)",
+   "status": "OK - key is value, not x/y"
+  },
+  {
+   "property": "translate",
+   "kind": "object",
+   "shape": "{\"x\":\"0px\",\"y\":\"-6px\",\"z\":\"0px\"}",
+   "compiles_to": "--mosaic-translate-*; translate:0px -6px 0px",
+   "status": "OK"
+  },
+  {
+   "property": "rotate",
+   "kind": "object",
+   "shape": "{\"x\":\"0deg\",\"y\":\"0deg\",\"z\":\"4deg\"}",
+   "compiles_to": "--mosaic-rotate-*; rotate:0 0 1 4deg",
+   "status": "OK"
+  },
+  {
+   "property": "transformOrigin",
+   "kind": "object",
+   "shape": "{\"x\":\"0%\",\"y\":\"0%\",\"z\":\"0px\"}",
+   "compiles_to": "transform-origin:0% 0% 0px",
+   "status": "OK"
+  },
+  {
+   "property": "perspectiveOrigin",
+   "kind": "object",
+   "shape": "{\"x\":\"50%\",\"y\":\"50%\"}",
+   "compiles_to": "perspective-origin:50% 50%",
+   "status": "OK"
+  },
+  {
+   "property": "filter",
+   "kind": "array",
+   "shape": "[{\"type\":\"blur\",\"blurOptions\":{\"value\":\"5px\"},\"uuid\":\"<uuid>\"}]",
+   "compiles_to": "filter:blur(5px)",
+   "status": "OK - also brightness/contrast/... each with <type>Options"
+  },
+  {
+   "property": "backdropFilter",
+   "kind": "array",
+   "shape": "[{\"type\":\"blur\",\"blurOptions\":{\"value\":\"14px\"},\"uuid\":\"<uuid>\"}]",
+   "compiles_to": "backdrop-filter:blur(14px) + -webkit- prefix",
+   "status": "OK"
+  },
+  {
+   "property": "gridTemplateColumns",
+   "kind": "array",
+   "shape": "[{\"type\":\"default\",\"defaultOptions\":{\"size\":\"1fr\"},\"uuid\":\"<uuid>\"}, ...one per column]",
+   "compiles_to": "grid-template-columns:1fr 1fr 2fr",
+   "status": "OK"
+  },
+  {
+   "property": "gridTemplateColumns (autofit)",
+   "kind": "array",
+   "shape": "[{\"type\":\"default\",\"defaultOptions\":{\"size\":\"240px\",\"autofit\":\"1\"},\"uuid\":\"<uuid>\"}]",
+   "compiles_to": "grid-template-columns:repeat(auto-fit, 240px)",
+   "status": "OK - autofit is rejected with an fr size"
+  },
+  {
+   "property": "gridChildPosition",
+   "kind": "object",
+   "shape": "{\"gridRowStart\":\"1\",\"gridColumnStart\":\"1\",\"gridRowEnd\":\"2\",\"gridColumnEnd\":\"3\"}",
+   "compiles_to": "grid-row-start:1;grid-column-start:1;...",
+   "status": "OK"
+  },
+  {
+   "property": "flexSizing",
+   "kind": "object",
+   "shape": "{\"type\":\"grow\",\"growOptions\":{}}",
+   "compiles_to": "flex-grow:1;flex-shrink:0",
+   "status": "OK"
+  },
+  {
+   "property": "objectFitStyle",
+   "kind": "object",
+   "shape": "{\"objectFit\":\"cover\",\"objectPositionX\":\"50%\",\"objectPositionY\":\"50%\"}",
+   "compiles_to": "object-fit:cover;object-position:50%",
+   "status": "OK"
+  },
+  {
+   "property": "mask",
+   "kind": "array",
+   "shape": "[{\"type\":\"gradient\",\"gradientOptions\":{\"subType\":\"linear\",\"linearOptions\":{\"angle\":\"180deg\"},\"dots\":[...]},\"uuid\":\"<uuid>\"}]",
+   "compiles_to": "mask-image:linear-gradient(...)",
+   "status": "PARTIAL - compiles, but only the last dot survives"
+  },
+  {
+   "property": "backgroundStyle",
+   "kind": "array",
+   "shape": "[{\"type\":\"overlay\",\"overlayOptions\":{\"color\":\"rgba(..)\"},\"uuid\":\"<uuid>\"}]",
+   "compiles_to": "(accepted, emits background-image:none)",
+   "status": "UNRESOLVED - use customStyles"
+  },
+  {
+   "property": "customStyles",
+   "kind": "string",
+   "shape": "\"outline: 2px dashed rgb(7,8,9);\"",
+   "compiles_to": "emitted verbatim into the rule",
+   "status": "OK - the escape hatch; bypasses the collection-variable layer"
+  },
+  {
+   "property": "image",
+   "kind": "string",
+   "shape": "wp-attachment://image/<attachmentID>/<size>/<path-relative-to-uploads>",
+   "compiles_to": "<img src=\"...\" width=\"2500\" height=\"1686\"> - dimensions resolved off the attachment",
+   "status": "OK"
+  },
+  {
+   "property": "image (full path)",
+   "kind": "string",
+   "shape": "wp-attachment://image/37/full/wp-content/uploads/2026/09/x.png",
+   "compiles_to": "src=\".../wp-content/uploads/wp-content/uploads/2026/09/x.png\" - uploads base prefixed TWICE, no error, no dimensions",
+   "status": "TRAP - the last segment is uploads-RELATIVE"
+  },
+  {
+   "property": "image (plain url)",
+   "kind": "string",
+   "shape": "https://site/wp-content/uploads/2026/09/x.png",
+   "compiles_to": "<img src=\"...\"> - works; width/height only when the URL resolves to an attachment",
+   "status": "OK"
+  }
+ ]
+}

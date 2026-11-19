@@ -1,0 +1,89 @@
+{
+ "source_file": "data/interaction-verification.csv",
+ "columns": [
+  "candidate",
+  "note",
+  "status",
+  "evidence",
+  "stored"
+ ],
+ "rows": [
+  {
+   "candidate": "metas-with-uuid",
+   "note": "the hypothesis: DataArray items carry their own uuid",
+   "status": "TIMING_ONLY",
+   "evidence": "1 keyframes, no properties",
+   "stored": "stored: 1 metas, 0 property values"
+  },
+  {
+   "candidate": "metas-without-uuid",
+   "note": "NEGATIVE CONTROL - identical but the meta has no uuid",
+   "status": "TIMING_ONLY",
+   "evidence": "1 keyframes, no properties",
+   "stored": "stored: 1 metas, 0 property values"
+  },
+  {
+   "candidate": "properties-keyed-by-meta-uuid",
+   "note": "NEGATIVE CONTROL - properties keyed by the meta's uuid, not name",
+   "status": "TIMING_ONLY",
+   "evidence": "1 keyframes, no properties",
+   "stored": "stored: 1 metas, 0 property values"
+  },
+  {
+   "candidate": "no-initial",
+   "note": "does the initial block have to be there?",
+   "status": "TIMING_ONLY",
+   "evidence": "1 keyframes, no properties",
+   "stored": "stored: 1 metas, 0 property values"
+  },
+  {
+   "candidate": "two-properties",
+   "note": "more than one meta, and a transform among them",
+   "status": "TIMING_ONLY",
+   "evidence": "1 keyframes, no properties",
+   "stored": "stored: 2 metas, 0 property values"
+  },
+  {
+   "candidate": "two-keyframes",
+   "note": "a real timeline rather than a single step",
+   "status": "TIMING_ONLY",
+   "evidence": "2 keyframes, no properties",
+   "stored": "stored: 1 metas, 0 property values"
+  },
+  {
+   "candidate": "editor-shape-pageload",
+   "note": "as the editor stores it: uuid keys, '0%'/'80%', duration on the keyframe",
+   "status": "BOUND",
+   "evidence": "1 keyframes driving opacity",
+   "stored": "stored: 1 metas, 2 property values"
+  },
+  {
+   "candidate": "editor-shape-numbers",
+   "note": "NEGATIVE CONTROL - editor shape but bare numbers 0 / 0.8",
+   "status": "TIMING_ONLY",
+   "evidence": "1 keyframes, no properties",
+   "stored": "stored: 1 metas, 0 property values"
+  },
+  {
+   "candidate": "editor-shape-name-keys",
+   "note": "NEGATIVE CONTROL - editor shape but keyed by 'opacity'",
+   "status": "TIMING_ONLY",
+   "evidence": "1 keyframes, no properties",
+   "stored": "stored: 1 metas, 0 property values"
+  },
+  {
+   "candidate": "editor-shape-scroll",
+   "note": "uuid keys and '%' strings on the progress family (scrollIntoView)",
+   "status": "BOUND",
+   "evidence": "1 keyframes driving opacity",
+   "stored": "stored: 1 metas, 2 property values"
+  },
+  {
+   "candidate": "timed-trigger",
+   "note": "the timed family rather than the progress family",
+   "status": "NO_PAYLOAD",
+   "evidence": "no entry for this trigger selector",
+   "stored": "stored: 0 metas, 0 property values"
+  }
+ ]
+}

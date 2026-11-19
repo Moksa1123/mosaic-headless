@@ -1,0 +1,275 @@
+{
+ "source_file": "data/design-audit.csv",
+ "columns": [
+  "url",
+  "breakpoints",
+  "check",
+  "level",
+  "node",
+  "detail",
+  "sample",
+  "acknowledged_because"
+ ],
+ "rows": [
+  {
+   "url": "https://example.com/my-account/",
+   "breakpoints": "_,_t,_m",
+   "check": "CONTRAST",
+   "level": "ack",
+   "node": "a.mofoline-button",
+   "detail": "2.26:1 against its background, needs 4.5",
+   "sample": "用 LINE 繼續",
+   "acknowledged_because": "LINE Login's own button (the plugin renamed its class from moksa-line to mofoline; same asset), emitted by the LINE plugin inside WooCommerce's login form. LINE's brand guidelines fix it at #06C755 with white text, which is 2.26:1 - the official asset fails WCAG 1.4.3 as designed. Recolouring a third party's sign-in control breaks the recognition it exists for; the fix belongs to LINE, not to this page. The page's own primary button was corrected to ink-on-accent (5.73:1) in the same pass."
+  },
+  {
+   "url": "https://example.com/my-account/",
+   "breakpoints": "_,_,_t,_t,_m,_m",
+   "check": "CLIPPED",
+   "level": "ack",
+   "node": "span.screen-reader-text",
+   "detail": "11px of text in a 1px box",
+   "sample": "必填",
+   "acknowledged_because": "WordPress's visually-hidden pattern: a 1px clipped box that keeps the text in the accessibility tree while hiding it from sight. Being clipped is the whole mechanism, not a defect - the audit is right that 11px of text sits in a 1px box, and that is exactly what a screen reader needs it to do."
+  },
+  {
+   "url": "https://example.com/moksa/",
+   "breakpoints": "_,_t,_m",
+   "check": "DECORATIVE_TEXT",
+   "level": "ack",
+   "node": "mk-code-c0-h::after",
+   "detail": "2.71:1 - drawn by CSS content, so it is out of the accessibility tree and exempt, but it IS visible",
+   "sample": "PY",
+   "acknowledged_because": "The hero's code layer. Drawn by CSS `content` so it is not in the accessibility tree, and WCAG 1.4.3 exempts incidental text that is part of a picture with other significant visual content. Measured at 1.46:1 under the headline and 2.71:1 to the right; raising it to 4.5:1 would make the background a foreground. The lede and the spec column carry their own paper so no real content is ever read against it."
+  },
+  {
+   "url": "https://example.com/moksa/",
+   "breakpoints": "_,_t,_m",
+   "check": "DECORATIVE_TEXT",
+   "level": "ack",
+   "node": "mk-code-c0-l0::after",
+   "detail": "1.46:1 - drawn by CSS content, so it is out of the accessibility tree and exempt, but it IS visible",
+   "sample": "@app.post(\\\"/orders/{id}/pai",
+   "acknowledged_because": "The hero's code layer. Drawn by CSS `content` so it is not in the accessibility tree, and WCAG 1.4.3 exempts incidental text that is part of a picture with other significant visual content. Measured at 1.46:1 under the headline and 2.71:1 to the right; raising it to 4.5:1 would make the background a foreground. The lede and the spec column carry their own paper so no real content is ever read against it."
+  },
+  {
+   "url": "https://example.com/moksa/",
+   "breakpoints": "_,_t,_m",
+   "check": "DECORATIVE_TEXT",
+   "level": "ack",
+   "node": "mk-code-c0-l1::after",
+   "detail": "1.46:1 - drawn by CSS content, so it is out of the accessibility tree and exempt, but it IS visible",
+   "sample": "async def paid(id: str):",
+   "acknowledged_because": "The hero's code layer. Drawn by CSS `content` so it is not in the accessibility tree, and WCAG 1.4.3 exempts incidental text that is part of a picture with other significant visual content. Measured at 1.46:1 under the headline and 2.71:1 to the right; raising it to 4.5:1 would make the background a foreground. The lede and the spec column carry their own paper so no real content is ever read against it."
+  },
+  {
+   "url": "https://example.com/moksa/",
+   "breakpoints": "_,_t,_m",
+   "check": "DECORATIVE_TEXT",
+   "level": "ack",
+   "node": "mk-code-c0-l2::after",
+   "detail": "1.46:1 - drawn by CSS content, so it is out of the accessibility tree and exempt, but it IS visible",
+   "sample": "    o = await repo.get(id)",
+   "acknowledged_because": "The hero's code layer. Drawn by CSS `content` so it is not in the accessibility tree, and WCAG 1.4.3 exempts incidental text that is part of a picture with other significant visual content. Measured at 1.46:1 under the headline and 2.71:1 to the right; raising it to 4.5:1 would make the background a foreground. The lede and the spec column carry their own paper so no real content is ever read against it."
+  },
+  {
+   "url": "https://example.com/moksa/",
+   "breakpoints": "_,_t,_m",
+   "check": "DECORATIVE_TEXT",
+   "level": "ack",
+   "node": "mk-code-c0-l3::after",
+   "detail": "1.46:1 - drawn by CSS content, so it is out of the accessibility tree and exempt, but it IS visible",
+   "sample": "    await tasks(\\\"invoice\\\",",
+   "acknowledged_because": "The hero's code layer. Drawn by CSS `content` so it is not in the accessibility tree, and WCAG 1.4.3 exempts incidental text that is part of a picture with other significant visual content. Measured at 1.46:1 under the headline and 2.71:1 to the right; raising it to 4.5:1 would make the background a foreground. The lede and the spec column carry their own paper so no real content is ever read against it."
+  },
+  {
+   "url": "https://example.com/moksa/",
+   "breakpoints": "_,_t,_m",
+   "check": "DECORATIVE_TEXT",
+   "level": "ack",
+   "node": "mk-code-c0-l4::after",
+   "detail": "1.46:1 - drawn by CSS content, so it is out of the accessibility tree and exempt, but it IS visible",
+   "sample": "    return {\\\"ok\\\": True}",
+   "acknowledged_because": "The hero's code layer. Drawn by CSS `content` so it is not in the accessibility tree, and WCAG 1.4.3 exempts incidental text that is part of a picture with other significant visual content. Measured at 1.46:1 under the headline and 2.71:1 to the right; raising it to 4.5:1 would make the background a foreground. The lede and the spec column carry their own paper so no real content is ever read against it."
+  },
+  {
+   "url": "https://example.com/moksa/",
+   "breakpoints": "_,_t,_m",
+   "check": "DECORATIVE_TEXT",
+   "level": "ack",
+   "node": "mk-code-c1-h::after",
+   "detail": "2.71:1 - drawn by CSS content, so it is out of the accessibility tree and exempt, but it IS visible",
+   "sample": "TSX",
+   "acknowledged_because": "The hero's code layer. Drawn by CSS `content` so it is not in the accessibility tree, and WCAG 1.4.3 exempts incidental text that is part of a picture with other significant visual content. Measured at 1.46:1 under the headline and 2.71:1 to the right; raising it to 4.5:1 would make the background a foreground. The lede and the spec column carry their own paper so no real content is ever read against it."
+  },
+  {
+   "url": "https://example.com/moksa/",
+   "breakpoints": "_,_t,_m",
+   "check": "DECORATIVE_TEXT",
+   "level": "ack",
+   "node": "mk-code-c1-l0::after",
+   "detail": "1.46:1 - drawn by CSS content, so it is out of the accessibility tree and exempt, but it IS visible",
+   "sample": "<section",
+   "acknowledged_because": "The hero's code layer. Drawn by CSS `content` so it is not in the accessibility tree, and WCAG 1.4.3 exempts incidental text that is part of a picture with other significant visual content. Measured at 1.46:1 under the headline and 2.71:1 to the right; raising it to 4.5:1 would make the background a foreground. The lede and the spec column carry their own paper so no real content is ever read against it."
+  },
+  {
+   "url": "https://example.com/moksa/",
+   "breakpoints": "_,_t,_m",
+   "check": "DECORATIVE_TEXT",
+   "level": "ack",
+   "node": "mk-code-c1-l1::after",
+   "detail": "1.46:1 - drawn by CSS content, so it is out of the accessibility tree and exempt, but it IS visible",
+   "sample": "  className=\\\"grid gap-6",
+   "acknowledged_because": "The hero's code layer. Drawn by CSS `content` so it is not in the accessibility tree, and WCAG 1.4.3 exempts incidental text that is part of a picture with other significant visual content. Measured at 1.46:1 under the headline and 2.71:1 to the right; raising it to 4.5:1 would make the background a foreground. The lede and the spec column carry their own paper so no real content is ever read against it."
+  },
+  {
+   "url": "https://example.com/moksa/",
+   "breakpoints": "_,_t,_m",
+   "check": "DECORATIVE_TEXT",
+   "level": "ack",
+   "node": "mk-code-c1-l2::after",
+   "detail": "1.46:1 - drawn by CSS content, so it is out of the accessibility tree and exempt, but it IS visible",
+   "sample": "             md:grid-cols-3\\",
+   "acknowledged_because": "The hero's code layer. Drawn by CSS `content` so it is not in the accessibility tree, and WCAG 1.4.3 exempts incidental text that is part of a picture with other significant visual content. Measured at 1.46:1 under the headline and 2.71:1 to the right; raising it to 4.5:1 would make the background a foreground. The lede and the spec column carry their own paper so no real content is ever read against it."
+  },
+  {
+   "url": "https://example.com/moksa/",
+   "breakpoints": "_,_t,_m",
+   "check": "DECORATIVE_TEXT",
+   "level": "ack",
+   "node": "mk-code-c1-l3::after",
+   "detail": "1.46:1 - drawn by CSS content, so it is out of the accessibility tree and exempt, but it IS visible",
+   "sample": "  <Card {...order} />",
+   "acknowledged_because": "The hero's code layer. Drawn by CSS `content` so it is not in the accessibility tree, and WCAG 1.4.3 exempts incidental text that is part of a picture with other significant visual content. Measured at 1.46:1 under the headline and 2.71:1 to the right; raising it to 4.5:1 would make the background a foreground. The lede and the spec column carry their own paper so no real content is ever read against it."
+  },
+  {
+   "url": "https://example.com/moksa/",
+   "breakpoints": "_,_t,_m",
+   "check": "DECORATIVE_TEXT",
+   "level": "ack",
+   "node": "mk-code-c1-l4::after",
+   "detail": "1.46:1 - drawn by CSS content, so it is out of the accessibility tree and exempt, but it IS visible",
+   "sample": "</section>",
+   "acknowledged_because": "The hero's code layer. Drawn by CSS `content` so it is not in the accessibility tree, and WCAG 1.4.3 exempts incidental text that is part of a picture with other significant visual content. Measured at 1.46:1 under the headline and 2.71:1 to the right; raising it to 4.5:1 would make the background a foreground. The lede and the spec column carry their own paper so no real content is ever read against it."
+  },
+  {
+   "url": "https://example.com/moksa/",
+   "breakpoints": "_,_t,_m",
+   "check": "DECORATIVE_TEXT",
+   "level": "ack",
+   "node": "mk-code-c2-h::after",
+   "detail": "2.71:1 - drawn by CSS content, so it is out of the accessibility tree and exempt, but it IS visible",
+   "sample": "VITE",
+   "acknowledged_because": "The hero's code layer. Drawn by CSS `content` so it is not in the accessibility tree, and WCAG 1.4.3 exempts incidental text that is part of a picture with other significant visual content. Measured at 1.46:1 under the headline and 2.71:1 to the right; raising it to 4.5:1 would make the background a foreground. The lede and the spec column carry their own paper so no real content is ever read against it."
+  },
+  {
+   "url": "https://example.com/moksa/",
+   "breakpoints": "_,_t,_m",
+   "check": "DECORATIVE_TEXT",
+   "level": "ack",
+   "node": "mk-code-c2-l0::after",
+   "detail": "1.46:1 - drawn by CSS content, so it is out of the accessibility tree and exempt, but it IS visible",
+   "sample": "export default defineConfig(",
+   "acknowledged_because": "The hero's code layer. Drawn by CSS `content` so it is not in the accessibility tree, and WCAG 1.4.3 exempts incidental text that is part of a picture with other significant visual content. Measured at 1.46:1 under the headline and 2.71:1 to the right; raising it to 4.5:1 would make the background a foreground. The lede and the spec column carry their own paper so no real content is ever read against it."
+  },
+  {
+   "url": "https://example.com/moksa/",
+   "breakpoints": "_,_t,_m",
+   "check": "DECORATIVE_TEXT",
+   "level": "ack",
+   "node": "mk-code-c2-l1::after",
+   "detail": "1.46:1 - drawn by CSS content, so it is out of the accessibility tree and exempt, but it IS visible",
+   "sample": "  plugins: [react()],",
+   "acknowledged_because": "The hero's code layer. Drawn by CSS `content` so it is not in the accessibility tree, and WCAG 1.4.3 exempts incidental text that is part of a picture with other significant visual content. Measured at 1.46:1 under the headline and 2.71:1 to the right; raising it to 4.5:1 would make the background a foreground. The lede and the spec column carry their own paper so no real content is ever read against it."
+  },
+  {
+   "url": "https://example.com/moksa/",
+   "breakpoints": "_,_t,_m",
+   "check": "DECORATIVE_TEXT",
+   "level": "ack",
+   "node": "mk-code-c2-l2::after",
+   "detail": "1.46:1 - drawn by CSS content, so it is out of the accessibility tree and exempt, but it IS visible",
+   "sample": "  build: { target: 'es2022' ",
+   "acknowledged_because": "The hero's code layer. Drawn by CSS `content` so it is not in the accessibility tree, and WCAG 1.4.3 exempts incidental text that is part of a picture with other significant visual content. Measured at 1.46:1 under the headline and 2.71:1 to the right; raising it to 4.5:1 would make the background a foreground. The lede and the spec column carry their own paper so no real content is ever read against it."
+  },
+  {
+   "url": "https://example.com/moksa/",
+   "breakpoints": "_,_t,_m",
+   "check": "DECORATIVE_TEXT",
+   "level": "ack",
+   "node": "mk-code-c2-l3::after",
+   "detail": "1.46:1 - drawn by CSS content, so it is out of the accessibility tree and exempt, but it IS visible",
+   "sample": "  server: { port: 5173 },",
+   "acknowledged_because": "The hero's code layer. Drawn by CSS `content` so it is not in the accessibility tree, and WCAG 1.4.3 exempts incidental text that is part of a picture with other significant visual content. Measured at 1.46:1 under the headline and 2.71:1 to the right; raising it to 4.5:1 would make the background a foreground. The lede and the spec column carry their own paper so no real content is ever read against it."
+  },
+  {
+   "url": "https://example.com/moksa/",
+   "breakpoints": "_,_t,_m",
+   "check": "DECORATIVE_TEXT",
+   "level": "ack",
+   "node": "mk-code-c2-l4::after",
+   "detail": "1.46:1 - drawn by CSS content, so it is out of the accessibility tree and exempt, but it IS visible",
+   "sample": "})",
+   "acknowledged_because": "The hero's code layer. Drawn by CSS `content` so it is not in the accessibility tree, and WCAG 1.4.3 exempts incidental text that is part of a picture with other significant visual content. Measured at 1.46:1 under the headline and 2.71:1 to the right; raising it to 4.5:1 would make the background a foreground. The lede and the spec column carry their own paper so no real content is ever read against it."
+  },
+  {
+   "url": "https://example.com/moksa/",
+   "breakpoints": "_,_t,_m",
+   "check": "DECORATIVE_TEXT",
+   "level": "ack",
+   "node": "mk-code-c3-h::after",
+   "detail": "2.71:1 - drawn by CSS content, so it is out of the accessibility tree and exempt, but it IS visible",
+   "sample": "JS",
+   "acknowledged_because": "The hero's code layer. Drawn by CSS `content` so it is not in the accessibility tree, and WCAG 1.4.3 exempts incidental text that is part of a picture with other significant visual content. Measured at 1.46:1 under the headline and 2.71:1 to the right; raising it to 4.5:1 would make the background a foreground. The lede and the spec column carry their own paper so no real content is ever read against it."
+  },
+  {
+   "url": "https://example.com/moksa/",
+   "breakpoints": "_,_t,_m",
+   "check": "DECORATIVE_TEXT",
+   "level": "ack",
+   "node": "mk-code-c3-l0::after",
+   "detail": "1.46:1 - drawn by CSS content, so it is out of the accessibility tree and exempt, but it IS visible",
+   "sample": "const o = await prisma.order",
+   "acknowledged_because": "The hero's code layer. Drawn by CSS `content` so it is not in the accessibility tree, and WCAG 1.4.3 exempts incidental text that is part of a picture with other significant visual content. Measured at 1.46:1 under the headline and 2.71:1 to the right; raising it to 4.5:1 would make the background a foreground. The lede and the spec column carry their own paper so no real content is ever read against it."
+  },
+  {
+   "url": "https://example.com/moksa/",
+   "breakpoints": "_,_t,_m",
+   "check": "DECORATIVE_TEXT",
+   "level": "ack",
+   "node": "mk-code-c3-l1::after",
+   "detail": "1.46:1 - drawn by CSS content, so it is out of the accessibility tree and exempt, but it IS visible",
+   "sample": "  .findUnique({ where: { id ",
+   "acknowledged_because": "The hero's code layer. Drawn by CSS `content` so it is not in the accessibility tree, and WCAG 1.4.3 exempts incidental text that is part of a picture with other significant visual content. Measured at 1.46:1 under the headline and 2.71:1 to the right; raising it to 4.5:1 would make the background a foreground. The lede and the spec column carry their own paper so no real content is ever read against it."
+  },
+  {
+   "url": "https://example.com/moksa/",
+   "breakpoints": "_,_t,_m",
+   "check": "DECORATIVE_TEXT",
+   "level": "ack",
+   "node": "mk-code-c3-l2::after",
+   "detail": "1.46:1 - drawn by CSS content, so it is out of the accessibility tree and exempt, but it IS visible",
+   "sample": "await n8n.trigger('order.pai",
+   "acknowledged_because": "The hero's code layer. Drawn by CSS `content` so it is not in the accessibility tree, and WCAG 1.4.3 exempts incidental text that is part of a picture with other significant visual content. Measured at 1.46:1 under the headline and 2.71:1 to the right; raising it to 4.5:1 would make the background a foreground. The lede and the spec column carry their own paper so no real content is ever read against it."
+  },
+  {
+   "url": "https://example.com/moksa/",
+   "breakpoints": "_,_t,_m",
+   "check": "DECORATIVE_TEXT",
+   "level": "ack",
+   "node": "mk-code-c3-l3::after",
+   "detail": "1.46:1 - drawn by CSS content, so it is out of the accessibility tree and exempt, but it IS visible",
+   "sample": "await line.push(o.customerId",
+   "acknowledged_because": "The hero's code layer. Drawn by CSS `content` so it is not in the accessibility tree, and WCAG 1.4.3 exempts incidental text that is part of a picture with other significant visual content. Measured at 1.46:1 under the headline and 2.71:1 to the right; raising it to 4.5:1 would make the background a foreground. The lede and the spec column carry their own paper so no real content is ever read against it."
+  },
+  {
+   "url": "https://example.com/moksa/",
+   "breakpoints": "_,_t,_m",
+   "check": "DECORATIVE_TEXT",
+   "level": "ack",
+   "node": "mk-code-c3-l4::after",
+   "detail": "1.46:1 - drawn by CSS content, so it is out of the accessibility tree and exempt, but it IS visible",
+   "sample": "await ecpay.issue(o)",
+   "acknowledged_because": "The hero's code layer. Drawn by CSS `content` so it is not in the accessibility tree, and WCAG 1.4.3 exempts incidental text that is part of a picture with other significant visual content. Measured at 1.46:1 under the headline and 2.71:1 to the right; raising it to 4.5:1 would make the background a foreground. The lede and the spec column carry their own paper so no real content is ever read against it."
+  }
+ ]
+}

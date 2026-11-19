@@ -1,0 +1,488 @@
+{
+ "source_file": "data/mobile-audit.csv",
+ "columns": [
+  "path",
+  "width",
+  "finding",
+  "element",
+  "detail"
+ ],
+ "rows": [
+  {
+   "path": "components/",
+   "width": "390",
+   "finding": "GRID_NOT_COLLAPSED",
+   "element": "cp-tabs-menu",
+   "detail": "2 columns at 390px"
+  },
+  {
+   "path": "components/",
+   "width": "390",
+   "finding": "GRID_NOT_COLLAPSED",
+   "element": "mk-f-links",
+   "detail": "2 columns at 390px"
+  },
+  {
+   "path": "content/",
+   "width": "390",
+   "finding": "GRID_NOT_COLLAPSED",
+   "element": "mk-f-links",
+   "detail": "2 columns at 390px"
+  },
+  {
+   "path": "conversion/",
+   "width": "390",
+   "finding": "GRID_NOT_COLLAPSED",
+   "element": "mk-f-links",
+   "detail": "2 columns at 390px"
+  },
+  {
+   "path": "dialogs/",
+   "width": "390",
+   "finding": "GRID_NOT_COLLAPSED",
+   "element": "mk-f-links",
+   "detail": "2 columns at 390px"
+  },
+  {
+   "path": "dynamic/",
+   "width": "390",
+   "finding": "GRID_NOT_COLLAPSED",
+   "element": "mk-f-links",
+   "detail": "2 columns at 390px"
+  },
+  {
+   "path": "forms/",
+   "width": "390",
+   "finding": "GRID_NOT_COLLAPSED",
+   "element": "mk-f-links",
+   "detail": "2 columns at 390px"
+  },
+  {
+   "path": "popovers/",
+   "width": "390",
+   "finding": "GRID_NOT_COLLAPSED",
+   "element": "pp-cells",
+   "detail": "3 columns at 390px"
+  },
+  {
+   "path": "popovers/",
+   "width": "390",
+   "finding": "GRID_NOT_COLLAPSED",
+   "element": "pp-tour-row",
+   "detail": "3 columns at 390px"
+  },
+  {
+   "path": "popovers/",
+   "width": "390",
+   "finding": "GRID_NOT_COLLAPSED",
+   "element": "mk-f-links",
+   "detail": "2 columns at 390px"
+  },
+  {
+   "path": "sliders/",
+   "width": "390",
+   "finding": "SMALL_TARGET",
+   "element": "sl-main-nav-dot",
+   "detail": "34x28: "
+  },
+  {
+   "path": "sliders/",
+   "width": "390",
+   "finding": "SMALL_TARGET",
+   "element": "sl-main-nav-dot",
+   "detail": "34x28: "
+  },
+  {
+   "path": "sliders/",
+   "width": "390",
+   "finding": "SMALL_TARGET",
+   "element": "sl-main-nav-dot",
+   "detail": "34x28: "
+  },
+  {
+   "path": "sliders/",
+   "width": "390",
+   "finding": "SMALL_TARGET",
+   "element": "sl-main-nav-dot",
+   "detail": "34x28: "
+  },
+  {
+   "path": "sliders/",
+   "width": "390",
+   "finding": "SMALL_TARGET",
+   "element": "sl-carousel-nav-dot",
+   "detail": "34x28: "
+  },
+  {
+   "path": "sliders/",
+   "width": "390",
+   "finding": "SMALL_TARGET",
+   "element": "sl-carousel-nav-dot",
+   "detail": "34x28: "
+  },
+  {
+   "path": "sliders/",
+   "width": "390",
+   "finding": "SMALL_TARGET",
+   "element": "sl-carousel-nav-dot",
+   "detail": "34x28: "
+  },
+  {
+   "path": "sliders/",
+   "width": "390",
+   "finding": "SMALL_TARGET",
+   "element": "sl-carousel-nav-dot",
+   "detail": "34x28: "
+  },
+  {
+   "path": "sliders/",
+   "width": "390",
+   "finding": "SMALL_TARGET",
+   "element": "sl-carousel-nav-dot",
+   "detail": "34x28: "
+  },
+  {
+   "path": "sliders/",
+   "width": "390",
+   "finding": "SMALL_TARGET",
+   "element": "sl-carousel-nav-dot",
+   "detail": "34x28: "
+  },
+  {
+   "path": "sliders/",
+   "width": "390",
+   "finding": "GRID_NOT_COLLAPSED",
+   "element": "mk-f-links",
+   "detail": "2 columns at 390px"
+  },
+  {
+   "path": "tokens/",
+   "width": "390",
+   "finding": "GRID_NOT_COLLAPSED",
+   "element": "mk-f-links",
+   "detail": "2 columns at 390px"
+  },
+  {
+   "path": "components/",
+   "width": "768",
+   "finding": "LONG_MEASURE",
+   "element": "m-text",
+   "detail": "44 chars/line"
+  },
+  {
+   "path": "components/",
+   "width": "768",
+   "finding": "LONG_MEASURE",
+   "element": "m-text",
+   "detail": "56 chars/line"
+  },
+  {
+   "path": "components/",
+   "width": "768",
+   "finding": "LONG_MEASURE",
+   "element": "m-text",
+   "detail": "56 chars/line"
+  },
+  {
+   "path": "content/",
+   "width": "768",
+   "finding": "LONG_MEASURE",
+   "element": "m-text",
+   "detail": "43 chars/line"
+  },
+  {
+   "path": "content/",
+   "width": "768",
+   "finding": "LONG_MEASURE",
+   "element": "m-text",
+   "detail": "58 chars/line"
+  },
+  {
+   "path": "conversion/",
+   "width": "768",
+   "finding": "LONG_MEASURE",
+   "element": "m-text",
+   "detail": "46 chars/line"
+  },
+  {
+   "path": "conversion/",
+   "width": "768",
+   "finding": "LONG_MEASURE",
+   "element": "m-text",
+   "detail": "47 chars/line"
+  },
+  {
+   "path": "conversion/",
+   "width": "768",
+   "finding": "LONG_MEASURE",
+   "element": "m-text",
+   "detail": "45 chars/line"
+  },
+  {
+   "path": "conversion/",
+   "width": "768",
+   "finding": "LONG_MEASURE",
+   "element": "m-text",
+   "detail": "49 chars/line"
+  },
+  {
+   "path": "conversion/",
+   "width": "768",
+   "finding": "LONG_MEASURE",
+   "element": "m-text",
+   "detail": "55 chars/line"
+  },
+  {
+   "path": "conversion/",
+   "width": "768",
+   "finding": "LONG_MEASURE",
+   "element": "m-text",
+   "detail": "55 chars/line"
+  },
+  {
+   "path": "conversion/",
+   "width": "768",
+   "finding": "LONG_MEASURE",
+   "element": "m-text",
+   "detail": "55 chars/line"
+  },
+  {
+   "path": "dialogs/",
+   "width": "768",
+   "finding": "LONG_MEASURE",
+   "element": "m-text",
+   "detail": "46 chars/line"
+  },
+  {
+   "path": "dialogs/",
+   "width": "768",
+   "finding": "LONG_MEASURE",
+   "element": "m-text",
+   "detail": "45 chars/line"
+  },
+  {
+   "path": "dialogs/",
+   "width": "768",
+   "finding": "LONG_MEASURE",
+   "element": "m-text",
+   "detail": "45 chars/line"
+  },
+  {
+   "path": "dynamic/",
+   "width": "768",
+   "finding": "LONG_MEASURE",
+   "element": "m-text",
+   "detail": "43 chars/line"
+  },
+  {
+   "path": "dynamic/",
+   "width": "768",
+   "finding": "LONG_MEASURE",
+   "element": "m-text",
+   "detail": "57 chars/line"
+  },
+  {
+   "path": "dynamic/",
+   "width": "768",
+   "finding": "LONG_MEASURE",
+   "element": "m-text",
+   "detail": "49 chars/line"
+  },
+  {
+   "path": "dynamic/",
+   "width": "768",
+   "finding": "LONG_MEASURE",
+   "element": "m-text",
+   "detail": "55 chars/line"
+  },
+  {
+   "path": "dynamic/",
+   "width": "768",
+   "finding": "LONG_MEASURE",
+   "element": "m-text",
+   "detail": "55 chars/line"
+  },
+  {
+   "path": "dynamic/",
+   "width": "768",
+   "finding": "LONG_MEASURE",
+   "element": "m-text",
+   "detail": "55 chars/line"
+  },
+  {
+   "path": "dynamic/",
+   "width": "768",
+   "finding": "LONG_MEASURE",
+   "element": "m-text",
+   "detail": "55 chars/line"
+  },
+  {
+   "path": "forms/",
+   "width": "768",
+   "finding": "LONG_MEASURE",
+   "element": "m-text",
+   "detail": "59 chars/line"
+  },
+  {
+   "path": "forms/",
+   "width": "768",
+   "finding": "LONG_MEASURE",
+   "element": "m-text",
+   "detail": "59 chars/line"
+  },
+  {
+   "path": "sliders/",
+   "width": "768",
+   "finding": "SMALL_TARGET",
+   "element": "sl-main-nav-dot",
+   "detail": "34x28: "
+  },
+  {
+   "path": "sliders/",
+   "width": "768",
+   "finding": "SMALL_TARGET",
+   "element": "sl-main-nav-dot",
+   "detail": "34x28: "
+  },
+  {
+   "path": "sliders/",
+   "width": "768",
+   "finding": "SMALL_TARGET",
+   "element": "sl-main-nav-dot",
+   "detail": "34x28: "
+  },
+  {
+   "path": "sliders/",
+   "width": "768",
+   "finding": "SMALL_TARGET",
+   "element": "sl-main-nav-dot",
+   "detail": "34x28: "
+  },
+  {
+   "path": "sliders/",
+   "width": "768",
+   "finding": "LONG_MEASURE",
+   "element": "m-text",
+   "detail": "44 chars/line"
+  },
+  {
+   "path": "sliders/",
+   "width": "768",
+   "finding": "LONG_MEASURE",
+   "element": "m-text",
+   "detail": "44 chars/line"
+  },
+  {
+   "path": "sliders/",
+   "width": "768",
+   "finding": "SMALL_TARGET",
+   "element": "sl-carousel-nav-dot",
+   "detail": "34x28: "
+  },
+  {
+   "path": "sliders/",
+   "width": "768",
+   "finding": "SMALL_TARGET",
+   "element": "sl-carousel-nav-dot",
+   "detail": "34x28: "
+  },
+  {
+   "path": "sliders/",
+   "width": "768",
+   "finding": "SMALL_TARGET",
+   "element": "sl-carousel-nav-dot",
+   "detail": "34x28: "
+  },
+  {
+   "path": "sliders/",
+   "width": "768",
+   "finding": "SMALL_TARGET",
+   "element": "sl-carousel-nav-dot",
+   "detail": "34x28: "
+  },
+  {
+   "path": "sliders/",
+   "width": "768",
+   "finding": "SMALL_TARGET",
+   "element": "sl-carousel-nav-dot",
+   "detail": "34x28: "
+  },
+  {
+   "path": "sliders/",
+   "width": "768",
+   "finding": "SMALL_TARGET",
+   "element": "sl-carousel-nav-dot",
+   "detail": "34x28: "
+  },
+  {
+   "path": "tokens/",
+   "width": "768",
+   "finding": "LONG_MEASURE",
+   "element": "m-text",
+   "detail": "47 chars/line"
+  },
+  {
+   "path": "tokens/",
+   "width": "768",
+   "finding": "LONG_MEASURE",
+   "element": "m-text",
+   "detail": "55 chars/line"
+  },
+  {
+   "path": "tokens/",
+   "width": "768",
+   "finding": "LONG_MEASURE",
+   "element": "m-text",
+   "detail": "55 chars/line"
+  },
+  {
+   "path": "tokens/",
+   "width": "768",
+   "finding": "LONG_MEASURE",
+   "element": "m-text",
+   "detail": "44 chars/line"
+  },
+  {
+   "path": "tokens/",
+   "width": "768",
+   "finding": "LONG_MEASURE",
+   "element": "m-text",
+   "detail": "45 chars/line"
+  },
+  {
+   "path": "tokens/",
+   "width": "768",
+   "finding": "LONG_MEASURE",
+   "element": "m-text",
+   "detail": "51 chars/line"
+  },
+  {
+   "path": "tokens/",
+   "width": "768",
+   "finding": "LONG_MEASURE",
+   "element": "m-text",
+   "detail": "49 chars/line"
+  },
+  {
+   "path": "tokens/",
+   "width": "768",
+   "finding": "LONG_MEASURE",
+   "element": "m-text",
+   "detail": "55 chars/line"
+  },
+  {
+   "path": "tokens/",
+   "width": "768",
+   "finding": "LONG_MEASURE",
+   "element": "m-text",
+   "detail": "55 chars/line"
+  },
+  {
+   "path": "tokens/",
+   "width": "768",
+   "finding": "LONG_MEASURE",
+   "element": "m-text",
+   "detail": "55 chars/line"
+  }
+ ]
+}

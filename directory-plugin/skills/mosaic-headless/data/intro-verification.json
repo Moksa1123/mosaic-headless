@@ -1,0 +1,226 @@
+{
+ "source_file": "data/intro-verification.csv",
+ "columns": [
+  "check",
+  "result",
+  "detail"
+ ],
+ "rows": [
+  {
+   "check": "PLAYS",
+   "result": "PASS",
+   "detail": "43 of 43 intro elements changed state"
+  },
+  {
+   "check": "COUNTS",
+   "result": "PASS",
+   "detail": "--mk-n reached 100"
+  },
+  {
+   "check": "ENDS",
+   "result": "PASS",
+   "detail": "veil is out of hit-testing from 3400ms"
+  },
+  {
+   "check": "NO_TRAP",
+   "result": "PASS",
+   "detail": "0 content elements still at opacity 0 in the viewport (1 below the fold and 0 on a scroll timeline awaiting it, 1 mid-blink)"
+  },
+  {
+   "check": "CLEARS",
+   "result": "PASS",
+   "detail": "a real click landed on 'mk-caret-row'"
+  },
+  {
+   "check": "AMBIENT",
+   "result": "PASS",
+   "detail": "8 elements still moving between 5000ms and 7000ms with no input: mk-board-city-s, mk-board-utc-s, mk-caret, mk-clock-s, mk-flap-0-s, mk-flap-1-s"
+  },
+  {
+   "check": "DEGRADES",
+   "result": "PASS",
+   "detail": "with reduced motion the veil is display:none throughout"
+  },
+  {
+   "check": "READABLE",
+   "result": "PASS",
+   "detail": "0 elements invisible at 120ms with reduced motion"
+  },
+  {
+   "check": "t_ms",
+   "result": "counter",
+   "detail": "veil_visibility",
+   "_extra": [
+    "veil_clip",
+    "veil_covers_centre",
+    "hit_centre",
+    "invisible_content"
+   ]
+  },
+  {
+   "check": "120",
+   "result": "",
+   "detail": "",
+   "_extra": [
+    "",
+    "False",
+    "html.no-js",
+    "0"
+   ]
+  },
+  {
+   "check": "400",
+   "result": "--mk-n=0;--mk-s=0;--mk-m=0",
+   "detail": "visible",
+   "_extra": [
+    "none",
+    "True",
+    "mk-boot-num",
+    "7"
+   ]
+  },
+  {
+   "check": "700",
+   "result": "--mk-n=9;--mk-s=0;--mk-m=0",
+   "detail": "visible",
+   "_extra": [
+    "none",
+    "True",
+    "mk-boot-num",
+    "7"
+   ]
+  },
+  {
+   "check": "1000",
+   "result": "--mk-n=52;--mk-s=0;--mk-m=0",
+   "detail": "visible",
+   "_extra": [
+    "none",
+    "True",
+    "mk-boot-num",
+    "3"
+   ]
+  },
+  {
+   "check": "1300",
+   "result": "--mk-n=82;--mk-s=0;--mk-m=0",
+   "detail": "visible",
+   "_extra": [
+    "none",
+    "True",
+    "mk-boot-num",
+    "3"
+   ]
+  },
+  {
+   "check": "1600",
+   "result": "--mk-n=94;--mk-s=0;--mk-m=0",
+   "detail": "visible",
+   "_extra": [
+    "none",
+    "True",
+    "mk-boot-num",
+    "3"
+   ]
+  },
+  {
+   "check": "1900",
+   "result": "--mk-n=98;--mk-s=0;--mk-m=0",
+   "detail": "visible",
+   "_extra": [
+    "none",
+    "True",
+    "mk-boot-num",
+    "3"
+   ]
+  },
+  {
+   "check": "2200",
+   "result": "--mk-n=100;--mk-s=0;--mk-m=0",
+   "detail": "visible",
+   "_extra": [
+    "none",
+    "True",
+    "mk-boot-num",
+    "3"
+   ]
+  },
+  {
+   "check": "2500",
+   "result": "--mk-n=100;--mk-s=0;--mk-m=0",
+   "detail": "visible",
+   "_extra": [
+    "none",
+    "True",
+    "mk-boot-num",
+    "3"
+   ]
+  },
+  {
+   "check": "2800",
+   "result": "--mk-n=100;--mk-s=0;--mk-m=0",
+   "detail": "visible",
+   "_extra": [
+    "none",
+    "True",
+    "mk-boot",
+    "0"
+   ]
+  },
+  {
+   "check": "3100",
+   "result": "--mk-n=100;--mk-s=0;--mk-m=0",
+   "detail": "visible",
+   "_extra": [
+    "none",
+    "False",
+    "mk-caret-row",
+    "0"
+   ]
+  },
+  {
+   "check": "3400",
+   "result": "--mk-n=0;--mk-s=0;--mk-m=0",
+   "detail": "hidden",
+   "_extra": [
+    "none",
+    "False",
+    "mk-caret-row",
+    "0"
+   ]
+  },
+  {
+   "check": "3800",
+   "result": "--mk-n=0;--mk-s=0;--mk-m=0",
+   "detail": "hidden",
+   "_extra": [
+    "none",
+    "False",
+    "mk-caret-row",
+    "0"
+   ]
+  },
+  {
+   "check": "5000",
+   "result": "--mk-n=0;--mk-s=0;--mk-m=0",
+   "detail": "hidden",
+   "_extra": [
+    "none",
+    "False",
+    "mk-caret-row",
+    "0"
+   ]
+  },
+  {
+   "check": "7000",
+   "result": "--mk-n=0;--mk-s=0;--mk-m=0",
+   "detail": "hidden",
+   "_extra": [
+    "none",
+    "False",
+    "mk-caret-row",
+    "0"
+   ]
+  }
+ ]
+}

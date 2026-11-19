@@ -1,0 +1,85 @@
+{
+ "source_file": "data/token-verification.csv",
+ "columns": [
+  "check",
+  "result",
+  "detail"
+ ],
+ "rows": [
+  {
+   "check": "ROOT_PRESENT",
+   "result": "PASS",
+   "detail": "9 custom properties on :root matching '--mk-'"
+  },
+  {
+   "check": "NO_DUPLICATES",
+   "result": "PASS",
+   "detail": "every property declared once"
+  },
+  {
+   "check": "NO_EMPTY",
+   "result": "PASS",
+   "detail": "every token has a value"
+  },
+  {
+   "check": "NOT_DEFAULT_WHITE",
+   "result": "PASS",
+   "detail": "none"
+  },
+  {
+   "check": "ALL_COLOUR_TOKENS_USED",
+   "result": "PASS",
+   "detail": "all 9 colour tokens are resolved by at least one element"
+  },
+  {
+   "check": "NON_COLOUR_TOKENS",
+   "result": "PASS",
+   "detail": "3 not judged by colour (they are numbers or lengths): --mk-m=0, --mk-n=0, --mk-s=0"
+  },
+  {
+   "check": "USED/--mk-accent",
+   "result": "PASS",
+   "detail": "5 element(s), e.g. mk-progress-track, mk-progress, mk-clock-dot"
+  },
+  {
+   "check": "USED/--mk-accent-ink",
+   "result": "PASS",
+   "detail": "2 element(s), e.g. mk-header-cta, tk-chip-mk-accent-ink"
+  },
+  {
+   "check": "USED/--mk-ai",
+   "result": "PASS",
+   "detail": "1 element(s), e.g. tk-chip-mk-ai"
+  },
+  {
+   "check": "USED/--mk-faint",
+   "result": "PASS",
+   "detail": "1 element(s), e.g. tk-chip-mk-faint"
+  },
+  {
+   "check": "USED/--mk-ink",
+   "result": "PASS",
+   "detail": "66 element(s), e.g. mk-clock-m, mk-clock-m, mk-clock-s"
+  },
+  {
+   "check": "USED/--mk-muted",
+   "result": "PASS",
+   "detail": "1 element(s), e.g. tk-chip-mk-muted"
+  },
+  {
+   "check": "USED/--mk-panel",
+   "result": "PASS",
+   "detail": "3 element(s), e.g. tk-sw, tk-chip-mk-panel, tk-props"
+  },
+  {
+   "check": "USED/--mk-paper",
+   "result": "PASS",
+   "detail": "9 element(s), e.g. mk-cap-g0-menu, mk-cap-g1-menu, tk-head"
+  },
+  {
+   "check": "USED/--mk-rule",
+   "result": "PASS",
+   "detail": "1 element(s), e.g. tk-chip-mk-rule"
+  }
+ ]
+}

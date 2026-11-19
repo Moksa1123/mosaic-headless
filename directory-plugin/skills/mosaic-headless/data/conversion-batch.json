@@ -1,0 +1,205 @@
+{
+ "source_file": "data/conversion-batch.csv",
+ "columns": [
+  "elementor_post",
+  "converted",
+  "skipped",
+  "result",
+  "checks",
+  "text",
+  "images",
+  "links"
+ ],
+ "rows": [
+  {
+   "elementor_post": "1296",
+   "converted": "87",
+   "skipped": "0",
+   "result": "PASS",
+   "checks": "5/5",
+   "text": "35 of 35 source strings",
+   "images": "0 of 0 source images",
+   "links": "2 of 2 source link targets"
+  },
+  {
+   "elementor_post": "1628",
+   "converted": "29",
+   "skipped": "1",
+   "result": "PASS",
+   "checks": "5/5",
+   "text": "9 of 9 source strings",
+   "images": "0 of 0 source images",
+   "links": "0 of 0 source link targets"
+  },
+  {
+   "elementor_post": "2339",
+   "converted": "252",
+   "skipped": "1",
+   "result": "PASS",
+   "checks": "5/5",
+   "text": "104 of 104 source strings",
+   "images": "11 of 11 source images",
+   "links": "26 of 26 source link targets"
+  },
+  {
+   "elementor_post": "2360",
+   "converted": "254",
+   "skipped": "0",
+   "result": "PASS",
+   "checks": "5/5",
+   "text": "113 of 113 source strings",
+   "images": "16 of 16 source images",
+   "links": "21 of 21 source link targets"
+  },
+  {
+   "elementor_post": "2361",
+   "converted": "382",
+   "skipped": "1",
+   "result": "PASS",
+   "checks": "5/5",
+   "text": "200 of 200 source strings",
+   "images": "0 of 0 source images",
+   "links": "12 of 12 source link targets"
+  },
+  {
+   "elementor_post": "2604",
+   "converted": "453",
+   "skipped": "2",
+   "result": "PASS",
+   "checks": "5/5",
+   "text": "301 of 301 source strings",
+   "images": "0 of 0 source images",
+   "links": "1 of 1 source link targets"
+  },
+  {
+   "elementor_post": "2760",
+   "converted": "8",
+   "skipped": "4",
+   "result": "PASS",
+   "checks": "5/5",
+   "text": "3 of 3 source strings",
+   "images": "0 of 0 source images",
+   "links": "0 of 0 source link targets"
+  },
+  {
+   "elementor_post": "3257",
+   "converted": "135",
+   "skipped": "0",
+   "result": "PASS",
+   "checks": "5/5",
+   "text": "58 of 58 source strings",
+   "images": "0 of 0 source images",
+   "links": "2 of 2 source link targets"
+  },
+  {
+   "elementor_post": "3455",
+   "converted": "92",
+   "skipped": "1",
+   "result": "PASS",
+   "checks": "5/5",
+   "text": "32 of 32 source strings",
+   "images": "0 of 0 source images",
+   "links": "2 of 2 source link targets"
+  },
+  {
+   "elementor_post": "9131",
+   "converted": "156",
+   "skipped": "0",
+   "result": "PASS",
+   "checks": "5/5",
+   "text": "72 of 72 source strings",
+   "images": "0 of 0 source images",
+   "links": "4 of 4 source link targets"
+  },
+  {
+   "elementor_post": "9135",
+   "converted": "154",
+   "skipped": "0",
+   "result": "PASS",
+   "checks": "5/5",
+   "text": "66 of 66 source strings",
+   "images": "0 of 0 source images",
+   "links": "4 of 4 source link targets"
+  },
+  {
+   "elementor_post": "9139",
+   "converted": "184",
+   "skipped": "1",
+   "result": "PASS",
+   "checks": "5/5",
+   "text": "85 of 85 source strings",
+   "images": "0 of 0 source images",
+   "links": "2 of 2 source link targets"
+  },
+  {
+   "elementor_post": "9145",
+   "converted": "150",
+   "skipped": "0",
+   "result": "PASS",
+   "checks": "5/5",
+   "text": "64 of 64 source strings",
+   "images": "0 of 0 source images",
+   "links": "5 of 5 source link targets"
+  },
+  {
+   "elementor_post": "9146",
+   "converted": "155",
+   "skipped": "0",
+   "result": "PASS",
+   "checks": "5/5",
+   "text": "65 of 65 source strings",
+   "images": "0 of 0 source images",
+   "links": "5 of 5 source link targets"
+  },
+  {
+   "elementor_post": "9147",
+   "converted": "152",
+   "skipped": "0",
+   "result": "PASS",
+   "checks": "5/5",
+   "text": "61 of 61 source strings",
+   "images": "0 of 0 source images",
+   "links": "4 of 4 source link targets"
+  },
+  {
+   "elementor_post": "9148",
+   "converted": "154",
+   "skipped": "0",
+   "result": "PASS",
+   "checks": "5/5",
+   "text": "61 of 61 source strings",
+   "images": "0 of 0 source images",
+   "links": "4 of 4 source link targets"
+  },
+  {
+   "elementor_post": "9149",
+   "converted": "154",
+   "skipped": "0",
+   "result": "PASS",
+   "checks": "5/5",
+   "text": "65 of 65 source strings",
+   "images": "0 of 0 source images",
+   "links": "4 of 4 source link targets"
+  },
+  {
+   "elementor_post": "9151",
+   "converted": "147",
+   "skipped": "0",
+   "result": "PASS",
+   "checks": "5/5",
+   "text": "61 of 61 source strings",
+   "images": "0 of 0 source images",
+   "links": "6 of 6 source link targets"
+  },
+  {
+   "elementor_post": "9152",
+   "converted": "196",
+   "skipped": "0",
+   "result": "PASS",
+   "checks": "5/5",
+   "text": "112 of 112 source strings",
+   "images": "0 of 0 source images",
+   "links": "7 of 7 source link targets"
+  }
+ ]
+}

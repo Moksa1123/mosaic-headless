@@ -1,0 +1,145 @@
+{
+ "source_file": "data/component-wall-verification.csv",
+ "columns": [
+  "check",
+  "result",
+  "detail"
+ ],
+ "rows": [
+  {
+   "check": "TABS/one_pane_at_rest",
+   "result": "PASS",
+   "detail": "visible panes at rest: [0]"
+  },
+  {
+   "check": "TABS/click_switches",
+   "result": "PASS",
+   "detail": "clicked tab 3 -> panes [3]"
+  },
+  {
+   "check": "TABS/active_label_readable",
+   "result": "PASS",
+   "detail": "{'bg': 'rgb(22, 24, 28)', 'labels': ['rgba(250, 250, 247, 0.6)', 'rgb(250, 250, 247)']}"
+  },
+  {
+   "check": "ACCORDION/shut_at_rest",
+   "result": "PASS",
+   "detail": "open: []"
+  },
+  {
+   "check": "ACCORDION/click_opens_one",
+   "result": "PASS",
+   "detail": "clicked 1 -> open [1]"
+  },
+  {
+   "check": "ACCORDION/keyboard_reachable",
+   "result": "PASS",
+   "detail": "title tabindex='0' - the plugin puts it in the tab order"
+  },
+  {
+   "check": "FORM/fields",
+   "result": "PASS",
+   "detail": "3 controls, types: email, text, textarea"
+  },
+  {
+   "check": "FORM/required",
+   "result": "PASS",
+   "detail": "required is set on 3 of them"
+  },
+  {
+   "check": "FORM/honeypot",
+   "result": "PASS",
+   "detail": "Mosaic adds its own spam trap: ['mosaic_hp_url', 'mosaic_hp_ts']"
+  },
+  {
+   "check": "FORM/option_labels",
+   "result": "SKIPPED",
+   "detail": "no select on this form"
+  },
+  {
+   "check": "FORM/select",
+   "result": "SKIPPED",
+   "detail": "no custom select on this form"
+  },
+  {
+   "check": "FORM/required_blocks",
+   "result": "PASS",
+   "detail": "empty form reports invalid: ['name', 'email', 'message']"
+  },
+  {
+   "check": "NAVBAR/wide",
+   "result": "PASS",
+   "detail": "at this width the links are shown and the toggle is not (nav=True toggle=False, 4 links)"
+  },
+  {
+   "check": "NAVBAR/narrow",
+   "result": "PASS",
+   "detail": "below buttonBreakpoint it collapses behind the toggle (dropdown-mode=True)"
+  },
+  {
+   "check": "NAVBAR/toggle_opens",
+   "result": "PASS",
+   "detail": "clicking it reveals the links"
+  },
+  {
+   "check": "MEDIA/image_loaded",
+   "result": "PASS",
+   "detail": "1200px wide, natural 2500px"
+  },
+  {
+   "check": "MEDIA/icons_inline",
+   "result": "PASS",
+   "detail": "3 inline <svg> - `icon` takes RAW SVG in its `svg` property, not a URL or a library name"
+  },
+  {
+   "check": "WORDPRESS/shortcode_ran",
+   "result": "PASS",
+   "detail": "3 items from the shortcode - this is WooCommerce's own output, not a reimplementation"
+  },
+  {
+   "check": "MULTISTEP",
+   "result": "SKIPPED",
+   "detail": "not on this page"
+  },
+  {
+   "check": "COMPONENT/instances",
+   "result": "PASS",
+   "detail": "3 instances: ['cs-0-cs-card', 'cs-1-cs-card', 'cs-2-cs-card']"
+  },
+  {
+   "check": "COMPONENT/one_definition",
+   "result": "PASS",
+   "detail": "all share the generated class ['_fs'] - one definition, not 3 copies"
+  },
+  {
+   "check": "COMPONENT/content_differs",
+   "result": "PASS",
+   "detail": "3 instances, 3 distinct bodies - the overrides are per-instance"
+  },
+  {
+   "check": "LOOP/slider",
+   "result": "SKIPPED",
+   "detail": "not on this page"
+  },
+  {
+   "check": "LOOP/tabs",
+   "result": "SKIPPED",
+   "detail": "not on this page"
+  },
+  {
+   "check": "LOOP/pagination",
+   "result": "SKIPPED",
+   "detail": "not on this page"
+  },
+  {
+   "check": "MAP/frame",
+   "result": "PASS",
+   "detail": "renders an openstreetmap iframe"
+  },
+  {
+   "check": "MAP/coordinates_applied",
+   "result": "PASS",
+   "detail": "marker=24.147700,120.673600"
+  }
+ ]
+}

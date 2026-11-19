@@ -1,0 +1,68 @@
+{
+ "source_file": "data/token-benchmark.csv",
+ "columns": [
+  "task",
+  "commands",
+  "tokens_read_source",
+  "tokens_load_tables",
+  "tokens_query",
+  "saving_vs_source_pct",
+  "saving_vs_tables_pct"
+ ],
+ "rows": [
+  {
+   "task": "Place a heading, a paragraph and a linked button",
+   "commands": "mo.py params text ; mo.py params button ; mo.py prop url",
+   "tokens_read_source": "10005",
+   "tokens_load_tables": "259539",
+   "tokens_query": "961",
+   "saving_vs_source_pct": "90.4",
+   "saving_vs_tables_pct": "99.63"
+  },
+  {
+   "task": "Set padding, a border and a radius, responsively",
+   "commands": "mo.py style --grouped ; mo.py css border-left-width ; mo.py css border-radius",
+   "tokens_read_source": "3490",
+   "tokens_load_tables": "259539",
+   "tokens_query": "396",
+   "saving_vs_source_pct": "88.7",
+   "saving_vs_tables_pct": "99.85"
+  },
+  {
+   "task": "Decide whether the accordion is usable, and how to nest it",
+   "commands": "mo.py type accordion-content ; mo.py placement accordion-item",
+   "tokens_read_source": "15615",
+   "tokens_load_tables": "259539",
+   "tokens_query": "397",
+   "saving_vs_source_pct": "97.5",
+   "saving_vs_tables_pct": "99.85"
+  },
+  {
+   "task": "Find which hover/focus states actually compile",
+   "commands": "mo.py states --verified",
+   "tokens_read_source": "3619",
+   "tokens_load_tables": "259539",
+   "tokens_query": "1054",
+   "saving_vs_source_pct": "70.9",
+   "saving_vs_tables_pct": "99.59"
+  },
+  {
+   "task": "Find which Mosaic key drives one CSS property",
+   "commands": "mo.py css grid-column",
+   "tokens_read_source": "1862",
+   "tokens_load_tables": "259539",
+   "tokens_query": "51",
+   "saving_vs_source_pct": "97.3",
+   "saving_vs_tables_pct": "99.98"
+  },
+  {
+   "task": "Know what is unsafe before committing anything",
+   "commands": "mo.py stats ; mo.py check div text button accordion-content",
+   "tokens_read_source": "63172",
+   "tokens_load_tables": "259539",
+   "tokens_query": "288",
+   "saving_vs_source_pct": "99.5",
+   "saving_vs_tables_pct": "99.89"
+  }
+ ]
+}

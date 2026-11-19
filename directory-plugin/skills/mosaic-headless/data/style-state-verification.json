@@ -1,0 +1,485 @@
+{
+ "source_file": "data/style-state-verification.csv",
+ "columns": [
+  "state",
+  "scope",
+  "host",
+  "selector_template",
+  "status",
+  "evidence"
+ ],
+ "rows": [
+  {
+   "state": "focus",
+   "scope": "global",
+   "host": "div",
+   "selector_template": "&:FOCUS",
+   "status": "COMPILED",
+   "evidence": "._h:FOCUS"
+  },
+  {
+   "state": "focus-visible",
+   "scope": "global",
+   "host": "div",
+   "selector_template": "&:FOCUS-VISIBLE",
+   "status": "COMPILED",
+   "evidence": "._i:FOCUS-VISIBLE"
+  },
+  {
+   "state": "hover",
+   "scope": "global",
+   "host": "div",
+   "selector_template": "&:HOVER",
+   "status": "COMPILED",
+   "evidence": "._j:HOVER"
+  },
+  {
+   "state": "hover-on-link",
+   "scope": "global",
+   "host": "div",
+   "selector_template": ":where(a[href]:not([disabled]),button:not([disabled])):HOVER &",
+   "status": "COMPILED",
+   "evidence": ":where(a[href]:not([disabled]),button:not([disabled])):HOVER ._k"
+  },
+  {
+   "state": "hover-on-tab",
+   "scope": "global",
+   "host": "div",
+   "selector_template": ":where(.m-tab:not(.m-tab--active)):HOVER &",
+   "status": "COMPILED",
+   "evidence": ":where(.m-tab:not(.m-tab--active)):HOVER ._l"
+  },
+  {
+   "state": "hover-tab",
+   "scope": "global",
+   "host": "div",
+   "selector_template": "&:where(.m-tab:not(.m-tab--active)):HOVER",
+   "status": "COMPILED",
+   "evidence": "._m:where(.m-tab:not(.m-tab--active)):HOVER"
+  },
+  {
+   "state": "hover-when-link",
+   "scope": "global",
+   "host": "div",
+   "selector_template": "&:where([tabindex]:not([tabindex=\"-1\"]),a[href]:not([disabled]),button:not([disabled])):HOVER",
+   "status": "COMPILED",
+   "evidence": "._n:where([tabindex]:not([tabindex=\"-1\"]),a[href]:not([disabled]),button:not([disabled])):"
+  },
+  {
+   "state": "____loop_pagination_number--active",
+   "scope": "node-type",
+   "host": "loop-pagination-number",
+   "selector_template": "&.m-loop-pagination-number--active",
+   "status": "NO_HOST",
+   "evidence": "host loop-pagination-number is COMMIT_500 - committing it breaks the page"
+  },
+  {
+   "state": "____loop_pagination_number_ellipsis",
+   "scope": "node-type",
+   "host": "loop-pagination-number",
+   "selector_template": "&.m-loop-pagination-number-ellipsis",
+   "status": "NO_HOST",
+   "evidence": "host loop-pagination-number is COMMIT_500 - committing it breaks the page"
+  },
+  {
+   "state": "___accordion-item--opened",
+   "scope": "node-type",
+   "host": "accordion-item",
+   "selector_template": "&.m-accordion-item--opened,.m-accordion-item:where(.m-accordion-item--opened) > &,.m-accordion-item:where(.m-accordion-item--opened) > .m-accordion-title &",
+   "status": "NO_HOST",
+   "evidence": "host accordion-item is BROKE_PAGE - committing it breaks the page"
+  },
+  {
+   "state": "___accordion-item--opening",
+   "scope": "node-type",
+   "host": "accordion-item",
+   "selector_template": "&.m-accordion-item--opening,.m-accordion-item:where(.m-accordion-item--opening) > &,.m-accordion-item:where(.m-accordion-item--opening) > .m-accordion-title &",
+   "status": "NO_HOST",
+   "evidence": "host accordion-item is BROKE_PAGE - committing it breaks the page"
+  },
+  {
+   "state": "___arrow_hidden",
+   "scope": "node-type",
+   "host": "",
+   "selector_template": "&:where(.m-slider-arrow--hidden)",
+   "status": "SKIPPED",
+   "evidence": "no node type declares Mosaic/NodeTypes/Slider/SliderArrow/SliderArrowElementTypeFactoryAbstract.php"
+  },
+  {
+   "state": "___checkbox-input--checked",
+   "scope": "node-type",
+   "host": "checkbox-input",
+   "selector_template": "&:checked",
+   "status": "NO_HOST",
+   "evidence": "host checkbox-input is BROKE_PAGE - committing it breaks the page"
+  },
+  {
+   "state": "___checkbox-input--checkmark",
+   "scope": "node-type",
+   "host": "checkbox-input",
+   "selector_template": "&:checked::before",
+   "status": "NO_HOST",
+   "evidence": "host checkbox-input is BROKE_PAGE - committing it breaks the page"
+  },
+  {
+   "state": "___choice--checked",
+   "scope": "node-type",
+   "host": "choice",
+   "selector_template": "&:has(:where(input):checked)",
+   "status": "COMPILED",
+   "evidence": "._h:has(:where(input):checked)"
+  },
+  {
+   "state": "___choice--checked-within",
+   "scope": "node-type",
+   "host": "choice",
+   "selector_template": ".m-choice:where(:has(input:checked)) &",
+   "status": "COMPILED",
+   "evidence": ".m-choice:where(:has(input:checked)) ._i"
+  },
+  {
+   "state": "___choice--focus-visible",
+   "scope": "node-type",
+   "host": "choice",
+   "selector_template": "&:has(:where(input):focus-visible)",
+   "status": "COMPILED",
+   "evidence": "._j:has(:where(input):focus-visible)"
+  },
+  {
+   "state": "___choice-field--invalid",
+   "scope": "node-type",
+   "host": "choice-field",
+   "selector_template": "&:has(:user-invalid)",
+   "status": "COMPILED",
+   "evidence": "._h:has(:user-invalid)"
+  },
+  {
+   "state": "___choice-field--invalid-within",
+   "scope": "node-type",
+   "host": "choice-field",
+   "selector_template": ".m-choice-field:where(:has(:user-invalid)) &",
+   "status": "COMPILED",
+   "evidence": ".m-choice-field:where(:has(:user-invalid)) ._k"
+  },
+  {
+   "state": "___dropdown--opened",
+   "scope": "node-type",
+   "host": "",
+   "selector_template": "&.m-dropdown:where(.dropdown--opened),.m-dropdown:where(.dropdown--opened) > &,.m-dropdown:where(.dropdown--opened) > :where( .m-dropdown-toggle) &",
+   "status": "SKIPPED",
+   "evidence": "no node type declares Mosaic/NodeTypes/Menu/Dropdown/DropdownElementTypeFactoryAbstract.php"
+  },
+  {
+   "state": "___dropdown--opening",
+   "scope": "node-type",
+   "host": "",
+   "selector_template": ".m-dropdown:where(.dropdown--opening) &",
+   "status": "SKIPPED",
+   "evidence": "no node type declares Mosaic/NodeTypes/Menu/Dropdown/DropdownElementTypeFactoryAbstract.php"
+  },
+  {
+   "state": "___dropdown-toggle--current",
+   "scope": "node-type",
+   "host": "dropdown-toggle",
+   "selector_template": "&.m-dropdown-toggle--current",
+   "status": "COMPILED",
+   "evidence": "._h.m-dropdown-toggle--current"
+  },
+  {
+   "state": "___dropdown-toggle--current-within",
+   "scope": "node-type",
+   "host": "dropdown-toggle",
+   "selector_template": ".m-dropdown:where(:has(.m-menu-link--current,.m-dropdown-toggle--current)) > &",
+   "status": "COMPILED",
+   "evidence": ".m-dropdown:where(:has(.m-menu-link--current,.m-dropdown-toggle--current)) > ._i"
+  },
+  {
+   "state": "___field--focus-visible",
+   "scope": "node-type",
+   "host": "field",
+   "selector_template": "&:has(:where(input, textarea, select, .m-select-toggle):focus-visible)",
+   "status": "COMPILED",
+   "evidence": "._h:has(:where(input, textarea, select, .m-select-toggle):focus-visible)"
+  },
+  {
+   "state": "___field--invalid",
+   "scope": "node-type",
+   "host": "field",
+   "selector_template": "&:has(:user-invalid, :where(.m-select-toggle[aria-invalid=\"true\"]))",
+   "status": "COMPILED",
+   "evidence": "._i:has(:user-invalid, :where(.m-select-toggle[aria-invalid=\"true\"]))"
+  },
+  {
+   "state": "___field--invalid-focus-visible",
+   "scope": "node-type",
+   "host": "field",
+   "selector_template": "&:has(:user-invalid:focus-visible, :where(.m-select-toggle:focus-visible ~ :user-invalid, .m-select-toggle[aria-invalid=\"true\"]:focus-visible))",
+   "status": "COMPILED",
+   "evidence": "._j:has(:user-invalid:focus-visible, :where(.m-select-toggle:focus-visible ~ :user-invalid"
+  },
+  {
+   "state": "___field--invalid-within",
+   "scope": "node-type",
+   "host": "field",
+   "selector_template": ".m-field:where(:has(:user-invalid, .m-select-toggle[aria-invalid=\"true\"])) &",
+   "status": "COMPILED",
+   "evidence": ".m-field:where(:has(:user-invalid, .m-select-toggle[aria-invalid=\"true\"])) ._k"
+  },
+  {
+   "state": "___field-set--invalid",
+   "scope": "node-type",
+   "host": "fieldset",
+   "selector_template": "&:has(:user-invalid, :where(.m-select-toggle[aria-invalid=\"true\"]))",
+   "status": "COMPILED",
+   "evidence": "._h:has(:user-invalid, :where(.m-select-toggle[aria-invalid=\"true\"]))"
+  },
+  {
+   "state": "___fileupload-input--selector-button",
+   "scope": "node-type",
+   "host": "fileupload-input",
+   "selector_template": "&::file-selector-button",
+   "status": "COMPILED",
+   "evidence": "._h::file-selector-button"
+  },
+  {
+   "state": "___fileupload-input--selector-button-hover",
+   "scope": "node-type",
+   "host": "fileupload-input",
+   "selector_template": "&::file-selector-button:hover",
+   "status": "COMPILED",
+   "evidence": "._i::file-selector-button:hover"
+  },
+  {
+   "state": "___form--error",
+   "scope": "node-type",
+   "host": "form-wrapper",
+   "selector_template": "&[data-form-state=\"error\"]",
+   "status": "COMPILED",
+   "evidence": "._h[data-form-state=\"error\"]"
+  },
+  {
+   "state": "___form--invalid-within",
+   "scope": "node-type",
+   "host": "form-wrapper",
+   "selector_template": ".m-form-wrapper:where(:has(:user-invalid, .m-select-toggle[aria-invalid=\"true\"])) &",
+   "status": "COMPILED",
+   "evidence": ".m-form-wrapper:where(:has(:user-invalid, .m-select-toggle[aria-invalid=\"true\"])) ._k"
+  },
+  {
+   "state": "___input--placeholder",
+   "scope": "node-type",
+   "host": "text-input",
+   "selector_template": "&.m-input::placeholder",
+   "status": "COMPILED",
+   "evidence": "._h.m-input::placeholder"
+  },
+  {
+   "state": "___listbox-option",
+   "scope": "node-type",
+   "host": "listbox",
+   "selector_template": "&.m-listbox :where(option)",
+   "status": "COMPILED",
+   "evidence": "._h.m-listbox :where(option)"
+  },
+  {
+   "state": "___loop_element_no_result",
+   "scope": "node-type",
+   "host": "loop",
+   "selector_template": "&.m-loop--no-result",
+   "status": "NO_HOST",
+   "evidence": "host loop is COMMIT_500 - committing it breaks the page"
+  },
+  {
+   "state": "___loop_pagination_button--disabled",
+   "scope": "node-type",
+   "host": "loop-pagination-button-next",
+   "selector_template": "&.m-loop-pagination-button--disabled",
+   "status": "NO_HOST",
+   "evidence": "host loop-pagination-button-next is BROKE_PAGE - committing it breaks the page"
+  },
+  {
+   "state": "___menu-link--current",
+   "scope": "node-type",
+   "host": "menu-link",
+   "selector_template": "&.m-menu-link--current",
+   "status": "COMPILED",
+   "evidence": "._h.m-menu-link--current"
+  },
+  {
+   "state": "___navbar--dropdown-mode",
+   "scope": "node-type",
+   "host": "navbar",
+   "selector_template": "&:where(.m-navbar.dropdown-mode,.m-navbar.dropdown-mode &)",
+   "status": "COMPILED",
+   "evidence": "._h:where(.m-navbar.dropdown-mode,.m-navbar.dropdown-mode ._h)"
+  },
+  {
+   "state": "___navbar--opened",
+   "scope": "node-type",
+   "host": "navbar",
+   "selector_template": ".dropdown-mode:where(.m-navbar.dropdown--opened) &",
+   "status": "COMPILED",
+   "evidence": ".dropdown-mode:where(.m-navbar.dropdown--opened) ._i"
+  },
+  {
+   "state": "___navbar--opening",
+   "scope": "node-type",
+   "host": "navbar",
+   "selector_template": ".dropdown-mode:where(.m-navbar.dropdown--opening) &",
+   "status": "COMPILED",
+   "evidence": ".dropdown-mode:where(.m-navbar.dropdown--opening) ._j"
+  },
+  {
+   "state": "___nested_dropdown_mode",
+   "scope": "node-type",
+   "host": "",
+   "selector_template": "&:where(.dropdown-mode .m-navbar-navigation .m-dropdown &, .m-dropdown .m-dropdown &):not(x)",
+   "status": "SKIPPED",
+   "evidence": "no node type declares Mosaic/NodeTypes/Menu/Dropdown/DropdownElementTypeFactoryAbstract.php"
+  },
+  {
+   "state": "___popover--flipped",
+   "scope": "node-type",
+   "host": "popover",
+   "selector_template": "&:where(.m-popover[data-mosaic-popover-flipped],.m-popover[data-mosaic-popover-flipped] &)",
+   "status": "COMPILED",
+   "evidence": "._h:where(.m-popover[data-mosaic-popover-flipped],.m-popover[data-mosaic-popover-flipped] "
+  },
+  {
+   "state": "___radio-input--checked",
+   "scope": "node-type",
+   "host": "radio-input",
+   "selector_template": "&:checked",
+   "status": "NO_HOST",
+   "evidence": "host radio-input is BROKE_PAGE - committing it breaks the page"
+  },
+  {
+   "state": "___radio-input--checkmark",
+   "scope": "node-type",
+   "host": "radio-input",
+   "selector_template": "&:checked::before",
+   "status": "NO_HOST",
+   "evidence": "host radio-input is BROKE_PAGE - committing it breaks the page"
+  },
+  {
+   "state": "___select--opened",
+   "scope": "node-type",
+   "host": "select",
+   "selector_template": "&.m-select:where(.m-select--opened),.m-select:where(.m-select--opened) > &,.m-select:where(.m-select--opened) > .m-select-toggle &,.m-select:where(.m-select--opened) > .m-select-options &",
+   "status": "ABSENT",
+   "evidence": "probe element never reached the page"
+  },
+  {
+   "state": "___select-option--active",
+   "scope": "node-type",
+   "host": "select-option",
+   "selector_template": "&.m-select-option--active,.m-select-option--active &",
+   "status": "COMPILED",
+   "evidence": "._h.m-select-option--active,.m-select-option--active ._h"
+  },
+  {
+   "state": "___select-option--in-toggle",
+   "scope": "node-type",
+   "host": "select-option",
+   "selector_template": "&.m-select-current-option,.m-select-current-option &",
+   "status": "COMPILED",
+   "evidence": "._i.m-select-current-option,.m-select-current-option ._i"
+  },
+  {
+   "state": "___select-option--selected",
+   "scope": "node-type",
+   "host": "select-option",
+   "selector_template": "&[aria-selected=\"true\"],&.m-select-option--selected,[aria-selected=\"true\"] &,.m-select-option--selected &",
+   "status": "COMPILED",
+   "evidence": "._j[aria-selected=\"true\"],._j.m-select-option--selected,[aria-selected=\"true\"] ._j,.m-sele"
+  },
+  {
+   "state": "___slide--active",
+   "scope": "node-type",
+   "host": "slider-slide",
+   "selector_template": ".m-slide--active > &",
+   "status": "NO_HOST",
+   "evidence": "host slider-slide is BROKE_PAGE - committing it breaks the page"
+  },
+  {
+   "state": "___slider_navigation_bullet--active",
+   "scope": "node-type",
+   "host": "slider-navigation-bullet",
+   "selector_template": "&.m-slider-bullet--active",
+   "status": "NO_HOST",
+   "evidence": "host slider-navigation-bullet is COMMIT_500 - committing it breaks the page"
+  },
+  {
+   "state": "___slider_navigation_bullet--hover",
+   "scope": "node-type",
+   "host": "slider-navigation-bullet",
+   "selector_template": "&:not(.m-slider-bullet--active):HOVER",
+   "status": "NO_HOST",
+   "evidence": "host slider-navigation-bullet is COMMIT_500 - committing it breaks the page"
+  },
+  {
+   "state": "___step--active",
+   "scope": "node-type",
+   "host": "form-multi-steps-step",
+   "selector_template": "&.m-multi-steps-step-tab--active",
+   "status": "COMPILED",
+   "evidence": "._h.m-multi-steps-step-tab--active"
+  },
+  {
+   "state": "___step--active___descendants",
+   "scope": "node-type",
+   "host": "form-multi-steps-step",
+   "selector_template": ".m-multi-steps-step-tab--active &",
+   "status": "COMPILED",
+   "evidence": ".m-multi-steps-step-tab--active ._i"
+  },
+  {
+   "state": "___step--completed",
+   "scope": "node-type",
+   "host": "form-multi-steps-step",
+   "selector_template": "&.m-multi-steps-step-tab--completed",
+   "status": "COMPILED",
+   "evidence": "._j.m-multi-steps-step-tab--completed"
+  },
+  {
+   "state": "___step--completed___descendants",
+   "scope": "node-type",
+   "host": "form-multi-steps-step",
+   "selector_template": ".m-multi-steps-step-tab--completed &",
+   "status": "COMPILED",
+   "evidence": ".m-multi-steps-step-tab--completed ._k"
+  },
+  {
+   "state": "___submit-button--busy",
+   "scope": "node-type",
+   "host": "submit-button",
+   "selector_template": "&[aria-busy=\"true\"]",
+   "status": "COMPILED",
+   "evidence": "._h[aria-busy=\"true\"]"
+  },
+  {
+   "state": "___tab--active",
+   "scope": "node-type",
+   "host": "tabs-tab",
+   "selector_template": "&.m-tab--active",
+   "status": "NO_HOST",
+   "evidence": "host tabs-tab is BROKE_PAGE - committing it breaks the page"
+  },
+  {
+   "state": "___tab--active___descendants",
+   "scope": "node-type",
+   "host": "tabs-tab",
+   "selector_template": ".m-tab--active &",
+   "status": "NO_HOST",
+   "evidence": "host tabs-tab is BROKE_PAGE - committing it breaks the page"
+  },
+  {
+   "state": "___textarea-input--placeholder",
+   "scope": "node-type",
+   "host": "textarea-input",
+   "selector_template": "&.m-textarea::placeholder",
+   "status": "COMPILED",
+   "evidence": "._h.m-textarea::placeholder"
+  }
+ ]
+}

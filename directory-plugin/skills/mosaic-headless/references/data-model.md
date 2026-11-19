@@ -1,0 +1,149 @@
+# The Mosaic data model
+
+> Directory edition: commands that mention `tools/` need the full edition (`npm` package `mosaic-headless`); this folder ships reference files only. The `wp` commands run on your WordPress host; how you reach it is up to you.
+
+## Where a page lives
+
+Nowhere you would guess from Elementor or Gutenberg. Mosaic stores **nothing** of a
+page's structure in `wp_posts` or `wp_postmeta`. It owns **23 of its own tables**,
+all prefixed `wp_mosaic_`, and the WordPress post is only one of several things a
+Mosaic *template* can be assigned to.
+
+Measured on a real install (`data/db-columns.csv`, 23 tables / 210 columns, Mosaic 1.0.8):
+
+| table | holds |
+|---|---|
+| `mosaic_themes` | the top-level container. Everything else is scoped to a `themeID`. |
+| `mosaic_masters` | master layouts (the outermost shell a template renders into) |
+| `mosaic_templates` | a template + its `conditions` blob and `path`/`assign` mode |
+| `mosaic_template_assigns` | which template serves which `type`/`typeIdentifier` |
+| `mosaic_nodes` | **the element tree** — one row per element, on every document |
+| `mosaic_components`, `mosaic_component_documents`, `mosaic_component_categories` | reusable components and their category tree |
+| `mosaic_styleguides` | style guide documents |
+| `mosaic_variants`, `mosaic_variant_sub_classes` | the built-in class system - the variant catalog (152 entries, see `data/variants.csv`) and the user's sub classes under each. Named `mosaic_element_classes` / `mosaic_sub_classes` before 1.0.8 |
+| `mosaic_universal_classes`, `mosaic_universal_sub_classes` | user-defined classes that apply to any element. `mosaic_utility_classes` / `mosaic_utility_sub_classes` before 1.0.8 |
+| `mosaic_collections`, `mosaic_collection_modes`, `mosaic_collection_skins`, `mosaic_collection_groups`, `mosaic_collection_variables` | the design-token system (a collection has modes and skins; variables resolve per mode) |
+| `mosaic_breakpoints` | responsive breakpoints, per theme — not global |
+| `mosaic_settings` | Mosaic → Settings, one row for the whole site (no `themeID` column) - including the Google Maps key, CAPTCHA and mailing-list API keys, so a theme ZIP never carries them |
+| `mosaic_submissions`, `mosaic_submission_actions` | form submissions (Pro) |
+| `mosaic_locks` | editing locks; the only table created at plugin activation |
+
+`mosaic_locks` appearing alone is the signature of a **half-installed** Mosaic: the
+plugin's network-level install ran, but the site-level install (which creates the
+other 22 tables) has not. It is triggered by an admin loading
+`/wp-admin/admin.php?page=mosaic`, not by activation.
+
+## The node row
+
+`mosaic_nodes` is the whole element tree, flattened:
+
+```
+themeID       varchar(36)   scope
+documentType  varchar(36)   which kind of document this node belongs to
+documentID    varchar(36)   which document
+ID            varchar(36)   node uuid
+parentType    varchar(36)   parent's kind
+parentID      varchar(36)   parent node uuid   -> the tree lives here
+ordering      varchar(400)  fractional-index string, NOT an integer
+status        varchar(36)   'publish' etc.
+type          varchar(128)  the node type slug -> data/node-types.csv
+data          longtext      the node's own properties, JSON
+revision      varchar(36)   optimistic-lock token
+version       varchar(128)
+```
+
+Two things bite here:
+
+**`ordering` is a string, not a number.** It is a fractional index (`a0`, `a1`,
+`a0V`…), so siblings sort lexicographically and a node can be inserted between two
+others without renumbering. Sorting it numerically produces a scrambled page.
+
+**The tree is by `parentID`, not by nesting.** There is no nested JSON blob to edit
+like `_elementor_data`. Reparenting is a single-column update; moving a subtree
+does not touch the subtree's rows.
+
+## Node types and properties
+
+129 node types are registered (`data/node-types.csv`), **5 of them Pro-only** as
+of 1.0.11: `modal`, `modal-overlay`, `modal-window`, `popover` and `code`. The
+split is structural, not a flag: Pro types live under `Mosaic/NodeTypes/Pro/`.
+1.0.11 turned it round. Through 1.0.10 the form system, slider and tabs (48
+types) were the Pro ones and modal / popover were Free; 1.0.11 moved the forms,
+slider and tabs out of `Pro/` and moved modal, popover and code in. A Pro-only
+type now keeps its slug and placement rules on a shared
+`*TypeFactoryAbstract` outside `Pro/`, so a Free install registers a locked
+stand-in under the same slug (`LockedNodeTypes`) instead of having no factory
+at all. Read the `edition` column for the version you target and never carry a
+Free/Pro claim across an upgrade.
+
+Each type declares its own data properties (`data/node-properties.csv`, 181
+properties across 49 classes). Properties are declared by `createDataSimple` (175),
+`createDataArray` (3) and `createDataGroup` (3), each with a validator chain. **174
+of 181 properties set `supportsInherit: true`** — inheritance is the norm in this
+model, not the exception, which is why a property being absent from a node's `data`
+is meaningful rather than merely missing.
+
+The validator chain in the `validators` column is what actually gates a write.
+`ValidatorAcceptedValues` means an enum (the accepted list is in the source file
+named by the `file` column); `ValidateAllowUndefined` means the property may be
+omitted; `ValidatorDynamicCodeObject` means the property accepts a dynamic-code
+object instead of a literal — that is Mosaic's dynamic-tag equivalent.
+
+## Styling
+
+Mosaic does not attach CSS to a node the way Elementor attaches controls to a
+widget. Styling goes through the **variant** system (Mosaic's name since 1.0.8 for
+its element classes): 152 built-in entries (`data/variants.csv`), each with its
+own CSS selectors and the class name it emits, arranged in a parent
+tree, some marked `metaIsGroup` (organisational) and some `metaIsEditable`. A node
+points at a default variant (`default_element_class` in `node-types.csv`) and
+takes variations from there.
+
+That is why the same visual change can be made in two very different places, and
+why writing a style onto a node directly is usually the wrong move: the class is
+the unit of reuse, and the collection/variable tables are the token layer beneath it.
+
+
+## Components: one definition, many places
+
+Three tables (`components`, `component_documents`, `component_categories`), four
+node types and eighteen REST routes. Driven end to end by
+`tools/sweep_components.py`; every claim here was measured, and none of it is
+guessable from the route list.
+
+```
+1  create      adminComponentsEditorInstance, commit a `component` record
+               parentType MUST be "componentCategory" - Page, Block and Part exist
+               out of the box, and no other parent type is accepted at all.
+               parentType:"" gives HTTP 500, "Parent type not supported"
+
+2  heal        GET componentDocumentInstance/<id>
+               the FIRST call 404s and creates the document; the second returns it,
+               healed into body / component-external / component-root / document
+
+3  fill        commit into the SAME instance, under the `component-internal` node
+               in its `node/component/<id>` key.
+               NOT componentNodeEditorInstance - `isCommitAllowed()` returns false
+               there and the commit is refused with "Not allowed!" and a 500, even
+               though that is the instance which shows you the tree.
+               NOT component-root either - it accepts no children
+
+4  instance    on a page, a node whose TYPE carries the component's id:
+                   type: "component-instance/<componentID>"
+               `ComponentInstanceElementTypeFactory` splits on that slash. A bare
+               `component-instance` has no id for `$flags[0]` and fatals, which is
+               the entire reason it is COMMIT_500 in node-verification.csv
+```
+
+Verified on a live page: two instances of one component, both rendered, the
+component's own text present twice from a single definition. Edit the component and
+every instance changes - which is the whole point, and the reason a real site should
+use these rather than repeating a tree.
+
+From the official docs and the schema: a component's "Context" - which `@VAR`
+namespaces its nodes may use - is the `path` column of `wp_mosaic_components`, the
+same template-path ids templates use. A component in use is not deleted. Resetting an
+override resets that one node, not its children. Pasting a component or class from
+another theme adds a resource even when one of that name exists, so `name` can
+repeat within a theme; only the emitted class name is made unique.
+

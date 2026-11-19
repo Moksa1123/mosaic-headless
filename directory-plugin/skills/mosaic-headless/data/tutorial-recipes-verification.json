@@ -1,0 +1,107 @@
+{
+ "source_file": "data/tutorial-recipes-verification.csv",
+ "columns": [
+  "recipe",
+  "check",
+  "status",
+  "evidence"
+ ],
+ "rows": [
+  {
+   "recipe": "OVERLAY",
+   "check": "faded and display:none after load",
+   "status": "PASS",
+   "evidence": "{'bg': 'rgb(255, 255, 255)', 'op': '0', 'd': 'none', 'tr': 'none'}"
+  },
+  {
+   "recipe": "OVERLAY",
+   "check": "page underneath takes a real click",
+   "status": "PASS",
+   "evidence": "clicked #rx-dark"
+  },
+  {
+   "recipe": "DARK",
+   "check": "Dark switches the page",
+   "status": "PASS",
+   "evidence": "rgb(250, 250, 245) -> rgb(20, 22, 28)"
+  },
+  {
+   "recipe": "DARK",
+   "check": "Dark sets the cookie",
+   "status": "PASS",
+   "evidence": "rx-mode=dark"
+  },
+  {
+   "recipe": "DARK",
+   "check": "a reload keeps Dark",
+   "status": "PASS",
+   "evidence": "rgb(20, 22, 28)"
+  },
+  {
+   "recipe": "DARK",
+   "check": "Light switches back",
+   "status": "PASS",
+   "evidence": "rgb(250, 250, 245), rx-mode=light"
+  },
+  {
+   "recipe": "LOOP",
+   "check": "moves on its own",
+   "status": "PASS",
+   "evidence": "153.434px -> 182.25px"
+  },
+  {
+   "recipe": "LOOP",
+   "check": "hover suspends it by Interaction ID",
+   "status": "PASS",
+   "evidence": "183.644px = 183.644px"
+  },
+  {
+   "recipe": "LOOP",
+   "check": "leaving resumes it",
+   "status": "PASS",
+   "evidence": "183.644px -> 196.695px"
+  },
+  {
+   "recipe": "LOOP",
+   "check": "still moving past one 4s cycle",
+   "status": "PASS",
+   "evidence": "198.316px -> 0.350098px"
+  },
+  {
+   "recipe": "OFFCANV",
+   "check": "odd click opens: display flex, slid in",
+   "status": "PASS",
+   "evidence": "{'bg': 'rgb(240, 240, 240)', 'op': '1', 'd': 'flex', 'tr': '0%'}"
+  },
+  {
+   "recipe": "OFFCANV",
+   "check": "even click closes: display none at the end",
+   "status": "PASS",
+   "evidence": "{'bg': 'rgb(240, 240, 240)', 'op': '1', 'd': 'none', 'tr': '100%'}"
+  },
+  {
+   "recipe": "PROGRESS",
+   "check": "bar fills as the article scrolls",
+   "status": "PASS",
+   "evidence": "-100% -> -55.1729% -> -0.968059%"
+  },
+  {
+   "recipe": "REVEAL",
+   "check": "first section reveals on scroll",
+   "status": "PASS",
+   "evidence": "{'bg': 'rgb(9, 99, 199)', 'op': '1', 'd': 'block', 'tr': '0px'}"
+  },
+  {
+   "recipe": "REVEAL",
+   "check": "second stays hidden until reached",
+   "status": "PASS",
+   "evidence": "{'bg': 'rgb(9, 99, 199)', 'op': '0', 'd': 'block', 'tr': '0px 40px'}"
+  },
+  {
+   "recipe": "REVEAL",
+   "check": "second reveals by class alone",
+   "status": "PASS",
+   "evidence": "{'bg': 'rgb(9, 99, 199)', 'op': '1', 'd': 'block', 'tr': '0px'}"
+  }
+ ]
+}

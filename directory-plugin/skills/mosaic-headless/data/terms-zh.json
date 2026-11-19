@@ -1,0 +1,797 @@
+{
+ "source_file": "data/terms-zh.csv",
+ "columns": [
+  "zh",
+  "en",
+  "kind",
+  "note",
+  "source",
+  "trust"
+ ],
+ "rows": [
+  {
+   "zh": "內距",
+   "en": "padding",
+   "kind": "css",
+   "note": "paddingTop/Right/Bottom/Left (1.0.12 shipped 邊框間距)",
+   "source": "mosaic 1.0.13 Languages/dist/mosaic-zh_TW-AppMosaicEditor.json",
+   "trust": "documented"
+  },
+  {
+   "zh": "邊框間距",
+   "en": "padding",
+   "kind": "css",
+   "note": "Mosaic's former zh_TW for Padding; Mosaic 1.0.9-1.0.12 wording",
+   "source": "mosaic 1.0.12 Languages/dist/mosaic-zh_TW-AppMosaicEditor.json (replaced in 1.0.13)",
+   "trust": "documented"
+  },
+  {
+   "zh": "外距",
+   "en": "margin",
+   "kind": "css",
+   "note": "marginTop/Right/Bottom/Left (1.0.12 shipped 邊界)",
+   "source": "mosaic 1.0.13 Languages/dist/mosaic-zh_TW-AppMosaicEditor.json",
+   "trust": "documented"
+  },
+  {
+   "zh": "邊界",
+   "en": "margin",
+   "kind": "css",
+   "note": "Mosaic's former zh_TW for Margin; Mosaic 1.0.9-1.0.12 wording",
+   "source": "mosaic 1.0.12 Languages/dist/mosaic-zh_TW-AppMosaicEditor.json (replaced in 1.0.13)",
+   "trust": "documented"
+  },
+  {
+   "zh": "邊框",
+   "en": "border",
+   "kind": "css",
+   "note": "border*Width/Style/Color per side (1.0.12 shipped 框線)",
+   "source": "mosaic 1.0.13 Languages/dist/mosaic-zh_TW-AppMosaicEditor.json",
+   "trust": "documented"
+  },
+  {
+   "zh": "框線",
+   "en": "border",
+   "kind": "css",
+   "note": "Mosaic's former zh_TW for Border; Mosaic 1.0.9-1.0.12 wording",
+   "source": "mosaic 1.0.12 Languages/dist/mosaic-zh_TW-AppMosaicEditor.json (replaced in 1.0.13)",
+   "trust": "documented"
+  },
+  {
+   "zh": "圓角",
+   "en": "border-radius",
+   "kind": "css",
+   "note": "borderRadius",
+   "source": "mosaic 1.0.13 Languages/dist/mosaic-zh_TW-AppMosaicEditor.json",
+   "trust": "documented"
+  },
+  {
+   "zh": "半徑",
+   "en": "border-radius",
+   "kind": "css",
+   "note": "Mosaic's shipped zh_TW for Radius",
+   "source": "mosaic 1.0.13 Languages/dist/mosaic-zh_TW-AppMosaicEditor.json",
+   "trust": "documented"
+  },
+  {
+   "zh": "寬度",
+   "en": "width",
+   "kind": "css",
+   "note": "also min-width / max-width",
+   "source": "mosaic 1.0.13 Languages/dist/mosaic-zh_TW-AppMosaicEditor.json",
+   "trust": "documented"
+  },
+  {
+   "zh": "高度",
+   "en": "height",
+   "kind": "css",
+   "note": "also min-height / max-height",
+   "source": "mosaic 1.0.13 Languages/dist/mosaic-zh_TW-AppMosaicEditor.json",
+   "trust": "documented"
+  },
+  {
+   "zh": "背景",
+   "en": "background",
+   "kind": "css",
+   "note": "backgroundColor / backgroundStyle",
+   "source": "mosaic 1.0.13 Languages/dist/mosaic-zh_TW-AppMosaicEditor.json",
+   "trust": "documented"
+  },
+  {
+   "zh": "背景色",
+   "en": "background-color",
+   "kind": "css",
+   "note": "",
+   "source": "colloquial; no Mosaic string",
+   "trust": "inferred"
+  },
+  {
+   "zh": "色彩",
+   "en": "color",
+   "kind": "css",
+   "note": "matches every *-color property",
+   "source": "mosaic 1.0.13 Languages/dist/mosaic-zh_TW-AppMosaicEditor.json",
+   "trust": "documented"
+  },
+  {
+   "zh": "顏色",
+   "en": "color",
+   "kind": "css",
+   "note": "matches every *-color property",
+   "source": "colloquial; no Mosaic string",
+   "trust": "inferred"
+  },
+  {
+   "zh": "字型",
+   "en": "font-family",
+   "kind": "css",
+   "note": "a site-wide typeface is a fontFamily collection variable (references/styling.md)",
+   "source": "mosaic 1.0.13 Languages/dist/mosaic-zh_TW-AppMosaicEditor.json",
+   "trust": "documented"
+  },
+  {
+   "zh": "字級",
+   "en": "font-size",
+   "kind": "css",
+   "note": "",
+   "source": "colloquial; no Mosaic string",
+   "trust": "inferred"
+  },
+  {
+   "zh": "字體大小",
+   "en": "font-size",
+   "kind": "css",
+   "note": "",
+   "source": "colloquial; no Mosaic string",
+   "trust": "inferred"
+  },
+  {
+   "zh": "行高",
+   "en": "line-height",
+   "kind": "css",
+   "note": "",
+   "source": "colloquial; no Mosaic string",
+   "trust": "inferred"
+  },
+  {
+   "zh": "字距",
+   "en": "letter-spacing",
+   "kind": "css",
+   "note": "",
+   "source": "colloquial; no Mosaic string",
+   "trust": "inferred"
+  },
+  {
+   "zh": "字重",
+   "en": "font-weight",
+   "kind": "css",
+   "note": "",
+   "source": "colloquial; no Mosaic string",
+   "trust": "inferred"
+  },
+  {
+   "zh": "粗細",
+   "en": "font-weight",
+   "kind": "css",
+   "note": "",
+   "source": "colloquial; no Mosaic string",
+   "trust": "inferred"
+  },
+  {
+   "zh": "不透明度",
+   "en": "opacity",
+   "kind": "css",
+   "note": "",
+   "source": "mosaic 1.0.13 Languages/dist/mosaic-zh_TW-AppMosaicEditor.json",
+   "trust": "documented"
+  },
+  {
+   "zh": "透明度",
+   "en": "opacity",
+   "kind": "css",
+   "note": "",
+   "source": "colloquial; no Mosaic string",
+   "trust": "inferred"
+  },
+  {
+   "zh": "陰影",
+   "en": "shadow",
+   "kind": "css",
+   "note": "box-shadow and text-shadow",
+   "source": "colloquial; no Mosaic string",
+   "trust": "inferred"
+  },
+  {
+   "zh": "間隙",
+   "en": "gap",
+   "kind": "css",
+   "note": "columnGap / rowGap",
+   "source": "colloquial; no Mosaic string",
+   "trust": "inferred"
+  },
+  {
+   "zh": "對齊",
+   "en": "align",
+   "kind": "css",
+   "note": "align-items / align-self / align-content / text-align",
+   "source": "mosaic 1.0.13 Languages/dist/mosaic-zh_TW-AppMosaicEditor.json",
+   "trust": "documented"
+  },
+  {
+   "zh": "顯示",
+   "en": "display",
+   "kind": "css",
+   "note": "",
+   "source": "mosaic 1.0.13 Languages/dist/mosaic-zh_TW-AppMosaicEditor.json",
+   "trust": "documented"
+  },
+  {
+   "zh": "位置",
+   "en": "position",
+   "kind": "css",
+   "note": "",
+   "source": "mosaic 1.0.13 Languages/dist/mosaic-zh_TW-AppMosaicEditor.json",
+   "trust": "documented"
+  },
+  {
+   "zh": "黏性定位",
+   "en": "position",
+   "kind": "css",
+   "note": "position: sticky",
+   "source": "mosaic 1.0.13 Languages/dist/mosaic-zh_TW-AppMosaicEditor.json",
+   "trust": "documented"
+  },
+  {
+   "zh": "溢出",
+   "en": "overflow",
+   "kind": "css",
+   "note": "",
+   "source": "mosaic 1.0.13 Languages/dist/mosaic-zh_TW-AppMosaicEditor.json",
+   "trust": "documented"
+  },
+  {
+   "zh": "轉場",
+   "en": "transition",
+   "kind": "css",
+   "note": "",
+   "source": "mosaic 1.0.13 Languages/dist/mosaic-zh_TW-AppMosaicEditor.json",
+   "trust": "documented"
+  },
+  {
+   "zh": "變形",
+   "en": "transform",
+   "kind": "css",
+   "note": "",
+   "source": "mosaic 1.0.13 Languages/dist/mosaic-zh_TW-AppMosaicEditor.json",
+   "trust": "documented"
+  },
+  {
+   "zh": "網格",
+   "en": "grid",
+   "kind": "css",
+   "note": "grid-template-* / grid-auto-*; child placement emits nothing (references/facts.md)",
+   "source": "mosaic 1.0.13 Languages/dist/mosaic-zh_TW-AppMosaicEditor.json",
+   "trust": "documented"
+  },
+  {
+   "zh": "濾鏡",
+   "en": "filter",
+   "kind": "css",
+   "note": "filter and backdrop-filter",
+   "source": "colloquial; no Mosaic string",
+   "trust": "inferred"
+  },
+  {
+   "zh": "層級",
+   "en": "z-index",
+   "kind": "css",
+   "note": "",
+   "source": "colloquial; no Mosaic string",
+   "trust": "inferred"
+  },
+  {
+   "zh": "按鈕",
+   "en": "button",
+   "kind": "type",
+   "note": "url -> <a>; none -> <button>; inactive -> <span>",
+   "source": "mosaic 1.0.13 Languages/dist/mosaic-zh_TW-AppMosaicEditor.json",
+   "trust": "documented"
+  },
+  {
+   "zh": "文字",
+   "en": "text",
+   "kind": "type",
+   "note": "renders <div>; set tagName for h1-h6 / p",
+   "source": "mosaic 1.0.13 Languages/dist/mosaic-zh_TW-AppMosaicEditor.json",
+   "trust": "documented"
+  },
+  {
+   "zh": "標題",
+   "en": "text",
+   "kind": "type",
+   "note": "a heading is a text node with tagName h1-h6",
+   "source": "mosaic 1.0.13 Languages/dist/mosaic-zh_TW-AppMosaicEditor.json",
+   "trust": "documented"
+  },
+  {
+   "zh": "圖片",
+   "en": "image",
+   "kind": "type",
+   "note": "",
+   "source": "mosaic 1.0.13 Languages/dist/mosaic-zh_TW-AppMosaicEditor.json",
+   "trust": "documented"
+  },
+  {
+   "zh": "圖示",
+   "en": "icon",
+   "kind": "type",
+   "note": "renders inline <svg>",
+   "source": "mosaic 1.0.13 Languages/dist/mosaic-zh_TW-AppMosaicEditor.json",
+   "trust": "documented"
+  },
+  {
+   "zh": "連結",
+   "en": "button|menu-link|wysiwyg-link|dropdown-toggle",
+   "kind": "type",
+   "note": "only these four take a url; wrap anything else in a Link-variant button",
+   "source": "mosaic 1.0.13 Languages/dist/mosaic-zh_TW-AppMosaicEditor.json",
+   "trust": "documented"
+  },
+  {
+   "zh": "摺疊面板",
+   "en": "accordion",
+   "kind": "type",
+   "note": "nest accordion > accordion-item > accordion-title / accordion-content",
+   "source": "mosaic 1.0.13 Languages/dist/mosaic-zh_TW-AppMosaicEditor.json",
+   "trust": "documented"
+  },
+  {
+   "zh": "手風琴",
+   "en": "accordion",
+   "kind": "type",
+   "note": "Mosaic's former zh_TW for Accordion; Mosaic 1.0.9-1.0.12 wording",
+   "source": "mosaic 1.0.12 Languages/dist/mosaic-zh_TW-AppMosaicEditor.json (replaced in 1.0.13)",
+   "trust": "documented"
+  },
+  {
+   "zh": "頁籤",
+   "en": "tabs",
+   "kind": "type",
+   "note": "the tab element (a browser tab stays 分頁)",
+   "source": "mosaic 1.0.13 Languages/dist/mosaic-zh_TW-AppMosaicEditor.json",
+   "trust": "documented"
+  },
+  {
+   "zh": "索引標籤",
+   "en": "tabs",
+   "kind": "type",
+   "note": "Mosaic's former zh_TW for Tabs / Tab; Mosaic 1.0.9-1.0.12 wording",
+   "source": "mosaic 1.0.12 Languages/dist/mosaic-zh_TW-AppMosaicEditor.json (replaced in 1.0.13)",
+   "trust": "documented"
+  },
+  {
+   "zh": "彈出視窗",
+   "en": "modal",
+   "kind": "type",
+   "note": "blocking dialog; Popover-API host since 1.0.10",
+   "source": "mosaic 1.0.13 Languages/dist/mosaic-zh_TW-AppMosaicEditor.json",
+   "trust": "documented"
+  },
+  {
+   "zh": "浮動框",
+   "en": "popover",
+   "kind": "type",
+   "note": "non-blocking dialog (1.0.10)",
+   "source": "mosaic 1.0.13 Languages/dist/mosaic-zh_TW-AppMosaicEditor.json",
+   "trust": "documented"
+  },
+  {
+   "zh": "彈窗",
+   "en": "modal|popover",
+   "kind": "type",
+   "note": "modal blocks the page; popover does not (references/dialog-and-triggers.md)",
+   "source": "colloquial; no Mosaic string",
+   "trust": "inferred"
+  },
+  {
+   "zh": "燈箱",
+   "en": "modal",
+   "kind": "type",
+   "note": "",
+   "source": "colloquial; no Mosaic string",
+   "trust": "inferred"
+  },
+  {
+   "zh": "下拉式選單",
+   "en": "dropdown|dropdown-wide",
+   "kind": "type",
+   "note": "openOn hover for a desktop menu",
+   "source": "mosaic 1.0.13 Languages/dist/mosaic-zh_TW-AppMosaicEditor.json",
+   "trust": "documented"
+  },
+  {
+   "zh": "導覽列",
+   "en": "navbar",
+   "kind": "type",
+   "note": "",
+   "source": "mosaic 1.0.13 Languages/dist/mosaic-zh_TW-AppMosaicEditor.json",
+   "trust": "documented"
+  },
+  {
+   "zh": "選單",
+   "en": "menu|menu-link|wp-menu",
+   "kind": "type",
+   "note": "site menus: references/design-system.md",
+   "source": "colloquial; no Mosaic string",
+   "trust": "inferred"
+  },
+  {
+   "zh": "漢堡選單",
+   "en": "navbar|modal",
+   "kind": "type",
+   "note": "phone menu = navbar or a modal drawer; there is no off-canvas node",
+   "source": "colloquial; no Mosaic string",
+   "trust": "inferred"
+  },
+  {
+   "zh": "輪播",
+   "en": "slider",
+   "kind": "type",
+   "note": "nest as default-children requires; bare slider is unsafe",
+   "source": "mosaic 1.0.13 Languages/dist/mosaic-zh_TW-AppMosaicEditor.json",
+   "trust": "documented"
+  },
+  {
+   "zh": "表單",
+   "en": "form|form-wrapper",
+   "kind": "type",
+   "note": "",
+   "source": "mosaic 1.0.13 Languages/dist/mosaic-zh_TW-AppMosaicEditor.json",
+   "trust": "documented"
+  },
+  {
+   "zh": "選取",
+   "en": "select",
+   "kind": "type",
+   "note": "1.0.12 used 選取 for every Select; 1.0.13 keeps it only for selecting elements (msgctxt) and calls the form element 下拉式方塊",
+   "source": "mosaic 1.0.12 Languages/dist/mosaic-zh_TW-AppMosaicEditor.json (replaced in 1.0.13)",
+   "trust": "documented"
+  },
+  {
+   "zh": "下拉欄位",
+   "en": "select",
+   "kind": "type",
+   "note": "1.0.12 Select (select-input is gone)",
+   "source": "colloquial; no Mosaic string",
+   "trust": "inferred"
+  },
+  {
+   "zh": "影片",
+   "en": "video|youtube|vimeo",
+   "kind": "type",
+   "note": "",
+   "source": "mosaic 1.0.13 Languages/dist/mosaic-zh_TW-AppMosaicEditor.json",
+   "trust": "documented"
+  },
+  {
+   "zh": "地圖",
+   "en": "googlemaps|openstreetmap",
+   "kind": "type",
+   "note": "",
+   "source": "mosaic 1.0.13 Languages/dist/mosaic-zh_TW-AppMosaicEditor.json",
+   "trust": "documented"
+  },
+  {
+   "zh": "容器",
+   "en": "div|section",
+   "kind": "type",
+   "note": "section arrives with 80px top and bottom padding",
+   "source": "mosaic 1.0.13 Languages/dist/mosaic-zh_TW-AppMosaicEditor.json",
+   "trust": "documented"
+  },
+  {
+   "zh": "區段",
+   "en": "section",
+   "kind": "type",
+   "note": "",
+   "source": "mosaic 1.0.13 Languages/dist/mosaic-zh_TW-AppMosaicEditor.json",
+   "trust": "documented"
+  },
+  {
+   "zh": "清單",
+   "en": "list|list-item",
+   "kind": "type",
+   "note": "",
+   "source": "colloquial; no Mosaic string",
+   "trust": "inferred"
+  },
+  {
+   "zh": "元件",
+   "en": "component-internal|component-instance",
+   "kind": "type",
+   "note": "a spec node with \"component\" becomes an instance (references/design-system.md)",
+   "source": "mosaic 1.0.13 Languages/dist/mosaic-zh_TW-AppMosaicEditor.json",
+   "trust": "documented"
+  },
+  {
+   "zh": "迴圈",
+   "en": "loop",
+   "kind": "type",
+   "note": "local-context loopSource is @VAR('post/<loop>')",
+   "source": "mosaic 1.0.13 Languages/dist/mosaic-zh_TW-AppMosaicEditor.json",
+   "trust": "documented"
+  },
+  {
+   "zh": "程式碼",
+   "en": "code",
+   "kind": "type",
+   "note": "last resort; a code node's content is a template (@media( kills the page)",
+   "source": "colloquial; no Mosaic string",
+   "trust": "inferred"
+  },
+  {
+   "zh": "懸停",
+   "en": "hover",
+   "kind": "state",
+   "note": "1.0.12 shipped 游標暫留)",
+   "source": "mosaic 1.0.13 Languages/dist/mosaic-zh_TW-AppMosaicEditor.json",
+   "trust": "documented"
+  },
+  {
+   "zh": "游標暫留",
+   "en": "hover",
+   "kind": "state",
+   "note": "Mosaic's former zh_TW for Hover; Mosaic 1.0.9-1.0.12 wording",
+   "source": "mosaic 1.0.12 Languages/dist/mosaic-zh_TW-AppMosaicEditor.json (replaced in 1.0.13)",
+   "trust": "documented"
+  },
+  {
+   "zh": "滑鼠移入",
+   "en": "hover",
+   "kind": "state",
+   "note": "",
+   "source": "colloquial; no Mosaic string",
+   "trust": "inferred"
+  },
+  {
+   "zh": "聚焦",
+   "en": "focus",
+   "kind": "state",
+   "note": "",
+   "source": "mosaic 1.0.13 Languages/dist/mosaic-zh_TW-AppMosaicEditor.json",
+   "trust": "documented"
+  },
+  {
+   "zh": "作用中",
+   "en": "active",
+   "kind": "state",
+   "note": "state ids like ___tab--active / ___slide--active",
+   "source": "mosaic 1.0.13 Languages/dist/mosaic-zh_TW-AppMosaicEditor.json",
+   "trust": "documented"
+  },
+  {
+   "zh": "展開",
+   "en": "opened",
+   "kind": "state",
+   "note": "___accordion-item--opened / ___dropdown--opened",
+   "source": "colloquial; no Mosaic string",
+   "trust": "inferred"
+  },
+  {
+   "zh": "斷點",
+   "en": "breakpoint",
+   "kind": "concept",
+   "note": "style keys _ (desktop) / _t (tablet) / _m (mobile): references/responsive.md",
+   "source": "mosaic 1.0.13 Languages/dist/mosaic-zh_TW-AppMosaicEditor.json",
+   "trust": "documented"
+  },
+  {
+   "zh": "中斷點",
+   "en": "breakpoint",
+   "kind": "concept",
+   "note": "Mosaic's former zh_TW for Breakpoint: references/responsive.md; Mosaic 1.0.9-1.0.12 wording",
+   "source": "mosaic 1.0.12 Languages/dist/mosaic-zh_TW-AppMosaicEditor.json (replaced in 1.0.13)",
+   "trust": "documented"
+  },
+  {
+   "zh": "響應式",
+   "en": "responsive",
+   "kind": "concept",
+   "note": "_t / _m style keys; verify with verify_rwd.py and audit_mobile.py (references/responsive.md)",
+   "source": "colloquial; no Mosaic string",
+   "trust": "inferred"
+  },
+  {
+   "zh": "RWD",
+   "en": "responsive",
+   "kind": "concept",
+   "note": "_t / _m style keys; verify with verify_rwd.py and audit_mobile.py (references/responsive.md)",
+   "source": "colloquial; no Mosaic string",
+   "trust": "inferred"
+  },
+  {
+   "zh": "手機版",
+   "en": "mobile",
+   "kind": "concept",
+   "note": "the _m style key (references/responsive.md)",
+   "source": "colloquial; no Mosaic string",
+   "trust": "inferred"
+  },
+  {
+   "zh": "平板",
+   "en": "tablet",
+   "kind": "concept",
+   "note": "the _t style key (references/responsive.md)",
+   "source": "colloquial; no Mosaic string",
+   "trust": "inferred"
+  },
+  {
+   "zh": "母版",
+   "en": "master",
+   "kind": "concept",
+   "note": "header/footer shell; build_site.py makes one per site",
+   "source": "mosaic 1.0.13 Languages/dist/mosaic-zh_TW-AppMosaicEditor.json",
+   "trust": "documented"
+  },
+  {
+   "zh": "範本",
+   "en": "template",
+   "kind": "concept",
+   "note": "mo.py routes --grep template; references/templates-and-conditions.md",
+   "source": "mosaic 1.0.13 Languages/dist/mosaic-zh_TW-AppMosaicEditor.json",
+   "trust": "documented"
+  },
+  {
+   "zh": "變體",
+   "en": "variant",
+   "kind": "concept",
+   "note": "mo.py classes; theme-global element classes (references/design-system.md)",
+   "source": "mosaic 1.0.13 Languages/dist/mosaic-zh_TW-AppMosaicEditor.json",
+   "trust": "documented"
+  },
+  {
+   "zh": "類別",
+   "en": "class",
+   "kind": "concept",
+   "note": "variants and universal classes: mo.py classes",
+   "source": "mosaic 1.0.13 Languages/dist/mosaic-zh_TW-AppMosaicEditor.json",
+   "trust": "documented"
+  },
+  {
+   "zh": "變數",
+   "en": "variable",
+   "kind": "concept",
+   "note": "collection variables = design tokens; {\"token\": \"--x\"} in a spec (references/design-system.md)",
+   "source": "mosaic 1.0.13 Languages/dist/mosaic-zh_TW-AppMosaicEditor.json",
+   "trust": "documented"
+  },
+  {
+   "zh": "集合",
+   "en": "collection",
+   "kind": "concept",
+   "note": "collection of variables; modes for dark/light (references/design-system.md)",
+   "source": "mosaic 1.0.13 Languages/dist/mosaic-zh_TW-AppMosaicEditor.json",
+   "trust": "documented"
+  },
+  {
+   "zh": "模式",
+   "en": "mode",
+   "kind": "concept",
+   "note": "a second mode on the colour collection = dark/light (references/design-system.md)",
+   "source": "mosaic 1.0.13 Languages/dist/mosaic-zh_TW-AppMosaicEditor.json",
+   "trust": "documented"
+  },
+  {
+   "zh": "互動",
+   "en": "interaction",
+   "kind": "concept",
+   "note": "mo.py interactions; build with tools/interactions.py (references/interactions.md)",
+   "source": "mosaic 1.0.13 Languages/dist/mosaic-zh_TW-AppMosaicEditor.json",
+   "trust": "documented"
+  },
+  {
+   "zh": "動畫",
+   "en": "interaction",
+   "kind": "concept",
+   "note": "animations are interactions (tools/interactions.py); never @keyframes in a code node",
+   "source": "colloquial; no Mosaic string",
+   "trust": "inferred"
+  },
+  {
+   "zh": "條件",
+   "en": "condition",
+   "kind": "concept",
+   "note": "mo.py conditions; references/templates-and-conditions.md",
+   "source": "mosaic 1.0.13 Languages/dist/mosaic-zh_TW-AppMosaicEditor.json",
+   "trust": "documented"
+  },
+  {
+   "zh": "覆寫",
+   "en": "override",
+   "kind": "concept",
+   "note": "component instance overrides (references/design-system.md)",
+   "source": "zh_TW designer glossary 2026-11-05",
+   "trust": "house-style"
+  },
+  {
+   "zh": "佈景",
+   "en": "theme",
+   "kind": "concept",
+   "note": "move a theme: theme_zip.py (Mosaic's ZIP) or theme_export.php / theme_import.php (references/building.md)",
+   "source": "colloquial; no Mosaic string",
+   "trust": "inferred"
+  },
+  {
+   "zh": "主題",
+   "en": "theme",
+   "kind": "concept",
+   "note": "move a theme: theme_zip.py (Mosaic's ZIP) or theme_export.php / theme_import.php (references/building.md)",
+   "source": "colloquial; no Mosaic string",
+   "trust": "inferred"
+  },
+  {
+   "zh": "動態內容",
+   "en": "dynamic",
+   "kind": "concept",
+   "note": "@VAR() values: mo.py vars (references/dynamic-content.md)",
+   "source": "colloquial; no Mosaic string",
+   "trust": "inferred"
+  },
+  {
+   "zh": "自訂欄位",
+   "en": "custom field",
+   "kind": "concept",
+   "note": "@VAR('post/meta_<key>'); run tools/list_fields.php (references/custom-fields.md)",
+   "source": "colloquial; no Mosaic string",
+   "trust": "inferred"
+  },
+  {
+   "zh": "深色模式",
+   "en": "mode",
+   "kind": "concept",
+   "note": "dark/light = a second mode on the colour collection (references/design-system.md)",
+   "source": "colloquial; no Mosaic string",
+   "trust": "inferred"
+  },
+  {
+   "zh": "下拉選單",
+   "en": "select|dropdown",
+   "kind": "type",
+   "note": "a form field = select (1.0.12); a menu that drops down = dropdown",
+   "source": "colloquial; no Mosaic string",
+   "trust": "inferred"
+  },
+  {
+   "zh": "不安全",
+   "en": "unsafe",
+   "kind": "concept",
+   "note": "mo.py types --unsafe; mo.py check <types> exits 1 on one",
+   "source": "colloquial; no Mosaic string",
+   "trust": "inferred"
+  },
+  {
+   "zh": "付費版",
+   "en": "pro",
+   "kind": "concept",
+   "note": "mo.py types --edition pro",
+   "source": "colloquial; no Mosaic string",
+   "trust": "inferred"
+  },
+  {
+   "zh": "下拉式方塊",
+   "en": "select",
+   "kind": "type",
+   "note": "1.0.13 zh_TW for the Select form element (msgctxt Form element); select > select-toggle + select-options > select-option",
+   "source": "mosaic 1.0.13 Languages/dist/mosaic-zh_TW-AppMosaicEditor.json",
+   "trust": "documented"
+  },
+  {
+   "zh": "頁籤組",
+   "en": "tabs",
+   "kind": "type",
+   "note": "1.0.13 zh_TW for Tabs",
+   "source": "mosaic 1.0.13 Languages/dist/mosaic-zh_TW-AppMosaicEditor.json",
+   "trust": "documented"
+  }
+ ]
+}

@@ -1,0 +1,797 @@
+{
+ "source_file": "data/data-class-hierarchy.csv",
+ "columns": [
+  "class",
+  "extends",
+  "abstract",
+  "file"
+ ],
+ "rows": [
+  {
+   "class": "AbstractDropdownElementMResourceData",
+   "extends": "ElementMResourceDataAbstract",
+   "abstract": "no",
+   "file": "Mosaic/NodeTypes/Menu/Dropdown/AbstractDropdownElementMResourceData.php"
+  },
+  {
+   "class": "AccordionContentElementMResourceData",
+   "extends": "ElementMResourceDataAbstract",
+   "abstract": "no",
+   "file": "Mosaic/NodeTypes/Accordion/AccordionItem/AccordionContent/AccordionContentElementMResourceData.php"
+  },
+  {
+   "class": "AccordionElementMResourceData",
+   "extends": "ElementMResourceDataAbstract",
+   "abstract": "no",
+   "file": "Mosaic/NodeTypes/Accordion/AccordionElementMResourceData.php"
+  },
+  {
+   "class": "AccordionItemElementMResourceData",
+   "extends": "ElementMResourceDataAbstract",
+   "abstract": "no",
+   "file": "Mosaic/NodeTypes/Accordion/AccordionItem/AccordionItemElementMResourceData.php"
+  },
+  {
+   "class": "AccordionLoopItemsElementMResourceData",
+   "extends": "ElementMResourceLoopDataAbstract",
+   "abstract": "no",
+   "file": "Mosaic/NodeTypes/Accordion/AccordionLoopItems/AccordionLoopItemsElementMResourceData.php"
+  },
+  {
+   "class": "AccordionTitleElementMResourceData",
+   "extends": "ElementMResourceDataAbstract",
+   "abstract": "no",
+   "file": "Mosaic/NodeTypes/Accordion/AccordionItem/AccordionTitle/AccordionTitleElementMResourceData.php"
+  },
+  {
+   "class": "BodyElementMResourceData",
+   "extends": "ElementMResourceDataAbstract",
+   "abstract": "no",
+   "file": "Mosaic/NodeTypes/Document/Body/BodyElementMResourceData.php"
+  },
+  {
+   "class": "ButtonElementMResourceData",
+   "extends": "ElementMResourceDataAbstract",
+   "abstract": "no",
+   "file": "Mosaic/NodeTypes/Button/ButtonElementMResourceData.php"
+  },
+  {
+   "class": "CheckboxInputElementMResourceData",
+   "extends": "ElementMResourceDataAbstract",
+   "abstract": "no",
+   "file": "Mosaic/NodeTypes/Form/Form/MElements/Checkbox/CheckboxInput/CheckboxInputElementMResourceData.php"
+  },
+  {
+   "class": "ChoiceContentElementMResourceData",
+   "extends": "ElementMResourceDataAbstract",
+   "abstract": "no",
+   "file": "Mosaic/NodeTypes/Form/Form/MElements/ChoiceField/Content/ChoiceContentElementMResourceData.php"
+  },
+  {
+   "class": "ChoiceElementMResourceData",
+   "extends": "ElementMResourceDataAbstract",
+   "abstract": "no",
+   "file": "Mosaic/NodeTypes/Form/Form/MElements/Choice/ChoiceElementMResourceData.php"
+  },
+  {
+   "class": "ChoiceFieldElementMResourceData",
+   "extends": "ElementMResourceDataAbstract",
+   "abstract": "no",
+   "file": "Mosaic/NodeTypes/Form/Form/MElements/ChoiceField/ChoiceFieldElementMResourceData.php"
+  },
+  {
+   "class": "ChoiceLabelElementMResourceData",
+   "extends": "ElementMResourceDataAbstract",
+   "abstract": "no",
+   "file": "Mosaic/NodeTypes/Form/Form/MElements/Choice/ChoiceLabel/ChoiceLabelElementMResourceData.php"
+  },
+  {
+   "class": "ChoiceLegendElementMResourceData",
+   "extends": "ElementMResourceDataAbstract",
+   "abstract": "no",
+   "file": "Mosaic/NodeTypes/Form/Form/MElements/ChoiceField/Legend/ChoiceLegendElementMResourceData.php"
+  },
+  {
+   "class": "CodeElementMResourceData",
+   "extends": "ElementMResourceDataAbstract",
+   "abstract": "no",
+   "file": "Mosaic/NodeTypes/Pro/Code/CodeElementMResourceData.php"
+  },
+  {
+   "class": "ComponentExternalElementMResourceData",
+   "extends": "ElementMResourceDataAbstract",
+   "abstract": "no",
+   "file": "Mosaic/NodeTypes/Component/Component/ComponentExternal/ComponentExternalElementMResourceData.php"
+  },
+  {
+   "class": "ComponentInstanceElementMResourceData",
+   "extends": "ElementMResourceDataAbstract",
+   "abstract": "no",
+   "file": "Mosaic/NodeTypes/Component/ComponentInstance/ComponentInstanceElementMResourceData.php"
+  },
+  {
+   "class": "ComponentInternalElementMResourceData",
+   "extends": "ElementMResourceDataAbstract",
+   "abstract": "no",
+   "file": "Mosaic/NodeTypes/Component/Component/ComponentInternal/ComponentInternalElementMResourceData.php"
+  },
+  {
+   "class": "DivElementMResourceData",
+   "extends": "ElementMResourceDataAbstract",
+   "abstract": "no",
+   "file": "Mosaic/NodeTypes/Div/DivElementMResourceData.php"
+  },
+  {
+   "class": "DocumentElementMResourceData",
+   "extends": "ElementMResourceDataAbstract",
+   "abstract": "no",
+   "file": "Mosaic/NodeTypes/Document/DocumentElementMResourceData.php"
+  },
+  {
+   "class": "DropdownElementMResourceData",
+   "extends": "AbstractDropdownElementMResourceData",
+   "abstract": "no",
+   "file": "Mosaic/NodeTypes/Menu/Dropdown/Dropdown/DropdownElementMResourceData.php"
+  },
+  {
+   "class": "DropdownToggleElementMResourceData",
+   "extends": "ElementMResourceDataAbstract",
+   "abstract": "no",
+   "file": "Mosaic/NodeTypes/Menu/Dropdown/DropdownToggle/DropdownToggleElementMResourceData.php"
+  },
+  {
+   "class": "DropdownWideElementMResourceData",
+   "extends": "AbstractDropdownElementMResourceData",
+   "abstract": "no",
+   "file": "Mosaic/NodeTypes/Menu/Dropdown/DropdownWide/DropdownWideElementMResourceData.php"
+  },
+  {
+   "class": "DropdownWrapperElementMResourceData",
+   "extends": "ElementMResourceDataAbstract",
+   "abstract": "no",
+   "file": "Mosaic/NodeTypes/Menu/Dropdown/DropdownWrapper/DropdownWrapperElementMResourceData.php"
+  },
+  {
+   "class": "ElementMResourceDataAbstract",
+   "extends": "NodeMResourceDataAbstract",
+   "abstract": "yes",
+   "file": "Mosaic/NodeTypes/ElementAbstract/ElementMResourceDataAbstract.php"
+  },
+  {
+   "class": "FieldElementMResourceData",
+   "extends": "ElementMResourceDataAbstract",
+   "abstract": "no",
+   "file": "Mosaic/NodeTypes/Form/Form/MElements/Field/FieldElementMResourceData.php"
+  },
+  {
+   "class": "FieldSetContentElementMResourceData",
+   "extends": "ElementMResourceDataAbstract",
+   "abstract": "no",
+   "file": "Mosaic/NodeTypes/Form/Form/MElements/FieldSet/Content/FieldSetContentElementMResourceData.php"
+  },
+  {
+   "class": "FieldSetElementMResourceData",
+   "extends": "ElementMResourceDataAbstract",
+   "abstract": "no",
+   "file": "Mosaic/NodeTypes/Form/Form/MElements/FieldSet/FieldSetElementMResourceData.php"
+  },
+  {
+   "class": "FieldSetLegendElementMResourceData",
+   "extends": "ElementMResourceDataAbstract",
+   "abstract": "no",
+   "file": "Mosaic/NodeTypes/Form/Form/MElements/FieldSet/Legend/FieldSetLegendElementMResourceData.php"
+  },
+  {
+   "class": "FileUploadElementMResourceData",
+   "extends": "ElementMResourceDataAbstract",
+   "abstract": "no",
+   "file": "Mosaic/NodeTypes/Form/Form/MElements/FileUpload/FileUploadElementMResourceData.php"
+  },
+  {
+   "class": "FormElementMResourceData",
+   "extends": "ElementMResourceDataAbstract",
+   "abstract": "no",
+   "file": "Mosaic/NodeTypes/Form/Form/FormElementMResourceData.php"
+  },
+  {
+   "class": "FormErrorElementMResourceData",
+   "extends": "ElementMResourceDataAbstract",
+   "abstract": "no",
+   "file": "Mosaic/NodeTypes/Form/Form/MElements/FormError/FormErrorElementMResourceData.php"
+  },
+  {
+   "class": "FormStepButtonElementMResourceData",
+   "extends": "ElementMResourceDataAbstract",
+   "abstract": "no",
+   "file": "Mosaic/NodeTypes/Form/Form/MElements/MultiSteps/Forms/FormStep/Button/FormStepButtonElementMResourceData.php"
+  },
+  {
+   "class": "FormStepElementMResourceData",
+   "extends": "ElementMResourceDataAbstract",
+   "abstract": "no",
+   "file": "Mosaic/NodeTypes/Form/Form/MElements/MultiSteps/Forms/FormStep/FormStepElementMResourceData.php"
+  },
+  {
+   "class": "FormWrapperElementMResourceData",
+   "extends": "ElementMResourceDataAbstract",
+   "abstract": "no",
+   "file": "Mosaic/NodeTypes/Form/FormWrapperElementMResourceData.php"
+  },
+  {
+   "class": "FormsElementMResourceData",
+   "extends": "ElementMResourceDataAbstract",
+   "abstract": "no",
+   "file": "Mosaic/NodeTypes/Form/Form/MElements/MultiSteps/Forms/FormsElementMResourceData.php"
+  },
+  {
+   "class": "GoogleMapsElementMResourceData",
+   "extends": "ElementMResourceDataAbstract",
+   "abstract": "no",
+   "file": "Mosaic/NodeTypes/GoogleMaps/GoogleMapsElementMResourceData.php"
+  },
+  {
+   "class": "HiddenInputElementMResourceData",
+   "extends": "ElementMResourceDataAbstract",
+   "abstract": "no",
+   "file": "Mosaic/NodeTypes/Form/Form/MElements/HiddenInput/HiddenInputElementMResourceData.php"
+  },
+  {
+   "class": "IconElementMResourceData",
+   "extends": "ElementMResourceDataAbstract",
+   "abstract": "no",
+   "file": "Mosaic/NodeTypes/Icon/IconElementMResourceData.php"
+  },
+  {
+   "class": "ImageElementMResourceData",
+   "extends": "ElementMResourceDataAbstract",
+   "abstract": "no",
+   "file": "Mosaic/NodeTypes/Image/ImageElementMResourceData.php"
+  },
+  {
+   "class": "InputTextElementMResourceData",
+   "extends": "ElementMResourceDataAbstract",
+   "abstract": "no",
+   "file": "Mosaic/NodeTypes/Form/Form/MElements/InputText/InputTextElementMResourceData.php"
+  },
+  {
+   "class": "LabelElementMResourceData",
+   "extends": "ElementMResourceDataAbstract",
+   "abstract": "no",
+   "file": "Mosaic/NodeTypes/Form/Form/MElements/Label/LabelElementMResourceData.php"
+  },
+  {
+   "class": "ListBoxElementMResourceData",
+   "extends": "ElementMResourceDataAbstract",
+   "abstract": "no",
+   "file": "Mosaic/NodeTypes/Form/Form/MElements/ListBox/ListBoxElementMResourceData.php"
+  },
+  {
+   "class": "ListBoxOptionElementMResourceData",
+   "extends": "ElementMResourceDataAbstract",
+   "abstract": "no",
+   "file": "Mosaic/NodeTypes/Form/Form/MElements/ListBox/Option/ListBoxOptionElementMResourceData.php"
+  },
+  {
+   "class": "ListElementMResourceData",
+   "extends": "ElementMResourceDataAbstract",
+   "abstract": "no",
+   "file": "Mosaic/NodeTypes/ListElement/ListElementMResourceData.php"
+  },
+  {
+   "class": "ListItemElementMResourceData",
+   "extends": "ElementMResourceDataAbstract",
+   "abstract": "no",
+   "file": "Mosaic/NodeTypes/ListElement/ListItem/ListItemElementMResourceData.php"
+  },
+  {
+   "class": "ListLoopItemsElementMResourceData",
+   "extends": "ElementMResourceLoopDataAbstract",
+   "abstract": "no",
+   "file": "Mosaic/NodeTypes/ListElement/ListLoopItems/ListLoopItemsElementMResourceData.php"
+  },
+  {
+   "class": "LoopElementMResourceData",
+   "extends": "ElementMResourceLoopDataAbstract",
+   "abstract": "no",
+   "file": "Mosaic/NodeTypes/Loop/LoopElementMResourceData.php"
+  },
+  {
+   "class": "LoopItemElementMResourceData",
+   "extends": "ElementMResourceDataAbstract",
+   "abstract": "no",
+   "file": "Mosaic/NodeTypes/Loop/LoopItems/LoopItem/LoopItemElementMResourceData.php"
+  },
+  {
+   "class": "LoopItemsElementMResourceData",
+   "extends": "ElementMResourceDataAbstract",
+   "abstract": "no",
+   "file": "Mosaic/NodeTypes/Loop/LoopItems/LoopItemsElementMResourceData.php"
+  },
+  {
+   "class": "LoopNoResultElementMResourceData",
+   "extends": "ElementMResourceDataAbstract",
+   "abstract": "no",
+   "file": "Mosaic/NodeTypes/Loop/LoopNoResult/LoopNoResultElementMResourceData.php"
+  },
+  {
+   "class": "LoopPaginationButtonElementMResourceData",
+   "extends": "ElementMResourceDataAbstract",
+   "abstract": "no",
+   "file": "Mosaic/NodeTypes/Loop/LoopPagination/Button/LoopPaginationButtonElementMResourceData.php"
+  },
+  {
+   "class": "LoopPaginationElementMResourceData",
+   "extends": "ElementMResourceDataAbstract",
+   "abstract": "no",
+   "file": "Mosaic/NodeTypes/Loop/LoopPagination/LoopPaginationElementMResourceData.php"
+  },
+  {
+   "class": "LoopPaginationNumberElementMResourceData",
+   "extends": "ElementMResourceDataAbstract",
+   "abstract": "no",
+   "file": "Mosaic/NodeTypes/Loop/LoopPagination/Numbers/Number/LoopPaginationNumberElementMResourceData.php"
+  },
+  {
+   "class": "LoopPaginationNumbersElementMResourceData",
+   "extends": "ElementMResourceDataAbstract",
+   "abstract": "no",
+   "file": "Mosaic/NodeTypes/Loop/LoopPagination/Numbers/LoopPaginationNumbersElementMResourceData.php"
+  },
+  {
+   "class": "MenuElementMResourceData",
+   "extends": "ElementMResourceDataAbstract",
+   "abstract": "no",
+   "file": "Mosaic/NodeTypes/Menu/MenuElementMResourceData.php"
+  },
+  {
+   "class": "MenuLinkElementMResourceData",
+   "extends": "ElementMResourceDataAbstract",
+   "abstract": "no",
+   "file": "Mosaic/NodeTypes/Menu/MenuLink/MenuLinkElementMResourceData.php"
+  },
+  {
+   "class": "ModalElementMResourceData",
+   "extends": "ElementMResourceDataAbstract",
+   "abstract": "no",
+   "file": "Mosaic/NodeTypes/Pro/Dialog/Modal/ModalElementMResourceData.php"
+  },
+  {
+   "class": "ModalOverlayElementMResourceData",
+   "extends": "ElementMResourceDataAbstract",
+   "abstract": "no",
+   "file": "Mosaic/NodeTypes/Pro/Dialog/Modal/ModalOverlay/ModalOverlayElementMResourceData.php"
+  },
+  {
+   "class": "ModalWindowElementMResourceData",
+   "extends": "ElementMResourceDataAbstract",
+   "abstract": "no",
+   "file": "Mosaic/NodeTypes/Pro/Dialog/Modal/ModalWindow/ModalWindowElementMResourceData.php"
+  },
+  {
+   "class": "MultiStepsElementMResourceData",
+   "extends": "ElementMResourceDataAbstract",
+   "abstract": "no",
+   "file": "Mosaic/NodeTypes/Form/Form/MElements/MultiSteps/MultiStepsElementMResourceData.php"
+  },
+  {
+   "class": "NavbarElementMResourceData",
+   "extends": "ElementMResourceDataAbstract",
+   "abstract": "no",
+   "file": "Mosaic/NodeTypes/Navbar/NavbarElementMResourceData.php"
+  },
+  {
+   "class": "NavbarToggleElementMResourceData",
+   "extends": "ElementMResourceDataAbstract",
+   "abstract": "no",
+   "file": "Mosaic/NodeTypes/Navbar/NavbarToggle/NavbarToggleElementMResourceData.php"
+  },
+  {
+   "class": "NavigationElementMResourceData",
+   "extends": "ElementMResourceDataAbstract",
+   "abstract": "no",
+   "file": "Mosaic/NodeTypes/Navbar/Navigation/NavigationElementMResourceData.php"
+  },
+  {
+   "class": "NodeMResourceDataAbstract",
+   "extends": "MResourceDataAbstract",
+   "abstract": "yes",
+   "file": "Mosaic/NodeTypes/NodeAbstract/NodeMResourceDataAbstract.php"
+  },
+  {
+   "class": "OpenStreetMapElementMResourceData",
+   "extends": "ElementMResourceDataAbstract",
+   "abstract": "no",
+   "file": "Mosaic/NodeTypes/OpenStreetMap/OpenStreetMapElementMResourceData.php"
+  },
+  {
+   "class": "PopoverElementMResourceData",
+   "extends": "ElementMResourceDataAbstract",
+   "abstract": "no",
+   "file": "Mosaic/NodeTypes/Pro/Popover/PopoverElementMResourceData.php"
+  },
+  {
+   "class": "RadioInputElementMResourceData",
+   "extends": "ElementMResourceDataAbstract",
+   "abstract": "no",
+   "file": "Mosaic/NodeTypes/Form/Form/MElements/Radio/RadioInput/RadioInputElementMResourceData.php"
+  },
+  {
+   "class": "RecaptchaElementMResourceData",
+   "extends": "ElementMResourceDataAbstract",
+   "abstract": "no",
+   "file": "Mosaic/NodeTypes/Form/Form/MElements/Recaptcha/RecaptchaElementMResourceData.php"
+  },
+  {
+   "class": "RootElementMResourceData",
+   "extends": "ElementMResourceDataAbstract",
+   "abstract": "no",
+   "file": "Mosaic/NodeTypes/Root/RootElementMResourceData.php"
+  },
+  {
+   "class": "SGAElementMResourceData",
+   "extends": "ElementMResourceDataAbstract",
+   "abstract": "no",
+   "file": "Mosaic/NodeTypes/SG/SGA/SGAElementMResourceData.php"
+  },
+  {
+   "class": "SGEntryContentButtonElementMResourceData",
+   "extends": "ElementMResourceDataAbstract",
+   "abstract": "no",
+   "file": "Mosaic/NodeTypes/SG/SGEntryContent/SGEntryContentButton/SGEntryContentButtonElementMResourceData.php"
+  },
+  {
+   "class": "SGEntryContentCodeElementMResourceData",
+   "extends": "ElementMResourceDataAbstract",
+   "abstract": "no",
+   "file": "Mosaic/NodeTypes/SG/SGEntryContent/SGEntryContentCode/SGEntryContentCodeElementMResourceData.php"
+  },
+  {
+   "class": "SGEntryContentElementMResourceData",
+   "extends": "ElementMResourceDataAbstract",
+   "abstract": "no",
+   "file": "Mosaic/NodeTypes/SG/SGEntryContent/SGEntryContentElementMResourceData.php"
+  },
+  {
+   "class": "SGEntryContentImageCaptionElementMResourceData",
+   "extends": "ElementMResourceDataAbstract",
+   "abstract": "no",
+   "file": "Mosaic/NodeTypes/SG/SGEntryContent/SGEntryContentImage/SGEntryContentImageCaption/SGEntryContentImageCaptionElementMResourceData.php"
+  },
+  {
+   "class": "SGEntryContentImageElementMResourceData",
+   "extends": "ElementMResourceDataAbstract",
+   "abstract": "no",
+   "file": "Mosaic/NodeTypes/SG/SGEntryContent/SGEntryContentImage/SGEntryContentImageElementMResourceData.php"
+  },
+  {
+   "class": "SGEntryContentImageImgElementMResourceData",
+   "extends": "ElementMResourceDataAbstract",
+   "abstract": "no",
+   "file": "Mosaic/NodeTypes/SG/SGEntryContent/SGEntryContentImage/SGEntryContentImageImg/SGEntryContentImageImgElementMResourceData.php"
+  },
+  {
+   "class": "SGEntryContentListElementMResourceData",
+   "extends": "ElementMResourceDataAbstract",
+   "abstract": "no",
+   "file": "Mosaic/NodeTypes/SG/SGEntryContent/SGEntryContentList/SGEntryContentListElementMResourceData.php"
+  },
+  {
+   "class": "SGEntryContentListItemElementMResourceData",
+   "extends": "ElementMResourceDataAbstract",
+   "abstract": "no",
+   "file": "Mosaic/NodeTypes/SG/SGEntryContent/SGEntryContentList/SGEntryContentListItem/SGEntryContentListItemElementMResourceData.php"
+  },
+  {
+   "class": "SGEntryContentPreformattedElementMResourceData",
+   "extends": "ElementMResourceDataAbstract",
+   "abstract": "no",
+   "file": "Mosaic/NodeTypes/SG/SGEntryContent/SGEntryContentPreformatted/SGEntryContentPreformattedElementMResourceData.php"
+  },
+  {
+   "class": "SGEntryContentPullQuoteCiteElementMResourceData",
+   "extends": "ElementMResourceDataAbstract",
+   "abstract": "no",
+   "file": "Mosaic/NodeTypes/SG/SGEntryContent/SGEntryContentPullQuote/SGEntryContentPullQuoteCite/SGEntryContentPullQuoteCiteElementMResourceData.php"
+  },
+  {
+   "class": "SGEntryContentPullQuoteElementMResourceData",
+   "extends": "ElementMResourceDataAbstract",
+   "abstract": "no",
+   "file": "Mosaic/NodeTypes/SG/SGEntryContent/SGEntryContentPullQuote/SGEntryContentPullQuoteElementMResourceData.php"
+  },
+  {
+   "class": "SGEntryContentPullQuoteParagraphElementMResourceData",
+   "extends": "ElementMResourceDataAbstract",
+   "abstract": "no",
+   "file": "Mosaic/NodeTypes/SG/SGEntryContent/SGEntryContentPullQuote/SGEntryContentPullQuoteParagraph/SGEntryContentPullQuoteParagraphElementMResourceData.php"
+  },
+  {
+   "class": "SGEntryContentQuoteCiteElementMResourceData",
+   "extends": "ElementMResourceDataAbstract",
+   "abstract": "no",
+   "file": "Mosaic/NodeTypes/SG/SGEntryContent/SGEntryContentQuote/SGEntryContentQuoteCite/SGEntryContentQuoteCiteElementMResourceData.php"
+  },
+  {
+   "class": "SGEntryContentQuoteElementMResourceData",
+   "extends": "ElementMResourceDataAbstract",
+   "abstract": "no",
+   "file": "Mosaic/NodeTypes/SG/SGEntryContent/SGEntryContentQuote/SGEntryContentQuoteElementMResourceData.php"
+  },
+  {
+   "class": "SGEntryContentSeparatorElementMResourceData",
+   "extends": "ElementMResourceDataAbstract",
+   "abstract": "no",
+   "file": "Mosaic/NodeTypes/SG/SGEntryContent/SGEntryContentSeparator/SGEntryContentSeparatorElementMResourceData.php"
+  },
+  {
+   "class": "SGEntryContentTextElementMResourceData",
+   "extends": "ElementMResourceDataAbstract",
+   "abstract": "no",
+   "file": "Mosaic/NodeTypes/SG/SGEntryContent/SGEntryContentText/SGEntryContentTextElementMResourceData.php"
+  },
+  {
+   "class": "SGEntryContentVerseElementMResourceData",
+   "extends": "ElementMResourceDataAbstract",
+   "abstract": "no",
+   "file": "Mosaic/NodeTypes/SG/SGEntryContent/SGEntryContentVerse/SGEntryContentVerseElementMResourceData.php"
+  },
+  {
+   "class": "SectionElementMResourceData",
+   "extends": "ElementMResourceDataAbstract",
+   "abstract": "no",
+   "file": "Mosaic/NodeTypes/Section/SectionElementMResourceData.php"
+  },
+  {
+   "class": "SelectElementMResourceData",
+   "extends": "ElementMResourceDataAbstract",
+   "abstract": "no",
+   "file": "Mosaic/NodeTypes/Form/Form/MElements/Select/SelectElementMResourceData.php"
+  },
+  {
+   "class": "SelectOptionElementMResourceData",
+   "extends": "ElementMResourceDataAbstract",
+   "abstract": "no",
+   "file": "Mosaic/NodeTypes/Form/Form/MElements/Select/Options/Option/SelectOptionElementMResourceData.php"
+  },
+  {
+   "class": "SelectOptionsElementMResourceData",
+   "extends": "ElementMResourceDataAbstract",
+   "abstract": "no",
+   "file": "Mosaic/NodeTypes/Form/Form/MElements/Select/Options/SelectOptionsElementMResourceData.php"
+  },
+  {
+   "class": "SelectPlaceholderElementMResourceData",
+   "extends": "ElementMResourceDataAbstract",
+   "abstract": "no",
+   "file": "Mosaic/NodeTypes/Form/Form/MElements/Select/Toggle/Placeholder/SelectPlaceholderElementMResourceData.php"
+  },
+  {
+   "class": "SelectToggleElementMResourceData",
+   "extends": "ElementMResourceDataAbstract",
+   "abstract": "no",
+   "file": "Mosaic/NodeTypes/Form/Form/MElements/Select/Toggle/SelectToggleElementMResourceData.php"
+  },
+  {
+   "class": "SliderArrowElementMResourceData",
+   "extends": "ElementMResourceDataAbstract",
+   "abstract": "no",
+   "file": "Mosaic/NodeTypes/Slider/SliderArrow/SliderArrowElementMResourceData.php"
+  },
+  {
+   "class": "SliderElementMResourceData",
+   "extends": "ElementMResourceDataAbstract",
+   "abstract": "no",
+   "file": "Mosaic/NodeTypes/Slider/SliderElementMResourceData.php"
+  },
+  {
+   "class": "SliderLoopSlidesElementMResourceData",
+   "extends": "ElementMResourceLoopDataAbstract",
+   "abstract": "no",
+   "file": "Mosaic/NodeTypes/Slider/SliderLoopSlides/SliderLoopSlidesElementMResourceData.php"
+  },
+  {
+   "class": "SliderNavigationBulletElementMResourceData",
+   "extends": "ElementMResourceDataAbstract",
+   "abstract": "no",
+   "file": "Mosaic/NodeTypes/Slider/SliderNavigation/SliderNavigationBullet/SliderNavigationBulletElementMResourceData.php"
+  },
+  {
+   "class": "SliderNavigationElementMResourceData",
+   "extends": "ElementMResourceDataAbstract",
+   "abstract": "no",
+   "file": "Mosaic/NodeTypes/Slider/SliderNavigation/SliderNavigationElementMResourceData.php"
+  },
+  {
+   "class": "SliderSlideElementMResourceData",
+   "extends": "ElementMResourceDataAbstract",
+   "abstract": "no",
+   "file": "Mosaic/NodeTypes/Slider/SliderSlides/SliderSlide/SliderSlideElementMResourceData.php"
+  },
+  {
+   "class": "SliderSlidesElementMResourceData",
+   "extends": "ElementMResourceDataAbstract",
+   "abstract": "no",
+   "file": "Mosaic/NodeTypes/Slider/SliderSlides/SliderSlidesElementMResourceData.php"
+  },
+  {
+   "class": "StepElementMResourceData",
+   "extends": "ElementMResourceDataAbstract",
+   "abstract": "no",
+   "file": "Mosaic/NodeTypes/Form/Form/MElements/MultiSteps/Steps/Step/StepElementMResourceData.php"
+  },
+  {
+   "class": "StepsElementMResourceData",
+   "extends": "ElementMResourceDataAbstract",
+   "abstract": "no",
+   "file": "Mosaic/NodeTypes/Form/Form/MElements/MultiSteps/Steps/StepsElementMResourceData.php"
+  },
+  {
+   "class": "SubmitButtonElementMResourceData",
+   "extends": "ElementMResourceDataAbstract",
+   "abstract": "no",
+   "file": "Mosaic/NodeTypes/Form/Form/MElements/SubmitButton/SubmitButtonElementMResourceData.php"
+  },
+  {
+   "class": "SubmitLabelElementMResourceData",
+   "extends": "ElementMResourceDataAbstract",
+   "abstract": "no",
+   "file": "Mosaic/NodeTypes/Form/Form/MElements/SubmitButton/Label/SubmitLabelElementMResourceData.php"
+  },
+  {
+   "class": "SubmitLoadingElementMResourceData",
+   "extends": "ElementMResourceDataAbstract",
+   "abstract": "no",
+   "file": "Mosaic/NodeTypes/Form/Form/MElements/SubmitButton/Loading/SubmitLoadingElementMResourceData.php"
+  },
+  {
+   "class": "SuccessScreenElementMResourceData",
+   "extends": "ElementMResourceDataAbstract",
+   "abstract": "no",
+   "file": "Mosaic/NodeTypes/Form/SuccessScreen/SuccessScreenElementMResourceData.php"
+  },
+  {
+   "class": "TabElementMResourceData",
+   "extends": "ElementMResourceDataAbstract",
+   "abstract": "no",
+   "file": "Mosaic/NodeTypes/Tabs/TabsMenu/Tab/TabElementMResourceData.php"
+  },
+  {
+   "class": "TabLoopTabPanesElementMResourceData",
+   "extends": "ElementMResourceDataAbstract",
+   "abstract": "no",
+   "file": "Mosaic/NodeTypes/Tabs/TabsContent/LoopTabPanes/TabLoopTabPanesElementMResourceData.php"
+  },
+  {
+   "class": "TabLoopTabsElementMResourceData",
+   "extends": "ElementMResourceLoopDataAbstract",
+   "abstract": "no",
+   "file": "Mosaic/NodeTypes/Tabs/TabsMenu/LoopTabs/TabLoopTabsElementMResourceData.php"
+  },
+  {
+   "class": "TabPaneElementMResourceData",
+   "extends": "ElementMResourceDataAbstract",
+   "abstract": "no",
+   "file": "Mosaic/NodeTypes/Tabs/TabsContent/TabPane/TabPaneElementMResourceData.php"
+  },
+  {
+   "class": "TabsContentElementMResourceData",
+   "extends": "ElementMResourceDataAbstract",
+   "abstract": "no",
+   "file": "Mosaic/NodeTypes/Tabs/TabsContent/TabsContentElementMResourceData.php"
+  },
+  {
+   "class": "TabsElementMResourceData",
+   "extends": "ElementMResourceDataAbstract",
+   "abstract": "no",
+   "file": "Mosaic/NodeTypes/Tabs/TabsElementMResourceData.php"
+  },
+  {
+   "class": "TabsMenuElementMResourceData",
+   "extends": "ElementMResourceDataAbstract",
+   "abstract": "no",
+   "file": "Mosaic/NodeTypes/Tabs/TabsMenu/TabsMenuElementMResourceData.php"
+  },
+  {
+   "class": "TemplateExternalElementMResourceData",
+   "extends": "ElementMResourceDataAbstract",
+   "abstract": "no",
+   "file": "Mosaic/NodeTypes/Template/TemplateExternal/TemplateExternalElementMResourceData.php"
+  },
+  {
+   "class": "TemplateInternalElementMResourceData",
+   "extends": "ElementMResourceDataAbstract",
+   "abstract": "no",
+   "file": "Mosaic/NodeTypes/Template/TemplateInternal/TemplateInternalElementMResourceData.php"
+  },
+  {
+   "class": "TextAreaElementMResourceData",
+   "extends": "ElementMResourceDataAbstract",
+   "abstract": "no",
+   "file": "Mosaic/NodeTypes/Form/Form/MElements/TextArea/TextAreaElementMResourceData.php"
+  },
+  {
+   "class": "TextElementMResourceData",
+   "extends": "ElementMResourceDataAbstract",
+   "abstract": "no",
+   "file": "Mosaic/NodeTypes/Text/TextElementMResourceData.php"
+  },
+  {
+   "class": "TurnstileElementMResourceData",
+   "extends": "ElementMResourceDataAbstract",
+   "abstract": "no",
+   "file": "Mosaic/NodeTypes/Form/Form/MElements/Turnstile/TurnstileElementMResourceData.php"
+  },
+  {
+   "class": "UnknownElementMResourceDataAbstract",
+   "extends": "ElementMResourceDataAbstract",
+   "abstract": "no",
+   "file": "Mosaic/NodeTypes/Unknown/UnknownElementMResourceDataAbstract.php"
+  },
+  {
+   "class": "VideoElementMResourceData",
+   "extends": "ElementMResourceDataAbstract",
+   "abstract": "no",
+   "file": "Mosaic/NodeTypes/Video/VideoElementMResourceData.php"
+  },
+  {
+   "class": "VimeoElementMResourceData",
+   "extends": "ElementMResourceDataAbstract",
+   "abstract": "no",
+   "file": "Mosaic/NodeTypes/Vimeo/VimeoElementMResourceData.php"
+  },
+  {
+   "class": "WPContentElementMResourceData",
+   "extends": "ElementMResourceDataAbstract",
+   "abstract": "no",
+   "file": "Mosaic/NodeTypes/WPContent/WPContentElementMResourceData.php"
+  },
+  {
+   "class": "WPMenuElementMResourceData",
+   "extends": "ElementMResourceDataAbstract",
+   "abstract": "no",
+   "file": "Mosaic/NodeTypes/Menu/WPMenu/WPMenuElementMResourceData.php"
+  },
+  {
+   "class": "WPShortcodeElementMResourceData",
+   "extends": "ElementMResourceDataAbstract",
+   "abstract": "no",
+   "file": "Mosaic/NodeTypes/WPShortcode/WPShortcodeElementMResourceData.php"
+  },
+  {
+   "class": "WysiwygLineBreakNodeMResourceData",
+   "extends": "NodeMResourceDataAbstract",
+   "abstract": "no",
+   "file": "Mosaic/NodeTypes/Wysiwyg/WysiwygLineBreak/WysiwygLineBreakNodeMResourceData.php"
+  },
+  {
+   "class": "WysiwygLinkElementMResourceData",
+   "extends": "ElementMResourceDataAbstract",
+   "abstract": "no",
+   "file": "Mosaic/NodeTypes/Wysiwyg/WysiwygLink/WysiwygLinkElementMResourceData.php"
+  },
+  {
+   "class": "WysiwygSpanElementMResourceData",
+   "extends": "ElementMResourceDataAbstract",
+   "abstract": "no",
+   "file": "Mosaic/NodeTypes/Wysiwyg/WysiwygSpan/WysiwygSpanElementMResourceData.php"
+  },
+  {
+   "class": "WysiwygTextNodeMResourceData",
+   "extends": "NodeMResourceDataAbstract",
+   "abstract": "no",
+   "file": "Mosaic/NodeTypes/Wysiwyg/WysiwygText/WysiwygTextNodeMResourceData.php"
+  },
+  {
+   "class": "WysiwygVariableNodeMResourceData",
+   "extends": "NodeMResourceDataAbstract",
+   "abstract": "no",
+   "file": "Mosaic/NodeTypes/Wysiwyg/WysiwygVariable/WysiwygVariableNodeMResourceData.php"
+  },
+  {
+   "class": "YouTubeElementMResourceData",
+   "extends": "ElementMResourceDataAbstract",
+   "abstract": "no",
+   "file": "Mosaic/NodeTypes/YouTube/YouTubeElementMResourceData.php"
+  }
+ ]
+}

@@ -1,0 +1,98 @@
+# Mosaic vs Elementor vs Gutenberg, as data models
+
+> Directory edition: commands that mention `tools/` need the full edition (`npm` package `mosaic-headless`); this folder ships reference files only. The `wp` commands run on your WordPress host; how you reach it is up to you.
+
+If you already know `elementor-headless` or `gutenberg-headless`, this is the page
+that tells you which of your habits transfer and which will actively mislead you.
+
+## The one-line difference
+
+| | Elementor | Gutenberg | Mosaic |
+|---|---|---|---|
+| Where the page lives | `wp_postmeta._elementor_data`, one nested JSON blob | `wp_posts.post_content`, serialized HTML comments | **23 own tables**, one row per element in `wp_mosaic_nodes` |
+| Unit of structure | widget in a nested array | block in a comment-delimited string | node row with a `parentID` |
+| Tree encoded by | JSON nesting | comment nesting in a string | a foreign key |
+| Ordering | array index | document order in the string | **fractional-index string** in `ordering` |
+| Scope | the post | the post | the **theme** (`themeID` on every row) |
+| Written by | overwrite the whole meta blob | overwrite `post_content` | checkout → commit, **per row, revision-checked** |
+| Silent-failure mode | unknown control stored and ignored | comment JSON and saved HTML disagree | validator rejection returned as HTTP 200 with an `exceptions` body |
+
+## What transfers
+
+**The core discipline transfers exactly.** All three builders will accept a payload
+they do not understand and give you a page that looks 90% right. In all three, the
+rule is the same: never write a property name, enum value, or Free/Pro claim from
+memory — look it up in `data/`.
+
+**The Free/Pro split is a real axis in both Elementor and Mosaic.** In Mosaic it is
+cleaner: whole node types are Pro or not (`edition` column in
+`data/node-types.csv`). In 1.0.11 only 5 of 129 are Pro (modal, its overlay and
+window, popover, code) and a Free install shows a locked stand-in for them; forms,
+slider and tabs, Pro through 1.0.10, are Free now. There is no "partially
+available" state to reason about the way there is with Elementor Pro controls on
+Free widgets.
+
+**Dynamic values exist in all three**, under three names. Elementor calls them
+dynamic tags; Gutenberg has bindings; Mosaic has **evaluator functions** — 19 of
+them (`abs`, `attachment`, `avg`, `calc`, `concat`, `date`, `esc_attr`, `esc_html`,
+`excerpt`, `fallback`, `find_image`, `find_link`, `find_video`, `json_encode`,
+`remove_html`, `round`, `round_up`, `substr`, `sum`) plus 8 dynamic sources, in
+`data/pluggables.csv`. A property accepts one wherever its validator chain includes
+`ValidatorDynamicCodeObject`.
+
+## What will mislead you
+
+**"Edit the page's JSON."** There is no page JSON. The closest thing to
+`_elementor_data` is a *set of rows*, and the tree is a `parentID` column. Reading a
+Mosaic document means a query, not a `json_decode`.
+
+**"Reorder by array index."** `ordering` is a fractional-index *string*. Sorting it
+as a number scrambles the page; renumbering siblings the way you would an array is
+both unnecessary and destructive of other clients' inserts.
+
+**"The post is the unit."** In Elementor and Gutenberg, one post = one page's data.
+In Mosaic a post is a *target*: an auto template binds by template path (a post
+type's singles, an archive, search) and serves every post that path covers, while a
+manual template is bound to one post through `mosaic_template_assigns`. Editing "the
+page" usually means editing a template, and the blast radius is every post that
+template serves. Check the template's `assign` and `path`, and
+`mosaic_template_assigns`, before you edit.
+
+**"Style the element."** Elementor puts controls on the widget. Mosaic puts styling
+in a **class system** (152 built-in variants - element classes) layered over a **token system**
+(collections → modes/skins → variables). Writing styles onto individual nodes works
+and is almost always wrong; it opts that node out of both layers.
+
+**"Breakpoints are a site setting."** In Mosaic they are theme-scoped rows in
+`mosaic_breakpoints`. Two themes on one site can disagree about what "tablet" means.
+
+**"Overwrite and move on."** Elementor and Gutenberg tolerate blind overwrites.
+Mosaic checks the `revision` of every row you claim; a commit built on a stale
+revision is rejected, and the rejection arrives as HTTP 200. See
+`references/write-protocol.md`.
+
+## Which skill to reach for
+
+- Post content authored as blocks, on a normal WP theme → `gutenberg-headless`.
+- An Elementor site, page-level construction → `elementor-headless`.
+- A Mosaic site → here. The write path and all 129 node types are measured (5 of
+  them Pro-only on 1.0.11 - see `references/data-model.md`).
+
+## One thing the converter has to add, not copy
+
+Elementor's own stylesheet caps every widget with `max-width: 100%`. So a width
+set in the editor - `_element_custom_width: {size: 600, unit: px}`, with no mobile
+value beside it - is a DESKTOP INTENT: Elementor renders it as 346px inside a 346px
+column on a phone, and the author never sees a problem.
+
+Copy that width across on its own and the element keeps all 600px. Nineteen
+converted pages did exactly that: at 390px the document was 662px wide and every
+page scrolled sideways, while the Elementor original at the same viewport did not.
+Nothing in the per-page checks caught it, and that is the instructive part -
+`verify_rwd` asks whether a declaration reached the stylesheet, and a 640px width
+on a phone reaches it perfectly.
+
+`from_elementor.py` now emits `maxWidth: "100%"` beside any px `width` it carries
+over, after the element handlers have had their say so a width a handler supplies
+is capped too. `verify_navigation.py --viewports 390,768,1280` opens every page of
+a site and fails the one that scrolls sideways, naming the widest element in it.

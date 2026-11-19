@@ -1,0 +1,145 @@
+{
+ "source_file": "data/evaluator-functions.csv",
+ "columns": [
+  "id",
+  "max_args",
+  "variadic",
+  "note",
+  "declared_in"
+ ],
+ "rows": [
+  {
+   "id": "abs",
+   "max_args": "1",
+   "variadic": "",
+   "note": "",
+   "declared_in": "Mosaic/Plugins/EvaluatorFunctions/Abs/EvaluatorFunctionAbs.php"
+  },
+  {
+   "id": "attachment",
+   "max_args": "2",
+   "variadic": "",
+   "note": "",
+   "declared_in": "Mosaic/Plugins/EvaluatorFunctions/Attachment/EvaluatorFunctionAttachment.php"
+  },
+  {
+   "id": "avg",
+   "max_args": "0",
+   "variadic": "yes",
+   "note": "",
+   "declared_in": "Mosaic/Plugins/EvaluatorFunctions/Avg/EvaluatorFunctionAvg.php"
+  },
+  {
+   "id": "calc",
+   "max_args": "1",
+   "variadic": "",
+   "note": "",
+   "declared_in": "Mosaic/Plugins/EvaluatorFunctions/Calc/EvaluatorFunctionCalc.php"
+  },
+  {
+   "id": "concat",
+   "max_args": "0",
+   "variadic": "",
+   "note": "",
+   "declared_in": "Mosaic/Plugins/EvaluatorFunctions/Concat/EvaluatorFunctionConcat.php"
+  },
+  {
+   "id": "date",
+   "max_args": "3",
+   "variadic": "",
+   "note": "The timestamp is a true GMT Unix timestamp. For local time we add the",
+   "declared_in": "Mosaic/Plugins/EvaluatorFunctions/Date/EvaluatorFunctionDate.php"
+  },
+  {
+   "id": "esc_attr",
+   "max_args": "1",
+   "variadic": "",
+   "note": "",
+   "declared_in": "Mosaic/Plugins/EvaluatorFunctions/EscAttr/EvaluatorFunctionEscAttr.php"
+  },
+  {
+   "id": "esc_html",
+   "max_args": "1",
+   "variadic": "",
+   "note": "",
+   "declared_in": "Mosaic/Plugins/EvaluatorFunctions/EscHtml/EvaluatorFunctionEscHtml.php"
+  },
+  {
+   "id": "excerpt",
+   "max_args": "4",
+   "variadic": "",
+   "note": "some languages ( e.g. Chinese ) doesn't use spaces between the words,",
+   "declared_in": "Mosaic/Plugins/EvaluatorFunctions/Excerpt/EvaluatorFunctionExcerpt.php"
+  },
+  {
+   "id": "fallback",
+   "max_args": "2",
+   "variadic": "yes",
+   "note": "false and null values don't have to be listed here, as strval() evaluates these as empty s",
+   "declared_in": "Mosaic/Plugins/EvaluatorFunctions/Fallback/EvaluatorFunctionFallback.php"
+  },
+  {
+   "id": "find_image",
+   "max_args": "2",
+   "variadic": "",
+   "note": "",
+   "declared_in": "Mosaic/Plugins/EvaluatorFunctions/FindImage/EvaluatorFunctionFindImage.php"
+  },
+  {
+   "id": "find_link",
+   "max_args": "2",
+   "variadic": "",
+   "note": "",
+   "declared_in": "Mosaic/Plugins/EvaluatorFunctions/FindLink/EvaluatorFunctionFindLink.php"
+  },
+  {
+   "id": "find_video",
+   "max_args": "2",
+   "variadic": "",
+   "note": "",
+   "declared_in": "Mosaic/Plugins/EvaluatorFunctions/FindVideo/EvaluatorFunctionFindVideo.php"
+  },
+  {
+   "id": "json_encode",
+   "max_args": "1",
+   "variadic": "",
+   "note": "",
+   "declared_in": "Mosaic/Plugins/EvaluatorFunctions/JsonEncode/EvaluatorFunctionJsonEncode.php"
+  },
+  {
+   "id": "remove_html",
+   "max_args": "1",
+   "variadic": "",
+   "note": "",
+   "declared_in": "Mosaic/Plugins/EvaluatorFunctions/RemoveHTML/EvaluatorFunctionRemoveHTML.php"
+  },
+  {
+   "id": "round",
+   "max_args": "1",
+   "variadic": "",
+   "note": "",
+   "declared_in": "Mosaic/Plugins/EvaluatorFunctions/Round/EvaluatorFunctionRound.php"
+  },
+  {
+   "id": "round_up",
+   "max_args": "2",
+   "variadic": "",
+   "note": "",
+   "declared_in": "Mosaic/Plugins/EvaluatorFunctions/RoundUp/EvaluatorFunctionRoundUp.php"
+  },
+  {
+   "id": "substr",
+   "max_args": "3",
+   "variadic": "",
+   "note": "Implemented based on JS String.prototype.substring()() logic",
+   "declared_in": "Mosaic/Plugins/EvaluatorFunctions/Substr/EvaluatorFunctionSubstr.php"
+  },
+  {
+   "id": "sum",
+   "max_args": "0",
+   "variadic": "yes",
+   "note": "",
+   "declared_in": "Mosaic/Plugins/EvaluatorFunctions/Sum/EvaluatorFunctionSum.php"
+  }
+ ]
+}

@@ -1,0 +1,120 @@
+{
+ "source_file": "data/theme-zip-verification.csv",
+ "columns": [
+  "check",
+  "result",
+  "detail"
+ ],
+ "rows": [
+  {
+   "check": "masters",
+   "result": "PASS",
+   "detail": "28 -> 28"
+  },
+  {
+   "check": "templates",
+   "result": "PASS",
+   "detail": "30 -> 30"
+  },
+  {
+   "check": "components",
+   "result": "PASS",
+   "detail": "4 -> 4"
+  },
+  {
+   "check": "component_categories",
+   "result": "PASS",
+   "detail": "0 -> 0"
+  },
+  {
+   "check": "component_documents",
+   "result": "PASS",
+   "detail": "4 -> 4"
+  },
+  {
+   "check": "collections",
+   "result": "PASS",
+   "detail": "1 -> 1"
+  },
+  {
+   "check": "collection_groups",
+   "result": "PASS",
+   "detail": "0 -> 0"
+  },
+  {
+   "check": "collection_modes",
+   "result": "PASS",
+   "detail": "1 -> 1"
+  },
+  {
+   "check": "collection_skins",
+   "result": "PASS",
+   "detail": "1 -> 1"
+  },
+  {
+   "check": "collection_variables",
+   "result": "PASS",
+   "detail": "16 -> 16"
+  },
+  {
+   "check": "breakpoints",
+   "result": "PASS",
+   "detail": "2 -> 2"
+  },
+  {
+   "check": "variants",
+   "result": "PASS",
+   "detail": "1 -> 1"
+  },
+  {
+   "check": "variant_sub_classes",
+   "result": "PASS",
+   "detail": "0 -> 0"
+  },
+  {
+   "check": "universal_classes",
+   "result": "PASS",
+   "detail": "0 -> 0"
+  },
+  {
+   "check": "universal_sub_classes",
+   "result": "PASS",
+   "detail": "0 -> 0"
+  },
+  {
+   "check": "styleguides",
+   "result": "PASS",
+   "detail": "0 -> 0"
+  },
+  {
+   "check": "template_assigns",
+   "result": "PASS",
+   "detail": "27 -> 27"
+  },
+  {
+   "check": "nodes",
+   "result": "PASS",
+   "detail": "8857 -> 8857; 0 orphans in the source (no parent, outside every tree): none"
+  },
+  {
+   "check": "tree shape",
+   "result": "PASS",
+   "detail": "6 (parentType, type) buckets, every one the same size"
+  },
+  {
+   "check": "ids kept (non-override)",
+   "result": "PASS",
+   "detail": "8817 of 8817 nodes outside overrides keep their id"
+  },
+  {
+   "check": "overrides (re-keyed)",
+   "result": "PASS",
+   "detail": "40 -> 40 override nodes; 40 keep their id - the import issues new ones, and re-points originalID at the re-keyed component internals"
+  },
+  {
+   "check": "live untouched",
+   "result": "PASS",
+   "detail": "live theme is c80251f8 (the source)"
+  }
+ ]
+}

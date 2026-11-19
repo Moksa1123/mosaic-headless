@@ -1,0 +1,432 @@
+{
+ "source_file": "data/style-states.csv",
+ "columns": [
+  "state",
+  "selector_template",
+  "order",
+  "scope",
+  "declared_in"
+ ],
+ "rows": [
+  {
+   "state": "&",
+   "selector_template": "&",
+   "order": "0",
+   "scope": "global",
+   "declared_in": "Mosaic/Builder/Style/StatesMeta.php"
+  },
+  {
+   "state": "focus",
+   "selector_template": "&:FOCUS",
+   "order": "750",
+   "scope": "global",
+   "declared_in": "Mosaic/Builder/Style/StatesMeta.php"
+  },
+  {
+   "state": "focus-visible",
+   "selector_template": "&:FOCUS-VISIBLE",
+   "order": "760",
+   "scope": "global",
+   "declared_in": "Mosaic/Builder/Style/StatesMeta.php"
+  },
+  {
+   "state": "hover",
+   "selector_template": "&:HOVER",
+   "order": "100",
+   "scope": "global",
+   "declared_in": "Mosaic/Builder/Style/StatesMeta.php"
+  },
+  {
+   "state": "hover-on-link",
+   "selector_template": ":where(a[href]:not([disabled]),button:not([disabled])):HOVER &",
+   "order": "200",
+   "scope": "global",
+   "declared_in": "Mosaic/Builder/Style/StatesMeta.php"
+  },
+  {
+   "state": "hover-on-tab",
+   "selector_template": ":where(.m-tab:not(.m-tab--active)):HOVER &",
+   "order": "200",
+   "scope": "global",
+   "declared_in": "Mosaic/NodeTypes/Tabs/TabsMenu/Tab/TabElementTypeFactory.php"
+  },
+  {
+   "state": "hover-tab",
+   "selector_template": "&:where(.m-tab:not(.m-tab--active)):HOVER",
+   "order": "100",
+   "scope": "global",
+   "declared_in": "Mosaic/NodeTypes/Tabs/TabsMenu/Tab/TabElementTypeFactory.php"
+  },
+  {
+   "state": "hover-when-link",
+   "selector_template": "&:where([tabindex]:not([tabindex=\"-1\"]),a[href]:not([disabled]),button:not([disabled])):HOVER",
+   "order": "100",
+   "scope": "global",
+   "declared_in": "Mosaic/Builder/Style/StatesMeta.php"
+  },
+  {
+   "state": "____loop_pagination_number--active",
+   "selector_template": "&.m-loop-pagination-number--active",
+   "order": "500",
+   "scope": "node-type",
+   "declared_in": "Mosaic/NodeTypes/Loop/LoopPagination/Numbers/Number/LoopPaginationNumberElementTypeFactory.php"
+  },
+  {
+   "state": "____loop_pagination_number_ellipsis",
+   "selector_template": "&.m-loop-pagination-number-ellipsis",
+   "order": "0",
+   "scope": "node-type",
+   "declared_in": "Mosaic/NodeTypes/Loop/LoopPagination/Numbers/Number/LoopPaginationNumberElementTypeFactory.php"
+  },
+  {
+   "state": "___accordion-item--opened",
+   "selector_template": "&.m-accordion-item--opened,.m-accordion-item:where(.m-accordion-item--opened) > &,.m-accordion-item:where(.m-accordion-item--opened) > .m-accordion-title &",
+   "order": "600",
+   "scope": "node-type",
+   "declared_in": "Mosaic/NodeTypes/Accordion/AccordionItem/AccordionItemElementTypeFactory.php"
+  },
+  {
+   "state": "___accordion-item--opening",
+   "selector_template": "&.m-accordion-item--opening,.m-accordion-item:where(.m-accordion-item--opening) > &,.m-accordion-item:where(.m-accordion-item--opening) > .m-accordion-title &",
+   "order": "600",
+   "scope": "node-type",
+   "declared_in": "Mosaic/NodeTypes/Accordion/AccordionItem/AccordionItemElementTypeFactory.php"
+  },
+  {
+   "state": "___arrow_hidden",
+   "selector_template": "&:where(.m-slider-arrow--hidden)",
+   "order": "800",
+   "scope": "node-type",
+   "declared_in": "Mosaic/NodeTypes/Slider/SliderArrow/SliderArrowElementTypeFactoryAbstract.php"
+  },
+  {
+   "state": "___checkbox-input--checked",
+   "selector_template": "&:checked",
+   "order": "500",
+   "scope": "node-type",
+   "declared_in": "Mosaic/NodeTypes/Form/Form/MElements/Checkbox/CheckboxInput/CheckboxInputElementTypeFactory.php"
+  },
+  {
+   "state": "___checkbox-input--checkmark",
+   "selector_template": "&:checked::before",
+   "order": "500",
+   "scope": "node-type",
+   "declared_in": "Mosaic/NodeTypes/Form/Form/MElements/Checkbox/CheckboxInput/CheckboxInputElementTypeFactory.php"
+  },
+  {
+   "state": "___choice--checked",
+   "selector_template": "&:has(:where(input):checked)",
+   "order": "500",
+   "scope": "node-type",
+   "declared_in": "Mosaic/NodeTypes/Form/Form/MElements/Choice/ChoiceElementTypeFactory.php"
+  },
+  {
+   "state": "___choice--checked-within",
+   "selector_template": ".m-choice:where(:has(input:checked)) &",
+   "order": "500",
+   "scope": "node-type",
+   "declared_in": "Mosaic/NodeTypes/Form/Form/MElements/Choice/ChoiceElementTypeFactory.php"
+  },
+  {
+   "state": "___choice--focus-visible",
+   "selector_template": "&:has(:where(input):focus-visible)",
+   "order": "760",
+   "scope": "node-type",
+   "declared_in": "Mosaic/NodeTypes/Form/Form/MElements/Choice/ChoiceElementTypeFactory.php"
+  },
+  {
+   "state": "___choice-field--invalid",
+   "selector_template": "&:has(:user-invalid)",
+   "order": "700",
+   "scope": "node-type",
+   "declared_in": "Mosaic/NodeTypes/Form/Form/MElements/ChoiceField/ChoiceFieldElementTypeFactory.php"
+  },
+  {
+   "state": "___choice-field--invalid-within",
+   "selector_template": ".m-choice-field:where(:has(:user-invalid)) &",
+   "order": "700",
+   "scope": "node-type",
+   "declared_in": "Mosaic/NodeTypes/Form/Form/MElements/ChoiceField/ChoiceFieldElementTypeFactory.php"
+  },
+  {
+   "state": "___dropdown--opened",
+   "selector_template": "&.m-dropdown:where(.dropdown--opened),.m-dropdown:where(.dropdown--opened) > &,.m-dropdown:where(.dropdown--opened) > :where( .m-dropdown-toggle) &",
+   "order": "600",
+   "scope": "node-type",
+   "declared_in": "Mosaic/NodeTypes/Menu/Dropdown/DropdownElementTypeFactoryAbstract.php"
+  },
+  {
+   "state": "___dropdown--opening",
+   "selector_template": ".m-dropdown:where(.dropdown--opening) &",
+   "order": "600",
+   "scope": "node-type",
+   "declared_in": "Mosaic/NodeTypes/Menu/Dropdown/DropdownElementTypeFactoryAbstract.php"
+  },
+  {
+   "state": "___dropdown-toggle--current",
+   "selector_template": "&.m-dropdown-toggle--current",
+   "order": "500",
+   "scope": "node-type",
+   "declared_in": "Mosaic/NodeTypes/Menu/Dropdown/DropdownToggle/DropdownToggleElementTypeFactory.php"
+  },
+  {
+   "state": "___dropdown-toggle--current-within",
+   "selector_template": ".m-dropdown:where(:has(.m-menu-link--current,.m-dropdown-toggle--current)) > &",
+   "order": "500",
+   "scope": "node-type",
+   "declared_in": "Mosaic/NodeTypes/Menu/Dropdown/DropdownToggle/DropdownToggleElementTypeFactory.php"
+  },
+  {
+   "state": "___field--focus-visible",
+   "selector_template": "&:has(:where(input, textarea, select, .m-select-toggle):focus-visible)",
+   "order": "760",
+   "scope": "node-type",
+   "declared_in": "Mosaic/NodeTypes/Form/Form/MElements/Field/FieldElementTypeFactory.php"
+  },
+  {
+   "state": "___field--invalid",
+   "selector_template": "&:has(:user-invalid, :where(.m-select-toggle[aria-invalid=\"true\"]))",
+   "order": "700",
+   "scope": "node-type",
+   "declared_in": "Mosaic/NodeTypes/Form/Form/MElements/Field/FieldElementTypeFactory.php"
+  },
+  {
+   "state": "___field--invalid-focus-visible",
+   "selector_template": "&:has(:user-invalid:focus-visible, :where(.m-select-toggle:focus-visible ~ :user-invalid, .m-select-toggle[aria-invalid=\"true\"]:focus-visible))",
+   "order": "770",
+   "scope": "node-type",
+   "declared_in": "Mosaic/NodeTypes/Form/Form/MElements/Field/FieldElementTypeFactory.php"
+  },
+  {
+   "state": "___field--invalid-within",
+   "selector_template": ".m-field:where(:has(:user-invalid, .m-select-toggle[aria-invalid=\"true\"])) &",
+   "order": "700",
+   "scope": "node-type",
+   "declared_in": "Mosaic/NodeTypes/Form/Form/MElements/Field/FieldElementTypeFactory.php"
+  },
+  {
+   "state": "___field-set--invalid",
+   "selector_template": "&:has(:user-invalid, :where(.m-select-toggle[aria-invalid=\"true\"]))",
+   "order": "700",
+   "scope": "node-type",
+   "declared_in": "Mosaic/NodeTypes/Form/Form/MElements/FieldSet/FieldSetElementTypeFactory.php"
+  },
+  {
+   "state": "___fileupload-input--selector-button",
+   "selector_template": "&::file-selector-button",
+   "order": "0",
+   "scope": "node-type",
+   "declared_in": "Mosaic/NodeTypes/Form/Form/MElements/FileUpload/FileUploadElementTypeFactory.php"
+  },
+  {
+   "state": "___fileupload-input--selector-button-hover",
+   "selector_template": "&::file-selector-button:hover",
+   "order": "100",
+   "scope": "node-type",
+   "declared_in": "Mosaic/NodeTypes/Form/Form/MElements/FileUpload/FileUploadElementTypeFactory.php"
+  },
+  {
+   "state": "___form--error",
+   "selector_template": "&[data-form-state=\"error\"]",
+   "order": "700",
+   "scope": "node-type",
+   "declared_in": "Mosaic/NodeTypes/Form/FormWrapperElementTypeFactory.php"
+  },
+  {
+   "state": "___form--invalid-within",
+   "selector_template": ".m-form-wrapper:where(:has(:user-invalid, .m-select-toggle[aria-invalid=\"true\"])) &",
+   "order": "700",
+   "scope": "node-type",
+   "declared_in": "Mosaic/NodeTypes/Form/FormWrapperElementTypeFactory.php"
+  },
+  {
+   "state": "___input--placeholder",
+   "selector_template": "&.m-input::placeholder",
+   "order": "0",
+   "scope": "node-type",
+   "declared_in": "Mosaic/NodeTypes/Form/Form/MElements/InputText/InputTextElementTypeFactory.php"
+  },
+  {
+   "state": "___listbox-option",
+   "selector_template": "&.m-listbox :where(option)",
+   "order": "500",
+   "scope": "node-type",
+   "declared_in": "Mosaic/NodeTypes/Form/Form/MElements/ListBox/ListBoxElementTypeFactory.php"
+  },
+  {
+   "state": "___loop_element_no_result",
+   "selector_template": "&.m-loop--no-result",
+   "order": "600",
+   "scope": "node-type",
+   "declared_in": "Mosaic/NodeTypes/Loop/LoopElementTypeFactory.php"
+  },
+  {
+   "state": "___loop_pagination_button--disabled",
+   "selector_template": "&.m-loop-pagination-button--disabled",
+   "order": "800",
+   "scope": "node-type",
+   "declared_in": "Mosaic/NodeTypes/Loop/LoopPagination/Button/ButtonNext/LoopPaginationButtonNextElementTypeFactory.php"
+  },
+  {
+   "state": "___menu-link--current",
+   "selector_template": "&.m-menu-link--current",
+   "order": "500",
+   "scope": "node-type",
+   "declared_in": "Mosaic/NodeTypes/Menu/MenuLink/MenuLinkElementTypeFactory.php"
+  },
+  {
+   "state": "___navbar--dropdown-mode",
+   "selector_template": "&:where(.m-navbar.dropdown-mode,.m-navbar.dropdown-mode &)",
+   "order": "600",
+   "scope": "node-type",
+   "declared_in": "Mosaic/NodeTypes/Navbar/NavbarElementTypeFactory.php"
+  },
+  {
+   "state": "___navbar--opened",
+   "selector_template": ".dropdown-mode:where(.m-navbar.dropdown--opened) &",
+   "order": "600",
+   "scope": "node-type",
+   "declared_in": "Mosaic/NodeTypes/Navbar/NavbarElementTypeFactory.php"
+  },
+  {
+   "state": "___navbar--opening",
+   "selector_template": ".dropdown-mode:where(.m-navbar.dropdown--opening) &",
+   "order": "600",
+   "scope": "node-type",
+   "declared_in": "Mosaic/NodeTypes/Navbar/NavbarElementTypeFactory.php"
+  },
+  {
+   "state": "___nested_dropdown_mode",
+   "selector_template": "&:where(.dropdown-mode .m-navbar-navigation .m-dropdown &, .m-dropdown .m-dropdown &):not(x)",
+   "order": "600",
+   "scope": "node-type",
+   "declared_in": "Mosaic/NodeTypes/Menu/Dropdown/DropdownElementTypeFactoryAbstract.php"
+  },
+  {
+   "state": "___popover--flipped",
+   "selector_template": "&:where(.m-popover[data-mosaic-popover-flipped],.m-popover[data-mosaic-popover-flipped] &)",
+   "order": "600",
+   "scope": "node-type",
+   "declared_in": "Mosaic/NodeTypes/Pro/Popover/PopoverElementTypeFactory.php"
+  },
+  {
+   "state": "___radio-input--checked",
+   "selector_template": "&:checked",
+   "order": "500",
+   "scope": "node-type",
+   "declared_in": "Mosaic/NodeTypes/Form/Form/MElements/Radio/RadioInput/RadioInputElementTypeFactory.php"
+  },
+  {
+   "state": "___radio-input--checkmark",
+   "selector_template": "&:checked::before",
+   "order": "500",
+   "scope": "node-type",
+   "declared_in": "Mosaic/NodeTypes/Form/Form/MElements/Radio/RadioInput/RadioInputElementTypeFactory.php"
+  },
+  {
+   "state": "___select--opened",
+   "selector_template": "&.m-select:where(.m-select--opened),.m-select:where(.m-select--opened) > &,.m-select:where(.m-select--opened) > .m-select-toggle &,.m-select:where(.m-select--opened) > .m-select-options &",
+   "order": "600",
+   "scope": "node-type",
+   "declared_in": "Mosaic/NodeTypes/Form/Form/MElements/Select/SelectElementTypeFactory.php"
+  },
+  {
+   "state": "___select-option--active",
+   "selector_template": "&.m-select-option--active,.m-select-option--active &",
+   "order": "500",
+   "scope": "node-type",
+   "declared_in": "Mosaic/NodeTypes/Form/Form/MElements/Select/Options/Option/SelectOptionElementTypeFactory.php"
+  },
+  {
+   "state": "___select-option--in-toggle",
+   "selector_template": "&.m-select-current-option,.m-select-current-option &",
+   "order": "600",
+   "scope": "node-type",
+   "declared_in": "Mosaic/NodeTypes/Form/Form/MElements/Select/Options/Option/SelectOptionElementTypeFactory.php"
+  },
+  {
+   "state": "___select-option--selected",
+   "selector_template": "&[aria-selected=\"true\"],&.m-select-option--selected,[aria-selected=\"true\"] &,.m-select-option--selected &",
+   "order": "400",
+   "scope": "node-type",
+   "declared_in": "Mosaic/NodeTypes/Form/Form/MElements/Select/Options/Option/SelectOptionElementTypeFactory.php"
+  },
+  {
+   "state": "___slide--active",
+   "selector_template": ".m-slide--active > &",
+   "order": "500",
+   "scope": "node-type",
+   "declared_in": "Mosaic/NodeTypes/Slider/SliderSlides/SliderSlide/SliderSlideElementTypeFactory.php"
+  },
+  {
+   "state": "___slider_navigation_bullet--active",
+   "selector_template": "&.m-slider-bullet--active",
+   "order": "500",
+   "scope": "node-type",
+   "declared_in": "Mosaic/NodeTypes/Slider/SliderNavigation/SliderNavigationBullet/SliderNavigationBulletElementTypeFactory.php"
+  },
+  {
+   "state": "___slider_navigation_bullet--hover",
+   "selector_template": "&:not(.m-slider-bullet--active):HOVER",
+   "order": "100",
+   "scope": "node-type",
+   "declared_in": "Mosaic/NodeTypes/Slider/SliderNavigation/SliderNavigationBullet/SliderNavigationBulletElementTypeFactory.php"
+  },
+  {
+   "state": "___step--active",
+   "selector_template": "&.m-multi-steps-step-tab--active",
+   "order": "500",
+   "scope": "node-type",
+   "declared_in": "Mosaic/NodeTypes/Form/Form/MElements/MultiSteps/Steps/Step/StepElementTypeFactory.php"
+  },
+  {
+   "state": "___step--active___descendants",
+   "selector_template": ".m-multi-steps-step-tab--active &",
+   "order": "500",
+   "scope": "node-type",
+   "declared_in": "Mosaic/NodeTypes/Form/Form/MElements/MultiSteps/Steps/Step/StepElementTypeFactory.php"
+  },
+  {
+   "state": "___step--completed",
+   "selector_template": "&.m-multi-steps-step-tab--completed",
+   "order": "500",
+   "scope": "node-type",
+   "declared_in": "Mosaic/NodeTypes/Form/Form/MElements/MultiSteps/Steps/Step/StepElementTypeFactory.php"
+  },
+  {
+   "state": "___step--completed___descendants",
+   "selector_template": ".m-multi-steps-step-tab--completed &",
+   "order": "500",
+   "scope": "node-type",
+   "declared_in": "Mosaic/NodeTypes/Form/Form/MElements/MultiSteps/Steps/Step/StepElementTypeFactory.php"
+  },
+  {
+   "state": "___submit-button--busy",
+   "selector_template": "&[aria-busy=\"true\"]",
+   "order": "800",
+   "scope": "node-type",
+   "declared_in": "Mosaic/NodeTypes/Form/Form/MElements/SubmitButton/SubmitButtonElementTypeFactory.php"
+  },
+  {
+   "state": "___tab--active",
+   "selector_template": "&.m-tab--active",
+   "order": "500",
+   "scope": "node-type",
+   "declared_in": "Mosaic/NodeTypes/Tabs/TabsMenu/Tab/TabElementTypeFactory.php"
+  },
+  {
+   "state": "___tab--active___descendants",
+   "selector_template": ".m-tab--active &",
+   "order": "500",
+   "scope": "node-type",
+   "declared_in": "Mosaic/NodeTypes/Tabs/TabsMenu/Tab/TabElementTypeFactory.php"
+  },
+  {
+   "state": "___textarea-input--placeholder",
+   "selector_template": "&.m-textarea::placeholder",
+   "order": "0",
+   "scope": "node-type",
+   "declared_in": "Mosaic/NodeTypes/Form/Form/MElements/TextArea/TextAreaElementTypeFactory.php"
+  }
+ ]
+}

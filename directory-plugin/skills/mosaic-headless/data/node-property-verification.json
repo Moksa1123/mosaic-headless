@@ -1,0 +1,1349 @@
+{
+ "source_file": "data/node-property-verification.csv",
+ "columns": [
+  "property",
+  "probed_on",
+  "sent",
+  "status",
+  "evidence"
+ ],
+ "rows": [
+  {
+   "property": "accept",
+   "probed_on": "",
+   "sent": "",
+   "status": "SKIPPED",
+   "evidence": ""
+  },
+  {
+   "property": "accessibleLabel",
+   "probed_on": "modal",
+   "sent": "\"mprobe37\"",
+   "status": "APPLIED",
+   "evidence": "<dialog class=\"m-modal M_Dialog M_IJ\" id=\"np-011\" aria-label=\"mprobe37\" aria-modal=\"true\">"
+  },
+  {
+   "property": "action",
+   "probed_on": "",
+   "sent": "",
+   "status": "NO_HOST",
+   "evidence": ""
+  },
+  {
+   "property": "alt",
+   "probed_on": "",
+   "sent": "",
+   "status": "NO_HOST",
+   "evidence": ""
+  },
+  {
+   "property": "alt",
+   "probed_on": "",
+   "sent": "",
+   "status": "NO_HOST",
+   "evidence": ""
+  },
+  {
+   "property": "animation",
+   "probed_on": "",
+   "sent": "",
+   "status": "NO_HOST",
+   "evidence": ""
+  },
+  {
+   "property": "animation",
+   "probed_on": "",
+   "sent": "",
+   "status": "NO_HOST",
+   "evidence": ""
+  },
+  {
+   "property": "animation",
+   "probed_on": "",
+   "sent": "",
+   "status": "NO_HOST",
+   "evidence": ""
+  },
+  {
+   "property": "animation",
+   "probed_on": "navbar",
+   "sent": "\"flipDown\"",
+   "status": "APPLIED",
+   "evidence": "<mosaic-navbar class=\"m-navbar\" id=\"np-059\" data-toggle-breakpoint-id=\"_m\" data-animation=\"flipDown\">"
+  },
+  {
+   "property": "appearance",
+   "probed_on": "",
+   "sent": "",
+   "status": "NO_HOST",
+   "evidence": ""
+  },
+  {
+   "property": "ariaLabel",
+   "probed_on": "",
+   "sent": "",
+   "status": "NO_HOST",
+   "evidence": ""
+  },
+  {
+   "property": "attrID",
+   "probed_on": "",
+   "sent": "",
+   "status": "INSTRUMENT",
+   "evidence": "this sweep locates and reads nodes THROUGH it; asserted instead by style-verification.csv (98 rows); rwd-verification.csv (731 rows)"
+  },
+  {
+   "property": "attributes",
+   "probed_on": "div",
+   "sent": "[{\"name\": \"data-mprobe37\", \"value\": \"yes\"}]",
+   "status": "NO_EFFECT",
+   "evidence": "<div class=\"m-div\" id=\"np-019\">"
+  },
+  {
+   "property": "autoScale",
+   "probed_on": "icon",
+   "sent": "371337",
+   "status": "NO_EFFECT",
+   "evidence": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 24 24\" fill=\"none\" class=\"m-icon\" id=\"np-031\">"
+  },
+  {
+   "property": "autocomplete",
+   "probed_on": "",
+   "sent": "",
+   "status": "SKIPPED",
+   "evidence": ""
+  },
+  {
+   "property": "autocomplete",
+   "probed_on": "",
+   "sent": "",
+   "status": "SKIPPED",
+   "evidence": ""
+  },
+  {
+   "property": "autoplay",
+   "probed_on": "video",
+   "sent": "\"1\"",
+   "status": "APPLIED",
+   "evidence": "<video class=\"m-video\" id=\"np-153\" data-autoplay=\"1\" muted=\"1\" controls=\"1\" playsinline=\"1\" preload=\"metadata\""
+  },
+  {
+   "property": "autoplay",
+   "probed_on": "vimeo",
+   "sent": "\"1\"",
+   "status": "APPLIED",
+   "evidence": "<mosaic-vimeo class=\"m-vimeo\" id=\"np-164\" data-autoplay=\"1\" data-mute=\"1\" data-playsinline=\"1\">"
+  },
+  {
+   "property": "autoplay",
+   "probed_on": "youtube",
+   "sent": "\"1\"",
+   "status": "APPLIED",
+   "evidence": "<mosaic-youtube class=\"m-youtube\" id=\"np-182\" data-autoplay=\"1\" data-mute=\"1\" data-playsinline=\"1\">"
+  },
+  {
+   "property": "autoplayDelay",
+   "probed_on": "",
+   "sent": "",
+   "status": "NO_HOST",
+   "evidence": ""
+  },
+  {
+   "property": "autoplayLimit",
+   "probed_on": "",
+   "sent": "",
+   "status": "NO_HOST",
+   "evidence": ""
+  },
+  {
+   "property": "buttonBreakpoint",
+   "probed_on": "navbar",
+   "sent": "\"none\"",
+   "status": "APPLIED",
+   "evidence": "<mosaic-navbar class=\"m-navbar\" id=\"np-058\" data-toggle-breakpoint-id=\"none\" data-animation=\"fade\">"
+  },
+  {
+   "property": "checked",
+   "probed_on": "",
+   "sent": "",
+   "status": "NO_HOST",
+   "evidence": ""
+  },
+  {
+   "property": "checked",
+   "probed_on": "",
+   "sent": "",
+   "status": "NO_HOST",
+   "evidence": ""
+  },
+  {
+   "property": "closedby",
+   "probed_on": "modal",
+   "sent": "\"nothing\"",
+   "status": "APPLIED",
+   "evidence": "<dialog class=\"m-modal M_Dialog M_IJ\" id=\"np-012\" aria-label aria-modal=\"true\" data-mosaic-modal-closedby=\"not"
+  },
+  {
+   "property": "colors",
+   "probed_on": "",
+   "sent": "",
+   "status": "SKIPPED",
+   "evidence": ""
+  },
+  {
+   "property": "conditions",
+   "probed_on": "",
+   "sent": "",
+   "status": "SKIPPED",
+   "evidence": ""
+  },
+  {
+   "property": "content",
+   "probed_on": "",
+   "sent": "",
+   "status": "SKIPPED",
+   "evidence": ""
+  },
+  {
+   "property": "content",
+   "probed_on": "code",
+   "sent": "\"mprobe37\"",
+   "status": "NO_EFFECT",
+   "evidence": "<div class=\"m-code\" id=\"np-069\">"
+  },
+  {
+   "property": "controls",
+   "probed_on": "video",
+   "sent": "\"1\"",
+   "status": "APPLIED",
+   "evidence": "<video class=\"m-video\" id=\"np-156\" controls=\"1\" preload=\"metadata\">"
+  },
+  {
+   "property": "controls",
+   "probed_on": "vimeo",
+   "sent": "\"1\"",
+   "status": "NO_EFFECT",
+   "evidence": "<mosaic-vimeo class=\"m-vimeo\" id=\"np-166\" data-autoplay=\"0\" data-mute=\"0\" data-playsinline=\"0\">"
+  },
+  {
+   "property": "controls",
+   "probed_on": "youtube",
+   "sent": "\"1\"",
+   "status": "NO_EFFECT",
+   "evidence": "<mosaic-youtube class=\"m-youtube\" id=\"np-184\" data-autoplay=\"0\" data-mute=\"0\" data-playsinline=\"0\">"
+  },
+  {
+   "property": "cssClasses",
+   "probed_on": "div",
+   "sent": "[\"mprobe37-cls\"]",
+   "status": "NO_EFFECT",
+   "evidence": "<div class=\"m-div\" id=\"np-020\">"
+  },
+  {
+   "property": "currentStatus",
+   "probed_on": "",
+   "sent": "",
+   "status": "SKIPPED",
+   "evidence": ""
+  },
+  {
+   "property": "defaultSlideIndex",
+   "probed_on": "",
+   "sent": "",
+   "status": "NO_HOST",
+   "evidence": ""
+  },
+  {
+   "property": "defaultTabIndex",
+   "probed_on": "tabs",
+   "sent": "371337",
+   "status": "NO_EFFECT",
+   "evidence": "<mosaic-tabs class=\"m-tabs\" id=\"np-146\">"
+  },
+  {
+   "property": "defaultValue",
+   "probed_on": "",
+   "sent": "",
+   "status": "SKIPPED",
+   "evidence": ""
+  },
+  {
+   "property": "defaultValue",
+   "probed_on": "",
+   "sent": "",
+   "status": "SKIPPED",
+   "evidence": ""
+  },
+  {
+   "property": "defaultValue",
+   "probed_on": "",
+   "sent": "",
+   "status": "SKIPPED",
+   "evidence": ""
+  },
+  {
+   "property": "defaultValue",
+   "probed_on": "",
+   "sent": "",
+   "status": "SKIPPED",
+   "evidence": ""
+  },
+  {
+   "property": "defaultValue",
+   "probed_on": "",
+   "sent": "",
+   "status": "SKIPPED",
+   "evidence": ""
+  },
+  {
+   "property": "disableScroll",
+   "probed_on": "navbar",
+   "sent": "\"1\"",
+   "status": "NO_EFFECT",
+   "evidence": "<mosaic-navbar class=\"m-navbar m-navbar--disable-scroll\" id=\"np-060\" data-toggle-breakpoint-id=\"_m\" data-anima"
+  },
+  {
+   "property": "disabled",
+   "probed_on": "select-option",
+   "sent": "371337",
+   "status": "NO_EFFECT",
+   "evidence": "<option class=\"m-select-option\" id=\"np-108\" value disabled=\"true\">"
+  },
+  {
+   "property": "disabled",
+   "probed_on": "text-input",
+   "sent": "371337",
+   "status": "NO_EFFECT",
+   "evidence": "<input class=\"m-input\" id=\"np-094\" type=\"text\">"
+  },
+  {
+   "property": "duration",
+   "probed_on": "",
+   "sent": "",
+   "status": "NO_HOST",
+   "evidence": ""
+  },
+  {
+   "property": "dynamicCode",
+   "probed_on": "",
+   "sent": "",
+   "status": "SKIPPED",
+   "evidence": ""
+  },
+  {
+   "property": "dynamicSources",
+   "probed_on": "",
+   "sent": "",
+   "status": "SKIPPED",
+   "evidence": ""
+  },
+  {
+   "property": "easing",
+   "probed_on": "",
+   "sent": "",
+   "status": "SKIPPED",
+   "evidence": ""
+  },
+  {
+   "property": "fetchPriority",
+   "probed_on": "",
+   "sent": "",
+   "status": "NO_HOST",
+   "evidence": ""
+  },
+  {
+   "property": "firstOpened",
+   "probed_on": "",
+   "sent": "",
+   "status": "NO_HOST",
+   "evidence": ""
+  },
+  {
+   "property": "format",
+   "probed_on": "",
+   "sent": "",
+   "status": "NO_HOST",
+   "evidence": ""
+  },
+  {
+   "property": "format",
+   "probed_on": "",
+   "sent": "",
+   "status": "NO_HOST",
+   "evidence": ""
+  },
+  {
+   "property": "height",
+   "probed_on": "",
+   "sent": "",
+   "status": "NO_HOST",
+   "evidence": ""
+  },
+  {
+   "property": "height",
+   "probed_on": "video",
+   "sent": "371337",
+   "status": "APPLIED",
+   "evidence": "<video class=\"m-video\" id=\"np-159\" controls=\"1\" height=\"371337\" preload=\"metadata\">"
+  },
+  {
+   "property": "hidden",
+   "probed_on": "",
+   "sent": "",
+   "status": "SKIPPED",
+   "evidence": ""
+  },
+  {
+   "property": "horizontalAlign",
+   "probed_on": "dropdown",
+   "sent": "\"right\"",
+   "status": "APPLIED",
+   "evidence": "<mosaic-dropdown class=\"m-dropdown-narrow m-dropdown dropdown-mode\" id=\"np-053\" data-open-on=\"click\" data-anim"
+  },
+  {
+   "property": "image",
+   "probed_on": "",
+   "sent": "",
+   "status": "SKIPPED",
+   "evidence": ""
+  },
+  {
+   "property": "image",
+   "probed_on": "",
+   "sent": "",
+   "status": "SKIPPED",
+   "evidence": ""
+  },
+  {
+   "property": "image",
+   "probed_on": "",
+   "sent": "",
+   "status": "SKIPPED",
+   "evidence": ""
+  },
+  {
+   "property": "inactive",
+   "probed_on": "button",
+   "sent": "371337",
+   "status": "NO_EFFECT",
+   "evidence": "<span class=\"m-button\" id=\"np-006\">"
+  },
+  {
+   "property": "insertLocation",
+   "probed_on": "code",
+   "sent": "\"bodyEnd\"",
+   "status": "APPLIED",
+   "evidence": "output relocated out of the tree"
+  },
+  {
+   "property": "interactionShorthand",
+   "probed_on": "",
+   "sent": "",
+   "status": "SKIPPED",
+   "evidence": ""
+  },
+  {
+   "property": "interactions",
+   "probed_on": "",
+   "sent": "",
+   "status": "SKIPPED",
+   "evidence": ""
+  },
+  {
+   "property": "isAutoplay",
+   "probed_on": "",
+   "sent": "",
+   "status": "NO_HOST",
+   "evidence": ""
+  },
+  {
+   "property": "isCarousel",
+   "probed_on": "",
+   "sent": "",
+   "status": "NO_HOST",
+   "evidence": ""
+  },
+  {
+   "property": "latitude",
+   "probed_on": "",
+   "sent": "",
+   "status": "SKIPPED",
+   "evidence": ""
+  },
+  {
+   "property": "layer",
+   "probed_on": "openstreetmap",
+   "sent": "\"hot\"",
+   "status": "NO_EFFECT",
+   "evidence": "<mosaic-openstreetmap class=\"m-osm\" id=\"np-066\">"
+  },
+  {
+   "property": "lazyLoad",
+   "probed_on": "",
+   "sent": "",
+   "status": "NO_HOST",
+   "evidence": ""
+  },
+  {
+   "property": "lazyLoad",
+   "probed_on": "openstreetmap",
+   "sent": "\"1\"",
+   "status": "NO_EFFECT",
+   "evidence": "<mosaic-openstreetmap class=\"m-osm\" id=\"np-067\">"
+  },
+  {
+   "property": "lazyLoad",
+   "probed_on": "vimeo",
+   "sent": "\"1\"",
+   "status": "NO_EFFECT",
+   "evidence": "<mosaic-vimeo class=\"m-vimeo\" id=\"np-169\" data-autoplay=\"0\" data-mute=\"0\" data-playsinline=\"0\">"
+  },
+  {
+   "property": "lazyLoad",
+   "probed_on": "youtube",
+   "sent": "\"1\"",
+   "status": "NO_EFFECT",
+   "evidence": "<mosaic-youtube class=\"m-youtube\" id=\"np-187\" data-autoplay=\"0\" data-mute=\"0\" data-playsinline=\"0\">"
+  },
+  {
+   "property": "listStart",
+   "probed_on": "",
+   "sent": "",
+   "status": "SKIPPED",
+   "evidence": ""
+  },
+  {
+   "property": "listType",
+   "probed_on": "",
+   "sent": "",
+   "status": "NO_HOST",
+   "evidence": ""
+  },
+  {
+   "property": "loading",
+   "probed_on": "",
+   "sent": "",
+   "status": "NO_HOST",
+   "evidence": ""
+  },
+  {
+   "property": "locked",
+   "probed_on": "div",
+   "sent": "true",
+   "status": "EDITOR_ONLY",
+   "evidence": "<div class=\"m-div\" id=\"np-016\">"
+  },
+  {
+   "property": "logging",
+   "probed_on": "",
+   "sent": "",
+   "status": "NO_HOST",
+   "evidence": ""
+  },
+  {
+   "property": "logging",
+   "probed_on": "choice-field",
+   "sent": "\"exclude\"",
+   "status": "NO_EFFECT",
+   "evidence": "<fieldset class=\"m-choice-field\" id=\"np-079\">"
+  },
+  {
+   "property": "logging",
+   "probed_on": "fileupload-input",
+   "sent": "\"mask\"",
+   "status": "NO_EFFECT",
+   "evidence": "<input class=\"m-file-upload\" id=\"np-084\" accept=\".jpg, .png, .jpeg, .avif\" type=\"file\">"
+  },
+  {
+   "property": "logging",
+   "probed_on": "select-input",
+   "sent": "\"exclude\"",
+   "status": "NO_EFFECT",
+   "evidence": "<select class=\"m-select\" id=\"np-114\" size=\"1\">"
+  },
+  {
+   "property": "logging",
+   "probed_on": "text-input",
+   "sent": "\"exclude\"",
+   "status": "NO_EFFECT",
+   "evidence": "<input class=\"m-input\" id=\"np-097\" type=\"text\">"
+  },
+  {
+   "property": "logging",
+   "probed_on": "textarea-input",
+   "sent": "\"exclude\"",
+   "status": "NO_EFFECT",
+   "evidence": "<textarea class=\"m-textarea\" id=\"np-122\">"
+  },
+  {
+   "property": "longitude",
+   "probed_on": "",
+   "sent": "",
+   "status": "SKIPPED",
+   "evidence": ""
+  },
+  {
+   "property": "loop",
+   "probed_on": "video",
+   "sent": "\"1\"",
+   "status": "APPLIED",
+   "evidence": "<video class=\"m-video\" id=\"np-155\" loop=\"1\" controls=\"1\" preload=\"metadata\">"
+  },
+  {
+   "property": "maptype",
+   "probed_on": "",
+   "sent": "",
+   "status": "NO_HOST",
+   "evidence": ""
+  },
+  {
+   "property": "maxlength",
+   "probed_on": "textarea-input",
+   "sent": "371337",
+   "status": "APPLIED",
+   "evidence": "<textarea class=\"m-textarea\" id=\"np-119\" maxlength=\"371337\">"
+  },
+  {
+   "property": "mediaLibrary",
+   "probed_on": "fileupload-input",
+   "sent": "371337",
+   "status": "NO_EFFECT",
+   "evidence": "<input class=\"m-file-upload\" id=\"np-085\" accept=\".jpg, .png, .jpeg, .avif\" type=\"file\">"
+  },
+  {
+   "property": "menuID",
+   "probed_on": "",
+   "sent": "",
+   "status": "SKIPPED",
+   "evidence": ""
+  },
+  {
+   "property": "minlength",
+   "probed_on": "textarea-input",
+   "sent": "371337",
+   "status": "APPLIED",
+   "evidence": "<textarea class=\"m-textarea\" id=\"np-118\" minlength=\"371337\">"
+  },
+  {
+   "property": "mode",
+   "probed_on": "",
+   "sent": "",
+   "status": "NO_HOST",
+   "evidence": ""
+  },
+  {
+   "property": "mode",
+   "probed_on": "",
+   "sent": "",
+   "status": "NO_HOST",
+   "evidence": ""
+  },
+  {
+   "property": "mode",
+   "probed_on": "",
+   "sent": "",
+   "status": "NO_HOST",
+   "evidence": ""
+  },
+  {
+   "property": "mode",
+   "probed_on": "list-item",
+   "sent": "\"separator\"",
+   "status": "NO_EFFECT",
+   "evidence": "<li class=\"m-list-item\" id=\"np-042\">"
+  },
+  {
+   "property": "mode",
+   "probed_on": "loop-item",
+   "sent": "\"separator\"",
+   "status": "NO_EFFECT",
+   "evidence": "<div class=\"m-loop-item M_IJ\" id=\"np-043\">"
+  },
+  {
+   "property": "multiple",
+   "probed_on": "fileupload-input",
+   "sent": "371337",
+   "status": "NO_EFFECT",
+   "evidence": "<input class=\"m-file-upload\" id=\"np-082\" accept=\".jpg, .png, .jpeg, .avif\" multiple type=\"file\">"
+  },
+  {
+   "property": "multiple",
+   "probed_on": "select-input",
+   "sent": "371337",
+   "status": "NO_EFFECT",
+   "evidence": "<select class=\"m-select\" id=\"np-111\" multiple size=\"1\">"
+  },
+  {
+   "property": "muted",
+   "probed_on": "video",
+   "sent": "\"1\"",
+   "status": "APPLIED",
+   "evidence": "<video class=\"m-video\" id=\"np-154\" muted=\"1\" controls=\"1\" preload=\"metadata\">"
+  },
+  {
+   "property": "muted",
+   "probed_on": "vimeo",
+   "sent": "\"1\"",
+   "status": "APPLIED",
+   "evidence": "<mosaic-vimeo class=\"m-vimeo\" id=\"np-165\" data-autoplay=\"0\" data-mute=\"1\" data-playsinline=\"0\">"
+  },
+  {
+   "property": "muted",
+   "probed_on": "youtube",
+   "sent": "\"1\"",
+   "status": "APPLIED",
+   "evidence": "<mosaic-youtube class=\"m-youtube\" id=\"np-183\" data-autoplay=\"0\" data-mute=\"1\" data-playsinline=\"0\">"
+  },
+  {
+   "property": "name",
+   "probed_on": "div",
+   "sent": "\"mprobe37\"",
+   "status": "EDITOR_ONLY",
+   "evidence": "<div class=\"m-div\" id=\"np-015\">"
+  },
+  {
+   "property": "nameAttribute",
+   "probed_on": "",
+   "sent": "",
+   "status": "SKIPPED",
+   "evidence": ""
+  },
+  {
+   "property": "nameAttribute",
+   "probed_on": "",
+   "sent": "",
+   "status": "SKIPPED",
+   "evidence": ""
+  },
+  {
+   "property": "nameAttribute",
+   "probed_on": "",
+   "sent": "",
+   "status": "SKIPPED",
+   "evidence": ""
+  },
+  {
+   "property": "nameAttribute",
+   "probed_on": "",
+   "sent": "",
+   "status": "SKIPPED",
+   "evidence": ""
+  },
+  {
+   "property": "nameAttribute",
+   "probed_on": "",
+   "sent": "",
+   "status": "SKIPPED",
+   "evidence": ""
+  },
+  {
+   "property": "nameAttribute",
+   "probed_on": "",
+   "sent": "",
+   "status": "SKIPPED",
+   "evidence": ""
+  },
+  {
+   "property": "openMode",
+   "probed_on": "",
+   "sent": "",
+   "status": "NO_HOST",
+   "evidence": ""
+  },
+  {
+   "property": "openOn",
+   "probed_on": "",
+   "sent": "",
+   "status": "NO_HOST",
+   "evidence": ""
+  },
+  {
+   "property": "openedByDefault",
+   "probed_on": "",
+   "sent": "",
+   "status": "NO_HOST",
+   "evidence": ""
+  },
+  {
+   "property": "override",
+   "probed_on": "",
+   "sent": "",
+   "status": "SKIPPED",
+   "evidence": ""
+  },
+  {
+   "property": "pagesAfter",
+   "probed_on": "",
+   "sent": "",
+   "status": "NO_HOST",
+   "evidence": ""
+  },
+  {
+   "property": "pagesBefore",
+   "probed_on": "",
+   "sent": "",
+   "status": "NO_HOST",
+   "evidence": ""
+  },
+  {
+   "property": "pagesEnd",
+   "probed_on": "",
+   "sent": "",
+   "status": "NO_HOST",
+   "evidence": ""
+  },
+  {
+   "property": "pagesStart",
+   "probed_on": "",
+   "sent": "",
+   "status": "NO_HOST",
+   "evidence": ""
+  },
+  {
+   "property": "placeholderText",
+   "probed_on": "text-input",
+   "sent": "\"mprobe37\"",
+   "status": "APPLIED",
+   "evidence": "<input class=\"m-input\" id=\"np-095\" placeholder=\"mprobe37\" type=\"text\">"
+  },
+  {
+   "property": "placeholderText",
+   "probed_on": "textarea-input",
+   "sent": "\"mprobe37\"",
+   "status": "APPLIED",
+   "evidence": "<textarea class=\"m-textarea\" id=\"np-117\" placeholder=\"mprobe37\">"
+  },
+  {
+   "property": "playsinline",
+   "probed_on": "video",
+   "sent": "\"1\"",
+   "status": "APPLIED",
+   "evidence": "<video class=\"m-video\" id=\"np-157\" controls=\"1\" playsinline=\"1\" preload=\"metadata\">"
+  },
+  {
+   "property": "playsinline",
+   "probed_on": "vimeo",
+   "sent": "\"1\"",
+   "status": "APPLIED",
+   "evidence": "<mosaic-vimeo class=\"m-vimeo\" id=\"np-167\" data-autoplay=\"0\" data-mute=\"0\" data-playsinline=\"1\">"
+  },
+  {
+   "property": "playsinline",
+   "probed_on": "youtube",
+   "sent": "\"1\"",
+   "status": "APPLIED",
+   "evidence": "<mosaic-youtube class=\"m-youtube\" id=\"np-185\" data-autoplay=\"0\" data-mute=\"0\" data-playsinline=\"1\">"
+  },
+  {
+   "property": "positionX",
+   "probed_on": "",
+   "sent": "",
+   "status": "SKIPPED",
+   "evidence": ""
+  },
+  {
+   "property": "positionY",
+   "probed_on": "",
+   "sent": "",
+   "status": "SKIPPED",
+   "evidence": ""
+  },
+  {
+   "property": "poster",
+   "probed_on": "",
+   "sent": "",
+   "status": "SKIPPED",
+   "evidence": ""
+  },
+  {
+   "property": "preload",
+   "probed_on": "video",
+   "sent": "\"none\"",
+   "status": "APPLIED",
+   "evidence": "<video class=\"m-video\" id=\"np-160\" controls=\"1\" preload=\"none\">"
+  },
+  {
+   "property": "privacy",
+   "probed_on": "vimeo",
+   "sent": "\"1\"",
+   "status": "NO_EFFECT",
+   "evidence": "<mosaic-vimeo class=\"m-vimeo\" id=\"np-168\" data-autoplay=\"0\" data-mute=\"0\" data-playsinline=\"0\">"
+  },
+  {
+   "property": "privacy",
+   "probed_on": "youtube",
+   "sent": "\"1\" + youtubeUrl {\"v\": \"https://www.youtube.com/watch?v=dQw4w9WgXcQ\"}",
+   "status": "APPLIED",
+   "evidence": "data-host=\"www.youtube-nocookie.com\" (re-measured 1.0.11; the earlier NO_OUTPUT probe had no usable youtubeUrl)"
+  },
+  {
+   "property": "processShortcodes",
+   "probed_on": "code",
+   "sent": "\"1\"",
+   "status": "NO_EFFECT",
+   "evidence": "<div class=\"m-code\" id=\"np-070\">"
+  },
+  {
+   "property": "query",
+   "probed_on": "",
+   "sent": "",
+   "status": "NO_HOST",
+   "evidence": ""
+  },
+  {
+   "property": "readonly",
+   "probed_on": "text-input",
+   "sent": "371337",
+   "status": "NO_EFFECT",
+   "evidence": "<input class=\"m-input\" id=\"np-093\" type=\"text\">"
+  },
+  {
+   "property": "rel",
+   "probed_on": "button",
+   "sent": "[\"mprobe37\"]",
+   "status": "APPLIED",
+   "evidence": "<a class=\"m-button\" id=\"np-009\" href=\"https://example.com/mprobe37\" rel=\"mprobe37\">"
+  },
+  {
+   "property": "rel",
+   "probed_on": "dropdown-toggle",
+   "sent": "[\"mprobe37\"]",
+   "status": "APPLIED",
+   "evidence": "<a class=\"m-dropdown-toggle\" id=\"np-052\" href=\"https://example.com/mprobe37\" rel=\"mprobe37\" aria-haspopup=\"tru"
+  },
+  {
+   "property": "rel",
+   "probed_on": "menu-link",
+   "sent": "[\"mprobe37\"]",
+   "status": "APPLIED",
+   "evidence": "<a class=\"m-menu-link\" id=\"np-056\" href=\"https://example.com/mprobe37\" rel=\"mprobe37\">"
+  },
+  {
+   "property": "rel",
+   "probed_on": "wysiwyg-link",
+   "sent": "[\"mprobe37\"]",
+   "status": "APPLIED",
+   "evidence": "<a class=\"m-inline-link\" id=\"np-176\" href=\"https://example.com/mprobe37\" rel=\"mprobe37\">"
+  },
+  {
+   "property": "requireOneOpen",
+   "probed_on": "",
+   "sent": "",
+   "status": "NO_HOST",
+   "evidence": ""
+  },
+  {
+   "property": "required",
+   "probed_on": "",
+   "sent": "",
+   "status": "NO_HOST",
+   "evidence": ""
+  },
+  {
+   "property": "required",
+   "probed_on": "choice-field",
+   "sent": "371337",
+   "status": "NO_EFFECT",
+   "evidence": "<fieldset class=\"m-choice-field\" id=\"np-077\">"
+  },
+  {
+   "property": "required",
+   "probed_on": "fileupload-input",
+   "sent": "371337",
+   "status": "NO_EFFECT",
+   "evidence": "<input class=\"m-file-upload\" id=\"np-083\" accept=\".jpg, .png, .jpeg, .avif\" required type=\"file\">"
+  },
+  {
+   "property": "required",
+   "probed_on": "select-input",
+   "sent": "371337",
+   "status": "NO_EFFECT",
+   "evidence": "<select class=\"m-select\" id=\"np-112\" required size=\"1\">"
+  },
+  {
+   "property": "required",
+   "probed_on": "text-input",
+   "sent": "371337",
+   "status": "NO_EFFECT",
+   "evidence": "<input class=\"m-input\" id=\"np-092\" required type=\"text\">"
+  },
+  {
+   "property": "required",
+   "probed_on": "textarea-input",
+   "sent": "371337",
+   "status": "NO_EFFECT",
+   "evidence": "<textarea class=\"m-textarea\" id=\"np-121\" required>"
+  },
+  {
+   "property": "requiredMin",
+   "probed_on": "choice-field",
+   "sent": "371337",
+   "status": "NO_EFFECT",
+   "evidence": "<fieldset class=\"m-choice-field\" id=\"np-078\">"
+  },
+  {
+   "property": "role",
+   "probed_on": "modal",
+   "sent": "\"mprobe37\"",
+   "status": "APPLIED",
+   "evidence": "<dialog class=\"m-modal M_Dialog M_IJ\" id=\"np-010\" role=\"mprobe37\" aria-label aria-modal=\"true\">"
+  },
+  {
+   "property": "selected",
+   "probed_on": "select-option",
+   "sent": "371337",
+   "status": "NO_EFFECT",
+   "evidence": "<option class=\"m-select-option\" id=\"np-107\" value selected=\"true\">"
+  },
+  {
+   "property": "shortcode",
+   "probed_on": "wpShortcode",
+   "sent": "\"mprobe37\"",
+   "status": "NO_EFFECT",
+   "evidence": "<div class=\"m-shortcode\" id=\"np-173\">"
+  },
+  {
+   "property": "size",
+   "probed_on": "",
+   "sent": "",
+   "status": "NO_HOST",
+   "evidence": ""
+  },
+  {
+   "property": "size",
+   "probed_on": "select-input",
+   "sent": "371337",
+   "status": "APPLIED",
+   "evidence": "<select class=\"m-select\" id=\"np-113\" size=\"371337\">"
+  },
+  {
+   "property": "sizes",
+   "probed_on": "",
+   "sent": "",
+   "status": "NO_HOST",
+   "evidence": ""
+  },
+  {
+   "property": "sizes",
+   "probed_on": "",
+   "sent": "",
+   "status": "NO_HOST",
+   "evidence": ""
+  },
+  {
+   "property": "sources",
+   "probed_on": "video",
+   "sent": "[\"mprobe37\"]",
+   "status": "NO_EFFECT",
+   "evidence": "<video class=\"m-video\" id=\"np-152\" controls=\"1\" preload=\"metadata\">"
+  },
+  {
+   "property": "srcset",
+   "probed_on": "",
+   "sent": "",
+   "status": "NO_HOST",
+   "evidence": ""
+  },
+  {
+   "property": "srcset",
+   "probed_on": "",
+   "sent": "",
+   "status": "NO_HOST",
+   "evidence": ""
+  },
+  {
+   "property": "startTime",
+   "probed_on": "",
+   "sent": "",
+   "status": "SKIPPED",
+   "evidence": ""
+  },
+  {
+   "property": "startTime",
+   "probed_on": "",
+   "sent": "",
+   "status": "SKIPPED",
+   "evidence": ""
+  },
+  {
+   "property": "stepActive",
+   "probed_on": "",
+   "sent": "",
+   "status": "NO_HOST",
+   "evidence": ""
+  },
+  {
+   "property": "stepActive",
+   "probed_on": "form-multi-steps-step",
+   "sent": "true",
+   "status": "NO_EFFECT",
+   "evidence": "<div class=\"m-multi-steps-step-tab\" id=\"np-101\" onclick=\"(() =>"
+  },
+  {
+   "property": "stepIndex",
+   "probed_on": "",
+   "sent": "",
+   "status": "NO_HOST",
+   "evidence": ""
+  },
+  {
+   "property": "stepIndex",
+   "probed_on": "form-multi-steps-step",
+   "sent": "371337",
+   "status": "NO_EFFECT",
+   "evidence": "<div class=\"m-multi-steps-step-tab\" id=\"np-100\" onclick=\"(() =>"
+  },
+  {
+   "property": "style",
+   "probed_on": "",
+   "sent": "",
+   "status": "INSTRUMENT",
+   "evidence": "this sweep locates and reads nodes THROUGH it; asserted instead by style-verification.csv (98 rows); rwd-verification.csv (731 rows)"
+  },
+  {
+   "property": "submitType",
+   "probed_on": "",
+   "sent": "",
+   "status": "SKIPPED",
+   "evidence": ""
+  },
+  {
+   "property": "suggestedVideos",
+   "probed_on": "youtube",
+   "sent": "\"1\"",
+   "status": "NO_EFFECT",
+   "evidence": "<mosaic-youtube class=\"m-youtube\" id=\"np-189\" data-autoplay=\"0\" data-mute=\"0\" data-playsinline=\"0\">"
+  },
+  {
+   "property": "svg",
+   "probed_on": "",
+   "sent": "",
+   "status": "SKIPPED",
+   "evidence": ""
+  },
+  {
+   "property": "tagName",
+   "probed_on": "div",
+   "sent": "\"h4\"",
+   "status": "APPLIED",
+   "evidence": "<h4 class=\"m-div\" id=\"np-013\">"
+  },
+  {
+   "property": "tagName",
+   "probed_on": "section",
+   "sent": "\"h4\"",
+   "status": "APPLIED",
+   "evidence": "<h4 class=\"m-section\" id=\"np-149\">"
+  },
+  {
+   "property": "tagName",
+   "probed_on": "text",
+   "sent": "\"h4\"",
+   "status": "APPLIED",
+   "evidence": "<h4 class=\"m-text m-wysiwyg\" id=\"np-150\">"
+  },
+  {
+   "property": "target",
+   "probed_on": "button",
+   "sent": "\"_top\"",
+   "status": "APPLIED",
+   "evidence": "<a class=\"m-button\" id=\"np-008\" href=\"https://example.com/mprobe37\" target=\"_top\">"
+  },
+  {
+   "property": "target",
+   "probed_on": "dropdown-toggle",
+   "sent": "\"_top\"",
+   "status": "APPLIED",
+   "evidence": "<a class=\"m-dropdown-toggle\" id=\"np-051\" href=\"https://example.com/mprobe37\" target=\"_top\" aria-haspopup=\"true"
+  },
+  {
+   "property": "target",
+   "probed_on": "menu-link",
+   "sent": "\"_top\"",
+   "status": "APPLIED",
+   "evidence": "<a class=\"m-menu-link\" id=\"np-055\" href=\"https://example.com/mprobe37\" target=\"_top\">"
+  },
+  {
+   "property": "target",
+   "probed_on": "wysiwyg-link",
+   "sent": "\"_top\"",
+   "status": "APPLIED",
+   "evidence": "<a class=\"m-inline-link\" id=\"np-175\" href=\"https://example.com/mprobe37\" target=\"_top\">"
+  },
+  {
+   "property": "text",
+   "probed_on": "",
+   "sent": "",
+   "status": "NO_HOST",
+   "evidence": ""
+  },
+  {
+   "property": "text",
+   "probed_on": "select-option",
+   "sent": "\"mprobe37\"",
+   "status": "NO_EFFECT",
+   "evidence": "<option class=\"m-select-option\" id=\"np-106\" value>"
+  },
+  {
+   "property": "theme",
+   "probed_on": "",
+   "sent": "",
+   "status": "NO_HOST",
+   "evidence": ""
+  },
+  {
+   "property": "threshold",
+   "probed_on": "video",
+   "sent": "371337",
+   "status": "NO_EFFECT",
+   "evidence": "<video class=\"m-video\" id=\"np-162\" controls=\"1\" preload=\"metadata\" data-threshold=\"100\">"
+  },
+  {
+   "property": "threshold",
+   "probed_on": "vimeo",
+   "sent": "371337",
+   "status": "NO_EFFECT",
+   "evidence": "<mosaic-vimeo class=\"m-vimeo\" id=\"np-171\" data-autoplay=\"0\" data-mute=\"0\" data-playsinline=\"0\" data-threshold="
+  },
+  {
+   "property": "threshold",
+   "probed_on": "youtube",
+   "sent": "371337",
+   "status": "NO_EFFECT",
+   "evidence": "<mosaic-youtube class=\"m-youtube\" id=\"np-190\" data-autoplay=\"0\" data-mute=\"0\" data-playsinline=\"0\" data-thresh"
+  },
+  {
+   "property": "thumbnail",
+   "probed_on": "",
+   "sent": "",
+   "status": "SKIPPED",
+   "evidence": ""
+  },
+  {
+   "property": "thumbnailAlt",
+   "probed_on": "",
+   "sent": "",
+   "status": "NO_HOST",
+   "evidence": ""
+  },
+  {
+   "property": "title",
+   "probed_on": "",
+   "sent": "",
+   "status": "NO_HOST",
+   "evidence": ""
+  },
+  {
+   "property": "type",
+   "probed_on": "",
+   "sent": "",
+   "status": "SKIPPED",
+   "evidence": ""
+  },
+  {
+   "property": "url",
+   "probed_on": "",
+   "sent": "",
+   "status": "SKIPPED",
+   "evidence": ""
+  },
+  {
+   "property": "url",
+   "probed_on": "",
+   "sent": "",
+   "status": "SKIPPED",
+   "evidence": ""
+  },
+  {
+   "property": "url",
+   "probed_on": "",
+   "sent": "",
+   "status": "SKIPPED",
+   "evidence": ""
+  },
+  {
+   "property": "url",
+   "probed_on": "",
+   "sent": "",
+   "status": "SKIPPED",
+   "evidence": ""
+  },
+  {
+   "property": "useAsBackground",
+   "probed_on": "",
+   "sent": "",
+   "status": "NO_HOST",
+   "evidence": ""
+  },
+  {
+   "property": "value",
+   "probed_on": "",
+   "sent": "",
+   "status": "NO_HOST",
+   "evidence": ""
+  },
+  {
+   "property": "value",
+   "probed_on": "",
+   "sent": "",
+   "status": "NO_HOST",
+   "evidence": ""
+  },
+  {
+   "property": "value",
+   "probed_on": "select-option",
+   "sent": "\"mprobe37\"",
+   "status": "APPLIED",
+   "evidence": "<option class=\"m-select-option\" id=\"np-105\" value=\"mprobe37\">"
+  },
+  {
+   "property": "video",
+   "probed_on": "",
+   "sent": "",
+   "status": "SKIPPED",
+   "evidence": ""
+  },
+  {
+   "property": "vimeoUrl",
+   "probed_on": "",
+   "sent": "",
+   "status": "SKIPPED",
+   "evidence": ""
+  },
+  {
+   "property": "width",
+   "probed_on": "",
+   "sent": "",
+   "status": "NO_HOST",
+   "evidence": ""
+  },
+  {
+   "property": "width",
+   "probed_on": "video",
+   "sent": "371337",
+   "status": "APPLIED",
+   "evidence": "<video class=\"m-video\" id=\"np-158\" controls=\"1\" width=\"371337\" preload=\"metadata\">"
+  },
+  {
+   "property": "youtubeUrl",
+   "probed_on": "",
+   "sent": "",
+   "status": "SKIPPED",
+   "evidence": ""
+  },
+  {
+   "property": "zoom",
+   "probed_on": "",
+   "sent": "",
+   "status": "NO_HOST",
+   "evidence": ""
+  },
+  {
+   "property": "zoom",
+   "probed_on": "openstreetmap",
+   "sent": "371337",
+   "status": "NO_EFFECT",
+   "evidence": "<mosaic-openstreetmap class=\"m-osm\" id=\"np-065\">"
+  }
+ ]
+}

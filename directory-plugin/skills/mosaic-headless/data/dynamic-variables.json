@@ -1,0 +1,544 @@
+{
+ "source_file": "data/dynamic-variables.csv",
+ "columns": [
+  "expression",
+  "namespace",
+  "name",
+  "label",
+  "declared_in"
+ ],
+ "rows": [
+  {
+   "expression": "@VAR('__current_theme/name')",
+   "namespace": "__current_theme",
+   "name": "name",
+   "label": "Name",
+   "declared_in": "Mosaic/Themes/Theme/VariableProviderTheme.php"
+  },
+  {
+   "expression": "@VAR('author/author_avatar')",
+   "namespace": "author",
+   "name": "author_avatar",
+   "label": "Avatar",
+   "declared_in": "Mosaic/Compatibility/WordPress/PathContext/VariableProviderAuthor.php"
+  },
+  {
+   "expression": "@VAR('author/author_description')",
+   "namespace": "author",
+   "name": "author_description",
+   "label": "Description",
+   "declared_in": "Mosaic/Compatibility/WordPress/PathContext/VariableProviderAuthor.php"
+  },
+  {
+   "expression": "@VAR('author/author_email')",
+   "namespace": "author",
+   "name": "author_email",
+   "label": "Email",
+   "declared_in": "Mosaic/Compatibility/WordPress/PathContext/VariableProviderAuthor.php"
+  },
+  {
+   "expression": "@VAR('author/author_id')",
+   "namespace": "author",
+   "name": "author_id",
+   "label": "ID",
+   "declared_in": "Mosaic/Compatibility/WordPress/PathContext/VariableProviderAuthor.php"
+  },
+  {
+   "expression": "@VAR('author/author_name')",
+   "namespace": "author",
+   "name": "author_name",
+   "label": "Display name",
+   "declared_in": "Mosaic/Compatibility/WordPress/PathContext/VariableProviderAuthor.php"
+  },
+  {
+   "expression": "@VAR('author/author_permalink')",
+   "namespace": "author",
+   "name": "author_permalink",
+   "label": "Permalink",
+   "declared_in": "Mosaic/Compatibility/WordPress/PathContext/VariableProviderAuthor.php"
+  },
+  {
+   "expression": "@VAR('author/author_url')",
+   "namespace": "author",
+   "name": "author_url",
+   "label": "Website",
+   "declared_in": "Mosaic/Compatibility/WordPress/PathContext/VariableProviderAuthor.php"
+  },
+  {
+   "expression": "@VAR('form/formName')",
+   "namespace": "form",
+   "name": "formName",
+   "label": "",
+   "declared_in": "Mosaic/Form/FormDocument.php"
+  },
+  {
+   "expression": "@VAR('form/value')",
+   "namespace": "form",
+   "name": "value",
+   "label": "",
+   "declared_in": "Mosaic/Form/FormDocument.php"
+  },
+  {
+   "expression": "@VAR('menu/hasChildren')",
+   "namespace": "menu",
+   "name": "hasChildren",
+   "label": "Item has children",
+   "declared_in": "Mosaic/Compatibility/Common/VariableProviderMenu.php"
+  },
+  {
+   "expression": "@VAR('menu/href')",
+   "namespace": "menu",
+   "name": "href",
+   "label": "Item URL",
+   "declared_in": "Mosaic/Compatibility/Common/VariableProviderMenu.php"
+  },
+  {
+   "expression": "@VAR('menu/id')",
+   "namespace": "menu",
+   "name": "id",
+   "label": "ID",
+   "declared_in": "Mosaic/Compatibility/Common/VariableProviderMenu.php"
+  },
+  {
+   "expression": "@VAR('menu/loop')",
+   "namespace": "menu",
+   "name": "loop",
+   "label": "",
+   "declared_in": "Mosaic/Compatibility/Common/VariableProviderMenu.php"
+  },
+  {
+   "expression": "@VAR('menu/name')",
+   "namespace": "menu",
+   "name": "name",
+   "label": "Name",
+   "declared_in": "Mosaic/Compatibility/Common/VariableProviderMenu.php"
+  },
+  {
+   "expression": "@VAR('menu/target')",
+   "namespace": "menu",
+   "name": "target",
+   "label": "Item target",
+   "declared_in": "Mosaic/Compatibility/Common/VariableProviderMenu.php"
+  },
+  {
+   "expression": "@VAR('menu/title')",
+   "namespace": "menu",
+   "name": "title",
+   "label": "Navigation label",
+   "declared_in": "Mosaic/Compatibility/Common/VariableProviderMenu.php"
+  },
+  {
+   "expression": "@VAR('post/author_avatar')",
+   "namespace": "post",
+   "name": "author_avatar",
+   "label": "Author avatar",
+   "declared_in": "Mosaic/Compatibility/WordPress/SchemaHelpers/Post/AbstractPostSchemaHelper.php"
+  },
+  {
+   "expression": "@VAR('post/author_description')",
+   "namespace": "post",
+   "name": "author_description",
+   "label": "Author description",
+   "declared_in": "Mosaic/Compatibility/WordPress/SchemaHelpers/Post/AbstractPostSchemaHelper.php"
+  },
+  {
+   "expression": "@VAR('post/author_email')",
+   "namespace": "post",
+   "name": "author_email",
+   "label": "Author email",
+   "declared_in": "Mosaic/Compatibility/WordPress/SchemaHelpers/Post/AbstractPostSchemaHelper.php"
+  },
+  {
+   "expression": "@VAR('post/author_id')",
+   "namespace": "post",
+   "name": "author_id",
+   "label": "Author ID",
+   "declared_in": "Mosaic/Compatibility/WordPress/SchemaHelpers/Post/AbstractPostSchemaHelper.php"
+  },
+  {
+   "expression": "@VAR('post/author_name')",
+   "namespace": "post",
+   "name": "author_name",
+   "label": "Author display name",
+   "declared_in": "Mosaic/Compatibility/WordPress/SchemaHelpers/Post/AbstractPostSchemaHelper.php"
+  },
+  {
+   "expression": "@VAR('post/author_permalink')",
+   "namespace": "post",
+   "name": "author_permalink",
+   "label": "Author permalink",
+   "declared_in": "Mosaic/Compatibility/WordPress/SchemaHelpers/Post/AbstractPostSchemaHelper.php"
+  },
+  {
+   "expression": "@VAR('post/author_url')",
+   "namespace": "post",
+   "name": "author_url",
+   "label": "Author website",
+   "declared_in": "Mosaic/Compatibility/WordPress/SchemaHelpers/Post/AbstractPostSchemaHelper.php"
+  },
+  {
+   "expression": "@VAR('post/content')",
+   "namespace": "post",
+   "name": "content",
+   "label": "Content",
+   "declared_in": "Mosaic/Compatibility/WordPress/PathContext/VariableProviderIndex.php"
+  },
+  {
+   "expression": "@VAR('post/featuredImage')",
+   "namespace": "post",
+   "name": "featuredImage",
+   "label": "Featured image",
+   "declared_in": "Mosaic/Compatibility/WordPress/SchemaHelpers/Post/AbstractPostSchemaHelper.php"
+  },
+  {
+   "expression": "@VAR('post/featuredImageAlt')",
+   "namespace": "post",
+   "name": "featuredImageAlt",
+   "label": "Featured image alt text",
+   "declared_in": "Mosaic/Compatibility/WordPress/SchemaHelpers/Post/AbstractPostSchemaHelper.php"
+  },
+  {
+   "expression": "@VAR('post/id')",
+   "namespace": "post",
+   "name": "id",
+   "label": "ID",
+   "declared_in": "Mosaic/Compatibility/WordPress/PathContext/VariableProviderSingle.php"
+  },
+  {
+   "expression": "@VAR('post/modified_date')",
+   "namespace": "post",
+   "name": "modified_date",
+   "label": "Modified date",
+   "declared_in": "Mosaic/Compatibility/WordPress/SchemaHelpers/Post/AbstractPostSchemaHelper.php"
+  },
+  {
+   "expression": "@VAR('post/modified_time')",
+   "namespace": "post",
+   "name": "modified_time",
+   "label": "Modified time",
+   "declared_in": "Mosaic/Compatibility/WordPress/SchemaHelpers/Post/AbstractPostSchemaHelper.php"
+  },
+  {
+   "expression": "@VAR('post/modified_timestamp')",
+   "namespace": "post",
+   "name": "modified_timestamp",
+   "label": "Modified timestamp",
+   "declared_in": "Mosaic/Compatibility/WordPress/SchemaHelpers/Post/AbstractPostSchemaHelper.php"
+  },
+  {
+   "expression": "@VAR('post/modified_timestamp_gmt')",
+   "namespace": "post",
+   "name": "modified_timestamp_gmt",
+   "label": "Modified timestamp GMT",
+   "declared_in": "Mosaic/Compatibility/WordPress/SchemaHelpers/Post/AbstractPostSchemaHelper.php"
+  },
+  {
+   "expression": "@VAR('post/parent_id')",
+   "namespace": "post",
+   "name": "parent_id",
+   "label": "Parent id",
+   "declared_in": "Mosaic/Compatibility/WordPress/SchemaHelpers/Post/AbstractPostSchemaHelper.php"
+  },
+  {
+   "expression": "@VAR('post/permalink')",
+   "namespace": "post",
+   "name": "permalink",
+   "label": "Permalink",
+   "declared_in": "Mosaic/Compatibility/WordPress/SchemaHelpers/Post/AbstractPostSchemaHelper.php"
+  },
+  {
+   "expression": "@VAR('post/publish_date')",
+   "namespace": "post",
+   "name": "publish_date",
+   "label": "Publish date",
+   "declared_in": "Mosaic/Compatibility/WordPress/SchemaHelpers/Post/AbstractPostSchemaHelper.php"
+  },
+  {
+   "expression": "@VAR('post/publish_time')",
+   "namespace": "post",
+   "name": "publish_time",
+   "label": "Publish time",
+   "declared_in": "Mosaic/Compatibility/WordPress/SchemaHelpers/Post/AbstractPostSchemaHelper.php"
+  },
+  {
+   "expression": "@VAR('post/publish_timestamp')",
+   "namespace": "post",
+   "name": "publish_timestamp",
+   "label": "Publish timestamp",
+   "declared_in": "Mosaic/Compatibility/WordPress/SchemaHelpers/Post/AbstractPostSchemaHelper.php"
+  },
+  {
+   "expression": "@VAR('post/publish_timestamp_gmt')",
+   "namespace": "post",
+   "name": "publish_timestamp_gmt",
+   "label": "Publish timestamp GMT",
+   "declared_in": "Mosaic/Compatibility/WordPress/SchemaHelpers/Post/AbstractPostSchemaHelper.php"
+  },
+  {
+   "expression": "@VAR('post/title')",
+   "namespace": "post",
+   "name": "title",
+   "label": "Title",
+   "declared_in": "Mosaic/Compatibility/WordPress/PathContext/VariableProviderIndex.php"
+  },
+  {
+   "expression": "@VAR('request/ip')",
+   "namespace": "request",
+   "name": "ip",
+   "label": "IP",
+   "declared_in": "Mosaic/Compatibility/Common/VariableProviderRequest.php"
+  },
+  {
+   "expression": "@VAR('request/page_url')",
+   "namespace": "request",
+   "name": "page_url",
+   "label": "Page URL",
+   "declared_in": "Mosaic/Compatibility/Common/VariableProviderRequest.php"
+  },
+  {
+   "expression": "@VAR('request/referrer')",
+   "namespace": "request",
+   "name": "referrer",
+   "label": "Referrer",
+   "declared_in": "Mosaic/Compatibility/Common/VariableProviderRequest.php"
+  },
+  {
+   "expression": "@VAR('request/user_agent')",
+   "namespace": "request",
+   "name": "user_agent",
+   "label": "User agent",
+   "declared_in": "Mosaic/Compatibility/Common/VariableProviderRequest.php"
+  },
+  {
+   "expression": "@VAR('site/admin_email')",
+   "namespace": "site",
+   "name": "admin_email",
+   "label": "Administration email",
+   "declared_in": "Mosaic/Compatibility/Common/VariableProviderSite.php"
+  },
+  {
+   "expression": "@VAR('site/description')",
+   "namespace": "site",
+   "name": "description",
+   "label": "Tagline",
+   "declared_in": "Mosaic/Compatibility/Common/VariableProviderSite.php"
+  },
+  {
+   "expression": "@VAR('site/logouturl')",
+   "namespace": "site",
+   "name": "logouturl",
+   "label": "Log out URL",
+   "declared_in": "Mosaic/Compatibility/Common/VariableProviderSite.php"
+  },
+  {
+   "expression": "@VAR('site/name')",
+   "namespace": "site",
+   "name": "name",
+   "label": "Title",
+   "declared_in": "Mosaic/Compatibility/Common/VariableProviderSite.php"
+  },
+  {
+   "expression": "@VAR('site/timestamp')",
+   "namespace": "site",
+   "name": "timestamp",
+   "label": "Local timestamp",
+   "declared_in": "Mosaic/Compatibility/Common/VariableProviderSite.php"
+  },
+  {
+   "expression": "@VAR('site/timestamp_gmt')",
+   "namespace": "site",
+   "name": "timestamp_gmt",
+   "label": "Timestamp GMT",
+   "declared_in": "Mosaic/Compatibility/Common/VariableProviderSite.php"
+  },
+  {
+   "expression": "@VAR('site/url')",
+   "namespace": "site",
+   "name": "url",
+   "label": "Home URL",
+   "declared_in": "Mosaic/Compatibility/Common/VariableProviderSite.php"
+  },
+  {
+   "expression": "@VAR('site/wpurl')",
+   "namespace": "site",
+   "name": "wpurl",
+   "label": "Site URL",
+   "declared_in": "Mosaic/Compatibility/Common/VariableProviderSite.php"
+  },
+  {
+   "expression": "@VAR('slider/count')",
+   "namespace": "slider",
+   "name": "count",
+   "label": "Count",
+   "declared_in": "Mosaic/NodeTypes/Slider/SliderSlides/SliderSlidesElementMResource.php"
+  },
+  {
+   "expression": "@VAR('slider/index')",
+   "namespace": "slider",
+   "name": "index",
+   "label": "Index",
+   "declared_in": "Mosaic/NodeTypes/Slider/SliderSlides/SliderSlidesElementMResource.php"
+  },
+  {
+   "expression": "@VAR('slider/thumbnail')",
+   "namespace": "slider",
+   "name": "thumbnail",
+   "label": "Thumbnail",
+   "declared_in": "Mosaic/NodeTypes/Slider/SliderSlides/SliderSlidesElementMResource.php"
+  },
+  {
+   "expression": "@VAR('slider/thumbnailAlt')",
+   "namespace": "slider",
+   "name": "thumbnailAlt",
+   "label": "Thumbnail alt",
+   "declared_in": "Mosaic/NodeTypes/Slider/SliderSlides/SliderSlidesElementMResource.php"
+  },
+  {
+   "expression": "@VAR('slider/title')",
+   "namespace": "slider",
+   "name": "title",
+   "label": "Title",
+   "declared_in": "Mosaic/NodeTypes/Slider/SliderSlides/SliderSlidesElementMResource.php"
+  },
+  {
+   "expression": "@VAR('user/description')",
+   "namespace": "user",
+   "name": "description",
+   "label": "Biographical info",
+   "declared_in": "Mosaic/Compatibility/Common/VariableProviderCurrentUser.php"
+  },
+  {
+   "expression": "@VAR('user/displayName')",
+   "namespace": "user",
+   "name": "displayName",
+   "label": "Display name",
+   "declared_in": "Mosaic/Compatibility/Common/VariableProviderCurrentUser.php"
+  },
+  {
+   "expression": "@VAR('user/email')",
+   "namespace": "user",
+   "name": "email",
+   "label": "Email",
+   "declared_in": "Mosaic/Compatibility/Common/VariableProviderCurrentUser.php"
+  },
+  {
+   "expression": "@VAR('user/firstName')",
+   "namespace": "user",
+   "name": "firstName",
+   "label": "First name",
+   "declared_in": "Mosaic/Compatibility/Common/VariableProviderCurrentUser.php"
+  },
+  {
+   "expression": "@VAR('user/id')",
+   "namespace": "user",
+   "name": "id",
+   "label": "ID",
+   "declared_in": "Mosaic/Compatibility/Common/VariableProviderCurrentUser.php"
+  },
+  {
+   "expression": "@VAR('user/lastName')",
+   "namespace": "user",
+   "name": "lastName",
+   "label": "Last name",
+   "declared_in": "Mosaic/Compatibility/Common/VariableProviderCurrentUser.php"
+  },
+  {
+   "expression": "@VAR('user/loggedin')",
+   "namespace": "user",
+   "name": "loggedin",
+   "label": "Is logged in",
+   "declared_in": "Mosaic/Compatibility/Common/VariableProviderCurrentUser.php"
+  },
+  {
+   "expression": "@VAR('user/url')",
+   "namespace": "user",
+   "name": "url",
+   "label": "Website",
+   "declared_in": "Mosaic/Compatibility/Common/VariableProviderCurrentUser.php"
+  },
+  {
+   "expression": "@VAR('user/user_registered')",
+   "namespace": "user",
+   "name": "user_registered",
+   "label": "Register datetime GMT",
+   "declared_in": "Mosaic/Compatibility/Common/VariableProviderCurrentUser.php"
+  },
+  {
+   "expression": "@VAR('user/user_registered_date')",
+   "namespace": "user",
+   "name": "user_registered_date",
+   "label": "Register date",
+   "declared_in": "Mosaic/Compatibility/Common/VariableProviderCurrentUser.php"
+  },
+  {
+   "expression": "@VAR('user/user_registered_time')",
+   "namespace": "user",
+   "name": "user_registered_time",
+   "label": "Register time",
+   "declared_in": "Mosaic/Compatibility/Common/VariableProviderCurrentUser.php"
+  },
+  {
+   "expression": "@VAR('user/user_registered_timestamp')",
+   "namespace": "user",
+   "name": "user_registered_timestamp",
+   "label": "Register timestamp",
+   "declared_in": "Mosaic/Compatibility/Common/VariableProviderCurrentUser.php"
+  },
+  {
+   "expression": "@VAR('user/username')",
+   "namespace": "user",
+   "name": "username",
+   "label": "Username",
+   "declared_in": "Mosaic/Compatibility/Common/VariableProviderCurrentUser.php"
+  },
+  {
+   "expression": "@VAR('wordpress_archive/description')",
+   "namespace": "wordpress_archive",
+   "name": "description",
+   "label": "Description",
+   "declared_in": "Mosaic/Compatibility/WordPress/PathContext/VariableProviderArchive.php"
+  },
+  {
+   "expression": "@VAR('wordpress_archive/posts')",
+   "namespace": "wordpress_archive",
+   "name": "posts",
+   "label": "",
+   "declared_in": "Mosaic/Compatibility/WordPress/PathContext/VariableProviderArchive.php"
+  },
+  {
+   "expression": "@VAR('wordpress_archive/title')",
+   "namespace": "wordpress_archive",
+   "name": "title",
+   "label": "Title",
+   "declared_in": "Mosaic/Compatibility/WordPress/PathContext/VariableProviderArchive.php"
+  },
+  {
+   "expression": "@VAR('wordpress_search/resultCount')",
+   "namespace": "wordpress_search",
+   "name": "resultCount",
+   "label": "Result count",
+   "declared_in": "Mosaic/Compatibility/WordPress/PathContext/VariableProviderSearch.php"
+  },
+  {
+   "expression": "@VAR('wordpress_search/results')",
+   "namespace": "wordpress_search",
+   "name": "results",
+   "label": "Search results",
+   "declared_in": "Mosaic/Compatibility/WordPress/PathContext/VariableProviderSearch.php"
+  },
+  {
+   "expression": "@VAR('wordpress_search/searchQuery')",
+   "namespace": "wordpress_search",
+   "name": "searchQuery",
+   "label": "Search query",
+   "declared_in": "Mosaic/Compatibility/WordPress/PathContext/VariableProviderSearch.php"
+  },
+  {
+   "expression": "@VAR('wordpress_search/title')",
+   "namespace": "wordpress_search",
+   "name": "title",
+   "label": "Title",
+   "declared_in": "Mosaic/Compatibility/WordPress/PathContext/VariableProviderSearch.php"
+  }
+ ]
+}

@@ -1,0 +1,45 @@
+{
+ "source_file": "data/accordion-verification.csv",
+ "columns": [
+  "step",
+  "result",
+  "detail"
+ ],
+ "rows": [
+  {
+   "step": "nested commit accepted",
+   "result": "PASS",
+   "detail": "no exception from the commit"
+  },
+  {
+   "step": "page still renders",
+   "result": "PASS",
+   "detail": "28743 bytes delivered"
+  },
+  {
+   "step": "title rendered",
+   "result": "PASS",
+   "detail": "the accordion title is in the delivered HTML"
+  },
+  {
+   "step": "content rendered",
+   "result": "PASS",
+   "detail": "the accordion content is in the delivered HTML"
+  },
+  {
+   "step": "carries plugin markup",
+   "result": "PASS",
+   "detail": "found 'mosaic-accordion' in the output"
+  },
+  {
+   "step": "bare content refused",
+   "result": "PASS",
+   "detail": "accordion-content is measured BROKE_PAGE under a plain container, and template-internal is not its declared parent"
+  },
+  {
+   "step": "nested placement allowed",
+   "result": "PASS",
+   "detail": "accordion-item is a declared child of accordion, so the same guard that refuses the bare node permits this one"
+  }
+ ]
+}

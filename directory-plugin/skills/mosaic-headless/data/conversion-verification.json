@@ -1,0 +1,55 @@
+{
+ "source_file": "data/conversion-verification.csv",
+ "columns": [
+  "check",
+  "result",
+  "detail"
+ ],
+ "rows": [
+  {
+   "check": "TEXT",
+   "result": "PASS",
+   "detail": "113 of 113 source strings on the page"
+  },
+  {
+   "check": "IMAGES",
+   "result": "PASS",
+   "detail": "16 of 16 source images present"
+  },
+  {
+   "check": "LINKS",
+   "result": "PASS",
+   "detail": "21 of 21 source link targets present"
+  },
+  {
+   "check": "HEADINGS",
+   "result": "PASS",
+   "detail": "27 real h1-h6 headings, levels intact"
+  },
+  {
+   "check": "RENDERS",
+   "result": "PASS",
+   "detail": "99174 bytes delivered"
+  },
+  {
+   "check": "RWD",
+   "result": "PASS",
+   "detail": "96 responsive declarations reach the served stylesheet in their own media query"
+  },
+  {
+   "check": "COMPUTED",
+   "result": "PASS",
+   "detail": "5595 of 5910 declarations are what the browser computed, 315 not-comparable, 0 overridden"
+  },
+  {
+   "check": "FIDELITY",
+   "result": "PASS",
+   "detail": "49 audit finding(s): 46 inherited from the source's own colours, 3 inside the source's raw HTML, 0 introduced by the conversion"
+  },
+  {
+   "check": "AUDIT",
+   "result": "INFO",
+   "detail": "12 error(s) and 37 warning(s) - the source design's, and still real; fix them in Elementor or in the spec, they do not pass by being inherited"
+  }
+ ]
+}

@@ -1,0 +1,150 @@
+{
+ "source_file": "data/loop-verification.csv",
+ "columns": [
+  "check",
+  "result",
+  "detail"
+ ],
+ "rows": [
+  {
+   "check": "RUNS",
+   "result": "PASS",
+   "detail": "12 of 12 parts changed on their own over a full 14000ms period, with no input"
+  },
+  {
+   "check": "SCRUBBABLE",
+   "result": "PASS",
+   "detail": "12 animations on the document timeline drive the parts; sampled past 3000ms of stagger"
+  },
+  {
+   "check": "ukw-sky",
+   "result": "PASS",
+   "detail": "moves 92.9 across one period; identical one period later"
+  },
+  {
+   "check": "ukw-sun",
+   "result": "PASS",
+   "detail": "moves 103.4 across one period; identical one period later"
+  },
+  {
+   "check": "ukw-fuji",
+   "result": "PASS",
+   "detail": "moves 93.5 across one period; identical one period later"
+  },
+  {
+   "check": "ukw-mist",
+   "result": "PASS",
+   "detail": "moves 67.6 across one period; identical one period later"
+  },
+  {
+   "check": "ukw-sea",
+   "result": "PASS",
+   "detail": "moves 58.3 across one period; identical one period later"
+  },
+  {
+   "check": "ukw-crest",
+   "result": "PASS",
+   "detail": "moves 85.1 across one period; identical one period later"
+  },
+  {
+   "check": "ukw-boat",
+   "result": "PASS",
+   "detail": "moves 100.1 across one period; identical one period later"
+  },
+  {
+   "check": "ukw-wave",
+   "result": "PASS",
+   "detail": "moves 113.8 across one period; identical one period later"
+  },
+  {
+   "check": "ukw-claw",
+   "result": "PASS",
+   "detail": "moves 103.7 across one period; identical one period later"
+  },
+  {
+   "check": "ukw-swell",
+   "result": "PASS",
+   "detail": "moves 109.9 across one period; identical one period later"
+  },
+  {
+   "check": "ukw-key",
+   "result": "PASS",
+   "detail": "moves 91.0 across one period; identical one period later"
+  },
+  {
+   "check": "mk-loop-seal",
+   "result": "PASS",
+   "detail": "moves 92.0 across one period; identical one period later"
+  },
+  {
+   "check": "CLEAR@390",
+   "result": "PASS",
+   "detail": "crosses 11 of 35 text elements, every one of them free at some other scroll position"
+  },
+  {
+   "check": "REACHABLE@390",
+   "result": "PASS",
+   "detail": "crosses 0 of 7 links and buttons, every one of them free at some other scroll position"
+  },
+  {
+   "check": "CLEAR@768",
+   "result": "PASS",
+   "detail": "crosses 4 of 36 text elements, every one of them free at some other scroll position"
+  },
+  {
+   "check": "REACHABLE@768",
+   "result": "PASS",
+   "detail": "crosses 0 of 8 links and buttons, every one of them free at some other scroll position"
+  },
+  {
+   "check": "CLEAR@1280",
+   "result": "PASS",
+   "detail": "crosses 3 of 36 text elements, every one of them free at some other scroll position"
+  },
+  {
+   "check": "REACHABLE@1280",
+   "result": "PASS",
+   "detail": "crosses 0 of 8 links and buttons, every one of them free at some other scroll position"
+  },
+  {
+   "check": "CLEAR@1440",
+   "result": "PASS",
+   "detail": "crosses 3 of 36 text elements, every one of them free at some other scroll position"
+  },
+  {
+   "check": "REACHABLE@1440",
+   "result": "PASS",
+   "detail": "crosses 0 of 15 links and buttons, every one of them free at some other scroll position"
+  },
+  {
+   "check": "CLEAR@1920",
+   "result": "PASS",
+   "detail": "crosses 1 of 36 text elements, every one of them free at some other scroll position"
+  },
+  {
+   "check": "REACHABLE@1920",
+   "result": "PASS",
+   "detail": "crosses 0 of 15 links and buttons, every one of them free at some other scroll position"
+  },
+  {
+   "check": "OPENS",
+   "result": "PASS",
+   "detail": "186x161 -> 1920x900, aria-expanded=true"
+  },
+  {
+   "check": "CLOSES",
+   "result": "PASS",
+   "detail": "back to 186x161, aria-expanded=false"
+  },
+  {
+   "check": "KEYBOARD",
+   "result": "PASS",
+   "detail": "the control takes focus and Enter opens it"
+  },
+  {
+   "check": "REDUCED",
+   "result": "PASS",
+   "detail": "present but with 0 running animations under prefers-reduced-motion: reduce"
+  }
+ ]
+}

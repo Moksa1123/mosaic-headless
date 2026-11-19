@@ -1,0 +1,529 @@
+# How Mosaic fails, measured
+
+> Directory edition: commands that mention `tools/` need the full edition (`npm` package `mosaic-headless`); this folder ships reference files only. The `wp` commands run on your WordPress host; how you reach it is up to you.
+
+## `$wpdb->insert()` casts any column named `ID` to an integer
+
+WordPress hardcodes `'ID' => '%d'` in `$wpdb->field_types`, because `wp_posts.ID` is
+an integer. Mosaic's `ID` columns are `varchar(36)` — UUIDs, and for breakpoints the
+literals `_t` and `_m`.
+
+So `$wpdb->insert($table, $row)` on a Mosaic table stores `_t` as `0`. It happened to
+fail loudly here, because `_m` also becomes `0` and collides on the composite primary
+key — on a table where only one row was affected it would have been silent.
+
+Pass an explicit format array on every insert:
+
+```php
+$wpdb->insert($table, $row, array_fill(0, count($row), '%s'));
+```
+
+## WP-CLI eats `--flags` before your script sees them
+
+`wp eval-file script.php --active` fails with *unknown --active parameter*: WP-CLI
+parses anything `--`-prefixed as its own option. Script arguments must be bare
+keywords — `wp eval-file script.php active`.
+
+## An invalid `ordering` orphans the node, silently
+
+`ordering` is a fractional-index STRING. Send something that is not one and the
+commit returns **no exception** — and the row is stored with **both `ordering` and
+`parentID` blanked**. The node has no parent, so it never renders, and anything you
+were measuring through it reads as a clean negative.
+
+Measured side by side in one commit, three sibling probes:
+
+```
+ordering "a6"    -> stored: ordering=a6  parentID=a2dd9602-...   renders
+ordering "z000"  -> stored: ordering=''  parentID=''            orphan
+ordering "z001"  -> stored: ordering=''  parentID=''            orphan
+```
+
+This cost a whole style-property sweep: 77 probes committed without error, none
+rendered, and all 77 properties came back ABSENT — including `color` and
+`paddingTop`, which the entire site is built on. The result looked like a finding.
+It was the tool being broken.
+
+Use `ordering_for()` in `tools/build_page.py`; never format your own. And when a
+sweep returns a suspiciously total failure, check that the probes rendered before
+believing the measurement — `sweep_style_properties.py` now exits rather than
+reporting a run in which nothing rendered.
+
+## Duplicate `ordering` among siblings drops nodes, silently
+
+`ordering_for()` in `build_page.py` wraps after 62 entries, so `ordering_for(i % 62)`
+hands two siblings the same index. Mosaic keeps one and discards the other without an
+exception. A sweep of 79 probes left 39 nodes in the database and still printed a
+result table.
+
+For more than 62 siblings, generate your own monotonic index - `"a" + ALPHA[i // 62]
++ ALPHA[i % 62]` gives 3844 lexicographically ordered slots.
+
+## A sweep must refuse a contaminated page
+
+Probe ids from separate runs share an id space, and two runs can give the same id to
+different node types - `np-101` was a `<select>` from one run and a `<div>` from the
+next, on the same page. Every number read off that page was meaningless.
+
+Worse, the cleanup query was `LIKE "%np-0%"`, which silently misses every id from
+`np-100` up, so "0 remaining" was itself wrong. Match the stored shape:
+`LIKE '%"attrID":"np-%'`.
+
+`sweep_node_properties.py` now exits unless the page carries exactly the probes this
+run planned, allowing for the ones whose own property relocates them out of the tree.
+
+## heal() owns the body's children
+
+Do not parent anything directly to a `body` node. `heal()` rebuilds the
+body > three-div skeleton whenever it decides one is missing, and probes hung
+straight off the body do not survive it. Attach to a div inside the body instead.
+
+Every failure below was produced on purpose, on a live install, by the sweep in
+`tools/sweep_node_types.py`. None of it is inferred from source.
+
+## Mosaic does not validate placement at commit time
+
+This is the fact that shapes everything else. Mosaic's commit endpoint will happily
+store a node whose parent makes no structural sense. The rejection happens later, at
+**render** — and it takes the entire page with it.
+
+Placing `accordion-item` directly under a `div`:
+
+```
+commit  -> HTTP 200, syncResponseEnvelopes with action "create". The row is in the DB.
+render  -> HTTP 200, 54 bytes, body: "AccordionElementMResource instance required"
+```
+
+Not a 500. Not a WordPress error page. A **200 with a plain string where the site used
+to be**. Three of the 74 free types do this from a plain `div` parent:
+
+| type | what the dead page says |
+|---|---|
+| `accordion-item` | `AccordionElementMResource instance required` |
+| `accordion-content` | `AccordionItemElementMResource instance required` |
+| `wysiwyg-variable` | `NodeMResourceFilterFunctionInterface parent is missing` |
+
+The consequence for anything automated: **a successful commit is not evidence of a
+working page.** Fetch the page and check its size after writing. A monitor that only
+watches status codes will report a healthy site that is serving 54 bytes.
+
+It also means a batch write is dangerous in a way it is not in Elementor or Gutenberg:
+one bad node does not degrade its own corner of the page, it deletes the page. Write
+one subtree, verify, then write the next.
+
+## Some types kill the commit request itself
+
+Five free types return **HTTP 500** from `/commit` when placed under a `div`:
+
+```
+component-instance   loop   loop-items   loop-pagination-numbers   loop-pagination-number
+```
+
+These are the types that require a resolved context — a component to instantiate, a
+query to iterate — and the constructor throws before Mosaic can turn the problem into
+a normal validation response. Nothing is written, so a 500 here is *safer* than the
+silent 200 above, but it is still a PHP fatal in the error log rather than an
+error message you can show a user.
+
+`document` produced a 502 on one run and a 500 on another: the same fatal, sometimes
+surfacing as a gateway timeout instead. Treat 5xx from `/commit` as one class.
+
+## Validator rejections arrive as HTTP 200
+
+Separate from both cases above: when Mosaic *does* reject a value cleanly, it answers
+`RESTJSONExceptionEnvelope` — HTTP **200** with an `exceptions` array in the body.
+
+```python
+resp = commit(...)          # 200
+resp["response"]["exceptions"]   # <- the actual verdict lives here
+```
+
+So there are three distinct outcomes and only one of them changes the status code:
+
+| what happened | status | how you detect it |
+|---|---|---|
+| clean validator rejection | 200 | `exceptions` in the body |
+| PHP fatal during commit | 500/502 | status code |
+| structurally invalid node accepted | 200 | **nothing, until you fetch the page** |
+
+## Commit has side effects beyond the rows you sent
+
+The first commit against a fresh theme came back having created things nobody asked
+for:
+
+```
+create breakpoint      _t
+create breakpoint      _m
+create collection      9083a14b-…
+create collectionMode  9a674a81-…
+create collectionSkin  e4beb80a-…
+```
+
+`heal()` runs as part of the commit path, so the response's `syncResponseEnvelopes`
+can contain resources from managers you never touched. Read the whole envelope list
+and take every revision in it — assuming the response only describes your own writes
+will leave you holding stale revisions for the rest of the session.
+
+Composite types heal aggressively too: a naive batch that placed all 74 types once
+produced **802 node rows**, because types like `accordion` and `navbar` build their
+required children on commit.
+
+## `modified_gmt` is server-assigned
+
+A record committed with `"modified_gmt": "2026-09-05 17:00:00"` came back stored as
+`16:59:16`. The server overwrites it. Do not use a value you sent as a local cache key.
+
+## A page cache turns "it worked" into "the node does not exist"
+
+Not a Mosaic failure - a failure of *checking* Mosaic, and it produces the exact
+result this skill exists to prevent: a confident negative about something that is
+actually there.
+
+Commit succeeds. `build_site.py` reports the byte size the renderer produced. Then
+the verifier fetches the URL, a full-page cache in front of WordPress (Varnish on
+Cloudways, or any CDN) answers with the pre-commit HTML, and every declaration on a
+node you have just added comes back `no-element`. Measured on this install: the
+builder saw 138878 bytes, `curl` on the same URL a second later got 136021, and
+seven declarations on two brand-new grid wrappers were reported missing while the
+wrappers were sitting correctly in the database and in the committed JSON.
+
+The tell is the byte count: if the size the builder reports and the size you fetch
+disagree, you are not looking at what you wrote.
+
+**And the cache cuts the other way too, which is worse.** Once every tool in the
+toolchain cache-busts, nothing is left looking at the page a visitor receives. A
+build finishes, every check reports green - responsive verified, computed values
+agreed, design audit clean, the entrance animation asserted on seven counts - and
+the site is still serving the previous document to everybody. Measured here: a
+visitor got 141,134 bytes with none of the new work in it while a cache-busted fetch
+of the same URL gave 148,457. Nothing was wrong except that nobody had looked.
+
+`build_site.py` now fetches each page twice at the end of the build, plain and
+cache-busted, and says so when they disagree. It cannot purge the cache - that needs
+credentials a build script has no business holding - but it must not be silent. Two
+fetches of the same live page differ by a few hundred bytes anyway, since nonces and
+ids regenerate per request, so the tolerance is proportional: natural variance
+measured at 0.25%, a stale document at 5%.
+
+`tools/verify_rwd.py` now appends a unique `_v=<ms>` query string and sends
+`Cache-Control: no-cache` on every fetch, so the assertion is always made against the
+document that was actually committed. Do the same in anything else that checks a page
+- including a browser: hard-reload is not always enough, a query string always is.
+
+## Changing a design token's VALUE leaves the old one in `:root`
+
+A collection variable is a row, and a row is identified by its ID. If the writer
+mints a fresh ID each run - which `build_page.py` did, because its `_varIDs` cache
+starts empty every time - then changing a token's value does not change the token.
+It adds a second one.
+
+The rows hang off the theme's collection, and `build_site.py` makes a fresh master
+per build while the collection persists, so nothing ever cleans them up. Both
+declarations reach `:root` and the later one wins:
+
+```css
+:root{ ... --mk-faint: rgb(107, 109, 113); ... --mk-faint: rgb(160, 162, 168); ... }
+```
+
+Measured: after changing `--mk-faint`, a rebuild reported OK, the new variable
+existed with the correct value, `verify_rwd.py` passed, and the page kept rendering
+the old grey. Ten stale rows had accumulated across earlier builds. **Every
+server-side check agreed with the intent and the page still disagreed** - only
+`verify_browser.py`, reading the computed colour off the element, could see it.
+
+The fix is that a token's row ID must be a function of its name -
+`uuid5(VAR_NAMESPACE, "--mk-faint")` - so a rebuild rebinds the row instead of
+adding one, plus a reap of anything on the collection claiming a managed custom
+property under an ID we did not derive. Both are in `theme_records()`.
+
+The general shape is worth remembering beyond tokens: **anything keyed by a random
+ID that you write repeatedly will accumulate**, and duplicates in a cascade fail
+silently in favour of whichever happens to be last.
+
+## A declaration can be present, correct, and still wrong
+
+The fourth failure mode in references/core-rules.md - "wrong value SHAPE, HTTP 200, and the CSS rule
+is simply absent" - has a quieter sibling: the rule is *present*, the value is what
+you asked for, and what the browser does with it is not what you meant.
+
+Three ways, all measured on the example page:
+
+- **The unit resolves against something you did not think about.**
+  `letter-spacing: -0.035em` is a normal amount of tightening for a Latin display
+  face. On a 62px headline it is -2.17px, and the headline was Chinese.
+- **The face cannot render the text.** `font-family: 'Space Grotesk', 'Noto Sans TC'`
+  is honoured exactly: Space Grotesk has no CJK coverage, so Han characters come from
+  Noto Sans TC - while still carrying the tracking that was chosen for the Latin
+  face. Nothing reports a fallback.
+- **The property was never in play.** `display: inline-block` on a flex item is
+  blockified by the spec. The declaration was in the stylesheet, correct, and
+  computed to `block`.
+
+None of these is visible to anything that reads the stylesheet, because the
+stylesheet is right. `verify_browser.py` asks the element instead.
+
+## Reproducing all of this
+
+```bash
+wp eval-file tools/bootstrap_probe_theme.php          # licence-free scratch theme
+python tools/sweep_node_types.py --config sweep.json --setup
+python tools/sweep_node_types.py --config sweep.json --sweep
+```
+
+The sweep is destructive by design and must only be pointed at a scratch site.
+
+## Render-time fatal from content: HTTP 500 after a clean commit
+
+A `code` node's content is run through Mosaic's templating parser at render, which
+is how `@VAR('post/title')` works inside raw HTML. It also means a CSS at-rule
+written without a space - `@media(max-width:767px)`, which is how every minifier
+writes it - is read as a call to a function named `media` with arguments the
+parser cannot tokenise:
+
+```
+commit  -> HTTP 200, 238 nodes, syncResponseEnvelopes all "create"
+render  -> HTTP 500. PHP Fatal: Parser::matchOperator(): Argument #1 (token)
+           must be of type Token, null given  (TemplatingParser/Parser.php:151)
+```
+
+Measured on the demo site with each form alone on a page: `@media (` renders,
+`@media(` does not; `@supports(` the same. Text nodes are NOT parsed - a paragraph
+containing `@media(max-width:1px)` or `info@example.com` renders literally - so the
+trap is scoped to `code`. `build_page.py` refuses a `code` node whose content
+matches a glued at-rule, and `from_elementor.py` inserts the space and reports it.
+
+The other half of this finding is about the checkers: WordPress's "critical error"
+page is 2,697 bytes, above the 2,000-byte healthy floor, and `Client.page()` was
+returning an HTTPError's body as the page - so `build_site` announced `OK` over a
+500 and a whole batch believed it. A 5xx now returns an empty body.
+
+## A shipped table can be stale rather than wrong
+
+The failure this skill nearly shipped three times in a row is not a bad value, it is
+an old one. `data/node-types.csv` carried an empty `default_element_class` for three
+releases: the column's regex was repaired AFTER the extraction run that produced the
+table, so the file went on describing the previous source and nothing compared the
+two again.
+
+Nothing in place could see it. Row counts were right the whole time — the table had
+the correct number of rows, with one column quietly blank. The release gate counts
+verification tables but never sees the plugin source, because that source is licensed
+third-party code and is not in the repository, so it cannot re-derive anything. And a
+reader of the skill has no way to tell a legitimately-empty column from a lost one.
+
+`tools/check_tables.py` closes it: it re-runs all seven extractors into a tempdir and
+diffs every output against the shipped file, naming the first differing line rather
+than just the filename. The moment to run it is **after any change to a
+`tools/extract_*.py`**, not only after a plugin upgrade — the upgrade is the case
+everyone remembers.
+
+The general shape, worth carrying beyond this repo: a derived artifact checked into
+the tree is only as fresh as the last time someone re-derived it, and if the deriving
+input is not in the tree, no amount of CI will notice.
+
+## Setting `display` on a `<dialog>` pins it open, and open-state checks cannot see it (1.0.9)
+
+**Fixed in 1.0.10**: the closed modal is `.m-modal:not(:popover-open){display:none !important}`,
+which no author `display` beats - measured, a flex-centred modal host hides when closed
+(`references/dialog-and-triggers.md`). Everything below is the 1.0.9 behaviour, and still
+the reason the checks it produced exist.
+
+The modal host is a `<dialog>`. Its open/closed visibility is not a class or an
+attribute Mosaic manages — it is the UA stylesheet rule
+`dialog:not([open]) { display: none }`. Any author-level `display` on that element
+wins the cascade, and every modal in the document is then on screen permanently,
+stacked over the page in DOM order.
+
+`display:flex` on the host is exactly what you reach for when you want to centre
+the window, so this is not an exotic mistake. What makes it worth its own section
+is that **it survives a thorough test suite**: 36 checks drove the modals' triggers,
+run rules, dismissal policies and geometry, every one of them PASSED, and the page
+they passed against had all ten of its dialogs open at once. Every check asked
+"when this is open, is it right?" — none asked "when it is closed, is it gone?"
+
+Two rules come out of it:
+
+- **Lay a modal's form out by positioning the window** (`position:absolute` plus
+  edges inside the fixed, `inset:0` host), never by making the host a flex or grid
+  container.
+- **Assert the closed state.** `tools/verify_dialog_lab.py` now closes everything
+  first and fails if any closed modal (not `:popover-open` and not `[open]`) still
+  has a box. The general form of
+  that lesson: for anything with a visible and an invisible state, a suite that
+  only exercises the visible one is testing half a component, and the half it
+  skips is the one the visitor sees most of the time.
+
+## A fragment link in a SHARED header is dead on every page but one
+
+`#services` points at an id in the CURRENT document. Put it in a header that every
+page shares, and on the one page that has that section it works, while on the other
+seven the browser looks for the id, does not find it, and does nothing — no
+navigation, no error, no feedback of any kind. The visitor clicks and the page sits
+there. It is worse than a 404 for exactly that reason.
+
+This shipped. The nav verifier had a check for it and the check could not see it:
+it fetched every menu href and asserted HTTP 200, and `#services` resolves to the
+*current* URL, so it returned 200 on all eight pages while being dead on seven.
+"Every link answers 200" and "every link does something" are different claims.
+
+Two things come out of it:
+
+- **Write shared-shell links absolutely** — `/#services`, not `#services`. A link
+  in a component that appears on more than one page has to mean the same thing
+  from all of them.
+- **Assert the fragment resolves on the page that carries it.**
+  `verify_navigation.py` now opens every page and fails on any `[href^="#"]`
+  whose target id is absent from that document. It found the four in the header
+  immediately — and then a fifth and sixth in the masthead, which `/intro/` shares
+  with the homepage and which I had not thought to look at.
+
+The general form: a check that confirms a resource EXISTS is not a check that the
+control WORKS, and anything living in a shared layout needs verifying on every
+page that includes it, not on the page it was designed for.
+
+## Three ways a form comes back empty, none of them an error
+
+A form page built in one pass rendered two fieldsets, one stray label and **zero
+controls**. The commit succeeded, the response carried no exception, and the HTML
+was valid. Every field had been dropped on the way in, for three different reasons:
+
+- **`label` and the inputs need a `field` above them.** They declare
+  `canBeNestedChildFor` and walk the parent chain looking for one; committed under
+  a plain div they are refused and discarded. `placement-rules.csv` now carries a
+  `nested_under` column naming exactly what each type is looking for — 54 types
+  have one, and the names rarely share a prefix (`radio-input` wants `choice`,
+  `label` wants `field`, `loop-pagination` wants `loop`).
+- **`fieldset` does not take fields.** It renders `fieldset-legend` +
+  `fieldset-content`, and direct children are dropped. Neither type was in
+  `node-types.csv` at all, because they are declared by an
+  `*ElementMResourceFactory.php` and every extractor here walked
+  `*ElementTypeFactory.php` only. Two types were missing from the catalog; the
+  walk now covers both and the count went 126 → 128.
+- **Up to 1.0.11, `select-option` was a leaf and its label the `text` PROPERTY.**
+  A `wysiwyg-text` child rendered an empty label: a dropdown that opened onto five
+  blank lines. **1.0.12 reversed it.** `select-input` is gone; the dropdown is now
+  `select > select-toggle (select-placeholder, icon) + select-options > select-option`,
+  and a `select-option`'s label is a CHILD (`text` > `wysiwyg-text`, or anything
+  else) - a `text` property on it is not a declared property any more. The native
+  control lives on as `listbox` / `listbox-option`, and THAT option is still the
+  leaf with `text`. Writing a 1.0.11 tree to 1.0.12 is the new way to get blank
+  options; see `references/upgrading.md` for what the data upgrade rewrote.
+
+The through-line is the one this file keeps recording: Mosaic accepts a write it
+cannot use and says nothing. The defence is to read the delivered page back and
+count what arrived — `verify_components.py` now asserts the control count, the option
+labels and that an empty required form is actually refused, and on 1.0.12 drives the
+custom select: it opens, a click and the keyboard both pick, the hidden input carries
+the value, and a submit with nothing picked marks the toggle `aria-invalid`.
+
+## `display` on an element whose visibility the plugin owns — twice now
+
+On 1.0.9 a `<dialog>`'s open state was its `display`, so `display:flex` on a modal host
+pinned every modal open (1.0.10 made the closed state `!important`). The same mistake,
+in a family 1.0.10 did not touch: `multi-steps-form-step`
+is shown and hidden by the plugin moving `m-form-step--active`, and a `display:flex`
+on the step wins the cascade, so all three steps sit on the page at once with three
+sets of Next buttons.
+
+The rule that comes out of it: **if something other than you decides when an
+element is visible, do not set `display` on that element.** Put the layout on a
+child. The families to watch are the ones whose markup carries an `--active` /
+`--opened` class: `modal`, `multi-steps-form-step`, `tabs-tab-pane`,
+`dropdown-wrapper`, `success-screen`, `loop-no-result`.
+
+`tabs-tab-pane` is the one that does NOT bite, and the reason is instructive — the
+plugin hides it with `!important`:
+
+```css
+.m-tab-pane:not(.m-tab-pane--active){display:none !important}
+```
+
+Nothing an author writes can beat that. The two that bite are precisely the two
+where the plugin relies on the UA default or on the theme instead.
+
+## Mosaic ships no visibility CSS for a form step
+
+Measured: the step navigation works — `m-form-step--active` moves, the step tabs
+change state, Next and Back fire — and **every panel stays on screen**, because
+hiding the inactive ones was never the plugin's job. The variant catalog carries a
+`Form step` entry (`.m-form-step`), and that is where the rule is meant to live.
+A theme that never styles that variant gets a multi-step form that is one long
+page.
+
+So a multi-step form needs one rule the author supplies:
+
+```css
+.m-form-step:not(.m-form-step--active){display:none}
+```
+
+On a theme that cannot use the variant layer, a `code` node with
+`insertLocation: "head"` is the escape hatch — and **it emits its content
+verbatim**: it does not wrap anything, so the `<style>` tags are yours to write.
+Without them the rule lands in `<head>` as bare text between `</style>` and
+`</head>`, renders nothing, and reads as a CSS specificity problem.
+
+## A "next" button inside a popover cannot open the next popover
+
+Measured on 1.0.10, building a three-step tour: the button in step 1 ran
+`popoverOpen` (step 2) and `popoverClose` (step 1), and nothing was open 200ms later.
+Two runtime rules combine:
+
+- a dialog opened by a trigger that sits inside another dialog becomes that dialog's
+  CHILD, and closing a parent closes its children - step 2 went down with step 1;
+- closing a popover suspends the interactions of every element inside it - with the
+  actions reversed, the `popoverOpen` after the close never ran.
+
+Advance a sequence on the step's own `afterClose` (it runs after the close, with no
+open parent left), make the button close only its own step, and remember afterClose
+also fires on Esc. The full pattern is in `references/dialog-and-triggers.md`.
+
+## A plugin folder swapped in by hand serves every asset as 406
+
+Installing 1.0.10 by unzipping it next to the old folder and renaming: the zip's
+directories came out `drwx------`, the web server could not traverse them, and every
+`public/Frontend/*.js` and the theme `style.css` answered **406**. The page still
+rendered - server-side output was fine - but with no front-end runtime every dropdown
+sat open and no modal could open. `find mosaic -type d -exec chmod 775 {} +` (files
+664), matching the other plugin folders, and purge the page cache. A REST-level check
+cannot see this; only fetching an asset can.
+
+## A loop source written as `@LOOP()` renders on the front end and kills the editor
+
+`loopType: "localContext"` with `loopSource: {"v": "@LOOP('post/<loop>')"}` renders
+every row on the delivered page, and opening the page in the Mosaic editor throws
+`TypeError: this._loopEvaluatorFunction is not a function` from
+`evaluateLoop` / `createLoopContextFactory`, leaving the canvas loading. The front
+end reads the loop name out of any function call; the editor only out of `@VAR`.
+Write `@VAR('post/<loop>')`. No server-side check can see this - the page is 200 and
+complete - so it is only caught by opening the editor. Details in
+`references/custom-fields.md`.
+
+## The editor canvas does not load a plugin's front-end CSS
+
+The canvas is a srcdoc iframe whose `<head>` comes from
+`ThemeMResource::getHead()`: a fresh `WP_Styles`, `do_action('enqueue_block_assets')`,
+Mosaic's own `style.css` and `AppWebPageEditorPreview.css`. `wp_enqueue_scripts`
+never runs there. Measured with a probe mu-plugin on 1.0.12: a style enqueued on
+`wp_enqueue_scripts` reached the front end and not the canvas; the same style on
+`enqueue_block_assets` reached both. A code node whose decoration is styled by a
+companion plugin therefore shows unstyled in the editor - on sharho a full-width
+black disc over the whole canvas. Enqueue that CSS on `enqueue_block_assets` (it
+also fires in the block editor, so scope the selectors), or ship an editor-only
+sheet there that gives the element a static look; front-end scripts do not run in
+the canvas either.
+
+## Inline editing re-serialises a text's runs (client report, 1.0.11)
+
+On sharho, a heading built as `text > wysiwyg-span > wysiwyg-span` (a visually-hidden
+and a no-wrap span nested inside another) came back from double-click -> Done -
+with no character typed - as two flat spans, and the undo button lit. The front end
+renders the nested structure fine (measured: `<span><span>` delivered), so the loss
+is the editor's serialiser. The editor's own bold and italic are not spans: they are
+`wysiwyg-text` `format: ["bold"]` / `["italic"]`, delivered as `<strong>` / `<em>`
+(`<strong><em>` for both, measured). Keep runs in shapes the editor itself writes,
+and tell a client not to edit a heading that needs nesting.
+
+Mosaic also keeps unsaved edits in the browser: reopening that template offered
+"a backup of this post stored in the browser differs from the version below" with
+Restore / Cancel. Restore brings the flattened version back, and the next save
+writes it. When reproducing an editor problem, press Cancel.

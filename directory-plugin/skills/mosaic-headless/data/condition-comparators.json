@@ -1,0 +1,135 @@
+{
+ "source_file": "data/condition-comparators.csv",
+ "columns": [
+  "context",
+  "rule_type",
+  "comparator",
+  "label",
+  "operators",
+  "settings_fields",
+  "field_types",
+  "supports_dynamic"
+ ],
+ "rows": [
+  {
+   "context": "element",
+   "rule_type": "serverCondition",
+   "comparator": "text",
+   "label": "Text",
+   "operators": "equals|not-equals|contains|not-contains|starts-with|regexp",
+   "settings_fields": "value",
+   "field_types": "text",
+   "supports_dynamic": "yes"
+  },
+  {
+   "context": "element",
+   "rule_type": "serverCondition",
+   "comparator": "number",
+   "label": "Number",
+   "operators": "equals|not-equals|greater-than|greater-than-or-equal|less-than|less-than-or-equal",
+   "settings_fields": "value",
+   "field_types": "number",
+   "supports_dynamic": "yes"
+  },
+  {
+   "context": "element",
+   "rule_type": "serverCondition",
+   "comparator": "date",
+   "label": "Date",
+   "operators": "after|after-or-equal|before|before-or-equal",
+   "settings_fields": "value",
+   "field_types": "dateTime",
+   "supports_dynamic": "yes"
+  },
+  {
+   "context": "formAction",
+   "rule_type": "serverCondition",
+   "comparator": "text",
+   "label": "Text",
+   "operators": "equals|not-equals|contains|not-contains|starts-with|regexp",
+   "settings_fields": "value",
+   "field_types": "text",
+   "supports_dynamic": "yes"
+  },
+  {
+   "context": "formAction",
+   "rule_type": "serverCondition",
+   "comparator": "number",
+   "label": "Number",
+   "operators": "equals|not-equals|greater-than|greater-than-or-equal|less-than|less-than-or-equal",
+   "settings_fields": "value",
+   "field_types": "number",
+   "supports_dynamic": "yes"
+  },
+  {
+   "context": "formAction",
+   "rule_type": "serverCondition",
+   "comparator": "date",
+   "label": "Date",
+   "operators": "after|after-or-equal|before|before-or-equal",
+   "settings_fields": "value",
+   "field_types": "dateTime",
+   "supports_dynamic": "yes"
+  },
+  {
+   "context": "interaction",
+   "rule_type": "serverCondition",
+   "comparator": "text",
+   "label": "Text",
+   "operators": "equals|not-equals|contains|not-contains|starts-with|regexp",
+   "settings_fields": "value",
+   "field_types": "text",
+   "supports_dynamic": "no"
+  },
+  {
+   "context": "interaction",
+   "rule_type": "serverCondition",
+   "comparator": "number",
+   "label": "Number",
+   "operators": "equals|not-equals|greater-than|greater-than-or-equal|less-than|less-than-or-equal",
+   "settings_fields": "value",
+   "field_types": "number",
+   "supports_dynamic": "no"
+  },
+  {
+   "context": "interaction",
+   "rule_type": "browserCondition",
+   "comparator": "text",
+   "label": "Text",
+   "operators": "equals|not-equals|contains|not-contains|starts-with",
+   "settings_fields": "value",
+   "field_types": "text",
+   "supports_dynamic": "no"
+  },
+  {
+   "context": "interaction",
+   "rule_type": "browserCondition",
+   "comparator": "number",
+   "label": "Number",
+   "operators": "equals|not-equals|greater-than|greater-than-or-equal|less-than|less-than-or-equal",
+   "settings_fields": "value",
+   "field_types": "number",
+   "supports_dynamic": "no"
+  },
+  {
+   "context": "template",
+   "rule_type": "serverCondition",
+   "comparator": "text",
+   "label": "Text",
+   "operators": "equals|not-equals|contains|not-contains|starts-with|regexp",
+   "settings_fields": "value",
+   "field_types": "text",
+   "supports_dynamic": "no"
+  },
+  {
+   "context": "template",
+   "rule_type": "serverCondition",
+   "comparator": "number",
+   "label": "Number",
+   "operators": "equals|not-equals|greater-than|greater-than-or-equal|less-than|less-than-or-equal",
+   "settings_fields": "value",
+   "field_types": "number",
+   "supports_dynamic": "no"
+  }
+ ]
+}

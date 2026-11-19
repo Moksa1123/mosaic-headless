@@ -1,0 +1,105 @@
+{
+ "source_file": "data/dialog-verification.csv",
+ "columns": [
+  "check",
+  "result",
+  "detail"
+ ],
+ "rows": [
+  {
+   "check": "HOST",
+   "result": "PASS",
+   "detail": "renders <dialog>"
+  },
+  {
+   "check": "STRUCTURE",
+   "result": "PASS",
+   "detail": "overlay and window children present"
+  },
+  {
+   "check": "ARIA",
+   "result": "PASS",
+   "detail": "aria-modal=true aria-label='Feature probe dialog' role=dialog"
+  },
+  {
+   "check": "CLOSED_AT_REST",
+   "result": "PASS",
+   "detail": "dialog.open=False display=none"
+  },
+  {
+   "check": "OPENS",
+   "result": "PASS",
+   "detail": "dialog.open=True display=grid top-layer=True"
+  },
+  {
+   "check": "CLOSES",
+   "result": "PASS",
+   "detail": "dialog.open=False"
+  },
+  {
+   "check": "CLOSEDBY_ESC",
+   "result": "PASS",
+   "detail": "closedby=everything, Esc closed it"
+  },
+  {
+   "check": "KEYBOARD",
+   "result": "PASS",
+   "detail": "the opening control takes focus"
+  },
+  {
+   "check": "REMEMBER",
+   "result": "PASS",
+   "detail": "wrote local:mos:v1:r:probe-seen, session:mos:v1:r:probe-seen"
+  },
+  {
+   "check": "FORGET",
+   "result": "PASS",
+   "detail": "cleared local:mos:v1:r:probe-seen, session:mos:v1:r:probe-seen"
+  },
+  {
+   "check": "SCROLL_DEPTH",
+   "result": "PASS",
+   "detail": "opacity 1 after scrolling to the bottom"
+  },
+  {
+   "check": "RUN_RULE_STORED",
+   "result": "PASS",
+   "detail": "a run rule left state: cookie, local:mos:v1:r:probe-depth, session:mos:v1:r:probe-depth"
+  },
+  {
+   "check": "SHORTHAND_REST",
+   "result": "PASS",
+   "detail": "closed before the trigger"
+  },
+  {
+   "check": "SHORTHAND_OPENS",
+   "result": "PASS",
+   "detail": "exit intent opened it with no authored interaction"
+  },
+  {
+   "check": "RUN_RULE_CAP",
+   "result": "PASS",
+   "detail": "same tab reloaded, same session: open=False (cap max=1)"
+  },
+  {
+   "check": "RUN_RULE_SESSION",
+   "result": "PASS",
+   "detail": "a new session opens it again (remember=session)"
+  },
+  {
+   "check": "MAP_RENDERS",
+   "result": "PASS",
+   "detail": "<mosaic-openstreetmap> 1232x320, iframe present"
+  },
+  {
+   "check": "MAP_AT",
+   "result": "PASS",
+   "detail": "marker at 25.0330,121.5654: yes"
+  },
+  {
+   "check": "MAP_LAZY",
+   "result": "PASS",
+   "detail": "iframe loading=lazy (lazyLoad=1)"
+  }
+ ]
+}

@@ -1,0 +1,821 @@
+{
+ "source_file": "data/style-verification.csv",
+ "columns": [
+  "property",
+  "group",
+  "css_property",
+  "sent",
+  "compiled",
+  "status"
+ ],
+ "rows": [
+  {
+   "property": "alignContent",
+   "group": "",
+   "css_property": "align-content",
+   "sent": "\"baseline\"",
+   "compiled": "baseline",
+   "status": "COMPILED"
+  },
+  {
+   "property": "alignItems",
+   "group": "",
+   "css_property": "align-items",
+   "sent": "\"baseline\"",
+   "compiled": "baseline",
+   "status": "COMPILED"
+  },
+  {
+   "property": "alignSelf",
+   "group": "",
+   "css_property": "align-self",
+   "sent": "\"baseline\"",
+   "compiled": "baseline",
+   "status": "COMPILED"
+  },
+  {
+   "property": "aspectRatio",
+   "group": "",
+   "css_property": "aspect-ratio",
+   "sent": "",
+   "compiled": "",
+   "status": "SKIPPED"
+  },
+  {
+   "property": "backdropFilter",
+   "group": "",
+   "css_property": "backdrop-filter",
+   "sent": "",
+   "compiled": "",
+   "status": "SKIPPED"
+  },
+  {
+   "property": "backgroundColor",
+   "group": "",
+   "css_property": "background-color",
+   "sent": "\"rgb(9, 99, 199)\"",
+   "compiled": "rgb(9, 99, 199)",
+   "status": "COMPILED"
+  },
+  {
+   "property": "backgroundStyle",
+   "group": "",
+   "css_property": "background-image",
+   "sent": "",
+   "compiled": "",
+   "status": "SKIPPED"
+  },
+  {
+   "property": "borderBottomColor",
+   "group": "borderStyle",
+   "css_property": "border-bottom-color",
+   "sent": "\"rgb(9, 99, 199)\"",
+   "compiled": "",
+   "status": "ABSENT"
+  },
+  {
+   "property": "borderBottomStyle",
+   "group": "borderStyle",
+   "css_property": "border-bottom-style",
+   "sent": "\"37px\"",
+   "compiled": "",
+   "status": "ABSENT"
+  },
+  {
+   "property": "borderBottomWidth",
+   "group": "borderStyle",
+   "css_property": "border-bottom-width",
+   "sent": "\"37px\"",
+   "compiled": "",
+   "status": "ABSENT"
+  },
+  {
+   "property": "borderLeftColor",
+   "group": "borderStyle",
+   "css_property": "border-left-color",
+   "sent": "\"rgb(9, 99, 199)\"",
+   "compiled": "",
+   "status": "ABSENT"
+  },
+  {
+   "property": "borderLeftStyle",
+   "group": "borderStyle",
+   "css_property": "border-left-style",
+   "sent": "\"37px\"",
+   "compiled": "",
+   "status": "ABSENT"
+  },
+  {
+   "property": "borderLeftWidth",
+   "group": "borderStyle",
+   "css_property": "border-left-width",
+   "sent": "\"37px\"",
+   "compiled": "",
+   "status": "ABSENT"
+  },
+  {
+   "property": "borderRadius",
+   "group": "",
+   "css_property": "border-radius",
+   "sent": "{\"type\": \"all\", \"allOptions\": {\"borderRadiusValue\": \"37px\"}}",
+   "compiled": "37px",
+   "status": "COMPILED"
+  },
+  {
+   "property": "borderRightColor",
+   "group": "borderStyle",
+   "css_property": "border-right-color",
+   "sent": "\"rgb(9, 99, 199)\"",
+   "compiled": "",
+   "status": "ABSENT"
+  },
+  {
+   "property": "borderRightStyle",
+   "group": "borderStyle",
+   "css_property": "border-right-style",
+   "sent": "\"37px\"",
+   "compiled": "",
+   "status": "ABSENT"
+  },
+  {
+   "property": "borderRightWidth",
+   "group": "borderStyle",
+   "css_property": "border-right-width",
+   "sent": "\"37px\"",
+   "compiled": "",
+   "status": "ABSENT"
+  },
+  {
+   "property": "borderTopColor",
+   "group": "borderStyle",
+   "css_property": "border-top-color",
+   "sent": "\"rgb(9, 99, 199)\"",
+   "compiled": "",
+   "status": "NO_ELEMENT"
+  },
+  {
+   "property": "borderTopStyle",
+   "group": "borderStyle",
+   "css_property": "border-top-style",
+   "sent": "\"37px\"",
+   "compiled": "",
+   "status": "ABSENT"
+  },
+  {
+   "property": "borderTopWidth",
+   "group": "borderStyle",
+   "css_property": "border-top-width",
+   "sent": "\"37px\"",
+   "compiled": "",
+   "status": "ABSENT"
+  },
+  {
+   "property": "bottom",
+   "group": "",
+   "css_property": "bottom",
+   "sent": "\"37px\"",
+   "compiled": "37px",
+   "status": "COMPILED"
+  },
+  {
+   "property": "boxShadow",
+   "group": "",
+   "css_property": "box-shadow",
+   "sent": "",
+   "compiled": "",
+   "status": "SKIPPED"
+  },
+  {
+   "property": "boxSizing",
+   "group": "",
+   "css_property": "box-sizing",
+   "sent": "\"content-box\"",
+   "compiled": "content-box",
+   "status": "COMPILED"
+  },
+  {
+   "property": "collectionModesData",
+   "group": "",
+   "css_property": "(custom properties)",
+   "sent": "{\"<collectionID>\": \"<modeID>\"}",
+   "compiled": "every variable of that collection re-declared on the element (18 declarations)",
+   "status": "COMPILED"
+  },
+  {
+   "property": "color",
+   "group": "",
+   "css_property": "color",
+   "sent": "\"rgb(9, 99, 199)\"",
+   "compiled": "rgb(9, 99, 199)",
+   "status": "COMPILED"
+  },
+  {
+   "property": "columnGap",
+   "group": "",
+   "css_property": "column-gap",
+   "sent": "\"37px\"",
+   "compiled": "37px",
+   "status": "COMPILED"
+  },
+  {
+   "property": "cursor",
+   "group": "",
+   "css_property": "cursor",
+   "sent": "\"unset\"",
+   "compiled": "unset",
+   "status": "COMPILED"
+  },
+  {
+   "property": "customDeclarations",
+   "group": "",
+   "css_property": "",
+   "sent": "",
+   "compiled": "",
+   "status": "SKIPPED"
+  },
+  {
+   "property": "display",
+   "group": "",
+   "css_property": "display",
+   "sent": "",
+   "compiled": "",
+   "status": "SKIPPED"
+  },
+  {
+   "property": "filter",
+   "group": "",
+   "css_property": "filter",
+   "sent": "",
+   "compiled": "",
+   "status": "SKIPPED"
+  },
+  {
+   "property": "flexBasis",
+   "group": "",
+   "css_property": "flex-basis",
+   "sent": "\"37px\"",
+   "compiled": "37px",
+   "status": "COMPILED"
+  },
+  {
+   "property": "flexDirection",
+   "group": "",
+   "css_property": "flex-direction",
+   "sent": "\"column-reverse\"",
+   "compiled": "column-reverse",
+   "status": "COMPILED"
+  },
+  {
+   "property": "flexSizing",
+   "group": "",
+   "css_property": "flex-sizing",
+   "sent": "",
+   "compiled": "",
+   "status": "SKIPPED"
+  },
+  {
+   "property": "flexWrap",
+   "group": "",
+   "css_property": "flex-wrap",
+   "sent": "\"wrap-reverse\"",
+   "compiled": "wrap-reverse",
+   "status": "COMPILED"
+  },
+  {
+   "property": "fontFamily",
+   "group": "",
+   "css_property": "font-family",
+   "sent": "",
+   "compiled": "",
+   "status": "SKIPPED"
+  },
+  {
+   "property": "fontSize",
+   "group": "",
+   "css_property": "font-size",
+   "sent": "\"37px\"",
+   "compiled": "37px",
+   "status": "COMPILED"
+  },
+  {
+   "property": "fontStyle",
+   "group": "",
+   "css_property": "font-style",
+   "sent": "\"italic\"",
+   "compiled": "italic",
+   "status": "COMPILED"
+  },
+  {
+   "property": "fontWeight",
+   "group": "",
+   "css_property": "font-weight",
+   "sent": "\"900\"",
+   "compiled": "900",
+   "status": "COMPILED"
+  },
+  {
+   "property": "gridAutoColumns",
+   "group": "",
+   "css_property": "grid-auto-columns",
+   "sent": "",
+   "compiled": "",
+   "status": "SKIPPED"
+  },
+  {
+   "property": "gridAutoFlow",
+   "group": "",
+   "css_property": "grid-auto-flow",
+   "sent": "\"column\"",
+   "compiled": "column",
+   "status": "COMPILED"
+  },
+  {
+   "property": "gridAutoRows",
+   "group": "",
+   "css_property": "grid-auto-rows",
+   "sent": "",
+   "compiled": "",
+   "status": "SKIPPED"
+  },
+  {
+   "property": "gridColumnEnd",
+   "group": "gridChildPosition",
+   "css_property": "grid-column-end",
+   "sent": "\"7\"",
+   "compiled": "",
+   "status": "ABSENT"
+  },
+  {
+   "property": "gridColumnStart",
+   "group": "gridChildPosition",
+   "css_property": "grid-column-start",
+   "sent": "\"7\"",
+   "compiled": "",
+   "status": "ABSENT"
+  },
+  {
+   "property": "gridRowEnd",
+   "group": "gridChildPosition",
+   "css_property": "grid-row-end",
+   "sent": "\"7\"",
+   "compiled": "",
+   "status": "ABSENT"
+  },
+  {
+   "property": "gridRowStart",
+   "group": "gridChildPosition",
+   "css_property": "grid-row-start",
+   "sent": "\"7\"",
+   "compiled": "",
+   "status": "ABSENT"
+  },
+  {
+   "property": "gridTemplateAreas",
+   "group": "",
+   "css_property": "grid-template-areas",
+   "sent": "",
+   "compiled": "",
+   "status": "SKIPPED"
+  },
+  {
+   "property": "gridTemplateColumns",
+   "group": "",
+   "css_property": "grid-template-columns",
+   "sent": "[{\"type\": \"default\", \"defaultOptions\": {\"size\": \"37px\"}}]",
+   "compiled": "none",
+   "status": "COMPILED"
+  },
+  {
+   "property": "gridTemplateRows",
+   "group": "",
+   "css_property": "grid-template-rows",
+   "sent": "[{\"type\": \"default\", \"defaultOptions\": {\"size\": \"37px\"}}]",
+   "compiled": "none",
+   "status": "COMPILED"
+  },
+  {
+   "property": "height",
+   "group": "",
+   "css_property": "height",
+   "sent": "\"37px\"",
+   "compiled": "37px",
+   "status": "COMPILED"
+  },
+  {
+   "property": "justifyContent",
+   "group": "",
+   "css_property": "justify-content",
+   "sent": "\"right\"",
+   "compiled": "right",
+   "status": "COMPILED"
+  },
+  {
+   "property": "justifyItems",
+   "group": "",
+   "css_property": "justify-items",
+   "sent": "\"baseline\"",
+   "compiled": "baseline",
+   "status": "COMPILED"
+  },
+  {
+   "property": "justifySelf",
+   "group": "",
+   "css_property": "justify-self",
+   "sent": "\"baseline\"",
+   "compiled": "baseline",
+   "status": "COMPILED"
+  },
+  {
+   "property": "left",
+   "group": "",
+   "css_property": "left",
+   "sent": "\"37px\"",
+   "compiled": "37px",
+   "status": "COMPILED"
+  },
+  {
+   "property": "letterSpacing",
+   "group": "",
+   "css_property": "letter-spacing",
+   "sent": "\"37px\"",
+   "compiled": "37px",
+   "status": "COMPILED"
+  },
+  {
+   "property": "lineHeight",
+   "group": "",
+   "css_property": "line-height",
+   "sent": "\"7\"",
+   "compiled": "7",
+   "status": "COMPILED"
+  },
+  {
+   "property": "listStylePosition",
+   "group": "",
+   "css_property": "list-style-position",
+   "sent": "\"outside\"",
+   "compiled": "outside",
+   "status": "COMPILED"
+  },
+  {
+   "property": "listStyleType",
+   "group": "",
+   "css_property": "list-style-type",
+   "sent": "\"none\"",
+   "compiled": "none",
+   "status": "COMPILED"
+  },
+  {
+   "property": "marginBottom",
+   "group": "",
+   "css_property": "margin-bottom",
+   "sent": "\"37px\"",
+   "compiled": "37px",
+   "status": "COMPILED"
+  },
+  {
+   "property": "marginLeft",
+   "group": "",
+   "css_property": "margin-left",
+   "sent": "\"37px\"",
+   "compiled": "37px",
+   "status": "COMPILED"
+  },
+  {
+   "property": "marginRight",
+   "group": "",
+   "css_property": "margin-right",
+   "sent": "\"37px\"",
+   "compiled": "37px",
+   "status": "COMPILED"
+  },
+  {
+   "property": "marginTop",
+   "group": "",
+   "css_property": "margin-top",
+   "sent": "\"37px\"",
+   "compiled": "37px",
+   "status": "COMPILED"
+  },
+  {
+   "property": "mask",
+   "group": "",
+   "css_property": "mask",
+   "sent": "",
+   "compiled": "",
+   "status": "SKIPPED"
+  },
+  {
+   "property": "maxHeight",
+   "group": "",
+   "css_property": "max-height",
+   "sent": "\"37px\"",
+   "compiled": "37px",
+   "status": "COMPILED"
+  },
+  {
+   "property": "maxWidth",
+   "group": "",
+   "css_property": "max-width",
+   "sent": "\"37px\"",
+   "compiled": "37px",
+   "status": "COMPILED"
+  },
+  {
+   "property": "minHeight",
+   "group": "",
+   "css_property": "min-height",
+   "sent": "\"37px\"",
+   "compiled": "37px",
+   "status": "COMPILED"
+  },
+  {
+   "property": "minWidth",
+   "group": "",
+   "css_property": "min-width",
+   "sent": "\"37px\"",
+   "compiled": "37px",
+   "status": "COMPILED"
+  },
+  {
+   "property": "mixBlendMode",
+   "group": "",
+   "css_property": "mix-blend-mode",
+   "sent": "\"luminosity\"",
+   "compiled": "luminosity",
+   "status": "COMPILED"
+  },
+  {
+   "property": "objectFitStyle",
+   "group": "",
+   "css_property": "object-fit",
+   "sent": "{\"objectFit\": \"cover\", \"objectPositionX\": \"37%\", \"objectPositionY\": \"37%\"}",
+   "compiled": "cover",
+   "status": "COMPILED"
+  },
+  {
+   "property": "opacity",
+   "group": "",
+   "css_property": "opacity",
+   "sent": "\"0.37\"",
+   "compiled": "0.37",
+   "status": "COMPILED"
+  },
+  {
+   "property": "order",
+   "group": "",
+   "css_property": "order",
+   "sent": "\"7\"",
+   "compiled": "7",
+   "status": "COMPILED"
+  },
+  {
+   "property": "outlineColor",
+   "group": "outlineStyle",
+   "css_property": "outline-color",
+   "sent": "\"rgb(9, 99, 199)\"",
+   "compiled": "",
+   "status": "ABSENT"
+  },
+  {
+   "property": "outlineOffset",
+   "group": "outlineStyle",
+   "css_property": "outline-offset",
+   "sent": "\"37px\"",
+   "compiled": "",
+   "status": "ABSENT"
+  },
+  {
+   "property": "outlineStyle",
+   "group": "outlineStyle",
+   "css_property": "outline-style",
+   "sent": "",
+   "compiled": "",
+   "status": "SKIPPED"
+  },
+  {
+   "property": "outlineWidth",
+   "group": "outlineStyle",
+   "css_property": "outline-width",
+   "sent": "\"37px\"",
+   "compiled": "",
+   "status": "ABSENT"
+  },
+  {
+   "property": "overflow",
+   "group": "",
+   "css_property": "overflow",
+   "sent": "\"auto\"",
+   "compiled": "auto",
+   "status": "COMPILED"
+  },
+  {
+   "property": "paddingBottom",
+   "group": "",
+   "css_property": "padding-bottom",
+   "sent": "\"37px\"",
+   "compiled": "37px",
+   "status": "COMPILED"
+  },
+  {
+   "property": "paddingLeft",
+   "group": "",
+   "css_property": "padding-left",
+   "sent": "\"37px\"",
+   "compiled": "37px",
+   "status": "COMPILED"
+  },
+  {
+   "property": "paddingRight",
+   "group": "",
+   "css_property": "padding-right",
+   "sent": "\"37px\"",
+   "compiled": "37px",
+   "status": "COMPILED"
+  },
+  {
+   "property": "paddingTop",
+   "group": "",
+   "css_property": "padding-top",
+   "sent": "\"37px\"",
+   "compiled": "37px",
+   "status": "COMPILED"
+  },
+  {
+   "property": "perspective",
+   "group": "",
+   "css_property": "perspective",
+   "sent": "\"731px\"",
+   "compiled": "731px",
+   "status": "COMPILED"
+  },
+  {
+   "property": "perspectiveOrigin",
+   "group": "",
+   "css_property": "perspective-origin",
+   "sent": "",
+   "compiled": "",
+   "status": "SKIPPED"
+  },
+  {
+   "property": "position",
+   "group": "",
+   "css_property": "position",
+   "sent": "\"sticky\"",
+   "compiled": "sticky",
+   "status": "COMPILED"
+  },
+  {
+   "property": "right",
+   "group": "",
+   "css_property": "right",
+   "sent": "\"37px\"",
+   "compiled": "37px",
+   "status": "COMPILED"
+  },
+  {
+   "property": "rotate",
+   "group": "",
+   "css_property": "rotate",
+   "sent": "",
+   "compiled": "",
+   "status": "SKIPPED"
+  },
+  {
+   "property": "rowGap",
+   "group": "",
+   "css_property": "row-gap",
+   "sent": "\"37px\"",
+   "compiled": "37px",
+   "status": "COMPILED"
+  },
+  {
+   "property": "scale",
+   "group": "",
+   "css_property": "scale",
+   "sent": "{\"type\": \"scale\", \"scaleOptions\": {\"value\": \"1.37\"}}",
+   "compiled": "1.37",
+   "status": "COMPILED"
+  },
+  {
+   "property": "textAlign",
+   "group": "",
+   "css_property": "text-align",
+   "sent": "\"right\"",
+   "compiled": "right",
+   "status": "COMPILED"
+  },
+  {
+   "property": "textDecorationLine",
+   "group": "",
+   "css_property": "text-decoration-line",
+   "sent": "\"line-through\"",
+   "compiled": "line-through",
+   "status": "COMPILED"
+  },
+  {
+   "property": "textShadow",
+   "group": "",
+   "css_property": "text-shadow",
+   "sent": "",
+   "compiled": "",
+   "status": "SKIPPED"
+  },
+  {
+   "property": "textTransform",
+   "group": "",
+   "css_property": "text-transform",
+   "sent": "\"capitalize\"",
+   "compiled": "capitalize",
+   "status": "COMPILED"
+  },
+  {
+   "property": "top",
+   "group": "",
+   "css_property": "top",
+   "sent": "\"37px\"",
+   "compiled": "37px",
+   "status": "COMPILED"
+  },
+  {
+   "property": "transform",
+   "group": "",
+   "css_property": "transform",
+   "sent": "",
+   "compiled": "",
+   "status": "SKIPPED"
+  },
+  {
+   "property": "transformOrigin",
+   "group": "",
+   "css_property": "transform-origin",
+   "sent": "",
+   "compiled": "",
+   "status": "SKIPPED"
+  },
+  {
+   "property": "transformStyle",
+   "group": "",
+   "css_property": "transform-style",
+   "sent": "\"preserve-3d\"",
+   "compiled": "preserve-3d",
+   "status": "COMPILED"
+  },
+  {
+   "property": "transition",
+   "group": "",
+   "css_property": "transition",
+   "sent": "",
+   "compiled": "",
+   "status": "SKIPPED"
+  },
+  {
+   "property": "translate",
+   "group": "",
+   "css_property": "translate",
+   "sent": "",
+   "compiled": "",
+   "status": "SKIPPED"
+  },
+  {
+   "property": "visibility",
+   "group": "",
+   "css_property": "visibility",
+   "sent": "\"hidden\"",
+   "compiled": "hidden",
+   "status": "COMPILED"
+  },
+  {
+   "property": "whiteSpace",
+   "group": "",
+   "css_property": "white-space",
+   "sent": "\"pre\"",
+   "compiled": "pre",
+   "status": "COMPILED"
+  },
+  {
+   "property": "width",
+   "group": "",
+   "css_property": "width",
+   "sent": "\"37px\"",
+   "compiled": "37px",
+   "status": "COMPILED"
+  },
+  {
+   "property": "wordSpacing",
+   "group": "",
+   "css_property": "word-spacing",
+   "sent": "\"37px\"",
+   "compiled": "37px",
+   "status": "COMPILED"
+  },
+  {
+   "property": "zIndex",
+   "group": "",
+   "css_property": "z-index",
+   "sent": "\"7\"",
+   "compiled": "7",
+   "status": "COMPILED"
+  }
+ ]
+}

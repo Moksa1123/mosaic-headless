@@ -1,0 +1,215 @@
+{
+ "source_file": "data/menu-verification.csv",
+ "columns": [
+  "group",
+  "check",
+  "result",
+  "evidence"
+ ],
+ "rows": [
+  {
+   "group": "SEO",
+   "check": "panel links are <a href> in the server HTML",
+   "result": "PASS",
+   "evidence": "18 links: ml-d1, ml-d2, ml-d3, ml-d4, ml-dd-l1, ml-dd-l2, ml-dd-l3, ml-mega-l1, ml-mega-l2, ml-mega-l3, ml-mega-l4, ml-mega-l5, ml-mega-l6, ml-nb-l1, ml-nb-l2, ml-nb-l3, ml-oc-l1, ml-oc-l2"
+  },
+  {
+   "group": "SEO",
+   "check": "a dropdown-toggle with a url renders as",
+   "result": "INFO",
+   "evidence": "<a class=\"m-dropdown-toggle _l\" id=\"ml-dd-toggle\" href=\"/components/\" aria-haspopup=\"true\" aria-expanded=\"false\">"
+  },
+  {
+   "group": "DESKTOP",
+   "check": "panels closed at rest",
+   "result": "PASS",
+   "evidence": "dd False, mega False"
+  },
+  {
+   "group": "DESKTOP",
+   "check": "hover opens the dropdown",
+   "result": "PASS",
+   "evidence": "visible after 58 ms, aria-expanded=true"
+  },
+  {
+   "group": "DESKTOP",
+   "check": "moving down into the panel keeps it open",
+   "result": "PASS",
+   "evidence": "still shown 500 ms after entering the panel"
+  },
+  {
+   "group": "DESKTOP",
+   "check": "leaving closes it",
+   "result": "PASS",
+   "evidence": "hidden after 159 ms"
+  },
+  {
+   "group": "DESKTOP",
+   "check": "mega panel opens on hover",
+   "result": "PASS",
+   "evidence": "x=0 w=1280 (viewport 1280)"
+  },
+  {
+   "group": "KEYS",
+   "check": "Enter on a toggle that has a url",
+   "result": "INFO",
+   "evidence": "navigated to https://example.com/components/"
+  },
+  {
+   "group": "KEYS",
+   "check": "ArrowDown opens it",
+   "result": "PASS",
+   "evidence": "shown=True, focus on ml-dd-toggle"
+  },
+  {
+   "group": "KEYS",
+   "check": "ArrowDown moves into the links",
+   "result": "INFO",
+   "evidence": "focus on ml-dd-toggle"
+  },
+  {
+   "group": "KEYS",
+   "check": "Escape closes it and returns focus",
+   "result": "PASS",
+   "evidence": "shown=False, focus on ml-dd-toggle"
+  },
+  {
+   "group": "KEYS",
+   "check": "Space opens the mega panel (toggle without url)",
+   "result": "PASS",
+   "evidence": "shown=True aria-expanded=true"
+  },
+  {
+   "group": "KEYS",
+   "check": "Tab from the open toggle goes to",
+   "result": "INFO",
+   "evidence": "ml-mega-l1"
+  },
+  {
+   "group": "TOUCH",
+   "check": "first tap on a linked toggle",
+   "result": "PASS",
+   "evidence": "url stays=True, panel shown=True"
+  },
+  {
+   "group": "TOUCH",
+   "check": "second tap on the same toggle",
+   "result": "INFO",
+   "evidence": "stayed; shown=False"
+  },
+  {
+   "group": "TOUCH",
+   "check": "tap opens the mega panel",
+   "result": "PASS",
+   "evidence": ""
+  },
+  {
+   "group": "TOUCH",
+   "check": "tap outside closes it",
+   "result": "PASS",
+   "evidence": ""
+  },
+  {
+   "group": "PHONE",
+   "check": "desktop menu hidden, burger shown",
+   "result": "PASS",
+   "evidence": ""
+  },
+  {
+   "group": "DRAWER",
+   "check": "burger opens the modal drawer",
+   "result": "PASS",
+   "evidence": "{'open': True, 'role': None, 'label': '主選單', 'modal': 'true', 'tag': 'dialog', 'scroll': 'clip/clip'}"
+  },
+  {
+   "group": "DRAWER",
+   "check": "focus moves into the drawer",
+   "result": "PASS",
+   "evidence": "focus on ml-drawer-win"
+  },
+  {
+   "group": "DRAWER",
+   "check": "close button inside the viewport",
+   "result": "PASS",
+   "evidence": "x=314 y=16 w=60 h=40"
+  },
+  {
+   "group": "DRAWER",
+   "check": "close button not covered by the z-1000 sticky header",
+   "result": "PASS",
+   "evidence": "element at its centre: self"
+  },
+  {
+   "group": "DRAWER",
+   "check": "Tab stays inside the drawer",
+   "result": "PASS",
+   "evidence": "focus visited ['ml-close', 'ml-d1', 'ml-d2', 'ml-d3', 'ml-d4']"
+  },
+  {
+   "group": "DRAWER",
+   "check": "Escape closes it",
+   "result": "PASS",
+   "evidence": ""
+  },
+  {
+   "group": "DRAWER",
+   "check": "focus returns to the burger",
+   "result": "PASS",
+   "evidence": "focus on ml-burger"
+  },
+  {
+   "group": "DRAWER",
+   "check": "the close button closes it",
+   "result": "PASS",
+   "evidence": ""
+  },
+  {
+   "group": "DRAWER",
+   "check": "a tap on the overlay closes it",
+   "result": "PASS",
+   "evidence": ""
+  },
+  {
+   "group": "NAVBAR",
+   "check": "collapsed below _t",
+   "result": "PASS",
+   "evidence": "{'mode': True, 'tag': 'mosaic-navbar-toggle', 'expanded': 'false', 'controls': None}"
+  },
+  {
+   "group": "NAVBAR",
+   "check": "toggle opens the links",
+   "result": "PASS",
+   "evidence": "aria-expanded=true, focus on ml-nb-toggle"
+  },
+  {
+   "group": "NAVBAR",
+   "check": "Escape closes it",
+   "result": "PASS",
+   "evidence": "shown=False"
+  },
+  {
+   "group": "PANEL",
+   "check": "click interaction opens the panel",
+   "result": "PASS",
+   "evidence": ""
+  },
+  {
+   "group": "PANEL",
+   "check": "its close control is covered by the sticky header",
+   "result": "INFO",
+   "evidence": "element at its centre: ml-burger"
+  },
+  {
+   "group": "PANEL",
+   "check": "Escape closes it",
+   "result": "FAIL",
+   "evidence": "shown=True"
+  },
+  {
+   "group": "PANEL",
+   "check": "focus moved into it",
+   "result": "FAIL",
+   "evidence": "focus on None"
+  }
+ ]
+}

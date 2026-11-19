@@ -1,0 +1,246 @@
+# Responsive (RWD)
+
+> Directory edition: commands that mention `tools/` need the full edition (`npm` package `mosaic-headless`); this folder ships reference files only. The `wp` commands run on your WordPress host; how you reach it is up to you.
+
+Responsive in Mosaic is the **second axis of the style object**, not a separate data
+structure and not a naming convention:
+
+```jsonc
+"style": {"states": {
+  "&": {                                  // state
+    "_":  {"paddingLeft": "48px"},        // base breakpoint
+    "_t": {"paddingLeft": "32px"},        // <=1079px
+    "_m": {"paddingLeft": "20px"}         // <=767px
+  }
+}}
+```
+
+`state → breakpoint → property`. Get the two middle levels the wrong way round and
+the validator sees `'n'/'o'/'n'/'e'` as property names, because it is iterating the
+characters of a value it expected to be a dict.
+
+## The breakpoints are rows, not constants
+
+They live in `wp_mosaic_breakpoints`, scoped to the theme, and a fresh theme heals
+into exactly two. Read off the live table:
+
+| ID | name | width | direction | ordering |
+|---|---|---|---|---|
+| `_t` | Tablet | 1079 | down | `a0` |
+| `_m` | Mobile | 767 | down | `a1` |
+
+Both are `direction: down`, so both match on a phone, and **`_m` is ordered after
+`_t`** — which is the only reason a mobile value overrides a tablet one rather than
+losing to it. Custom breakpoints get UUIDs instead of `_t`/`_m`; do not hardcode the
+pair, read the table.
+
+A row is not always `down`. `BreakpointMResourceData` declares `type` (`simple` |
+`custom`, default simple), `width` (integer ≥ 1), `direction` (`up` | `down`,
+default down), `query` (a custom row's media query, written without `@media`) and
+`previewWidth` / `previewHeight`. An `up` row is a min-width breakpoint, so the
+"later row overrides" reasoning above only holds among `down` rows - read
+`direction` before assuming the cascade. Only the two healed `down` rows have been
+measured here.
+
+## What it compiles to
+
+One inline stylesheet per breakpoint, in the head, each wrapped in its own query:
+
+```html
+<style id="mosaic-theme-block-editor-styles_-inline-css">    <!-- base, no query -->
+<style id="mosaic-theme-block-editor-styles_t-inline-css">   <!-- @media (max-width:1079px) -->
+<style id="mosaic-theme-block-editor-styles_m-inline-css">   <!-- @media (max-width:767px) -->
+```
+
+Rules inside them hang off the generated `._<token>` class, **never off your
+`attrID`**. The id is in the HTML and the rule is in the CSS, and the only bridge
+between them is `id="<attrID>" class="m-div _<token>"` in the delivered markup. Any tool
+that wants to check a breakpoint value has to read that mapping first.
+
+## The trap that has cost the most: an override cannot REMOVE
+
+**A breakpoint override can only CHANGE a property. It can never remove one the base
+breakpoint declared.** This is ordinary cascade behaviour and it is still the single
+most repeated bug in this codebase, because the shape of the data invites it:
+
+```python
+# WRONG - and it looks right
+"_":  {"customDeclarations": "border-left:1px solid #ddd;"},   # 4-up: rule between cells
+"_m": {"customDeclarations": ""},                              # 1-up: no rule wanted
+```
+
+The mobile value declares nothing, so nothing overrides, so the desktop
+`border-left` survives into the collapsed layout and draws a vertical rule down the
+middle of a single column. Same for the asymmetric padding that went with it.
+
+```python
+# RIGHT - say zero out loud
+"_m": {"customDeclarations": "border-left:0;"},
+```
+
+Measured twice on the same page: a 3×2 hairline list that kept a column rule and a
+48px indent on alternate rows at one column, and a 4-up statistics band whose third
+cell opened a row while still carrying the four-up rule. `tools/verify_rwd.py`
+reports every one of these as `RESET-RISK`.
+
+## Place a grid child with `gridChildPosition`, never its legs
+
+`gridColumnStart`, `gridColumnEnd`, `gridRowStart` and `gridRowEnd` are in
+`data/style-properties.csv` as members of the `gridChildPosition` group. Written as
+loose keys they compile to nothing - 16 `gridColumnStart` declarations in a committed
+spec, **zero** `grid-column` in the delivered CSS, no exception anywhere.
+
+Written as the group they work. Measured on 1.0.11:
+
+```jsonc
+"gridChildPosition": {"gridColumnStart": "2", "gridColumnEnd": "4",
+                      "gridRowStart": "1", "gridRowEnd": "3"}
+// -> grid-column-start:2; grid-column-end:4; grid-row-start:1; grid-row-end:3
+```
+
+All four keys are required non-empty strings (`ValidatorStyleGridChildPosition`) -
+`"auto"` and `"span 2"` are strings too. This is the editor's Grid child →
+Position → Manual.
+
+## A row with more children than columns fills the gutter, not the width
+
+This is the trap the CSS checker structurally cannot catch, and it is worth stating
+on its own because every value involved verifies.
+
+A three-child row at `84px 1fr 1.35fr` narrowed to `48px 1fr` does not put its third
+child on the full width. Grid puts it in **column 1** — the 48px number gutter — and
+the body text comes out at one or two characters per line. Every declaration in that
+spec is present in the right media query with the right value; `verify_rwd.py`
+reports 251 verified and 0 missing. The stylesheet is right and the page is wrong.
+
+Measured twice on the same build: a services row whose body text ran 48px wide, and a
+four-child products row whose status chip landed alone in a 72px gutter on row two at
+tablet, 60px tall for one line of 10px type.
+
+The rule that follows: **when a template narrows, count the children.** Either the
+narrow template keeps as many columns as the row has children, or the row collapses
+to a single column, or a child that is really a property of another child moves
+inside it. The products chip took the third option — it describes the product, it was
+never a column of the table.
+
+## Three layout traps that only appear at a narrow width
+
+**A transform makes an element the containing block for its absolutely positioned
+descendants.** Any element in a scroll-reveal list carries one, so an
+`position:absolute; top:0; bottom:0` child resolves against *it* rather than against
+the section. Measured: a rule meant to span a 483px band came out 299px — the band
+minus its 92px padding, exactly. The fix is to move the absolute child out to the
+positioned ancestor you actually meant.
+
+**A flex row with no `nowrap` does not overflow — it shrinks its children until the
+text breaks.** A header row that looked like it was wrapping was actually being
+squeezed, splitting a three-character wordmark across two lines. `white-space:nowrap`
+makes the row hold its size so you can see the real overflow and design for it.
+
+**Inherited `line-height` sets element heights, not your padding.** A header measured
+66px with nothing wrapping in it, because every nav link inherited the `2.05`
+line-height set for running text. The design was not choosing that height; the
+cascade was.
+
+## Section is `display:flex`
+
+A `section` node is a flex container, so a max-width block child shrink-to-fits
+instead of filling: a 1120px wrap came out 415px. Every wrapper needs `width:100%`.
+
+## Verify it, do not look at it
+
+Resizing the browser checks the part of the page that happens to be on screen. The
+mechanical check reads what the spec declared and what the site actually served, and
+compares them key by key:
+
+```bash
+python sites/_moksa.py          # moksa.json is generated, not shipped
+python tools/verify_rwd.py --config sweep.json --site sites/moksa.json --csv rwd.csv
+```
+
+It maps each `attrID` to its generated class, parses the `_t` and `_m` stylesheets,
+and asserts every declared property is present in that breakpoint's rule for that
+element. It exits non-zero on any `MISSING` or `RESET-RISK`.
+
+`data/rwd-verification.csv` is the current run: **569 responsive declarations across
+two sites and three pages, all `verified`, no `MISSING`, no `unmapped`, no
+`RESET-RISK`.**
+
+A verifier that has never failed is not evidence of anything, so it is checked
+against a poisoned copy of the spec — one undeclared property and one un-reset
+border injected — and it must report exactly those two and exit non-zero:
+
+```
+mk-svc-0,_m,letter-spacing,9px,,MISSING
+mk-svc-0,_m,border-left,set at base,not reset,RESET-RISK
+```
+
+Rows it cannot judge are labelled `unmapped`, never counted as passes: a tool that
+scores its own blind spots as successes is worse than no tool.
+
+**What it does not cover, and this matters:**
+
+- **Anything that needs layout rather than CSS.** Grid placement, horizontal
+  overflow, clipped text. The two worst bugs on this page both had a completely
+  clean verifier run — see the gutter trap above. Every width still needs a real
+  browser at 1440 / 1024 / 390.
+- **Nodes with no `attrID`.** The bridge from a spec declaration to a compiled rule
+  is `id="<attrID>" class="m-div _<token>"`, so a node that was never given an id is
+  invisible to the tool. The services body text was exactly that: it carried a
+  responsive declaration the tool never saw. Give an `attrID` to anything whose
+  responsive behaviour you want checked.
+
+The tool tells you the values arrived. Only the browser tells you they add up.
+
+## Five ways a page passes the width check and is still broken on a phone
+
+`verify_navigation.py --viewports` asks one question — does the document scroll
+sideways — and a page can pass it while being unusable. `tools/audit_mobile.py`
+asks the rest, re-opening each page at every width and reporting WIDE, OUTSIDE,
+CLIPPED, TINY_TYPE, SMALL_TARGET, GRID_NOT_COLLAPSED and LONG_MEASURE. Run on the
+five showcase pages it found all five of the following, none of which the width
+check could see.
+
+**`flexSizing: {"type": "grow"}` is `flex-grow:1; flex-shrink:0`.** It is not
+`flex: 1`. A value column set with it can grow but can never give ground, so one
+long mono string in a 310px card pushed the whole document out to 440px — and the
+page still "did not scroll sideways", because the document itself had simply become
+wider. The four types compile as:
+
+| type | emitted |
+|---|---|
+| `none` | `flex-grow:0; flex-shrink:0` |
+| `shrink` | `flex-grow:0; flex-shrink:1` |
+| `grow` | `flex-grow:1; flex-shrink:0` |
+| `custom` | whichever of `flexGrow` / `flexShrink` you set |
+
+So an item that must both fill and yield needs `custom` with both set to `1`.
+
+**A grid or flex item defaults to `min-width: auto`, which means min-content.** A
+code block in `white-space: pre` has a min-content width of its longest LINE, so
+the track refuses to shrink and the grid overflows its container. `overflow: auto`
+on the block does not help — the item ABOVE it is what is too wide. `minWidth: 0`
+on the item is the fix.
+
+**`section` arrives with 80px of vertical padding.** It is invisible until a page
+adds its own spacing, and then every band carries 80 + 80 + yours; the showcase
+pages opened with about 200px of nothing. `section()` in the demo now takes a
+`pad_y` so a page can take that rhythm into its own hands.
+
+**A fixed header's height is not a constant.** The demo's nav grew from four items
+to nine as pages were added; on a phone it wrapped to two rows and took the fixed
+header to 177px, with the first 97px of every page hidden underneath it, because
+the pages cleared a height decided when it was one line. Below 768px the header
+simply joins the flow now, which removes the whole class of bug.
+
+**A type scale needs a floor, not just a ramp.** 10px mono labels are part of the
+hierarchy on a large screen and illegible on a phone; the audit found 80 runs of
+them on one page. The demo's `mono()` raises anything under 12px at `_t` — which
+is `<=1079px`, so it covers the tablet too, where a 768px touch device was still
+being served desktop values.
+
+`data/mobile-audit.csv` is the standing result. Three classes in it are accepted
+rather than fixed, and are worth stating so they are not re-opened: the footer link
+list is deliberately two columns, the slider bullets are 26x28 (a secondary control
+below the 30px the tool asks for), and LONG_MEASURE flags CJK lines over 42
+characters, which at 768px is a preference rather than a defect.

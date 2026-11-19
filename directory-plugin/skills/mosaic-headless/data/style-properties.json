@@ -1,0 +1,821 @@
+{
+ "source_file": "data/style-properties.csv",
+ "columns": [
+  "property",
+  "group",
+  "factory",
+  "value_class",
+  "accepted_values",
+  "tokenable"
+ ],
+ "rows": [
+  {
+   "property": "display",
+   "group": "",
+   "factory": "CSSPropertyFactory",
+   "value_class": "",
+   "accepted_values": "",
+   "tokenable": ""
+  },
+  {
+   "property": "alignItems",
+   "group": "",
+   "factory": "CSSPropertyFactory",
+   "value_class": "",
+   "accepted_values": "normal|start|center|end|stretch|flex-start|flex-end|self-start|self-end|baseline|first baseline|last baseline",
+   "tokenable": ""
+  },
+  {
+   "property": "justifyItems",
+   "group": "",
+   "factory": "CSSPropertyFactory",
+   "value_class": "",
+   "accepted_values": "normal|start|center|end|stretch|flex-start|flex-end|self-start|self-end|baseline|first baseline|last baseline",
+   "tokenable": ""
+  },
+  {
+   "property": "alignContent",
+   "group": "",
+   "factory": "CSSPropertyFactory",
+   "value_class": "",
+   "accepted_values": "normal|start|center|end|stretch|space-between|space-around|space-evenly|flex-start|flex-end|baseline",
+   "tokenable": ""
+  },
+  {
+   "property": "justifyContent",
+   "group": "",
+   "factory": "CSSPropertyFactory",
+   "value_class": "",
+   "accepted_values": "normal|start|center|end|stretch|space-between|space-around|space-evenly|flex-start|flex-end|left|right",
+   "tokenable": ""
+  },
+  {
+   "property": "flexDirection",
+   "group": "",
+   "factory": "CSSPropertyFactory",
+   "value_class": "",
+   "accepted_values": "row|row-reverse|column|column-reverse",
+   "tokenable": ""
+  },
+  {
+   "property": "flexWrap",
+   "group": "",
+   "factory": "CSSPropertyFactory",
+   "value_class": "",
+   "accepted_values": "nowrap|wrap|wrap-reverse",
+   "tokenable": ""
+  },
+  {
+   "property": "columnGap",
+   "group": "",
+   "factory": "CSSCollectionVariablePropertyFactory",
+   "value_class": "",
+   "accepted_values": "",
+   "tokenable": "yes"
+  },
+  {
+   "property": "rowGap",
+   "group": "",
+   "factory": "CSSCollectionVariablePropertyFactory",
+   "value_class": "",
+   "accepted_values": "",
+   "tokenable": "yes"
+  },
+  {
+   "property": "gridAutoFlow",
+   "group": "",
+   "factory": "CSSPropertyFactory",
+   "value_class": "",
+   "accepted_values": "row|row dense|column|column dense",
+   "tokenable": ""
+  },
+  {
+   "property": "gridAutoColumns",
+   "group": "",
+   "factory": "CSSCollectionVariablePropertyFactory",
+   "value_class": "",
+   "accepted_values": "",
+   "tokenable": "yes"
+  },
+  {
+   "property": "gridAutoRows",
+   "group": "",
+   "factory": "CSSCollectionVariablePropertyFactory",
+   "value_class": "",
+   "accepted_values": "",
+   "tokenable": "yes"
+  },
+  {
+   "property": "gridTemplateColumns",
+   "group": "",
+   "factory": "CSSGridTemplateStylePropertyFactory",
+   "value_class": "",
+   "accepted_values": "",
+   "tokenable": ""
+  },
+  {
+   "property": "gridTemplateRows",
+   "group": "",
+   "factory": "CSSGridTemplateStylePropertyFactory",
+   "value_class": "",
+   "accepted_values": "",
+   "tokenable": ""
+  },
+  {
+   "property": "gridTemplateAreas",
+   "group": "",
+   "factory": "CSSGridAreaPropertyFactory",
+   "value_class": "",
+   "accepted_values": "",
+   "tokenable": ""
+  },
+  {
+   "property": "gridChildPosition",
+   "group": "",
+   "factory": "CSSGridChildPositionPropertyFactory",
+   "value_class": "",
+   "accepted_values": "",
+   "tokenable": ""
+  },
+  {
+   "property": "gridChildPosition",
+   "group": "",
+   "factory": "CSSGridChildPositionPropertyFactory",
+   "value_class": "",
+   "accepted_values": "",
+   "tokenable": ""
+  },
+  {
+   "property": "gridChildPosition",
+   "group": "",
+   "factory": "CSSGridChildPositionPropertyFactory",
+   "value_class": "",
+   "accepted_values": "",
+   "tokenable": ""
+  },
+  {
+   "property": "gridChildPosition",
+   "group": "",
+   "factory": "CSSGridChildPositionPropertyFactory",
+   "value_class": "",
+   "accepted_values": "",
+   "tokenable": ""
+  },
+  {
+   "property": "flexSizing",
+   "group": "",
+   "factory": "CSSFlexSizingPropertyFactory",
+   "value_class": "",
+   "accepted_values": "",
+   "tokenable": ""
+  },
+  {
+   "property": "flexBasis",
+   "group": "",
+   "factory": "CSSPropertyFactory",
+   "value_class": "",
+   "accepted_values": "",
+   "tokenable": ""
+  },
+  {
+   "property": "alignSelf",
+   "group": "",
+   "factory": "CSSPropertyFactory",
+   "value_class": "",
+   "accepted_values": "auto|start|center|end|stretch|normal|flex-start|flex-end|self-start|self-end|baseline|first baseline|last baseline",
+   "tokenable": ""
+  },
+  {
+   "property": "justifySelf",
+   "group": "",
+   "factory": "CSSPropertyFactory",
+   "value_class": "",
+   "accepted_values": "auto|start|center|end|stretch|normal|flex-start|flex-end|self-start|self-end|baseline|first baseline|last baseline",
+   "tokenable": ""
+  },
+  {
+   "property": "order",
+   "group": "",
+   "factory": "CSSPropertyFactory",
+   "value_class": "",
+   "accepted_values": "",
+   "tokenable": ""
+  },
+  {
+   "property": "listStylePosition",
+   "group": "",
+   "factory": "CSSPropertyFactory",
+   "value_class": "",
+   "accepted_values": "inside|outside",
+   "tokenable": ""
+  },
+  {
+   "property": "listStyleType",
+   "group": "",
+   "factory": "CSSListStyleTypeStylePropertyFactory",
+   "value_class": "",
+   "accepted_values": "disc|circle|square|decimal|georgian|trad-chinese-informal|kannada|none",
+   "tokenable": ""
+  },
+  {
+   "property": "fontFamily",
+   "group": "",
+   "factory": "CSSFontFamilyPropertyFactory",
+   "value_class": "",
+   "accepted_values": "",
+   "tokenable": ""
+  },
+  {
+   "property": "textDecorationLine",
+   "group": "",
+   "factory": "CSSPropertyFactory",
+   "value_class": "",
+   "accepted_values": "none|underline|overline|line-through",
+   "tokenable": ""
+  },
+  {
+   "property": "fontStyle",
+   "group": "",
+   "factory": "CSSPropertyFactory",
+   "value_class": "",
+   "accepted_values": "normal|italic",
+   "tokenable": ""
+  },
+  {
+   "property": "color",
+   "group": "",
+   "factory": "CSSColorPropertyFactory",
+   "value_class": "",
+   "accepted_values": "",
+   "tokenable": "yes"
+  },
+  {
+   "property": "fontSize",
+   "group": "",
+   "factory": "CSSCollectionVariablePropertyFactory",
+   "value_class": "",
+   "accepted_values": "",
+   "tokenable": "yes"
+  },
+  {
+   "property": "lineHeight",
+   "group": "",
+   "factory": "CSSCollectionVariablePropertyFactory",
+   "value_class": "",
+   "accepted_values": "",
+   "tokenable": "yes"
+  },
+  {
+   "property": "fontWeight",
+   "group": "",
+   "factory": "CSSPropertyFactory",
+   "value_class": "",
+   "accepted_values": "100|200|300|400|500|600|700|800|900",
+   "tokenable": ""
+  },
+  {
+   "property": "textAlign",
+   "group": "",
+   "factory": "CSSPropertyFactory",
+   "value_class": "",
+   "accepted_values": "start|center|end|justify|left|right|inherit",
+   "tokenable": ""
+  },
+  {
+   "property": "letterSpacing",
+   "group": "",
+   "factory": "CSSCollectionVariablePropertyFactory",
+   "value_class": "",
+   "accepted_values": "",
+   "tokenable": "yes"
+  },
+  {
+   "property": "wordSpacing",
+   "group": "",
+   "factory": "CSSCollectionVariablePropertyFactory",
+   "value_class": "",
+   "accepted_values": "",
+   "tokenable": "yes"
+  },
+  {
+   "property": "whiteSpace",
+   "group": "",
+   "factory": "CSSPropertyFactory",
+   "value_class": "",
+   "accepted_values": "normal|pre-wrap|nowrap|pre",
+   "tokenable": ""
+  },
+  {
+   "property": "textTransform",
+   "group": "",
+   "factory": "CSSPropertyFactory",
+   "value_class": "",
+   "accepted_values": "none|lowercase|uppercase|capitalize",
+   "tokenable": ""
+  },
+  {
+   "property": "textShadow",
+   "group": "",
+   "factory": "CSSTextShadowStylePropertyFactory",
+   "value_class": "",
+   "accepted_values": "",
+   "tokenable": ""
+  },
+  {
+   "property": "width",
+   "group": "",
+   "factory": "CSSSizePropertyFactory",
+   "value_class": "",
+   "accepted_values": "",
+   "tokenable": "yes"
+  },
+  {
+   "property": "minWidth",
+   "group": "",
+   "factory": "CSSSizePropertyFactory",
+   "value_class": "",
+   "accepted_values": "",
+   "tokenable": "yes"
+  },
+  {
+   "property": "maxWidth",
+   "group": "",
+   "factory": "CSSSizePropertyFactory",
+   "value_class": "",
+   "accepted_values": "",
+   "tokenable": "yes"
+  },
+  {
+   "property": "height",
+   "group": "",
+   "factory": "CSSSizePropertyFactory",
+   "value_class": "",
+   "accepted_values": "",
+   "tokenable": "yes"
+  },
+  {
+   "property": "minHeight",
+   "group": "",
+   "factory": "CSSSizePropertyFactory",
+   "value_class": "",
+   "accepted_values": "",
+   "tokenable": "yes"
+  },
+  {
+   "property": "maxHeight",
+   "group": "",
+   "factory": "CSSSizePropertyFactory",
+   "value_class": "",
+   "accepted_values": "",
+   "tokenable": "yes"
+  },
+  {
+   "property": "position",
+   "group": "",
+   "factory": "CSSPropertyFactory",
+   "value_class": "",
+   "accepted_values": "static|relative|absolute|fixed|sticky",
+   "tokenable": ""
+  },
+  {
+   "property": "zIndex",
+   "group": "",
+   "factory": "CSSPropertyFactory",
+   "value_class": "",
+   "accepted_values": "",
+   "tokenable": ""
+  },
+  {
+   "property": "top",
+   "group": "",
+   "factory": "CSSCollectionVariablePropertyFactory",
+   "value_class": "",
+   "accepted_values": "",
+   "tokenable": "yes"
+  },
+  {
+   "property": "right",
+   "group": "",
+   "factory": "CSSCollectionVariablePropertyFactory",
+   "value_class": "",
+   "accepted_values": "",
+   "tokenable": "yes"
+  },
+  {
+   "property": "bottom",
+   "group": "",
+   "factory": "CSSCollectionVariablePropertyFactory",
+   "value_class": "",
+   "accepted_values": "",
+   "tokenable": "yes"
+  },
+  {
+   "property": "left",
+   "group": "",
+   "factory": "CSSCollectionVariablePropertyFactory",
+   "value_class": "",
+   "accepted_values": "",
+   "tokenable": "yes"
+  },
+  {
+   "property": "marginTop",
+   "group": "",
+   "factory": "CSSCollectionVariablePropertyFactory",
+   "value_class": "",
+   "accepted_values": "",
+   "tokenable": "yes"
+  },
+  {
+   "property": "marginRight",
+   "group": "",
+   "factory": "CSSCollectionVariablePropertyFactory",
+   "value_class": "",
+   "accepted_values": "",
+   "tokenable": "yes"
+  },
+  {
+   "property": "marginBottom",
+   "group": "",
+   "factory": "CSSCollectionVariablePropertyFactory",
+   "value_class": "",
+   "accepted_values": "",
+   "tokenable": "yes"
+  },
+  {
+   "property": "marginLeft",
+   "group": "",
+   "factory": "CSSCollectionVariablePropertyFactory",
+   "value_class": "",
+   "accepted_values": "",
+   "tokenable": "yes"
+  },
+  {
+   "property": "paddingTop",
+   "group": "",
+   "factory": "CSSCollectionVariablePropertyFactory",
+   "value_class": "",
+   "accepted_values": "",
+   "tokenable": "yes"
+  },
+  {
+   "property": "paddingRight",
+   "group": "",
+   "factory": "CSSCollectionVariablePropertyFactory",
+   "value_class": "",
+   "accepted_values": "",
+   "tokenable": "yes"
+  },
+  {
+   "property": "paddingBottom",
+   "group": "",
+   "factory": "CSSCollectionVariablePropertyFactory",
+   "value_class": "",
+   "accepted_values": "",
+   "tokenable": "yes"
+  },
+  {
+   "property": "paddingLeft",
+   "group": "",
+   "factory": "CSSCollectionVariablePropertyFactory",
+   "value_class": "",
+   "accepted_values": "",
+   "tokenable": "yes"
+  },
+  {
+   "property": "borderRadius",
+   "group": "",
+   "factory": "CSSBorderRadiusPropertyFactory",
+   "value_class": "",
+   "accepted_values": "",
+   "tokenable": ""
+  },
+  {
+   "property": "borderTopWidth",
+   "group": "borderStyle",
+   "factory": "CSSGrouppedPropertyFactory",
+   "value_class": "CSSCollectionVariableProperty",
+   "accepted_values": "",
+   "tokenable": "yes"
+  },
+  {
+   "property": "borderTopStyle",
+   "group": "borderStyle",
+   "factory": "CSSGrouppedPropertyFactory",
+   "value_class": "",
+   "accepted_values": "",
+   "tokenable": ""
+  },
+  {
+   "property": "borderTopColor",
+   "group": "borderStyle",
+   "factory": "CSSGrouppedPropertyFactory",
+   "value_class": "CSSColorProperty",
+   "accepted_values": "",
+   "tokenable": "yes"
+  },
+  {
+   "property": "borderRightWidth",
+   "group": "borderStyle",
+   "factory": "CSSGrouppedPropertyFactory",
+   "value_class": "CSSCollectionVariableProperty",
+   "accepted_values": "",
+   "tokenable": "yes"
+  },
+  {
+   "property": "borderRightStyle",
+   "group": "borderStyle",
+   "factory": "CSSGrouppedPropertyFactory",
+   "value_class": "",
+   "accepted_values": "",
+   "tokenable": ""
+  },
+  {
+   "property": "borderRightColor",
+   "group": "borderStyle",
+   "factory": "CSSGrouppedPropertyFactory",
+   "value_class": "CSSColorProperty",
+   "accepted_values": "",
+   "tokenable": "yes"
+  },
+  {
+   "property": "borderBottomWidth",
+   "group": "borderStyle",
+   "factory": "CSSGrouppedPropertyFactory",
+   "value_class": "CSSCollectionVariableProperty",
+   "accepted_values": "",
+   "tokenable": "yes"
+  },
+  {
+   "property": "borderBottomStyle",
+   "group": "borderStyle",
+   "factory": "CSSGrouppedPropertyFactory",
+   "value_class": "",
+   "accepted_values": "",
+   "tokenable": ""
+  },
+  {
+   "property": "borderBottomColor",
+   "group": "borderStyle",
+   "factory": "CSSGrouppedPropertyFactory",
+   "value_class": "CSSColorProperty",
+   "accepted_values": "",
+   "tokenable": "yes"
+  },
+  {
+   "property": "borderLeftWidth",
+   "group": "borderStyle",
+   "factory": "CSSGrouppedPropertyFactory",
+   "value_class": "CSSCollectionVariableProperty",
+   "accepted_values": "",
+   "tokenable": "yes"
+  },
+  {
+   "property": "borderLeftStyle",
+   "group": "borderStyle",
+   "factory": "CSSGrouppedPropertyFactory",
+   "value_class": "",
+   "accepted_values": "",
+   "tokenable": ""
+  },
+  {
+   "property": "borderLeftColor",
+   "group": "borderStyle",
+   "factory": "CSSGrouppedPropertyFactory",
+   "value_class": "CSSColorProperty",
+   "accepted_values": "",
+   "tokenable": "yes"
+  },
+  {
+   "property": "outlineWidth",
+   "group": "outlineStyle",
+   "factory": "CSSGrouppedPropertyFactory",
+   "value_class": "CSSCollectionVariableProperty",
+   "accepted_values": "",
+   "tokenable": "yes"
+  },
+  {
+   "property": "outlineStyle",
+   "group": "outlineStyle",
+   "factory": "CSSGrouppedPropertyFactory",
+   "value_class": "",
+   "accepted_values": "",
+   "tokenable": ""
+  },
+  {
+   "property": "outlineColor",
+   "group": "outlineStyle",
+   "factory": "CSSGrouppedPropertyFactory",
+   "value_class": "CSSColorProperty",
+   "accepted_values": "",
+   "tokenable": "yes"
+  },
+  {
+   "property": "outlineOffset",
+   "group": "outlineStyle",
+   "factory": "CSSGrouppedPropertyFactory",
+   "value_class": "CSSCollectionVariableProperty",
+   "accepted_values": "",
+   "tokenable": "yes"
+  },
+  {
+   "property": "boxShadow",
+   "group": "",
+   "factory": "CSSBoxShadowStylePropertyFactory",
+   "value_class": "",
+   "accepted_values": "",
+   "tokenable": ""
+  },
+  {
+   "property": "opacity",
+   "group": "",
+   "factory": "CSSPropertyFactory",
+   "value_class": "",
+   "accepted_values": "",
+   "tokenable": ""
+  },
+  {
+   "property": "visibility",
+   "group": "",
+   "factory": "CSSPropertyFactory",
+   "value_class": "",
+   "accepted_values": "visible|hidden",
+   "tokenable": ""
+  },
+  {
+   "property": "overflow",
+   "group": "",
+   "factory": "CSSPropertyFactory",
+   "value_class": "",
+   "accepted_values": "visible|hidden|clip|scroll|auto",
+   "tokenable": ""
+  },
+  {
+   "property": "filter",
+   "group": "",
+   "factory": "CSSFilterStylePropertyFactory",
+   "value_class": "",
+   "accepted_values": "",
+   "tokenable": ""
+  },
+  {
+   "property": "backdropFilter",
+   "group": "",
+   "factory": "CSSBackdropFilterPropertyFactory",
+   "value_class": "",
+   "accepted_values": "",
+   "tokenable": ""
+  },
+  {
+   "property": "transform",
+   "group": "",
+   "factory": "CSSTransformPropertyFactory",
+   "value_class": "",
+   "accepted_values": "",
+   "tokenable": ""
+  },
+  {
+   "property": "translate",
+   "group": "",
+   "factory": "CSSTranslateStylePropertyFactory",
+   "value_class": "",
+   "accepted_values": "",
+   "tokenable": ""
+  },
+  {
+   "property": "scale",
+   "group": "",
+   "factory": "CSSScaleStylePropertyFactory",
+   "value_class": "",
+   "accepted_values": "",
+   "tokenable": ""
+  },
+  {
+   "property": "rotate",
+   "group": "",
+   "factory": "CSSRotateStylePropertyFactory",
+   "value_class": "",
+   "accepted_values": "",
+   "tokenable": ""
+  },
+  {
+   "property": "transformOrigin",
+   "group": "",
+   "factory": "CSSTransformOriginStylePropertyFactory",
+   "value_class": "",
+   "accepted_values": "",
+   "tokenable": ""
+  },
+  {
+   "property": "transformStyle",
+   "group": "",
+   "factory": "CSSPropertyFactory",
+   "value_class": "",
+   "accepted_values": "flat|preserve-3d",
+   "tokenable": ""
+  },
+  {
+   "property": "transition",
+   "group": "",
+   "factory": "CSSTransitionPropertyFactory",
+   "value_class": "",
+   "accepted_values": "",
+   "tokenable": ""
+  },
+  {
+   "property": "mask",
+   "group": "",
+   "factory": "CSSMaskStylePropertyFactory",
+   "value_class": "",
+   "accepted_values": "",
+   "tokenable": ""
+  },
+  {
+   "property": "perspectiveOrigin",
+   "group": "",
+   "factory": "CSSPerspectiveOriginStylePropertyFactory",
+   "value_class": "",
+   "accepted_values": "",
+   "tokenable": ""
+  },
+  {
+   "property": "perspective",
+   "group": "",
+   "factory": "CSSPropertyFactory",
+   "value_class": "",
+   "accepted_values": "",
+   "tokenable": ""
+  },
+  {
+   "property": "objectFitStyle",
+   "group": "",
+   "factory": "CSSObjectFitStylePropertyFactory",
+   "value_class": "",
+   "accepted_values": "",
+   "tokenable": ""
+  },
+  {
+   "property": "mixBlendMode",
+   "group": "",
+   "factory": "CSSPropertyFactory",
+   "value_class": "",
+   "accepted_values": "normal|multiply|screen|overlay|darken|lighten|color-dodge|color-burn|hard-light|soft-light|difference|exclusion|hue|saturation|color|luminosity",
+   "tokenable": ""
+  },
+  {
+   "property": "boxSizing",
+   "group": "",
+   "factory": "CSSPropertyFactory",
+   "value_class": "",
+   "accepted_values": "border-box|content-box",
+   "tokenable": ""
+  },
+  {
+   "property": "aspectRatio",
+   "group": "",
+   "factory": "CSSPropertyFactory",
+   "value_class": "",
+   "accepted_values": "",
+   "tokenable": ""
+  },
+  {
+   "property": "backgroundColor",
+   "group": "",
+   "factory": "CSSColorPropertyFactory",
+   "value_class": "",
+   "accepted_values": "",
+   "tokenable": "yes"
+  },
+  {
+   "property": "backgroundStyle",
+   "group": "",
+   "factory": "CSSBackgroundStylePropertyFactory",
+   "value_class": "",
+   "accepted_values": "",
+   "tokenable": ""
+  },
+  {
+   "property": "cursor",
+   "group": "",
+   "factory": "CSSPropertyFactory",
+   "value_class": "",
+   "accepted_values": "auto|default|none|context-menu|help|pointer|progress|wait|cell|crosshair|text|vertical-text|alias|copy|move|no-drop|not-allowed|grab|grabbing|e-resize|n-resize|ne-resize|nw-resize|s-resize|se-resize|sw-resize|w-resize|ew-resize|ns-resize|nesw-resize|nwse-resize|col-resize|row-resize|all-scroll|zoom-in|zoom-out|inherit|initial|revert|revert-layer|unset",
+   "tokenable": ""
+  },
+  {
+   "property": "customDeclarations",
+   "group": "",
+   "factory": "CustomDeclarationsPropertyFactory",
+   "value_class": "",
+   "accepted_values": "",
+   "tokenable": ""
+  },
+  {
+   "property": "collectionModesData",
+   "group": "",
+   "factory": "CSSCollectionModePropertyFactory",
+   "value_class": "",
+   "accepted_values": "",
+   "tokenable": ""
+  }
+ ]
+}

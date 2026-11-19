@@ -1,0 +1,195 @@
+{
+ "source_file": "data/popover-verification.csv",
+ "columns": [
+  "check",
+  "result",
+  "detail"
+ ],
+ "rows": [
+  {
+   "check": "FOUND",
+   "result": "PASS",
+   "detail": "19 popovers on the page"
+  },
+  {
+   "check": "HOST",
+   "result": "PASS",
+   "detail": "every one is <div popover=manual>, none carries `open`"
+  },
+  {
+   "check": "NOTICE/pageLoad",
+   "result": "PASS",
+   "detail": "open after load"
+  },
+  {
+   "check": "NOTICE/aria",
+   "result": "PASS",
+   "detail": "role=status aria-live=polite aria-modal=None"
+  },
+  {
+   "check": "NOTICE/non_blocking",
+   "result": "PASS",
+   "detail": "centre hit-tests to the page; wheel scrolled 0 -> 600"
+  },
+  {
+   "check": "NOTICE/page_usable",
+   "result": "PASS",
+   "detail": "open while the notice shows: ['pp-menu', 'pp-notice']"
+  },
+  {
+   "check": "NOTICE/closedby_nothing",
+   "result": "PASS",
+   "detail": "Esc left it open"
+  },
+  {
+   "check": "NOTICE/close_button",
+   "result": "PASS",
+   "detail": "popoverClose closed it"
+  },
+  {
+   "check": "CLOSED_IS_HIDDEN",
+   "result": "PASS",
+   "detail": "every closed popover measures 0x0"
+  },
+  {
+   "check": "MENU/placement",
+   "result": "PASS",
+   "detail": "flipped above: menu 224..627 high, trigger 627..671, left edges 685 / 685"
+  },
+  {
+   "check": "MENU/toggle",
+   "result": "PASS",
+   "detail": "the same button closed it"
+  },
+  {
+   "check": "MENU/esc",
+   "result": "PASS",
+   "detail": "closedby=everything: Esc closed it"
+  },
+  {
+   "check": "INFO/placement",
+   "result": "PASS",
+   "detail": "inline-end: card 949..1209, trigger 905..949; centres 449 / 449"
+  },
+  {
+   "check": "INFO/esc_ignored",
+   "result": "PASS",
+   "detail": "closedby=clickOutside: Esc left it open"
+  },
+  {
+   "check": "INFO/click_outside",
+   "result": "PASS",
+   "detail": "a click outside closed it"
+  },
+  {
+   "check": "POINTER/anchor",
+   "result": "PASS",
+   "detail": "popover bottom 300 vs card top 300; centres 950 / 949"
+  },
+  {
+   "check": "GRID/top-left",
+   "result": "PASS",
+   "detail": "box 12,12 240x112 in 1280x900"
+  },
+  {
+   "check": "GRID/top-center",
+   "result": "PASS",
+   "detail": "box 520,12 240x112 in 1280x900"
+  },
+  {
+   "check": "GRID/top-right",
+   "result": "PASS",
+   "detail": "box 1028,12 240x112 in 1280x900"
+  },
+  {
+   "check": "GRID/center-left",
+   "result": "PASS",
+   "detail": "box 12,393 240x112 in 1280x900"
+  },
+  {
+   "check": "GRID/center-center",
+   "result": "PASS",
+   "detail": "box 520,393 240x112 in 1280x900"
+  },
+  {
+   "check": "GRID/center-right",
+   "result": "PASS",
+   "detail": "box 1028,393 240x112 in 1280x900"
+  },
+  {
+   "check": "GRID/bottom-left",
+   "result": "PASS",
+   "detail": "box 12,775 240x112 in 1280x900"
+  },
+  {
+   "check": "GRID/bottom-center",
+   "result": "PASS",
+   "detail": "box 520,775 240x112 in 1280x900"
+  },
+  {
+   "check": "GRID/bottom-right",
+   "result": "PASS",
+   "detail": "box 1028,775 240x112 in 1280x900"
+  },
+  {
+   "check": "TOUR/steps",
+   "result": "PASS",
+   "detail": "pp-tour-brief > pp-tour-quote > pp-tour-launch > pp-tour-done"
+  },
+  {
+   "check": "TOUR/anchored",
+   "result": "PASS",
+   "detail": "3 of 3 steps sit beside the box they explain"
+  },
+  {
+   "check": "TOUR/esc_ignored",
+   "result": "PASS",
+   "detail": "open after Esc on step 2: pp-tour-quote"
+  },
+  {
+   "check": "TOUR/quit_ends",
+   "result": "PASS",
+   "detail": "open after 結束導覽 on step 2: none"
+  },
+  {
+   "check": "TOUR/restart_resumes",
+   "result": "PASS",
+   "detail": "restarted, two steps on: pp-tour-launch"
+  },
+  {
+   "check": "SNAP/flips",
+   "result": "PASS",
+   "detail": "flipped=True; popover right 1069 vs trigger left 1069"
+  },
+  {
+   "check": "SNAP/flipped_state",
+   "result": "PASS",
+   "detail": "background while flipped: rgb(22, 24, 28)"
+  },
+  {
+   "check": "SNAP/off_shifted",
+   "result": "PASS",
+   "detail": "keepInView=0, not flipped: popover 1020..1280 inside a 1280 viewport, over its trigger 1069..1231"
+  },
+  {
+   "check": "FLEXMODAL/closed",
+   "result": "PASS",
+   "detail": "authored display:flex, closed it computes display:none 0x0"
+  },
+  {
+   "check": "FLEXMODAL/open",
+   "result": "PASS",
+   "detail": "display:flex top-layer=True window centre 633,450 in 1280x900"
+  },
+  {
+   "check": "NO_JS_ERRORS",
+   "result": "PASS",
+   "detail": "none"
+  },
+  {
+   "check": "PHONE/menu_fits",
+   "result": "PASS",
+   "detail": "menu 43..318 in a 390 viewport"
+  }
+ ]
+}

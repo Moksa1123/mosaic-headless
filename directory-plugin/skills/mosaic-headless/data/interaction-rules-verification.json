@@ -1,0 +1,113 @@
+{
+ "source_file": "data/interaction-rules-verification.csv",
+ "columns": [
+  "subject",
+  "case",
+  "result",
+  "detail"
+ ],
+ "rows": [
+  {
+   "subject": "pickOne",
+   "case": "12 fresh loads, remember=page",
+   "result": "PASS",
+   "detail": "exactly one of the three modals opened every time; 4/6/2 across the group"
+  },
+  {
+   "subject": "pickOne",
+   "case": "8 reloads of one tab, remember=page",
+   "result": "PASS",
+   "detail": "re-drawn on every load: 6/1/1"
+  },
+  {
+   "subject": "pickOne",
+   "case": "8 reloads of one tab, remember=forever",
+   "result": "PASS",
+   "detail": "the same contender all 8 times"
+  },
+  {
+   "subject": "pickOne",
+   "case": "6 fresh browser contexts, remember=forever",
+   "result": "PASS",
+   "detail": "draws again in a new context: 1/3/2 - the record is per browser profile"
+  },
+  {
+   "subject": "pickOne",
+   "case": "storage record",
+   "result": "PASS",
+   "detail": "mos:v1:r:<name> gains lastID, naming the contender the draw chose"
+  },
+  {
+   "subject": "pickOne",
+   "case": "two buttons, group dl-ab, click B then A",
+   "result": "PASS",
+   "detail": "B opens, A then does nothing - 6/6 fresh visitors"
+  },
+  {
+   "subject": "pickOne",
+   "case": "same two buttons, click A then B",
+   "result": "PASS",
+   "detail": "A opens, B then does nothing - 6/6; the winner flips with the ORDER"
+  },
+  {
+   "subject": "pickOne",
+   "case": "both interactions on ONE button",
+   "result": "PASS",
+   "detail": "the same contender 14/14 - one evaluates first and records itself"
+  },
+  {
+   "subject": "pickOne",
+   "case": "what the rule actually does",
+   "result": "PASS",
+   "detail": "draws among contenders that evaluate TOGETHER; a click delivers one at a time, so click+pickOne is a latch, not a lottery"
+  },
+  {
+   "subject": "targetModifiers",
+   "case": "plain element",
+   "result": "PASS",
+   "detail": "[{\"type\":\"all\",\"selector\":\"._e\"}]"
+  },
+  {
+   "subject": "targetModifiers",
+   "case": "plain variant",
+   "result": "PASS",
+   "detail": "[{\"type\":\"all\",\"selector\":\"h2,.m-heading-2\"}] - a variant resolves to its own selectors"
+  },
+  {
+   "subject": "targetModifiers",
+   "case": "children(variant)",
+   "result": "PASS",
+   "detail": "appends {\"type\":\"children\",\"selector\":\"h2,.m-heading-2\"}"
+  },
+  {
+   "subject": "targetModifiers",
+   "case": "sibling(variant)",
+   "result": "PASS",
+   "detail": "appends {\"type\":\"sibling\",...}"
+  },
+  {
+   "subject": "targetModifiers",
+   "case": "parent(variant)",
+   "result": "PASS",
+   "detail": "appends {\"type\":\"parent\",...}"
+  },
+  {
+   "subject": "targetModifiers",
+   "case": "include(element)",
+   "result": "PASS",
+   "detail": "appends {\"type\":\"include\",...}"
+  },
+  {
+   "subject": "targetModifiers",
+   "case": "exclude(element)",
+   "result": "PASS",
+   "detail": "appends {\"type\":\"exclude\",...}"
+  },
+  {
+   "subject": "targetModifiers",
+   "case": "children then exclude",
+   "result": "PASS",
+   "detail": "three entries, in the order written - the list is a pipeline, not a filter set"
+  }
+ ]
+}

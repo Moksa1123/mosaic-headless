@@ -1,0 +1,191 @@
+{
+ "source_file": "data/slider-verification.csv",
+ "columns": [
+  "slider",
+  "check",
+  "result",
+  "detail"
+ ],
+ "rows": [
+  {
+   "slider": "hero, 4 slides, carousel",
+   "check": "HOST",
+   "result": "PASS",
+   "detail": "<mosaic-slider> animation=slide carousel=true, 4 slides"
+  },
+  {
+   "slider": "hero, 4 slides, carousel",
+   "check": "TRACK",
+   "result": "PASS",
+   "detail": "<mosaic-slider-slides> aria-live=off"
+  },
+  {
+   "slider": "hero, 4 slides, carousel",
+   "check": "HAS_CURRENT",
+   "result": "PASS",
+   "detail": "slide 0 is current at rest"
+  },
+  {
+   "slider": "hero, 4 slides, carousel",
+   "check": "BULLET_TEMPLATE",
+   "result": "PASS",
+   "detail": "4 bullets for 4 slides, all with id='sl-main-nav-dot' - one authored bullet is repeated per slide, duplicate ids included"
+  },
+  {
+   "slider": "hero, 4 slides, carousel",
+   "check": "BULLET_ARIA",
+   "result": "PASS",
+   "detail": "role=button tabindex=0 labels=一、輪播不是相簿, 二、四種動畫, 三、箭頭會自己消失, 四、不想動就不動 - taken from each slide's own title"
+  },
+  {
+   "slider": "hero, 4 slides, carousel",
+   "check": "ADVANCES",
+   "result": "PASS",
+   "detail": "reached 4 of 4 slides unaided"
+  },
+  {
+   "slider": "hero, 4 slides, carousel",
+   "check": "AUTOPLAY_DECLARED",
+   "result": "PASS",
+   "detail": "data-autoplay=true delay=3600"
+  },
+  {
+   "slider": "hero, 4 slides, carousel",
+   "check": "BULLET_GOES",
+   "result": "PASS",
+   "detail": "bullet 0 -> slide 0"
+  },
+  {
+   "slider": "hero, 4 slides, carousel",
+   "check": "ARROW_ENDS",
+   "result": "PASS",
+   "detail": "carousel: it wraps, so neither arrow hides (prev hidden=False, next hidden=False)"
+  },
+  {
+   "slider": "hero, 4 slides, carousel",
+   "check": "CAROUSEL_LAYOUT",
+   "result": "PASS",
+   "detail": "grid \"slide\", every slide still one track wide ([1200] vs 1200) - isCarousel wraps the ends, it does not show more than one"
+  },
+  {
+   "slider": "hero, 4 slides, carousel",
+   "check": "ARROW_ARIA",
+   "result": "PASS",
+   "detail": "role=button tabindex=0 label='下一張投影片'"
+  },
+  {
+   "slider": "hero, 4 slides, carousel",
+   "check": "NEXT",
+   "result": "PASS",
+   "detail": "slide 0 -> 1"
+  },
+  {
+   "slider": "hero, 4 slides, carousel",
+   "check": "PREV",
+   "result": "PASS",
+   "detail": "slide 1 -> 0"
+  },
+  {
+   "slider": "hero, 4 slides, carousel",
+   "check": "KEYBOARD",
+   "result": "PASS",
+   "detail": "focus bullet 3 taken, Enter -> slide 3"
+  },
+  {
+   "slider": "hero, 4 slides, carousel",
+   "check": "REDUCED",
+   "result": "PASS",
+   "detail": "under prefers-reduced-motion it holds still (slide 0 -> 0)"
+  },
+  {
+   "slider": "carousel, 6 slides, wraps",
+   "check": "HOST",
+   "result": "PASS",
+   "detail": "<mosaic-slider> animation=slide carousel=true, 6 slides"
+  },
+  {
+   "slider": "carousel, 6 slides, wraps",
+   "check": "TRACK",
+   "result": "PASS",
+   "detail": "<mosaic-slider-slides> aria-live=off"
+  },
+  {
+   "slider": "carousel, 6 slides, wraps",
+   "check": "HAS_CURRENT",
+   "result": "PASS",
+   "detail": "slide 0 is current at rest"
+  },
+  {
+   "slider": "carousel, 6 slides, wraps",
+   "check": "BULLET_TEMPLATE",
+   "result": "PASS",
+   "detail": "6 bullets for 6 slides, all with id='sl-carousel-nav-dot' - one authored bullet is repeated per slide, duplicate ids included"
+  },
+  {
+   "slider": "carousel, 6 slides, wraps",
+   "check": "BULLET_ARIA",
+   "result": "PASS",
+   "detail": "role=button tabindex=0 labels=WEB, AI, ERP, SEO, SHOP, AUTOMATION - taken from each slide's own title"
+  },
+  {
+   "slider": "carousel, 6 slides, wraps",
+   "check": "ADVANCES",
+   "result": "PASS",
+   "detail": "reached 6 of 6 slides unaided"
+  },
+  {
+   "slider": "carousel, 6 slides, wraps",
+   "check": "AUTOPLAY_DECLARED",
+   "result": "PASS",
+   "detail": "data-autoplay=true delay=2400"
+  },
+  {
+   "slider": "carousel, 6 slides, wraps",
+   "check": "BULLET_GOES",
+   "result": "PASS",
+   "detail": "bullet 0 -> slide 0"
+  },
+  {
+   "slider": "carousel, 6 slides, wraps",
+   "check": "ARROW_ENDS",
+   "result": "PASS",
+   "detail": "carousel: it wraps, so neither arrow hides (prev hidden=False, next hidden=False)"
+  },
+  {
+   "slider": "carousel, 6 slides, wraps",
+   "check": "CAROUSEL_LAYOUT",
+   "result": "PASS",
+   "detail": "grid \"slide\", every slide still one track wide ([1200] vs 1200) - isCarousel wraps the ends, it does not show more than one"
+  },
+  {
+   "slider": "carousel, 6 slides, wraps",
+   "check": "ARROW_ARIA",
+   "result": "PASS",
+   "detail": "role=button tabindex=0 label='下一張投影片'"
+  },
+  {
+   "slider": "carousel, 6 slides, wraps",
+   "check": "NEXT",
+   "result": "PASS",
+   "detail": "slide 0 -> 1"
+  },
+  {
+   "slider": "carousel, 6 slides, wraps",
+   "check": "PREV",
+   "result": "PASS",
+   "detail": "slide 1 -> 0"
+  },
+  {
+   "slider": "carousel, 6 slides, wraps",
+   "check": "KEYBOARD",
+   "result": "PASS",
+   "detail": "focus bullet 5 taken, Enter -> slide 5"
+  },
+  {
+   "slider": "carousel, 6 slides, wraps",
+   "check": "REDUCED",
+   "result": "PASS",
+   "detail": "under prefers-reduced-motion it holds still (slide 0 -> 0)"
+  }
+ ]
+}

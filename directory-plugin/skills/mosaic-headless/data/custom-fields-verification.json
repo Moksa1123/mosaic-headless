@@ -1,0 +1,509 @@
+{
+ "source_file": "data/custom-fields-verification.csv",
+ "columns": [
+  "provider",
+  "field",
+  "expression",
+  "expected",
+  "rendered",
+  "result"
+ ],
+ "rows": [
+  {
+   "provider": "ACF",
+   "field": "text",
+   "expression": "@VAR('post/meta_acf_text')",
+   "expected": "ACF plain text",
+   "rendered": "ACF plain text",
+   "result": "PASS"
+  },
+  {
+   "provider": "ACF",
+   "field": "textarea (newline kept, no <br>)",
+   "expression": "@VAR('post/meta_acf_area')",
+   "expected": "line one\\nline two",
+   "rendered": "line one\\nline two",
+   "result": "PASS"
+  },
+  {
+   "provider": "ACF",
+   "field": "number",
+   "expression": "@VAR('post/meta_acf_num')",
+   "expected": "42",
+   "rendered": "42",
+   "result": "PASS"
+  },
+  {
+   "provider": "ACF",
+   "field": "true_false",
+   "expression": "@VAR('post/meta_acf_bool')",
+   "expected": "1",
+   "rendered": "1",
+   "result": "PASS"
+  },
+  {
+   "provider": "ACF",
+   "field": "url",
+   "expression": "@VAR('post/meta_acf_url')",
+   "expected": "https://example.com/acf",
+   "rendered": "https://example.com/acf",
+   "result": "PASS"
+  },
+  {
+   "provider": "ACF",
+   "field": "email",
+   "expression": "@VAR('post/meta_acf_email')",
+   "expected": "acf@example.com",
+   "rendered": "acf@example.com",
+   "result": "PASS"
+  },
+  {
+   "provider": "ACF",
+   "field": "color_picker",
+   "expression": "@VAR('post/meta_acf_color')",
+   "expected": "#ff5a36",
+   "rendered": "#ff5a36",
+   "result": "PASS"
+  },
+  {
+   "provider": "ACF",
+   "field": "date_picker (return Y-m-d)",
+   "expression": "@VAR('post/meta_acf_date')",
+   "expected": "2026-09-15",
+   "rendered": "2026-09-15",
+   "result": "PASS"
+  },
+  {
+   "provider": "ACF",
+   "field": "wysiwyg",
+   "expression": "@VAR_RAW('post/meta_acf_wys')",
+   "expected": "Rich text",
+   "rendered": "Rich text",
+   "result": "PASS"
+  },
+  {
+   "provider": "ACF",
+   "field": "select (return value)",
+   "expression": "@VAR('post/meta_acf_select')",
+   "expected": "b",
+   "rendered": "b",
+   "result": "PASS"
+  },
+  {
+   "provider": "ACF",
+   "field": "select (return value) __label",
+   "expression": "@VAR('post/meta_acf_select__label')",
+   "expected": "",
+   "rendered": "",
+   "result": "EMPTY"
+  },
+  {
+   "provider": "ACF",
+   "field": "radio",
+   "expression": "@VAR('post/meta_acf_radio')",
+   "expected": "r2",
+   "rendered": "r2",
+   "result": "PASS"
+  },
+  {
+   "provider": "ACF",
+   "field": "image (return array)",
+   "expression": "@VAR('post/meta_acf_img')",
+   "expected": "https://example.com/wp-content/uploads/woocommerce-placeholder.webp",
+   "rendered": "https://example.com/wp-content/uploads/woocommerce-placeholder.webp",
+   "result": "PASS"
+  },
+  {
+   "provider": "ACF",
+   "field": "image (return array) __id",
+   "expression": "@VAR('post/meta_acf_img__id')",
+   "expected": "5",
+   "rendered": "5",
+   "result": "PASS"
+  },
+  {
+   "provider": "ACF",
+   "field": "image (return id)",
+   "expression": "@VAR('post/meta_acf_img_id')",
+   "expected": "https://example.com/wp-content/uploads/2026/09/richmenu-a.png",
+   "rendered": "https://example.com/wp-content/uploads/2026/09/richmenu-a.png",
+   "result": "PASS"
+  },
+  {
+   "provider": "ACF",
+   "field": "image (return id) __id",
+   "expression": "@VAR('post/meta_acf_img_id__id')",
+   "expected": "37",
+   "rendered": "37",
+   "result": "PASS"
+  },
+  {
+   "provider": "ACF",
+   "field": "file (return url)",
+   "expression": "@VAR('post/meta_acf_file')",
+   "expected": "https://example.com/wp-content/uploads/woocommerce-placeholder.webp",
+   "rendered": "https://example.com/wp-content/uploads/woocommerce-placeholder.webp",
+   "result": "PASS"
+  },
+  {
+   "provider": "ACF",
+   "field": "link (return array)",
+   "expression": "@VAR('post/meta_acf_link')",
+   "expected": "https://example.com/link",
+   "rendered": "https://example.com/link",
+   "result": "PASS"
+  },
+  {
+   "provider": "ACF",
+   "field": "link __title",
+   "expression": "@VAR('post/meta_acf_link__title')",
+   "expected": "Link title",
+   "rendered": "Link title",
+   "result": "PASS"
+  },
+  {
+   "provider": "ACF",
+   "field": "link __target",
+   "expression": "@VAR('post/meta_acf_link__target')",
+   "expected": "_blank",
+   "rendered": "_blank",
+   "result": "PASS"
+  },
+  {
+   "provider": "ACF",
+   "field": "page_link",
+   "expression": "@VAR('post/meta_acf_pl')",
+   "expected": "https://example.com/sample-page/",
+   "rendered": "https://example.com/sample-page/",
+   "result": "PASS"
+  },
+  {
+   "provider": "ACF",
+   "field": "post_object",
+   "expression": "@VAR('post/meta_acf_po')",
+   "expected": "6",
+   "rendered": "6",
+   "result": "PASS"
+  },
+  {
+   "provider": "ACF",
+   "field": "post_object __label",
+   "expression": "@VAR('post/meta_acf_po__label')",
+   "expected": "Shop",
+   "rendered": "Shop",
+   "result": "PASS"
+  },
+  {
+   "provider": "ACF",
+   "field": "post_object __url",
+   "expression": "@VAR('post/meta_acf_po__url')",
+   "expected": "https://example.com/shop/",
+   "rendered": "https://example.com/shop/",
+   "result": "PASS"
+  },
+  {
+   "provider": "ACF",
+   "field": "user",
+   "expression": "@VAR('post/meta_acf_user')",
+   "expected": "1",
+   "rendered": "1",
+   "result": "PASS"
+  },
+  {
+   "provider": "ACF",
+   "field": "user __label",
+   "expression": "@VAR('post/meta_acf_user__label')",
+   "expected": "Cheng-Chun Chang",
+   "rendered": "Cheng-Chun Chang",
+   "result": "PASS"
+  },
+  {
+   "provider": "ACF",
+   "field": "user __url",
+   "expression": "@VAR('post/meta_acf_user__url')",
+   "expected": "https://example.com/author/moksa/",
+   "rendered": "https://example.com/author/moksa/",
+   "result": "PASS"
+  },
+  {
+   "provider": "ACF",
+   "field": "oembed in a text node",
+   "expression": "@VAR_RAW('post/meta_acf_oembed')",
+   "expected": "",
+   "rendered": "",
+   "result": "EMPTY"
+  },
+  {
+   "provider": "Meta Box",
+   "field": "text",
+   "expression": "@VAR('post/meta_mb_text')",
+   "expected": "MB plain text",
+   "rendered": "MB plain text",
+   "result": "PASS"
+  },
+  {
+   "provider": "Meta Box",
+   "field": "number",
+   "expression": "@VAR('post/meta_mb_num')",
+   "expected": "17",
+   "rendered": "17",
+   "result": "PASS"
+  },
+  {
+   "provider": "Meta Box",
+   "field": "checkbox",
+   "expression": "@VAR('post/meta_mb_check')",
+   "expected": "1",
+   "rendered": "1",
+   "result": "PASS"
+  },
+  {
+   "provider": "Meta Box",
+   "field": "select",
+   "expression": "@VAR('post/meta_mb_select')",
+   "expected": "a",
+   "rendered": "a",
+   "result": "PASS"
+  },
+  {
+   "provider": "Meta Box",
+   "field": "select __label",
+   "expression": "@VAR('post/meta_mb_select__label')",
+   "expected": "Alpha",
+   "rendered": "Alpha",
+   "result": "PASS"
+  },
+  {
+   "provider": "Meta Box",
+   "field": "date",
+   "expression": "@VAR('post/meta_mb_date')",
+   "expected": "2026-09-15",
+   "rendered": "2026-09-15",
+   "result": "PASS"
+  },
+  {
+   "provider": "Meta Box",
+   "field": "color",
+   "expression": "@VAR('post/meta_mb_color')",
+   "expected": "#0a84ff",
+   "rendered": "#0a84ff",
+   "result": "PASS"
+  },
+  {
+   "provider": "Meta Box",
+   "field": "url",
+   "expression": "@VAR('post/meta_mb_url')",
+   "expected": "https://example.com/mb",
+   "rendered": "https://example.com/mb",
+   "result": "PASS"
+  },
+  {
+   "provider": "Meta Box",
+   "field": "wysiwyg",
+   "expression": "@VAR('post/meta_mb_wys')",
+   "expected": "MB rich",
+   "rendered": "MB rich",
+   "result": "PASS"
+  },
+  {
+   "provider": "Meta Box",
+   "field": "single_image",
+   "expression": "@VAR('post/meta_mb_single')",
+   "expected": "https://example.com/wp-content/uploads/woocommerce-placeholder.webp",
+   "rendered": "https://example.com/wp-content/uploads/woocommerce-placeholder.webp",
+   "result": "PASS"
+  },
+  {
+   "provider": "Meta Box",
+   "field": "single_image __id",
+   "expression": "@VAR('post/meta_mb_single__id')",
+   "expected": "5",
+   "rendered": "5",
+   "result": "PASS"
+  },
+  {
+   "provider": "Meta Box",
+   "field": "user",
+   "expression": "@VAR('post/meta_mb_user')",
+   "expected": "Cheng-Chun Chang",
+   "rendered": "Cheng-Chun Chang",
+   "result": "PASS"
+  },
+  {
+   "provider": "Meta Box",
+   "field": "user __id",
+   "expression": "@VAR('post/meta_mb_user__id')",
+   "expected": "1",
+   "rendered": "1",
+   "result": "PASS"
+  },
+  {
+   "provider": "Meta Box",
+   "field": "user __url",
+   "expression": "@VAR('post/meta_mb_user__url')",
+   "expected": "https://example.com/author/moksa/",
+   "rendered": "https://example.com/author/moksa/",
+   "result": "PASS"
+  },
+  {
+   "provider": "Meta Box",
+   "field": "oembed in a text node",
+   "expression": "@VAR_RAW('post/meta_mb_oembed')",
+   "expected": "",
+   "rendered": "",
+   "result": "EMPTY"
+  },
+  {
+   "provider": "Meta Box",
+   "field": "oembed __url",
+   "expression": "@VAR('post/meta_mb_oembed__url')",
+   "expected": "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+   "rendered": "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+   "result": "PASS"
+  },
+  {
+   "provider": "ACF",
+   "field": "relationship, one row inline (index 1)",
+   "expression": "@LOOP('post/loopacf_rel', 1, 'value__url')",
+   "expected": "https://example.com/sample-page/",
+   "rendered": "https://example.com/sample-page/",
+   "result": "PASS"
+  },
+  {
+   "provider": "ACF",
+   "field": "relationship, every row inline (index 0)",
+   "expression": "@LOOP('post/loopacf_rel', 0, 'value__label')",
+   "expected": "Sample Page, Shop",
+   "rendered": "Sample Page, Shop",
+   "result": "PASS"
+  },
+  {
+   "provider": "ACF",
+   "field": "group, one row inline",
+   "expression": "@LOOP('post/loop-acf_group', 1, 'value_ga')",
+   "expected": "group text",
+   "rendered": "group text",
+   "result": "PASS"
+  },
+  {
+   "provider": "ACF",
+   "field": "relationship loop row value (= ID)",
+   "expression": "loop post/loopacf_rel -> @VAR('item/value')",
+   "expected": "2 | 6",
+   "rendered": "2 | 6",
+   "result": "PASS"
+  },
+  {
+   "provider": "ACF",
+   "field": "relationship loop row __label",
+   "expression": "loop post/loopacf_rel -> @VAR('item/value__label')",
+   "expected": "Sample Page | Shop",
+   "rendered": "Sample Page | Shop",
+   "result": "PASS"
+  },
+  {
+   "provider": "ACF",
+   "field": "relationship loop row __url",
+   "expression": "loop post/loopacf_rel -> @VAR('item/value__url')",
+   "expected": "https://example.com/sample-page/ | https://example.com/shop/",
+   "rendered": "https://example.com/sample-page/ | https://example.com/shop/",
+   "result": "PASS"
+  },
+  {
+   "provider": "ACF",
+   "field": "relationship loop row index",
+   "expression": "loop post/loopacf_rel -> @VAR('item/index')",
+   "expected": "1 | 2",
+   "rendered": "1 | 2",
+   "result": "PASS"
+  },
+  {
+   "provider": "ACF",
+   "field": "checkbox loop row value",
+   "expression": "loop post/loopacf_check -> @VAR('item/value')",
+   "expected": "x | z",
+   "rendered": "x | z",
+   "result": "PASS"
+  },
+  {
+   "provider": "ACF",
+   "field": "taxonomy loop row __label",
+   "expression": "loop post/loopacf_tax -> @VAR('item/value__label')",
+   "expected": "Uncategorized",
+   "rendered": "Uncategorized",
+   "result": "PASS"
+  },
+  {
+   "provider": "ACF",
+   "field": "taxonomy loop row __url",
+   "expression": "loop post/loopacf_tax -> @VAR('item/value__url')",
+   "expected": "https://example.com/category/uncategorized/",
+   "rendered": "https://example.com/category/uncategorized/",
+   "result": "PASS"
+  },
+  {
+   "provider": "ACF",
+   "field": "group loop row sub-field",
+   "expression": "loop post/loop-acf_group -> @VAR('item/value_ga')",
+   "expected": "group text",
+   "rendered": "group text",
+   "result": "PASS"
+  },
+  {
+   "provider": "ACF",
+   "field": "group loop row sub-field (number)",
+   "expression": "loop post/loop-acf_group -> @VAR('item/value_gb')",
+   "expected": "7",
+   "rendered": "7",
+   "result": "PASS"
+  },
+  {
+   "provider": "Meta Box",
+   "field": "image_advanced loop row __id",
+   "expression": "loop post/loopmb_img -> @VAR('item/value__id')",
+   "expected": "5 | 37",
+   "rendered": "5 | 37",
+   "result": "PASS"
+  },
+  {
+   "provider": "Meta Box",
+   "field": "checkbox_list loop row value",
+   "expression": "loop post/loopmb_multi -> @VAR('item/value')",
+   "expected": "x | y",
+   "rendered": "x | y",
+   "result": "PASS"
+  },
+  {
+   "provider": "Meta Box",
+   "field": "checkbox_list loop row __label",
+   "expression": "loop post/loopmb_multi -> @VAR('item/value__label')",
+   "expected": "Ex | Why",
+   "rendered": "Ex | Why",
+   "result": "PASS"
+  },
+  {
+   "provider": "Meta Box",
+   "field": "cloneable text loop row value",
+   "expression": "loop post/loopmb_text_clone -> @VAR('item/value')",
+   "expected": "clone one | clone two",
+   "rendered": "clone one | clone two",
+   "result": "PASS"
+  },
+  {
+   "provider": "ACF",
+   "field": "oembed through a code node",
+   "expression": "code: @VAR_RAW('post/meta_acf_oembed')",
+   "expected": "<iframe",
+   "rendered": "<iframe title=\"Rick Astley - Never Gonna Give You Up (Offici",
+   "result": "PASS"
+  },
+  {
+   "provider": "Meta Box",
+   "field": "wysiwyg through a code node",
+   "expression": "code: @VAR_RAW('post/meta_mb_wys')",
+   "expected": "<p>MB <em>rich</em></p>",
+   "rendered": "<div class=\"wp-site-blocks\"><div class=\"entry-content alignf",
+   "result": "PASS"
+  }
+ ]
+}

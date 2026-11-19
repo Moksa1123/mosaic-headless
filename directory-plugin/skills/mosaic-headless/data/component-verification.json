@@ -1,0 +1,50 @@
+{
+ "source_file": "data/component-verification.csv",
+ "columns": [
+  "step",
+  "result",
+  "detail"
+ ],
+ "rows": [
+  {
+   "step": "categories exist",
+   "result": "PASS",
+   "detail": "Page, Block, Part"
+  },
+  {
+   "step": "component created",
+   "result": "PASS",
+   "detail": "parented to 'Page'"
+  },
+  {
+   "step": "document healed",
+   "result": "PASS",
+   "detail": "first GET 404'd, second gave component-internal"
+  },
+  {
+   "step": "component filled",
+   "result": "PASS",
+   "detail": "tree is component-internal, div, text, wysiwyg-text"
+  },
+  {
+   "step": "read-only instance refuses",
+   "result": "PASS",
+   "detail": "componentNodeEditorInstance rejected the same commit"
+  },
+  {
+   "step": "instances committed",
+   "result": "PASS",
+   "detail": "type carries the component id"
+  },
+  {
+   "step": "both instances rendered",
+   "result": "PASS",
+   "detail": "2 instance elements in the delivered HTML"
+  },
+  {
+   "step": "component content reused",
+   "result": "PASS",
+   "detail": "the component's own text appears 2 times from ONE definition"
+  }
+ ]
+}

@@ -1,0 +1,89 @@
+{
+ "source_file": "data/pending.csv",
+ "columns": [
+  "date",
+  "question",
+  "why_not_found",
+  "asked_by",
+  "status"
+ ],
+ "rows": [
+  {
+   "date": "2026-11-16",
+   "question": "Node properties ariaLive and positioning (popover / 1.0.10+) have no probe row",
+   "why_not_found": "sweep_node_properties.py was last run before they existed; needs a scratch-site re-sweep on 1.0.12",
+   "asked_by": "mosaic skill (SOP pass: 201 vs 191 explanation)",
+   "status": "open"
+  },
+  {
+   "date": "2026-11-16",
+   "question": "The style and node property sweeps predate 1.0.12",
+   "why_not_found": "source tables were re-extracted on 1.0.12 and the node sweep re-run; the property sweeps were not (references/verification-record.md says which version each ran on)",
+   "asked_by": "mosaic skill (SOP pass)",
+   "status": "open"
+  },
+  {
+   "date": "2026-11-16",
+   "question": "gridColumnStart / gridColumnEnd / gridRowStart / gridRowEnd emit nothing headlessly",
+   "why_not_found": "the editor's stored shape for grid child placement has not been captured; author it once in the editor and read the row back",
+   "asked_by": "references/verification-record.md (known gaps)",
+   "status": "open"
+  },
+  {
+   "date": "2026-11-16",
+   "question": "Interaction shapes still unmeasured: player actions; dropdown open-on-hover settings; form integration actions",
+   "why_not_found": "not yet authored in the editor and read back (the method that solved tween values in v1.35.0)",
+   "asked_by": "mosaic skill",
+   "status": "open"
+  },
+  {
+   "date": "2026-11-16",
+   "question": "terms-zh.csv rows marked inferred are colloquial words with no Mosaic string",
+   "why_not_found": "the designer glossary shipped in Mosaic 1.0.13 and those rows are now documented; the colloquial rows have no Mosaic string to cite",
+   "asked_by": "mosaic skill (terms-zh.csv)",
+   "status": "open"
+  },
+  {
+   "date": "2026-11-16",
+   "question": "Shared msgids that need a msgctxt from Mosaic: Fixed / Select / Snap / Toggle / Scale down",
+   "why_not_found": "one English string serves a verb and a noun so one zh_TW string cannot fit both (選取 for the Select field)",
+   "asked_by": "zh_TW review 2026-11-05",
+   "status": "closed 2026-11-17: all five carry a msgctxt in Mosaic 1.0.13"
+  },
+  {
+   "date": "2026-11-16",
+   "question": "Is a top-level user-invocable key accepted by the claude.ai skill upload",
+   "why_not_found": "scripts/check-release.mjs notes the Agent Skills spec allows only six top-level keys; Claude Code reads user-invocable and the claude-code platform template now writes it; the other platform templates do not; the claude.ai upload path is untested",
+   "asked_by": "mosaic skill (SOP item 0)",
+   "status": "open"
+  },
+  {
+   "date": "2026-11-17",
+   "question": "Mosaic 1.0.13 editor features the skill cannot write yet: new collection-variable types (background/gradient, box/text shadow, nested; font size and line height as variables); List classes; pageLoad delay; scroll-direction offset; Hide/Show in Editor actions; accordion all-open; External Styles / Gutenberg Styles",
+   "why_not_found": "they live in the editor JavaScript, not in the PHP the extractors read; each needs one editor-authored example read back from the row on a 1.0.13 site (references/upgrading.md)",
+   "asked_by": "user (Mosaic 1.0.13 release)",
+   "status": "open"
+  },
+  {
+   "date": "2026-11-17",
+   "question": "Demo verifiers and sweeps not yet re-run on Mosaic 1.0.13",
+   "why_not_found": "the demo site was upgraded on 2026-11-17 and passed the page health check (90/90, no duplicate roots); the browser verifiers were held back because the shared host was under heavy load",
+   "asked_by": "user (Mosaic 1.0.13 release)",
+   "status": "open"
+  },
+  {
+   "date": "2026-11-18",
+   "question": "Demo site: 7 component instances (case-card x3, service-row x4) in two unbound templates have all 70 override nodes emptied to originalID-only shells",
+   "why_not_found": "not a gap in the data but a known state: written 2026-11-04 18:05 UTC after a component rebuild re-keyed the components; the templates serve no post so no visitor sees it. Left as is (read-only check); prune_unbound.php would remove the templates, or the instances can be re-filled from a spec. Whether to delete the two unbound templates is the user's decision",
+   "asked_by": "skill 總機 (em925 override incident follow-up)",
+   "status": "waiting (user decision)"
+  },
+  {
+   "date": "2026-11-18",
+   "question": "Install the front-end write block for wp_mosaic_nodes on the demo site (references/facts.md, empty-root prevention)",
+   "why_not_found": "a decision, not a gap: the block is measured on another live site; installing it on the shared demo site waits for the user",
+   "asked_by": "skill 總機 (em925 empty-root root cause)",
+   "status": "waiting (user decision)"
+  }
+ ]
+}

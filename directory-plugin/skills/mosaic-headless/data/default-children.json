@@ -1,0 +1,201 @@
+{
+ "source_file": "data/default-children.csv",
+ "columns": [
+  "type",
+  "default_children",
+  "child_count",
+  "source",
+  "declared_in"
+ ],
+ "rows": [
+  {
+   "type": "accordion-content",
+   "default_children": "text|wysiwyg-text",
+   "child_count": "2",
+   "source": "default",
+   "declared_in": "Mosaic/NodeTypes/Accordion/AccordionItem/AccordionContent/AccordionContentElementTypeFactory.php"
+  },
+  {
+   "type": "accordion-item",
+   "default_children": "accordion-title|accordion-content",
+   "child_count": "2",
+   "source": "default",
+   "declared_in": "Mosaic/NodeTypes/Accordion/AccordionItem/AccordionItemElementTypeFactory.php"
+  },
+  {
+   "type": "choice-field",
+   "default_children": "choice-legend|choice-content",
+   "child_count": "2",
+   "source": "heal",
+   "declared_in": "Mosaic/NodeTypes/Form/Form/MElements/ChoiceField/ChoiceFieldElementMResource.php"
+  },
+  {
+   "type": "dropdown",
+   "default_children": "dropdown-toggle|dropdown-wrapper",
+   "child_count": "2",
+   "source": "heal",
+   "declared_in": "Mosaic/NodeTypes/Menu/Dropdown/Dropdown/DropdownElementMResource.php"
+  },
+  {
+   "type": "dropdown-wide",
+   "default_children": "dropdown-toggle|dropdown-wrapper-wide",
+   "child_count": "2",
+   "source": "heal",
+   "declared_in": "Mosaic/NodeTypes/Menu/Dropdown/DropdownWide/DropdownWideElementMResource.php"
+  },
+  {
+   "type": "form-multi-steps",
+   "default_children": "form-multi-steps-steps|multi-steps-forms|form-multi-steps-step|multi-steps-form-step",
+   "child_count": "4",
+   "source": "heal",
+   "declared_in": "Mosaic/NodeTypes/Form/Form/MElements/MultiSteps/MultiStepsElementMResource.php"
+  },
+  {
+   "type": "form-wrapper",
+   "default_children": "form|success-screen",
+   "child_count": "2",
+   "source": "heal",
+   "declared_in": "Mosaic/NodeTypes/Form/FormWrapperElementMResource.php"
+  },
+  {
+   "type": "loop",
+   "default_children": "loop-items|loop-no-result",
+   "child_count": "2",
+   "source": "heal",
+   "declared_in": "Mosaic/NodeTypes/Loop/LoopElementMResource.php"
+  },
+  {
+   "type": "loop-pagination-numbers",
+   "default_children": "loop-pagination-number",
+   "child_count": "1",
+   "source": "heal",
+   "declared_in": "Mosaic/NodeTypes/Loop/LoopPagination/Numbers/LoopPaginationNumbersElementMResource.php"
+  },
+  {
+   "type": "modal",
+   "default_children": "modal-overlay",
+   "child_count": "1",
+   "source": "heal",
+   "declared_in": "Mosaic/NodeTypes/Pro/Dialog/Modal/ModalElementMResource.php"
+  },
+  {
+   "type": "select",
+   "default_children": "select-toggle|select-options",
+   "child_count": "2",
+   "source": "heal",
+   "declared_in": "Mosaic/NodeTypes/Form/Form/MElements/Select/SelectElementMResource.php"
+  },
+  {
+   "type": "select-toggle",
+   "default_children": "select-placeholder",
+   "child_count": "1",
+   "source": "heal",
+   "declared_in": "Mosaic/NodeTypes/Form/Form/MElements/Select/Toggle/SelectToggleElementMResource.php"
+  },
+  {
+   "type": "slider",
+   "default_children": "slider-slides",
+   "child_count": "1",
+   "source": "heal",
+   "declared_in": "Mosaic/NodeTypes/Slider/SliderElementMResource.php"
+  },
+  {
+   "type": "slider-navigation",
+   "default_children": "slider-navigation-bullet",
+   "child_count": "1",
+   "source": "default",
+   "declared_in": "Mosaic/NodeTypes/Slider/SliderNavigation/SliderNavigationElementTypeFactory.php"
+  },
+  {
+   "type": "slider-navigation",
+   "default_children": "slider-navigation-bullet",
+   "child_count": "1",
+   "source": "heal",
+   "declared_in": "Mosaic/NodeTypes/Slider/SliderNavigation/SliderNavigationElementMResource.php"
+  },
+  {
+   "type": "styleguide-entry-content-image",
+   "default_children": "styleguide-entry-content-image-img|styleguide-entry-content-image-caption",
+   "child_count": "2",
+   "source": "heal",
+   "declared_in": "Mosaic/NodeTypes/SG/SGEntryContent/SGEntryContentImage/SGEntryContentImageElementMResource.php"
+  },
+  {
+   "type": "styleguide-entry-content-list",
+   "default_children": "styleguide-entry-content-list-item",
+   "child_count": "1",
+   "source": "heal",
+   "declared_in": "Mosaic/NodeTypes/SG/SGEntryContent/SGEntryContentList/SGEntryContentListElementMResource.php"
+  },
+  {
+   "type": "styleguide-entry-content-pullquote",
+   "default_children": "styleguide-entry-content-pullquote-paragraph|styleguide-entry-content-pullquote-cite",
+   "child_count": "2",
+   "source": "heal",
+   "declared_in": "Mosaic/NodeTypes/SG/SGEntryContent/SGEntryContentPullQuote/SGEntryContentPullQuoteElementMResource.php"
+  },
+  {
+   "type": "styleguide-entry-content-text-quote",
+   "default_children": "styleguide-entry-content-quote-cite",
+   "child_count": "1",
+   "source": "heal",
+   "declared_in": "Mosaic/NodeTypes/SG/SGEntryContent/SGEntryContentQuote/SGEntryContentQuoteElementMResource.php"
+  },
+  {
+   "type": "submit-button",
+   "default_children": "submit-label|submit-loading",
+   "child_count": "2",
+   "source": "heal",
+   "declared_in": "Mosaic/NodeTypes/Form/Form/MElements/SubmitButton/SubmitButtonElementMResource.php"
+  },
+  {
+   "type": "tabs-content",
+   "default_children": "tabs-tab-pane",
+   "child_count": "1",
+   "source": "default",
+   "declared_in": "Mosaic/NodeTypes/Tabs/TabsContent/TabsContentElementTypeFactory.php"
+  },
+  {
+   "type": "tabs-loop-tab-panes",
+   "default_children": "text|wysiwyg-variable",
+   "child_count": "2",
+   "source": "default",
+   "declared_in": "Mosaic/NodeTypes/Tabs/TabsContent/LoopTabPanes/TabLoopTabPanesElementTypeFactory.php"
+  },
+  {
+   "type": "tabs-loop-tabs",
+   "default_children": "text|wysiwyg-variable",
+   "child_count": "2",
+   "source": "default",
+   "declared_in": "Mosaic/NodeTypes/Tabs/TabsMenu/LoopTabs/TabLoopTabsElementTypeFactory.php"
+  },
+  {
+   "type": "tabs-menu",
+   "default_children": "tabs-tab",
+   "child_count": "1",
+   "source": "default",
+   "declared_in": "Mosaic/NodeTypes/Tabs/TabsMenu/TabsMenuElementTypeFactory.php"
+  },
+  {
+   "type": "tabs-tab",
+   "default_children": "text|wysiwyg-text",
+   "child_count": "2",
+   "source": "default",
+   "declared_in": "Mosaic/NodeTypes/Tabs/TabsMenu/Tab/TabElementTypeFactory.php"
+  },
+  {
+   "type": "tabs-tab-pane",
+   "default_children": "text|wysiwyg-text",
+   "child_count": "2",
+   "source": "default",
+   "declared_in": "Mosaic/NodeTypes/Tabs/TabsContent/TabPane/TabPaneElementTypeFactory.php"
+  },
+  {
+   "type": "text",
+   "default_children": "wysiwyg-text",
+   "child_count": "1",
+   "source": "default",
+   "declared_in": "Mosaic/NodeTypes/Text/TextElementTypeFactory.php"
+  }
+ ]
+}

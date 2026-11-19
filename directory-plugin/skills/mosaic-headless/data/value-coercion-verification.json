@@ -1,0 +1,96 @@
+{
+ "source_file": "data/value-coercion-verification.csv",
+ "columns": [
+  "validator",
+  "probed_on",
+  "sent",
+  "result",
+  "note"
+ ],
+ "rows": [
+  {
+   "validator": "ValidatorInteger",
+   "probed_on": "maxlength on textarea-input",
+   "sent": "\"12\"",
+   "result": "12",
+   "note": "accepted"
+  },
+  {
+   "validator": "ValidatorInteger",
+   "probed_on": "maxlength on textarea-input",
+   "sent": "\"12abc\"",
+   "result": "12",
+   "note": "trailing garbage ignored - parseInt semantics, new in 1.0.9"
+  },
+  {
+   "validator": "ValidatorInteger",
+   "probed_on": "maxlength on textarea-input",
+   "sent": "\"abc\"",
+   "result": "(absent)",
+   "note": "no leading digits, rejected"
+  },
+  {
+   "validator": "ValidatorInteger",
+   "probed_on": "maxlength on textarea-input",
+   "sent": "\"-5x\"",
+   "result": "(absent)",
+   "note": "parses to -5, then refused by the property's own min:0 - the parser accepted it"
+  },
+  {
+   "validator": "ValidatorInteger",
+   "probed_on": "maxlength on textarea-input",
+   "sent": "\" 7 \"",
+   "result": "7",
+   "note": "leading and trailing whitespace tolerated"
+  },
+  {
+   "validator": "ValidatorInteger",
+   "probed_on": "maxlength on textarea-input",
+   "sent": "\"0012\"",
+   "result": "12",
+   "note": "leading zeros are decimal, not octal"
+  },
+  {
+   "validator": "ValidatorInteger",
+   "probed_on": "maxlength on textarea-input",
+   "sent": "\"1e3\"",
+   "result": "1",
+   "note": "NOT 1000 - the exponent is trailing garbage"
+  },
+  {
+   "validator": "ValidatorInteger",
+   "probed_on": "maxlength on textarea-input",
+   "sent": "\"12.9\"",
+   "result": "12",
+   "note": "truncated toward zero, not rounded"
+  },
+  {
+   "validator": "stretch",
+   "probed_on": "width",
+   "sent": "\"stretch\"",
+   "result": "width:-webkit-fill-available then width:stretch",
+   "note": "both emitted, prefix first"
+  },
+  {
+   "validator": "stretch",
+   "probed_on": "height",
+   "sent": "\"stretch\"",
+   "result": "height:-webkit-fill-available then height:stretch",
+   "note": "both emitted"
+  },
+  {
+   "validator": "stretch",
+   "probed_on": "maxWidth",
+   "sent": "\"stretch\"",
+   "result": "max-width:-webkit-fill-available then max-width:stretch",
+   "note": "both emitted"
+  },
+  {
+   "validator": "stretch",
+   "probed_on": "width",
+   "sent": "\"STRETCH\"",
+   "result": "width:STRETCH",
+   "note": "kept as typed - the match is case-sensitive, and CSS keywords are not, so it still applies"
+  }
+ ]
+}

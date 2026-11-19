@@ -1,0 +1,120 @@
+{
+ "source_file": "data/animatable-properties.csv",
+ "columns": [
+  "property",
+  "kind",
+  "animates_via"
+ ],
+ "rows": [
+  {
+   "property": "transform",
+   "kind": "Transform",
+   "animates_via": "(the CSS property)"
+  },
+  {
+   "property": "translateX",
+   "kind": "Move",
+   "animates_via": "--mosaic-translate-x"
+  },
+  {
+   "property": "translateY",
+   "kind": "Move",
+   "animates_via": "--mosaic-translate-y"
+  },
+  {
+   "property": "translateZ",
+   "kind": "Move",
+   "animates_via": "--mosaic-translate-z"
+  },
+  {
+   "property": "scale",
+   "kind": "Scale",
+   "animates_via": "--mosaic-scale"
+  },
+  {
+   "property": "scaleX",
+   "kind": "Scale",
+   "animates_via": "--mosaic-scale-x"
+  },
+  {
+   "property": "scaleY",
+   "kind": "Scale",
+   "animates_via": "--mosaic-scale-y"
+  },
+  {
+   "property": "scaleZ",
+   "kind": "Scale",
+   "animates_via": "--mosaic-scale-z"
+  },
+  {
+   "property": "rotateX",
+   "kind": "Rotate",
+   "animates_via": "--mosaic-rotate-x"
+  },
+  {
+   "property": "rotateY",
+   "kind": "Rotate",
+   "animates_via": "--mosaic-rotate-y"
+  },
+  {
+   "property": "rotateZ",
+   "kind": "Rotate",
+   "animates_via": "--mosaic-rotate-z"
+  },
+  {
+   "property": "opacity",
+   "kind": "Opacity",
+   "animates_via": "(the CSS property)"
+  },
+  {
+   "property": "color",
+   "kind": "Color",
+   "animates_via": "(the CSS property)"
+  },
+  {
+   "property": "backgroundColor",
+   "kind": "Color",
+   "animates_via": "(the CSS property)"
+  },
+  {
+   "property": "borderColor",
+   "kind": "Color",
+   "animates_via": "(the CSS property)"
+  },
+  {
+   "property": "boxShadow",
+   "kind": "BoxShadow",
+   "animates_via": "(the CSS property)"
+  },
+  {
+   "property": "textShadow",
+   "kind": "TextShadow",
+   "animates_via": "(the CSS property)"
+  },
+  {
+   "property": "width",
+   "kind": "Size",
+   "animates_via": "(the CSS property)"
+  },
+  {
+   "property": "height",
+   "kind": "Size",
+   "animates_via": "(the CSS property)"
+  },
+  {
+   "property": "filter",
+   "kind": "Filter",
+   "animates_via": "(the CSS property)"
+  },
+  {
+   "property": "backdropFilter",
+   "kind": "Filter",
+   "animates_via": "(the CSS property)"
+  },
+  {
+   "property": "transformOrigin",
+   "kind": "TransformOrigin",
+   "animates_via": "(the CSS property)"
+  }
+ ]
+}

@@ -1,0 +1,124 @@
+{
+ "source_file": "data/interaction-types.csv",
+ "columns": [
+  "id",
+  "family",
+  "label",
+  "description",
+  "declared_in"
+ ],
+ "rows": [
+  {
+   "id": "pointerMove",
+   "family": "progress",
+   "label": "Mouse",
+   "description": "Animate as the mouse moves over the element, or as a finger drags across it with Touch on.",
+   "declared_in": "Mosaic/Plugins/InteractionTypes/progress/pointermove/InteractionTypePointerMoveAbstract.php"
+  },
+  {
+   "id": "scrollIntoView",
+   "family": "progress",
+   "label": "Page & scroll",
+   "description": "Tracks the visibility of an element as it enters and exits the viewport.",
+   "declared_in": "Mosaic/Plugins/InteractionTypes/progress/scrollIntoView/InteractionTypeScrollIntoViewAbstract.php"
+  },
+  {
+   "id": "accordionItemChange",
+   "family": "timed",
+   "label": "Element events",
+   "description": "Animate when the accordion item opens or closes.",
+   "declared_in": "Mosaic/Plugins/InteractionTypes/timed/accordionitemchange/InteractionTypeAccordionItemChangeAbstract.php"
+  },
+  {
+   "id": "click",
+   "family": "timed",
+   "label": "Mouse",
+   "description": "Animate on the first/second click.",
+   "declared_in": "Mosaic/Plugins/InteractionTypes/timed/click/InteractionTypeClickAbstract.php"
+  },
+  {
+   "id": "dropdownChange",
+   "family": "timed",
+   "label": "Element events",
+   "description": "Animate when the dropdown opens or closes.",
+   "declared_in": "Mosaic/Plugins/InteractionTypes/timed/dropdownchange/InteractionTypeDropdownChangeAbstract.php"
+  },
+  {
+   "id": "elementScrollIntoView",
+   "family": "timed",
+   "label": "Page & scroll",
+   "description": "Animate when the element enters viewport.",
+   "declared_in": "Mosaic/Plugins/InteractionTypes/timed/elementscrollintoview/InteractionTypeElementScrollIntoView.php"
+  },
+  {
+   "id": "exitIntent",
+   "family": "timed",
+   "label": "Mouse",
+   "description": "Activates when the mouse leaves the page. Desktop only - it never runs on touch devices.",
+   "declared_in": "Mosaic/Plugins/InteractionTypes/timed/exitintent/InteractionTypeExitIntentAbstract.php"
+  },
+  {
+   "id": "formSubmit",
+   "family": "timed",
+   "label": "Element events",
+   "description": "Runs when the form reaches a submission outcome.",
+   "declared_in": "Mosaic/Plugins/InteractionTypes/timed/formsubmit/InteractionTypeFormSubmitAbstract.php"
+  },
+  {
+   "id": "hover",
+   "family": "timed",
+   "label": "Mouse",
+   "description": "Animate when the cursor hovers the element.",
+   "declared_in": "Mosaic/Plugins/InteractionTypes/timed/hover/InteractionTypeHoverAbstract.php"
+  },
+  {
+   "id": "modal",
+   "family": "timed",
+   "label": "Element events",
+   "description": "Animates the modal as it opens and closes.",
+   "declared_in": "Mosaic/Plugins/InteractionTypes/timed/modal/InteractionTypeModalAbstract.php"
+  },
+  {
+   "id": "pageLoad",
+   "family": "timed",
+   "label": "Page & scroll",
+   "description": "Activates when the page finishes loading.",
+   "declared_in": "Mosaic/Plugins/InteractionTypes/timed/pageload/InteractionTypePageLoad.php"
+  },
+  {
+   "id": "popover",
+   "family": "timed",
+   "label": "Element events",
+   "description": "Animates the popover as it opens and closes.",
+   "declared_in": "Mosaic/Plugins/InteractionTypes/timed/popover/InteractionTypePopoverAbstract.php"
+  },
+  {
+   "id": "scrollDepth",
+   "family": "timed",
+   "label": "Page & scroll",
+   "description": "Activates when the visitor scrolls this far down the page.",
+   "declared_in": "Mosaic/Plugins/InteractionTypes/timed/scrolldepth/InteractionTypeScrollDepthAbstract.php"
+  },
+  {
+   "id": "scrollDirectionChange",
+   "family": "timed",
+   "label": "Page & scroll",
+   "description": "Animate when the scroll direction changes.",
+   "declared_in": "Mosaic/Plugins/InteractionTypes/timed/scrolldirectionchange/InteractionTypeScrollDirectionChangeAbstract.php"
+  },
+  {
+   "id": "slideChange",
+   "family": "timed",
+   "label": "Element events",
+   "description": "Animate when the slide slides in or out.",
+   "declared_in": "Mosaic/Plugins/InteractionTypes/timed/slidechange/InteractionTypeSlideChangeAbstract.php"
+  },
+  {
+   "id": "tabChange",
+   "family": "timed",
+   "label": "Element events",
+   "description": "Animate when the tab becomes active or inactive.",
+   "declared_in": "Mosaic/Plugins/InteractionTypes/timed/tabchange/InteractionTypeTabChangeAbstract.php"
+  }
+ ]
+}

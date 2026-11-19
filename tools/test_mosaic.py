@@ -411,6 +411,8 @@ class DirectoryEdition(unittest.TestCase):
         want = bd.build()                       # raises on a forbidden word, file type or size
         self.assertEqual(bd.differences(want, bd.existing()), [],
                          "run python scripts/build_directory.py")
+        # GitHub is what the directory reads: every generated file must be committed
+        self.assertEqual(bd.untracked(want), [], "git add directory-plugin (check .gitignore)")
         for rel in want:
             self.assertIn(os.path.splitext(rel)[1] or rel, {".md", ".json", ".png", "LICENSE"}, rel)
         skill = want["skills/mosaic-headless/SKILL.md"].decode("utf-8")

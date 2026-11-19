@@ -1,0 +1,225 @@
+{
+ "source_file": "data/page-modal-verification.csv",
+ "columns": [
+  "page",
+  "result",
+  "trigger",
+  "run_rule",
+  "remember",
+  "memory_name",
+  "closedby",
+  "aria_modal",
+  "accessible_label"
+ ],
+ "rows": [
+  {
+   "page": "home",
+   "result": "PASS",
+   "trigger": "exitIntent",
+   "run_rule": "cap",
+   "remember": "session",
+   "memory_name": "mw-home",
+   "closedby": "everything",
+   "aria_modal": "yes",
+   "accessible_label": "還沒找到要的東西？"
+  },
+  {
+   "page": "services",
+   "result": "PASS",
+   "trigger": "scrollDepth",
+   "run_rule": "cooldown",
+   "remember": "forever",
+   "memory_name": "mw-services",
+   "closedby": "everything",
+   "aria_modal": "yes",
+   "accessible_label": "想知道哪一項最適合？"
+  },
+  {
+   "page": "mowp",
+   "result": "PASS",
+   "trigger": "exitIntent",
+   "run_rule": "cap",
+   "remember": "session",
+   "memory_name": "mw-mowp",
+   "closedby": "everything",
+   "aria_modal": "yes",
+   "accessible_label": "需要同樣的東西嗎？"
+  },
+  {
+   "page": "weebly-migration",
+   "result": "PASS",
+   "trigger": "exitIntent",
+   "run_rule": "cap",
+   "remember": "session",
+   "memory_name": "mw-weebly-migration",
+   "closedby": "everything",
+   "aria_modal": "yes",
+   "accessible_label": "需要同樣的東西嗎？"
+  },
+  {
+   "page": "works",
+   "result": "PASS",
+   "trigger": "scrollDepth",
+   "run_rule": "cap",
+   "remember": "session",
+   "memory_name": "mw-works",
+   "closedby": "clickOutside",
+   "aria_modal": "yes",
+   "accessible_label": "想看完整的案例？"
+  },
+  {
+   "page": "plan",
+   "result": "PASS",
+   "trigger": "pageLoad",
+   "run_rule": "firstRunWindow",
+   "remember": "session",
+   "memory_name": "mw-plan",
+   "closedby": "esc",
+   "aria_modal": "yes",
+   "accessible_label": "報價只是起點"
+  },
+  {
+   "page": "about",
+   "result": "PASS",
+   "trigger": "exitIntent",
+   "run_rule": "cap",
+   "remember": "forever",
+   "memory_name": "mw-about",
+   "closedby": "nothing",
+   "aria_modal": "yes",
+   "accessible_label": "我們是誰，決定了做法"
+  },
+  {
+   "page": "teams",
+   "result": "PASS",
+   "trigger": "exitIntent",
+   "run_rule": "cap",
+   "remember": "session",
+   "memory_name": "mw-teams",
+   "closedby": "everything",
+   "aria_modal": "yes",
+   "accessible_label": "需要同樣的東西嗎？"
+  },
+  {
+   "page": "open-source",
+   "result": "PASS",
+   "trigger": "exitIntent",
+   "run_rule": "cap",
+   "remember": "session",
+   "memory_name": "mw-open-source",
+   "closedby": "everything",
+   "aria_modal": "yes",
+   "accessible_label": "需要同樣的東西嗎？"
+  },
+  {
+   "page": "order-notify-guide",
+   "result": "PASS",
+   "trigger": "exitIntent",
+   "run_rule": "cap",
+   "remember": "session",
+   "memory_name": "mw-order-notify-guide",
+   "closedby": "everything",
+   "aria_modal": "yes",
+   "accessible_label": "需要同樣的東西嗎？"
+  },
+  {
+   "page": "contact",
+   "result": "PASS",
+   "trigger": "scrollDepth",
+   "run_rule": "cap",
+   "remember": "page",
+   "memory_name": "mw-contact",
+   "closedby": "everything",
+   "aria_modal": "yes",
+   "accessible_label": "寫信太慢？"
+  },
+  {
+   "page": "case-drpen",
+   "result": "PASS",
+   "trigger": "exitIntent",
+   "run_rule": "cap",
+   "remember": "session",
+   "memory_name": "mw-case-drpen",
+   "closedby": "everything",
+   "aria_modal": "yes",
+   "accessible_label": "需要同樣的東西嗎？"
+  },
+  {
+   "page": "case-lyycamp",
+   "result": "PASS",
+   "trigger": "exitIntent",
+   "run_rule": "cap",
+   "remember": "session",
+   "memory_name": "mw-case-lyycamp",
+   "closedby": "everything",
+   "aria_modal": "yes",
+   "accessible_label": "需要同樣的東西嗎？"
+  },
+  {
+   "page": "case-em925",
+   "result": "PASS",
+   "trigger": "exitIntent",
+   "run_rule": "cap",
+   "remember": "session",
+   "memory_name": "mw-case-em925",
+   "closedby": "everything",
+   "aria_modal": "yes",
+   "accessible_label": "需要同樣的東西嗎？"
+  },
+  {
+   "page": "case-sweetluck",
+   "result": "PASS",
+   "trigger": "exitIntent",
+   "run_rule": "cap",
+   "remember": "session",
+   "memory_name": "mw-case-sweetluck",
+   "closedby": "everything",
+   "aria_modal": "yes",
+   "accessible_label": "需要同樣的東西嗎？"
+  },
+  {
+   "page": "case-amclinic",
+   "result": "PASS",
+   "trigger": "exitIntent",
+   "run_rule": "cap",
+   "remember": "session",
+   "memory_name": "mw-case-amclinic",
+   "closedby": "everything",
+   "aria_modal": "yes",
+   "accessible_label": "需要同樣的東西嗎？"
+  },
+  {
+   "page": "case-ruinart",
+   "result": "PASS",
+   "trigger": "exitIntent",
+   "run_rule": "cap",
+   "remember": "session",
+   "memory_name": "mw-case-ruinart",
+   "closedby": "everything",
+   "aria_modal": "yes",
+   "accessible_label": "需要同樣的東西嗎？"
+  },
+  {
+   "page": "case-medical-erp",
+   "result": "PASS",
+   "trigger": "exitIntent",
+   "run_rule": "cap",
+   "remember": "session",
+   "memory_name": "mw-case-medical-erp",
+   "closedby": "everything",
+   "aria_modal": "yes",
+   "accessible_label": "需要同樣的東西嗎？"
+  },
+  {
+   "page": "case-igoods",
+   "result": "PASS",
+   "trigger": "exitIntent",
+   "run_rule": "cap",
+   "remember": "session",
+   "memory_name": "mw-case-igoods",
+   "closedby": "everything",
+   "aria_modal": "yes",
+   "accessible_label": "需要同樣的東西嗎？"
+  }
+ ]
+}
