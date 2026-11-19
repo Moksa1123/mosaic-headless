@@ -248,9 +248,13 @@ def existing() -> dict[str, bytes]:
 
 
 def differences(want: dict[str, bytes], have: dict[str, bytes]) -> list[str]:
+    # a Windows checkout may turn LF into CRLF; that is not drift
+    def same(k):
+        a, b = want[k], have[k]
+        return a == b or (not k.endswith(".png") and a == b.replace(b"\r\n", b"\n"))
     out = [f"missing: {k}" for k in sorted(set(want) - set(have))]
     out += [f"stale (not built from sources): {k}" for k in sorted(set(have) - set(want))]
-    out += [f"out of date: {k}" for k in sorted(set(want) & set(have)) if want[k] != have[k]]
+    out += [f"out of date: {k}" for k in sorted(set(want) & set(have)) if not same(k)]
     return out
 
 
