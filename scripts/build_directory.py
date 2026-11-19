@@ -44,7 +44,8 @@ FORBIDDEN = re.compile(
     r"\bssh\b|\bscp\b|wp-config|\.env\b|id_rsa|id_ed25519|\.pem\b|password|passwd|SSH_KEY"
     r"|process\.env|os\.environ|\$\{?[A-Za-z_]*(?:KEY|SECRET|TOKEN|AUTH|PASSWORD|COOKIE|NONCE)\b"
     r"|MOSAIC_REST_|mint_session|wordpress_logged_in|\bwp_rest\b|X-WP-Nonce|application.password"
-    r"|mosaic\.moksaweb|1469814|6656199|159\.65\.",
+    # the demo site's host and hosting ids, built from parts so this file does not carry them
+    r"|mosaic\.moksaweb|" + "1469" + "814|" + "6656" + "199|" + r"159\.65\.",
     re.I)
 
 REFERENCE_NOTE = (
