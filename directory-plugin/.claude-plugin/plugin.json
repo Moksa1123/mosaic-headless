@@ -1,0 +1,28 @@
+{
+  "name": "mosaic-headless",
+  "displayName": "Mosaic Headless (unofficial, directory edition)",
+  "version": "1.38.3",
+  "description": "Look up Mosaic Pro (Nextend) WordPress building blocks from measured data: node types, properties, style keys that compile, placement rules and the failure modes behind broken pages. Directory edition: reference files only, no scripts. Unofficial: not made by or affiliated with Nextend.",
+  "author": {
+    "name": "Moksa"
+  },
+  "homepage": "https://github.com/Moksa1123/mosaic-headless/tree/main/directory-plugin#readme",
+  "repository": "https://github.com/Moksa1123/mosaic-headless",
+  "license": "MIT",
+  "keywords": [
+    "wordpress",
+    "mosaic-pro",
+    "nextend",
+    "page-builder",
+    "headless",
+    "wp-cli",
+    "elementor-migration"
+  ],
+  "icon": "./.claude-plugin/icon.png",
+  "documentationUrl": "https://github.com/Moksa1123/mosaic-headless/tree/main/directory-plugin#readme",
+  "supportUrl": "https://github.com/Moksa1123/mosaic-headless/issues",
+  "privacyPolicyUrl": "https://github.com/Moksa1123/mosaic-headless/tree/main/directory-plugin#what-it-runs-and-connects-to",
+  "skills": [
+    "./skills/mosaic-headless"
+  ]
+}

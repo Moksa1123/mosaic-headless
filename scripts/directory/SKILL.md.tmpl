@@ -1,0 +1,117 @@
+---
+name: mosaic-headless
+description: "{{DESCRIPTION}}"
+license: MIT
+version: {{PKG_VERSION}}
+user-invocable: true
+---
+
+# Headless Mosaic (directory edition)
+
+Answer questions about Mosaic Pro (Nextend) sites from measured data instead of
+memory: which node types exist and which break a page, what each style key is
+called and whether it compiles, what goes inside what, and how a page is stored.
+This edition ships the measured tables as JSON and the reference guides; it has
+no scripts. The page builder, verifiers and theme tools are in the full npm
+package `mosaic-headless`.
+
+**Scope: Mosaic page and template construction.** Not WordPress site health,
+not plugin audits.
+
+## Sources
+
+| | |
+|---|---|
+| Surface | Extracted from the Mosaic Pro {{MOSAIC_VERSION}} plugin source, then written to a live install one item at a time and asserted on the delivered HTML and compiled CSS. Detail: [verification-record.md](references/verification-record.md) |
+| Size | {{NODE_TYPES}} node types, {{PROP_NAMES}} node properties, {{STYLE_PROPS}} style properties, {{STATES}} style states, {{VARIANTS}} variants, {{DYNVARS}} dynamic variables, {{TRIGGERS}} interaction triggers, {{ROUTES}} REST routes |
+| Files | `data/*.json`, one per measured table; each has `source_file`, `columns` and `rows`. Large tables are split into `-1`, `-2` ... parts |
+| Trust | `measured` (swept, probed, driven on a live site) > `documented` (plugin source, Mosaic's own zh_TW strings) > `inferred` / `house-style`. Never present the last two as Mosaic's own |
+| Open gaps | `data/pending.json` |
+
+## Usage
+
+Use it for building or changing Mosaic pages, templates, components, variants,
+design tokens, popups, menus, sliders, forms and interactions, and for "what is
+it called / what value shape / is it safe / does it render" questions.
+
+| Request | Go to |
+|---|---|
+| Elementor pages | `elementor-headless` |
+| Block-editor (Gutenberg) pages | `gutenberg-headless` |
+| Site health checks, plugin updates, security | out of scope - say so |
+| Writing pages to a site, checking a delivered page, moving a theme | the full edition: `npx mosaic-headless@{{PKG_VERSION}} claude-code --global` |
+
+## Routing
+
+**Iron rule: look it up first, never answer from memory. Not in the data → say so, mark it 待補 (pending), and do not guess.**
+Mosaic accepts most wrong writes with HTTP 200 and then renders nothing, drops a
+CSS rule, or replaces the whole public page with an error string. Why, with the
+eight failure modes: [core-rules.md](references/core-rules.md).
+
+Search the JSON files for the name you need (grep for `"type": "accordion"`,
+`"property": "paddingTop"` ...) and read only the matching rows; do not load the
+large tables whole. Chinese and colloquial words: look them up in
+`data/terms-zh.json` first (`內距` → padding, `懸停` → hover, `摺疊面板` →
+accordion), then search for the English name.
+
+| The user asks | Read | What to report |
+|---|---|---|
+| "is this node type safe / what does it render" | `node-verification` (outcome, rendered tag) + `node-type-notes` + `node-types` | the measured outcome first; `RENDERED` or `COMMITTED` is safe, the unsafe ones are listed below |
+| "what goes inside what" | `placement-rules` + `default-children` | the allowed children, and what a composite type needs inside it |
+| "what can I set on this type" | `node-properties` (by `owner_class`, walk `data-class-hierarchy` for inherited ones) + `node-property-verification` | each property's accepted values and whether it was seen to apply |
+| "which key drives this CSS / padding / radius" | `style-verification` (`css_property` → `property`) + `style-properties` + `style-value-shapes` | the Mosaic key, its value shape, whether it compiled; a key with a `group` is inert set alone |
+| "hover / focus / active styles" | `style-states` + `style-state-verification` | the state id and the selector it compiles to |
+| "tablet / phone values", "RWD", "breakpoint" | [responsive.md](references/responsive.md) + `rwd-verification` | `_t` / `_m` keys |
+| "popup", "modal", "popover", "tour" | [dialog-and-triggers.md](references/dialog-and-triggers.md) + `popover-verification`, `dialog-verification` | modal blocks, popover does not; shorthand triggers are only `pageLoad` / `exitIntent` / `scrollDepth` |
+| "animation", "interaction" | `interaction-types` + [interactions.md](references/interactions.md) | trigger ids and the stored value shape |
+| "site colours / fonts", "dark mode", "variant" | `variants` + [design-system.md](references/design-system.md) | variant ids and class names; tokens and modes |
+| "show the post title / a custom field" | `dynamic-variables` + `custom-fields-verification` + [dynamic-content.md](references/dynamic-content.md) | the exact `@VAR()` expression |
+| "show only on some pages" | `condition-subjects` + `condition-comparators` + [templates-and-conditions.md](references/templates-and-conditions.md) | subject ids and operators |
+| "REST route", "database column" | `rest-routes`, `db-columns` | method, path, args; table and column |
+| "why did that happen" | [facts.md](references/facts.md), [failure-modes.md](references/failure-modes.md) | the measured explanation |
+| a word that matches nothing | - | retry in English; still nothing → say it is not in the data |
+
+Types measured unsafe to commit ({{UNSAFE_COUNT}}; each kills the request or the
+whole public page when placed the obvious way, most of them only when placed
+without the parent their factory needs - check `placement-rules`):
+{{UNSAFE_LIST}}
+
+## Tasks
+
+**Build native, not code.** A `code` node, a `script` action or a pile of
+`customDeclarations` renders and is a dead end: the client cannot edit it. Use
+the native features listed in [core-rules.md](references/core-rules.md) first.
+
+| Task | How, with this edition | Done when |
+|---|---|---|
+| Write a page spec | look up every type (safe? allowed under its parent?) and every style key (its shape, `_t` / `_m` for breakpoints); spec format in [building.md](references/building.md) | every type is safe and allowed where it sits, every key is in `style-properties` |
+| Explain a broken page | [failure-modes.md](references/failure-modes.md) and [facts.md](references/facts.md) | the failure mode named, with the measured evidence |
+| Plan a plugin upgrade | [upgrading.md](references/upgrading.md) | the checklist for that version |
+| Commit a spec, verify the delivered page, move a theme, run a data upgrade | the full edition (`npm` package `mosaic-headless`); how you reach your WordPress host is up to you | - |
+
+Five facts that cause most broken pages (the rest: [facts.md](references/facts.md)):
+
+- A `button`'s words go in a `text` node; only four types take a `url`.
+- A `wysiwyg-text` run prints tags literally since 1.0.11: inline formatting is `wysiwyg-span` / `-link` / `-linebreak`.
+- One root per document, or every instance renders empty. Deleting a root or re-keying a component empties that component's overrides elsewhere.
+- `@media(` in a `code` node is a function call and returns HTTP 500 after a clean commit; write `@media (`.
+- `scrollDepth`'s action slot is `reached` since 1.0.10.
+
+## Verify
+
+This edition has no verifier. A page written from its lookups is checked by the
+full edition's verifiers against the page a visitor actually receives
+([core-rules.md](references/core-rules.md) explains why a successful commit
+proves nothing). Without them, say the page is unverified.
+
+## Data files
+
+| File | Rows | What |
+|---|---:|---|
+{{DATA_FILES}}
+
+## Maintenance
+
+Generated by `scripts/build_directory.py` in the
+[source repository](https://github.com/Moksa1123/mosaic-headless) from its
+`data/*.csv`, `references/*.md` and `SKILL.md`; never edit this folder by hand.
