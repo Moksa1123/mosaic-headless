@@ -37,7 +37,7 @@ This is the **directory edition** of [mosaic-headless](https://github.com/Moksa1
 The full edition adds the page builder, the delivered-page verifiers and the theme tools:
 
 ```bash
-npx mosaic-headless@1.38.3 claude-code --global
+npx mosaic-headless@1.39.0 claude-code --global
 ```
 
 ## Quick start

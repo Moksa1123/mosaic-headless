@@ -63,7 +63,7 @@
     "install-skill": "node scripts/install.mjs",
     "check": "node scripts/check-release.mjs",
     "preversion": "npm run check",
-    "version": "node scripts/sync-version.mjs && git add SKILL.md assets/templates/platforms .claude-plugin/plugin.json",
+    "version": "node scripts/sync-version.mjs && python scripts/build_directory.py && git add SKILL.md assets/templates/platforms .claude-plugin/plugin.json directory-plugin",
     "postversion": "git push && git push --tags",
     "prepublishOnly": "npm run check"
   }

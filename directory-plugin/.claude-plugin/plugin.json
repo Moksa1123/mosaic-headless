@@ -1,7 +1,7 @@
 {
   "name": "mosaic-headless",
   "displayName": "Mosaic Headless (unofficial, directory edition)",
-  "version": "1.38.3",
+  "version": "1.39.0",
   "description": "Look up Mosaic Pro (Nextend) WordPress building blocks from measured data: node types, properties, style keys that compile, placement rules and the failure modes behind broken pages. Directory edition: reference files only, no scripts. Unofficial: not made by or affiliated with Nextend.",
   "author": {
     "name": "Moksa"
