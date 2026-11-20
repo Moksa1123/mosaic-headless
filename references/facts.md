@@ -318,3 +318,59 @@ Platform and rendered-tag facts, each measured. Moved out of SKILL.md on 2026-11
   the uploads base a second time, serving a broken `src` with no error and no
   dimensions. A plain `https://` URL also works, and is the right fallback for an
   image that is not an attachment on this site.
+
+## Measured on a second site (Mosaic 1.0.13 + WooCommerce 11.3, 2026-11-20)
+
+A store's Mosaic conversion, measured on its staging copy by that site's own session
+(2026-11-20/21) and handed to this skill. Each line says what was also checked here
+against the 1.0.13 source or this skill's tables; the rest is that site's measurement.
+
+- **A WordPress menu nests through local-context loops, one namespace per level.**
+  `wp-menu` sub-menus are a loop with `loopType: localContext` and
+  `loopSource: @VAR('<parent namespace>/loop')`, and every level needs its own
+  `loopNamespace` (`m2`, `m3`, `m4`...). Without one, an inner level reads the outer
+  level's values: one menu came out as 4,227 duplicate links and a 6-second page.
+- **A `list` cannot hold a `wp-menu`.** `list` accepts only `list-item` and
+  `list-loop-items` (also `data/placement-rules.csv`), and `build_page.py` refuses it.
+  Wrap the `wp-menu` in a `div` with `tagName: "ul"`; the output is a proper
+  `ul > li`.
+- **`loop-items` arrives as a three-column grid with an 80px / 32px gap**
+  (`.m-loop-items{display:grid;grid-template-columns:1fr 1fr 1fr;gap:80px 32px}` in
+  the 1.0.13 stylesheet). Set `rowGap` and `columnGap` yourself on every nested loop.
+- **There is no `flex` shorthand key** (only `flexDirection`, `flexWrap`,
+  `flexSizing`, `flexBasis`; `build_page.py` refuses `flex`). `display: list-item` was
+  refused on that site, and `list-item` renders `display:flex` with no bullet: put
+  either in `customDeclarations`.
+- **`modal-window` arrived with 32px of padding** on that site. The 1.0.13 base
+  stylesheet gives `.m-modal-window` none, so it comes from the node's default style,
+  not from the stylesheet: set `padding*` when the window should be flush.
+- **The accordion does not animate unless told to.** The panel jumps from 0 to full
+  height; `data.animation: "slide"` animates it (`accordion`'s `animation` takes
+  `none|slide`, `data/node-properties.csv`).
+- **A server condition's `regexp` can exclude pages**: a negative look-ahead such as
+  `/^(?!(452|28786)$)/` means "not these post ids" (`regexp` is an operator of the
+  `text` comparator, `data/condition-comparators.csv`).
+- **An image can name its thumbnail size**: `{"v": "@attachment(17321, '1536x1536')"}`
+  (`attachment` takes two arguments, `data/evaluator-functions.csv`).
+- **No action closes a dropdown.** The close actions are `modalClose` and
+  `popoverClose` (and `popoverToggle`), so a phone sub-panel with a "back" button
+  cannot be built from dropdowns alone; build it from a modal or a popover.
+- **`dropdown-wrapper-wide` works inside a modal** with `position: fixed` (left 520px,
+  top 0, height 100vh), and the pointer moving into the panel does not close it. Two
+  traps, both met on that site and fixed there:
+  - its default `clip-path: inset(0px -40px -40px -40px)` (in the 1.0.13 stylesheet)
+    clips a `position: fixed` panel inside it;
+  - in hover mode, leaving uses the convex hull of the toggle and the dropdown box as
+    a safe area; a full-height box takes the links above and below into that hull,
+    and hovering them does not close the dropdown.
+  Fix: shrink the dropdown box to a zero-width anchor and put the panel in a fixed
+  child.
+- **An ACF field reads empty where its field group's location rule does not apply**:
+  `@VAR('post/meta_x')` is empty on that page even though the post meta has a value.
+  Check the group's location rules before suspecting the expression.
+- **Never give a node inside a loop an `attrID`**: every repetition prints the same
+  id.
+- **`wp media regenerate` deletes the old thumbnails by default**, so a page that
+  hard-codes an old thumbnail URL breaks; pass `--skip-delete`. Files WP-CLI writes
+  belong to the user that ran it: reset the owner and permissions afterwards. This is
+  WordPress, not Mosaic, and matters because Mosaic pages often carry thumbnail URLs.

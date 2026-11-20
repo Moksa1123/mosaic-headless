@@ -84,6 +84,13 @@
    "why_not_found": "a decision, not a gap: the block is measured on another live site; installing it on the shared demo site waits for the user",
    "asked_by": "skill 總機 (em925 empty-root root cause)",
    "status": "waiting (user decision)"
+  },
+  {
+   "date": "2026-11-21",
+   "question": "Can a child of an accordion item (an icon in the title) be styled through the ___accordion-item--opened state, or only the item itself?",
+   "why_not_found": "conflicting: a second site (1.0.13) reported the state applies only to the item and needed outside CSS for an icon turn; the 1.0.13 selector template also targets the item's direct children and anything inside .m-accordion-title. This skill's state sweep recorded NO_HOST for it, so neither is measured here. Needs one accordion with a styled title icon, opened in Chromium",
+   "asked_by": "skill 總機 (second-site findings 2026-11-21, item 14)",
+   "status": "open"
   }
  ]
 }

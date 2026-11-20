@@ -42,6 +42,9 @@ Moved out of SKILL.md on 2026-11-16 (skill SOP pass). `scripts/check-release.mjs
    without root: where Mosaic looks for the binary, a no-root install, and the two
    things (PHP-FPM's disabled functions, a setting decided once) that make a working
    install look broken.
+17. `references/standard-fixes.md` — problems that kept coming back on real sites and
+   the one fix each: the WooCommerce lightbox toolbar, a sticky column riding over the
+   page, rebuilding a template without serving a blank page; each with its check.
 
 ## The data files
 

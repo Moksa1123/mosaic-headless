@@ -142,6 +142,8 @@ fits, and say in the spec which native path was checked.
 | **Move a theme** | `theme_zip.py export` / `import` (test mode unless `--activate`), or `theme_export.php` / `theme_import.php`; prune unbound masters first | `theme_zip_compare.php` all PASS |
 | **Plugin upgrade** | `data_upgrade.py`; re-extract (`extract_*.py`, `check_tables.py`); re-run the verifiers | [upgrading.md](references/upgrading.md) checklist; `scan_inline_tags.py` finds nothing |
 | **Elementor → Mosaic** | `from_elementor.py --strict`; build; check | `verify_conversion.py` exit 0 |
+| **Rebuild a template** | build and validate the new tree first, replace the old nodes last - never clear first ([standard-fixes.md](references/standard-fixes.md)) | the page never served blank; delivered-page checks pass |
+| **WooCommerce product page** | the lightbox toolbar fix and a sticky column scoped to its own container ([standard-fixes.md](references/standard-fixes.md)) | `verify_lightbox.py` and `verify_sticky.py` exit 0 |
 | **Old site shows literal tags** (1.0.11+) | `scan_inline_tags.py` (read only) → `fix_inline_tags.py`, dry run then `--apply` | a second scan finds nothing |
 
 Before writing anything, read [data-model.md](references/data-model.md) (where a
@@ -177,6 +179,8 @@ Every validator below exits 1 on any FAIL.
 | interactions, intro, loop | `verify_recipes.py`, `verify_intro.py`, `verify_loop.py` | exit 0 (the intro must END and hand the page back) |
 | slider, tabs, accordion, forms, map | `verify_slider.py`, `verify_components.py` | exit 0 |
 | Elementor conversion | `verify_conversion.py` | exit 0: every string, image, link and heading level found |
+| product-image lightbox | `verify_lightbox.py --url <product>` | exit 0: close button flush top-right, counter top-left, spinner out of flow, at four widths |
+| sticky element | `verify_sticky.py --url <page> --sticky <sel> --bound <sel> --avoid <sel> --top <px>` | exit 0: no overlap, stays inside its container, sticks at the offset - measured while scrolling, not read off `position` |
 | theme move | `wp eval-file tools/theme_zip_compare.php <src> <copy> out.csv` | no FAIL row |
 | component instances | `wp db query < tools/override_health.sql` (read only) | no instance newly all shells, no duplicate override nodes |
 | this skill | `python tools/test_mosaic.py` | all pass (offline) |
