@@ -538,6 +538,12 @@ class SyncNodesPlan(unittest.TestCase):
 
     def test_normalisers(self):
         self.assertEqual(self.sn.css_norm("a: 1px , 2px;b:c ;"), self.sn.css_norm("a:1px,2px;b:c"))
+        # measured on a live site: aspect-ratio 1/1 stored as 1 / 1, one declaration per line
+        self.assertEqual(self.sn.css_norm("aspect-ratio:1/1;object-fit:cover;display:block;"),
+                         self.sn.css_norm("aspect-ratio: 1 / 1;\nobject-fit: cover;\ndisplay: block;"))
+        self.assertEqual(self.sn.css_norm("grid-column:1/-1"), self.sn.css_norm("grid-column: 1 / -1"))
+        # but calc() keeps its operator spacing
+        self.assertNotEqual(self.sn.css_norm("width:calc(100% - 10px)"), self.sn.css_norm("width:calc(100%-10px)"))
         self.assertEqual(self.sn.svg_norm('<svg width="9" b="2" a="1"><g/></svg>'),
                          self.sn.svg_norm('<svg a="1" b="2" height="9"><g/></svg>'))
         self.assertNotEqual(self.sn.svg_norm('<svg a="1"><path d="M0"/></svg>'),

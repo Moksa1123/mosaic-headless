@@ -109,10 +109,12 @@ def stable_uuids() -> set:
 
 
 def css_norm(text: str) -> str:
-    # Mosaic stores 'palt' as "palt", re-spaces, and puts each declaration on its own line
+    # Mosaic stores 'palt' as "palt", re-spaces (aspect-ratio 1/1 as 1 / 1, a space after
+    # ':' and ','), and puts each declaration on its own line. Not + or -: inside calc()
+    # the spaces around them are significant.
     text = (text or "").replace("'", '"')
     text = re.sub(r"\s+", " ", text).strip()
-    text = re.sub(r"\s*([:;,{}()])\s*", r"\1", text)
+    text = re.sub(r"\s*([:;,{}()/])\s*", r"\1", text)
     return text.rstrip(";")
 
 
