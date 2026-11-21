@@ -18,7 +18,7 @@
   <img src="https://img.shields.io/badge/node_properties-120-success?style=flat-square" alt="120 個の node プロパティ">
   <img src="https://img.shields.io/badge/style_properties-101-success?style=flat-square" alt="101 個のスタイルプロパティ">
   <img src="https://img.shields.io/badge/responsive_checks-733-blueviolet?style=flat-square" alt="733 件のレスポンシブ検査">
-  <img src="https://img.shields.io/badge/self--tests-53-blueviolet?style=flat-square" alt="53 項目のセルフテスト">
+  <img src="https://img.shields.io/badge/self--tests-55-blueviolet?style=flat-square" alt="55 項目のセルフテスト">
 </p>
 
 <p align="center">
@@ -183,7 +183,7 @@ node type、node プロパティ、スタイルプロパティ、スタイル状
 | `data/theme-zip-verification.csv` | 22 | Mosaic 自身のテーマ ZIP を往復させて比較 |
 | `data/conversion-batch.csv` | 19 | あるサイトのすべての Elementor ページを変換・構築・検査 |
 
-- セルフテスト：`python tools/test_mosaic.py`、オフラインの 53 項目（検索、中国語の用語、構築結果の形と拒否ルール、公開されている構築インターフェース、このリポジトリの数値とプライバシー）。
+- セルフテスト：`python tools/test_mosaic.py`、オフラインの 55 項目（検索、中国語の用語、構築結果の形と拒否ルール、公開されている構築インターフェース、このリポジトリの数値とプライバシー）。
 - evals：Mosaic 1.0.10〜1.0.12 の挙動に関する 16 問。skill ありで 16/16、なしで 0/16。結果：[evals/RESULTS.md](evals/RESULTS.md)。
 - `SKILL.md`、これらの README、バッジの数値は、`tools/check_numbers.py` がデータと照合しています。詳細：[verification-record.md](references/verification-record.md)。
 

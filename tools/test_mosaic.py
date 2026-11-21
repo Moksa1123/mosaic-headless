@@ -536,6 +536,30 @@ class SyncNodesPlan(unittest.TestCase):
         _, _, only, _ = self.sn.plan(spec, "S", live, "L", {"r-body"})
         self.assertEqual((len(all_updates), len(only)), (2, 1))
 
+    def test_attr_absent_from_a_document_skips_it(self):
+        # a site-wide --attr run: the id lives in one page; every other document has
+        # it on neither side and must be skipped, not refused (live site, 2026-11-21)
+        other = {"type": "div", "data": {"attrID": "o-root"},
+                 "children": [{"type": "text", "data": {"attrID": "o-title"}, "text": "Other page"}]}
+        same, struct, updates, notes = self.sn.plan(self.flat(other, "S"), "S",
+                                                    self.as_stored(self.flat(other, "L")), "L", {"r-body"})
+        self.assertTrue(same, struct)
+        self.assertEqual((struct, updates), ([], []))
+        self.assertTrue(any("skipped" in n for n in notes), notes)
+        # the document that has it still finds its one edit
+        live = self.as_stored(self.flat(self.rich_tree(), "L"))
+        same, struct, updates, _ = self.sn.plan(self.flat(self.rich_tree(body="B2"), "S"), "S", live, "L", {"r-body"})
+        self.assertTrue(same, struct)
+        self.assertEqual(len(updates), 1)
+
+    def test_attr_on_one_side_only_is_structural(self):
+        live = self.as_stored(self.flat(self.rich_tree(), "L"))
+        spec = self.rich_tree()
+        spec["children"].append({"type": "text", "data": {"attrID": "r-new"}, "text": "New"})
+        same, struct, _, _ = self.sn.plan(self.flat(spec, "S"), "S", live, "L", {"r-new"})
+        self.assertFalse(same)
+        self.assertTrue(any("@r-new" in s for s in struct), struct)
+
     def test_normalisers(self):
         self.assertEqual(self.sn.css_norm("a: 1px , 2px;b:c ;"), self.sn.css_norm("a:1px,2px;b:c"))
         # measured on a live site: aspect-ratio 1/1 stored as 1 / 1, one declaration per line

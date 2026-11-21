@@ -261,9 +261,15 @@ def plan(spec_records: list[dict], spec_top: str, live_nodes: list[dict], live_t
     if auto:
         notes.append("%d node(s) Mosaic inserted itself (default children) - kept, not counted" % len(auto))
     if only_attrs:
-        missing = [a for a in only_attrs if not any(k == "@" + a for _, _, k, _ in pairs)]
-        if missing:
-            struct += ["@%s: not found in both the spec and the site" % a for a in missing]
+        # An --attr id that neither side of THIS document has is simply not here: the
+        # document is skipped, not refused (a site-wide run touches every document and the
+        # id lives in one of them). One-sided cases are already in struct above, as
+        # "only in the spec" / "only on the site", from the alignment.
+        def attrs_of(nodes):
+            return {(n.get("data") or {}).get("attrID") for n in nodes} - {None}
+        here = set(only_attrs) & (attrs_of(spec_records) | attrs_of(live))
+        if not here:
+            return True, [], [], ["no --attr node in this document - skipped"]
     updates = []
     if struct:
         return False, struct, updates, notes

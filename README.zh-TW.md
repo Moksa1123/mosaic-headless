@@ -18,7 +18,7 @@
   <img src="https://img.shields.io/badge/node_properties-120-success?style=flat-square" alt="120 個 node 屬性">
   <img src="https://img.shields.io/badge/style_properties-101-success?style=flat-square" alt="101 個樣式屬性">
   <img src="https://img.shields.io/badge/responsive_checks-733-blueviolet?style=flat-square" alt="733 條 RWD 檢查">
-  <img src="https://img.shields.io/badge/self--tests-53-blueviolet?style=flat-square" alt="53 項自我測試">
+  <img src="https://img.shields.io/badge/self--tests-55-blueviolet?style=flat-square" alt="55 項自我測試">
 </p>
 
 <p align="center">
@@ -183,7 +183,7 @@ node type、node 屬性、樣式屬性、樣式狀態從外掛原始碼抽出（
 | `data/theme-zip-verification.csv` | 22 | Mosaic 自己的佈景 ZIP 匯出再匯入並比對 |
 | `data/conversion-batch.csv` | 19 | 一個網站的每個 Elementor 頁面都轉換、建置並檢查 |
 
-- 自我測試：`python tools/test_mosaic.py`，53 項離線測試（查詢、中文用語、建頁產出的結構與拒收規則、對外的建頁介面、本 repo 的數字與隱私）。
+- 自我測試：`python tools/test_mosaic.py`，55 項離線測試（查詢、中文用語、建頁產出的結構與拒收規則、對外的建頁介面、本 repo 的數字與隱私）。
 - evals：16 題 Mosaic 1.0.10 到 1.0.12 的行為題；有 skill 16/16，沒有 skill 0/16。結果見 [evals/RESULTS.md](evals/RESULTS.md)。
 - `SKILL.md`、這幾份 README 和徽章上的數字，都由 `tools/check_numbers.py` 對照資料核對。細節見 [verification-record.md](references/verification-record.md)。
 
