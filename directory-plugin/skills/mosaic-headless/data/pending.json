@@ -90,6 +90,20 @@
    "question": "Can a child of an accordion item (an icon in the title) be styled through the ___accordion-item--opened state, or only the item itself?",
    "why_not_found": "conflicting: a second site (1.0.13) reported the state applies only to the item and needed outside CSS for an icon turn; the 1.0.13 selector template also targets the item's direct children and anything inside .m-accordion-title. This skill's state sweep recorded NO_HOST for it, so neither is measured here. Needs one accordion with a styled title icon, opened in Chromium",
    "asked_by": "skill 總機 (second-site findings 2026-11-21, item 14)",
+   "status": "closed 2026-11-21: source-documented in references/facts.md (third site): the selector template reaches the item, its direct children and anything inside the title; deeper panel children need outside CSS. Still not browser-measured here"
+  },
+  {
+   "date": "2026-11-21",
+   "question": "Does a taxonomy loop's offset ever apply (a product-brand loop started from the first term whatever the offset)?",
+   "why_not_found": "measured on a second site only; this skill's node-property sweep never probed loop offsets on a taxonomy source. Treated as NO_EFFECT in references/facts.md until a sweep measures it",
+   "asked_by": "skill 總機 (batch 4, item 40)",
+   "status": "open"
+  },
+  {
+   "date": "2026-11-21",
+   "question": "Should build_site.py look up a post's existing template before binding, instead of always creating a new master and template?",
+   "why_not_found": "a design decision, not a gap: em925's deploy tool imports build_site, so its behaviour is left unchanged (its md5 is part of em925's agreement). sync_nodes.py + list_bindings.php now cover in-place updates; build_site.py's limits are documented in SKILL.md and references/tools.md",
+   "asked_by": "skill 總機 (batch 3 item 20, batch 4 item 32)",
    "status": "open"
   }
  ]

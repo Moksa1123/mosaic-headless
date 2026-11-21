@@ -279,3 +279,10 @@ a `pageLoad` cooldown kept it shut on reload.
 `setCookie` writes a session cookie, gone when the browser closes. With a class as the
 trigger and an empty target, the action hits the element that fired; a class used as
 the TARGET hits every element carrying it on the page.
+
+## A transform tween adds to the node's own transform
+
+An interaction that animates `translateX` (or any transform) composes with the
+transform the node already has from its style - it does not replace it. One
+pre-positioned element came out 260px off on a live 1.0.13 site. Position the
+element with `left` / `top` (or margins), and leave `transform` to the interaction.

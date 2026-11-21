@@ -18,7 +18,7 @@
   <img src="https://img.shields.io/badge/node_properties-120-success?style=flat-square" alt="120개 node 속성">
   <img src="https://img.shields.io/badge/style_properties-101-success?style=flat-square" alt="101개 스타일 속성">
   <img src="https://img.shields.io/badge/responsive_checks-733-blueviolet?style=flat-square" alt="733개 반응형 검사">
-  <img src="https://img.shields.io/badge/self--tests-43-blueviolet?style=flat-square" alt="43개 자체 테스트">
+  <img src="https://img.shields.io/badge/self--tests-48-blueviolet?style=flat-square" alt="48개 자체 테스트">
 </p>
 
 <p align="center">
@@ -146,7 +146,7 @@ English: Mosaic Pro, Nextend, build a Mosaic page without the editor, Mosaic pad
 - **스스로 실행되는 것은 없습니다.** hook, MCP 서버, 백그라운드 프로세스가 없습니다. Claude가 `SKILL.md`에 따라 명령을 제안하고 사용자가 승인할 때만 실행됩니다.
 - **로컬 전용, 네트워크 없음**: `tools/mo.py`는 `data/`의 CSV를 읽어 답을 출력합니다. `tools/test_mosaic.py`와 `tools/check_numbers.py`는 이 저장소를 읽습니다. 아무것도 쓰거나 연결하지 않습니다.
 - **REST API로 사용자의 WordPress 사이트에**: `build_page.py`, `build_site.py`, `data_upgrade.py`, `theme_zip.py`, `sweep_*.py`, `probe*.py`는 설정한 단 하나의 사이트의 Mosaic REST 경로를 호출해 페이지, 컴포넌트, 템플릿, 테마를 읽고 씁니다. 그 사이트에만 연결합니다.
-- **WP-CLI로 사용자의 사이트에서 실행**: `tools/*.php`는 `wp eval-file`로 서버(보통 사용자 자신의 SSH)의 WordPress 안에서 실행되어 그 사이트의 Mosaic 테이블과 테마 데이터를 읽고 씁니다. `theme_delete.php`와 `prune_unbound.php`는 데이터를 삭제하므로 `--apply` 없이는 시험 실행만 합니다.
+- **WP-CLI로 사용자의 사이트에서 실행**: `tools/*.php`는 `wp eval-file`로 서버(보통 사용자 자신의 SSH)의 WordPress 안에서 실행되어 그 사이트의 Mosaic 테이블과 테마 데이터를 읽고 씁니다. `prune_unbound.php`는 데이터를 삭제하므로 `apply`라는 단어(`--apply`가 아님) 없이는 시험 실행만 합니다. `theme_delete.php`는 지정한 테마를 삭제하며, 사용 중인 테마는 삭제하지 않습니다.
 - **공개 페이지 읽기**: `tools/verify_*.py`와 `audit_mobile.py`는 같은 사이트의 페이지를 Playwright(Chromium) 또는 `urllib`로 열어, 전달된 결과와 기록한 내용을 비교합니다.
 - **자격 증명**: 사이트 URL, WordPress 로그인 cookie, 그에 맞는 `wp_rest` nonce(사용자 자신의 사이트 관리자). `tools/mint_session.php`가 서버에서 이 값들을 출력합니다. plugin으로 설치하면 Claude Code가 `userConfig`로 물어보며, cookie와 nonce는 민감 정보로 표시되어 플랫폼의 자격 증명 저장소에 보관됩니다. 환경 변수(`MOSAIC_SITE_URL`, `MOSAIC_REST_COOKIE`, `MOSAIC_REST_NONCE`)나 `--config`로 넘기는 자신의 JSON 파일도 쓸 수 있습니다. **어떤 도구도 사용자의 컴퓨터에서 자격 증명을 찾지 않습니다.**
 - **제3자**: `sites/`의 예제는 Google Fonts를 불러오므로, 그것으로 만든 페이지에서는 방문자의 브라우저가 Google에서 글꼴을 받아 옵니다.
@@ -159,6 +159,7 @@ English: Mosaic Pro, Nextend, build a Mosaic page without the editor, Mosaic pad
 | `from_elementor.py` / `verify_conversion.py` | Elementor를 Mosaic로 변환하고 내용이 옮겨졌는지 확인 | 로컬 파일/사용자의 사이트 |
 | `verify_rwd.py`, `verify_browser.py`, `verify_*.py` | 전달된 페이지를 Chromium으로 읽기 | 사용자의 사이트(읽기) |
 | `theme_zip.py`, `theme_export.php` / `theme_import.php` | 테마 전체 이전 | 사용자의 사이트(REST/WP-CLI) |
+| `sync_nodes.py` + `list_bindings.php` | 구축된 사이트를 제자리에서 갱신: 바뀐 노드만 기존 master 그대로 수정. `--apply` 없이는 미리보기만 | 사용자의 사이트(REST. 연결 관계는 WP-CLI로 읽기) |
 | `data_upgrade.py` | 플러그인 업데이트 후 Mosaic 데이터 마이그레이션 실행 | 사용자의 사이트(REST) |
 | `scan_inline_tags.py` / `fix_inline_tags.py` | 1.0.11+에서 HTML 태그가 그대로 보이는 텍스트를 찾아 수정 | 사용자의 사이트(REST) |
 | `test_mosaic.py`, `check_numbers.py` | 자체 테스트와 숫자 검사 | 이 저장소 |
@@ -182,7 +183,7 @@ node type, node 속성, 스타일 속성, 스타일 상태는 플러그인 소�
 | `data/theme-zip-verification.csv` | 22 | Mosaic 자체 테마 ZIP을 왕복시켜 비교 |
 | `data/conversion-batch.csv` | 19 | 한 사이트의 모든 Elementor 페이지를 변환, 구축, 검사 |
 
-- 자체 테스트: `python tools/test_mosaic.py`, 오프라인 테스트 43개(조회, 중국어 용어, 구축 결과의 형태와 거부 규칙, 공개된 구축 인터페이스, 이 저장소의 숫자와 개인정보).
+- 자체 테스트: `python tools/test_mosaic.py`, 오프라인 테스트 48개(조회, 중국어 용어, 구축 결과의 형태와 거부 규칙, 공개된 구축 인터페이스, 이 저장소의 숫자와 개인정보).
 - evals: Mosaic 1.0.10~1.0.12 동작에 관한 16문항. skill 사용 시 16/16, 미사용 시 0/16. 결과: [evals/RESULTS.md](evals/RESULTS.md).
 - `SKILL.md`, 이 README들, 배지의 숫자는 `tools/check_numbers.py`가 데이터와 대조합니다. 자세한 내용: [verification-record.md](references/verification-record.md).
 

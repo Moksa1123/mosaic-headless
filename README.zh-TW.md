@@ -18,7 +18,7 @@
   <img src="https://img.shields.io/badge/node_properties-120-success?style=flat-square" alt="120 個 node 屬性">
   <img src="https://img.shields.io/badge/style_properties-101-success?style=flat-square" alt="101 個樣式屬性">
   <img src="https://img.shields.io/badge/responsive_checks-733-blueviolet?style=flat-square" alt="733 條 RWD 檢查">
-  <img src="https://img.shields.io/badge/self--tests-43-blueviolet?style=flat-square" alt="43 項自我測試">
+  <img src="https://img.shields.io/badge/self--tests-48-blueviolet?style=flat-square" alt="48 項自我測試">
 </p>
 
 <p align="center">
@@ -146,7 +146,7 @@ English: Mosaic Pro, Nextend, build a Mosaic page without the editor, Mosaic pad
 - **不會自己執行任何東西。** 沒有 hook、沒有 MCP server、沒有背景程序。只有 Claude 依照 `SKILL.md` 提出指令、你同意之後才會執行。
 - **只在本機、不連網**：`tools/mo.py` 讀 `data/` 裡的 CSV 並印出答案；`tools/test_mosaic.py`、`tools/check_numbers.py` 讀這個 repo。都不寫入、不連線。
 - **透過 REST API 連你的 WordPress 網站**：`build_page.py`、`build_site.py`、`data_upgrade.py`、`theme_zip.py`，以及 `sweep_*.py`、`probe*.py`，會呼叫你設定的那一個網站的 Mosaic REST 路由，讀寫頁面、元件、範本和佈景。只連那個網站。
-- **透過 WP-CLI 在你的網站上執行**：`tools/*.php` 用 `wp eval-file` 在伺服器上（通常是你自己的 SSH）跑在你的 WordPress 裡，讀寫該網站的 Mosaic 資料表和佈景資料。`theme_delete.php`、`prune_unbound.php` 會刪資料，沒加 `--apply` 時只做試跑。
+- **透過 WP-CLI 在你的網站上執行**：`tools/*.php` 用 `wp eval-file` 在伺服器上（通常是你自己的 SSH）跑在你的 WordPress 裡，讀寫該網站的 Mosaic 資料表和佈景資料。`prune_unbound.php` 會刪資料，沒加 `apply` 這個字（不是 `--apply`）時只做試跑；`theme_delete.php` 會刪掉你指定的佈景，但不會刪使用中的佈景。
 - **讀你的公開頁面**：`tools/verify_*.py`、`audit_mobile.py` 用 Playwright（Chromium）或 `urllib` 開同一個網站的頁面，比對送出的結果和寫入的內容。
 - **帳密**：網站網址、WordPress 登入 cookie 和對應的 `wp_rest` nonce，必須是你自己網站的管理員。`tools/mint_session.php` 在伺服器上印出這三個值。以 plugin 安裝時，Claude Code 會用 `userConfig` 詢問；cookie 和 nonce 標為敏感資料，存在系統的憑證儲存區。也可以用環境變數（`MOSAIC_SITE_URL`、`MOSAIC_REST_COOKIE`、`MOSAIC_REST_NONCE`），或用 `--config` 傳入你自己的 JSON 檔。**任何工具都不會在你的電腦上找帳密。**
 - **第三方**：`sites/` 裡的示範範例會載入 Google Fonts，所以用它建出來的頁面，訪客的瀏覽器會向 Google 取字型。
@@ -159,6 +159,7 @@ English: Mosaic Pro, Nextend, build a Mosaic page without the editor, Mosaic pad
 | `from_elementor.py` / `verify_conversion.py` | Elementor 轉 Mosaic，並證明內容都搬過來 | 本機檔案／你的網站 |
 | `verify_rwd.py`、`verify_browser.py`、`verify_*.py` | 用 Chromium 讀實際送出的頁面 | 你的網站（唯讀） |
 | `theme_zip.py`、`theme_export.php` / `theme_import.php` | 搬整個佈景 | 你的網站（REST／WP-CLI） |
+| `sync_nodes.py` + `list_bindings.php` | 就地更新已建好的網站：只改有變的節點，沿用原本的 master；沒加 `--apply` 只預覽 | 你的網站（REST；綁定關係用 WP-CLI 讀） |
 | `data_upgrade.py` | 外掛更新後執行 Mosaic 的資料遷移 | 你的網站（REST） |
 | `scan_inline_tags.py` / `fix_inline_tags.py` | 找出並修正 1.0.11+ 會把 HTML 標籤印出來的文字 | 你的網站（REST） |
 | `test_mosaic.py`、`check_numbers.py` | 自我測試、數字核對 | 這個 repo |
@@ -182,7 +183,7 @@ node type、node 屬性、樣式屬性、樣式狀態從外掛原始碼抽出（
 | `data/theme-zip-verification.csv` | 22 | Mosaic 自己的佈景 ZIP 匯出再匯入並比對 |
 | `data/conversion-batch.csv` | 19 | 一個網站的每個 Elementor 頁面都轉換、建置並檢查 |
 
-- 自我測試：`python tools/test_mosaic.py`，43 項離線測試（查詢、中文用語、建頁產出的結構與拒收規則、對外的建頁介面、本 repo 的數字與隱私）。
+- 自我測試：`python tools/test_mosaic.py`，48 項離線測試（查詢、中文用語、建頁產出的結構與拒收規則、對外的建頁介面、本 repo 的數字與隱私）。
 - evals：16 題 Mosaic 1.0.10 到 1.0.12 的行為題；有 skill 16/16，沒有 skill 0/16。結果見 [evals/RESULTS.md](evals/RESULTS.md)。
 - `SKILL.md`、這幾份 README 和徽章上的數字，都由 `tools/check_numbers.py` 對照資料核對。細節見 [verification-record.md](references/verification-record.md)。
 

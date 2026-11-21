@@ -135,3 +135,11 @@ child rather than nothing.
 registering it: every non-underscore `post_meta` key present on the post type is
 exposed as `meta_<key>` (`MetaFieldUnknown`, a plain string). A site that stores
 its data with `update_post_meta()` and nothing else is already readable.
+
+## A menu item's ACF image
+
+ACF fields on menu items resolve in the `menu` namespace like a post's do: an image
+field's ID is `@VAR('menu/meta_<field>__id')`, and `@attachment(<that id>,
+'medium_large')` (or any registered size) gives a thumbnail URL for an `image` node.
+Measured on a live 1.0.13 site (2026-11-21); run `tools/list_fields.php` on the post
+to see the names a site really registers.

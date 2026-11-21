@@ -143,7 +143,7 @@ Platform and rendered-tag facts, each measured. Moved out of SKILL.md on 2026-11
   in templates when nginx closed the upstream at five minutes. Pruned to the bound
   set (masters not reached from a bound template, their templates, their nodes)
   the same import took under two minutes and compared 22 of 22. Prune before you
-  export - `wp eval-file tools/prune_unbound.php <themeID>` counts, `--apply` deletes; `wp_mosaic_template_assigns.parentID` -> template -> `masterID` is the
+  export - `wp eval-file tools/prune_unbound.php <themeID>` counts, `... <themeID> apply` deletes (a bare word: WP-CLI eats `--apply`); `wp_mosaic_template_assigns.parentID` -> template -> `masterID` is the
   bound set, plus any `assign="auto"` template. Then sweep ORPHANS: a probe run
   that half-failed, or a prune that removed a parent, leaves nodes whose parent id
   points at nothing. The export skips them, so the copy is short by exactly those
@@ -341,9 +341,10 @@ against the 1.0.13 source or this skill's tables; the rest is that site's measur
   `flexSizing`, `flexBasis`; `build_page.py` refuses `flex`). `display: list-item` was
   refused on that site, and `list-item` renders `display:flex` with no bullet: put
   either in `customDeclarations`.
-- **`modal-window` arrived with 32px of padding** on that site. The 1.0.13 base
-  stylesheet gives `.m-modal-window` none, so it comes from the node's default style,
-  not from the stylesheet: set `padding*` when the window should be flush.
+- **`modal-window` arrives with `padding: 32px`, `border-radius: 8px`, a 384px
+  `max-width` and a shadow** - all in the 1.0.13 stylesheet rule that ends
+  `.m-modal-window)` (`row-gap: 24px` too). Set `padding*`, `borderRadius` and
+  `maxWidth` when the window should be flush, square or wide.
 - **The accordion does not animate unless told to.** The panel jumps from 0 to full
   height; `data.animation: "slide"` animates it (`accordion`'s `animation` takes
   `none|slide`, `data/node-properties.csv`).
@@ -374,3 +375,67 @@ against the 1.0.13 source or this skill's tables; the rest is that site's measur
   hard-codes an old thumbnail URL breaks; pass `--skip-delete`. Files WP-CLI writes
   belong to the user that ran it: reset the owner and permissions afterwards. This is
   WordPress, not Mosaic, and matters because Mosaic pages often carry thumbnail URLs.
+- **A modal focuses an input, or else its window.** On open, 1.0.13's `Modal.js`
+  looks at the first focusable element: an `input` (not a button type), `select`,
+  `textarea` or `contenteditable` gets focus, anything else does not and the
+  `.m-modal-window` is focused instead; an `autofocus` attribute is ignored (the
+  two selector lists are in `Modal.js`; the behaviour measured on that site). In a
+  form dialog, put the input first.
+- **A dropdown's hover mode works for a mouse only.** `Dropdown.js` opens on hover
+  only when `pointerType === "mouse"`; with touch or a pen it is tap to open, tap
+  to close (read in the 1.0.13 source). Test a hover menu on a touch device too.
+- **`dropdown-wrapper-wide` centres its content**, so a panel taller than the
+  screen is cut off at both ends; set `justifyContent: flex-start` on the panel
+  (that site; the wrapper's `grid ... justify-content:center` is in the 1.0.13
+  stylesheet).
+- **An interaction's `translateX` adds to the node's own CSS transform** - one
+  position came out 260px off. Pre-position with `left`/`top` and leave `transform`
+  to the interaction (references/interactions.md).
+- **A taxonomy loop ignores `offset`**: a product-brand loop started from the first
+  term whatever the offset (that site; not in this skill's sweep, so treat it as
+  NO_EFFECT until measured otherwise).
+- **A menu item's ACF image gives its ID**: `@VAR('menu/meta_<field>__id')`, and
+  `@attachment(<that id>, 'medium_large')` turns it into a thumbnail - measured on
+  that site (references/custom-fields.md).
+- **Rendering time grows with the node count, and Mosaic has no page-output cache**
+  (its `Cache` stores Google fonts only). On that site a header and footer of ~860
+  nodes gave a 3.5-4.7s TTFB where the same host served a classic theme in
+  1.0-1.4s, and one page spent 3,364ms rendering with only 32 SQL queries. Keep the
+  shell's node count down, and put a full-page cache in front of any WooCommerce
+  site built on Mosaic.
+
+## Measured on a third site (Mosaic 1.0.13, 2026-11-21)
+
+From another site's test install, handed to this skill; each line says what was
+also checked here against the 1.0.13 source.
+
+- **Every `srcset` and `sizes` entry needs its own `uuid`, or the whole set is dropped
+  in silence.** The commit succeeds and the image renders without them. Shapes:
+  `srcset: [{"image": "wp-attachment://image/<id>/<size>/<path>", "widthOrDpr": "300w", "uuid": "<uuid>"}]`,
+  `sizes: [{"query": "(max-width: 767px)", "slotWidth": "30vw", "uuid": "<uuid>"}, {"query": "", "slotWidth": "260px", "uuid": "<uuid>"}]`.
+  Confirmed in source: `ValidatorImageAttachment::createValidatorImageSourceRecord()`
+  and `createValidatorImageSizeRecord()` both require `uuid` (`ValidatorUUID`).
+- **`attributes` (and so an `aria-label` written there) is not printed** on `button`
+  or `menu-link` (that site); this skill's own node-property sweep, which probed it on
+  a `div`, has `attributes` as `NO_EFFECT` too. An icon-only button needs visually hidden text inside it as its name.
+- **`menu-link` arrives with `padding: 4px 8px`** (`.m-menu-link` in the 1.0.13
+  stylesheet), so a menu-link used as a plain link or a card wrapper needs its
+  padding set to 0.
+- **`tabs-menu` has a light grey background, `#e8e8e8`** (`.m-tabs-menu` in the 1.0.13
+  stylesheet): on a dark mode its tab labels can disappear. Give it a background
+  from the mode's tokens.
+- **The accordion's open state: one state, two names.** In the data it is the style
+  state `___accordion-item--opened`; on the page it is the class
+  `m-accordion-item--opened` on the item. Its selector template in 1.0.13 is
+  `&.m-accordion-item--opened, .m-accordion-item:where(.m-accordion-item--opened) > &,
+  .m-accordion-item:where(.m-accordion-item--opened) > .m-accordion-title &` - so the
+  state can be set on the item, on any direct child of the item, and on anything
+  inside its title (a "+" icon that turns into "x"), natively. A child deeper in the
+  panel, outside the title, needs outside CSS on the class. Source-documented; this
+  skill's state sweep had no host for it, so it is not browser-measured here.
+- **`accordion` arrives with `grid-gap: 24px`** between items (`.m-accordion` in the
+  1.0.13 stylesheet). A title that also has vertical padding leaves a visible extra
+  space under a divider line: set `rowGap` on the accordion.
+- The `modal` open state is `:popover-open`, not `dialog[open]` (already above, under
+  1.0.10), and there is no `flex` style key (above, second site): both confirmed again
+  on this site.

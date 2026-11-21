@@ -47,6 +47,8 @@ Moved out of SKILL.md on 2026-11-16 (skill SOP pass). `scripts/check-release.mjs
 17. `references/standard-fixes.md` — problems that kept coming back on real sites and
    the one fix each: the WooCommerce lightbox toolbar, a sticky column riding over the
    page, rebuilding a template without serving a blank page; each with its check.
+18. `references/mosaic-woo.md` — the standard kit for a WooCommerce store on Mosaic
+   (WooCommerce treats Mosaic as a block theme) and its checklist.
 
 ## The data files
 

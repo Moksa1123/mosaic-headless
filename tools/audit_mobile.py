@@ -12,7 +12,7 @@ import json
 import sys
 from playwright.sync_api import sync_playwright
 
-AUDIT = r"""() => {
+AUDIT = r"""(minTarget) => {
   const out = [];
   const vw = document.documentElement.clientWidth;
   const vis = el => {
@@ -61,9 +61,10 @@ AUDIT = r"""() => {
     if (t && leaf && fs && fs < 11)
       out.push(['TINY_TYPE', id, fs + 'px: ' + t.slice(0, 32)]);
 
-    // 4. a control too small to hit
+    // 4. a control too small to hit (--min-target, 40px by default: an icon-only
+    //    button 28px wide was measured on a live store's phone header)
     if (/^(A|BUTTON)$/.test(el.tagName) || el.getAttribute('role') === 'button') {
-      if (r.height < 30 || r.width < 30)
+      if (r.height < minTarget || r.width < minTarget)
         out.push(['SMALL_TARGET', id,
                   Math.round(r.width) + 'x' + Math.round(r.height) + ': ' + t.slice(0, 24)]);
     }
@@ -103,6 +104,8 @@ def main():
     ap.add_argument("--csv")
     ap.add_argument("--ignore", default="",
                     help="comma-separated KIND or KIND:id to accept as intended")
+    ap.add_argument("--min-target", type=int, default=40,
+                    help="smallest tappable link/button side in px (default 40; WCAG AAA asks 44)")
     a = ap.parse_args()
     url_base = a.base
     slugs = a.paths.split(",")
@@ -123,7 +126,7 @@ def main():
               p.evaluate("()=>document.querySelectorAll('dialog').forEach(d=>(d.open || d.matches(':popover-open') || d.getAttribute('data-mosaic-dialog-state') === 'open')&&(d.mosaicDialog ? (d.mosaicDialog.requestClose || d.mosaicDialog.close).call(d.mosaicDialog) : d.matches(':popover-open') ? d.hidePopover() : d.close()))")
               p.wait_for_timeout(300)
               agg = {}
-              for kind, who, detail in p.evaluate(AUDIT):
+              for kind, who, detail in p.evaluate(AUDIT, a.min_target):
                   if kind in ignore or ("%s:%s" % (kind, who)) in ignore:
                       continue
                   agg.setdefault(kind, []).append((who, detail))

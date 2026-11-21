@@ -78,7 +78,14 @@ class Client:
             with urllib.request.urlopen(req, timeout=120) as r:
                 return json.loads(r.read().decode("utf-8"))
         except urllib.error.HTTPError as e:
-            return {"_httperror": e.code, "_body": e.read().decode("utf-8", "replace")[:400]}
+            body = e.read().decode("utf-8", "replace")[:400]
+            if "rest_cookie_invalid_nonce" in body or "rest_not_logged_in" in body:
+                # the session minted by mint_session.php ran out mid-run (its cookie
+                # lasts 12h by default, the wp_rest nonce at most a day); say so
+                # instead of leaving a bare 403 in the middle of a build
+                body = ("SESSION EXPIRED - mint a new one (wp eval-file tools/mint_session.php) "
+                        "and update MOSAIC_REST_COOKIE / MOSAIC_REST_NONCE or --config. " + body)
+            return {"_httperror": e.code, "_body": body}
 
     def theme_url(self, tail):
         return "%s/theme/%s/%s" % (self.api, self.cfg["themeID"], tail)

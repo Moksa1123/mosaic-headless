@@ -18,7 +18,7 @@
   <img src="https://img.shields.io/badge/node_properties-120-success?style=flat-square" alt="120 node properties">
   <img src="https://img.shields.io/badge/style_properties-101-success?style=flat-square" alt="101 style properties">
   <img src="https://img.shields.io/badge/responsive_checks-733-blueviolet?style=flat-square" alt="733 responsive checks">
-  <img src="https://img.shields.io/badge/self--tests-43-blueviolet?style=flat-square" alt="43 self-tests">
+  <img src="https://img.shields.io/badge/self--tests-48-blueviolet?style=flat-square" alt="48 self-tests">
 </p>
 
 <p align="center">
@@ -146,7 +146,7 @@ English: Mosaic Pro, Nextend, build a Mosaic page without the editor, Mosaic pad
 - **Nothing runs on its own.** The plugin has no hooks, no MCP servers and no background processes. Tools run only when Claude follows `SKILL.md` and you approve the command.
 - **Offline, local only**: `tools/mo.py` reads the CSV files in `data/` and prints answers. `tools/test_mosaic.py` and `tools/check_numbers.py` read the repository. They write nothing and contact nothing.
 - **Your WordPress site, over its REST API**: `build_page.py`, `build_site.py`, `data_upgrade.py`, `theme_zip.py`, the `sweep_*.py` and `probe*.py` tools call Mosaic's REST routes on the one site you configure, to read and write pages, components, templates and themes. They contact only that site.
-- **Your WordPress site, through WP-CLI**: the `tools/*.php` scripts run inside your WordPress with `wp eval-file`, on the server (usually over your own SSH). They read and write Mosaic's tables and theme data on that site. `theme_delete.php` and `prune_unbound.php` delete data and run as a dry run unless told `--apply`.
+- **Your WordPress site, through WP-CLI**: the `tools/*.php` scripts run inside your WordPress with `wp eval-file`, on the server (usually over your own SSH). They read and write Mosaic's tables and theme data on that site. `prune_unbound.php` deletes data and runs as a dry run unless given the bare word `apply`; `theme_delete.php` deletes the theme you name and refuses the live one.
 - **Reading your public pages**: `tools/verify_*.py` and `audit_mobile.py` open pages of that same site with Playwright (Chromium) or `urllib` and compare what was delivered with what was written.
 - **Credentials**: a site URL, a WordPress logged-in cookie and the matching `wp_rest` nonce, for an administrator on your own site. `tools/mint_session.php` prints them on the server. Installed as a plugin, Claude Code asks for them as `userConfig` values; the cookie and nonce are marked sensitive and kept in the platform's credential store. They can also come from environment variables (`MOSAIC_SITE_URL`, `MOSAIC_REST_COOKIE`, `MOSAIC_REST_NONCE`) or a JSON file you pass with `--config`. **No tool looks for credentials on your machine.**
 - **Third parties**: the worked example in `sites/` loads Google Fonts, so pages built from it make visitors' browsers fetch fonts from Google.
@@ -159,6 +159,7 @@ English: Mosaic Pro, Nextend, build a Mosaic page without the editor, Mosaic pad
 | `from_elementor.py` / `verify_conversion.py` | Elementor to Mosaic, and proof the content arrived | local file / your site |
 | `verify_rwd.py`, `verify_browser.py`, `verify_*.py` | read the delivered page in Chromium | your site (read) |
 | `theme_zip.py`, `theme_export.php` / `theme_import.php` | move a whole theme | your site (REST / WP-CLI) |
+| `sync_nodes.py` + `list_bindings.php` | update a built site in place: only changed nodes, on the masters it already has; dry run unless `--apply` | your site (REST; bindings read with WP-CLI) |
 | `data_upgrade.py` | run Mosaic's data migration after a plugin update | your site (REST) |
 | `scan_inline_tags.py` / `fix_inline_tags.py` | find and fix text that prints HTML tags on 1.0.11+ | your site (REST) |
 | `test_mosaic.py`, `check_numbers.py` | self-test and number check | this repository |
@@ -182,7 +183,7 @@ Node types, node properties, style properties and style states are extracted fro
 | `data/theme-zip-verification.csv` | 22 | Mosaic's own theme ZIP round-tripped and compared |
 | `data/conversion-batch.csv` | 19 | every Elementor page of a site converted, built and checked |
 
-- Self-test: `python tools/test_mosaic.py`, 43 offline tests (lookups, Chinese terms, the build output's shape and refusals, the public build interface, this repository's numbers and privacy).
+- Self-test: `python tools/test_mosaic.py`, 48 offline tests (lookups, Chinese terms, the build output's shape and refusals, the public build interface, this repository's numbers and privacy).
 - Evals: 16 questions about Mosaic 1.0.10 to 1.0.12 behaviour; with the skill 16/16, without it 0/16. Results: [evals/RESULTS.md](evals/RESULTS.md).
 - Every number in `SKILL.md`, these READMEs and their badges is checked against the data by `tools/check_numbers.py`. Detail: [verification-record.md](references/verification-record.md).
 

@@ -2,8 +2,16 @@
 /**
  * Mint a logged-in cookie and a matching wp_rest nonce, without a browser.
  *
- *   wp eval-file mint_session.php                 # first administrator
+ *   wp eval-file mint_session.php                 # first administrator, 12 hours
  *   wp eval-file mint_session.php admin@site.com  # a specific account
+ *   wp eval-file mint_session.php - 20            # first administrator, 20 hours
+ *
+ * The second argument is the session's lifetime in hours (positional: WP-CLI takes
+ * any --flag as its own). The cookie lives that long, but the wp_rest NONCE is
+ * WordPress's and expires after at most a day (nonce_life, 24h by default, valid
+ * for 12-24h depending on when it was made), so more than 24 is capped. When a long
+ * build stops with rest_cookie_invalid_nonce, the session ran out: mint again and
+ * re-run; the tools print that hint themselves.
  *
  * The catch: wp_create_nonce() mixes in wp_get_session_token(), which reads the
  * session token out of the CURRENT REQUEST's logged-in cookie. Under WP-CLI there is
@@ -16,7 +24,8 @@ $args = isset($args) ? $args : [];
 
 // Takes a login or email; falls back to the first administrator on the site. Never
 // hardcode an account here - this file ships.
-$who  = isset($args[0]) ? $args[0] : '';
+$who  = (isset($args[0]) && $args[0] !== '-') ? $args[0] : '';
+$hours = isset($args[1]) ? max(1, min(24, (int) $args[1])) : 12;
 $user = null;
 if ($who !== '') {
     $user = strpos($who, '@') !== false ? get_user_by('email', $who)
@@ -36,7 +45,7 @@ if (!$user) {
     return;
 }
 
-$expiration = time() + 12 * HOUR_IN_SECONDS;
+$expiration = time() + $hours * HOUR_IN_SECONDS;
 
 $manager = WP_Session_Tokens::get_instance($user->ID);
 $token   = $manager->create($expiration);
@@ -50,3 +59,4 @@ echo 'COOKIE=' . LOGGED_IN_COOKIE . '=' . $cookie . "\n";
 echo 'NONCE=' . wp_create_nonce('wp_rest') . "\n";
 echo 'SITEURL=' . get_option('siteurl') . "\n";
 echo 'USER=' . $user->user_login . "\n";
+echo 'EXPIRES=' . gmdate('Y-m-d H:i', $expiration) . " UTC (the nonce may lapse sooner, see above)\n";

@@ -213,7 +213,7 @@ and heading level — and it earned its place at once: it caught the converter l
 | `verify_rwd.py` | does every `_t`/`_m` declaration reach the served stylesheet |
 | `verify_intro.py` / `verify_loop.py` | a page-load sequence that ENDS; a perpetual one that loops, hides nothing, and opens |
 | `theme_export.php` / `theme_import.php` | a whole theme as JSON rows over WP-CLI, ids intact |
-| `prune_unbound.php` | clears the templates and masters that page rebuilds leave bound to nothing, with their nodes; dry run unless `--apply` |
+| `prune_unbound.php` | clears the templates and masters that page rebuilds leave bound to nothing, with their nodes; dry run unless given the bare word `apply` |
 | `fix_text_runs.py` | makes buttons built before v1.34.1 editable in the Mosaic editor by wrapping their text the way the editor does; dry run unless `--apply` |
 | `scan_inline_tags.py` | read only: finds text that holds HTML tags, which Mosaic 1.0.11+ prints as visible `<p>` / `<br>` on the page, and warns on a document with a duplicate root |
 | `fix_inline_tags.py` | fixes what `scan_inline_tags.py` finds, turning the tags into real inline nodes; dry run unless `--apply` |

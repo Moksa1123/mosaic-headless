@@ -89,6 +89,15 @@ class MoQueries(unittest.TestCase):
         self.assertEqual(code, 0)
         self.assertIn("borderRadius", out)
 
+    def test_css_not_a_style_key(self):
+        code, out = mo("css", "clip-path")
+        self.assertEqual(code, 1)
+        self.assertIn("not a Mosaic style key", out)
+        self.assertIn("customDeclarations", out)
+        code, out = mo("css", "border-radus")
+        self.assertIn("did you mean: border-radius", out)
+        self.assertEqual(mo("css", "object-fit")[0], 0)       # it does have a key: objectFitStyle
+
     def test_params(self):
         code, out = mo("--json", "params", "text")
         self.assertEqual(code, 0, out)
@@ -396,6 +405,55 @@ class SkillDoc(unittest.TestCase):
             hits = [os.path.join(d, name) for d in ("tools", "sites", "evals")
                     if os.path.exists(os.path.join(ROOT, d, name))]
             self.assertTrue(hits, name)
+
+
+class SyncNodesPlan(unittest.TestCase):
+    """sync_nodes.py's matching, offline: a live document is simulated as the same spec
+    flattened again (fresh node ids, the way a commit stores it)."""
+
+    @classmethod
+    def setUpClass(cls):
+        import build_page
+        import sync_nodes
+        cls.bp, cls.sn = build_page, sync_nodes
+        cls.surface = build_page.Surface()
+
+    def tree(self, title="Hello", extra=False):
+        kids = [{"type": "text", "data": {"tagName": "h1", "attrID": "t-title"}, "text": title},
+                {"type": "button", "data": {"url": {"v": "/contact/"}, "attrID": "t-cta"}, "text": "Go"}]
+        if extra:
+            kids.append({"type": "text", "data": {"attrID": "t-new"}, "text": "New"})
+        return {"type": "div", "data": {"attrID": "t-root"}, "children": kids}
+
+    def flat(self, tree, top):
+        return self.bp.flatten(self.bp.refresh_node_ids(tree), top, "DOC", self.surface, False,
+                               parent_type="template-internal")
+
+    def test_identical_tree_needs_nothing(self):
+        same, struct, updates, _ = self.sn.plan(self.flat(self.tree(), "S"), "S", self.flat(self.tree(), "L"), "L")
+        self.assertTrue(same)
+        self.assertEqual((struct, updates), ([], []))
+
+    def test_text_edit_is_one_update(self):
+        same, struct, updates, _ = self.sn.plan(self.flat(self.tree("Changed"), "S"), "S",
+                                                self.flat(self.tree(), "L"), "L")
+        self.assertTrue(same)
+        self.assertEqual(len(updates), 1)
+        live, merged, changed = updates[0]
+        self.assertEqual((live["type"], changed, merged["text"]), ("wysiwyg-text", ["text"], "Changed"))
+
+    def test_added_node_is_structural(self):
+        same, struct, updates, _ = self.sn.plan(self.flat(self.tree(extra=True), "S"), "S",
+                                                self.flat(self.tree(), "L"), "L")
+        self.assertFalse(same)
+        self.assertTrue(any("@t-new" in s for s in struct))
+
+    def test_override_shell_counter(self):
+        shell = {"parentType": "override", "parentID": "I", "status": "publish",
+                 "data": {"override": {"originalID": "X"}}}
+        full = dict(shell, data={"override": {"originalID": "Y"}, "text": "kept"})
+        self.assertEqual(self.sn.all_shell_instances([shell, dict(shell)]), 1)
+        self.assertEqual(self.sn.all_shell_instances([shell, full]), 0)
 
 
 class DirectoryEdition(unittest.TestCase):

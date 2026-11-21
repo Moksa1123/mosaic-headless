@@ -2,8 +2,14 @@
 /**
  * Remove the templates and masters no post is bound to, and the nodes under them.
  *
- *   wp eval-file prune_unbound.php <themeID>            # dry run: counts only
- *   wp eval-file prune_unbound.php <themeID> --apply    # delete
+ *   wp eval-file prune_unbound.php <themeID>          # dry run: counts only
+ *   wp eval-file prune_unbound.php <themeID> apply    # delete
+ *
+ * `apply` is a bare positional word: WP-CLI takes any `--flag` on the command line as
+ * one of its own global parameters and never passes it to the script, so the
+ * `--apply` this tool used to ask for could not reach it and every run stayed a dry
+ * run (reported from a 1.0.13 site, 2026-11-21). `--apply` is still accepted in case
+ * a wrapper passes it through.
  *
  * Every build_site.py / build_page.py run makes a fresh master and template and
  * re-binds the post to them; the previous pair stays behind, bound to nothing.
@@ -27,10 +33,10 @@
  */
 $args  = isset($args) ? $args : [];
 $id    = isset($args[0]) ? trim($args[0]) : '';
-$apply = in_array('--apply', $args, true);
+$apply = in_array('apply', $args, true) || in_array('--apply', $args, true);
 
 if (!preg_match('/^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i', $id)) {
-    WP_CLI::error('usage: wp eval-file prune_unbound.php <themeID> [--apply]');
+    WP_CLI::error('usage: wp eval-file prune_unbound.php <themeID> [apply]');
 }
 
 global $wpdb;
@@ -75,7 +81,7 @@ if (!$apply) {
         "SELECT COUNT(*) FROM {$p}mosaic_nodes n LEFT JOIN {$p}mosaic_nodes q ON q.ID = n.parentID
           WHERE n.themeID = %s AND n.parentType = 'node' AND q.ID IS NULL", $id));
     WP_CLI::log("orphan nodes already present: $orphans");
-    WP_CLI::success('dry run - nothing deleted. Back up, then re-run with --apply');
+    WP_CLI::success('dry run - nothing deleted. Back up, then re-run with apply (a bare word: wp eval-file prune_unbound.php <themeID> apply)');
     return;
 }
 

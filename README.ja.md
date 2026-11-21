@@ -18,7 +18,7 @@
   <img src="https://img.shields.io/badge/node_properties-120-success?style=flat-square" alt="120 個の node プロパティ">
   <img src="https://img.shields.io/badge/style_properties-101-success?style=flat-square" alt="101 個のスタイルプロパティ">
   <img src="https://img.shields.io/badge/responsive_checks-733-blueviolet?style=flat-square" alt="733 件のレスポンシブ検査">
-  <img src="https://img.shields.io/badge/self--tests-43-blueviolet?style=flat-square" alt="43 項目のセルフテスト">
+  <img src="https://img.shields.io/badge/self--tests-48-blueviolet?style=flat-square" alt="48 項目のセルフテスト">
 </p>
 
 <p align="center">
@@ -146,7 +146,7 @@ English: Mosaic Pro, Nextend, build a Mosaic page without the editor, Mosaic pad
 - **自動では何も実行されません。** フック、MCP サーバー、バックグラウンドプロセスはありません。Claude が `SKILL.md` に従ってコマンドを提案し、あなたが承認したときだけ実行されます。
 - **ローカルのみ、通信なし**：`tools/mo.py` は `data/` の CSV を読んで答えを表示します。`tools/test_mosaic.py` と `tools/check_numbers.py` はこのリポジトリを読みます。書き込みも通信もしません。
 - **REST API であなたの WordPress サイトへ**：`build_page.py`、`build_site.py`、`data_upgrade.py`、`theme_zip.py`、`sweep_*.py`、`probe*.py` は、設定した 1 つのサイトの Mosaic REST ルートを呼び出し、ページ、コンポーネント、テンプレート、テーマを読み書きします。接続先はそのサイトだけです。
-- **WP-CLI であなたのサイト上で実行**：`tools/*.php` は `wp eval-file` でサーバー上（通常はあなた自身の SSH 経由）の WordPress 内で動き、そのサイトの Mosaic テーブルとテーマデータを読み書きします。`theme_delete.php` と `prune_unbound.php` はデータを削除するため、`--apply` を付けない限り試行のみです。
+- **WP-CLI であなたのサイト上で実行**：`tools/*.php` は `wp eval-file` でサーバー上（通常はあなた自身の SSH 経由）の WordPress 内で動き、そのサイトの Mosaic テーブルとテーマデータを読み書きします。`prune_unbound.php` はデータを削除するため、`apply` という語（`--apply` ではありません）を付けない限り試行のみです。`theme_delete.php` は指定したテーマを削除し、使用中のテーマは削除しません。
 - **公開ページの読み取り**：`tools/verify_*.py` と `audit_mobile.py` は同じサイトのページを Playwright（Chromium）または `urllib` で開き、配信結果と書き込んだ内容を比較します。
 - **認証情報**：サイト URL、WordPress のログイン cookie、それに対応する `wp_rest` nonce（あなた自身のサイトの管理者のもの）。`tools/mint_session.php` がサーバー上でこれらを表示します。plugin としてインストールすると Claude Code が `userConfig` として尋ね、cookie と nonce は機密扱いでプラットフォームの資格情報ストアに保存されます。環境変数（`MOSAIC_SITE_URL`、`MOSAIC_REST_COOKIE`、`MOSAIC_REST_NONCE`）や、`--config` で渡す自分の JSON ファイルも使えます。**どのツールもあなたのマシン上で認証情報を探しません。**
 - **第三者**：`sites/` の作例は Google Fonts を読み込むため、それで作ったページでは訪問者のブラウザーが Google からフォントを取得します。
@@ -159,6 +159,7 @@ English: Mosaic Pro, Nextend, build a Mosaic page without the editor, Mosaic pad
 | `from_elementor.py` / `verify_conversion.py` | Elementor から Mosaic へ変換し、内容が届いたことを確認 | ローカルファイル／あなたのサイト |
 | `verify_rwd.py`、`verify_browser.py`、`verify_*.py` | 配信ページを Chromium で読む | あなたのサイト（読み取り） |
 | `theme_zip.py`、`theme_export.php` / `theme_import.php` | テーマ全体の移行 | あなたのサイト（REST／WP-CLI） |
+| `sync_nodes.py` + `list_bindings.php` | 構築済みサイトをその場で更新：変わったノードだけを既存の master のまま書き換え。`--apply` なしはプレビューのみ | あなたのサイト（REST。紐付けは WP-CLI で読む） |
 | `data_upgrade.py` | プラグイン更新後に Mosaic のデータ移行を実行 | あなたのサイト（REST） |
 | `scan_inline_tags.py` / `fix_inline_tags.py` | 1.0.11+ で HTML タグがそのまま表示されるテキストを検出・修正 | あなたのサイト（REST） |
 | `test_mosaic.py`、`check_numbers.py` | セルフテストと数値チェック | このリポジトリ |
@@ -182,7 +183,7 @@ node type、node プロパティ、スタイルプロパティ、スタイル状
 | `data/theme-zip-verification.csv` | 22 | Mosaic 自身のテーマ ZIP を往復させて比較 |
 | `data/conversion-batch.csv` | 19 | あるサイトのすべての Elementor ページを変換・構築・検査 |
 
-- セルフテスト：`python tools/test_mosaic.py`、オフラインの 43 項目（検索、中国語の用語、構築結果の形と拒否ルール、公開されている構築インターフェース、このリポジトリの数値とプライバシー）。
+- セルフテスト：`python tools/test_mosaic.py`、オフラインの 48 項目（検索、中国語の用語、構築結果の形と拒否ルール、公開されている構築インターフェース、このリポジトリの数値とプライバシー）。
 - evals：Mosaic 1.0.10〜1.0.12 の挙動に関する 16 問。skill ありで 16/16、なしで 0/16。結果：[evals/RESULTS.md](evals/RESULTS.md)。
 - `SKILL.md`、これらの README、バッジの数値は、`tools/check_numbers.py` がデータと照合しています。詳細：[verification-record.md](references/verification-record.md)。
 

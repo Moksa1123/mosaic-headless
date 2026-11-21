@@ -55,7 +55,8 @@ is it safe / does it render".
 |---|---|---|
 | `tools/mo.py` | query the measured surface - **the front door**; reads `data/*.csv` only | stdlib |
 | `tools/build_page.py` | commit one page spec through the verified write path; refuses unsafe types, bad placement, out-of-enum values | stdlib |
-| `tools/build_site.py` | a whole site: one master with the shell, one document per page, components | stdlib |
+| `tools/build_site.py` | a whole site: one master with the shell, one document per page, components. Makes a NEW master every run: never build only some pages | stdlib |
+| `tools/sync_nodes.py` | update a built site in place: only the nodes that changed, on the masters it already has; dry run unless `--apply` (bindings from `list_bindings.php`) | stdlib |
 | `tools/interactions.py` | library: every interaction shape the editor stores (`tween`, `on`, `mode_switch`...) | stdlib |
 | `tools/from_elementor.py` | Elementor `_elementor_data` -> Mosaic spec, unconverted elements named | stdlib |
 | `tools/theme_zip.py`, `theme_export.php` / `theme_import.php` | move a whole theme | stdlib / WP-CLI |
@@ -132,6 +133,7 @@ fits, and say in the spec which native path was checked.
 |---|---|---|
 | **Build a page** | `mo.py skeleton`; `mo.py check <every type>`; `mo.py params` / `css` for every key; `build_page.py --spec page.json` | build exits 0, then the Verify rows for a page pass |
 | **Build a whole site** | `build_site.py --site site.json`; rebuild pages that share components **in the same run** | every page `OK`, no `STALE CACHE` line; `verify_navigation.py` exit 0 |
+| **Change a built site** (a header line, a page's text or structure) | `wp eval-file tools/list_bindings.php <themeID>` → `sync_nodes.py --site --bindings` (dry run) → `--apply`. Not `build_site.py`: it makes a new master, and building some pages splits the site | sync prints `verified` per document, exit 0; a rerun shows nothing to do |
 | **Change a style** | `mo.py css <property>` → style key; `mo.py states` for a state; tokens via `{"token": "--x"}` in a `theme` block, not per-node values | `verify_rwd.py` and `verify_browser.py` exit 0 |
 | **Responsive** | `_t` / `_m` keys only ([responsive.md](references/responsive.md)); a width copied from Elementor needs `maxWidth: "100%"` | `verify_rwd.py`, `audit_mobile.py --widths 390,768` exit 0 |
 | **Popup / drawer / tour** | `modal` (blocking) or `popover` (non-blocking); shorthand triggers only `pageLoad` / `exitIntent` / `scrollDepth`; a tour advances on `afterClose` | `verify_dialog.py` / `verify_popovers.py` exit 0 |
@@ -143,7 +145,7 @@ fits, and say in the spec which native path was checked.
 | **Plugin upgrade** | `data_upgrade.py`; re-extract (`extract_*.py`, `check_tables.py`); re-run the verifiers | [upgrading.md](references/upgrading.md) checklist; `scan_inline_tags.py` finds nothing |
 | **Elementor → Mosaic** | `from_elementor.py --strict`; build; check | `verify_conversion.py` exit 0 |
 | **Rebuild a template** | build and validate the new tree first, replace the old nodes last - never clear first ([standard-fixes.md](references/standard-fixes.md)) | the page never served blank; delivered-page checks pass |
-| **WooCommerce product page** | the lightbox toolbar fix and a sticky column scoped to its own container ([standard-fixes.md](references/standard-fixes.md)) | `verify_lightbox.py` and `verify_sticky.py` exit 0 |
+| **WooCommerce store on Mosaic** | the standard kit: theme support, scripts, notices, gallery, lightbox, sticky summary, archives, tap targets, page cache ([mosaic-woo.md](references/mosaic-woo.md)) | its checklist; `verify_lightbox.py`, `verify_sticky.py`, `audit_mobile.py` exit 0 |
 | **Old site shows literal tags** (1.0.11+) | `scan_inline_tags.py` (read only) → `fix_inline_tags.py`, dry run then `--apply` | a second scan finds nothing |
 
 Before writing anything, read [data-model.md](references/data-model.md) (where a

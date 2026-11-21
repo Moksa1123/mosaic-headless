@@ -621,6 +621,22 @@ def cmd_css(a):
            if any(w in (r["css_property"] or "").lower() or w in r["property"].lower()
                   for w in wants)]
     props = index("style-properties", "property")
+    if not out:
+        # "nothing matched" could mean a typo or a CSS property Mosaic has no key for
+        # (clip-path, flex, list-style, scrollbar-width, object-fit...); say which.
+        import difflib
+        names = sorted({r["css_property"] for r in rows("style-verification") if r["css_property"]}
+                       | {r["property"] for r in rows("style-properties")})
+        near = difflib.get_close_matches(a.property.lower(), [n.lower() for n in names], n=5, cutoff=0.6)
+        if ARGS.json:
+            emit({"property": a.property, "style_key": None, "did_you_mean": near}, lambda: None)
+        else:
+            print("%s is not a Mosaic style key: no style property compiles to it." % a.property)
+            if near:
+                print("did you mean: %s" % ", ".join(near))
+            print("For a real CSS property with no key, write it in `customDeclarations` - "
+                  "one value the validator rejects drops the WHOLE block (references/facts.md).")
+        sys.exit(1)
     emit([dict(r, group=props.get(r["property"], {}).get("group", "")) for r in out],
          lambda: table(["css property", "set in Mosaic as", "group", "swept"],
                        [[r["css_property"], r["property"],
