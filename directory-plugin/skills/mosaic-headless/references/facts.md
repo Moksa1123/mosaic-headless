@@ -411,6 +411,31 @@ against the 1.0.13 source or this skill's tables; the rest is that site's measur
 From another site's test install, handed to this skill; each line says what was
 also checked here against the 1.0.13 source.
 
+- **What Mosaic stores is not byte-equal to what was sent, even when nothing
+  changed** - which is why comparing a spec to a live site needs normalising
+  (`tools/sync_nodes.py` does it). After a fresh rebuild with an unchanged spec, a
+  live 1.0.13 site showed 1,588 node "differences" in 21 documents. That site's own
+  breakdown (2026-11-21; one node can have several):
+  - `customDeclarations` re-spaced AND re-lined - a space after `:` and `,`, a newline
+    between declarations: 1,560 nodes, 1,107 with nothing else;
+  - `rgb()` / `rgba()` values re-spaced (`rgba(0, 0, 0, 0)` for `rgba(0,0,0,0)`):
+    259 nodes (`color`, `backgroundColor`);
+  - an icon's `svg` rewritten: attributes reordered (`xmlns` first) and `width` /
+    `height` added to the root `<svg>` (from its viewBox): 281 nodes;
+  - keys the type does not keep, stored as null: `attributes` on button / menu-link
+    (11), a form label's `forInput` (5), tabs-menu's `accessibleLabel` (1);
+  - interactions stored without each interaction's `uuid` and without
+    `clickOptions.ID` (5), and a `settings.target.uuid` that names the node id the
+    build minted;
+  - and, not on that site because its spec used none, `build_page.py` itself: every
+    `boxShadow`, `transition` and `transform` list item gets a new random `uuid` on
+    every run - compare with those renamed, never by value;
+  - children heal() inserts. **Auto-inserted or really extra:** a live node the spec
+    does not have is Mosaic's own when it has no `attrID` and its type is a default
+    child of its parent's type (`data/default-children.csv`, "default" or "heal" -
+    e.g. an empty `accordion-content` gets `text > wysiwyg-text`); anything else -
+    a node with an `attrID`, or a type the parent does not insert - is really
+    extra, and means the site was edited outside the spec.
 - **Every `srcset` and `sizes` entry needs its own `uuid`, or the whole set is dropped
   in silence.** The commit succeeds and the image renders without them. Shapes:
   `srcset: [{"image": "wp-attachment://image/<id>/<size>/<path>", "widthOrDpr": "300w", "uuid": "<uuid>"}]`,

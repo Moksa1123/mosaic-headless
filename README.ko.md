@@ -18,7 +18,7 @@
   <img src="https://img.shields.io/badge/node_properties-120-success?style=flat-square" alt="120개 node 속성">
   <img src="https://img.shields.io/badge/style_properties-101-success?style=flat-square" alt="101개 스타일 속성">
   <img src="https://img.shields.io/badge/responsive_checks-733-blueviolet?style=flat-square" alt="733개 반응형 검사">
-  <img src="https://img.shields.io/badge/self--tests-48-blueviolet?style=flat-square" alt="48개 자체 테스트">
+  <img src="https://img.shields.io/badge/self--tests-53-blueviolet?style=flat-square" alt="53개 자체 테스트">
 </p>
 
 <p align="center">
@@ -183,7 +183,7 @@ node type, node 속성, 스타일 속성, 스타일 상태는 플러그인 소�
 | `data/theme-zip-verification.csv` | 22 | Mosaic 자체 테마 ZIP을 왕복시켜 비교 |
 | `data/conversion-batch.csv` | 19 | 한 사이트의 모든 Elementor 페이지를 변환, 구축, 검사 |
 
-- 자체 테스트: `python tools/test_mosaic.py`, 오프라인 테스트 48개(조회, 중국어 용어, 구축 결과의 형태와 거부 규칙, 공개된 구축 인터페이스, 이 저장소의 숫자와 개인정보).
+- 자체 테스트: `python tools/test_mosaic.py`, 오프라인 테스트 53개(조회, 중국어 용어, 구축 결과의 형태와 거부 규칙, 공개된 구축 인터페이스, 이 저장소의 숫자와 개인정보).
 - evals: Mosaic 1.0.10~1.0.12 동작에 관한 16문항. skill 사용 시 16/16, 미사용 시 0/16. 결과: [evals/RESULTS.md](evals/RESULTS.md).
 - `SKILL.md`, 이 README들, 배지의 숫자는 `tools/check_numbers.py`가 데이터와 대조합니다. 자세한 내용: [verification-record.md](references/verification-record.md).
 

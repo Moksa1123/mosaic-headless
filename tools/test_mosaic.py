@@ -448,6 +448,101 @@ class SyncNodesPlan(unittest.TestCase):
         self.assertFalse(same)
         self.assertTrue(any("@t-new" in s for s in struct))
 
+    # what a live 1.0.13 site did to an unchanged spec (2026-11-21): random list-item
+    # uuids on every build, re-spaced CSS, a rewritten svg, a heal-inserted child
+    SVG = '<svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M0 0h24v24H0z"/></svg>'
+
+    def rich_tree(self, title="Hello", body="Body"):
+        return {"type": "div", "data": {"attrID": "r-root"},
+                "style": {"&": {"_": {"shadow": {"x": "0px", "y": "4px", "color": "rgba(0,0,0,.2)"},
+                                       "transitionAll": "200ms ease", "move": {"translateY": "-8px"},
+                                       "customDeclarations": "outline:0;font-feature-settings:'palt' 1,'kern' 1"}}},
+                "children": [
+                    {"type": "icon", "data": {"attrID": "r-icon", "svg": self.SVG}},
+                    {"type": "text", "data": {"tagName": "h2", "attrID": "r-title"}, "text": title},
+                    {"type": "accordion", "data": {"attrID": "r-acc"}, "children": [
+                        {"type": "accordion-item", "data": {"attrID": "r-item"}, "children": [
+                            {"type": "accordion-title", "data": {"attrID": "r-q"}, "text": "Q"},
+                            {"type": "accordion-content", "data": {"attrID": "r-a"}}]}]},
+                    {"type": "text", "data": {"attrID": "r-body"}, "text": body},
+                    {"type": "button", "nodeID": "pin-target", "data": {"attrID": "r-btn", "url": {"v": "/x/"},
+                     "attributes": [{"name": "aria-label", "value": "Open"}]},
+                     "style": {"&": {"_": {"backgroundColor": "rgba(0,0,0,0)", "color": "rgb(255,255,255)"}}},
+                     "text": "Open"},
+                    {"type": "div", "data": {"attrID": "r-opener", "interactions": [
+                        {"uuid": "11111111-2222-4333-8444-555555555555", "type": "click",
+                         "clickOptions": {"ID": "66666666-7777-4888-9999-000000000000"},
+                         "settings": {"target": {"type": "element", "uuid": "pin-target"}}}]}}]}
+
+    def as_stored(self, records):
+        """What Mosaic hands back: CSS re-spaced, svg rewritten, default children added."""
+        import uuid as _uuid
+        out = []
+        for r in records:
+            r = json.loads(json.dumps(r))
+            st = ((r.get("data") or {}).get("style") or {}).get("states") or {}
+            for bps in st.values():
+                for props in bps.values():
+                    if "customDeclarations" in props:
+                        props["customDeclarations"] = (props["customDeclarations"]
+                                                       .replace(":", ": ").replace(",", ", ")
+                                                       .replace(";", ";\n"))
+                    for ck in ("backgroundColor", "color"):
+                        if isinstance(props.get(ck), str):
+                            props[ck] = props[ck].replace(",", ", ")
+            d = r.get("data") or {}
+            if "attributes" in d:                          # button / menu-link keep none
+                d["attributes"] = None
+            for it in d.get("interactions") or []:          # stored without these
+                it.pop("uuid", None)
+                (it.get("clickOptions") or {}).pop("ID", None)
+            if r["type"] == "icon":
+                r["data"]["svg"] = ('<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" '
+                                    'fill="none" viewBox="0 0 24 24"><path d="M0 0h24v24H0z"/></svg>')
+            out.append(r)
+            if r["type"] == "accordion-content":            # heal fills an empty panel
+                t = {"ID": str(_uuid.uuid4()), "parentID": r["ID"], "parentType": "node", "type": "text",
+                     "ordering": "a0", "status": "publish", "data": {}}
+                out += [t, {"ID": str(_uuid.uuid4()), "parentID": t["ID"], "parentType": "node",
+                            "type": "wysiwyg-text", "ordering": "a0", "status": "publish", "data": {"text": ""}}]
+        return out
+
+    def test_rebuild_of_unchanged_rich_spec_is_zero(self):
+        live = self.as_stored(self.flat(self.rich_tree(), "L"))
+        same, struct, updates, notes = self.sn.plan(self.flat(self.rich_tree(), "S"), "S", live, "L")
+        self.assertTrue(same, struct)
+        self.assertEqual(updates, [], [(u[0]["_key"], u[2]) for u in updates])
+        self.assertTrue(any("inserted itself" in n for n in notes), notes)
+
+    def test_one_real_edit_in_rich_spec_is_one_update(self):
+        live = self.as_stored(self.flat(self.rich_tree(), "L"))
+        same, struct, updates, _ = self.sn.plan(self.flat(self.rich_tree(title="Changed"), "S"), "S", live, "L")
+        self.assertTrue(same, struct)
+        self.assertEqual([(u[0]["type"], u[2]) for u in updates], [("wysiwyg-text", ["text"])])
+
+    def test_extra_node_with_attr_is_structural(self):
+        live = self.as_stored(self.flat(self.rich_tree(), "L"))
+        root = next(n for n in live if (n.get("data") or {}).get("attrID") == "r-root")
+        live.append({"ID": "extra-1", "parentID": root["ID"], "parentType": "node", "type": "div",
+                     "ordering": "z9", "status": "publish", "data": {"attrID": "someone-elses"}})
+        same, struct, _, _ = self.sn.plan(self.flat(self.rich_tree(), "S"), "S", live, "L")
+        self.assertFalse(same)
+        self.assertTrue(any("only on the site" in s for s in struct), struct)
+
+    def test_attr_filter_limits_scope(self):
+        live = self.as_stored(self.flat(self.rich_tree(), "L"))
+        spec = self.flat(self.rich_tree(title="T2", body="B2"), "S")
+        _, _, all_updates, _ = self.sn.plan(spec, "S", live, "L")
+        _, _, only, _ = self.sn.plan(spec, "S", live, "L", {"r-body"})
+        self.assertEqual((len(all_updates), len(only)), (2, 1))
+
+    def test_normalisers(self):
+        self.assertEqual(self.sn.css_norm("a: 1px , 2px;b:c ;"), self.sn.css_norm("a:1px,2px;b:c"))
+        self.assertEqual(self.sn.svg_norm('<svg width="9" b="2" a="1"><g/></svg>'),
+                         self.sn.svg_norm('<svg a="1" b="2" height="9"><g/></svg>'))
+        self.assertNotEqual(self.sn.svg_norm('<svg a="1"><path d="M0"/></svg>'),
+                            self.sn.svg_norm('<svg a="1"><path d="M1"/></svg>'))
+
     def test_override_shell_counter(self):
         shell = {"parentType": "override", "parentID": "I", "status": "publish",
                  "data": {"override": {"originalID": "X"}}}

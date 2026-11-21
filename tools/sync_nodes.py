@@ -39,8 +39,10 @@ from __future__ import annotations
 
 import argparse
 import copy
+import csv
 import json
 import os
+import re
 import sys
 import time
 import uuid
@@ -57,55 +59,230 @@ SHELL_REGIONS = ("header", "footer")
 
 
 # ── matching ──────────────────────────────────────────────────────────────────
+#
+# A node Mosaic stored is not byte-equal to the record build_page sent, even when
+# nothing changed. Measured on a live 1.0.13 site (2026-11-21), a fresh rebuild and an
+# unchanged spec gave 1,588 "differences" before these rules:
+#   - build_page gives every boxShadow / transition / transform list item a NEW random
+#     uuid on every run, and interactions carry run-random uuids too;
+#   - Mosaic re-spaces customDeclarations (a space after ':' and ',');
+#   - Mosaic rewrites an icon's svg (attribute order, xmlns first, width/height added);
+#   - heal() inserts children a composite type needs (data/default-children.csv).
+# So both sides are normalised before they are compared, and children Mosaic adds by
+# itself are recognised and left alone.
 
-def keyed(nodes: list[dict], top_parent: str) -> dict[str, dict]:
-    """Key every node under top_parent: '@attrID' when it has one, else
-    '<parent key>/<index among siblings>:<type>'. Nodes outside the subtree are left out."""
-    children: dict[str, list[dict]] = {}
-    for n in nodes:
-        children.setdefault(n["parentID"], []).append(n)
-    out: dict[str, dict] = {}
-
-    def walk(parent_id: str, parent_key: str):
-        kids = sorted(children.get(parent_id, []), key=lambda n: n.get("ordering", ""))
-        for i, n in enumerate(kids):
-            attr = (n.get("data") or {}).get("attrID")
-            k = "@" + attr if attr else "%s/%d:%s" % (parent_key, i, n["type"])
-            out[k] = dict(n, _key=k, _parent=parent_key, _index=i)
-            walk(n["ID"], k)
-
-    walk(top_parent, "ROOT")
-    return out
-
-
-def structure(index: dict[str, dict]) -> dict[str, tuple]:
-    return {k: (n["type"], n["_parent"], n["_index"]) for k, n in index.items()}
+DATA_DIR = os.path.join(os.path.dirname(os.path.abspath(__file__)), "..", "data")
+UUID_RE = re.compile(r"^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$", re.I)
+TAG_RE = re.compile(r"<([A-Za-z][\w:.-]*)((?:\s+[^\s=>/]+(?:\s*=\s*(?:\"[^\"]*\"|'[^']*'|[^\s>]+))?)*)\s*(/?)>")
+ATTR_RE = re.compile(r"([^\s=>/]+)(?:\s*=\s*(\"[^\"]*\"|'[^']*'|[^\s>]+))?")
+COLOR_FN_RE = re.compile(r"^\s*(?:rgba?|hsla?)\(", re.I)
+# Data keys a node type does not keep: sent, accepted, and stored as null (button and
+# menu-link `attributes`, a form label's `forInput`, tabs-menu `accessibleLabel`;
+# measured 2026-11-21). Compared only when the site does hold a value for them.
+DROPPED_ON_SAVE = {"attributes", "forInput", "accessibleLabel"}
 
 
-def plan(spec_records: list[dict], spec_top: str, live_nodes: list[dict], live_top: str):
-    """(same_structure, structural differences, [(live node, merged data, changed keys)], warnings)."""
+def _csv(name):
+    with open(os.path.join(DATA_DIR, name), encoding="utf-8", newline="") as fh:
+        return list(csv.DictReader(fh))
+
+
+_DEFAULTS = None
+_STABLE = None
+
+
+def default_children() -> dict[str, set]:
+    """parent type -> the child types Mosaic inserts into it by itself."""
+    global _DEFAULTS
+    if _DEFAULTS is None:
+        _DEFAULTS = {r["type"]: set(filter(None, r["default_children"].split("|")))
+                     for r in _csv("default-children.csv")}
+    return _DEFAULTS
+
+
+def stable_uuids() -> set:
+    """uuids that mean something by value: variant ids from the catalog."""
+    global _STABLE
+    if _STABLE is None:
+        _STABLE = {r["id"].lower() for r in _csv("variants.csv") if r.get("id")}
+    return _STABLE
+
+
+def css_norm(text: str) -> str:
+    # Mosaic stores 'palt' as "palt", re-spaces, and puts each declaration on its own line
+    text = (text or "").replace("'", '"')
+    text = re.sub(r"\s+", " ", text).strip()
+    text = re.sub(r"\s*([:;,{}()])\s*", r"\1", text)
+    return text.rstrip(";")
+
+
+def svg_norm(text: str) -> str:
+    """Attribute order and the root svg's width/height do not count."""
+    first = [True]
+
+    def tag(m):
+        name, attrs, close = m.group(1), m.group(2) or "", m.group(3)
+        pairs = []
+        for a in ATTR_RE.finditer(attrs):
+            k, v = a.group(1), a.group(2)
+            v = (v or "").strip("\"'")
+            if first[0] and name.lower() == "svg" and k.lower() in ("width", "height"):
+                continue
+            pairs.append((k.lower(), v))
+        if name.lower() == "svg":
+            first[0] = False
+        return "<%s%s%s>" % (name.lower(), "".join(' %s="%s"' % p for p in sorted(pairs)), "/" if close else "")
+    text = TAG_RE.sub(tag, text or "")
+    return re.sub(r">\s+<", "><", re.sub(r"\s+", " ", text)).strip()
+
+
+def normalise(value, id_map: dict, stable: set, key=None):
+    """A comparable copy of one data value: spec node ids mapped to live ones, run-random
+    uuids renamed in order of appearance, CSS and SVG text normalised."""
+    seen: dict[str, str] = {}
+
+    def u(s: str) -> str:
+        low = s.lower()
+        if low in id_map:
+            return id_map[low]
+        if low in stable:
+            return low
+        if UUID_RE.match(s):
+            seen.setdefault(low, "~u%d" % (len(seen) + 1))
+            return seen[low]
+        return s
+
+    top = key
+
+    def walk(v, key=None, depth=0):
+        if isinstance(v, dict):
+            out = {}
+            for k in sorted(v, key=str):
+                # Mosaic drops these from a stored interaction: every "ID" (clickOptions.ID)
+                # and the uuid of each interaction in the list (measured, 2026-11-21)
+                if top == "interactions" and (k == "ID" or (k == "uuid" and depth == 1)):
+                    continue
+                out[u(k) if isinstance(k, str) else k] = walk(v[k], k, depth + 1)
+            return out
+        if isinstance(v, list):
+            return [walk(x, key, depth + 1) for x in v]
+        if isinstance(v, str):
+            if key == "customDeclarations":
+                return css_norm(v)
+            if key == "svg":
+                return svg_norm(v)
+            if COLOR_FN_RE.match(v):            # rgba(0, 0, 0, 0) is stored for rgba(0,0,0,0)
+                return re.sub(r"\s+", "", v)
+            return u(v)
+        return v
+    return walk(value, key)
+
+
+def match_trees(spec_nodes, spec_top, live_nodes, live_top):
+    """Walk both trees together. Children are aligned in order: by attrID where the spec
+    node has one, else by type. A live child the spec does not have is AUTO (Mosaic
+    inserted it: no attrID, and its type is a default child of its parent's type) or
+    EXTRA. Returns (pairs, spec_only, auto, extra); pairs carry the ancestor attrIDs."""
+    def kids_of(nodes):
+        out: dict[str, list[dict]] = {}
+        for n in nodes:
+            out.setdefault(n["parentID"], []).append(n)
+        for v in out.values():
+            v.sort(key=lambda n: n.get("ordering", ""))
+        return out
+    sk, lk = kids_of(spec_nodes), kids_of(live_nodes)
+    live_by_id = {n["ID"]: n for n in live_nodes}
+    defaults = default_children()
+    pairs, spec_only, auto, extra = [], [], [], []
+
+    def attr(n):
+        return (n.get("data") or {}).get("attrID")
+
+    def classify(l, parent_type, pkey, ancestors):
+        if not attr(l) and l["type"] in defaults.get(parent_type, set()):
+            stack = [l]
+            while stack:                       # the whole inserted subtree is Mosaic's
+                n = stack.pop()
+                auto.append(n)
+                stack += lk.get(n["ID"], [])
+        else:
+            extra.append((l, "%s/+%s" % (pkey, l["type"]), ancestors))
+
+    def align(s_parent, l_parent, pkey, l_parent_type, ancestors):
+        S, L = sk.get(s_parent, []), lk.get(l_parent, [])
+        pos, counts = 0, {}
+        for s in S:
+            a = attr(s)
+            j = next((i for i in range(pos, len(L))
+                      if (a and attr(L[i]) == a) or (not a and not attr(L[i]) and L[i]["type"] == s["type"])), None)
+            if j is None:
+                k = "@" + a if a else "%s/%s" % (pkey, s["type"])
+                spec_only.append((s, k, ancestors))
+                continue
+            for skipped in L[pos:j]:
+                classify(skipped, l_parent_type, pkey, ancestors)
+            l, pos = L[j], j + 1
+            if a:
+                key = "@" + a
+            else:
+                counts[s["type"]] = counts.get(s["type"], 0) + 1
+                key = "%s/%s#%d" % (pkey, s["type"], counts[s["type"]])
+            pairs.append((s, l, key, ancestors))
+            align(s["ID"], l["ID"], key, l["type"], ancestors + ([a] if a else []))
+        for rest in L[pos:]:
+            classify(rest, l_parent_type, pkey, ancestors)
+
+    top_type = live_by_id.get(live_top, {}).get("type", "")
+    align(spec_top, live_top, "ROOT", top_type, [])
+    return pairs, spec_only, auto, extra
+
+
+def plan(spec_records: list[dict], spec_top: str, live_nodes: list[dict], live_top: str, only_attrs=None):
+    """(same_structure, structural differences, [(live node, merged data, changed keys)], notes).
+    only_attrs limits everything to the subtrees rooted at those attrIDs."""
     live = [n for n in live_nodes if n.get("status") != "delete" and n.get("parentType") != "override"]
-    s_idx, l_idx = keyed(spec_records, spec_top), keyed(live, live_top)
-    s_st, l_st = structure(s_idx), structure(l_idx)
+    pairs, spec_only, auto, extra = match_trees(spec_records, spec_top, live, live_top)
+
+    def inside(key, ancestors):
+        if not only_attrs:
+            return True
+        return any(a in only_attrs for a in ancestors) or (key.startswith("@") and key[1:] in only_attrs)
+
     struct = []
-    for k in sorted(set(s_st) | set(l_st)):
-        if s_st.get(k) != l_st.get(k):
-            struct.append("%s: spec %s / live %s" % (k, s_st.get(k), l_st.get(k)))
-    updates, warnings = [], []
-    if not struct:
-        for k, s in s_idx.items():
-            ln = l_idx[k]
-            sd, ld = s.get("data") or {}, ln.get("data") or {}
-            changed = [key for key in sd if json.dumps(sd[key], sort_keys=True) != json.dumps(ld.get(key), sort_keys=True)]
-            extra = [key for key in ld if key not in sd]
-            if extra:
-                warnings.append("%s keeps live-only keys %s (the spec cannot remove a key; rebuild to drop it)"
-                                % (k, ", ".join(extra)))
-            if changed:
-                merged = dict(ld)
-                merged.update({key: sd[key] for key in changed})
-                updates.append((ln, merged, changed))
-    return not struct, struct, updates, warnings
+    for s, l, key, anc in pairs:
+        if s["type"] != l["type"] and inside(key, anc):
+            struct.append("%s: type spec %s / live %s" % (key, s["type"], l["type"]))
+    struct += ["%s: only in the spec (%s)" % (k, s["type"]) for s, k, anc in spec_only if inside(k, anc)]
+    struct += ["%s: only on the site (%s)" % (k, l["type"]) for l, k, anc in extra if inside(k, anc)]
+
+    notes = []
+    if auto:
+        notes.append("%d node(s) Mosaic inserted itself (default children) - kept, not counted" % len(auto))
+    if only_attrs:
+        missing = [a for a in only_attrs if not any(k == "@" + a for _, _, k, _ in pairs)]
+        if missing:
+            struct += ["@%s: not found in both the spec and the site" % a for a in missing]
+    updates = []
+    if struct:
+        return False, struct, updates, notes
+    id_map = {s["ID"].lower(): l["ID"].lower() for s, l, _, _ in pairs}
+    stable = stable_uuids() | {v.lower() for v in VAR_IDS.values()} | {l["ID"].lower() for _, l, _, _ in pairs}
+    for s, l, key, anc in pairs:
+        if not inside(key, anc):
+            continue
+        sd, ld = s.get("data") or {}, l.get("data") or {}
+        changed = [k for k in sd
+                   if not (k in DROPPED_ON_SAVE and ld.get(k) in (None, [], ""))
+                   and json.dumps(normalise(sd[k], id_map, stable, k), sort_keys=True)
+                   != json.dumps(normalise(ld.get(k), id_map, stable, k), sort_keys=True)]
+        extra_keys = [k for k in ld if k not in sd]
+        if extra_keys and changed:
+            notes.append("%s keeps live-only keys %s" % (key, ", ".join(extra_keys)))
+        if changed:
+            merged = dict(ld)
+            merged.update({k: sd[k] for k in changed})
+            updates.append((dict(l, _key=key), merged, changed))
+    return True, struct, updates, notes
 
 
 # ── documents ─────────────────────────────────────────────────────────────────
@@ -157,8 +334,9 @@ def depth_order(nodes: list[dict]) -> list[dict]:
 
 
 class Run:
-    def __init__(self, client, apply: bool, backup: str, batch: int = 150, pause: float = 3.0):
+    def __init__(self, client, apply: bool, backup: str, batch: int = 150, pause: float = 3.0, attrs=None):
         self.client, self.apply, self.backup = client, apply, backup
+        self.attrs = set(attrs or [])
         self.batch, self.pause = max(1, batch), max(0.0, pause)
         self.failed = False
         self.wrote = 0
@@ -245,7 +423,7 @@ def sync_shell(run: Run, site: dict, master_id: str, surface, comps) -> None:
     updates, struct_all = [], []
     for region, tree in shell.items():
         recs, _ = spec_flat(tree, master_id, "master", "div", surface, comps)
-        same, struct, ups, warns = plan(recs, "SPEC-TOP", nodes, region_parent[region])
+        same, struct, ups, warns = plan(recs, "SPEC-TOP", nodes, region_parent[region], run.attrs)
         struct_all += ["%s %s" % (region, s) for s in struct]
         updates += ups
         for w in warns:
@@ -271,7 +449,7 @@ def sync_shell(run: Run, site: dict, master_id: str, surface, comps) -> None:
             left = []
             for region, tree in shell.items():
                 recs, _ = spec_flat(tree, master_id, "master", "div", surface, comps)
-                same, struct, ups, _ = plan(recs, "SPEC-TOP", new_nodes, region_parent[region])
+                same, struct, ups, _ = plan(recs, "SPEC-TOP", new_nodes, region_parent[region], run.attrs)
                 left += struct + ["%s differs" % u[0]["_key"] for u in ups]
             return left
         run.verify(instance, "masterDocumentInstance", key, before, recheck)
@@ -293,7 +471,7 @@ def sync_page(run: Run, page: dict, binding: dict, surface, comps) -> None:
         run.failed = True
         return
     recs, uses_components = spec_flat(page["tree"], template_id, "template", "template-internal", surface, comps)
-    same, struct, updates, warns = plan(recs, "SPEC-TOP", nodes, root["ID"])
+    same, struct, updates, warns = plan(recs, "SPEC-TOP", nodes, root["ID"], run.attrs)
     for w in warns:
         print("  note %s %s" % (label, w))
     before = all_shell_instances(nodes)
@@ -314,6 +492,10 @@ def sync_page(run: Run, page: dict, binding: dict, surface, comps) -> None:
               % (label, len(struct), template_id[:8], master_id[:8]))
         for s in struct[:6]:
             print("    %s" % s)
+        if run.attrs:
+            print("REFUSE %s: a structural change inside --attr; rebuild the page (run without --attr)" % label)
+            run.failed = True
+            return
         if uses_components:
             print("REFUSE %s: the page uses components; rebuild it with build_site.py (override pass)" % label)
             run.failed = True
@@ -344,7 +526,7 @@ def sync_page(run: Run, page: dict, binding: dict, surface, comps) -> None:
         def recheck(new_nodes):
             r2, _ = spec_flat(page["tree"], template_id, "template", "template-internal", surface, comps)
             new_root = next((n for n in new_nodes if n["type"] == "template-internal" and n.get("status") != "delete"), None)
-            s2, st2, ups2, _ = plan(r2, "SPEC-TOP", new_nodes, new_root["ID"] if new_root else "")
+            s2, st2, ups2, _ = plan(r2, "SPEC-TOP", new_nodes, new_root["ID"] if new_root else "", run.attrs)
             return st2 + ["%s differs" % u[0]["_key"] for u in ups2]
         run.verify(instance, "templateDocumentInstance", key, before, recheck)
         body = run.client.page(page["slug"])
@@ -362,6 +544,7 @@ def main() -> int:
     ap.add_argument("--site", required=True, help="the site spec build_site.py built from")
     ap.add_argument("--bindings", required=True, help="output of: wp eval-file tools/list_bindings.php <themeID>")
     ap.add_argument("--only", help="comma list of: shell, and/or page slugs (default: everything in the spec)")
+    ap.add_argument("--attr", help="comma list of attrIDs: compare and write only those subtrees")
     ap.add_argument("--apply", action="store_true", help="write; without it nothing is written")
     ap.add_argument("--backup", default="sync-backup-%s" % time.strftime("%Y%m%d-%H%M%S"),
                     help="folder for the JSON of every document before it is written")
@@ -400,7 +583,8 @@ def main() -> int:
     if bindings.get("themeID") and cfg.get("themeID") and bindings["themeID"] != cfg["themeID"]:
         print("REFUSE: bindings are for theme %s, the config for %s" % (bindings["themeID"][:8], cfg["themeID"][:8]))
         return 1
-    run = Run(Client(cfg), a.apply, a.backup, a.batch, a.pause)
+    run = Run(Client(cfg), a.apply, a.backup, a.batch, a.pause,
+              [x.strip() for x in (a.attr or "").split(",") if x.strip()])
     surface = Surface()
     VAR_IDS.clear()
     for name in ((site.get("theme") or {}).get("variables") or {}):
