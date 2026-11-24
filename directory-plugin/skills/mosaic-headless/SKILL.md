@@ -142,7 +142,7 @@ proves nothing). Without them, say the page is unverified.
 | `node-types.json` | 134 | source — slug, label, edition, aliases, data class |
 | `node-verification.json` | 134 | swept live — outcome, rendered tag and classes, page bytes, failure detail |
 | `page-modal-verification.json` | 19 | read live - one modal per page, and what each one's trigger, run rule, memory scope and dismissal policy actually came out as |
-| `pending.json` | 17 | open questions not yet answered by a measurement or a documented source |
+| `pending.json` | 18 | open questions not yet answered by a measurement or a documented source |
 | `placement-rules.json` | 134 | source — which children each type accepts |
 | `pluggables.json` | 305 | source — every `setID()` by registry |
 | `popover-verification.json` | 37 | driven live - 1.0.10's popover: every host a `<div popover=manual>`, a pageLoad notice that leaves the page scrollable and clickable, closedby honoured per policy, anchored placement against the trigger and against another element, the nine screen cells, keepInView flipping and the `___popover--flipped` state applying, a three-step tour advanced by afterClose and ended by interactionSuspend, and a modal whose host sets `display:flex` and still hides when closed |

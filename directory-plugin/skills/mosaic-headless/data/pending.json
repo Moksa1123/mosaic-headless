@@ -126,6 +126,13 @@
    "why_not_found": "a to-do, not a gap: the repo has none, so v1.41.0 followed gutenberg-headless's; skill 總機 asked for it with the next release",
    "asked_by": "skill 總機 (round-button brief 2026-11-24)",
    "status": "open"
+  },
+  {
+   "date": "2026-11-24",
+   "question": "Add a references/facts.md entry: WooCommerce coming-soon mode (store pages only) + Mosaic -> store pages answer 406. Woo renders its coming-soon page and returns '' from template_include; Mosaic's themes/mosaic/functions.php forces its index.php anyway; with no archive-product/single-product Mosaic template FrontendRenderer sets status_header(406). Also: does a store page that HAS a Mosaic template print two documents (Woo's page + Mosaic's) while coming-soon is on?",
+   "why_not_found": "the 406 is traced from source and read on the demo site (1.0.14, /shop/ and a product page, read-only); the two-document case is predicted from the code only - measuring it needs a store template written on the demo site, which waits for moksa 總機. Do the facts entry with the next release, together with RELEASING.md",
+   "asked_by": "skill 總機 (demo /shop/ 406 trace 2026-11-24)",
+   "status": "open"
   }
  ]
 }
