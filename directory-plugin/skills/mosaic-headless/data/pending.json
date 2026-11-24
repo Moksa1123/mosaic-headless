@@ -119,6 +119,13 @@
    "why_not_found": "measured once on the demo site (1.0.14; the import flow's PHP is unchanged since 1.0.12); how much memory a theme that size needs, or whether Mosaic splits the tick, is not known. theme_import.php handles it",
    "asked_by": "skill 總機 (Mosaic 1.0.14 re-verification)",
    "status": "open"
+  },
+  {
+   "date": "2026-11-24",
+   "question": "Add a RELEASING.md (rewrite of gutenberg-headless's for this repo: PR, merge, push the tag, CI publishes via OIDC)",
+   "why_not_found": "a to-do, not a gap: the repo has none, so v1.41.0 followed gutenberg-headless's; skill 總機 asked for it with the next release",
+   "asked_by": "skill 總機 (round-button brief 2026-11-24)",
+   "status": "open"
   }
  ]
 }
