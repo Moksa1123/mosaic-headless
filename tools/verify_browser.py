@@ -557,6 +557,213 @@ PROBE = r"""
 """
 
 
+# ── ROUND: a circle that is not one ──────────────────────────────────────────
+#
+# A button set to 44 x 44 with `borderRadius: 999px` is meant to be a circle. Mosaic's
+# `.m-button` rule arrives with `padding: 12px 24px`, and 24 + 24 is more than 44, so
+# the box is 48 x 44 - an ellipse - unless every side of the padding is written as 0
+# (references/facts.md). The fill that shows the shape is often a hover colour, so a
+# screenshot at rest sees nothing wrong; the reading has to be taken while hovered too.
+#
+# An element counts as "meant to be round" when every corner's computed radius is
+# >= 999px or >= 50%. Width and height are read with getBoundingClientRect, at rest
+# and again with the pointer on it. A pill - a wide button with a 999px radius - is
+# round by the same test and is not a defect, so only a box whose long side is at
+# most ROUND_PILL_RATIO times its short side is reported: 48 x 44 is 1.09, a
+# "Contact us" pill is 3 or more. A circle that only gets its radius under `:hover`
+# is found from the stylesheet's :hover rules (same-origin sheets only).
+# A short pill exists too - a "Home" nav link at 55 x 40 on a client site - so an
+# element showing more than ROUND_MAX_TEXT characters of text is a labelled pill and
+# is skipped; a circle holds an icon, a number or one character.
+ROUND_PILL_RATIO = 1.5
+ROUND_MAX_TEXT = 2
+
+ROUND_JS = r"""
+() => {
+  const qual = v => {
+    v = (v || '').trim().split(/\s+/)[0];
+    if (v.endsWith('%')) return parseFloat(v) >= 50;
+    if (v.endsWith('px')) return parseFloat(v) >= 999;
+    return false;
+  };
+  const corners = cs => [cs.borderTopLeftRadius, cs.borderTopRightRadius,
+                         cs.borderBottomRightRadius, cs.borderBottomLeftRadius];
+  const round = cs => corners(cs).every(qual);
+  const seen = new Set();
+  for (const el of document.body.querySelectorAll('*')) {
+    if (round(getComputedStyle(el))) seen.add(el);
+  }
+  // a radius that only exists under :hover
+  const walk = rules => {
+    for (const r of rules) {
+      if (r.cssRules && !r.selectorText) {
+        if (!r.media || matchMedia(r.media.mediaText).matches) walk(r.cssRules);
+        continue;
+      }
+      if (!r.selectorText || !r.selectorText.includes(':hover') || !r.style) continue;
+      const s = r.style;
+      if (![s.borderTopLeftRadius, s.borderTopRightRadius,
+            s.borderBottomRightRadius, s.borderBottomLeftRadius].every(qual)) continue;
+      try {
+        document.querySelectorAll(r.selectorText.replace(/:hover/g, ''))
+          .forEach(el => seen.add(el));
+      } catch (e) {}
+    }
+  };
+  for (const sh of document.styleSheets) {
+    try { walk(sh.cssRules); } catch (e) {}   // cross-origin sheet
+  }
+  const out = [];
+  let i = 0;
+  for (const el of seen) {
+    const cs = getComputedStyle(el);
+    if (cs.display === 'none' || cs.visibility === 'hidden') continue;
+    const r = el.getBoundingClientRect();
+    if (r.width < 4 || r.height < 4) continue;
+    el.setAttribute('data-round-probe', String(i));
+    const cls = (el.getAttribute('class') || '').trim().split(/\s+/).filter(Boolean);
+    const label = (el.getAttribute('aria-label') || el.getAttribute('title') ||
+                   (el.innerText || '').trim()).replace(/\s+/g, ' ').slice(0, 30);
+    out.push({i: i, node: el.id || (el.tagName.toLowerCase() +
+                                     (cls.length ? '.' + cls.slice(0, 2).join('.') : '')),
+              label: label, href: el.getAttribute('href') || '',
+              text: (el.innerText || '').replace(/\s+/g, ''),
+              w: r.width, h: r.height, round: round(cs),
+              radius: cs.borderTopLeftRadius, padding: cs.padding});
+    i++;
+  }
+  return out;
+}
+"""
+
+ROUND_READ_JS = r"""
+el => {
+  const cs = getComputedStyle(el);
+  const r = el.getBoundingClientRect();
+  return {w: r.width, h: r.height, radius: cs.borderTopLeftRadius,
+          corners: [cs.borderTopLeftRadius, cs.borderTopRightRadius,
+                    cs.borderBottomRightRadius, cs.borderBottomLeftRadius],
+          padding: cs.padding};
+}
+"""
+
+
+def _is_round(corners):
+    for v in corners:
+        v = (v or "").split()[0] if (v or "").strip() else ""
+        try:
+            if v.endswith("%"):
+                if float(v[:-1]) < 50:
+                    return False
+            elif v.endswith("px"):
+                if float(v[:-2]) < 999:
+                    return False
+            else:
+                return False
+        except ValueError:
+            return False
+    return True
+
+
+def _oval(w, h):
+    """Unequal by half a pixel or more, and not long enough to be a pill."""
+    lo, hi = min(w, h), max(w, h)
+    return lo > 0 and hi - lo >= 0.5 and hi / lo <= ROUND_PILL_RATIO
+
+
+def round_check(page, limit=80):
+    """ROUND_NOT_ROUND findings for the page as it stands: every element whose
+    corners are all >= 999px or >= 50%, measured at rest and hovered."""
+    found = []
+    for c in page.evaluate(ROUND_JS)[:limit]:
+        if len(c["text"]) > ROUND_MAX_TEXT:
+            continue                            # a labelled pill, not a circle
+        rest = c if c["round"] else None
+        hover = None
+        loc = page.locator('[data-round-probe="%d"]' % c["i"])
+        try:
+            loc.hover(timeout=1500, force=True)
+            page.wait_for_timeout(350)          # most hover transitions are <= 300ms
+            got = loc.evaluate(ROUND_READ_JS)
+            if _is_round(got["corners"]):
+                hover = got
+        except Exception:
+            pass                                # off-screen, covered, or gone
+        try:
+            page.mouse.move(0, 0)
+        except Exception:
+            pass
+        bad = []
+        if rest and _oval(rest["w"], rest["h"]):
+            bad.append("%gx%g at rest" % (round(rest["w"], 1), round(rest["h"], 1)))
+        if hover and _oval(hover["w"], hover["h"]):
+            bad.append("%gx%g hovered" % (round(hover["w"], 1), round(hover["h"], 1)))
+        if not bad:
+            continue
+        seen = hover or rest
+        found.append({
+            "check": "ROUND_NOT_ROUND", "level": "error", "node": c["node"],
+            "detail": "radius %s but %s (padding %s)"
+                      % (seen["radius"], ", ".join(bad), seen["padding"]),
+            "sample": (c["label"] or c["href"])[:30],
+        })
+    return found
+
+
+def round_scan(urls, viewports, block_media=True, gap_ms=1500):
+    """The ROUND check alone, on public URLs, with no spec and no REST session.
+
+    Made for reading a front end that is not yours: no cache-buster (the cached copy
+    is what a visitor gets and costs the server nothing), images, video and fonts are
+    not fetched, one load per URL per viewport with a pause between loads, and the
+    run STOPS at the first 401/403/429/503 - the reason is returned, nothing is
+    retried."""
+    import time
+    try:
+        from playwright.sync_api import sync_playwright
+    except ImportError:
+        sys.exit("verify_browser.py needs Playwright:\n"
+                 "  pip install playwright && playwright install chromium")
+    findings, stopped, loads = [], None, 0
+
+    def no_media(route):
+        if route.request.resource_type in ("image", "media", "font"):
+            route.abort()
+        else:
+            route.continue_()
+
+    with sync_playwright() as pw:
+        browser = pw.chromium.launch()
+        for url in urls:
+            for bp, w, h in viewports:
+                page = browser.new_page(viewport={"width": w, "height": h},
+                                        device_scale_factor=1)
+                if block_media:
+                    page.route("**/*", no_media)
+                try:
+                    resp = page.goto(url, wait_until="load", timeout=45000)
+                    loads += 1
+                    status = resp.status if resp else 0
+                    if status in (401, 403, 429, 503):
+                        stopped = "%s answered HTTP %d (%s)" % (url, status, bp)
+                    else:
+                        page.wait_for_timeout(1200)
+                        for f in round_check(page):
+                            findings.append(dict(f, url=url, breakpoint=bp))
+                except Exception as e:   # a timeout is reported, not retried
+                    findings.append({"check": "LOAD", "level": "warn", "url": url,
+                                     "breakpoint": bp, "node": "", "sample": "",
+                                     "detail": str(e).splitlines()[0][:120]})
+                page.close()
+                if stopped:
+                    break
+                time.sleep(gap_ms / 1000.0)
+            if stopped:
+                break
+        browser.close()
+    return findings, stopped, loads
+
+
 def run(url, ids, shots_dir):
     try:
         from playwright.sync_api import sync_playwright
@@ -585,6 +792,8 @@ def run(url, ids, shots_dir):
                 page.screenshot(path=os.path.join(shots_dir, "browser-%s.png"
                                                   % bp.strip("_") or "desktop"),
                                 full_page=False)
+            # after the screenshot, because this one hovers things
+            results[bp]["audit"].extend(round_check(page))
             page.close()
         browser.close()
     return results
@@ -608,7 +817,13 @@ def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--config",
                     help="JSON with base/cookie/nonce; omit it and the MOSAIC_SITE_URL / MOSAIC_REST_COOKIE / MOSAIC_REST_NONCE environment variables supply them instead")
-    ap.add_argument("--site", required=True)
+    ap.add_argument("--site", help="the site spec (required unless --round)")
+    ap.add_argument("--round", nargs="+", metavar="URL",
+                    help="run ONLY the round-element check on these public URLs: "
+                         "no spec, no REST session, images/fonts not fetched, "
+                         "stops at the first 403")
+    ap.add_argument("--viewports", default="_,_m",
+                    help="with --round: which of _,_t,_m to load (default _,_m)")
     ap.add_argument("--csv", help="a DIRECTORY: the computed-value table is "
                     "written one file per page, <dir>/<slug>.csv")
     ap.add_argument("--audit", help="the design-audit findings")
@@ -620,6 +835,10 @@ def main():
     ap.add_argument("--page", help="only this slug")
     a = ap.parse_args()
 
+    if a.round:
+        sys.exit(main_round(a))
+    if not a.site:
+        ap.error("--site is required (or use --round URL ...)")
     cfg = mosaic_config.load(a.config)
     spec = json.load(open(a.site, encoding="utf-8"))
 
@@ -795,6 +1014,31 @@ def main():
                     "FAIL - %d overridden declarations, %d audit errors"
                     % (counts.get("OVERRIDDEN", 0), len(errors))))
     sys.exit(1 if hard else 0)
+
+
+def main_round(a):
+    want = [v.strip() for v in a.viewports.split(",") if v.strip()]
+    vps = [v for v in VIEWPORTS if v[0] in want]
+    findings, stopped, loads = round_scan(a.round, vps)
+    errors = [f for f in findings if f["level"] == "error"]
+    print("round check: %d URL(s), %d page loads, %d finding(s)"
+          % (len(a.round), loads, len(errors)))
+    for f in findings:
+        print("  %-5s %-4s %-40s %-28s %s  %s"
+              % (f["level"], f["breakpoint"], f["url"][-40:], f["node"][:28],
+                 f["detail"], f.get("sample", "")))
+    if a.audit:
+        with open(a.audit, "w", newline="", encoding="utf-8") as fh:
+            w = csv.writer(fh)
+            w.writerow(["url", "breakpoint", "check", "level", "node", "detail",
+                        "sample"])
+            for f in findings:
+                w.writerow([f["url"], f["breakpoint"], f["check"], f["level"],
+                            f["node"], f["detail"], f.get("sample", "")])
+    if stopped:
+        print("STOPPED - " + stopped)
+        return 2
+    return 1 if errors else 0
 
 
 if __name__ == "__main__":

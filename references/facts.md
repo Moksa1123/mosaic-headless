@@ -147,6 +147,18 @@ Platform and rendered-tag facts, each measured. Moved out of SKILL.md on 2026-11
   whose spec set neither; between a masthead and the block below it that is a
   160px hole. Set `paddingTop`/`paddingBottom` explicitly when a section's rhythm
   is meant to come from its contents.
+- **`button` arrives with `padding: 12px 24px`, so a round button is an ellipse until
+  all four paddings are 0.** `.m-button{…width:fit-content;padding:12px 24px;…}` in the
+  1.0.14 stylesheet (the `:where(button.m-button)` reset to `padding:0` has no
+  specificity and loses). Measured on the demo site (1.0.14, Chromium, 1440px,
+  `getBoundingClientRect`, at rest and hovered): a button with no style is 48 x 24;
+  `width`/`height` 44px with `borderRadius` 999px - or 50% - renders **48 x 44**,
+  because 24 + 24 > 44; the same button with `paddingTop`, `paddingBottom`,
+  `paddingLeft` and `paddingRight` all `0px` renders 44 x 44. Reported first from a
+  client site (four 44px circles at 48 x 44, 44 x 44 after the fix). The fill that
+  shows the shape is often a `hover` background, so a screenshot at rest looks fine:
+  `verify_browser.py` reports it as `ROUND_NOT_ROUND`, measured hovered too
+  (`--round URL` runs that check alone on any public page).
 - **A `code` node's content is a template, and `@media(` is a function call.**
   Mosaic parses `code` content for `@VAR(...)`; a CSS at-rule glued to its
   parenthesis - the form every minifier emits - is parsed as a call with

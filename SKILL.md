@@ -6,7 +6,7 @@ license: "MIT"
 user-invocable: true
 metadata:
   author: "moksa (https://moksaweb.com)"
-  version: "1.40.3"
+  version: "1.41.0"
   homepage: "https://github.com/Moksa1123/mosaic-headless"
 ---
 
