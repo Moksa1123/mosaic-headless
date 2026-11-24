@@ -407,6 +407,21 @@ class SkillDoc(unittest.TestCase):
             self.assertTrue(hits, name)
 
 
+class RoundCheck(unittest.TestCase):
+    """verify_browser's ROUND_NOT_ROUND decision, without a browser."""
+
+    def test_round_and_oval(self):
+        import verify_browser as vb
+        self.assertTrue(vb._is_round(["999px"] * 4))
+        self.assertTrue(vb._is_round(["50%"] * 4))
+        self.assertFalse(vb._is_round(["999px", "999px", "0px", "999px"]))
+        self.assertFalse(vb._is_round(["8px"] * 4))
+        self.assertTrue(vb._oval(48, 44))          # the default-padding button
+        self.assertFalse(vb._oval(44, 44))         # all four paddings 0
+        self.assertFalse(vb._oval(140, 44))        # a pill
+        self.assertFalse(vb._oval(44.3, 44))       # sub-pixel rounding
+
+
 class SyncNodesPlan(unittest.TestCase):
     """sync_nodes.py's matching, offline: a live document is simulated as the same spec
     flattened again (fresh node ids, the way a commit stores it)."""
