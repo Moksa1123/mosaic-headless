@@ -52,6 +52,13 @@ expression as a plain string in `dynamicCode`:
  "children": [{"type": "wysiwyg-variable", "data": {"dynamicCode": "@VAR('post/title')"}}]}
 ```
 
+The text's tag decides what block HTML survives (Mosaic 1.0.14, measured): a `p` or
+`h1`-`h6` text - by `tagName` or by its Paragraph / Heading variant - strips `<p>`,
+`<h2>` and the like out of the value and joins the runs with no space, so post content
+reads as one run-on line; a `div` text, or one with no tag and no variant, keeps them.
+Put `@VAR('post/content')` in a `div` text. Before 1.0.14 a variant-tagged `p` kept the
+inner paragraphs and the browser split them into empty `<p>` (references/upgrading.md).
+
 `wysiwyg-variable` is one of the seven types that **kill the page** when placed under
 a plain container — it needs a wysiwyg parent, and the sweep recorded it as
 `NodeMResourceFilterFunctionInterface parent is missing`.

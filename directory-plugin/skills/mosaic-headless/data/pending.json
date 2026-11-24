@@ -66,8 +66,8 @@
   },
   {
    "date": "2026-11-17",
-   "question": "Demo verifiers and sweeps not yet re-run on Mosaic 1.0.13",
-   "why_not_found": "the demo site was upgraded on 2026-11-17 and passed the page health check (90/90, no duplicate roots); the browser verifiers were held back because the shared host was under heavy load",
+   "question": "Demo verifiers and sweeps not yet re-run on Mosaic 1.0.13 / 1.0.14",
+   "why_not_found": "the demo site went to 1.0.13 on 2026-11-17 and 1.0.14 on 2026-11-24; both passed the page health check (90/90, no duplicate roots), 1.0.14 also theme export/import and sync_nodes; the browser verifiers and property sweeps were not re-run (1.0.14 changed no stored shape)",
    "asked_by": "user (Mosaic 1.0.13 release)",
    "status": "open"
   },
@@ -104,6 +104,20 @@
    "question": "Should build_site.py look up a post's existing template before binding, instead of always creating a new master and template?",
    "why_not_found": "a design decision, not a gap: em925's deploy tool imports build_site, so its behaviour is left unchanged (its md5 is part of em925's agreement). sync_nodes.py + list_bindings.php now cover in-place updates; build_site.py's limits are documented in SKILL.md and references/tools.md",
    "asked_by": "skill 總機 (batch 3 item 20, batch 4 item 32)",
+   "status": "open"
+  },
+  {
+   "date": "2026-11-24",
+   "question": "Does Mosaic 1.0.14 really answer 503 (Retry-After 30, no-cache) and write no root when the database connection is lost mid-render?",
+   "why_not_found": "read from the 1.0.14 source and WordPress 7.1.5's wpdb only; measuring it needs the database to go away under a front-end render, not done on the shared demo site",
+   "asked_by": "skill 總機 (Mosaic 1.0.14 re-verification)",
+   "status": "open"
+  },
+  {
+   "date": "2026-11-24",
+   "question": "Mosaic's own ZIP import of a ~24k-node theme exhausts a 512M PHP memory limit in createTemplates",
+   "why_not_found": "measured once on the demo site (1.0.14; the import flow's PHP is unchanged since 1.0.12); how much memory a theme that size needs, or whether Mosaic splits the tick, is not known. theme_import.php handles it",
+   "asked_by": "skill 總機 (Mosaic 1.0.14 re-verification)",
    "status": "open"
   }
  ]

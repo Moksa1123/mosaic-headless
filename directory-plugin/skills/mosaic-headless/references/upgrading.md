@@ -1,4 +1,4 @@
-# Upgrading the plugin: what 1.0.7 → 1.0.8 → 1.0.10 → 1.0.11 → 1.0.12 did to the data, measured
+# Upgrading the plugin: what 1.0.7 → 1.0.8 → 1.0.10 → 1.0.11 → 1.0.12 → 1.0.13 → 1.0.14 did to the data, measured
 
 > Directory edition: commands that mention `tools/` need the full edition (`npm` package `mosaic-headless`); this folder ships reference files only. The `wp` commands run on your WordPress host; how you reach it is up to you.
 
@@ -453,3 +453,80 @@ Editor actions; the accordion "all open" option; Style Guides renamed External
 Styles, with Gutenberg Styles. The dynamic-data function "renames" (`@FIND_IMAGE`
 ...) change the docs, not the evaluator: the ids already had underscores in 1.0.12
 (`references/dynamic-content.md`).
+
+## 1.0.13 → 1.0.14
+
+Released 2026-11-24. Read from the Pro package, diffed against 1.0.13, and run on the
+live test site the same day.
+
+**`wp plugin update mosaic` can report success and change nothing.** Mosaic's updater
+stages the package in `plugins/mosaic-next/` and, when the data version is unchanged,
+moves it over `plugins/mosaic/` with `move_dir()`
+(`MosaicUpgradeLayer/Update/UpdateInteraction.php`, `filterUpgraderInstallPackageResult`)
+- without checking the result. Run by a system user that cannot delete inside
+`mosaic/` (on a managed host, the server's master user, where the folders belong to
+the application's own user and give the group only `r-x`), that move fails silently:
+WP-CLI prints "Updated", `mosaic/` stays the old version, the new one sits inactive in
+`mosaic-next/`. The package itself was the real one; licensing and the download were
+not the problem. Run the update as the user that owns `wp-content/plugins/mosaic/`
+(1.0.13 went in that way), and never trust the CLI line: check `Version:` in
+`mosaic/mosaic.php` afterwards. To finish a half-done update by hand, copy
+`mosaic-next/` to a new folder as the owning user (dirs 775, files 664), move
+`mosaic/` aside and the copy into its place; `wp plugin list` then shows 1.0.14 active.
+A leftover `mosaic-next/` owned by the other user has to be removed by that user.
+
+**No data migration.** `defines.php`: `version 1.0.14`, `dataVersion 1.0.12`. Minimums
+unchanged (PHP 8.2, WordPress 6.9).
+
+**Re-extracted: nothing changed.** Every extractor re-run against 1.0.14 rewrote its
+table byte for byte, and `check_tables.py` passes. The unauthenticated REST index lists
+the same 115 routes with the same methods and arguments. Only three PHP files changed:
+
+| file | change |
+|---|---|
+| `Mosaic/Database/MosaicDB.php` | readers throw on a lost connection - the empty-root fix (`references/facts.md`) |
+| `Mosaic/Builder/FrontendRenderer.php` | a `DatabaseException` on a front-end render answers 503, `Retry-After: 30`, no-cache |
+| `Mosaic/NodeTypes/Text/TextElementMResource.php` | the text filter uses the tag the element renders with (below) |
+
+The rest is the editor bundles (multi-select, bulk styling, the interaction-preview
+fix) and translations; none of it changes what is stored.
+
+**Dynamic text with block HTML** (measured on the live site, post content holding two
+paragraphs and a heading): a `text` node whose tag comes from its Paragraph or Heading
+variant, with no `tagName`, used to filter its dynamic content as if it had no tag -
+block tags allowed - and printed them inside its `<p>` / `<h2>`, which the browser
+splits into empty paragraphs. 1.0.14 filters with the rendered tag:
+
+| text node | renders | dynamic `post/content` comes out |
+|---|---|---|
+| no `tagName`, no variant | `<div>` | the block HTML, intact |
+| `tagName: "div"` | `<div>` | the block HTML, intact |
+| `tagName: "p"` or `"h2"` | `<p>` / `<h2>` | text only, block tags stripped, runs joined with no space |
+| Paragraph / Heading 2 variant, no `tagName` | `<p>` / `<h2>` | the same - this is the case 1.0.14 fixed |
+
+No empty `<p>` on the page. To show post content with its paragraphs, use a `div` text
+(or no tag). `VAR` and `VAR_RAW` behaved the same here.
+
+**On the live site:** the same 90 pages answered as before (88 × 200, the front page's
+own permalink 301, checkout 302), no page's size moved more than 1.28%, 238 roots and no
+duplicates before and after. The WP-CLI JSON export of the live theme was identical
+before and after the upgrade apart from its version stamp; `theme_import.php` +
+`theme_zip_compare.php` passed 22 of 22. `sync_nodes.py` on a throwaway two-page site:
+an unchanged spec gave 0 differences, a one-line edit 1, a structural change rebuilt the
+template, and the re-check gave 0.
+
+**Mosaic's own ZIP (`theme_zip.py`) needed two fixes - broken since 1.0.12, not by
+1.0.14.** 1.0.12 made the export's download and the import's upload "tick isolated":
+the download serves the piece at the byte `offset` the client posts, and each upload
+chunk carries `chunkIndex` and `chunkSize`; a chunk's tick never reports completion, the
+call with `chunkIndex == totalChunks` does. Without them the export failed with
+"Missing arguments [offset]" and the import with "Missing arguments". With the fix a
+480-node theme went through export and test-mode import; the copy lacked 11 nodes whose
+parent was not in that theme (a second `template-external` per master, left over from
+older tools) and one variant, which the export itself left out. A 23,848-node theme
+exported fine but its import died in `createTemplates` on PHP's 512M memory limit
+(`ValidatorFractionalIndex.php`, deep in heal) and created nothing; the import flow's
+PHP is unchanged from 1.0.12, so this is the theme's size, not 1.0.14. For a theme that
+large use `theme_export.php` / `theme_import.php`.
+
+Not measured: the 503 (it needs the database to go away); the editor-only features.

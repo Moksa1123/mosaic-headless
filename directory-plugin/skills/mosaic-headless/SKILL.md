@@ -2,7 +2,7 @@
 name: mosaic-headless
 description: "Look up Mosaic Pro (Nextend) WordPress building blocks from measured data instead of memory: 134 node types with the outcome measured on a live site, 120 node properties, 101 style properties and 60 style states with the value shapes that compile, placement rules, variants, dynamic variables, interaction triggers and REST routes, plus guides to the data model and its failure modes. Directory edition: reference data and guides only; the page builder and verifiers ship in the full npm package mosaic-headless. Unofficial: not made by or affiliated with Nextend. 中文觸發：Mosaic、Nextend、不開編輯器做頁面、做一頁、整站、母版、範本、元件、變體、內距、外距、圓角、懸停、斷點、RWD、手機版、彈出視窗、浮動框、彈窗、摺疊面板、頁籤、輪播、表單、互動、動畫、深色模式、搬佈景、匯出匯入佈景、Mosaic 升級、Elementor 轉 Mosaic、自訂欄位。"
 license: MIT
-version: 1.40.2
+version: 1.40.3
 user-invocable: true
 ---
 
@@ -39,7 +39,7 @@ it called / what value shape / is it safe / does it render" questions.
 | Elementor pages | `elementor-headless` |
 | Block-editor (Gutenberg) pages | `gutenberg-headless` |
 | Site health checks, plugin updates, security | out of scope - say so |
-| Writing pages to a site, checking a delivered page, moving a theme | the full edition: `npx mosaic-headless@1.40.2 claude-code --global` |
+| Writing pages to a site, checking a delivered page, moving a theme | the full edition: `npx mosaic-headless@1.40.3 claude-code --global` |
 
 ## Routing
 
@@ -142,7 +142,7 @@ proves nothing). Without them, say the page is unverified.
 | `node-types.json` | 134 | source — slug, label, edition, aliases, data class |
 | `node-verification.json` | 134 | swept live — outcome, rendered tag and classes, page bytes, failure detail |
 | `page-modal-verification.json` | 19 | read live - one modal per page, and what each one's trigger, run rule, memory scope and dismissal policy actually came out as |
-| `pending.json` | 14 | open questions not yet answered by a measurement or a documented source |
+| `pending.json` | 16 | open questions not yet answered by a measurement or a documented source |
 | `placement-rules.json` | 134 | source — which children each type accepts |
 | `pluggables.json` | 305 | source — every `setID()` by registry |
 | `popover-verification.json` | 37 | driven live - 1.0.10's popover: every host a `<div popover=manual>`, a pageLoad notice that leaves the page scrollable and clickable, closedby honoured per policy, anchored placement against the trigger and against another element, the nine screen cells, keepInView flipping and the `___popover--flipped` state applying, a three-step tour advanced by afterClose and ended by interactionSuspend, and a modal whose host sets `display:flex` and still hides when closed |
