@@ -153,9 +153,17 @@ def export_theme(a, cfg):
         out.write(data)
         got["bytes"] += len(data)
 
+    def on_milestone(mid, fields, calls):
+        # Mosaic 1.0.12+ serves each piece of the archive from the byte offset the
+        # client posts ('Missing arguments [offset]' without it); 1.0.8-1.0.11 kept
+        # the cursor on the server and ignore the field.
+        if mid == "download":
+            fields["offset"] = got["bytes"]
+        return None
+
     print("export theme %s" % theme)
     Flow(cfg).run(url, {"themeID": theme, "simpleExport": "1" if a.simple else "0"},
-                  on_file=on_file)
+                  on_milestone=on_milestone, on_file=on_file)
     out.close()
     if got["bytes"] < 4 or open(a.out, "rb").read(2) != b"PK":
         sys.exit("no archive came back (%d bytes)" % got["bytes"])
@@ -189,8 +197,19 @@ def import_theme(a, cfg):
     def on_milestone(mid, fields, calls):
         if mid != "upload":
             return None
+        if calls > len(chunks) + 3:
+            sys.exit("  upload never reported completion after %d calls" % calls)
+        index = min(calls, len(chunks) - 1)
         fields["totalChunks"] = str(len(chunks))
-        return ("file", os.path.basename(a.zip), chunks[min(calls, len(chunks) - 1)])
+        # Mosaic 1.0.12+ writes each chunk at chunkIndex * chunkSize and refuses a
+        # tick without both ('Missing arguments'); 1.0.8-1.0.11 appended and ignore them.
+        # Every chunk's tick answers isCompleted:false (a chunked batch never advances
+        # the milestone); the call AFTER the last chunk, chunkIndex == totalChunks,
+        # starts past the last batch and is the one that reports completion. It still
+        # needs a file part; nothing is written from it.
+        fields["chunkIndex"] = str(calls)
+        fields["chunkSize"] = str(CHUNK)
+        return ("file", os.path.basename(a.zip), chunks[index])
 
     Flow(cfg).run(url, base, on_milestone=on_milestone)
     print("imported. mode=%s - %s" % (

@@ -33,7 +33,7 @@
 
 ## What it does
 
-Mosaic keeps a page in its own database tables, one row per element, not in `post_content`. This skill is a measured map of that model plus the tools to write through it, extracted from Mosaic Pro 1.0.13 and swept on a live site.
+Mosaic keeps a page in its own database tables, one row per element, not in `post_content`. This skill is a measured map of that model plus the tools to write through it, extracted from Mosaic Pro 1.0.14 and swept on a live site.
 
 | Area | What you get |
 |---|---|
@@ -200,7 +200,7 @@ What a lookup costs, priced with tiktoken on the same six tasks (`data/token-ben
 
 ## Limits
 
-- Measured against Mosaic Pro up to 1.0.13. Features that live only in the 1.0.13 editor (new style-variable types, List classes, pageLoad delay and others) are not measured yet and are not written by the tools.
+- Measured against Mosaic Pro up to 1.0.14. Features that live only in the 1.0.13 editor (new style-variable types, List classes, pageLoad delay and others) are not measured yet and are not written by the tools.
 - Grid child placement properties emit nothing when written headlessly; some interaction shapes are still unmeasured.
 - The browser verifiers need Playwright and a site you can write to; they are not part of the offline self-test.
 - Open questions: [data/pending.csv](data/pending.csv). The long guide (failure modes, the Elementor converter, the worked example): [docs/guide.md](docs/guide.md).

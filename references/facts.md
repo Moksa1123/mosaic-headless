@@ -56,6 +56,24 @@ Platform and rendered-tag facts, each measured. Moved out of SKILL.md on 2026-11
   bot traffic a site gets, the likelier it is. A small site is less likely to hit it,
   not immune.
 
+  **Fixed in Mosaic 1.0.14, read from the source (2026-11-24).** The four readers in
+  `MosaicDB` (`get_results`, `get_row`, `get_col`, `get_var`) now also throw when
+  `$wpdb->dbh` is empty - which is what WordPress leaves after a failed reconnect
+  (`db_connect()` sets `dbh = null` on `connect_errno`, `class-wpdb.php` line 1997 on
+  7.1.5) - so a lost connection is an error, not "no root", and heal never runs on it.
+  `FrontendRenderer` catches that `DatabaseException` and answers **503 with
+  `Retry-After: 30` and no-cache headers** instead of a page. `AbstractDocument`
+  (load + heal) is byte-identical to 1.0.13: heal still writes on the front end, it is
+  only no longer fed a false empty read. What the fix does NOT do:
+  - repair a site that already has extra roots or emptied overrides: run the health
+    SQL above and `tools/override_health.sql` after upgrading, and repair as before;
+  - help any site still on 1.0.13 or older;
+  - cover a failure the readers cannot see (a read that returns empty while the
+    connection is up). None is known, but the front-end write block below still costs
+    nothing and remains a valid second layer.
+  Not measured: the 503 itself (dropping the database of the shared demo site to watch
+  it was not worth the risk).
+
   **Prevention, measured on one live site (2026-11-18):** block front-end writes to
   `wp_mosaic_nodes`. A `query` filter refuses `INSERT` / `REPLACE` / `DELETE` on that
   table during an ordinary front-end request, while `UPDATE` passes and wp-admin,

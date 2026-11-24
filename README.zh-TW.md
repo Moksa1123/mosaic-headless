@@ -33,7 +33,7 @@
 
 ## 功能
 
-Mosaic 把頁面存在自己的資料表裡，一個元素一列，不在 `post_content`。這個 skill 是那套資料模型的實測地圖，加上透過它寫入的工具；資料從 Mosaic Pro 1.0.13 抽出，並在正式網站上逐一實測。
+Mosaic 把頁面存在自己的資料表裡，一個元素一列，不在 `post_content`。這個 skill 是那套資料模型的實測地圖，加上透過它寫入的工具；資料從 Mosaic Pro 1.0.14 抽出，並在正式網站上逐一實測。
 
 | 類別 | 內容 |
 |---|---|
@@ -200,7 +200,7 @@ node type、node 屬性、樣式屬性、樣式狀態從外掛原始碼抽出（
 
 ## 限制
 
-- 實測到 Mosaic Pro 1.0.13。只存在於 1.0.13 編輯器裡的功能（新的樣式變數類型、List 的 class、pageLoad 延遲等）還沒實測，工具也不會寫。
+- 實測到 Mosaic Pro 1.0.14。只存在於 1.0.13 編輯器裡的功能（新的樣式變數類型、List 的 class、pageLoad 延遲等）還沒實測，工具也不會寫。
 - 用 headless 方式寫入格線子項位置的屬性不會有輸出；部分互動形狀還沒實測。
 - 瀏覽器驗證器需要 Playwright 和一個可以寫入的網站，不在離線自我測試裡。
 - 待補問題：[data/pending.csv](data/pending.csv)。完整說明（失敗模式、Elementor 轉換器、示範範例）：[docs/guide.md](docs/guide.md)（英文）。

@@ -28,7 +28,7 @@ Every tool in `tools/`, and where the REST session comes from. Moved out of SKIL
 | `interactions.py` | a library, not a command: `tween`, `on`, `mode_switch`, `set_cookie`, `cookie_is`, `hide_at_end`, `suspend` / `resume`, `class_target` - every interaction shape in the form the editor stores |
 | `verify_recipes.py` | builds Mosaic's four docs tutorials on one page and drives each in Chromium |
 | `theme_export.php` / `theme_import.php` | move a whole theme across installs, ids intact |
-| `theme_zip.py` | drive Mosaic's OWN export/import - the ZIP the editor makes, attachments included, over the milestone protocol; import lands in test mode unless told `--activate` |
+| `theme_zip.py` | drive Mosaic's OWN export/import - the ZIP the editor makes, attachments included, over the milestone protocol; import lands in test mode unless told `--activate`. Sends the `offset` / `chunkIndex` / `chunkSize` that 1.0.12+ requires (measured on 1.0.14; 1.0.8-1.0.11 do not read them, per their source); a theme of ~20k nodes can exhaust a 512M PHP limit on import - use `theme_export.php` / `theme_import.php` for those |
 | `theme_zip_compare.php` | hold an imported copy against its source, tree for tree - every scoped table, the (parentType, type) shape, which ids survive, and orphans named rather than counted |
 | `prune_unbound.php` | delete the templates no post is bound to, the masters no kept template uses, their nodes, then orphan nodes pass after pass - one theme, dry run unless given the bare word `apply` (WP-CLI eats `--apply`), `assign="auto"` templates kept |
 | `theme_delete.php` | remove a theme completely through the plugin's own routine; refuses the live one |
