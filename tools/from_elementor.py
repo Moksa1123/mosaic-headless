@@ -284,7 +284,7 @@ def as_button(el, ctx):
         if link.get("is_external"):
             data["target"] = "_blank"
         if link.get("nofollow"):
-            data["rel"] = "nofollow"
+            data["rel"] = ["nofollow"]          # a list; a string is dropped on save
     node = {"type": "button", "data": data,
             "children": inline_children(s.get("text") or s.get("button_text") or "")}
     extra = {}
@@ -440,7 +440,7 @@ class Ctx:
         if link.get("is_external"):
             data["target"] = "_blank"
         if link.get("nofollow"):
-            data["rel"] = "nofollow"
+            data["rel"] = ["nofollow"]          # a list; a string is dropped on save
         return {"type": "menu-link", "data": data, "children": [node]}
 
     def note(self, el, why):

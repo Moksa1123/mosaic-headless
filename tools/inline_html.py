@@ -95,7 +95,8 @@ def _inline(nodes):
             if attrs.get("target") in ("_self", "_blank", "_parent", "_top"):
                 data["target"] = attrs["target"]
             if attrs.get("rel"):
-                data["rel"] = attrs["rel"]
+                # a list: rel's validator is ValidatorArray, a string is dropped on save
+                data["rel"] = attrs["rel"].split()
             out.append({"type": "wysiwyg-link", "data": data, "children": _inline(kids)})
         elif tag in SPAN_STYLE:
             out.append({"type": "wysiwyg-span", "data": {},
