@@ -494,3 +494,87 @@ also checked here against the 1.0.13 source.
 - The `modal` open state is `:popover-open`, not `dialog[open]` (already above, under
   1.0.10), and there is no `flex` style key (above, second site): both confirmed again
   on this site.
+
+## Measured on a fourth site (Mosaic 1.0.13, 2026-11-25)
+
+From another site's conversion (an intro animation and a dark mode), handed to this
+skill; each line says what was reproduced here on the demo site (Mosaic 1.0.14).
+
+- **An interaction's target is a node ID, and an in-place sync used to break it.**
+  `settings.target = {"type": "element", "uuid": ...}` names the target node's `ID`.
+  `build_page.py` gives every pinned `nodeID` a fresh random uuid on each run, so a
+  spec never knows the live ids. `sync_nodes.py` before 1.42.0 wrote the spec's
+  interactions as they were: the targets named this run's random uuids, no node on
+  the site, and the animation did nothing (that site: an intro's curtain, horse and
+  logo stood still; only the wrapper faded). Reproduced on the demo: built with three
+  targets that existed, synced a duration change with 1.41.0 -> all three targets
+  MISSING; its read-back did say `@st-intro differs`, but next to two false
+  differences (below), so it read as noise. 1.42.0 rewrites spec ids to live ids
+  (spec `nodeID` -> attrID -> live `ID`) before writing, refuses a write whose target
+  is not a node of the document (or of the master, for a template), and fails the run
+  (exit 1) if a written node targets a missing node after the commit. Re-synced on
+  the demo with 1.42.0: the three targets were the live ids again, `document.getAnimations()`
+  in Chromium had an animation on each, and a dry run after it showed 0 differences.
+- **Two tweens of the same property on one element do not chain.** At page load every
+  tween's `initial` is applied at once, so the later one's start value wins and the
+  first never shows. Demo, 1.0.14, Chromium: one element with `translateX` 0 -> 100px
+  (1.5 s) then 100px -> 200px (1.5 s, delay 1.5 s) stood at 100px from the first
+  sample (14 ms) until 1.5 s, then moved 100 -> 200px; a control with one tween
+  0 -> 200px over 3 s started at 0. Each tween is its own Web Animation (both on
+  `--mosaic-translate-x`). Use ONE tween with a longer duration (to
+  `calc(100vw + <width>)` for "runs off the screen") instead of two legs.
+- **A variable-mode switch is an animation on `<html>`, and Chrome's visited-link
+  colour does not see it.** The mode-switch action is an `animation` action with a
+  `collectionMode` property meta (`tools/interactions.py` `mode_switch`), and it
+  runs as a Web Animation on `<html>` (the demo's `document.getAnimations()` lists one
+  targeting `HTML`). That site found that Chrome computes the colour of a VISITED link
+  without the animated values: after a switch to dark, links the visitor has opened
+  keep the light value and can disappear, and `getComputedStyle` cannot show it (it
+  reports the unvisited value, for privacy) - only a screenshot does. Its fix: after
+  every switch (and on load) copy the current value of each `--*` variable onto
+  `<html style>`. Reported by that site, not reproduced here (needs a theme with a
+  mode collection and a visited link).
+- **A colour variable registered as `@property <color>` makes `var(--x, fallback)`
+  use the fallback on links** (that site: outlines and colours on `<a>` came out in the
+  fallback colour). Write colour variables without a fallback in generated CSS (font
+  variables are not affected). Reported by that site, not reproduced here.
+- **Dark mode has to remap Mosaic's front-end colours too.** Mosaic's theme
+  stylesheet paints form fields from its own variables:
+  `input:where(:not([type=file],[type=checkbox],[type=radio])),textarea,select` get
+  `background-color: var(--mosaic-frontend-white)` (#ffffff), `color` from
+  `--mosaic-frontend-neutral-800` and the border from `-neutral-300`; `[type=checkbox],
+  [type=radio]` get the same white background, and a checked box is `-neutral-900` with
+  a `-white` tick (1.0.14 `themes/mosaic/public/style.css`). And
+  WooCommerce's fields use its own `--wc-form-color-*`. Without setting those on
+  `:root` for the dark mode, inputs and checkboxes stay white (that site). Map
+  `--mosaic-frontend-white`, `--mosaic-frontend-black`, `--mosaic-frontend-neutral-*`
+  and `--wc-form-color-*` to the mode's tokens.
+- **Stored values `sync_nodes.py` now treats as equal** (demo, 1.0.14): `opacity ".35"`
+  is stored `"0.35"`; `url(x)` in `customDeclarations` is stored `url("x")`; an `rgba()`
+  keeps `.85` but gains spaces. And **`rel` must be a list**: on a `wysiwyg-link`,
+  `"rel": "noopener"` was stored as null and `["noopener"]` was kept (its validator is
+  `ValidatorArray`; `data/node-property-verification.csv` already had the list
+  APPLIED). `inline_html.py` and `from_elementor.py` wrote a string until 1.42.0, so
+  every converted `rel` was lost; they write a list now, and a sync treats an old
+  string `rel` against an empty one as no difference (with a note).
+
+## WooCommerce "coming soon" + Mosaic: store pages answer 406 (demo, 2026-11-24)
+
+Traced in source and read on the demo (Mosaic 1.0.14, WooCommerce 11.2, read only):
+with WooCommerce's coming-soon mode on for **store pages only**, `/shop/` and every
+product page answer **HTTP 406**.
+
+- WooCommerce renders its coming-soon page itself and then returns `''` from the
+  `template_include` filter (`ComingSoonRequestHandler.php`, line 117) so WordPress
+  loads no theme template.
+- Mosaic's theme ignores that and forces its own `index.php`
+  (`themes/mosaic/functions.php`, line 54).
+- With no Mosaic template for the store (`archive-product` / `single-product`, nor a
+  generic archive / index one), the renderer throws `TemplateNotFoundException` and
+  `FrontendRenderer.php` (line 62) sends `status_header(406)`.
+- A `200` seen with a query string was a cached copy (Varnish HIT), not a fix.
+
+What to do: take the store out of coming-soon mode (go live), and give the store its
+Mosaic templates. Not measured: a store page that DOES have a Mosaic template while
+coming-soon is on may print two documents (WooCommerce's page and Mosaic's) - the
+code predicts it; testing it needs a store template written on the demo.

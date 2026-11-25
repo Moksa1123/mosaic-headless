@@ -588,6 +588,89 @@ class SyncNodesPlan(unittest.TestCase):
         self.assertNotEqual(self.sn.svg_norm('<svg a="1"><path d="M0"/></svg>'),
                             self.sn.svg_norm('<svg a="1"><path d="M1"/></svg>'))
 
+    # 2026-11-25, live site: a sync of a changed intro animation wrote run-random uuids
+    # into settings.target, so three animated elements pointed at nodes that do not exist
+    def opener_spec(self, duration):
+        t = self.rich_tree()
+        opener = t["children"][-1]
+        opener["data"]["interactions"][0]["settings"]["duration"] = duration
+        return t
+
+    def test_interaction_target_is_written_as_the_live_id(self):
+        live = self.as_stored(self.flat(self.opener_spec(300), "L"))
+        btn = next(n for n in live if (n.get("data") or {}).get("attrID") == "r-btn")
+        same, struct, updates, _ = self.sn.plan(self.flat(self.opener_spec(900), "S"), "S", live, "L")
+        self.assertTrue(same, struct)
+        self.assertEqual([(u[0]["data"].get("attrID"), u[2]) for u in updates], [("r-opener", ["interactions"])])
+        merged = updates[0][1]
+        self.assertEqual(self.sn.element_targets(merged), [btn["ID"]])
+        # and the document after that write has no dangling target
+        after = [dict(n, data=merged) if n["ID"] == updates[0][0]["ID"] else n for n in live]
+        self.assertEqual(self.sn.dangling_targets(after), [])
+
+    def test_the_old_write_left_a_dangling_target_and_is_caught(self):
+        # what 1.41.0 wrote: the spec's value as is - its target is this run's random uuid
+        live = self.as_stored(self.flat(self.opener_spec(300), "L"))
+        spec = self.flat(self.opener_spec(900), "S")
+        raw = next(r for r in spec if (r.get("data") or {}).get("attrID") == "r-opener")["data"]["interactions"]
+        after = [dict(n, data=dict(n["data"], interactions=raw))
+                 if (n.get("data") or {}).get("attrID") == "r-opener" else n for n in live]
+        bad = self.sn.dangling_targets(after)
+        self.assertEqual(len(bad), 1)
+        self.assertEqual(bad[0][0]["data"]["attrID"], "r-opener")
+        # a target in the master counts as present for a template
+        self.assertEqual(self.sn.dangling_targets(after, also={bad[0][1]}), [])
+
+    def test_target_to_a_node_outside_attr_that_is_not_on_the_site_is_refused(self):
+        live = self.as_stored(self.flat(self.opener_spec(300), "L"))
+        spec = self.opener_spec(900)
+        spec["children"][4]["data"]["attrID"] = "r-btn-renamed"     # the target is not on the site
+        same, struct, updates, _ = self.sn.plan(self.flat(spec, "S"), "S", live, "L", {"r-opener"})
+        self.assertFalse(same)
+        self.assertEqual(updates, [])
+        self.assertTrue(any("not on the site" in s for s in struct), struct)
+
+    def test_run_refuses_a_write_with_a_dangling_target(self):
+        run = self.sn.Run(None, True, "unused")
+        rec = {"newRevisionRecord": {"ID": "n1", "data": {"interactions": [
+            {"settings": {"target": {"type": "element", "uuid": "nowhere"}}}]}}, "originalRevisionRecord": None}
+        import contextlib
+        import io
+        with contextlib.redirect_stdout(io.StringIO()):
+            self.assertFalse(run.targets_ok("t", [rec], {"a", "b"}))
+        self.assertTrue(run.failed)
+        run2 = self.sn.Run(None, True, "unused")
+        self.assertTrue(run2.targets_ok("t", [rec], {"nowhere"}))
+
+    def test_stored_rewrites_are_not_differences(self):
+        # 2026-11-25, live site: opacity ".35" is stored "0.35"; url(x) as url("x");
+        # rgba(...,.85) keeps or drops its zero
+        self.assertEqual(self.sn.css_norm("mask:url(/a.webp) center/contain;transition:opacity .2s"),
+                         self.sn.css_norm('mask: url("/a.webp") center / contain;\ntransition: opacity 0.2s;'))
+        self.assertEqual(self.sn.css_norm("color:red!important;;"), self.sn.css_norm("color: red !important;"))
+        n = lambda v, k="opacity": self.sn.normalise(v, {}, set(), k)
+        self.assertEqual(n(".35"), n("0.35"))
+        self.assertEqual(n("rgba(255,255,255,.85)", "color"), n("rgba(255, 255, 255, 0.85)", "color"))
+        self.assertNotEqual(n(".35"), n("0.36"))
+        self.assertNotEqual(n("Price .35", "text"), n("Price 0.35", "text"))   # words are not values
+
+    def test_string_rel_is_not_a_difference_but_a_list_is_written(self):
+        # measured on the demo (1.0.14, 2026-11-25): rel "noopener" is stored as null,
+        # ["noopener"] is kept (rel's validator is ValidatorArray)
+        def tree(rel):
+            return {"type": "text", "data": {"attrID": "l-root"}, "children": [
+                {"type": "wysiwyg-link", "data": {"attrID": "l-a", "url": "/a/", "rel": rel},
+                 "children": [{"type": "wysiwyg-text", "data": {"text": "a"}}]}]}
+        live = self.flat(tree(None), "L")
+        same, _, updates, notes = self.sn.plan(self.flat(tree("noopener"), "S"), "S", live, "L")
+        self.assertEqual(updates, [])
+        self.assertTrue(any("only as a list" in x for x in notes), notes)
+        same, _, updates, _ = self.sn.plan(self.flat(tree(["noopener"]), "S"), "S", live, "L")
+        self.assertEqual([u[2] for u in updates], [["rel"]])
+        import inline_html
+        link = inline_html.inline_children('<a href="/x/" rel="noopener nofollow">x</a>')[0]
+        self.assertEqual(link["data"]["rel"], ["noopener", "nofollow"])
+
     def test_override_shell_counter(self):
         shell = {"parentType": "override", "parentID": "I", "status": "publish",
                  "data": {"override": {"originalID": "X"}}}

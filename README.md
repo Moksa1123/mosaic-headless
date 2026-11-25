@@ -18,7 +18,7 @@
   <img src="https://img.shields.io/badge/node_properties-120-success?style=flat-square" alt="120 node properties">
   <img src="https://img.shields.io/badge/style_properties-101-success?style=flat-square" alt="101 style properties">
   <img src="https://img.shields.io/badge/responsive_checks-733-blueviolet?style=flat-square" alt="733 responsive checks">
-  <img src="https://img.shields.io/badge/self--tests-56-blueviolet?style=flat-square" alt="56 self-tests">
+  <img src="https://img.shields.io/badge/self--tests-62-blueviolet?style=flat-square" alt="62 self-tests">
 </p>
 
 <p align="center">
@@ -183,7 +183,7 @@ Node types, node properties, style properties and style states are extracted fro
 | `data/theme-zip-verification.csv` | 22 | Mosaic's own theme ZIP round-tripped and compared |
 | `data/conversion-batch.csv` | 19 | every Elementor page of a site converted, built and checked |
 
-- Self-test: `python tools/test_mosaic.py`, 56 offline tests (lookups, Chinese terms, the build output's shape and refusals, the public build interface, this repository's numbers and privacy).
+- Self-test: `python tools/test_mosaic.py`, 62 offline tests (lookups, Chinese terms, the build output's shape and refusals, the public build interface, this repository's numbers and privacy).
 - Evals: 16 questions about Mosaic 1.0.10 to 1.0.12 behaviour; with the skill 16/16, without it 0/16. Results: [evals/RESULTS.md](evals/RESULTS.md).
 - Every number in `SKILL.md`, these READMEs and their badges is checked against the data by `tools/check_numbers.py`. Detail: [verification-record.md](references/verification-record.md).
 
