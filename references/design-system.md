@@ -6,7 +6,7 @@ were measured on a live install.
 
 ## Variants: style every element of a kind, once
 
-The 152 rows in `data/variants.csv` are the **variant catalog** — Mosaic's built-in
+The 162 rows in `data/variants.csv` (re-captured on 1.0.14) are the **variant catalog** — Mosaic's built-in
 taxonomy of what an element *is* (Heading 2, Button, Section, Div, Body …), each
 carrying the CSS selectors that identify it and, since 1.0.8, the class name the
 element emits (`class_name`: `m-heading-2`, `m-button`) and whether that name is
@@ -65,6 +65,27 @@ Three things learned the hard way:
   finds none. `build_page.py` takes a theme variant key as the catalog id, the
   `class_name` (`m-loop-item`) or a name, and refuses a name that matches more than
   one row.
+
+What the rows in `wp_mosaic_variants` are (1.0.14, demo, 2026-11-28):
+
+- **One row per catalog entry the theme has saved, and `data: {}` is normal.** The
+  table holds this theme's style for a built-in variant; `{}` means "not styled".
+  `VariantsRevisionModel::getRevisionRecordsRaw()` reads only rows whose ID is in
+  the catalog, and a variant applies by element type, not because a node names it -
+  so "no node references this variant" is not an orphan. The demo's main theme had
+  157 rows, 154 of them `{}` and named by no node.
+- **The editor adds the rows a theme is missing when it saves.** After 1.0.12 split
+  the Select, creating one template in the editor added five `{}` rows - exactly the
+  five catalog entries 1.0.12 introduced (`Select` f93d34d2, `Toggle`, `Placeholder`,
+  `Options`, `Option`). They belong to the theme, not to the template, so deleting
+  the template leaves them; deleting them is harmless too (the editor writes them
+  again). The same template created and deleted by a REST commit added none - the
+  rows come from the editor's client, not from the server.
+- **1.0.12 renamed the old Select variant.** `05fbeaf8…` was `Select` / `m-select`
+  and is now `List box` / `m-listbox` (its child `df2d64e1…` became
+  `m-listbox-option`); the new `select` node's variant is `f93d34d2…`. A style keyed
+  to the old ID now lands on the native list box. `data/variants.csv` was captured on
+  1.0.11 until 2026-11-28 and still showed the old names.
 
 More from a client build on 1.0.10:
 

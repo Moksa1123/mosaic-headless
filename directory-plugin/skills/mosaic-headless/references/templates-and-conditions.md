@@ -80,6 +80,14 @@ editor's drag-to-reorder. The editor's fallback types map to paths as Single →
 `index.php`. Masters order the same way: the first master by `ordering` is the one
 a new template is offered by default.
 
+**A new template with an `ordering` already taken renumbers the whole list.**
+Committed with `ordering: "a0"` on a theme of 123 templates (1.0.14, demo,
+2026-11-28), the new row went first and 90 other templates got a new `ordering`
+string, a new `revision` and a new `modified_gmt`. Their relative order stayed the
+same, so routing did not change, and deleting the new template did not put the old
+strings back. A table checksum taken before such a commit will not match after it.
+To leave the other rows alone, use an `ordering` after the last one.
+
 **A template_assigns row with empty `parentID` and `parentType` binds nothing.** It is
 what the editor writes for "Auto template" (`TemplateAssign` treats it as
 auto-assigned and `Post::getAssignedTemplateID` skips it), so do not count it as a
@@ -93,6 +101,28 @@ pages built by `tools/build_site.py` are all bound this way.
 One consequence worth knowing: **that endpoint creates a new template every time.**
 Calling it twice for the same post leaves two template rows and one assign row —
 `tools/build_all.py` resets the theme before rebuilding for exactly this reason.
+
+**The editor offers Manual only for the post types in a site setting.** The Assign
+choice, the post list's "Edit in Mosaic" link and the block editor's template panel
+all ask `PostEdit::isManualAssignEnabledForPostType()`, which reads
+`manualAssignEnabledForPostTypes` (Mosaic → Settings, `references/write-protocol.md`).
+With nothing saved there the default is **`page` only**
+(`PostEdit::getDefaultManualAssignedPostTypes()`), so on a stock 1.0.14 site a Single
+post template can only be Auto - the dialog has no Manual (seen on the demo,
+2026-11-28, where the setting was never saved). To limit an Auto post template, use
+its conditions: query parameter, Cookie, current user, category, tag, post format,
+product (`mo.py conditions --context template`). Or add `post` to the setting.
+
+**The editor reads a template's variables from the front end, through the
+template's conditions.** The variable list (Post data and so on) comes from the post's
+own URL with `?mosaic_frontend_action=TemplatingContext`
+(`ActionTemplatingContext`), and that request picks the template the same way a visit
+does. If the template's conditions do not match that request - a query-parameter
+condition the editor's request does not carry, say - Mosaic finds no template and
+answers `templateNotExists`, and the editor shows **no variables at all**. Measured on
+the demo (2026-11-28): with the condition `m17demo = 1` the editor had no variables;
+with the condition removed they appeared. Build the layout without the condition and
+add it last, or set the variables by hand (`references/dynamic-content.md`).
 
 ## The condition structure
 

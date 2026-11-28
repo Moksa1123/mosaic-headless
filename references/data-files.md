@@ -95,7 +95,7 @@ Moved out of SKILL.md on 2026-11-16 (skill SOP pass). `scripts/check-release.mjs
 | `data/tutorial-recipes-verification.csv` | 16 | **driven live** - Mosaic's four docs tutorials (dark/light switcher, loading overlay, class-driven reveal, loop with hover pause) plus the off-canvas toggle and the reading progress bar, built from `tools/interactions.py` and checked in Chromium |
 | `data/menu-verification.csv` | 34 | **driven live** - every way to build a site menu on one page: hover dropdown and mega panel (mouse, keyboard, touch tablet), and three phone menus (modal drawer, navbar, the tutorial's click panel) on a 390px touch phone - Esc, focus trap and return, aria, scroll lock, a sticky header over the close button |
 | `data/intro-verification.csv` | 8 + 15 | **sampled live** - the entrance sequence over fifteen timestamps on a monotonic clock, plus the eight assertions about it |
-| `data/variants.csv` | 157 | **live** — the variant catalog (Mosaic's built-in element classes); their IDs are what a `variant` record must use, and `class_name` is what the element emits |
+| `data/variants.csv` | 162 | **live** — the variant catalog (Mosaic's built-in element classes); their IDs are what a `variant` record must use, and `class_name` is what the element emits |
 | `data/dynamic-variables.csv` | 76 | source — every `@VAR('ns/name')` expression, by namespace |
 | `data/evaluator-functions.csv` | 19 | source — the `@` functions with their arity |
 | `data/interaction-types.csv` | 16 | source — trigger types, `timed` vs `progress`; 1.0.9 added exitIntent, scrollDepth and modal, 1.0.10 adds popover (Popover visibility change: show / beforeClose / afterClose) |

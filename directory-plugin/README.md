@@ -17,7 +17,7 @@ This is the **directory edition** of [mosaic-headless](https://github.com/Moksa1
 | Node types | 134 node types, each with the outcome measured when it was committed alone on a live site; 27 are marked unsafe |
 | Properties and styles | 120 node properties, 101 style properties and 60 style states, with the value shapes that compile |
 | Placement | what each type accepts as children, and what composite types need inside them |
-| Design system | 157 variants, 76 dynamic variables, 16 interaction triggers, conditions |
+| Design system | 162 variants, 76 dynamic variables, 16 interaction triggers, conditions |
 | Chinese terms | designer wording mapped to Mosaic's names (`內距` → padding) |
 | Guides | data model, write protocol, failure modes, styling, responsive, dialogs, interactions, upgrades |
 
@@ -37,7 +37,7 @@ This is the **directory edition** of [mosaic-headless](https://github.com/Moksa1
 The full edition adds the page builder, the delivered-page verifiers and the theme tools:
 
 ```bash
-npx mosaic-headless@1.42.0 claude-code --global
+npx mosaic-headless@1.43.0 claude-code --global
 ```
 
 ## Quick start
