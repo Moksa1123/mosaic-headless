@@ -560,11 +560,35 @@ skill; each line says what was reproduced here on the demo site (Mosaic 1.0.14).
   every converted `rel` was lost; they write a list now, and a sync treats an old
   string `rel` against an empty one as no difference (with a note).
 
-## WooCommerce "coming soon" + Mosaic: store pages answer 406 (demo, 2026-11-24)
+## No Mosaic template for the request -> HTTP 406 (demo, 2026-11-24 and 11-28)
+
+The general rule (Mosaic 1.0.14): the Mosaic theme always loads its own `index.php`,
+which looks up a template for the request's paths (the `X-Mosaic-Paths` header lists
+them). When none matches - no template on that path, or one whose conditions fail -
+`FrontendRenderer.php` (line 62) sends `status_header(406)` with an empty body for a
+visitor, and a "Missing Mosaic template" page for a logged-in administrator. It is
+not tied to any plugin; every case below is this rule.
+
+- **Single post** (measured 2026-11-28, reported by another session filming on the
+  demo): the main theme had no `single-post.php` template, and a post answered 406
+  with or without a browser user agent. An Auto Single post template made it 200;
+  deleting the template made it 406 again. A template whose conditions do not match
+  the request (a query parameter the URL lacks) is the same as none: 406 without the
+  parameter, 200 with it.
+- **WooCommerce store pages in coming-soon mode** - below. This one is a bug and not
+  only a missing template: WooCommerce has already printed its page, and Mosaic's
+  406 is sent on top of it.
+
+What to do: give every path a visitor can reach a template, or keep a Fallback
+(`index.php`, the editor's Empty) template as the catch-all
+(`references/templates-and-conditions.md`). `verify_navigation.py` reports a 406 for
+each page with no template; only a logged-out request shows it.
+
+### WooCommerce "coming soon" + Mosaic: store pages answer 406 (demo, 2026-11-24)
 
 Traced in source and read on the demo (Mosaic 1.0.14, WooCommerce 11.2, read only):
 with WooCommerce's coming-soon mode on for **store pages only**, `/shop/` and every
-product page answer **HTTP 406**.
+product page answer **HTTP 406** on their plain URL.
 
 - WooCommerce renders its coming-soon page itself and then returns `''` from the
   `template_include` filter (`ComingSoonRequestHandler.php`, line 117) so WordPress
@@ -574,7 +598,14 @@ product page answer **HTTP 406**.
 - With no Mosaic template for the store (`archive-product` / `single-product`, nor a
   generic archive / index one), the renderer throws `TemplateNotFoundException` and
   `FrontendRenderer.php` (line 62) sends `status_header(406)`.
-- A `200` seen with a query string was a cached copy (Varnish HIT), not a fix.
+- **A query string hides it.** Re-read 2026-11-28, both uncached (`X-Cache: MISS`):
+  `/shop/` answered 406 with `Cache-Control: no-store, no-cache…`, and `/shop/?x=1`
+  answered 200 with WooCommerce's own `max-age=60` - the same coming-soon page both
+  times. So a health check that adds a cache-busting query string reports 200 for a
+  page every visitor gets as 406; check the plain URL. `verify_navigation.py` adds
+  `?_v=`, so it misses this case (a post with no template stays 406 with a query
+  string - only coming-soon flips). (The 11-24 note here called the query-string 200
+  a cached copy; the 11-28 re-read shows it was not cached.)
 
 What to do: take the store out of coming-soon mode (go live), and give the store its
 Mosaic templates. Not measured: a store page that DOES have a Mosaic template while

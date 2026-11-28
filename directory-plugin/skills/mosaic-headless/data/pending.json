@@ -147,6 +147,13 @@
    "why_not_found": "reported by a fourth site (references/facts.md, fourth site); not reproduced here - needs a theme with a mode collection, a visited link and screenshots (getComputedStyle cannot show visited colours)",
    "asked_by": "skill 總機 (sync_nodes interaction target brief 2026-11-25)",
    "status": "open"
+  },
+  {
+   "date": "2026-11-28",
+   "question": "With WooCommerce coming-soon on, why does a store URL with any query string answer 200 (WooCommerce's max-age=60) while the plain URL answers Mosaic's 406?",
+   "why_not_found": "observed on the demo only (references/facts.md, No Mosaic template section); the code path that skips Mosaic's status for a query string was not traced. It matters because verify_navigation.py adds ?_v= and so misses the 406",
+   "asked_by": "skill 總機 (template brief 2026-11-28)",
+   "status": "open"
   }
  ]
 }
